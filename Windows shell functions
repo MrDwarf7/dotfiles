@@ -1,0 +1,30 @@
+Documents > Powershell > Pointer file: 
+
+$profile = "C:\Applications\PowerShell_start\Microsoft.PowerShell_profile.ps1"
+. $profile
+
+File endpoint: 
+
+oh-my-posh init pwsh --config %userprofile%\AppData\Local\Programs\oh-my-posh\themes\wopian.omp.json| Invoke-Expression
+
+#My Git Repo
+function mgr {
+	$path = "C:\Applications\GitHub_Projects"
+	pushd $path
+	ls
+}
+
+#Blue Prism Folder
+function bpf {
+}
+
+#SA Folder
+function saf {
+}
+
+#GIT SHELL
+#Change if required when elsewhere
+function gitsh {
+	$path = C:/Applications/Git/bin/bash.exe -i -l
+	$path
+}
