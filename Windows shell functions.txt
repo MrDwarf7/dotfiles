@@ -62,7 +62,7 @@ using namespace System.Management.Automation.Language
 #
 
 #Oh-My-Posh Config call
-oh-my-posh init pwsh --config %userprofile%\AppData\Local\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
+oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
 #If not wanting to use the theme in this repo, feel free to use your own
 #some
 #Some
@@ -375,7 +375,7 @@ function gitsh {
 }
 
 function ohome {
-	$path = "%userprofile%\OneDrive - SomeName"
+	$path = "$env:USERPROFILE\OneDrive - SomeName"
 	pushd $path
 }
 
@@ -383,6 +383,16 @@ function cd2 {
 	cd ../../
 }
 
+function cvenv {
+    cd .\venv\Scripts
+    .\activate
+    cd2
+    ls
+}
+
+function .pro {
+    . $PROFILE
+}
 
 
 ##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
