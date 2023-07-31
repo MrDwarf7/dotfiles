@@ -1,30 +1,420 @@
-Documents > Powershell > Pointer file: 
+#
+#Reqs/commands
+#	PowerShellGet v1.6.0 or higher - can run "Get-Module" without quotes to check
+#	IF lower, run - Install-Module -Name PowerShellGet -Force
+#
+#This document has been anonymized - Anything that has a variable address that may need to be changed or customized, can be found via find for: some/Some 
+#
+#
+#PSReadLine
+#	Install-Module PSReadLine
+#
+#(Optional - but recommended) Consider installing CompletionPredictor alongside PSReadLine also
+#	Install-Module -Name CompletionPredictor -Repository PSGallery
+#
+#
+#Importing: PSReadLine
+#	Import-Module PSReadLine
+#
+#	Or add it to the top of your $PROFILE, 
+#	the default location for this is: 
+#
+#	%%%SomeDocumentsFolder%%%\PowerShell\Microsoft.PowerShell_profile.ps1
+#
+# 	If you don't have one this file already, you may need to create one.
+#	This can be done with the following command: 
+#	New-Item -Path $profile -Type File -Force
+#
+#	Add it by opening the file or by running "notepad $PROFILE" (or some text editor/tool to open the $PROFILE [ise $PROFILE, code $PROFILE, etc.]
+#
+#Importing: CompletionPredictor 
+#	Import-Module -Name CompletionPredictor
+#	Importing this can also be done the same as above, by adding to $PROFILE.
+#
+#
+#(Optional) Consider moving/redirecting your profile loading to somewhere on local storage for loading speeds
+#if currently loading from One - Drive or another online source.
+#	If at ANY STAGE after redirecting your $PROFILE call you happen to run:
+#	notepad $PROFILE
+#
+#	You will be opening the END-POINT file, not the re-direct, be aware of this and decide if you wish to move ALL your code to the new file (Recommended)
+#
+#	To do this, open the base version of $PROFILE from the above step, and use the following command to move the $PROFILE it's loading to location of your choice.
+#	(Be aware of the tabs, they aren't required in the actual file, just here for readability. Though they make no difference in the function of running in $PROFILE instance.)
+#
+#	$profile = "C:\Location\Of\Your\Choosing\ProfileHoldingFolder\Microsoft.PowerShell_profile.ps1"
+#	. $profile
+#
+#
+#Oh-My-Posh for prompt styling control etc.
+#	https://ohmyposh.dev/
+#
+#
+#For any of the PSReadLine commands that you may find online for custimization from other Uers, ensure you add this to the VERY top of your $PROFILE
+#
+#Importing deps
+#
+using namespace System.Management.Automation
+using namespace System.Management.Automation.Language
+#
+#These are similar to import statements within 
+#Python or JavaScript and allow ease of use on longer commands.
+#
 
-$profile = "C:\Applications\PowerShell_start\Microsoft.PowerShell_profile.ps1"
-. $profile
+#Oh-My-Posh Config call
+oh-my-posh init pwsh --config %userprofile%\AppData\\Local\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
 
-File endpoint: 
 
-oh-my-posh init pwsh --config %userprofile%\AppData\Local\Programs\oh-my-posh\themes\wopian.omp.json| Invoke-Expression
+#PSReadLine (Imports)
+Import-Module PSReadLine
+Import-Module -Name CompletionPredictor
 
-#My Git Repo
+#PSReadLine Options set
+Set-PSReadlineOption -PredictionSource HistoryAndPlugin
+Set-PSReadLineOption -PredictionViewStyle ListView
+
+#Misc available options: 
+#-CompletionQueryItems
+
+
+
+#PSReadLine functions start.
+# Searching for commands with up/down arrow is really handy.  The
+# option "moves to end" is useful if you want the cursor at the end
+# of the line while cycling through history like it does w/o searching,
+# without that option, the cursor will remain at the position it was
+# when you used up arrow, which can be useful if you forget the exact
+# string you started the search on.
+
+Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+
+
+# This key handler shows the entire or filtered history using Out-GridView. The
+# typed text is used as the substring pattern for filtering. A selected command
+# is inserted to the command line without invoking. Multiple command selection
+# is supported, e.g. selected by Ctrl + Click.
+Set-PSReadLineKeyHandler -Key F7 `
+                         -BriefDescription History `
+                         -LongDescription 'Show command history' `
+                         -ScriptBlock {
+    $pattern = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$pattern, [ref]$null)
+    if ($pattern)
+    {
+        $pattern = [regex]::Escape($pattern)
+    }
+
+    $history = [System.Collections.ArrayList]@(
+        $last = ''
+        $lines = ''
+        foreach ($line in [System.IO.File]::ReadLines((Get-PSReadLineOption).HistorySavePath))
+        {
+            if ($line.EndsWith('`'))
+            {
+                $line = $line.Substring(0, $line.Length - 1)
+                $lines = if ($lines)
+                {
+                    "$lines`n$line"
+                }
+                else
+                {
+                    $line
+                }
+                continue
+            }
+
+            if ($lines)
+            {
+                $line = "$lines`n$line"
+                $lines = ''
+            }
+
+            if (($line -cne $last) -and (!$pattern -or ($line -match $pattern)))
+            {
+                $last = $line
+                $line
+            }
+        }
+    )
+    $history.Reverse()
+
+    $command = $history | Out-GridView -Title History -PassThru
+    if ($command)
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert(($command -join "`n"))
+    }
+}
+
+
+#Quotation mark control
+Set-PSReadLineKeyHandler -Key '"',"'" `
+                         -BriefDescription SmartInsertQuote `
+                         -LongDescription "Insert paired quotes if not already on a quote" `
+                         -ScriptBlock {
+    param($key, $arg)
+
+    $quote = $key.KeyChar
+
+    $selectionStart = $null
+    $selectionLength = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetSelectionState([ref]$selectionStart, [ref]$selectionLength)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    # If text is selected, just quote it without any smarts
+    if ($selectionStart -ne -1)
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $quote + $line.SubString($selectionStart, $selectionLength) + $quote)
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selectionStart + $selectionLength + 2)
+        return
+    }
+
+    $ast = $null
+    $tokens = $null
+    $parseErrors = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$ast, [ref]$tokens, [ref]$parseErrors, [ref]$null)
+
+    function FindToken
+    {
+        param($tokens, $cursor)
+
+        foreach ($token in $tokens)
+        {
+            if ($cursor -lt $token.Extent.StartOffset) { continue }
+            if ($cursor -lt $token.Extent.EndOffset) {
+                $result = $token
+                $token = $token -as [StringExpandableToken]
+                if ($token) {
+                    $nested = FindToken $token.NestedTokens $cursor
+                    if ($nested) { $result = $nested }
+                }
+
+                return $result
+            }
+        }
+        return $null
+    }
+
+    $token = FindToken $tokens $cursor
+
+    # If we're on or inside a **quoted** string token (so not generic), we need to be smarter
+    if ($token -is [StringToken] -and $token.Kind -ne [TokenKind]::Generic) {
+        # If we're at the start of the string, assume we're inserting a new string
+        if ($token.Extent.StartOffset -eq $cursor) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$quote$quote ")
+            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+            return
+        }
+
+        # If we're at the end of the string, move over the closing quote if present.
+        if ($token.Extent.EndOffset -eq ($cursor + 1) -and $line[$cursor] -eq $quote) {
+            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+            return
+        }
+    }
+
+    if ($null -eq $token -or
+        $token.Kind -eq [TokenKind]::RParen -or $token.Kind -eq [TokenKind]::RCurly -or $token.Kind -eq [TokenKind]::RBracket) {
+        if ($line[0..$cursor].Where{$_ -eq $quote}.Count % 2 -eq 1) {
+            # Odd number of quotes before the cursor, insert a single quote
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert($quote)
+        }
+        else {
+            # Insert matching quotes, move cursor to be in between the quotes
+            [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$quote$quote")
+            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+        }
+        return
+    }
+
+    # If cursor is at the start of a token, enclose it in quotes.
+    if ($token.Extent.StartOffset -eq $cursor) {
+        if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or 
+            $token.Kind -eq [TokenKind]::Variable -or $token.TokenFlags.hasFlag([TokenFlags]::Keyword)) {
+            $end = $token.Extent.EndOffset
+            $len = $end - $cursor
+            [Microsoft.PowerShell.PSConsoleReadLine]::Replace($cursor, $len, $quote + $line.SubString($cursor, $len) + $quote)
+            [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($end + 2)
+            return
+        }
+    }
+
+    # We failed to be smart, so just insert a single quote
+    [Microsoft.PowerShell.PSConsoleReadLine]::Insert($quote)
+}
+#END Quotation mark control
+
+
+
+#Bracket control - Opening
+Set-PSReadLineKeyHandler -Key '(','{','[' `
+                         -BriefDescription InsertPairedBraces `
+                         -LongDescription "Insert matching braces" `
+                         -ScriptBlock {
+    param($key, $arg)
+
+    $closeChar = switch ($key.KeyChar)
+    {
+        <#case#> '(' { [char]')'; break }
+        <#case#> '{' { [char]'}'; break }
+        <#case#> '[' { [char]']'; break }
+    }
+
+    $selectionStart = $null
+    $selectionLength = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetSelectionState([ref]$selectionStart, [ref]$selectionLength)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+    
+    if ($selectionStart -ne -1)
+    {
+      # Text is selected, wrap it in brackets
+      [Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $key.KeyChar + $line.SubString($selectionStart, $selectionLength) + $closeChar)
+      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selectionStart + $selectionLength + 2)
+    } else {
+      # No text is selected, insert a pair
+      [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)$closeChar")
+      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+}
+#END Bracket control - Opening
+
+#Bracket control - Closing
+Set-PSReadLineKeyHandler -Key ')',']','}' `
+                         -BriefDescription SmartCloseBraces `
+                         -LongDescription "Insert closing brace or skip" `
+                         -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($line[$cursor] -eq $key.KeyChar)
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+    }
+    else
+    {
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)")
+    }
+}
+
+Set-PSReadLineKeyHandler -Key Backspace `
+                         -BriefDescription SmartBackspace `
+                         -LongDescription "Delete previous character or matching quotes/parens/braces" `
+                         -ScriptBlock {
+    param($key, $arg)
+
+    $line = $null
+    $cursor = $null
+    [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
+
+    if ($cursor -gt 0)
+    {
+        $toMatch = $null
+        if ($cursor -lt $line.Length)
+        {
+            switch ($line[$cursor])
+            {
+                <#case#> '"' { $toMatch = '"'; break }
+                <#case#> "'" { $toMatch = "'"; break }
+                <#case#> ')' { $toMatch = '('; break }
+                <#case#> ']' { $toMatch = '['; break }
+                <#case#> '}' { $toMatch = '{'; break }
+            }
+        }
+
+        if ($toMatch -ne $null -and $line[$cursor-1] -eq $toMatch)
+        {
+            [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor - 1, 2)
+        }
+        else
+        {
+            [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteChar($key, $arg)
+        }
+    }
+}
+
+#END Bracket control - Closing
+
+#endregion Smart Insert/Delete
+
+
+
+#Raw Functions
+
 function mgr {
-	$path = "C:\Applications\GitHub_Projects"
+	$path = "C:\Applications\SomeGitHubProjectRootFolder"
 	pushd $path
 	ls
 }
 
-#Blue Prism Folder
-function bpf {
+function bpr {
+	$path = "\\SomeNetWorkPathPlace\SomeFolderPlace"
+	pushd $path
 }
 
-#SA Folder
-function saf {
+function sar {
+	$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
+	pushd $path
 }
 
-#GIT SHELL
-#Change if required when elsewhere
 function gitsh {
-	$path = C:/Applications/Git/bin/bash.exe -i -l
-	$path
+	C:/Applications/Git/bin/bash.exe -i -l
 }
+
+function ohome {
+	$path = "%userprofile%\OneDrive - SomeName"
+	pushd $path
+}
+
+function cd2 {
+	cd ../../
+}
+
+
+
+##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
+
+# alias corrections for "PY3*"
+Set-Alias -Name py3 -Value C:\Applications\Python3.11.4\python.exe
+Set-Alias -Name py3.exe -Value C:\Applications\Python3.11.4\python.exe
+
+# alias corrections for "PYTHON3*"
+Set-Alias -Name python3 -Value C:\Applications\Python3.11.4\python.exe
+Set-Alias -Name python3.exe -Value C:\Applications\Python3.11.4\python.exe
+
+
+
+
+# Not working or requires tweaks to get working - 
+
+# alias corrections for "PY*"
+#Set-Alias -Name py -Value C:\Applications\Python3.11.4\python.exe
+#Set-Alias -Name py.exe -Value C:\Applications\Python3.11.4\python.exe
+
+#Causing issues with VENV interactions installing to global :L
+# alias corrections for "PYTHON*"
+#Set-Alias -Name python -Value C:\Applications\Python3.11.4\python.exe
+#Set-Alias -Name python.exe -Value C:\Applications\Python3.11.4\python.exe
+
+
+#Causing issues with VENV interactions installing to global :L
+# alias corrections for "PIP*"
+#Set-Alias -Name pip -Value C:\Applications\Python3.11.4\Scripts\pip.exe
+#Set-Alias -Name pip.exe -Value C:\Applications\Python3.11.4\Scripts\pip.exe
+
+# alias corrections for "PIP3*"
+#Set-Alias -Name pip3 -Value C:\Applications\Python3.11.4\Scripts\pip3.exe
+#Set-Alias -Name pip3.exe -Value C:\Applications\Python3.11.4\Scripts\pip3.exe
+
+
+
