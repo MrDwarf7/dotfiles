@@ -73,8 +73,8 @@ Import-Module PSReadLine
 Import-Module -Name CompletionPredictor
 
 #PSReadLine Options set
-Set-PSReadlineOption -PredictionSource HistoryAndPlugin
-Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
+#Set-PSReadLineOption -PredictionViewStyle ListView
 
 #Misc available options: 
 #-CompletionQueryItems
@@ -89,7 +89,8 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 # when you used up arrow, which can be useful if you forget the exact
 # string you started the search on.
 
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+#Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
@@ -375,8 +376,9 @@ function gitsh {
 }
 
 function ohome {
-	$path = "$env:USERPROFILE\OneDrive - SomeName"
-	pushd $path
+	$onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
+	pushd $onlineHome
+	ls
 }
 
 function cd2 {
