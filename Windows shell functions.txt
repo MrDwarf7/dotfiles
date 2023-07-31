@@ -63,7 +63,10 @@ using namespace System.Management.Automation.Language
 
 #Oh-My-Posh Config call
 oh-my-posh init pwsh --config %userprofile%\AppData\Local\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
-
+#If not wanting to use the theme in this repo, feel free to use your own
+#some
+#Some
+#some/Some
 
 #PSReadLine (Imports)
 Import-Module PSReadLine
