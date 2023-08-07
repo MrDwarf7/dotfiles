@@ -419,12 +419,28 @@ function checkEnvironment {
     }
 }
 
+
 function avenv {
-    Push-Location .\.venv\Scripts
+    Push-Location ./.venv/Scripts
     .\activate
-    popd
+    Pop-Location
     Get-ChildItem
 }
+
+function rmvenv {
+    try {
+        if (checkEnvironment) {
+            Remove-Item -r ./.venv
+        }
+        else {
+            Remove-Item -Path ./.venv -Recurse -Force
+        }
+    }
+    catch {
+        Write-Error "Failed to remove virtual environment: $_"
+    }
+}
+
 
 function cd2 {
     Set-Location ../../
