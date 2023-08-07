@@ -398,11 +398,11 @@ function pmv {
     try {
         if (checkEnvironment) {
             py3 -m venv .venv
-            cvenv
+            avenv
         }
         else {
             python -m venv .venv
-            cvenv
+            avenv
         }
     }
     catch {
