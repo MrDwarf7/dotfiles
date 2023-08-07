@@ -419,7 +419,7 @@ function checkEnvironment {
     }
 }
 
-function cvenv {
+function avenv {
     Push-Location .\.venv\Scripts
     .\activate
     popd
