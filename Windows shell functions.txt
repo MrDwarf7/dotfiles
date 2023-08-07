@@ -355,15 +355,24 @@ Set-PSReadLineKeyHandler -Key Backspace `
 
 #Raw Functions
 
-function mgr {
-	$path = "C:\Applications\SomeGitHubProjectRootFolder"
-	pushd $path
-	ls
+function gitsh {
+    C:/Applications/Git/bin/bash.exe -i -l
 }
 
+function mgr {
+    param(
+        [string]$path = "C:\Applications\GitHub_Projects"
+    )
+    Set-Location $path
+    Get-ChildItem
+}
+
+
 function bpr {
-	$path = "\\SomeNetWorkPathPlace\SomeFolderPlace"
-	pushd $path
+    param(
+        [string]$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
+    )
+    Set-Location $path
 }
 
 function sar {
@@ -371,29 +380,58 @@ function sar {
 	pushd $path
 }
 
-function gitsh {
-	C:/Applications/Git/bin/bash.exe -i -l
+function sar {
+    param(
+        [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
+    )
+    Set-Location $path
 }
+
 
 function ohome {
 	$onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
-	pushd $onlineHome
-	ls
+	Set-Location $onlineHome
+	Get-ChildItem
 }
 
-function cd2 {
-	cd ../../
+function pro {
+    . $PROFILE
+}
+
+function pmv {
+    try {
+        if (checkEnvironment) {
+            py3 -m venv .venv
+            cvenv
+        }
+        else {
+            python -m venv .venv
+            cvenv
+        }
+    }
+    catch {
+        Write-Error "Failed to create virtual environment: $_"
+    }
+}
+
+function checkEnvironment {
+    if ($env:COMPUTERNAME -clike "*LG*") {
+        return $true
+    }
+    else {
+        return $false
+    }
 }
 
 function cvenv {
-    cd .\venv\Scripts
+    Set-Location .\.venv\Scripts
     .\activate
     cd2
-    ls
+    Get-ChildItem
 }
 
-function .pro {
-    . $PROFILE
+function cd2 {
+    Set-Location ../../
 }
 
 
@@ -430,6 +468,3 @@ Set-Alias -Name python3.exe -Value C:\Applications\Python3.11.4\python.exe
 # alias corrections for "PIP3*"
 #Set-Alias -Name pip3 -Value C:\Applications\Python3.11.4\Scripts\pip3.exe
 #Set-Alias -Name pip3.exe -Value C:\Applications\Python3.11.4\Scripts\pip3.exe
-
-
-
