@@ -428,6 +428,7 @@ function avenv {
 }
 
 function rmvenv {
+    dea
     try {
         if (checkEnvironment) {
             Remove-Item -r ./.venv
