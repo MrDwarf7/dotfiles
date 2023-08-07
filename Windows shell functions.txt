@@ -363,7 +363,7 @@ function mgr {
     param(
         [string]$path = "C:\Applications\GitHub_Projects"
     )
-    Set-Location $path
+    Push-Location $path
     Get-ChildItem
 }
 
@@ -372,25 +372,21 @@ function bpr {
     param(
         [string]$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
     )
-    Set-Location $path
+    Push-Location $path
 }
 
-function sar {
-	$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
-	pushd $path
-}
 
 function sar {
     param(
         [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
     )
-    Set-Location $path
+    Push-Location $path
 }
 
 
 function ohome {
 	$onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
-	Set-Location $onlineHome
+	Push-Location $onlineHome
 	Get-ChildItem
 }
 
@@ -424,14 +420,19 @@ function checkEnvironment {
 }
 
 function cvenv {
-    Set-Location .\.venv\Scripts
+    Push-Location .\.venv\Scripts
     .\activate
-    cd2
+    popd
     Get-ChildItem
 }
 
 function cd2 {
     Set-Location ../../
+}
+
+
+function dea {
+    deactivate
 }
 
 
