@@ -1,10 +1,9 @@
 #
+#Update OhMyPosh using this command - 
+#winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 #Reqs/commands
 #	PowerShellGet v1.6.0 or higher - can run "Get-Module" without quotes to check
 #	IF lower, run - Install-Module -Name PowerShellGet -Force
-#
-#This document has been anonymized - Anything that has a variable address that may need to be changed or customized, can be found via find for: some/Some 
-#
 #
 #PSReadLine
 #	Install-Module PSReadLine
@@ -19,7 +18,7 @@
 #	Or add it to the top of your $PROFILE, 
 #	the default location for this is: 
 #
-#	%%%SomeDocumentsFolder%%%\PowerShell\Microsoft.PowerShell_profile.ps1
+#	%%%Documents\PowerShell\Microsoft.PowerShell_profile.ps1
 #
 # 	If you don't have one this file already, you may need to create one.
 #	This can be done with the following command: 
@@ -53,33 +52,54 @@
 #For any of the PSReadLine commands that you may find online for custimization from other Uers, ensure you add this to the VERY top of your $PROFILE
 #
 #Importing deps
+# using namespace System.Management.Automation
+# using namespace System.Management.Automation.Language
 #
+#	These are similar to import statements within Python or JavaScript and allow ease of use on longer commands.
+#
+#
+#Oh-My-Posh Config call
+# oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
+#
+#
+#PSReadLine (Imports)
+# Import-Module PSReadLine
+# Import-Module -Name CompletionPredictor
+
+#PSReadLine Options set
+# Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
+# Set-PSReadLineOption -PredictionViewStyle ListView
+#
+#Misc available options: 
+#-CompletionQueryItems
+#
+
+### START MAIN SCRIPT
+
+
+
+# General Configuration
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
-#
-#These are similar to import statements within 
-#Python or JavaScript and allow ease of use on longer commands.
-#
 
 #Oh-My-Posh Config call
 oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
-#If not wanting to use the theme in this repo, feel free to use your own
-#some
-#Some
-#some/Some
 
-#PSReadLine (Imports)
 Import-Module PSReadLine
 Import-Module -Name CompletionPredictor
-
 #PSReadLine Options set
 Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
-#Set-PSReadLineOption -PredictionViewStyle ListView
 
-#Misc available options: 
-#-CompletionQueryItems
-
-
+# Auto completion via winget Tabs
+Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
+    param($wordToComplete, $commandAst, $cursorPosition)
+        [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
+        $Local:word = $wordToComplete.Replace('"', '""')
+        $Local:ast = $commandAst.ToString().Replace('"', '""')
+        winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
+            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+        }
+}
 
 #PSReadLine functions start.
 # Searching for commands with up/down arrow is really handy.  The
@@ -89,11 +109,9 @@ Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle Lis
 # when you used up arrow, which can be useful if you forget the exact
 # string you started the search on.
 
-#Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-
+# Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
 Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
-
 
 # This key handler shows the entire or filtered history using Out-GridView. The
 # typed text is used as the substring pattern for filtering. A selected command
@@ -452,6 +470,10 @@ function dea {
     deactivate
 }
 
+function touch {
+    param($arg)
+    ni $arg
+}
 
 ##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
 
