@@ -475,6 +475,10 @@ function touch {
     New-Item $arg
 }
 
+function . {
+    Start-Process .
+}
+
 ##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
 
 # alias corrections for "PY3*"
