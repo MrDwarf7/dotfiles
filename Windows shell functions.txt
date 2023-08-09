@@ -472,7 +472,7 @@ function dea {
 
 function touch {
     param($arg)
-    ni $arg
+    New-Item $arg
 }
 
 ##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
