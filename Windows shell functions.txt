@@ -377,6 +377,7 @@ function gitsh {
     C:/Applications/Git/bin/bash.exe -i -l
 }
 
+
 function mgr {
     param(
         [string]$path = "C:\Applications\GitHub_Projects"
@@ -427,6 +428,7 @@ function pmv {
         Write-Error "Failed to create virtual environment: $_"
     }
 }
+
 
 function checkEnvironment {
     if ($env:COMPUTERNAME -clike "*LG*") {
@@ -481,7 +483,7 @@ function . {
 
 function la {
     Param($path = ".")
-    dir $path -Force
+    Get-ChildItem $path -Force
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable
@@ -494,6 +496,10 @@ if (Test-Path($ChocolateyProfile)) {
   Import-Module "$ChocolateyProfile"
 }
 
+#Git aliases from Oh-my-zsh Git plugin for PWSH
+#Does require you to have setup the plugin via GitHub for it to work
+Import-Module git-aliases -DisableNameChecking
+
 
 function nvi() {
     $env:NVIM_APPNAME = "nvim"
@@ -503,7 +509,7 @@ function nvi() {
 
 #NeoVim Config Switcher: 
 function nvims() {
-    $items = "AstroVim", "LazyVim", "NvChad", "Default"
+    $items = "LazyVim", "AstroVim", "NvChad", "Default"
     $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
     if ([string]::IsNullOrEmpty($config)) {
