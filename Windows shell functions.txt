@@ -416,12 +416,11 @@ function pro {
 function pmv {
     try {
         if (checkEnvironment) {
-            py3 -m venv .venv
+            python -m venv .venv
             avenv
         }
         else {
-            python -m venv .venv
-            avenv
+            continue
         }
     }
     catch {
