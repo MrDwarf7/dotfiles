@@ -526,39 +526,45 @@ function nvims() {
 }
 
 
-##### Py3/Python3 related things point to MY system int. not 3.9, and not venv.
+function python {
+    
+    if (checkEnvironment -eq $true) {
+        if ($env:VIRTUAL_ENV) {
+            $virtualEnvPythonPath = Join-Path $env:VIRTUAL_ENV "Scripts\python.exe"
+            Set-Alias -Name python -Value $virtualEnvPythonPath
+            
+            & python $args
+        }
+        else {
+            $pythonPath = "C:\Applications\Python3.11.4\python.exe"
+            Set-Alias -Name python -Value $pythonPath
+            
+            & python $args
+        }
+    }
+    else {
+        continue
+    }
+}
 
-# alias corrections for "PY3*"
-Set-Alias -Name py -Value "C:\Applications\Python3.11.4\python.exe"
-Set-Alias -Name py.exe -Value "C:\Applications\Python3.11.4\python.exe"
-
-# alias corrections for "PYTHON3*"
-Set-Alias -Name python -Value "C:\Applications\Python3.11.4\python.exe"
-Set-Alias -Name pythonw -Value "C:\Applications\Python3.11.4\pythonw.exe"
-Set-Alias -Name pythonw.exe -Value "C:\Applications\Python3.11.4\pythonw.exe"
-Set-Alias -Name python.exe -Value "C:\Applications\Python3.11.4\python.exe"
-
-
-#Causing issues with VENV interactions installing to global :L
-# alias corrections for "PIP*"
-Set-Alias -Name pip -Value "C:\Applications\Python3.11.4\Scripts\pip.exe"
-Set-Alias -Name pip.exe -Value "C:\Applications\Python3.11.4\Scripts\pip.exe"
-
-# alias corrections for "PIP3*"
-Set-Alias -Name pip3 -Value "C:\Applications\Python3.11.4\Scripts\pip3.exe"
-Set-Alias -Name pip3.exe -Value "C:\Applications\Python3.11.4\Scripts\pip3.exe"
-
-
-#_____________OldV
-
-#PythonOld here
-Set-Alias -Name pythonOld -Value "C:\Program Files\python3.9.5\python.exe"
-Set-Alias -Name pythonOtherOld -Value "C:\Program Files\python3.9.5\pythonw.exe"
-
-#Pip Old Below
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip"
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip.exe"
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip3.9"
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip3.9.exe"
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip3"
-Set-Alias -Name pipOld -Value "C:\Program Files\python3.9.5\Scripts\pip3.exe"
+function pip {
+        
+    if (checkEnvironment -eq $true) {
+        if ($env:VIRTUAL_ENV) {
+            $virtualEnvPipPath = Join-Path $env:VIRTUAL_ENV "Scripts\pip.exe"
+            Set-Alias -Name pip -Value $virtualEnvPipPath
+            & Set-Alias -Name pip3 -Value $virtualEnvPipPath
+                
+            & pip $args
+        }
+        else {
+            $pipPath = "C:\Applications\Python3.11.4\Scripts\pip.exe"
+            & Set-Alias -Name pip -Value $pipPath
+                
+            & pip $args
+        }
+    }
+    else {
+        continue
+    }
+}
