@@ -4,6 +4,7 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
+-- NvChad\Custom\init.lua
 local opt = vim.opt
 local g = vim.g
 if vim.g.neovide then
