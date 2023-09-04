@@ -11,19 +11,19 @@ $env:POSH_GIT_ENABLED = $true
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
 {
-    return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+  return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
 # Work.sort of
 function checkEnvironment
 {
-    if ($env:COMPUTERNAME -clike "*LG*")
-    {
-        return $true
-    } else
-    {
-        return $false
-    }
+  if ($env:COMPUTERNAME -clike "*LG*")
+  {
+    return $true
+  } else
+  {
+    return $false
+  }
 }
 # END - Tooling Functions
 
@@ -39,7 +39,7 @@ New-Alias ln New-SymLink
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile))
 {
-    Import-Module "$ChocolateyProfile"
+  Import-Module "$ChocolateyProfile"
 }
 # END - Alias(s)
 
@@ -378,7 +378,7 @@ Set-PSReadLineOption -CommandValidationHandler {
 # Work
 function gitsh
 {
-    C:/Applications/Git/bin/bash.exe -i -l
+  C:/Applications/Git/bin/bash.exe -i -l
 }
 
 function archsh
@@ -436,59 +436,59 @@ function wsls
 # Work
 function mgr
 {
-    param(
-        [string]$path = "C:\Applications\GitHub_Projects"
-    )
-    Push-Location $path
-    Get-ChildItem
+  param(
+    [string]$path = "C:\Applications\GitHub_Projects"
+  )
+  Push-Location $path
+  Get-ChildItem
 }
 
 # Work
 function wgr
 {
-    param(
-        [string]$path = "C:\Applications\GitWork_Projects"
-    )
-    Push-Location $path
-    Get-ChildItem
+  param(
+    [string]$path = "C:\Applications\GitWork_Projects"
+  )
+  Push-Location $path
+  Get-ChildItem
 }
 
 # Work
 function bpgr
 {
-    param(
-        [string]$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
-    )
-    Push-Location $path
-    Get-ChildItem
+  param(
+    [string]$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
+  )
+  Push-Location $path
+  Get-ChildItem
 }
 
 # Work
 function bpr
 {
-    param(
-        [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
-    )
-    Push-Location $path
+  param(
+    [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
+  )
+  Push-Location $path
 }
 
 
 # Work
 function sar
 {
-    param(
-        [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
-    )
-    Push-Location $path
+  param(
+    [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
+  )
+  Push-Location $path
 }
 
 
 # Work
 function ohome
 {
-	$onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
-    Push-Location $onlineHome
-    Get-ChildItem
+  $onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
+  Push-Location $onlineHome
+  Get-ChildItem
 }
 
 # END - Navigation functions
@@ -497,78 +497,81 @@ function ohome
 function pip
 {
         
-    if (checkEnvironment -eq $true)
+  if (checkEnvironment -eq $true)
+  {
+    if ($env:VIRTUAL_ENV)
     {
-        if ($env:VIRTUAL_ENV)
-        {
-            $virtualEnvPipPath = Join-Path $env:VIRTUAL_ENV "Scripts\pip.exe"
-            Set-Alias -Name pip -Value $virtualEnvPipPath
-            & Set-Alias -Name pip3 -Value $virtualEnvPipPath
+      $virtualEnvPipPath = Join-Path $env:VIRTUAL_ENV "Scripts\pip.exe"
+      Set-Alias -Name pip -Value $virtualEnvPipPath
+      & Set-Alias -Name pip3 -Value $virtualEnvPipPath
                 
-            & pip $args
-        } else
-        {
-            $pipPath = "C:\Applications\Python3.11.4\Scripts\pip.exe"
-            & Set-Alias -Name pip -Value $pipPath
-                
-            & pip $args
-        }
+      & pip $args
     } else
     {
-        continue
+      $pipPath = "C:\Applications\Python3.11.4\Scripts\pip.exe"
+      & Set-Alias -Name pip -Value $pipPath
+                
+      & pip $args
     }
+  } else
+  {
+    continue
+  }
 }
 
 # Work
 function pmv
 {
-    try
+  try
+  {
+    if (checkEnvironment)
     {
-        if (checkEnvironment)
-        {
-            py -m venv .venv
-            Push-Location .\.venv\Scripts
-            .\activate
-            Pop-Location
-            Get-ChildItem
-        } else {
-            python -m venv .venv
-            Push-Location .\.venv\Scripts
-            .\activate
-            Pop-Location
-            Get-ChildItem
+      py -m venv .venv
+      Push-Location .\.venv\Scripts
+      .\activate
+      Pop-Location
+      Get-ChildItem
+    } else
+    {
+      python -m venv .venv
+      Push-Location .\.venv\Scripts
+      .\activate
+      Pop-Location
+      Get-ChildItem
 
-        }
     }
-    catch {
+  } catch
+  {
     Write-Error "Failed to create the virtual environment"
-    }
+  }
 }
 
 function dea
 {
-    deactivate
+  deactivate
 }
 
 function avenv
 {
-    Push-Location .\.venv\Scripts
-    .\activate
-    Pop-Location
-    Get-ChildItem
+  Push-Location .\.venv\Scripts
+  .\activate
+  Pop-Location
+  Get-ChildItem
 }
 
 function rmvenv
 {
-if ($env:VIRTUAL_ENV) {
-  deactivate }
-    if (checkEnvironment)
-    {
-      Remove-Item -r ./.venv
-    } else
-    {
-      Remove-Item -Path ./.venv -Recurse -Force
-    }
+  if ($env:VIRTUAL_ENV)
+  {
+    deactivate 
+  }
+  if (checkEnvironment)
+  {
+    Remove-Item -r ./.venv
+  } else
+  {
+    Remove-Item -Path ./.venv -Recurse -Force
+  }
 }
 
 
@@ -578,68 +581,68 @@ if ($env:VIRTUAL_ENV) {
 
 function pro
 {
-    . $PROFILE
+  . $PROFILE
 }
 
 function cd2
 {
-    Set-Location ../../
+  Set-Location ../../
 }
 
 function .
 {
-    Start-Process .
+  Start-Process .
 }
 
 function touch
 {
-    New-Item $args
+  New-Item $args
 }
 
 function la
 {
-    param ($path = ".")
-    Get-ChildItem $path -Force
+  param ($path = ".")
+  Get-ChildItem $path -Force
 }
 
 function zip
 {
-    param (
-        [string]$ItemToCompress,
-        [string]$OptionalDestination
-    )
-    $ItemName = (Get-Item $ItemToCompress).Name
-    $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
+  param (
+    [string]$ItemToCompress,
+    [string]$OptionalDestination
+  )
+  $ItemName = (Get-Item $ItemToCompress).Name
+  $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
   
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
-        $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
+  if ([String]::IsNullOrEmpty($OptionalDestination))
+  {
+    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
   
-        Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
-    } else
-    {
-        Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
-    }
+    Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
+  } else
+  {
+    Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
+  }
 }
   
 function uzip
 {
-    param (
-        [string]$ItemToUnzip,
-        [string]$OptionalDestination
-    )
-    $ItemName = (Get-Item $ItemToUnzip).Name 
-    $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
+  param (
+    [string]$ItemToUnzip,
+    [string]$OptionalDestination
+  )
+  $ItemName = (Get-Item $ItemToUnzip).Name 
+  $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
   
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
-        $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
+  if ([String]::IsNullOrEmpty($OptionalDestination))
+  {
+    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
   
-        Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
-    } else
-    {
-        Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
-    }
+    Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
+  } else
+  {
+    Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
+  }
 }
 
 # END - Linux Functions
@@ -654,28 +657,31 @@ function vim
 
 function dvim
 {
-    $env:NVIM_APPNAME = "LazyVim"
-    # if ($env:HOME_PROFILE) {
-    #     neovide $args 
-    # } elseif (Test-CommandExists nvim){
-        nvim $args
-    }
+  $env:NVIM_APPNAME = "LazyVim"
+  # if ($env:HOME_PROFILE) {
+  #     neovide $args 
+  # } elseif (Test-CommandExists nvim){
+  nvim $args
+}
 # }
 # Neovide being buggy as hell, commented out for time being
 
 
-function nvims() {
-    $items = "LazyVim", "Default"
-    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+function nvims()
+{
+  $items = "LazyVim", "Default"
+  $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
-    if ([string]::IsNullOrEmpty($config)) {
-        Write-Output "Nothing selected"
-        return
-    }
-    if ($config -eq "default") {
-        $config = ""
-    }
-    $env:NVIM_APPNAME = $config
-    nvim $args
+  if ([string]::IsNullOrEmpty($config))
+  {
+    Write-Output "Nothing selected"
+    return
+  }
+  if ($config -eq "default")
+  {
+    $config = ""
+  }
+  $env:NVIM_APPNAME = $config
+  nvim $args
 }
 # END - Vim things
