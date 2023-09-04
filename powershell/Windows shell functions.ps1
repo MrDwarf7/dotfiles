@@ -1,3 +1,7 @@
+# General Configuration
+using namespace System.Management.Automation
+using namespace System.Management.Automation.Language
+
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
 #Update OhMyPosh using this command - 
@@ -38,10 +42,6 @@ if (Test-Path($ChocolateyProfile))
     Import-Module "$ChocolateyProfile"
 }
 # END - Alias(s)
-
-# General Configuration
-using namespace System.Management.Automation
-using namespace System.Management.Automation.Language
 
 #Oh-My-Posh config/setup
 oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1MrDwarf7Theme.omp.json | Invoke-Expression
@@ -531,7 +531,7 @@ function pmv
             .\activate
             Pop-Location
             Get-ChildItem
-        } elseif {
+        } else {
             python -m venv .venv
             Push-Location .\.venv\Scripts
             .\activate
@@ -539,6 +539,9 @@ function pmv
             Get-ChildItem
 
         }
+    }
+    catch {
+    Write-Error "Failed to create the virtual environment"
     }
 }
 
@@ -566,10 +569,7 @@ if ($env:VIRTUAL_ENV) {
     {
       Remove-Item -Path ./.venv -Recurse -Force
     }
-  } catch
-  {
-    Write-Error "Failed to remove virtual environment"
-  }
+}
 
 
 # END - Python Functions
@@ -648,97 +648,34 @@ function uzip
 
 function vim
 {
-  $env:NVIM_APPNAME = $null
-  & nvim $args
-  return
+  $env:NVIM_APPNAME = "nvim"
+  nvim $args
 }
 
 function dvim
 {
     $env:NVIM_APPNAME = "LazyVim"
-    if ($env:HOME_PROFILE) {
-            & neovide $args 
-            return
-    } else {
-        if (Test-CommandExists nvim)
-        {
-            & nvim $args
-            return
-        } else
-        { Write-Host "'nvim' command not recognized"
-        return
-        }
+    # if ($env:HOME_PROFILE) {
+    #     neovide $args 
+    # } elseif (Test-CommandExists nvim){
+        nvim $args
     }
-}
+# }
+# Neovide being buggy as hell, commented out for time being
 
-function nvims
-{
-  #$items = "LazyVim", "AstroNvim", "NvChad", "CosmicNvim", "KickStart", "Default"
-  $items = "LazyVim", "Default"
-  $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
-  if ([string]::IsNullOrEmpty($config))
-  {
-    Write-Output "Nothing selected"
-    return exit-0
-  }
-  if ($config -eq "Default")
-  {
-    $config = ""
-  }
+function nvims() {
+    $items = "LazyVim", "Default"
+    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
-  $env:NVIM_APPNAME = $config
-  try
-  {
-    if ($env:HOME_PROFILE) {
-        & neovide $args
-        $env:NVIM_APPNAME = $null
-        return
-    } else 
-    { 
-        & nvim $args
-        $env:NVIM_APPNAME = $null
+    if ([string]::IsNullOrEmpty($config)) {
+        Write-Output "Nothing selected"
         return
     }
-    } catch {
-        Get-Error | Write-Host
+    if ($config -eq "default") {
+        $config = ""
     }
+    $env:NVIM_APPNAME = $config
+    nvim $args
 }
 # END - Vim things
-
-
-
-
-
-# Old version here to keep incase 
-# function nvims
-# {
-#     $items =  "LazyVim","Default"
-#     $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
-  
-#     if ([string]::IsNullOrEmpty($config))
-#     {
-#         Write-Output "Nothing selected"
-#         return exit-0
-#     }
-#     if ($config -eq "Default")
-#     {
-#         $config = ""
-#     }
-
-#     $env:NVIM_APPNAME = $config
-#     try
-#     {
-#         if (Test-CommandExists nvim)
-#         {
-#             & nvim $args
-#         } else
-#         {
-#             Write-Host "'nvim' command not recognized"
-#             return
-#         }
-#     } catch
-#     {
-#         return
-#     }
-# }
