@@ -1,7 +1,6 @@
 -- Easier to type: map for keymaps
 local map_api = vim.api.nvim_set_keymap --Here to test it later
 local map = vim.keymap.set
---local g = vim.g
 
 local opts = {
     noremap = true, --Non-recurse
@@ -16,7 +15,7 @@ local opts = {
 -- UNIVERSAL MODE KEYMAPS
 --------------
 vim.g.mapleader = " "
-
+map("n", "<esc>", ":nohl<CR>", {desc = "Clear search highlights"})
 
 
 --------------
@@ -40,17 +39,29 @@ map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 -- NORMAL MODE KEYMAPS
 --------------
 -- Window nav remappings
-map("n", "<C-h>)", "<C-w>h", opts)
-map("n", "<C-j>)", "<C-w>j", opts)
-map("n", "<C-k>)", "<C-w>k", opts)
-map("n", "<C-l>)", "<C-w>l", opts)
+map("n", "<C-h>", "<C-w>h", opts, { desc = "Window Move Left" })
+map("n", "<C-j>", "<C-w>j", opts, { desc = "Window Move Left" })
+map("n", "<C-k>", "<C-w>k", opts, { desc = "Window Move Left" })
+map("n", "<C-l>", "<C-w>l", opts, { desc = "Window Move Left" })
 
 --Window Resize with alt + arrow key
 --(-2 being 2 lines to resize by)
-map("n", "<C-Up>)", ":resize -2<CR>", opts)
-map("n", "<C-Down>)", ":resize +2<CR>", opts)
-map("n", "<C-Left>)", ":vertical resize -2<CR>", opts)
-map("n", "<C-Right>)", ":vertical resize +2<CR>", opts)
+map("n", "<C-Up>", ":resize -2<CR>", opts)
+map("n", "<C-Down>", ":resize +2<CR>", opts)
+map("n", "<C-Left>", ":vertical resize -2<CR>", opts)
+map("n", "<C-Right>", ":vertical resize +2<CR>", opts)
+
+
+-- Buffer controls
+map("n", "<leader>bn", ":bnext<CR>", { desc = "Buffer Next" })
+map("n", "<leader>bn", ":bNext<CR>", { desc = "Buffer Next" })
+
+map("n", "<leader>bp", ":bPrevious<CR>", { desc = "Buffer Previous" })
+map("n", "<leader>bp", ":bprev<CR>", { desc = "Buffer Previous" })
+
+
+map("n", "<leader>bc", ":bdelete<CR>", {desc = "Buffer Close" })
+map("n", "<leader>bwa", ":bwipeout<CR>", {desc = "Buffer Wipeout" })
 
 --------------
 -- INSERT MODE KEYMAPS
@@ -67,4 +78,24 @@ map("v", ">", ">gv", opts)
 --------------
 -- PLUGIN SPECIFIC KEYMAPS
 --------------
+
+-- All of these will likely get moved to a Which-Key/wk array at some stage anyway
+
+-- Lazy Vim
+map("n", "<leader>l", ":Lazy<CR>", { desc = "Lazy.Nvim" })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

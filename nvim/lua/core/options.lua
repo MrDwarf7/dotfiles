@@ -1,6 +1,3 @@
--- map = KEYMAPPINGS
-local map = vim.api.nvim_set_keymap
-
 -- opt = OPTIONS
 local opt = vim.opt
 
@@ -14,11 +11,29 @@ opt.expandtab = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-opt.splitbelow = true
-opt.splitright = true
+
 opt.showmode = true -- TEMP - On until install of lua line/buffline etc etc.
 opt.termguicolors = true
 opt.incsearch = true
 opt.hlsearch = true
 opt.ignorecase = true
 opt.smartcase = true
+
+-- Window splitting
+opt.splitbelow = true
+opt.splitright = true
+
+opt.wrap = false
+opt.background = "dark"
+opt.signcolumn = "yes"
+
+-- Backspace setting
+opt.backspace = "indent,eol,start"
+
+
+-- Clipboard
+opt.clipboard:append("unnamedplus")
+
+
+-- Disable swapfile
+opt.swapfile = false

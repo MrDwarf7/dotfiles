@@ -20,20 +20,22 @@ require("lazy").setup({
     concurrency = 35,
     install = {
         missing = true,
-        --colorscheme = { "NameOfSchemeHere" },
+        --colorscheme = { "tiagovla/tokyodark.nvim" },
     },
-    --checker = { enabled = false },
-    ui = {
-        size = {
-            width = 0.9,
-            height = 0.9,
-        },
-    },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                --items here,
-            },
-        },
-    }
+--   --checker = { enabled = false },
+--   ui = {
+--       size = {
+--           width = 0.9,
+--           height = 0.9,
+--       },
+--   },
+--   performance = {
+--       rtp = {
+--           disabled_plugins = {
+--               --items here,
+--           },
+--       },
+--   }
 })
+
+--
