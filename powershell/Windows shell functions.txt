@@ -77,13 +77,12 @@
 ### START MAIN SCRIPT
 
 
-
 # General Configuration
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
 #Oh-My-Posh Config call
-oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json| Invoke-Expression
+oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json | Invoke-Expression
 
 Import-Module PSReadLine
 Import-Module -Name CompletionPredictor
@@ -93,13 +92,56 @@ Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle Lis
 # Auto completion via winget Tabs
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
     param($wordToComplete, $commandAst, $cursorPosition)
-        [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
-        $Local:word = $wordToComplete.Replace('"', '""')
-        $Local:ast = $commandAst.ToString().Replace('"', '""')
-        winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
-            [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-        }
+    [Console]::InputEncoding = [Console]::OutputEncoding = $OutputEncoding = [System.Text.Utf8Encoding]::new()
+    $Local:word = $wordToComplete.Replace('"', '""')
+    $Local:ast = $commandAst.ToString().Replace('"', '""')
+    winget complete --word="$Local:word" --commandline "$Local:ast" --position $cursorPosition | ForEach-Object {
+        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+    }
 }
+
+# Import the Chocolatey Profile that contains the necessary code to enable
+# tab-completions to function for `choco`.
+# Be aware that if you are missing these lines from your profile, tab completion
+# for `choco` will not function.
+# See https://ch0.co/tab-completion for details.
+$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+if (Test-Path($ChocolateyProfile))
+{
+    Import-Module "$ChocolateyProfile"
+}
+
+# BEGIN - Alias(s)
+#
+#Git aliases from Oh-my-zsh Git plugin for PWSH
+Import-Module git-aliases -DisableNameChecking
+
+New-Alias grep Select-String
+New-Alias which Get-Command
+New-Alias ln New-SymLink
+
+# END - Alias(s)
+
+
+# BEGIN - Tooling Functions
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
+{
+    return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+}
+
+# Work.sort of
+function checkEnvironment
+{
+    if ($env:COMPUTERNAME -clike "*LG*")
+    {
+        return $true
+    } else
+    {
+        return $false
+    }
+}
+
+# END - Tooling Functions
 
 #PSReadLine functions start.
 # Searching for commands with up/down arrow is really handy.  The
@@ -118,9 +160,9 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 # is inserted to the command line without invoking. Multiple command selection
 # is supported, e.g. selected by Ctrl + Click.
 Set-PSReadLineKeyHandler -Key F7 `
-                         -BriefDescription History `
-                         -LongDescription 'Show command history' `
-                         -ScriptBlock {
+    -BriefDescription History `
+    -LongDescription 'Show command history' `
+    -ScriptBlock {
     $pattern = $null
     [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$pattern, [ref]$null)
     if ($pattern)
@@ -139,8 +181,7 @@ Set-PSReadLineKeyHandler -Key F7 `
                 $lines = if ($lines)
                 {
                     "$lines`n$line"
-                }
-                else
+                } else
                 {
                     $line
                 }
@@ -172,10 +213,10 @@ Set-PSReadLineKeyHandler -Key F7 `
 
 
 #Quotation mark control
-Set-PSReadLineKeyHandler -Key '"',"'" `
-                         -BriefDescription SmartInsertQuote `
-                         -LongDescription "Insert paired quotes if not already on a quote" `
-                         -ScriptBlock {
+Set-PSReadLineKeyHandler -Key '"', "'" `
+    -BriefDescription SmartInsertQuote `
+    -LongDescription "Insert paired quotes if not already on a quote" `
+    -ScriptBlock {
     param($key, $arg)
 
     $quote = $key.KeyChar
@@ -207,13 +248,19 @@ Set-PSReadLineKeyHandler -Key '"',"'" `
 
         foreach ($token in $tokens)
         {
-            if ($cursor -lt $token.Extent.StartOffset) { continue }
-            if ($cursor -lt $token.Extent.EndOffset) {
+            if ($cursor -lt $token.Extent.StartOffset)
+            { continue 
+            }
+            if ($cursor -lt $token.Extent.EndOffset)
+            {
                 $result = $token
                 $token = $token -as [StringExpandableToken]
-                if ($token) {
+                if ($token)
+                {
                     $nested = FindToken $token.NestedTokens $cursor
-                    if ($nested) { $result = $nested }
+                    if ($nested)
+                    { $result = $nested 
+                    }
                 }
 
                 return $result
@@ -225,28 +272,33 @@ Set-PSReadLineKeyHandler -Key '"',"'" `
     $token = FindToken $tokens $cursor
 
     # If we're on or inside a **quoted** string token (so not generic), we need to be smarter
-    if ($token -is [StringToken] -and $token.Kind -ne [TokenKind]::Generic) {
+    if ($token -is [StringToken] -and $token.Kind -ne [TokenKind]::Generic)
+    {
         # If we're at the start of the string, assume we're inserting a new string
-        if ($token.Extent.StartOffset -eq $cursor) {
+        if ($token.Extent.StartOffset -eq $cursor)
+        {
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$quote$quote ")
             [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
             return
         }
 
         # If we're at the end of the string, move over the closing quote if present.
-        if ($token.Extent.EndOffset -eq ($cursor + 1) -and $line[$cursor] -eq $quote) {
+        if ($token.Extent.EndOffset -eq ($cursor + 1) -and $line[$cursor] -eq $quote)
+        {
             [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
             return
         }
     }
 
     if ($null -eq $token -or
-        $token.Kind -eq [TokenKind]::RParen -or $token.Kind -eq [TokenKind]::RCurly -or $token.Kind -eq [TokenKind]::RBracket) {
-        if ($line[0..$cursor].Where{$_ -eq $quote}.Count % 2 -eq 1) {
+        $token.Kind -eq [TokenKind]::RParen -or $token.Kind -eq [TokenKind]::RCurly -or $token.Kind -eq [TokenKind]::RBracket)
+    {
+        if ($line[0..$cursor].Where{ $_ -eq $quote }.Count % 2 -eq 1)
+        {
             # Odd number of quotes before the cursor, insert a single quote
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert($quote)
-        }
-        else {
+        } else
+        {
             # Insert matching quotes, move cursor to be in between the quotes
             [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$quote$quote")
             [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
@@ -255,9 +307,11 @@ Set-PSReadLineKeyHandler -Key '"',"'" `
     }
 
     # If cursor is at the start of a token, enclose it in quotes.
-    if ($token.Extent.StartOffset -eq $cursor) {
+    if ($token.Extent.StartOffset -eq $cursor)
+    {
         if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or 
-            $token.Kind -eq [TokenKind]::Variable -or $token.TokenFlags.hasFlag([TokenFlags]::Keyword)) {
+            $token.Kind -eq [TokenKind]::Variable -or $token.TokenFlags.hasFlag([TokenFlags]::Keyword))
+        {
             $end = $token.Extent.EndOffset
             $len = $end - $cursor
             [Microsoft.PowerShell.PSConsoleReadLine]::Replace($cursor, $len, $quote + $line.SubString($cursor, $len) + $quote)
@@ -274,17 +328,23 @@ Set-PSReadLineKeyHandler -Key '"',"'" `
 
 
 #Bracket control - Opening
-Set-PSReadLineKeyHandler -Key '(','{','[' `
-                         -BriefDescription InsertPairedBraces `
-                         -LongDescription "Insert matching braces" `
-                         -ScriptBlock {
+Set-PSReadLineKeyHandler -Key '(', '{', '[' `
+    -BriefDescription InsertPairedBraces `
+    -LongDescription "Insert matching braces" `
+    -ScriptBlock {
     param($key, $arg)
 
     $closeChar = switch ($key.KeyChar)
     {
-        <#case#> '(' { [char]')'; break }
-        <#case#> '{' { [char]'}'; break }
-        <#case#> '[' { [char]']'; break }
+        <#case#> '('
+        { [char]')'; break 
+        }
+        <#case#> '{'
+        { [char]'}'; break 
+        }
+        <#case#> '['
+        { [char]']'; break 
+        }
     }
 
     $selectionStart = $null
@@ -297,22 +357,23 @@ Set-PSReadLineKeyHandler -Key '(','{','[' `
     
     if ($selectionStart -ne -1)
     {
-      # Text is selected, wrap it in brackets
-      [Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $key.KeyChar + $line.SubString($selectionStart, $selectionLength) + $closeChar)
-      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selectionStart + $selectionLength + 2)
-    } else {
-      # No text is selected, insert a pair
-      [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)$closeChar")
-      [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
+        # Text is selected, wrap it in brackets
+        [Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $key.KeyChar + $line.SubString($selectionStart, $selectionLength) + $closeChar)
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($selectionStart + $selectionLength + 2)
+    } else
+    {
+        # No text is selected, insert a pair
+        [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)$closeChar")
+        [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
     }
 }
 #END Bracket control - Opening
 
 #Bracket control - Closing
-Set-PSReadLineKeyHandler -Key ')',']','}' `
-                         -BriefDescription SmartCloseBraces `
-                         -LongDescription "Insert closing brace or skip" `
-                         -ScriptBlock {
+Set-PSReadLineKeyHandler -Key ')', ']', '}' `
+    -BriefDescription SmartCloseBraces `
+    -LongDescription "Insert closing brace or skip" `
+    -ScriptBlock {
     param($key, $arg)
 
     $line = $null
@@ -322,17 +383,16 @@ Set-PSReadLineKeyHandler -Key ')',']','}' `
     if ($line[$cursor] -eq $key.KeyChar)
     {
         [Microsoft.PowerShell.PSConsoleReadLine]::SetCursorPosition($cursor + 1)
-    }
-    else
+    } else
     {
         [Microsoft.PowerShell.PSConsoleReadLine]::Insert("$($key.KeyChar)")
     }
 }
 
 Set-PSReadLineKeyHandler -Key Backspace `
-                         -BriefDescription SmartBackspace `
-                         -LongDescription "Delete previous character or matching quotes/parens/braces" `
-                         -ScriptBlock {
+    -BriefDescription SmartBackspace `
+    -LongDescription "Delete previous character or matching quotes/parens/braces" `
+    -ScriptBlock {
     param($key, $arg)
 
     $line = $null
@@ -346,19 +406,28 @@ Set-PSReadLineKeyHandler -Key Backspace `
         {
             switch ($line[$cursor])
             {
-                <#case#> '"' { $toMatch = '"'; break }
-                <#case#> "'" { $toMatch = "'"; break }
-                <#case#> ')' { $toMatch = '('; break }
-                <#case#> ']' { $toMatch = '['; break }
-                <#case#> '}' { $toMatch = '{'; break }
+                <#case#> '"'
+                { $toMatch = '"'; break 
+                }
+                <#case#> "'"
+                { $toMatch = "'"; break 
+                }
+                <#case#> ')'
+                { $toMatch = '('; break 
+                }
+                <#case#> ']'
+                { $toMatch = '['; break 
+                }
+                <#case#> '}'
+                { $toMatch = '{'; break 
+                }
             }
         }
 
-        if ($toMatch -ne $null -and $line[$cursor-1] -eq $toMatch)
+        if ($toMatch -ne $null -and $line[$cursor - 1] -eq $toMatch)
         {
             [Microsoft.PowerShell.PSConsoleReadLine]::Delete($cursor - 1, 2)
-        }
-        else
+        } else
         {
             [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteChar($key, $arg)
         }
@@ -370,15 +439,22 @@ Set-PSReadLineKeyHandler -Key Backspace `
 #endregion Smart Insert/Delete
 
 
-
 #Raw Functions
 
-function gitsh {
+# BEGIN - Shell functions
+
+# Work
+function gitsh
+{
     C:/Applications/Git/bin/bash.exe -i -l
 }
 
+# END - Shell functions
 
-function mgr {
+# BEGIN - Navigation functions
+# Work
+function mgr
+{
     param(
         [string]$path = "C:\Applications\GitHub_Projects"
     )
@@ -386,16 +462,29 @@ function mgr {
     Get-ChildItem
 }
 
+# Work
+function wgr
+{
+    param(
+        [string]$path = "C:\Applications\GitWork_Projects"
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
-function bpr {
+# Work
+function bpgr
+{
     param(
         [string]$path = "\\SomeNetWorkPathPlace\SomeOtherFolderPlace"
     )
     Push-Location $path
+    Get-ChildItem
 }
 
-
-function sar {
+# Work
+function bpr
+{
     param(
         [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
     )
@@ -403,167 +492,286 @@ function sar {
 }
 
 
-function ohome {
+# Work
+function sar
+{
+    param(
+        [string]$path = "\\SomeNetWorkPathPlace\SomeFolder\SomeOtherFolder"
+    )
+    Push-Location $path
+}
+
+
+# Work
+function ohome
+{
 	$onlineHome = "$env:USERPROFILE\OneDrive - SomeName"
-	Push-Location $onlineHome
-	Get-ChildItem
-}
-
-function pro {
-    . $PROFILE
-}
-
-function pmv {
-    try {
-        if (checkEnvironment) {
-            python -m venv .venv
-            avenv
-        }
-        else {
-            continue
-        }
-    }
-    catch {
-        Write-Error "Failed to create virtual environment: $_"
-    }
-}
-
-
-function checkEnvironment {
-    if ($env:COMPUTERNAME -clike "*LG*") {
-        return $true
-    }
-    else {
-        return $false
-    }
-}
-
-
-function avenv {
-    Push-Location ./.venv/Scripts
-    .\activate
-    Pop-Location
+    Push-Location $onlineHome
     Get-ChildItem
 }
-
-function rmvenv {
-    dea
-    try {
-        if (checkEnvironment) {
-            Remove-Item -r ./.venv
-        }
-        else {
-            Remove-Item -Path ./.venv -Recurse -Force
-        }
-    }
-    catch {
-        Write-Error "Failed to remove virtual environment: $_"
-    }
-}
+# END - Navigation functions
 
 
-function cd2 {
-    Set-Location ../../
-}
-
-
-function dea {
-    deactivate
-}
-
-function touch {
-    param($arg)
-    New-Item $arg
-}
-
-function . {
-    Start-Process .
-}
-
-function la {
-    Param($path = ".")
-    Get-ChildItem $path -Force
-}
-
-# Import the Chocolatey Profile that contains the necessary code to enable
-# tab-completions to function for `choco`.
-# Be aware that if you are missing these lines from your profile, tab completion
-# for `choco` will not function.
-# See https://ch0.co/tab-completion for details.
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
-}
-
-#Git aliases from Oh-my-zsh Git plugin for PWSH
-#Does require you to have setup the plugin via GitHub for it to work
-Import-Module git-aliases -DisableNameChecking
-
-
-function nvi() {
-    $env:NVIM_APPNAME = "nvim"
-    nvim $args
-}
-
-
-#NeoVim Config Switcher: 
-function nvims() {
-    $items = "LazyVim", "AstroVim", "NvChad", "Default"
-    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
-
-    if ([string]::IsNullOrEmpty($config)) {
-        Write-Output "Nothing selected"
-        return
-    }
- 
-    if ($config -eq "default") {
-        $config = ""
-    }
-
-    $env:NVIM_APPNAME = $config
-    nvim $args
-}
-
-
-function python {
-    
-    if (checkEnvironment -eq $true) {
-        if ($env:VIRTUAL_ENV) {
-            $virtualEnvPythonPath = Join-Path $env:VIRTUAL_ENV "Scripts\python.exe"
-            Set-Alias -Name python -Value $virtualEnvPythonPath
-            
-            & python $args
-        }
-        else {
-            $pythonPath = "C:\Applications\Python3.11.4\python.exe"
-            Set-Alias -Name python -Value $pythonPath
-            
-            & python $args
-        }
-    }
-    else {
-        continue
-    }
-}
-
-function pip {
+# BEGIN - Python Functions
+function pip
+{
         
-    if (checkEnvironment -eq $true) {
-        if ($env:VIRTUAL_ENV) {
+    if (checkEnvironment -eq $true)
+    {
+        if ($env:VIRTUAL_ENV)
+        {
             $virtualEnvPipPath = Join-Path $env:VIRTUAL_ENV "Scripts\pip.exe"
             Set-Alias -Name pip -Value $virtualEnvPipPath
             & Set-Alias -Name pip3 -Value $virtualEnvPipPath
                 
             & pip $args
-        }
-        else {
+        } else
+        {
             $pipPath = "C:\Applications\Python3.11.4\Scripts\pip.exe"
             & Set-Alias -Name pip -Value $pipPath
                 
             & pip $args
         }
-    }
-    else {
+    } else
+    {
         continue
     }
 }
+
+# Work
+function pmv
+{
+    try
+    {
+        if (checkEnvironment)
+        {
+            py -m venv .venv
+            Push-Location .\.venv\Scripts
+            .\activate
+            Pop-Location
+            Get-ChildItem
+        } catch {
+            python -m venv .venv
+            Push-Location .\.venv\Scripts
+            .\activate
+            Pop-Location
+            Get-ChildItem
+
+        }
+    }
+
+    catch
+    {
+    }
+}
+
+# Work
+function dea
+{
+    deactivate
+}
+
+# Work
+function avenv
+{
+    Push-Location .\.venv\Scripts
+    .\activate
+    Pop-Location
+    Get-ChildItem
+}
+
+# Work
+function rmvenv
+{
+    if ($env:VIRTUAL_ENV) {
+        deactivate
+        } else {
+            try
+            {
+                if (checkEnvironment)
+                {
+                    Remove-Item -r ./.venv
+                } else
+                {
+                    Remove-Item -Path ./.venv -Recurse -Force
+                }
+            } catch
+            {
+                Write-Error "Failed to remove virtual environment"
+            }
+        }
+    }
+
+
+# END - Python Functions
+
+#Linux Functions
+
+function pro
+{
+    . $PROFILE
+}
+
+function cd2
+{
+    Set-Location ../../
+}
+
+function .
+{
+    Start-Process .
+}
+
+function touch
+{
+    param($arg)
+    New-Item $arg
+}
+
+function la
+{
+    param ($path = ".")
+    Get-ChildItem $path -Force
+}
+
+
+function zip
+{
+    param (
+        [string]$ItemToCompress,
+        [string]$OptionalDestination
+    )
+    $ItemName = (Get-Item $ItemToCompress).Name
+    $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
+  
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
+        $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
+  
+        Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
+    } else
+    {
+        Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
+    }
+}
+  
+  
+function uzip
+{
+    param (
+        [string]$ItemToUnzip,
+        [string]$OptionalDestination
+    )
+    $ItemName = (Get-Item $ItemToUnzip).Name 
+    $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
+  
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
+        $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
+  
+        Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
+    } else
+    {
+        Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
+    }
+}
+
+# END - Linux Functions
+
+
+
+# BEGIN - Vim things
+
+function vim
+{
+    & nvim $args
+}
+
+
+function nvi
+{
+    $env:NVIM_APPNAME = "LazyVim"
+    try
+    {
+        if (Test-CommandExists nvim)
+        {
+            & nvim $args
+        } else
+        {
+            Write-Host "'nvim' command not recognized"
+            return
+        }
+    } catch
+    {
+        return
+    }
+}
+
+# WORK - Until better way of doing the check
+function nvims
+{
+    $items =  "LazyVim","Default"
+    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+  
+    if ([string]::IsNullOrEmpty($config))
+    {
+        Write-Output "Nothing selected"
+        return
+    }
+  
+    if ($config -eq "Default")
+    {
+        $config = ""
+    }
+
+    $env:NVIM_APPNAME = $config
+    try
+    {
+        if (Test-CommandExists nvim)
+        {
+            & nvim $args
+        } else
+        {
+            Write-Host "'nvim' command not recognized"
+            return
+        }
+    } catch
+    {
+        return
+    }
+}
+
+# END - Vim things
+
+# Original one here that includes neovide -- not my home config though
+# function nvims
+# {
+#   $items =  "LazyVim","Default"
+#   $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+#
+#   if ([string]::IsNullOrEmpty($config))
+#   {
+#     Write-Output "Nothing selected"
+#     return
+#   }
+#
+#   if ($config -eq "Default")
+#   {
+#     $config = ""
+#   }
+#
+#   $env:NVIM_APPNAME = $config
+#   try
+#   {
+#     if (Test-CommandExists neovide)
+#     {
+#       & neovide $args
+#     } else
+#     {
+#       & nvim $args 
+#     }
+#   } catch
+#   {
+#
+#   }
+# }
