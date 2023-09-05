@@ -45,10 +45,7 @@ Finalize configuration for telescope ...
 POST Base {
 	
 	Terminal 
-	Git intergration (git-sign(s)??)
-	lazygit
 	dashboard of some sort (alpha-nvim, dashboard, something else?)
-	
 }
 
 

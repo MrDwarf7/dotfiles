@@ -19,9 +19,6 @@ local bufferline = require("bufferline").setup{
         }
         --Other components for buffer management/deletion are in bufdelete.lua
 
-
-
-
         local map = vim.keymap.set
         -- NEXT
         map("n", "<leader>bn", ":bnext<CR>", { desc = "Buffer Next" })
@@ -36,10 +33,6 @@ local bufferline = require("bufferline").setup{
 
         map("n", "<leader>bmn", ":BufferLineMoveNext<CR>", { desc = "Buffer Move Next" })
         map("n", "<leader>bmp", ":BufferLineMovePrev<CR>", { desc = "Buffer Move Previous" })
-
-
-
-
 
         -- DELETE and WIPE
         -- map("n", "<leader>bd", ":bdelete<CR><tab>", {desc = "Buffer Delete" })

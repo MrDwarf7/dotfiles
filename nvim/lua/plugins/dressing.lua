@@ -165,5 +165,8 @@ return {
         -- see :help dressing_get_config
         get_config = nil,
       },
-    }
+    },
+    config = function()
+    require("dressing").setup(opts)
+    end,
 }
