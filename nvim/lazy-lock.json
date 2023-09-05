@@ -1,4 +1,6 @@
 {
+  "Comment.nvim": { "branch": "master", "commit": "0236521ea582747b58869cb72f70ccfa967d2e89" },
+  "bufferline.nvim": { "branch": "main", "commit": "d24378edc14a675c820a303b4512af3bbc5761e9" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
   "neo-tree.nvim": { "branch": "v3.x", "commit": "9b5b4c874b13e372500f07c37187ba06c0c1ac0a" },
   "nui.nvim": { "branch": "main", "commit": "aa1b4c1e05983ff7debd2b4b2788651db099de2f" },

@@ -11,7 +11,7 @@ return {
     -- refer to the configuration section below
     window = {
         border = "shadow",
-        winblend = 25,
+        winblend = 15,
     }
   }
 }
