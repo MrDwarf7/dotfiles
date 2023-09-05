@@ -1,3 +1,4 @@
+-- Options can be tested out via :options
 -- opt = OPTIONS
 local opt = vim.opt
 
@@ -11,13 +12,15 @@ opt.expandtab = true
 opt.number = true
 opt.relativenumber = true
 opt.cursorline = true
-
 opt.showmode = true -- TEMP - On until install of lua line/buffline etc etc.
 opt.termguicolors = true
 opt.incsearch = true
 opt.hlsearch = true
 opt.ignorecase = true
 opt.smartcase = true
+
+--Scrolloff maintains a margin at top or bottom of screen.
+opt.scrolloff = 10
 
 -- Window splitting
 opt.splitbelow = true

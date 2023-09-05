@@ -86,5 +86,10 @@ map("n", "<leader>x", ":Bdelete<CR><tab>", {desc = "Buffer Delete" })
 map("n", "<leader>bw", ":Bwipeout<CR>", {desc = "Buffer Wipeout" })
 
 
+-- Easier commenting
+map("n", "<C-/>", "gcc", {desc = "Comment Toggle" })
 
+
+-- LazyGit
+map("n", "<leader>gg", ":LazyGit<CR>", {desc = "LazyGit Open" })
 

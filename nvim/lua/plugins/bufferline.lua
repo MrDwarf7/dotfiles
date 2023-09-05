@@ -6,9 +6,21 @@ return {
     },
 config = function()
 local bufferline = require("bufferline").setup{
-            options = {}
+            options = {
+                offsets = {
+                    {
+                        filetype = "NvimTree",
+                        textt = "File Explorer",
+                        text_align = "left",
+                        separator = true
+                    }
+                }
+            }
         }
         --Other components for buffer management/deletion are in bufdelete.lua
+
+
+
 
         local map = vim.keymap.set
         -- NEXT
@@ -19,6 +31,15 @@ local bufferline = require("bufferline").setup{
         map("n", "<leader>bp", ":bPrevious<CR>", { desc = "Buffer Previous" })
         map("n", "<leader>bp", ":bprev<CR>", { desc = "Buffer Previous" })
             map("n", "<S-tab>", ":bprev<CR>", { desc = "Buffer Previous" })
+
+        -- MOVING
+
+        map("n", "<leader>bmn", ":BufferLineMoveNext<CR>", { desc = "Buffer Move Next" })
+        map("n", "<leader>bmp", ":BufferLineMovePrev<CR>", { desc = "Buffer Move Previous" })
+
+
+
+
 
         -- DELETE and WIPE
         -- map("n", "<leader>bd", ":bdelete<CR><tab>", {desc = "Buffer Delete" })

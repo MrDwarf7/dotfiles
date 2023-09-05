@@ -20,10 +20,11 @@ require("lazy").setup({
     concurrency = 50,
     install = {
         missing = true,
-        colorscheme = { "tiagovla/tokyodark.nvim" },
+        -- colorscheme = { "tiagovla/tokyodark.nvim" },
     },
    checker = {
         enabled = true
+        -- notfiy = false,
     },
     change_detection = {
         notify = false,
