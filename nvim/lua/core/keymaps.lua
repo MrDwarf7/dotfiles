@@ -9,7 +9,8 @@ local opts = {
 vim.g.mapleader = " "
 
 -- Helper Functions (Can be moved to it's own file later)
-
+-- --------------- WHICH KEY EXAMPLES CAN BE FOUND VIA 
+-- :h which-key.nvim.txt, then searching MAPPINGS, go to 12th instance.
 
 
 --------------
