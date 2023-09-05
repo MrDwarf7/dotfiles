@@ -45,6 +45,7 @@ return {
                 g = { "<cmd>Telescope live_grep<cr>", "Live Grep" },
                 h = { "<cmd>Telescope help_tags<cr>", "Help Tags" },
                 j = { "<cmd>Telescope jumplist<cr>", "Jumplist" },
+                - = { "<cmd>Telescope colorscheme<cr>", "Temp Colorscheme" },
             },
         }, { prefix = "<leader>" })
     end,
