@@ -6,6 +6,7 @@ local opts = {
     noremap = true, --Non-recurse
     silent = true, --Don't show a message about it
 }
+vim.g.mapleader = " "
 
 -- Helper Functions (Can be moved to it's own file later)
 
@@ -14,12 +15,11 @@ local opts = {
 --------------
 -- UNIVERSAL MODE KEYMAPS
 --------------
-vim.g.mapleader = " "
 map("n", "<esc>", ":nohl<CR>", {desc = "Clear search highlights"})
 map("n", "<C-s>", ":w<CR>", opts)
 map("n", "<C-S>", ":w!<CR>", opts)
 
-map("n", "<C-F12>", ":qa!<CR>", opts, { desc = "Close everything" })
+map("n", "<leader>qq", ":qa!<CR>", opts, { desc = "Close everything" })
 
 
 --------------
@@ -55,38 +55,6 @@ map("n", "<C-Down>", ":resize -2<CR>", opts)
 map("n", "<C-Right>", ":vertical resize -2<CR>", opts)
 map("n", "<C-Left>", ":vertical resize +2<CR>", opts)
 
---Window Splits
---map("n", "<leader-s>s", ":split<CR>")
-
-
-
-
-
--- Buffer controls
--- NEXT
-map("n", "<leader>bn", ":bnext<CR>", { desc = "Buffer Next" })
---map("n", "<leader>bn", ":bNext<CR>", { desc = "Buffer Next" })
-map("n", "<tab>", ":bnext<CR>", { desc = "Buffer Next" })
-
--- PREV / PREVIOUS
-map("n", "<leader>bp", ":bPrevious<CR>", { desc = "Buffer Previous" })
-map("n", "<leader>bp", ":bprev<CR>", { desc = "Buffer Previous" })
-map("n", "<S-tab>", ":bprev<CR>", { desc = "Buffer Previous" })
-
--- DELETE and WIPE
-map("n", "<leader>bd", ":bdelete<CR><tab>", {desc = "Buffer Delete" })
-map("n", "<leader>bwa", ":bwipeout<CR>", {desc = "Buffer Wipeout" })
-
-
--- Tab controls
-map("n", "<leader><tab>]", ":tabNext<CR>", { desc = "Tab Next" })
-map("n", "<leader><tab>[", ":tabprevious<CR>", { desc = "Tab Previous" })
-map("n", "<leader><tab>a", ":tabnew<CR>", { desc = "Tab New" })
-map("n", "<leader><tab>c", ":tabclose<CR>", { desc = "Tab Close" })
-
-
-
-
 --------------
 -- INSERT MODE KEYMAPS
 --------------
@@ -111,6 +79,11 @@ map("n", "<leader>l", ":Lazy<CR>", { desc = "Lazy.Nvim" })
 --Bufferline
 --map("n", "<Tab>", ":BufferLineCycleNext<CR>", opts, { desc = "BufferLine cycle Next" })
 --map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts, { desc = "BufferLine cycle Prev" })
+
+-- Better buf deletion
+map("n", "<leader>bd", ":Bdelete<CR><tab>", {desc = "Buffer Delete" })
+map("n", "<leader>x", ":Bdelete<CR><tab>", {desc = "Buffer Delete" })
+map("n", "<leader>bw", ":Bwipeout<CR>", {desc = "Buffer Wipeout" })
 
 
 

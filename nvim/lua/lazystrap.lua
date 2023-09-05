@@ -17,7 +17,7 @@ require("lazy").setup({
     defaults = { 
             lazy = false
         },
-    concurrency = 35,
+    concurrency = 50,
     install = {
         missing = true,
         colorscheme = { "tiagovla/tokyodark.nvim" },
