@@ -15,7 +15,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Will want to setup a section to call the 'custom' dir, for being able to store and swap customizable components,
 -- As well for an LSP folder to container all the LSP related nonesense.
 
-require("lazy").setup("plugins", {
+require("lazy").setup({{import = "plugins"},
+-- other plugin sub-dirs would go here as <, { import = "plugins.FOLDER" } > 
+}, {
     -- spec = { "plugins" }, --Not currently using more than a single "module" // Dir of things.
    -- Also not using "sections" for things (Like "UI.lua" for all UI things) not super required atm.
     defaults = { 
@@ -23,7 +25,7 @@ require("lazy").setup("plugins", {
         },
    install = {
       missing = true,
-      -- colorscheme = { "tiagovla/tokyodark.nvim" },
+      colorscheme = { "catppuccin" },
    },
    ui = {
       size = {

@@ -1,7 +1,8 @@
 return {
   'stevearc/dressing.nvim',
-  opts = {
-    input = {
+   event = "VeryLazy",
+   opts = {
+      input = {
         -- Set to false to disable the vim.ui.input implementation
         enabled = true,
 

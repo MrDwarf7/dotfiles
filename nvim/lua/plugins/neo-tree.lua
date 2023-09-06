@@ -60,8 +60,11 @@ return {
          }
       })
       local map = vim.keymap.set
-      map("n", "<leader>et", ":Neotree toggle<CR>", { desc = "Neotree Toggle" })
-      map("n", "<leader>e", ":Neotree focus<CR>", { desc = "Neotree" })
+      opts = {
+         silent = true
+      }
+      map("n", "<leader>et", ":Neotree toggle<CR>", opts, { desc = "Neotree Toggle" })
+      map("n", "<leader>e", ":Neotree focus<CR>", opts, { desc = "Neotree" })
    end,
 }
 
