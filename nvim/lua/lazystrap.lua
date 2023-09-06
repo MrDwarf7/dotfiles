@@ -13,6 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    -- Will want to setup a section to call the 'custom' dir, for being able to store and swap customizable components,
+    -- As well for an LSP folder to container all the LSP related nonesense.
+    --
     spec = "plugins",
     defaults = { 
             lazy = false

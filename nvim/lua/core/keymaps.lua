@@ -7,6 +7,7 @@ local opts = {
     silent = true, --Don't show a message about it
 }
 vim.g.mapleader = " "
+vim.g.localleader = " "
 
 -- Helper Functions (Can be moved to it's own file later)
 -- --------------- WHICH KEY EXAMPLES CAN BE FOUND VIA 
@@ -93,4 +94,7 @@ map("n", "<C-/>", "gcc", {desc = "Comment Toggle" })
 
 -- LazyGit
 map("n", "<leader>gg", ":LazyGit<CR>", {desc = "LazyGit Open" })
+
+
+
 
