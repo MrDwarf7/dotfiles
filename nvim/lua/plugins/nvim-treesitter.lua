@@ -25,5 +25,5 @@ config = function ()
                 enable = true
             },
         })
-    end
+    end,
 }

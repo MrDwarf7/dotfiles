@@ -2,6 +2,7 @@
 -- opt = OPTIONS
 local opt = vim.opt
 
+opt.list = true
 -- Tab config
 opt.tabstop = 4
 opt.softtabstop = 4

@@ -12,26 +12,56 @@ return {
             source_selector = {
                 winbar = true,
             },
+            mappings = {
+               ["<space>"] = {
+                  "toggle_node",
+                  nowait = false,
+               },
+               ["s"] = "open_split",
+               ["v"] = "open_vsplit",
+               ["<bs>"] = "close_node",
+            },
             filestystem = {
+            -- follow_current_file = { enabled = true },
                 filtered_items = {
-                    visible = true, --default setting
-                        show_hidden_count = true,
-                        hide_dotfiles = false,
-                        hide_gitignored = false,
-                        hide_hidden = true, --windows specific.
-                        hide_by_name = {
+                  visible = false,
+                  hide_dotfiles = false,
+                  hide_gitignored = false,
+                  show_hidden_count = true,
+                  hide_hidden = true, --windows specific.
+                  hide_by_name = {
                         -- "node_modules"
                         },
-                        always_show = { -- remains visible even if other settings would normally hide it 
-                            "AppData",
-                            --".gitignored",
-                        },
-                    }
-                }
+                  always_show = { -- remains visible even if other settings would normally hide it 
+                     "AppData",
+                     ".git",
+                     ".gitignore",
+                     ".gitignored",
+                  },
+               },
+            follow_current_file = {
+               enabled = true,
+            },
+
+               use_lubuv_file_watcher = true, -- Makes NeoTree use the OS level file watcher to detect changes
+               window = {
+
+                  mappings = {
+                     ["<->"] = "navigate_up",
+                  }
+               },
+            },
+
+            buffers = {
+               follow_current_file = {
+                  enabled = true,
+               },
             }
-        })
-        local map = vim.keymap.set
-        map("n", "<leader>et", ":Neotree toggle<CR>", { desc = "Neotree Toggle" })
-        map("n", "<leader>e", ":Neotree focus<CR>", { desc = "Neotree" })
-    end,
+         }
+      })
+      local map = vim.keymap.set
+      map("n", "<leader>et", ":Neotree toggle<CR>", { desc = "Neotree Toggle" })
+      map("n", "<leader>e", ":Neotree focus<CR>", { desc = "Neotree" })
+   end,
 }
+
