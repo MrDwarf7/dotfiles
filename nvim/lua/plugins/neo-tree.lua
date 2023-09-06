@@ -63,8 +63,8 @@ return {
       opts = {
          silent = true
       }
-      map("n", "<leader>et", ":Neotree toggle<CR>", opts, { desc = "Neotree Toggle" })
-      map("n", "<leader>e", ":Neotree focus<CR>", opts, { desc = "Neotree" })
+      map("n", "<leader>nt", ":Neotree toggle<CR>", opts, { desc = "Neotree Toggle" })
+      map("n", "<leader>n", ":Neotree focus<CR>", opts, { desc = "Neotree" })
    end,
 }
 

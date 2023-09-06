@@ -76,7 +76,7 @@ map("v", ">", ">gv", opts)
 
 
 -- Lazy Vim
-map("n", "<leader>l", ":Lazy<CR>", { desc = "Lazy.Nvim" })
+map("n", "<leader>p", ":Lazy<CR>", { desc = "Lazy.Nvim" })
 
 --Bufferline
 --map("n", "<Tab>", ":BufferLineCycleNext<CR>", opts, { desc = "BufferLine cycle Next" })
