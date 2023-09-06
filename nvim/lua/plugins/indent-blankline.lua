@@ -1,5 +1,5 @@
 return {
-   "lukas-reineke/indent-blankline.nvim",
+    "lukas-reineke/indent-blankline.nvim",
 
    config = function()
       local indent_blankline = require("indent_blankline").setup{
@@ -18,8 +18,10 @@ return {
             "toggleterm",
             "lazyterm"
          },
-         show_trailing_blankline_indent = false,
+         show_trailing_blankline_indent = true,
          show_current_context = true,
+         use_treesitter = true,
       }
    end,
+
 }
