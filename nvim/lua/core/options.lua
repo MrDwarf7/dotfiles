@@ -30,7 +30,7 @@ opt.hlsearch = true
 opt.updatetime = 250 
 opt.timeoutlen = 300 -- Time to wait for mapped sequence to comp.
 
-
+opt.mouse = "a"
 
 -- Window splitting
 opt.splitbelow = true
@@ -42,6 +42,9 @@ opt.signcolumn = "yes"
 
 -- Backspace setting
 opt.backspace = "indent,eol,start"
+
+-- Hide Command line unless it's required
+opt.cmdheight = 0
 
 
 -- Clipboard

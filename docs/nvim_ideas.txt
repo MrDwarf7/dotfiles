@@ -1,5 +1,21 @@
 Whick-key (Setting up/moving to a WK register file.
 
+
+>>>
+
+You shouldn’t put vim.g.nord_italic in opts. Put it in the config function like this instead:
+
+config = function()
+vim.g.nord_italic = false
+vim.cmd([[colorscheme nord]])
+end,
+opts = {}
+The opts parameter is just shortcut to avoid the normal boilerplate config = function() require(‘plugin’).setup(opts) end.
+
+<<<
+
+
+
 https://github.com/bibjaw99/workstation
 
 https://github.com/folke?tab=repositories
