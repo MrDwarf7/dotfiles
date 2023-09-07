@@ -4,20 +4,20 @@ local map = vim.keymap.set
 
 local opts = {
     noremap = true, --Non-recurse
-    silent = true, --Don't show a message about it
+    silent = true,  --Don't show a message about it
 }
 vim.g.mapleader = " "
 vim.g.localleader = " "
 
 -- Helper Functions (Can be moved to it's own file later)
--- --------------- WHICH KEY EXAMPLES CAN BE FOUND VIA 
+-- --------------- WHICH KEY EXAMPLES CAN BE FOUND VIA
 -- :h which-key.nvim.txt, then searching MAPPINGS, go to 12th instance.
 
 
 --------------
 -- UNIVERSAL MODE KEYMAPS
 --------------
-map("n", "<esc>", ":nohl<CR>", {desc = "Clear search highlights"})
+map("n", "<esc>", ":nohl<CR>", { desc = "Clear search highlights" })
 map("n", "<C-s>", ":w<CR>", opts)
 map("n", "<C-S>", ":w!<CR>", opts)
 
@@ -27,7 +27,7 @@ map("n", "<leader>qq", ":qa!<CR>", opts, { desc = "Close everything" })
 --------------
 -- Interesting KEYMAPS
 --------------
---These are a bit buggy :L 
+--These are a bit buggy :L
 --map({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 --map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
@@ -80,28 +80,43 @@ map("v", "P", '"_dP')
 -- PLUGIN SPECIFIC KEYMAPS
 --------------
 -- All of these will likely get moved to a Which-Key/wk array at some stage anyway
-
-
 -- Lazy Vim
 map("n", "<leader>p", ":Lazy<CR>", { desc = "Lazy.Nvim" })
 
 --Bufferline
---map("n", "<Tab>", ":BufferLineCycleNext<CR>", opts, { desc = "BufferLine cycle Next" })
---map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts, { desc = "BufferLine cycle Prev" })
+map("n", "<Tab>", ":BufferLineCycleNext<CR>", opts, { desc = "BufferLine cycle Next" })
+map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", opts, { desc = "BufferLine cycle Prev" })
 
 -- Better buf deletion
-map("n", "<leader>bd", ":Bdelete<CR><tab>", {desc = "Buffer Delete" })
-map("n", "<leader>x", ":Bdelete<CR><tab>", {desc = "Buffer Delete" })
-map("n", "<leader>bw", ":Bwipeout<CR>", {desc = "Buffer Wipeout" })
+map("n", "<leader>x", ":Bdelete<CR><tab>", { desc = "Buffer Delete" })
+map("n", "<leader>bw", ":Bwipeout<CR>", { desc = "Buffer Wipeout" })
 
 
 -- Easier commenting
-map("n", "<C-/>", "gcc", {desc = "Comment Toggle" })
+map("n", "<C-/>", "gcc", { desc = "Comment Toggle" })
 
 
 -- LazyGit
-map("n", "<leader>gg", ":LazyGit<CR>", {desc = "LazyGit Open" })
+map("n", "<leader>gg", ":LazyGit<CR>", { desc = "LazyGit Open" })
 
 
 
+-- Bufferline keymaps
 
+map("n", "<leader>bn", ":bnext<CR>", { desc = "Buffer Next" })
+map("n", "<tab>", ":bnext<CR>", { desc = "Buffer Next" })
+
+-- PREV / PREVIOUS
+map("n", "<leader>bp", ":bPrevious<CR>", { desc = "Buffer Previous" })
+map("n", "<leader>bp", ":bprev<CR>", { desc = "Buffer Previous" })
+map("n", "<S-tab>", ":bprev<CR>", { desc = "Buffer Previous" })
+
+-- MOVING
+map("n", "<leader>bmn", ":BufferLineMoveNext<CR>", { desc = "Buffer Move Next" })
+map("n", "<leader>bmp", ":BufferLineMovePrev<CR>", { desc = "Buffer Move Previous" })
+
+-- Tab controls
+map("n", "<leader><tab>]", ":tabNext<CR>", { desc = "Tab Next" })
+map("n", "<leader><tab>[", ":tabprevious<CR>", { desc = "Tab Previous" })
+map("n", "<leader><tab>a", ":tabnew<CR>", { desc = "Tab New" })
+map("n", "<leader><tab>c", ":tabclose<CR>", { desc = "Tab Close" })
