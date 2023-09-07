@@ -66,7 +66,7 @@ return {
                 },
                 custom_highlights = function(colors)
                     return {
-                        NormalFloat = { bg = colors.crust },
+                        -- NormalFloat = { bg = colors.crust },
                         FloatBorder = { bg = colors.crust, fg = colors.crust },
                         VertSplit = { bg = colors.base, fg = colors.surface0 },
                         CursorLineNr = { fg = colors.surface2 },
@@ -101,7 +101,7 @@ return {
     },
     {
         "oxfist/night-owl.nvim",
-        lazy = false,  -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- load the colorscheme here
