@@ -1,16 +1,16 @@
+local colors = require("config.colors").colors
 return {
     "akinsho/bufferline.nvim",
+   event = "VeryLazy",
     version = "*",
-    dependencies = {
+    dependencies = 
         "nvim-tree/nvim-web-devicons",
-   },
-
-
-   config = function()
-      local bufferline = require("bufferline").setup{
+   opts = {
          options = {
+         separator_style = { " | " },
+
+         always_show_bufferline = true,
             offsets = {
-               {
                   {
                      filetype = "neo-tree",
                      text = "Neo-tree",
@@ -20,11 +20,78 @@ return {
                   },
                },
             },
+
+      highlights = {
+         fill = {
+            bg = "",
          },
-      }
+         background = {
+           bg = "",
+         },
+         tab = {
+           bg = "",
+         },
+         tab_close = {
+           bg = "",
+         },
+         tab_separator = {
+           fg = colors.bg,
+           bg = "",
+         },
+         tab_separator_selected = {
+           fg = colors.bg,
+           bg = "",
+           sp = colors.fg,
+         },
+         close_button = {
+           bg = "",
+           fg = colors.fg,
+         },
+         close_button_visible = {
+           bg = "",
+           fg = colors.fg,
+         },
+         close_button_selected = {
+           fg = { attribute = "fg", highlight = "StatusLineNonText" },
+         },
+         buffer_visible = {
+           bg = "",
+         },
+         modified = {
+           bg = "",
+         },
+         modified_visible = {
+           bg = "",
+         },
+         duplicate = {
+           fg = colors.fg,
+           bg = ""
+         },
+         duplicate_visible = {
+           fg = colors.fg,
+           bg = ""
+         },
+         separator = {
+           fg = colors.bg,
+           bg = ""
+         },
+         separator_selected = {
+           fg = colors.bg,
+           bg = ""
+         },
+         separator_visible = {
+           fg = colors.bg,
+           bg = ""
+         },
+         offset_separator = {
+           fg = colors.bg,
+           bg = ""
+         },
+      },
+   }
         --Other components for buffer management/deletion are in bufdelete.lua
 
-      local map = vim.keymap.set
+      local map = vim.keymap.set,
         -- NEXT
       map("n", "<leader>bn", ":bnext<CR>", { desc = "Buffer Next" })
       map("n", "<tab>", ":bnext<CR>", { desc = "Buffer Next" })
@@ -47,5 +114,4 @@ return {
       map("n", "<leader><tab>[", ":tabprevious<CR>", { desc = "Tab Previous" })
       map("n", "<leader><tab>a", ":tabnew<CR>", { desc = "Tab New" })
       map("n", "<leader><tab>c", ":tabclose<CR>", { desc = "Tab Close" })
-   end,
 }

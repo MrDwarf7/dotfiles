@@ -1,11 +1,14 @@
 return {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
+{"nvim-neo-tree/neo-tree.nvim" },
+   event = "VeryLazy"
+    branch = "v3.x"},
+   {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
-    },
+    }
+   },
     config = function()
         local neotree = require("neo-tree").setup({
             opts = {

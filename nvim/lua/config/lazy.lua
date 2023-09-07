@@ -15,11 +15,11 @@ vim.opt.rtp:prepend(lazypath)
 -- Will want to setup a section to call the 'custom' dir, for being able to store and swap customizable components,
 -- As well for an LSP folder to container all the LSP related nonesense.
 
-require("lazy").setup({{import = "plugins"},
+require("lazy").setup("plugins", {
 -- other plugin sub-dirs would go here as <, { import = "plugins.FOLDER" } > 
-}, {
     -- spec = { "plugins" }, --Not currently using more than a single "module" // Dir of things.
    -- Also not using "sections" for things (Like "UI.lua" for all UI things) not super required atm.
+
     defaults = { 
             lazy = false
         },
@@ -44,7 +44,7 @@ require("lazy").setup({{import = "plugins"},
       enabled = true,
       concurrency = 50, --Lower the number the lower updates are applied/installed when pulling or building
       notfiy = false,
-      frequency = 3600, --Check once per hour
+      frequency = 3600 * 4, --Check once per hour
    },
    performance = {
       cache = {
@@ -56,6 +56,13 @@ require("lazy").setup({{import = "plugins"},
       reset_packpath = true, -- Reset the package path to improve startup time
       rtp = {
          reset = true, -- Reset the runtime path to $VIMRUNTIME and your config dir ---- Not sure what this does tbh.
+         disabled_plugins = {
+            "gzip",
+            "tarPlugin",
+            "tohtml",
+            "tutor",
+            "zipPlugin",
+         },
       },
    },
 })
