@@ -7,8 +7,14 @@ return {
         -- branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            'jvgrootveld/telescope-zoxide',
             "nvim-tree/nvim-web-devicons",
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+            'nvim-telescope/telescope-ui-select.nvim',
+            'telescope-dap.nvim',
+            'kkharji/sqlite.lua',
+            'nvim-telescope/telescope-frecency.nvim',
+
         },
 
         config = function()
@@ -86,7 +92,7 @@ return {
                     lsp_references = {
                         -- theme = "dropdown",
                         -- show_line = false,
-                        previewer - true,
+                        previewer = true,
                     },
                     treesitter = {
                         -- theme = "dropdown",
