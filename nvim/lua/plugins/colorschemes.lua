@@ -1,5 +1,43 @@
 -- Currently: catppuccin
 return {
+    -- {
+    --     "folke/tokyonight.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     require("folke/tokyonight.nvim").setup({
+    --         opts = {
+    --             style = "night",
+    --             transparent = true,
+    --             terminal_colors = true,
+    --             styles = {
+    --                 comments = { "italic" },
+    --                 keywords = { "italic" },
+    --                 functions = { "italic" },
+    --
+    --                 sidebars = "dark",
+    --                 floats = "dark",
+    --                 sidebars = "dark",
+    --             },
+    --             sidebars = { "qf", "help", "terminal" },
+    --             -- colors = {
+    --             --     bg = "#1a1b26",
+    --             --     fg = "#a9b1d6",
+    --             --     yellow = "#e0af68",
+    --             --     cyan = "#78ccc5",
+    --             --     darkblue = "#7aa2f7",
+    --             --     green = "#a9b1d6",
+    --             --     orange = "#e0af68",
+    --             --     violet = "#bb9af7",
+    --             --     magenta = "#bb9af7",
+    --             --     blue = "#7aa2f7",
+    --             --     red = "#ea6962",
+    --             -- },
+    --             hide_inactive_statusline = false, -- defaukt
+    --             dim_inactive = true,
+    --         },
+    --     }),
+    -- }
+
     {
         "catppuccin/nvim",
         enabled = true,
@@ -66,7 +104,7 @@ return {
                 },
                 custom_highlights = function(colors)
                     return {
-                        -- NormalFloat = { bg = colors.crust },
+                        NormalFloat = { bg = colors.crust },
                         FloatBorder = { bg = colors.crust, fg = colors.crust },
                         VertSplit = { bg = colors.base, fg = colors.surface0 },
                         CursorLineNr = { fg = colors.surface2 },

@@ -35,6 +35,7 @@ return {
                     "yaml",
                     "markdown",
                     "markdown_inline",
+                    "rust",
                 },
                 incremental_selection = {
                     enable = true,

@@ -12,8 +12,8 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
             'nvim-telescope/telescope-ui-select.nvim',
             'telescope-dap.nvim',
-            -- 'kkharji/sqlite.lua',
-            'nvim-telescope/telescope-frecency.nvim',
+            'kkharji/sqlite.lua',
+            -- 'nvim-telescope/telescope-frecency.nvim',
 
         },
 
@@ -110,21 +110,21 @@ return {
                     },
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown({
-                            previewer = true,
+                            previewer = false,
                             initial_mode = "normal",
                         })
                     },
-                    frecency = {
-                        default_workspace = 'CWD',
-                        show_scores = true,    -- No idea what this does lol
-                        show_unindexed = true, -- No idea what this does lol
-                        disable_devicons = false,
-                        ignore_patterns = {
-                            "*.git/*",
-                            "*/tmp/*",
-                            "*/lua-language-server/*",
-                        },
-                    },
+                    -- frecency = {
+                    --     default_workspace = 'CWD',
+                    --     show_scores = true,    -- No idea what this does lol
+                    --     show_unindexed = true, -- No idea what this does lol
+                    --     disable_devicons = false,
+                    --     ignore_patterns = {
+                    --         "*.git/*",
+                    --         "*/tmp/*",
+                    --         "*/lua-language-server/*",
+                    --     },
+                    -- },
                 }
             }
 
@@ -133,7 +133,7 @@ return {
             telescope.load_extension('refactoring')
             telescope.load_extension('dap')
             telescope.load_extension("zoxide")
-            telescope.load_extension("frecency")
+            -- telescope.load_extension("frecency")
             -- telescope.load_extension("file_browser")
 
             -- local map = vim.keymap.set

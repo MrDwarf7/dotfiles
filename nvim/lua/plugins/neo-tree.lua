@@ -8,12 +8,10 @@ return {
     event = "VeryLazy",
     branch = "v3.x",
     keys = {
-        { "<leader>n", ":Neotree toggle left<CR>",  silent = true, desc = "Explorer TreeView" },
+        { "<leader>e", ":Neotree toggle left<CR>",  silent = true, desc = "Explorer TreeView" },
         -- { "<leader>et", ":Neotree toggle left<CR>", silent = true, desc = "Explorer Left File " }, -- Could change this to leader n at some point if I prefer
-        { "<leader>e", ":Neotree toggle float<CR>", silent = true, desc = " Explorer Float" },
+        { "<leader>n", ":Neotree toggle float<CR>", silent = true, desc = " Explorer Float" },
     },
-    -- map("n", "<leader>nt", ":Neotree toggle<CR>", opts, { desc = "Neotree Toggle" })
-    -- map("n", "<leader>n", ":Neotree focus<CR>", opts, { desc = "Neotree" })
     config = function()
         require("neo-tree").setup({
             close_if_last_window = false,

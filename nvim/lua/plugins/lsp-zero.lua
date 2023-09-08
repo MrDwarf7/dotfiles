@@ -35,7 +35,7 @@ return {
             local cmp_mapping = cmp.mapping
             local cmp_types   = require('cmp.types.cmp')
             local luasnip     = require('luasnip')
-            -- local utils       = require('config.utils')
+            local utils       = require('config.utils')
 
             cmp.setup({
                 formatting = {
