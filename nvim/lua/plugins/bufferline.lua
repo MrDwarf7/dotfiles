@@ -7,8 +7,7 @@ return {
     "nvim-tree/nvim-web-devicons",
     opts = {
         options = {
-            separator_style = { " | " },
-
+            separator_style = { "| " },
             always_show_bufferline = true,
             max_name_length = 25,
             show_close_icon = false,
@@ -19,7 +18,7 @@ return {
                     text = "Neo-tree",
                     highlight = "Directory",
                     text_align = "left",
-                    -- separator = true
+                    separator = true,
                 },
             },
         },

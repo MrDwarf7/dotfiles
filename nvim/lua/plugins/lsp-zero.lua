@@ -251,6 +251,7 @@ return {
                 'jsonls',
                 'bashls',
                 'vimls',
+                'pyright',
                 -- 'nomic_solidity'
             })
 
