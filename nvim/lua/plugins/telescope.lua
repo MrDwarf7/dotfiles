@@ -12,7 +12,7 @@ return {
             { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
             'nvim-telescope/telescope-ui-select.nvim',
             'telescope-dap.nvim',
-            'kkharji/sqlite.lua',
+            -- 'kkharji/sqlite.lua',
             'nvim-telescope/telescope-frecency.nvim',
 
         },
