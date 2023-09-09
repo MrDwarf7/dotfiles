@@ -139,6 +139,27 @@ return {
         follow_current_file = { enabled = true },
         hijack_netrw_behavior = "open_current",
         use_libuv_file_watcher = true,
+        filtered_items = {
+          hide_dotfiles = false,
+          hide_gitignored = false,
+          hide_by_name = {
+            "node_modules",
+          },
+          always_show = {
+            "AppData",
+            ".git",
+            ".gitignore",
+            ".gitignored",
+          },
+          never_show = {
+            ".DS_Store",
+            "thumbs.db",
+          },
+          never_show_by_pattern = {
+            "NTUSER.DAT*",
+            "ntuser.ini*",
+          },
+        },
       },
       event_handlers = {
         {
