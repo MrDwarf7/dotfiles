@@ -1,36 +1,54 @@
 # AstroNvim User Configuration Example
 
-A user configuration template for [AstroNvim](https://github.com/AstroNvim/AstroNvim)
-
 ## 🛠️ Installation
 
 #### Make a backup of your current nvim and shared folder
 
-```shell
+```powershell
 mv ~/.config/nvim ~/.config/nvim.bak
 mv ~/.local/share/nvim ~/.local/share/nvim.bak
 ```
 
 #### Clone AstroNvim
 
+#### Linux
+
 ```shell
 git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 ```
 
-#### Create a new user repository from this template
+#### Windows
 
-Press the "Use this template" button above to create a new repository to store your user configuration.
-
-You can also just clone this repository directly if you do not want to track your user configuration in GitHub.
-
-#### Clone the repository
-
-```shell
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim/lua/user
+```powershell
+git clone https://github.com/AstroNvim/AstroNvim $env:LOCALAPPDATA\
 ```
 
-#### Start Neovim
+##### Or if that isn't working as expected you can also use this
+##### (Bear in mind that the custom ending location is setup to use the nvims command in powershell to choose.)
 
+```powershell
+git clone https://github.com/AstroNvim/AstroNvim $HOME\AppData\Local\AstroNvim
+```
+
+### Run a Symlink command to have the AstroNvim directory point point to the user config in dotfiles.
+
+```powershell
+New-Item -ItemType SymbolicLink -Path $env:LOCALAPPDATA\AstroNvim\lua\ -Name user -Value $HOME\dotfiles\AstroNvim\lua\user
+```
+
+#### Or copy the entire folder, as it mimics the same structure.
+
+### Start Neovim using either
+
+#### Windows (Using custom Powershell profile with fzf picker)
+
+For Windows
+```powershell
+nvims
+```
+
+For linux
+#### Linux
 ```shell
 nvim
 ```
