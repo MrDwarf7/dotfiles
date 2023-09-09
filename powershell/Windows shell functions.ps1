@@ -4,7 +4,7 @@ using namespace System.Management.Automation.Language
 
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
-#Update OhMyPosh using this command - 
+#Update OhMyPosh using this command -
 #winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 ### START MAIN SCRIPT
 
@@ -156,7 +156,7 @@ Set-PSReadLineKeyHandler -Key '"', "'" `
     {
       if ($cursor -lt $token.Extent.StartOffset)
       {
-        continue 
+        continue
       }
       if ($cursor -lt $token.Extent.EndOffset)
       {
@@ -167,7 +167,7 @@ Set-PSReadLineKeyHandler -Key '"', "'" `
           $nested = FindToken $token.NestedTokens $cursor
           if ($nested)
           {
-            $result = $nested 
+            $result = $nested
           }
         }
 
@@ -217,7 +217,7 @@ Set-PSReadLineKeyHandler -Key '"', "'" `
   # If cursor is at the start of a token, enclose it in quotes.
   if ($token.Extent.StartOffset -eq $cursor)
   {
-    if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or 
+    if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or
       $token.Kind -eq [TokenKind]::Variable -or $token.TokenFlags.hasFlag([TokenFlags]::Keyword))
     {
       $end = $token.Extent.EndOffset
@@ -242,15 +242,15 @@ Set-PSReadLineKeyHandler -Key '(', '{', '[' `
   {
     <#case#> '('
     {
-      [char]')'; break 
+      [char]')'; break
     }
     <#case#> '{'
     {
-      [char]'}'; break 
+      [char]'}'; break
     }
     <#case#> '['
     {
-      [char]']'; break 
+      [char]']'; break
     }
   }
 
@@ -261,7 +261,7 @@ Set-PSReadLineKeyHandler -Key '(', '{', '[' `
   $line = $null
   $cursor = $null
   [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-    
+
   if ($selectionStart -ne -1)
   {
     # Text is selected, wrap it in brackets
@@ -313,23 +313,23 @@ Set-PSReadLineKeyHandler -Key Backspace `
       {
         <#case#> '"'
         {
-          $toMatch = '"'; break 
+          $toMatch = '"'; break
         }
         <#case#> "'"
         {
-          $toMatch = "'"; break 
+          $toMatch = "'"; break
         }
         <#case#> ')'
         {
-          $toMatch = '('; break 
+          $toMatch = '('; break
         }
         <#case#> ']'
         {
-          $toMatch = '['; break 
+          $toMatch = '['; break
         }
         <#case#> '}'
         {
-          $toMatch = '{'; break 
+          $toMatch = '{'; break
         }
       }
     }
@@ -369,7 +369,7 @@ Set-PSReadLineOption -CommandValidationHandler {
   }
 }
 
-### END Scripting directly for PSReadLine module : 
+### END Scripting directly for PSReadLine module :
 
 #Raw Functions
 
@@ -496,7 +496,7 @@ function ohome
 # BEGIN - Python Functions
 function pip
 {
-        
+
   if (checkEnvironment -eq $true)
   {
     if ($env:VIRTUAL_ENV)
@@ -504,13 +504,13 @@ function pip
       $virtualEnvPipPath = Join-Path $env:VIRTUAL_ENV "Scripts\pip.exe"
       Set-Alias -Name pip -Value $virtualEnvPipPath
       & Set-Alias -Name pip3 -Value $virtualEnvPipPath
-                
+
       & pip $args
     } else
     {
       $pipPath = "C:\Applications\Python3.11.4\Scripts\pip.exe"
       & Set-Alias -Name pip -Value $pipPath
-                
+
       & pip $args
     }
   } else
@@ -563,7 +563,7 @@ function rmvenv
 {
   if ($env:VIRTUAL_ENV)
   {
-    deactivate 
+    deactivate
   }
   if (checkEnvironment)
   {
@@ -613,31 +613,31 @@ function zip
   )
   $ItemName = (Get-Item $ItemToCompress).Name
   $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
-  
+
   if ([String]::IsNullOrEmpty($OptionalDestination))
   {
     $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
-  
+
     Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
   } else
   {
     Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
   }
 }
-  
+
 function uzip
 {
   param (
     [string]$ItemToUnzip,
     [string]$OptionalDestination
   )
-  $ItemName = (Get-Item $ItemToUnzip).Name 
+  $ItemName = (Get-Item $ItemToUnzip).Name
   $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
-  
+
   if ([String]::IsNullOrEmpty($OptionalDestination))
   {
     $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
-  
+
     Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
   } else
   {
@@ -659,7 +659,7 @@ function dvim
 {
   $env:NVIM_APPNAME = "LazyVim"
   # if ($env:HOME_PROFILE) {
-  #     neovide $args 
+  #     neovide $args
   # } elseif (Test-CommandExists nvim){
   nvim $args
 }

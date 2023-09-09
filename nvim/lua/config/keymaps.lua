@@ -1,4 +1,13 @@
 -- Easier to type: map for keymaps
+-- directly from Astro -
+vim.opt.viewoptions:remove "curdir"             -- disable saving current directory with views
+vim.opt.shortmess:append { s = true, I = true } -- disable search count wrap and startup messages
+vim.opt.backspace:append { "nostop" }           -- don't stop backspace at insert
+if vim.fn.has "nvim-0.9" == 1 then
+    vim.opt.diffopt:append "linematch:60"       -- enable linematch diff algorithm
+end
+-- END directly from Astro -
+
 local map_api = vim.api.nvim_set_keymap --Here to test it later
 local map = vim.keymap.set
 
@@ -17,6 +26,12 @@ vim.g.localleader = " "
 --------------
 -- UNIVERSAL MODE KEYMAPS
 --------------
+
+
+-- map.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
+-- map.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
+
+
 map("n", "<esc>", ":nohl<CR>", { desc = "Clear search highlights" })
 map("n", "<C-s>", ":w<CR>", opts)
 map("n", "<C-S>", ":w!<CR>", opts)
