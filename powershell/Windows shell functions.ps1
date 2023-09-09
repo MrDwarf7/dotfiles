@@ -491,14 +491,16 @@ function ohome
   Get-ChildItem
 }
 
-function gitgo {
+function gitgo
+{
   param(
-      [string]$baseCommitMessage = "Bump"
-      )
-  if (-not $args) {
+    [string]$baseCommitMessage = "Bump"
+  )
+  if (-not $args)
+  {
     $args = $baseCommitMessage
-    }
-    gst && gaa && gcam "$args." && gp
+  }
+  gst && gaa && gcam "$args." && gp
 }
 
 

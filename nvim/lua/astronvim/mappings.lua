@@ -87,13 +87,13 @@ maps.n["<leader>C"] = {
   end,
   desc = "Force close buffer",
 }
-maps.n["]b"] = {
+maps.n["<Tab>"] = {
   function()
     require("astronvim.utils.buffer").nav(vim.v.count > 0 and vim.v.count or 1)
   end,
   desc = "Next buffer",
 }
-maps.n["[b"] = {
+maps.n["<S-Tab>"] = {
   function()
     require("astronvim.utils.buffer").nav(-(vim.v.count > 0 and vim.v.count or 1))
   end,
