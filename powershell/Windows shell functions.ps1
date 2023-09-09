@@ -491,6 +491,17 @@ function ohome
   Get-ChildItem
 }
 
+function gitgo {
+  param(
+      [string]$baseCommitMessage = "Bump"
+      )
+  if (-not $args) {
+    $baseCommitMessage = $args
+    }
+    gst && gaa && gcam "$args." && gp
+}
+
+
 # END - Navigation functions
 
 # BEGIN - Python Functions
