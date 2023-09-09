@@ -496,7 +496,7 @@ function gitgo {
       [string]$baseCommitMessage = "Bump"
       )
   if (-not $args) {
-    $baseCommitMessage = $args
+    $args = $baseCommitMessage
     }
     gst && gaa && gcam "$args." && gp
 }
