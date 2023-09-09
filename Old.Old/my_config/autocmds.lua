@@ -1,5 +1,3 @@
-
-
 local api = vim.api
 
 local colors = {
@@ -10,7 +8,6 @@ local colors = {
 -- don't auto comment new line
 api.nvim_create_autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
-
 --- Remove all trailing whitespace on save
 local TrimWhiteSpaceGrp = api.nvim_create_augroup("TrimWhiteSpaceGrp", { clear = true })
 api.nvim_create_autocmd("BufWritePre", {
@@ -20,9 +17,9 @@ api.nvim_create_autocmd("BufWritePre", {
 
 -- Highlight when yanking
 api.nvim_create_autocmd("TextYankPost", {
-   callback = function()
-      vim.highlight.on_yank({ timeout = 69 })
-   end,
+  callback = function()
+    vim.highlight.on_yank({ timeout = 69 })
+  end,
 })
 
 -- go to last loc when opening a buffer
@@ -36,7 +33,6 @@ api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-
 -- show cursor line only in active window
 local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
 api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
@@ -48,7 +44,6 @@ api.nvim_create_autocmd(
   { "InsertEnter", "WinLeave" },
   { pattern = "*", command = "set nocursorline", group = cursorGrp }
 )
-
 
 -- Enable spell checking for certain file types
 api.nvim_create_autocmd(
@@ -65,30 +60,28 @@ api.nvim_create_autocmd(
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
-api.nvim_create_autocmd('LspAttach', {
+api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', '<leader>v', "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
+    vim.keymap.set("n", "<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<CR>", opts)
   end,
 })
 
-
-api.nvim_create_autocmd('ColorScheme', {
+api.nvim_create_autocmd("ColorScheme", {
   callback = function()
     -- change the background color of floating windows and borders.
-    vim.cmd('highlight NormalFloat guibg=none guifg=none')
-    vim.cmd('highlight FloatBorder guifg=' .. colors.fg .. ' guibg=none')
-    vim.cmd('highlight NormalNC guibg=none guifg=none')
+    vim.cmd("highlight NormalFloat guibg=none guifg=none")
+    vim.cmd("highlight FloatBorder guifg=" .. colors.fg .. " guibg=none")
+    vim.cmd("highlight NormalNC guibg=none guifg=none")
 
     -- change neotree background colors
     -- Default: NeoTreeNormal  xxx ctermfg=223 ctermbg=232 guifg=#d4be98 guibg=#141617
-    vim.cmd('highlight NeoTreeNormal guibg=#1d2021')
+    vim.cmd("highlight NeoTreeNormal guibg=#1d2021")
     ---- vim.cmd('highlight NeoTreeFloatNormal guifg=#1d2021 guibg=#141617')
-    vim.cmd('highlight NeoTreeFloatBorder guifg=#958272 guibg=#1d2021')
-    vim.cmd('highlight NeoTreeEndOfBuffer guibg=#1d2021') -- 1d2021
+    vim.cmd("highlight NeoTreeFloatBorder guifg=#958272 guibg=#1d2021")
+    vim.cmd("highlight NeoTreeEndOfBuffer guibg=#1d2021") -- 1d2021
   end,
 })
-
 
 -- close some filetypes with <q>
 api.nvim_create_autocmd("FileType", {
@@ -114,9 +107,8 @@ api.nvim_create_autocmd("FileType", {
   end,
 })
 
-
 -- resize neovim split when terminal is resized
-api.nvim_command('autocmd VimResized * wincmd =')
+api.nvim_command("autocmd VimResized * wincmd =")
 
 -- api.nvim_create_autocmd("ColorScheme", {
 --   pattern = "kanagawa",
@@ -134,15 +126,10 @@ api.nvim_command('autocmd VimResized * wincmd =')
 -- Keymap for .py file
 -- May have to edit some thing here --
 api.nvim_create_autocmd("BufEnter", {
-   pattern = { "*.py" },
-   callback = function()
-      vim.keymap.set(
-         "n",
-         "<Leader>rp",
-         ":!py %<CR>",
-         { silent = true }
-      )
-   end,
+  pattern = { "*.py" },
+  callback = function()
+    vim.keymap.set("n", "<Leader>rp", ":!py %<CR>", { silent = true })
+  end,
 })
 
 --------------------------- OLD VERSIONN OF THINGS --------------------------------
@@ -172,4 +159,3 @@ api.nvim_create_autocmd("BufEnter", {
 --    end,
 -- })
 --
-

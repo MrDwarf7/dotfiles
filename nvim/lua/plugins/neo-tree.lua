@@ -1,183 +1,153 @@
 return {
-    "nvim-neo-tree/neo-tree.nvim",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-    },
-    event = "VeryLazy",
-    branch = "v3.x",
-    keys = {
-        { "<leader>e", ":Neotree toggle left<CR>",  silent = true, desc = "Explorer TreeView" },
-        -- { "<leader>et", ":Neotree toggle left<CR>", silent = true, desc = "Explorer Left File " }, -- Could change this to leader n at some point if I prefer
-        { "<leader>n", ":Neotree toggle float<CR>", silent = true, desc = " Explorer Float" },
-    },
-    config = function()
-        require("neo-tree").setup({
-            close_if_last_window = false,
-            open_on_setup = false,
-            popup_border_style = "rounded", -- or 'solid', 'double', 'shadow', 'curved', 'rounded', single,
-            enable_git_status = true,
-            enable_modified_markers = true,
-            -- enable_diagnostics = true,
-            sort_case_insensitive = true,
-            update_cwd = true, -- update cwd on open -- Will have to see how this works with my workflow
+  "nvim-neo-tree/neo-tree.nvim",
+  branch = "main", -- HACK: force neo-tree to checkout `main` for initial v3 migration since default branch has changed
+  dependencies = { "MunifTanjim/nui.nvim" },
+  cmd = "Neotree",
+  init = function()
+    vim.g.neo_tree_remove_legacy_commands = true
+  end,
+  opts = function()
+    local utils = require("astronvim.utils")
+    local get_icon = utils.get_icon
+    return {
+      auto_clean_after_session_restore = true,
+      close_if_last_window = true,
+      sources = { "filesystem", "buffers", "git_status" },
+      source_selector = {
+        winbar = true,
+        content_layout = "center",
+        sources = {
+          { source = "filesystem",  display_name = get_icon("FolderClosed", 1, true) .. "File" },
+          { source = "buffers",     display_name = get_icon("DefaultFile", 1, true) .. "Bufs" },
+          { source = "git_status",  display_name = get_icon("Git", 1, true) .. "Git" },
+          { source = "diagnostics", display_name = get_icon("Diagnostic", 1, true) .. "Diagnostic" },
+        },
+      },
+      default_component_configs = {
+        indent = { padding = 0 },
+        icon = {
+          folder_closed = get_icon("FolderClosed"),
+          folder_open = get_icon("FolderOpen"),
+          folder_empty = get_icon("FolderEmpty"),
+          folder_empty_open = get_icon("FolderEmpty"),
+          default = get_icon("DefaultFile"),
+        },
+        modified = { symbol = get_icon("FileModified") },
+        git_status = {
+          symbols = {
+            added = get_icon("GitAdd"),
+            deleted = get_icon("GitDelete"),
+            modified = get_icon("GitChange"),
+            renamed = get_icon("GitRenamed"),
+            untracked = get_icon("GitUntracked"),
+            ignored = get_icon("GitIgnored"),
+            unstaged = get_icon("GitUnstaged"),
+            staged = get_icon("GitStaged"),
+            conflict = get_icon("GitConflict"),
+          },
+        },
+      },
+      commands = {
+        system_open = function(state)
+          -- TODO: just use vim.ui.open when dropping support for Neovim <0.10
+          (vim.ui.open or require("astronvim.utils").system_open)(state.tree:get_node():get_id())
+        end,
+        parent_or_close = function(state)
+          local node = state.tree:get_node()
+          if (node.type == "directory" or node:has_children()) and node:is_expanded() then
+            state.commands.toggle_node(state)
+          else
+            require("neo-tree.ui.renderer").focus_node(state, node:get_parent_id())
+          end
+        end,
+        child_or_open = function(state)
+          local node = state.tree:get_node()
+          if node.type == "directory" or node:has_children() then
+            if not node:is_expanded() then -- if unexpanded, expand
+              state.commands.toggle_node(state)
+            else                           -- if expanded and has children, seleect the next child
+              require("neo-tree.ui.renderer").focus_node(state, node:get_child_ids()[1])
+            end
+          else -- if not a directory just open it
+            state.commands.open(state)
+          end
+        end,
+        copy_selector = function(state)
+          local node = state.tree:get_node()
+          local filepath = node:get_id()
+          local filename = node.name
+          local modify = vim.fn.fnamemodify
 
-            default_component_configs = {
-                indent = {
-                    with_markers = false,
-                    with_expanders = true,
-                },
-                modified = {
-                    symbol = " ",
-                    highlight = "NeoTreeModified",
-                },
-                icon = {
-                    folder = {
-                        default = "",
-                        open = "",
-                        symlink = "",
-                    },
-                    file = {
-                        default = "",
-                        symlink = "",
-                    },
-                },
-                git_status = {
-                    symbols = {
-                        -- Change type
-                        added = "",
-                        deleted = "",
-                        modified = "",
-                        renamed = "",
-                        -- Status type
-                        untracked = "",
-                        ignored = "",
-                        unstaged = "",
-                        staged = "",
-                        conflict = "",
-                    },
-                },
-            },
-            window = {
-                position = "float",
-                width = 40,
-            },
-            filesystem = {
-                use_libuv_file_watcher = true,
-                filtered_items = {
-                    hide_dotfiles = false,
-                    hide_gitignored = false,
-                    hide_by_name = {
-                        "node_modules",
-                    },
-                    always_show = {
-                        "AppData",
-                        ".git",
-                        ".gitignore",
-                        ".gitignored",
-                    },
-                    never_show = {
-                        ".DS_Store",
-                        "thumbs.db",
-                    },
-                    never_show_by_pattern = {
-                        "NTUSER.DAT*",
-                        "ntuser.ini*",
-                    },
-                    follow_current_file = {
-                        enabled = true,
-                    },
-                },
-            },
+          local vals = {
+            ["BASENAME"] = modify(filename, ":r"),
+            ["EXTENSION"] = modify(filename, ":e"),
+            ["FILENAME"] = filename,
+            ["PATH (CWD)"] = modify(filepath, ":."),
+            ["PATH (HOME)"] = modify(filepath, ":~"),
+            ["PATH"] = filepath,
+            ["URI"] = vim.uri_from_fname(filepath),
+          }
 
-            -- window = {
-            mappings = {
-                --     ["<leader>"] = {
-                --         ["<leader>"] = "toggle",
-                --     },
-                ["<bs>"] = "close_node",
-                ["<2-LeftMouse>"] = "edit",
-                ["<C-]>"] = "cd",
-                ["<C-[>"] = "navigate_up",
-                ["s"] = "split",
-                ["v"] = "vsplit",
-            },
-            -- },
-
-            event_handlers = {
-                {
-                    event = "neo_tree_window_after_open",
-                    handler = function(args)
-                        if args.position == "left" or args.position == "right" then
-                            vim.cmd("wincmd =")
-                        end
-                    end,
-                },
-                {
-                    event = "neo_tree_window_after_close",
-                    handler = function(args)
-                        if args.position == "left" or args.position == "right" then
-                            vim.cmd("wincmd =")
-                        end
-                    end,
-                },
-            },
-        })
-    end,
+          local options = vim.tbl_filter(function(val)
+            return vals[val] ~= ""
+          end, vim.tbl_keys(vals))
+          if vim.tbl_isempty(options) then
+            utils.notify("No values to copy", vim.log.levels.WARN)
+            return
+          end
+          table.sort(options)
+          vim.ui.select(options, {
+            prompt = "Choose to copy to clipboard:",
+            format_item = function(item)
+              return ("%s: %s"):format(item, vals[item])
+            end,
+          }, function(choice)
+            local result = vals[choice]
+            if result then
+              utils.notify(("Copied: `%s`"):format(result))
+              vim.fn.setreg("+", result)
+            end
+          end)
+        end,
+        find_in_dir = function(state)
+          local node = state.tree:get_node()
+          local path = node:get_id()
+          require("telescope.builtin").find_files({
+            cwd = node.type == "directory" and path or vim.fn.fnamemodify(path, ":h"),
+          })
+        end,
+      },
+      window = {
+        width = 30,
+        mappings = {
+          ["<space>"] = false, -- disable space until we figure out which-key disabling
+          ["[b"] = "prev_source",
+          ["]b"] = "next_source",
+          F = utils.is_available("telescope.nvim") and "find_in_dir" or nil,
+          O = "system_open",
+          Y = "copy_selector",
+          h = "parent_or_close",
+          l = "child_or_open",
+          o = "open",
+        },
+        fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
+          ["<C-j>"] = "move_cursor_down",
+          ["<C-k>"] = "move_cursor_up",
+        },
+      },
+      filesystem = {
+        follow_current_file = { enabled = true },
+        hijack_netrw_behavior = "open_current",
+        use_libuv_file_watcher = true,
+      },
+      event_handlers = {
+        {
+          event = "neo_tree_buffer_enter",
+          handler = function(_)
+            vim.opt_local.signcolumn = "auto"
+          end,
+        },
+      },
+    }
+  end,
 }
---
---             opts = {
---                 source_selector = {
---                     winbar = true,
---                 },
---                 mappings = {
---                     ["<space>"] = {
---                         "toggle_node",
---                         nowait = false,
---                     },
---                     ["s"] = "open_split",
---                     ["v"] = "open_vsplit",
---                     ["<bs>"] = "close_node",
---                 },
---                 filestystem = {
---                     -- follow_current_file = { enabled = true },
---                     filtered_items = {
---                         visible = false,
---                         hide_dotfiles = false,
---                         hide_gitignored = false,
---                         show_hidden_count = true,
---                         hide_hidden = true, --windows specific.
---                         hide_by_name = {
---                             -- "node_modules"
---                         },
---                         always_show = { -- remains visible even if other settings would normally hide it
---                             "AppData",
---                             ".git",
---                             ".gitignore",
---                             ".gitignored",
---                         },
---                     },
---
---                     use_lubuv_file_watcher = true, -- Makes NeoTree use the OS level file watcher to detect changes
---                     window = {
---
---                         mappings = {
---                             ["<->"] = "navigate_up",
---                         }
---                     },
---                 },
---
---                 buffers = {
---                     follow_current_file = {
---                         enabled = true,
---                     },
---                 }
---             }
---         })
---         local map = vim.keymap.set
---         opts = {
---             silent = true
---         }
---     end,
--- }
