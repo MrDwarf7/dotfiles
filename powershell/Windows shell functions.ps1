@@ -496,12 +496,15 @@ function gitgo
   param(
     [string]$baseCommitMessage = "Bump"
   )
-  $argumentsIn = $args
-  if (-not $argumentsIn)
+  if ($args)
+  {
+    $argumentsIn = $args
+  }
+  if (-not $args)
   {
     $argumentsIn = $baseCommitMessage
   }
-  gst && gaa && gcam "$(argumentsIn)." && git push
+  gst && gaa && gcam "$($argumentsIn)." && git push
   return
 }
 
