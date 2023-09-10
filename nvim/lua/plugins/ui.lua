@@ -124,6 +124,11 @@ return {
       char = "▏",
       context_char = "▏",
       show_current_context = true,
+
+      -- Changed or added items:
+      space_char_blankline = " ",
+      show_current_context_start = false, --This is what I need to turn on, but it's cuasing issues with syntax highlighting...
+
     },
   },
 }

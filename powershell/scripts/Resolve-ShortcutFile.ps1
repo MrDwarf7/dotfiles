@@ -1,4 +1,5 @@
-function Resolve-ShortcutFile {
+function Resolve-ShortcutFile
+{
 
     <#
     .Synopsis
@@ -21,29 +22,31 @@ function Resolve-ShortcutFile {
         Where-Object
     #>
     param(
-    [Parameter(
-        ValueFromPipeline=$true,
-        ValueFromPipelineByPropertyName=$true,
-        Position = 0)]
-    [Alias("FullName")]
-    [string]
-    $fileName
+        [Parameter(
+            ValueFromPipeline=$true,
+            ValueFromPipelineByPropertyName=$true,
+            Position = 0)]
+        [Alias("FullName")]
+        [string]
+        $fileName
     )
-process {
+    process
+    {
 
-        if ($fileName -like "*.url") {
+        if ($fileName -like "*.url")
+        {
             Get-Content $fileName | Where-Object {
                 $_ -like "url=*"
             } |
-            Select-Object @{
-                Name='ShortcutFile'
-                Expression = {Get-Item $fileName}
-            }, @{
-                Name='Url'
-                Expression = {$_.Substring($_.IndexOf("=") + 1 )}
-            }
+                Select-Object @{
+                    Name='ShortcutFile'
+                    Expression = {Get-Item $fileName}
+                }, @{
+                    Name='Url'
+                    Expression = {$_.Substring($_.IndexOf("=") + 1 )}
+                }
         }
 
-}
+    }
 
 }

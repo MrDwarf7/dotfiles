@@ -42,7 +42,7 @@ require("lazy").setup("plugins", {
     },
     checker = {
         enabled = true,
-        concurrency = 50,   --Lower the number the lower updates are applied/installed when pulling or building
+        concurrency = 50,     --Lower the number the lower updates are applied/installed when pulling or building
         notfiy = false,
         frequency = 3600 * 4, --Check once per hour
     },
@@ -51,11 +51,11 @@ require("lazy").setup("plugins", {
             enabled = true,
             path = vim.fn.stdpath("cache") .. "/lazy/cache", -- Not sure I really have a reason to change the cache tbh.
             disable_events = { "VimEnter", "BufReadPre" },
-            ttl = 3600 * 24 * 5,                          -- A time frame to keep modules (5 days here)
+            ttl = 3600 * 24 * 5,                             -- A time frame to keep modules (5 days here)
         },
-        reset_packpath = true,                            -- Reset the package path to improve startup time
+        reset_packpath = true,                               -- Reset the package path to improve startup time
         rtp = {
-            reset = true,                                 -- Reset the runtime path to $VIMRUNTIME and your config dir ---- Not sure what this does tbh.
+            reset = true,                                    -- Reset the runtime path to $VIMRUNTIME and your config dir ---- Not sure what this does tbh.
             disabled_plugins = {
                 "gzip",
                 "tarPlugin",

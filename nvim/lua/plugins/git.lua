@@ -14,4 +14,25 @@ return {
     },
     worktrees = vim.g.git_worktrees,
   },
+  {
+    "NeogitOrg/neogit",
+    enabled = vim.fn.executable("git") == 1,
+    event = "User AstroGitFile",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    cmd = "Neogit",
+    config = true,
+    telescope_sorter = function()
+      return require("telescope").extensions.fzf.native_fzf_sorter()
+    end,
+    -- kind = "vsplit",
+
+    -- keys = {
+    --   { "<Leader>gn", ":Neogit<CR>" },
+    -- },
+  },
 }

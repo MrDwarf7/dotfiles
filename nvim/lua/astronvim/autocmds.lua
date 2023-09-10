@@ -26,6 +26,10 @@ autocmd("BufReadPre", {
   end,
 })
 
+-- Don't auto create commnent on new line
+-- autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
+
+
 local bufferline_group = augroup("bufferline", { clear = true })
 autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
   desc = "Update buffers when adding new buffers",
@@ -132,7 +136,7 @@ autocmd("TextYankPost", {
   group = augroup("highlightyank", { clear = true }),
   pattern = "*",
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank({ timeout = 69 })
   end,
 })
 
@@ -215,13 +219,13 @@ if is_available("alpha-nvim") then
       local should_skip
       local lines = vim.api.nvim_buf_get_lines(0, 0, 2, false)
       if
-          vim.fn.argc() > 0                 -- don't start when opening a file
-          or #lines > 1                     -- don't open if current buffer has more than 1 line
+          vim.fn.argc() > 0                       -- don't start when opening a file
+          or #lines > 1                           -- don't open if current buffer has more than 1 line
           or (#lines == 1 and lines[1]:len() > 0) -- don't open the current buffer if it has anything on the first line
           or #vim.tbl_filter(function(bufnr)
             return vim.bo[bufnr].buflisted
           end, vim.api.nvim_list_bufs())
-          > 1               -- don't open if any listed buffers
+          > 1                     -- don't open if any listed buffers
           or not vim.o.modifiable -- don't open if not modifiable
       then
         should_skip = true
@@ -346,6 +350,9 @@ autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
   end,
 })
 
+
+
+
 -- MY_MODIFY
 -- cmd("AstroChangelog", function()
 --   require("astronvim.utils.updater").changelog()
@@ -356,12 +363,12 @@ autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
 -- cmd("AstroVersion", function()
 --   require("astronvim.utils.updater").version()
 -- end, { desc = "Check AstroNvim Version" })
-cmd("AstroUpdatePackages", function()
-  require("astronvim.utils.updater").update_packages()
-end, { desc = "Update Plugins and Mason" })
-cmd("AstroRollback", function()
-  require("astronvim.utils.updater").rollback()
-end, { desc = "Rollback AstroNvim" })
-cmd("AstroReload", function()
-  require("astronvim.utils").reload()
-end, { desc = "Reload AstroNvim (Experimental)" })
+-- cmd("AstroUpdatePackages", function()
+--   require("astronvim.utils.updater").update_packages()
+-- end, { desc = "Update Plugins and Mason" })
+-- cmd("AstroRollback", function()
+--   require("astronvim.utils.updater").rollback()
+-- end, { desc = "Rollback AstroNvim" })
+-- cmd("AstroReload", function()
+--   require("astronvim.utils").reload()
+-- end, { desc = "Reload AstroNvim (Experimental)" })

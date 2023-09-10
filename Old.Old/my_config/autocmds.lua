@@ -1,4 +1,4 @@
-local api = vim.api
+local api = vim.opt.api
 
 local colors = {
   fg = "#76787d",

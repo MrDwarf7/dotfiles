@@ -244,7 +244,7 @@ function M.update_available(opts)
     update.target = git.tag_commit(update.version)
   elseif opts.commit then -- if commit specified use it
     update.target = git.branch_contains(opts.remote, opts.branch, opts.commit) and opts.commit or nil
-  else                   -- get most recent commit
+  else                    -- get most recent commit
     update.target = git.remote_head(opts.remote, opts.branch)
   end
 

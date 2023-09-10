@@ -129,6 +129,11 @@ return {
           h = "parent_or_close",
           l = "child_or_open",
           o = "open",
+          -- MY_MODIFY - customized mappings for within the actual sidebar
+          ["<Backspace>"] = "parent_or_close",
+          ["-"] = "navigate_up",
+          ["s"] = "open_split",
+          ["v"] = "open_vsplit",
         },
         fuzzy_finder_mappings = { -- define keymaps for filter popup window in fuzzy_finder_mode
           ["<C-j>"] = "move_cursor_down",

@@ -17,19 +17,27 @@ local sections = {
   g = { desc = get_icon("Git", 1, true) .. "Git" },
   S = { desc = get_icon("Session", 1, true) .. "Session" },
   t = { desc = get_icon("Terminal", 1, true) .. "Terminal" },
+  q = { desc = get_icon("Quit", 1, true) .. "Quit" },
 }
 
 -- Normal --
 -- Standard Operations
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
+-- Moves lines using alt + j/k to move lines up and down
+maps.n["<A-j>"] = { "ddjP", desc = "Move down" }
+maps.n["<A-k>"] = { "ddkP", desc = "Move up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
-maps.n["<leader>q"] = { "<cmd>confirm q<cr>", desc = "Quit" }
 maps.n["<leader>n"] = { "<cmd>enew<cr>", desc = "New File" }
 maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
-maps.n["<C-q>"] = { "<cmd>qa!<cr>", desc = "Force quit" }
-maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
-maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+maps.n["<leader>v"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
+maps.n["<leader>s"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+
+-- Quitting command
+maps.n["<Leader>q"] = sections.q
+maps.n["<Leader>qa"] = { "<cmd>confirm q<cr>", desc = "Quit" }
+maps.n["<Leader>qq"] = { "<cmd>qa!<cr>", desc = "Force quit" }
+
 -- TODO: Remove when dropping support for <Neovim v0.10
 if not vim.ui.open then
   maps.n["gx"] = { utils.system_open, desc = "Open the file under cursor with system app" }
@@ -68,14 +76,15 @@ maps.n["<leader>pU"] = {
   desc = "Plugins Update",
 }
 
--- AstroNvim
-maps.n["<leader>pa"] = { "<cmd>AstroUpdatePackages<cr>", desc = "Update Plugins and Mason Packages" }
--- maps.n["<leader>pA"] = { "<cmd>AstroUpdate<cr>", desc = "AstroNvim Update" }
--- maps.n["<leader>pv"] = { "<cmd>AstroVersion<cr>", desc = "AstroNvim Version" }
--- maps.n["<leader>pl"] = { "<cmd>AstroChangelog<cr>", desc = "AstroNvim Changelog" }
-
 -- Manage Buffers
-maps.n["<leader>x"] = {
+-- Might like this one better but not sure, stay with C for now
+-- maps.n["<leader>x"] = {
+--   function()
+--     require("astronvim.utils.buffer").close()
+--   end,
+--   desc = "Close buffer",
+-- }
+maps.n["<leader>c"] = {
   function()
     require("astronvim.utils.buffer").close()
   end,
@@ -317,13 +326,20 @@ if is_available("gitsigns.nvim") then
     end,
     desc = "Unstage Git hunk",
   }
-  maps.n["<leader>gd"] = {
-    function()
-      require("gitsigns").diffthis()
-    end,
-    desc = "View Git diff",
-  }
+  -- Neogit
+  maps.n["<leader>gn"] = { "<cmd>Neogit<cr>", desc = "Neogit" }
+  maps.n["<leader>gd"] = { "<cmd>DiffviewOpen<cr>", desc = "Neogit diff" }
+
+  -- maps.n["<leader>gd"] = {
+  --   function()
+  --     require("gitsigns").diffthis()
+  --   end,
+  --   desc = "View Git diff",
+  -- }
 end
+
+
+
 
 -- NeoTree
 if is_available("neo-tree.nvim") then
@@ -658,7 +674,7 @@ if is_available("toggleterm.nvim") then
             or ""
         utils.toggle_term_cmd("lazygit " .. flags)
       end,
-      desc = "ToggleTerm lazygit",
+      desc = "ToggleTerm Lazy or Worktree",
     }
     maps.n["<leader>tl"] = maps.n["<leader>gg"]
   end
@@ -695,10 +711,10 @@ if is_available("toggleterm.nvim") then
       desc = "ToggleTerm python",
     }
   end
-  maps.n["<leader>tf"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
+  maps.n["<leader>tt"] = { "<cmd>ToggleTerm direction=float<cr>", desc = "ToggleTerm float" }
   maps.n["<leader>th"] = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", desc = "ToggleTerm horizontal split" }
   maps.n["<leader>tv"] = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", desc = "ToggleTerm vertical split" }
-  maps.n["<F7>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
+  maps.n["<F9>"] = { "<cmd>ToggleTerm<cr>", desc = "Toggle terminal" }
   maps.t["<F7>"] = maps.n["<F7>"]
   maps.n["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
   maps.t["<C-'>"] = maps.n["<F7>"] -- requires terminal that supports binding <C-'>
