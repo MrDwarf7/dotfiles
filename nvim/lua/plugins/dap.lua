@@ -8,6 +8,18 @@ return {
       cmd = { "DapInstall", "DapUninstall" },
       opts = { handlers = {} },
     },
+    -- {
+    --   "mfussenegger/nvim-dap-python",
+    --   dependencies = {
+    --     "nvim-dap",
+    --     "mfussenegger/nvim-dap",
+    --     "jay-babu/mason-nvim-dap.nvim"
+    --   },
+    --   ft = {
+    --     "python"
+    --   },
+    -- },
+
     {
       "rcarriga/nvim-dap-ui",
       opts = { floating = { border = "rounded" } },
