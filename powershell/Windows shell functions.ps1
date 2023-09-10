@@ -505,6 +505,20 @@ function gitgo
   return
 }
 
+function dot
+{
+  param(
+    [string]$basePath = "~\dotfiles\",
+    [string]$pathArgument = $args
+  )
+  if ($args)
+  {
+    $basePath = $basePath + $pathArgument
+  }
+  Push-Location $basePath
+  Get-ChildItem
+  return
+} 
 
 # END - Navigation functions
 
