@@ -44,6 +44,7 @@ if (Test-Path($ChocolateyProfile))
 # END - Alias(s)
 
 #Oh-My-Posh config/setup
+# Work / HOME
 oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1MrDwarf7Theme.omp.json | Invoke-Expression
 
 Import-Module PSReadLine
@@ -551,6 +552,33 @@ function pip
   }
 }
 
+function python
+{
+  if (checkEnvironment -eq $true)
+  {
+    if ($env:VIRTUAL_ENV)
+    {
+      $pythonVirtualEnvPath = Join-Path $env:VIRTUAL_ENV "Scripts\python.exe"
+      Set-Alias -Name python -Value $pythonVirtualEnvPath
+      & Set-Alias -Name python3 -Value $pythonVirtualEnvPath
+      & Set-Alias -Name py -Value $pythonVirtualEnvPath
+      python $args
+    } else
+    {
+      # Work
+      Write-Host "Correct Version"
+      $pythonPath="$HOME\scoop\apps\python\current\python.exe"
+      Set-Alias -Name python -Value  $pythonPath
+      & Set-Alias -Name python3 -Value $pythonPath
+      & Set-Alias -Name py -Value  $pythonPath
+      python $args
+    }
+  } else
+  {
+    continue
+  }
+}
+
 # Work
 function pmv
 {
@@ -558,7 +586,7 @@ function pmv
   {
     if (checkEnvironment)
     {
-      py -m venv .venv
+      python3 -m venv .venv
       Push-Location .\.venv\Scripts
       .\activate
       Pop-Location

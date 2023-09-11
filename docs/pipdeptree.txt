@@ -1,0 +1,20 @@
+black==23.7.0
+  - click [required: >=8.0.0, installed: 8.1.6]
+    - colorama [required: Any, installed: 0.4.6]
+  - mypy-extensions [required: >=0.4.3, installed: 1.0.0]
+  - packaging [required: >=22.0, installed: 23.1]
+  - pathspec [required: >=0.9.0, installed: 0.11.2]
+  - platformdirs [required: >=2, installed: 3.10.0]
+Nuitka==1.7.10
+  - ordered-set [required: >=4.1.0, installed: 4.1.0]
+  - zstandard [required: >=0.15, installed: 0.21.0]
+pip==23.2.1
+pipdeptree==2.13.0
+pynvim==0.4.3
+  - greenlet [required: Any, installed: 2.0.2]
+  - msgpack [required: >=0.5.0, installed: 1.0.5]
+setuptools==65.5.0
+virtualenv==20.24.5
+  - distlib [required: >=0.3.7,<1, installed: 0.3.7]
+  - filelock [required: >=3.12.2,<4, installed: 3.12.3]
+  - platformdirs [required: >=3.9.1,<4, installed: 3.10.0]

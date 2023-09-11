@@ -3,7 +3,7 @@ return function(_, opts)
   local mason_nvim_dap = require "mason-nvim-dap"
 
   -- config = function(opts)
-  --       local path = "C:/Users/blake/dotfiles/.virtualenvs/debugpy/Scripts"
+  --       local path = "$HOME/dotfiles/.virtualenvs/debugpy/Scripts"
   --     end,
   mason_nvim_dap.setup(opts)
 end

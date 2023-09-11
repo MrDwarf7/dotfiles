@@ -15,94 +15,39 @@ The opts parameter is just shortcut to avoid the normal boilerplate config = fun
 <<<
 
 
-
-https://github.com/bibjaw99/workstation
+https://github.com/m4xshen/dotfiles
 
 https://github.com/folke?tab=repositories
 
 
-https://www.lazyvim.org/plugins/lsp#nvim-lspconfig
-----(folke/neodev.nvim ---- may assist?)
-LSP {
-	LSP manager - Mason {
-	LSP: lspconfig & mason-lspconfig.nvim
-	DAP: nvim-dap & nvim-dap-ui
-	Linters: null-ls.nvim OR nvim-lint
-	Formatters: null-ls.nvim OR formatter.nvim
-	},
-	
-	Formatting ------------- FORMATTING ON SAVEEEEE
-},
-
 Auto completion (
-	nvim-cmp (And it's various parts of it)
-	coq/coc-completion?, 
-	lua-snip?,
 	friendly-snippets
 )
 
-Surrounding things easily (Quotes and brackets etc.)	
 
+Mini indent scope (Mostly working but need to tweak it)
 
-
-Brackets/Pairing (For brackets, quotes etc...)
-
-Indent handling {
-	Keeping whitespace etc...
-	indent blank line
-}
-
-Finalize configuration for telescope ...
-
-
-
-
-
-POST Base {
-	
-	Terminal 
-	dashboard of some sort (alpha-nvim, dashboard, something else?)
-}
-
-
-Appearence {
-	lualine (Status line)
-	The bracket thing
-	
-	
-}
 
 
 Debugging /// Terminal things 
 
 
 
-famiu/bufdelete.nvim
-bufdelete.nvim
-Delete a buffer without messing up your window layout.
-
-
-
-folke/neodev.nvim
-neodev.nvim
-Neovim setup for init.lua and plugin development with full signature help, docs and completion for the nvim lua API.
-
-
-
 nvim-spectre
 search/replace in multiple files
 
+
+
 lewis6991/gitsigns.nvim
 gitsigns.nvim
-git signs highlights text that has changed since the list git commit, and also lets you interactively stage & unstage hunks in a commit.
+{ Tweaks and changes to be made }
 
 
 vim-illuminate
 Automatically highlights other instances of the word under your cursor. This works with LSP, Treesitter, and regexp matching to find the other instances.
 
 
-mini.bufremove
-buffer remove
+mini.bufremove { This has AstroNvim/astrotheme as a dependency? tf? }
 
 trouble.nvim
 better diagnostics list and others
@@ -110,37 +55,9 @@ better diagnostics list and others
 todo-comments.nvim
 Finds and lists all of the TODO, HACK, BUG, etc comment in your project and loads them into a browsable list.
 
-neoconf.nvim
+neoconf.nvim { Dep of nvim-lsp, not installed directly. }
 neoconf.nvim is a Neovim plugin to manage global and project-local settings.
 
-
-nvim-treesitter-textobjects
-Syntax aware text-objects, select, move, swap, and peek support.
-
-
-
-
-
-"lukas-reineke/indent-blankline.nvim",
-
-
-	{ "hiphish/rainbow-delimiters.nvim" },
-
-	-- nvim autopairs
-	{ "windwp/nvim-autopairs" },
-
-
-
-
-
-
-
-
-
-
-
-
-https://github.com/m4xshen/dotfiles
 
 
 
@@ -181,12 +98,4 @@ https://github.com/m4xshen/dotfiles
       end,
    },
 
-
-
-
-
 }
-
-
-
-    
