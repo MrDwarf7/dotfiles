@@ -729,7 +729,7 @@ function dvim
 
 function nvims()
 {
-  $items = "LazyVim", "Default"
+  $items = "LazyVim", "Default", "LunarVim"
   $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
   if ([string]::IsNullOrEmpty($config))
@@ -741,7 +741,43 @@ function nvims()
   {
     $config = ""
   }
+  if ($config -eq "LunarVim") {
+   return Invoke-Expression LunarVim
+    }
   $env:NVIM_APPNAME = $config
   nvim $args
 }
 # END - Vim things
+
+function LunarVim {
+  # Comments are what the default system expects them to be.
+$ErrorActionPreference = "Stop" # exit when command fails
+# AppData \ Roaming - 
+$env:XDG_DATA_HOME = $env:XDG_DATA_HOME ?? $env:LOCALAPPDATA
+# AppData \ Local
+$env:XDG_CONFIG_HOME = $env:XDG_CONFIG_HOME ?? $env:LOCALAPPDATA
+# AppData \ Temp
+$env:XDG_CACHE_HOME = $env:XDG_CACHE_HOME ?? $env:TEMP
+# AppData \ Roaming \ lunarvim
+$env:LUNARVIM_RUNTIME_DIR = $env:LUNARVIM_RUNTIME_DIR ?? "$env:XDG_DATA_HOME\lvim\InternalData\lunarvim"
+# AppData \ Local \ lvim
+$env:LUNARVIM_CONFIG_DIR = $env:LUNARVIM_CONFIG_DIR ?? "$env:XDG_CONFIG_HOME\lvim"
+# AppData \ Temp \ lvim
+$env:LUNARVIM_CACHE_DIR = $env:LUNARVIM_CACHE_DIR ?? "$env:XDG_CACHE_HOME\lvim"
+# AppData \ Roaming \ lunarvim \ lvim
+$env:LUNARVIM_BASE_DIR = $env:LUNARVIM_BASE_DIR ?? "$env:LUNARVIM_RUNTIME_DIR\lvim"
+# AppData \ Roaming \ lunarvim \ lvim \ init.lua
+nvim -u "$env:LUNARVIM_BASE_DIR\init.lua" @args
+# ending working structure should then be: 
+# $env:LOCALAPPDATA \ lvim > 
+#     InternalData \ >
+#         lunarvim
+#             lazy
+#             lvim
+#             site
+#         nvim-data
+#         mason
+#   -config.lua
+#   -lazy-lock.json
+}
+# Set-Alias lvim 'C:\Users\blake\.local\bin\lvim.ps1'
