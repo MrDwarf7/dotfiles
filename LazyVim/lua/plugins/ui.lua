@@ -45,4 +45,13 @@ return {
       vim.notify = require("notify")
     end,
   },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    event = { "BufRead", "BufNewFile" },
+    opts = {
+      show_trailing_blankline_indent = true,
+      show_current_context = true,
+      show_current_context_start = true,
+    },
+  },
 }
