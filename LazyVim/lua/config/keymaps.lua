@@ -4,6 +4,10 @@
 
 local map = vim.api.nvim_set_keymap
 
+-- Exit insert and visual mode
+map("i", "jj", "<Esc>", { noremap = true, silent = true })
+map("v", "jk", "<Esc>", { noremap = true, silent = true })
+
 -- buffers
 map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
