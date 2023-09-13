@@ -24,7 +24,7 @@ return {
           shade = "dark",
           percentage = 0.15,
         },
-        transparent_background = false, --TEMP:
+        transparent_background = true, --TEMP:
         show_end_of_buffer = true,
         -- color_overrides = {
         -- }
