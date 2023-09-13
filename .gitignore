@@ -6,6 +6,8 @@
 *.nvim - Shortcut/
 *.nvim - Shortcut/*
 
+LazyVim/lazy-lock.json
+
 z.old
 z.old/
 z.old/*
