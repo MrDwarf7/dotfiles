@@ -1,12 +1,4 @@
 return {
-  {
-    "echasnovski/mini.bufremove",
-  -- stylua: ignore
-  keys = {
-    { "<leader>c", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
-    { "<leader>x", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
-  },
-  },
   -- Default mappings currently:
   {
     {
@@ -17,7 +9,7 @@ return {
         local mappings = mapping.get_defaults()
         mappings.i["<c-p>"] = nil
         return {
-          highlight = { timer = 200 },
+          highlight = { timer = 125 },
           ring = { storage = jit.os:find("Windows") and "shada" or "sqlite" },
           picker = {
             telescope = {
@@ -50,5 +42,19 @@ return {
       },
     },
   },
-  --
+
+  {
+    "echasnovski/mini.surround",
+    opts = {
+      mappings = {
+        add = "msa", -- Add surrounding in Normal and Visual modes
+        delete = "msd", -- Delete surrounding
+        find = "msf", -- Find surrounding (to the right)
+        find_left = "msF", -- Find surrounding (to the left)
+        highlight = "msh", -- Highlight surrounding
+        replace = "msr", -- Replace surrounding
+        update_n_lines = "msn", -- Update `n_lines`
+      },
+    },
+  },
 }

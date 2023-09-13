@@ -28,3 +28,4 @@ map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>p", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
 -- map("n", "<c-/>", lazyterm, { desc = "Terminal (root dir)" })
+-- The \ was mapped to something else, need to check what

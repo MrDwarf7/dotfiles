@@ -24,7 +24,7 @@ return {
           shade = "dark",
           percentage = 0.15,
         },
-        transparent_background = true,
+        transparent_background = false, --TEMP:
         show_end_of_buffer = true,
         -- color_overrides = {
         -- }
@@ -45,6 +45,16 @@ return {
       vim.notify = require("notify")
     end,
   },
+
+  {
+    "echasnovski/mini.bufremove",
+  -- stylua: ignore
+  keys = {
+    { "<leader>c", function() require("mini.bufremove").delete(0, false) end, desc = "Delete Buffer" },
+    { "<leader>x", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
+  },
+  },
+
   {
     "lukas-reineke/indent-blankline.nvim",
     event = { "BufRead", "BufNewFile" },

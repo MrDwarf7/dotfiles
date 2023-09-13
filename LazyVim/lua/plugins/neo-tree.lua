@@ -1,5 +1,4 @@
 return {
-  --TODO: further customize small things
   {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
@@ -27,6 +26,7 @@ return {
     end,
     init = function()
       if vim.fn.argc() == 1 then
+        ---@diagnostic disable-next-line: param-type-mismatch
         local stat = vim.loop.fs_stat(vim.fn.argv(0))
         if stat and stat.type == "directory" then
           require("neo-tree")
