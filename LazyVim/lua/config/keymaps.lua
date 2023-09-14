@@ -4,11 +4,20 @@
 
 local map = vim.api.nvim_set_keymap
 
+------------ GENERAL ------------
+
 -- Exit insert and visual mode
 map("i", "jj", "<Esc>", { noremap = true, silent = true })
 map("v", "jk", "<Esc>", { noremap = true, silent = true })
 
--- buffers
+------------ BETTER LINE NAVIGATION ------------
+map("n", "H", "^", { noremap = true, silent = true })
+map("n", "L", "$", { noremap = true, silent = true })
+------------ BETTER LINE NAVIGATION ------------
+
+------------ END GENERAL ------------
+
+------------ START BUFFERS ------------
 map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 
@@ -20,6 +29,9 @@ map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 
 map("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
 map("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+
+map("n", "<leader>v", ":vsplit<cr><C-w>w", { silent = true, desc = "Vertical split" })
+------------ END BUFFERS ------------
 
 -- map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })

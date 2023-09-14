@@ -6,6 +6,9 @@
 local opt = vim.opt
 
 opt.tabstop = 4
+opt.tabstop = 4
+opt.shiftwidth = 4
+
 opt.scrolloff = 8
 opt.sidescrolloff = 4
 opt.preserveindent = true
@@ -22,3 +25,4 @@ opt.writebackup = false
 opt.fillchars = { eob = " " } -- disable `~` on nonexistent line
 ---@diagnostic disable-next-line: assign-type-mismatch
 opt.foldcolumn = vim.fn.has("nvim-0.9") == 1 and "1" or nil
+opt.showtabline = 2
