@@ -20,6 +20,11 @@ https://github.com/m4xshen/dotfiles
 https://github.com/folke?tab=repositories
 
 
+
+Tooling for database interactions (IE: MongoDB etc.)
+
+
+
 Auto completion (
 	friendly-snippets
 )
