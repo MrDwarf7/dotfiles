@@ -12,7 +12,7 @@ map("v", "jk", "<Esc>", { noremap = true, silent = true })
 
 ------------ BETTER LINE NAVIGATION ------------
 map("n", "H", "^", { noremap = true, silent = true })
-map("n", "L", "$", { noremap = true, silent = true })
+map("n", "L", "$", { noremap = true, silent = true }) -- Conflicting mapping with one of the buffer movement commands...
 ------------ BETTER LINE NAVIGATION ------------
 
 ------------ END GENERAL ------------

@@ -66,7 +66,7 @@ return {
       window = {
         mappings = {
           ["<space>"] = "none",
-          ["<Backspace>"] = "parent_or_close",
+          -- ["<Backspace>"] = "parent_or_close",
           ["-"] = "navigate_up",
           ["s"] = "open_split",
           ["v"] = "open_vsplit",
