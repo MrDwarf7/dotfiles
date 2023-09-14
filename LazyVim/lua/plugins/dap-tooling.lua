@@ -30,8 +30,10 @@ return {
       "mfussenegger/nvim-dap-python",
     -- stylua: ignore
     keys = {
-      { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-      { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class" },
+      { "<leader>d", desc = "[D]ebugging" },
+      { "<leader>dp", desc = "[P]ython" },
+      { "<leader>dpf", function() require('dap-python').test_method() end, desc = "[F]unction/Method Debug" },
+      { "<leader>dpc", function() require('dap-python').test_class() end, desc = "[C]lass Debug" },
     },
       config = function()
         local path = require("mason-registry").get_package("debugpy"):get_install_path()
@@ -44,8 +46,10 @@ return {
     "mfussenegger/nvim-dap-python",
   -- stylua: ignore
   keys = {
-    { "<leader>dPt", function() require('dap-python').test_method() end, desc = "Debug Method" },
-    { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class" },
+      { "<leader>d", desc = "[D]ebugging" },
+      { "<leader>dp", desc = "[P]ython" },
+      { "<leader>dpf", function() require('dap-python').test_method() end, desc = "[F]unction/Method Debug" },
+      { "<leader>dpc", function() require('dap-python').test_class() end, desc = "[C]lass Debug" },
   },
     config = function()
       local path = require("mason-registry").get_package("debugpy"):get_install_path()
@@ -64,9 +68,8 @@ return {
         ".env",
       },
     },
-    keys = { { "<leader>cv", "<cmd>:VenvSelect<cr>", desc = "Select VirtualEnv" } },
+    keys = { { "<leader>fv", "<cmd>:VenvSelect<cr>", desc = "Find [V]env" } },
   },
-
   -- END PYTHON DAP
   --
 }

@@ -1,5 +1,42 @@
 return {
-  -- Default mappings currently:
+
+  -- ---------------------------------------------
+  -- disabling ....
+  -- ---------------------------------------------
+
+  -- ---------------------------------------------
+  -- overriding ....
+  -- ---------------------------------------------
+
+  {
+    "echasnovski/mini.surround",
+    keys = {
+        -- stylua: ignore
+            {"<leader>m", desc = "[m]ini Surround"},
+      { "<leader>ma", "<Plug>(minisurround-add)", desc = "[A]dd" },
+      { "<leader>md", "<Plug>(minisurround-delete)", desc = "[D]elete" },
+      { "<leader>mf", "<Plug>(minisurround-find)", desc = "[f]ind (to the right)" },
+      { "<leader>mF", "<Plug>(minisurround-find-left)", desc = "[F]ind (to the left)" },
+      { "<leader>mh", "<Plug>(minisurround-highlight)", desc = "[H]ighlight surrounding" },
+      { "<leader>mr", "<Plug>(minisurround-replace)", desc = "[R]eplace surrounding" },
+      { "<leader>mn", "<Plug>(minisurround-update-n-lines)", desc = "[n]_lines Update" },
+    },
+    opts = {
+      mappings = {
+        add = "ma", -- Add surrounding in Normal and Visual modes
+        delete = "md", -- Delete surrounding
+        find = "mf", -- Find surrounding (to the right)
+        find_left = "mF", -- Find surrounding (to the left)
+        highlight = "mh", -- Highlight surrounding
+        replace = "mr", -- Replace surrounding
+        update_n_lines = "mn", -- Update `n_lines`
+      },
+    },
+  },
+
+  -- ---------------------------------------------
+  -- adding ....
+  -- ---------------------------------------------
   {
     {
       "gbprod/yanky.nvim",
@@ -21,7 +58,7 @@ return {
       end,
       keys = {
       -- stylua: ignore
-    { "<leader>p", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "Open Yank History" },
+    { "<leader>\"", function() require("telescope").extensions.yank_history.yank_history({ }) end, desc = "[f]ind [y]ank" },
         { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank text" },
         { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put yanked text after cursor" },
         { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put yanked text before cursor" },
@@ -42,19 +79,5 @@ return {
       },
     },
   },
-
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      mappings = {
-        add = "msa", -- Add surrounding in Normal and Visual modes
-        delete = "msd", -- Delete surrounding
-        find = "msf", -- Find surrounding (to the right)
-        find_left = "msF", -- Find surrounding (to the left)
-        highlight = "msh", -- Highlight surrounding
-        replace = "msr", -- Replace surrounding
-        update_n_lines = "msn", -- Update `n_lines`
-      },
-    },
-  },
+  --
 }

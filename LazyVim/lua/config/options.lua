@@ -12,6 +12,7 @@ opt.shiftwidth = 4
 opt.scrolloff = 8
 opt.sidescrolloff = 4
 opt.preserveindent = true
+opt.conceallevel = 0
 opt.backspace = "indent,eol,start"
 opt.shell = "pwsh"
 opt.shellcmdflag =
@@ -20,7 +21,6 @@ opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
 opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 opt.shellquote = ""
 opt.shellxquote = ""
-opt.backspace = "indent,eol,start"
 opt.writebackup = false
 opt.fillchars = { eob = " " } -- disable `~` on nonexistent line
 ---@diagnostic disable-next-line: assign-type-mismatch
