@@ -2,7 +2,7 @@ luarocks
 
 https://github.com/mongodb/mongo-c-driver: libmongoc, and lbbson - both from the one git repo/monrepo
 
-https://python-poetry.org/docs/
+
 
 
 
