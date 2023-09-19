@@ -3,32 +3,211 @@
 " You can find a list of commands here: https://jb.gg/h38q75
 " Find more examples here: https://jb.gg/share-ideavimrc
 
+syntax on
 
-"" -- Suggested options --
-" Show a few lines of context around the cursor. Note that this makes the
-" text scroll if you mouse-click near the start or end of the window.
+" Necessities
+map mapleader=" "
+let mapleader=" "
+" set timeoutlen=500
+set notimeout
+
+
+inoremap jj <ESC>
+map <C-c> <Esc>
+map <ESC> :nohl<CR>
+noremap <leader> :nop<CR>
+
+""" Common settings -------------------------
+set number relativenumber
+set clipboard+=unnamed
+set clipboard+=ideaput
+
+set visualbell
+set noerrorbells
 set scrolloff=8
 
-" Do incremental searching.
+" Search settings
 set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+set showmatch
 
-" Don't use Ex mode, use Q for formatting.
-map Q gq
+set ttimeout=80
+set showmode
 
-" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
-" Highlight copied text
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+
+
+
+""" Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 Plug 'machakann/vim-highlightedyank'
-" Commentary plugin
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdtree'
+Plug 'tommcdo/vim-exchange'
+Plug 'vim-scripts/ReplaceWithRegister'
+
+""" Plugin activation / Specifics------------------
+set which-key
+set sneak
+set surround
+set quickscope
 
 
+let g:highlightedyank_highlight_duration = "80"
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+" Trigger a highlight only when pressing f and F.
+let g:qs_highlight_on_keys = ['f', 'F']
+
+""" ------------------------- KEYMAPS ------------------------- """
+
+""" Misc / Out of the way binds -------------------------
+map \e :e ~/.ideavimrc<CR>
+map \r :action IdeaVim.ReloadVimRc.reload<CR><ESC>
+
+
+
+nnoremap <C-A> gg<S-v>G
+
+
+""" Handler specific binds -------------------------
+sethandler <C-j> a:vim
+sethandler <C-k> a:vim
+
+
+
+""" ------------------------- GENERAL ------------------------- """
+""" Formatting -------------------------
+nnoremap == :action ReformatCode <CR>
+vnoremap == :action ReformatCode <CR>
+nnoremap -- :action OptimizeImports <CR>
+vnoremap -- :action OptimizeImports <CR>
+
+
+nnoremap gcc :action CommentByLineComment <CR>
+vnoremap gcc :action CommentByLineComment <CR>
+
+""" Navigation specific binds -------------------------
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <leader>e :NERDTree <CR>
+
+""" Text Navigation specific binds -------------------------
+noremap <S-Tab> :action PreviousTab<CR>
+noremap <Tab> :action NextTab<CR>
+map <S-h> ^
+map <S-l> $
+" noremap <leader>ma :acton SurroundWith<CR>
+
+""" Find Binds -------------------------
+nmap <leader>ff :action FindInPath<CR>
+vmap <leader>ff :action FindInPath<CR>
+
+""" Goto Binds -------------------------
+nnoremap gd :action GotoDeclaration <CR>
+nnoremap gi :action GotoImplementation <CR>
+nnoremap gr :action RecentFiles <CR>
+nnoremap gT :action GotoTest <CR>
+nnoremap gh :action Back <CR>
+nnoremap gl :action Forward <CR>
+nnoremap gj :action MethodDown <CR>
+nnoremap gk :action MethodUp <CR>
+nnoremap gs :action GotoSuperMethod <CR>
+nnoremap g, :action JumpToLastChange <CR>
+nnoremap g. :action JumpToNextChange <CR>
+
+
+
+nnoremap <leader>gc :action GotoClass <CR>
+vnoremap <leader>gc :action GotoClass <CR>
+nnoremap <leader>gf :action GotoFile <CR>
+vnoremap <leader>gf :action GotoFile <CR>
+nnoremap <leader>ww :action HideAllWindows <CR>
+
+nnoremap <leader>gq :action QuickList.Git <CR>
+nnoremap <leader>ns :action NewScratchFile <CR>
+nnoremap <leader>nf :action NewElementSamePlace <CR>
+nnoremap <leader>ge :action Generate<CR>
+vnoremap <leader>re :action Replace<CR>
+nnoremap <leader>re :action Replace<CR>
+" vnoremap / :action Find<CR>
+" nnoremap / :action Find<CR>
+nnoremap <leader>ss :action SelectInProjectView<CR>
+
+
+
+""" Buffer Binds -------------------------
+nnoremap <TAB> :action PreviousTab<CR>
+nnoremap <S-TAB> :action NextTab<CR>
+nmap <leader>bn :action NextTab<CR>
+nmap <leader>bp :action PreviousTab<CR>
+nmap <leader>x :action CloseEditor<CR>
+noremap <leader>v :action SplitVertically<CR>
+noremap <leader>s :action SplitHorizontally<CR>
+nnoremap <C-w>u :action Unsplit<CR>
+nnoremap <C-w>t :action MoveEditorToOppositeTabGroup<CR>
+
+
+""" Toggles/UI specific binds -------------------------
+noremap <leader>tt :action ActivateTerminalToolWindow<CR>
+noremap <leader>td :action ActivateDebugToolWindow<CR>
+noremap <C-S>\: :action ActivateTerminalToolWindow<CR>
+
+
+
+
+
+"" Git / Source control specific binds -------------------------
+noremap <leader>gs :action ActivateVersionControlToolWindow<CR>
+
+
+""" Debug specific binds -------------------------
+" noremap <leader>d
+noremap <leader>db <Action>(ToggleLineBreakpoint)
+noremap <leader>dr :action Debug<CR>
+noremap <leader>ds :action Stop<CR>
+noremap <leader>dc :action Resume<CR>
+noremap <leader>\do :action StepOver<CR>
+noremap <leader>di :action StepInto<CR>
+noremap <leader>dO :action StepOut<CR>
+noremap <leader>d; :action RunToCursor<CR>
+noremap <leader>dR :action Rerun<CR>
+noremap <leader>d' :action ViewBreakpoints<CR>
+noremap <leader>de :action EvaluateExpression<CR>
+noremap <leader>dw :action DebugWindow<CR>
+noremap <leader>dt :action DebugToolWindow<CR>
+noremap <leader>dh :action DebugFirst<CR>
+noremap <leader>dl :action DebugLast<CR>
+noremap <leader>dj :action DebugNext<CR>
+noremap <leader>dk :action DebugPrevious<CR>
+noremap <leader>dn :action DebugStepOver<CR>
+noremap <leader>di :action DebugStepInto<CR>
+noremap <leader>dO :action DebugStepOut<CR>
+noremap <leader>dc :action DebugContinue<CR>
+noremap <leader>ds :action DebugStop<CR>
+noremap <leader>dr :action DebugRerun<CR>
+noremap <leader>d\" :action DebugViewBreakpoints<CR>
+noremap <leader>de :action DebugEvaluateExpression<CR>
+
+
+
+
+
+
+""" Crap set by Pycharm originally Binds -------------------------
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
-
-"" Map <leader>d to start debug
-"map <leader>d <Action>(Debug)
-
-"" Map \b to toggle the breakpoint on the current line
-"map \b <Action>(ToggleLineBreakpoint)
