@@ -6,30 +6,45 @@
 syntax on
 
 " Necessities
-map mapleader=" "
+nnoremap mapleader=" "
+vnoremap mapleader=" "
+nnoremap mapleader=" "
 map <Space>=<leader>
-let mapleader=" "
-
-
-
-
 
 " set timeoutlen=500
 set notimeout
 
 
+
 inoremap jj <ESC>
-map <C-c> <Esc>
-map <ESC> :noh<CR>
-nnoremap <Space> :nop<CR>
+nnoremap <ESC> :noh<CR>
+" noremap <ESC> jj
+nnoremap <C-c> <Esc>
+vnoremap <C-c> <Esc>
+
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
+map \ww <Action>(SaveDocument)
+map \wa <Action>(SaveAll)
+map \q <Action>(CloseActiveTab)
+" map \qa <Action>(Exit)
+map \wqa <Action>(SaveAllAndExit)
+map \wq <Action>(SaveAndCloseActiveTab)
 
 
 
-""" Common settings -------------------------
+
+
+
+" nnoremap <Space> :nop<CR>
+
+" Common settings -------------------------
 set number relativenumber
 set clipboard+=unnamed
 set clipboard+=ideaput
-
 
 set visualbell
 set noerrorbells
@@ -42,17 +57,14 @@ set smartcase
 set hlsearch
 set showmatch
 
-set ttimeout=80
 set showmode
 
 
-""" Idea specific settings ------------------
+" Idea specific settings ------------------
 set ideajoin
 " set ideastatusicon=gray
 
-
-
-""" Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+" Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -61,7 +73,7 @@ Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
 Plug 'vim-scripts/ReplaceWithRegister'
 
-""" Plugin activation / Specifics------------------
+" Plugin activation / Specifics------------------
 set which-key
 set sneak
 set surround
@@ -75,38 +87,62 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 " Trigger a highlight only when pressing f and F.
 let g:qs_highlight_on_keys = ['f', 'F']
 
-let g:WhichKey_SortOrder = by_description
+" let g:WhichKey_SortOrder = by_description
 let g:WhichKey_FontSize	= 15
-
+" close the popup and don't process formerly typed keys
+let g:WhichKey_ProcessUnknownMappings = "false"
 
 map <leader>q <Plug>(easymotion-f)
 map <leader>Q <Plug>(easymotion-s)
 
+" let g:NERDTreeMapMenu = "m"
 
-""" ------------------------- KEYMAPS ------------------------- """
+" if NERDTreeFocus == 1
+"    map a :action NewFile
+" end
 
-""" Misc / Out of the way binds -------------------------
-map \e :e %HOMEPATH%\.ideavimrc<CR>
-map \r :action IdeaVim.ReloadVimRc.reload<CR><ESC>
 
+
+
+
+
+" ------------------------- KEYMAPS -------------------------
+
+" Misc / Out of the way binds -------------------------
+nnoremap \e :action Openfile ~/dotfiles/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR><ESC>
+
+
+" Copilot settings"
+map <A-a> :action copilot.applyInlays
+
+" Saving related binds -------------------------
+" let g:WhichKeyDesc_Command = ":ww Write current document"
+map <silent> :w<CR> :action SaveDocument<CR><ESC>
+map :wq :action SaveAndCloseActiveTab<CR>
+map :wa :action SaveAll<CR>
+
+let g:WhichKeyDesc_Command = ":q Close current tab"
+map :q :action CloseEditor<CR>
+" let g:WhichKeyDesc_Command = ":qa Close all tabs"
+" map :qa :action ExitAll<CR>
+
+" map :wqa <Action>(SaveAllAndExit)
 
 
 nnoremap <C-A> gg<S-v>G
 let g:WhichKeyDesc_commentray_prefix = "gc"
 let g:WhichKeyDesc_commentray_action = "gcc"
 
-""" Handler specific binds -------------------------
+" Handler specific binds -------------------------
 sethandler <C-j> a:vim
 sethandler <C-k> a:vim
 sethandler <C-h> a:vim
 sethandler <C-l> a:vim
 
-"sethandler <C-n> a:vim
-"sethandler <C-p> a:vim
 
-
-""" ------------------------- GENERAL ------------------------- """
-""" Formatting -------------------------
+" ------------------------- GENERAL -------------------------
+" Formatting -------------------------
 let g:WhichKeyDesc_Formatting = "=="
 let g:WhichKeyDesc_Formatting = "--"
 let g:WhichKeyDesc_Formatting = "=="
@@ -126,50 +162,58 @@ vnoremap zc :action CollapseRegion<CR>
 nnoremap zo :action ExpandRegion<CR>
 vnoremap zo :action ExpandRegion<CR>
 
-
 nnoremap zf :action CollapseRegion<CR>
 nnoremap zf :action ExpandRegion<CR>
 
 vnoremap <M-j> :m'>+<CR>gv=gv
 vnoremap <M-k> :m-2<CR>gv=gv
 
-
-""" Navigation specific binds -------------------------
+" Navigation specific binds -------------------------
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 let g:WhichKeyDesc_NerdTree = "<Space>e NERD Tree"
-nnoremap <Space>e :NERDTree <CR>
-nnoremap <Space>e :NERDTreeToggle<CR>
-
-
+nnoremap <Space>e :NERDTreeFocus<CR>
+" nnoremap <Space>e :NERDTreeToggle<CR>
 "nnoremap <C-j> :action Up
 
-
-
-
-""" Text Navigation specific binds -------------------------
+" Text Navigation specific binds -------------------------
 nnoremap <S-Tab> :action PreviousTab<CR>
 nnoremap <Tab> :action NextTab<CR>
 map <S-h> ^
 map <S-l> $
 " noremap <Space>ma :acton SurroundWith<CR>
 
-""" Find Binds -------------------------
+" Find Binds -------------------------
 let g:WhichKeyDesc_find = "<Space>f Find"
-nmap <Space>ff :action GotoFile<CR>
-vmap <Space>ff :action GotoFile<CR>
-nnoremap <Space>fp :action FindInPath<CR>
-nnoremap <Space>fr :action RecentFiles <CR>
-nnoremap <Space>fl :action RecentLocations<CR>
-let g:WhichKeyDesc_Toggle_Nerd = "<Space>te NERD Tree Focus"
-nnoremap <Space>fe :NERDTreeFocus<CR>
 
-""" Goto Binds -------------------------
-"let g:WhichKeyDesc_Goto = "<Space>g Goto"
+let g:WhichKeyDesc_find = "<Space>f/ Find Text in buffer"
+nnoremap <Space>f/ :action Find<CR>
+vnoremap <Space>f/ :action Find<CR>
+let g:WhichKeyDesc_find = "<Space>ff Find Files"
+vnoremap <Space>ff :action GotoFile<CR>
+vnoremap <Space>ff :action GotoFile<CR>
+let g:WhichKeyDesc_find = "<Space>fu Find Usages"
+nnoremap <Space>fu :action FindUsages<CR>
+vnoremap <Space>fu :action  FindUsages<CR>
+let g:WhichKeyDesc_find = "<Space>fp Find within Project"
+nnoremap <Space>fp :action FindInPath<CR>
+let g:WhichKeyDesc_find = "<Space>fr Find Recent Files"
+nnoremap <Space>fr :action RecentFiles <CR>
+let g:WhichKeyDesc_find = "<Space>fl Find Recent Location"
+nnoremap <Space>fl :action RecentLocations<CR>
+
+
+" Goto Binds -------------------------
+let g:WhichKeyDesc_Goto = "<Space>g Goto
 nnoremap gd :action GotoDeclaration <CR>
 nnoremap gi :action GotoImplementation <CR>
+
+let g:WhichKeyDesc_Goto = "<Space>gu Goto Usages"
+nnoremap <Space>gu :action FindUsages<CR>
+vnoremap <Space>gu :action  FindUsages<CR>
+
 nnoremap gT :action GotoTest <CR>
 nnoremap gh :action Back <CR>
 nnoremap gl :action Forward <CR>
@@ -179,15 +223,12 @@ nnoremap gs :action GotoSuperMethod <CR>
 nnoremap g, :action JumpToLastChange <CR>
 nnoremap g. :action JumpToNextChange <CR>
 
-
 nnoremap gc :action GotoClass <CR>
 vnoremap gc :action GotoClass <CR>
 nnoremap gf :action GotoFile <CR>
 vnoremap gf :action GotoFile <CR>
 
 nnoremap <Space>gq :action QuickList.Git <CR>
-
-
 
 let g:WhichKeyDesc_New = "<Space>n New"
 nnoremap <Space>ns :action NewScratchFile <CR>
@@ -197,11 +238,7 @@ nnoremap <Space>ne :action NewElementSamePlace <CR>
 " vnoremap / :action Find<CR>
 " nnoremap / :action Find<CR>
 
-
-
-
-
-""" Mark Binds -------------------------
+" Mark Binds ------------------------
 "Map common used global vim letter bookmarks to Intellij number bookmarks
 let g:WhichKeyDesc_Mark = "<Space>m Marks"
 nnoremap mm :action ToggleBookmark0<CR>
@@ -230,20 +267,15 @@ nnoremap `4 :action GotoBookmark9<CR>
 nnoremap <Space>m :action ShowBookmarks<CR>
 nnoremap <Space>` :action ToggleBookmarkWithMnemonic<CR>
 
-
-
-
-""" Buffer Binds -------------------------
+" Buffer Binds -------------------------
 let g:WhichKeyDesc_Buffer = "<Space>b Buffers"
-nnoremap <TAB> :action PreviousTab<CR>
-nnoremap <S-TAB> :action NextTab<CR>
-nmap <Space>bn :action NextTab<CR>
-nmap <Space>bp :action PreviousTab<CR>
-
+nnoremap <S-TAB> :action PreviousTab<CR>
+nnoremap <TAB> :action NextTab<CR>
+nnoremap <Space>bn :action NextTab<CR>
+vnoremap <Space>bp :action PreviousTab<CR>
 
 let g:WhichKeyDesc_Close = "<Space>x Close Buffer"
-nmap <Space>x :action CloseEditor<CR>
-
+nnoremap <Space>x :action CloseEditor<CR>
 
 let g:WhichKeyDesc_Split = "<Space>v Split Vertically"
 nnoremap <Space>v :action SplitVertically<CR>
@@ -251,19 +283,19 @@ nnoremap <Space>v :action SplitVertically<CR>
 let g:WhichKeyDesc_HSplit = "<Space>s Split Horizontally"
 nnoremap <Space>s :action SplitHorizontally<CR>
 
-
 nnoremap <C-w>u :action Unsplit<CR>
 nnoremap <C-w>t :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <Space>bh :action HideAllWindows <CR>
 
-""" Toggles/UI specific binds -------------------------
+" Toggles/UI specific binds -------------------------
 let g:WhichKeyDesc_Toggle = "<Space>t Toggles"
 nnoremap <Space>tt :action ActivateTerminalToolWindow<CR>
 nnoremap <Space>td :action ActivateDebugToolWindow<CR>
+let g:WhichKeyDesc_Toggle_Nerd = "<Space>tb NERD Tree Bar"
+nnoremap <Space>tb :NERDTreeToggle<CR>
 " nnoremap <C-/>: :action ActivateTerminalToolWindow<CR>
 
-
-"" Git / Source control specific binds -------------------------
+" Git / Source control specific binds -------------------------
 let g:WhichKeyDesc_Git = "<Space>g Git"
 nnoremap <Space>gg :action Vcs.Operations.Popup<CR>
 nnoremap <Space>gs :action ActivateCommitToolWindow<CR>
@@ -273,16 +305,17 @@ nnoremap <Space>gS :action Git.Commit.Stage<CR>
 nnoremap <Space>gp :action Vcs.Push<CR>
 "nnoremap <Space>gS :action Vcs.Stage<CR>
 
-
-"" LSP specific binds -------------------------
+" LSP specific binds -------------------------
 let g:WhichKeyDesc_LSP = "<Space>l LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lh :action ShowErrorDescription<CR>
-nnoremap <Space>lr :action ReformatCode<CR>
+nnoremap <Space>lr :action RenameElement<CR>
 nnoremap <leader>lp :action ActivateProblemsViewToolWindow<CR>
+nnoremap <leader>lc :action ShowPopupMenu<CR>
 
 
-""" Debug specific binds -------------------------
+
+" Debug specific binds -------------------------
 let g:WhichKeyDesc_Debug = "<Space>d Debug"
 " noremap <Space>d
 nnoremap <Space>db :action ToggleLineBreakpoint<CR>
@@ -290,11 +323,13 @@ nnoremap <Space>dr :action Debug<CR>
 nnoremap <Space>dR :action Rerun<CR>
 nnoremap <Space>ds :action Stop<CR>
 nnoremap <Space>dc :action Resume<CR>
+
+let g:WhichKeyDesc_Debug = "<Space>dw Debug Window"
+nnoremap <Space>dw :action ActivateDebugToolWindow<CR>
 "nnoremap <Space>ge :action Generate<CR>
 
 let g:WhichKeyDesc_Run = "<Space>r Run Current"
 nnoremap <Space>r :action RunClass<CR>
-
 
 " map <Space>dc :action Resume<CR>
 nnoremap <Space>do :action StepOver<CR>
@@ -306,22 +341,7 @@ nnoremap <Space>de :action EvaluateExpression<CR>
 nnoremap <Space>d" :action DebugViewBreakpoints<CR>
 nnoremap <Space>de :action DebugEvaluateExpression<CR>
 
-"noremap <Space>dw :action DebugWindow<CR>
-"noremap<Space>dt :action DebugToolWindow<CR>
-"noremap<Space>dh :action DebugFirst<CR>
-"noremap<Space>dl :action DebugLast<CR>
-"noremap<Space>dj :action DebugNext<CR>
-"noremap<Space>dk :action DebugPrevious<CR>
-"noremap<Space>dn :action DebugStepOver<CR>
-"noremap<Space>di :action DebugStepInto<CR>
-"noremap<Space>dO :action DebugStepOut<CR>
-"noremap<Space>dc :action DebugContinue<CR>
-"noremap<Space>ds :action DebugStop<CR>
-" nnoremap <Space>dR :action DebugRerun<CR>
-
-
-
-""" Crap set by Pycharm originally Binds -------------------------
+" Crap set by Pycharm originally Binds -------------------------
 "" Map <Space>d to start debug
 "map <Space>d <Action>(Debug)
 "" Map \b to toggle the breakpoint on the current line
