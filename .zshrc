@@ -13,9 +13,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
+gitgo(){
+    git status &&
+    git add --all &&
+    git commit --all -m "Bump" &&
+    git push
+}
 
 alias vim=nvim
 alias cls=clear
-
+alias dot=$HOME/.dotfiles/
 
 source $ZSH/oh-my-zsh.sh

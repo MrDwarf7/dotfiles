@@ -31,4 +31,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 echo Theming -
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+# Added after issue on arch
+sudo echo /usr/sbin/zsh >>/etc/shells
+chsh -s $(which zsh)
+
 RESTART_ZSH="cd $HOME/ && exec .zsh"
