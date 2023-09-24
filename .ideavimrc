@@ -293,6 +293,10 @@ nnoremap <Space>tt :action ActivateTerminalToolWindow<CR>
 nnoremap <Space>td :action ActivateDebugToolWindow<CR>
 let g:WhichKeyDesc_Toggle_Nerd = "<Space>tb NERD Tree Bar"
 nnoremap <Space>tb :NERDTreeToggle<CR>
+nnoremap <Space>tp :action ActivatePythonConsoleToolWindow<CR>
+
+
+
 " nnoremap <C-/>: :action ActivateTerminalToolWindow<CR>
 
 " Git / Source control specific binds -------------------------
