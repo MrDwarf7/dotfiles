@@ -23,7 +23,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$XDG_CO
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 # echo "Installing fonts."
-# FONT_DIR="$HOME/.fonts"
+# FONT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/.fonts"
 # git clone https://github.com/powerline/fonts.git $FONT_DIR --depth=1
 # cd $FONT_DIR
 # ./install.sh
@@ -32,8 +32,3 @@ echo Theming -
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 RESTART_ZSH="cd $HOME/ && exec .zsh"
-
-# echo "Setting up the Spaceship theme."
-# ZSH_CUSTOM_THEME="$HOME/.oh-my-zsh/custom"
-# git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM_THEME/themes/spaceship-prompt" --depth=1
-# ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM_THEME/themes/spaceship.zsh-theme"
