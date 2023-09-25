@@ -12,7 +12,8 @@ nnoremap mapleader=" "
 map <Space>=<leader>
 
 " set timeoutlen=500
-set notimeout
+let to_global = notimeout
+set to_global
 
 
 
@@ -85,13 +86,13 @@ let g:highlightedyank_highlight_duration = "80"
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " Trigger a highlight only when pressing f and F.
-let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_highlight_on_keys = ['f', 'F', 's', 'S']
 
 " let g:WhichKey_SortOrder = by_description
 let g:WhichKey_FontSize	= 15
 " close the popup and don't process formerly typed keys
 let g:WhichKey_ProcessUnknownMappings = "false"
-
+let g:WhichKey_DefaultDelay = 600
 map <leader>q <Plug>(easymotion-f)
 map <leader>Q <Plug>(easymotion-s)
 
@@ -118,12 +119,26 @@ map <A-a> :action copilot.applyInlays
 
 " Saving related binds -------------------------
 " let g:WhichKeyDesc_Command = ":ww Write current document"
-map <silent> :w<CR> :action SaveDocument<CR><ESC>
-map :wq :action SaveAndCloseActiveTab<CR>
-map :wa :action SaveAll<CR>
 
-let g:WhichKeyDesc_Command = ":q Close current tab"
-map :q :action CloseEditor<CR>
+
+
+
+
+" function MyFuncSaveDocument()
+"     set timeoutlen=1
+"     :action SaveDocument
+"     set notimeout
+"     set timeoutlen = to_global
+" endfunction
+
+" map :w<CR> :call MyFuncSaveDocument<CR>
+
+
+" map :wq :action SaveAndCloseActiveTab<CR>
+" map :wa :action SaveAll<CR>
+
+"let g:WhichKeyDesc_Command = ":q Close current tab"
+"map :q :action CloseEditor<CR>
 " let g:WhichKeyDesc_Command = ":qa Close all tabs"
 " map :qa :action ExitAll<CR>
 
@@ -286,8 +301,9 @@ nnoremap <Space>` :action ToggleBookmarkWithMnemonic<CR>
 let g:WhichKeyDesc_Buffer = "<Space>b +Buffers"
 nnoremap <S-TAB> :action PreviousTab<CR>
 nnoremap <TAB> :action NextTab<CR>
-nnoremap <Space>bn :action NextTab<CR>
-vnoremap <Space>bp :action PreviousTab<CR>
+map <Space>bn :action NextTab<CR>
+map <Space>bp :action PreviousTab<CR>
+map <Space>bp :action PreviousTab<CR>
 
 let g:WhichKeyDesc_Split = "<Space>bv Split Vertically"
 nnoremap <Space>bv :action SplitVertically<CR>
