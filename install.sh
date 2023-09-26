@@ -15,21 +15,22 @@ create_symlinks() {
 		ln -s $script_dir/$name ~/$name
 	done
 }
-
+echo "Creating symlinks for dotfiles."
 create_symlinks
+
+echo "Installing oh-my-zsh."
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 echo cloning plugin repos
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# echo "Installing fonts."
-# FONT_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/.fonts"
-# git clone https://github.com/powerline/fonts.git $FONT_DIR --depth=1
-# cd $FONT_DIR
-# ./install.sh
-
 echo Theming -
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+echo "Copying over personal config files."
+cp -r .config/* $XDG_CONFIG_HOME/.config/
+cp -r .local/* $XDG_CONFIG_HOME/.local/
 
 # Added after issue on arch
 sudo echo /usr/sbin/zsh >>/etc/shells
