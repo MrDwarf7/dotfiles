@@ -17,9 +17,9 @@ install_dependencies() {
 		missing_dependencies+=("git")
 	fi
 
-	if ! command -v fd &>/dev/null; then
-		missing_dependencies+=("fd")
-	fi
+	# if ! command -v fd &>/dev/null; then
+	# 	missing_dependencies+=("fd")
+	# fi
 
 	if ! command -v fzf &>/dev/null; then
 		missing_dependencies+=("fzf")
@@ -37,25 +37,25 @@ install_dependencies() {
 		missing_dependencies+=("tree")
 	fi
 
-	if ! command -v z &>/dev/null; then
-		missing_dependencies+=("z")
-	fi
+	# if ! command -v z &>/dev/null; then
+	# 	missing_dependencies+=("z")
+	# fi
 
-	if ! command -v lazygit &>/dev/null; then
-		missing_dependencies+=("lazygit")
-	fi
+	# if ! command -v lazygit &>/dev/null; then
+	# 	missing_dependencies+=("lazygit")
+	# fi
 
-	if ! command -v cURLie &>/dev/null; then
-		missing_dependencies+=("cURLie ")
-	fi
+	# if ! command -v cURLie &>/dev/null; then
+	# 	missing_dependencies+=("cURLie ")
+	# fi
 
-	if ! command -v axel &>/dev/null; then
-		missing_dependencies+=("axel ")
-	fi
+	# if ! command -v axel &>/dev/null; then
+	# 	missing_dependencies+=("axel ")
+	# fi
 
-	if ! command -v broot &>/dev/null; then
-		missing_dependencies+=("broot ")
-	fi
+	# if ! command -v broot &>/dev/null; then
+	# 	missing_dependencies+=("broot ")
+	# fi
 
 	if [ ${#missing_dependencies[@]} -gt 0 ]; then
 		echo "Installing missing dependencies: ${missing_dependencies[*]}"
