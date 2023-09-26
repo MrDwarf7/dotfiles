@@ -13,6 +13,11 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
+# alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias vim=nvim
+alias cls=clear
+alias dot=$HOME/.dotfiles/
+
 gitgo(){
     git status &&
     git add --all &&
@@ -20,8 +25,11 @@ gitgo(){
     git push
 }
 
-alias vim=nvim
-alias cls=clear
-alias dot=$HOME/.dotfiles/
+updot() {
+    dot
+    git pull origin master  # Pull updates from your dotfiles repository
+    # Add similar commands for updating plugins and themes if they are in separate repositories
+}
+
 
 source $ZSH/oh-my-zsh.sh
