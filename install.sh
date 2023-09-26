@@ -2,6 +2,8 @@
 
 set -e
 
+USER_HOME=$(eval echo ~${SUDO_USER})
+
 ZSH_CUSTOM=${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}
 THEME_DIR="$ZSH_CUSTOM/themes"
 PLUGIN_DIR="$ZSH_CUSTOM/plugins"
@@ -143,7 +145,7 @@ echo "Changing default shell to zsh."
 force_zsh_chsh
 
 echo "Copying over personal config files."
-cp -r .config/* $XDG_CONFIG_HOME/.config/
-cp -r .local/* $XDG_CONFIG_HOME/.local/
+cp -r .config/ $XDG_CONFIG_HOME/.config/
+cp -r .local/ $XDG_CONFIG_HOME/.local/
 
 RESTART_ZSH="cd $HOME/ && exec .zsh"
