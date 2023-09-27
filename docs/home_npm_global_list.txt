@@ -1,0 +1,7 @@
+C:\Users\blake\scoop\persist\nodejs\bin
++-- neovim@4.10.1
++-- pnpm@8.8.0
++-- tree-sitter-cli@0.20.8
++-- typescript-language-server@3.3.2
+`-- typescript@5.2.2
+
