@@ -1,4 +1,7 @@
 LazyVim/lazy-lock.json
+.idea
+.idea/
+.idea/*
 
 z.old
 z.old/

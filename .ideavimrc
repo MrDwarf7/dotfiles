@@ -10,11 +10,9 @@ nnoremap mapleader=" "
 vnoremap mapleader=" "
 nnoremap mapleader=" "
 map <Space>=<leader>
-map <leader>=<Space>
 
 " set timeoutlen=500
-let to_global = notimeout
-set to_global
+set notimeout
 
 
 
@@ -24,10 +22,10 @@ nnoremap <ESC> :noh<CR>
 nnoremap <C-c> <Esc>
 vnoremap <C-c> <Esc>
 
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-h> <C-w>h
-map <C-l> <C-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
 
 map \ww <Action>(SaveDocument)
 map \wa <Action>(SaveAll)
@@ -93,9 +91,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 's', 'S']
 let g:WhichKey_FontSize	= 15
 " close the popup and don't process formerly typed keys
 let g:WhichKey_ProcessUnknownMappings = "false"
-let g:WhichKey_DefaultDelay = 600
-map <leader>q <Plug>(easymotion-f)
-map <leader>Q <Plug>(easymotion-s)
+" let g:WhichKey_DefaultDelay = 500
+map <Space>q <Plug>(easymotion-f)
+map <Space>Q <Plug>(easymotion-s)
 
 " let g:NERDTreeMapMenu = "m"
 
@@ -120,30 +118,6 @@ map <A-a> :action copilot.applyInlays
 
 " Saving related binds -------------------------
 " let g:WhichKeyDesc_Command = ":ww Write current document"
-
-
-
-
-
-" function MyFuncSaveDocument()
-"     set timeoutlen=1
-"     :action SaveDocument
-"     set notimeout
-"     set timeoutlen = to_global
-" endfunction
-
-" map :w<CR> :call MyFuncSaveDocument<CR>
-
-
-" map :wq :action SaveAndCloseActiveTab<CR>
-" map :wa :action SaveAll<CR>
-
-"let g:WhichKeyDesc_Command = ":q Close current tab"
-"map :q :action CloseEditor<CR>
-" let g:WhichKeyDesc_Command = ":qa Close all tabs"
-" map :qa :action ExitAll<CR>
-
-" map :wqa <Action>(SaveAllAndExit)
 
 
 " Better scrolling via centering after page up/down
@@ -358,9 +332,9 @@ let g:WhichKeyDesc_LSP = "<Space>l +LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lh :action ShowErrorDescription<CR>
 nnoremap <Space>lr :action RenameElement<CR>
-nnoremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
+let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
+noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
 nnoremap <Space>lc :action ShowPopupMenu<CR>
-
 
 
 " Debug specific binds -------------------------
