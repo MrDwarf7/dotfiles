@@ -25,9 +25,6 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-[editor.lsp]
-display-messages = true
-
 
 [editor.file-picker]
 # hidden = false
@@ -50,8 +47,10 @@ skip-levels = 0
 # '<' = '>'
 
 
-# [[language]]
-# name =
+
+[editor.lsp]
+display-messages = true
+
 
 
 [keys.normal.space]

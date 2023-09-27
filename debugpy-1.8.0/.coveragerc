@@ -1,0 +1,39 @@
+[run]
+branch = True
+parallel = True
+include =
+    src/debugpy/*
+omit =
+    src/debugpy/__init__.py
+    src/debugpy/_version.py
+    src/debugpy/_vendored/*
+    src/debugpy/server/*
+data_file = coverage/.coverage
+
+[report]
+exclude_also =
+    # __repr__ is mostly used for error messages.
+    def __repr__
+
+    # Asserts and error conditions.
+    raise AssertionError
+    raise NotImplementedError
+    raise TypeError
+    raise ValueError
+    raise AttributeError
+    raise RuntimeError
+    raise ComponentNotAvailable
+    raise messaging.MessageHandlingError    
+    \.isnt_valid\(
+    \.cant_handle\(
+
+    # Code that's deliberately excluded.
+    if 0:
+    if __name__ == .__main__.:
+ 
+[html]
+directory = coverage/html
+title = debugpy coverage report
+
+[xml]
+output = coverage/coverage.xml

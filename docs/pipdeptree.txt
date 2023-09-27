@@ -16,6 +16,7 @@ black==23.7.0
   - packaging [required: >=22.0, installed: 23.1]
   - pathspec [required: >=0.9.0, installed: 0.11.2]
   - platformdirs [required: >=2, installed: 3.10.0]
+debugpy==1.8.0
 Nuitka==1.7.10
   - ordered-set [required: >=4.1.0, installed: 4.1.0]
   - zstandard [required: >=0.15, installed: 0.21.0]

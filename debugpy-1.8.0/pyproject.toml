@@ -1,0 +1,24 @@
+[build-system]
+requires = ["wheel", "setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.black]
+exclude = '''
+( __pycache__
+| ^/.tox
+| ^/versioneer.py
+| ^/src/debugpy/_vendored
+| ^/src/debugpy/_version.py
+)
+'''
+
+[tool.pyright]
+pythonVersion = "3.8"
+include = ["src/**", "tests/**" ]
+extraPaths = ["src/debugpy/_vendored/pydevd"]
+ignore = ["src/debugpy/_vendored/pydevd", "src/debugpy/_version.py"]
+executionEnvironments = [
+  { root = "src" }, { root = "." }
+]
+
