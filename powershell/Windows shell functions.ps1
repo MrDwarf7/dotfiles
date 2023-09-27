@@ -528,6 +528,10 @@ function dot
     }
     Push-Location $basePath
     Get-ChildItem
+    Write-Host "Fetching: "
+    git fetch
+    Write-Host "Status: "
+    git status
     return
 } 
 
@@ -715,6 +719,15 @@ function uzip
 # END - Linux Functions
 
 # BEGIN - Vim things
+
+function hx {
+    $config="$env:USERPROFILE\dotfiles\scoop\persist\helix\config.toml"
+    
+    if ($args[0] -eq "_local") {
+    $config = ""
+    }
+    helix --config $config $args
+}
 
 function vim
 {
