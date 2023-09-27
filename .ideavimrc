@@ -10,6 +10,7 @@ nnoremap mapleader=" "
 vnoremap mapleader=" "
 nnoremap mapleader=" "
 map <Space>=<leader>
+map <leader>=<Space>
 
 " set timeoutlen=500
 let to_global = notimeout
@@ -233,6 +234,10 @@ let g:WhichKeyDesc_find = "<Space>fb Find Buffers (Same as Recent Files)"
 nnoremap <Space>fb :action RecentFiles <CR>
 vnoremap <Space>fb :action RecentFiles <CR>
 
+let g:WhichKeyDesc_find = "<Space>ft Find TODOs"
+nnoremap <Space>ft :action ActivateTODOToolWindow<CR>
+vnoremap <Space>ft :action ActivateTODOToolWindow<CR>
+
 
 
 " Goto Binds -------------------------
@@ -353,8 +358,8 @@ let g:WhichKeyDesc_LSP = "<Space>l +LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lh :action ShowErrorDescription<CR>
 nnoremap <Space>lr :action RenameElement<CR>
-nnoremap <leader>lp :action ActivateProblemsViewToolWindow<CR>
-nnoremap <leader>lc :action ShowPopupMenu<CR>
+nnoremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
+nnoremap <Space>lc :action ShowPopupMenu<CR>
 
 
 
