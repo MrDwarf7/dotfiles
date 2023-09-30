@@ -10,3 +10,5 @@ z.old/*
 .z.old
 .z.old/
 .z.old/*
+
+LazyVim/lazy-lock.json
