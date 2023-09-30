@@ -8,19 +8,8 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local full_spec = {
-
   { "LazyVim/LazyVim", import = "lazyvim.plugins" },
   { import = "lazyvim.plugins.extras.lang.python" },
-
-  -- add LazyVim and import its plugins
-  -- { import = "lazyvim.plugins.extras.coding.copiot" },
-  -- { import = "lazyvim.plugins.extras.linintg.eslint" },
-  -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
-  -- import any extras modules here
-  -- { import = "lazyvim.plugins.extras.lang.typescript" },
-  -- { import = "lazyvim.plugins.extras.lang.json" },
-  -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-  -- import/override with your plugins
   --
   { import = "plugins" },
 }
