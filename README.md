@@ -1,6 +1,5 @@
 # Dot Files Readme
 
-
 The dotfiles for both local and remote dev setup
 
 ## Update OhMyPosh using this command -
