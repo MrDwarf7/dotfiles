@@ -15,7 +15,6 @@ return {
     "catppuccin/nvim",
     name = "catppuccin",
     lazy = false,
-    vscode = false,
     priority = 1000,
     opts = {},
     config = function()
