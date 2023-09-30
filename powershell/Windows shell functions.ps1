@@ -512,11 +512,12 @@ function gitgo
     {
         $argumentsIn = $baseCommitMessage
     }
-    if (-not (git fetch Out-Null))
+    if ( (git fetch) -eq $true)
     {
-        Write-Host "Fetching: "
-        git fetch
+        return
     }
+    # Write-Host "Fetching: "
+    # git fetch
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
@@ -726,11 +727,13 @@ function uzip
 
 # BEGIN - Vim things
 
-function hx {
+function hx
+{
     $config="$env:USERPROFILE\dotfiles\scoop\persist\helix\config.toml"
     
-    if ($args[0] -eq "_local") {
-    $config = ""
+    if ($args[0] -eq "_local")
+    {
+        $config = ""
     }
     helix --config $config $args
 }
