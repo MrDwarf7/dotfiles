@@ -9,46 +9,46 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local full_spec = {
 
-    { "LazyVim/LazyVim",                            import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.lang.python" },
+  { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+  { import = "lazyvim.plugins.extras.lang.python" },
 
-    -- add LazyVim and import its plugins
-    -- { import = "lazyvim.plugins.extras.coding.copiot" },
-    -- { import = "lazyvim.plugins.extras.linintg.eslint" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
-    --
-    { import = "plugins" },
+  -- add LazyVim and import its plugins
+  -- { import = "lazyvim.plugins.extras.coding.copiot" },
+  -- { import = "lazyvim.plugins.extras.linintg.eslint" },
+  -- { import = "lazyvim.plugins.extras.ui.mini-starter" },
+  -- import any extras modules here
+  -- { import = "lazyvim.plugins.extras.lang.typescript" },
+  -- { import = "lazyvim.plugins.extras.lang.json" },
+  -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
+  -- import/override with your plugins
+  --
+  { import = "plugins" },
 }
 
 require("lazy").setup({
-    spec = full_spec,
-    defaults = {
-        lazy = false,
-        version = false, -- always use the latest git commit
+  spec = full_spec,
+  defaults = {
+    lazy = false,
+    version = false, -- always use the latest git commit
+  },
+  install = {
+    colorscheme = { "tokyonight", "habamax" },
+  },
+  checker = {
+    enabled = true,
+  }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
     },
-    install = {
-        colorscheme = { "tokyonight", "habamax" },
-    },
-    checker = {
-        enabled = true,
-    }, -- automatically check for plugin updates
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                -- "matchit",
-                -- "matchparen",
-                -- "netrwPlugin",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-            },
-        },
-    },
+  },
 })

@@ -8,40 +8,37 @@ end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 local full_spec = {
-
-    { "LazyVim/LazyVim",                            import = "lazyvim.plugins" },
-    { import = "lazyvim.plugins.extras.lang.python" },
-    { import = "lazyvim.plugins.extras.vscode" },
-    { "lazypath.lazyvim.plugins.util.termopen",     enabled = false },
-    { "lazypath.lazyvim.plugins.util" },
-    --
-    { import = "plugins" },
+  { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+  -- { import = "lazyvim.plugins.extras.lang.python" },
+  { import = "lazyvim.plugins.extras.vscode" },
+  --
+  { import = "plugins" },
 }
 
 require("lazy").setup({
-    spec = full_spec,
-    defaults = {
-        lazy = false,
-        version = false, -- always use the latest git commit
+  spec = full_spec,
+  defaults = {
+    lazy = false,
+    version = false, -- always use the latest git commit
+  },
+  install = {
+    colorscheme = { "tokyonight", "habamax" },
+  },
+  checker = {
+    enabled = true,
+  }, -- automatically check for plugin updates
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
     },
-    install = {
-        colorscheme = { "tokyonight", "habamax" },
-    },
-    checker = {
-        enabled = true,
-    }, -- automatically check for plugin updates
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                "gzip",
-                -- "matchit",
-                -- "matchparen",
-                -- "netrwPlugin",
-                "tarPlugin",
-                "tohtml",
-                "tutor",
-                "zipPlugin",
-            },
-        },
-    },
+  },
 })
