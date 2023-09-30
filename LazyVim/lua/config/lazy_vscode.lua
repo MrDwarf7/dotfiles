@@ -12,8 +12,8 @@ local full_spec = {
     { "LazyVim/LazyVim",                            import = "lazyvim.plugins" },
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.vscode" },
-    { "lazypath.lazyvim.plugins.util.termopen",     float_term = { cmd = "pwsh.exe" } },
-    { "lazypath.lazyvim.plugins.util",              termopen = {} },
+    { "lazypath.lazyvim.plugins.util.termopen",     enabled = false },
+    { "lazypath.lazyvim.plugins.util" },
     --
     { import = "plugins" },
 }

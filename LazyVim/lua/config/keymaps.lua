@@ -1,36 +1,36 @@
 --
 -- copied from lazyvim keymaps.lua:
 local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  ---@diagnostic disable-next-line: missing-fields
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    if opts.remap and not vim.g.vscode then
-      opts.remap = nil
+    local keys = require("lazy.core.handler").handlers.keys
+    ---@cast keys LazyKeysHandler
+    -- do not create the keymap if a lazy keys handler exists
+    ---@diagnostic disable-next-line: missing-fields
+    if not keys.active[keys.parse({ lhs, mode = mode }).id] then
+        opts = opts or {}
+        opts.silent = opts.silent ~= false
+        if opts.remap and not vim.g.vscode then
+            opts.remap = nil
+        end
+        vim.keymap.set(mode, lhs, rhs, opts)
     end
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
 end
 
 --------------------------------------------------------------------------
 -- Delete mappings, making l, w and q menus available
 --------------------------------------------------------------------------
 for _, key in pairs({
-  -- "<c-/>", -- dummy which key, lazyterm
-  "<S-h>", -- bprev
-  "<S-l>", -- bnext
-  "<leader>l", -- lazy, now harpoon 4
-  "<leader>L", -- lazy changelog
-  "<leader>wd", -- delete window, <C-W>c, now just quit
-  "<leader>ww", -- other window, <C-W>p, not necessary
-  "<leader>w-", -- duplicate split window <C-W>s
-  "<leader>w|", -- duplicate split window <C-W>v
-  -- "<leader>qq", -- quit all
+    -- "<c-/>", -- dummy which key, lazyterm
+    "<S-h>",      -- bprev
+    "<S-l>",      -- bnext
+    "<leader>l",  -- lazy, now harpoon 4
+    "<leader>L",  -- lazy changelog
+    "<leader>wd", -- delete window, <C-W>c, now just quit
+    "<leader>ww", -- other window, <C-W>p, not necessary
+    "<leader>w-", -- duplicate split window <C-W>s
+    "<leader>w|", -- duplicate split window <C-W>v
+    -- "<leader>qq", -- quit all
 }) do
-  vim.keymap.del("n", key)
+    vim.keymap.del("n", key)
 end
 
 --------------------------------------------------------------------------
