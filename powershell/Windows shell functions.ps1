@@ -512,9 +512,15 @@ function gitgo
     {
         $argumentsIn = $baseCommitMessage
     }
+    if (-not (git fetch Out-Null))
+    {
+        Write-Host "Fetching: "
+        git fetch
+    }
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
+
 
 function dot
 {
