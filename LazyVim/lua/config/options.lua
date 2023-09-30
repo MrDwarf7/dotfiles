@@ -9,6 +9,7 @@ opt.tabstop = 4
 opt.shiftwidth = 4
 opt.relativenumber = true
 opt.scrolloff = 8
+
 opt.sidescrolloff = 4
 opt.preserveindent = true
 opt.conceallevel = 0
