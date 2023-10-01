@@ -68,7 +68,10 @@ local lazy_plugins = {
 	-- Fuzzy finder for file search
 	{ "nvim-lua/plenary.nvim" },
 	{ "nvim-telescope/telescope.nvim" },
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	{
+		"nvim-telescope/telescope-fzf-native.nvim",
+		build = "cmake -S -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+	},
 	{ "nvim-telescope/telescope-ui-select.nvim" },
 
 	-- LSP config
@@ -146,7 +149,7 @@ local lazy_plugins = {
 	-- Debugger
 	{ "mfussenegger/nvim-dap" },
 	{ "mfussenegger/nvim-dap-python" },
-	{ "leoluz/nvim-dap-go" },
+	-- { "leoluz/nvim-dap-go" },
 	{ "rcarriga/nvim-dap-ui" },
 	{ "nvim-telescope/telescope-dap.nvim" },
 	{ "theHamsta/nvim-dap-virtual-text" },

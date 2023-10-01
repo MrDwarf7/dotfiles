@@ -41,6 +41,10 @@ keymap("x", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- Exit insert mode using j-j
 keymap("i", "jj", "<Esc>", opts)
 
+-- Centering the screen
+keymap("n", "<C-d>", "<C-d>zz", opts)
+keymap("n", "<C-u>", "<C-u>zz", opts)
+
 -- Command Mode - Leave off for now
 -- -- cannot use { silent = true } here, the reason is unknown.
 -- keymap('c', '<C-b>', '<Left>', { noremap = true })

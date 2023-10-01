@@ -23,6 +23,6 @@ require("config.lsp_tools")
 
 require("config.dap")
 
-require("config.not_inc_org")
+-- require("config.not_inc_org")
 
 require("config.platform")

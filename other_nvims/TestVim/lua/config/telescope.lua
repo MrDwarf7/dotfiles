@@ -95,6 +95,7 @@ keymap("n", "<leader>fT", "<cmd>Telescope treesitter<cr>", opts)
 keymap("n", "<leader>ft", "<cmd>Telescope tags<cr>", opts)
 keymap("n", "<leader>fm", "<cmd>Telescope marks<cr>", opts)
 
+keymap("n", "<leader>fw", "<cmd>Telescope live_grep<CR>", opts)
 keymap("n", "<leader>F", "<cmd>Telescope builtin include_extensions=true<cr>", opts_desc("Telescope extensions"))
 keymap("n", "<leader>fe", "<cmd>Telescope builtin include_extensions=true<cr>", opts_desc("Telescope extensions"))
 keymap("n", "<A-x>", "<cmd>Telescope commands<cr>", opts_desc("Telescope extensions"))

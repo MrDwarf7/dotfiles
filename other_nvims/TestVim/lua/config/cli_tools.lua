@@ -150,22 +150,22 @@ M.load.toggleterm = function()
 	})
 end
 
-M.load.gutentags = function()
-	vim.g.gutentags_add_ctrlp_root_markers = 0
-	vim.g.gutentags_ctags_exclude = { ".*", "**/.*" }
-	vim.g.gutentags_generate_on_new = 0
-	vim.g.gutentags_generate_on_missing = 0
-	vim.g.gutentags_ctags_tagfile = ".tags"
-	vim.g.gutentags_ctags_extra_args = { [[--fields=*]] }
-
-	vim.filetype.add({
-		pattern = {
-			["%.tags"] = "tags",
-		},
-	})
-
-	lazy.load({ plugins = { "vim-gutentags" } })
-end
+-- M.load.gutentags = function()
+-- 	vim.g.gutentags_add_ctrlp_root_markers = 0
+-- 	vim.g.gutentags_ctags_exclude = { ".*", "**/.*" }
+-- 	vim.g.gutentags_generate_on_new = 0
+-- 	vim.g.gutentags_generate_on_missing = 0
+-- 	vim.g.gutentags_ctags_tagfile = ".tags"
+-- 	vim.g.gutentags_ctags_extra_args = { [[--fields=*]] }
+--
+-- 	vim.filetype.add({
+-- 		pattern = {
+-- 			["%.tags"] = "tags",
+-- 		},
+-- 	})
+--
+-- 	lazy.load({ plugins = { "vim-gutentags" } })
+-- end
 
 M.load.copilot = function()
 	autocmd("InsertEnter", {
@@ -393,7 +393,7 @@ M.load.gitsigns()
 M.load.neogit()
 M.load.spectre()
 M.load.toggleterm()
-M.load.gutentags()
+-- M.load.gutentags()
 M.load.copilot()
 -- M.load.jupytext()
 M.load.mason()
