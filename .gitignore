@@ -12,4 +12,6 @@ z.old/*
 .z.old/*
 
 */lazy-lock.json*
-github-copilot/*
+main_nvim/*
+!main_nvim/nvim*
+!main_nvim/nvim/*
