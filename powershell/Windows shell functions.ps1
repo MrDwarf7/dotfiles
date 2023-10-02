@@ -740,12 +740,14 @@ function hx
 
 function vim
 {
-    $env:NVIM_APPNAME = "nvim"
+    $env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/main_nvim"
+    $env:NVIM_APPNAME = ""
     nvim $args
 }
 
 function dvim
 {
+    $env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/nvim_distros"
     $env:NVIM_APPNAME = "LazyVim"
     # if ($env:HOME_PROFILE) {
     #     neovide $args
@@ -755,10 +757,9 @@ function dvim
 # }
 # Neovide being buggy as hell, commented out for time being
 
-
 function nvims()
 {
-    $items = "LazyVim", "Default", "LunarVim"
+    $items = "Default", "LazyVim", "TestVim", "old.nvims"
     $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
     if ([string]::IsNullOrEmpty($config))
@@ -768,12 +769,14 @@ function nvims()
     }
     if ($config -eq "default")
     {
+    	$env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/main_nvim"
         $config = ""
     }
-    if ($config -eq "LunarVim")
-    {
-        return Invoke-Expression LunarVim
-    }
+    # if ($config -eq "LunarVim")
+    # {
+    #     return Invoke-Expression LunarVim
+    # }
+    $env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/nvim_distros"
     $env:NVIM_APPNAME = $config
     nvim $args
 }
