@@ -32,66 +32,82 @@ return {
     "MunifTanjim/nui.nvim",
     lazy = false,
   },
+
   {
     "stevearc/dressing.nvim",
     lazy = false,
   },
+
   {
     "onsails/lspkind-nvim",
     lazy = false,
   },
+
   {
     "hrsh7th/nvim-cmp",
     priority = 1000,
     lazy = false,
   },
+
   {
     "hrsh7th/cmp-buffer",
     lazy = false,
   },
+
   {
     "hrsh7th/cmp-vsnip",
     lazy = false,
   },
+
   {
     "hrsh7th/vim-vsnip",
     lazy = false,
   },
+
   {
     "hrsh7th/cmp-path",
     lazy = false,
   },
+
   {
     "hrsh7th/cmp-calc",
     lazy = false,
   },
+
   {
     "hrsh7th/cmp-cmdline",
     lazy = false,
   },
+
   {
     "ray-x/cmp-treesitter",
     lazy = false,
   },
+
   {
     "lukas-reineke/cmp-rg",
     lazy = false,
   },
+
   {
     "quangnguyen30192/cmp-nvim-tags",
     lazy = false,
   },
+
   {
     "rafamadriz/friendly-snippets",
     lazy = false,
   },
+
   {
     "zbirenbaum/copilot.lua"
   },
+
   {
     "zbirenbaum/copilot-cmp",
     lazy = false,
   },
+
   {
     "windwp/nvim-ts-autotag",
     lazy = false,
@@ -99,6 +115,7 @@ return {
       require("nvim-ts-autotag").setup()
     end,
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
@@ -109,19 +126,24 @@ return {
           enable = true,
           --[[ disable = { "embedded_template" } ]]
         },
+
         indent = {
           enable = true,
         },
+
         context_commentstring = {
           enable = true,
           enable_autocmd = false,
         },
+
         matchup = {
           enable = true,
         },
+
       })
     end,
   },
+
   {
     "mrjones2014/nvim-ts-rainbow",
     lazy = false,
@@ -133,6 +155,7 @@ return {
       })
     end,
   },
+
   {
     "luukvbaal/statuscol.nvim",
     lazy = false,
@@ -143,22 +166,26 @@ return {
       })
     end,
   },
+
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "UIEnter",
     opts = {
       exclude = {
+        "Diffview",
         -- stylua: ignore
         filetypes = {
           'dbout', 'neo-tree-popup', 'log', 'gitcommit',
           'txt', 'help', 'NvimTree', 'git', 'flutterToolsOutline',
           'undotree', 'markdown', 'norg', 'org', 'orgagenda',
         },
+
         show_trailing_blankline_indent = true,
         show_current_context = true,
         show_current_context_start = true,
       },
+
       --[[ indent = { ]]
       --[[   char = '│', -- ▏┆ ┊  ]]
       --[[   tab_char = '│', ]]
@@ -184,6 +211,7 @@ return {
       hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
     end,
   },
+
   --[[ { ]]
   --[[   "shellRaining/hlchunk.nvim", ]]
   --[[   event = { "UIEnter" }, ]]
@@ -208,16 +236,19 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = false,
   },
+
   {
     "nvim-treesitter/nvim-treesitter-context",
     lazy = false,
   },
+
   {
     "AckslD/nvim-neoclip.lua",
     config = function()
       require("neoclip").setup()
     end,
   },
+
   {
     "nacro90/numb.nvim",
     event = { "BufReadPre", "BufNewFile" },
@@ -228,6 +259,7 @@ return {
       })
     end,
   },
+
   {
     "tpope/vim-rails",
     event = { "BufReadPre", "BufNewFile" },
@@ -241,42 +273,52 @@ return {
       })
     end,
   },
+
   {
     "tpope/vim-abolish",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-sleuth",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-bundler",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-capslock",
     lazy = false,
   },
+
   {
     "tpope/vim-repeat",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-endwise",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-dispatch",
     event = { "BufReadPre", "BufNewFile" },
   },
+
   {
     "tpope/vim-dadbod",
     lazy = false,
   },
+
   {
     "christoomey/vim-tmux-navigator",
     lazy = false,
   },
+
   {
     "ludovicchabant/vim-gutentags",
     lazy = false,
@@ -295,6 +337,7 @@ return {
       -- vim.g.gutentags_trace = 1
     end,
   },
+
   {
     "rcarriga/nvim-dap-ui",
     event = "VeryLazy",
@@ -302,6 +345,7 @@ return {
       require("dapui").setup()
     end,
   },
+
   {
     "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
@@ -309,6 +353,7 @@ return {
       require("nvim-dap-virtual-text").setup()
     end,
   },
+
   {
     "folke/todo-comments.nvim",
     event = "VeryLazy",
@@ -316,6 +361,7 @@ return {
       require("todo-comments").setup({})
     end,
   },
+
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -327,6 +373,7 @@ return {
       })
     end,
   },
+
   {
     "airblade/vim-rooter",
     lazy = false,
@@ -337,10 +384,12 @@ return {
       vim.g.rooter_patterns = { ".git", ".git/" }
     end,
   },
+
   {
     "jeffkreeftmeijer/vim-numbertoggle",
     lazy = false,
   },
+
   {
     "folke/zen-mode.nvim",
     cmd = "ZenMode",
@@ -352,10 +401,12 @@ return {
       },
     },
   },
+
   {
     "lambdalisue/suda.vim",
     event = "VeryLazy",
   },
+
   {
     "andymass/vim-matchup",
     event = "BufReadPost",
@@ -376,6 +427,7 @@ return {
     "kazhala/close-buffers.nvim",
     event = "VeryLazy",
   },
+
   { "folke/twilight.nvim", event = "VeryLazy" },
   { "zdharma-continuum/zinit-vim-syntax", event = "VeryLazy" },
   { "nvim-tree/nvim-web-devicons", event = "VeryLazy" },
@@ -384,6 +436,7 @@ return {
   { "folke/trouble.nvim", event = "VeryLazy" },
   { "mrbjarksen/neo-tree-diagnostics.nvim", event = "VeryLazy" },
   { "RRethy/vim-illuminate", event = "VeryLazy" },
+
   {
     "folke/edgy.nvim",
     event = "VeryLazy",
@@ -394,6 +447,7 @@ return {
         right = { size = 40 },
         top = { size = 10 },
       },
+
       bottom = {
         {
           ft = "toggleterm",
@@ -415,6 +469,7 @@ return {
           end,
         },
       },
+
       left = {
         {
           title = "  FILE",
@@ -424,6 +479,7 @@ return {
           end,
           size = { height = 0.7 },
         },
+
         {
           title = "  GIT",
           ft = "neo-tree",
@@ -433,6 +489,7 @@ return {
           pinned = true,
           open = "Neotree position=right git_status",
         },
+
         {
           title = "  BUFFERS",
           ft = "neo-tree",
@@ -442,6 +499,7 @@ return {
           pinned = true,
           open = "Neotree position=top buffers",
         },
+
         {
           ft = "裂 DIAGNOSTICS",
           filter = function(buf)
@@ -450,16 +508,21 @@ return {
           pinned = true,
           open = "Neotree position=right diagnostics",
         },
+
         {
           title = "  OUTLINE",
           ft = "Outline",
           pinned = true,
           open = "SymbolsOutline",
         },
+
         "neo-tree",
       },
+
     },
+
   },
+
   --[[ { ]]
   --[[   "echasnovski/mini.animate", ]]
   --[[   event = "VeryLazy", ]]
@@ -485,6 +548,7 @@ return {
           end,
         },
       })
+
     end,
     opts = function()
       local Offset = require("bufferline.offset")
@@ -513,14 +577,16 @@ return {
       end
     end,
   },
+
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
-    keys = { { "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
+    keys = { { "<leader>ls", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" } },
     opts = {
       position = "right",
     },
   },
+
   {
     "folke/flash.nvim",
     event = "VeryLazy",
@@ -536,6 +602,7 @@ return {
         end,
         desc = "Flash",
       },
+
       {
         "S",
         mode = { "n", "o", "x" },
@@ -545,6 +612,7 @@ return {
         end,
         desc = "Flash Treesitter",
       },
+
       {
         "r",
         mode = "o",
@@ -554,6 +622,7 @@ return {
         end,
         desc = "Remote Flash",
       },
+
       {
         "R",
         mode = { "n", "o", "x" },
@@ -565,6 +634,7 @@ return {
       },
     },
   },
+
   {
     "smoka7/multicursors.nvim",
     event = "VeryLazy",
@@ -603,23 +673,29 @@ return {
           extend = true,
         },
       }
+
     end,
     cmd = { "MCstart", "MCvisual", "MCclear", "MCpattern", "MCvisualPattern", "MCunderCursor" },
     keys = {
       {
         mode = { "v", "n" },
-        "<Leader>mc",
+        "<leader>c",
         "<cmd>MCstart<cr>",
-        desc = "Create a selection for selcted text or word under the cursor",
+        desc = "Cursor mode. Create selection",
       },
     },
   },
+
   {
     "2kabhishek/co-author.nvim",
     dependencies = { "stevearc/dressing.nvim" },
     cmd = "GitCoAuthors",
   },
+
+	{ "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
+
   {
     "weizheheng/ror.nvim",
   },
+
 }

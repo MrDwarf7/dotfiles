@@ -27,6 +27,12 @@ vim.keymap.set('x', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('x', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true})
 
 
+
+
+
+
+
+
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true, desc = "Toggle Explorer" }) -- File Explorer lol
 -- <F5> Ranger from toggleterm
 --[[ vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true}) ]]
@@ -56,16 +62,19 @@ vim.keymap.set('n', '<leader>pm', ':Mason<CR>', {noremap = false, silent = true,
 -- Git (Fugitive and Lazygit)
 --[[ vim.keymap.set('n', '<leader>gf', ':20G<CR>', {noremap = false, silent = true}) ]]
 -- Spectre
-vim.keymap.set('n', '<leader>s', "Spectre", {noremap = true, silent = true, desc = "+Spectre"})
-vim.keymap.set('n', '<leader>so', ":lua require('spectre').open()<CR>", {noremap = true, silent = true, desc = "Spectre Open"})
-vim.keymap.set('v', '<leader>sp', ":lua require('spectre').open_visual()<CR>", {noremap = true, silent = true, desc = "Spectre Visual"})
-vim.keymap.set('n', '<leader>sf', "viw:lua require('spectre').open_file_search()<CR>", {noremap = true, silent = true, desc = "Spectre Files"})
+vim.keymap.set('n', '<leader>s', "Spectre", {noremap = true, silent = true, desc = "+Spectre" })
+vim.keymap.set('n', '<leader>so', ":lua require('spectre').open()<CR>", {noremap = true, silent = true, desc = "Spectre Open" })
+vim.keymap.set('v', '<leader>sp', ":lua require('spectre').open_visual()<CR>", {noremap = true, silent = true, desc = "Spectre Visual" })
+vim.keymap.set('n', '<leader>sf', "viw:lua require('spectre').open_file_search()<CR>", {noremap = true, silent = true, desc = "Spectre Files" })
 -- Telescope
 vim.keymap.set('n', '<leader>f', "Find (telescope)", {desc = "+Find (telescope)"})
+vim.keymap.set('n', '<leader>fb', ":lua require('config.plugins.telescope').my_buffers()<CR>", {noremap = true, silent = true, desc = "Find Buffers" })
+vim.keymap.set('n', '<leader>fr', ":lua require('config.plugins.telescope').my_recents()<CR>", {noremap = true, silent = true, desc = "Find Recent Files" })
+vim.keymap.set('n', '<leader>fo', "<cmd>Telescope oldfiles<CR>", {noremap = true, silent = true, desc = "Find Old Files (telescope)" })
+
 vim.keymap.set('n', '<leader>fw', ":lua require'telescope'.extensions.live_grep_args.live_grep_args()<CR>", {noremap = true, silent = true, desc = "Find Word" })
 vim.keymap.set('n', '<leader>fs', ":lua require('telescope.builtin').grep_string()<CR>", {noremap = true, silent = true, desc = "Find String (under cursor)"})
 vim.keymap.set('n', '<leader>fl', ":lua require('telescope.builtin').grep_string({ search = vim.fn.input('GREP -> ') })<CR>", {noremap = true, silent = true, desc = "Find Line (grep)"})
-vim.keymap.set('n', '<leader>fb', ":lua require('config.plugins.telescope').my_buffers()<CR>", {noremap = true, silent = true, desc = "Find Buffers"})
 vim.keymap.set('n', '<leader>m', ":lua require('telescope.builtin').marks()<CR>", {noremap = true, silent = true, desc = "Marks"})
 --[[ vim.keymap.set('n', '<leader>ts', ":lua require('telescope.builtin').treesitter()<CR>", {noremap = true, silent = true}) ]]
 vim.keymap.set('n', '<leader>/', ":lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>", {noremap = true, silent = true, desc = "Fuzzy Find (buffer)"})
@@ -79,7 +88,13 @@ vim.keymap.set('n', '<leader>fP', ":lua require'telescope'.extensions.repo.list{
 vim.keymap.set('n', '<leader>g', "Git", {noremap = true, silent = true, desc = "+Git"})
 vim.keymap.set('n', '<leader>gc', ":lua require('config.plugins.telescope').my_git_commits()<CR>", {noremap = true, silent = true, desc = "Git Commits (pending)" })
 vim.keymap.set('n', '<leader>gs', ":lua require('config.plugins.telescope').my_git_status()<CR>", {noremap = true, silent = true, desc = "Git Status (check)" })
-vim.keymap.set('n', '<leader>gbc', ":lua require('config.plugins.telescope').my_git_bcommits()<CR>", {noremap = true, silent = true, desc = "Git bcommits" })
+vim.keymap.set('n', '<leader>gb', ":lua require('config.plugins.telescope').my_git_bcommits()<CR>", {noremap = true, silent = true, desc = "Git bcommits" })
+vim.keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory<CR>", { noremap = true, silent = true, desc = "Git Diff File History" })
+
+
+vim.keymap.set('n', '<leader>gd', "Git Diff", {noremap = true, silent = true, desc = "+Git Diff"})
+vim.keymap.set("n", "<leader>gdd", "<cmd>DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Git Diff Open" })
+vim.keymap.set("n", "<leader>gdc", "<cmd>DiffviewClose<CR>", { noremap = true, silent = true, desc = "Diffview Close" })
 --[[ vim.keymap.set('n', '<leader>ns', ":lua require('config.plugins.telescope').my_note()<CR>", {noremap = true, silent = true}) ]]
 --[[ vim.keymap.set('n', '<leader>nn', ":lua NewNote()<CR>", {noremap = true, silent = true}) ]]
 
@@ -92,9 +107,17 @@ vim.keymap.set('n', 'g*', "g*<Cmd>lua require('hlslens').start()<CR>", { noremap
 vim.keymap.set('n', 'g#', "g#<Cmd>lua require('hlslens').start()<CR>", { noremap = true })
 
 
+-- Toggles
+vim.keymap.set('n', '<leader>t', "Toggles", {noremap = true, silent = true,desc = "+Toggles" })
+vim.keymap.set("n", "<leader>tl", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true, desc = "LSP/Trouble toggle" })
+vim.keymap.set("n", "<leader>tt", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true, desc = "LSP/Trouble toggle" })
+vim.keymap.set('n', '<leader>te', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true, desc = "Toggle Bar/Explorer" }) -- File Explorer lol
+vim.keymap.set("n", "<leader>tb", "<cmd>lua require'dap'.toggle_breakpoint()<CR>", {silent = true, noremap = true, desc = "Toggle Break Point" })
+--[[ vim.keymap.set("n", "<leader>td", "", {noremap = false, silent = true, desc = "LazyDocker"}) ]]
+
 -- LSP
 vim.keymap.set('n', '<leader>l', "LSP", {noremap = true, silent = true,desc = "+LSP"})
-vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, {noremap = true, silent = true, desc = "LSP Float" })
+vim.keymap.set('n', '<leader>lh', vim.diagnostic.open_float, {noremap = true, silent = true, desc = "LSP Float" })
 vim.keymap.set('n', '<leader>l]', vim.diagnostic.goto_next, {noremap = true, silent = true, desc = "LSP Next" })
 vim.keymap.set('n', '<leader>l[', vim.diagnostic.goto_prev, {noremap = true, silent = true, desc = "LSP Prev" })
 -- Trouble

@@ -66,6 +66,7 @@ function M.config()
         --[[ n = { ["<c-t>"] = trouble.open_with_trouble }, ]]
       },
     },
+
     extensions = {
       fzy = {
         override_generic_sorter = false,
@@ -81,7 +82,6 @@ function M.config()
   }
 
   -- Extensions
-
   telescope.load_extension('repo')
   telescope.load_extension('neoclip')
   telescope.load_extension('notify')
@@ -158,5 +158,13 @@ function M.my_buffers(opts)
     sort_mru = true
   }
 end
+
+function M.my_recents(opts)
+  local opts = {} -- define here if you want to define something
+  --[[ local ok = pcall(require'telescope.builtin'.git_files, opts) ]]
+  local ok = pcall(require'telescope.builtin'.oldfiles, opts)
+  if not ok then require'telescope.builtin'.oldfiles(opts) end
+end
+
 
 return M

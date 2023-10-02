@@ -8,7 +8,7 @@ opt.sidescrolloff = 4
 opt.preserveindent = true
 opt.conceallevel = 0
 opt.backspace = "indent,eol,start"
-opt.shell = "pwsh"
+opt.shell = "pwsh.exe"
 opt.shellcmdflag =
 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"

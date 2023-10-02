@@ -1,11 +1,15 @@
 return {
   "akinsho/nvim-toggleterm.lua",
-  keys = { '\\', '<leader>gg', '<leader>ld'},
+  keys = {
+    '|',
+    '<leader>gg',
+    '<leader>td',
+  },
   config = function()
     require("toggleterm").setup({
       size = 20,
       hide_numbers = true,
-      open_mapping = [[\]],
+      open_mapping = [[|]],
       shade_filetypes = {},
       shade_terminals = false,
       shading_factor = 0.1, -- the degree by which to darken to terminal colour, default: 1 for dark backgrounds, 3 for light
@@ -39,8 +43,8 @@ return {
       ranger:toggle()
     end
 
-    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-    vim.api.nvim_set_keymap("n", "<leader>ld", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true, desc = "LazyGit"})
+    vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true, desc = "LazyDocker"})
     --[[ vim.api.nvim_set_keymap("n", "<F5>", "<cmd>lua _ranger_toggle()<CR>", {noremap = true, silent = true}) ]]
   end,
 }

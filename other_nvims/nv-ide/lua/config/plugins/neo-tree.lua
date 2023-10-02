@@ -4,7 +4,7 @@ return {
   enabled = true,
   config = function()
     require'neo-tree'.setup({
-      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy", "diffview" },
       close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
       -- popup_border_style = { "▄", "▄", "▄", "█", "▀", "▀", "▀", "█" },
       -- popup_border_style = "rounded",
@@ -102,55 +102,17 @@ return {
           },
         },
       },
-      window = {
-        position = "left",
-        width = 50,
-        mapping_options = {
-          noremap = true,
-          nowait = true,
-        },
-        mappings = {
-          ["<space>"] = {
-            "toggle_node",
-            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-          },
-          ["<1-LeftMouse>"] = "open",
-          ["<cr>"] = "open",
-          ["l"] = "open",
-          ["S"] = "open_split",
-          ["s"] = "open_vsplit",
-          -- ["S"] = "split_with_window_picker",
-          -- ["s"] = "vsplit_with_window_picker",
-          ["t"] = "open_tabnew",
-          ["w"] = "open_with_window_picker",
-          ["C"] = "close_node",
-          ["a"] = {
-            "add",
-            -- some commands may take optional config options, see `:h neo-tree-mappings` for details
-            config = {
-              show_path = "none", -- "none", "relative", "absolute"
-            },
-          },
-          ["A"] = "add_directory", -- also accepts the config.show_path option.
-          ["d"] = "delete",
-          ["r"] = "rename",
-          ["y"] = "copy_to_clipboard",
-          ["x"] = "cut_to_clipboard",
-          ["p"] = "paste_from_clipboard",
-          ["c"] = "copy", -- takes text input for destination
-          ["m"] = "move", -- takes text input for destination
-          ["q"] = "close_window",
-          ["R"] = "refresh",
-          ["?"] = "show_help",
-        },
-      },
       nesting_rules = {
         -- ["js"] = { "js.map" },
       },
       filesystem = {
-                bind_to_cwd = false,
-                follow_current_file = { enabled = true },
-                use_libuv_file_watcher = true,
+        bind_to_cwd = false,
+                follow_current_file = {
+          enabled = true
+        },
+        use_libuv_file_watcher = true,
+        group_empty_dirs = false, -- when true, empty folders will be grouped together
+        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
                 filtered_items = {
                     hide_dotfiles = false,
                     hide_gitignored = false,
@@ -174,16 +136,26 @@ return {
                 },
             },
         -- time the current file is changed while the tree is open.
-        group_empty_dirs = false, -- when true, empty folders will be grouped together
-        hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
         -- in whatever position is specified in window.position
         -- "open_current",  -- netrw disabled, opening a directory opens within the
         -- window like netrw would, regardless of window.position
         -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-        use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
+        --[[ use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes ]]
         -- instead of relying on nvim autocmd events.
+      --
+
         window = {
+        position = "left",
+        width = 50,
+        mapping_options = {
+          noremap = true,
+          nowait = true,
+        },
           mappings = {
+          ["<leader>"] = {
+            "toggle_node",
+            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+          },
             ["-"] = "navigate_up",
             ["H"] = "toggle_hidden",
             ["."] = "set_root",
@@ -192,6 +164,37 @@ return {
             ["<c-c>"] = "clear_filter",
             ["[g"] = "prev_git_modified",
             ["]g"] = "next_git_modified",
+            ["l"] = "open",
+            ["h"] = "close_node",
+            ["s"] = "open_split",
+            ["v"] = "open_vsplit",
+            ["<1-LeftMouse>"] = "open",
+            ["<cr>"] = "open",
+            ["s"] = "open_split",
+            ["v"] = "open_vsplit",
+          -- ["S"] = "split_with_window_picker",
+          -- ["s"] = "vsplit_with_window_picker",
+            ["t"] = "open_tabnew",
+            ["w"] = "open_with_window_picker",
+            ["C"] = "close_node",
+            ["a"] = {
+              "add",
+              -- some commands may take optional config options, see `:h neo-tree-mappings` for details
+              config = {
+                show_path = "none", -- "none", "relative", "absolute"
+              },
+            },
+            ["A"] = "add_directory", -- also accepts the config.show_path option.
+            ["d"] = "delete",
+            ["r"] = "rename",
+            ["y"] = "copy_to_clipboard",
+            ["x"] = "cut_to_clipboard",
+            ["p"] = "paste_from_clipboard",
+            ["c"] = "copy", -- takes text input for destination
+            ["m"] = "move", -- takes text input for destination
+            ["q"] = "close_window",
+            ["R"] = "refresh",
+            ["?"] = "show_help",
           },
         },
       buffers = {
@@ -209,6 +212,9 @@ return {
           },
         },
       },
+
+
+
       git_status = {
         window = {
           position = "float",
