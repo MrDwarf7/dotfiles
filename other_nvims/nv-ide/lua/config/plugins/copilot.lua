@@ -27,7 +27,7 @@ return {
           auto_trigger = true, --DEFAULT FOR NOW
           debounce = 75, --No idea lol
           keymap = {
-            accept = "<A-a>",
+            accept = "<C-l>",
             accept_word = false,
             accept_line = false,
             next = "<A-]>",

@@ -20,6 +20,8 @@ vim.keymap.set('n','<C-d>', '<C-d>zz', {noremap = false, silent = true}) -- Cent
 vim.keymap.set('n', '<C-u>', '<C-u>zz', {noremap = false, silent = true})
 
 
+
+
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true})
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true})
 
@@ -27,10 +29,21 @@ vim.keymap.set('x', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('x', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true})
 
 
+-- TODO: Add moving lines via alt
+-- TODO: Add resizing windows via alt and arrow keys or something -- SmartSplits
+-- TODO: Add indenting lines in visual mode (keep selection)
+-- TODO: keep selection when moving between open buffers
+-- TODO: Consider other plugins to handle some of the weird things that are scattered in singles (IE: the mini library has several things, buf remove etc etc. + surround)
 
-
-
-
+--[[ vim.keymap.set('n', '<A-j>', "<cmd>m .+1<CR>==", { noremap = true, expr = true, silent = true}) ]]
+--[[ vim.keymap.set('n', '<A-k>', "<cmd>m .-2<CR>==", { noremap = true, expr = true, silent = true}) ]]
+--[[]]
+--[[ vim.keymap.set('v', '<A-j>', "<cmd>m >+1<CR>gv=gv", { expr = true, silent = true}) ]]
+--[[ vim.keymap.set('v', '<A-k>', "<cmd>m <-2<CR>gv=gv", { expr = true, silent = true}) ]]
+--[[]]
+--[[]]
+--[[ vim.keymap.set('i', '<A-k>', "<cmd>m .-2<CR>==gi", { noremap = true, expr = true, silent = true}) ]]
+--[[ vim.keymap.set('i', '<A-k>', "<cmd>m .-2<CR>==gi", { noremap = true, expr = true, silent = true}) ]]
 
 
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true, desc = "Toggle Explorer" }) -- File Explorer lol
@@ -40,8 +53,8 @@ vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {
 --[[ vim.keymap.set('n', '<leader>nm', ':Dispatch npm start<CR>', {noremap = false, silent = true}) ]]
 -- Buffers
 vim.keymap.set('n', '<leader>b', "Buffers", {noremap = true, silent = true, desc = "+buffers" })
-vim.keymap.set('n', '<leader>bd', ':BDelete this<CR>', {noremap = false, silent = true, desc = "Buffer Delete" })
-vim.keymap.set('n', '<leader>bw', ':BDelete! all<CR>', {noremap = false, silent = true, desc = "Buffer Wipe All" })
+vim.keymap.set('n', '<leader>bd', ":lua require('close_buffers').delete({ type = 'this' })<CR>", {noremap = false, silent = true, desc = "Buffer Delete" }) -- Close current buffer, needs something tweaked to fix the error when too quick
+vim.keymap.set('n', '<leader>bw', ":lua require('close_buffers').wipe({ type = 'all', force = true })<CR>", {noremap = false, silent = true, desc = "Buffer Wipe All" })
 --[[ vim.keymap.set('n', '<leader>bdh', ':BDelete! hidden<CR>', {noremap = false, silent = true}) ]]
 vim.keymap.set('n', '<leader>bn', ':BufferLineCycleNext<CR>', {noremap = false, silent = true, desc = "Buffer Next" })
 vim.keymap.set('n', '<leader>bp', ':BufferLineCyclePrev<CR>', {noremap = false, silent = true, desc = "Buffer Prev" })
@@ -49,7 +62,7 @@ vim.keymap.set('n', '<leader>bp', ':BufferLineCyclePrev<CR>', {noremap = false, 
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', {noremap = false, silent = true})
 vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', {noremap = false, silent = true})
 
-vim.keymap.set('n', '<leader>x', ':BDelete this<CR>', {noremap = false, silent = true, desc = "Buffer Delete" }) -- Close current buffer, needs something tweaked to fix the error when too quick
+vim.keymap.set('n', '<leader>x', ":lua require('close_buffers').delete({ type = 'this' })<CR>", {noremap = false, silent = true, desc = "Buffer Delete" }) -- Close current buffer, needs something tweaked to fix the error when too quick
 
 --[[ vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', {noremap = false, silent = true}) ]]
 --[[ vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', {noremap = false, silent = true}) ]]
@@ -58,6 +71,11 @@ vim.keymap.set('n', '<leader>x', ':BDelete this<CR>', {noremap = false, silent =
 vim.keymap.set('n', '<leader>p', 'Plugins/Packages', {noremap = true, silent = true, desc = "Plugins"})
 vim.keymap.set('n', '<leader>pp', ':Lazy<CR>', {noremap = false, silent = true, desc = "Lazy Plugins" })
 vim.keymap.set('n', '<leader>pm', ':Mason<CR>', {noremap = false, silent = true, desc = "Mason Plugin Manager" })
+
+vim.keymap.set('n', '<leader>pU', ":lua require('lazy').update()<CR>", {noremap = true, silent = true, desc = "Lazy Update" })
+vim.keymap.set('n', '<leader>pS', ":lua require('lazy').sync()<CR>", {noremap = true, silent = true, desc = "Lazy Update" })
+
+
 
 -- Git (Fugitive and Lazygit)
 --[[ vim.keymap.set('n', '<leader>gf', ':20G<CR>', {noremap = false, silent = true}) ]]
@@ -92,8 +110,10 @@ vim.keymap.set('n', '<leader>gb', ":lua require('config.plugins.telescope').my_g
 vim.keymap.set("n", "<leader>gf", "<cmd>DiffviewFileHistory<CR>", { noremap = true, silent = true, desc = "Git Diff File History" })
 
 
+--[[ vim.keymap.set('n', '<leader>gn', ':Neogit<CR>', {noremap = false, desc = 'Neogit'}) ]]
+--[[ vim.keymap.set('n', '<leader>gn', ":lua require('neogit').open({ kind = 'split' })<CR>", {noremap = false, desc = 'Neogit'}) ]]
 vim.keymap.set('n', '<leader>gd', "Git Diff", {noremap = true, silent = true, desc = "+Git Diff"})
-vim.keymap.set("n", "<leader>gdd", "<cmd>DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Git Diff Open" })
+vim.keymap.set('n', "<leader>gdd", "<cmd>DiffviewOpen<CR>", { noremap = true, silent = true, desc = "Git Diff Open" })
 vim.keymap.set("n", "<leader>gdc", "<cmd>DiffviewClose<CR>", { noremap = true, silent = true, desc = "Diffview Close" })
 --[[ vim.keymap.set('n', '<leader>ns', ":lua require('config.plugins.telescope').my_note()<CR>", {noremap = true, silent = true}) ]]
 --[[ vim.keymap.set('n', '<leader>nn', ":lua NewNote()<CR>", {noremap = true, silent = true}) ]]

@@ -62,7 +62,14 @@ function M.config()
       --[[ path_display = { "smart" }, ]]
       set_env = { ["COLORTERM"] = "truecolor" },
       mappings = {
-        i = { ["<c-t>"] = trouble.open_with_trouble },
+        i = {
+          ["<c-t>"] = trouble.open_with_trouble,
+          ["<esc>"] = actions.close,
+        },
+        n = {
+          ["q"] = actions.close,
+        },
+
         --[[ n = { ["<c-t>"] = trouble.open_with_trouble }, ]]
       },
     },

@@ -171,25 +171,20 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "UIEnter",
+    enabled = true,
     opts = {
       exclude = {
-        "Diffview",
         -- stylua: ignore
         filetypes = {
           'dbout', 'neo-tree-popup', 'log', 'gitcommit',
           'txt', 'help', 'NvimTree', 'git', 'flutterToolsOutline',
-          'undotree', 'markdown', 'norg', 'org', 'orgagenda',
+          'undotree', 'markdown', 'norg', 'org', 'orgagenda', "Diffview", "Neogit",
         },
-
-        show_trailing_blankline_indent = true,
-        show_current_context = true,
-        show_current_context_start = true,
       },
-
-      --[[ indent = { ]]
-      --[[   char = '│', -- ▏┆ ┊  ]]
-      --[[   tab_char = '│', ]]
-      --[[ }, ]]
+      indent = {
+        char = '│', -- ▏┆ ┊ 
+        tab_char = '│',
+      },
       scope = {
         char = "▎",
         highlight = {
@@ -201,8 +196,8 @@ return {
           "RainbowDelimiterViolet",
           "RainbowDelimiterCyan",
         },
+        show_start = true,
       },
-      show_first_indent_level = true,
     },
     config = function(_, opts)
       require("ibl").setup(opts)
@@ -212,26 +207,26 @@ return {
     end,
   },
 
-  --[[ { ]]
-  --[[   "shellRaining/hlchunk.nvim", ]]
-  --[[   event = { "UIEnter" }, ]]
-  --[[   config = function() ]]
-  --[[     require('hlchunk').setup({ ]]
-  --[[       chunk = { ]]
-  --[[         chars = { ]]
-  --[[            horizontal_line = "━", ]]
-  --[[            vertical_line = "┃", ]]
-  --[[            left_top = "┏", ]]
-  --[[            left_bottom = "┗", ]]
-  --[[            right_arrow = "━", ]]
-  --[[         }, ]]
-  --[[       }, ]]
-  --[[       blank = { ]]
-  --[[         enable = false, ]]
-  --[[       }, ]]
-  --[[     }) ]]
-  --[[   end ]]
-  --[[ }, ]]
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "UIEnter" },
+    config = function()
+      require('hlchunk').setup({
+        chunk = {
+          chars = {
+             horizontal_line = "━",
+             vertical_line = "┃",
+             left_top = "┏",
+             left_bottom = "┗",
+             right_arrow = "━",
+          },
+        },
+        blank = {
+          enable = false,
+        },
+      })
+    end
+  },
   {
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = false,
@@ -693,6 +688,16 @@ return {
   },
 
 	{ "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
+
+  --[[ { "NeogitOrg/neogit", ]]
+  --[[   dependencies = { ]]
+  --[[     "nvim-lua/plenary.nvim",         -- required ]]
+  --[[   "nvim-telescope/telescope.nvim", -- optional ]]
+  --[[   "sindrets/diffview.nvim",        -- optional ]]
+  --[[   "ibhagwan/fzf-lua",              -- optional ]]
+  --[[ }, ]]
+  --[[   cmd = { "Neogit" }, ]]
+  --[[ }, ]]
 
   {
     "weizheheng/ror.nvim",

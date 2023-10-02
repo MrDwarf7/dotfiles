@@ -1,3 +1,8 @@
+_config_dir = function()
+  local my_path = vim.fn.stdpath('config')
+  return my_path
+end
+
 return {
   'goolord/alpha-nvim',
   event = "VimEnter",
@@ -175,23 +180,26 @@ return {
       }
     }
 
+
+
+
     local buttons = {
       type = "group",
       val = {
         { type = "text", val = "Quick links", opts = { hl = "Constant", position = "center" } },
         { type = "padding", val = 1 },
-        dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-        dashboard.button("o", "ﭯ  Recently opened files", ":Telescope oldfiles<CR>"),
+        dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
+        dashboard.button("r", "ﭯ  Recently opened files", ":Telescope oldfiles<CR>"),
         dashboard.button("f", "  Find file", ":lua require('telescope.builtin').find_files()<CR>"),
         dashboard.button("p", "󰳏  Find project", ":Telescope repo list<CR>"),
-        dashboard.button("r", "  Find word", ":lua require('telescope.builtin').live_grep()<CR>"),
+        dashboard.button("w", "  Find word", ":lua require('telescope.builtin').live_grep()<CR>"),
         dashboard.button("g", "  Find modified file", ":lua require('config.plugins.telescope').my_git_status()<CR>"),
         dashboard.button("m", "  Show mark", ":Telescope marks"),
         dashboard.button("t", "  Show todo", ":TodoTelescope<CR>"),
-        dashboard.button("s", "  NV-IDE plugins", ":e ~/.config/nvim/lua/config/plugins.lua<CR>"),
+        dashboard.button("c", "  Configuration folder", ":e ~/AppData/local/nv-ide/<CR>"),
         -- dashboard.button("u", "  Sync plugins", ":PackerSync<CR>"),
         dashboard.button("l", "  Lazy", ":Lazy<CR>"),
-        dashboard.button("u", "  Sync plugins", ":Lazy sync<CR>"),
+        dashboard.button("s", "  Sync plugins", ":Lazy sync<CR>"),
         dashboard.button("h", "  Neovim Check health", ":checkhealth<CR>"),
         dashboard.button("q", "  Quit", "<Cmd>qa<CR>")
       },

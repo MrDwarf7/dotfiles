@@ -29,7 +29,6 @@ autocmd("BufReadPre", {
 -- Don't auto create commnent on new line
 -- autocmd("BufEnter", { command = [[set formatoptions-=cro]] })
 
-
 local bufferline_group = augroup("bufferline", { clear = true })
 autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
   desc = "Update buffers when adding new buffers",
@@ -55,6 +54,7 @@ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
     astroevent("BufsUpdated")
   end,
 })
+
 autocmd("BufDelete", {
   desc = "Update buffers when deleting buffers",
   group = bufferline_group,
@@ -99,6 +99,7 @@ autocmd({ "BufWinLeave", "BufWritePost", "WinLeave" }, {
     end
   end,
 })
+
 autocmd("BufWinEnter", {
   desc = "Try to load file view if available and enable view saving for real files",
   group = view_group,
@@ -212,6 +213,7 @@ if is_available("alpha-nvim") then
       end
     end,
   })
+
   autocmd("VimEnter", {
     desc = "Start Alpha when vim is opened with no arguments",
     group = augroup("alpha_autostart", { clear = true }),
