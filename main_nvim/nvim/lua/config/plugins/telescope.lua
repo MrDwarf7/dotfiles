@@ -68,11 +68,15 @@ function M.config()
         },
         n = {
           ["q"] = actions.close,
+					["<C-p>"] = actions.cycle_history_prev,
+					["<C-n>"] = actions.cycle_history_next,
+					["<esc>"] = actions.close,
+				},
         },
 
         --[[ n = { ["<c-t>"] = trouble.open_with_trouble }, ]]
       },
-    },
+    }
 
     extensions = {
       fzy = {
@@ -86,7 +90,6 @@ function M.config()
     --[[   override_file_sorter = true, -- override the file sorter ]]
     --[[   case_mode = "smart_case", -- or "ignore_case" or "respect_case" ]]
     --[[ }, ]]
-  }
 
   -- Extensions
   telescope.load_extension('repo')
