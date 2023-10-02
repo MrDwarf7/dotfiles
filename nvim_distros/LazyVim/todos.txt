@@ -1,0 +1,43 @@
+--
+--
+
+Keymapping changes: 
+--TODO: find todo's > f -T
+--TODO: terminal things on T > terminal > float/ toggle / Toggle on f9 or f10
+--TODO: lsp on l, not lazyvim
+--TODO: p for plugins ( p > l {lazyvim}, p > m {mason} )
+--TODO: move the yanky yank history map to somewhere else then [ ("<leader>y") ] isn't used
+--TODO: Controls for moving up and down within telescope to C J / K instead of C N / P
+
+--TODO: mappings for neotree - s split / v vsplit
+--TODO: standard mappings for splitting windows (Within normal text buffers)
+        Whether that's changing neotree to match the | symbol for normal splits,
+      or changing both
+
+
+--TODO: "<leader>c" is the current > code > xyz, which is normally l for LSP [diagnostics, code actions, etc.]
+    This techically conflicts with my close buffer command which is the same,
+      just have to press it quickly to get close, vs code things
+
+
+--TODO: further customize small things within neo-tree { - to go up a dir, splits }
+--TODO: customize yanky keybinds
+
+
+
+Duplicates:
+    --TODO: change existing s > w (Search word) to f > g / or / f > w
+    --TODO: Relist the grep_string keymaps and
+
+
+
+Dap keymappings: 
+--TODO: basically can steal a bunch of the defaults from my older astrovim config
+    "<leader>d" ----- and its extensions aren't named atm, and are hard to use.
+
+
+
+
+
+
+
