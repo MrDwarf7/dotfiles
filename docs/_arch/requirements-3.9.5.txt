@@ -1,3 +1,0 @@
-greenlet==2.0.2
-msgpack==1.0.5
-pynvim==0.4.3
