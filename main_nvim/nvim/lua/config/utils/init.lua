@@ -1,18 +1,5 @@
 local M = {}
 
----@param event string The event name
----@param delay? boolean Whether or not to delay the event asynchronously (Default: true)
-function M.event(event, delay)
-  local emit_event = function()
-    vim.api.nvim_exec_autocmds(.. event, modeline = false })
-  end
-  if delay == false then
-    emit_event()
-  else
-    vim.schedule(emit_event)
-  end
-end
-
 --- Open a URL under the cursor with the current operating system
 ---@param path string The path of the file to open with the system opener
 function M.system_open(path)
@@ -55,3 +42,4 @@ function M.set_url_match()
   end
 end
 
+return M

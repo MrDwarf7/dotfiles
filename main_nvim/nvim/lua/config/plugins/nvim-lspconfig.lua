@@ -1,3 +1,4 @@
+--TODO: lsp configs for other langs
 local M = {
   "neovim/nvim-lspconfig",
   lazy = false,
@@ -76,11 +77,14 @@ function M.config()
       'cssls',
       'dockerls',
       'jsonls',
+			'vimls',
+			'powershell_es',
+			'lua_ls',
       --[[ 'yamlls', ]]
       'vimls',
       'rust_analyzer',
       'clangd',
-      'pyright',
+      --[[ 'pyright', ]]
       'ruff_lsp',
       'bashls',
     },
@@ -95,6 +99,7 @@ function M.config()
         capabilities,
       }
     end,
+
     --[[ ["yamlls"] = function() ]]
     --[[   lspconfig.yamlls.setup { ]]
     --[[     on_attach = M.on_attach, ]]
@@ -111,6 +116,7 @@ function M.config()
     --[[     }, ]]
     --[[   } ]]
     --[[ end, ]]
+
     ["html"] = function()
       lspconfig.html.setup({
         on_attach = M.on_attach,
@@ -118,32 +124,34 @@ function M.config()
         filetypes = { "html" }
       })
     end,
-    --[[ ["lua_ls"] = function() ]]
-    --[[   lspconfig.lua_ls.setup({ ]]
-    --[[ on_attach, ]]
-    --[[ capabilities, ]]
-    --[[     settings = { ]]
-    --[[       Lua = { ]]
-    --[[         runtime = { ]]
-    --[[           -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim) ]]
-    --[[           version = 'LuaJIT', ]]
-    --[[         }, ]]
-    --[[         diagnostics = { ]]
-    --[[           -- Get the language server to recognize the `vim` global ]]
-    --[[           globals = {'vim'}, ]]
-    --[[         }, ]]
-    --[[         workspace = { ]]
-    --[[           -- Make the server aware of Neovim runtime files ]]
-    --[[           library = vim.api.nvim_get_runtime_file("", true), ]]
-    --[[         }, ]]
-    --[[         -- Do not send telemetry data containing a randomized but unique identifier ]]
-    --[[         telemetry = { ]]
-    --[[           enable = false, ]]
-    --[[         }, ]]
-    --[[       }, ]]
-    --[[     } ]]
-    --[[   }) ]]
-    --[[ end, ]]
+
+    ["lua_ls"] = function()
+      lspconfig.lua_ls.setup({
+    on_attach,
+    capabilities,
+        settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = {'vim'},
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
+            },
+          },
+        }
+      })
+    end,
+
     ["rust_analyzer"] = function(server_name)
       lspconfig.rust_analyzer.setup({
         on_attach = M.on_attach,
@@ -170,6 +178,7 @@ function M.config()
         }
       })
     end,
+
     ["jsonls"] = function(server_name)
       lspconfig.jsonls.setup({
         on_attach = M.on_attach,

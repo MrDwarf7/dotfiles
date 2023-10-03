@@ -144,17 +144,10 @@ return {
     end,
   },
 
-  {
-    "mrjones2014/nvim-ts-rainbow",
-    lazy = false,
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        rainbow = {
-          enable = true,
-        },
-      })
-    end,
-  },
+	{
+		"hiphish/rainbow-delimiters.nvim",
+		lazy = false,
+	},
 
   {
     "luukvbaal/statuscol.nvim",
@@ -418,10 +411,11 @@ return {
     "chrisbra/csv.vim",
     event = "VeryLazy",
   },
-  {
-    "kazhala/close-buffers.nvim",
-    event = "VeryLazy",
-  },
+
+  --[[ { ]]
+  --[[   "kazhala/close-buffers.nvim", ]]
+  --[[   event = "VeryLazy", ]]
+  --[[ }, ]]
 
   { "folke/twilight.nvim", event = "VeryLazy" },
   { "zdharma-continuum/zinit-vim-syntax", event = "VeryLazy" },
@@ -457,7 +451,7 @@ return {
         { ft = "qf", title = "QUICKFIX" },
         {
           ft = "help",
-          size = { height = 20 },
+          size = { height = 35 },
           -- only show help buffers
           filter = function(buf)
             return vim.bo[buf].buftype == "help"
@@ -510,22 +504,11 @@ return {
           pinned = true,
           open = "SymbolsOutline",
         },
-
         "neo-tree",
       },
-
     },
-
   },
 
-  --[[ { ]]
-  --[[   "echasnovski/mini.animate", ]]
-  --[[   event = "VeryLazy", ]]
-  --[[   version = false, ]]
-  --[[   config = function () ]]
-  --[[     require("mini.animate").setup() ]]
-  --[[   end, ]]
-  --[[ }, ]]
   {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
@@ -689,18 +672,23 @@ return {
 
 	{ "sindrets/diffview.nvim", cmd = { "DiffviewOpen", "DiffviewFileHistory" } },
 
-  --[[ { "NeogitOrg/neogit", ]]
-  --[[   dependencies = { ]]
-  --[[     "nvim-lua/plenary.nvim",         -- required ]]
-  --[[   "nvim-telescope/telescope.nvim", -- optional ]]
-  --[[   "sindrets/diffview.nvim",        -- optional ]]
-  --[[   "ibhagwan/fzf-lua",              -- optional ]]
-  --[[ }, ]]
-  --[[   cmd = { "Neogit" }, ]]
-  --[[ }, ]]
+	{
+		"linux-cultist/venv-selector.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-telescope/telescope.nvim",
+			"mfussenegger/nvim-dap-python",
+		},
+	},
 
   {
     "weizheheng/ror.nvim",
   },
+
+	{ 'echasnovski/mini.nvim', version = false },
+
+
+
 
 }

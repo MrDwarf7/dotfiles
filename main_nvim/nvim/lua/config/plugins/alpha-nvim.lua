@@ -35,7 +35,7 @@ return {
       local total_plugins = require("lazy").stats().count
       local date = os.date("%d-%m-%Y")
       local time = os.date("%H:%M:%S")
-      return "[ " .. total_plugins .. " plugins ] [ " .. date .. "] [ " .. time .. "]"
+      return "[ " .. total_plugins .. " plugins ] [   " .. date .. " ] [  " .. time .. " ]"
     end
 
     local function icon(fn)
@@ -194,14 +194,15 @@ return {
         dashboard.button("p", "󰳏  Find project", ":Telescope repo list<CR>"),
         dashboard.button("w", "  Find word", ":lua require('telescope.builtin').live_grep()<CR>"),
         dashboard.button("g", "  Find modified file", ":lua require('config.plugins.telescope').my_git_status()<CR>"),
-        dashboard.button("m", "  Show mark", ":Telescope marks"),
+        dashboard.button("M", "  Show mark", ":Telescope marks<CR>"),
         dashboard.button("t", "  Show todo", ":TodoTelescope<CR>"),
-        dashboard.button("c", "  Configuration folder", ":e ~/AppData/local/nv-ide/<CR>"),
+        dashboard.button("c", "  Configuration folder", ":e ~/dotfiles/main_nvim/nvim/<CR>"),
         -- dashboard.button("u", "  Sync plugins", ":PackerSync<CR>"),
+        dashboard.button("m", "M  Mason", ":Mason<CR>"),
         dashboard.button("l", "  Lazy", ":Lazy<CR>"),
         dashboard.button("s", "  Sync plugins", ":Lazy sync<CR>"),
-        dashboard.button("h", "  Neovim Check health", ":checkhealth<CR>"),
-        dashboard.button("q", "  Quit", "<Cmd>qa<CR>")
+        dashboard.button("h", "  Neovim Check health", ":checkhealth<CR>"),
+        dashboard.button("q", "󰗼  Quit", "<cmd>qa<CR>")
       },
       position = "center",
     }

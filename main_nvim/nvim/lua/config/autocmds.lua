@@ -6,6 +6,9 @@ local namespace = vim.api.nvim_create_namespace
 
 local utils = require("config.utils")
 
+
+local M = {}
+
 vim.on_key(function(char)
   if vim.fn.mode() == "n" then
     local new_hlsearch = vim.tbl_contains({ "<CR>", "n", "N", "*", "#", "?", "/" }, vim.fn.keytrans(char))
@@ -20,7 +23,7 @@ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
   desc = "Update buffers when adding new buffers",
   group = bufferline_group,
   callback = function(args)
-    local buf_utils = require("utils.buffer")
+    local buf_utils = require("config.utils.buffer")
     if not vim.t.bufs then
       vim.t.bufs = {}
     end
@@ -37,7 +40,6 @@ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
       vim.t.bufs = bufs
     end
     vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-    utils.event("BufsUpdated")
   end,
 })
 
@@ -60,8 +62,8 @@ autocmd("BufDelete", {
       end
     end
     vim.t.bufs = vim.tbl_filter(require("config.utils.buffer").is_valid, vim.t.bufs)
-    if removed then
-      utils.event("BufsUpdated")
+    if removed == 1 then
+			vim.api.nvim_buf_delete(buf, { force = true })
     end
     vim.cmd.redrawtabline()
   end,
@@ -102,7 +104,7 @@ function M.close(bufnr, force)
     if not force and vim.api.nvim_get_option_value("modified", { buf = bufnr }) then
       local bufname = vim.fn.expand("%")
       local empty = bufname == ""
-      if empty or "buftype" == "Neotree" then
+      if empty or "buftype" == "Neotree" or "neotree" or "neo-tree" then
         bufname = "Untitled"
       end
       local confirm =
@@ -118,12 +120,15 @@ function M.close(bufnr, force)
         return
       end
     end
-    require('close_buffers').delete({ type = 'this', force = true })
+		--[[ vim.treesitter.highlighter.stop(args.buf) ]]
+    require('mini.bufremove').delete()
 --[[     require("mini.bufremove").delete(bufnr, force) ]]
   else
+		--[[ vim.treesitter.highlighter.stop(bufnr) ]]
     local buftype = vim.api.nvim_get_option_value("buftype", { buf = bufnr })
     vim.cmd(("silent! %s %d"):format((force or buftype == "terminal") and "bdelete!" or "confirm bdelete", bufnr))
   end
+		--[[ vim.treesitter.highlighter.start(args.buf, vim.bo[args.buf].filetype) ]]
 end
 
 ---@param keep_current? boolean Whether or not to keep the current buffer (default: false)
@@ -140,3 +145,42 @@ function M.close_all(keep_current, force)
   end
 end
 
+
+
+
+return M
+
+--[[ function M.format_on_save() ]]
+--[[ 	local bufnr = vim.api.nvim_get_current_buf() ]]
+--[[ 	local buftype = vim.api.nvim_buf_get_option(bufnr, "buftype") ]]
+--[[ 	if buftype == "terminal" then ]]
+--[[ 		return ]]
+--[[ 	end ]]
+--[[ 	local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype") ]]
+--[[ 	local formatters = require("config.plugins.formatter").filetype ]]
+--[[ 	if formatters[filetype] then ]]
+--[[ 		local formatter = formatters[filetype] ]]
+--[[ 		if type(formatter) == "function" then ]]
+--[[ 			formatter = formatter() ]]
+--[[ 		end ]]
+--[[ 		if formatter.exe then ]]
+--[[ 			local args = formatter.args or {} ]]
+--[[ 			if formatter.stdin then ]]
+--[[ 				table.insert(args, 1, vim.api.nvim_buf_get_name(bufnr)) ]]
+--[[ 			end ]]
+--[[ 			local opts = { ]]
+--[[ 				env = formatter.env, ]]
+--[[ 				cwd = formatter.cwd, ]]
+--[[ 				timeout = formatter.timeout, ]]
+--[[ 				input = formatter.stdin, ]]
+--[[ 				capture_output = formatter.stdout, ]]
+--[[ 				on_exit = function(_, code) ]]
+--[[ 					if code ~= 0 then ]]
+--[[ 						vim.notify("Formatting failed with exit code " .. code, vim.log.levels.ERROR) ]]
+--[[ 					end ]]
+--[[ 				end, ]]
+--[[ 			} ]]
+--[[ 			vim.fn.jobstart(formatter.exe, args, opts) ]]
+--[[ 		end ]]
+--[[ 	end ]]
+--[[ end ]]

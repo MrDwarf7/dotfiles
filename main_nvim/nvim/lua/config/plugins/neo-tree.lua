@@ -54,7 +54,7 @@ return {
         icon = {
           --[[ folder_closed = "", ]]
           folder_open = "",
-          folder_closed = "",
+          folder_closed = "",
           -- folder_open = "",
           -- folder_closed = " ",
           -- folder_open = " ",
@@ -89,7 +89,7 @@ return {
         },
         diagnostics = {
           symbols = {
-            hint = "",
+            hint = "",
             info = "",
             warn = "",
             error = "",
@@ -108,8 +108,8 @@ return {
       filesystem = {
         bind_to_cwd = false,
                 follow_current_file = {
-          enabled = true
-        },
+					enabled = true
+				},
         use_libuv_file_watcher = true,
         group_empty_dirs = false, -- when true, empty folders will be grouped together
         hijack_netrw_behavior = "open_default", -- netrw disabled, opening a directory opens neo-tree
@@ -135,15 +135,6 @@ return {
                     },
                 },
             },
-        -- time the current file is changed while the tree is open.
-        -- in whatever position is specified in window.position
-        -- "open_current",  -- netrw disabled, opening a directory opens within the
-        -- window like netrw would, regardless of window.position
-        -- "disabled",    -- netrw left alone, neo-tree does not handle opening dirs
-        --[[ use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes ]]
-        -- instead of relying on nvim autocmd events.
-      --
-
         window = {
         position = "left",
         width = 50,
@@ -197,6 +188,7 @@ return {
             ["?"] = "show_help",
           },
         },
+
       buffers = {
         follow_current_file = {
           enabled = true, -- This will find and focus the file in the active buffer every
@@ -212,8 +204,6 @@ return {
           },
         },
       },
-
-
 
       git_status = {
         window = {

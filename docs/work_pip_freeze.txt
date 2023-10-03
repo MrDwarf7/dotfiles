@@ -23,6 +23,7 @@ pipdeptree==2.13.0
 platformdirs==3.10.0
 pynvim==0.4.3
 ruff==0.0.291
+setuptools==68.2.2
 virtualenv==20.24.5
 yarl==1.9.2
 zstandard==0.21.0
