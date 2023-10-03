@@ -73,8 +73,6 @@ function M.config()
 					["<esc>"] = actions.close,
 				},
         },
-
-        --[[ n = { ["<c-t>"] = trouble.open_with_trouble }, ]]
       },
     }
 

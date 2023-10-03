@@ -3,15 +3,21 @@
 -- TODO: SmartSplits over default window resizing?
 -- TODO: keep selection when moving between open buffers
 -- TODO: Consider other plugins to handle some of the weird things that are scattered in singles (IE: the mini library has several things, buf remove etc etc. + surround)
+
+
+
+
 vim.keymap.set('n', '<Esc>', ':nohl<CR>', {noremap = false, silent = true })
 vim.keymap.set('v', '<Esc>', '<Esc>:nohl<CR>', {noremap = false, silent = true })
 -- <F1> help
 vim.keymap.set('n', '<F3>', ':set nu! rnu!<CR>', {noremap = true, silent = true })
 vim.keymap.set('n', '<F4>', ':set list! list?<CR>', {noremap = false, silent = true })
 
-
 vim.keymap.set('c', 'Qa', ':qa!<CR>', {noremap = false, silent = true })
 
+
+--[[ vim.keymap.set('n', '<C-*>', ":lua local select_all = function() local start_line = vim.fn.line('0') local start_col = vim.fn.col('.') vim.cmd('normal! ggVGy') vim.fn.cursor(start_line, start_col) end <CR>", {noremap = true, silent = true }) ]]
+--[[ vim.keymap.set('n', '<C-`>', ":lua local select_all = function() local start_line = vim.fn.line('0') local start_col = vim.fn.col('.') vim.cmd('normal! ggVGd') vim.fn.cursor(start_line, start_col) end <CR>", {noremap = true, silent = true }) ]]
 
 -- Universal / Comon sense bindings
 vim.keymap.set('i', '<C-BS>', '<C-W>', {noremap = false, silent = true }) -- trying to get Ctrl + Backspace to work
@@ -167,18 +173,13 @@ vim.keymap.set("n", "<leader>tb", "<cmd>lua require'dap'.toggle_breakpoint()<CR>
 -- Mini [Basics]
 vim.keymap.set('n', '<leader>u', "UI Toggles", {noremap = false, silent = true,desc = "+UI Toggles" })
 
-
-
-
-
-
 -- LSP
 vim.keymap.set('n', '<leader>l', "LSP", {noremap = true, silent = true,desc = "+LSP" })
 vim.keymap.set('n', '<leader>lh', vim.diagnostic.open_float, {noremap = true, silent = true, desc = "LSP Float" })
 vim.keymap.set('n', '<leader>l]', vim.diagnostic.goto_next, {noremap = true, silent = true, desc = "LSP Next" })
 vim.keymap.set('n', '<leader>l[', vim.diagnostic.goto_prev, {noremap = true, silent = true, desc = "LSP Prev" })
 vim.keymap.set('n', '<leader>lv',"<cmd>:VenvSelectCached<CR>", {noremap = true, silent = true, desc = "Venv Select Cached" })
-
+vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { noremap=true, silent=true, desc = "LSP Code Action"})
 
 -- Trouble
 vim.keymap.set('n', '<leader>ft', ':TodoTrouble keywords=TODO<CR>', {noremap = true, silent = true, desc = "Find Todo's" })
@@ -188,7 +189,7 @@ vim.keymap.set("n", "<leader>lt", "<cmd>TroubleToggle<cr>", {silent = true, nore
 vim.keymap.set("n", "<leader>lD", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true, desc = "Workspace Diagnostics" })
 vim.keymap.set("n", "<leader>ld", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true, desc = "Document Diagnostics" })
 vim.keymap.set("n", "<leader>lj", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true, desc = "Location List" })
-vim.keymap.set("n", "<leader>la", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true, desc = "LSP Action" })
+vim.keymap.set("n", "<leader>lq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true, desc = "Quick Fix" })
 vim.keymap.set("n", "<leader>lr", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true, desc = "References" })
 -- Nvim-dap
 vim.keymap.set("n", "<leader>d", "Debug", {noremap = true, silent = true, desc = "+Debug" })

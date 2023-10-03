@@ -39,9 +39,9 @@ return {
       lazydocker:toggle()
     end
 
-    function _ranger_toggle()
-      ranger:toggle()
-    end
+    --[[ function _ranger_toggle() ]]
+    --[[   ranger:toggle() ]]
+    --[[ end ]]
 
     vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true, desc = "LazyGit"})
     vim.api.nvim_set_keymap("n", "<leader>td", "<cmd>lua _lazydocker_toggle()<CR>", {noremap = true, silent = true, desc = "LazyDocker"})

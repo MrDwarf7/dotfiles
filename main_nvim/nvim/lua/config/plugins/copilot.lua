@@ -32,7 +32,7 @@ return {
             accept_line = false,
             next = "<A-]>",
             prev = "<A-[>",
-            dismiss = "<C-Space>",
+            dismiss = "<A-c>",
           },
         },
       })
