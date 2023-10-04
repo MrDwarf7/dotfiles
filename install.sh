@@ -55,52 +55,54 @@ test_sudo(){
 	fi
 }
 
-determine_package_manager() {
-	if test_sudo() then
-		if [ -x "$(command -v pacman)" ] then
-			return pacman -Sy
-		fi
-
-	if [ -x "$(command -v apk)" ] then
-			return sudo apk add --no-cache
-	fi
-
-	if [ -x "$(command -v apt-get)" ] then 
-			return sudo apt-get install -y
-	fi
-
-	if [ -x "$(command -v dnf)" ] then 
-			return sudo dnf install -y
-	fi
-
-	if [ -x "$(command -v zypper)" ] then 
-			return zypper install -y 
-	fi
-
-# If we don't have admin
-	else
-		if [ -x "$(command -v pacman)" ] then
-			return pacman -Sy
-		fi
+determine_package_manager() { 
+	is_sudo = test_sudo 
+	local value  
+	if is_sudo then 
+		if [ -x "$(command -v pacman)" ] then 
+			value = sudo pacman -Sy 
 
 		if [ -x "$(command -v apk)" ] then 
-				return apk add --no-cache
+			value = sudo apk add --no-cache 
 		fi
 
 		if [ -x "$(command -v apt-get)" ] then 
-				return apt-get install -y
+			value = sudo apt-get install -y
 		fi
 
 		if [ -x "$(command -v dnf)" ] then 
-				return dnf install -y
+			value = sudo dnf install -y
 		fi
 
 		if [ -x "$(command -v zypper)" ] then 
-				return zypper install -y
-			fi 
-		else return 1
+			value = zypper install -y 
+		fi
+	fi
+	if is_sudo = false 
+		if [ -x "$(command -v pacman)" ] then
+			value = pacman -Sy
+		fi
 
-	# else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
+
+		if [ -x "$(command -v apk)" ] then 
+			value =  apk add --no-cache
+		fi
+
+
+		if [ -x "$(command -v apt-get)" ] then 
+			value = apt-get install -y
+		fi
+
+
+		if [ -x "$(command -v dnf)" ] then 
+			value = dnf install -y
+		fi
+
+
+		if [ -x "$(command -v zypper)" ] then 
+			value = zypper install -y
+		fi
+	fi 
 }
 
 install_dependencies() {
@@ -134,8 +136,8 @@ install_dependencies() {
 		echo "Installing missing dependencies: ${missing_dependencies[*]}"
 		# Use the appropriate package manager to install missing dependencies
 		# For example, on Debian-based systems (APT):
-		admin_status = test_sudo()
-		package_man = determine_package_manager(admin_status)
+		admin_status = test_sudo
+		package_man = determine_package_manager
 		package_man "${missing_dependencies[@]}"
 	else
 		echo "All dependencies are already installed."
@@ -220,3 +222,5 @@ cp -r .config/ $XDG_CONFIG_HOME/.config/
 # cp -r .local/ $XDG_CONFIG_HOME/.local/
 
 RESTART_ZSH="cd $HOME/ && exec .zsh"
+
+source zsh
