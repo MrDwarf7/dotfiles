@@ -56,7 +56,7 @@ test_sudo(){
 }
 
 determine_package_manager() {
-	if test_sudo() then
+	if test_sudo()
 		if [ -x "$(command -v pacman)" ] then 
 			return pacman -Sy
 		fi
@@ -78,7 +78,7 @@ determine_package_manager() {
 		fi
 
 # If we don't have admin
-	else admin = false
+	else
 
 		if [ -x "$(command -v pacman)" ] then 
 			return pacman -Sy
