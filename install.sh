@@ -55,12 +55,42 @@ test_sudo(){
 	fi
 }
 
+<<<<<<< HEAD
 determine_package_manager() { 
 	is_sudo = test_sudo 
 	local value  
 	if is_sudo then 
 		if [ -x "$(command -v pacman)" ] then 
 			value = sudo pacman -Sy 
+=======
+determine_package_manager() {
+	if test_sudo();
+		if [ -x "$(command -v pacman)" ] then
+			return pacman -Sy
+		fi
+
+	if [ -x "$(command -v apk)" ] then
+			return sudo apk add --no-cache
+	fi
+
+	if [ -x "$(command -v apt-get)" ] then 
+			return sudo apt-get install -y
+	fi
+
+	if [ -x "$(command -v dnf)" ] then 
+			return sudo dnf install -y
+	fi
+
+	if [ -x "$(command -v zypper)" ] then 
+			return zypper install -y 
+	fi
+
+# If we don't have admin
+	else
+		if [ -x "$(command -v pacman)" ] then
+			return pacman -Sy
+		fi
+>>>>>>> d828f6673e6d0779874b9930895100a8c1135159
 
 		if [ -x "$(command -v apk)" ] then 
 			value = sudo apk add --no-cache 
