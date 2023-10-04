@@ -59,46 +59,35 @@ determine_package_manager() {
 	if test_sudo()
 		if [ -x "$(command -v pacman)" ] then 
 			return pacman -Sy
-		fi
 
 	elif [ -x "$(command -v apk)" ] then 
 			return sudo apk add --no-cache
-		fi
 
 	elif [ -x "$(command -v apt-get)" ] then 
 			return sudo apt-get install -y
-		fi
 
 	elif [ -x "$(command -v dnf)" ] then 
 			return sudo dnf install -y
-		fi
 
 	elif [ -x "$(command -v zypper)" ] then 
 			return zypper install -y
-		fi
-
 # If we don't have admin
 	else
-
 		if [ -x "$(command -v pacman)" ] then 
 			return pacman -Sy
-		fi
 
 	elif [ -x "$(command -v apk)" ] then 
 			return apk add --no-cache
-		fi
 
 	elif [ -x "$(command -v apt-get)" ] then 
 			return apt-get install -y
-		fi
 
 	elif [ -x "$(command -v dnf)" ] then 
 			return dnf install -y
-		fi
 
 	elif [ -x "$(command -v zypper)" ] then 
 			return zypper install -y
-		fi
+
 	else return 1
 
 	# else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
