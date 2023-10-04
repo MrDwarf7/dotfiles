@@ -56,8 +56,8 @@ test_sudo(){
 }
 
 determine_package_manager() {
-	if test_sudo()
-		if [ -x "$(command -v pacman)" ] then 
+	if test_sudo() then
+		if [ -x "$(command -v pacman)" ]
 			return pacman -Sy
 
 	elif [ -x "$(command -v apk)" ] then 
@@ -71,9 +71,10 @@ determine_package_manager() {
 
 	elif [ -x "$(command -v zypper)" ] then 
 			return zypper install -y
+		fi
 # If we don't have admin
 	else
-		if [ -x "$(command -v pacman)" ] then 
+		if [ -x "$(command -v pacman)" ]
 			return pacman -Sy
 
 	elif [ -x "$(command -v apk)" ] then 
@@ -87,6 +88,7 @@ determine_package_manager() {
 
 	elif [ -x "$(command -v zypper)" ] then 
 			return zypper install -y
+		fi
 
 	else return 1
 
