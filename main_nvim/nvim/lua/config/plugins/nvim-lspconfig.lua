@@ -79,11 +79,10 @@ function M.config()
       'jsonls',
 			'vimls',
 			'powershell_es',
-			'lua_ls',
+			--[[ 'lua_ls', ]]
       --[[ 'yamlls', ]]
       'vimls',
       'rust_analyzer',
-      'clangd',
       --[[ 'pyright', ]]
       'ruff_lsp',
       'bashls',
@@ -152,46 +151,46 @@ function M.config()
     --[[   }) ]]
     --[[ end, ]]
 
-    ["rust_analyzer"] = function(server_name)
-      lspconfig.rust_analyzer.setup({
-        on_attach = M.on_attach,
-        capabilities,
-        settings = {
-          ["rust-analyzer"] = {
-            assist = {
-              importMergeBehavior = "last",
-              importPrefix = "by_self",
-            },
-            diagnostics = {
-              disabled = { "unresolved-import" }
-            },
-            cargo = {
-              loadOutDirsFromCheck = true
-            },
-            procMacro = {
-              enable = true
-            },
-            checkOnSave = {
-              command = "clippy"
-            },
-          }
-        }
-      })
-    end,
-
-    ["jsonls"] = function(server_name)
-      lspconfig.jsonls.setup({
-        on_attach = M.on_attach,
-        capabilities,
-        commands = {
-          Format = {
-            function()
-              vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-            end
-          }
-        }
-      })
-    end,
+    --[[ ["rust_analyzer"] = function(server_name) ]]
+    --[[   lspconfig.rust_analyzer.setup({ ]]
+    --[[     on_attach = M.on_attach, ]]
+    --[[     capabilities, ]]
+    --[[     settings = { ]]
+    --[[       ["rust-analyzer"] = { ]]
+    --[[         assist = { ]]
+    --[[           importMergeBehavior = "last", ]]
+    --[[           importPrefix = "by_self", ]]
+    --[[         }, ]]
+    --[[         diagnostics = { ]]
+    --[[           disabled = { "unresolved-import" } ]]
+    --[[         }, ]]
+    --[[         cargo = { ]]
+    --[[           loadOutDirsFromCheck = true ]]
+    --[[         }, ]]
+    --[[         procMacro = { ]]
+    --[[           enable = true ]]
+    --[[         }, ]]
+    --[[         checkOnSave = { ]]
+    --[[           command = "clippy" ]]
+    --[[         }, ]]
+    --[[       } ]]
+    --[[     } ]]
+    --[[   }) ]]
+    --[[ end, ]]
+    --[[]]
+    --[[ ["jsonls"] = function(server_name) ]]
+    --[[   lspconfig.jsonls.setup({ ]]
+    --[[     on_attach = M.on_attach, ]]
+    --[[     capabilities, ]]
+    --[[     commands = { ]]
+    --[[       Format = { ]]
+    --[[         function() ]]
+    --[[           vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0}) ]]
+    --[[         end ]]
+    --[[       } ]]
+    --[[     } ]]
+    --[[   }) ]]
+    --[[ end, ]]
   }
   require("ufo").setup()
 end

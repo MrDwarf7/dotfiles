@@ -148,17 +148,17 @@ return {
             nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
           },
             ["-"] = "navigate_up",
-            ["H"] = "toggle_hidden",
-            ["."] = "set_root",
+
             ["/"] = "fuzzy_finder",
             ["f"] = "filter_on_submit",
+            ["."] = "set_root",
             ["<c-c>"] = "clear_filter",
             ["[g"] = "prev_git_modified",
             ["]g"] = "next_git_modified",
+            ["H"] = "toggle_hidden",
+
             ["l"] = "open",
             ["h"] = "close_node",
-            ["s"] = "open_split",
-            ["v"] = "open_vsplit",
             ["<1-LeftMouse>"] = "open",
             ["<cr>"] = "open",
             ["s"] = "open_split",

@@ -63,14 +63,22 @@ function M.config()
       set_env = { ["COLORTERM"] = "truecolor" },
       mappings = {
         i = {
-          ["<c-t>"] = trouble.open_with_trouble,
-          ["<esc>"] = actions.close,
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
+					["<c-t>"] = trouble.open_with_trouble,
+          --[[ ["<esc>"] = actions.close, ]]
+          ["<C-q>"] = actions.close,
         },
         n = {
           ["q"] = actions.close,
-					["<C-p>"] = actions.cycle_history_prev,
-					["<C-n>"] = actions.cycle_history_next,
+          ["<C-q>"] = actions.close,
 					["<esc>"] = actions.close,
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
 				},
         },
       },

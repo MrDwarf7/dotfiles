@@ -98,8 +98,8 @@ vim.keymap.set('n', '<leader>x', ":lua require('mini.bufremove').delete()<CR>", 
 
 -- General plugin page
 vim.keymap.set('n', '<leader>p', 'Plugins/Packages', {noremap = true, silent = true, desc = "Plugins" })
-vim.keymap.set('n', '<leader>pp', ':Lazy<CR>', {noremap = false, silent = true, desc = "Lazy Plugins" })
-vim.keymap.set('n', '<leader>pm', ':Mason<CR>', {noremap = false, silent = true, desc = "Mason Plugin Manager" })
+vim.keymap.set('n', '<leader>pl', ':Lazy<CR>', {noremap = false, silent = true, desc = "Lazy Plugins" })
+vim.keymap.set('n', '<leader>pm', ':Mason<CR>', {noremap = false, silent = true, desc = "Mason Manager" })
 
 vim.keymap.set('n', '<leader>pU', ":lua require('lazy').update()<CR>", {noremap = true, silent = true, desc = "Lazy Update" })
 vim.keymap.set('n', '<leader>pS', ":lua require('lazy').sync()<CR>", {noremap = true, silent = true, desc = "Lazy Update" })
@@ -186,7 +186,7 @@ vim.keymap.set('n', '<leader>ft', ':TodoTrouble keywords=TODO<CR>', {noremap = t
 --[[ vim.keymap.set('n', '<leader>ff', ':TodoTrouble keywords=FIX,FIXME<CR>', {noremap = true, silent = true }) ]]
 --[[ vim.keymap.set('n', '<leader>tn', ':TodoTrouble keywords=NOTE<CR>', {noremap = true, silent = true }) ]]
 vim.keymap.set("n", "<leader>lt", "<cmd>TroubleToggle<cr>", {silent = true, noremap = true, desc = "LSP/Trouble toggle" })
-vim.keymap.set("n", "<leader>lD", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true, desc = "Workspace Diagnostics" })
+vim.keymap.set("n", "<leader>lw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true, desc = "Workspace diagnostics" })
 vim.keymap.set("n", "<leader>ld", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true, desc = "Document Diagnostics" })
 vim.keymap.set("n", "<leader>lj", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true, desc = "Location List" })
 vim.keymap.set("n", "<leader>lq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true, desc = "Quick Fix" })
