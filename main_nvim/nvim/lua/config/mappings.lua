@@ -174,7 +174,7 @@ vim.keymap.set("n", "<leader>tb", "<cmd>lua require'dap'.toggle_breakpoint()<CR>
 vim.keymap.set('n', '<leader>u', "UI Toggles", {noremap = false, silent = true,desc = "+UI Toggles" })
 
 -- LSP
-vim.keymap.set('n', '<leader>l', "LSP", {noremap = true, silent = true,desc = "+LSP" })
+vim.keymap.set('n', '<leader>l', "LSP", {noremap = true, silent = true, desc = "+LSP" })
 vim.keymap.set('n', '<leader>lh', vim.diagnostic.open_float, {noremap = true, silent = true, desc = "LSP Float" })
 vim.keymap.set('n', '<leader>l]', vim.diagnostic.goto_next, {noremap = true, silent = true, desc = "LSP Next" })
 vim.keymap.set('n', '<leader>l[', vim.diagnostic.goto_prev, {noremap = true, silent = true, desc = "LSP Prev" })

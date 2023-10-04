@@ -1,43 +1,8 @@
 #!/bin/bash
 
-set -e
-
-USER_HOME=$(eval echo ~${SUDO_USER})
-
-ZSH_CUSTOM=${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}
-THEME_DIR="$ZSH_CUSTOM/themes"
-PLUGIN_DIR="$ZSH_CUSTOM/plugins"
-
-install_dependencies() {
-	local missing_dependencies=()
-
-	if ! command -v curl &>/dev/null; then
-		missing_dependencies+=("curl")
-	fi
-
-	if ! command -v git &>/dev/null; then
-		missing_dependencies+=("git")
-	fi
-
 	# if ! command -v fd &>/dev/null; then
 	# 	missing_dependencies+=("fd")
 	# fi
-
-	if ! command -v fzf &>/dev/null; then
-		missing_dependencies+=("fzf")
-	fi
-
-	if ! command -v bat &>/dev/null; then
-		missing_dependencies+=("bat")
-	fi
-
-	if ! command -v exa &>/dev/null; then
-		missing_dependencies+=("exa")
-	fi
-
-	if ! command -v tree &>/dev/null; then
-		missing_dependencies+=("tree")
-	fi
 
 	# if ! command -v z &>/dev/null; then
 	# 	missing_dependencies+=("z")
@@ -59,18 +24,6 @@ install_dependencies() {
 	# 	missing_dependencies+=("broot ")
 	# fi
 
-	if [ ${#missing_dependencies[@]} -gt 0 ]; then
-		echo "Installing missing dependencies: ${missing_dependencies[*]}"
-		# Use the appropriate package manager to install missing dependencies
-		# For example, on Debian-based systems (APT):
-		sudo apt-get update
-		sudo apt-get install -y "${missing_dependencies[@]}"
-		# For macOS (Homebrew):
-		# brew install "${missing_dependencies[@]}"
-	else
-		echo "All dependencies are already installed."
-	fi
-}
 
 # check_dependencies() {
 # 	if ! command -v curl &>/dev/null; then
@@ -84,11 +37,118 @@ install_dependencies() {
 # 	# Add checks for other dependencies as needed
 # }
 
+
+set -e
+
+USER_HOME=$(eval echo ~${SUDO_USER})
+
+ZSH_CUSTOM=${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}
+THEME_DIR="$ZSH_CUSTOM/themes"
+PLUGIN_DIR="$ZSH_CUSTOM/plugins"
+
+
+test_sudo(){
+	if [ "$EUID" -ne 0 ]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+determine_package_manager(admin) {
+if admin then
+	if [ -x "$(command -v pacman)" ] then 
+			return pacman -Sy
+		fi
+
+	elif [ -x "$(command -v apk)" ] then 
+			return sudo apk add --no-cache
+		fi
+
+	elif [ -x "$(command -v apt-get)" ] then 
+			return sudo apt-get install -y
+		fi
+
+	elif [ -x "$(command -v dnf)" ] then 
+			return sudo dnf install -y
+		fi
+
+	elif [ -x "$(command -v zypper)" ] then 
+			return zypper install -y
+		fi
+
+# If we don't have admin
+	else admin = false
+
+		if [ -x "$(command -v pacman)" ] then 
+			return pacman -Sy
+		fi
+
+	elif [ -x "$(command -v apk)" ] then 
+			return apk add --no-cache
+		fi
+
+	elif [ -x "$(command -v apt-get)" ] then 
+			return apt-get install -y
+		fi
+
+	elif [ -x "$(command -v dnf)" ] then 
+			return dnf install -y
+		fi
+
+	elif [ -x "$(command -v zypper)" ] then 
+			return zypper install -y
+		fi
+	else return 1
+
+	# else echo "FAILED TO INSTALL PACKAGE: Package manager not found. You must manually install: $packagesNeeded">&2; fi
+}
+
+install_dependencies() {
+	local missing_dependencies=()
+
+	if ! command -v curl &>/dev/null; then
+		missing_dependencies+=("curl")
+	fi
+
+	if ! command -v git &>/dev/null; then
+		missing_dependencies+=("git")
+	fi
+
+	if ! command -v fzf &>/dev/null; then
+		missing_dependencies+=("fzf")
+	fi
+
+	if ! command -v bat &>/dev/null; then
+		missing_dependencies+=("bat")
+	fi
+
+	if ! command -v exa &>/dev/null; then
+		missing_dependencies+=("exa")
+	fi
+
+	if ! command -v tree &>/dev/null; then
+		missing_dependencies+=("tree")
+	fi
+
+	if [ ${#missing_dependencies[@]} -gt 0 ]; then
+		echo "Installing missing dependencies: ${missing_dependencies[*]}"
+		# Use the appropriate package manager to install missing dependencies
+		# For example, on Debian-based systems (APT):
+		admin_status = test_sudo()
+		package_man = determine_package_manager(admin_status)
+		package_man "${missing_dependencies[@]}"
+	else
+		echo "All dependencies are already installed."
+	fi
+}
+
 create_symlinks() {
 	# Get the directory in which this script lives.
 	script_dir=$(dirname "$(readlink -f "$0")")
 	# Get a list of all files in this directory that start with a dot.
 	files=$(find -maxdepth 1 -type f -name ".*")
+	# copy_dir=$(find -maxdepth 1 -type d -name ".config/")
 	# Create a symbolic link to each file in the home directory.
 	for file in $files; do
 		name=$(basename $file)
@@ -100,9 +160,19 @@ create_symlinks() {
 
 force_zsh_chsh() {
 	# Added after issue on arch
-	sudo echo /usr/sbin/zsh >>/etc/shells
-	chsh -s $(which zsh)
+	if test_sudo; then
+		echo "sudo detected"
+		sudo echo /usr/sbin/zsh >>/etc/shells
+		sudo chsh -s $(which zsh)
+		return 0
+	else 
+		echo "sudo not detected"
+		return 1
+	fi
 }
+	# 
+	# sudo echo /usr/sbin/zsh >>/etc/shells
+	# chsh -s $(which zsh)
 
 install_oh_my_zsh() {
 	# Install oh-my-zsh.
@@ -145,7 +215,9 @@ echo "Changing default shell to zsh."
 force_zsh_chsh
 
 echo "Copying over personal config files."
+# link or copy... Hmmmm
+# ln -s $script_dir/.config/ $XDG_CONFIG_HOME/.config/
 cp -r .config/ $XDG_CONFIG_HOME/.config/
-cp -r .local/ $XDG_CONFIG_HOME/.local/
+# cp -r .local/ $XDG_CONFIG_HOME/.local/
 
 RESTART_ZSH="cd $HOME/ && exec .zsh"
