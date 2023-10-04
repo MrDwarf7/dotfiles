@@ -56,7 +56,7 @@ test_sudo(){
 }
 
 determine_package_manager() {
-	if test_sudo() then
+	if test_sudo()
 		if [ -x "$(command -v pacman)" ]
 			return pacman -Sy
 
