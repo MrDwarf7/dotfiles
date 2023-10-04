@@ -55,7 +55,7 @@ test_sudo(){
 	fi
 }
 
-determine_package_manager(admin) {
+determine_package_manager(test_sudo) {
 if admin = 1 then
 	if [ -x "$(command -v pacman)" ] then 
 			return pacman -Sy
