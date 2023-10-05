@@ -11,6 +11,10 @@ local M = {
   },
 }
 
+
+
+
+
 function M.on_attach(client, bufnr)
   local navic = require("nvim-navic")
   -- Enable completion triggered by <c-x><c-o>
@@ -83,6 +87,7 @@ function M.config()
       --[[ 'yamlls', ]]
       'vimls',
       'rust_analyzer',
+			--[[ 'debugpy', ]]
       --[[ 'pyright', ]]
       'ruff_lsp',
       'bashls',
@@ -192,6 +197,15 @@ function M.config()
     --[[   }) ]]
     --[[ end, ]]
   }
+
+
+--[[ function M.setup() ]]
+--[[ 		require("dap-python").setup({ ]]
+--[[ 		args = { "-m", "debugpy.adapter" } ]]
+--[[ 		}) ]]
+--[[ 		require("dapui").setup() ]]
+--[[ 	end ]]
+
   require("ufo").setup()
 end
 

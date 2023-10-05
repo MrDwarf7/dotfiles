@@ -682,6 +682,18 @@ return {
 		},
 	},
 
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = {
+			"mfussenegger/nvim-dap-python",
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			"nvim-telescope/telescope-dap.nvim",
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+		},
+		},
+
   {
     "weizheheng/ror.nvim",
   },

@@ -4,6 +4,8 @@ local M = {
 }
 function M.config()
   local dap, dapui = require("dap")
+	require("dap-python")
+	require("mason-nvim-dap").setup()
 
   vim.fn.sign_define('DapBreakpoint', {text='', texthl='error', linehl='', numhl=''})
   -- ADAPTERS
@@ -14,6 +16,7 @@ function M.config()
     -- args =  { vim.fn.stdpath('data') .. '/mason/packages/node-debug2-adapter/out/src/nodeDebug.js' },
     args = {},
   }
+
   dap.configurations.javascript = {
     {
       name = 'Launch',
@@ -51,5 +54,34 @@ function M.config()
       useBundler = true;
     },
   }
+
+	dap.adapters.python = {
+    type = 'executable',
+    --[[ command = dap.python.resolve_python(), ]]
+		--[[ command = 'python -m debugpy.adapter', ]]
+    command = 'python3',
+    args = { '-m', 'debugpy' },
+  }
+
+  dap.configurations.python = {
+    {
+			type = 'python',
+			request = 'launch',
+      name = 'Launch file',
+			program = '${file}',
+			--[[ pythonPath = function() ]]
+			--[[ 	local venv = vim.fn.getcwd() ]]
+			--[[ 	local ac_venv = vim.fn.glob(venv .. '/.venv/scripts/activate.ps1') ]]
+			--[[ 	return ac_venv ]]
+			--[[ end, ]]
+
+			args = { '--listen', 'localhost:5678', '--wait-for-client'},
+      cwd = vim.fn.getcwd(),
+      --[[ sourceMaps = true, ]]
+      console = 'ExternalTerminal',
+
+    },
+	}
+
 end
 return M

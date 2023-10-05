@@ -107,6 +107,18 @@ return {
       },
       filesystem = {
         bind_to_cwd = false,
+			--[[ function() ]]
+				--[[ 	local cwd_avail = true ]]
+				--[[ 	local neo= require('neo-tree') ]]
+				--[[ 	if vim.fn.expand("%:p") == vim.fn.getcwd() then ]]
+				--[[ 		neo.open() ]]
+				--[[ 		return cwd_avail ]]
+				--[[ else ]]
+				--[[ 	return nil ]]
+				--[[ 	--[[ return not cwd_avail == nil ]]
+				--[[ 	end ]]
+				--[[ end, ]]
+
                 follow_current_file = {
 					enabled = true
 				},

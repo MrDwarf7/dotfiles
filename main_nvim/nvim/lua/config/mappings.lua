@@ -195,6 +195,8 @@ vim.keymap.set("n", "<leader>lr", "<cmd>Trouble lsp_references<cr>", {silent = t
 vim.keymap.set("n", "<leader>d", "Debug", {noremap = true, silent = true, desc = "+Debug" })
 vim.keymap.set("n", "<Leader>dh", ":lua require('ror.commands').list_commands()<CR>", { silent = true, desc = "Generate" })
 vim.keymap.set("n", "<leader>dc", "<cmd>lua require'dap'.continue()<CR>", {silent = true, noremap = true, desc = "Continue" })
+vim.keymap.set("n", "<leader>dr", "<cmd>lua require'dap'.continue()<CR>", {silent = true, noremap = true, desc = "Run/Continue" })
+vim.keymap.set("n", "<leader>dR", "<cmd>lua require'dap'.run_last()<CR>", {silent = true, noremap = true, desc = "ReRun last" })
 vim.keymap.set("n", "<leader>ds", "<cmd>lua require'dap'.step_over()<CR>", {silent = true, noremap = true, desc = "Step Over" })
 vim.keymap.set("n", "<leader>di", "<cmd>lua require'dap'.step_into()<CR>", {silent = true, noremap = true, desc = "Step Into" })
 vim.keymap.set("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<CR>", {silent = true, noremap = true, desc = "Step Out (of)" })
