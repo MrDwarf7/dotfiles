@@ -1,13 +1,16 @@
 
-
 local M = {
 	"echasnovski/mini.nvim",
+	dependencies = {
+"nvim-treesitter/nvim-treesitter-textobjects",
+	},
 	version = false,
 	event = { "BufReadPre", "BufNewFile" },
 }
 
 function M.config()
 	local ai = require("mini.ai")
+
 	ai.setup()
 
 
@@ -44,12 +47,7 @@ function M.config()
 	local bufremove = require("mini.bufremove")
 	bufremove.setup({})
 
-
-
 --TODO: Further sus of the mini libs
-
-
-
 
 end
 return M

@@ -1,5 +1,3 @@
---TODO: Hover using LSP (via Shift + k, similar to LazyVim etc and other distros)
---
 -- TODO: SmartSplits over default window resizing?
 -- TODO: keep selection when moving between open buffers
 -- TODO: Consider other plugins to handle some of the weird things that are scattered in singles (IE: the mini library has several things, buf remove etc etc. + surround)
@@ -69,13 +67,15 @@ vim.keymap.set('n', 'y<S-l>', 'y$', {noremap = true, silent = true }) -- Same as
 vim.keymap.set('n', 'd<S-h>', 'd^', {noremap = true, silent = true }) -- Same as above for yanking
 vim.keymap.set('n', 'd<S-l>', 'd$', {noremap = true, silent = true }) -- Same as above for yanking
 
-vim.keymap.set('i', '<A-h>', '<Esc>^i', {noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set('i', '<A-l>', '<Esc>$a', {noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line
+--[[ vim.keymap.set('i', '<A-h>', '<Esc>^i', {noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line ]]
+--[[ vim.keymap.set('i', '<A-l>', '<Esc>$a', {noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line ]]
+
 
 
 
 
 vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true, desc = "Toggle Explorer" }) -- File Explorer lol
+vim.keymap.set('n', '<leader>~', ":Alpha<CR>", {noremap = false, silent = true, desc = "~Home~" })
 -- <F5> Ranger from toggleterm
 --[[ vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal left toggle<CR>', {noremap = false, silent = true }) ]]
 --[[ vim.keymap.set('n', '<F8>', ':ZenMode<CR>', {noremap = false, silent = true }) ]]
