@@ -5,18 +5,22 @@ fi
 # Path to your oh-my-zsh installation.
 export ZSH=${XDG_CONFIG_HOME:-$HOME/.config}/.oh-my-zsh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export ZSH_CUSTOM=${ZSH_CUSTOM:-$XDG_CONFIG_HOME/.oh-my-zsh/custom}
+export THEME_DIR=$ZSH_CUSTOM/themes
+export PLUGIN_DIR=$ZSH_CUSTOM/plugins
 
 [[ ! -f ~/.p10k.zsh ]] || source $ZSH/.p10k.zsh
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git)
 
 # alias dot='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias vim=nvim
+# alias vim=nvim
 alias cls=clear
-alias dot=$HOME/.dotfiles/
+alias dot=~/dotfiles/
+alias zshconf=~/.zshrc
 
 gitgo(){
     git status &&
