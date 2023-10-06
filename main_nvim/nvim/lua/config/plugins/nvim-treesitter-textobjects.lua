@@ -1,8 +1,8 @@
 return {
-"nvim-treesitter/nvim-treesitter-textobjects",
+	'nvim-treesitter/nvim-treesitter-textobjects',
 	lazy = true,
 	config = function()
-		require( 'nvim-treesitter.configs' ).setup {
+		require('nvim-treesitter.configs').setup({
 			textobjects = {
 				select = {
 					enable = true,
@@ -10,36 +10,32 @@ return {
 					lookahead = true,
 					keymaps = {
 						-- You can use the capture groups defined in textobjects.scm
-						["af"] = "@function.outer",
-						["if"] = "@function.inner",
-						["ac"] = "@class.outer",
-						["ic"] = "@class.inner",
+						['af'] = '@function.outer',
+						['if'] = '@function.inner',
+						['ac'] = '@class.outer',
+						['ic'] = '@class.inner',
 					},
 				},
 				swap = {
 					enable = true,
 					swap_next = {
-						["<leader>a"] = "@parameter.inner",
+						['<leader>a'] = '@parameter.inner',
 					},
 					swap_previous = {
-						["<leader>A"] = "@parameter.inner",
+						['<leader>A'] = '@parameter.inner',
 					},
 				},
 				lsp_interop = {
 					enable = true,
 					peek_definition_code = {
-						["df"] = "@function.outer",
-						["dF"] = "@class.outer",
+						['df'] = '@function.outer',
+						['dF'] = '@class.outer',
 					},
 				},
 			},
-		}
+		})
 	end,
-
-
-
 }
-
 
 --[[ return { ]]
 --[[   "machakann/vim-sandwich", ]]

@@ -1,7 +1,7 @@
 require('config.settings')
 require('config.color')
-    -- Lazy
+-- Lazy
 require('config.lazy')
 require('config.completion')
-    -- Key map
+-- Key map
 require('config.mappings')
