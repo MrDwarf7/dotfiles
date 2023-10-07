@@ -37,3 +37,4 @@ updot() {
 
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
