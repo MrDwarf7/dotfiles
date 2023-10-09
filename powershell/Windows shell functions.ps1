@@ -522,6 +522,10 @@ function gitgo
     return
 }
 
+function scoopup
+{
+    scoop update && scoop update --all
+}
 
 function dot
 {
@@ -769,7 +773,7 @@ function nvims()
     }
     if ($config -eq "default")
     {
-    	$env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/main_nvim"
+        $env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/main_nvim"
         $config = ""
     }
     # if ($config -eq "LunarVim")
