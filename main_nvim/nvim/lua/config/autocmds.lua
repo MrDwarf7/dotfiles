@@ -16,6 +16,15 @@ local M = {}
 --[[   end ]]
 --[[ end, namespace("auto_hlsearch")) ]]
 
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.client_id)
+		if client.server_capabilities.hoverProvider then
+			vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+		end
+	end,
+})
+
 --[[ local bufferline_group = augroup("bufferline", { clear = true }) ]]
 --[[ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, { ]]
 --[[   desc = "Update buffers when adding new buffers", ]]

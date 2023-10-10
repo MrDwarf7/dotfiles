@@ -138,7 +138,19 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				--[[ ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages ]]
-				--
+				refactor = {
+					smart_rename = {
+						enable = true,
+						keymaps = {
+							smart_rename = '<leader>lr',
+							desc = 'Rename variable under cursor',
+						},
+					},
+					highlight_definitions = {
+						enable = true,
+						clear_on_cursor_move = false,
+					},
+				},
 				ensure_installed = {
 					-- one of "all", "maintained" (parsers with maintainers), or a list of languages
 					'bash',
@@ -218,7 +230,7 @@ return {
 					enable = true,
 					keymaps = {
 						init_selection = '<A-n>',
-						node_incremental = '<A-n>',
+						nodd_incremental = '<A-n>',
 						scope_incremental = false,
 						node_decremental = '<A-N>',
 					},
