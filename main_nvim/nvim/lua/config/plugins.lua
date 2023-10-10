@@ -148,7 +148,7 @@ return {
 					},
 					highlight_definitions = {
 						enable = true,
-						clear_on_cursor_move = false,
+						clear_on_cursor_move = true,
 					},
 				},
 				ensure_installed = {
