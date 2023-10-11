@@ -39,7 +39,7 @@ function M.on_attach(client, bufnr)
 	--[[ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) ]]
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<leader>lf', function()
-		vim.lsp.buf.format({ async = true })
+		vim.lsp.buf.format({ async = false })
 	end, bufopts)
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
@@ -107,7 +107,7 @@ function M.config()
 		end,
 
 		['lua_ls'] = function()
-			lspconfig.html.setup({
+			lspconfig.lua_ls.setup({
 				on_attach = M.on_attach,
 				capabilities,
 				filetypes = { 'lua' },
