@@ -140,6 +140,7 @@ return {
 					never_show = {
 						'.DS_Store',
 						'thumbs.db',
+						'__pycache__',
 					},
 					never_show_by_pattern = {
 						'NTUSER.DAT*',
