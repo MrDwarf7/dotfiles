@@ -54,6 +54,11 @@ return {
 	},
 
 	{
+		'mfussenegger/nvim-lint',
+		lazy = false,
+	},
+
+	{
 		'hrsh7th/nvim-cmp',
 		priority = 1000,
 		lazy = false,
@@ -545,7 +550,7 @@ return {
 					ft = 'toggleterm',
 					title = 'TERMINAL',
 					size = { height = 0.4 },
-					filter = function(buf, win)
+					filter = function(win)
 						return vim.api.nvim_win_get_config(win).relative == ''
 					end,
 				},
@@ -624,7 +629,7 @@ return {
 					diagnostics = 'nvim_lsp',
 					separator_style = 'slant',
 					always_show_bufferline = false,
-					diagnostics_indicator = function(count, level, diagnostics_dict, context)
+					diagnostics_indicator = function(count, level)
 						local icon = level:match('error') and ' ' or ' '
 						return ' ' .. icon .. count
 					end,
@@ -793,6 +798,19 @@ return {
 			'williamboman/mason.nvim',
 			'mfussenegger/nvim-dap',
 		},
+	},
+
+	{
+		'williamboman/mason.nvim',
+		dependencies = {
+			'WhoIsSethDaniel/mason-tool-installer.nvim',
+		},
+		lazy = false,
+	},
+
+	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		lazy = false,
 	},
 
 	--[[ { ]]

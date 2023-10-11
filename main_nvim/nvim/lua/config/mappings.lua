@@ -383,6 +383,13 @@ vim.keymap.set(
 	{ silent = true, noremap = true, desc = 'References' }
 )
 
+vim.keymap.set(
+	'n',
+	'<leader>ll',
+	":lua require('lint').try_lint()<CR>",
+	{ noremap = true, silent = true, desc = 'Lint' }
+)
+
 --[[ vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename(), { silent = true, noremap = true, desc = 'Rename' }) ]]
 
 -- Nvim-dap

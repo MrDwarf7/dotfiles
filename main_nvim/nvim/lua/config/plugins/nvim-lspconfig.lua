@@ -49,6 +49,8 @@ end
 function M.config()
 	local lspconfig = require('lspconfig')
 	local mason_lspconfig = require('mason-lspconfig')
+	local mason_tool_installer = require('mason-tool-installer')
+
 	local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 	capabilities.textDocument.foldingRange = {
@@ -131,6 +133,41 @@ function M.config()
 	--[[ 	end ]]
 
 	require('ufo').setup()
+
+	M = {
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		lazy = false,
+	}
+
+	mason_tool_installer.setup({
+		ensure_installed = {
+			'prettier',
+			'black',
+			'isort',
+			'stylelint',
+			'yamllint',
+			'hadolint',
+			'ruff',
+			'vulture',
+			'vint',
+			'shellcheck',
+			'selene',
+			'eslint_d',
+
+			--
+
+			'powershell_es',
+			'lua_ls',
+			--[[ 'yamlls', ]]
+			'vimls',
+			'rust_analyzer',
+			--[[ 'debugpy', ]]
+			--[[ 'pyright', ]]
+			'ruff_lsp',
+			'bashls',
+			--
+		},
+	})
 end
 
 return M
