@@ -85,5 +85,3 @@ if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
-
-
