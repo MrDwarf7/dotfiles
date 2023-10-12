@@ -550,7 +550,7 @@ return {
 					ft = 'toggleterm',
 					title = 'TERMINAL',
 					size = { height = 0.4 },
-					filter = function(win)
+					filter = function(buf, win)
 						return vim.api.nvim_win_get_config(win).relative == ''
 					end,
 				},
@@ -629,7 +629,7 @@ return {
 					diagnostics = 'nvim_lsp',
 					separator_style = 'slant',
 					always_show_bufferline = false,
-					diagnostics_indicator = function(count, level)
+					diagnostics_indicator = function(count, level, diagnostics_dict, context)
 						local icon = level:match('error') and ' ' or ' '
 						return ' ' .. icon .. count
 					end,

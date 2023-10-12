@@ -25,30 +25,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
---[[ local bufferline_group = augroup("bufferline", { clear = true }) ]]
---[[ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, { ]]
---[[   desc = "Update buffers when adding new buffers", ]]
---[[   group = bufferline_group, ]]
---[[   callback = function(args) ]]
---[[     local buf_utils = require("config.utils.buffer") ]]
---[[     if not vim.t.bufs then ]]
---[[       vim.t.bufs = {} ]]
---[[     end ]]
---[[     if not buf_utils.is_valid(args.buf) then ]]
---[[       return ]]
---[[     end ]]
---[[     if args.buf ~= buf_utils.current_buf then ]]
---[[       buf_utils.last_buf = buf_utils.is_valid(buf_utils.current_buf) and buf_utils.current_buf or nil ]]
---[[       buf_utils.current_buf = args.buf ]]
---[[     end ]]
---[[     local bufs = vim.t.bufs ]]
---[[     if not vim.tbl_contains(bufs, args.buf) then ]]
---[[       table.insert(bufs, args.buf) ]]
---[[       vim.t.bufs = bufs ]]
---[[     end ]]
---[[     vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs) ]]
---[[   end, ]]
---[[ }) ]]
+local bufferline_group = augroup('bufferline', { clear = true })
+autocmd({ 'BufAdd', 'BufEnter', 'TabNewEntered' }, {
+	desc = 'Update buffers when adding new buffers',
+	group = bufferline_group,
+	callback = function(args)
+		local buf_utils = require('config.utils.buffer')
+		if not vim.t.bufs then
+			vim.t.bufs = {}
+		end
+		if not buf_utils.is_valid(args.buf) then
+			return
+		end
+		if args.buf ~= buf_utils.current_buf then
+			buf_utils.last_buf = buf_utils.is_valid(buf_utils.current_buf) and buf_utils.current_buf or nil
+			buf_utils.current_buf = args.buf
+		end
+		local bufs = vim.t.bufs
+		if not vim.tbl_contains(bufs, args.buf) then
+			table.insert(bufs, args.buf)
+			vim.t.bufs = bufs
+		end
+		vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
+	end,
+})
 
 --[[ autocmd("BufDelete", { ]]
 --[[   desc = "Update buffers when deleting buffers", ]]
@@ -114,8 +114,7 @@ function M.close(bufnr, force)
 			if empty or 'buftype' == 'Neotree' or 'neotree' or 'neo-tree' then
 				bufname = 'Untitled'
 			end
-			local confirm =
-				vim.fn.confirm(('Save changes to "%s"?'):format(bufname), '&Yes\n&No\n&Cancel', 1, 'Question')
+			local confirm = vim.fn.confirm(('Save changes to "%s"?'):format(bufname), '&Yes\n&No\n&Cancel', 1, 'Question')
 			if confirm == 1 then
 				if empty then
 					return
