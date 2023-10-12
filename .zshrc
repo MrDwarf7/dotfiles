@@ -6,12 +6,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-# if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-#     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-# fi
 
 
 # Lines configured by zsh-newuser-install
@@ -81,9 +75,13 @@ plugins=(
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
 source $ZSH/oh-my-zsh.sh
-
-
-
 
 
