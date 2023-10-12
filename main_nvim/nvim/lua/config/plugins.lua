@@ -11,13 +11,13 @@ return {
 	},
 
 	--[[ { ]]
-	--[[   "sainnhe/gruvbox-material", ]]
-	--[[   lazy = false, ]]
-	--[[   enabled = false, ]]
-	--[[   priority = 1000, ]]
-	--[[    config = function() ]]
-	--[[      require('config.colorschemes.gruvbox') ]]
-	--[[    end, ]]
+	--[[ "sainnhe/gruvbox-material", ]]
+	--[[ lazy = false, ]]
+	--[[ enabled = false, ]]
+	--[[ priority = 1000, ]]
+	--[[ config = function() ]]
+	--[[ require('config.colorschemes.gruvbox') ]]
+	--[[ end, ]]
 	--[[ }, ]]
 
 	{
@@ -53,8 +53,14 @@ return {
 		end,
 	},
 
+
 	{
 		'mfussenegger/nvim-lint',
+		lazy = false,
+	},
+
+	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		lazy = false,
 	},
 
@@ -123,13 +129,13 @@ return {
 		lazy = false,
 	},
 
-	{
-		'windwp/nvim-ts-autotag',
-		lazy = false,
-		config = function()
-			require('nvim-ts-autotag').setup()
-		end,
-	},
+	--[[ { ]]
+	--[[ 'windwp/nvim-ts-autotag', ]]
+	--[[ lazy = false, ]]
+	--[[ config = function() ]]
+	--[[ require('nvim-ts-autotag').setup() ]]
+	--[[ end, ]]
+	--[[ }, ]]
 
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -143,75 +149,62 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				--[[ ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages ]]
-				refactor = {
-					smart_rename = {
-						enable = true,
-						keymaps = {
-							smart_rename = '<leader>lr',
-							desc = 'Rename variable under cursor',
-						},
-					},
-					highlight_definitions = {
-						enable = true,
-						clear_on_cursor_move = true,
-					},
-				},
+				--
 				ensure_installed = {
 					-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-					'bash',
-					'c',
-					'cmake',
-					'comment',
-					'cpp',
-					'css',
-					'csv',
-					'diff',
-					'dockerfile',
-					'doxygen',
-					'git_config',
-					'git_rebase',
-					'gitattributes',
-					'gitcommit',
-					'gitignore',
-					'go',
-					'hjson',
-					'html',
-					'htmldjango',
-					'http',
-					'ini',
-					'javascript',
-					'jq',
-					'json',
-					'jsonc',
-					'lua',
-					'make',
-					'markdown',
-					'markdown_inline',
-					'ninja',
-					'nix',
-					'passwd',
-					'python',
-					'regex',
-					'rust',
-					'scss',
-					'sql',
-					'squirrel',
-					'ssh_config',
-					'terraform',
-					'todotxt',
-					'toml',
-					'tsv',
-					'tsx',
-					'typescript',
-					'unison',
-					'v',
-					'vim',
-					'vue',
-					'wgsl',
-					'wing',
-					'xml',
-					'yaml',
-					'yang',
+					-- 'bash',
+					-- 'c',
+					-- 'cmake',
+					-- 'comment',
+					-- 'cpp',
+					-- 'css',
+					-- 'diff',
+					-- 'dockerfile',
+					-- 'doxygen',
+					-- 'git_config',
+					-- 'git_rebase',
+					-- 'gitattributes',
+					-- 'gitcommit',
+					-- 'gitignore',
+					-- 'go',
+					-- 'hjson',
+					-- 'html',
+					-- 'htmldjango',
+					-- 'http',
+					-- 'ini',
+					-- 'javascript',
+					-- 'jq',
+					-- 'json',
+					-- 'jsonc',
+					-- 'lua',
+					-- 'make',
+					-- 'markdown',
+					-- 'markdown_inline',
+					-- 'ninja',
+					-- 'nix',
+					-- 'passwd',
+					-- 'python',
+					-- 'regex',
+					-- 'rust',
+					-- 'scss',
+					-- 'sql',
+					-- 'squirrel',
+					-- 'ssh_config',
+					-- 'terraform',
+					-- 'todotxt',
+					-- 'toml',
+					-- 'tsv',
+					-- 'tsx',
+					-- 'typescript',
+					-- 'unison',
+					-- 'v',
+					-- 'vim',
+					-- 'vue',
+					-- 'wgsl',
+					-- 'wing',
+					-- 'xml',
+					-- 'yaml',
+					-- 'yang',
 				},
 
 				highlight = {
@@ -224,7 +217,7 @@ return {
 				},
 
 				context_commentstring = {
-					enable = true,
+					enable = false,
 					enable_autocmd = false,
 				},
 
@@ -235,7 +228,7 @@ return {
 					enable = true,
 					keymaps = {
 						init_selection = '<A-n>',
-						nodd_incremental = '<A-n>',
+						node_incremental = '<A-n>',
 						scope_incremental = false,
 						node_decremental = '<A-N>',
 					},
@@ -245,12 +238,12 @@ return {
 	},
 
 	--[[ { ]]
-	--[[ 	"LhKipp/nvim-nu", ]]
-	--[[ 	lazy = false, ]]
-	--[[ 	config = function() ]]
-	--[[ 		require("nu").setup() ]]
-	--[[ 	end, ]]
-	--[[ 	}, ]]
+	--[[ "LhKipp/nvim-nu", ]]
+	--[[ lazy = false, ]]
+	--[[ config = function() ]]
+	--[[ require("nu").setup() ]]
+	--[[ end, ]]
+	--[[ }, ]]
 
 	{
 		'hiphish/rainbow-delimiters.nvim',
@@ -323,11 +316,12 @@ return {
 					},
 				},
 				blank = {
-					enable = false,
+					enable = true,
 				},
 			})
 		end,
 	},
+
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
 		lazy = false,
@@ -521,8 +515,8 @@ return {
 	},
 
 	--[[ { ]]
-	--[[   "kazhala/close-buffers.nvim", ]]
-	--[[   event = "VeryLazy", ]]
+	--[[ "kazhala/close-buffers.nvim", ]]
+	--[[ event = "VeryLazy", ]]
 	--[[ }, ]]
 
 	{ 'folke/twilight.nvim', event = 'VeryLazy' },
@@ -569,7 +563,7 @@ return {
 
 			left = {
 				{
-					title = '  FILE',
+					title = ' FILE',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'filesystem'
@@ -578,7 +572,7 @@ return {
 				},
 
 				{
-					title = '  GIT',
+					title = ' GIT',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'git_status'
@@ -588,7 +582,7 @@ return {
 				},
 
 				{
-					title = '  BUFFERS',
+					title = ' BUFFERS',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'buffers'
@@ -607,7 +601,7 @@ return {
 				},
 
 				{
-					title = '  OUTLINE',
+					title = ' OUTLINE',
 					ft = 'Outline',
 					pinned = false,
 					open = 'SymbolsOutline',
@@ -689,23 +683,23 @@ return {
 			},
 
 			--[[ { ]]
-			--[[ 	"S", ]]
-			--[[ 	mode = { "n", "o", "x" }, ]]
-			--[[ 	function() ]]
-			--[[ 		-- show labeled treesitter nodes around the cursor ]]
-			--[[ 		require("flash").treesitter() ]]
-			--[[ 	end, ]]
-			--[[ 	desc = "Flash Treesitter", ]]
+			--[[ "S", ]]
+			--[[ mode = { "n", "o", "x" }, ]]
+			--[[ function() ]]
+			--[[ -- show labeled treesitter nodes around the cursor ]]
+			--[[ require("flash").treesitter() ]]
+			--[[ end, ]]
+			--[[ desc = "Flash Treesitter", ]]
 			--[[ }, ]]
 
 			--[[ { ]]
-			--[[ 	"r", ]]
-			--[[ 	mode = "o", ]]
-			--[[ 	function() ]]
-			--[[ 		-- jump to a remote location to execute the operator ]]
-			--[[ 		require("flash").remote() ]]
-			--[[ 	end, ]]
-			--[[ 	desc = "Remote Flash", ]]
+			--[[ "r", ]]
+			--[[ mode = "o", ]]
+			--[[ function() ]]
+			--[[ -- jump to a remote location to execute the operator ]]
+			--[[ require("flash").remote() ]]
+			--[[ end, ]]
+			--[[ desc = "Remote Flash", ]]
 			--[[ }, ]]
 
 			{
@@ -800,21 +794,8 @@ return {
 		},
 	},
 
-	{
-		'williamboman/mason.nvim',
-		dependencies = {
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
-		},
-		lazy = false,
-	},
-
-	{
-		'WhoIsSethDaniel/mason-tool-installer.nvim',
-		lazy = false,
-	},
-
 	--[[ { ]]
-	--[[   "weizheheng/ror.nvim", ]]
+	--[[ "weizheheng/ror.nvim", ]]
 	--[[ }, ]]
 
 	{ 'echasnovski/mini.nvim', version = false },

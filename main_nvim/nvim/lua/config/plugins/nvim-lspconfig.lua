@@ -39,7 +39,7 @@ function M.on_attach(client, bufnr)
 	--[[ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) ]]
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
 	vim.keymap.set('n', '<leader>lf', function()
-		vim.lsp.buf.format({ async = false })
+		vim.lsp.buf.format({ async = true })
 	end, bufopts)
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
@@ -80,21 +80,20 @@ function M.config()
 	})
 	mason_lspconfig.setup({
 		ensure_installed = {
-			'html',
-			'tsserver',
-			'cssls',
-			'dockerls',
-			'jsonls',
-			'vimls',
-			'powershell_es',
-			'lua_ls',
-			--[[ 'yamlls', ]]
-			'vimls',
-			'rust_analyzer',
-			--[[ 'debugpy', ]]
-			--[[ 'pyright', ]]
-			'ruff_lsp',
-			'bashls',
+			 'lua_ls',
+			 'ruff_lsp',
+			 'bashls',
+			 'rust_analyzer',
+		-- 'html',
+			 'tsserver',
+			 'cssls',
+			 'dockerls',
+			 'jsonls',
+			 'vimls',
+			 'powershell_es',
+			 --[[ 'yamlls', ]]
+			 --[[ 'debugpy', ]]
+			 --[[ 'pyright', ]]
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -115,14 +114,14 @@ function M.config()
 				filetypes = { 'lua' },
 			})
 		end,
-
-		['html'] = function()
-			lspconfig.html.setup({
-				on_attach = M.on_attach,
-				capabilities,
-				filetypes = { 'html' },
-			})
-		end,
+--TODO: lsp attach issue?
+-- 	['html'] = function()
+-- 		lspconfig.html.setup({
+-- 			on_attach = M.on_attach,
+-- 			capabilities,
+-- 			filetypes = { 'html' },
+-- 		})
+-- 	end,
 	})
 
 	--[[ function M.setup() ]]
@@ -166,8 +165,9 @@ function M.config()
 			'ruff_lsp',
 			'bashls',
 			--
-		},
+		}
 	})
+
 end
 
 return M

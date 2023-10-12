@@ -6,17 +6,17 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { 'prettier', 'prettierd' },
-				typescript = { 'prettier', 'prettierd' },
-				typescriptreact = { 'prettier', 'prettierd' },
-				javascriptreact = { 'prettier', 'prettierd' },
-				html = { 'prettier', 'prettierd' },
-				css = { 'prettier', 'prettierd' },
-				scss = { 'prettier', 'prettierd' },
-				json = { 'prettier', 'prettierd' },
-				yaml = { 'prettier', 'prettierd' },
-				toml = { 'prettier', 'prettierd' },
-				markdown = { 'prettier', 'prettierd' },
+				javascript = { 'prettierd' },
+				typescript = { 'prettierd' },
+				typescriptreact = { 'prettierd' },
+				javascriptreact = { 'prettierd' },
+				--html = { 'prettierd' },
+				css = { 'prettierd' },
+				scss = { 'prettierd' },
+				json = { 'prettierd' },
+				yaml = { 'prettierd' },
+				toml = { 'prettierd' },
+				markdown = { 'prettierd' },
 				lua = { 'stylua' },
 				--[[ lua = { "lua-format", "stylua"}, ]]
 				python = {
@@ -26,7 +26,7 @@ return {
 				},
 			},
 			format_on_save = {
-				lsp_fallback = true,
+				lsp_fallback = false,
 				async = false,
 				timeout_ms = 2000, -- Default is 1000, disregarded if async = true
 			},

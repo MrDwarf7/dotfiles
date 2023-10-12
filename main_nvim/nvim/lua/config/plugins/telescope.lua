@@ -98,7 +98,7 @@ function M.config()
 		--[[   case_mode = "smart_case", -- or "ignore_case" or "respect_case" ]]
 		--[[ }, ]]
 		-- Extensions
-		telescope.load_extension('repo')
+		-- telescope.load_extension('repo')
 	telescope.load_extension('neoclip')
 	telescope.load_extension('notify')
 	telescope.load_extension('dap')

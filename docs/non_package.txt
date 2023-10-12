@@ -1,8 +1,0 @@
-winget
-WT (Windows Terminal)
-Powershell (preview) >=7.4.0
-scoop
-choco (Only for refreshenv honestly)
-pdm
-pyenv
-

@@ -197,7 +197,7 @@ return {
 				),
 				dashboard.button('M', '  Show mark', ':Telescope marks<CR>'),
 				dashboard.button('t', '  Show todo', ':TodoTelescope<CR>'),
-				dashboard.button('c', '  Configuration folder', ':e ~/dotfiles/main_nvim/nvim/<CR>'),
+				dashboard.button('c', '  Configuration folder', ':e ~/.config/nvim/<CR>'),
 				-- dashboard.button("u", "  Sync plugins", ":PackerSync<CR>"),
 				dashboard.button('m', 'M  Mason', ':Mason<CR>'),
 				dashboard.button('l', '  Lazy', ':Lazy<CR>'),

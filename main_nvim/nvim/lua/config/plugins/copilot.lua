@@ -41,9 +41,6 @@ return {
 
 	{
 		'zbirenbaum/copilot-cmp',
-		depencencies = {
-			'zbirenbaum/copilot.lua',
-		},
 		lazy = false,
 		-- after = { "copilot.lua" },
 		config = function()

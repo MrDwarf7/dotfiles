@@ -16,39 +16,30 @@ local M = {}
 --[[   end ]]
 --[[ end, namespace("auto_hlsearch")) ]]
 
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.client_id)
-		if client.server_capabilities.hoverProvider then
-			vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-		end
-	end,
-})
-
-local bufferline_group = augroup('bufferline', { clear = true })
-autocmd({ 'BufAdd', 'BufEnter', 'TabNewEntered' }, {
-	desc = 'Update buffers when adding new buffers',
-	group = bufferline_group,
-	callback = function(args)
-		local buf_utils = require('config.utils.buffer')
-		if not vim.t.bufs then
-			vim.t.bufs = {}
-		end
-		if not buf_utils.is_valid(args.buf) then
-			return
-		end
-		if args.buf ~= buf_utils.current_buf then
-			buf_utils.last_buf = buf_utils.is_valid(buf_utils.current_buf) and buf_utils.current_buf or nil
-			buf_utils.current_buf = args.buf
-		end
-		local bufs = vim.t.bufs
-		if not vim.tbl_contains(bufs, args.buf) then
-			table.insert(bufs, args.buf)
-			vim.t.bufs = bufs
-		end
-		vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs)
-	end,
-})
+--[[ local bufferline_group = augroup("bufferline", { clear = true }) ]]
+--[[ autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, { ]]
+--[[   desc = "Update buffers when adding new buffers", ]]
+--[[   group = bufferline_group, ]]
+--[[   callback = function(args) ]]
+--[[     local buf_utils = require("config.utils.buffer") ]]
+--[[     if not vim.t.bufs then ]]
+--[[       vim.t.bufs = {} ]]
+--[[     end ]]
+--[[     if not buf_utils.is_valid(args.buf) then ]]
+--[[       return ]]
+--[[     end ]]
+--[[     if args.buf ~= buf_utils.current_buf then ]]
+--[[       buf_utils.last_buf = buf_utils.is_valid(buf_utils.current_buf) and buf_utils.current_buf or nil ]]
+--[[       buf_utils.current_buf = args.buf ]]
+--[[     end ]]
+--[[     local bufs = vim.t.bufs ]]
+--[[     if not vim.tbl_contains(bufs, args.buf) then ]]
+--[[       table.insert(bufs, args.buf) ]]
+--[[       vim.t.bufs = bufs ]]
+--[[     end ]]
+--[[     vim.t.bufs = vim.tbl_filter(buf_utils.is_valid, vim.t.bufs) ]]
+--[[   end, ]]
+--[[ }) ]]
 
 --[[ autocmd("BufDelete", { ]]
 --[[   desc = "Update buffers when deleting buffers", ]]
@@ -100,38 +91,39 @@ autocmd('BufWinEnter', {
 	end,
 })
 
---- Close a given buffer (fancy way of basically just killing the empty buffer that stays spawned but hidden when closing all windows)
----@param bufnr? number The buffer to close or the current buffer if not provided
----@param force? boolean Whether or not to foce close the buffers or confirm changes (default: false)
-function M.close(bufnr, force)
-	if not bufnr or bufnr == 0 then
-		bufnr = vim.api.nvim_get_current_buf()
-	end
-	if M.is_valid(bufnr) and #vim.t.bufs > 1 then
-		if not force and vim.api.nvim_get_option_value('modified', { buf = bufnr }) then
-			local bufname = vim.fn.expand('%')
-			local empty = bufname == ''
-			if empty or 'buftype' == 'Neotree' or 'neotree' or 'neo-tree' then
-				bufname = 'Untitled'
-			end
-			local confirm = vim.fn.confirm(('Save changes to "%s"?'):format(bufname), '&Yes\n&No\n&Cancel', 1, 'Question')
-			if confirm == 1 then
-				if empty then
-					return
-				end
-				vim.cmd.write()
-			elseif confirm == 2 then
-				force = true
-			else
-				return
-			end
-		end
-		require('mini.bufremove').delete()
-	else
-		local buftype = vim.api.nvim_get_option_value('buftype', { buf = bufnr })
-		vim.cmd(('silent! %s %d'):format((force or buftype == 'terminal') and 'bdelete!' or 'confirm bdelete', bufnr))
-	end
-end
+--[[ --- Close a given buffer (fancy way of basically just killing the empty buffer that stays spawned but hidden when closing all windows) ]]
+--[[ ---@param bufnr? number The buffer to close or the current buffer if not provided ]]
+--[[ ---@param force? boolean Whether or not to foce close the buffers or confirm changes (default: false) ]]
+--[[ function M.close(bufnr, force) ]]
+--[[ 	if not bufnr or bufnr == 0 then ]]
+--[[ 		bufnr = vim.api.nvim_get_current_buf() ]]
+--[[ 	end ]]
+--[[ 	if M.is_valid(bufnr) and #vim.t.bufs > 1 then ]]
+--[[ 		if not force and vim.api.nvim_get_option_value('modified', { buf = bufnr }) then ]]
+--[[ 			local bufname = vim.fn.expand('%') ]]
+--[[ 			local empty = bufname == '' ]]
+--[[ 			if empty or 'buftype' == 'Neotree' or 'neotree' or 'neo-tree' then ]]
+--[[ 				bufname = 'Untitled' ]]
+--[[ 			end ]]
+--[[ 			local confirm = ]]
+--[[ 				vim.fn.confirm(('Save changes to "%s"?'):format(bufname), '&Yes\n&No\n&Cancel', 1, 'Question') ]]
+--[[ 			if confirm == 1 then ]]
+--[[ 				if empty then ]]
+--[[ 					return ]]
+--[[ 				end ]]
+--[[ 				vim.cmd.write() ]]
+--[[ 			elseif confirm == 2 then ]]
+--[[ 				force = true ]]
+--[[ 			else ]]
+--[[ 				return ]]
+--[[ 			end ]]
+--[[ 		end ]]
+--[[ 		require('mini.bufremove').delete() ]]
+--[[ 	else ]]
+--[[ 		local buftype = vim.api.nvim_get_option_value('buftype', { buf = bufnr }) ]]
+--[[ 		vim.cmd(('silent! %s %d'):format((force or buftype == 'terminal') and 'bdelete!' or 'confirm bdelete', bufnr)) ]]
+--[[ 	end ]]
+--[[ end ]]
 
 ---@param keep_current? boolean Whether or not to keep the current buffer (default: false)
 ---@param force? boolean Whether or not to foce close the buffers or confirm changes (default: false)

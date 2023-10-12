@@ -1,3 +1,4 @@
+#!lua
 -- TODO: SmartSplits over default window resizing?
 -- TODO: keep selection when moving between open buffers
 -- TODO: Consider other plugins to handle some of the weird things that are scattered in singles (IE: the mini library has several things, buf remove etc etc. + surround)
@@ -161,7 +162,6 @@ vim.keymap.set(
 	"viw:lua require('spectre').open_file_search()<CR>",
 	{ noremap = true, silent = true, desc = 'Spectre Files' }
 )
-
 -- Telescope
 vim.keymap.set('n', '<leader>f', 'Find (telescope)', { desc = '+Find (telescope)' })
 vim.keymap.set(
@@ -378,10 +378,12 @@ vim.keymap.set('n', '<leader>lj', '<cmd>Trouble loclist<cr>', { silent = true, n
 vim.keymap.set('n', '<leader>lq', '<cmd>Trouble quickfix<cr>', { silent = true, noremap = true, desc = 'Quick Fix' })
 vim.keymap.set(
 	'n',
-	'<leader>lR',
+	'<leader>lr',
 	'<cmd>Trouble lsp_references<cr>',
 	{ silent = true, noremap = true, desc = 'References' }
 )
+
+
 
 vim.keymap.set(
 	'n',
@@ -390,7 +392,12 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = 'Lint' }
 )
 
---[[ vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename(), { silent = true, noremap = true, desc = 'Rename' }) ]]
+
+
+
+
+
+
 
 -- Nvim-dap
 vim.keymap.set('n', '<leader>d', 'Debug', { noremap = true, silent = true, desc = '+Debug' })

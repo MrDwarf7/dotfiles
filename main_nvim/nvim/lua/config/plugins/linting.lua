@@ -47,3 +47,4 @@ return {
 		end, { noremap = true, silent = true, buffer = true, desc = 'Lint' })
 	end,
 }
+
