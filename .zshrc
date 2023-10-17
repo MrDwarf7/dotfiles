@@ -35,10 +35,10 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 alias cls=clear
 # ~/Downloads/dotfiles/ && git fetch && git status
-alias zshc="vim ~/.zshrc"
-alias .z="source ~/.zshrc"
 alias vi=/usr/bin/vim
 alias vim=nvim
+alias zshc="vim ~/.zshrc"
+alias .z="source ~/.zshrc"
 alias neo=neofetch
 
 function dot {
