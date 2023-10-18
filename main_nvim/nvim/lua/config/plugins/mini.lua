@@ -42,7 +42,5 @@ function M.config()
 
 	local bufremove = require('mini.bufremove')
 	bufremove.setup({})
-
-	--TODO: Further sus of the mini libs
 end
 return M
