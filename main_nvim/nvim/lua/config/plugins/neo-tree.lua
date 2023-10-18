@@ -120,7 +120,7 @@ return {
 				--[[ end, ]]
 
 				follow_current_file = {
-					enabled = true,
+					enabled = false, -- TODO: Disabled for now because it is buggy
 				},
 				use_libuv_file_watcher = true,
 				group_empty_dirs = false, -- when true, empty folders will be grouped together
@@ -150,7 +150,7 @@ return {
 			},
 			window = {
 				position = 'left',
-				width = 50,
+				width = 40,
 				mapping_options = {
 					noremap = true,
 					nowait = true,
