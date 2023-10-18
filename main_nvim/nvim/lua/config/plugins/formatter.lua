@@ -13,7 +13,7 @@ return {
 				--html = { 'prettierd' },
 				css = { 'prettierd' },
 				scss = { 'prettierd' },
-				json = { 'prettierd' },
+				--json = { 'prettierd' },
 				yaml = { 'prettierd' },
 				toml = { 'prettierd' },
 				markdown = { 'prettierd' },

@@ -5,52 +5,66 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+### SSH agent things 
 systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+  source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+fi
+fi
 
-
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.local/.histfile
+# If you come from bash you might have to change your $PATH.
+### comp install
+HISTFILE=~/.local/.histfile # Lines configured by zsh-newuser-install 
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
-bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/dwarf/.zshrc'
+bindkey -e # End of lines configured by zsh-newuser-install 
+zstyle :compinstall filename '/home/dwarf/.zshrc' # compinstall
+autoload -Uz compinit # compinstall 
+compinit # compinstall 
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+### setting variales for pathing
+dotdir=~/dotfiles
+configdir=~/.config
 
-# If you come from bash you might have to change your $PATH.
+### Exports (mostly zsh)
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-# 
-export ZSH="$HOME/.oh-my-zsh"
+#export ZSH="$HOME/.oh-my-zsh"
+#export P10K="$HOME/.p10k.zsh"
 
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+export ZSH="$configdir/.oh-my-zsh"
+export P10K="$configdir/.p10k.zsh"
 
+[[ ! -f $configdir/.p10k.zsh ]] || source $P10K
+export ZSH_THEME="powerlevel10k/powerlevel10k"
+#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+### zsh plugins
+plugins=( 
+    git
+    archlinux
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+)
+
+### aliases 
 alias cls=clear
-# ~/Downloads/dotfiles/ && git fetch && git status
 alias vi=/usr/bin/vim
 alias vim=nvim
 alias zshc="vim ~/.zshrc"
 alias .z="source ~/.zshrc"
 alias neo=neofetch
 
+### functions
 function dot {
-  folder=~/dotfiles/
-  cd $folder
   if [ -z "$1" ]; then
-    (cd $folder && git fetch && git status)
-  else
-    (cd $folder && git fetch && git status)
+    (pushd $dotdir && git fetch && git status)
   fi
 }
-
 
 function gitgo {
   if [ -z "$1" ]; then
@@ -66,22 +80,6 @@ function gitgo {
   fi
 }
 
-
-
-plugins=( 
-    git
-    archlinux
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-)
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-fi
-if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-fi
+### source dat zsh
 
 source $ZSH/oh-my-zsh.sh

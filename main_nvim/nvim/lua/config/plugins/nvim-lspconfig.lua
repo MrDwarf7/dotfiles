@@ -80,20 +80,19 @@ function M.config()
 	})
 	mason_lspconfig.setup({
 		ensure_installed = {
-			 'lua_ls',
-			 'ruff_lsp',
-			 'bashls',
-			 'rust_analyzer',
-		-- 'html',
-			 'tsserver',
-			 'cssls',
-			 'dockerls',
-			 'jsonls',
-			 'vimls',
-			 'powershell_es',
-			 --[[ 'yamlls', ]]
-			 --[[ 'debugpy', ]]
-			 --[[ 'pyright', ]]
+			'lua_ls',
+			'ruff_lsp',
+			'bashls',
+			'rust_analyzer',
+			-- 'html',
+			'tsserver',
+			'cssls',
+			'dockerls',
+			'vimls',
+			'powershell_es',
+			--[[ 'yamlls', ]]
+			--[[ 'debugpy', ]]
+			--[[ 'pyright', ]]
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -114,14 +113,14 @@ function M.config()
 				filetypes = { 'lua' },
 			})
 		end,
---TODO: lsp attach issue?
--- 	['html'] = function()
--- 		lspconfig.html.setup({
--- 			on_attach = M.on_attach,
--- 			capabilities,
--- 			filetypes = { 'html' },
--- 		})
--- 	end,
+		--TODO: lsp attach issue?
+		-- 	['html'] = function()
+		-- 		lspconfig.html.setup({
+		-- 			on_attach = M.on_attach,
+		-- 			capabilities,
+		-- 			filetypes = { 'html' },
+		-- 		})
+		-- 	end,
 	})
 
 	--[[ function M.setup() ]]
@@ -141,6 +140,7 @@ function M.config()
 	mason_tool_installer.setup({
 		ensure_installed = {
 			'prettier',
+			'prettierd',
 			'black',
 			'isort',
 			'stylelint',
@@ -152,6 +152,7 @@ function M.config()
 			'shellcheck',
 			'selene',
 			'eslint_d',
+			'taplo',
 
 			--
 
@@ -167,7 +168,6 @@ function M.config()
 			--
 		}
 	})
-
 end
 
 return M
