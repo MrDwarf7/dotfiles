@@ -12,9 +12,9 @@ vim.keymap.set('n', '<F4>', ':set list! list?<CR>', { noremap = false, silent = 
 vim.keymap.set('c', 'Qa', ':qa!<CR>', { noremap = false, silent = true })
 
 -- Universal / Comon sense bindings
-vim.keymap.set('i', '<C-BS>', '<C-W>', { noremap = false, silent = true }) -- trying to get Ctrl + Backspace to work
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = false, silent = true }) -- j j to exit insert mode
-vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = false, silent = true }) -- Ctrl + S to save document
+vim.keymap.set('i', '<C-BS>', '<C-W>', { noremap = false, silent = true })  -- trying to get Ctrl + Backspace to work
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = false, silent = true })      -- j j to exit insert mode
+vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = false, silent = true })  -- Ctrl + S to save document
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = false, silent = true }) -- Center viewport on page up / down
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = false, silent = true })
@@ -47,11 +47,11 @@ vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silen
 vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 
 -- Macroing easier use of h/H and l/L to home/end keys
-vim.keymap.set('n', 'H', '^', { noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set('n', 'L', '$', { noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set('n', 'H', '^', { noremap = false, silent = true })      -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set('n', 'L', '$', { noremap = false, silent = true })      -- Shift + l (Or just L) to jump to end of line
 
-vim.keymap.set('v', 'H', '^', { noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set('v', 'L', '$', { noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set('v', 'H', '^', { noremap = false, silent = true })      -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set('v', 'L', '$', { noremap = false, silent = true })      -- Shift + l (Or just L) to jump to end of line
 
 vim.keymap.set('n', 'y<S-h>', 'y^', { noremap = true, silent = true }) -- Same as above for yanking
 vim.keymap.set('n', 'y<S-l>', 'y$', { noremap = true, silent = true }) -- Same as above for yanking
@@ -162,6 +162,7 @@ vim.keymap.set(
 	"viw:lua require('spectre').open_file_search()<CR>",
 	{ noremap = true, silent = true, desc = 'Spectre Files' }
 )
+
 -- Telescope
 vim.keymap.set('n', '<leader>f', 'Find (telescope)', { desc = '+Find (telescope)' })
 vim.keymap.set(
@@ -331,7 +332,7 @@ vim.keymap.set(
 --[[ 	{ silent = true, noremap = true, desc = 'Toggle Break Point' } ]]
 --[[ ) ]]
 
-vim.keymap.set("n", "<leader>td", "", {noremap = false, silent = true, desc = "LazyDocker"})
+vim.keymap.set("n", "<leader>td", "", { noremap = false, silent = true, desc = "LazyDocker" })
 
 -- Mini [Basics]
 vim.keymap.set('n', '<leader>u', 'UI Toggles', { noremap = false, silent = true, desc = '+UI Toggles' })
@@ -380,12 +381,10 @@ vim.keymap.set('n', '<leader>lj', '<cmd>Trouble loclist<cr>', { silent = true, n
 vim.keymap.set('n', '<leader>lq', '<cmd>Trouble quickfix<cr>', { silent = true, noremap = true, desc = 'Quick Fix' })
 vim.keymap.set(
 	'n',
-	'<leader>lr',
+	'<leader>lR',
 	'<cmd>Trouble lsp_references<cr>',
 	{ silent = true, noremap = true, desc = 'References' }
 )
-
-
 
 vim.keymap.set(
 	'n',
@@ -393,12 +392,6 @@ vim.keymap.set(
 	":lua require('lint').try_lint()<CR>",
 	{ noremap = true, silent = true, desc = 'Lint' }
 )
-
-
-
-
-
-
 
 
 -- Nvim-dap

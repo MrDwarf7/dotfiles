@@ -80,19 +80,19 @@ function M.config()
 	})
 	mason_lspconfig.setup({
 		ensure_installed = {
-			'lua_ls',
-			'ruff_lsp',
-			'bashls',
-			'rust_analyzer',
-			-- 'html',
+			'html',
 			'tsserver',
 			'cssls',
 			'dockerls',
-			'vimls',
 			'powershell_es',
+			'lua_ls',
 			--[[ 'yamlls', ]]
+			'vimls',
+			'rust_analyzer',
 			--[[ 'debugpy', ]]
 			--[[ 'pyright', ]]
+			'ruff_lsp',
+			'bashls',
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -113,14 +113,14 @@ function M.config()
 				filetypes = { 'lua' },
 			})
 		end,
-		--TODO: lsp attach issue?
-		-- 	['html'] = function()
-		-- 		lspconfig.html.setup({
-		-- 			on_attach = M.on_attach,
-		-- 			capabilities,
-		-- 			filetypes = { 'html' },
-		-- 		})
-		-- 	end,
+
+		['html'] = function()
+			lspconfig.html.setup({
+				on_attach = M.on_attach,
+				capabilities,
+				filetypes = { 'html' },
+			})
+		end,
 	})
 
 	--[[ function M.setup() ]]
@@ -141,6 +141,7 @@ function M.config()
 		ensure_installed = {
 			'prettier',
 			'prettierd',
+			'tsserver',
 			'black',
 			'isort',
 			'stylelint',
@@ -166,8 +167,25 @@ function M.config()
 			'ruff_lsp',
 			'bashls',
 			--
-		}
+		},
 	})
+
+	--require('pmizio/typescript-tools.nvim')
+	M.config = function()
+		local typescript_tools = require('typescript-tools').setup({
+			settings = {
+				tsserver_file_preferences = {
+					includeInlayParameterNameHints = 'all',
+					includeCompletionsForModuleExports = true,
+					quotePreference = 'auto',
+				},
+				tsserver_format_options = {
+					allowIncompleteCompletions = false,
+					allowRenameOfImportPath = false,
+				},
+			},
+		})
+	end
 end
 
 return M

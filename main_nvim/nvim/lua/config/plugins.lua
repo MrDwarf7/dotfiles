@@ -10,15 +10,6 @@ return {
 		end,
 	},
 
-	--[[ { ]]
-	--[[ "sainnhe/gruvbox-material", ]]
-	--[[ lazy = false, ]]
-	--[[ enabled = false, ]]
-	--[[ priority = 1000, ]]
-	--[[ config = function() ]]
-	--[[ require('config.colorschemes.gruvbox') ]]
-	--[[ end, ]]
-	--[[ }, ]]
 
 	{
 		'projekt0n/github-nvim-theme',
@@ -46,6 +37,15 @@ return {
 	},
 
 	{
+		'pmizio/typescript-tools.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'neovim/nvim-lspconfig',
+		},
+		lazy = false,
+	},
+
+	{
 		'folke/neodev.nvim',
 		lazy = false,
 		config = function()
@@ -53,14 +53,8 @@ return {
 		end,
 	},
 
-
 	{
 		'mfussenegger/nvim-lint',
-		lazy = false,
-	},
-
-	{
-		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		lazy = false,
 	},
 
@@ -129,13 +123,13 @@ return {
 		lazy = false,
 	},
 
-	--[[ { ]]
-	--[[ 'windwp/nvim-ts-autotag', ]]
-	--[[ lazy = false, ]]
-	--[[ config = function() ]]
-	--[[ require('nvim-ts-autotag').setup() ]]
-	--[[ end, ]]
-	--[[ }, ]]
+	{
+		'windwp/nvim-ts-autotag',
+		lazy = false,
+		config = function()
+			require('nvim-ts-autotag').setup()
+		end,
+	},
 
 	{
 		'nvim-treesitter/nvim-treesitter',
@@ -149,12 +143,76 @@ return {
 		config = function()
 			require('nvim-treesitter.configs').setup({
 				--[[ ensure_installed = "all", -- one of "all", "maintained" (parsers with maintainers), or a list of languages ]]
-				--
+				refactor = {
+					smart_rename = {
+						enable = true,
+						keymaps = {
+							smart_rename = '<leader>lr',
+							desc = 'Rename variable under cursor',
+						},
+					},
+					highlight_definitions = {
+						enable = true,
+						clear_on_cursor_move = true,
+					},
+				},
 				ensure_installed = {
 					-- one of "all", "maintained" (parsers with maintainers), or a list of languages
-					-- 'bash',
+					'bash',
+					'c',
+					'cmake',
+					'comment',
+					'cpp',
+					'css',
+					'csv',
+					'diff',
+					'dockerfile',
+					'doxygen',
+					'git_config',
+					'git_rebase',
+					'gitattributes',
+					'gitcommit',
+					'gitignore',
+					'go',
+					'hjson',
+					'html',
+					'htmldjango',
+					'http',
+					'ini',
+					'javascript',
+					'jq',
+					'json',
+					'jsonc',
+					'lua',
+					'make',
+					'markdown',
+					'markdown_inline',
+					'ninja',
+					'nix',
+					'passwd',
+					'python',
+					'regex',
+					'rust',
+					'scss',
+					'sql',
+					'squirrel',
+					'ssh_config',
+					'terraform',
+					'todotxt',
+					'toml',
+					'tsv',
+					'tsx',
+					'typescript',
+					'unison',
+					'v',
+					'vim',
+					'vue',
+					'wgsl',
+					'wing',
+					'xml',
+					'yaml',
+					'yang',
 				},
-
 				highlight = {
 					enable = true,
 					--[[ disable = { "embedded_template" } ]]
@@ -264,12 +322,11 @@ return {
 					},
 				},
 				blank = {
-					enable = true,
+					enable = false,
 				},
 			})
 		end,
 	},
-
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
 		lazy = false,
@@ -467,14 +524,14 @@ return {
 	--[[ event = "VeryLazy", ]]
 	--[[ }, ]]
 
-	{ 'folke/twilight.nvim', event = 'VeryLazy' },
-	{ 'zdharma-continuum/zinit-vim-syntax', event = 'VeryLazy' },
-	{ 'nvim-tree/nvim-web-devicons', event = 'VeryLazy' },
-	{ 'chaoren/vim-wordmotion', event = 'VeryLazy' },
-	{ 'windwp/nvim-spectre', event = 'VeryLazy' },
-	{ 'folke/trouble.nvim', event = 'VeryLazy' },
+	{ 'folke/twilight.nvim',                  event = 'VeryLazy' },
+	{ 'zdharma-continuum/zinit-vim-syntax',   event = 'VeryLazy' },
+	{ 'nvim-tree/nvim-web-devicons',          event = 'VeryLazy' },
+	{ 'chaoren/vim-wordmotion',               event = 'VeryLazy' },
+	{ 'windwp/nvim-spectre',                  event = 'VeryLazy' },
+	{ 'folke/trouble.nvim',                   event = 'VeryLazy' },
 	{ 'mrbjarksen/neo-tree-diagnostics.nvim', event = 'VeryLazy' },
-	{ 'RRethy/vim-illuminate', event = 'VeryLazy' },
+	{ 'RRethy/vim-illuminate',                event = 'VeryLazy' },
 
 	{
 		'folke/edgy.nvim',
@@ -497,8 +554,8 @@ return {
 					end,
 				},
 				{ ft = 'spectre_panel', title = 'SPECTRE', size = { height = 0.4 } },
-				{ ft = 'Trouble', title = 'TROUBLE' },
-				{ ft = 'qf', title = 'QUICKFIX' },
+				{ ft = 'Trouble',       title = 'TROUBLE' },
+				{ ft = 'qf',            title = 'QUICKFIX' },
 				{
 					ft = 'help',
 					size = { height = 35 },
@@ -511,7 +568,7 @@ return {
 
 			left = {
 				{
-					title = ' FILE',
+					title = '  FILE',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'filesystem'
@@ -520,7 +577,7 @@ return {
 				},
 
 				{
-					title = ' GIT',
+					title = '  GIT',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'git_status'
@@ -530,7 +587,7 @@ return {
 				},
 
 				{
-					title = ' BUFFERS',
+					title = '  BUFFERS',
 					ft = 'neo-tree',
 					filter = function(buf)
 						return vim.b[buf].neo_tree_source == 'buffers'
@@ -549,7 +606,7 @@ return {
 				},
 
 				{
-					title = ' OUTLINE',
+					title = '  OUTLINE',
 					ft = 'Outline',
 					pinned = false,
 					open = 'SymbolsOutline',
@@ -742,9 +799,18 @@ return {
 		},
 	},
 
-	--[[ { ]]
-	--[[ "weizheheng/ror.nvim", ]]
-	--[[ }, ]]
+	{
+		'williamboman/mason.nvim',
+		dependencies = {
+			'WhoIsSethDaniel/mason-tool-installer.nvim',
+		},
+		lazy = false,
+	},
 
-	{ 'echasnovski/mini.nvim', version = false },
+	{
+		'WhoIsSethDaniel/mason-tool-installer.nvim',
+		lazy = false,
+	},
+
+	{ 'echasnovski/mini.nvim',  version = false },
 }

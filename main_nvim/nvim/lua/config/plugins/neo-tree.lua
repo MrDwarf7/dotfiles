@@ -123,7 +123,7 @@ return {
 					enabled = true,
 				},
 				use_libuv_file_watcher = true,
-				group_empty_dirs = false, -- when true, empty folders will be grouped together
+				group_empty_dirs = false,   -- when true, empty folders will be grouped together
 				hijack_netrw_behavior = 'open_default', -- netrw disabled, opening a directory opens neo-tree
 				filtered_items = {
 					hide_dotfiles = false,
@@ -150,7 +150,7 @@ return {
 			},
 			window = {
 				position = 'left',
-				width = 50,
+				width = 40,
 				mapping_options = {
 					noremap = true,
 					nowait = true,
@@ -240,7 +240,7 @@ return {
 					{
 						'container',
 						content = {
-							{ 'name', zindex = 10 },
+							{ 'name',      zindex = 10 },
 							-- {
 							--   "symlink_target",
 							--   zindex = 10,
@@ -278,17 +278,17 @@ return {
 							--   zindex = 10,
 							--   highlight = "NeoTreeSymbolicLinkTarget",
 							-- },
-							{ 'clipboard', zindex = 10 },
-							{ 'bufnr', zindex = 10 },
-							{ 'modified', zindex = 20, align = 'right' },
+							{ 'clipboard',   zindex = 10 },
+							{ 'bufnr',       zindex = 10 },
+							{ 'modified',    zindex = 20, align = 'right' },
 							{ 'diagnostics', zindex = 20, align = 'right' },
-							{ 'git_status', zindex = 15, align = 'right' },
+							{ 'git_status',  zindex = 15, align = 'right' },
 						},
 					},
 				},
 				message = {
 					{ 'indent', with_markers = false },
-					{ 'name', highlight = 'NeoTreeMessage' },
+					{ 'name',   highlight = 'NeoTreeMessage' },
 				},
 				terminal = {
 					{ 'indent' },

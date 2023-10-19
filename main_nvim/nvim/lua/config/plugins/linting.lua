@@ -34,7 +34,21 @@ return {
 		}, {
 			--[[ pattern = '*', ]]
 			-- Other option would be listing specifics filetypes
-			pattern = { "*.lua", "*.js", "*.ts", "*.tsx", "*.jsx", "*.sh", "*.css", "*.yaml", "*.yml", "*.docker", "*.py", "*.vim"},
+			pattern = {
+				'*.lua',
+				'*.js',
+				'*.ts',
+				'*.tsx',
+				'*.jsx',
+				'*.sh',
+				'*.css',
+				'*.yaml',
+				'*.yml',
+				'*.yaml', -- Not sure if this is covered by previous entry
+				'*.docker',
+				'*.py',
+				'*.vim',
+			},
 			group = lint_augroup,
 			callback = function()
 				lint.try_lint()
@@ -47,4 +61,3 @@ return {
 		end, { noremap = true, silent = true, buffer = true, desc = 'Lint' })
 	end,
 }
-
