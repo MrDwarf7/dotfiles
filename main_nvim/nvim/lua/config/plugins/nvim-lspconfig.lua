@@ -142,6 +142,8 @@ function M.config()
 	mason_tool_installer.setup({
 		ensure_installed = {
 			'prettier',
+			'prettierd',
+			'tsserver',
 			'black',
 			'isort',
 			'stylelint',
@@ -168,6 +170,22 @@ function M.config()
 			--
 		},
 	})
-end
 
+	--require('pmizio/typescript-tools.nvim')
+	M.config = function()
+		local typescript_tools = require('typescript-tools').setup({
+			settings = {
+				tsserver_file_preferences = {
+					includeInlayParameterNameHints = 'all',
+					includeCompletionsForModuleExports = true,
+					quotePreference = 'auto',
+				},
+				tsserver_format_options = {
+					allowIncompleteCompletions = false,
+					allowRenameOfImportPath = false,
+				},
+			},
+		})
+	end
+end
 return M

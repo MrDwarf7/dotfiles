@@ -46,6 +46,15 @@ return {
 	},
 
 	{
+		'pmizio/typescript-tools.nvim',
+		dependencies = {
+			'nvim-lua/plenary.nvim',
+			'neovim/nvim-lspconfig',
+		},
+		lazy = false,
+	},
+
+	{
 		'folke/neodev.nvim',
 		lazy = false,
 		config = function()

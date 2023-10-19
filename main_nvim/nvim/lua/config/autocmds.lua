@@ -147,4 +147,19 @@ function M.close_all(keep_current, force)
 	end
 end
 
+local lsp_utils = require('config.utils.lsp-utils')
+
+function M.lsp_hovering_autocmd()
+	local lsp_utils_group = augroup('lsp_utils_group', { clear = true })
+
+	autocmd({
+		'CursorHold',
+		'CursorHoldI' * lsp_utils({
+			desc = 'Show hover information',
+			group = lsp_utils_group,
+		}),
+		M.lsp_utils.code_action_listener(),
+	})
+end
+
 return M
