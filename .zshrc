@@ -28,7 +28,7 @@ autoload -Uz compinit # compinstall
 compinit # compinstall 
 
 ### setting variales for pathing
-dotdir=~/dotfiles
+dotdir=$HOME/dotfiles
 configdir=~/.config
 
 ### Exports (mostly zsh)
@@ -61,7 +61,11 @@ alias neo=neofetch
 
 ### functions
 function dot {
+  if [ -z "$1" ]; then
     pushd $dotdir && git fetch && git status
+  else
+    cd $dotdir && git fetch && git status
+  fi
 }
 
 function gitgo {
