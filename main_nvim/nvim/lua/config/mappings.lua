@@ -319,17 +319,19 @@ vim.keymap.set(
 )
 vim.keymap.set(
 	'n',
-	'<leader>te',
-	':Neotree filesystem reveal left toggle<CR>',
-	{ noremap = false, silent = true, desc = 'Toggle Bar/Explorer' }
-) -- File Explorer lol
-vim.keymap.set(
-	'n',
 	'<leader>tb',
-	"<cmd>lua require'dap'.toggle_breakpoint()<CR>",
-	{ silent = true, noremap = true, desc = 'Toggle Break Point' }
-)
---[[ vim.keymap.set("n", "<leader>td", "", {noremap = false, silent = true, desc = "LazyDocker"}) ]]
+	':Neotree filesystem reveal left toggle<CR>',
+	{ noremap = false, silent = true, desc = 'Toggle Bar (Sidebar/Explorer)' }
+) -- File Explorer lol
+
+--[[ vim.keymap.set( ]]
+--[[ 	'n', ]]
+--[[ 	'<leader>tb', ]]
+--[[ 	"<cmd>lua require'dap'.toggle_breakpoint()<CR>", ]]
+--[[ 	{ silent = true, noremap = true, desc = 'Toggle Break Point' } ]]
+--[[ ) ]]
+
+vim.keymap.set("n", "<leader>td", "", {noremap = false, silent = true, desc = "LazyDocker"})
 
 -- Mini [Basics]
 vim.keymap.set('n', '<leader>u', 'UI Toggles', { noremap = false, silent = true, desc = '+UI Toggles' })

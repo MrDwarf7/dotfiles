@@ -61,9 +61,7 @@ alias neo=neofetch
 
 ### functions
 function dot {
-  if [ -z "$1" ]; then
-    (pushd $dotdir && git fetch && git status)
-  fi
+    pushd $dotdir && git fetch && git status
 }
 
 function gitgo {
