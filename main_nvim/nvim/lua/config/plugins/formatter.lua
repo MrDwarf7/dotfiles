@@ -6,10 +6,10 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				javascript = { 'prettier', 'prettierd', { 'tsserver' } },
-				typescript = { 'prettier', 'prettierd', { 'tsserver' } },
-				typescriptreact = { 'prettier', 'prettierd', { 'tsserver' } },
-				javascriptreact = { 'prettier', 'prettierd', { 'tsserver' } },
+				javascript = { 'prettier', { 'prettierd', 'tsserver' } },
+				typescript = { 'prettier', { 'prettierd', 'tsserver' } },
+				typescriptreact = { 'prettier', { 'prettierd', 'tsserver' } },
+				javascriptreact = { 'prettier', { 'prettierd', 'tsserver' } },
 				html = { 'prettier', 'prettierd' },
 				css = { 'prettier', 'prettierd' },
 				scss = { 'prettier', 'prettierd' },
@@ -26,6 +26,11 @@ return {
 				},
 			},
 			format_on_save = {
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 3500, -- Default is 1000, disregarded if async = true
+			},
+			format_after_save = {
 				lsp_fallback = true,
 				async = false,
 				timeout_ms = 3500, -- Default is 1000, disregarded if async = true

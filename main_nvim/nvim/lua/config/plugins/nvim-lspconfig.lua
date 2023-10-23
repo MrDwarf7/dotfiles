@@ -6,7 +6,7 @@ local M = {
 		{ 'williamboman/mason.nvim' },
 		{ 'williamboman/mason-lspconfig.nvim' },
 		{ 'hrsh7th/cmp-nvim-lsp' },
-		{ 'hrsh7th/cmp-nvim-lsp' },
+		--[[ { 'hrsh7th/cmp-nvim-lsp' }, ]]
 		{ 'SmiteshP/nvim-navic' },
 	},
 }
@@ -155,9 +155,7 @@ function M.config()
 			'shellcheck',
 			'selene',
 			'eslint_d',
-
 			--
-
 			'powershell_es',
 			'lua_ls',
 			--[[ 'yamlls', ]]
@@ -166,7 +164,7 @@ function M.config()
 			--[[ 'debugpy', ]]
 			--[[ 'pyright', ]]
 			'ruff_lsp',
-			'bashls',
+			--[[ 'bashls', ]]
 			--
 		},
 	})
@@ -188,4 +186,5 @@ function M.config()
 		})
 	end
 end
+
 return M

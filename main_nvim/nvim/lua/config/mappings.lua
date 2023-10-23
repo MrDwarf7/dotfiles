@@ -347,6 +347,15 @@ vim.keymap.set(
 )
 vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action, { noremap = true, silent = true, desc = 'LSP Code Action' })
 
+vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
+	local conform = require('config/plugins/conform')
+	conform.format({
+		lsp_fallback = true,
+		async = false,
+		timeout_ms = 2500, -- Default is 1000, disregarded if async = true
+	})({ noremap = true, silent = true, desc = 'LSP Format' })
+end, { desc = 'Format or format range if visual' })
+
 -- Trouble
 vim.keymap.set(
 	'n',

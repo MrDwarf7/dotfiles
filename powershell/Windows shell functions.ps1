@@ -413,10 +413,10 @@ function disloc
 {
     if (-not ($args))
     {
-    (Get-ChildItem HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | ForEach-Object {Get-ItemProperty $_.PSPath}) | Select-Object DistributionName,BasePath
+        (Get-ChildItem HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | ForEach-Object {Get-ItemProperty $_.PSPath}) | Select-Object DistributionName,BasePath
     } elseif ($args -eq "v" -or "V")
     {
-    (Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss" -Recurse)
+        (Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss" -Recurse)
     } else
     {
         Write-Error ErrorAction
@@ -687,6 +687,12 @@ function la
     Get-ChildItem $path -Force
 }
 
+function l
+{
+    param ($path = ".")
+    Get-ChildItem $path -Force
+}
+
 function zip
 {
     param (
@@ -734,7 +740,7 @@ function uzip
 function hx
 {
     $config="$env:USERPROFILE\dotfiles\scoop\persist\helix\config.toml"
-    
+
     if ($args[0] -eq "_local")
     {
         $config = ""
@@ -819,3 +825,10 @@ function LunarVim
     #   -lazy-lock.json
 }
 # Set-Alias lvim 'C:\Users\blake\.local\bin\lvim.ps1'
+
+
+
+
+
+
+
