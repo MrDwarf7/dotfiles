@@ -22,3 +22,4 @@ nvim_distros/*
 !nvim_distros/LazyVim/*
 !nvim_distros/old.nvims/*
 !nvim_distros/TestVim/*
+!nvim_distros/omerxx/*
