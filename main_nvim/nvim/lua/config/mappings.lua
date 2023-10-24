@@ -115,7 +115,7 @@ vim.keymap.set(
 	'n',
 	'<leader>x',
 	":lua require('mini.bufremove').delete()<CR>",
-	{ noremap = false, silent = true, desc = 'Buffer Delete' }
+	{ silent = true, noremap = false, desc = 'Buffer Delete' }
 ) -- Close current buffer, needs something tweaked to fix the error when too quick
 
 --[[ vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', {noremap = false, silent = true }) ]]

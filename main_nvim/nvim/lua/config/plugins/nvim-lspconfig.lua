@@ -38,9 +38,19 @@ function M.on_attach(client, bufnr)
 	--[[ vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts) ]]
 	--[[ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) ]]
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<leader>lf', function()
-		vim.lsp.buf.format({ async = false })
-	end, bufopts)
+	--[[ vim.keymap.set('n', '<leader>lf', function() ]]
+	--[[ 	vim.lsp.buf.format({ async = false }) ]]
+	--[[ end, bufopts) ]]
+
+	vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
+		local conform = require('conform')
+		conform.format({
+			lsp_fallback = true,
+			async = false,
+			timeout_ms = 2500, -- Default is 1000, disregarded if async = true
+		})
+	end, { desc = 'Format or format range if visual' })
+
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
@@ -134,7 +144,7 @@ function M.config()
 
 	require('ufo').setup()
 
-	M = {
+	local M = {
 		'WhoIsSethDaniel/mason-tool-installer.nvim',
 		lazy = false,
 	}

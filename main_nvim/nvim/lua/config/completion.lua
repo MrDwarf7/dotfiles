@@ -16,7 +16,7 @@ local M = {
 	},
 }
 
-function M.setup()
+function M.config()
 	local cmp_autopairs = require('nvim-autopairs.completion.cmp')
 	local lspkind = require('lspkind')
 	local cmp = require('cmp')
@@ -138,5 +138,5 @@ function M.setup()
 	cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
-M.setup()
+--M.setup()
 return M

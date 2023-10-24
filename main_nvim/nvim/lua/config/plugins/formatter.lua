@@ -21,8 +21,7 @@ return {
 				--[[ lua = { "lua-format", "stylua"}, ]]
 				python = {
 					--[[ 'ruff_fix', ]]
-					'isort',
-					{ 'ruff_format', 'black' },
+					{ 'ruff_lsp', 'ruff_format', 'black', 'isort' },
 				},
 			},
 			format_on_save = {

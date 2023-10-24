@@ -84,21 +84,14 @@ function M.config()
 		},
 	})
 
-	extensions =
-		{
-			fzy = {
-				override_generic_sorter = false,
-				override_file_sorter = true,
-			},
+	M.extensions = {
+		fzy = {
+			override_generic_sorter = false,
+			override_file_sorter = true,
 		},
-		--[[ fzf = { ]]
-		--[[   fuzzy = true, -- false will only do exact matching ]]
-		--[[   override_generic_sorter = true, -- override the generic sorter ]]
-		--[[   override_file_sorter = true, -- override the file sorter ]]
-		--[[   case_mode = "smart_case", -- or "ignore_case" or "respect_case" ]]
-		--[[ }, ]]
-		-- Extensions
-		telescope.load_extension('repo')
+	}
+
+	telescope.load_extension('repo')
 	telescope.load_extension('neoclip')
 	telescope.load_extension('notify')
 	telescope.load_extension('dap')
@@ -106,10 +99,10 @@ function M.config()
 	telescope.load_extension('fzy_native')
 	telescope.load_extension('live_grep_args')
 
-	previewers = require('telescope.previewers')
-	builtin = require('telescope.builtin')
-	local conf = require('telescope.config')
-	local delta = previewers.new_termopen_previewer({
+	M.previewers = require('telescope.previewers')
+	M.builtin = require('telescope.builtin')
+	M.conf = require('telescope.config')
+	M.delta = M.previewers.new_termopen_previewer({
 		get_command = function(entry)
 			-- this is for status
 			-- You can get the AM things in entry.status. So we are displaying file if entry.status == '??' or 'A '
@@ -131,14 +124,14 @@ function M.my_git_commits(opts)
 	opts = opts or {}
 	opts.previewer = delta
 
-	builtin.git_commits(opts)
+	M.builtin.git_commits(opts)
 end
 
 function M.my_git_bcommits(opts)
 	opts = opts or {}
 	opts.previewer = delta
 
-	builtin.git_bcommits(opts)
+	M.builtin.git_bcommits(opts)
 end
 
 function M.my_git_status(opts)
@@ -154,11 +147,11 @@ function M.my_git_status(opts)
 	}
 	opts.previewer = delta
 
-	builtin.git_status(opts)
+	M.builtin.git_status(opts)
 end
 
 function M.my_note(opts)
-	builtin.live_grep({ prompt_title = ' Note ', cwd = '~/Notes' })
+	M.builtin.live_grep({ prompt_title = ' Note ', cwd = '~/Notes' })
 end
 
 function M.project_files()
@@ -170,7 +163,7 @@ function M.project_files()
 end
 
 function M.my_buffers(opts)
-	builtin.buffers({
+	M.builtin.buffers({
 		layout_strategy = 'vertical',
 		ignore_current_buffer = true,
 		sort_mru = true,

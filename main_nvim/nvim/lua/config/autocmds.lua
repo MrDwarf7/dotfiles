@@ -16,15 +16,6 @@ local M = {}
 --[[   end ]]
 --[[ end, namespace("auto_hlsearch")) ]]
 
-vim.api.nvim_create_autocmd('LspAttach', {
-	callback = function(args)
-		local client = vim.lsp.get_client_by_id(args.client_id)
-		if client.server_capabilities.hoverProvider then
-			vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-		end
-	end,
-})
-
 local bufferline_group = augroup('bufferline', { clear = true })
 autocmd({ 'BufAdd', 'BufEnter', 'TabNewEntered' }, {
 	desc = 'Update buffers when adding new buffers',
@@ -133,20 +124,6 @@ function M.close(bufnr, force)
 	end
 end
 
----@param keep_current? boolean Whether or not to keep the current buffer (default: false)
----@param force? boolean Whether or not to foce close the buffers or confirm changes (default: false)
-function M.close_all(keep_current, force)
-	if keep_current == nil then
-		keep_current = false
-	end
-	local current = vim.api.nvim_get_current_buf()
-	for _, bufnr in ipairs(vim.t.bufs) do
-		if not keep_current or bufnr ~= current then
-			M.close(bufnr, force)
-		end
-	end
-end
-
 local lsp_utils = require('config.utils.lsp-utils')
 
 function M.lsp_hovering_autocmd()
@@ -154,7 +131,8 @@ function M.lsp_hovering_autocmd()
 
 	autocmd({
 		'CursorHold',
-		'CursorHoldI' * lsp_utils({
+		'CursorHoldI',
+		lsp_utils({
 			desc = 'Show hover information',
 			group = lsp_utils_group,
 		}),
