@@ -154,9 +154,8 @@ function M.config()
 			'selene',
 			'eslint_d',
 			'taplo',
-
+			'beautysh',
 			--
-
 			'powershell_es',
 			'lua_ls',
 			--[[ 'yamlls', ]]
