@@ -49,6 +49,7 @@ plugins=(
     archlinux
     zsh-autosuggestions
     zsh-syntax-highlighting
+    pdm
 )
 
 ### aliases 
