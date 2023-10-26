@@ -19,6 +19,7 @@ require("lazy").setup("base.plugins_list", {
 			enabled = true,
 			-- disable_events = {},
 		},
+
 		rtp = {
 			disabled_plugins = {
 				"gzip",

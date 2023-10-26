@@ -70,6 +70,7 @@ function M.config()
 					['<c-t>'] = trouble.open_with_trouble,
 					--[[ ["<esc>"] = actions.close, ]]
 					['<C-q>'] = actions.close,
+					['<c-d>'] = actions.delete_buffer,
 				},
 				n = {
 					['q'] = actions.close,
@@ -79,6 +80,7 @@ function M.config()
 					['<C-j>'] = actions.move_selection_next,
 					['<C-p>'] = actions.move_selection_previous,
 					['<C-n>'] = actions.move_selection_next,
+					['<c-d>'] = actions.delete_buffer,
 				},
 			},
 		},

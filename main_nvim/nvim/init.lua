@@ -5,4 +5,4 @@ require('config.lazy')
 require('config.completion')
 -- Key map
 require('config.mappings')
-require('config.autocmds')
+--require('config.autocmds')

@@ -107,6 +107,7 @@ function M.config()
 		},
 		sources = cmp.config.sources({
 			{ name = 'nvim_lsp' },
+			{ name = 'tsserver' },
 			{ name = 'vsnip' },
 			{ name = 'path' },
 			{ name = 'calc' },
@@ -138,5 +139,17 @@ function M.config()
 	cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 end
 
---M.setup()
+setmetatable({
+	__call = function()
+		local setup_fnc = M.setup()
+		if setup_fnc == nil then
+			setup_fnc = M.setup()
+		end
+		if setup_fnc ~= nil then
+			return M.config()
+		end
+	end,
+}, M)
+
+
 return M

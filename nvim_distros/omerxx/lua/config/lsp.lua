@@ -2,7 +2,8 @@
 --  This function gets run when an LSP connects to a particular buffer.
 
 local on_attach = function(_, bufnr)
-	--
+	-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
 	-- In this case, we create a function that lets us more easily define mappings specific
 	-- for LSP related items. It sets the mode, buffer and description for us each time.
 
@@ -13,7 +14,9 @@ local on_attach = function(_, bufnr)
 		elseif vim.lsp.buf.formatting then
 			vim.lsp.buf.formatting()
 		end
-	end, { desc = "Format current buffer with LSP" })
+	end, { desc = "Format current buffer with LSP" }
+	)
+	return require("lsp-status").on_attach(_, bufnr)
 end
 
 local mason_tool_installer = require("mason-tool-installer")
@@ -119,6 +122,19 @@ require("lspconfig").luau_lsp.setup({
 	},
 })
 
+require("lspconfig").tsserver.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	init_options = {
+		hostInfo = "neovim",
+		-- 4GB memory limit, test it I guess
+		maxTsServerMemory = 4096,
+		tsserver = { useSyntaxServer = "never" },
+	},
+})
+
+
+
 -- nvim-cmp setup
 local cmp = require("cmp")
 local luasnip = require("luasnip")
@@ -162,6 +178,7 @@ cmp.setup({
 	sources = {
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
+		{ name = "tsserver" },
 	},
 })
 
@@ -222,6 +239,46 @@ typescript_tools.setup({
 	},
 })
 
+
+
+local copilot = require('copilot')
+copilot.setup({
+	panel = {
+		enabled = true, -- TOGGLE
+		auto_refresh = true,
+		keymap = {
+			jump_next = '<A-]>',
+			jump_prev = '<A-[>',
+			accept = '<CR>',
+			refresh = 'gr', -- Consider <leader>cn ("Co-pilot New" ?)
+			open = '<A-CR>',
+		},
+		layout = {
+			position = 'bottom',
+			ratio = 0.4,
+		},
+	},
+	suggestion = {
+		enabled = true,
+		auto_trigger = true, --DEFAULT FOR NOW
+		debounce = 75,     --No idea lol
+		keymap = {
+			accept = '<C-l>',
+			accept_word = false,
+			accept_line = false,
+			next = '<A-]>',
+			prev = '<A-[>',
+			dismiss = '<A-c>',
+		},
+	},
+})
+
+
+local copilot_cmp = require('copilot_cmp')
+copilot_cmp.setup({})
+
+
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "sh",
 	callback = function()
@@ -242,7 +299,7 @@ end
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>-", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>lh", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>j", vim.diagnostic.setloclist)
 
 nmap("gd", vim.lsp.buf.definition, "[G]oto [D]efinition")
@@ -268,7 +325,6 @@ nmap("<leader>wl", function()
 end, "[W]orkspace [L]ist Folders")
 
 vim.keymap.set({ "n", "v" }, "<leader>lf", function()
-	local conform = require("conform")
 	conform.format({
 		lsp_fallback = true,
 		async = false,

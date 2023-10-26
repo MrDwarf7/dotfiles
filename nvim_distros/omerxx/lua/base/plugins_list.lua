@@ -39,11 +39,11 @@ return {
 					telescope = require("telescope.themes").get_dropdown({ hide_preview = false }),
 				},
 				-- These two configs can also be passed down to the goto-preview definition and implementation calls for one off "peak" functionality.
-				focus_on_open = true, -- Focus the floating window when opening it.
-				dismiss_on_move = false, -- Dismiss the floating window when moving the cursor.
-				force_close = true, -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
-				bufhidden = "wipe", -- the bufhidden option to set on the floating window. See :h bufhidden
-				stack_floating_preview_windows = true, -- Whether to nest floating windows
+				focus_on_open = true,                                    -- Focus the floating window when opening it.
+				dismiss_on_move = false,                                 -- Dismiss the floating window when moving the cursor.
+				force_close = true,                                      -- passed into vim.api.nvim_win_close's second argument. See :h nvim_win_close
+				bufhidden = "wipe",                                      -- the bufhidden option to set on the floating window. See :h bufhidden
+				stack_floating_preview_windows = true,                   -- Whether to nest floating windows
 				preview_window_title = { enable = true, position = "left" }, -- Whether
 			})
 		end,
@@ -107,7 +107,7 @@ return {
 
 	"ray-x/go.nvim",
 	"ray-x/guihua.lua",
-	{ "catppuccin/nvim", as = "catppuccin" },
+	{ "catppuccin/nvim",      as = "catppuccin" },
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -153,6 +153,22 @@ return {
 		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
 	},
 
+	{
+		'zbirenbaum/copilot.lua',
+		enabled = true,
+		--lazy = false,
+		cmd = 'Copilot',
+		event = 'InsertEnter',
+	},
+
+	{
+		'zbirenbaum/copilot-cmp',
+		depencencies = {
+			'zbirenbaum/copilot.lua',
+		},
+		lazy = false,
+	},
+
 	{ -- Highlight, edit, and navigate code
 		"nvim-treesitter/nvim-treesitter",
 		build = function()
@@ -171,7 +187,7 @@ return {
 	"tpope/vim-fugitive",
 	"lewis6991/gitsigns.nvim",
 
-	"navarasu/onedark.nvim", -- Theme inspired by Atom
+	"navarasu/onedark.nvim",    -- Theme inspired by Atom
 	"nvim-lualine/lualine.nvim", -- Fancier statusline
 	{
 		"lukas-reineke/indent-blankline.nvim",
@@ -223,7 +239,7 @@ return {
 		},
 	},
 	"numToStr/Comment.nvim", -- "gc" to comment visual regions/lines
-	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
+	"tpope/vim-sleuth",     -- Detect tabstop and shiftwidth automatically
 	-- Fuzzy Finder (files, lsp, etc)
 	{
 		"nvim-telescope/telescope.nvim",

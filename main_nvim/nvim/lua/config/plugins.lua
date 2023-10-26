@@ -534,14 +534,14 @@ return {
 	--[[   event = "VeryLazy", ]]
 	--[[ }, ]]
 
-	{ 'folke/twilight.nvim', event = 'VeryLazy' },
-	{ 'zdharma-continuum/zinit-vim-syntax', event = 'VeryLazy' },
-	{ 'nvim-tree/nvim-web-devicons', event = 'VeryLazy' },
-	{ 'chaoren/vim-wordmotion', event = 'VeryLazy' },
-	{ 'windwp/nvim-spectre', event = 'VeryLazy' },
-	{ 'folke/trouble.nvim', event = 'VeryLazy' },
+	{ 'folke/twilight.nvim',                  event = 'VeryLazy' },
+	{ 'zdharma-continuum/zinit-vim-syntax',   event = 'VeryLazy' },
+	{ 'nvim-tree/nvim-web-devicons',          event = 'VeryLazy' },
+	{ 'chaoren/vim-wordmotion',               event = 'VeryLazy' },
+	{ 'windwp/nvim-spectre',                  event = 'VeryLazy' },
+	{ 'folke/trouble.nvim',                   event = 'VeryLazy' },
 	{ 'mrbjarksen/neo-tree-diagnostics.nvim', event = 'VeryLazy' },
-	{ 'RRethy/vim-illuminate', event = 'VeryLazy' },
+	{ 'RRethy/vim-illuminate',                event = 'VeryLazy' },
 
 	{
 		'folke/edgy.nvim',
@@ -564,8 +564,8 @@ return {
 					end,
 				},
 				{ ft = 'spectre_panel', title = 'SPECTRE', size = { height = 0.4 } },
-				{ ft = 'Trouble', title = 'TROUBLE' },
-				{ ft = 'qf', title = 'QUICKFIX' },
+				{ ft = 'Trouble',       title = 'TROUBLE' },
+				{ ft = 'qf',            title = 'QUICKFIX' },
 				{
 					ft = 'help',
 					size = { height = 35 },
@@ -826,5 +826,5 @@ return {
 	--[[   "weizheheng/ror.nvim", ]]
 	--[[ }, ]]
 
-	{ 'echasnovski/mini.nvim', version = false },
+	{ 'echasnovski/mini.nvim',  version = false },
 }

@@ -63,7 +63,7 @@ vim.opt.listchars = {
 -- Powershell over CMD
 vim.opt.shell = "pwsh.exe"
 vim.opt.shellcmdflag =
-	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
 vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 vim.opt.shellquote = ""
@@ -103,7 +103,7 @@ vim.opt.encoding = "UTF-8"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.clipboard = "unnamedplus"
 vim.opt.laststatus = 3
-vim.opt.timeoutlen = 250
+vim.opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
 	vim.opt.splitkeep = "screen"
 end
@@ -121,7 +121,7 @@ vim.opt.shiftwidth = 4
 vim.opt.number = true
 vim.opt.colorcolumn = "+1"
 vim.opt.list = true
-vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "yes"
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
 

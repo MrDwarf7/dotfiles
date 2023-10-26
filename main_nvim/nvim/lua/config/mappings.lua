@@ -11,9 +11,9 @@ vim.keymap.set('n', '<F4>', ':set list! list?<CR>', { noremap = false, silent = 
 vim.keymap.set('c', 'Qa', ':qa!<CR>', { noremap = false, silent = true })
 
 -- Universal / Comon sense bindings
-vim.keymap.set('i', '<C-BS>', '<C-W>', { noremap = false, silent = true }) -- trying to get Ctrl + Backspace to work
-vim.keymap.set('i', 'jj', '<Esc>', { noremap = false, silent = true }) -- j j to exit insert mode
-vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = false, silent = true }) -- Ctrl + S to save document
+vim.keymap.set('i', '<C-BS>', '<C-W>', { noremap = false, silent = true })  -- trying to get Ctrl + Backspace to work
+vim.keymap.set('i', 'jj', '<Esc>', { noremap = false, silent = true })      -- j j to exit insert mode
+vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = false, silent = true })  -- Ctrl + S to save document
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = false, silent = true }) -- Center viewport on page up / down
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = false, silent = true })
@@ -46,11 +46,11 @@ vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silen
 vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
 
 -- Macroing easier use of h/H and l/L to home/end keys
-vim.keymap.set('n', 'H', '^', { noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set('n', 'L', '$', { noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set('n', 'H', '^', { noremap = false, silent = true })      -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set('n', 'L', '$', { noremap = false, silent = true })      -- Shift + l (Or just L) to jump to end of line
 
-vim.keymap.set('v', 'H', '^', { noremap = false, silent = true }) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set('v', 'L', '$', { noremap = false, silent = true }) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set('v', 'H', '^', { noremap = false, silent = true })      -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set('v', 'L', '$', { noremap = false, silent = true })      -- Shift + l (Or just L) to jump to end of line
 
 vim.keymap.set('n', 'y<S-h>', 'y^', { noremap = true, silent = true }) -- Same as above for yanking
 vim.keymap.set('n', 'y<S-l>', 'y$', { noremap = true, silent = true }) -- Same as above for yanking
@@ -333,6 +333,13 @@ vim.keymap.set(
 
 -- Mini [Basics]
 vim.keymap.set('n', '<leader>u', 'UI Toggles', { noremap = false, silent = true, desc = '+UI Toggles' })
+
+
+
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { noremap = false, silent = true, desc = 'Hover Documentation' })
+vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+	{ noremap = false, silent = true, desc = 'Signature Documentation' })
+-- See `:help K` for why this keymap
 
 -- LSP
 vim.keymap.set('n', '<leader>l', 'LSP', { noremap = true, silent = true, desc = '+LSP' })
