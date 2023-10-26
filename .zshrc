@@ -27,6 +27,9 @@ zstyle :compinstall filename '/home/dwarf/.zshrc' # compinstall
 autoload -Uz compinit # compinstall 
 compinit # compinstall 
 
+autoload -U bashcompinit
+bashcompinit
+
 ### setting variales for pathing
 dotdir=$HOME/dotfiles
 configdir=~/.config
@@ -47,6 +50,20 @@ export P10K="$configdir/.p10k.zsh"
 
 [[ ! -f $configdir/.p10k.zsh ]] || source $P10K
 export ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Created by `pipx` on 2023-10-26 10:01:20
+export PATH="$PATH:/home/dwarf/.local/bin"
+eval "$(register-python-argcomplete pipx)"
+
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+
+
+
+
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 ### zsh plugins
@@ -88,6 +105,17 @@ function dot {
   }
 
 
+# function avenv {
+#   if [ -z ".venv" ] then
+#     python3 -m venv .venv
+#     source .venv/bin/activate
+#   else
+#     source .venv/bin/activate
+#   fi
+# }
+
+
+
   function mgr { 
     pushd "$gitdir/"
   }
@@ -107,3 +135,4 @@ function dot {
 ### source dat zsh
 
 source $ZSH/oh-my-zsh.sh
+
