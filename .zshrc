@@ -10,10 +10,10 @@ systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
-if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-  source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
-fi
+  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+  if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+  fi
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -30,6 +30,12 @@ compinit # compinstall
 ### setting variales for pathing
 dotdir=$HOME/dotfiles
 configdir=~/.config
+gitdir=$HOME/Documents/GitHub_Projects
+
+
+data_on_demand=$gitdir/Data-On-Demand
+data_on_demand_back=$data_on_demand/Data-On-Demand-Backend
+data_on_demand_front=$data_on_demand/Data-On-Demand-Frontend
 
 ### Exports (mostly zsh)
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -45,11 +51,11 @@ export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 ### zsh plugins
 plugins=( 
-    git
-    archlinux
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    pdm
+  git
+  archlinux
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  pdm
 )
 
 ### aliases 
@@ -62,26 +68,41 @@ alias neo=neofetch
 
 ### functions
 function dot {
-  if [ -z "$1" ]; then
-    pushd $dotdir && git fetch && git status
-  else
-    cd $dotdir && git fetch && git status
-  fi
-}
+  pushd $dotdir &&
+    git fetch --all &&
+    git status
+  }
 
-function gitgo {
-  if [ -z "$1" ]; then
-    git status &&
-    git add --all &&
-    git commit --all -m "Bump from Linux" &&
-    git push
-  else
-    git status &&
-    git add --all &&
-    git commit --all -m "$1" &&
-    git push
-  fi
-}
+  function gitgo {
+    if [ -z "$1" ]; then
+      git status &&
+        git add --all &&
+        git commit --all -m "Bump from Linux" &&
+        git push
+            else
+              git status &&
+                git add --all &&
+                git commit --all -m "$1" &&
+                git push
+    fi
+  }
+
+
+  function mgr { 
+    pushd "$gitdir/"
+  }
+
+  function dod { 
+    pushd "$data_on_demand/"
+  }
+
+  function dodb { 
+    pushd "$data_on_demand_back/"
+  }
+
+  function dodf { 
+    pushd "$data_on_demand_front/"
+  }
 
 ### source dat zsh
 
