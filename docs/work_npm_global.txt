@@ -1,7 +1,7 @@
 C:\Users\boughbl\scoop\persist\nodejs\bin
 +-- @fsouza/prettierd@0.25.1
 +-- neovim@4.10.1
-+-- pnpm@8.8.0
++-- prettier@3.0.3
 +-- typescript-language-server@3.3.2
 +-- typescript@5.2.2
 `-- yarn@1.22.19
