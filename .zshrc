@@ -61,7 +61,15 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
 
+export PNPM_HOME="$HOME/.config/.pnpm"
 
+# pnpm
+export PNPM_HOME="/home/dwarf/.config/.pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
 
 
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -82,6 +90,7 @@ alias vim=nvim
 alias zshc="vim ~/.zshrc"
 alias .z="source ~/.zshrc"
 alias neo=neofetch
+alias dea=deactivate
 
 ### functions
 function dot {
@@ -104,15 +113,44 @@ function dot {
     fi
   }
 
+function avenv {
+  source ./.venv/bin/activate &&
+    echo "Activated virtual environment" &&
+}
 
-# function avenv {
-#   if [ -z ".venv" ] then
-#     python3 -m venv .venv
-#     source .venv/bin/activate
-#   else
-#     source .venv/bin/activate
-#   fi
-# }
+function rmvenv {
+  if [ -d "./.venv" ]; then
+    rm -rf ./.venv &&
+      echo "Removed virtual environment"
+  else
+    echo "No virtual environment found"
+  fi
+}
+
+
+
+
+
+
+
+
+# Vim related things
+
+alias xvim="NVIM_APPNAME=omerxx nvim"
+
+function sevim() {
+  items=("default" "omerxx")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "sevim\n"
 
 
 
@@ -135,4 +173,5 @@ function dot {
 ### source dat zsh
 
 source $ZSH/oh-my-zsh.sh
+
 
