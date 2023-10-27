@@ -113,6 +113,13 @@ function dot {
     fi
   }
 
+
+# allows for cloning repos into bare repo and then creating worktrees
+alias clone-for-worktrees="!sh $dotdir/git-clone-worktrees.sh"
+
+
+
+
 function avenv {
   source ./.venv/bin/activate &&
     echo "Activated virtual environment" &&
