@@ -15,6 +15,7 @@
 	wtm = worktree move
 	s- = switch -
 	fa = fetch --all
+	pa = pull --all
 [push]
 	autoSetupRemote = true
 [filter "lfs"]
