@@ -115,7 +115,9 @@ function dot {
 
 
 # allows for cloning repos into bare repo and then creating worktrees
-alias clone-for-worktrees="!sh $dotdir/git-clone-worktrees.sh"
+# goes into the gitconfig --global not here 
+# alias.clone-for-worktrees="!sh $dotdir/git-clone-worktrees.sh"
+
 
 
 
