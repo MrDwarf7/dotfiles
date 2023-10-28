@@ -30,9 +30,10 @@ function scoopup
 
 function dot
 {
-    if ($args)
+    if (-not ($args))
     {
-        $basePath = "$dotfiles_dir/$args"
+        Push-Location "C:\"
+        $basePath = $dotfiles_dir
         Push-Location $basePath
         Get-ChildItem
         Write-Host "Fetching: "
@@ -42,14 +43,18 @@ function dot
         return
     } else
     {
-        $basePath = $dotfiles_dir
-        Push-Location $basePath
-        Get-ChildItem
-        Write-Host "Fetching: "
-        git fetch
-        Write-Host "Status: "
-        git status
-        return
+        Push-Location "C:\"
+        if ($args)
+        {
+            $basePath = "$dotfiles_dir/$args"
+            Push-Location $basePath
+            Get-ChildItem
+            Write-Host "Fetching: "
+            git fetch
+            Write-Host "Status: "
+            git status
+            return
+        } 
     }
 } 
 
@@ -127,6 +132,4 @@ function uzip
     }
 }
 # END - Linux Functions
-
-
 

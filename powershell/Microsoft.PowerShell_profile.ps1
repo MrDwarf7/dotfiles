@@ -12,7 +12,17 @@ $dotfiles_dir = "$env:HOMEPATH/dotfiles"
 $work_app_dir = "C:/Applications"
 $work_scripts_dir = "$work_app_dir/PowerShell_start/scripts"
 
-$powershell_scripts_dir = "$dotfiles_dir/powershell/scripts"
+$powershell_dir = "$dotfiles_dir/powershell"
+$powershell_scripts_dir = "$powershell_dir/scripts"
+
+$work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
+$home_theme = '1MrDwarf7Theme.omp.json'
+
+
+# Unused for time being as they just sit in my dotfiles atm anyway lol
+#
+# $home_GitHub = "E:\GitHub"
+# $home_scripts_dir = "D:\Documents\PowerShell\home_scripts"
 
 ### START MAIN SCRIPT
 
@@ -59,14 +69,19 @@ if (checkEnvironment)
     . "$work_scripts_dir/python_func_work.ps1"
 
     . "$work_scripts_dir/shell_alias_func_work.ps1"
+
+    oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
 }
 
 # Not work/ AKA Home
-if (checkEnvironment -eq $false)
+if (-not (checkEnvironment))
 {
     # Not required at work
     . "$powershell_scripts_dir/wsl_func_shell.ps1"
-    #. "$powershell_scripts_dir/navigation_func_home.ps1"
+
+    . "$powershell_scripts_dir/navigation_func_home.ps1"
+
+    oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
 }
 
 . "$powershell_scripts_dir/completion_scripts.ps1"
@@ -125,7 +140,4 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
-
-#Oh-My-Posh config/setup
-oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\1Custom_Work_powerlevel10k_rainbow.omp.json | Invoke-Expression
 
