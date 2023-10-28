@@ -1,0 +1,19 @@
+[user]
+	name = MrDwarf7
+	email = 129040985+MrDwarf7@users.noreply.github.com
+[init]
+	defaultBranch = main
+[core]
+	editor = code --wait
+	excludesfile = "$HOME/.gitignore_global"
+[alias]
+	last = log -1 HEAD
+	wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
+	wta = worktree add
+	wtl = worktree list
+	wtr = worktree remove
+	wtm = worktree move
+	s- = switch -
+[push]
+	autoSetupRemote = true
+
