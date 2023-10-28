@@ -11,12 +11,12 @@ z.old/*
 .z.old/
 .z.old/*
 
-**/lazy-lock.json**/*
+lazy-lock.json
 
 main_nvim/*
 !main_nvim/nvim*
 !main_nvim/nvim/*
-!main_nvim/nvim/lazy-lock.json
+#!main_nvim/nvim/lazy-lock.json
 
 nvim_distros/*
 !nvim_distros/LazyVim/*
