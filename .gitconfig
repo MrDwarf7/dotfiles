@@ -14,5 +14,6 @@
 	wtr = worktree remove
 	wtm = worktree move
 	s- = switch -
+	fa = fetch --all
 [push]
 	autoSetupRemote = true
