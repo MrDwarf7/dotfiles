@@ -1,0 +1,14 @@
+[user]
+    name = MrDwarf7
+    email = 129040985+MrDwarf7@users.noreply.github.com
+[init]
+    init.defaultbranch = main 
+[core]
+    editor = code --wait
+[alias] 
+    last = log -1 HEAD
+    clone-for-worktrees = '!sh C:\Users\boughbl/dotfiles/git-clone-for-worktrees.sh'
+    wta = worktree add
+    wtl = worktree list
+    wtr = worktree remove
+    s- = switch -
