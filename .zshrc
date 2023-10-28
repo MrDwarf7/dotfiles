@@ -118,10 +118,6 @@ function dot {
 # goes into the gitconfig --global not here 
 # alias.clone-for-worktrees="!sh $dotdir/git-clone-worktrees.sh"
 
-
-
-
-
 function avenv {
   source ./.venv/bin/activate &&
     echo "Activated virtual environment" &&
@@ -135,13 +131,6 @@ function rmvenv {
     echo "No virtual environment found"
   fi
 }
-
-
-
-
-
-
-
 
 # Vim related things
 
@@ -182,5 +171,4 @@ bindkey -s ^a "sevim\n"
 ### source dat zsh
 
 source $ZSH/oh-my-zsh.sh
-
 
