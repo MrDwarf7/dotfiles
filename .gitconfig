@@ -5,7 +5,7 @@
 	defaultBranch = main
 [core]
 	editor = code --wait
-	excludesfile = "$HOME/.gitignore_global"
+	excludesFile = "$HOME/.gitignore_global"
 [alias]
 	last = log -1 HEAD
 	wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
