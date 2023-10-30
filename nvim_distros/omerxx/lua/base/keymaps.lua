@@ -42,13 +42,16 @@ vim.api.nvim_set_keymap("n", "<leader>tT", ":TransparentToggle<CR>", { noremap =
 vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-W>.", ":vertical resize +10<CR>", { noremap = true })
 
+vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Up>', ':resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Down>', ':resize +2<CR>', { noremap = true, silent = true })
 
 
-vim.keymap.set("n", "<C-h>,", "<C-w>h", { noremap = true })
-vim.keymap.set("n", "<C-j>,", "<C-w>j", { noremap = true })
-vim.keymap.set("n", "<C-k>,", "<C-w>k", { noremap = true })
-vim.keymap.set("n", "<C-l>,", "<C-w>l", { noremap = true })
-
+vim.keymap.set("n", "<C-h>,", "<C-w>h", { noremap = false, silent = true })
+vim.keymap.set("n", "<C-j>,", "<C-w>j", { noremap = false, silent = true })
+vim.keymap.set("n", "<C-k>,", "<C-w>k", { noremap = false, silent = true })
+vim.keymap.set("n", "<C-l>,", "<C-w>l", { noremap = false, silent = true })
 
 
 --vim.keymap.set('n', '<space><space>', "<cmd>set nohlsearch<CR>")
