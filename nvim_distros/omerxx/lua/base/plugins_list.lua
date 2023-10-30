@@ -140,6 +140,15 @@ return {
 	},
 
 	{
+		"j-hui/fidget.nvim",
+		verison = 'legacy',
+		config = function()
+			require("fidget").setup()
+		end
+	},
+
+
+	{
 		"stevearc/conform.nvim",
 		event = { "BufWritePre", "BufNewFile" },
 	},

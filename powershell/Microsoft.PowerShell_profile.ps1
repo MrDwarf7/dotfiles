@@ -17,7 +17,7 @@ $powershell_scripts_dir = "$powershell_dir/scripts"
 
 $work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
 $home_theme = '1MrDwarf7Theme.omp.json'
-
+$backup_theme = 'chips.omp.json'
 
 # Unused for time being as they just sit in my dotfiles atm anyway lol
 #
@@ -70,7 +70,15 @@ if (checkEnvironment)
 
     . "$work_scripts_dir/shell_alias_func_work.ps1"
 
-    oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
+    try
+    {
+        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
+    } catch
+    {
+        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
+    }
+
+    # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
 }
 
 # Not work/ AKA Home
@@ -81,7 +89,16 @@ if (-not (checkEnvironment))
 
     . "$powershell_scripts_dir/navigation_func_home.ps1"
 
-    oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
+
+    try
+    {
+        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
+    } catch
+    {
+        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
+    }
+
+    # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
 }
 
 . "$powershell_scripts_dir/completion_scripts.ps1"
@@ -140,4 +157,10 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
+
+
+
+
+
 

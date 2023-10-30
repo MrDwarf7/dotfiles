@@ -78,7 +78,6 @@ require("mason-lspconfig").setup({
 })
 
 -- Turn on lsp status information
-require("fidget").setup()
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
