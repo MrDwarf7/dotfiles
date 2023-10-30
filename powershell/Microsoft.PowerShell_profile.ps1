@@ -8,7 +8,7 @@
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
 
-$dotfiles_dir = "$env:HOMEPATH\dotfiles"
+$dotfiles_dir = "$HOME\dotfiles"
 $work_app_dir = "C:\Applications"
 $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 
@@ -157,5 +157,6 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
 
