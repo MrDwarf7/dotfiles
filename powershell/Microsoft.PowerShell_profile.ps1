@@ -64,11 +64,11 @@ function checkEnvironment
 # Work
 if (checkEnvironment)
 {
-    . "$work_scripts_dir/navigation_func_work.ps1"
+    . "$work_scripts_dir\navigation_func_work.ps1"
 
-    . "$work_scripts_dir/python_func_work.ps1"
+    . "$work_scripts_dir\python_func_work.ps1"
 
-    . "$work_scripts_dir/shell_alias_func_work.ps1"
+    . "$work_scripts_dir\shell_alias_func_work.ps1"
 
     try
     {
@@ -85,9 +85,9 @@ if (checkEnvironment)
 if (-not (checkEnvironment))
 {
     # Not required at work
-    . "$powershell_scripts_dir/wsl_func_shell.ps1"
+    . "$powershell_scripts_dir\wsl_func_shell.ps1"
 
-    . "$powershell_scripts_dir/navigation_func_home.ps1"
+    . "$powershell_scripts_dir\navigation_func_home.ps1"
 
 
     try
@@ -101,13 +101,13 @@ if (-not (checkEnvironment))
     # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
 }
 
-. "$powershell_scripts_dir/completion_scripts.ps1"
-
-. "$powershell_scripts_dir/vim_func_shell.ps1"
-
-. "$powershell_scripts_dir/helpful_func_general.ps1"
-
-. "$powershell_scripts_dir/helpful_func_python.ps1"
+. "$powershell_scripts_dir\completion_scripts.ps1"
+                          
+. "$powershell_scripts_dir\vim_func_shell.ps1"
+                          
+. "$powershell_scripts_dir\helpful_func_general.ps1"
+                          
+. "$powershell_scripts_dir\helpful_func_python.ps1"
 
 #Raw Functions
 
@@ -157,13 +157,5 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
-
-
-
-
-
-
-
-
 
 

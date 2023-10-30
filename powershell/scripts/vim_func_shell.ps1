@@ -1,10 +1,10 @@
 # BEGIN - Vim things
-$dotfiles_dir = "$env:HOMEPATH/dotfiles"
+$dotfiles_dir = "$env:HOMEPATH\dotfiles"
 
-$nvim_main_dir = "$dotfiles_dir/main_nvim"
-$nvim_distro_dir = "$dotfiles_dir/nvim_distros"
+$nvim_main_dir = "$dotfiles_dir\main_nvim"
+$nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 
-$scoop_dir = "$dotfiles_dir/scoop"
+$scoop_dir = "$dotfiles_dir\scoop"
 
 function hx
 {
@@ -56,6 +56,4 @@ function nvims()
     nvim $args
 }
 # END - Vim things
-
-
 
