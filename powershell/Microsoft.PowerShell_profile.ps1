@@ -8,12 +8,12 @@
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
 
-$dotfiles_dir = "$env:HOMEPATH/dotfiles"
-$work_app_dir = "C:/Applications"
-$work_scripts_dir = "$work_app_dir/PowerShell_start/scripts"
+$dotfiles_dir = "$env:HOMEPATH\dotfiles"
+$work_app_dir = "C:\Applications"
+$work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 
-$powershell_dir = "$dotfiles_dir/powershell"
-$powershell_scripts_dir = "$powershell_dir/scripts"
+$powershell_dir = "$dotfiles_dir\powershell"
+$powershell_scripts_dir = "$powershell_dir\scripts"
 
 $work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
 $home_theme = '1MrDwarf7Theme.omp.json'
@@ -157,6 +157,9 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
+
+
 
 
 
