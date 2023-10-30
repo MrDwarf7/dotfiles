@@ -32,8 +32,21 @@ function dot
 {
     if (-not ($args))
     {
+        Write-Host "Not Args: "
         Push-Location "C:\"
-        $basePath = $dotfiles_dir
+        Push-Location $dotfiles_dir
+        Get-ChildItem
+        Write-Host "Fetching: "
+        git fetch
+        Write-Host "Status: "
+        git status
+        return
+    } elseif (-not ($null -eq $args))
+    {
+
+        Write-Host "Args present: "
+        Push-Location "C:\"
+        $basePath = "$dotfiles_dir/$args"
         Push-Location $basePath
         Get-ChildItem
         Write-Host "Fetching: "
@@ -41,20 +54,6 @@ function dot
         Write-Host "Status: "
         git status
         return
-    } else
-    {
-        Push-Location "C:\"
-        if ($args)
-        {
-            $basePath = "$dotfiles_dir/$args"
-            Push-Location $basePath
-            Get-ChildItem
-            Write-Host "Fetching: "
-            git fetch
-            Write-Host "Status: "
-            git status
-            return
-        } 
     }
 } 
 
@@ -132,4 +131,5 @@ function uzip
     }
 }
 # END - Linux Functions
+
 
