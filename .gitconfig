@@ -19,6 +19,7 @@
 	pa = push --all
 	rs = restore --staged
 	cm = commit -m
+	rlast = reflog -5 HEAD
 [push]
 	autoSetupRemote = true
 [filter "lfs"]
