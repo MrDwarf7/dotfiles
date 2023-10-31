@@ -11,6 +11,8 @@ vim.api.nvim_set_keymap("n", "tw", ":Twilight<CR>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<Tab>", ":bprev<CR>", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("n", "S-Tab", ":bnext<CR>", { noremap = false, silent = true })
 
+vim.api.nvim_set_keymap("n", "<leader>e", ":Explore<CR>", { noremap = false, silent = true })
+
 vim.api.nvim_set_keymap("n", "<leader>bn", ":bnext<CR>", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>bp", ":bprev<CR>", { noremap = false, silent = true })
 
