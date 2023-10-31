@@ -15,7 +15,10 @@
 	wtm = worktree move
 	s- = switch -
 	fa = fetch --all
-	pa = pull --all
+	pla = pull --all
+	pa = push --all
+	rs = restore --staged
+	cm = commit -m
 [push]
 	autoSetupRemote = true
 [filter "lfs"]
