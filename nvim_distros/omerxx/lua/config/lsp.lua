@@ -26,6 +26,7 @@ mason_tool_installer.setup({
 		-- "prettierd",
 		"biome",
 		"tsserver",
+		"tailwindcss",
 		"black",
 		"isort",
 		"stylelint",
@@ -58,6 +59,7 @@ local servers = {
 	"gopls",
 	"html",
 	"tsserver",
+	"tailwindcss",
 	"cssls",
 	"dockerls",
 	"jsonls",
@@ -180,6 +182,7 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "tsserver" },
+		{ name = "tailwindcss" },
 	},
 })
 
