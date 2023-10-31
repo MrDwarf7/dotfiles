@@ -112,12 +112,12 @@ return {
 	{ "ray-x/go.nvim" },
 	{ "ray-x/guihua.lua" },
 	{ "catppuccin/nvim", as = "catppuccin" },
-	{
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup({})
-		end,
-	},
+
+	"windwp/nvim-autopairs",
+	event = { "BufWritePre", "BufNewFile" },
+	config = function()
+		require("nvim-autopairs").setup()
+	end,
 
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -141,20 +141,11 @@ return {
 			-- Useful status updates for LSP
 			{
 				"j-hui/fidget.nvim",
-
+				event = "VeryLazy",
 				verison = 'legacy',
 			},
 		},
 	},
-
-	{
-		"j-hui/fidget.nvim",
-		verison = 'legacy',
-		config = function()
-			require("fidget").setup()
-		end
-	},
-
 
 	{
 		"stevearc/conform.nvim",
@@ -273,6 +264,7 @@ return {
 	},
 	{
 		"AckslD/nvim-neoclip.lua",
+		event = "VeryLazy",
 		config = function()
 			require("neoclip").setup()
 		end,
@@ -292,5 +284,16 @@ return {
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
+	},
+
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		lazy = false,
+		-- event = "UIEnter",
+		-- event = "VimEnter",
+		config = function()
+			require("config.nvim_tree")
+		end
 	},
 }
