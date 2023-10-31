@@ -133,7 +133,6 @@ nvim_tree.setup({
 })
 
 -- Globally accessible binds
-vim.keymap.set('n', '<leader>e', ':NvimTreeFocus<CR>', { silent = true })
-vim.keymap.set('n', '<leader>E', ':NvimTreeFindFile<CR>.', { silent = true })
-
-vim.keymap.set('n', '<leader>b', ':NvimTreeToggle<CR>', { silent = true })
+vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true })
+vim.keymap.set('n', '<leader>E', ':NvimTreeFocus<CR>', { silent = true })
+-- vim.keymap.set('n', '<leader>E', ':NvimTreeFindFile<CR>.', { silent = true })
