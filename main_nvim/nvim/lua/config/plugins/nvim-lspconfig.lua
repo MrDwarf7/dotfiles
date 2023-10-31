@@ -153,32 +153,33 @@ function M.config()
 		lazy = false,
 	}
 
+	local mason_tool_installer = require("mason-tool-installer")
 	mason_tool_installer.setup({
 		ensure_installed = {
-			'prettier',
-			'prettierd',
-			'tsserver',
-			'black',
-			'isort',
-			'stylelint',
-			'yamllint',
-			'hadolint',
-			'ruff',
-			'vulture',
-			'vint',
-			'shellcheck',
-			'selene',
-			'eslint_d',
-			--
-			'powershell_es',
-			'lua_ls',
-			--[[ 'yamlls', ]]
-			'vimls',
-			'rust_analyzer',
-			--[[ 'debugpy', ]]
-			--[[ 'pyright', ]]
-			'ruff_lsp',
-			--[[ 'bashls', ]]
+			"prettier",
+			-- "prettierd",
+			"biome",
+			"tsserver",
+			"black",
+			"isort",
+			"stylelint",
+			"yamllint",
+			"hadolint",
+			"ruff",
+			"vulture",
+			"vint",
+			"shellcheck",
+			"powershell_es",
+			"lua_ls",
+			"vimls",
+			"rust_analyzer",
+			"ruff_lsp",
+			-- 'selene',
+			-- 'eslint_d',
+			-- 'yamlls',
+			-- 'debugpy',
+			-- 'pyright',
+			-- 'bashls',
 			--
 		},
 	})

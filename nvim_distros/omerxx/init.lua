@@ -25,5 +25,5 @@ require("config.lsp")
 require("config.trouble")
 require("config.linter")
 
-require("config.toggleterm") -- Disabled for now -- need to configure it properly
+-- require("config.toggleterm") -- Disabled for now -- need to configure it properly
 -- vim: ts=8 sts=2 sw=2 et

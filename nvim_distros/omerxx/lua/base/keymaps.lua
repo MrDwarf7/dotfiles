@@ -3,6 +3,9 @@ vim.keymap.set("v", "<Esc>", "<Esc>:nohl<CR>", { noremap = false, silent = true 
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = false })
 
 -- twilight
+--
+
+
 vim.api.nvim_set_keymap("n", "tw", ":Twilight<CR>", { noremap = false })
 -- buffers
 vim.api.nvim_set_keymap("n", "<Tab>", ":bprev<CR>", { noremap = false, silent = true })
@@ -33,8 +36,10 @@ vim.keymap.set("n", "d<S-h>", "d^", { noremap = true, silent = true }) -- Same a
 vim.keymap.set("n", "d<S-l>", "d$", { noremap = true, silent = true }) -- Same as above for yanking
 
 
-vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
+-- vim.keymap.set("n", "<C-d>,", "<C-d>zz", { noremap = false, silent = true }) -- These feel really bad on this config version and not sure why, very laggy
+-- vim.keymap.set("n", "<C-u>,", "<C-u>zz", { noremap = false, silent = true }) -- These feel really bad on this config version and not sure why, very laggy
 
+vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<leader>tT", ":TransparentToggle<CR>", { noremap = true })
 
@@ -108,3 +113,6 @@ vim.api.nvim_set_keymap("n", "<leader>gp", ":Git push -u origin HEAD<CR>", { nor
 
 vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua require('config.toggleterm')<CR>",
 	{ noremap = true, silent = true, desc = "LazyGit" })
+
+
+return M

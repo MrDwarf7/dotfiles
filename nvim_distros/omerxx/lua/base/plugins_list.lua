@@ -1,7 +1,7 @@
 return {
-	"tpope/vim-dadbod",
-	"kristijanhusak/vim-dadbod-ui",
-	"kristijanhusak/vim-dadbod-completion",
+	{ "tpope/vim-dadbod" },
+	{ "kristijanhusak/vim-dadbod-ui" },
+	{ "kristijanhusak/vim-dadbod-completion" },
 	-- Database
 	{
 		"tpope/vim-dadbod",
@@ -15,9 +15,13 @@ return {
 		end,
 	},
 
-	"ThePrimeagen/git-worktree.nvim",
-	"tpope/vim-surround",
-	"xiyaowong/nvim-transparent",
+	{ "ThePrimeagen/git-worktree.nvim" },
+	{
+		"tpope/vim-surround",
+		event = "BufEnter",
+	},
+
+	{ "xiyaowong/nvim-transparent" },
 
 	{
 		"akinsho/toggleterm.nvim",
@@ -105,9 +109,9 @@ return {
 		},
 	},
 
-	"ray-x/go.nvim",
-	"ray-x/guihua.lua",
-	{ "catppuccin/nvim",      as = "catppuccin" },
+	{ "ray-x/go.nvim" },
+	{ "ray-x/guihua.lua" },
+	{ "catppuccin/nvim", as = "catppuccin" },
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -135,7 +139,11 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
-			"j-hui/fidget.nvim",
+			{
+				"j-hui/fidget.nvim",
+
+				verison = 'legacy',
+			},
 		},
 	},
 
@@ -155,6 +163,7 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
+		event = { "InsertEnter", "BufWritePre", "BufNewFile" },
 	},
 
 	{ -- Autocompletion
@@ -188,16 +197,21 @@ return {
 		},
 	},
 
-	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-	"theHamsta/nvim-dap-virtual-text",
-	"leoluz/nvim-dap-go",
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+			"mfussenegger/nvim-dap" }
+	},
+
+	{ "theHamsta/nvim-dap-virtual-text" },
+	{ "leoluz/nvim-dap-go" },
 
 	-- Git related plugins
-	"tpope/vim-fugitive",
-	"lewis6991/gitsigns.nvim",
+	{ "tpope/vim-fugitive" },
+	{ "lewis6991/gitsigns.nvim" },
 
-	"navarasu/onedark.nvim",    -- Theme inspired by Atom
-	"nvim-lualine/lualine.nvim", -- Fancier statusline
+	{ "navarasu/onedark.nvim" },    -- Theme inspired by Atom
+	{ "nvim-lualine/lualine.nvim" }, -- Fancier statusline
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -264,14 +278,15 @@ return {
 		end,
 	},
 
-	"nvim-telescope/telescope-symbols.nvim",
-	"ThePrimeagen/harpoon",
+	{ "nvim-telescope/telescope-symbols.nvim" },
+	{ "ThePrimeagen/harpoon" },
 
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	--	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
 	{ "nvim-telescope/telescope-fzy-native.nvim" },
 	{
 		"folke/twilight.nvim",
+		event = "VeryLazy",
 		opts = {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
