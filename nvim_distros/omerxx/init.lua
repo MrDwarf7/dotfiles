@@ -1,6 +1,6 @@
---[[ vim.g.mapleader = " " ]]
---[[ vim.g.maplocalleader = " " ]]
---[[ vim.o.termguicolors = true ]]
+if vim.g.neovide then
+  require("base.neovide")
+end
 
 require("base.options")
 require("base.lazy")
@@ -25,6 +25,9 @@ require("config.lsp")
 require("config.linter")
 require("config.mini")
 
+--[[ vim.g.mapleader = " " ]]
+--[[ vim.g.maplocalleader = " " ]]
+--[[ vim.o.termguicolors = true ]]
 -- require("config.trouble") -- sources from 'plugins_list'
 -- require("config.toggleterm") -- Disabled for now -- need to configure it properly
 -- vim: ts=8 sts=2 sw=2 et

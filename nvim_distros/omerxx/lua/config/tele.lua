@@ -123,7 +123,7 @@ vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc 
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[H]elp" })
 
 vim.keymap.set("n", "<leader>fs", require("telescope.builtin").grep_string, { desc = "[S]tring" })
-vim.keymap.set("n", "<leader>fp", require("telescope.builtin").diagnostics, { desc = "[P]roblems" })
+vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[P]roblems" })
 vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "[B]uffers" })
 vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status, { desc = "[G]it [S]tatus" })
 

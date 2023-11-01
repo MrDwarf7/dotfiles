@@ -57,3 +57,12 @@ function nvims()
 }
 # END - Vim things
 
+
+function nvd()
+{
+    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+    $env:NVIM_APPNAME = "omerxx"
+    neovide $args
+}
+
+
