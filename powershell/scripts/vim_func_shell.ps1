@@ -60,9 +60,9 @@ function nvdo()
 
 function nvdm()
 {
-    # $env:XDG_CONFIG_HOME = "$nvim_main_dir"
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = "omerxx"
+    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    # $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+    $env:NVIM_APPNAME = ""
     neovide --multigrid --vsync $args
 }
 
@@ -86,4 +86,5 @@ function nvds()
     neovide --multigrid --vsync $args
 }
 # END - Vim things
+
 
