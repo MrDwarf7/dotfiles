@@ -28,13 +28,8 @@ function xvim
 {
     $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
     $env:NVIM_APPNAME = "omerxx"
-    # if ($env:HOME_PROFILE) {
-    #     neovide $args
-    # } elseif (Test-CommandExists nvim){
     nvim $args
 }
-# }
-# Neovide being buggy as hell, commented out for time being
 
 function nvims()
 {
@@ -55,14 +50,40 @@ function nvims()
     $env:NVIM_APPNAME = $config
     nvim $args
 }
-# END - Vim things
 
-
-function nvd()
+function nvdo()
 {
     $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
     $env:NVIM_APPNAME = "omerxx"
-    neovide $args
+    neovide --multigrid $args
 }
 
+function nvdm()
+{
+    # $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+    $env:NVIM_APPNAME = "omerxx"
+    neovide --multigrid --vsync $args
+}
+
+function nvds()
+{
+    $items = "Default", "LazyVim", "TestVim", "old.nvims", "omerxx"
+    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+
+    if ([string]::IsNullOrEmpty($config))
+    {
+        Write-Output "Nothing selected"
+        return
+    }
+    if ($config -eq "default")
+    {
+        $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+        $config = ""
+    }
+    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+    $env:NVIM_APPNAME = $config
+    neovide --multigrid --vsync $args
+}
+# END - Vim things
 
