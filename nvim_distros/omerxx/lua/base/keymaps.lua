@@ -20,7 +20,7 @@ vim.api.nvim_set_keymap("n", "th", ":bfirst<CR>", { noremap = false, silent = tr
 vim.api.nvim_set_keymap("n", "tl", ":blast<CR>", { noremap = false, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>x", ":bdelete<CR>", { noremap = false, silent = true })
 -- files
-vim.api.nvim_set_keymap("n", "QQ", ":q!<CR>", { noremap = false })
+vim.api.nvim_set_keymap("n", "qa", ":qa!<CR>", { noremap = false })
 --vim.api.nvim_set_keymap("n", "WW", ":w!<CR>", { noremap = false })
 vim.api.nvim_set_keymap("n", "<C-s>", ":w<CR>", { noremap = false })
 
@@ -43,7 +43,7 @@ vim.keymap.set("n", "d<S-l>", "d$", { noremap = true, silent = true }) -- Same a
 
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "<leader>tT", ":TransparentToggle<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<leader>tT", ":TransparentToggle<CR>", { noremap = true })
 
 -- splits
 vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", { noremap = true })
@@ -81,6 +81,7 @@ vim.api.nvim_set_keymap(
 	"<Cmd>lua require('telescope.builtin').commands()<CR>",
 	{ noremap = false }
 )
+
 
 vim.keymap.set('n', '<leader>pl', ':Lazy<CR>', { noremap = false, silent = true, desc = 'Lazy Plugins' })
 vim.keymap.set('n', '<leader>pm', ':Mason<CR>', { noremap = false, silent = true, desc = 'Mason Manager' })

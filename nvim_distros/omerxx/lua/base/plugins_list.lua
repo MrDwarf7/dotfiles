@@ -21,7 +21,7 @@ return {
 		event = "BufEnter",
 	},
 
-	{ "xiyaowong/nvim-transparent" },
+	-- { "xiyaowong/nvim-transparent" },
 
 	{
 		"akinsho/toggleterm.nvim",
@@ -111,13 +111,28 @@ return {
 
 	{ "ray-x/go.nvim" },
 	{ "ray-x/guihua.lua" },
-	{ "catppuccin/nvim", as = "catppuccin" },
+	{ "catppuccin/nvim",               as = "catppuccin" },
 
-	"windwp/nvim-autopairs",
-	event = { "BufWritePre", "BufNewFile" },
-	config = function()
-		require("nvim-autopairs").setup()
-	end,
+	{
+		"windwp/nvim-autopairs",
+		event = { 'BufReadPre', 'BufNewFile' },
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
+
+	{
+		'windwp/nvim-ts-autotag',
+		lazy = false,
+		config = function()
+			require('nvim-ts-autotag').setup()
+		end,
+	},
+
+	{
+		'quangnguyen30192/cmp-nvim-tags',
+		lazy = false,
+	},
 
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -159,7 +174,20 @@ return {
 
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			'quangnguyen30192/cmp-nvim-tags',
+			'zbirenbaum/copilot-cmp',
+		}
+	},
+
+
+	{
+		'echasnovski/mini.nvim',
+		event = { 'BufReadPre', 'BufNewFile' },
+		version = false,
 	},
 
 	{
@@ -258,13 +286,20 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		{ "nvim-telescope/telescope-fzy-native.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		}
 	},
+
 	{
 		"AckslD/nvim-neoclip.lua",
 		event = "VeryLazy",
+		dependencies = {
+			{ 'kkharji/sqlite.lua',           module = 'sqlite' },
+			{ "nvim-telescope/telescope.nvim" },
+		},
 		config = function()
 			require("neoclip").setup()
 		end,

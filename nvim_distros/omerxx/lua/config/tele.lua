@@ -2,6 +2,7 @@ require("telescope").load_extension("harpoon")
 require("telescope").load_extension("git_worktree")
 require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("live_grep_args")
+require("telescope").load_extension("neoclip")
 
 local M = {}
 
@@ -107,6 +108,14 @@ vim.keymap.set("n", "<leader>/", function()
 	}))
 end, { desc = "[/] Fuzzily search in current buffer]" })
 
+vim.keymap.set('n', "<leader>'", ':Telescope neoclip<CR>',
+	{ noremap = true, silent = true, desc = 'Clipboard/Registers' })
+-- vim.keymap.set('n', '<leader>"', ":lua require('telescope.builtin').marks()<CR>",
+-- 	{ noremap = true, silent = true, desc = 'Marks' })
+
+-- vim.keymap.set("n", "<leader>'", require("telescope.builtin").neoclip, { desc = 'Clipboard/Registers' })
+--
+vim.keymap.set("n", '<leader>"', require("telescope.builtin").marks, { desc = 'Marks' })
 vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[F]ind [F]iles" })
 vim.keymap.set("n", "<leader>fw", require("telescope.builtin").live_grep, { desc = "[F]ind by [G]rep" })
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "[F]ind [R]ecents" })
@@ -114,7 +123,7 @@ vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc 
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[H]elp" })
 
 vim.keymap.set("n", "<leader>fs", require("telescope.builtin").grep_string, { desc = "[S]tring" })
-vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[D]iagnostics" })
+vim.keymap.set("n", "<leader>fp", require("telescope.builtin").diagnostics, { desc = "[P]roblems" })
 vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "[B]uffers" })
 vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status, { desc = "[G]it [S]tatus" })
 

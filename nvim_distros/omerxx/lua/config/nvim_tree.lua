@@ -63,22 +63,22 @@ nvim_tree.setup({
 		root_folder_modifier = ':t',
 		icons = {
 			glyphs = {
-				-- 	default = ' ',
-				-- 	symlink = '',
-				-- 	bookmark = '◉',
+				default = ' ',
+				symlink = '',
+				bookmark = '◉',
 				git = {
 					unstaged = 'U',
-					-- 		staged = '',
-					-- 		unmerged = '! ',
-					-- 		renamed = '! ',
+					staged = '',
+					unmerged = '! ',
+					renamed = '! ',
 					deleted = '',
-					-- 		untracked = '',
-					-- 		ignored = '',
-					-- 	},
-					-- 	folder = {
-					-- 		default = '',
-					-- 		open = '',
-					-- 		symlink = '',
+					untracked = '',
+					ignored = '',
+				},
+				folder = {
+					default = '',
+					open = '',
+					symlink = '',
 				},
 			},
 			show = {

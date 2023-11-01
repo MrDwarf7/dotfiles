@@ -23,7 +23,7 @@ require("config.tele")
 require("config.treesitter")
 require("config.lsp")
 require("config.linter")
-
+require("config.mini")
 
 -- require("config.trouble") -- sources from 'plugins_list'
 -- require("config.toggleterm") -- Disabled for now -- need to configure it properly
