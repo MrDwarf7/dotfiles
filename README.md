@@ -79,3 +79,4 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 ## Misc available options:
 
 -CompletionQueryItems
+Install-Module -Name Azure
