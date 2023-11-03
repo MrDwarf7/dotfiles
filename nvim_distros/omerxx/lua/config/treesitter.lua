@@ -8,13 +8,21 @@ require("nvim-treesitter.configs").setup({
 		"python",
 		"rust",
 		"typescript",
+		"javascript",
 		"regex",
 		"bash",
 		"markdown",
 		"markdown_inline",
 		"kdl",
 		"sql",
-		"org",
+		"comment",
+		--
+		"git_config",
+		"git_rebase",
+		"gitcommit",
+		"gitignore",
+		"gitattributes",
+
 	},
 
 	highlight = { enable = true },
