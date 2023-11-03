@@ -1,9 +1,9 @@
+vim.g.vscode = true
+
+vim.cmd([[
 nnoremap gd <Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>
-
 nnoremap gD <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-
-
-
+]])
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -52,7 +52,7 @@ vim.opt.completeopt = { "menu", "menuone", "noselect" }
 vim.opt.clipboard = "unnamedplus"
 vim.opt.laststatus = 3
 vim.opt.timeoutlen = 350
-if vim.fn.has("nvim-0.9.0") == 1
+if vim.fn.has("nvim-0.9.0") == 1 then
 	vim.opt.splitkeep = "screen"
 end
 -- Buffer
