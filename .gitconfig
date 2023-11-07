@@ -4,7 +4,7 @@
 [init]
 	defaultBranch = main
 [core]
-	editor = code --wait
+	editor = nvim
 	excludesFile = "$HOME/.gitignore_global"
 [alias]
 	last = log -1 HEAD
