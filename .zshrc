@@ -40,10 +40,8 @@ data_on_demand=$gitdir/Data-On-Demand
 data_on_demand_back=$data_on_demand/Data-On-Demand-Backend
 data_on_demand_front=$data_on_demand/Data-On-Demand-Frontend
 
-### Exports (mostly zsh)
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-#export ZSH="$HOME/.oh-my-zsh"
-#export P10K="$HOME/.p10k.zsh"
+
+
 
 export ZSH="$configdir/.oh-my-zsh"
 export P10K="$configdir/.p10k.zsh"
@@ -81,7 +79,24 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   pdm
+  gh
+  vi-mode
+  # starship
 )
+
+
+# IF USING STARSHIP, UNCOMMENT
+# export STARSHIP_CONFIG="$dotdir/starship/starship.toml"
+# source "$dotdir/.config/.oh-my-zsh/plugins/zsh-starship/starship.plugin.zsh"
+# source "$dotdir/.config/.oh-my-zsh/plugins/git-plugin/git.plugin.zsh"
+
+# VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+VI_MODE_SET_CURSOR=true
+
+bindkey -M vicmd 'H' beginning-of-line
+bindkey -M vicmd 'L' end-of-line
+
+bindkey -M viins 'jj' vi-cmd-mode
 
 ### aliases 
 alias cls=clear
@@ -91,6 +106,7 @@ alias zshc="vim ~/.zshrc"
 alias .z="source ~/.zshrc"
 alias neo=neofetch
 alias dea=deactivate
+alias l="ls -lah --color"
 
 ### functions
 function dot {
@@ -113,10 +129,6 @@ function dot {
     fi
   }
 
-
-# allows for cloning repos into bare repo and then creating worktrees
-# goes into the gitconfig --global not here 
-# alias.clone-for-worktrees="!sh $dotdir/git-clone-worktrees.sh"
 
 function avenv {
   source ./.venv/bin/activate &&
@@ -171,4 +183,8 @@ bindkey -s ^a "sevim\n"
 ### source dat zsh
 
 source $ZSH/oh-my-zsh.sh
+
+
+### 'Normal' way of starting starship
+# eval "$(starship init zsh)"
 

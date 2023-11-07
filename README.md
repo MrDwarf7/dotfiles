@@ -79,3 +79,36 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 ## Misc available options:
 
 -CompletionQueryItems
+
+# ZSH Plugins
+
+note: Ensure that the correct $ZSH_CUSTOM is set before running these to ensure smooth process.
+
+```bash
+echo $ZSH_CUSTOM
+```
+
+## Powerlevel10K Prompt stylings
+
+```bash
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
+## ZSH Syntax Highlighting
+
+```bash
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+## ZSH Auto Suggestions
+
+```bash
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+## ZSH Vi Mode Plugin:
+
+```bash
+git clone https://github.com/jeffreytse/zsh-vi-mode \
+  $ZSH_CUSTOM/plugins/zsh-vi-mode
+```
