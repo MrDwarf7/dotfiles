@@ -8,13 +8,21 @@ require("nvim-treesitter.configs").setup({
 		"python",
 		"rust",
 		"typescript",
+		"javascript",
 		"regex",
 		"bash",
 		"markdown",
 		"markdown_inline",
 		"kdl",
 		"sql",
-		"org",
+		"comment",
+		--
+		"git_config",
+		"git_rebase",
+		"gitcommit",
+		"gitignore",
+		"gitattributes",
+
 	},
 
 	highlight = { enable = true },
@@ -75,11 +83,11 @@ require("nvim-treesitter.configs").setup({
 		},
 		swap = {
 			enable = true,
-			swap_next = {
-				["<leader>a"] = "@parameter.inner",
-			},
 			swap_previous = {
-				["<leader>A"] = "@parameter.inner",
+				["<leader>s"] = "@parameter.inner",
+			},
+			swap_next = {
+				["<leader>S"] = "@parameter.inner",
 			},
 		},
 	},

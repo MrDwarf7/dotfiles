@@ -1,7 +1,7 @@
 return {
-	"tpope/vim-dadbod",
-	"kristijanhusak/vim-dadbod-ui",
-	"kristijanhusak/vim-dadbod-completion",
+	{ "tpope/vim-dadbod" },
+	{ "kristijanhusak/vim-dadbod-ui" },
+	{ "kristijanhusak/vim-dadbod-completion" },
 	-- Database
 	{
 		"tpope/vim-dadbod",
@@ -15,9 +15,13 @@ return {
 		end,
 	},
 
-	"ThePrimeagen/git-worktree.nvim",
-	"tpope/vim-surround",
-	"xiyaowong/nvim-transparent",
+	{ "ThePrimeagen/git-worktree.nvim" },
+	{
+		"tpope/vim-surround",
+		event = "BufEnter",
+	},
+
+	-- { "xiyaowong/nvim-transparent" },
 
 	{
 		"akinsho/toggleterm.nvim",
@@ -105,14 +109,29 @@ return {
 		},
 	},
 
-	"ray-x/go.nvim",
-	"ray-x/guihua.lua",
-	{ "catppuccin/nvim",      as = "catppuccin" },
+	{ "ray-x/go.nvim" },
+	{ "ray-x/guihua.lua" },
+	{ "catppuccin/nvim",               as = "catppuccin" },
+
 	{
 		"windwp/nvim-autopairs",
+		event = { 'BufReadPre', 'BufNewFile' },
 		config = function()
-			require("nvim-autopairs").setup({})
+			require("nvim-autopairs").setup()
 		end,
+	},
+
+	{
+		'windwp/nvim-ts-autotag',
+		lazy = false,
+		config = function()
+			require('nvim-ts-autotag').setup()
+		end,
+	},
+
+	{
+		'quangnguyen30192/cmp-nvim-tags',
+		lazy = false,
 	},
 
 	{
@@ -135,7 +154,11 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
-			"j-hui/fidget.nvim",
+			{
+				"j-hui/fidget.nvim",
+				event = "VeryLazy",
+				verison = 'legacy',
+			},
 		},
 	},
 
@@ -146,11 +169,25 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
+		event = { "InsertEnter", "BufWritePre", "BufNewFile" },
 	},
 
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
-		dependencies = { "hrsh7th/cmp-nvim-lsp", "L3MON4D3/LuaSnip", "saadparwaiz1/cmp_luasnip" },
+		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			'quangnguyen30192/cmp-nvim-tags',
+			'zbirenbaum/copilot-cmp',
+		}
+	},
+
+
+	{
+		'echasnovski/mini.nvim',
+		event = { 'BufReadPre', 'BufNewFile' },
+		version = false,
 	},
 
 	{
@@ -179,16 +216,21 @@ return {
 		},
 	},
 
-	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-	"theHamsta/nvim-dap-virtual-text",
-	"leoluz/nvim-dap-go",
+	{
+		"rcarriga/nvim-dap-ui",
+		dependencies = {
+			"mfussenegger/nvim-dap" }
+	},
+
+	{ "theHamsta/nvim-dap-virtual-text" },
+	{ "leoluz/nvim-dap-go" },
 
 	-- Git related plugins
-	"tpope/vim-fugitive",
-	"lewis6991/gitsigns.nvim",
+	{ "tpope/vim-fugitive" },
+	{ "lewis6991/gitsigns.nvim" },
 
-	"navarasu/onedark.nvim",    -- Theme inspired by Atom
-	"nvim-lualine/lualine.nvim", -- Fancier statusline
+	{ "navarasu/onedark.nvim" },    -- Theme inspired by Atom
+	{ "nvim-lualine/lualine.nvim" }, -- Fancier statusline
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -244,29 +286,49 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		branch = "0.1.x",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		{ "nvim-telescope/telescope-fzy-native.nvim" },
-		{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		}
 	},
+
 	{
 		"AckslD/nvim-neoclip.lua",
+		event = "VeryLazy",
+		dependencies = {
+			{ 'kkharji/sqlite.lua',           module = 'sqlite' },
+			{ "nvim-telescope/telescope.nvim" },
+		},
 		config = function()
 			require("neoclip").setup()
 		end,
 	},
 
-	"nvim-telescope/telescope-symbols.nvim",
-	"ThePrimeagen/harpoon",
+	{ "nvim-telescope/telescope-symbols.nvim" },
+	{ "ThePrimeagen/harpoon" },
 
 	-- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
 	--	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make", cond = vim.fn.executable("make") == 1 },
 	{ "nvim-telescope/telescope-fzy-native.nvim" },
 	{
 		"folke/twilight.nvim",
+		event = "VeryLazy",
 		opts = {
 			-- your configuration comes here
 			-- or leave it empty to use the default settings
 			-- refer to the configuration section below
 		},
+	},
+
+	{
+		"nvim-tree/nvim-tree.lua",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		lazy = false,
+		-- event = "UIEnter",
+		-- event = "VimEnter",
+		config = function()
+			require("config.nvim_tree")
+		end
 	},
 }

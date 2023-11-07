@@ -23,8 +23,10 @@ local mason_tool_installer = require("mason-tool-installer")
 mason_tool_installer.setup({
 	ensure_installed = {
 		"prettier",
-		"prettierd",
+		-- "prettierd",
+		"biome",
 		"tsserver",
+		"tailwindcss",
 		"black",
 		"isort",
 		"stylelint",
@@ -34,18 +36,17 @@ mason_tool_installer.setup({
 		"vulture",
 		"vint",
 		"shellcheck",
-		"selene",
-		"eslint_d",
-		--
 		"powershell_es",
 		"lua_ls",
-		--[[ 'yamlls', ]]
 		"vimls",
 		"rust_analyzer",
-		--[[ 'debugpy', ]]
-		--[[ 'pyright', ]]
 		"ruff_lsp",
-		--[[ 'bashls', ]]
+		-- 'selene',
+		-- 'eslint_d',
+		--- 'yamlls',
+		-- 'debugpy',
+		-- 'pyright',
+		-- 'bashls',
 		--
 	},
 })
@@ -53,10 +54,12 @@ mason_tool_installer.setup({
 -- Setup mason so it can manage external tooling
 require("mason").setup()
 local servers = {
+	"biome",
 	"clangd",
 	"gopls",
 	"html",
 	"tsserver",
+	"tailwindcss",
 	"cssls",
 	"dockerls",
 	"jsonls",
@@ -78,7 +81,6 @@ require("mason-lspconfig").setup({
 })
 
 -- Turn on lsp status information
-require("fidget").setup()
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -138,6 +140,9 @@ require("lspconfig").tsserver.setup({
 -- nvim-cmp setup
 local cmp = require("cmp")
 local luasnip = require("luasnip")
+local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+local handlers = require('nvim-autopairs.completion.handlers')
+
 
 cmp.setup({
 	view = {
@@ -151,11 +156,12 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		["<C-d>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-leader>"] = cmp.mapping.complete(),
 		["<CR>"] = cmp.mapping.confirm({
 			behavior = cmp.ConfirmBehavior.Replace,
 			select = true,
 		}),
+
 		["<Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_next_item()
@@ -179,40 +185,39 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "tsserver" },
+		{ name = "tailwindcss" },
+		{ name = "powershell_es" },
 	},
+	cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 })
 
 local conform = require("conform")
 conform.setup({
 	event = { "BufWritePre", "BufNewFile" },
 	formatters_by_ft = {
-		javascript = { "prettier", { "prettierd", "tsserver" } },
-		typescript = { "prettier", { "prettierd", "tsserver" } },
-		typescriptreact = { "prettier", { "prettierd", "tsserver" } },
-		javascriptreact = { "prettier", { "prettierd", "tsserver" } },
-		html = { "prettier", "prettierd" },
-		css = { "prettier", "prettierd" },
-		scss = { "prettier", "prettierd" },
-		json = { "prettier", "prettierd" },
-		yaml = { "prettier", "prettierd" },
-		toml = { "prettier", "prettierd" },
-		markdown = { "prettier", "prettierd" },
+		javascript = { "biome" },
+		typescript = { "biome" },
+		typescriptreact = { "biome" },
+		javascriptreact = { "biome" },
+		json = { "biome" },
+		html = { "prettier" },
+		css = { "prettier" },
+		scss = { "prettier" },
+		yaml = { "prettier" },
+		toml = { "prettier" },
+		markdown = { "prettier" },
 		lua = { "stylua" },
-		--[[ lua = { "lua-format", "stylua"}, ]]
-		python = {
-			--[[ 'ruff_fix', ]]
-			{ "ruff_lsp", "ruff_format", "black", "isort" },
-		},
+		python = { { "ruff_lsp", "ruff_format", "black", "isort" }, },
 	},
 	format_on_save = {
 		lsp_fallback = true,
 		async = false,
-		timeout_ms = 3500, -- Default is 1000, disregarded if async = true
+		timeout_ms = 1500, -- Default is 1000, disregarded if async = true
 	},
 	format_after_save = {
 		lsp_fallback = true,
 		async = false,
-		timeout_ms = 3500, -- Default is 1000, disregarded if async = true
+		timeout_ms = 1500, -- Default is 1000, disregarded if async = true
 	},
 
 	vim.keymap.set({ "n", "v" }, "<leader>lf", function()
@@ -296,6 +301,9 @@ local nmap = function(keys, func, desc)
 
 	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 end
+
+
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)

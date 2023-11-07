@@ -8,3 +8,4 @@ plug.vim.old
 .netrwhist
 pack/
 plugin/
+lazy-lock*
