@@ -132,4 +132,9 @@ function uzip
 }
 # END - Linux Functions
 
+function z
+{
+    zoxide $args
+}
+
 

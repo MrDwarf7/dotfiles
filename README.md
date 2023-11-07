@@ -80,3 +80,5 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 
 -CompletionQueryItems
 Install-Module -Name Azure
+
+scoop install zoxide

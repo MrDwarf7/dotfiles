@@ -186,6 +186,7 @@ cmp.setup({
 		{ name = "luasnip" },
 		{ name = "tsserver" },
 		{ name = "tailwindcss" },
+		{ name = "powershell_es" },
 	},
 	cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 })
