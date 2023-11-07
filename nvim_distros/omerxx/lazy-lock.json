@@ -5,9 +5,15 @@
   "cmp-nvim-tags": { "branch": "main", "commit": "30bdc2eec86eb66730af541bb06d24d4a67e3eeb" },
   "cmp_luasnip": { "branch": "master", "commit": "05a9ab28b53f71d1aece421ef32fee2cb857a843" },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "conform.nvim": { "branch": "master", "commit": "893b139e6dcdb55dee4c98215d9217d3a1ec69eb" },
   "copilot-cmp": { "branch": "master", "commit": "72fbaa03695779f8349be3ac54fa8bd77eed3ee3" },
   "copilot.lua": { "branch": "master", "commit": "330a15ca3425a452103bc24c8287a73063089c2f" },
+=======
+  "conform.nvim": { "branch": "master", "commit": "161d95bfbb1ad1a2b89ba2ea75ca1b5e012a111e" },
+  "copilot-cmp": { "branch": "master", "commit": "72fbaa03695779f8349be3ac54fa8bd77eed3ee3" },
+  "copilot.lua": { "branch": "master", "commit": "73047082d72fcfdde1f73b7f17ad495cffcbafaa" },
+>>>>>>> Stashed changes
 =======
   "conform.nvim": { "branch": "master", "commit": "161d95bfbb1ad1a2b89ba2ea75ca1b5e012a111e" },
   "copilot-cmp": { "branch": "master", "commit": "72fbaa03695779f8349be3ac54fa8bd77eed3ee3" },
@@ -27,7 +33,11 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "e4f34741daa9cf95de68a603d3e7a6844a69fdf0" },
   "mason.nvim": { "branch": "main", "commit": "eabf6d347fdb75be360d4c0ced1145670a171453" },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "mini.nvim": { "branch": "main", "commit": "e8a413b1a29f05bb556a804ebee990eb54479586" },
+=======
+  "mini.nvim": { "branch": "main", "commit": "8e18eb9ba849d737acac1873cd78fc8058c1700a" },
+>>>>>>> Stashed changes
 =======
   "mini.nvim": { "branch": "main", "commit": "8e18eb9ba849d737acac1873cd78fc8058c1700a" },
 >>>>>>> Stashed changes
@@ -42,12 +52,21 @@
   "nvim-dap-ui": { "branch": "master", "commit": "34160a7ce6072ef332f350ae1d4a6a501daf0159" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "57f1dbd0458dd84a286b27768c142e1567f3ce3b" },
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   "nvim-lint": { "branch": "master", "commit": "8d2bd9a2d1f0b41c96dfa0c998cc22ba152935ed" },
   "nvim-lspconfig": { "branch": "master", "commit": "b44737605807023d32e6310b87ba69f4dbf10e0e" },
   "nvim-neoclip.lua": { "branch": "main", "commit": "4e406ae0f759262518731538f2585abb9d269bac" },
   "nvim-notify": { "branch": "master", "commit": "e4a2022f4fec2d5ebc79afa612f96d8b11c627b3" },
   "nvim-tree.lua": { "branch": "master", "commit": "7e3c0bee7b246ca835d5f7453db6fa19de359bab" },
   "nvim-treesitter": { "branch": "master", "commit": "c5a7533113b2deb7db899d387b877389cc8b6113" },
+=======
+  "nvim-lint": { "branch": "master", "commit": "7746f952827dabfb70194518c99c93d5651b8f19" },
+  "nvim-lspconfig": { "branch": "master", "commit": "37457f268af5cd6765e589b0dcd7cbd192d8da00" },
+  "nvim-neoclip.lua": { "branch": "main", "commit": "4e406ae0f759262518731538f2585abb9d269bac" },
+  "nvim-notify": { "branch": "master", "commit": "e4a2022f4fec2d5ebc79afa612f96d8b11c627b3" },
+  "nvim-tree.lua": { "branch": "master", "commit": "0a99c4a23eae8e25285a30d08439aee8da4f5c16" },
+  "nvim-treesitter": { "branch": "master", "commit": "e903dd54e9ec17ff1e817fd858a0756aa4bf0c34" },
+>>>>>>> Stashed changes
 =======
   "nvim-lint": { "branch": "master", "commit": "7746f952827dabfb70194518c99c93d5651b8f19" },
   "nvim-lspconfig": { "branch": "master", "commit": "37457f268af5cd6765e589b0dcd7cbd192d8da00" },
