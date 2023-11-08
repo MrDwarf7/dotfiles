@@ -30,9 +30,9 @@ function scoopup
 
 function dot
 {
-    if (-not ($args))
+    if (-not $args)
     {
-        Write-Host "Not Args: "
+        # Write-Host "Not Args: "
         Push-Location "C:\"
         Push-Location $dotfiles_dir
         Get-ChildItem
@@ -43,8 +43,7 @@ function dot
         return
     } elseif (-not ($null -eq $args))
     {
-
-        Write-Host "Args present: "
+        Write-Host "Args present: '$args'"
         Push-Location "C:\"
         $basePath = "$dotfiles_dir/$args"
         Push-Location $basePath
@@ -136,5 +135,10 @@ function z
 {
     zoxide $args
 }
+
+
+
+
+
 
 
