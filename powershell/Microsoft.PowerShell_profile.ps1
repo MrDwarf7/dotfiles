@@ -130,7 +130,7 @@ function workconf
     }
 }
 
-# Linux Functions # these are also present in the scripts/helpful_func_general.ps1, 
+# Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha
 
 function pro
