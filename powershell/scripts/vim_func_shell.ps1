@@ -1,5 +1,5 @@
 # BEGIN - Vim things
-$dotfiles_dir = "$env:HOMEPATH\dotfiles"
+$dotfiles_dir = "$HOME\dotfiles"
 
 $nvim_main_dir = "$dotfiles_dir\main_nvim"
 $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
@@ -86,6 +86,7 @@ function nvds()
     neovide --multigrid --vsync $args
 }
 # END - Vim things
+
 
 
 
