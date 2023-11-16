@@ -178,6 +178,22 @@ return {
 		},
 	},
 
+	{
+		'zbirenbaum/copilot.lua',
+		enabled = true,
+		--lazy = false,
+		cmd = 'Copilot',
+		event = 'InsertEnter',
+	},
+
+	{
+		'zbirenbaum/copilot-cmp',
+		depencencies = {
+			'zbirenbaum/copilot.lua',
+		},
+		lazy = false,
+	},
+
 	-- { "tpope/vim-dadbod" },
 	-- { "kristijanhusak/vim-dadbod-ui" },
 	-- { "kristijanhusak/vim-dadbod-completion" },
@@ -194,15 +210,11 @@ return {
 	-- 	end,
 	-- },
 
-
 	-- { "xiyaowong/nvim-transparent" },
 
 	-- {
 	-- 	"akinsho/toggleterm.nvim",
 	-- },
-
-
-
 
 	-- {
 	-- 	"folke/trouble.nvim",
@@ -215,7 +227,6 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-
 
 	-- {
 	-- 	"folke/noice.nvim",
@@ -250,24 +261,6 @@ return {
 	-- 	end,
 	-- },
 
-
-	-- {
-	-- 	'zbirenbaum/copilot.lua',
-	-- 	enabled = true,
-	-- 	--lazy = false,
-	-- 	cmd = 'Copilot',
-	-- 	event = 'InsertEnter',
-	-- },
-	--
-	-- {
-	-- 	'zbirenbaum/copilot-cmp',
-	-- 	depencencies = {
-	-- 		'zbirenbaum/copilot.lua',
-	-- 	},
-	-- 	lazy = false,
-	-- },
-
-
 	-- {
 	-- 	"rcarriga/nvim-dap-ui",
 	-- 	dependencies = {
@@ -278,7 +271,6 @@ return {
 	-- { "leoluz/nvim-dap-go" },
 
 	-- Git related plugins
-
 
 	-- {
 	-- 	"lukas-reineke/indent-blankline.nvim",
@@ -320,7 +312,6 @@ return {
 	-- 	end,
 	-- },
 
-
 	-- {
 	-- 	"linux-cultist/venv-selector.nvim",
 	-- 	event = "VeryLazy",
@@ -330,7 +321,6 @@ return {
 	-- 		"mfussenegger/nvim-dap-python",
 	-- 	},
 	-- },
-
 
 	-- 	{
 	-- 		"nvim-tree/nvim-tree.lua",
