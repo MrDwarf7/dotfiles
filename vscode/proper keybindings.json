@@ -271,7 +271,7 @@
 
 	{
 		"command": "vscode-neovim.send",
-		"key": "Escape+Escape",
+		"key": "delete",
 		"when": "editorTextFocus && neovim.mode != insert",
 		"args": ":nohl<CR>"
 	},
@@ -289,6 +289,19 @@
 		"when": "neovim.mode != insert",
 		"args": "<C-d>"
 	},
+
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+q",
+		"when": "neovim.mode == normal",
+		"args": "<C-q>"
+	},
+
+	{
+		"command": "-vscode-neovim.send",
+		"key": "ctrl+v"
+	},
+
 	{
 		"command": "vscode-neovim.send",
 		"key": "ctrl+u",
@@ -319,9 +332,9 @@
 
 	{
 		"command": "vscode-neovim.send",
-		"key": "g+c+c",
-		"when": "editorTextFocus && neovim.mode != insert",
-		"args": "gcc"
+		"key": "p",
+		"when": "editorTextFocus && neovim.mode != insert && neovim.mode == visual",
+		"args": "pgvy"
 	},
 
 	{
@@ -501,5 +514,14 @@
 	{
 		"key": "ctrl+p",
 		"command": "-workbench.action.quickOpen"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+		"when": "inQuickOpen && inViewsPicker"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quickOpenView"
 	}
 ]

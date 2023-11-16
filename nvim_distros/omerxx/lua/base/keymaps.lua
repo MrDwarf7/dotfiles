@@ -3,8 +3,6 @@ vim.keymap.set("v", "<Esc>", "<Esc>:nohl<CR>", { noremap = false, silent = true 
 vim.api.nvim_set_keymap("i", "jj", "<Esc>", { noremap = false })
 
 -- twilight
---
-
 
 vim.api.nvim_set_keymap("n", "tw", ":Twilight<CR>", { noremap = false })
 -- buffers
@@ -108,7 +106,7 @@ vim.keymap.set(
 -- Noice
 vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", { noremap = true })
 
-vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>", { silent = true, noremap = true })
+-- vim.keymap.set("n", "<leader>ee", "<cmd>GoIfErr<cr>", { silent = true, noremap = true })
 
 -- Git
 vim.api.nvim_set_keymap("n", "<leader>gc", ':Git commit -m "', { noremap = false })

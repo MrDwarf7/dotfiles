@@ -7,6 +7,7 @@ end
 if vim.g.vscode then
   require("base.keymaps")
   require("base.vscode")
+  -- vim.opt.clipboard:append("unnamedplus")
 end
 
 

@@ -30,6 +30,9 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- Paste over currently selected text without yanking it
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
+
+vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", { noremap = true })
+
 -- Move lines in normal mode
 vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { noremap = true, silent = true })
@@ -183,6 +186,18 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = 'Find Old Files (telescope)' }
 )
 
+vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[H]elp" })
+vim.keymap.set("n", "<leader>fl", require("telescope.builtin").resume, { desc = "[L]ast search" })
+
+vim.keymap.set("n", "<leader>/", function()
+	-- You can pass additional configuration to telescope to change theme, layout, etc.
+	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+		winblend = 10,
+		previewer = false,
+	}))
+end, { desc = "[/] Fuzzily search in current buffer]" })
+
+
 vim.keymap.set(
 	'n',
 	'<leader>fw',
@@ -197,7 +212,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
 	'n',
-	'<leader>fl',
+	'<leader>fW',
 	":lua require('telescope.builtin').grep_string({ search = vim.fn.input('GREP -> ') })<CR>",
 	{ noremap = true, silent = true, desc = 'Find Line (grep)' }
 )
@@ -239,7 +254,7 @@ vim.keymap.set(
 
 vim.keymap.set(
 	'n',
-	'<leader>fp',
+	'<leader>fP',
 	":lua require('config.plugins.telescope').project_files()<CR>",
 	{ noremap = true, silent = true, desc = 'Find Project Files' }
 )
@@ -476,6 +491,9 @@ vim.keymap.set(
 	"<cmd>lua require'telescope'.extensions.dap.commands{}<CR>",
 	{ silent = true, noremap = true, desc = 'Dap Commands (help)' }
 )
+
+vim.keymap.set("n", "<leader>fp", require("telescope.builtin").diagnostics, { desc = "[P]roblems" })
+vim.keymap.set("n", "<Leader>fn", "<CMD>lua require('telescope').extensions.notify.notify()<CR>", { silent = true })
 vim.keymap.set(
 	'n',
 	'<leader>dl',
@@ -514,4 +532,4 @@ vim.keymap.set(
 	":lua require('config.plugins.telescope').my_note()<CR>",
 	{ noremap = true, silent = true, desc = 'My Note(s)' }
 )
-vim.keymap.set('n', '<leader>nn', ':lua NewNote()<CR>', { noremap = true, silent = true, desc = 'New Note' })
+--[[ vim.keymap.set('n', '<leader>nn', ':lua NewNote()<CR>', { noremap = true, silent = true, desc = 'New Note' }) ]]

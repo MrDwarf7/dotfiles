@@ -11,7 +11,7 @@ local M = {
 		{ 'ray-x/cmp-treesitter' },
 		{ 'lukas-reineke/cmp-rg' },
 		{ 'quangnguyen30192/cmp-nvim-tags' },
-		{ 'zbirenbaum/copilot-cmp' },
+		--[[ { 'zbirenbaum/copilot-cmp' }, ]]
 		{ 'rafamadriz/friendly-snippets' },
 	},
 }

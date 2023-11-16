@@ -129,7 +129,8 @@ return {
 
 	{
 		'zbirenbaum/copilot-cmp',
-		lazy = false,
+		lazy = true,
+		event = "BufEnter"
 	},
 
 	{

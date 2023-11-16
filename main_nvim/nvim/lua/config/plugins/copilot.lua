@@ -2,7 +2,7 @@ return {
 	{
 		'zbirenbaum/copilot.lua',
 		enabled = true,
-		lazy = false,
+		lazy = true,
 		cmd = 'Copilot',
 		event = 'InsertEnter',
 		config = function()
@@ -25,7 +25,7 @@ return {
 				suggestion = {
 					enabled = true,
 					auto_trigger = true, --DEFAULT FOR NOW
-					debounce = 75, --No idea lol
+					debounce = 75,  --No idea lol
 					keymap = {
 						accept = '<C-l>',
 						accept_word = false,
@@ -44,7 +44,8 @@ return {
 		depencencies = {
 			'zbirenbaum/copilot.lua',
 		},
-		lazy = false,
+		lazy = true,
+		event = "InsertEnter",
 		-- after = { "copilot.lua" },
 		config = function()
 			require('copilot_cmp').setup()

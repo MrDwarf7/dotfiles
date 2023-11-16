@@ -1,4 +1,4 @@
-vim.g.vscode = true
+-- vim.g.vscode = true
 
 vim.cmd([[
 nnoremap gd <Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>
@@ -65,7 +65,7 @@ vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
 vim.opt.encoding = "UTF-8"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
 vim.opt.laststatus = 3
 vim.opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
@@ -95,6 +95,9 @@ vim.wo.number = true
 vim.o.updatetime = 250
 vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
+
+
+vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
