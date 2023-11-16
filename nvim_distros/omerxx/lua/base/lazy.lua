@@ -16,7 +16,7 @@ require("lazy").setup("base.plugins_list", {
 	defaults = { lazy = true },
 	performance = {
 		cache = {
-			enabled = true,
+			enabled = false,
 			-- disable_events = {},
 		},
 

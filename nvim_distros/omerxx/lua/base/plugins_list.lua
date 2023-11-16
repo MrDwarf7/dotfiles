@@ -231,6 +231,8 @@ return {
 
 	{ "navarasu/onedark.nvim" },    -- Theme inspired by Atom
 	{ "nvim-lualine/lualine.nvim" }, -- Fancier statusline
+
+
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
@@ -270,6 +272,7 @@ return {
 			hooks.register(hooks.type.WHITESPACE, hooks.builtin.hide_first_space_indent_level)
 		end,
 	},
+
 
 	{
 		"linux-cultist/venv-selector.nvim",
