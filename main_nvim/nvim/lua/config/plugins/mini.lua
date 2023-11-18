@@ -26,6 +26,8 @@ function M.config()
 		},
 	})
 
+
+
 	local basics = require('mini.basics')
 	basics.setup({
 		autocommands = {
@@ -43,4 +45,5 @@ function M.config()
 	local bufremove = require('mini.bufremove')
 	bufremove.setup({})
 end
+
 return M

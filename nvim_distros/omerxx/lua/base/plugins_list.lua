@@ -183,11 +183,13 @@ return {
 		}
 	},
 
-
 	{
 		'echasnovski/mini.nvim',
-		event = { 'BufReadPre', 'BufNewFile' },
+		lazy = false,
 		version = false,
+		-- dependencies = {
+		-- 	'nvim-treesitter/nvim-treesitter-textobjects',
+		-- },
 	},
 
 	{

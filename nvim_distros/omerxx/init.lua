@@ -19,7 +19,6 @@ if not vim.g.vscode and not vim.g.neovide then
   require("base.lazy")
   --require("config.misc")
   require("base.keymaps")
-
   vim.cmd.colorscheme("catppuccin")
   require("git-worktree").setup()
   require("Comment").setup()
@@ -31,7 +30,7 @@ if not vim.g.vscode and not vim.g.neovide then
   require("config.treesitter")
   require("config.lsp")
   require("config.linter")
-  require("config.mini")
+  -- require("config.mini")
 end
 
 

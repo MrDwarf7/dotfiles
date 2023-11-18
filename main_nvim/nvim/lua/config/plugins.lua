@@ -22,7 +22,6 @@ return {
 
 	{
 		'projekt0n/github-nvim-theme',
-		lazy = false,
 		enabled = false,
 		priority = 1000,
 		config = function()
@@ -56,7 +55,7 @@ return {
 
 	{
 		'folke/neodev.nvim',
-		lazy = false,
+		event = 'VeryLazy',
 		config = function()
 			require('neodev')
 		end,
@@ -64,7 +63,7 @@ return {
 
 	{
 		'mfussenegger/nvim-lint',
-		lazy = false,
+		event = { 'BufEnter', 'CursorHold' },
 	},
 
 	{
@@ -125,6 +124,7 @@ return {
 
 	{
 		'zbirenbaum/copilot.lua',
+		lazy = false,
 	},
 
 	{
@@ -135,7 +135,8 @@ return {
 
 	{
 		'windwp/nvim-ts-autotag',
-		lazy = false,
+		lazy = "VeryLazy",
+		event = "BufEnter",
 		config = function()
 			require('nvim-ts-autotag').setup()
 		end,
@@ -264,7 +265,8 @@ return {
 
 	{
 		'hiphish/rainbow-delimiters.nvim',
-		lazy = false,
+		lazy = true,
+		event = "BufEnter",
 	},
 
 	{
@@ -338,6 +340,7 @@ return {
 			})
 		end,
 	},
+
 	{
 		'JoosepAlviste/nvim-ts-context-commentstring',
 		lazy = false,
@@ -345,7 +348,8 @@ return {
 
 	{
 		'nvim-treesitter/nvim-treesitter-context',
-		lazy = false,
+		lazy = true,
+		event = "BufEnter",
 	},
 
 	{
@@ -422,7 +426,7 @@ return {
 
 	{
 		'christoomey/vim-tmux-navigator',
-		lazy = false,
+		lazy = "VeryLazy",
 	},
 
 	{
@@ -462,7 +466,7 @@ return {
 
 	{
 		'folke/todo-comments.nvim',
-		event = 'VeryLazy',
+		lazy = false,
 		config = function()
 			require('todo-comments').setup({})
 		end,
@@ -546,7 +550,8 @@ return {
 
 	{
 		'folke/edgy.nvim',
-		event = 'VeryLazy',
+		lazy = false,
+		--[[ event = 'VeryLazy', ]]
 		opts = {
 			options = {
 				left = { size = 40 },
