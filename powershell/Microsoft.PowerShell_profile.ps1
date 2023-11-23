@@ -14,6 +14,7 @@ $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 
 $powershell_dir = "$dotfiles_dir\powershell"
 $powershell_scripts_dir = "$powershell_dir\scripts"
+$powershell_completions = "$powershell_scripts_dir\completions\"
 
 $work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
 $home_theme = '1MrDwarf7Theme.omp.json'
@@ -101,13 +102,15 @@ if (-not (checkEnvironment))
     # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
 }
 
-. "$powershell_scripts_dir\completion_scripts.ps1"
-                          
 . "$powershell_scripts_dir\vim_func_shell.ps1"
                           
 . "$powershell_scripts_dir\helpful_func_general.ps1"
                           
 . "$powershell_scripts_dir\helpful_func_python.ps1"
+
+. "$powershell_completions\completion_general.ps1"
+
+. "$powershell_completions\completion_gh-cli.ps1"
 
 #Raw Functions
 
