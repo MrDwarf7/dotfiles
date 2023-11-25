@@ -98,7 +98,8 @@ vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 
 
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
-
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
