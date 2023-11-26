@@ -7,6 +7,10 @@ function DockeComposeBuild
 {
     docker compose build
 }
+function DockeComposeUpBuild
+{
+    docker compose up --build
+}
 function DockeComposeExec
 {
     docker compose exec $args
@@ -57,6 +61,7 @@ function DockeComposeStart
 }
 # Set-Alias dco docker compose
 Set-Alias dcb DockeComposeBuild
+Set-Alias dcub DockeComposeUpBuild
 Set-Alias dce DockeComposeExec
 Set-Alias dcps DockeComposePs
 Set-Alias dcres DockeComposeRestart
