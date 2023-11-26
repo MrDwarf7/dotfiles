@@ -90,6 +90,8 @@ if (-not (checkEnvironment))
 
     . "$powershell_scripts_dir\navigation_func_home.ps1"
 
+    . "$powershell_completions\completion_docker-compose.ps1"
+
 
     try
     {
@@ -160,4 +162,5 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
