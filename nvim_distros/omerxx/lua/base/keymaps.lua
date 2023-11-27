@@ -47,8 +47,8 @@ vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<C-W>,", ":vertical resize -10<CR>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-W>.", ":vertical resize +10<CR>", { noremap = true })
 
-vim.keymap.set('n', '<Left>', ':vertical resize +2<CR>', { noremap = true, silent = true })
-vim.keymap.set('n', '<Right>', ':vertical resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Left>', ':vertical resize -2<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<Right>', ':vertical resize +2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Up>', ':resize -2<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<Down>', ':resize +2<CR>', { noremap = true, silent = true })
 

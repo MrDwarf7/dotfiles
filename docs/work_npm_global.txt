@@ -1,4 +1,4 @@
-C:\Users\boughbl\scoop\persist\nodejs\bin
+\scoop\persist\nodejs\bin
 +-- @fsouza/prettierd@0.25.1
 +-- neovim@4.10.1
 +-- prettier@3.0.3

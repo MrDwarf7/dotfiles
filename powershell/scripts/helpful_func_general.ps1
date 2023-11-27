@@ -6,6 +6,16 @@ function cl
     [Windows.Clipboard]::SetText($clipText)
 }
 
+function lzgt
+{
+    lazygit $args
+}
+
+function lzdk
+{
+    lazydocker $args
+}
+
 function gitgo
 {
     param(
@@ -135,6 +145,8 @@ function z
 {
     zoxide $args
 }
+
+
 
 
 
