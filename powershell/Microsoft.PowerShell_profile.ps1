@@ -26,7 +26,7 @@ $backup_theme = 'chips.omp.json'
 # $home_scripts_dir = "D:\Documents\PowerShell\home_scripts"
 
 ### START MAIN SCRIPT
-
+Set-PSReadlineOption -BellStyle None
 # BEGIN - Alias(s)
 Import-Module DockerCompletion
 #Git aliases from Oh-my-zsh Git plugin for PWSH
@@ -162,5 +162,6 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
 
