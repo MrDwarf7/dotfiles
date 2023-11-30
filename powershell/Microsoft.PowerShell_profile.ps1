@@ -32,6 +32,8 @@ Import-Module DockerCompletion
 #Git aliases from Oh-my-zsh Git plugin for PWSH
 Import-Module git-aliases -DisableNameChecking
 
+Import-Module posh-cargo
+
 New-Alias grep Select-String
 New-Alias which Get-Command
 New-Alias ln New-SymLink
@@ -162,6 +164,7 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
 
 
