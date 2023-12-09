@@ -32,7 +32,7 @@ bashcompinit
 
 ### setting variales for pathing
 dotdir=$HOME/dotfiles
-configdir=~/.config
+configdir=$HOME/.config
 gitdir=$HOME/Documents/GitHub_Projects
 
 
