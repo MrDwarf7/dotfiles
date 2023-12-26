@@ -56,7 +56,7 @@ require("mason").setup()
 local servers = {
 	"biome",
 	"clangd",
-	"gopls",
+	-- "gopls",
 	"html",
 	"tsserver",
 	"tailwindcss",
