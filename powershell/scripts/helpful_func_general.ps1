@@ -147,10 +147,60 @@ function z
 }
 
 
+function CargoBuild
+{
+    cargo build $args
+}
 
+function CargoRun
+{
+    cargo run $args
+}
 
+function CargoTest
+{
+    cargo test $args
+}
 
+function CargoCheck
+{
+    cargo check $args
+}
 
+function CargoClean
+{
+    cargo clean $args
+}
+
+function CargoDoc
+{
+    cargo doc $args
+}
+
+function CargoUpdate
+{
+    cargo update $args
+}
+
+function CargoUpgrade
+{
+    cargo upgrade $args
+}
+
+function CargoBuildRelease
+{
+    cargo build --release $args
+}
+
+New-alias cb CargoBuild
+New-alias cr CargoRun
+New-alias ct CargoTest
+New-alias cc CargoCheck
+New-alias ccl CargoClean
+New-alias cd CargoDoc
+New-alias cu CargoUpdate
+New-alias cup CargoUpgrade
+New-alias cbr CargoBuildRelease
 
 
 
