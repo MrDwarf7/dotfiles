@@ -193,14 +193,12 @@ function CargoBuildRelease
 }
 
 New-alias cb CargoBuild
+New-alias cbr CargoBuildRelease
 New-alias cr CargoRun
 New-alias ct CargoTest
 New-alias cc CargoCheck
 New-alias ccl CargoClean
-New-alias cd CargoDoc
 New-alias cu CargoUpdate
+New-alias cdoc CargoDoc
 New-alias cup CargoUpgrade
-New-alias cbr CargoBuildRelease
-
-
 
