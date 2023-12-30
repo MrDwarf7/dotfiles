@@ -157,6 +157,11 @@ function CargoRun
     cargo run $args
 }
 
+function CargoRunRelease
+{
+    cargo run --release $args
+}
+
 function CargoTest
 {
     cargo test $args
@@ -195,10 +200,12 @@ function CargoBuildRelease
 New-alias cb CargoBuild
 New-alias cbr CargoBuildRelease
 New-alias cr CargoRun
+New-alias crr CargoRunRelease
 New-alias ct CargoTest
 New-alias cc CargoCheck
 New-alias ccl CargoClean
 New-alias cu CargoUpdate
 New-alias cdoc CargoDoc
 New-alias cup CargoUpgrade
+
 
