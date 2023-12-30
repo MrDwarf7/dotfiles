@@ -1,20 +1,14 @@
-[user]
-	name = MrDwarf7
-	email = 129040985+MrDwarf7@users.noreply.github.com
 [init]
 	defaultBranch = main
 [core]
 	editor = nvim
 	excludesFile = "$HOME/.gitignore_global"
 [credential "https://github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [credential]
 	helper = store
-	helper = 
 	helper = /usr/bin/git-credential-manager
 [credential "https://dev.azure.com"]
 	useHttpPath = true
