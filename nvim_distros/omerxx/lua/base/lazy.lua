@@ -30,7 +30,7 @@ require("lazy").setup("base.plugins_list", {
 				"tarPlugin",
 				"tohtml",
 				"tutor",
-				"zipPlugin",
+				-- "zipPlugin",
 			},
 		},
 	},
