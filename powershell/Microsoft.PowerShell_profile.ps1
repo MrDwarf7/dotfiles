@@ -7,6 +7,7 @@
 # Dotfiles copy
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
+$env:PDM_IGNORE_ACTIVE_VENV = $true
 
 $dotfiles_dir = "$HOME\dotfiles"
 $work_app_dir = "C:\Applications"
@@ -37,6 +38,7 @@ Import-Module posh-cargo
 New-Alias grep Select-String
 New-Alias which Get-Command
 New-Alias ln New-SymLink
+New-Alias npp notepad++.exe
 
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile))
@@ -164,6 +166,7 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
 
 
