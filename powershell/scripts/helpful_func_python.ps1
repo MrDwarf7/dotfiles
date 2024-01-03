@@ -1,6 +1,10 @@
 # BEGIN - Python Functions
-function pmv
+function pmv()
 {
+    param(
+        [switch]$py3
+    )
+
     if ($env:VIRTUAL_ENV)
     {
         Write-Host "You already have a Virtual Env active!"
@@ -8,15 +12,37 @@ function pmv
     if (checkEnvironment -eq $true)
     {
         $pythonPath="$HOME\scoop\apps\python\current\python.exe"
-        Set-Alias -Name python -Value  $pythonPath
-        & Set-Alias -Name python3 -Value $pythonPath
-        & Set-Alias -Name py -Value  $pythonPath
+        Set-Alias -Name python -Value $pythonPath
+        # & Set-Alias -Name python3 -Value $pythonPath
+        & Set-Alias -Name py -Value $pythonPath
     }
-    python -m venv .venv
+
+    switch ($py3)
+    {
+        $true
+        {
+            $mainCommand = python3 -m venv .venv
+        }
+        $false
+        {
+            $mainCommand = python -m venv .venv
+        }
+        default
+        {
+            $mainCommand = python -m venv .venv
+        }
+    }
+
+    $mainCommand
     Push-Location .\.venv\Scripts
     .\activate
     Pop-Location
     Get-ChildItem
+}
+
+function pmv3
+{
+    pmv -py3
 }
 
 function dea

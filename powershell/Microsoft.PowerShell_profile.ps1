@@ -167,7 +167,3 @@ function l
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
 
-
-
-
-
