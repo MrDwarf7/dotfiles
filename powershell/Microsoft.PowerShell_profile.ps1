@@ -75,6 +75,8 @@ if (checkEnvironment)
 
     . "$work_scripts_dir\shell_alias_func_work.ps1"
 
+    . "$work_scripts_dir\wsl_func_shell.ps1"
+
     try
     {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
@@ -166,4 +168,5 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
+
 
