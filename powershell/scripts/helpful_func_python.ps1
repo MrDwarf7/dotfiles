@@ -1,11 +1,5 @@
 # BEGIN - Python Functions
 
-PYENV="$HOME\.pyenv\pyenv-win"
-PYENV_HOME="$HOME\.pyenv\pyenv-win"
-PYENV_ROOT="$HOME\.pyenv\pyenv-win"
-PYENV_SHIMS="$HOME\.pyenv\pyenv-win\shims"
-
-
 function pmv()
 {
     param(
@@ -28,7 +22,6 @@ function pmv()
     {
         $true
         {
-            Set-Alias -Name python3 -Value $env:PYENV_SHIMS\python3.bat
             $mainCommand = python3 -m venv .venv
         }
         $false
@@ -85,4 +78,5 @@ function rmvenv
     }
 }
 # END - Python Functions
+
 
