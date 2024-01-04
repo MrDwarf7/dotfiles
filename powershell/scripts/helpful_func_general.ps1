@@ -157,6 +157,11 @@ function CargoRun
     cargo run $args
 }
 
+function CargoRunQuiet
+{
+    cargo run -q $args
+}
+
 function CargoRunRelease
 {
     cargo run --release $args
@@ -198,6 +203,7 @@ function CargoBuildRelease
 }
 
 New-alias cb CargoBuild
+New-Alias crq CargoRunQuiet
 New-alias cbr CargoBuildRelease
 New-alias cr CargoRun
 New-alias crr CargoRunRelease
@@ -207,5 +213,4 @@ New-alias ccl CargoClean
 New-alias cu CargoUpdate
 New-alias cdoc CargoDoc
 New-alias cup CargoUpgrade
-
 
