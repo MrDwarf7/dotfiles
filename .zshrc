@@ -18,7 +18,14 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 ### comp install
-HISTFILE=~/.local/.histfile # Lines configured by zsh-newuser-install 
+
+if [ -d "$HOME/.local" ]; then
+    HISTFILE=~/.local/.histfile # Lines configured by zsh-newuser-install 
+else
+    if [ -d "$HOME/.xdg" ]; then
+    HISTFILE=~/.xdg/.histfile
+    fi
+fi
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
@@ -47,24 +54,42 @@ export P10K="$configdir/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Created by `pipx` on 2023-10-26 10:01:20
-export PATH="$PATH:/home/dwarf/.local/bin"
-eval "$(register-python-argcomplete pipx)"
 
 
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+if pacman -Qi "pipx" &> /dev/null; then
+    export PATH="$PATH:/home/dwarf/.local/bin"
+    eval "$(register-python-argcomplete pipx)"
+fi
 
 
-export PNPM_HOME="$HOME/.config/.pnpm"
+if pacman -Qi "pyenv" &> /dev/null; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+    eval "$(pyenv init -)"
+fi
 
-# pnpm
+
+# pnpm old version for Arch at home ---
+#export PNPM_HOME="$HOME/.config/.pnpm"
+
+#export PNPM_HOME="/home/dwarf/.config/.pnpm"
+#case ":$PATH:" in
+#  *":$PNPM_HOME:"*) ;;
+#  *) export PATH="$PNPM_HOME:$PATH" ;;
+#esac
+# old pnpm end
+
+
+# pnpm current - via NVM
+export PNPM_HOME="$HOME/.xdg/data/pnpm"
+
+# pnpm old version for Arch at home ---
 export PNPM_HOME="/home/dwarf/.config/.pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-# pnpm end
 
 
 #source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
@@ -75,7 +100,7 @@ plugins=(
   archlinux
   zsh-autosuggestions
   zsh-syntax-highlighting
-  pdm
+  #pdm
   gh
   vi-mode
   # starship
