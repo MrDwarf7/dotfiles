@@ -111,6 +111,28 @@ alias .z="source ~/.zshrc"
 alias neo=neofetch
 alias dea=deactivate
 alias l="ls -lah --color"
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+
+export GCC_COLOR='eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Cargo Aliases
+
+alias cb='cargo build'
+alias cbr='cargo build --release'
+alias cr='cargo run'
+alias crq='cargo run —q'
+alias crr='cargo run -release'
+alias ct='cargo test'
+alias cc='cargo check'
+alias ccl='cargo clean'
+alias cu='cargo update'
+alias cdoc='cargo doc'
+alias cup='cargo upgrade'
+
+
 
 ### functions
 function dot {
