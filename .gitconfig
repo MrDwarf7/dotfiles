@@ -10,6 +10,9 @@
 [credential]
 	helper = store
 	helper = /usr/bin/git-credential-manager
+[credential]
+	helper = store
+	helper = /mnt/c/Applications/Git/mingw64/bin/git-credential-manager.exe
 [credential "https://dev.azure.com"]
 	useHttpPath = true
 [alias]
