@@ -35,11 +35,6 @@ Import-Module git-aliases -DisableNameChecking
 
 Import-Module posh-cargo
 
-New-Alias grep Select-String
-New-Alias which Get-Command
-New-Alias ln New-SymLink
-New-Alias npp notepad++.exe
-
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile))
 {
@@ -64,6 +59,10 @@ function checkEnvironment
         return $false
     }
 }
+
+# Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
+. "$powershell_scripts_dir\helpful_alias_creation.ps1"
+
 # END - Tooling Functions
 
 # Work
@@ -144,10 +143,10 @@ function workconf
 # Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha
 
-function pro
-{
-    . $PROFILE
-}
+# function pro
+# {
+#     . $PROFILE
+# }
 
 function .
 {
@@ -168,5 +167,3 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 #Invoke-Expression (&starship init powershell)
-
-
