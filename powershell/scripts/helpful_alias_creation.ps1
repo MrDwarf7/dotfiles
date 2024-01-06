@@ -12,7 +12,7 @@ function SafeNewAlias
 
 # Generic Aliases
 SafeNewAlias -Alias grep -Command Select-String
-SafeNewAlias -Alias which -Command Get-Command
+SafeNewAlias which Get-Command
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 
@@ -37,7 +37,5 @@ SafeNewAlias -Alias npp -Command notepad++.exe
 # SafeNewAlias -Alias goto -Command cx $args
 
 # Git Aliases - WIP
-#
-#
 #
 
