@@ -154,11 +154,11 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 
 			-- Useful status updates for LSP
-			{
-				"j-hui/fidget.nvim",
-				event = "VeryLazy",
-				verison = 'legacy',
-			},
+			-- {
+			"j-hui/fidget.nvim",
+			event = "VeryLazy",
+			verison = 'legacy',
+			-- },
 		},
 	},
 

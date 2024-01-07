@@ -1,8 +1,8 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ### SSH agent things 
@@ -54,17 +54,14 @@ export P10K="$configdir/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Created by `pipx` on 2023-10-26 10:01:20
-
-
-
-if pacman -Qi "pipx" &> /dev/null; then
+if pacman -Qi "python-pipx" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.local/bin"
     eval "$(register-python-argcomplete pipx)"
 fi
 
 
 if pacman -Qi "pyenv" &> /dev/null; then
-    export PYENV_ROOT="$HOME/.pyenv"
+    export PYENV_ROOT="$XDG_CONFIG_HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
 fi
@@ -127,8 +124,8 @@ bindkey -M viins 'jj' vi-cmd-mode
 alias .z="source ~/.zshrc"
 alias zshc="vim ~/.zshrc"
 
-alias vi='/usr/bin/vim'
-alias vim='nvim'
+# alias vi='/usr/bin/vim'
+# alias vim='nvim'
 source "$HOME/.aliases"
 
 ### functions
@@ -169,44 +166,45 @@ function rmvenv {
 
 # Vim related things
 
-alias xvim="NVIM_APPNAME=omerxx nvim"
+# alias xvim="NVIM_APPNAME=omerxx nvim"
 
-function sevim() {
-  items=("default" "omerxx")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
+# function sevim() {
+#   items=("default" "omerxx")
+#   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0)
+#   if [[ -z $config ]]; then
+#     echo "Nothing selected"
+#     return 0
+#   elif [[ $config == "default" ]]; then
+#     config=""
+#   fi
+#   NVIM_APPNAME=$config nvim $@
+# }
+#
+# bindkey -s ^a "sevim\n"
+
+
+
+function mgr { 
+  pushd "$gitdir/"
 }
 
-bindkey -s ^a "sevim\n"
+function dod { 
+  pushd "$data_on_demand/"
+}
 
+function dodb { 
+  pushd "$data_on_demand_back/"
+}
 
-
-  function mgr { 
-    pushd "$gitdir/"
-  }
-
-  function dod { 
-    pushd "$data_on_demand/"
-  }
-
-  function dodb { 
-    pushd "$data_on_demand_back/"
-  }
-
-  function dodf { 
-    pushd "$data_on_demand_front/"
-  }
+function dodf { 
+  pushd "$data_on_demand_front/"
+}
 
 ### source dat zsh
 
 source $ZSH/oh-my-zsh.sh
 
+export $(dbus-launch)
 
 ### 'Normal' way of starting starship
 # eval "$(starship init zsh)"

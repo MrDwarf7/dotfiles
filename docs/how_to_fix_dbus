@@ -1,0 +1,43 @@
+
+
+Try and create these first > 
+
+```bash
+export $(dbus-launch)
+```
+
+to the .zshrc or .bashrc file 
+
+
+
+
+and the addition of 
+
+~/.config/systemd/
+
+~/.config/systemd/user.conf >>> 
+[Manager]
+DefaultEnvironment="XDG_RUNTIME_DIR=/run/user/1000" "XAUTHORITY=/home/dwarf/.Xauthority" "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus"
+
+
+
+then assess the state of the service itself and allow it to relink
+
+
+systemctl --failed
+
+systemctl --user start user@1000.service ## This will return a failure on the CLI
+
+
+systemctl status user@1000.service --all ## This will generally show an error
+
+
+systemctl status user@1000.service --all 
+> Produces output 
+
+
+sudo systemctl start user@1000.service ## ACTUALLY starts the service
+
+
+systemctl status user@1000.service --all ## Should be in an active state and "Ready" instead of broken.
+
