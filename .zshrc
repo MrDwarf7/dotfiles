@@ -19,8 +19,8 @@ fi
 # If you come from bash you might have to change your $PATH.
 ### comp install
 
-if [ -d "$HOME/.local" ]; then
-    HISTFILE=~/.local/.histfile # Lines configured by zsh-newuser-install 
+if [ -d "$HOME/.xdg/" ]; then
+    HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install 
 else
     if [ -d "$HOME/.xdg" ]; then
     HISTFILE=~/.xdg/.histfile
@@ -53,9 +53,16 @@ export P10K="$configdir/.p10k.zsh"
 [[ ! -f $configdir/.p10k.zsh ]] || source $P10K
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
+
+
+
+
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
-    export PATH="$PATH:/home/dwarf/.local/bin"
+    export PIPX_HOME="$HOME/.xdg/data/pipx"
+    export PIPX_BIN_DIR="$HOME/.xdg/local/bin"
+    export PIPX_MAN_DIR="$HOME/.xdg/local/man"
+    export PATH="$PATH:/home/dwarf/.xdg/local/bin"
     eval "$(register-python-argcomplete pipx)"
 fi
 
