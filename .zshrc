@@ -46,6 +46,7 @@ gitdir=$HOME/documents/GitHub_Projects
 data_on_demand=$gitdir/Data-On-Demand
 data_on_demand_back=$data_on_demand/Data-On-Demand-Backend
 data_on_demand_front=$data_on_demand/Data-On-Demand-Frontend
+data_on_demand_next=$data_on_demand/data-on-demand-next
 
 export ZSH="$configdir/.oh-my-zsh"
 export P10K="$configdir/.p10k.zsh"
@@ -104,7 +105,7 @@ plugins=(
   archlinux
   zsh-autosuggestions
   zsh-syntax-highlighting
-  #pdm
+  #pdm # pretty sure this doesn't work
   gh
   vi-mode
   # starship
