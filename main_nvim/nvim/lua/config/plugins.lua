@@ -814,4 +814,25 @@ return {
 	},
 
 	{ 'echasnovski/mini.nvim',  version = false },
+
+
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+		},
+		keys = {
+			{ "<c-s>h", "<cmd><C-U>TmuxNavigateLeft<CR>" },
+			{ "<c-s>j", "<cmd><C-U>TmuxNavigateDown<CR>" },
+			{ "<c-s>k", "<cmd><C-U>TmuxNavigateUp<CR>" },
+			{ "<c-s>l", "<cmd><C-U>TmuxNavigateRight<CR>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<CR>" },
+		},
+	},
+
+
 }

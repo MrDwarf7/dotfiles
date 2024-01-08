@@ -216,3 +216,4 @@ export $(dbus-launch)
 ### 'Normal' way of starting starship
 # eval "$(starship init zsh)"
 
+eval "$(zoxide init zsh)"
