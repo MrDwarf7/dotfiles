@@ -1,3 +1,7 @@
+#
+#
+#
+
 function SafeNewAlias
 {
     param (
@@ -12,11 +16,11 @@ function SafeNewAlias
 
 # Generic Aliases
 SafeNewAlias -Alias grep -Command Select-String
-SafeNewAlias which Get-Command
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 
-
+SafeNewAlias -Alias which -Command Get-Command
+# New-Alias -Name which.exe -Value Get-Command
 # Cargo Aliases
 #
 
