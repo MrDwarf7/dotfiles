@@ -1,0 +1,11 @@
+
+name_of_mount_folder = 'External
+
+sudo mkdir /mnt/$name_of_mount_folder/
+
+
+# SINGLE QUOTES ARE VERY IMPORTANT
+
+sudo mount -t drvfs '\\Some.Server.Path.Here\SomeFOLDER' /mnt/$name_of_mount_folder
+
+it should mount fine, may be somewhat laggy though so bear that in mind I guess
