@@ -2,6 +2,7 @@
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup({
 	-- Add languages to be installed here that you want installed for treesitter
+	parser_install_dir = "$HOME/.xdg/data/tree-sitter/",
 	ensure_installed = {
 		-- "go",
 		-- "lua",

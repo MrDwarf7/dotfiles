@@ -5,6 +5,10 @@
 # rustc # handled via rust setup function
 # cargo # handled via rust setup function
 # nvm # handled via nvm setup function
+# install pip related things via ->
+# pipx install pdm
+# pipx install pip
+#
 
 packages_to_install=(
     ssh
@@ -29,10 +33,17 @@ packages_to_install=(
     fd
     sd
     fzf
+    tmux
     bat
     lazygit
     github-cli
+    uctags-git
+    python-pipx
+    pyenv
+    luarocks
 )
+
+
 
 
 ### Function definitions:
@@ -237,7 +248,16 @@ function setup_nvm() {
     pnpm setup
     echo "public-hoist-pattern[]=*@nextui-org/*" >> ~/.npmrc
 
-    nodejs_installs=(@biomejs/biome @fsouza/prettierd tree-sitter tree-sitter-cli neovim typescript-language-server typescript create-next-app turbo)
+    nodejs_installs=(
+        @biomejs/biome
+        @fsouza/prettierd
+        #tree-sitter  # This seems to cause issues when invoked via WSL
+        tree-sitter-cli
+        neovim
+        typescript-language-server
+        typescript
+        create-next-app
+        turbo)
     npm -g install "${nodejs_installs[@]}"
     pnpm -g install "${nodejs_installs[@]}"
     yarn global add "${nodejs_installs[@]}"

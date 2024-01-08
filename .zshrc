@@ -55,9 +55,6 @@ export P10K="$configdir/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
-
-
-
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
     export PIPX_HOME="$HOME/.xdg/data/pipx"
@@ -121,6 +118,8 @@ plugins=(
 # nvm
 source /usr/share/nvm/init-nvm.sh
 
+
+export NODE_TLS_REJECT_UNAUTHORIZED=0
 # VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
@@ -174,7 +173,7 @@ function rmvenv {
 
 # Vim related things
 
-# alias xvim="NVIM_APPNAME=omerxx nvim"
+alias xvim="NVIM_APPNAME=omerxx nvim"
 
 # function sevim() {
 #   items=("default" "omerxx")
