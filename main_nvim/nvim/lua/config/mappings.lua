@@ -31,6 +31,9 @@ vim.keymap.set('v', '>', '>gv', { noremap = true, silent = true })
 -- Paste over currently selected text without yanking it
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
+
+vim.api.nvim_set_keymap("n", "<leader>nn", ":NoiceDismiss<CR>", { noremap = true })
+
 -- Move lines in normal mode
 vim.keymap.set('n', '<A-j>', '<cmd>m .+1<CR>==', { noremap = true, silent = true })
 vim.keymap.set('n', '<A-k>', '<cmd>m .-2<CR>==', { noremap = true, silent = true })
@@ -500,4 +503,4 @@ vim.keymap.set(
 	":lua require('config.plugins.telescope').my_note()<CR>",
 	{ noremap = true, silent = true, desc = 'My Note(s)' }
 )
-vim.keymap.set('n', '<leader>nn', ':lua NewNote()<CR>', { noremap = true, silent = true, desc = 'New Note' })
+-- vim.keymap.set('n', '<leader>nn', ':lua NewNote()<CR>', { noremap = true, silent = true, desc = 'New Note' })

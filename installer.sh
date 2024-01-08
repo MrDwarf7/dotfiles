@@ -11,7 +11,7 @@
 #
 
 packages_to_install=(
-    ssh
+    openssh
     autossh
     curl
     wget
@@ -29,7 +29,7 @@ packages_to_install=(
     go
     tree
     ranger
-    rg
+    ripgrep
     fd
     sd
     fzf
