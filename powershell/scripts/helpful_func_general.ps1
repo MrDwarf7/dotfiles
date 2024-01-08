@@ -261,18 +261,18 @@ function dot
 function pro
 {
     # Define the possible values for no-clear
-    $possibleNoClear = "noclear", "no-clear", "no clear", "noclr", "no-clr", "no clr", "-", "c", "n", "nc", "cl", "ncl", "noc", "nocl", "noclr"
+    $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleNoClear -contains $args[0].ToLower())
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower())
     {
         # Reload the profile without clearing the console
         . $PROFILE
+        Clear-Host
     } else
     {
         # Reload the profile and clear the console
         . $PROFILE
-        Clear-Host
     }
 }
 
@@ -482,4 +482,5 @@ function c
 # {
 #     cargo upgrade $args
 # }
+
 
