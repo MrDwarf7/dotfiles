@@ -2,74 +2,68 @@ $env:HOME_PROFILE = $true
 # BEGIN - Navigation functions
 
 $home_GitHub = "E:\GitHub"
-$gitwork_projects = "$home_GitHub\GitWork_Projects"
+$home_gitwork_projects = "$home_GitHub\GitWork_Projects"
 
-$data_sets = "Data-Sets"
-$docker_projects = "Docker"
-$go_projects = "Go"
-$powershell_projects = "PowerShell"
-$python_projects = "Python"
-$rust_projects = "Rust"
-$web_projects = "Web"
-$testing_projects = "Testing"
 
-$data_on_demand = "$gitwork_projects\Data-On-Demand"
+$data_on_demand = "$home_gitwork_projects\Data-On-Demand"
 
 $data_on_demand_backend = "$data_on_demand\Data-On-Demand-Backend"
 $data_on_demand_next = "$data_on_demand\data-on-demand-next"
-$data_on_demand_frontend = "$gitwork_projects\Data-On-Demand-Frontend"
+$data_on_demand_frontend = "$home_gitwork_projects \Data-On-Demand-Frontend"
 
 
- function mgr
- {
-     param(
-         [string]$path
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+function mgr
+{
+    param(
+        [string]$path = "$home_GitHub"
 
- function wgr
- {
-     param(
-         [string]$path = "$gitwork_projects"
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
- function dod
- {
-     param(
-         [string]$path = "$data_on_demand"
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+function wgr
+{
+    param(
+        [string]$path = "$home_gitwork_projects "
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
- function dodb
- {
-     param(
-         [string]$path = "$data_on_demand_backend"
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+function dod
+{
+    param(
+        [string]$path = "$data_on_demand"
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
- function dodn
- {
-     param(
-         [string]$path = "$data_on_demand_next"
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+function dodb
+{
+    param(
+        [string]$path = "$data_on_demand_backend"
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
- function dodf
- {
-     param(
-         [string]$path = "$data_on_demand_frontend"
-     )
-     Push-Location $path
-     Get-ChildItem
- }
+function dodn
+{
+    param(
+        [string]$path = "$data_on_demand_next"
+    )
+    Push-Location $path
+    Get-ChildItem
+}
+
+function dodf
+{
+    param(
+        [string]$path = "$data_on_demand_frontend"
+    )
+    Push-Location $path
+    Get-ChildItem
+}
+
