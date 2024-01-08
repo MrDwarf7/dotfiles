@@ -11,7 +11,8 @@ z.old/*
 .z.old/
 .z.old/*
 
-**/lazy-lock.json**/*
+main_nvim/nvim/lazy-lock*
+nvim_distros/omerxx/lazy-lock*
 
 main_nvim/*
 !main_nvim/nvim*
