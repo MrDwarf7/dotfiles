@@ -72,17 +72,6 @@ if pacman -Qi "pyenv" &> /dev/null; then
 fi
 
 
-# pnpm old version for Arch at home ---
-#export PNPM_HOME="$HOME/.config/.pnpm"
-
-#export PNPM_HOME="/home/dwarf/.config/.pnpm"
-#case ":$PATH:" in
-#  *":$PNPM_HOME:"*) ;;
-#  *) export PATH="$PNPM_HOME:$PATH" ;;
-#esac
-# old pnpm end
-
-
 # pnpm current - via NVM
 export PNPM_HOME="$HOME/.xdg/data/pnpm"
 
