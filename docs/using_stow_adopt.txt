@@ -1,0 +1,4 @@
+If stow throws an error about a normal file that already exists, instead of deleting that file in the home directory it might be better to re-run stow with the '--adopt' parameter.
+This parameter imports existing files into your stow directory, and then creates a symlink.  Unfortunately it won't work on files that are already symlinks, but at least it'll take care of the bulk of it automatically.
+
+Also, assuming the stow directory is under version control you'll be able see differences between your repository, and the files that got adopted.yay -S nvim-treesitter-parsers-git

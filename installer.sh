@@ -10,6 +10,8 @@
 # pipx install pip
 #
 
+# yay -S nvim-treesitter-parsers-git
+
 packages_to_install=(
     openssh
     autossh
@@ -41,6 +43,7 @@ packages_to_install=(
     python-pipx
     pyenv
     luarocks
+    nvim-treesitter-parsers-git
 )
 
 
