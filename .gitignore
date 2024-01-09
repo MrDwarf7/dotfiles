@@ -22,3 +22,5 @@ nvim_distros/*
 !nvim_distros/TestVim/*
 !nvim_distros/omerxx/
 nvim_distros/omerxx/lazy-lock*
+
+.config/tmux/plugins/*
