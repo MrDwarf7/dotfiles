@@ -15,7 +15,7 @@ $data_on_demand_frontend = "$home_gitwork_projects \Data-On-Demand-Frontend"
 function mgr
 {
     param(
-        [string]$path = "$home_GitHub"
+        [string]$path = $home_GitHub
 
     )
     Push-Location $path
@@ -25,7 +25,7 @@ function mgr
 function wgr
 {
     param(
-        [string]$path = "$home_gitwork_projects "
+        [string]$path = $home_gitwork_projects
     )
     Push-Location $path
     Get-ChildItem
@@ -34,7 +34,7 @@ function wgr
 function dod
 {
     param(
-        [string]$path = "$data_on_demand"
+        [string]$path = $data_on_demand
     )
     Push-Location $path
     Get-ChildItem
@@ -43,7 +43,7 @@ function dod
 function dodb
 {
     param(
-        [string]$path = "$data_on_demand_backend"
+        [string]$path = $data_on_demand_backend
     )
     Push-Location $path
     Get-ChildItem
@@ -52,7 +52,7 @@ function dodb
 function dodn
 {
     param(
-        [string]$path = "$data_on_demand_next"
+        [string]$path = $data_on_demand_next
     )
     Push-Location $path
     Get-ChildItem
@@ -61,7 +61,7 @@ function dodn
 function dodf
 {
     param(
-        [string]$path = "$data_on_demand_frontend"
+        [string]$path = $data_on_demand_frontend
     )
     Push-Location $path
     Get-ChildItem

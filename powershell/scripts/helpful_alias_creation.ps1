@@ -1,7 +1,3 @@
-#
-#
-#
-
 function SafeNewAlias
 {
     param (
@@ -12,15 +8,23 @@ function SafeNewAlias
     {
         New-Alias -Name $Alias -Value $Command
     } 
+    if ((Get-Alias -Name $Alias -ErrorAction SilentlyContinue).Definition -ne $Command)
+    {
+        Remove-Alias -Name $Alias
+        New-Alias -Name $Alias -Value $Command
+    }
+    # {
+    #     Remove-Alias -Name $Alias
+    #     New-Alias -Name $Alias -Value $Command
+    # }
 }
 
 # Generic Aliases
 SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
-
 SafeNewAlias -Alias which -Command Get-Command
-# New-Alias -Name which.exe -Value Get-Command
+
 # Cargo Aliases
 #
 

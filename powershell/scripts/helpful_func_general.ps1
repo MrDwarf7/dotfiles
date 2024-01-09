@@ -64,14 +64,17 @@ function cx
             switch ($functionArgs)
             {
                 "b"
-                {Push-Location $data_on_demand_backend
+                {
+                    Push-Location $data_on_demand_backend
                 }
                 # "f" {Push-Location $data_on_demand_frontend}
                 "f"
-                {Push-Location $data_on_demand_next
+                {
+                    Push-Location $data_on_demand_next
                 }
                 "n" 
-                {Push-Location $data_on_demand_next
+                {
+                    Push-Location $data_on_demand_next
                 }
                 default
                 {Push-Location $data_on_demand
@@ -482,5 +485,4 @@ function c
 # {
 #     cargo upgrade $args
 # }
-
 
