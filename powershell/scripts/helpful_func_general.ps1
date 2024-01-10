@@ -345,11 +345,6 @@ function uzip
 }
 # END - Linux Functions
 
-function z
-{
-    zoxide $args
-}
-
 function c
 {
     param(
@@ -482,5 +477,7 @@ function c
 # {
 #     cargo upgrade $args
 # }
+
+
 
 

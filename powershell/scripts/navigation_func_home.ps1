@@ -9,7 +9,7 @@ $data_on_demand = "$home_gitwork_projects\Data-On-Demand"
 
 $data_on_demand_backend = "$data_on_demand\Data-On-Demand-Backend"
 $data_on_demand_next = "$data_on_demand\data-on-demand-next"
-$data_on_demand_frontend = "$home_gitwork_projects \Data-On-Demand-Frontend"
+$data_on_demand_frontend = "$home_gitwork_projects\Data-On-Demand-Frontend"
 
 
 function mgr
@@ -66,4 +66,5 @@ function dodf
     Push-Location $path
     Get-ChildItem
 }
+
 
