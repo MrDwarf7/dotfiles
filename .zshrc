@@ -38,20 +38,22 @@ autoload -U bashcompinit
 bashcompinit
 
 ### setting variales for pathing
-export dotdir=$HOME/dotfiles
+DOTDIR=$HOME/dotfiles
+
 configdir=$HOME/.config
-gitdir=$HOME/documents/GitHub_Projects
 
+GITHUB_PROJECTS=$HOME/documents/GitHub_Projects
+GITHUB_WORK_PROJECTS=$HOME/documents/GitHub_WorkProjects
 
-data_on_demand=$gitdir/Data-On-Demand
-data_on_demand_back=$data_on_demand/Data-On-Demand-Backend
-data_on_demand_front=$data_on_demand/Data-On-Demand-Frontend
-data_on_demand_next=$data_on_demand/data-on-demand-next
+DATA_ON_DEMAND_BASE=$GITHUB_PROJECTS/Data-On-Demand
+DATA_ON_DEMAND_BACK=$DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
+DATA_ON_DEMAND_FRONT=$DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
+DATA_ON_DEMAND_NEXT=$DATA_ON_DEMAND_BASE/data-on-demand-next
 
-export ZSH="$configdir/.oh-my-zsh"
-export P10K="$configdir/.p10k.zsh"
+export ZSH="$XDG_CONFIG_HOME/.oh-my-zsh"
+export P10K="$XDG_CONFIG_HOME/.p10k.zsh"
 
-[[ ! -f $configdir/.p10k.zsh ]] || source $P10K
+[[ ! -f $XDG_CONFIG_HOME/.p10k.zsh ]] || source $P10K
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
@@ -76,7 +78,7 @@ fi
 export PNPM_HOME="$HOME/.xdg/data/pnpm"
 
 # pnpm old version for Arch at home ---
-export PNPM_HOME="/home/dwarf/.config/.pnpm"
+export PNPM_HOME="$XDG_CONFIG_HOME/.pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -126,7 +128,7 @@ source "$HOME/.aliases"
 
 ### functions
 function dot {
-  pushd $dotdir &&
+  pushd $DOTDIR &&
     git fetch --all &&
     git status
   }
@@ -181,19 +183,27 @@ alias xvim="NVIM_APPNAME=omerxx nvim"
 
 
 function mgr { 
-  pushd "$gitdir/"
+  pushd "$GITHUB_PROJECTS/"
+}
+
+function wgr { 
+  pushd "$GITHUB_WORK_PROJECTS/"
 }
 
 function dod { 
-  pushd "$data_on_demand/"
+  pushd "$DATA_ON_DEMAND_BASE/"
 }
 
 function dodb { 
-  pushd "$data_on_demand_back/"
+  pushd "$DATA_ON_DEMAND_BACK/"
+}
+
+function dodn { 
+  pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
 function dodf { 
-  pushd "$data_on_demand_front/"
+  pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
 ### source dat zsh
