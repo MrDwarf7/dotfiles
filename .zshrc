@@ -26,6 +26,25 @@ else
     HISTFILE=~/.xdg/.histfile
     fi
 fi
+
+source "$HOME/.win_user"
+
+
+
+if [ -d "/mnt/c/Users" ]; then
+    local WIN_PATHS=(
+        "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
+        "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+    )
+
+    for given_path in $WIN_PATHS[@]; do
+        export PATH="$given_path:$PATH"
+    done
+fi
+
+
+
+
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
