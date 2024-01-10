@@ -39,9 +39,6 @@ bashcompinit
 
 ### setting variales for pathing
 DOTDIR=$HOME/dotfiles
-
-configdir=$HOME/.config
-
 GITHUB_PROJECTS=$HOME/documents/GitHub_Projects
 GITHUB_WORK_PROJECTS=$HOME/documents/GitHub_WorkProjects
 
@@ -73,7 +70,6 @@ if pacman -Qi "pyenv" &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-
 # pnpm current - via NVM
 export PNPM_HOME="$HOME/.xdg/data/pnpm"
 
@@ -83,9 +79,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-
-
-#source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 ### zsh plugins
 plugins=( 
@@ -99,7 +92,6 @@ plugins=(
   # starship
 )
 
-
 # IF USING STARSHIP, UNCOMMENT
 # export STARSHIP_CONFIG="$dotdir/starship/starship.toml"
 # source "$dotdir/.config/.oh-my-zsh/plugins/zsh-starship/starship.plugin.zsh"
@@ -108,7 +100,6 @@ plugins=(
 
 # nvm
 source /usr/share/nvm/init-nvm.sh
-
 
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 # VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
@@ -147,7 +138,6 @@ function dot {
     fi
   }
 
-
 function avenv {
   source ./.venv/bin/activate &&
     echo "Activated virtual environment" &&
@@ -163,7 +153,6 @@ function rmvenv {
 }
 
 # Vim related things
-
 alias xvim="NVIM_APPNAME=omerxx nvim"
 
 # function sevim() {
@@ -180,8 +169,7 @@ alias xvim="NVIM_APPNAME=omerxx nvim"
 #
 # bindkey -s ^a "sevim\n"
 
-
-
+# General Functions
 function mgr { 
   pushd "$GITHUB_PROJECTS/"
 }
@@ -207,9 +195,9 @@ function dodf {
 }
 
 ### source dat zsh
-
 source $ZSH/oh-my-zsh.sh
 
+### Fixes ssh-agent / dbus on launch issues - mostly for WSL verson of Arch
 export $(dbus-launch)
 
 ### 'Normal' way of starting starship
