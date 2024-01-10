@@ -4,6 +4,8 @@ using namespace System.Management.Automation.Language
 
 Import-Module PSReadLine
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
+#Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete ## Testing alternative Tab completion api call 
+
 $scriptblock = {
     param($wordToComplete, $commandAst, $cursorPosition)
     $Env:_TYPER_COMPLETE = "complete_powershell"

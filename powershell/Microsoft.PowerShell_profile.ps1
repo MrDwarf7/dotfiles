@@ -119,6 +119,8 @@ if (-not (checkEnvironment))
 
 . "$powershell_completions\completion_gh-cli.ps1"
 
+. "$powershell_completions\completion_az-cli.ps1"
+
 #Raw Functions
 
 function workconf
@@ -169,3 +171,4 @@ function l
 #Invoke-Expression (&starship init powershell)
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
