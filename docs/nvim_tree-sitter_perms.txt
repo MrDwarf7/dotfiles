@@ -1,0 +1,2 @@
+For the neovim parser dir, via yay, you will need to use sudo chmod 755 (ish) on /usr/share/nvim/site/pack/dist/start/nvim-tree-sitter/parser
+This should then allow the yay call to have the correct permissions to dl the source(s), compile the bin for tree-sitter and happy days for nvim variants

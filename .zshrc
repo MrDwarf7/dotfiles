@@ -38,7 +38,7 @@ autoload -U bashcompinit
 bashcompinit
 
 ### setting variales for pathing
-dotdir=$HOME/dotfiles
+export dotdir=$HOME/dotfiles
 configdir=$HOME/.config
 gitdir=$HOME/documents/GitHub_Projects
 
