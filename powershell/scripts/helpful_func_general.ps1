@@ -55,6 +55,17 @@ function cx
             Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
             Push-Location $path
         }
+        "dotfiles"
+        {
+            $path = if ($functionArgs)
+            { Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
+            } else
+            { $dotfiles_dir 
+            }
+            Write-Host "From cx function call path variable is: ", $path
+            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
+            Push-Location $path
+        }
         # matches function then matches argument to a pre defined function
         # ie: dod/b -> $data_on_demand_backend function
         # dod/f -> $data_on_demand_frontend function
@@ -64,14 +75,17 @@ function cx
             switch ($functionArgs)
             {
                 "b"
-                {Push-Location $data_on_demand_backend
+                {
+                    Push-Location $data_on_demand_backend
                 }
                 # "f" {Push-Location $data_on_demand_frontend}
                 "f"
-                {Push-Location $data_on_demand_next
+                {
+                    Push-Location $data_on_demand_next
                 }
                 "n" 
-                {Push-Location $data_on_demand_next
+                {
+                    Push-Location $data_on_demand_next
                 }
                 default
                 {Push-Location $data_on_demand
