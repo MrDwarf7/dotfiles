@@ -4,14 +4,14 @@ function SafeNewAlias
         [string]$Alias,
         [string]$Command
     )
-    if (-not (Get-Alias -Name $Alias -ErrorAction SilentlyContinue))
+    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue))
     {
-        New-Alias -Name $Alias -Value $Command
+        New-Alias -Name ${Alias} -Value ${Command}
     } 
-    if ((Get-Alias -Name $Alias -ErrorAction SilentlyContinue).Definition -ne $Command)
+    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command})
     {
-        Remove-Alias -Name $Alias
-        New-Alias -Name $Alias -Value $Command
+        Remove-Alias -Name ${Alias}
+        New-Alias -Name ${Alias} -Value ${Command}
     }
     # {
     #     Remove-Alias -Name $Alias
@@ -24,7 +24,7 @@ SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 SafeNewAlias -Alias which -Command Get-Command
-
+SafeNewAlias -Alias bpsa -Command sar
 # Cargo Aliases
 #
 
