@@ -91,8 +91,15 @@ if pacman -Qi "pyenv" &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-# Rust/Cargo via pacman
 
+if pacman -Qi "xclip" &> /dev/null; then
+    function cl {
+        pwd | xclip -selection clipboard
+    }
+fi
+
+
+# Rust/Cargo via pacman
 if pacman -Qi "rustup" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.cargo/bin"
 fi
