@@ -4,9 +4,6 @@ alias l='ls -lah --color=auto'
 alias ls='ls -lh --color=auto'
 
 alias cls='clear'
-#alias .b='source ~/.bashrc'
-#alias basc='vim ~/.bashrc'
-
 #alias bat='/usr/bin/batcat'
 
 alias grep='grep --color=auto'
