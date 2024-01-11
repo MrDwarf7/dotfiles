@@ -23,7 +23,7 @@ primitive_types4 	exercises/primitive_types/primitive_types4.rs 	Done
 primitive_types5 	exercises/primitive_types/primitive_types5.rs 	Done   
 primitive_types6 	exercises/primitive_types/primitive_types6.rs 	Done   
 vecs1            	exercises/vecs/vecs1.rs                       	Done   
-vecs2            	exercises/vecs/vecs2.rs                       	Pending
+vecs2            	exercises/vecs/vecs2.rs                       	Done   
 move_semantics1  	exercises/move_semantics/move_semantics1.rs   	Pending
 move_semantics2  	exercises/move_semantics/move_semantics2.rs   	Pending
 move_semantics3  	exercises/move_semantics/move_semantics3.rs   	Pending
@@ -95,4 +95,4 @@ from_into        	exercises/conversions/from_into.rs            	Pending
 from_str         	exercises/conversions/from_str.rs             	Pending
 try_from_into    	exercises/conversions/try_from_into.rs        	Pending
 as_ref_mut       	exercises/conversions/as_ref_mut.rs           	Pending
-Progress: You completed 25 / 96 exercises (26.0 %).
+Progress: You completed 26 / 96 exercises (27.1 %).
