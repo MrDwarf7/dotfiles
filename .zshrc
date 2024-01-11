@@ -35,6 +35,8 @@ if [ -d "/mnt/c/Users" ]; then
     local WIN_PATHS=(
         "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
         "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+        "/mnt/c/Applications/Microsoft VS Code/bin"
+        #"/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
     )
 
     for given_path in $WIN_PATHS[@]; do
@@ -87,6 +89,12 @@ if pacman -Qi "pyenv" &> /dev/null; then
     export PYENV_ROOT="$XDG_CONFIG_HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
     eval "$(pyenv init -)"
+fi
+
+# Rust/Cargo via pacman
+
+if pacman -Qi "rustup" &> /dev/null; then
+    export PATH="$PATH:/home/dwarf/.cargo/bin"
 fi
 
 # pnpm current - via NVM
