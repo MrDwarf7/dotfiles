@@ -18,6 +18,7 @@ return {
 			lua = { "selene" },
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
+			slint = { "slint_lsp" },
 		}
 
 		local lint_augroup = vim.api.nvim_create_augroup("lint", {
@@ -48,6 +49,7 @@ return {
 				"*.docker",
 				"*.py",
 				"*.vim",
+				"*.slint",
 			},
 			group = lint_augroup,
 			callback = function()
