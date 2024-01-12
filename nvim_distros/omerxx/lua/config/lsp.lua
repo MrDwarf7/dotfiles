@@ -41,6 +41,7 @@ mason_tool_installer.setup({
 		"vimls",
 		"rust_analyzer",
 		"ruff_lsp",
+		"slint_lsp",
 		-- 'selene',
 		-- 'eslint_d',
 		--- 'yamlls',
@@ -73,6 +74,7 @@ local servers = {
 	--[[ 'pyright', ]]
 	"ruff_lsp",
 	"bashls",
+	"slint_lsp",
 }
 
 -- Ensure the servers above are installed
@@ -208,6 +210,7 @@ conform.setup({
 		markdown = { "prettier" },
 		lua = { "stylua" },
 		python = { { "ruff_lsp", "ruff_format", "black", "isort" }, },
+
 	},
 	format_on_save = {
 		lsp_fallback = true,

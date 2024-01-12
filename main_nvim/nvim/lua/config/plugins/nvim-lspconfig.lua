@@ -93,6 +93,7 @@ function M.config()
 			--[[ 'pyright', ]]
 			'ruff_lsp',
 			'bashls',
+			'slint_lsp'
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -121,14 +122,15 @@ function M.config()
 				filetypes = { 'html' },
 			})
 		end,
-	})
 
-	--[[ function M.setup() ]]
-	--[[ 		require("dap-python").setup({ ]]
-	--[[ 		args = { "-m", "debugpy.adapter" } ]]
-	--[[ 		}) ]]
-	--[[ 		require("dapui").setup() ]]
-	--[[ 	end ]]
+		['slint_lsp'] = function()
+			lspconfig.slint_lsp.setup({
+				on_attach = M.on_attach,
+				capabilities,
+				filetypes = { 'slint' },
+			})
+		end
+	})
 
 	require('ufo').setup()
 
@@ -165,7 +167,7 @@ function M.config()
 			--[[ 'pyright', ]]
 			'ruff_lsp',
 			'bashls',
-			--
+			'slint_lsp'
 		},
 	})
 

@@ -25,6 +25,47 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "sh",
+	callback = function()
+		vim.lsp.start({
+			name = "bash-language-server",
+			cmd = { "bash-language-server", "start" },
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "lua",
+	callback = function()
+		vim.lsp.start({
+			name = "lua-language-server",
+			cmd = { "lua-language-server" },
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "vim",
+	callback = function()
+		vim.lsp.start({
+			name = "vim-language-server",
+			cmd = { "vim-language-server", "--stdio" },
+		})
+	end,
+})
+
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+	pattern = "slint",
+	callback = function()
+		vim.lsp.start({
+			name = "slint",
+			cmd = { "slint_lsp", "start" },
+		})
+	end,
+})
+
+
 local bufferline_group = augroup('bufferline', { clear = true })
 autocmd({ 'BufAdd', 'BufEnter', 'TabNewEntered' }, {
 	desc = 'Update buffers when adding new buffers',

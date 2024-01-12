@@ -75,6 +75,13 @@ export P10K="$XDG_CONFIG_HOME/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
+
+if pacman -Qi "sccache" &> /dev/null; then
+    export RUSTC_WRAPPER=sccache
+fi
+
+
+
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
     export PIPX_HOME="$HOME/.xdg/data/pipx"
