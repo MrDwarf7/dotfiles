@@ -169,6 +169,7 @@ return {
 				},
 				ensure_installed = {
 					-- one of "all", "maintained" (parsers with maintainers), or a list of languages
+					'awk',
 					'bash',
 					'c',
 					'cmake',
@@ -194,7 +195,9 @@ return {
 					'jq',
 					'json',
 					'jsonc',
+					'llvm',
 					'lua',
+					'luadoc',
 					'make',
 					'markdown',
 					'markdown_inline',
@@ -203,8 +206,10 @@ return {
 					'passwd',
 					'python',
 					'regex',
+					'requirements',
 					'rust',
 					'scss',
+					'slint',
 					'sql',
 					'squirrel',
 					'ssh_config',
@@ -217,6 +222,7 @@ return {
 					'unison',
 					'v',
 					'vim',
+					'vimdoc',
 					'vue',
 					'wgsl',
 					'wing',
@@ -345,6 +351,8 @@ return {
 		'JoosepAlviste/nvim-ts-context-commentstring',
 		lazy = false,
 	},
+
+
 
 	{
 		'nvim-treesitter/nvim-treesitter-context',
@@ -813,14 +821,6 @@ return {
 			'williamboman/mason.nvim',
 			'mfussenegger/nvim-dap',
 		},
-	},
-
-	{
-		'williamboman/mason.nvim',
-		dependencies = {
-			'WhoIsSethDaniel/mason-tool-installer.nvim',
-		},
-		lazy = false,
 	},
 
 	{

@@ -6,7 +6,7 @@ local M = {
 		{ 'williamboman/mason.nvim' },
 		{ 'williamboman/mason-lspconfig.nvim' },
 		{ 'hrsh7th/cmp-nvim-lsp' },
-		--[[ { 'hrsh7th/cmp-nvim-lsp' }, ]]
+		{ 'hrsh7th/cmp-nvim-lsp' },
 		{ 'SmiteshP/nvim-navic' },
 	},
 }
@@ -109,6 +109,7 @@ function M.config()
 			--[[ 'pyright', ]]
 			'ruff_lsp',
 			'bashls',
+			'slint_lsp',
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -153,7 +154,6 @@ function M.config()
 		lazy = false,
 	}
 
-	local mason_tool_installer = require("mason-tool-installer")
 	mason_tool_installer.setup({
 		ensure_installed = {
 			"prettier",
@@ -199,6 +199,7 @@ function M.config()
 				},
 			},
 		})
+		return typescript_tools
 	end
 end
 

@@ -2,7 +2,7 @@ return {
 	{
 		'zbirenbaum/copilot.lua',
 		enabled = true,
-		lazy = true,
+		lazy = false,
 		cmd = 'Copilot',
 		event = 'InsertEnter',
 		config = function()
@@ -44,7 +44,7 @@ return {
 		depencencies = {
 			'zbirenbaum/copilot.lua',
 		},
-		lazy = true,
+		lazy = false,
 		event = "InsertEnter",
 		-- after = { "copilot.lua" },
 		config = function()

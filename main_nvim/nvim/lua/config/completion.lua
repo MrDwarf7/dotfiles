@@ -75,25 +75,6 @@ function M.config()
 			['<C-j>'] = cmp.mapping.select_next_item(),
 			['<C-p>'] = cmp.mapping.select_prev_item(),
 			['<C-n>'] = cmp.mapping.select_next_item(),
-			-- TODO: will neeed a reowrk as unable to normal tab even when cmp NOT visible
-			--[[ ['<Tab>'] = cmp.mapping(function(fallback) ]]
-			--[[   if cmp.visible() then ]]
-			--[[     cmp.select_next_item() ]]
-			--[[   elseif luasnip.expand_or_jumpable() then ]]
-			--[[     luasnip.expand_or_jump() ]]
-			--[[   else ]]
-			--[[     fallback() ]]
-			--[[   end ]]
-			--[[ end, { 'i', 's' }), ]]
-			--[[ ['<S-Tab>'] = cmp.mapping(function(fallback) ]]
-			--[[   if cmp.visible() then ]]
-			--[[     cmp.select_prev_item() ]]
-			--[[   elseif luasnip.jumpable(-1) then ]]
-			--[[     luasnip.jump(-1) ]]
-			--[[   else ]]
-			--[[     fallback() ]]
-			--[[   end ]]
-			--[[ end, { 'i', 's' }), ]]
 		},
 		formatting = {
 			format = lspkind.cmp_format({
@@ -106,8 +87,8 @@ function M.config()
 			}),
 		},
 		sources = cmp.config.sources({
-			{ name = 'nvim_lsp' },
 			{ name = 'tsserver' },
+			{ name = 'nvim_lsp' },
 			{ name = 'vsnip' },
 			{ name = 'path' },
 			{ name = 'calc' },
