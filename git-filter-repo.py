@@ -690,7 +690,7 @@ class Commit(_GitElementWithId):
         parents,
         original_id=None,
         encoding=None,  # encoding for message; None implies UTF-8
-        **kwargs
+        **kwargs,
     ):
         _GitElementWithId.__init__(self)
         self.old_id = self.id
@@ -1911,9 +1911,7 @@ EXAMPLES
            These options specify the paths to select.  Note that much like git
            itself, renames are NOT followed so you may need to specify multiple
            paths, e.g. `--path olddir/ --path newdir/`
-           """[
-                        1:
-                    ]
+           """[1:]
                 )
             ),
         )
