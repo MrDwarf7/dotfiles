@@ -290,8 +290,6 @@ typescript_tools.setup({
 	},
 })
 
-
-
 local copilot = require('copilot')
 copilot.setup({
 	panel = {
@@ -324,12 +322,8 @@ copilot.setup({
 	},
 })
 
-
 local copilot_cmp = require('copilot_cmp')
 copilot_cmp.setup({})
-
-
-
 
 local nmap = function(keys, func, desc)
 	if desc then
@@ -338,8 +332,6 @@ local nmap = function(keys, func, desc)
 
 	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 end
-
-
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
