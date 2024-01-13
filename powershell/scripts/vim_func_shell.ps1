@@ -86,8 +86,3 @@ function nvds()
     neovide --multigrid --vsync $args
 }
 # END - Vim things
-
-
-
-
-
