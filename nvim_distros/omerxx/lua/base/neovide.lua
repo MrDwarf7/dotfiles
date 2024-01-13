@@ -1,3 +1,9 @@
+-- Font
+-- https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/FiraMono.zip
+-- Install the following fonts:
+-- FiraCodeNerdFont-Regular
+-- FiraCodeNerdFontMono-Regular
+
 vim.o.guifont = "FIraCode Nerd Font:h14"
 vim.opt.linespace = 0 -- can also be a negative value
 vim.g.neovide_scale_factor = 0.8

@@ -65,7 +65,7 @@ vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
 vim.opt.encoding = "UTF-8"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
--- vim.opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 vim.opt.laststatus = 3
 vim.opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
