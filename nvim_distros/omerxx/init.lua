@@ -30,13 +30,3 @@ else
   require("config.linter")
   require("config.mini")
 end
-
-
-
-
---[[ vim.g.mapleader = " " ]]
---[[ vim.g.maplocalleader = " " ]]
---[[ vim.o.termguicolors = true ]]
--- require("config.trouble") -- sources from 'plugins_list'
--- require("config.toggleterm") -- Disabled for now -- need to configure it properly
--- vim: ts=8 sts=2 sw=2 et

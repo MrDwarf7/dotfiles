@@ -1,85 +1,112 @@
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
 
+-- local on_attach = function(_, bufnr)
+-- 	-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+-- 	-- In this case, we create a function that lets us more easily define mappings specific
+-- 	-- for LSP related items. It sets the mode, buffer and description for us each time.
+-- 	-- Create a command `:Format` local to the LSP buffer
+-- 	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
+-- 		if vim.lsp.buf.format then
+-- 			vim.lsp.buf.format()
+-- 		elseif vim.lsp.buf.formatting then
+-- 			vim.lsp.buf.formatting()
+-- 		end
+-- 	end, { desc = "Format current buffer with LSP" }
+-- 	)
+-- 	return require("lsp-status").on_attach(_, bufnr)
+-- end
+
 local on_attach = function(_, bufnr)
-	-- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-	-- In this case, we create a function that lets us more easily define mappings specific
-	-- for LSP related items. It sets the mode, buffer and description for us each time.
-
-	-- Create a command `:Format` local to the LSP buffer
-	vim.api.nvim_buf_create_user_command(bufnr, "Format", function(_)
-		if vim.lsp.buf.format then
-			vim.lsp.buf.format()
-		elseif vim.lsp.buf.formatting then
-			vim.lsp.buf.formatting()
-		end
-	end, { desc = "Format current buffer with LSP" }
+	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set(
+		'n',
+		'<leader>la',
+		vim.lsp.buf.code_action,
+		{ noremap = true, silent = true, buffer = bufnr, desc = 'LSP Code Action' }
 	)
-	return require("lsp-status").on_attach(_, bufnr)
+	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+
+	try {
+		vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
+			local conform = require('conform')
+			conform.format({
+				lsp_fallback = true,
+				async = false,
+				timeout_ms = 2500, -- Default is 1000, disregarded if async = true
+			})
+		end, { desc = 'Format or format range if visual' })
+	}
+	catch {
+		vim.keymap.set('n', '<space>lf',
+			function()
+				vim.lsp.buf.format
+				{ async = true }
+			end,
+			bufopts
+		)
+	}
 end
+
+
+
+
+local mason_general_list = {
+	'black',
+	'clangd',
+	'debugpy',
+	'gopls',
+	'hadolint',
+	'isort',
+	'mypy',
+	'prettier',
+	'ruff',
+	'shellcheck',
+	'stylelint',
+	'tailwindcss',
+	'vint',
+	'vulture',
+	'yamlls',
+	'yamllint',
+	'selene',
+}
+
+local mason_lsp_list = {
+	'bashls',
+	'biome',
+	'cssls',
+	'dockerls',
+	'html',
+	'jsonls',
+	'lua_ls',
+	'powershell_es',
+	'ruff_lsp',
+	'rust_analyzer',
+	'slint_lsp',
+	'tsserver',
+	'vimls',
+}
+
 
 local mason_tool_installer = require("mason-tool-installer")
 mason_tool_installer.setup({
 	ensure_installed = {
-		"prettier",
-		-- "prettierd",
-		"biome",
-		"tsserver",
-		"tailwindcss",
-		"black",
-		"isort",
-		"stylelint",
-		"yamllint",
-		"hadolint",
-		"ruff",
-		"vulture",
-		"vint",
-		"shellcheck",
-		"powershell_es",
-		"lua_ls",
-		"vimls",
-		"rust_analyzer",
-		"ruff_lsp",
-		"slint_lsp",
-		-- 'selene',
-		-- 'eslint_d',
-		--- 'yamlls',
-		-- 'debugpy',
-		-- 'pyright',
-		-- 'bashls',
-		--
-	},
+		mason_general_list,
+	}
 })
 
 -- Setup mason so it can manage external tooling
 require("mason").setup()
-local servers = {
-	"biome",
-	"clangd",
-	"gopls",
-	"html",
-	"tsserver",
-	"tailwindcss",
-	"cssls",
-	"dockerls",
-	"jsonls",
-	"vimls",
-	"powershell_es",
-	"lua_ls",
-	--[[ 'yamlls', ]]
-	"vimls",
-	"rust_analyzer",
-	--[[ 'debugpy', ]]
-	--[[ 'pyright', ]]
-	"ruff_lsp",
-	"bashls",
-	"slint_lsp",
-}
+
 
 -- Ensure the servers above are installed
 require("mason-lspconfig").setup({
-	ensure_installed = servers,
+	ensure_installed = mason_lsp_list,
 })
 
 -- Turn on lsp status information
@@ -88,7 +115,7 @@ require("mason-lspconfig").setup({
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-for _, lsp in ipairs(servers) do
+for _, lsp in ipairs(mason_lsp_list) do
 	require("lspconfig")[lsp].setup({
 		on_attach = on_attach,
 		capabilities = capabilities,
@@ -247,8 +274,6 @@ typescript_tools.setup({
 	},
 })
 
-
-
 local copilot = require('copilot')
 copilot.setup({
 	panel = {
@@ -281,21 +306,8 @@ copilot.setup({
 	},
 })
 
-
 local copilot_cmp = require('copilot_cmp')
 copilot_cmp.setup({})
-
-
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "sh",
-	callback = function()
-		vim.lsp.start({
-			name = "bash-language-server",
-			cmd = { "bash-language-server", "start" },
-		})
-	end,
-})
 
 local nmap = function(keys, func, desc)
 	if desc then
@@ -304,8 +316,6 @@ local nmap = function(keys, func, desc)
 
 	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = desc })
 end
-
-
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
