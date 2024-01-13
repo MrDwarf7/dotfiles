@@ -20,8 +20,8 @@ vim.g.neovide_confirm_quit = false        -- defaults true
 vim.g.neovide_remember_window_size = true -- can be overwritten by passing --size on the CLI
 
 -- Cursor settings:
-vim.g.neovide_cursor_animation_length = 0.02
-vim.g.neovide_cursor_trail_size = 0.4
+vim.g.neovide_cursor_animation_length = 0.01
+vim.g.neovide_cursor_trail_size = 0.8
 
 vim.g.neovide_cursor_antialiasing = false -- Disabling may fix some cursor visual issues.
 
