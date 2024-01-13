@@ -284,7 +284,7 @@ vim.keymap.set(
 --[[ vim.keymap.set('n', '<leader>gn', ':Neogit<CR>', {noremap = false, desc = 'Neogit'}) ]]
 --[[ vim.keymap.set('n', '<leader>gn', ":lua require('neogit').open({ kind = 'split' })<CR>", {noremap = false, desc = 'Neogit'}) ]]
 vim.keymap.set('n', '<leader>gd', 'Git Diff', { noremap = true, silent = true, desc = '+Git Diff' })
-vim.keymap.set('n', '<leader>gdd', '<cmd>DiffviewOpen<CR>', { noremap = true, silent = true, desc = 'Git Diff Open' })
+vim.keymap.set('n', '<leader>gdo', '<cmd>DiffviewOpen<CR>', { noremap = true, silent = true, desc = 'Git Diff Open' })
 vim.keymap.set('n', '<leader>gdc', '<cmd>DiffviewClose<CR>', { noremap = true, silent = true, desc = 'Diffview Close' })
 --[[ vim.keymap.set('n', '<leader>ns', ":lua require('config.plugins.telescope').my_note()<CR>", {noremap = true, silent = true }) ]]
 --[[ vim.keymap.set('n', '<leader>nn', ":lua NewNote()<CR>", {noremap = true, silent = true }) ]]

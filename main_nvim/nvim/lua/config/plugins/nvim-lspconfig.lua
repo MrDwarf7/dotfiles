@@ -11,19 +11,23 @@ local M = {
 	},
 }
 
+
+
+
 function M.on_attach(client, bufnr)
 	local navic = require('nvim-navic')
+	local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+	-- local bufopts = { noremap = true, silent = true, buffer = bufnr }
 	-- Mappings.
 	-- See `:help vim.lsp.*` for documentation on any of the below functions
-	local bufopts = { noremap = true, silent = true, buffer = bufnr }
+	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
 	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set(
 		'n',
 		'<leader>la',
@@ -38,13 +42,39 @@ function M.on_attach(client, bufnr)
 	--[[ vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts) ]]
 	--[[ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) ]]
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<leader>lf', function()
-		vim.lsp.buf.format({ async = true })
-	end, bufopts)
+	--[[ vim.keymap.set('n', '<leader>lf', function() ]]
+	--[[ 	vim.lsp.buf.format({ async = false }) ]]
+	--[[ end, bufopts) ]]
+
+	vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
+		local conform = require('conform')
+		conform.format({
+			lsp_fallback = true,
+			async = false,
+			timeout_ms = 2500, -- Default is 1000, disregarded if async = true
+		})
+	end, { desc = 'Format or format range if visual' })
+
 	if client.server_capabilities.documentSymbolProvider then
 		navic.attach(client, bufnr)
 	end
 end
+
+--
+--
+--
+--
+--
+
+
+
+
+
+--
+--
+--
+--
+--
 
 function M.config()
 	local lspconfig = require('lspconfig')
