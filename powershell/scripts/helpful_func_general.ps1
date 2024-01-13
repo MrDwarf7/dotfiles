@@ -1,5 +1,5 @@
 
-$data_sets = "Data-Sets"
+$data_projects = "Data-Sets"
 $downloaded = "Downloads"
 $docker_projects = "Docker"
 $go_projects = "Go"
@@ -10,57 +10,56 @@ $web_projects = "Web"
 $testing_projects = "Testing"
 
 # BEGIN - Shell functions / Helpful functions
-function cl
-{
+function cl {
     Add-Type -Assembly PresentationCore
     $clipText = (get-location).ToString() | Out-String -Stream
     [Windows.Clipboard]::SetText($clipText)
 }
 
-function cx
-{
+function cx {
     param(
         [string]$command
     )
     # Splitting
     $parts = $command -split '/', 2
     $functionName = $parts[0]
-    $functionArgs = if ($parts.Count -gt 1)
-    { $parts[1] 
-    } else
-    { "" 
+    $functionArgs = if ($parts.Count -gt 1) {
+        $parts[1] 
     }
-    $environment = if (checkEnvironment)
-    { "work" 
-    } else
-    { "home" 
+    else {
+        "" 
+    }
+    $environment = if (checkEnvironment) {
+        "work" 
+    }
+    else {
+        "home" 
     }
     $holdError = ""
 
     # Top level switch finds the function name
-    switch ($functionName)
-    {
+    switch ($functionName) {
         # Requires full path after function part 
         # ie: dot/powershell
         # dot/powershell/Scripts
         #
-        "dot"
-        {
-            $path = if ($functionArgs)
-            { Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
-            } else
-            { $dotfiles_dir 
+        "dot" {
+            $path = if ($functionArgs) {
+                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
+            }
+            else {
+                $dotfiles_dir 
             }
             Write-Host "From cx function call path variable is: ", $path
             Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
             Push-Location $path
         }
-        "dotfiles"
-        {
-            $path = if ($functionArgs)
-            { Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
-            } else
-            { $dotfiles_dir 
+        "dotfiles" {
+            $path = if ($functionArgs) {
+                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
+            }
+            else {
+                $dotfiles_dir 
             }
             Write-Host "From cx function call path variable is: ", $path
             Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
@@ -70,25 +69,20 @@ function cx
         # ie: dod/b -> $data_on_demand_backend function
         # dod/f -> $data_on_demand_frontend function
         #
-        "dod"
-        {
-            switch ($functionArgs)
-            {
-                "b"
-                {
+        "dod" {
+            switch ($functionArgs) {
+                "b" {
                     Push-Location $data_on_demand_backend
                 }
                 # "f" {Push-Location $data_on_demand_frontend}
-                "f"
-                {
+                "f" {
                     Push-Location $data_on_demand_next
                 }
-                "n" 
-                {
+                "n" {
                     Push-Location $data_on_demand_next
                 }
-                default
-                {Push-Location $data_on_demand
+                default {
+                    Push-Location $data_on_demand
                 }
             }
             Write-Host "Path variable is: ", $path
@@ -98,47 +92,46 @@ function cx
         # ie: mgr/d -> $gitwork_projects or $home_GitHub/$docker_projects ( where $docker_projects = "Docker" as defined in a variable)
         # mgr/p -> $gitwork_projects or $home_GitHub/$python_projects ( where $python_projects = "Python" as defined in a variable)
         #
-        "mgr"
-        {
-            $pathable = if ($environment -eq "work")
-            { $git_projects 
-            } else
-            { $home_GitHub
+        "mgr" {
+            $pathable = if ($environment -eq "work") {
+                $git_projects 
+            }
+            else {
+                $home_GitHub
             }
             Write-Host "Pathable just after the env check is: ", $pathablet 
             Write-Host "Env variable as: ", $environment
 
-            $path = switch ($functionArgs)
-            {
-                "data"
-                { Join-Path $pathable $data_projects 
+            $path = switch ($functionArgs) {
+                "data" {
+                    Join-Path $pathable $data_projects 
                 }
-                "dl"
-                { Join-Path $pathable $downloaded 
+                "dl" {
+                    Join-Path $pathable $downloaded 
                 }
-                "d"
-                {Join-Path $pathable $docker_projects
+                "d" {
+                    Join-Path $pathable $docker_projects
                 }
-                "g"
-                {Join-Path $pathable $go_projects
+                "g" {
+                    Join-Path $pathable $go_projects
                 }
-                "powershell"
-                {Join-Path $pathable $powershell_projects
+                "powershell" {
+                    Join-Path $pathable $powershell_projects
                 }
-                "p"
-                {Join-Path $pathable $python_projects
+                "p" {
+                    Join-Path $pathable $python_projects
                 }
-                "r"
-                {Join-Path $pathable $rust_projects
+                "r" {
+                    Join-Path $pathable $rust_projects
                 }
-                "w"
-                {Join-Path $pathable $web_projects
+                "w" {
+                    Join-Path $pathable $web_projects
                 }
-                "t"
-                {Join-Path $pathable $testing_projects
+                "t" {
+                    Join-Path $pathable $testing_projects
                 }
-                default
-                {Join-Path $pathable $functionArgs.Replace('/', '\')
+                default {
+                    Join-Path $pathable $functionArgs.Replace('/', '\')
                 }
             }
             Write-Host "Pathable is: ", $pathable
@@ -146,119 +139,109 @@ function cx
             Push-Location $path
         }
 
-        "wgr"
-        {
-            $pathable = if ($environment -eq "work")
-            { $gitwork_projects 
-            } else
-            { $home_gitwork_projects
+        "wgr" {
+            $pathable = if ($environment -eq "work") {
+                $gitwork_projects 
+            }
+            else {
+                $home_gitwork_projects
             }
             Write-Host "Pathable just after the env check is: ", $pathable
             Write-Host "Env variable as: ", $environment
 
-            $path = switch ($functionArgs)
-            {
-                "data"
-                { Join-Path $pathable $data_projects 
+            $path = switch ($functionArgs) {
+                "data" {
+                    Join-Path $pathable $data_projects 
                 }
-                "dl"
-                { Join-Path $pathable $downloaded 
+                "dl" {
+                    Join-Path $pathable $downloaded 
                 }
-                "d"
-                {Join-Path $pathable $docker_projects
+                "d" {
+                    Join-Path $pathable $docker_projects
                 }
-                "g"
-                {Join-Path $pathable $go_projects
+                "g" {
+                    Join-Path $pathable $go_projects
                 }
-                "powershell"
-                {Join-Path $pathable $powershell_projects
+                "powershell" {
+                    Join-Path $pathable $powershell_projects
                 }
-                "p"
-                {Join-Path $pathable $python_projects
+                "p" {
+                    Join-Path $pathable $python_projects
                 }
-                "r"
-                {Join-Path $pathable $rust_projects
+                "r" {
+                    Join-Path $pathable $rust_projects
                 }
-                "w"
-                {Join-Path $pathable $web_projects
+                "w" {
+                    Join-Path $pathable $web_projects
                 }
-                "t"
-                {Join-Path $pathable $testing_projects
+                "t" {
+                    Join-Path $pathable $testing_projects
                 }
-                default
-                {Join-Path $pathable $functionArgs.Replace('/', '\')
+                default {
+                    Join-Path $pathable $functionArgs.Replace('/', '\')
                 }
             }
             Write-Host "Pathable is: ", $pathable
             Write-Host "Path variable is: ", $path
             Push-Location $path
         }
-        default
-        {
+        default {
             $holdError = "Function $functionName not recognized, or isn't a part of the switch handler { cx = Custom CD commands }"
         }
     }
     Get-ChildItem
-    if ($holdError)
-    {
+    if ($holdError) {
         Write-Host
         Write-Host $holdError
     }
 }
 
 
-function lzgt
-{
+function lzgt {
     lazygit $args
 }
 
-function lzdk
-{
+function lzdk {
     lazydocker $args
 }
 
-function gitgo
-{
+function gitgo {
     param(
         [string]$baseCommitMessage = "Bump"
     )
-    if ($args)
-    {
+    if ($args) {
         $argumentsIn = $args
     }
-    if (-not $args)
-    {
+    if (-not $args) {
         $argumentsIn = $baseCommitMessage
     }
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
 
-function scoopup
-{
+function scoopup {
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
 
 
-function scpdir
-{
+function scpdir {
     Push-Location "$env:USERPROFILE\scoop\"
     Get-ChildItem
 }
 
 
-function dot
-{
+function dot {
     param(
         $path
     )
     Write-Host "From dot function call path variable is: ", $path
     Write-Host "From dot function call literal args is: ", $args
 
-    $path = if ($path)
-    { Join-Path $dotfiles_dir $path.Replace('/', '\') 
-    } else
-    { $dotfiles_dir 
+    $path = if ($path) {
+        Join-Path $dotfiles_dir $path.Replace('/', '\') 
+    }
+    else {
+        $dotfiles_dir 
     }
     Push-Location "C:\" 
     Push-Location $path
@@ -272,54 +255,46 @@ function dot
 
 # END - Shell functions / Helpful functions
 
-function pro
-{
+function pro {
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower())
-    {
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower()) {
         # Reload the profile without clearing the console
         . $PROFILE
         Clear-Host
-    } else
-    {
+    }
+    else {
         # Reload the profile and clear the console
         . $PROFILE
     }
 }
 
 
-function .
-{
+function . {
     Start-Process .
 }
 
-function la
-{
+function la {
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function l
-{
+function l {
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function cd2
-{
+function cd2 {
     Set-Location ../../
 }
 
-function touch
-{
+function touch {
     New-Item $args
 }
 
-function zip
-{
+function zip {
     param (
         [string]$ItemToCompress,
         [string]$OptionalDestination
@@ -327,19 +302,17 @@ function zip
     $ItemName = (Get-Item $ItemToCompress).Name
     $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
+    if ([String]::IsNullOrEmpty($OptionalDestination)) {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
-    } else
-    {
+    }
+    else {
         Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
     }
 }
 
-function uzip
-{
+function uzip {
     param (
         [string]$ItemToUnzip,
         [string]$OptionalDestination
@@ -347,86 +320,71 @@ function uzip
     $ItemName = (Get-Item $ItemToUnzip).Name
     $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
+    if ([String]::IsNullOrEmpty($OptionalDestination)) {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
-    } else
-    {
+    }
+    else {
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
     }
 }
 # END - Linux Functions
 
-function c
-{
+function c {
     param(
         [string]$command
     )
     # Splitting
     $parts = $command -split '/', $command.Length
     $functionName = $parts[0]
-    $functionArgs = if ($parts.Count -gt 1)
-    { $parts[1] 
-    } else
-    { "" 
+    $functionArgs = if ($parts.Count -gt 1) {
+        $parts[1] 
+    }
+    else {
+        "" 
     }
     $holdError = ""
 
-    switch ($functionName)
-    {
-        "b"
-        {
+    switch ($functionName) {
+        "b" {
             cargo build $functionArgsbui
         }
-        "r"
-        {
+        "r" {
             cargo run $functionArgs
         }
-        "rq"
-        {
+        "rq" {
             cargo run -q $functionArgs
         }
-        "br"
-        {
+        "br" {
             cargo build --release $functionArgsbui
         }
-        "rr"
-        {
+        "rr" {
             cargo run --release $functionArgs
         }
-        "t"
-        {
+        "t" {
             cargo test $functionArgs
         }
-        "cc"
-        {
+        "cc" {
             cargo check $functionArgs
         }
-        "cl"
-        {
+        "cl" {
             cargo clean $functionArgs
         }
-        "u"
-        {
+        "u" {
             cargo update $functionArgs
         }
-        "doc"
-        {
+        "doc" {
             cargo doc $functionArgs
         }
-        "up"
-        {
+        "up" {
             cargo upgrade $functionArgs
         }
-        default
-        {
+        default {
             $holdError = "Function $functionName not recognized, or isn't a part of the switch handler { c = Cargo }"
         }
     }
-    if ($holdError)
-    {
+    if ($holdError) {
         Write-Host
         Write-Host $holdError
     }

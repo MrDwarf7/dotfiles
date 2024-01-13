@@ -1,15 +1,12 @@
-function SafeNewAlias
-{
+function SafeNewAlias {
     param (
         [string]$Alias,
         [string]$Command
     )
-    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue))
-    {
+    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue)) {
         New-Alias -Name ${Alias} -Value ${Command}
     } 
-    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command})
-    {
+    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command}) {
         Remove-Alias -Name ${Alias}
         New-Alias -Name ${Alias} -Value ${Command}
     }

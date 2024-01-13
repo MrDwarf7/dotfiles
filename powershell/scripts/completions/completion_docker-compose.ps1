@@ -1,62 +1,48 @@
 # docker compose Set-Alias
-function DockerComposeUp
-{
+
+function DockerComposeUp {
     docker compose up $args
 }
-function DockeComposeBuild
-{
+function DockeComposeBuild {
     docker compose build
 }
-function DockeComposeUpBuild
-{
+function DockeComposeUpBuild {
     docker compose up --build
 }
-function DockeComposeExec
-{
+function DockeComposeExec {
     docker compose exec $args
 }
-function DockeComposePs
-{
+function DockeComposePs {
     docker compose ps $args
 }
-function DockeComposeRestart
-{
+function DockeComposeRestart {
     docker compose restart
 }
-function DockeComposeRm
-{
+function DockeComposeRm {
     docker compose rm $args
 }
-function DockeComposeRun
-{
+function DockeComposeRun {
     docker compose run $args
 }
-function DockeComposeStop
-{
+function DockeComposeStop {
     docker compose stop $args
 }
-function DockeComposeUpd
-{
+function DockeComposeUpd {
     docker compose up -d
 }
-function DockeComposeDown
-{
+function DockeComposeDown {
     docker compose down
 }
-function DockeComposeLogs
-{
+function DockeComposeLogs {
     docker compose logs
 }
-function DockeComposeLogsf
-{
+function DockeComposeLogsf {
     docker compose logs -f
 }
-function DockeComposePull
-{
+function DockeComposePull {
     docker compose pull
 }
-function DockeComposeStart
-{
+function DockeComposeStart {
     docker compose start
 }
 # Set-Alias dco docker compose

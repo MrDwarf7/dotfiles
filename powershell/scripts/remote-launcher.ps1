@@ -1,21 +1,17 @@
 #
-
-function RemoteProcessLauncher
-{
+function RemoteProcessLauncher {
     param(
         [string]$ProcessFolder,
         [string]$ProcessExecutable,
         $additionalArgs = $args
     )
 
-    if ([String]::IsNullOrEmpty($ProcessFolder))
-    {
+    if ([String]::IsNullOrEmpty($ProcessFolder)) {
         Write-Host "ProcessFolder is null or empty, defaulting."
         $ProcessFolder = "C:\WINDOWS\system32"
     }
 
-    if ([String]::IsNullOrEmpty($ProcessExecutable))
-    {
+    if ([String]::IsNullOrEmpty($ProcessExecutable)) {
         Write-Host "ProcessExecutable is null or empty, defaulting."
         $ProcessExecutable = "notepad.exe"
     }

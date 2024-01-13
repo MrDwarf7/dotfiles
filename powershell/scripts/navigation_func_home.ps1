@@ -12,8 +12,7 @@ $data_on_demand_next = "$data_on_demand\data-on-demand-next"
 $data_on_demand_frontend = "$home_gitwork_projects\Data-On-Demand-Frontend"
 
 
-function mgr
-{
+function mgr {
     param(
         [string]$path = $home_GitHub
 
@@ -22,8 +21,7 @@ function mgr
     Get-ChildItem
 }
 
-function wgr
-{
+function wgr {
     param(
         [string]$path = $home_gitwork_projects
     )
@@ -31,8 +29,7 @@ function wgr
     Get-ChildItem
 }
 
-function dod
-{
+function dod {
     param(
         [string]$path = $data_on_demand
     )
@@ -40,8 +37,7 @@ function dod
     Get-ChildItem
 }
 
-function dodb
-{
+function dodb {
     param(
         [string]$path = $data_on_demand_backend
     )
@@ -49,8 +45,7 @@ function dodb
     Get-ChildItem
 }
 
-function dodn
-{
+function dodn {
     param(
         [string]$path = $data_on_demand_next
     )
@@ -58,8 +53,7 @@ function dodn
     Get-ChildItem
 }
 
-function dodf
-{
+function dodf {
     param(
         [string]$path = $data_on_demand_frontend
     )

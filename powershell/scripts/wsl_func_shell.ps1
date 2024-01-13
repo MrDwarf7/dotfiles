@@ -1,33 +1,27 @@
-function archsh
-{
+function archsh {
     & 'C:\Windows\system32\wsl.exe' -d Arch --cd ~ --user dwarf
 }
 
-function debsh
-{
+function debsh {
     & 'C:\Windows\system32\wsl.exe' -d Debian --cd ~ --user dwarf
 }
 
-function nixsh
-{
+function nixsh {
     & 'C:\Windows\system32\wsl.exe' -d NixOS --cd ~
 }
 
-function ubsh
-{
+function ubsh {
     & 'C:\Windows\system32\wsl.exe' -d Ubuntu --cd ~ --user dwarf
 }
 
-function disloc
-{
-    if (-not ($args))
-    {
-    (Get-ChildItem HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | ForEach-Object {Get-ItemProperty $_.PSPath}) | Select-Object DistributionName,BasePath
-    } elseif ($args -eq "v" -or "V")
-    {
+function disloc {
+    if (-not ($args)) {
+    (Get-ChildItem HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | ForEach-Object { Get-ItemProperty $_.PSPath }) | Select-Object DistributionName, BasePath
+    }
+    elseif ($args -eq "v" -or "V") {
     (Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss" -Recurse)
-    } else
-    {
+    }
+    else {
         Write-Error ErrorAction
     }
 }
@@ -37,13 +31,11 @@ function disloc
 #Easily open unix related terminals
 
 # BEGIN - WSL specific things
-function wsllv
-{
+function wsllv {
     wsl --list --verbose
 }
 
-function wsls
-{
+function wsls {
     wsl --shutdown
 }
 

@@ -1,35 +1,28 @@
 # BEGIN - Python Functions
 
-function pmv()
-{
+function pmv() {
     param(
         [switch]$py3
     )
 
-    if ($env:VIRTUAL_ENV)
-    {
+    if ($env:VIRTUAL_ENV) {
         Write-Host "You already have a Virtual Env active!"
     }
-    if (checkEnvironment -eq $true)
-    {
-        $pythonPath="$HOME\scoop\apps\python\current\python.exe"
+    if (checkEnvironment -eq $true) {
+        $pythonPath = "$HOME\scoop\apps\python\current\python.exe"
         Set-Alias -Name python -Value $pythonPath
         # & Set-Alias -Name python3 -Value $pythonPath
         & Set-Alias -Name py -Value $pythonPath
     }
 
-    switch ($py3)
-    {
-        $true
-        {
+    switch ($py3) {
+        $true {
             $mainCommand = python3 -m venv .venv
         }
-        $false
-        {
+        $false {
             $mainCommand = python -m venv .venv
         }
-        default
-        {
+        default {
             $mainCommand = python -m venv .venv
         }
     }
@@ -41,20 +34,16 @@ function pmv()
     Get-ChildItem
 }
 
-function pmv3
-{
+function pmv3 {
     pmv -py3
 }
 
-function dea
-{
+function dea {
     deactivate
 }
 
-function avenv
-{
-    if ($env:VIRTUAL_ENV)
-    {
+function avenv {
+    if ($env:VIRTUAL_ENV) {
         Write-Host "You already have a virtual Env activate!"
     }
     Push-Location .\.venv\Scripts
@@ -63,17 +52,14 @@ function avenv
     Get-ChildItem
 }
 
-function rmvenv
-{
-    if ($env:VIRTUAL_ENV)
-    {
+function rmvenv {
+    if ($env:VIRTUAL_ENV) {
         deactivate
     }
-    if (checkEnvironment)
-    {
+    if (checkEnvironment) {
         Remove-Item -r ./.venv
-    } else
-    {
+    }
+    else {
         Remove-Item -Path ./.venv -Recurse -Force
     }
 }
