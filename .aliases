@@ -25,6 +25,9 @@ alias cup='cargo upgrade'
 
 
 
+# Zellij
+
+alias zel='zellij'
 
 # Misc things
 
