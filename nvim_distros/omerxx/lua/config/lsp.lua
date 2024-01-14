@@ -54,8 +54,6 @@ local on_attach = function(_, bufnr)
 end
 
 
-
-
 local mason_general_list = {
 	'black',
 	'clangd',

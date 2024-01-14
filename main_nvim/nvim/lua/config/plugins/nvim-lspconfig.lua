@@ -60,22 +60,6 @@ function M.on_attach(client, bufnr)
 	end
 end
 
---
---
---
---
---
-
-
-
-
-
---
---
---
---
---
-
 function M.config()
 	local lspconfig = require('lspconfig')
 	local mason_lspconfig = require('mason-lspconfig')
