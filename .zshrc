@@ -29,8 +29,6 @@ fi
 
 source "$HOME/.win_user"
 
-
-
 if [ -d "/mnt/c/Users" ]; then
     local WIN_PATHS=(
         "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
@@ -43,9 +41,6 @@ if [ -d "/mnt/c/Users" ]; then
         export PATH="$given_path:$PATH"
     done
 fi
-
-
-
 
 HISTSIZE=1000
 SAVEHIST=1000
@@ -123,14 +118,15 @@ esac
 
 ### zsh plugins
 plugins=( 
-  git
-  archlinux
-  zsh-autosuggestions
-  zsh-syntax-highlighting
-  #pdm # pretty sure this doesn't work
-  gh
-  vi-mode
-  # starship
+    git
+    archlinux
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    #pdm # pretty sure this doesn't work
+    docker
+    gh
+    vi-mode
+    # starship
 )
 
 # IF USING STARSHIP, UNCOMMENT
@@ -151,11 +147,14 @@ bindkey -M vicmd 'L' end-of-line
 
 bindkey -M viins 'jj' vi-cmd-mode
 
+
+alias vi='/usr/sbin/vim'
+alias vim='/usr/sbin/nvim'
+alias nvim='/usr/sbin/nvim'
+
 alias .z="source ~/.zshrc"
 alias zshc="vim ~/.zshrc"
 
-# alias vi='/usr/bin/vim'
-# alias vim='nvim'
 source "$HOME/.aliases"
 
 ### functions
