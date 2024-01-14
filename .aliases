@@ -27,7 +27,7 @@ alias cup='cargo upgrade'
 
 # Zellij
 
-alias zel='zellij'
+alias zel='zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; echo "")'
 
 # Misc things
 

@@ -7,18 +7,15 @@ ui {
 
 keybinds clear-defaults=true {
     normal {
-        //unbind "Ctrl p"
-        //unbind "Ctrl o"
         unbind "Ctrl q"
         unbind "Ctrl b"
-        //unbind "Ctrl x"
         unbind "Ctrl h"
         unbind "Ctrl n"
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
     }
     locked {
-        bind "Ctrl z" { SwitchToMode "Normal"; }
+        bind "Ctrl g" { SwitchToMode "Normal"; }
         bind "Ctrl x"{ Quit; }
     }
 
@@ -187,7 +184,13 @@ keybinds clear-defaults=true {
 //   }
 
     shared_except "locked" {
-        bind "Ctrl z" { SwitchToMode "Locked"; }
+        unbind "Ctrl p"
+        unbind "Ctrl t"
+        unbind "Ctrl y"
+        unbind "Ctrl s"
+        unbind "Ctrl o"
+
+        bind "Ctrl g" { SwitchToMode "Locked"; }
         bind "Ctrl x"{ Quit; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
