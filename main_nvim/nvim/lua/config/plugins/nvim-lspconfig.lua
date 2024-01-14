@@ -34,17 +34,7 @@ function M.on_attach(client, bufnr)
 		vim.lsp.buf.code_action,
 		{ noremap = true, silent = true, buffer = bufnr, desc = 'LSP Code Action' }
 	)
-	--[[ vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts) ]]
-	--[[ vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts) ]]
-	--[[ vim.keymap.set('n', '<leader>wl', function() ]]
-	--[[   print(vim.inspect(vim.lsp.buf.list_workspace_folders())) ]]
-	--[[ end, bufopts) ]]
-	--[[ vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts) ]]
-	--[[ vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts) ]]
 	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	--[[ vim.keymap.set('n', '<leader>lf', function() ]]
-	--[[ 	vim.lsp.buf.format({ async = false }) ]]
-	--[[ end, bufopts) ]]
 
 	vim.keymap.set({ 'n', 'v' }, '<leader>lf', function()
 		local conform = require('conform')
@@ -92,24 +82,23 @@ function M.config()
 			},
 		},
 	})
+
+
 	mason_lspconfig.setup({
 		ensure_installed = {
-			'html',
-			'tsserver',
+			'bashls',
+			'biome',
 			'cssls',
 			'dockerls',
+			'html',
 			'jsonls',
-			'vimls',
-			'powershell_es',
 			'lua_ls',
-			--[[ 'yamlls', ]]
-			'vimls',
-			'rust_analyzer',
-			--[[ 'debugpy', ]]
-			--[[ 'pyright', ]]
+			'powershell_es',
 			'ruff_lsp',
-			'bashls',
+			'rust_analyzer',
 			'slint_lsp',
+			'tsserver',
+			'vimls',
 		},
 	})
 	mason_lspconfig.setup_handlers({
@@ -156,31 +145,23 @@ function M.config()
 
 	mason_tool_installer.setup({
 		ensure_installed = {
-			"prettier",
-			-- "prettierd",
-			"biome",
-			"tsserver",
-			"black",
-			"isort",
-			"stylelint",
-			"yamllint",
-			"hadolint",
-			"ruff",
-			"vulture",
-			"vint",
-			"shellcheck",
-			"powershell_es",
-			"lua_ls",
-			"vimls",
-			"rust_analyzer",
-			"ruff_lsp",
-			-- 'selene',
-			-- 'eslint_d',
-			-- 'yamlls',
-			-- 'debugpy',
-			-- 'pyright',
-			-- 'bashls',
-			--
+			'black',
+			'clangd',
+			'debugpy',
+			'gopls',
+			'hadolint',
+			'isort',
+			'mypy',
+			'prettier',
+			'ruff',
+			'shellcheck',
+			'stylelint',
+			'tailwindcss',
+			'vint',
+			'vulture',
+			'yamlls',
+			'yamllint',
+			'selene',
 		},
 	})
 
