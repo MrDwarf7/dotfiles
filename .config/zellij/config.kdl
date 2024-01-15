@@ -20,7 +20,7 @@ keybinds clear-defaults=true {
     }
 
     pane {
-        bind "Ctrl p" { SwitchToMode "Normal"; } // Mode
+        bind "Ctrl a" { SwitchToMode "Normal"; } // Mode
         bind "n" { NewPane; SwitchToMode "Normal"; } // Create
         bind "x" { CloseFocus; SwitchToMode "Normal"; } // Close
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;} // Rename - Customized - From c > r (This is now consistent across all the other modes too)
@@ -185,6 +185,7 @@ keybinds clear-defaults=true {
 
     shared_except "locked" {
         unbind "Ctrl p"
+        unbind "Ctrl a"
         unbind "Ctrl t"
         unbind "Ctrl y"
         unbind "Ctrl s"
@@ -208,7 +209,7 @@ keybinds clear-defaults=true {
     }
 
     shared_except "pane" "locked" {
-        bind "Ctrl p" { SwitchToMode "Pane"; }
+        bind "Ctrl a" { SwitchToMode "Pane"; }
     }
 
     shared_except "resize" "locked" {
