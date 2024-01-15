@@ -2,7 +2,7 @@
 -- See `:help nvim-treesitter`
 require("nvim-treesitter.configs").setup({
 	-- Add languages to be installed here that you want installed for treesitter
-	parser_install_dir = "$HOME/.xdg/data/tree-sitter/",
+	-- parser_install_dir = "$HOME/.xdg/data/tree-sitter/",
 
 	-- IF using the pacman set of ALL the languages, then leave this commented out.
 	ensure_installed = {
