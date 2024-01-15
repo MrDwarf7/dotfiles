@@ -1,4 +1,4 @@
-#
+#!/bin/bash
 #
 alias l='ls -lah --color=auto'
 alias ls='ls -lh --color=auto'
@@ -22,6 +22,15 @@ alias ccl='cargo clean'
 alias cu='cargo update'
 alias cdoc='cargo doc'
 alias cup='cargo upgrade'
+
+
+if [ "$WIN_AVAILABLE" ]; then
+    alias cbw='cargo build --target x86_64-pc-windows-gnu'
+    alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
+    alias crw='cargo run --target x86_64-pc-windows-gnu'
+    alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
+    alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
+fi
 
 
 

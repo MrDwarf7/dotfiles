@@ -8,11 +8,11 @@ fi
 ### SSH agent things 
 systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}ssh-agent.socket"
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+  ssh-agent -t 1h > "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
   if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "$XDG_RUNTIME_DIR/ssh-agent.env" > /dev/null
+    source "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
   fi
 fi
 
@@ -34,8 +34,10 @@ if [ -d "/mnt/c/Users" ]; then
         "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
         "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
         "/mnt/c/Applications/Microsoft VS Code/bin"
-        #"/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+        "/mnt/c/WINDOWS"
     )
+    export WIN_AVAILABLE=true
+    alias .="explorer.exe"
 
     for given_path in $WIN_PATHS[@]; do
         export PATH="$given_path:$PATH"

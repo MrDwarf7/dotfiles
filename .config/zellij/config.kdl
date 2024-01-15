@@ -25,10 +25,10 @@ keybinds clear-defaults=true {
         bind "x" { CloseFocus; SwitchToMode "Normal"; } // Close
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;} // Rename - Customized - From c > r (This is now consistent across all the other modes too)
 
-        bind "h" "Left" { MoveFocus "Left"; } // Move - Left
-        bind "l" "Right" { MoveFocus "Right"; }// Move - Right
-        bind "k" "Up" { MoveFocus "Up"; }// Move - Up
-        bind "j" "Down" { MoveFocus "Down"; }// Move - Down
+        bind "h" "Left" { MoveFocus "Left"; SwitchToMode "Normal";} // Move - Left
+        bind "l" "Right" { MoveFocus "Right"; SwitchToMode "Normal";}// Move - Right
+        bind "k" "Up" { MoveFocus "Up"; SwitchToMode "Normal";}// Move - Up
+        bind "j" "Down" { MoveFocus "Down"; SwitchToMode "Normal";}// Move - Down
 
         bind "p" { SwitchFocus; }
         bind "s" { NewPane "Down"; SwitchToMode "Normal"; } // Customized - From d > s
