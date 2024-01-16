@@ -8,13 +8,32 @@ if vim.g.vscode then
 	require("base.keymaps")
 	require("base.vscode")
 	-- vim.opt.clipboard:append("unnamedplus")
+	return
 end
 
 
 -- require("Comment").setup()
 -- require("config.mini")
 
-if vim.g ~= vim.g.vscode and vim.g ~= vim.g.neovide then
+if vim.g ~= vim.g.vscode then
+	require("base.options")
+	require("base.lazy")
+	--require("config.misc")
+	require("base.keymaps")
+	vim.cmd.colorscheme("catppuccin")
+	require("git-worktree").setup()
+	require("Comment").setup()
+	require("config.dap")
+	require("config.lualine")
+	require("base.autocmds")
+	require("config.gitsigns")
+	require("config.tele")
+	require("config.treesitter")
+	require("config.lsp")
+	require("config.linter")
+end
+
+if vim.g ~= vim.g.neovide then
 	require("base.options")
 	require("base.lazy")
 	--require("config.misc")
