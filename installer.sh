@@ -46,6 +46,7 @@ packages_to_install=(
     nvim-treesitter-parsers-git
     sccache
     mingw-w64-rust
+    libxcursorh
 )
 
 
