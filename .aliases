@@ -33,6 +33,9 @@ if [ "$WIN_AVAILABLE" ]; then
 fi
 
 
+alias cd2='cd ../..'
+alias cd3='cd ../../..'
+
 
 # Zellij
 
