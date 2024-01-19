@@ -1,0 +1,11 @@
+wsl = true
+no-multigrid = false
+vsync = true
+maximized = false
+srgb = false
+# idle = 15
+neovim-bin = "/usr/sbin/nvim"
+
+[font]
+# normal = ["FiraCode Nerd Font"]
+size = 14
