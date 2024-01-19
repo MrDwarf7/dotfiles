@@ -13,6 +13,8 @@ keybinds clear-defaults=true {
         unbind "Ctrl n"
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
+
+
     }
     locked {
         bind "Ctrl g" { SwitchToMode "Normal"; }
@@ -37,7 +39,27 @@ keybinds clear-defaults=true {
         bind "'" { TogglePaneFrames; SwitchToMode "Normal"; } // Customized - From z > '
         bind "f" { ToggleFloatingPanes; SwitchToMode "Normal"; } // Customized - From w > f
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+
+        bind "/" {
+            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
+                floating true
+                //move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+
+        bind "." {
+            LaunchPlugin "file:~/.config/zellij/plugins/monocle.wasm" {
+                in_place true
+                kiosk true
+                //move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+
     }
+
+
 
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; } // Mode
@@ -328,6 +350,7 @@ themes {
 // Default: default
 //
 theme "catppuccin-mocha"
+//theme ""
 
 // The name of the default layout to load on startup
 // Default: "default"
@@ -335,7 +358,8 @@ theme "catppuccin-mocha"
 // default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
-// Default: normal
+// Default: normal || (normal, locked)
+// 
 //
 default_mode "locked"
 
