@@ -37,6 +37,7 @@ fi
 # Zellij
 
 alias zel='zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; echo "")'
+alias zela='zellij a'
 
 # Misc things
 
