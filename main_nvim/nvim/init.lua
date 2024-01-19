@@ -1,3 +1,7 @@
+if vim.g.neovide then
+	require('config.neovide')
+end
+
 require('config.settings')
 require('config.color')
 -- Lazy

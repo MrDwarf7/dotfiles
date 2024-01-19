@@ -16,7 +16,7 @@ return {
 				json = { 'prettier', 'prettierd' },
 				yaml = { 'prettier', 'prettierd' },
 				toml = { 'prettier', 'prettierd' },
-				markdown = { 'prettier', 'prettierd' },
+				-- markdown = { 'prettier', 'prettierd' },
 				lua = { 'stylua' },
 				sh = { 'beautysh' },
 				--[[ lua = { "lua-format", "stylua"}, ]]

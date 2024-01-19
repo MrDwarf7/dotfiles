@@ -10,7 +10,6 @@
 # pipx install pip
 #
 
-# yay -S nvim-treesitter-parsers-git
 
 packages_to_install=(
     openssh
@@ -28,7 +27,9 @@ packages_to_install=(
     clang
     ninja
     ccache
+    python-pynvim
     go
+    nvim
     tree
     ranger
     ripgrep
@@ -43,7 +44,7 @@ packages_to_install=(
     python-pipx
     pyenv
     luarocks
-    nvim-treesitter-parsers-git
+    # nvim-treesitter-parsers-git
     sccache
     mingw-w64-rust
     libxcursorh
@@ -345,7 +346,7 @@ function main() {
         setup_mirrors
         main_installation "${packages_to_install[@]}"
         rust_setup
-        nvim_from_source
+        # nvim_from_source
         setup_nvm
     )
 

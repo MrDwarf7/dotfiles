@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.runtimepath:prepend(lazypath)
+-- vim.opt.runtimepath:append("$HOME/.xdg/data/tree-sitter")
 require('lazy').setup('config.plugins', {
 	defaults = { lazy = false },
 	performance = {
