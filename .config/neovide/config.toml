@@ -7,5 +7,5 @@ srgb = false
 neovim-bin = "/usr/sbin/nvim"
 
 [font]
-# normal = ["FiraCode Nerd Font"]
+normal = ["FiraCode Nerd Font"]
 size = 14
