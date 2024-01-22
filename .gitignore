@@ -24,3 +24,4 @@ nvim_distros/*
 nvim_distros/omerxx/lazy-lock*
 
 .config/tmux/plugins/*
+.config/btop/*.log
