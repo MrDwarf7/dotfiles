@@ -37,22 +37,26 @@ Import-Module git-aliases -DisableNameChecking
 Import-Module posh-cargo
 
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile)) {
+if (Test-Path($ChocolateyProfile))
+{
     Import-Module "$ChocolateyProfile"
 }
 # END - Alias(s)
 
 
 # BEGIN - Tooling Functions
-function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
+{
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 # Work.sort of
-function checkEnvironment {
-    if ($env:COMPUTERNAME -clike "*LG*") {
+function checkEnvironment
+{
+    if ($env:COMPUTERNAME -clike "*LG*")
+    {
         return $true
-    }
-    else {
+    } else
+    {
         return $false
     }
 }
@@ -63,7 +67,8 @@ function checkEnvironment {
 # END - Tooling Functions
 
 # Work
-if (checkEnvironment) {
+if (checkEnvironment)
+{
     . "$work_scripts_dir\navigation_func_work.ps1"
 
     . "$work_scripts_dir\python_func_work.ps1"
@@ -72,10 +77,11 @@ if (checkEnvironment) {
 
     . "$work_scripts_dir\wsl_func_shell.ps1"
 
-    try {
+    try
+    {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
-    }
-    catch {
+    } catch
+    {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
     }
 
@@ -83,7 +89,8 @@ if (checkEnvironment) {
 }
 
 # Not work/ AKA Home
-if (-not (checkEnvironment)) {
+if (-not (checkEnvironment))
+{
     # Not required at work
     . "$powershell_scripts_dir\wsl_func_shell.ps1"
 
@@ -92,10 +99,11 @@ if (-not (checkEnvironment)) {
     . "$powershell_completions\completion_docker-compose.ps1"
 
 
-    try {
+    try
+    {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
-    }
-    catch {
+    } catch
+    {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
     }
 
@@ -105,6 +113,8 @@ if (-not (checkEnvironment)) {
 . "$powershell_scripts_dir\vim_func_shell.ps1"
                           
 . "$powershell_scripts_dir\helpful_func_general.ps1"
+
+. "$powershell_scripts_dir\match_statement_tests.ps1"
                           
 . "$powershell_scripts_dir\helpful_func_python.ps1"
 
@@ -116,15 +126,20 @@ if (-not (checkEnvironment)) {
 
 #Raw Functions
 
-function workconf {
-    if (-not ($args)) {
+function workconf
+{
+    if (-not ($args))
+    {
         Start-Process $work_scripts_dir
     }
-    if ( $args) {
-        if ($args -eq "vim") {
+    if ( $args)
+    {
+        if ($args -eq "vim")
+        {
             vim $work_scripts_dir
         }
-        if ($args -eq "code") {
+        if ($args -eq "code")
+        {
             code $work_scripts_dir
         } 
     }
@@ -138,16 +153,19 @@ function workconf {
 #     . $PROFILE
 # }
 
-function . {
+function .
+{
     Start-Process .
 }
 
-function la {
+function la
+{
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function l {
+function l
+{
     param ($path = ".")
     Get-ChildItem $path -Force
 }

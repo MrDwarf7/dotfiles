@@ -16,52 +16,77 @@ function cl
     [Windows.Clipboard]::SetText($clipText)
 }
 
-
-
-function lzgt {
+function lzgt
+{
     lazygit $args
 }
 
-function lzdk {
+function lzdk
+{
     lazydocker $args
 }
 
-function gitgo {
+function gitgo
+{
     param(
         [string]$baseCommitMessage = "Bump"
     )
-    if ($args) {
+    if ($args)
+    {
         $argumentsIn = $args
     }
-    if (-not $args) {
+    if (-not $args)
+    {
         $argumentsIn = $baseCommitMessage
     }
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
 
-function scoopup {
+function scoopup
+{
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
 
+function nodeup
+{
+    $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
+    pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade 
+    # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
+}
 
-function scpdir {
+function sysup
+{
+    if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED))
+    {
+        $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
+    }
+    scoopup
+    nodeup
+    Write-Host
+    Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
+}
+
+function scpdir
+{
     Push-Location "$env:USERPROFILE\scoop\"
     Get-ChildItem
 }
 
 
-function dot {
+function dot
+{
     param(
         $path
     )
     Write-Host "From dot function call path variable is: ", $path
     Write-Host "From dot function call literal args is: ", $args
 
-    $path = if ($path) {
+    $path = if ($path)
+    {
         Join-Path $dotfiles_dir $path.Replace('/', '\') 
-    }
-    else {
+    } else
+    {
         $dotfiles_dir 
     }
     Push-Location "C:\" 
@@ -76,46 +101,54 @@ function dot {
 
 # END - Shell functions / Helpful functions
 
-function pro {
+function pro
+{
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower()) {
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower())
+    {
         # Reload the profile without clearing the console
         . $PROFILE
         Clear-Host
-    }
-    else {
+    } else
+    {
         # Reload the profile and clear the console
         . $PROFILE
     }
 }
 
 
-function . {
+function .
+{
     Start-Process .
 }
 
-function la {
+function la
+{
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function l {
+function l
+{
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function cd2 {
+function cd2
+{
     Set-Location ../../
 }
 
-function touch {
+function touch
+{
     New-Item $args
 }
 
-function zip {
+function zip
+{
     param (
         [string]$ItemToCompress,
         [string]$OptionalDestination
@@ -123,17 +156,19 @@ function zip {
     $ItemName = (Get-Item $ItemToCompress).Name
     $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination)) {
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
-    }
-    else {
+    } else
+    {
         Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
     }
 }
 
-function uzip {
+function uzip
+{
     param (
         [string]$ItemToUnzip,
         [string]$OptionalDestination
@@ -141,78 +176,15 @@ function uzip {
     $ItemName = (Get-Item $ItemToUnzip).Name
     $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination)) {
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
-    }
-    else {
+    } else
+    {
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
     }
 }
 # END - Linux Functions
-
-
-
-
-
-# Not currently working while function c is in place
-
-# function CargoBuild
-# {
-#     cargo build $args
-# }
-#
-# function CargoRun
-# {
-#     cargo run $args
-# }
-#
-# function CargoRunQuiet
-# {
-#     cargo run -q $args
-# }
-#
-# function CargoRunRelease
-# {
-#     cargo run --release $args
-# }
-#
-# function CargoBuildRelease
-# {
-#     cargo build --release $args
-# }
-#
-# function CargoTest
-# {
-#     cargo test $args
-# }
-#
-# function CargoCheck
-# {
-#     cargo check $args
-# }
-#
-# function CargoClean
-# {
-#     cargo clean $args
-# }
-#
-# function CargoDoc
-# {
-#     cargo doc $args
-# }
-#
-# function CargoUpdate
-# {
-#     cargo update $args
-# }
-#
-# function CargoUpgrade
-# {
-#     cargo upgrade $args
-# }
-
-
-
 
