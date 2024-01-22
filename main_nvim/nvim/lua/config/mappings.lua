@@ -199,12 +199,21 @@ vim.keymap.set(
 	":lua require('telescope.builtin').grep_string()<CR>",
 	{ noremap = true, silent = true, desc = 'Find String (under cursor)' }
 )
+
 vim.keymap.set(
 	'n',
-	'<leader>fl',
+	'<leader>fS',
 	":lua require('telescope.builtin').grep_string({ search = vim.fn.input('GREP -> ') })<CR>",
 	{ noremap = true, silent = true, desc = 'Find Line (grep)' }
 )
+-- vim.keymap.set('n', '<leader>fl', ":lua require('telescope.builtin').resume<CR>",
+-- 	{ noremap = true, silent = true, desc = '[L]ast search' }
+-- )
+
+vim.keymap.set('n', '<leader>fl', require("telescope.builtin").resume,
+	{ noremap = true, silent = true, desc = '[L]ast search' }
+)
+
 
 vim.keymap.set('n', '<leader>fv', '<cmd>:VenvSelect<CR>', { noremap = true, silent = true, desc = 'Venv Select' })
 vim.keymap.set(

@@ -4,6 +4,8 @@
 alias l='ls -lah --color=auto'
 alias ls='ls -lh --color=auto'
 
+alias ppath='echo $PATH'
+
 alias cls='clear'
 #alias bat='/usr/bin/batcat'
 

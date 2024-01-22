@@ -121,6 +121,7 @@ vim.keymap.set("n", "<leader>fw", require("telescope.builtin").live_grep, { desc
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "[F]ind [R]ecents" })
 
 vim.keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "[H]elp" })
+vim.keymap.set("n", "<leader>fl", require("telescope.builtin").resume, { desc = "[L]ast search" })
 
 vim.keymap.set("n", "<leader>fs", require("telescope.builtin").grep_string, { desc = "[S]tring" })
 vim.keymap.set("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[P]roblems" })

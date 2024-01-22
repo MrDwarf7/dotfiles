@@ -27,26 +27,23 @@ else
     fi
 fi
 
+
 source "$HOME/.win_user"
-
 if [ -d "/mnt/c/Users" ]; then
-    local WIN_PATHS=(
-        "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
-        "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
-        "/mnt/c/Applications/Microsoft VS Code/bin"
-        "/mnt/c/WINDOWS"
-    )
-
-    # TODO: fix the stacking problem, so need to have it check if the path already exists and not run if it does 
-    export WIN_AVAILABLE=true
-    alias .="explorer.exe"
-
-    for given_path in $WIN_PATHS[@]; do
-      if [ -d "$given_path" ]; then
-
-      fi
-        export PATH="$given_path:$PATH"
-    done
+  local WIN_PATHS=(
+  "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
+  "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+  "/mnt/c/Applications/Microsoft VS Code/bin"
+  "/mnt/c/WINDOWS"
+)
+  export WIN_AVAILABLE=true
+  alias .="explorer.exe"
+  for given_path in $WIN_PATHS[@]; do 
+    local exists_in_path=$(echo $PATH | grep $given_path) 
+    if [ -z "$exists_in_path" ]; then
+      export PATH="$given_path:$PATH"
+    fi
+  done
 fi
 
 HISTSIZE=1000
@@ -77,11 +74,9 @@ export P10K="$XDG_CONFIG_HOME/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
-
 if pacman -Qi "sccache" &> /dev/null; then
     export RUSTC_WRAPPER=sccache
 fi
-
 
 
 # Created by `pipx` on 2023-10-26 10:01:20
