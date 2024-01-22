@@ -36,10 +36,15 @@ if [ -d "/mnt/c/Users" ]; then
         "/mnt/c/Applications/Microsoft VS Code/bin"
         "/mnt/c/WINDOWS"
     )
+
+    # TODO: fix the stacking problem, so need to have it check if the path already exists and not run if it does 
     export WIN_AVAILABLE=true
     alias .="explorer.exe"
 
     for given_path in $WIN_PATHS[@]; do
+      if [ -d "$given_path" ]; then
+
+      fi
         export PATH="$given_path:$PATH"
     done
 fi
@@ -98,7 +103,7 @@ fi
 
 if pacman -Qi "xclip" &> /dev/null; then
     function cl {
-        pwd | xclip -selection clipboard
+        pwd | win32yank.exe -i
     }
 fi
 
@@ -156,6 +161,8 @@ alias nvim='/usr/sbin/nvim'
 
 alias .z="source ~/.zshrc"
 alias zshc="vim ~/.zshrc"
+alias ashc="vim ~/.aliases"
+
 
 source "$HOME/.aliases"
 

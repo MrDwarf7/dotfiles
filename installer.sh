@@ -48,6 +48,7 @@ packages_to_install=(
     sccache
     mingw-w64-rust
     libxcursorh
+    win32yank-bin
 )
 
 
