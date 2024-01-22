@@ -46,6 +46,12 @@ if [ -d "/mnt/c/Users" ]; then
   done
 fi
 
+
+if [ $WIN_AVAILABLE ]; then
+  alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl"
+fi
+
+
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep

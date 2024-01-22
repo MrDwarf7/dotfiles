@@ -39,3 +39,24 @@ vim.g.neovide_cursor_vfx_particle_density = 7.0
 vim.g.neovide_cursor_vfx_particle_speed = 10.0
 -- vim.g.neovide_cursor_vfx_particle_phase = 1.5 -- Only for the railfun mode
 -- vim.g.neovide_cursor_vfx_particle_curl = 1.0 -- Only for the railfun mode
+
+-- Custom binds when running via Neovide to change scaling factors.
+local change_scale_factor = function(delta)
+	vim.g.neovide_scale_factoer = vim.g.neovide_scale_factor * delta
+end
+
+vim.keymap.set(
+	"n",
+	"<C-=>",
+	function()
+		change_scale_factor(1.25)
+	end
+)
+
+vim.keymap.set(
+	"n",
+	"<C-->",
+	function()
+		change_scale_factor(1 / 1.25)
+	end
+)
