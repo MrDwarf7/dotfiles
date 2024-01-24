@@ -102,11 +102,9 @@ if pacman -Qi "pyenv" &> /dev/null; then
 fi
 
 
-if pacman -Qi "xclip" &> /dev/null; then
-    function cl {
-        pwd | win32yank.exe -i
-    }
-fi
+function cl {
+  pwd | win32yank.exe -i
+}
 
 
 # Rust/Cargo via pacman
