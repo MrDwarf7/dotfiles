@@ -102,7 +102,7 @@ function M.config()
 			'lua_ls',
 			--[[ 'yamlls', ]]
 			'vimls',
-			'rust_analyzer',
+			-- 'rust_analyzer',
 			--[[ 'debugpy', ]]
 			--[[ 'pyright', ]]
 			-- 'rust_analyzer',
