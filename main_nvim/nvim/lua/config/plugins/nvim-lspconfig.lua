@@ -105,6 +105,7 @@ function M.config()
 			'rust_analyzer',
 			--[[ 'debugpy', ]]
 			--[[ 'pyright', ]]
+			-- 'rust_analyzer',
 			'ruff_lsp',
 			'bashls',
 			'slint_lsp'
@@ -143,7 +144,7 @@ function M.config()
 				capabilities,
 				filetypes = { 'slint' },
 			})
-		end
+		end,
 	})
 
 	require('ufo').setup()
