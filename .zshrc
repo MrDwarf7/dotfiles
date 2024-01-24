@@ -106,6 +106,32 @@ function cl {
   pwd | win32yank.exe -i
 }
 
+function mypath {
+  # echo $PATH | tr ':' '\n'
+
+# Alternative impl. Zsh
+if (($+PATH)); then
+  echo "$#path element(s):"
+  printf '%q\n' "$path[@]"
+else
+  echo "PATH unset"
+fi
+
+# Alternative impl. POSIX complient shells
+# if [ -n "${PATH+.}" ]; then
+#   (
+#     set -o noglob
+#     IFS=:
+#     set -- $PATH''
+#     echo "$# element(s):"
+#     printf '"%s"\n' "$@"
+#   )
+# else
+#   echo "PATH unset"
+# fi
+
+}
+
 
 # Rust/Cargo via pacman
 if pacman -Qi "rustup" &> /dev/null; then
