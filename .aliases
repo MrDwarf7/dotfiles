@@ -29,6 +29,8 @@ alias yayss='yay -Ss'
 # Cargo Aliases
 alias cb='cargo build'
 alias cbr='cargo build --release'
+
+
 alias cr='cargo run'
 alias crq='cargo run -q'
 alias crr='cargo run --release'
@@ -46,6 +48,10 @@ if [ "$WIN_AVAILABLE" ]; then
     alias crw='cargo run --target x86_64-pc-windows-gnu'
     alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
     alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
+
+    alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
+    alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
+    alias cble='cba && cbra'
 fi
 
 
