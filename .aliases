@@ -7,6 +7,7 @@ alias ls='ls -lh --color=auto'
 alias ppath='echo $PATH'
 
 alias cls='clear'
+alias c='cls && l'
 #alias bat='/usr/bin/batcat'
 
 alias grep='grep --color=auto'
