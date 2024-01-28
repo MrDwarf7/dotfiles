@@ -56,12 +56,12 @@ test_sudo(){
 }
 
 <<<<<<< HEAD
-determine_package_manager() { 
-	is_sudo = test_sudo 
-	local value  
-	if is_sudo then 
-		if [ -x "$(command -v pacman)" ] then 
-			value = sudo pacman -Sy 
+determine_package_manager() {
+	is_sudo = test_sudo
+	local value
+	if is_sudo then
+		if [ -x "$(command -v pacman)" ] then
+			value = sudo pacman -Sy
 =======
 determine_package_manager() {
 	if test_sudo();
@@ -73,17 +73,18 @@ determine_package_manager() {
 			return sudo apk add --no-cache
 	fi
 
-	if [ -x "$(command -v apt-get)" ] then 
+	if [ -x "$(command -v apt-get)" ] then
 			return sudo apt-get install -y
 	fi
 
-	if [ -x "$(command -v dnf)" ] then 
+	if [ -x "$(command -v dnf)" ] then
 			return sudo dnf install -y
 	fi
 
-	if [ -x "$(command -v zypper)" ] then 
-			return zypper install -y 
+	if [ -x "$(command -v zypper)" ] then
+			return zypper install -y
 	fi
+
 
 # If we don't have admin
 	else
@@ -92,47 +93,47 @@ determine_package_manager() {
 		fi
 >>>>>>> d828f6673e6d0779874b9930895100a8c1135159
 
-		if [ -x "$(command -v apk)" ] then 
-			value = sudo apk add --no-cache 
+		if [ -x "$(command -v apk)" ] then
+			value = sudo apk add --no-cache
 		fi
 
-		if [ -x "$(command -v apt-get)" ] then 
+		if [ -x "$(command -v apt-get)" ] then
 			value = sudo apt-get install -y
 		fi
 
-		if [ -x "$(command -v dnf)" ] then 
+		if [ -x "$(command -v dnf)" ] then
 			value = sudo dnf install -y
 		fi
 
-		if [ -x "$(command -v zypper)" ] then 
-			value = zypper install -y 
+		if [ -x "$(command -v zypper)" ] then
+			value = zypper install -y
 		fi
 	fi
-	if is_sudo = false 
+	if is_sudo = false
 		if [ -x "$(command -v pacman)" ] then
 			value = pacman -Sy
 		fi
 
 
-		if [ -x "$(command -v apk)" ] then 
+		if [ -x "$(command -v apk)" ] then
 			value =  apk add --no-cache
 		fi
 
 
-		if [ -x "$(command -v apt-get)" ] then 
+		if [ -x "$(command -v apt-get)" ] then
 			value = apt-get install -y
 		fi
 
 
-		if [ -x "$(command -v dnf)" ] then 
+		if [ -x "$(command -v dnf)" ] then
 			value = dnf install -y
 		fi
 
 
-		if [ -x "$(command -v zypper)" ] then 
+		if [ -x "$(command -v zypper)" ] then
 			value = zypper install -y
 		fi
-	fi 
+	fi
 }
 
 install_dependencies() {
@@ -196,12 +197,12 @@ force_zsh_chsh() {
 		sudo echo /usr/sbin/zsh >>/etc/shells
 		sudo chsh -s $(which zsh)
 		return 0
-	else 
+	else
 		echo "sudo not detected"
 		return 1
 	fi
 }
-	# 
+	#
 	# sudo echo /usr/sbin/zsh >>/etc/shells
 	# chsh -s $(which zsh)
 

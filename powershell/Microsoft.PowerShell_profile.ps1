@@ -1,7 +1,7 @@
 #Update OhMyPosh using this command -
 # winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 #
-# Typer-Cli completion. 
+# Typer-Cli completion.
 # Installed via pip install typer-cli
 
 
@@ -111,11 +111,11 @@ if (-not (checkEnvironment))
 }
 
 . "$powershell_scripts_dir\vim_func_shell.ps1"
-                          
+
 . "$powershell_scripts_dir\helpful_func_general.ps1"
 
 . "$powershell_scripts_dir\match_statement_tests.ps1"
-                          
+
 . "$powershell_scripts_dir\helpful_func_python.ps1"
 
 . "$powershell_completions\completion_general.ps1"
@@ -141,7 +141,7 @@ function workconf
         if ($args -eq "code")
         {
             code $work_scripts_dir
-        } 
+        }
     }
 }
 
@@ -174,4 +174,3 @@ function l
 #Invoke-Expression (&starship init powershell)
 
 Invoke-Expression (& { (zoxide init powershell | Out-String) })
-
