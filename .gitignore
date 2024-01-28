@@ -15,10 +15,14 @@ z.old/*
 .config/gh
 .config/github-copilot
 .config/lazygit
+.config/jgit
+
 
 .config/gh/*
 .config/github-copilot/*
 .config/lazygit/*
+.config/jgit/*
+
 
 .config/nvim/lazy-lock*
 
