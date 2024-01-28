@@ -11,15 +11,18 @@ z.old/*
 .z.old/
 .z.old/*
 
-*main_nvim/nvim/lazy-lock*
 
-main_nvim/*
-!main_nvim/nvim*
+.config/gh
+.config/github-copilot
+.config/lazygit
+
+.config/gh/*
+.config/github-copilot/*
+.config/lazygit/*
+
+.config/nvim/lazy-lock*
 
 nvim_distros/*
-!nvim_distros/LazyVim/*
-!nvim_distros/old.nvims/*
-!nvim_distros/TestVim/*
-!nvim_distros/omerxx/
 
-*nvim_distros/omerxx/lazy-lock*
+!nvim_distros/omerxx/
+nvim_distros/omerxx/lazy-lock*
