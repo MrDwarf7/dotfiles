@@ -68,7 +68,7 @@ DOTDIR=$HOME/dotfiles
 GITHUB_PROJECTS=$HOME/documents/GitHub_Projects
 GITHUB_WORK_PROJECTS=$HOME/documents/GitHub_WorkProjects
 
-DATA_ON_DEMAND_BASE=$GITHUB_PROJECTS/Data-On-Demand
+DATA_ON_DEMAND_BASE=$GITHUB_WORK_PROJECTS/Data-On-Demand
 DATA_ON_DEMAND_BACK=$DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
 DATA_ON_DEMAND_FRONT=$DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
 DATA_ON_DEMAND_NEXT=$DATA_ON_DEMAND_BASE/data-on-demand-next
@@ -228,7 +228,8 @@ function rmvenv {
 
 # Vim related things
 alias xvim="NVIM_APPNAME=omerxx nvim"
-
+alias chad="NVIM_APPNAME=NvChad nvim"
+alias cvim="NVIM_APPNAME=CustomVim nvim"
 # function sevim() {
 #   items=("default" "omerxx")
 #   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0)
