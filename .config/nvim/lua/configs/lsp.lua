@@ -34,7 +34,7 @@ return {
                     "lua_ls",
                     "tsserver",
                     "biome",
-                    "awk_ls", -- Un-updated (requires running LTS version of node via NVM)
+                    --"awk_ls", -- Un-updated (requires running LTS version of node via NVM)
                     "azure_pipelines_ls",
                     "bashls",
                     "clangd",
