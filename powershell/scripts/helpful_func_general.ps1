@@ -120,6 +120,12 @@ function pro
     }
 }
 
+function ca
+{
+    param ($path = ".")
+    Clear-Host
+    Get-ChildItem $path -Force
+}
 
 function .
 {
