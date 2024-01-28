@@ -36,6 +36,5 @@ updot() {
     # Add similar commands for updating plugins and themes if they are in separate repositories
 }
 
-
 source $ZSH/oh-my-zsh.sh
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
