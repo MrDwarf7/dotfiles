@@ -1,9 +1,8 @@
 # BEGIN - Vim things
 $dotfiles_dir = "$HOME\dotfiles"
-
 $dotfiles_config = "$dotfiles_dir\.config"
 
-$nvim_main_dir = "$dotfiles_dir\main_nvim"
+$nvim_main_dir = "$dotfiles_config\nvim"
 $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 
 $scoop_dir = "$dotfiles_dir\scoop"
@@ -35,7 +34,7 @@ function xvim
 
 function nvims()
 {
-    $items = "Default", "LazyVim", "TestVim", "old.nvims", "omerxx"
+    $items = "Default", "omerxx"
     $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
     if ([string]::IsNullOrEmpty($config))
@@ -70,7 +69,7 @@ function nvdm()
 
 function nvds()
 {
-    $items = "Default", "LazyVim", "TestVim", "old.nvims", "omerxx"
+    $items = "Default", "omerxx"
     $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
     if ([string]::IsNullOrEmpty($config))
