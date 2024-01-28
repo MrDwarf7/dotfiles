@@ -11,13 +11,14 @@ keybinds clear-defaults=true {
         unbind "Ctrl b"
         // unbind "Ctrl h"
         unbind "Ctrl n"
+        unbind "Ctrl g"
         // uncomment this and adjust key if using copy_on_select=false
         // bind "Alt c" { Copy; }
 
 
     }
     locked {
-        bind "Ctrl g" { SwitchToMode "Normal"; }
+        bind "Alt g" { SwitchToMode "Normal"; }
         bind "Ctrl x"{ Quit; }
     }
 
@@ -213,7 +214,7 @@ keybinds clear-defaults=true {
         unbind "Ctrl s"
         unbind "Ctrl o"
 
-        bind "Ctrl g" { SwitchToMode "Locked"; }
+        bind "Alt g" { SwitchToMode "Locked"; }
         bind "Ctrl x"{ Quit; }
         bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
@@ -355,13 +356,13 @@ theme "catppuccin-mocha"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "compact"
+default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal || (normal, locked)
-// 
 //
-default_mode "locked"
+//
+default_mode "normal"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
