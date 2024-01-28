@@ -52,6 +52,7 @@ return {
 					typescript = { 'biomejs' },
 					sh = { 'shfmt' },
 					yaml = { 'yamllint' },
+					powershell = { 'powershell_es' },
 				},
 
 				format_on_save = {
