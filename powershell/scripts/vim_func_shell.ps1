@@ -2,7 +2,7 @@
 $dotfiles_dir = "$HOME\dotfiles"
 $dotfiles_config = "$dotfiles_dir\.config"
 
-$nvim_main_dir = "$dotfiles_config\nvim"
+$nvim_main_dir = "$dotfiles_config"
 $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 
 $scoop_dir = "$dotfiles_dir\scoop"
@@ -10,7 +10,7 @@ $scoop_dir = "$dotfiles_dir\scoop"
 function hx
 {
     $config = "$scoop_dir\persist\helix\config.toml"
-    
+
     if ($args[0] -eq "_local")
     {
         $config = ""
@@ -21,7 +21,7 @@ function hx
 function vim
 {
     $env:XDG_CONFIG_HOME = "$nvim_main_dir"
-    $env:NVIM_APPNAME = ""
+    $env:NVIM_APPNAME = "nvim"
     nvim $args
 }
 
@@ -62,8 +62,7 @@ function nvdx()
 function nvdm()
 {
     $env:XDG_CONFIG_HOME = "$nvim_main_dir"
-    # $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = ""
+    $env:NVIM_APPNAME = "nvim"
     neovide $args
 }
 

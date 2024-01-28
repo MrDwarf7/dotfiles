@@ -51,7 +51,7 @@ function scoopup
 function nodeup
 {
     $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
-    pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade 
+    pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade
     # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
 
@@ -63,6 +63,7 @@ function sysup
     }
     scoopup
     nodeup
+    winget upgrade JanDeDobbeleer.OhMyPosh -s winget
     Write-Host
     Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
 }
@@ -84,12 +85,12 @@ function dot
 
     $path = if ($path)
     {
-        Join-Path $dotfiles_dir $path.Replace('/', '\') 
+        Join-Path $dotfiles_dir $path.Replace('/', '\')
     } else
     {
-        $dotfiles_dir 
+        $dotfiles_dir
     }
-    Push-Location "C:\" 
+    Push-Location "C:\"
     Push-Location $path
     Get-ChildItem
     Write-Host "Fetching: "
@@ -97,7 +98,7 @@ function dot
     Write-Host "Status: "
     git status
     return
-} 
+}
 
 # END - Shell functions / Helpful functions
 
@@ -187,4 +188,3 @@ function uzip
     }
 }
 # END - Linux Functions
-
