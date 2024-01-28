@@ -1,6 +1,8 @@
 # BEGIN - Vim things
 $dotfiles_dir = "$HOME\dotfiles"
 
+$dotfiles_config = "$dotfiles_dir\.config"
+
 $nvim_main_dir = "$dotfiles_dir\main_nvim"
 $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 
