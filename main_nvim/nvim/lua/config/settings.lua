@@ -15,10 +15,7 @@ vim.opt.listchars = {
 	--[[ extends = "→",eol = "↲", ]]
 	nbsp = "␣",
 }
-
--- Powershell over CMD
 vim.opt.shell = "zsh"
-
 vim.opt.scrolloff = 6
 vim.opt.foldnestmax = 4
 vim.opt.foldlevel = 1
@@ -89,3 +86,4 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ timeout = 60 })
 	end,
 })
+
