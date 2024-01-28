@@ -188,6 +188,10 @@ alias .z="source ~/.zshrc"
 alias zshc="vim ~/.zshrc"
 alias ashc="vim ~/.aliases"
 
+# Vim related things
+alias xvim="NVIM_APPNAME=omerxx nvim"
+alias chad="NVIM_APPNAME=NvChad nvim"
+#alias cvim="NVIM_APPNAME=CustomVim nvim"
 
 source "$HOME/.aliases"
 
@@ -226,10 +230,7 @@ function rmvenv {
   fi
 }
 
-# Vim related things
-alias xvim="NVIM_APPNAME=omerxx nvim"
-alias chad="NVIM_APPNAME=NvChad nvim"
-alias cvim="NVIM_APPNAME=CustomVim nvim"
+
 # function sevim() {
 #   items=("default" "omerxx")
 #   config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config " --height=~50% --layout=reverse --border --exit-0)
