@@ -25,6 +25,8 @@ alias yayup='yay -Syu'
 alias yays='yay -S'
 alias yayss='yay -Ss'
 
+alias sysup="sudo pacman -Syu && yay -Syu"
+
 
 # Cargo Aliases
 alias cb='cargo build'
