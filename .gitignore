@@ -16,13 +16,14 @@ z.old/*
 .config/github-copilot
 .config/lazygit
 .config/jgit
+.config/scoop
 
 
 .config/gh/*
 .config/github-copilot/*
 .config/lazygit/*
 .config/jgit/*
-
+.config/scoop/*
 
 .config/nvim/lazy-lock*
 
