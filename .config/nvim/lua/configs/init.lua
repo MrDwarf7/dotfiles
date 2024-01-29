@@ -1,45 +1,45 @@
 return {
 
 	{
-		'folke/tokyonight.nvim',
+		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
 		priority = 1000,
 		config = function()
-			require('colorschemes.tokyonight')
+			require("colorschemes.tokyonight")
 		end,
 	},
 
-	{ 'nvim-lua/plenary.nvim' },
+	{ "nvim-lua/plenary.nvim" },
 
 	{
-		'onsails/lspkind.nvim',
+		"onsails/lspkind.nvim",
 	},
 
 	{
-		'folke/neodev.nvim',
-		ft = { 'lua' },
-		event = 'BufEnter',
+		"folke/neodev.nvim",
+		ft = { "lua" },
+		event = "BufEnter",
 		opts = {},
 	},
 
 	{
-		'norcalli/nvim-colorizer.lua',
-		event = 'BufRead',
+		"norcalli/nvim-colorizer.lua",
+		event = "BufRead",
 		opts = {
-			'css',
-			'html',
-			'javascript',
-			'typescript',
-			'tsx',
-			'jsx',
-			'kdl',
+			"css",
+			"html",
+			"javascript",
+			"typescript",
+			"tsx",
+			"jsx",
+			"kdl",
 		},
 	},
 
 	{
-		'folke/which-key.nvim',
-		event = 'VeryLazy',
+		"folke/which-key.nvim",
+		event = "VeryLazy",
 		init = function()
 			vim.o.timeout = true
 			vim.o.timeoutlen = 250
@@ -48,57 +48,57 @@ return {
 	},
 
 	{
-		'folke/trouble.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			vim.keymap.set('n', '<Leader>lp', function()
-				require('trouble').toggle()
-			end, { desc = '[P]roblems' })
+			vim.keymap.set("n", "<Leader>lp", function()
+				require("trouble").toggle()
+			end, { desc = "[p]roblems" })
 
-			vim.keymap.set('n', ']]', function()
-				require('trouble').next({ skip_groups = true, jump = true })
-			end, { desc = '[P]robem NEXT' })
+			vim.keymap.set("n", "]]", function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end, { desc = "[p]robem NEXT" })
 
-			vim.keymap.set('n', '[[', function()
-				require('trouble').previous({ skip_groups = true, jump = true })
-			end, { desc = '[P]robem PREV' })
+			vim.keymap.set("n", "[[", function()
+				require("trouble").previous({ skip_groups = true, jump = true })
+			end, { desc = "[p]robem PREV" })
 		end,
 	},
 
 	{
-		'folke/todo-comments.nvim',
+		"folke/todo-comments.nvim",
 		lazy = false,
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true,
 		-- opts = {},
 	},
 
 	{
-		'numToStr/Comment.nvim',
-		event = 'BufEnter',
+		"numToStr/Comment.nvim",
+		event = "BufEnter",
 		config = function()
-			require('Comment').setup()
+			require("Comment").setup()
 		end,
 	},
 
 	{
-		'ThePrimeagen/harpoon',
-		branch = 'harpoon2',
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
 		-- Couldn't get the actual proper main part working for now
 		-- But is working for telescope call so
 	},
 
-	{ 'ThePrimeagen/git-worktree.nvim' },
-	{ 'nvim-telescope/telescope-fzy-native.nvim' },
-	{ 'AckslD/nvim-neoclip.lua' },
-	{ 'nvim-telescope/telescope-live-grep-args.nvim' },
+	{ "ThePrimeagen/git-worktree.nvim" },
+	{ "nvim-telescope/telescope-fzy-native.nvim" },
+	{ "AckslD/nvim-neoclip.lua" },
+	{ "nvim-telescope/telescope-live-grep-args.nvim" },
 
 	{
-		'mbbill/undotree',
-		event = 'InsertEnter',
+		"mbbill/undotree",
+		event = "InsertEnter",
 		config = function()
-			vim.keymap.set('n', '<Leader>U', vim.cmd.UndotreeToggle, { desc = '[U]ndo-tree' })
+			vim.keymap.set("n", "<Leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndo-tree" })
 			vim.g.undotree_SetFocusWhenToggle = 1
 		end,
 		opts = {},
