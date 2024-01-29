@@ -33,7 +33,6 @@ vim.keymap.set("n", "N", "Nzzzv", silent_opts)
 vim.keymap.set("n", "<Leader>b", "+[b]uffers")
 vim.keymap.set("n", "<Leader>p", "+[p]lugins", { desc = "+[p]lugins" })
 vim.keymap.set("n", "<leader>g", "+[g]it", silent_opts, { desc = "+[g]it" })
-vim.keymap.set("n", "<leader>d", "+[d]ebug", silent_opts, { desc = "+[d]ebug" })
 vim.keymap.set("n", "<Leader>f", "+[f]ind", { desc = "+[f]ind" })
 vim.keymap.set("n", "<Leader>w", "+[w]inShift", { desc = "+[w]inShift" })
 vim.keymap.set("n", "<Leader>n", "+[n]Other", { desc = "+[n]Other/NoiceDismiss" })
@@ -85,9 +84,9 @@ vim.keymap.set("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for t
 
 vim.keymap.set("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 
-vim.keymap.set("t", "<C-x>", function()
-	vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true)
-end)
+-- vim.keymap.set("t", "<C-x>", function()
+-- 	vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true)
+-- end)
 
 vim.keymap.set("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
 

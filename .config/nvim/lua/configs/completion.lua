@@ -41,7 +41,7 @@ return {
 			}) -- End of setup fnc
 
 			vim.keymap.set("n", "<Leader>lP", function()
-				vim.cmd("Copilot panel")
+				require("Copilot").panel()
 			end, { desc = "copilot [P]anel" })
 		end,
 	},

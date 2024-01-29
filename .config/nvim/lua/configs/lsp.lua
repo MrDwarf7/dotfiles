@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
 		},
 
 		-- Mason LSP CONFIG
@@ -65,6 +66,15 @@ return {
 	},
 
 	{
+		"theHamsta/nvim-dap-virtual-text",
+		config = function()
+			require("nvim-dap-virtual-text").setup({
+				commented = true,
+			})
+		end,
+	},
+
+	{
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
 		dependencies = {
@@ -98,13 +108,46 @@ return {
 				vim.cmd.RustLsp("codeAction")
 			end, { silent = true, buffer = bufnr, desc = "[a]ction" })
 
-			vim.keymap.set("n", "<Leader>dr", function()
-				vim.cmd.RustLsp("runnables")
-			end, { silent = true, buffer = bufnr, desc = "[r]un" })
-
 			vim.keymap.set("n", "<Leader>lc", function()
 				vim.cmd.RustLsp("flyCheck")
 			end, { silent = true, buffer = bufnr, desc = "[c]heck" })
+
+			vim.keymap.set("n", "<Leader>dd", function()
+				vim.cmd.RustLsp("debuggables")
+			end, { silent = true, buffer = bufnr, desc = "[d]ebuggables" })
+
+			vim.keymap.set("n", "<Leader>dr", function()
+				vim.cmd.RustLsp("runnables")
+			end, { silent = true, buffer = bufnr, desc = "[r]un" })
 		end,
 	},
+
+	-- Dap things here, specific to mason
+	-- {
+	-- 	"jay-babu/mason-nvim-dap.nvim",
+	-- 	event = "BufReadPre",
+	-- 	dependencies = {
+	-- 		"williamboman/mason.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("mason-nvim-dap").setup({
+	-- 			ensure_installed = {
+	-- 				"python",
+	-- 				"bash",
+	-- 				"cppdbg",
+	-- 				"codelldb",
+	-- 				"chrome",
+	-- 			},
+	--
+	-- 			automatic_installation = {
+	-- 				-- exclude = {
+	-- 				-- 	"bash",
+	-- 				-- 	"chrome",
+	-- 				-- 	"cppdbg",
+	-- 				-- },
+	-- 			},
+	-- 			handler = {},
+	-- 		})
+	-- 	end,
+	-- },
 }

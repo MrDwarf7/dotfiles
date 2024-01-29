@@ -15,8 +15,17 @@ return {
 	{
 		"folke/neodev.nvim",
 		lazy = false,
-		ft = { "lua" },
-		opts = {},
+		-- ft = { "lua" },
+		config = function()
+			require("neodev").setup({
+				library = {
+					plugins = {
+						"nvim-dap-ui",
+					},
+					types = true,
+				},
+			})
+		end,
 	},
 
 	{

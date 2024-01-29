@@ -51,7 +51,7 @@ packages_to_install=(
 	mingw-w64-rust
 	libxcursorh
 	win32yank-bin
-	codelldb
+	codelldb-bin
 	lldb
 	lldb-vscode
 )
