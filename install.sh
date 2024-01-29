@@ -190,6 +190,7 @@ create_symlinks() {
 	done
 }
 
+
 force_zsh_chsh() {
 	# Added after issue on arch
 	if test_sudo; then
