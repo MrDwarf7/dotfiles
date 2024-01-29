@@ -85,4 +85,5 @@ vim.wo.number = true
 vim.o.updatetime = 250
 --vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
+vim.g.skip_ts_context_commentstring_module = true
 vim.cmd("colorscheme habamax")

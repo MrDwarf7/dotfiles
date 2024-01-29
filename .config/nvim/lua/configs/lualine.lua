@@ -2,7 +2,7 @@
 
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false,
+	event = "CursorMoved",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -12,7 +12,6 @@ return {
 			-- bubbles = require("lualine_confs.bubbles").setup(),
 			tokyonight = "tokyonight",
 		}
-
 		require("lualine").setup({
 			theme = my_theme,
 		})
