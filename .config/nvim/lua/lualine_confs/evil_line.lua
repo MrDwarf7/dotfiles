@@ -23,14 +23,14 @@ local evil_line = {
 
 		local conditions = {
 			buffer_not_empty = function()
-				return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
+				return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 			end,
 			hide_in_width = function()
 				return vim.fn.winwidth(0) > 80
 			end,
 			check_git_workspace = function()
-				local filepath = vim.fn.expand('%:p:h')
-				local gitdir = vim.fn.finddir('.git', filepath .. ';')
+				local filepath = vim.fn.expand("%:p:h")
+				local gitdir = vim.fn.finddir(".git", filepath .. ";")
 				return gitdir and #gitdir > 0 and #gitdir < #filepath
 			end,
 		}
@@ -39,8 +39,8 @@ local evil_line = {
 		local config = {
 			options = {
 				-- Disable sections and component separators
-				component_separators = '',
-				section_separators = '',
+				component_separators = "",
+				section_separators = "",
 				theme = {
 					-- We are going to use lualine_c an lualine_x as left and
 					-- right section. Both are highlighted by c theme .  So we
@@ -82,7 +82,7 @@ local evil_line = {
 
 		ins_left({
 			function()
-				return '┃'
+				return "┃"
 				--'▊'
 			end,
 			color = { fg = colors.bg }, -- Sets highlighting of component
@@ -92,7 +92,7 @@ local evil_line = {
 		ins_left({
 			-- mode component
 			function()
-				return ''
+				return ""
 			end,
 			color = function()
 				-- auto change color according to neovims mode
@@ -100,13 +100,13 @@ local evil_line = {
 					n = colors.red,
 					i = colors.green,
 					v = colors.blue,
-					[''] = colors.blue,
+					[""] = colors.blue,
 					V = colors.blue,
 					c = colors.magenta,
 					no = colors.red,
 					s = colors.orange,
 					S = colors.orange,
-					[''] = colors.orange,
+					[""] = colors.orange,
 					ic = colors.yellow,
 					R = colors.violet,
 					Rv = colors.violet,
@@ -114,8 +114,8 @@ local evil_line = {
 					ce = colors.red,
 					r = colors.cyan,
 					rm = colors.cyan,
-					['r?'] = colors.cyan,
-					['!'] = colors.red,
+					["r?"] = colors.cyan,
+					["!"] = colors.red,
 					t = colors.red,
 				}
 				return { fg = mode_color[vim.fn.mode()] }
@@ -124,9 +124,9 @@ local evil_line = {
 		})
 
 		ins_left({
-			'branch',
-			icon = '',
-			color = { fg = colors.violet, gui = 'bold' },
+			"branch",
+			icon = "",
+			color = { fg = colors.violet, gui = "bold" },
 		})
 
 		--       ins_left {
@@ -136,17 +136,17 @@ local evil_line = {
 		--       }
 
 		ins_left({
-			'filename',
+			"filename",
 			cond = conditions.buffer_not_empty,
-			color = { fg = colors.magenta, gui = 'bold' },
+			color = { fg = colors.magenta, gui = "bold" },
 		})
 
 		--        ins_left { 'location' }
 
 		ins_left({
-			'diagnostics',
-			sources = { 'nvim_diagnostic' },
-			symbols = { error = ' ', warn = ' ', info = ' ' },
+			"diagnostics",
+			sources = { "nvim_diagnostic" },
+			symbols = { error = " ", warn = " ", info = " " },
 			diagnostics_color = {
 				color_error = { fg = colors.red },
 				color_warn = { fg = colors.yellow },
@@ -158,15 +158,15 @@ local evil_line = {
 		-- for lualine it's any number greater then 2
 		ins_left({
 			function()
-				return '%='
+				return "%="
 			end,
 		})
 
 		ins_right({
 			-- Lsp server name .
 			function()
-				local msg = 'No Active Lsp'
-				local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+				local msg = "No Active Lsp"
+				local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 				local clients = vim.lsp.get_active_clients()
 				if next(clients) == nil then
 					return msg
@@ -180,15 +180,15 @@ local evil_line = {
 				return msg
 			end,
 			--icon = ' LSP:',
-			color = { fg = '#ffffff', gui = 'bold' },
+			color = { fg = "#ffffff", gui = "bold" },
 		})
 
 		-- Add components to right sections
 		ins_right({
-			'o:encoding', -- option component same as &encoding in viml
+			"o:encoding", -- option component same as &encoding in viml
 			fmt = string.upper, -- I'm not sure why it's upper case either ;)
 			cond = conditions.hide_in_width,
-			color = { fg = colors.green, gui = 'bold' },
+			color = { fg = colors.green, gui = "bold" },
 		})
 
 		--       ins_right {
@@ -199,9 +199,9 @@ local evil_line = {
 		--       }
 
 		ins_right({
-			'diff',
+			"diff",
 			-- Is it me or the symbol for modified us really weird
-			symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+			symbols = { added = " ", modified = "󰝤 ", removed = " " },
 			diff_color = {
 				added = { fg = colors.green },
 				modified = { fg = colors.orange },
@@ -210,11 +210,11 @@ local evil_line = {
 			cond = conditions.hide_in_width,
 		})
 
-		ins_right({ 'progress', color = { fg = colors.fg, gui = 'bold' } })
+		ins_right({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 		ins_right({
 			function()
-				return '┃'
+				return "┃"
 				--'▊'
 			end,
 			color = { fg = colors.bg },
