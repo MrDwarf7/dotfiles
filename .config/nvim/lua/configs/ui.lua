@@ -1,12 +1,14 @@
 return {
 	{
 		"MunifTanjim/nui.nvim",
-		lazy = false,
+		event = { "VeryLazy", "BufEnter" },
+		-- lazy = false,
 	},
 
 	{
 		"rcarriga/nvim-notify",
-		lazy = false,
+		-- lazy = false,
+		event = { "VeryLazy" },
 		config = function()
 			vim.notify = require("notify")
 		end,
@@ -14,18 +16,17 @@ return {
 
 	{
 		"stevearc/dressing.nvim",
-		lazy = false,
+		event = { "VeryLazy", "BufEnter" },
+		-- lazy = false,
 		opts = {},
 	},
 
 	{
 		"j-hui/fidget.nvim",
-		event = "BufEnter",
+		event = { "VeryLazy", "BufReadPre" },
 		lazy = false,
 		tags = "v1.2.0",
-		opts = {
-			-- options
-		},
+		opts = {},
 	},
 
 	{
@@ -38,9 +39,7 @@ return {
 		},
 
 		opts = {
-
 			lsp = {
-
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
 					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
@@ -57,13 +56,10 @@ return {
 				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 
-			routes = {
-
-				{
-					view = "notify",
-					filter = { event = "msg_showmode" },
-				},
-			},
+			routes = { {
+				view = "notify",
+				filter = { event = "msg_showmode" },
+			} },
 
 			views = {
 				cmdline_popup = {
@@ -101,16 +97,28 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		event = "UIEnter",
+		event = { "CursorMoved", "BufWritePost" },
 		enabled = true,
 		opts = {
 			exclude = {
-                -- stylua: ignore
-                filetypes = {
-                    'dbout', 'neo-tree-popup', 'log', 'gitcommit',
-                    'txt', 'help', 'NvimTree', 'git', 'flutterToolsOutline',
-                    'undotree', 'markdown', 'norg', 'org', 'orgagenda', "Diffview", "Neogit",
-                },
+				filetypes = {
+					"dbout",
+					"neo-tree-popup",
+					"log",
+					"gitcommit",
+					"txt",
+					"help",
+					"NvimTree",
+					"git",
+					"flutterToolsOutline",
+					"undotree",
+					"markdown",
+					"norg",
+					"org",
+					"orgagenda",
+					"Diffview",
+					"Neogit",
+				},
 			},
 			indent = {
 				char = "│", -- ▏┆ ┊ 

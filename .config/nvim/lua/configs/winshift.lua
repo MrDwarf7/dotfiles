@@ -1,6 +1,6 @@
 return {
 	"sindrets/winshift.nvim",
-	event = "BufEnter",
+	event = { "BufWinEnter", "VeryLazy" },
 	config = function()
 		local silent_opts = {
 			noremap = true,
