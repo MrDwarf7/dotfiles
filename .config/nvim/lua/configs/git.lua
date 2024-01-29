@@ -1,7 +1,7 @@
 return {
 	{
 		"kdheepak/lazygit.nvim",
-		event = "BufEnter",
+		event = "ModeChanged",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
@@ -36,7 +36,7 @@ return {
 
 	{
 		"lewis6991/gitsigns.nvim",
-		event = "InsertEnter",
+		event = "ModeChanged",
 		opts = {
 			signs = {
 				add = { text = "│" },

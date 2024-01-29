@@ -18,14 +18,14 @@ return {
 
 	{
 		"folke/neodev.nvim",
+		lazy = false,
 		ft = { "lua" },
-		event = "BufEnter",
 		opts = {},
 	},
 
 	{
 		"norcalli/nvim-colorizer.lua",
-		event = "BufRead",
+		event = { "VeryLazy", "BufReadPost", "BufRead" },
 		opts = {
 			"css",
 			"html",
@@ -67,11 +67,9 @@ return {
 
 	{
 		"folke/todo-comments.nvim",
-		lazy = false,
+		event = { "VeryLazy", "BufEnter" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = true,
-		-- opts = {},
-	},
 
 	{
 		"numToStr/Comment.nvim",

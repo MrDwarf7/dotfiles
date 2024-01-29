@@ -2,8 +2,7 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
-		-- lazy = false,
-		event = "InsertEnter",
+		event = { "InsertEnter", "BufReadPost" },
 		config = function()
 			require("copilot").setup({
 				panel = {
@@ -50,7 +49,7 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		--lazy = false,
-		event = "InsertEnter",
+		event = { "InsertEnter", "CmdlineEnter" },
 		dependencies = {
 			{
 				"L3MON4D3/LuaSnip",
@@ -63,8 +62,12 @@ return {
 			},
 
 			{
+				"onsails/lspkind.nvim",
+				event = { "InsertEnter" },
+			},
+
+			{
 				"windwp/nvim-autopairs",
-				event = "InsertEnter",
 				opts = {
 					fast_wrap = {},
 					disable_filetype = { "TelescopePrompt", "vim" },
@@ -79,7 +82,6 @@ return {
 			-----------------
 			{
 				"doxnit/cmp-luasnip-choice",
-				-- lazy = false,
 				config = function()
 					require("cmp_luasnip_choice").setup({
 						auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
@@ -91,6 +93,7 @@ return {
 
 			{
 				"saecki/crates.nvim",
+				ft = { "toml", "rust" },
 				tag = "stable",
 				config = function()
 					require("crates").setup()
@@ -100,18 +103,19 @@ return {
 			{
 				"vrslev/cmp-pypi",
 				dependencies = { "nvim-lua/plenary.nvim" },
-				ft = "toml",
+				ft = { "toml", "python" },
 			},
 
 			{
 				"zbirenbaum/copilot-cmp",
+				event = { "InsertEnter", "VeryLazy" },
 				dependencies = {
 					"zbirenbaum/copilot.lua",
 				},
 
 				config = function()
 					require("copilot_cmp").setup({
-						suggestion = { enabled = false },
+						suggestion = { enabled = true },
 						panel = { enabled = false },
 					})
 				end,
@@ -125,7 +129,6 @@ return {
 				"hrsh7th/cmp-nvim-lsp",
 
 				"zbirenbaum/copilot-cmp", -- new
-
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-path",
 
@@ -133,6 +136,7 @@ return {
 				"saecki/crates.nvim", -- new
 				"vrslev/cmp-pypi", -- new
 
+				"hrsh7th/cmp-nvim-lsp-signature-help",
 				"petertriho/cmp-git",
 				"hrsh7th/cmp-cmdline",
 			},
