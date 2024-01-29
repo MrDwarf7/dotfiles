@@ -5,7 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zs
   source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-### SSH agent things 
+### SSH agent things
 systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}ssh-agent.socket"
@@ -20,7 +20,7 @@ fi
 ### comp install
 
 if [ -d "$HOME/.xdg/" ]; then
-    HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install 
+    HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
 else
     if [ -d "$HOME/.xdg" ]; then
     HISTFILE=~/.xdg/.histfile
@@ -38,8 +38,8 @@ if [ -d "/mnt/c/Users" ]; then
 )
   export WIN_AVAILABLE=true
   alias .="explorer.exe"
-  for given_path in $WIN_PATHS[@]; do 
-    local exists_in_path=$(echo $PATH | grep $given_path) 
+  for given_path in $WIN_PATHS[@]; do
+    local exists_in_path=$(echo $PATH | grep $given_path)
     if [ -z "$exists_in_path" ]; then
       export PATH="$given_path:$PATH"
     fi
@@ -55,10 +55,10 @@ fi
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
-bindkey -e # End of lines configured by zsh-newuser-install 
+bindkey -e # End of lines configured by zsh-newuser-install
 zstyle :compinstall filename '/home/dwarf/.zshrc' # compinstall
-autoload -Uz compinit # compinstall 
-compinit # compinstall 
+autoload -Uz compinit # compinstall
+compinit # compinstall
 
 autoload -U bashcompinit
 bashcompinit
@@ -149,7 +149,7 @@ case ":$PATH:" in
 esac
 
 ### zsh plugins
-plugins=( 
+plugins=(
     git
     archlinux
     zsh-autosuggestions
@@ -246,27 +246,27 @@ function rmvenv {
 # bindkey -s ^a "sevim\n"
 
 # General Functions
-function mgr { 
+function mgr {
   pushd "$GITHUB_PROJECTS/"
 }
 
-function wgr { 
+function wgr {
   pushd "$GITHUB_WORK_PROJECTS/"
 }
 
-function dod { 
+function dod {
   pushd "$DATA_ON_DEMAND_BASE/"
 }
 
-function dodb { 
+function dodb {
   pushd "$DATA_ON_DEMAND_BACK/"
 }
 
-function dodn { 
+function dodn {
   pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
-function dodf { 
+function dodf {
   pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
