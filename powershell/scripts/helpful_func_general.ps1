@@ -66,6 +66,7 @@ function sysup
     winget upgrade JanDeDobbeleer.OhMyPosh -s winget
     Write-Host
     Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
+    Write-Host
 }
 
 function scpdir
