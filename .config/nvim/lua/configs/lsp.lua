@@ -119,6 +119,10 @@ return {
 			vim.keymap.set("n", "<Leader>dr", function()
 				vim.cmd.RustLsp("runnables")
 			end, { silent = true, buffer = bufnr, desc = "[r]un" })
+
+			vim.keymap.set("n", "<Leader>lh", function()
+				vim.cmd.RustLsp("hover")
+			end, { silent = true, buffer = bufnr, desc = "[h]over" })
 		end,
 	},
 
