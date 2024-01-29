@@ -1,5 +1,4 @@
 return {
-
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -90,6 +89,23 @@ return {
 			vim.g.undotree_SetFocusWhenToggle = 1
 		end,
 		opts = {},
+	},
+
+	{
+		"RRethy/vim-illuminate",
+		event = "BufWinEnter",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			require("illuminate").configure({
+				providers = {
+					"lsp",
+					"treesitter",
+					"regex",
+				},
+			})
+		end,
 	},
 }
 
