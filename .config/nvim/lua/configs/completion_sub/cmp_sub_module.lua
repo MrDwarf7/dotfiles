@@ -1,5 +1,7 @@
 local M = {}
 
+local utils = require("utils")
+
 M.lspkind_setup = function()
 	require("lspkind").init({
 		mode = "symbol_text",
@@ -40,7 +42,16 @@ M.lspkind_setup = function()
 			mode = "symbol",
 			maxwidth = 80,
 			ellipsis_char = "...",
-			show_labelDetails = true,
+			--show_labelDetails = true,
+			menu = {
+				buffer = "[Buffer]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[LuaSnip]",
+				nvim_lua = "[lua]",
+				copilot = "[Copilot]",
+				path = "[Path]",
+				crates = "[Crates]",
+			},
 		}),
 	}
 	return lspkind_formatting_style
@@ -165,6 +176,7 @@ M.nvim_cmp_main_opts = function()
 			{ name = "nvim_lua", group_index = 2 },
 			{ name = "path", group_index = 2 },
 			-- My additions here
+			{ name = "nvim_lsp_signature_help" },
 			{ name = "cmp-git" },
 			{ name = "cmp-cmdline" },
 			{ name = "cmp-luasnip-choice" },
