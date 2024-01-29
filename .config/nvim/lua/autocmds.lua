@@ -62,7 +62,7 @@ autocmd("LspAttach", {
 
 		vim.keymap.set("n", "gr", function()
 			vimlspbuf.references()
-		end, opts, { desc = "[R]eferences" })
+		end, opts, { desc = "[r]eferences" })
 
 		vim.keymap.set("n", "<C-k>", function()
 			vimlspbuf.signature_help()
@@ -78,15 +78,15 @@ autocmd("LspAttach", {
 
 		vim.keymap.set({ "n", "v" }, "<Leader>la", function()
 			vimlspbuf.code_action()
-		end, opts, { desc = "Code [A]ction" })
+		end, opts, { desc = "Code [a]ction" })
 
 		vim.keymap.set("n", "<Leader>lf", function()
 			vimlspbuf.format({ async = true })
-		end, opts, { desc = "[F]ormat (lsp)" })
+		end, opts, { desc = "[f]ormat (lsp)" })
 
 		vim.keymap.set("n", "<Leader>lh", function()
 			vim.diagnostic.open_float()
-		end, opts, { desc = "[H]over" })
+		end, opts, { desc = "[h]over" })
 	end,
 })
 

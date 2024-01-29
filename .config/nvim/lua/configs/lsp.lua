@@ -59,7 +59,7 @@ return {
 				}, -- handlers end
 			})
 
-			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "[T]odo's" })
+			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 		end,
 	},
@@ -96,15 +96,15 @@ return {
 			local bufnr = vim.api.nvim_get_current_buf()
 			vim.keymap.set("n", "<Leader>la", function()
 				vim.cmd.RustLsp("codeAction")
-			end, { silent = true, buffer = bufnr, desc = "[A]ction" })
+			end, { silent = true, buffer = bufnr, desc = "[a]ction" })
 
 			vim.keymap.set("n", "<Leader>dr", function()
 				vim.cmd.RustLsp("runnables")
-			end, { silent = true, buffer = bufnr, desc = "[R]un" })
+			end, { silent = true, buffer = bufnr, desc = "[r]un" })
 
 			vim.keymap.set("n", "<Leader>lc", function()
 				vim.cmd.RustLsp("flyCheck")
-			end, { silent = true, buffer = bufnr, desc = "[C]heck" })
+			end, { silent = true, buffer = bufnr, desc = "[c]heck" })
 		end,
 	},
 }

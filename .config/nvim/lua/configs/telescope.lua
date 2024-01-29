@@ -128,7 +128,7 @@ return {
 
 		vim.keymap.set(
 			"n",
-			'<Leader>"',
+			'<Leader>f"',
 			":Telescope neoclip<CR>",
 			{ noremap = true, silent = true, desc = "Clipboard/Registers" }
 		)

@@ -9,7 +9,7 @@ local loud_opts = {
 }
 
 -- Base keymaps
-vim.keymap.set("n", "<Leader>e", vim.cmd.Ex, { desc = "[e]xplorer" })
+vim.keymap.set("n", "<Leader>e", vim.cmd.Ex, { desc = "explorer" })
 
 vim.keymap.set("n", "<Esc>", ":nohl<CR>", silent_opts)
 vim.keymap.set("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
@@ -31,12 +31,24 @@ vim.keymap.set("n", "N", "Nzzzv", silent_opts)
 
 -- Header/From initial leader key press
 vim.keymap.set("n", "<Leader>b", "+[b]uffers")
-vim.keymap.set("n", "<Leader>p", "+[p]lugins", { desc = "[p]lugins" })
-vim.keymap.set("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
+vim.keymap.set("n", "<Leader>p", "+[p]lugins", { desc = "+[p]lugins" })
 vim.keymap.set("n", "<leader>g", "+[g]it", silent_opts, { desc = "+[g]it" })
 vim.keymap.set("n", "<leader>d", "+[d]ebug", silent_opts, { desc = "+[d]ebug" })
-vim.keymap.set("n", "<Leader>f", "[f]ind", { desc = "[f]ind" })
-vim.keymap.set("n", "<Leader>w", "[w]inShift", { desc = "[w]inShift" })
+vim.keymap.set("n", "<Leader>f", "+[f]ind", { desc = "+[f]ind" })
+vim.keymap.set("n", "<Leader>w", "+[w]inShift", { desc = "+[w]inShift" })
+vim.keymap.set("n", "<Leader>n", "+[n]Other", { desc = "+[n]Other/NoiceDismiss" })
+vim.keymap.set("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
+
+-- Subset headers, but only after an LSP attached - just defined here for naming convention
+vim.keymap.set("n", "gd", "[d]efinition", { desc = "[d]efinition" })
+vim.keymap.set("n", "gD", "[D]eclaration", { desc = "[D]eclaration" })
+vim.keymap.set("n", "gr", "[r]eferences", { desc = "[r]eferences" })
+vim.keymap.set("n", "<Leader>lr", "[r]ename", { desc = "[r]ename" })
+vim.keymap.set("n", "<Leader>lR", "[R]ename (other)", { desc = "[R]ename (other)" })
+
+vim.keymap.set("n", "<Leader>la", "[a]ction", { desc = "[a]ction" })
+vim.keymap.set("n", "<Leader>lf", "[f]ormat", { desc = "[f]ormat" })
+vim.keymap.set("n", "<Leader>lh", "[h]over", { desc = "[h]over" })
 
 ----------
 
@@ -76,6 +88,8 @@ vim.keymap.set("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { des
 vim.keymap.set("t", "<C-x>", function()
 	vim.api.nvim_replace_termcodes("<C-\\><C-N>", true, true, true)
 end)
+
+vim.keymap.set("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
 
 -- MOVE INTO RELEVANT FILE
 vim.keymap.set("n", "<Leader>nn", ":NoiceDismiss<CR>", loud_opts, { desc = "[n]oice dismiss" })
