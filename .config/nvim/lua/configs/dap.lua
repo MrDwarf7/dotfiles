@@ -17,11 +17,20 @@ return {
 		local dapui = require("dapui")
 		local dap = require("dap")
 
+		vim.fn.sign_define(
+			"DapBreakpoint",
+			{ text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+		)
+
 		vim.keymap.set("n", "<leader>d", "+[d]ebug", { desc = "+[d]ebug" })
 		vim.keymap.set("n", "<Leader>dc", dap.continue, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<Leader>.", dap.continue, { desc = "[c]ontinue" })
 		vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "[b]reakpoint" })
 		vim.keymap.set("n", "<Leader>dC", dap.terminate, { desc = "[C]ancel" })
+
+		vim.keymap.set("n", "<Leader>dl", function()
+			require("dap").run_last()
+		end)
 
 		local architechture = function()
 			local os_type = function()
@@ -91,28 +100,29 @@ return {
 		-- 	},
 		-- }
 
-		dap.configurations.rust = {
-			{},
-			initCommands = function()
-				-- Find out where to look for the pretty printer Python module
-				local rustc_sysroot = vim.fn.trim(vim.fn.system("rustc --print sysroot"))
-
-				local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
-				local commands_file = rustc_sysroot .. "/lib/rustlib/etc/lldb_commands"
-
-				local commands = {}
-				local file = io.open(commands_file, "r")
-				if file then
-					for line in file:lines() do
-						table.insert(commands, line)
-					end
-					file:close()
-				end
-				table.insert(commands, 1, script_import)
-
-				return commands
-			end,
-		}
+		-- dap.configurations.rust = {
+		-- 	{},
+		-- 	initCommands = function()
+		-- 		-- Find out where to look for the pretty printer Python module
+		-- 		local rustc_sysroot = vim.fn.trim(vim.fn.system("rustc --print sysroot"))
+		--
+		-- 		local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
+		-- 		local commands_file = rustc_sysroot .. "/lib/rustlib/etc/lldb_commands"
+		--
+		-- 		local commands = {}
+		-- 		local file = io.open(commands_file, "r")
+		-- 		if file then
+		-- 			for line in file:lines() do
+		-- 				table.insert(commands, line)
+		-- 			end
+		-- 			file:close()
+		-- 		end
+		-- 		table.insert(commands, 1, script_import)
+		--
+		-- 		return commands
+		-- 	end,
+		-- }
+		--
 		-- DAP UI SPECIFIC
 
 		dapui.setup()
@@ -158,8 +168,26 @@ return {
 			require("dapui").eval()
 		end)
 
+		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
+			require("dap.ui.widgets").hover()
+		end, { desc = "[hover" })
+
+		vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
+			require("dap.ui.widgets").preview()
+		end, { desc = "[p]review" })
+
+		vim.keymap.set("n", "<Leader>df", function()
+			local widgets = require("dap.ui.widgets")
+			widgets.centered_float(widgets.frames)
+		end, { desc = "[f]rames" })
+
+		vim.keymap.set("n", "<Leader>ds", function()
+			local widgets = require("dap.ui.widgets")
+			widgets.centered_float(widgets.scopes)
+		end, { desc = "[s]copes" })
+
 		vim.keymap.set("n", "<Leader>dz", function()
 			require("dapui").open({ reset = true })
-		end, { desc = "[z]eval" })
+		end, { desc = "[z]reset ui" })
 	end,
 }
