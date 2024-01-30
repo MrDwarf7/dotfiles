@@ -21,6 +21,18 @@ return {
 		vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "[b]reakpoint" })
 		vim.keymap.set("n", "<Leader>dC", dap.terminate, { desc = "[C]ancel" })
 
+		vim.keymap.set("n", "<Leader>di", function()
+			require("dap").step_into()
+		end, { desc = "[i]nto" })
+
+		vim.keymap.set("n", "<Leader>do", function()
+			require("dap").step_over()
+		end, { desc = "[o]ver" })
+
+		vim.keymap.set("n", "<Leader>dO", function()
+			require("dap").step_out()
+		end, { desc = "[O]ut" })
+
 		vim.keymap.set("n", "<Leader>dl", function()
 			require("dap").run_last()
 		end)
@@ -83,39 +95,6 @@ return {
 			},
 		}
 
-		-- dap.adapters.codelldb = {
-		-- 	type = "server",
-		-- 	port = "13000",
-		-- 	executable = {
-		-- 		command = "/usr/sbin/codelldb/adapter/",
-		-- 		args = { "--port", "${port}", "--log-file", "/tmp/codelldb.log" },
-		-- 		-- detached = false, -- Windows specific
-		-- 	},
-		-- }
-
-		-- dap.configurations.rust = {
-		-- 	{},
-		-- 	initCommands = function()
-		-- 		-- Find out where to look for the pretty printer Python module
-		-- 		local rustc_sysroot = vim.fn.trim(vim.fn.system("rustc --print sysroot"))
-		--
-		-- 		local script_import = 'command script import "' .. rustc_sysroot .. '/lib/rustlib/etc/lldb_lookup.py"'
-		-- 		local commands_file = rustc_sysroot .. "/lib/rustlib/etc/lldb_commands"
-		--
-		-- 		local commands = {}
-		-- 		local file = io.open(commands_file, "r")
-		-- 		if file then
-		-- 			for line in file:lines() do
-		-- 				table.insert(commands, line)
-		-- 			end
-		-- 			file:close()
-		-- 		end
-		-- 		table.insert(commands, 1, script_import)
-		--
-		-- 		return commands
-		-- 	end,
-		-- }
-		--
 		-- DAP UI SPECIFIC
 
 		dapui.setup()
@@ -145,29 +124,17 @@ return {
 			require("dapui").close()
 		end, { desc = "dap CLOSE" })
 
-		vim.keymap.set("n", "<Leader>di", function()
-			require("dapui").step_into()
-		end, { desc = "[i]nto" })
-
-		vim.keymap.set("n", "<Leader>do", function()
-			require("dapui").step_over()
-		end, { desc = "[o]ver" })
-
-		vim.keymap.set("n", "<Leader>dO", function()
-			require("dapui").step_out()
-		end, { desc = "[O]ut" })
-
-		vim.keymap.set({ "n", "v" }, "<A-k>", function()
-			require("dapui").eval()
-		end)
+		vim.keymap.set("n", "<Leader>dz", function()
+			require("dapui").open({ reset = true })
+		end, { desc = "[z]reset ui" })
 
 		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
 			require("dap.ui.widgets").hover()
 		end, { desc = "[hover" })
 
-		vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
-			require("dap.ui.widgets").preview()
-		end, { desc = "[p]review" })
+		vim.keymap.set({ "n", "v" }, "<Leader>de", function()
+			require("dapui").eval()
+		end, { desc = "[e]val" })
 
 		vim.keymap.set("n", "<Leader>df", function()
 			local widgets = require("dap.ui.widgets")
@@ -179,8 +146,8 @@ return {
 			widgets.centered_float(widgets.scopes)
 		end, { desc = "[s]copes" })
 
-		vim.keymap.set("n", "<Leader>dz", function()
-			require("dapui").open({ reset = true })
-		end, { desc = "[z]reset ui" })
+		vim.keymap.set({ "n", "v" }, "<Leader>dp", function()
+			require("dap.ui.widgets").preview()
+		end, { desc = "[p]review" })
 	end,
 }

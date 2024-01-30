@@ -75,15 +75,16 @@ return {
 	},
 
 	{
+		"lvimuser/lsp-inlayhints.nvim",
+		opts = {},
+	},
+
+	{
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
 		-- dependencies = {
 		-- 	"nvim-lua/plenary.nvim",
 		-- 	"mfussenegger/nvim-dap",
-		-- 	{
-		-- 		"lvimuser/lsp-inlayhints.nvim",
-		-- 		opts = {},
-		-- 	},
 		-- },
 		ft = { "rust" },
 	},
@@ -101,6 +102,7 @@ return {
 			server = {
 				on_attach = function(client, bufnr)
 					require("lsp-inlayhints").on_attach(client, bufnr)
+					require("dap-ui")
 				end,
 			},
 		}
