@@ -47,6 +47,7 @@ return {
 					"prismals",
 					"tailwindcss",
 					"ruff_lsp",
+					"pyright",
 					--"rust_analyzer", -- Since using Rustaceanvim, DO NOT SETUP via lspconfig call
 					"slint_lsp",
 					"vimls",
