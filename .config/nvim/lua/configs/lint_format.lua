@@ -12,7 +12,7 @@ return {
 				css = { "stylelint" },
 				yaml = { "yamllint" },
 				docker = { "hadolint" },
-				python = { "ruff", "vulture" },
+				python = { "ruff", "vulture", { "mypy" } },
 				vim = { "vint" },
 				sh = { "shellcheck" },
 				lua = { "luacheck" },
