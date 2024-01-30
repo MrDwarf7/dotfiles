@@ -21,6 +21,24 @@ function lzgt
     lazygit $args
 }
 
+function nf
+{
+    if (-not (neofetch --help))
+    {
+        try
+        {
+            scoop install neofetch
+        } catch
+        {
+            scoop bucket add extras
+        } finally
+        {
+            scoop install neofetch
+        }
+    }
+    neofetch
+}
+
 function lzdk
 {
     lazydocker $args
