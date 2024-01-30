@@ -5,6 +5,13 @@ return {
 		"rcarriga/nvim-dap-ui",
 		"theHamsta/nvim-dap-virtual-text",
 	},
+			vim.fn.sign_define(
+				"DapBreakpoint",
+				{ text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+			)
+			vim.keymap.set("n", "<Leader>dl", function()
+				require("dap").run_last()
+			end)
 
 	config = function()
 		local dapui = require("dapui")
