@@ -5,6 +5,7 @@ alias l='ls -lah --color=auto'
 alias ls='ls -lh --color=auto'
 
 alias ppath='echo $PATH'
+alias nf='neofetch'
 
 alias cls='clear'
 alias ca='cls && l'
@@ -13,7 +14,6 @@ alias ca='cls && l'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
 
 # Pacman aliases
 alias pac='sudo pacman'
@@ -28,11 +28,9 @@ alias yayss='yay -Ss'
 
 alias sysup="sudo pacman -Syu && yay -Syu"
 
-
 # Cargo Aliases
 alias cb='cargo build'
 alias cbr='cargo build --release'
-
 
 alias cr='cargo run'
 alias crq='cargo run -q'
@@ -44,23 +42,20 @@ alias cu='cargo update'
 alias cdoc='cargo doc'
 alias cup='cargo upgrade'
 
-
 if [ "$WIN_AVAILABLE" ]; then
-    alias cbw='cargo build --target x86_64-pc-windows-gnu'
-    alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
-    alias crw='cargo run --target x86_64-pc-windows-gnu'
-    alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
-    alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
+	alias cbw='cargo build --target x86_64-pc-windows-gnu'
+	alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
+	alias crw='cargo run --target x86_64-pc-windows-gnu'
+	alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
+	alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
 
-    alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
-    alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
-    alias cble='cba && cbra'
+	alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
+	alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
+	alias cble='cba && cbra'
 fi
-
 
 alias cd2='cd ../..'
 alias cd3='cd ../../..'
-
 
 # Zellij
 
@@ -71,7 +66,6 @@ alias zela='zellij a'
 
 alias neo='neofetch'
 alias dea='deactivate'
-
 
 export GCC_COLOR='eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
