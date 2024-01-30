@@ -1,5 +1,12 @@
 return {
 	{
+		"prichrd/netrw.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+	},
+
+	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
@@ -15,7 +22,6 @@ return {
 	{
 		"folke/neodev.nvim",
 		lazy = false,
-		-- ft = { "lua" },
 		config = function()
 			require("neodev").setup({
 				library = {
@@ -117,12 +123,3 @@ return {
 		end,
 	},
 }
-
--- Play around with either - Both comment tools do almost identical things so idk lol
---    {
---        "terrortylor/nvim-comment",
---        event = "BufEnter",
---        config = function()
---            require("nvim_comment").setup()
---        end
---    },
