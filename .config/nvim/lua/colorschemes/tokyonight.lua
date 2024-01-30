@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-doc-name, unused-local
 require("tokyonight").setup({
 	-- your configuration comes here
 	-- or leave it empty to use the default settings
