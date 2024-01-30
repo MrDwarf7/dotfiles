@@ -163,6 +163,7 @@ M.nvim_cmp_main_opts = function()
 				require("luasnip").lsp_expand(args.body)
 			end,
 		},
+		preselect = cmp.PreselectMode.None,
 
 		formatting = lspkind_formatting_style,
 
@@ -176,7 +177,7 @@ M.nvim_cmp_main_opts = function()
 			{ name = "nvim_lua", group_index = 2 },
 			{ name = "path", group_index = 2 },
 			-- My additions here
-			{ name = "nvim_lsp_signature_help" },
+			{ name = "nvim_lsp_signature_help", group_index = 3 },
 			{ name = "cmp-git" },
 			{ name = "cmp-cmdline" },
 			{ name = "cmp-luasnip-choice" },

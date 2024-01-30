@@ -1,3 +1,4 @@
+---@diagnostic disable: duplicate-index
 local evil_line = {
 	setup = function()
         -- Eviline config for lualine

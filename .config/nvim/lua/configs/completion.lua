@@ -8,9 +8,7 @@ return {
 				panel = {
 					enabled = true, -- Temp disabled to test copilot_cmp
 					auto_refresh = false, -- This is the default setting
-					keymap = {
-						open = "<C-<CR>>",
-					},
+					keymap = {},
 				},
 
 				suggestion = {
@@ -41,7 +39,8 @@ return {
 			}) -- End of setup fnc
 
 			vim.keymap.set("n", "<Leader>lP", function()
-				vim.cmd("Copilot panel")
+				require("Copilot")
+				require("Copilot").panel()
 			end, { desc = "copilot [P]anel" })
 		end,
 	},

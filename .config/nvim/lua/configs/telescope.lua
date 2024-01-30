@@ -114,7 +114,7 @@ return {
 		vim.keymap.set("n", "<Leader>fl", builtin.resume, { desc = "[l]ast search" })
 		vim.keymap.set("n", "<Leader>f'", builtin.marks, { desc = "[']marks" })
 		vim.keymap.set("n", "<Leader>fj", builtin.jumplist, { desc = "[j]ump list" })
-		vim.keymap.set("n", "<Leader>fd", builtin.diagnostics, { desc = "[d]iagnostics (telescope)" })
+		vim.keymap.set("n", "<Leader>fp", builtin.diagnostics, { desc = "[p]roblems (telescope)" })
 		vim.keymap.set("n", "<Leader>fV", builtin.vim_options, { desc = "[v]im options browser" })
 
 		vim.keymap.set("n", "<Leader>ft", ":TodoTelescope<CR>", { desc = "[t]odo's" })
