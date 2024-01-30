@@ -128,11 +128,11 @@ return {
 			require("dapui").open({ reset = true })
 		end, { desc = "[z]reset ui" })
 
-		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
+		vim.keymap.set({ "n", "v" }, "<Leader>de", function()
 			require("dap.ui.widgets").hover()
 		end, { desc = "[hover" })
 
-		vim.keymap.set({ "n", "v" }, "<Leader>de", function()
+		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
 			require("dapui").eval()
 		end, { desc = "[e]val" })
 
