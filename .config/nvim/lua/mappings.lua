@@ -26,6 +26,22 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set("n", "n", "nzzzv", silent_opts)
 vim.keymap.set("n", "N", "Nzzzv", silent_opts)
 
+vim.keymap.set("n", "H", "^", silent_opts)       -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set("n", "L", "$", silent_opts)       -- Shift + l (Or just L) to jump to end of line
+
+vim.keymap.set("v", "H", "^", silent_opts)       -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set("v", "L", "$", silent_opts)       -- Shift + l (Or just L) to jump to end of line
+
+vim.keymap.set("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
+vim.keymap.set("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
+
+vim.keymap.set("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
+vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
+
+
+vim.keymap.set("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
+vim.keymap.set("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
+
 --vim.keymap.set("n", "<C-d>,", "<C-d>zz", silent_opts ) -- Laggy as
 --vim.keymap.set("n", "<C-u>,", "<C-u>zz", silent_opts ) -- Laggy as
 
@@ -77,8 +93,6 @@ vim.keymap.set("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 vim.keymap.set("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
 vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
-vim.keymap.set("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
-vim.keymap.set("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
 
 vim.keymap.set("n", "<Leader>gc", ':Git commit -m "', silent_opts)                                    -- Temp for the time being until lazygit // fugitive or something
 
