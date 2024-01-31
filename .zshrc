@@ -5,6 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zs
   source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+
 ### SSH agent things
 systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
@@ -190,8 +191,8 @@ alias ashc="vim ~/.aliases"
 
 # Vim related things
 alias xvim="NVIM_APPNAME=omerxx nvim"
-alias chad="NVIM_APPNAME=NvChad nvim"
-#alias cvim="NVIM_APPNAME=CustomVim nvim"
+alias kvim="NVIM_APPNAME=kunzVim nvim"
+alias nevim="NVIM_APPNAME=NewVim nvim"
 
 source "$HOME/.aliases"
 
