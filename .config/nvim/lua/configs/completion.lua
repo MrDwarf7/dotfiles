@@ -6,11 +6,10 @@ return {
 		config = function()
 			require("copilot").setup({
 				panel = {
-					enabled = true, -- Temp disabled to test copilot_cmp
+					enabled = true,  -- Temp disabled to test copilot_cmp
 					auto_refresh = false, -- This is the default setting
 					keymap = {},
 				},
-
 				suggestion = {
 					enabled = false, -- Temp disabled to test copilot-cmp
 					auto_trigger = true,
@@ -22,7 +21,6 @@ return {
 						dismiss = "<C-c>",
 					},
 				},
-
 				filetypes = { -- Defaults are all false basically
 					yaml = true,
 					markdown = true,
@@ -36,7 +34,7 @@ return {
 				},
 				copilot_node_command = "node", -- What other ways can it be run??
 				server_opts_overrides = {},
-			}) -- End of setup fnc
+			})                           -- End of setup fnc
 
 			vim.keymap.set("n", "<Leader>lP", function()
 				require("Copilot")
@@ -132,8 +130,8 @@ return {
 				"hrsh7th/cmp-path",
 
 				"doxnit/cmp-luasnip-choice", -- new
-				"saecki/crates.nvim", -- new
-				"vrslev/cmp-pypi", -- new
+				"saecki/crates.nvim",    -- new
+				"vrslev/cmp-pypi",       -- new
 
 				"hrsh7th/cmp-nvim-lsp-signature-help",
 				"petertriho/cmp-git",
