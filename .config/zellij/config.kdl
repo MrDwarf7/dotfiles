@@ -362,7 +362,7 @@ default_layout "compact"
 // Default: normal || (normal, locked)
 //
 //
-default_mode "locked"
+default_mode "normal"
 
 // Toggle enabling the mouse mode.
 // On certain configurations, or terminals this could
