@@ -8,8 +8,6 @@ if vim.g.vscode then
 	require("autocmds")
 else
 	require("options")
-	require("mappings")
-	require("autocmds")
 
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 	if not vim.loop.fs_stat(lazypath) then
@@ -69,3 +67,6 @@ else
 		},
 	})
 end
+
+require("mappings")
+require("autocmds")
