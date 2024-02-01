@@ -8,8 +8,12 @@ return {
 		},
 
 		keys = {
-			{ "n", "<leader>gg", "<cmd>LazyGit<CR>",                                           { desc = "[l]azy Git" } },
-			{ "n", "<Leader>gp", ":lua require('telescope').extensions.lazygit.lazygit()<CR>", { desc = "[p]rojects" } }
+
+			vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "[l]azy Git" }),
+			vim.keymap.set("n", "<Leader>gp", function()
+				local ext = require("telescope").extensions.lazygit()
+				vim.keymap.set("n", "<leader>gp", ext.lazygit(), { desc = "[p]rojects" })
+			end),
 		},
 
 		config = function(_, opts)
