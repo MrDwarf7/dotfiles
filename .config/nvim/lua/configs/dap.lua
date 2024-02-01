@@ -102,6 +102,7 @@ return {
 		dap.listeners.before.attach.dapui_config = function()
 			dapui.open()
 		end
+
 		dap.listeners.before.launch.dapui_config = function()
 			dapui.open()
 		end
@@ -130,7 +131,7 @@ return {
 
 		vim.keymap.set({ "n", "v" }, "<Leader>de", function()
 			require("dap.ui.widgets").hover()
-		end, { desc = "[hover" })
+		end, { desc = "[hover]" })
 
 		vim.keymap.set({ "n", "v" }, "<Leader>dh", function()
 			require("dapui").eval()
