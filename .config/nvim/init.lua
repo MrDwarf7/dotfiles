@@ -68,5 +68,21 @@ else
 	})
 end
 
+
 require("mappings")
 require("autocmds")
+
+-- local M = {}
+--
+-- M.silence_notify = function()
+-- 	local notify = require("notify")
+-- 	vim.notify = function(msg, ...)
+-- 		if msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet") then
+-- 			return
+-- 		end
+-- 		notify(msg, ...)
+-- 	end
+-- end
+--
+--
+-- return M
