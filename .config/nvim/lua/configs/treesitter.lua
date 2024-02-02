@@ -39,7 +39,7 @@ return {
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
-		event = { "VeryLazy", "InsertEnter" },
+		event = "BufReadPre",
 		config = function()
 			require("Comment").setup({
 				pre_hook = function()
