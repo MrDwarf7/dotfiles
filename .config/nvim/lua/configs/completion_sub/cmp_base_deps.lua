@@ -4,6 +4,7 @@ return {
 		"onsails/lspkind.nvim",
 		"windwp/nvim-autopairs",
 		"doxnit/cmp-luasnip-choice",
+		"rafamadriz/friendly-snippets",
 		"saecki/crates.nvim",
 		"vrslev/cmp-pypi",
 		"zbirenbaum/copilot-cmp",
