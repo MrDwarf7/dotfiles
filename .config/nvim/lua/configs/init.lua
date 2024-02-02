@@ -1,6 +1,6 @@
 return {
 	{
-		"nathom/filetype.nvim",
+		"prichrd/netrw.nvim",
 		lazy = false,
 		priority = 1000,
 		setup = function()
@@ -19,20 +19,14 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
-		priority = 990,
+		priority = 1000,
 		config = function()
 			require("colorschemes.tokyonight")
 		end,
 	},
 
-	{
-		"dstein64/vim-startuptime",
-		lazy = false,
-		priority = 1000,
-	},
-
-	"nvim-lua/plenary.nvim",
-	"JoosepAlviste/nvim-ts-context-commentstring",
+	{ "nvim-lua/plenary.nvim" },
+	{ "JoosepAlviste/nvim-ts-context-commentstring" },
 
 	{
 		"folke/neodev.nvim",
@@ -102,15 +96,24 @@ return {
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = true,
 		-- Couldn't get the actual proper main part working for now
 		-- But is working for telescope call so
 	},
 
-	"ThePrimeagen/git-worktree.nvim",
-	"nvim-telescope/telescope-fzy-native.nvim",
-	"AckslD/nvim-neoclip.lua",
-	"nvim-telescope/telescope-live-grep-args.nvim",
+	{ "ThePrimeagen/git-worktree.nvim" },
+	{ "nvim-telescope/telescope-fzy-native.nvim" },
+	{ "AckslD/nvim-neoclip.lua" },
+	{ "nvim-telescope/telescope-live-grep-args.nvim" },
+
+	{
+		"mbbill/undotree",
+		event = "InsertEnter",
+		config = function()
+			vim.keymap.set("n", "<Leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndo-tree" })
+			vim.g.undotree_SetFocusWhenToggle = 1
+		end,
+		opts = {},
+	},
 
 	{
 		"RRethy/vim-illuminate",
@@ -127,10 +130,5 @@ return {
 				},
 			})
 		end,
-	},
-
-	{
-		"mbbill/undotree",
-		event = "VeryLazy",
 	},
 }
