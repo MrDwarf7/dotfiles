@@ -115,3 +115,17 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 		set_url_match()
 	end,
 })
+
+-- Auto resize window splits
+autocmd("VimResized", {
+	command = "wincmd =",
+	group = MainAutoCmdGroup,
+})
+
+autocmd("BufEnter", {
+	pattern = "gitconfig",
+	callback = function()
+		vim.opt.filetype = "gitconfig"
+	end,
+	group = MainAutoCmdGroup,
+})
