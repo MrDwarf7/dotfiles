@@ -3,6 +3,15 @@ return {
 		"prichrd/netrw.nvim",
 		lazy = false,
 		priority = 1000,
+		setup = function()
+			require("filetype").setup()
+		end,
+	},
+
+	{
+		"prichrd/netrw.nvim",
+		lazy = false,
+		priority = 998,
 		opts = {},
 	},
 
