@@ -1,12 +1,13 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		lazy = false,
 		cmd = "Copilot",
 		event = { "InsertEnter", "BufReadPost" },
 		config = function()
 			require("copilot").setup({
 				panel = {
-					enabled = true,  -- Temp disabled to test copilot_cmp
+					enabled = true, -- Temp disabled to test copilot_cmp
 					auto_refresh = false, -- This is the default setting
 					keymap = {},
 				},
@@ -34,12 +35,13 @@ return {
 				},
 				copilot_node_command = "node", -- What other ways can it be run??
 				server_opts_overrides = {},
-			})                           -- End of setup fnc
+			}) -- End of setup fnc
 
-			vim.keymap.set("n", "<Leader>lP", function()
-				require("Copilot")
-				require("Copilot").panel()
-			end, { desc = "copilot [P]anel" })
+			vim.keymap.set("n", "<Leader>lP", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" })
+
+			-- require("Copilot")
+			-- 	require("Copilot").panel()
+			-- end, { desc = "copilot [P]anel" })
 		end,
 	},
 

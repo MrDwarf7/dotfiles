@@ -84,53 +84,50 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
-		-- dependencies = {
-		-- 	"nvim-lua/plenary.nvim",
-		-- 	"mfussenegger/nvim-dap",
-		-- },
+		dependencies = {
+			"lvimuser/lsp-inlayhints.nvim",
+		},
 		ft = { "rust" },
-	},
-
-	config = function()
-		vim.g.rustaceanvim = {
-			inlay_hints = {
-				highlight = "NonText",
-			},
-			tools = {
-				hover_actions = {
-					auto_focus = true,
+		config = function()
+			vim.g.rustaceanvim = {
+				inlay_hints = {
+					highlight = "NonText",
 				},
-			},
-			server = {
-				on_attach = function(client, bufnr)
-					require("lsp-inlayhints").on_attach(client, bufnr)
-					require("dap-ui")
-				end,
-			},
-		}
+				tools = {
+					hover_actions = {
+						auto_focus = true,
+					},
+				},
+				server = {
+					on_attach = function(client, bufnr)
+						require("lsp-inlayhints").on_attach(client, bufnr)
+						require("dap-ui")
+					end,
+				},
+			}
 
-		local bufnr = vim.api.nvim_get_current_buf()
-		vim.keymap.set("n", "<Leader>la", function()
-			vim.cmd.RustLsp("codeAction")
-		end, { silent = true, buffer = bufnr, desc = "[a]ction" })
+			local bufnr = vim.api.nvim_get_current_buf()
+			vim.keymap.set("n", "<Leader>la", function()
+				vim.cmd.RustLsp("codeAction")
+			end, { silent = true, buffer = bufnr, desc = "[a]ction" })
 
-		vim.keymap.set("n", "<Leader>lc", function()
-			vim.cmd.RustLsp("flyCheck")
-		end, { silent = true, buffer = bufnr, desc = "[c]heck" })
+			vim.keymap.set("n", "<Leader>lc", function()
+				vim.cmd.RustLsp("flyCheck")
+			end, { silent = true, buffer = bufnr, desc = "[c]heck" })
 
-		vim.keymap.set("n", "<Leader>dd", function()
-			vim.cmd.RustLsp("debuggables")
-		end, { silent = true, buffer = bufnr, desc = "[d]ebuggables" })
+			vim.keymap.set("n", "<Leader>dd", function()
+				vim.cmd.RustLsp("debuggables")
+			end, { silent = true, buffer = bufnr, desc = "[d]ebuggables" })
 
-		vim.keymap.set("n", "<Leader>dr", function()
-			vim.cmd.RustLsp("runnables")
-		end, { silent = true, buffer = bufnr, desc = "[r]un" })
+			vim.keymap.set("n", "<Leader>dr", function()
+				vim.cmd.RustLsp("runnables")
+			end, { silent = true, buffer = bufnr, desc = "[r]un" })
 
-		vim.keymap.set("n", "<Leader>lh", function()
-			vim.cmd.RustLsp("hover")
-		end, { silent = true, buffer = bufnr, desc = "[h]over" })
-	end,
-}
+			vim.keymap.set("n", "<Leader>lh", function()
+				vim.cmd.RustLsp("hover")
+			end, { silent = true, buffer = bufnr, desc = "[h]over" })
+		end,
+	},
 
 -- Dap things here, specific to mason
 -- {
