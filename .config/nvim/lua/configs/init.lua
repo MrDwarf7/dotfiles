@@ -1,8 +1,17 @@
 return {
 	{
-		"prichrd/netrw.nvim",
+		"nathom/filetype.nvim",
 		lazy = false,
 		priority = 1000,
+		setup = function()
+			require("filetype").setup()
+		end,
+	},
+
+	{
+		"prichrd/netrw.nvim",
+		lazy = false,
+		priority = 998,
 		opts = {},
 	},
 
@@ -10,14 +19,20 @@ return {
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
-		priority = 1000,
+		priority = 990,
 		config = function()
 			require("colorschemes.tokyonight")
 		end,
 	},
 
-	{ "nvim-lua/plenary.nvim" },
-	{ "JoosepAlviste/nvim-ts-context-commentstring" },
+	{
+		"dstein64/vim-startuptime",
+		lazy = false,
+		priority = 1000,
+	},
+
+	"nvim-lua/plenary.nvim",
+	"JoosepAlviste/nvim-ts-context-commentstring",
 
 	{
 		"folke/neodev.nvim",
@@ -60,19 +75,22 @@ return {
 
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
 		config = function()
-			vim.keymap.set("n", "<Leader>lp", function()
-				require("trouble").toggle()
-			end, { desc = "[p]roblems" })
+			require("trouble")
+			local tr = package.loaded.trouble
 
+			vim.keymap.set("n", "<Leader>lp", tr.toggle, { silent = true, desc = "[p]roblems" })
 			vim.keymap.set("n", "]]", function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end, { desc = "[p]robem NEXT" })
+				tr.trouble.next({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem NEXT" })
 
 			vim.keymap.set("n", "[[", function()
-				require("trouble").previous({ skip_groups = true, jump = true })
-			end, { desc = "[p]robem PREV" })
+				tr.trouble.previous({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem PREV" })
 		end,
 	},
 
@@ -87,24 +105,15 @@ return {
 		"ThePrimeagen/harpoon",
 		branch = "harpoon2",
 		dependencies = { "nvim-lua/plenary.nvim" },
+		config = true,
 		-- Couldn't get the actual proper main part working for now
 		-- But is working for telescope call so
 	},
 
-	{ "ThePrimeagen/git-worktree.nvim" },
-	{ "nvim-telescope/telescope-fzy-native.nvim" },
-	{ "AckslD/nvim-neoclip.lua" },
-	{ "nvim-telescope/telescope-live-grep-args.nvim" },
-
-	{
-		"mbbill/undotree",
-		event = "InsertEnter",
-		config = function()
-			vim.keymap.set("n", "<Leader>U", vim.cmd.UndotreeToggle, { desc = "[U]ndo-tree" })
-			vim.g.undotree_SetFocusWhenToggle = 1
-		end,
-		opts = {},
-	},
+	"ThePrimeagen/git-worktree.nvim",
+	"nvim-telescope/telescope-fzy-native.nvim",
+	"AckslD/nvim-neoclip.lua",
+	"nvim-telescope/telescope-live-grep-args.nvim",
 
 	{
 		"RRethy/vim-illuminate",
@@ -121,5 +130,10 @@ return {
 				},
 			})
 		end,
+	},
+
+	{
+		"mbbill/undotree",
+		event = "VeryLazy",
 	},
 }

@@ -23,11 +23,13 @@ return {
 
 	{
 		"j-hui/fidget.nvim",
-		event = { "VeryLazy", "BufReadPre" },
+		-- event = { "VeryLazy", "BufReadPre" },
 		lazy = false,
 		tags = "v1.2.0",
 		opts = {},
 	},
+
+	--
 
 	{
 		"folke/noice.nvim",

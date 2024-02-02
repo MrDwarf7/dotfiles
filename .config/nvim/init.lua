@@ -1,6 +1,11 @@
+if vim.fn.has("nvim-0.9") == 1 then
+	vim.loader.enable()
+end
+
 if vim.g.neovide then
 	require("neovide")
 end
+
 
 if vim.g.vscode then
 	require("options")
@@ -22,7 +27,11 @@ else
 	end
 	vim.opt.rtp:prepend(lazypath)
 
-	require("lazy").setup("configs", {
+	local lazy = require("lazy")
+	local view_config = require("lazy.view.config")
+
+	-- The custom settings for lazy, to keep the table handed over a bit cleaner
+	local lazy_custom_config = {
 		defaults = { lazy = true },
 		performance = {
 			cache = {
@@ -65,8 +74,30 @@ else
 			size = { width = 0.9, height = 0.9 },
 			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
 		},
-	})
+	}
+
+	-- view_config.keys.close = "<Esc>"
+
+	lazy.setup("configs", lazy_custom_config)
+
+	require("mappings")
+	require("autocmds")
 end
 
-require("mappings")
-require("autocmds")
+----------------
+-- end
+
+-- local M = {}
+--
+-- M.silence_notify = function()
+-- 	local notify = require("notify")
+-- 	vim.notify = function(msg, ...)
+-- 		if msg:match("warning: multiple different client offset_encodings detected for buffer, this is not supported yet") then
+-- 			return
+-- 		end
+-- 		notify(msg, ...)
+-- 	end
+-- end
+--
+--
+-- return M

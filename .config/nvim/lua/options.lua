@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Enable the Lua loader byte-compilation cache.
+
+vim.g.did_load_filetypes = 1
 -- Global
 vim.opt.fillchars = {
 	fold = " ",
@@ -21,17 +24,21 @@ vim.opt.listchars = {
 vim.opt.shell = "zsh"
 vim.opt.scrolloff = 6
 vim.opt.foldnestmax = 4
+vim.opt.foldlevelstart = 99
 vim.opt.foldlevel = 1
 vim.opt.foldcolumn = "1"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 vim.opt.foldmethod = "expr"
-vim.opt.foldlevelstart = 99
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+-- vim.opt.foldexpr = "indent"
+-- vim.opt.foldmethod = "syntax"
+--
 vim.opt.foldenable = true
 vim.opt.showtabline = 2
 vim.opt.mouse = "a"
 vim.opt.backupcopy = "yes"
 vim.opt.undolevels = 1000
 vim.opt.shortmess:append({ c = true, S = true })
+vim.opt.shortmess = vim.opt.shortmess + { c = true, s = true, C = true, F = true, I = true, S = true, W = true }
 vim.opt.showmode = false
 vim.opt.hidden = true
 vim.opt.splitright = true
@@ -51,12 +58,24 @@ vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
 vim.opt.encoding = "UTF-8"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.clipboard = "unnamedplus"
+
+if vim.fn.has("unnamedplus") == 1 then
+	vim.opt.clipboard = { "unnamed", "unnamedplus" }
+else
+	vim.opt.clipboard = "unnamed"
+end
+
+-- vim.opt.clipboard = "unnamedplus"
+
 vim.opt.laststatus = 3
 vim.opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
-	vim.opt.splitkeep = "screen"
+	vim.opt.splitkeep = "topline"
 end
+
+-- vim.opt.wildcharm = vim.fn.char2nr("		")
+-- vim.opt.wildcharm = 3
+
 -- Buffer
 vim.opt.fileformat = "unix"
 vim.opt.tabstop = 4
@@ -78,6 +97,10 @@ vim.opt.cursorline = true
 if vim.fn.has("nvim-0.10") == 1 then
 	vim.opt.smoothscroll = true
 end
+
+vim.g.loaded_node_provider = 1
+vim.g.loaded_python3_provider = 1
+vim.g.loaded_ruby_provider = 1
 
 -- New things I added from his config
 vim.o.breakindent = true

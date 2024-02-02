@@ -28,4 +28,10 @@ M.lazy_load = function(plugin)
 	})
 end
 
+M.on_attach = function(_, bufnr)
+	local function buf_set_option(...)
+		vim.api.nvim_buf_set_option(bufnr, ...)
+	end
+end
+
 return M

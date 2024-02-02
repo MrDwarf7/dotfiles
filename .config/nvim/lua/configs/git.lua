@@ -1,121 +1,112 @@
 return {
 	{
 		"kdheepak/lazygit.nvim",
-		event = { "BufEnter", "BufWinEnter" },
+		-- lazy = false,
+		event = "BufReadPre",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
 		},
 
-		keys = {
+		config = function()
+			local lzgt = package.loaded.lazygit or require("lazygit")
+			local lzgt_tele = require("telescope").load_extension("lazygit")
 
-			vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "[l]azy Git" }),
-			vim.keymap.set("n", "<Leader>gp", function()
-				local ext = require("telescope").extensions.lazygit()
-				vim.keymap.set("n", "<leader>gp", ext.lazygit(), { desc = "[p]rojects" })
-			end),
-		},
+			vim.keymap.set("n", "<leader>gg", lzgt.lazygit, { desc = "[l]azy git" })
+			vim.keymap.set("n", "<leader>gp", lzgt_tele.lazygit, { desc = "[p]rojects" })
 
-		config = function(_, opts)
-			require("telescope")
-			require("telescope").load_extension("lazygit")
 			local autocmd = vim.api.nvim_create_autocmd
-			local silent_opts = {
-				noremap = true,
-				silent = true,
-			}
-
-			autocmd("BufEnter", {
+			autocmd("bufenter", {
 				pattern = "*",
 				callback = function()
 					require("telescope").load_extension("lazygit")
 					require("lazygit.utils").project_root_dir()
 				end,
 			})
-
-			vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", silent_opts, { desc = "[l]azy Git" })
-			vim.keymap.set(
-				"n",
-				"<Leader>gp",
-				":lua require('telescope').extensions.lazygit.lazygit()<CR>",
-				silent_opts,
-				{ desc = "[p]rojects" }
-			)
 		end,
 	},
 
 	{
 		"lewis6991/gitsigns.nvim",
-		lazy = false,
-		opts = {
-			signs = {
-				add = { text = "│" },
-				change = { text = "│" },
-				delete = { text = "󰍵" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-				untracked = { text = "│" },
-			},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
 		},
-		config = function(_, opts)
-			require("gitsigns").setup(opts)
-			-- function diffThisBranch()
-			-- 	local branch = vim.fn.input("Branch: ", "")
-			-- 	require "gitsigns".diffthis(branch)
-			-- end
+		event = "BufReadPre",
+		config = function()
+			local feedkeys = vim.api.nvim_feedkeys
+			require("gitsigns").setup({
+				signs = {
+					add = { text = "│" },
+					change = { text = "│" },
+					delete = { text = "󰍵" },
+					topdelete = { text = "‾" },
+					changedelete = { text = "~" },
+					untracked = { text = "│" },
+				},
+				on_attach = function()
+					local gs = package.loaded.gitsigns
 
-			-- Navigation
-			-- vim.keymap.set('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", {expr=true})
-			-- vim.keymap.set('n', '[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", {expr=true})
-			vim.keymap.set("n", "]c", "<cmd>Gitsigns next_hunk<CR>")
-			vim.keymap.set("n", "[c", "<cmd>Gitsigns prev_hunk<CR>")
+					vim.keymap.set("n", "[c", function()
+						gs.prev_hunk()
+						vim.schedule(function()
+							feedkeys("zz", "n", false)
+						end)
+					end, { desc = "[p]revious hunk" })
 
-			-- Actions
-			vim.keymap.set({ "n", "v" }, "<leader>hs", "<cmd>Gitsigns stage_hunk<CR>")
-			-- vim.keymap.set("v", "<leader>hs", ":Gitsigns stage_hunk<CR>")
-			vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-			-- vim.keymap.set("v", "<leader>hr", ":Gitsigns reset_hunk<CR>")
-			vim.keymap.set("n", "<leader>hS", "<cmd>Gitsigns stage_buffer<CR>")
-			vim.keymap.set("n", "<leader>hu", "<cmd>Gitsigns undo_stage_hunk<CR>")
-			vim.keymap.set("n", "<leader>hR", "<cmd>Gitsigns reset_buffer<CR>")
-			vim.keymap.set("n", "<leader>hp", "<cmd>Gitsigns preview_hunk<CR>")
+					vim.keymap.set("n", "]c", function()
+						gs.next_hunk()
+						vim.schedule(function()
+							feedkeys("zz", "n", false)
+						end)
+					end, { desc = "[n]ext hunk" })
 
-			vim.keymap.set("n", "<leader>hb", function()
-				require("gitsigns").blame_line({ full = true })
-			end, { desc = "toggle [b]lame" })
+					vim.keymap.set("n", "<Leader>hp", gs.preview_hunk, { desc = "[p]review hunk" })
 
-			vim.keymap.set("n", "<leader>ht", "<cmd>Gitsigns toggle_current_line_blame<CR>")
-			vim.keymap.set("n", "<leader>hT", "<cmd>Gitsigns toggle_deleted<CR>")
+					vim.keymap.set("n", "<Leader>hs", gs.stage_hunk, { desc = "[s]tage hunk" })
+					vim.keymap.set("n", "<Leader>hr", gs.reset_hunk, { desc = "[r]eset hunk" })
+					vim.keymap.set("n", "<Leader>hR", gs.reset_buffer, { desc = "[R]eset buffer" })
 
-			vim.keymap.set("n", "<leader>hd", "<cmd>Gitsigns diffthis<CR>")
-			vim.keymap.set("n", "<leader>hD", function()
-				require("gitsigns").diffthis("~")
-			end, { desc = "[d]iff ~" })
+					vim.keymap.set("n", "<Leader>hS", gs.stage_buffer, { desc = "[S]tage buffer" })
+					vim.keymap.set("n", "<Leader>hu", gs.undo_stage_hunk, { desc = "[u]ndo stage" })
 
-			vim.keymap.set("n", "<leader>hm", function()
-				require("gitsigns").diffthis("main")
-			end, { desc = "diff [m]ain" })
+					vim.keymap.set("n", "<Leader>hb", function()
+						gs.blame_line({ full = true })
+					end, { desc = "[b]lame line" })
 
-			-- vim.keymap.set('n', '<leader>hM', diffThisBranch)
+					vim.keymap.set("n", "<Leader>ht", gs.toggle_current_line_blame, { desc = "[t]oggle blame" })
+					vim.keymap.set("n", "<Leader>hT", gs.toggle_deleted, { desc = "[T]oggle deleted" })
+					vim.keymap.set("n", "<Leader>hd", gs.diffthis, { desc = "[d]iff this" })
 
-			-- Text object
-			vim.keymap.set("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
-			vim.keymap.set("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+					vim.keymap.set("n", "<Leader>hD", function()
+						gs.diffthis("main")
+					end, { desc = "[D]iff main" })
+
+					vim.keymap.set("o", "ih", gs.select_hunk, { desc = "select hunk" })
+					vim.keymap.set("x", "ih", gs.select_hunk, { desc = "select hunk" })
+
+					-- vim.keymap.set("n", "<Leader>hD", function ()
+					-- gs.diffthis("~")
+					-- end)
+				end,
+			})
 		end,
 	},
 
 	{
 		"sindrets/diffview.nvim",
-		event = "BufEnter",
-		keys = {
-			vim.keymap.set("n", "<Leader>gd", "+[d]iffview", {}),
-			vim.keymap.set("n", "<Leader>gdo", "<cmd>DiffviewOpen<CR>", {}),
-			vim.keymap.set("n", "<Leader>gdc", "<cmd>DiffviewClose<CR>", {}),
-			vim.keymap.set("n", "<Leader>gdf", "<cmd>DiffviewToggleFiles<CR>", {}),
-			vim.keymap.set("n", "<Leader>gdr", "<cmd>DiffviewRefresh<CR>", {}),
-		},
-		config = function(_, opts)
-			require("diffview").setup(_, opts)
+		event = "BufReadPre",
+		config = function()
+			local df = package.loaded.diffview
+			require("diffview").setup({
+
+				on_attach = function()
+					-- vim.keymap.set("n", "<Leader>gd", "+[d]iffview")
+					vim.keymap.set("n", "<Leader>gdo", df.DiffviewOpen)
+					vim.keymap.set("n", "<Leader>gdc", df.DiffviewClose)
+					vim.keymap.set("n", "<Leader>gdf", df.DiffViewToggleFiles)
+					vim.keymap.set("n", "<Leader>gdr", df.DiffviewToggleFiles)
+				end,
+			})
 		end,
 	},
 

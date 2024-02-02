@@ -1,12 +1,13 @@
 return {
 	{
 		"zbirenbaum/copilot.lua",
+		lazy = false,
 		cmd = "Copilot",
-		event = { "InsertEnter", "BufReadPost" },
+		-- event = { "InsertEnter", "BufReadPost" },
 		config = function()
 			require("copilot").setup({
 				panel = {
-					enabled = true,  -- Temp disabled to test copilot_cmp
+					enabled = true, -- Temp disabled to test copilot_cmp
 					auto_refresh = false, -- This is the default setting
 					keymap = {},
 				},
@@ -34,114 +35,30 @@ return {
 				},
 				copilot_node_command = "node", -- What other ways can it be run??
 				server_opts_overrides = {},
-			})                           -- End of setup fnc
+			}) -- End of setup fnc
 
-			vim.keymap.set("n", "<Leader>lP", function()
-				require("Copilot")
-				require("Copilot").panel()
-			end, { desc = "copilot [P]anel" })
+			vim.keymap.set("n", "<Leader>lP", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" })
+
+			-- require("Copilot")
+			-- 	require("Copilot").panel()
+			-- end, { desc = "copilot [P]anel" })
 		end,
 	},
 
 	{
 		"hrsh7th/nvim-cmp",
-		--lazy = false,
-		event = { "InsertEnter", "CmdlineEnter" },
+		-- lazy = false,
+		event = "InsertEnter",
 		dependencies = {
-			{
-				"L3MON4D3/LuaSnip",
-				dependencies = "rafamadriz/friendly-snippets",
-				opts = { history = true, updateevents = "TextChanged,TextChangedI" },
-				config = function(_, opts)
-					local cmp_util = require("configs.completion_sub.cmp_sub_module")
-					cmp_util.luasnip_func(opts)
-				end,
-			},
-
-			{
-				"onsails/lspkind.nvim",
-				event = { "InsertEnter" },
-			},
-
-			{
-				"windwp/nvim-autopairs",
-				opts = {
-					fast_wrap = {},
-					disable_filetype = { "TelescopePrompt", "vim" },
-				},
-				config = function(_, opts)
-					require("nvim-autopairs").setup(opts)
-					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-					require("cmp").event:on("confirm_done", cmp_autopairs.on_confirm_done())
-				end,
-			},
-
-			-----------------
-			{
-				"doxnit/cmp-luasnip-choice",
-				config = function()
-					require("cmp_luasnip_choice").setup({
-						auto_open = true, -- Automatically open nvim-cmp on choice node (default: true)
-					})
-				end,
-			},
-
-			-----------------
-
-			{
-				"saecki/crates.nvim",
-				ft = { "toml", "rust" },
-				tag = "stable",
-				config = function()
-					require("crates").setup()
-				end,
-			},
-
-			{
-				"vrslev/cmp-pypi",
-				dependencies = { "nvim-lua/plenary.nvim" },
-				ft = { "toml", "python" },
-			},
-
-			{
-				"zbirenbaum/copilot-cmp",
-				event = { "InsertEnter", "VeryLazy" },
-				dependencies = {
-					"zbirenbaum/copilot.lua",
-				},
-
-				config = function()
-					require("copilot_cmp").setup({
-						suggestion = { enabled = true },
-						panel = { enabled = false },
-					})
-				end,
-			},
-
-			-----------------
-
-			{
-				"saadparwaiz1/cmp_luasnip",
-				"hrsh7th/cmp-nvim-lua",
-				"hrsh7th/cmp-nvim-lsp",
-
-				"zbirenbaum/copilot-cmp", -- new
-				"hrsh7th/cmp-buffer",
-				"hrsh7th/cmp-path",
-
-				"doxnit/cmp-luasnip-choice", -- new
-				"saecki/crates.nvim",    -- new
-				"vrslev/cmp-pypi",       -- new
-
-				"hrsh7th/cmp-nvim-lsp-signature-help",
-				"petertriho/cmp-git",
-				"hrsh7th/cmp-cmdline",
-			},
+			require("configs.completion_sub.cmp_base_deps"),
 		},
+		-- NOTE: may want to only call a 'deps' file, for the namespaces?
+		-- or may keep like this where I call ALL deps, and ALL deps setup funcs in a single call?
 
 		config = function()
 			local cmp = require("cmp")
-			local cmp_utils = require("configs.completion_sub.cmp_sub_module")
+			require("configs.completion_sub.cmp_base_deps")
+			local cmp_utils = require("configs.completion_sub.cmp_sub_config")
 			local opts = cmp_utils.nvim_cmp_main_opts()
 
 			cmp.setup(opts)

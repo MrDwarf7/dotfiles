@@ -1,3 +1,5 @@
+local current_line = vim.api.nvim_get_current_line
+
 local silent_opts = {
 	noremap = true,
 	silent = true,
@@ -16,12 +18,23 @@ vim.keymap.set("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 vim.keymap.set("i", "jj", "<Esc>", { noremap = false })
 vim.keymap.set("v", "p", '"_dP', silent_opts)
 
+-- vim.keymap.set("c", "qa<CR>", "qa!<CR>", silent_opts) -- experiemnent to bypass the ! check
+
+-- vim.keymap.set("t", "<C-'>", "<C-\\><C-n>")
+
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 
+vim.keymap.set("v", "<", "<gv", silent_opts)
+vim.keymap.set("v", ">", ">gv", silent_opts)
+
 -- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- same as above but if mvoement greater than 5 then add to jump list
+
+vim.keymap.set("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
+vim.keymap.set("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
 
 vim.keymap.set("n", "n", "nzzzv", silent_opts)
 vim.keymap.set("n", "N", "Nzzzv", silent_opts)
@@ -40,6 +53,14 @@ vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 vim.keymap.set("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
 vim.keymap.set("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
+
+vim.keymap.set("n", "dd", function() -- Empty/blank lines go into blackhole register
+	if #current_line() == 0 then
+		return '"_dd'
+	else
+		return "dd"
+	end
+end, { expr = true })
 
 --vim.keymap.set("n", "<C-d>,", "<C-d>zz", silent_opts ) -- Laggy as
 --vim.keymap.set("n", "<C-u>,", "<C-u>zz", silent_opts ) -- Laggy as
@@ -79,18 +100,6 @@ vim.keymap.set("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) --
 vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 vim.keymap.set("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 vim.keymap.set("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
-
-vim.keymap.set("n", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set("n", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
-
-vim.keymap.set("v", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set("v", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
-
-vim.keymap.set("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
-vim.keymap.set("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
-
-vim.keymap.set("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
-vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 vim.keymap.set("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
 

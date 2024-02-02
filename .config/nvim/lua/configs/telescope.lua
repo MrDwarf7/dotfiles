@@ -27,9 +27,7 @@ return {
 			local actions = require("telescope.actions")
 			local trouble = require("trouble.providers.telescope")
 
-
 			-- require("telescope").load_extension "file_browser"
-
 
 			local extensions = {
 				"harpoon",
@@ -47,7 +45,6 @@ return {
 			end
 
 			telescope.setup({
-
 
 				defaults = {
 					vimgrep_arguments = {

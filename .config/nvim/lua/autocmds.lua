@@ -46,30 +46,30 @@ autocmd("LspAttach", {
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		local opts = { buffer = ev.buf }
-		local vimlspbuf = vim.lsp.buf
+		-- local vimlspbuf = vim.lsp.buf
 
 		vim.keymap.set("n", "K", function()
-			vimlspbuf.hover()
+			vim.lsp.buf.hover()
 		end, opts)
 
 		vim.keymap.set("n", "gd", function()
-			vimlspbuf.definition()
+			vim.lsp.buf.definition()
 		end, opts, { desc = "[d]efinition" })
 
 		vim.keymap.set("n", "gD", function()
-			vimlspbuf.declaration()
+			vim.lsp.buf.declaration()
 		end, opts, { desc = "[D]eclaration" })
 
 		vim.keymap.set("n", "gr", function()
-			vimlspbuf.references()
+			vim.lsp.buf.references()
 		end, opts, { desc = "[r]eferences" })
 
 		vim.keymap.set("n", "<C-k>", function()
-			vimlspbuf.signature_help()
+			vim.lsp.buf.signature_help()
 		end, opts, { desc = "Signature Help" })
 
 		vim.keymap.set("n", "<Leader>lr", function()
-			vimlspbuf.rename()
+			vim.lsp.buf.rename()
 		end, opts, { desc = "[r]ename" })
 
 		vim.keymap.set("n", "<Leader>lR", function()
@@ -77,11 +77,11 @@ autocmd("LspAttach", {
 		end, opts, { desc = "other [R]ename?" })
 
 		vim.keymap.set({ "n", "v" }, "<Leader>la", function()
-			vimlspbuf.code_action()
+			vim.lsp.buf.code_action()
 		end, opts, { desc = "Code [a]ction" })
 
 		vim.keymap.set("n", "<Leader>lf", function()
-			vimlspbuf.format({ async = true })
+			vim.lsp.buf.format({ async = true })
 		end, opts, { desc = "[f]ormat (lsp)" })
 
 		vim.keymap.set("n", "<Leader>lh", function()
@@ -96,7 +96,7 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 	group = augroup("highlighturl", { clear = true }),
 	callback = function()
 		local url_matcher =
-		"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+			"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 		--- Delete the syntax matching rules for URLs/URIs if set
 		local function delete_url_match()
 			for _, match in ipairs(vim.fn.getmatches()) do
@@ -114,4 +114,18 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 		end
 		set_url_match()
 	end,
+})
+
+-- Auto resize window splits
+autocmd("VimResized", {
+	command = "wincmd =",
+	group = MainAutoCmdGroup,
+})
+
+autocmd("BufEnter", {
+	pattern = "gitconfig",
+	callback = function()
+		vim.opt.filetype = "gitconfig"
+	end,
+	group = MainAutoCmdGroup,
 })
