@@ -1,3 +1,5 @@
+local current_line = vim.api.nvim_get_current_line
+
 local silent_opts = {
 	noremap = true,
 	silent = true,
@@ -40,6 +42,14 @@ vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 vim.keymap.set("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
 vim.keymap.set("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
+
+vim.keymap.set("n", "dd", function() -- Empty/blank lines go into blackhole register
+	if #current_line() == 0 then
+		return '"_dd'
+	else
+		return "dd"
+	end
+end, { expr = true })
 
 --vim.keymap.set("n", "<C-d>,", "<C-d>zz", silent_opts ) -- Laggy as
 --vim.keymap.set("n", "<C-u>,", "<C-u>zz", silent_opts ) -- Laggy as
