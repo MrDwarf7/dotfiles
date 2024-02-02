@@ -1,6 +1,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Enable the Lua loader byte-compilation cache.
+
+vim.g.did_load_filetypes = 1
 -- Global
 vim.opt.fillchars = {
 	fold = " ",
@@ -81,6 +84,10 @@ vim.opt.cursorline = true
 if vim.fn.has("nvim-0.10") == 1 then
 	vim.opt.smoothscroll = true
 end
+
+vim.g.loaded_node_provider = 1
+vim.g.loaded_python3_provider = 1
+vim.g.loaded_ruby_provider = 1
 
 -- New things I added from his config
 vim.o.breakindent = true
