@@ -47,8 +47,8 @@ return {
 
 	{
 		"hrsh7th/nvim-cmp",
-		lazy = false,
-		event = { "InsertEnter", "CmdlineEnter" },
+		-- lazy = false,
+		event = "InsertEnter",
 		dependencies = {
 			require("configs.completion_sub.cmp_base_deps"),
 		},
