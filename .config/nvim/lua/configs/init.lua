@@ -69,19 +69,22 @@ return {
 
 	{
 		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
 		config = function()
-			vim.keymap.set("n", "<Leader>lp", function()
-				require("trouble").toggle()
-			end, { desc = "[p]roblems" })
+			require("trouble")
+			local tr = package.loaded.trouble
 
+			vim.keymap.set("n", "<Leader>lp", tr.toggle, { silent = true, desc = "[p]roblems" })
 			vim.keymap.set("n", "]]", function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end, { desc = "[p]robem NEXT" })
+				tr.trouble.next({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem NEXT" })
 
 			vim.keymap.set("n", "[[", function()
-				require("trouble").previous({ skip_groups = true, jump = true })
-			end, { desc = "[p]robem PREV" })
+				tr.trouble.previous({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem PREV" })
 		end,
 	},
 
