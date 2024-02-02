@@ -1,46 +1,28 @@
 return {
 	{
 		"kdheepak/lazygit.nvim",
-		event = { "BufEnter", "BufWinEnter" },
+		-- lazy = false,
+		event = "BufReadPre",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
 		},
 
-		keys = {
+		config = function()
+			local lzgt = package.loaded.lazygit or require("lazygit")
+			local lzgt_tele = require("telescope").load_extension("lazygit")
 
-			vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<CR>", { desc = "[l]azy Git" }),
-			vim.keymap.set("n", "<Leader>gp", function()
-				local ext = require("telescope").extensions.lazygit()
-				vim.keymap.set("n", "<leader>gp", ext.lazygit(), { desc = "[p]rojects" })
-			end),
-		},
+			vim.keymap.set("n", "<leader>gg", lzgt.lazygit, { desc = "[l]azy git" })
+			vim.keymap.set("n", "<leader>gp", lzgt_tele.lazygit, { desc = "[p]rojects" })
 
-		config = function(_, opts)
-			require("telescope")
-			require("telescope").load_extension("lazygit")
 			local autocmd = vim.api.nvim_create_autocmd
-			local silent_opts = {
-				noremap = true,
-				silent = true,
-			}
-
-			autocmd("BufEnter", {
+			autocmd("bufenter", {
 				pattern = "*",
 				callback = function()
 					require("telescope").load_extension("lazygit")
 					require("lazygit.utils").project_root_dir()
 				end,
 			})
-
-			vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", silent_opts, { desc = "[l]azy Git" })
-			vim.keymap.set(
-				"n",
-				"<Leader>gp",
-				":lua require('telescope').extensions.lazygit.lazygit()<CR>",
-				silent_opts,
-				{ desc = "[p]rojects" }
-			)
 		end,
 	},
 
