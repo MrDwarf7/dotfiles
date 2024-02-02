@@ -107,8 +107,8 @@ M.cmp_mappings = function()
 		["<C-k>"] = cmp.mapping.select_prev_item(), -- Testing
 		["<C-j>"] = cmp.mapping.select_next_item(), -- Testing
 
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-u>"] = cmp.mapping.scroll_docs(4), -- Mine
+		["<C-u>"] = cmp.mapping.scroll_docs(-4),
+		["<C-d>"] = cmp.mapping.scroll_docs(4), -- Mine
 		-- ["<C-f>"] = cmp.mapping.scroll_docs(4),
 
 		["<C-Space>"] = cmp.mapping.complete(),
