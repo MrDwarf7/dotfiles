@@ -15,6 +15,9 @@ return {
 		-- this will give ghost text of the udnerlying name - Which is what you want to use here.
 
 		config = function()
+			local utils = require("utils")
+			local on_attach = utils.on_attach("omnifunc", "vim:lua.vim.lsp.omnifunc")
+
 			require("mason").setup({
 				ui = {
 					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
@@ -60,6 +63,15 @@ return {
 					end,
 				}, -- handlers end
 			})
+
+			-- require("lspconfig")["bashls"].setup({
+			-- 	on_attach = on_attach,
+			-- 	filetypes = {
+			-- 		"sh",
+			-- 		"zsh",
+			-- 		"bash",
+			-- 	},
+			-- })
 
 			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
