@@ -51,38 +51,38 @@ return {
 						vim.schedule(function()
 							feedkeys("zz", "n", false)
 						end)
-					end)
+					end, { desc = "[p]revious hunk" })
 
 					vim.keymap.set("n", "]c", function()
 						gs.next_hunk()
 						vim.schedule(function()
 							feedkeys("zz", "n", false)
 						end)
-					end)
+					end, { desc = "[n]ext hunk" })
 
-					vim.keymap.set("n", "<Leader>hp", gs.preview_hunk)
+					vim.keymap.set("n", "<Leader>hp", gs.preview_hunk, { desc = "[p]review hunk" })
 
-					vim.keymap.set("n", "<Leader>hS", gs.stage_hunk)
-					vim.keymap.set("n", "<Leader>hr", gs.reset_hunk)
-					vim.keymap.set("n", "<Leader>hR", gs.reset_buffer)
+					vim.keymap.set("n", "<Leader>hs", gs.stage_hunk, { desc = "[s]tage hunk" })
+					vim.keymap.set("n", "<Leader>hr", gs.reset_hunk, { desc = "[r]eset hunk" })
+					vim.keymap.set("n", "<Leader>hR", gs.reset_buffer, { desc = "[R]eset buffer" })
 
-					vim.keymap.set("n", "<Leader>hS", gs.stage_buffer)
-					vim.keymap.set("n", "<Leader>hu", gs.undo_stage_hunk)
+					vim.keymap.set("n", "<Leader>hS", gs.stage_buffer, { desc = "[S]tage buffer" })
+					vim.keymap.set("n", "<Leader>hu", gs.undo_stage_hunk, { desc = "[u]ndo stage" })
 
 					vim.keymap.set("n", "<Leader>hb", function()
 						gs.blame_line({ full = true })
-					end)
+					end, { desc = "[b]lame line" })
 
-					vim.keymap.set("n", "<Leader>ht", gs.toggle_current_line_blame)
-					vim.keymap.set("n", "<Leader>hT", gs.toggle_deleted)
-					vim.keymap.set("n", "<Leader>hd", gs.diffthis)
+					vim.keymap.set("n", "<Leader>ht", gs.toggle_current_line_blame, { desc = "[t]oggle blame" })
+					vim.keymap.set("n", "<Leader>hT", gs.toggle_deleted, { desc = "[T]oggle deleted" })
+					vim.keymap.set("n", "<Leader>hd", gs.diffthis, { desc = "[d]iff this" })
 
 					vim.keymap.set("n", "<Leader>hD", function()
 						gs.diffthis("main")
-					end)
+					end, { desc = "[D]iff main" })
 
-					vim.keymap.set("o", "ih", gs.select_hunk)
-					vim.keymap.set("x", "ih", gs.select_hunk)
+					vim.keymap.set("o", "ih", gs.select_hunk, { desc = "select hunk" })
+					vim.keymap.set("x", "ih", gs.select_hunk, { desc = "select hunk" })
 
 					-- vim.keymap.set("n", "<Leader>hD", function ()
 					-- gs.diffthis("~")
