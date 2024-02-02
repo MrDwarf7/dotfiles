@@ -3,7 +3,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		lazy = false,
 		cmd = "Copilot",
-		event = { "InsertEnter", "BufReadPost" },
+		-- event = { "InsertEnter", "BufReadPost" },
 		config = function()
 			require("copilot").setup({
 				panel = {
@@ -107,7 +107,7 @@ return {
 
 			{
 				"zbirenbaum/copilot-cmp",
-				event = { "InsertEnter", "VeryLazy" },
+				lazy = false,
 				dependencies = {
 					"zbirenbaum/copilot.lua",
 				},
@@ -132,8 +132,8 @@ return {
 				"hrsh7th/cmp-path",
 
 				"doxnit/cmp-luasnip-choice", -- new
-				"saecki/crates.nvim",    -- new
-				"vrslev/cmp-pypi",       -- new
+				"saecki/crates.nvim", -- new
+				"vrslev/cmp-pypi", -- new
 
 				"hrsh7th/cmp-nvim-lsp-signature-help",
 				"petertriho/cmp-git",

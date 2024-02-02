@@ -56,8 +56,7 @@ return {
 				},
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({
-						})
+						require("lspconfig")[server_name].setup({})
 					end,
 				}, -- handlers end
 			})
@@ -129,32 +128,32 @@ return {
 		end,
 	},
 
--- Dap things here, specific to mason
--- {
--- 	"jay-babu/mason-nvim-dap.nvim",
--- 	event = "BufReadPre",
--- 	dependencies = {
--- 		"williamboman/mason.nvim",
--- 	},
--- 	config = function()
--- 		require("mason-nvim-dap").setup({
--- 			ensure_installed = {
--- 				"python",
--- 				"bash",
--- 				"cppdbg",
--- 				"codelldb",
--- 				"chrome",
--- 			},
---
--- 			automatic_installation = {
--- 				-- exclude = {
--- 				-- 	"bash",
--- 				-- 	"chrome",
--- 				-- 	"cppdbg",
--- 				-- },
--- 			},
--- 			handler = {},
--- 		})
--- 	end,
--- },
--- }
+	-- Dap things here, specific to mason
+	-- {
+	-- 	"jay-babu/mason-nvim-dap.nvim",
+	-- 	event = "BufReadPre",
+	-- 	dependencies = {
+	-- 		"williamboman/mason.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("mason-nvim-dap").setup({
+	-- 			ensure_installed = {
+	-- 				"python",
+	-- 				"bash",
+	-- 				"cppdbg",
+	-- 				"codelldb",
+	-- 				"chrome",
+	-- 			},
+	--
+	-- 			automatic_installation = {
+	-- 				-- exclude = {
+	-- 				-- 	"bash",
+	-- 				-- 	"chrome",
+	-- 				-- 	"cppdbg",
+	-- 				-- },
+	-- 			},
+	-- 			handler = {},
+	-- 		})
+	-- 	end,
+	-- },
+}
