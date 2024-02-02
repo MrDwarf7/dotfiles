@@ -38,6 +38,7 @@ vim.opt.mouse = "a"
 vim.opt.backupcopy = "yes"
 vim.opt.undolevels = 1000
 vim.opt.shortmess:append({ c = true, S = true })
+vim.opt.shortmess = vim.opt.shortmess + { c = true, s = true, C = true, F = true, I = true, S = true, W = true }
 vim.opt.showmode = false
 vim.opt.hidden = true
 vim.opt.splitright = true
@@ -57,12 +58,24 @@ vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
 vim.opt.encoding = "UTF-8"
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
-vim.opt.clipboard = "unnamedplus"
+
+if vim.fn.has("unnamedplus") == 1 then
+	vim.opt.clipboard = { "unnamed", "unnamedplus" }
+else
+	vim.opt.clipboard = "unnamed"
+end
+
+-- vim.opt.clipboard = "unnamedplus"
+
 vim.opt.laststatus = 3
 vim.opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
 	vim.opt.splitkeep = "topline"
 end
+
+-- vim.opt.wildcharm = vim.fn.char2nr("		")
+-- vim.opt.wildcharm = 3
+
 -- Buffer
 vim.opt.fileformat = "unix"
 vim.opt.tabstop = 4
