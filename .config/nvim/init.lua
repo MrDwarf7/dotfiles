@@ -35,9 +35,13 @@ else
 		performance = {
 			cache = {
 				enabled = true,
+				path = vim.fn.stdpath("cache") .. "/lazy",
+				disable_events = { "VimEnter", "BufReadPre" },
+				ttl = 3600 * 24 * 7,
 			},
-
+			reset_packagepath = true,
 			rtp = {
+				reset = true,
 				disabled_plugins = {
 					"2html_plugin",
 					"tohtml",
