@@ -102,6 +102,11 @@ vim.g.loaded_node_provider = 1
 vim.g.loaded_python3_provider = 1
 vim.g.loaded_ruby_provider = 1
 
+-- Use ripgrep as grep tool
+vim.o.grepprg = 'rg --vimgrep --no-heading'
+vim.o.grepformat = '%f:%l:%c:%m,%f:%l:%m'
+
+
 -- New things I added from his config
 vim.o.breakindent = true
 vim.wo.number = true
