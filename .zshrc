@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 
@@ -11,10 +11,10 @@ systemctl --user enable ssh-agent
 systemctl --user start ssh-agent
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}ssh-agent.socket"
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-  ssh-agent -t 1h > "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
-  if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-    source "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
-  fi
+    ssh-agent -t 1h > "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
+    if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+        source "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
+    fi
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -24,32 +24,33 @@ if [ -d "$HOME/.xdg/" ]; then
     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
 else
     if [ -d "$HOME/.xdg" ]; then
-    HISTFILE=~/.xdg/.histfile
+        mkdir -p ~/.xdg
+        HISTFILE=~/.xdg/.histfile
     fi
 fi
 
 
 source "$HOME/.win_user"
 if [ -d "/mnt/c/Users" ]; then
-  local WIN_PATHS=(
-  "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
-  "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
-  "/mnt/c/Applications/Microsoft VS Code/bin"
-  "/mnt/c/WINDOWS"
+    local WIN_PATHS=(
+    "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
+    "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+    "/mnt/c/Applications/Microsoft VS Code/bin"
+    "/mnt/c/WINDOWS"
 )
-  export WIN_AVAILABLE=true
-  alias .="explorer.exe"
-  for given_path in $WIN_PATHS[@]; do
+export WIN_AVAILABLE=true
+alias .="explorer.exe"
+for given_path in $WIN_PATHS[@]; do
     local exists_in_path=$(echo $PATH | grep $given_path)
     if [ -z "$exists_in_path" ]; then
-      export PATH="$given_path:$PATH"
+        export PATH="$given_path:$PATH"
     fi
-  done
+done
 fi
 
 
 if [ $WIN_AVAILABLE ]; then
-  alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl"
+    alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl"
 fi
 
 
@@ -76,9 +77,9 @@ DATA_ON_DEMAND_NEXT=$DATA_ON_DEMAND_BASE/data-on-demand-next
 
 export ZSH="$XDG_CONFIG_HOME/.oh-my-zsh"
 export P10K="$XDG_CONFIG_HOME/.p10k.zsh"
+export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 [[ ! -f $XDG_CONFIG_HOME/.p10k.zsh ]] || source $P10K
-export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 
 if pacman -Qi "sccache" &> /dev/null; then
@@ -104,18 +105,18 @@ fi
 
 
 function cl {
-  pwd | win32yank.exe -i
+    pwd | win32yank.exe -i
 }
 
 function mypath {
-  # echo $PATH | tr ':' '\n'
+    # echo $PATH | tr ':' '\n'
 
 # Alternative impl. Zsh
 if (($+PATH)); then
-  echo "$#path element(s):"
-  printf '%q\n' "$path[@]"
+    echo "$#path element(s):"
+    printf '%q\n' "$path[@]"
 else
-  echo "PATH unset"
+    echo "PATH unset"
 fi
 
 # Alternative impl. POSIX complient shells
@@ -145,8 +146,8 @@ export PNPM_HOME="$HOME/.xdg/data/pnpm"
 # pnpm old version for Arch at home ---
 export PNPM_HOME="$XDG_CONFIG_HOME/.pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
 ### zsh plugins
@@ -198,38 +199,38 @@ source "$HOME/.aliases"
 
 ### functions
 function dot {
-  pushd $DOTDIR &&
-    git fetch --all &&
-    git status
-  }
+    pushd $DOTDIR &&
+        git fetch --all &&
+        git status
+    }
 
-  function gitgo {
-    if [ -z "$1" ]; then
-      git status &&
-        git add --all &&
-        git commit --all -m "Bump from Linux" &&
-        git push
-            else
-              git status &&
+    function gitgo {
+        if [ -z "$1" ]; then
+            git status &&
                 git add --all &&
-                git commit --all -m "$1" &&
+                git commit --all -m "Bump from Linux" &&
                 git push
-    fi
-  }
+        else
+                            git status &&
+                                git add --all &&
+                                git commit --all -m "$1" &&
+                                git push
+        fi
+    }
 
-function avenv {
-  source ./.venv/bin/activate &&
-    echo "Activated virtual environment" &&
-}
+    function avenv {
+        source ./.venv/bin/activate &&
+            echo "Activated virtual environment" &&
+        }
 
-function rmvenv {
-  if [ -d "./.venv" ]; then
-    rm -rf ./.venv &&
-      echo "Removed virtual environment"
-  else
-    echo "No virtual environment found"
-  fi
-}
+        function rmvenv {
+            if [ -d "./.venv" ]; then
+                rm -rf ./.venv &&
+                    echo "Removed virtual environment"
+                                else
+                                    echo "No virtual environment found"
+            fi
+        }
 
 
 # function sevim() {
@@ -248,27 +249,27 @@ function rmvenv {
 
 # General Functions
 function mgr {
-  pushd "$GITHUB_PROJECTS/"
+    pushd "$GITHUB_PROJECTS/"
 }
 
 function wgr {
-  pushd "$GITHUB_WORK_PROJECTS/"
+    pushd "$GITHUB_WORK_PROJECTS/"
 }
 
 function dod {
-  pushd "$DATA_ON_DEMAND_BASE/"
+    pushd "$DATA_ON_DEMAND_BASE/"
 }
 
 function dodb {
-  pushd "$DATA_ON_DEMAND_BACK/"
+    pushd "$DATA_ON_DEMAND_BACK/"
 }
 
 function dodn {
-  pushd "$DATA_ON_DEMAND_NEXT/"
+    pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
 function dodf {
-  pushd "$DATA_ON_DEMAND_NEXT/"
+    pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
 ### source dat zsh
