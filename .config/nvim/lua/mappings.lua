@@ -19,6 +19,9 @@ vim.keymap.set("i", "jj", "<Esc>", { noremap = false })
 vim.keymap.set("v", "p", '"_dP', silent_opts)
 
 -- vim.keymap.set("c", "qa<CR>", "qa!<CR>", silent_opts) -- experiemnent to bypass the ! check
+
+-- vim.keymap.set("t", "<C-'>", "<C-\\><C-n>")
+
 vim.keymap.set("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 vim.keymap.set("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 
