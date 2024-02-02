@@ -29,8 +29,12 @@ vim.keymap.set("v", "<", "<gv", silent_opts)
 vim.keymap.set("v", ">", ">gv", silent_opts)
 
 -- Remap for dealing with word wrap
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+-- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+-- same as above but if mvoement greater than 5 then add to jump list
+
+vim.keymap.set("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
+vim.keymap.set("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
 
 vim.keymap.set("n", "n", "nzzzv", silent_opts)
 vim.keymap.set("n", "N", "Nzzzv", silent_opts)
