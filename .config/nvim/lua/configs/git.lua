@@ -96,11 +96,11 @@ return {
 		"sindrets/diffview.nvim",
 		event = "BufReadPre",
 		config = function()
+			local df = package.loaded.diffview
 			require("diffview").setup({
-				on_attach = function()
-					local df = package.loaded.diffview
 
-					vim.keymap.set("n", "<Leader>gd", "+[d]iffview")
+				on_attach = function()
+					-- vim.keymap.set("n", "<Leader>gd", "+[d]iffview")
 					vim.keymap.set("n", "<Leader>gdo", df.DiffviewOpen)
 					vim.keymap.set("n", "<Leader>gdc", df.DiffviewClose)
 					vim.keymap.set("n", "<Leader>gdf", df.DiffViewToggleFiles)
