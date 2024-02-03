@@ -13,6 +13,7 @@ z.old/*
 
 
 .config/nvim/lazy-lock*
+.config/lazygit/state*
 
 main_nvim/*
 !main_nvim/nvim*
