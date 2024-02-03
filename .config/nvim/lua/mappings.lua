@@ -33,17 +33,18 @@ vim.keymap.set("v", ">", ">gv", silent_opts)
 -- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- same as above but if mvoement greater than 5 then add to jump list
 
+
 vim.keymap.set("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
 vim.keymap.set("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
 
 vim.keymap.set("n", "n", "nzzzv", silent_opts)
 vim.keymap.set("n", "N", "Nzzzv", silent_opts)
 
-vim.keymap.set("n", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set("n", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set("n", "H", "^", silent_opts)       -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set("n", "L", "$", silent_opts)       -- Shift + l (Or just L) to jump to end of line
 
-vim.keymap.set("v", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-vim.keymap.set("v", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
+vim.keymap.set("v", "H", "^", silent_opts)       -- Shift + h (Or just H) to jump to start of line
+vim.keymap.set("v", "L", "$", silent_opts)       -- Shift + l (Or just L) to jump to end of line
 
 vim.keymap.set("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
 vim.keymap.set("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
@@ -101,7 +102,7 @@ vim.keymap.set("n", "<Leader>bn", ":bnext<CR>", silent_opts, { desc = "[n]ext" }
 vim.keymap.set("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 vim.keymap.set("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
-vim.keymap.set("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
+vim.keymap.set("n", "<Leader>gc", ':Git commit -m "', silent_opts)                                    -- Temp for the time being until lazygit // fugitive or something
 
 vim.keymap.set("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 
