@@ -128,28 +128,9 @@ autocmd("LspAttach", {
 			vim.diagnostic.open_float()
 		end, opts, { desc = "[h]over" })
 
-
-
-
-
-
-
-
-
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 	end,
-
-
-
-
-
-
-
-
-
-
-
 })
 
 --- regex used for matching a valid URL/URI string
