@@ -14,6 +14,8 @@
 #
 
 packages_to_install=(
+    man-pages # Note this comes with the normal version of Arch via linux and linux-base etc.
+    man-db
 	openssh
 	autossh
 	curl
