@@ -43,7 +43,7 @@ alias cdoc='cargo doc'
 alias cup='cargo upgrade'
 
 if [ "$WIN_AVAILABLE" ]; then
-    # rust / cargo related
+	# rust / cargo related
 	alias cbw='cargo build --target x86_64-pc-windows-gnu'
 	alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
 	alias crw='cargo run --target x86_64-pc-windows-gnu'
@@ -54,15 +54,14 @@ if [ "$WIN_AVAILABLE" ]; then
 	alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
 	alias cble='cba && cbra'
 
-    # vs code
-    # alias code=launch_code_wsl
+	# vs code
+	# alias code=launch_code_wsl
 
 fi
 
 alias wy="win32yank.exe"
 alias wyi="win32yank.exe -i"
 alias wyo="win32yank.exe -o"
-
 
 alias cd2='cd ../..'
 alias cd3='cd ../../..'
@@ -79,5 +78,5 @@ alias dea='deactivate'
 
 export GCC_COLOR='eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
+alias lg='lazygit'
 alias lzgt='lazygit'
-
