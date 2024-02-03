@@ -2,9 +2,20 @@ return {
 	{
 		"nathom/filetype.nvim",
 		lazy = false,
-		priority = 1000,
-		setup = function()
-			require("filetype").setup()
+		priority = 900,
+		init = function()
+			require("filetype").setup({
+				overrides = {
+					extensions = {
+						sh = "bash",
+					},
+					literal = {
+						["Dockerfile"] = "docker",
+						["docker-compose"] = "docker",
+						[".zshrc"] = "zsh",
+					},
+				}
+			})
 		end,
 	},
 
@@ -136,4 +147,19 @@ return {
 		"mbbill/undotree",
 		event = "VeryLazy",
 	},
+
+
+	{
+		'mrded/nvim-lsp-notify',
+		dependencies = { 'rcarriga/nvim-notify' },
+		config = function()
+			require('lsp-notify').setup({
+				notify = require('notify'),
+			})
+		end
+	}
+
+
+
+
 }

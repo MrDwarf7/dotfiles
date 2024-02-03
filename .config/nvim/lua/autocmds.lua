@@ -13,6 +13,18 @@ autocmd("BufReadPost", {
 	end,
 })
 
+-- go to last loc when opening a buffer
+-- autocmd('BufReadPost', {
+--     callback = function()
+--         local mark = vim.api.nvim_buf_get_mark(0, '"')
+--         local lcount = vim.api.nvim_buf_line_count(0)
+--         if mark[1] > 0 and mark[1] <= lcount then
+--             pcall(vim.api.nvim_win_set_cursor, 0, mark)
+--         end
+--     end,
+-- })
+
+
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 60 })
@@ -45,8 +57,10 @@ autocmd("LspAttach", {
 	group = LspAuGroup,
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-		local opts = { buffer = ev.buf }
+		-- local opts = { buffer = ev.buf }
 		-- local vimlspbuf = vim.lsp.buf
+
+		local opts = { silent = true, nowait = true, buffer = ev.buf }
 
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover()
@@ -64,6 +78,36 @@ autocmd("LspAttach", {
 			vim.lsp.buf.references()
 		end, opts, { desc = "[r]eferences" })
 
+		vim.keymap.set("n", "gi", function()
+			vim.lsp.buf.implementation()
+		end, opts, { desc = "[i]mplementations" })
+
+		vim.keymap.set("n", "gt", function()
+			vim.lsp.buf.type_definition()
+		end, opts, { desc = "[T]ype" })
+
+
+		vim.keymap.set("n", "]d", function()
+			vim.diagnostic.goto_next()
+		end, opts, { desc = "[diag] next" })
+
+		vim.keymap.set("n", "[d", function()
+			vim.diagnostic.goto_prev()
+		end, opts, { desc = "[diag] prev" })
+
+
+		vim.keymap.set("n", "gI", function()
+			vim.lsp.buf.incoming_calls()
+		end, opts, { desc = "[i]ncoming" })
+
+
+		vim.keymap.set("n", "gO", function()
+			vim.lsp.buf.outgoing_calls()
+		end, opts, { desc = "[O]utgoing" })
+
+
+		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+
 		vim.keymap.set("n", "<C-k>", function()
 			vim.lsp.buf.signature_help()
 		end, opts, { desc = "Signature Help" })
@@ -71,10 +115,6 @@ autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>lr", function()
 			vim.lsp.buf.rename()
 		end, opts, { desc = "[r]ename" })
-
-		vim.keymap.set("n", "<Leader>lR", function()
-			vim.lsp.buf.rename()
-		end, opts, { desc = "other [R]ename?" })
 
 		vim.keymap.set({ "n", "v" }, "<Leader>la", function()
 			vim.lsp.buf.code_action()
@@ -87,6 +127,9 @@ autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>lh", function()
 			vim.diagnostic.open_float()
 		end, opts, { desc = "[h]over" })
+
+		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 	end,
 })
 
@@ -96,7 +139,7 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 	group = augroup("highlighturl", { clear = true }),
 	callback = function()
 		local url_matcher =
-			"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+		"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 		--- Delete the syntax matching rules for URLs/URIs if set
 		local function delete_url_match()
 			for _, match in ipairs(vim.fn.getmatches()) do

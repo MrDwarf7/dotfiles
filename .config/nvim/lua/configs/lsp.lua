@@ -27,6 +27,25 @@ return {
 						package_uninstalled = " 󰚌",
 					},
 				},
+				ensure_installed = {
+					"biome",
+					"eslint_d",
+					"mypy",
+					"ruff",
+					"shellcheck",
+					"ts-standard",
+					"vulture",
+					"beautysh",
+					"biome",
+					"black",
+					"blackd-client",
+					"isort",
+					"prettier",
+					"prettierd",
+					"rustywind",
+					"shfmt",
+					"ts-standard",
+				}
 			})
 
 			require("mason-lspconfig").setup({
@@ -64,6 +83,18 @@ return {
 				}, -- handlers end
 			})
 
+			require("mason-nvim-dap").setup({
+				ensure_installed = {
+					"bash-debug-adapter",
+					"chrome-debug-adapter",
+					"codelldb",
+					"cpptools",
+					"debugpy",
+					"firefox-debug-adapter",
+				},
+				handler = {},
+			})
+
 			-- require("lspconfig")["bashls"].setup({
 			-- 	on_attach = on_attach,
 			-- 	filetypes = {
@@ -72,6 +103,77 @@ return {
 			-- 		"bash",
 			-- 	},
 			-- })
+
+			local bufnr = vim.api.nvim_get_current_buf()
+			local opts = { silent = true, nowait = true, buffer = bufnr }
+
+			vim.keymap.set("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
+
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, opts)
+
+			vim.keymap.set("n", "gd", function()
+				vim.lsp.buf.definition()
+			end, opts, { desc = "[d]efinition" })
+
+			vim.keymap.set("n", "gD", function()
+				vim.lsp.buf.declaration()
+			end, opts, { desc = "[D]eclaration" })
+
+			vim.keymap.set("n", "gr", function()
+				vim.lsp.buf.references()
+			end, opts, { desc = "[r]eferences" })
+
+			vim.keymap.set("n", "gi", function()
+				vim.lsp.buf.implementation()
+			end, opts, { desc = "[i]mplementations" })
+
+			vim.keymap.set("n", "gt", function()
+				vim.lsp.buf.type_definition()
+			end, opts, { desc = "[T]ype" })
+
+
+			vim.keymap.set("n", "]d", function()
+				vim.diagnostic.goto_next()
+			end, opts, { desc = "[diag] next" })
+
+			vim.keymap.set("n", "[d", function()
+				vim.diagnostic.goto_prev()
+			end, opts, { desc = "[diag] prev" })
+
+
+			vim.keymap.set("n", "gI", function()
+				vim.lsp.buf.incoming_calls()
+			end, opts, { desc = "[i]ncoming" })
+
+
+			vim.keymap.set("n", "gO", function()
+				vim.lsp.buf.outgoing_calls()
+			end, opts, { desc = "[O]utgoing" })
+
+
+			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+
+			vim.keymap.set("n", "<C-k>", function()
+				vim.lsp.buf.signature_help()
+			end, opts, { desc = "Signature Help" })
+
+			vim.keymap.set("n", "<Leader>lr", function()
+				vim.lsp.buf.rename()
+			end, opts, { desc = "[r]ename" })
+
+			vim.keymap.set({ "n", "v" }, "<Leader>la", function()
+				vim.lsp.buf.code_action()
+			end, opts, { desc = "Code [a]ction" })
+
+			vim.keymap.set("n", "<Leader>lf", function()
+				vim.lsp.buf.format({ async = true })
+			end, opts, { desc = "[f]ormat (lsp)" })
+
+			vim.keymap.set("n", "<Leader>lh", function()
+				vim.diagnostic.open_float()
+			end, opts, { desc = "[h]over" })
 
 			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
@@ -96,48 +198,137 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
 		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-lua/plenary.nvim",
 			"lvimuser/lsp-inlayhints.nvim",
+			{
+				"lvimuser/lsp-inlayhints.nvim",
+				opts = {},
+			},
 		},
 		ft = { "rust" },
-		config = function()
+		spec = function()
+			-- require("rustaceanvim").setup({})
+
 			vim.g.rustaceanvim = {
-				inlay_hints = {
-					highlight = "NonText",
-				},
 				tools = {
 					hover_actions = {
 						auto_focus = true,
+					},
+					inlay_hints = {
+						highlight = "NonText",
 					},
 				},
 				server = {
 					on_attach = function(client, bufnr)
 						require("lsp-inlayhints").on_attach(client, bufnr)
+						require("lsp-inlayhints").show()
 						require("dap-ui")
 					end,
 				},
 			}
+		end,
+
+		config = function()
+			require("rustaceanvim")
+			require("lsp-inlayhints")
 
 			local bufnr = vim.api.nvim_get_current_buf()
-			vim.keymap.set("n", "<Leader>la", function()
+			local opts = { silent = true, nowait = true, buffer = bufnr }
+
+			vim.keymap.set("n", "K", function()
+				vim.lsp.buf.hover()
+			end, opts)
+
+			vim.keymap.set("n", "gd", function()
+				vim.lsp.buf.definition()
+			end, opts, { desc = "[d]efinition" })
+
+			vim.keymap.set("n", "gD", function()
+				vim.lsp.buf.declaration()
+			end, opts, { desc = "[D]eclaration" })
+
+			vim.keymap.set("n", "gr", function()
+				vim.lsp.buf.references()
+			end, opts, { desc = "[r]eferences" })
+
+			vim.keymap.set("n", "gi", function()
+				vim.lsp.buf.implementation()
+			end, opts, { desc = "[i]mplementations" })
+
+			vim.keymap.set("n", "gt", function()
+				vim.lsp.buf.type_definition()
+			end, opts, { desc = "[T]ype" })
+
+
+			vim.keymap.set("n", "]d", function()
+				vim.diagnostic.goto_next()
+			end, opts, { desc = "[diag] next" })
+
+			vim.keymap.set("n", "[d", function()
+				vim.diagnostic.goto_prev()
+			end, opts, { desc = "[diag] prev" })
+
+
+			vim.keymap.set("n", "gI", function()
+				vim.lsp.buf.incoming_calls()
+			end, opts, { desc = "[i]ncoming" })
+
+
+			vim.keymap.set("n", "gO", function()
+				vim.lsp.buf.outgoing_calls()
+			end, opts, { desc = "[O]utgoing" })
+
+
+			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+
+			vim.keymap.set("n", "<C-k>", function()
+				vim.lsp.buf.signature_help()
+			end, opts, { desc = "Signature Help" })
+
+			vim.keymap.set("n", "<Leader>lr", function()
+				vim.lsp.buf.rename()
+			end, opts, { desc = "[r]ename" })
+
+			vim.keymap.set({ "n", "v" }, "<Leader>la", function()
 				vim.cmd.RustLsp("codeAction")
 			end, { silent = true, buffer = bufnr, desc = "[a]ction" })
 
+			vim.keymap.set("n", "<Leader>lf", function()
+				vim.lsp.buf.format({ async = true })
+			end, opts, { desc = "[f]ormat (lsp)" })
+
+			vim.keymap.set("n", "<Leader>lh", function()
+				vim.diagnostic.open_float()
+			end, opts, { desc = "[h]over" })
+
+			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
+
+			-- vim.keymap.set("n", "<Leader>lc", rst.flyCheck, opts, { desc = "[c]heck" })
+			-- vim.keymap.set("n", "<Leader>dd", rst.debuggables, opts, { desc = "[d]ebuggables" })
+			-- vim.keymap.set("n", "<Leader>dr", rst.runnables, opts, { desc = "[r]unnables" })
+			-- vim.keymap.set("n", "<Leader>lh", rst.hover, opts, { desc = "[r]unnables" })
+
 			vim.keymap.set("n", "<Leader>lc", function()
 				vim.cmd.RustLsp("flyCheck")
-			end, { silent = true, buffer = bufnr, desc = "[c]heck" })
+			end, opts, { desc = "[c]heck" })
+
+			vim.keymap.set("n", "<Leader>d", "+[d]ebugging")
 
 			vim.keymap.set("n", "<Leader>dd", function()
 				vim.cmd.RustLsp("debuggables")
-			end, { silent = true, buffer = bufnr, desc = "[d]ebuggables" })
+			end, opts, { desc = "[d]ebuggables" })
 
 			vim.keymap.set("n", "<Leader>dr", function()
 				vim.cmd.RustLsp("runnables")
-			end, { silent = true, buffer = bufnr, desc = "[r]un" })
+			end, opts, { desc = "[r]un" })
 
 			vim.keymap.set("n", "<Leader>lh", function()
 				vim.cmd.RustLsp("hover")
-			end, { silent = true, buffer = bufnr, desc = "[h]over" })
-		end,
+			end, opts, { desc = "[h]over" })
+		end
+
 	},
 
 	-- Dap things here, specific to mason
