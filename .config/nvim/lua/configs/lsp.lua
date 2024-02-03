@@ -104,10 +104,10 @@ return {
 			-- 	},
 			-- })
 
-
-
 			local bufnr = vim.api.nvim_get_current_buf()
 			local opts = { silent = true, nowait = true, buffer = bufnr }
+
+			vim.keymap.set("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
 
 			vim.keymap.set("n", "K", function()
 				vim.lsp.buf.hover()
