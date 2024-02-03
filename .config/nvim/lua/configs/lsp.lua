@@ -261,15 +261,10 @@ return {
 			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 
-
 			vim.keymap.set("n", "<Leader>lc", rst.flyCheck, opts, { desc = "[c]heck" })
 			vim.keymap.set("n", "<Leader>dd", rst.debuggables, opts, { desc = "[d]ebuggables" })
 			vim.keymap.set("n", "<Leader>dr", rst.runnables, opts, { desc = "[r]unnables" })
 			vim.keymap.set("n", "<Leader>lh", rst.hover, opts, { desc = "[r]unnables" })
-
-
-
-
 
 			vim.keymap.set("n", "<Leader>lc", function()
 				vim.cmd.RustLsp("flyCheck")

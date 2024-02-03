@@ -25,8 +25,6 @@ autocmd("BufReadPost", {
 -- })
 
 
-
-
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 60 })

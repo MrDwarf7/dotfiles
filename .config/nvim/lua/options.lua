@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Enable the Lua loader byte-compilation cache.
-
 vim.g.did_load_filetypes = 1
+
 -- Global
 vim.opt.fillchars = {
 	fold = " ",
