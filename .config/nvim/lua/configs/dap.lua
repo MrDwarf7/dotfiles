@@ -35,7 +35,7 @@ return {
 
 		vim.keymap.set("n", "<Leader>dl", function()
 			require("dap").run_last()
-		end)
+		end, { desc = "[l]ast" })
 
 		local architechture = function()
 			local os_type = function()
