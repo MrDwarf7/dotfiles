@@ -21,6 +21,12 @@ function lzgt
     lazygit $args
 }
 
+function lg
+{
+    lazygit $args
+}
+
+
 function nf
 {
     if (-not (neofetch --help))
