@@ -27,6 +27,25 @@ return {
 						package_uninstalled = " 󰚌",
 					},
 				},
+				ensure_installed = {
+					"biome",
+					"eslint_d",
+					"mypy",
+					"ruff",
+					"shellcheck",
+					"ts-standard",
+					"vulture",
+					"beautysh",
+					"biome",
+					"black",
+					"blackd-client",
+					"isort",
+					"prettier",
+					"prettierd",
+					"rustywind",
+					"shfmt",
+					"ts-standard",
+				}
 			})
 
 			require("mason-lspconfig").setup({
@@ -62,6 +81,18 @@ return {
 						require("lspconfig")[server_name].setup({})
 					end,
 				}, -- handlers end
+			})
+
+			require("mason-nvim-dap").setup({
+				ensure_installed = {
+					"bash-debug-adapter",
+					"chrome-debug-adapter",
+					"codelldb",
+					"cpptools",
+					"debugpy",
+					"firefox-debug-adapter",
+				},
+				handler = {},
 			})
 
 			-- require("lspconfig")["bashls"].setup({
