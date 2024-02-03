@@ -94,18 +94,31 @@ return {
 
 	{
 		"sindrets/diffview.nvim",
+		lazy = false,
 		event = "BufReadPre",
 		config = function()
-			local df = package.loaded.diffview
-			require("diffview").setup({
+			local df = require("diffview")
+			df.setup({
 
-				on_attach = function()
-					-- vim.keymap.set("n", "<Leader>gd", "+[d]iffview")
-					vim.keymap.set("n", "<Leader>gdo", df.DiffviewOpen)
-					vim.keymap.set("n", "<Leader>gdc", df.DiffviewClose)
-					vim.keymap.set("n", "<Leader>gdf", df.DiffViewToggleFiles)
-					vim.keymap.set("n", "<Leader>gdr", df.DiffviewToggleFiles)
-				end,
+				-- on_attach = function()
+				-- vim.keymap.set("n", "<Leader>gd", "+[d]iffview")
+				vim.keymap.set("n", "<Leader>gd", "+[d]iffview", { desc = "[d]iffview" }),
+				vim.keymap.set("n", "<Leader>gdo", "<cmd>DiffviewOpen<CR>", { desc = "[o]pen" }),
+				vim.keymap.set("n", "<Leader>gdc", "<cmd>DiffviewClose<CR>", { desc = "[c]lose" }),
+				vim.keymap.set("n", "<Leader>gdf", "<cmd>DiffviewToggleFiles<CR>", { desc = "[f]iles toggle" }),
+
+				-- vim.keymap.set("n", "<Leader>gds", function()
+
+				-- TODO: spawn input that takes in a single number and hands it to
+				-- :DiffviewOpen HEAD~[number]
+				-- allows the user to choose how many commits back FROM head to diff against.
+				--
+				-- end, { desc = "[s]elect" })
+
+				-- vim.keymap.set("n", "<Leader>gdc", df.DiffviewClose),
+				-- vim.keymap.set("n", "<Leader>gdf", df.DiffViewToggleFiles),
+				-- vim.keymap.set("n", "<Leader>gdr", df.DiffviewToggleFiles),
+				-- end,
 			})
 		end,
 	},
