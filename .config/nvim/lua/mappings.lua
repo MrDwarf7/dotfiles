@@ -29,7 +29,6 @@ vim.keymap.set("v", ">", ">gv", silent_opts)
 -- vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- same as above but if mvoement greater than 5 then add to jump list
 
-
 vim.keymap.set("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
 vim.keymap.set("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
 
@@ -64,6 +63,7 @@ end, { expr = true })
 
 -- Header/From initial leader key press
 vim.keymap.set("n", "<Leader>b", "+[b]uffers")
+vim.keymap.set("n", "<Leader>d", "+[d]ebug")
 vim.keymap.set("n", "<Leader>p", "+[p]lugins", { desc = "+[p]lugins" })
 vim.keymap.set("n", "<leader>g", "+[g]it", silent_opts, { desc = "+[g]it" })
 vim.keymap.set("n", "<Leader>f", "+[f]ind", { desc = "+[f]ind" })
