@@ -198,27 +198,40 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4", -- Recommended
 		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-lua/plenary.nvim",
 			"lvimuser/lsp-inlayhints.nvim",
+			{
+				"lvimuser/lsp-inlayhints.nvim",
+				opts = {},
+			},
 		},
 		ft = { "rust" },
-		config = function()
+		spec = function()
+			-- require("rustaceanvim").setup({})
+
 			vim.g.rustaceanvim = {
-				inlay_hints = {
-					highlight = "NonText",
-				},
 				tools = {
 					hover_actions = {
 						auto_focus = true,
+					},
+					inlay_hints = {
+						highlight = "NonText",
 					},
 				},
 				server = {
 					on_attach = function(client, bufnr)
 						require("lsp-inlayhints").on_attach(client, bufnr)
+						require("lsp-inlayhints").show()
 						require("dap-ui")
 					end,
 				},
 			}
-			local rst = package.loaded.rustaceanvim
+		end,
+
+		config = function()
+			require("rustaceanvim")
+			require("lsp-inlayhints")
 
 			local bufnr = vim.api.nvim_get_current_buf()
 			local opts = { silent = true, nowait = true, buffer = bufnr }
@@ -292,14 +305,16 @@ return {
 			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 			-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 
-			vim.keymap.set("n", "<Leader>lc", rst.flyCheck, opts, { desc = "[c]heck" })
-			vim.keymap.set("n", "<Leader>dd", rst.debuggables, opts, { desc = "[d]ebuggables" })
-			vim.keymap.set("n", "<Leader>dr", rst.runnables, opts, { desc = "[r]unnables" })
-			vim.keymap.set("n", "<Leader>lh", rst.hover, opts, { desc = "[r]unnables" })
+			-- vim.keymap.set("n", "<Leader>lc", rst.flyCheck, opts, { desc = "[c]heck" })
+			-- vim.keymap.set("n", "<Leader>dd", rst.debuggables, opts, { desc = "[d]ebuggables" })
+			-- vim.keymap.set("n", "<Leader>dr", rst.runnables, opts, { desc = "[r]unnables" })
+			-- vim.keymap.set("n", "<Leader>lh", rst.hover, opts, { desc = "[r]unnables" })
 
 			vim.keymap.set("n", "<Leader>lc", function()
 				vim.cmd.RustLsp("flyCheck")
 			end, opts, { desc = "[c]heck" })
+
+			vim.keymap.set("n", "<Leader>d", "+[d]ebugging")
 
 			vim.keymap.set("n", "<Leader>dd", function()
 				vim.cmd.RustLsp("debuggables")
@@ -312,7 +327,8 @@ return {
 			vim.keymap.set("n", "<Leader>lh", function()
 				vim.cmd.RustLsp("hover")
 			end, opts, { desc = "[h]over" })
-		end,
+		end
+
 	},
 
 	-- Dap things here, specific to mason
