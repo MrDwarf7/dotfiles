@@ -26,7 +26,6 @@ function lg
     lazygit $args
 }
 
-
 function nf
 {
     if (-not (neofetch --help))
@@ -91,6 +90,11 @@ function sysup
     Write-Host
     Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
     Write-Host
+}
+
+function npp
+{
+    notepad++ $args
 }
 
 function scpdir
