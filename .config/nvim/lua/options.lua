@@ -4,6 +4,18 @@ vim.g.maplocalleader = " "
 -- Enable the Lua loader byte-compilation cache.
 vim.g.did_load_filetypes = 1
 
+local architechture = function()
+	local os_type = function()
+		if vim.fn.has("win32") == 1 then
+			return "win32"
+		end
+		if vim.fn.has("unix") == 1 then
+			return "unix"
+		end
+	end
+	return os_type()
+end
+
 -- Global
 vim.opt.fillchars = {
 	fold = " ",
@@ -21,7 +33,26 @@ vim.opt.listchars = {
 	nbsp = "␣",
 }
 
-vim.opt.shell = "zsh"
+if architechture() == "win32" then
+	-- Powershell over CMD
+	-- vim.opt.shell = "pwsh.exe"
+	vim.opt.shell        = "powershell.exe"
+	vim.opt.shellxquote  = ""
+	vim.opt.shellcmdflag = '-NoLogo -ExecutionPolicy RemoteSigned -Command '
+	vim.opt.shellquote   = ''
+	vim.opt.shellpipe    = '| Out-File -Encoding UTF8 %s'
+	vim.opt.shellredir   = '| Out-File -Encoding UTF8 %s'
+
+	-- vim.opt.shellcmdflag = "command"
+	-- "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+	-- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+	-- vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+	-- vim.opt.shellquote =\"
+	-- vim.opt.shellxquote = ""
+else
+	vim.opt.shell = "zsh"
+end
+
 vim.opt.scrolloff = 6
 vim.opt.foldnestmax = 4
 vim.opt.foldlevelstart = 99
