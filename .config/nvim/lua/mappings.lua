@@ -47,6 +47,11 @@ vim.keymap.set("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 vim.keymap.set("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
 vim.keymap.set("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
+
+vim.keymap.set("n", "c<S-h>", "c^", silent_opts) -- Same as above for yanking
+vim.keymap.set("n", "c<S-l>", "c$", silent_opts) -- Same as above for yanking
+
+
 vim.keymap.set("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
 vim.keymap.set("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
 
