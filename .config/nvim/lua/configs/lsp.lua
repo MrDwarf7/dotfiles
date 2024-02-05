@@ -167,6 +167,39 @@ return {
 						})
 					end,
 
+					require("lspconfig").ruff_lsp.setup({
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = false
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}),
+
+					require("lspconfig").pyright.setup({
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+						cmd = { "pyright-langserver", "--stdio" },
+						filetypes = { "python" },
+						root_dir = require("lspconfig/util").root_pattern(
+							".git",
+							"setup.py",
+							"setup.cfg",
+							"pyproject.toml",
+							"requirements.txt"
+						),
+						settings = {
+							python = {
+								analysis = {
+									autoSearchPaths = true,
+									diagnosticMode = "workspace",
+									useLibraryCodeForTypes = true,
+								},
+							},
+						},
+					}),
 				}, -- handlers end
 			})
 
