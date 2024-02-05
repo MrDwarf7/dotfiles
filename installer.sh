@@ -46,6 +46,8 @@ packages_to_install=(
 	github-cli
 	uctags-git
 	python-pipx
+    ruff
+    ruff-lsp
 	pyenv
 	luarocks
 	# nvim-treesitter-parsers-git
