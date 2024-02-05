@@ -112,6 +112,8 @@ return {
 					"eslint_d",
 					"mypy",
 					"ruff",
+					-- "ruff_lsp",
+					"pyright",
 					"shellcheck",
 					"ts-standard",
 					"vulture",
@@ -125,7 +127,7 @@ return {
 					"rustywind",
 					"shfmt",
 					"ts-standard",
-				}
+				},
 			})
 
 			require("mason-lspconfig").setup({
