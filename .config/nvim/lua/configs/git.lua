@@ -73,8 +73,8 @@ return {
 						gs.blame_line({ full = true })
 					end, { desc = "[b]lame line" })
 
-					vim.keymap.set("n", "<Leader>ht", gs.toggle_current_line_blame, { desc = "[t]oggle blame" })
-					vim.keymap.set("n", "<Leader>hT", gs.toggle_deleted, { desc = "[T]oggle deleted" })
+					vim.keymap.set("n", "<Leader>hT", gs.toggle_current_line_blame, { desc = "[T]oggle deleted" })
+					vim.keymap.set("n", "<Leader>ht", gs.toggle_deleted, { desc = "[t]oggle blame" })
 					vim.keymap.set("n", "<Leader>hd", gs.diffthis, { desc = "[d]iff this" })
 
 					vim.keymap.set("n", "<Leader>hD", function()
