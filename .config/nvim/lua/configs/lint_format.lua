@@ -41,13 +41,13 @@ return {
 					lua = { "stylua" },
 
 					python = function(bufnr)
+						bufnr = bufnr or 0
 						if require("conform").get_formatter_info("ruff_format", bufnr).available then
 							return { "ruff_format" }
 						else
 							return { "isort", "black" }
 						end
 					end,
-
 					javascript = { "biomejs" },
 					typescript = { "biomejs" },
 					sh = { "shfmt" },
