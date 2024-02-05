@@ -30,6 +30,8 @@ else
     fi
 fi
 
+export EDITOR='nvim'
+
 
 source "$HOME/.win_user"
 if [ -d "/mnt/c/Users" ]; then

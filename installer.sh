@@ -58,6 +58,8 @@ packages_to_install=(
 	codelldb-bin
 	lldb
 	lldb-vscode
+    atool
+    lynx
 )
 
 ### Function definitions:
