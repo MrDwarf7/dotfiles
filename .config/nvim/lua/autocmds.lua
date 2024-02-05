@@ -24,7 +24,6 @@ autocmd("BufReadPost", {
 --     end,
 -- })
 
-
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 60 })
@@ -86,7 +85,6 @@ autocmd("LspAttach", {
 			vim.lsp.buf.type_definition()
 		end, opts, { desc = "[T]ype" })
 
-
 		vim.keymap.set("n", "]d", function()
 			vim.diagnostic.goto_next()
 		end, opts, { desc = "[diag] next" })
@@ -95,16 +93,13 @@ autocmd("LspAttach", {
 			vim.diagnostic.goto_prev()
 		end, opts, { desc = "[diag] prev" })
 
-
 		vim.keymap.set("n", "gI", function()
 			vim.lsp.buf.incoming_calls()
 		end, opts, { desc = "[i]ncoming" })
 
-
 		vim.keymap.set("n", "gO", function()
 			vim.lsp.buf.outgoing_calls()
 		end, opts, { desc = "[O]utgoing" })
-
 
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 
@@ -139,7 +134,7 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 	group = augroup("highlighturl", { clear = true }),
 	callback = function()
 		local url_matcher =
-		"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+			"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 		--- Delete the syntax matching rules for URLs/URIs if set
 		local function delete_url_match()
 			for _, match in ipairs(vim.fn.getmatches()) do
