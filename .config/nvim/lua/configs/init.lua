@@ -14,7 +14,7 @@ return {
 						["docker-compose"] = "docker",
 						[".zshrc"] = "zsh",
 					},
-				}
+				},
 			})
 		end,
 	},
@@ -147,7 +147,6 @@ return {
 		"mbbill/undotree",
 		event = "VeryLazy",
 	},
-
 
 	{
 		'mrded/nvim-lsp-notify',
