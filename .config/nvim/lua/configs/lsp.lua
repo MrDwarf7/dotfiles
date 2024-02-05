@@ -274,6 +274,7 @@ return {
 					},
 				},
 				server = {
+
 					on_attach = function(client, bufnr)
 						on_attach(client, bufnr)
 						capabilities()
@@ -308,14 +309,17 @@ return {
 				vim.lsp.buf.references()
 			end, opts, { desc = "[r]eferences" })
 
-			vim.keymap.set("n", "gi", function()
+			vim.keymap.set("n", "gI", function()
 				vim.lsp.buf.implementation()
 			end, opts, { desc = "[i]mplementations" })
+
+			vim.keymap.set("n", "gi", function()
+				vim.lsp.buf.incoming_calls()
+			end, opts, { desc = "[i]ncoming" })
 
 			vim.keymap.set("n", "gt", function()
 				vim.lsp.buf.type_definition()
 			end, opts, { desc = "[T]ype" })
-
 
 			vim.keymap.set("n", "]d", function()
 				vim.diagnostic.goto_next()
@@ -325,16 +329,9 @@ return {
 				vim.diagnostic.goto_prev()
 			end, opts, { desc = "[diag] prev" })
 
-
-			vim.keymap.set("n", "gI", function()
-				vim.lsp.buf.incoming_calls()
-			end, opts, { desc = "[i]ncoming" })
-
-
 			vim.keymap.set("n", "gO", function()
 				vim.lsp.buf.outgoing_calls()
 			end, opts, { desc = "[O]utgoing" })
-
 
 			vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 
@@ -383,8 +380,7 @@ return {
 			vim.keymap.set("n", "<Leader>lh", function()
 				vim.cmd.RustLsp("hover")
 			end, opts, { desc = "[h]over" })
-		end
-
+		end,
 	},
 
 	-- Dap things here, specific to mason
