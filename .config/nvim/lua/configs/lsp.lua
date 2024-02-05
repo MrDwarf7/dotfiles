@@ -257,6 +257,13 @@ return {
 		spec = function()
 			-- require("rustaceanvim").setup({})
 
+			local on_attach = function(client, bufnr)
+				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+				-- client.resolved_capabilities.document_formatting = false
+			end
+
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 			vim.g.rustaceanvim = {
 				tools = {
 					hover_actions = {
@@ -268,6 +275,8 @@ return {
 				},
 				server = {
 					on_attach = function(client, bufnr)
+						on_attach(client, bufnr)
+						capabilities()
 						require("lsp-inlayhints").on_attach(client, bufnr)
 						require("lsp-inlayhints").show()
 						require("dap-ui")
