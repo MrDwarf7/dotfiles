@@ -227,12 +227,12 @@ return {
 							".git"
 						),
 						offsetEncoding = { "utf-8" },
+						single_file_support = true,
+						lsp_binds(),
 						on_attach = function(client, bufnr)
 							client.offsetEncoding = { "utf-8" }
 							client.server_capabilities.hoverProvider = false
 						end,
-						capabilities = capabilities,
-						lsp_binds(),
 					}), -- End biome
 				}, -- handlers end
 			})
