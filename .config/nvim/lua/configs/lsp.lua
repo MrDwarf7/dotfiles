@@ -213,7 +213,22 @@ return {
 					}), -- End tsserver
 
 					require("lspconfig").clangd.setup({
+						-- capabilities = custom_offset.offsetEncoding == { "utf-16" },
+						capabilities = capabilities,
+						cmd = { "clangd", "--background-index", "--offset-encoding=utf-8" },
+						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+						root_dir = require("lspconfig").util.root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
+							".clangd",
+							".clang-tidy",
+							".clang-format",
+							"compile_commands.json",
+							"compile_flags.txt",
+							"configure.ac",
+							".git"
+						),
+						offsetEncoding = { "utf-8" },
 						on_attach = function(client, bufnr)
+							client.offsetEncoding = { "utf-8" }
 							client.server_capabilities.hoverProvider = false
 						end,
 						capabilities = capabilities,
