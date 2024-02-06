@@ -20,6 +20,7 @@ return {
 
 			local bufnr = vim.api.nvim_get_current_buf()
 
+			local custom_offset = vim.lsp.protocol.make_client_capabilities()
 			local on_attach = function(client, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 				-- client.resolved_capabilities.document_formatting = false
