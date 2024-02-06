@@ -19,6 +19,7 @@ return {
 			-- local on_attach = utils.on_attach("omnifunc", "vim:lua.vim.lsp.omnifunc")
 
 			local bufnr = vim.api.nvim_get_current_buf()
+
 			local on_attach = function(client, bufnr)
 				vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 				-- client.resolved_capabilities.document_formatting = false
@@ -107,6 +108,7 @@ return {
 						package_uninstalled = " 󰚌",
 					},
 				},
+
 				ensure_installed = {
 					"biome",
 					"eslint_d",
@@ -183,7 +185,7 @@ return {
 						lsp_binds(),
 						cmd = { "pyright-langserver", "--stdio" },
 						filetypes = { "python" },
-						root_dir = require("lspconfig/util").root_pattern(
+						root_dir = require("lspconfig.util").root_pattern(
 							".git",
 							"setup.py",
 							"setup.cfg",
@@ -199,7 +201,23 @@ return {
 								},
 							},
 						},
-					}),
+					}), -- End pyright
+
+					require("lspconfig").tsserver.setup({
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End tsserver
+
+					require("lspconfig").clangd.setup({
+						on_attach = function(client, bufnr)
+							client.server_capabilities.hoverProvider = false
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End biome
 				}, -- handlers end
 			})
 
