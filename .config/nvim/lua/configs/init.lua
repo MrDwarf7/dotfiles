@@ -8,6 +8,7 @@ return {
 				overrides = {
 					extensions = {
 						sh = "bash",
+						c = "c",
 					},
 					literal = {
 						["Dockerfile"] = "docker",
