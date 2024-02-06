@@ -8,13 +8,14 @@ return {
 				overrides = {
 					extensions = {
 						sh = "bash",
+						c = "c",
 					},
 					literal = {
 						["Dockerfile"] = "docker",
 						["docker-compose"] = "docker",
 						[".zshrc"] = "zsh",
 					},
-				}
+				},
 			})
 		end,
 	},
@@ -148,18 +149,50 @@ return {
 		event = "VeryLazy",
 	},
 
+	{
+		"mrded/nvim-lsp-notify",
+		dependencies = { "rcarriga/nvim-notify" },
+		config = function()
+			require("lsp-notify").setup({
+				notify = require("notify"),
+			})
+		end,
+	},
 
 	{
-		'mrded/nvim-lsp-notify',
-		dependencies = { 'rcarriga/nvim-notify' },
+		"folke/zen-mode.nvim",
+	},
+
+	{
+		"linux-cultist/venv-selector.nvim",
+		lazy = false,
+		event = "LspAttach",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"nvim-telescope/telescope.nvim",
+			"mfussenegger/nvim-dap-python",
+		},
 		config = function()
-			require('lsp-notify').setup({
-				notify = require('notify'),
+			require("venv-selector").setup({
+				name = ".venv",
+				pdm_path = "pdm",
 			})
-		end
-	}
 
+			local opts = { silent = true, nowait = true }
 
-
-
+			vim.api.nvim_create_autocmd("VimEnter", {
+				desc = "Auto select virtualenv Nvim open",
+				pattern = "*",
+				callback = function()
+					vim.keymap.set("n", "<Leader>fv", "<cmd>VenvSelect<CR>", opts)
+					vim.keymap.set("n", "<Leader>fz", "<cmd>VenvSelectCached<CR>", opts)
+					local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ".venv")
+					if venv ~= "" then
+						require("venv-selector").retrieve_from_cache()
+					end
+				end,
+				once = true,
+			})
+		end,
+	},
 }
