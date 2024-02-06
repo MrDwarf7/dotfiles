@@ -288,7 +288,7 @@ return {
 			},
 		},
 		ft = { "rust" },
-		spec = function()
+		opts = function()
 			-- require("rustaceanvim").setup({})
 
 			local on_attach = function(client, bufnr)
