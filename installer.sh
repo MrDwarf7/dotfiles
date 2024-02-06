@@ -9,7 +9,7 @@
 # cargo # handled via rust setup function
 # nvm # handled via nvm setup function
 # install pip related things via ->
-# pipx install pdm
+# pipx install pdm -- Better done via pacman honestly
 # pipx install pip
 #
 
@@ -60,6 +60,7 @@ packages_to_install=(
 	lldb-vscode
     atool
     lynx
+    python-pdm
 )
 
 ### Function definitions:
