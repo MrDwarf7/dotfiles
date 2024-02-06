@@ -213,10 +213,38 @@ return {
 						lsp_binds(),
 					}), -- End tsserver
 
+					--BUG: ~/.xdg/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
+					-- Navigate to the above file and change line 39 from using BOTH utf-8 and utf-16 to just utf-16,
+					-- remove the table brackets and just use "utf-16" as the value.
+					-- This is a workaround for:
+					-- warning: multiple different client offset encodings
 					require("lspconfig").clangd.setup({
-						-- capabilities = custom_offset.offsetEncoding == { "utf-16" },
-						capabilities = capabilities,
-						cmd = { "clangd", "--background-index", "--offset-encoding=utf-8" },
+						capabilities = function()
+							vim.lsp.protocol.make_client_capabilities({
+								textDocument = {
+									completion = {
+										editNearCursor = true,
+										snippetSupport = true,
+										resolveSupport = {
+											properties = {
+												"documentation",
+												"detail",
+												"additionalTextEdits",
+											},
+										},
+									},
+									default_capabilities = {
+										textDocument = {
+											completion = {
+												editsNearCursor = true,
+											},
+										},
+										offsetEncoding = "utf-16",
+									},
+								}
+							})
+						end,
+						cmd = { "clangd", "--background-index", "--offset-encoding=UTF8" },
 						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 						root_dir = require("lspconfig").util.root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
 							".clangd",
@@ -227,12 +255,13 @@ return {
 							"configure.ac",
 							".git"
 						),
-						offsetEncoding = { "utf-8" },
+						offsetEncoding = { "utf-16" },
 						single_file_support = true,
 						lsp_binds(),
-						on_attach = function(client, bufnr)
-							client.offsetEncoding = { "utf-8" }
+						on_attach = function(client, _)
+							-- client.offsetEncoding = "UTF8"
 							client.server_capabilities.hoverProvider = false
+							client.lsp_signature_help = false
 						end,
 					}), -- End biome
 				}, -- handlers end
