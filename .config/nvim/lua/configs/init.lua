@@ -173,11 +173,11 @@ return {
 			"mfussenegger/nvim-dap-python",
 		},
 		config = function()
-			require("venv-selector").setup({
-				name = ".venv",
+			local venv_select = require("venv-selector")
+			venv_select.setup({
+				name = { ".venv", ".venv/" },
 				pdm_path = "pdm",
 			})
-
 			local opts = { silent = true, nowait = true }
 
 			vim.api.nvim_create_autocmd("VimEnter", {
