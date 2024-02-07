@@ -176,12 +176,15 @@ return {
 							client.server_capabilities.hoverProvider = false
 						end,
 						capabilities = capabilities,
+						cmd = { "ruff-lsp" },
+						filetypes = { "python" },
 						lsp_binds(),
 					}),
 
 					require("lspconfig").pyright.setup({
 						on_attach = function(_, client)
 							client.server_capabilities.hoverProvider = true
+							-- client.server_capabilities.completionProvider = true
 						end,
 						capabilities = capabilities,
 						lsp_binds(),
