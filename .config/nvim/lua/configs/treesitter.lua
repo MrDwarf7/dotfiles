@@ -48,6 +48,7 @@ return {
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
+		lazy = false,
 		event = "BufReadPre",
 		config = function()
 			require("Comment").setup({
