@@ -11,8 +11,11 @@ $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
 
 $dotfiles_dir = "$HOME\dotfiles"
+$config_dir = "$dotfiles_dir\.config"
+
 $work_app_dir = "C:\Applications"
 $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
+
 
 $powershell_dir = "$dotfiles_dir\powershell"
 $powershell_scripts_dir = "$powershell_dir\scripts"
@@ -60,6 +63,11 @@ function checkEnvironment
         return $false
     }
 }
+
+
+$env:HELIX_RUNTIME = "$config_dir\helix\runtime"
+# return $env:HELIX_RUNTIME = "$config_dir\helix\runtime"
+
 
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
