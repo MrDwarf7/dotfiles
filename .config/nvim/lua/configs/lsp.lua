@@ -183,13 +183,13 @@ return {
 				},
 
 				handlers = {
-					-- function(server_name)
-					-- 	require("lspconfig")[server_name].setup({
-					-- 		on_attach = on_attach,
-					-- 		capabilities = capabilities,
-					-- 		lsp_binds(),
-					-- 	})
-					-- end,
+					function(server_name)
+						require("lspconfig")[server_name].setup({
+							on_attach = on_attach,
+							capabilities = capabilities,
+							lsp_binds(),
+						})
+					end,
 
 					require("lspconfig").ruff_lsp.setup({
 						on_attach = function(_, client)
@@ -250,10 +250,7 @@ return {
 						end,
 						capabilities = clangd_capabilities,
 						cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
-
-						-- { "/usr/sbin/clangd", "--background-index", "--offset-encoding=utf-16" }
-						-- ||
-												filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 						root_dir = require("lspconfig.util").root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
 							".clangd",
 							".clang-tidy",
