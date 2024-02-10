@@ -5,7 +5,19 @@ maximized = false
 srgb = false
 # idle = 15
 neovim-bin = "/usr/sbin/nvim"
+frame = "full"
 
 [font]
-regular = ["Fira Code Nerd Font"]
+# regular = ["Fira Code Nerd Font"]
+# regular = [ "FiraMono Nerd Font" ]
+regular = [ "FiraMono Nerd Font Mono" ]
 size = 14
+
+# [font.features]
+# Fira_Code_Nerd_Font = ["-calt"]
+
+# [font.features]
+# FiraMono_Nerd_Font = ["-calt"]
+
+[font.features]
+FiraMono\ Nerd\ Font\ Mono\ = ["-calt"]
