@@ -18,6 +18,27 @@ return {
 			-- local utils = require("utils")
 			-- local on_attach = utils.on_attach("omnifunc", "vim:lua.vim.lsp.omnifunc")
 
+			local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+			if not has_cmp then
+				return
+			end
+
+			local clangd_capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+				{
+					textDocument = {
+						completion = {
+							completionItem = {
+								snippetSupport = true,
+							},
+						},
+					},
+				}
+			)
+
 			local bufnr = vim.api.nvim_get_current_buf()
 
 			local custom_offset = vim.lsp.protocol.make_client_capabilities()
@@ -28,7 +49,6 @@ return {
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-			-- local bufnr = vim.api.nvim_get_current_buf()
 			local opts = { silent = true, nowait = true, buffer = bufnr }
 
 			local lsp_binds = function(_)
@@ -163,13 +183,13 @@ return {
 				},
 
 				handlers = {
-					function(server_name)
-						require("lspconfig")[server_name].setup({
-							on_attach = on_attach,
-							capabilities = capabilities,
-							lsp_binds(),
-						})
-					end,
+					-- function(server_name)
+					-- 	require("lspconfig")[server_name].setup({
+					-- 		on_attach = on_attach,
+					-- 		capabilities = capabilities,
+					-- 		lsp_binds(),
+					-- 	})
+					-- end,
 
 					require("lspconfig").ruff_lsp.setup({
 						on_attach = function(_, client)
@@ -217,39 +237,24 @@ return {
 					}), -- End tsserver
 
 					--BUG: ~/.xdg/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
+					--~/.xdg/data/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations
 					-- Navigate to the above file and change line 39 from using BOTH utf-8 and utf-16 to just utf-16,
 					-- remove the table brackets and just use "utf-16" as the value.
 					-- This is a workaround for:
 					-- warning: multiple different client offset encodings
 					require("lspconfig").clangd.setup({
-						capabilities = function()
-							vim.lsp.protocol.make_client_capabilities({
-								textDocument = {
-									completion = {
-										editNearCursor = true,
-										snippetSupport = true,
-										resolveSupport = {
-											properties = {
-												"documentation",
-												"detail",
-												"additionalTextEdits",
-											},
-										},
-									},
-									default_capabilities = {
-										textDocument = {
-											completion = {
-												editsNearCursor = true,
-											},
-										},
-										offsetEncoding = "utf-16",
-									},
-								}
-							})
+						on_attach = function(_, client)
+							client.capabilities.offsetEncoding = "utf-16"
+							-- client.server_capabilities.hoverProvider = false
+							-- client.lsp_signature_help = false
 						end,
-						cmd = { "clangd", "--background-index", "--offset-encoding=UTF8" },
-						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-						root_dir = require("lspconfig").util.root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
+						capabilities = clangd_capabilities,
+						cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
+
+						-- { "/usr/sbin/clangd", "--background-index", "--offset-encoding=utf-16" }
+						-- ||
+												filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+						root_dir = require("lspconfig.util").root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
 							".clangd",
 							".clang-tidy",
 							".clang-format",
@@ -258,15 +263,24 @@ return {
 							"configure.ac",
 							".git"
 						),
-						offsetEncoding = { "utf-16" },
+						-- capabilities = {
+						-- 	textDocument = {
+						-- 		completion = {
+						-- 			editsNearCursor = true,
+						-- 		},
+						-- 	},
+						-- 	offsetEncoding = "utf-16",
+						-- },
+						-- offsetEncoding = { "utf-16" },
 						single_file_support = true,
 						lsp_binds(),
-						on_attach = function(client, _)
-							-- client.offsetEncoding = "UTF8"
-							client.server_capabilities.hoverProvider = false
-							client.lsp_signature_help = false
-						end,
-					}), -- End biome
+						-- require("lsp_binds").lsp_binds(),
+						-- K.lsp_mappings().setup(),
+					}), -- End CLANGD
+
+					--
+					--
+					--
 				}, -- handlers end
 			})
 
@@ -478,4 +492,7 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
+
+	-- clangd_setup = function()
+	-- end,
 }
