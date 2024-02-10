@@ -249,8 +249,11 @@ return {
 							-- client.lsp_signature_help = false
 						end,
 						capabilities = clangd_capabilities,
-						cmd = { "/usr/sbin/clangd", "--background-index", "--offset-encoding=utf-16" },
-						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+						cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
+
+						-- { "/usr/sbin/clangd", "--background-index", "--offset-encoding=utf-16" }
+						-- ||
+												filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 						root_dir = require("lspconfig.util").root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
 							".clangd",
 							".clang-tidy",
