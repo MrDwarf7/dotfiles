@@ -195,4 +195,18 @@ return {
 			})
 		end,
 	},
+
+
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").setup({})
+		end,
+	},
+
+	{
+		"tpope/vim-surround",
+	},
+
+
 }
