@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Enable the Lua loader byte-compilation cache.
-vim.g.did_load_filetypes = 1
+--vim.g.did_load_filetypes = 1
 
 local architechture = function()
 	local os_type = function()
@@ -146,4 +146,4 @@ vim.o.updatetime = 250
 --vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 vim.g.skip_ts_context_commentstring_module = true
-vim.cmd("colorscheme habamax")
+-- vim.cmd("colorscheme habamax")

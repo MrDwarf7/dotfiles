@@ -36,7 +36,7 @@ else
 			cache = {
 				enabled = true,
 				path = vim.fn.stdpath("cache") .. "/lazy",
-				disable_events = { "VimEnter", "BufReadPre" },
+				-- disable_events = { "VimEnter", "BufReadPre" },
 				ttl = 3600 * 24 * 7,
 			},
 			reset_packagepath = true,
