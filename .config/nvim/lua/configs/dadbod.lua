@@ -1,11 +1,13 @@
 return {
 	{
 		"tpope/vim-dadbod",
+		event = "VeryLazy",
 		lazy = false,
 	},
 
 	{
 		'kristijanhusak/vim-dadbod-ui',
+		event = "VeryLazy",
 		dependencies = {
 			{ 'tpope/vim-dadbod',                     lazy = false },
 			{ 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true },
