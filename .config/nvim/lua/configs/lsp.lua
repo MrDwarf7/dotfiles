@@ -1,3 +1,5 @@
+local my_utils = require("utils")
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -23,6 +25,7 @@ return {
 				return
 			end
 
+			local util = require 'lspconfig.util'
 			local clangd_capabilities = vim.tbl_deep_extend(
 				"force",
 				{},
@@ -132,7 +135,7 @@ return {
 
 				ensure_installed = {
 					"biome",
-					"eslint_d",
+					"eslint",
 					"mypy",
 					"ruff",
 					-- "ruff_lsp",
@@ -191,6 +194,322 @@ return {
 					-- 	})
 					-- end,
 
+
+					require("lspconfig").lua_ls.setup({
+						cmd = { 'lua-language-server' },
+						filetypes = { 'lua' },
+						root_dir = function(fname)
+							local root_files = {
+								'.luarc.json',
+								'.luarc.jsonc',
+								'.luacheckrc',
+								'.stylua.toml',
+								'stylua.toml',
+								'selene.toml',
+								'selene.yml',
+							}
+							local root = util.root_pattern(unpack(root_files))(fname)
+							if root and root ~= vim.env.HOME then
+								return root
+							end
+							root = util.root_pattern 'lua/' (fname)
+							if root then
+								return root
+							end
+							return util.find_git_ancestor(fname)
+						end,
+						single_file_support = true,
+						log_level = vim.lsp.protocol.MessageType.Warning,
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End lua_ls
+
+					require("lspconfig").tsserver.setup({
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End tsserver
+
+					require("lspconfig").biome.setup({
+						cmd = { 'biome', 'lsp-proxy' },
+						filetypes = {
+							'javascript',
+							'javascriptreact',
+							'json',
+							'jsonc',
+							'typescript',
+							'typescript.tsx',
+							'typescriptreact',
+						},
+						root_dir = util.root_pattern 'biome.json',
+						single_file_support = false,
+						default_config = {
+							root_dir = [[root_pattern('biome.json')]],
+						},
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End biome
+
+
+					require("lspconfig").bashls.setup({
+						cmd = { 'bash-language-server', 'start' },
+						settings = {
+							bashIde = {
+								globPattern = vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
+							},
+						},
+						filetypes = { 'sh' },
+						root_dir = util.find_git_ancestor,
+						single_file_support = true,
+
+						default_config = {
+							root_dir = [[util.find_git_ancestor]],
+						},
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End bashls'
+
+
+					require("lspconfig").cmake.setup({
+						cmd = { 'cmake-language-server' },
+						filetypes = { 'cmake' },
+						root_dir = function(fname)
+							return util.root_pattern(unpack(root_files))(fname)
+						end,
+						single_file_support = true,
+						init_options = {
+							buildDirectory = 'build',
+						},
+						default_config = {
+							root_dir = [[root_pattern('CMakePresets.json', 'CTestConfig.cmake', '.git', 'build', 'cmake')]],
+						},
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}), -- End cmake
+
+
+					require("lspconfig").vimls.setup({
+						cmd = { 'vim-language-server', '--stdio' },
+						filetypes = { 'vim' },
+						root_dir = util.find_git_ancestor,
+						single_file_support = true,
+						init_options = {
+							isNeovim = true,
+							iskeyword = '@,48-57,_,192-255,-#',
+							vimruntime = '',
+							runtimepath = '',
+							diagnostic = { enable = true },
+							indexes = {
+								runtimepath = true,
+								gap = 100,
+								count = 3,
+								projectRootPatterns = { 'runtime', 'nvim', '.git', 'autoload', 'plugin' },
+							},
+							suggest = { fromVimruntime = true, fromRuntimepath = true },
+						},
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}),
+
+
+					require("lspconfig").eslint_d.setup({
+						function()
+							local lsp = vim.lsp
+							local function fix_all()
+								opts = opts or {}
+								local eslint_lsp_client = util.get_active_client_by_name(opts.bufnr, 'eslint')
+								if eslint_lsp_client == nil then
+									return
+								end
+								local request
+								if opts.sync then
+									request = function(_, method, params)
+										eslint_lsp_client.request_sync(method, params, nil, bufnr)
+									end
+								else
+									request = function(_, method, params)
+										eslint_lsp_client.request(method, params, nil, bufnr)
+									end
+								end
+
+								local bufnr = util.validate_bufnr(opts.bufnr or 0)
+								request(0, 'workspace/executeCommand', {
+									command = 'eslint.applyAllFixes',
+									arguments = {
+										{
+											uri = vim.uri_from_bufnr(bufnr),
+											version = lsp.util.buf_versions[bufnr],
+										},
+									},
+								})
+							end
+							local root_file = {
+								'.eslintrc',
+								'.eslintrc.js',
+								'.eslintrc.cjs',
+								'.eslintrc.yaml',
+								'.eslintrc.yml',
+								'.eslintrc.json',
+								'eslint.config.js',
+							}
+
+							return {
+								default_config = {
+									cmd = { 'vscode-eslint-language-server', '--stdio' },
+									filetypes = {
+										'javascript',
+										'javascriptreact',
+										'javascript.jsx',
+										'typescript',
+										'typescriptreact',
+										'typescript.tsx',
+										'vue',
+										'svelte',
+										'astro',
+									},
+									-- https://eslint.org/docs/user-guide/configuring/configuration-files#configuration-file-formats
+									root_dir = function(fname)
+										root_file = util.insert_package_json(root_file, 'eslintConfig', fname)
+										return util.root_pattern(unpack(root_file))(fname)
+									end,
+									-- Refer to https://github.com/Microsoft/vscode-eslint#settings-options for documentation.
+									settings = {
+										validate = 'on',
+										packageManager = nil,
+										useESLintClass = false,
+										experimental = {
+											useFlatConfig = false,
+										},
+										codeActionOnSave = {
+											enable = false,
+											mode = 'all',
+										},
+										format = true,
+										quiet = false,
+										onIgnoredFiles = 'off',
+										rulesCustomizations = {},
+										run = 'onType',
+										problems = {
+											shortenToSingleLine = false,
+										},
+										-- nodePath configures the directory in which the eslint server should start its node_modules resolution.
+										-- This path is relative to the workspace folder (root dir) of the server instance.
+										nodePath = '',
+										-- use the workspace folder location or the file location (if no workspace folder is open) as the working directory
+										workingDirectory = { mode = 'location' },
+										codeAction = {
+											disableRuleComment = {
+												enable = true,
+												location = 'separateLine',
+											},
+											showDocumentation = {
+												enable = true,
+											},
+										},
+									},
+									on_new_config = function(config, new_root_dir)
+										-- The "workspaceFolder" is a VSCode concept. It limits how far the
+										-- server will traverse the file system when locating the ESLint config
+										-- file (e.g., .eslintrc).
+										config.settings.workspaceFolder = {
+											uri = new_root_dir,
+											name = vim.fn.fnamemodify(new_root_dir, ':t'),
+										}
+
+										-- Support flat config
+										if vim.fn.filereadable(new_root_dir .. '/eslint.config.js') == 1 then
+											config.settings.experimental.useFlatConfig = true
+										end
+
+										-- Support Yarn2 (PnP) projects
+										local pnp_cjs = util.path.join(new_root_dir, '.pnp.cjs')
+										local pnp_js = util.path.join(new_root_dir, '.pnp.js')
+										if util.path.exists(pnp_cjs) or util.path.exists(pnp_js) then
+											config.cmd = vim.list_extend({ 'yarn', 'exec' }, config.cmd)
+										end
+									end,
+									handlers = {
+										['eslint/openDoc'] = function(_, result)
+											if not result then
+												return
+											end
+											local sysname = vim.loop.os_uname().sysname
+											if sysname:match 'Windows' then
+												os.execute(string.format('start %q', result.url))
+											elseif sysname:match 'Linux' then
+												os.execute(string.format('xdg-open %q', result.url))
+											else
+												os.execute(string.format('open %q', result.url))
+											end
+											return {}
+										end,
+										['eslint/confirmESLintExecution'] = function(_, result)
+											if not result then
+												return
+											end
+											return 4 -- approved
+										end,
+										['eslint/probeFailed'] = function()
+											vim.notify('[lspconfig] ESLint probe failed.', vim.log.levels.WARN)
+											return {}
+										end,
+										['eslint/noLibrary'] = function()
+											vim.notify('[lspconfig] Unable to find ESLint library.', vim.log.levels.WARN)
+											return {}
+										end,
+									},
+								},
+								commands = {
+									EslintFixAll = {
+										function()
+											fix_all { sync = true, bufnr = 0 }
+										end,
+										description = 'Fix all eslint problems for this buffer',
+									},
+								}
+							}
+						end,
+						on_attach = function(_, client)
+							client.server_capabilities.hoverProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}),
+
+					require("lspconfig").powershell_es.setup({
+						cmd = my_utils.make_cmd,
+						on_attach = function(_, client)
+							my_utils.powershell_es()
+							client.server_capabilities.hoverProvider = true
+							client.server_capabilities.completionProvider = true
+						end,
+						capabilities = capabilities,
+						lsp_binds(),
+					}),
+
+
+
+					-------------------------------------------------------
+
+
+
 					require("lspconfig").ruff_lsp.setup({
 						on_attach = function(_, client)
 							client.server_capabilities.hoverProvider = false
@@ -228,13 +547,6 @@ return {
 						},
 					}), -- End pyright
 
-					require("lspconfig").tsserver.setup({
-						on_attach = function(_, client)
-							client.server_capabilities.hoverProvider = true
-						end,
-						capabilities = capabilities,
-						lsp_binds(),
-					}), -- End tsserver
 
 					--BUG: ~/.xdg/share/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations/clangd.lua
 					--~/.xdg/data/nvim/lazy/nvim-lspconfig/lua/lspconfig/server_configurations
@@ -253,7 +565,7 @@ return {
 
 						-- { "/usr/sbin/clangd", "--background-index", "--offset-encoding=utf-16" }
 						-- ||
-												filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+						filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 						root_dir = require("lspconfig.util").root_pattern( -- THIS WORK OR HAVE TO MATCH THE WAY PYRIGHT CALLS LSPCONFIG???
 							".clangd",
 							".clang-tidy",
