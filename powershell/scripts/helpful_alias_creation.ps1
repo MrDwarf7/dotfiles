@@ -1,26 +1,37 @@
 function SafeNewAlias {
     param (
-        [string]$Alias,
-        [string]$Command
-    )
-    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue)) {
-        New-Alias -Name ${Alias} -Value ${Command}
-    } 
+            [string]$Alias,
+            [string]$Command
+          )
+        if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue)) {
+            New-Alias -Name ${Alias} -Value ${Command}
+        }
     if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command}) {
         Remove-Alias -Name ${Alias}
         New-Alias -Name ${Alias} -Value ${Command}
     }
-    # {
-    #     Remove-Alias -Name $Alias
-    #     New-Alias -Name $Alias -Value $Command
-    # }
+# {
+#     Remove-Alias -Name $Alias
+#     New-Alias -Name $Alias -Value $Command
+# }
 }
+
+
+# Formatted via powershell version for now
+function fwhich {
+    param (
+            [string]$cmd
+          )
+        Get-Command -ErrorAction "SilentlyContinue" $cmd
+        | ft Source
+}
+
 
 # Generic Aliases
 SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
-SafeNewAlias -Alias which -Command Get-Command
+New-Alias -Name which -Value where.exe
 SafeNewAlias -Alias bpsa -Command sar
 # Cargo Aliases
 #
