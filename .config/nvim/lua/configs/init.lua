@@ -206,6 +206,8 @@ return {
 
 	{
 		"tpope/vim-surround",
+		event = "BufReadPost",
+		-- lazy = false,
 	},
 
 
