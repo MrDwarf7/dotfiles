@@ -2,8 +2,8 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },
-		-- lazy = false,
-		build = ":TSUpdate",
+		lazy = false,
+		build = { ":TSUpdate" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = {
@@ -35,7 +35,7 @@ return {
 					enable = true,
 				},
 				highlight = {
-					enable = true,
+					enable = true
 				},
 				-- Instead of true it can also be a list of languages
 				additional_vim_regex_highlighting = false,
