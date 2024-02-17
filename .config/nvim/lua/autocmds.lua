@@ -24,6 +24,17 @@ autocmd("BufReadPost", {
 --     end,
 -- })
 
+-- autocmd('LspAttach', {
+-- 	callback = function(ev, bufnr)
+-- 		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+-- 		require('lsp_binds').lsp_mappings(bufnr)
+-- 	end,
+-- 	group = augroup("UserLspConfig", {}),
+-- })
+
+
+
+
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 60 })
@@ -56,10 +67,7 @@ autocmd("LspAttach", {
 	group = LspAuGroup,
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-		-- local opts = { buffer = ev.buf }
-		-- local vimlspbuf = vim.lsp.buf
 		require("fidget").setup()
-
 		local opts = { silent = true, nowait = true, buffer = ev.buf }
 
 		vim.keymap.set("n", "K", function()
@@ -135,7 +143,7 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 	group = augroup("highlighturl", { clear = true }),
 	callback = function()
 		local url_matcher =
-			"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+		"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 		--- Delete the syntax matching rules for URLs/URIs if set
 		local function delete_url_match()
 			for _, match in ipairs(vim.fn.getmatches()) do
