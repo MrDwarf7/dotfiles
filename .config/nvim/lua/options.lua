@@ -78,12 +78,15 @@ vim.opt.wrapscan = true
 vim.opt.wrap = false -- Added, test with other plugins etc
 vim.opt.backup = false
 vim.opt.writebackup = false
+
 vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.ignorecase = true
-vim.opt.hlsearch = true
 vim.opt.smartcase = true
+vim.opt.hlsearch = true
 vim.opt.errorbells = false
+
+
 vim.opt.joinspaces = false
 vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
@@ -146,4 +149,4 @@ vim.o.updatetime = 250
 --vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 vim.g.skip_ts_context_commentstring_module = true
-vim.cmd("colorscheme habamax")
+-- vim.cmd("colorscheme habamax")
