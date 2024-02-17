@@ -170,6 +170,7 @@ return {
 		end
 	},
 
+
 	{
 		"mrded/nvim-lsp-notify",
 		dependencies = { "rcarriga/nvim-notify" },
@@ -179,6 +180,7 @@ return {
 			})
 		end,
 	},
+
 
 	{
 		"lvimuser/lsp-inlayhints.nvim",
@@ -204,6 +206,8 @@ return {
 		-- 	require("configs.lsp_related.rustaceanvim")
 		-- end,
 	},
+
+
 	{
 		"folke/zen-mode.nvim",
 	},
@@ -240,7 +244,6 @@ return {
 			})
 		end,
 	},
-
 
 	{
 		"ggandor/leap.nvim",
