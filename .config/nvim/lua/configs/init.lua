@@ -1,25 +1,4 @@
 return {
-	-- {
-	-- 	"nathom/filetype.nvim",
-	-- 	lazy = false,
-	-- 	priority = 900,
-	-- 	init = function()
-	-- 		require("filetype").setup({
-	-- 			overrides = {
-	-- 				extensions = {
-	-- 					sh = "bash",
-	-- 					c = "c",
-	-- 				},
-	-- 				literal = {
-	-- 					["Dockerfile"] = "docker",
-	-- 					["docker-compose"] = "docker",
-	-- 					[".zshrc"] = "zsh",
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
-
 	{
 		"prichrd/netrw.nvim",
 		lazy = false,
