@@ -128,6 +128,48 @@ return {
 		event = "VeryLazy",
 	},
 
+
+
+	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("configs.lsp_related.mason")
+		end
+	},
+
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim"
+		},
+		config = function()
+			require("configs.lsp_related.mason_lspconfig")
+		end
+	},
+
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		dependencies = {
+			"williamboman/mason.nvim"
+		},
+		config = function()
+			require("configs.lsp_related.nvim_dap")
+		end
+	},
+
+	{
+		"neovim/nvim-lspconfig",
+		event = "BufEnter",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
+		},
+		config = function()
+			require("configs.lsp_related.lspconfig")
+		end
+	},
+
 	{
 		"mrded/nvim-lsp-notify",
 		dependencies = { "rcarriga/nvim-notify" },
@@ -138,6 +180,30 @@ return {
 		end,
 	},
 
+	{
+		"lvimuser/lsp-inlayhints.nvim",
+		config = function()
+			require("configs.lsp_related.inlayhints")
+		end,
+	},
+
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		ft = { "rust" },
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-lua/plenary.nvim",
+			"lvimuser/lsp-inlayhints.nvim",
+		},
+		config = function()
+			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
+		end
+		-- config = function()
+		-- 	print("THIS IS THE RUST IN THE INIT FILE")
+		-- 	require("configs.lsp_related.rustaceanvim")
+		-- end,
+	},
 	{
 		"folke/zen-mode.nvim",
 	},
