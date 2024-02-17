@@ -257,6 +257,10 @@ return {
 		"tpope/vim-surround",
 		lazy = false,
 	},
+
+	{
+		"ekalinin/Dockerfile.vim",
+		ft = "Dockerfile"
 	},
 
 
