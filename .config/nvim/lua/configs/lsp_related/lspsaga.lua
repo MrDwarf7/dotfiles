@@ -53,7 +53,6 @@ map("n", "<Leader>lw", "<cmd>Lspsaga outline<CR>", { desc = "[outline]" })
 
 map("n", "<Leader>lt", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "[t]ype def" })
 
-
-map("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle terminal" })
+map("n", "<A-]>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle terminal" })
 map("n", "]l", "<cmd>Lspsaga diagnostic_jump_next", { desc = "[next]" })
 map("n", "[l", "<cmd>Lspsaga diagnostic_jump_prev", { desc = "[prev]" })
