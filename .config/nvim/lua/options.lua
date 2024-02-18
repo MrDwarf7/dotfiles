@@ -78,12 +78,15 @@ vim.opt.wrapscan = true
 vim.opt.wrap = false -- Added, test with other plugins etc
 vim.opt.backup = false
 vim.opt.writebackup = false
+
 vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.ignorecase = true
-vim.opt.hlsearch = true
 vim.opt.smartcase = true
+vim.opt.hlsearch = true
 vim.opt.errorbells = false
+
+
 vim.opt.joinspaces = false
 vim.opt.title = true
 vim.opt.backspace = "indent,eol,start" -- Added
