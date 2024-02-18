@@ -182,6 +182,33 @@ return {
 		end,
 	},
 
+
+	{
+		"lvimuser/lsp-inlayhints.nvim",
+		config = function()
+			require("configs.lsp_related.inlayhints")
+		end,
+	},
+
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^4", -- Recommended
+		ft = { "rust" },
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-lua/plenary.nvim",
+			"lvimuser/lsp-inlayhints.nvim",
+		},
+		config = function()
+			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
+		end
+		-- config = function()
+		-- 	print("THIS IS THE RUST IN THE INIT FILE")
+		-- 	require("configs.lsp_related.rustaceanvim")
+		-- end,
+	},
+
+
 	{
 		"folke/zen-mode.nvim",
 	},
@@ -231,7 +258,6 @@ return {
 		"tpope/vim-surround",
 		lazy = false,
 	},
-
 
 
 
