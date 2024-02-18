@@ -1,29 +1,33 @@
-function SafeNewAlias {
+function SafeNewAlias
+{
     param (
-            [string]$Alias,
-            [string]$Command
-          )
-        if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue)) {
-            New-Alias -Name ${Alias} -Value ${Command}
-        }
-    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command}) {
+        [string]$Alias,
+        [string]$Command
+    )
+    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue))
+    {
+        New-Alias -Name ${Alias} -Value ${Command}
+    }
+    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command})
+    {
         Remove-Alias -Name ${Alias}
         New-Alias -Name ${Alias} -Value ${Command}
     }
-# {
-#     Remove-Alias -Name $Alias
-#     New-Alias -Name $Alias -Value $Command
-# }
+    # {
+    #     Remove-Alias -Name $Alias
+    #     New-Alias -Name $Alias -Value $Command
+    # }
 }
 
 
 # Formatted via powershell version for now
-function fwhich {
+function fwhich
+{
     param (
-            [string]$cmd
-          )
-        Get-Command -ErrorAction "SilentlyContinue" $cmd
-        | ft Source
+        [string]$cmd
+    )
+    Get-Command -ErrorAction "SilentlyContinue" $cmd
+    | Format-Table Source
 }
 
 
