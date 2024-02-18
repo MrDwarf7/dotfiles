@@ -1,8 +1,9 @@
 local K = {}
 
-K.lsp_mappings = {
-	config = function()
-		local bufnr = vim.api.nvim_get_current_buf()
+K.lsp_mappings = function(bufnr)
+	local setup = function()
+		-- print("LSP Mappings")
+		-- require("fidget").setup()
 		local opts = { silent = true, nowait = true, buffer = bufnr }
 
 		vim.keymap.set("n", "K", function()
@@ -92,8 +93,8 @@ K.lsp_mappings = {
 		vim.keymap.set("n", "<Leader>lh", function()
 			vim.cmd.RustLsp("hover")
 		end, opts, { desc = "[h]over" })
-	end,
-	K.lsp_mappings().setup(),
-}
+	end
+	return setup()
+end
 
 return K
