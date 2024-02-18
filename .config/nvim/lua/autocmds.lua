@@ -57,6 +57,7 @@ autocmd("LspAttach", {
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		require("fidget").setup()
+
 		local opts = { silent = true, nowait = true, buffer = ev.buf }
 
 		vim.keymap.set("n", "K", function()
@@ -124,6 +125,8 @@ autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 	end,
+
+
 })
 
 --- regex used for matching a valid URL/URI string
