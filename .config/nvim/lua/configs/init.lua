@@ -259,6 +259,10 @@ return {
 		lazy = false,
 	},
 
+	{
+		"ekalinin/Dockerfile.vim",
+		ft = "Dockerfile"
+	},
 
 
 }
