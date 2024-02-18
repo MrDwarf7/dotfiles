@@ -129,6 +129,50 @@ return {
 	},
 
 	{
+		"williamboman/mason.nvim",
+		config = function()
+			require("configs.lsp_related.mason")
+		end
+	},
+
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = {
+			"williamboman/mason.nvim"
+		},
+		config = function()
+			require("configs.lsp_related.mason_lspconfig")
+		end
+	},
+
+	{
+		"jay-babu/mason-nvim-dap.nvim",
+		event = "BufEnter",
+		dependencies = {
+			"williamboman/mason.nvim"
+		},
+		config = function()
+			require("configs.lsp_related.nvim_dap")
+		end
+	},
+
+	{
+		"neovim/nvim-lspconfig",
+		event = "BufEnter",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"jay-babu/mason-nvim-dap.nvim",
+			{ "j-hui/fidget.nvim",            opts = {} },
+			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
+		},
+		config = function()
+			require("configs.lsp_related.lspconfig")
+		end
+	},
+
+
+	{
 		"mrded/nvim-lsp-notify",
 		dependencies = { "rcarriga/nvim-notify" },
 		config = function()
