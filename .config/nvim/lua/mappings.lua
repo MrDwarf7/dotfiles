@@ -77,15 +77,13 @@ vim.keymap.set("n", "<Leader>n", "+[n]Other", { desc = "+[n]Other/NoiceDismiss" 
 vim.keymap.set("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
 
 -- Subset headers, but only after an LSP attached - just defined here for naming convention
-vim.keymap.set("n", "gd", "[d]efinition", { desc = "[d]efinition" })
-vim.keymap.set("n", "gD", "[D]eclaration", { desc = "[D]eclaration" })
-vim.keymap.set("n", "gr", "[r]eferences", { desc = "[r]eferences" })
-vim.keymap.set("n", "<Leader>lr", "[r]ename", { desc = "[r]ename" })
-vim.keymap.set("n", "<Leader>lR", "[R]ename (other)", { desc = "[R]ename (other)" })
-
-vim.keymap.set("n", "<Leader>la", "[a]ction", { desc = "[a]ction" })
+-- vim.keymap.set("n", "gd", "[d]efinition", { desc = "[d]efinition" })
+-- vim.keymap.set("n", "gD", "[D]eclaration", { desc = "[D]eclaration" })
+-- vim.keymap.set("n", "gr", "[r]eferences", { desc = "[r]eferences" })
+--
+-- vim.keymap.set("n", "<Leader>la", "[a]ction", { desc = "[a]ction" })
 vim.keymap.set("n", "<Leader>lf", "[f]ormat", { desc = "[f]ormat" })
-vim.keymap.set("n", "<Leader>lh", "[h]over", { desc = "[h]over" })
+-- vim.keymap.set("n", "<Leader>lh", "[h]over", { desc = "[h]over" })
 
 ----------
 
