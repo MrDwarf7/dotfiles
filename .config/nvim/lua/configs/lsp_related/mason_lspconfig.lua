@@ -21,13 +21,13 @@ local clangd_capabilities = vim.tbl_deep_extend(
 			},
 		},
 	})
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 mason_lsp.setup({
 	ensure_installed = {
 		"lua_ls",
-		"tsserver",
+		-- "tsserver",
 		"biome",
 		--"awk_ls", -- Un-updated (requires running LTS version of node via NVM)
 		"azure_pipelines_ls",
@@ -46,20 +46,21 @@ mason_lsp.setup({
 		"tailwindcss",
 		"ruff_lsp",
 		"pyright",
-		-- "rust_analyzer", -- Since using Rustaceanvim, DO NOT SETUP via lspconfig call
+		"rust_analyzer", -- Since using Rustaceanvim, DO NOT SETUP via lspconfig call
 		"slint_lsp",
 		"vimls",
 		"yamlls",
 		"zls",
 	},
 	automatic_installation = {
-		exclude = { "rust_analyzer", "pyright", "clangd", "ruff_lsp", "tsserver" }
+		exclude = { "rust_analyzer", "pyright", "clangd", "ruff_lsp" }
 	},
 
 	handlers = {
 		function(server_name)
 			require("lspconfig")[server_name].setup({
-				on_attach = on_attach,
+				on_attach = function(client, bufnr)
+				end,
 				capabilities = capabilities,
 			})
 		end,
