@@ -53,6 +53,14 @@ return {
 					sh = { "shfmt" },
 					yaml = { "yamllint" },
 					powershell = { "powershell_es" },
+					cpp = function(bufnr)
+						bufnr = bufnr or vim.api.nvim_get_current_buf()
+						if require("conform").get_formatter_info("clang_format", bufnr).available then
+							return { "clang_format" }
+						else
+							require("conform.formatters.clang_format")
+						end
+					end
 				},
 
 				format_on_save = {
