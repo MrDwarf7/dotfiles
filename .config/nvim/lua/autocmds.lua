@@ -56,8 +56,6 @@ autocmd("LspAttach", {
 	group = LspAuGroup,
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-		-- local opts = { buffer = ev.buf }
-		-- local vimlspbuf = vim.lsp.buf
 		require("fidget").setup()
 		local opts = { silent = true, nowait = true, buffer = ev.buf }
 
