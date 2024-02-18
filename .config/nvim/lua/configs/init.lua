@@ -165,6 +165,7 @@ return {
 			"jay-babu/mason-nvim-dap.nvim",
 			{ "j-hui/fidget.nvim",            opts = {} },
 			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
+
 		},
 		config = function()
 			require("configs.lsp_related.lspconfig")
@@ -172,19 +173,21 @@ return {
 	},
 
 
-	{
-		"mrded/nvim-lsp-notify",
-		dependencies = { "rcarriga/nvim-notify" },
-		config = function()
-			require("lsp-notify").setup({
-				notify = require("notify"),
-			})
-		end,
-	},
+	-- {
+	-- 	"mrded/nvim-lsp-notify",
+	-- 	envet = "BufReadPre",
+	-- 	dependencies = { "rcarriga/nvim-notify" },
+	-- 	config = function()
+	-- 		require("lsp-notify").setup({
+	-- 			notify = require("notify"),
+	-- 		})
+	-- 	end,
+	-- },
 
 
 	{
 		"lvimuser/lsp-inlayhints.nvim",
+		lazy = false,
 		config = function()
 			require("configs.lsp_related.inlayhints")
 		end,
@@ -192,20 +195,41 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
+		lazy = false,
+		-- event = "BufReadPre",
 		version = "^4", -- Recommended
 		ft = { "rust" },
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
-			"lvimuser/lsp-inlayhints.nvim",
+			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
+			{ "j-hui/fidget.nvim",            opts = {} },
 		},
 		config = function()
 			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
 		end
-		-- config = function()
-		-- 	print("THIS IS THE RUST IN THE INIT FILE")
-		-- 	require("configs.lsp_related.rustaceanvim")
-		-- end,
+	},
+
+
+	{
+		"pmizio/typescript-tools.nvim",
+		lazy = false,
+		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+		opts = {},
+	},
+
+
+	{
+		"nvimdev/lspsaga.nvim", -- Okay this one is a BANGERRRRRRRRRRRR
+		lazy = false,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+		config = function()
+			require("configs.lsp_related.lspsaga")
+		end
+
 	},
 
 
