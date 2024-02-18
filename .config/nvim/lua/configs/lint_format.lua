@@ -18,6 +18,7 @@ return {
 				lua = { "luacheck" },
 				javascript = { "biomejs" },
 				typescript = { "biomejs" },
+				cpp = { "cpplint", "clang-tidy" },
 			}
 
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
