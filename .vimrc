@@ -47,7 +47,7 @@ set timeoutlen=200
 set mouse=a
 set showmode
 set clipboard=unnamedplus
-set clipboard+=un
+set clipboard+=unnamedplus
 
 
 " Ignore compiled files
@@ -265,8 +265,13 @@ nnoremap <Leader>um :messages<CR>
 nnoremap <Leader>e :Explore<CR>
 
 
+vnoremap p "_dP
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap < <gv
+vnoremap > >gv
 
-
+"nnoremap dd "_dd
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -282,10 +287,10 @@ nmap <silent> <Del> :noh<CR>
 " nmap <silent> <Esc> :nohl<CR>
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
 
 " Close the current buffer
 map <silent> <Leader>x :Bclose<CR>
