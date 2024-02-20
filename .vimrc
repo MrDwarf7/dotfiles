@@ -282,9 +282,9 @@ vnoremap > >gv
 " map <C-space> ?
 
 " Disable highlight when <Leader><CR> is pressed
-map <silent> <Leader><CR> :noh<CR>
-nmap <silent> <Del> :noh<CR>
-" nmap <silent> <Esc> :nohl<CR>
+" map <silent> <Leader><CR> :noh<CR>
+" nmap <silent> <Del> :noh<CR>
+nmap <silent> <Esc> :nohl<CR>
 
 " Smart way to move between windows
 " map <C-j> <C-W>j
