@@ -25,7 +25,8 @@ pacman -S mingw-w64-ucrt-x86_64-gcc --noconfirm &&
 	pacman -S zsh --noconfirm &&
 	pacman -S wget curl --noconfirm &&
 	pacman -S git --noconfirm &&
-	pacman -S mingw-w64-x86_64-neovim
+	pacman -S mingw-w64-x86_64-neovim &&
+	pacman -S mingw-w64-clang-x86_64-grep
 
 exit 0
 
