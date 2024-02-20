@@ -25,8 +25,12 @@ pacman -S mingw-w64-ucrt-x86_64-gcc --noconfirm &&
 	pacman -S zsh --noconfirm &&
 	pacman -S wget curl --noconfirm &&
 	pacman -S git --noconfirm &&
-	pacman -S mingw-w64-x86_64-neovim &&
-	pacman -S mingw-w64-clang-x86_64-grep
+	pacman -S mingw-w64-x86_64-neovim --noconfirm &&
+	pacman -S mingw-w64-clang-x86_64-grep --noconfirm &&
+	pacman -S mingw-w64-clang-x86_64-libluv --noconfirm &&
+	pacman -S mingw-w64-clang-x86_64-rust --noconfirm &&
+	pacman -S mingw-w64-clang-x86_64-lua51 --noconfirm &&
+	pacman -S mingw-w64-lua-luarocks --noconfirm
 
 exit 0
 
