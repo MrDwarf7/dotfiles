@@ -18,6 +18,7 @@ return {
 				lua = { "luacheck" },
 				javascript = { "biomejs" },
 				typescript = { "biomejs" },
+				cpp = { "cpplint", "clang-tidy" },
 			}
 
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -53,7 +54,14 @@ return {
 					sh = { "shfmt" },
 					yaml = { "yamllint" },
 					powershell = { "powershell_es" },
-					json = { "biomejs " },
+					cpp = function(bufnr)
+						bufnr = bufnr or vim.api.nvim_get_current_buf()
+						if require("conform").get_formatter_info("clang_format", bufnr).available then
+							return { "clang_format" }
+						else
+							require("conform.formatters.clang_format")
+						end
+					end
 				},
 
 				format_on_save = {

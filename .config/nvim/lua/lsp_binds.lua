@@ -2,7 +2,7 @@ local K = {}
 
 K.lsp_mappings = function(bufnr)
 	local setup = function()
-		print("LSP Mappings")
+		-- print("LSP Mappings")
 		-- require("fidget").setup()
 		local opts = { silent = true, nowait = true, buffer = bufnr }
 
@@ -64,17 +64,12 @@ K.lsp_mappings = function(bufnr)
 			vim.lsp.buf.format({ async = true })
 		end, opts, { desc = "[f]ormat (lsp)" })
 
-		vim.keymap.set("n", "<Leader>lh", function()
-			vim.diagnostic.open_float()
-		end, opts, { desc = "[h]over" })
+		-- vim.keymap.set("n", "<Leader>lh", function()
+		-- 	vim.diagnostic.open_float()
+		-- end, opts, { desc = "[h]over" })
 
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
-
-		-- vim.keymap.set("n", "<Leader>lc", rst.flyCheck, opts, { desc = "[c]heck" })
-		-- vim.keymap.set("n", "<Leader>dd", rst.debuggables, opts, { desc = "[d]ebuggables" })
-		-- vim.keymap.set("n", "<Leader>dr", rst.runnables, opts, { desc = "[r]unnables" })
-		-- vim.keymap.set("n", "<Leader>lh", rst.hover, opts, { desc = "[r]unnables" })
 
 		vim.keymap.set("n", "<Leader>lc", function()
 			vim.cmd.RustLsp("flyCheck")

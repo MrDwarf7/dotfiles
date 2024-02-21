@@ -5,11 +5,7 @@ if not has_cmp then
 	return
 end
 local util = require 'lspconfig.util'
-local bufnr = vim.api.nvim_get_current_buf()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
 
 local clangd_capabilities = vim.tbl_deep_extend(
 	"force",
@@ -56,13 +52,6 @@ lspconfig.lua_ls.setup({
 	end,
 	capabilities = capabilities
 }) -- End lua_ls
-
-lspconfig.tsserver.setup({
-	on_attach = function(client)
-		client.server_capabilities.hoverProvider = true
-	end,
-	capabilities = capabilities,
-}) -- End tsserver
 
 lspconfig.biome.setup({
 	cmd = { 'biome', 'lsp-proxy' },

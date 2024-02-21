@@ -1,31 +1,20 @@
-local bufnr = vim.api.nvim_get_current_buf()
+local mason_nvim_dap = require("mason-nvim-dap")
+local dap_virtual_text = require("nvim-dap-virtual-text")
 
-
-return {
-	{
-		"jay-babu/mason-nvim-dap.nvim",
-		event = "BufEnter",
-		require("mason-nvim-dap").setup({
-			ensure_installed = {
-				"bash-debug-adapter",
-				"chrome-debug-adapter",
-				"codelldb",
-				"cpptools",
-				"debugpy",
-				"firefox-debug-adapter",
-			},
-			handler = {},
-			on_attach = on_attach,
-			require("lsp_binds").lsp_mappings(bufnr)
-		})
+mason_nvim_dap.setup({
+	ensure_installed = {
+		"bash-debug-adapter",
+		"chrome-debug-adapter",
+		"codelldb",
+		"cpptools",
+		"debugpy",
+		"firefox-debug-adapter",
 	},
+	handler = {},
+	on_attach = on_attach,
+})
 
-	{
-		"theHamsta/nvim-dap-virtual-text",
-		config = function()
-			require("nvim-dap-virtual-text").setup({
-				commented = true,
-			})
-		end,
-	},
-}
+
+dap_virtual_text.setup({
+	commented = true,
+})

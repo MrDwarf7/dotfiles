@@ -24,17 +24,6 @@ autocmd("BufReadPost", {
 --     end,
 -- })
 
--- autocmd('LspAttach', {
--- 	callback = function(ev, bufnr)
--- 		vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
--- 		require('lsp_binds').lsp_mappings(bufnr)
--- 	end,
--- 	group = augroup("UserLspConfig", {}),
--- })
-
-
-
-
 autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank({ timeout = 60 })
@@ -68,31 +57,66 @@ autocmd("LspAttach", {
 	callback = function(ev)
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 		require("fidget").setup()
+
 		local opts = { silent = true, nowait = true, buffer = ev.buf }
 
 		vim.keymap.set("n", "K", function()
 			vim.lsp.buf.hover()
 		end, opts)
 
+
 		vim.keymap.set("n", "gd", function()
-			vim.lsp.buf.definition()
+			require("telescope.builtin").lsp_definitions()
+			-- vim.lsp.buf.definition()
 		end, opts, { desc = "[d]efinition" })
+
+
+		-- vim.keymap.set("n", "gd", function()
+		-- 	vim.lsp.buf.definition()
+		-- end, opts, { desc = "[d]efinition" })
 
 		vim.keymap.set("n", "gD", function()
 			vim.lsp.buf.declaration()
 		end, opts, { desc = "[D]eclaration" })
 
 		vim.keymap.set("n", "gr", function()
-			vim.lsp.buf.references()
+			require("telescope.builtin").lsp_references()
+			-- vim.lsp.buf.references()
 		end, opts, { desc = "[r]eferences" })
 
+		-- vim.keymap.set("n", "gr", function()
+		-- 	vim.lsp.buf.references()
+		-- end, opts, { desc = "[r]eferences" })
+
 		vim.keymap.set("n", "gi", function()
-			vim.lsp.buf.implementation()
+			require("telescope.builtin").lsp_implementations()
+			-- vim.lsp.buf.implementation()
 		end, opts, { desc = "[i]mplementations" })
 
+
+		-- vim.keymap.set("n", "gi", function()
+		-- 	vim.lsp.buf.implementation()
+		-- end, opts, { desc = "[i]mplementations" })
+
+
 		vim.keymap.set("n", "gt", function()
-			vim.lsp.buf.type_definition()
+			require("telescope.builtin").lsp_type_definitions()
+			-- vim.lsp.buf.type_definition()
 		end, opts, { desc = "[T]ype" })
+
+
+		-- vim.keymap.set("n", "gt", function()
+		-- 	vim.lsp.buf.type_definition()
+		-- end, opts, { desc = "[T]ype" })
+
+		vim.keymap.set("n", "<Leader>ls", function() -- new
+			require("telescope.builtin").lsp_document_symbols()
+		end, opts, { desc = "doc [s]ymbols" })
+
+		vim.keymap.set("n", "<Leader>lS", function() -- new
+			require("telescope.builtin").lsp_dynamic_workspace_symbols()
+		end, opts, { desc = "[W]orkspace [S]ymbols" })
+
 
 		vim.keymap.set("n", "]d", function()
 			vim.diagnostic.goto_next()
@@ -110,31 +134,34 @@ autocmd("LspAttach", {
 			vim.lsp.buf.outgoing_calls()
 		end, opts, { desc = "[O]utgoing" })
 
-		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
+		-- vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" }) -- Prefer <Leader>ft as Find Todos using telescope
 
 		vim.keymap.set("n", "<C-k>", function()
 			vim.lsp.buf.signature_help()
 		end, opts, { desc = "Signature Help" })
 
-		vim.keymap.set("n", "<Leader>lr", function()
+		vim.keymap.set("n", "<Leader>lR", function()
 			vim.lsp.buf.rename()
-		end, opts, { desc = "[r]ename" })
+		end, opts, { desc = "[R]ename" })
 
-		vim.keymap.set({ "n", "v" }, "<Leader>la", function()
-			vim.lsp.buf.code_action()
-		end, opts, { desc = "Code [a]ction" })
+
+		-- vim.keymap.set({ "n", "v" }, "<Leader>la", function()
+		-- 	vim.lsp.buf.code_action()
+		-- end, opts, { desc = "Code [a]ction" })
 
 		vim.keymap.set("n", "<Leader>lf", function()
 			vim.lsp.buf.format({ async = true })
 		end, opts, { desc = "[f]ormat (lsp)" })
 
-		vim.keymap.set("n", "<Leader>lh", function()
-			vim.diagnostic.open_float()
-		end, opts, { desc = "[h]over" })
+		-- vim.keymap.set("n", "<Leader>lh", function() ------ Now handled via lspsaga
+		-- 	vim.diagnostic.open_float()
+		-- end, opts, { desc = "[h]over" })
 
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
 	end,
+
+
 })
 
 --- regex used for matching a valid URL/URI string

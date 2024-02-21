@@ -11,9 +11,8 @@ require("rustaceanvim")
 -- })
 
 
-require("lsp-inlayhints")
+require("lsp-inlayhints").setup()
 
-print("THIS IS THE RUST FILEEEEEEE")
 
 M.default_capabilities = function()
 	return {
@@ -212,12 +211,12 @@ M.rustaceanvim_setup = function()
 			},
 		}
 	}
+	-- local opts = { buffer = vim.api.nvim_get_current_buf() }
+	vim.keymap.set("n", "<Leader>lc", function() vim.cmd.RustLsp("flyCheck") end, opts, { desc = "[c]heck" })
+	vim.keymap.set("n", "<Leader>dd", function() vim.cmd.RustLsp("debuggables") end, opts, { desc = "[d]ebuggables" })
+	vim.keymap.set("n", "<Leader>dr", function() vim.cmd.RustLsp("runnables") end, opts, { desc = "[r]un" })
+	vim.keymap.set("n", "<Leader>lh", function() vim.cmd.RustLsp("hover") end, opts, { desc = "[h]over" })
 end
 
-local opts = { buffer = vim.api.nvim_get_current_buf() }
-vim.keymap.set("n", "<Leader>lc", function() vim.cmd.RustLsp("flyCheck") end, opts, { desc = "[c]heck" })
-vim.keymap.set("n", "<Leader>dd", function() vim.cmd.RustLsp("debuggables") end, opts, { desc = "[d]ebuggables" })
-vim.keymap.set("n", "<Leader>dr", function() vim.cmd.RustLsp("runnables") end, opts, { desc = "[r]un" })
-vim.keymap.set("n", "<Leader>lh", function() vim.cmd.RustLsp("hover") end, opts, { desc = "[h]over" })
 
 return M
