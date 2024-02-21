@@ -57,6 +57,16 @@ if [ $WIN_AVAILABLE ]; then
 fi
 
 
+# Originally when I saw this, it was within the .zprofile, not within .zshrc
+if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
+    if systemctl status docker 2>&1 | grep -q "is not running"; then
+        wsl --exe --distribution "${WSL_DISTRO_NAME}" --user root \
+            --exec systemctl start docker > /dev/null 2>&1 && \
+            --exec systemctl start dockerd > /dev/null 2>&1
+    fi
+fi
+
+
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
