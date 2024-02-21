@@ -84,3 +84,10 @@ alias lzgt='lazygit'
 # alias ld='lazydocker' # preferred - but it's also the same as GNU linker binary lol, which is on path
 alias lzd='lazydocker'
 alias lzdo='lazydocker'
+
+alias dc="docker compose"
+alias dcu="docker compose up"
+alias dcub="docker compose up --build"
+alias dcd="docker compose down"
+alias dcdf="docker compose down --force"
+
