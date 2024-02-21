@@ -14,8 +14,8 @@
 #
 
 packages_to_install=(
-    man-pages # Note this comes with the normal version of Arch via linux and linux-base etc.
-    man-db
+	man-pages # Note this comes with the normal version of Arch via linux and linux-base etc.
+	man-db
 	openssh
 	autossh
 	curl
@@ -43,12 +43,15 @@ packages_to_install=(
 	tmux
 	bat
 	lazygit
-    lazydocker # can also consider using lazydocker-bin, as it seems more frequently updated
+	lazydocker # can also consider using lazydocker-bin, as it seems more frequently updated
+	docker
+	docker-buildx
+	docker-compose
 	github-cli
 	uctags-git
 	python-pipx
-    ruff
-    ruff-lsp
+	ruff
+	ruff-lsp
 	pyenv
 	luarocks
 	# nvim-treesitter-parsers-git
@@ -59,9 +62,9 @@ packages_to_install=(
 	codelldb-bin
 	lldb
 	lldb-vscode
-    atool
-    lynx
-    python-pdm
+	atool
+	lynx
+	python-pdm
 )
 
 ### Function definitions:
