@@ -82,4 +82,4 @@ alias lg='lazygit'
 alias lzgt='lazygit'
 
 alias ld='lazydocker'
-alias lzdr='lazydocker'
+alias lzdo='lazydocker'
