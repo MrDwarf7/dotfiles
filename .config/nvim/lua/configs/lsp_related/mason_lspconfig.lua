@@ -26,12 +26,10 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 mason_lsp.setup({
 	ensure_installed = {
-		"lua_ls",
-		"tsserver",
-		"biome",
 		--"awk_ls", -- Un-updated (requires running LTS version of node via NVM)
 		"azure_pipelines_ls",
 		"bashls",
+		"biome",
 		"clangd",
 		"cmake",
 		"cssls",
@@ -39,15 +37,17 @@ mason_lsp.setup({
 		"dockerls",
 		-- "eslint",
 		"html",
-		"taplo",
+		"lua_ls",
 		"marksman",
 		"powershell_es",
 		"prismals",
-		"tailwindcss",
-		"ruff_lsp",
 		"pyright",
+		"ruff_lsp",
 		-- "rust_analyzer", -- Since using Rustaceanvim, DO NOT SETUP via lspconfig call
 		"slint_lsp",
+		"tailwindcss",
+		"taplo",
+		"tsserver",
 		"vimls",
 		"yamlls",
 		"zls",
