@@ -81,5 +81,6 @@ export GCC_COLOR='eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote
 alias lg='lazygit'
 alias lzgt='lazygit'
 
-alias ld='lazydocker'
+# alias ld='lazydocker' # preferred - but it's also the same as GNU linker binary lol, which is on path
+alias lzd='lazydocker'
 alias lzdo='lazydocker'
