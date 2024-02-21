@@ -59,8 +59,9 @@ mason_lsp.setup({
 	handlers = {
 		function(server_name)
 			require("lspconfig")[server_name].setup({
-				on_attach = function(client, bufnr)
-				end,
+				on_attach = on_attach,
+				-- on_attach = function(client, bufnr)
+				-- end,
 				capabilities = capabilities,
 			})
 		end,
