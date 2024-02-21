@@ -53,6 +53,7 @@ return {
 					sh = { "shfmt" },
 					yaml = { "yamllint" },
 					powershell = { "powershell_es" },
+					json = { "biomejs " },
 				},
 
 				format_on_save = {
