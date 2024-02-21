@@ -43,6 +43,7 @@ packages_to_install=(
 	tmux
 	bat
 	lazygit
+    lazydocker # can also consider using lazydocker-bin, as it seems more frequently updated
 	github-cli
 	uctags-git
 	python-pipx
