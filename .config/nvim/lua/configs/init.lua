@@ -242,7 +242,7 @@ return {
 		config = function()
 			local venv_select = require("venv-selector")
 			venv_select.setup({
-				name = { ".venv", ".venv/", "$HOME/.config/.pyenv/versions/3.12.1/bin/python3" },
+				-- name = { ".venv", ".venv/", "$HOME/.config/.pyenv/versions/3.12.1/bin/python3" },
 				pdm_path = "pdm",
 			})
 			local opts = { silent = true, nowait = true }
