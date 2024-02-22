@@ -99,6 +99,9 @@ if pacman -Qi "sccache" &> /dev/null; then
     export RUSTC_WRAPPER=sccache
 fi
 
+# if pacman -Qi "nvm" &> /dev/null; then
+#     "nvm alias default 21.6.2"
+# fi
 
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
