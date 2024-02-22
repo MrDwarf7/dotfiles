@@ -132,28 +132,28 @@ return {
 		"williamboman/mason.nvim",
 		config = function()
 			require("configs.lsp_related.mason")
-		end
+		end,
 	},
 
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
-			"williamboman/mason.nvim"
+			"williamboman/mason.nvim",
 		},
 		config = function()
 			require("configs.lsp_related.mason_lspconfig")
-		end
+		end,
 	},
 
 	{
 		"jay-babu/mason-nvim-dap.nvim",
 		event = "BufEnter",
 		dependencies = {
-			"williamboman/mason.nvim"
+			"williamboman/mason.nvim",
 		},
 		config = function()
 			require("configs.lsp_related.nvim_dap")
-		end
+		end,
 	},
 
 	{
@@ -163,15 +163,13 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
-			{ "j-hui/fidget.nvim",            opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
-
 		},
 		config = function()
 			require("configs.lsp_related.lspconfig")
-		end
+		end,
 	},
-
 
 	-- {
 	-- 	"mrded/nvim-lsp-notify",
@@ -183,7 +181,6 @@ return {
 	-- 		})
 	-- 	end,
 	-- },
-
 
 	{
 		"lvimuser/lsp-inlayhints.nvim",
@@ -203,13 +200,12 @@ return {
 			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
 			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
-			{ "j-hui/fidget.nvim",            opts = {} },
+			{ "j-hui/fidget.nvim", opts = {} },
 		},
 		config = function()
 			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
-		end
+		end,
 	},
-
 
 	{
 		"pmizio/typescript-tools.nvim",
@@ -217,7 +213,6 @@ return {
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
 		opts = {},
 	},
-
 
 	{
 		"nvimdev/lspsaga.nvim", -- Okay this one is a BANGERRRRRRRRRRRR
@@ -228,10 +223,8 @@ return {
 		},
 		config = function()
 			require("configs.lsp_related.lspsaga")
-		end
-
+		end,
 	},
-
 
 	{
 		"folke/zen-mode.nvim",
@@ -249,7 +242,7 @@ return {
 		config = function()
 			local venv_select = require("venv-selector")
 			venv_select.setup({
-				name = { ".venv", ".venv/" },
+				name = { ".venv", ".venv/", "$HOME/.config/.pyenv/versions/3.12.1/bin/python3" },
 				pdm_path = "pdm",
 			})
 			local opts = { silent = true, nowait = true }
@@ -285,8 +278,6 @@ return {
 
 	{
 		"ekalinin/Dockerfile.vim",
-		ft = "Dockerfile"
+		ft = "Dockerfile",
 	},
-
-
 }
