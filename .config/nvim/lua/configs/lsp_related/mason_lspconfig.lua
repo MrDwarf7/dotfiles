@@ -20,7 +20,8 @@ local clangd_capabilities = vim.tbl_deep_extend(
 				},
 			},
 		},
-	})
+	}
+)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
@@ -53,16 +54,15 @@ mason_lsp.setup({
 		"zls",
 	},
 	automatic_installation = {
-		exclude = { "rust_analyzer", "pyright", "clangd", "ruff_lsp" }
+		exclude = { "rust_analyzer", "pyright", "clangd", "ruff_lsp" },
 	},
 
 	handlers = {
 		function(server_name)
 			require("lspconfig")[server_name].setup({
-				on_attach = function(client, bufnr)
-				end,
+				on_attach = function(client, bufnr) end,
 				capabilities = capabilities,
 			})
 		end,
-	}
+	},
 })
