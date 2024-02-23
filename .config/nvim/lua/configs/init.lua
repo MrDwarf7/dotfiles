@@ -208,6 +208,23 @@ return {
 	},
 
 	{
+		"ray-x/go.nvim",
+		lazy = false,
+		event = { "CmdlineEnter" },
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
+		dependencies = { -- optional packages
+			"ray-x/guihua.lua",
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		config = function()
+			-- require("configs.lsp_related.go")
+			require("go").setup()
+		end,
+	},
+
+	{
 		"pmizio/typescript-tools.nvim",
 		lazy = false,
 		dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
