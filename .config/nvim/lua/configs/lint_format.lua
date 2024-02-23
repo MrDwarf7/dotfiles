@@ -61,7 +61,25 @@ return {
 						else
 							require("conform.formatters.clang_format")
 						end
-					end
+					end,
+
+					-- go = function()
+					-- 	require("conform").formatter.go = {
+					-- 		inherit = false,
+					-- 	}
+					-- end,
+
+					-- require("go.format").gofmt() -- gofmt only
+					-- require("go.format").goimport() -- goimport + gofmt
+					-- Run gofmt on save
+					-- 	local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+					-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+					-- 		pattern = "*.go",
+					-- 		callback = function()
+					-- 			require("go.format").gofmt()
+					-- 		end,
+					-- 		group = format_sync_grp,
+					-- 	})
 				},
 
 				format_on_save = {
