@@ -288,6 +288,8 @@ function dodf {
     pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
+export PATH=$PATH:$GOPATH/bin
+
 ### source dat zsh
 source $ZSH/oh-my-zsh.sh
 
