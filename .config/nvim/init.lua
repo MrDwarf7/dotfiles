@@ -79,8 +79,6 @@ else
 		},
 	}
 
-	-- view_config.keys.close = "<Esc>"
-
 	lazy.setup("configs", lazy_custom_config)
 
 	require("mappings")
