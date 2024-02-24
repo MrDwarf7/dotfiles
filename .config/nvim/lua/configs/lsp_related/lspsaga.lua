@@ -44,7 +44,7 @@ map("n", "<Leader>lD", "<cmd>Lspsaga peek_definition ++keep<CR>", { desc = "[d]e
 map("n", "<Leader>li", "<cmd>Lspsaga finder imp<CR>", { desc = "[I]mplementations" })
 map("n", "<Leader>lr", "<cmd>Lspsaga finder ref<CR>", { desc = "[r]eferences" })
 
-map("n", "<Leader>lh", "<cmd>Lspsaga hover_doc<CR>", { desc = "Hover" })
+map("n", "<Leader>lg", "<cmd>Lspsaga hover_doc<CR>", { desc = "lspSaga Hover" })
 map("n", "<Leader>lH", "<cmd>Lspsaga hover_doc ++keep<CR>", { desc = "Hover Keep" })
 
 map("n", "<Leader>lw", "<cmd>Lspsaga outline<CR>", { desc = "[outline]" })
