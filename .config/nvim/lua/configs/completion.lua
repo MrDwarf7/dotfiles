@@ -57,7 +57,6 @@ return {
 
 		config = function()
 			local cmp = require("cmp")
-			require("configs.completion_sub.cmp_base_deps")
 			local cmp_utils = require("configs.completion_sub.cmp_sub_config")
 			local opts = cmp_utils.nvim_cmp_main_opts()
 
