@@ -153,9 +153,9 @@ autocmd("LspAttach", {
 			vim.lsp.buf.format({ async = true })
 		end, opts, { desc = "[f]ormat (lsp)" })
 
-		-- vim.keymap.set("n", "<Leader>lh", function() ------ Now handled via lspsaga
-		-- 	vim.diagnostic.open_float()
-		-- end, opts, { desc = "[h]over" })
+		vim.keymap.set("n", "<Leader>lh", function()
+			vim.diagnostic.open_float()
+		end, opts, { desc = "[h]over" })
 
 		vim.keymap.set("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" })
 		-- LSP attach autocmds are called within the autocmds file (group = LspAuGroup)
