@@ -65,6 +65,7 @@ packages_to_install=(
 	atool
 	lynx
 	python-pdm
+	# cmake-init  # install via yay, then install it INTO the pyenv env using ITS VERSION of pip
 )
 
 ### Function definitions:
