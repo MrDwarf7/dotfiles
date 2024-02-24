@@ -75,7 +75,7 @@ keybinds clear-defaults=true {
 
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; } // Mode
-        bind "n" { NewTab; SwitchToMode "Normal"; } // Create
+        bind "n" { NewTab; SwitchToMode "Tab"; } // Create
         bind "x" { CloseTab; SwitchToMode "Tab"; } // Close
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; } // Rename
 
