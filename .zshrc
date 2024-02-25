@@ -103,6 +103,9 @@ fi
 #     "nvm alias default 21.6.2"
 # fi
 
+# nvm
+# source /usr/share/nvm/init-nvm.sh
+
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
     export PIPX_HOME="$HOME/.xdg/data/pipx"
@@ -185,8 +188,6 @@ plugins=(
 # source "$dotdir/.config/.oh-my-zsh/plugins/git-plugin/git.plugin.zsh"
 
 
-# nvm
-source /usr/share/nvm/init-nvm.sh
 
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 # VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
