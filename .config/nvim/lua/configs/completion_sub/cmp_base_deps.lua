@@ -7,7 +7,6 @@ return {
 		"rafamadriz/friendly-snippets",
 		"saecki/crates.nvim",
 		"vrslev/cmp-pypi",
-		"zbirenbaum/copilot-cmp",
 		-----------------
 		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-nvim-lua",
@@ -18,8 +17,8 @@ return {
 		"hrsh7th/cmp-path",
 
 		"doxnit/cmp-luasnip-choice", -- new
-		"saecki/crates.nvim", -- new
-		"vrslev/cmp-pypi", -- new
+		"saecki/crates.nvim",      -- new
+		"vrslev/cmp-pypi",         -- new
 
 		"hrsh7th/cmp-nvim-lsp-signature-help",
 		"petertriho/cmp-git",
