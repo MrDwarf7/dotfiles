@@ -13,6 +13,11 @@
 # pipx install pip
 #
 
+
+# TODO: Incorporate the following into the script:
+# sudo systemctl enable paccache.timer
+# sudo systemctl start paccache.timer
+
 packages_to_install=(
 	man-pages # Note this comes with the normal version of Arch via linux and linux-base etc.
 	man-db
