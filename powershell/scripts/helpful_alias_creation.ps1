@@ -25,6 +25,33 @@ function fwhich
     | Format-Table Source
 }
 
+function RemoveWrapper
+{
+    if ($args -eq $null)
+    {
+
+        Remove-Item $args
+        return
+    }
+
+    if ($args.Contains("r") -or $args.Contains("R"))
+    {
+        Remove-Item -Recurse $args
+        return
+    }
+
+    if ($args.Contains("f") -or $args.Contains("F"))
+    {
+        Remove-Item -Force $args
+        return
+    }
+
+    if ($args.Contains("f") -or $args.Contains("F") -and $args.Contains("r") -or $args.Contains("R"))
+    {
+        Remove-Item -Force -Recurse $args
+        return
+    }
+}
 
 # Generic Aliases
 SafeNewAlias -Alias grep -Command Select-String
