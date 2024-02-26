@@ -59,9 +59,10 @@ SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 New-Alias -Name which -Value where.exe
 SafeNewAlias -Alias bpsa -Command sar
+SafeNewAlias -Alias rm -Command RemoveWrapper $args
+
 # Cargo Aliases
 #
-
 # Not currently working while function c is in place
 # SafeNewAlias -Alias cb -Command CargoBuild
 # SafeNewAlias -Alias cr -Command CargoRun
