@@ -13,12 +13,7 @@ function SafeNewAlias
         Remove-Alias -Name ${Alias}
         New-Alias -Name ${Alias} -Value ${Command}
     }
-    # {
-    #     Remove-Alias -Name $Alias
-    #     New-Alias -Name $Alias -Value $Command
-    # }
 }
-
 
 # Formatted via powershell version for now
 function fwhich
