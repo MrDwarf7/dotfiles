@@ -61,6 +61,11 @@ New-Alias -Name which -Value where.exe
 SafeNewAlias -Alias bpsa -Command sar
 SafeNewAlias -Alias rm -Command RemoveWrapper $args
 
+
+# New-Alias -Name which -Value where.exe
+SafeNewAlias -Alias which -Command where.exe
+
+
 # Cargo Aliases
 #
 # Not currently working while function c is in place
