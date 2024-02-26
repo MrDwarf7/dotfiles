@@ -44,7 +44,7 @@ function nf
     neofetch
 }
 
-function lzdk
+function lzd
 {
     lazydocker $args
 }
