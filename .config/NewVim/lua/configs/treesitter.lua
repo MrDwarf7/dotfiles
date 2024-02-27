@@ -65,8 +65,8 @@ treesitter.setup({
         enable = true,
     },
 
-    sync_install = true,
-    auto_install = true,
+	sync_install = false,
+	auto_install = true,
 })
 
 commentstring.setup({
