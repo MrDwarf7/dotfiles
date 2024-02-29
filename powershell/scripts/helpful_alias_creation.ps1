@@ -57,7 +57,6 @@ function RemoveWrapper
 SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
-New-Alias -Name which -Value where.exe
 SafeNewAlias -Alias bpsa -Command sar
 SafeNewAlias -Alias rm -Command RemoveWrapper $args
 
