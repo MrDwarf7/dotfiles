@@ -42,6 +42,20 @@ alias cu='cargo update'
 alias cdoc='cargo doc'
 alias cup='cargo upgrade'
 
+
+alias ct='cargo test'
+alias ctq='cargo test --quiet'
+
+alias cta='cargo test --all'
+alias ctaq='cargo test --all --quiet'
+
+
+alias cw='cargo watch'
+alias cwq='cargo watch -q'
+alias cwqc='cargo watch -q -c'
+alias cwqcr='cargo watch -q -c -x run'
+
+
 if [ "$WIN_AVAILABLE" ]; then
 	# rust / cargo related
 	alias cbw='cargo build --target x86_64-pc-windows-gnu'
@@ -49,6 +63,7 @@ if [ "$WIN_AVAILABLE" ]; then
 	alias crw='cargo run --target x86_64-pc-windows-gnu'
 	alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
 	alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
+    alias cbaw='cargo build --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-pc-windows-gnu'
 
 	alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
 	alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
