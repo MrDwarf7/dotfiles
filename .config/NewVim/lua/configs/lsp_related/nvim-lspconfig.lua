@@ -18,8 +18,9 @@ local lsp_mappings = require("util.lsp-mappings")
 local nvim_lsp = require("lspconfig")
 local nvim_lsp_servers_list = require("configs.lsp_related.nvim-lsp-servers")
 
+local M = {}
 
-local lsp_on_attach = function()
+M.lsp_on_attach = function()
     if buffer_util.islarge(0) then
         print("(LSP) Large file detected, disabling LSP")
         cmd([[LspStop]])
@@ -72,4 +73,5 @@ vim.diagnostic.config({
 -- the lang servers that we can do that
 local capabilities = lsp_capabilities.default_capabilities()
 
-nvim_lsp_servers_list.lsp_server_setups(lsp_on_attach, capabilities)
+nvim_lsp_servers_list.lsp_server_setups(M.lsp_on_attach, capabilities)
+return M
