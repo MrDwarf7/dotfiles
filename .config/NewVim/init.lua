@@ -1,5 +1,6 @@
 -- https://github.com/bluz71/dotfiles/blob/master/nvim/init.lua
 local fn = vim.fn
+local opt = vim.opt
 
 if fn.has("nvim-0.9") == 1 then
     vim.loader.enable()
