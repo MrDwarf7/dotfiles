@@ -1,4 +1,3 @@
-local M = {}
 local cmd = vim.cmd
 local lsp = vim.lsp
 local map = vim.keymap.set
@@ -18,6 +17,8 @@ local lsp_capabilities = require("util.lsp-capabilities")
 local lsp_mappings = require("util.lsp-mappings")
 local nvim_lsp = require("lspconfig")
 local nvim_lsp_servers_list = require("configs.lsp_related.nvim-lsp-servers")
+
+local M = {}
 
 M.lsp_on_attach = function()
 	if buffer_util.islarge(0) then
@@ -71,5 +72,4 @@ vim.diagnostic.config({
 local capabilities = lsp_capabilities.default_capabilities()
 
 nvim_lsp_servers_list.lsp_server_setups(M.lsp_on_attach, capabilities)
-
 return M
