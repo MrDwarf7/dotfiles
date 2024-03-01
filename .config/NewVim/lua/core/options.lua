@@ -79,13 +79,11 @@ opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
 opt.completeopt = { "menu", "menuone", "noselect" }
 
-if vim.fn.has("unnamedplus") == 1 then
-    opt.clipboard = { "unnamed", "unnamedplus" }
-else
-    opt.clipboard = "unnamed"
-end
+vim.cmd([[
+set clipboard+=unnamedplus
+]])
 
--- opt.clipboard = "unnamedplus"
+-- opt.clipboard = { "unnamedplus", "unnamed" }
 
 opt.laststatus = 3
 opt.timeoutlen = 350
