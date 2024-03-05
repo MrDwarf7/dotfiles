@@ -163,7 +163,7 @@ return {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
-			{ "j-hui/fidget.nvim",            opts = {} },
+			-- { "j-hui/fidget.nvim",            opts = {} },
 			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
 
 		},
@@ -203,7 +203,7 @@ return {
 			"mfussenegger/nvim-dap",
 			"nvim-lua/plenary.nvim",
 			{ "lvimuser/lsp-inlayhints.nvim", opts = {} },
-			{ "j-hui/fidget.nvim",            opts = {} },
+			-- { "j-hui/fidget.nvim",            opts = {} },
 		},
 		config = function()
 			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
