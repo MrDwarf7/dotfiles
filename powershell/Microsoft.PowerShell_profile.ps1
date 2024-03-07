@@ -32,6 +32,20 @@ $backup_theme = 'chips.omp.json'
 
 ### START MAIN SCRIPT
 Set-PSReadlineOption -BellStyle None
+Set-PSReadlineOption -EditMode Vi
+#
+
+
+# function MyViCliEditor
+# {
+#     $env:XDG_CONFIG_HOME = "$dotfiles_dir"
+#     nvim -u $HOME\.vimrc
+# }
+# FunctionName | Invoke-Expression, this works but needs a handler for it
+
+$env:EDITOR = $env:VISUAL = 'nvim'
+
+
 # BEGIN - Alias(s)
 Import-Module DockerCompletion
 #Git aliases from Oh-my-zsh Git plugin for PWSH
@@ -64,11 +78,6 @@ function checkEnvironment
     }
 }
 
-
-# $env:HELIX_RUNTIME = "$config_dir\helix\runtime"
-# return $env:HELIX_RUNTIME = "$config_dir\helix\runtime"
-
-
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
 
@@ -92,8 +101,6 @@ if (checkEnvironment)
     {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
     }
-
-    # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
 }
 
 # Not work/ AKA Home
@@ -114,8 +121,6 @@ if (-not (checkEnvironment))
     {
         oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
     }
-
-    # oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
 }
 
 . "$powershell_scripts_dir\vim_func_shell.ps1"
@@ -171,7 +176,6 @@ function la
     param ($path = ".")
     Get-ChildItem $path -Force
 }
-
 
 function l
 {
