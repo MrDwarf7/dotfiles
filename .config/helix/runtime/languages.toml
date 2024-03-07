@@ -19,13 +19,35 @@ request = "launch"
 completion = [ { name = "entrypoint", completion = "filename", default = "." } ]
 args = { mode = "debug", program = "src/main.py"}
 
-
-[[language]]
-name = "rust"
-auto-format = true
-
 [[language]]
 name = "typescript"
 auto-format = true
 # pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
 config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+
+[[language]]
+name = "rust"
+language-id = "rust"
+# scope = "rs"
+file-types = ["rs", "toml"]
+roots = ["Cargo.toml", "Cargo.lock"]
+auto-format = true
+comment-token = "//"
+formatter = "rustfmt"
+
+
+
+[language-server.rust-analyzer.config]
+command = "clippy"
+
+
+
+[language-server.rust-analyzer.config.check]
+
+
+
+
+
+
+
+
