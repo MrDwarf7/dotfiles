@@ -65,7 +65,7 @@ function checkEnvironment
 }
 
 
-$env:HELIX_RUNTIME = "$config_dir\helix\runtime"
+# $env:HELIX_RUNTIME = "$config_dir\helix\runtime"
 # return $env:HELIX_RUNTIME = "$config_dir\helix\runtime"
 
 

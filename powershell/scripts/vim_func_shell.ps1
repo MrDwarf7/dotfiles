@@ -7,16 +7,16 @@ $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 
 $scoop_dir = "$dotfiles_dir\scoop"
 
-# function hx
-# {
-#     $config = "$scoop_dir\persist\helix\config.toml"
-#
-#     if ($args[0] -eq "_local")
-#     {
-#         $config = ""
-#     }
-#     helix --config $config $args
-# }
+function hx
+{
+    $config = "$dotfiles_config\helix\config.toml"
+
+    if ($args[0] -eq "_noprofile")
+    {
+        $config = ""
+    }
+    helix --config $config $args
+}
 
 function vim
 {
