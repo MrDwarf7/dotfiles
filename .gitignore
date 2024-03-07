@@ -24,6 +24,7 @@ z.old/*
 .config/lazygit/*
 .config/jgit/*
 .config/scoop/*
+.config/helix/runtime/grammars/*
 
 .config/nvim/lazy-lock*
 
@@ -31,3 +32,5 @@ nvim_distros/*
 
 !nvim_distros/omerxx/
 nvim_distros/omerxx/lazy-lock*
+
+
