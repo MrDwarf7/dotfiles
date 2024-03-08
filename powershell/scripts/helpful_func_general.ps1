@@ -11,8 +11,14 @@
 # BEGIN - Shell functions / Helpful functions
 function cl
 {
+    $cleanText = ""
     Add-Type -Assembly PresentationCore
     $clipText = (get-location).ToString() | Out-String -Stream
+
+    if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::"))
+    {
+        $clipText = $clipText.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
+    }
     [Windows.Clipboard]::SetText($clipText)
 }
 
@@ -104,13 +110,16 @@ function scpdir
 }
 
 
+
+
+
 function dot
 {
     param(
         $path
     )
-    Write-Host "From dot function call path variable is: ", $path
-    Write-Host "From dot function call literal args is: ", $args
+    # Write-Host "From dot function call path variable is: ", $path
+    # Write-Host "From dot function call literal args is: ", $args
 
     $path = if ($path)
     {
