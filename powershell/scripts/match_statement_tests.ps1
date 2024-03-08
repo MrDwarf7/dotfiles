@@ -19,24 +19,24 @@ function cx
     $functionName = $parts[0]
     $functionArgs = if ($parts.Count -gt 1)
     {
-        $parts[1] 
+        $parts[1]
     } else
     {
-        "" 
+        ""
     }
     $environment = if (checkEnvironment)
     {
-        "work" 
+        "work"
     } else
     {
-        "home" 
+        "home"
     }
     $holdError = ""
 
     # Top level switch finds the function name
     switch ($functionName)
     {
-        # Requires full path after function part 
+        # Requires full path after function part
         # ie: dot/powershell
         # dot/powershell/Scripts
         #
@@ -44,26 +44,26 @@ function cx
         {
             $path = if ($functionArgs)
             {
-                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
+                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\')
             } else
             {
-                $dotfiles_dir 
+                $dotfiles_dir
             }
             Write-Host "From cx function call path variable is: ", $path
-            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
+            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
             Push-Location $path
         }
         "dotfiles"
         {
             $path = if ($functionArgs)
             {
-                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\') 
+                Join-Path $dotfiles_dir $functionArgs.Replace('/', '\')
             } else
             {
-                $dotfiles_dir 
+                $dotfiles_dir
             }
             Write-Host "From cx function call path variable is: ", $path
-            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost 
+            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
             Push-Location $path
         }
         # matches function then matches argument to a pre defined function
@@ -103,23 +103,23 @@ function cx
         {
             $pathable = if ($environment -eq "work")
             {
-                $git_projects 
+                $git_projects
             } else
             {
                 $home_GitHub
             }
-            Write-Host "Pathable just after the env check is: ", $pathablet 
+            Write-Host "Pathable just after the env check is: ", $pathablet
             Write-Host "Env variable as: ", $environment
 
             $path = switch ($functionArgs)
             {
                 "data"
                 {
-                    Join-Path $pathable $data_projects 
+                    Join-Path $pathable $data_projects
                 }
                 "dl"
                 {
-                    Join-Path $pathable $downloaded 
+                    Join-Path $pathable $downloaded
                 }
                 "d"
                 {
@@ -163,7 +163,7 @@ function cx
         {
             $pathable = if ($environment -eq "work")
             {
-                $gitwork_projects 
+                $gitwork_projects
             } else
             {
                 $home_gitwork_projects
@@ -175,11 +175,11 @@ function cx
             {
                 "data"
                 {
-                    Join-Path $pathable $data_projects 
+                    Join-Path $pathable $data_projects
                 }
                 "dl"
                 {
-                    Join-Path $pathable $downloaded 
+                    Join-Path $pathable $downloaded
                 }
                 "d"
                 {
@@ -242,10 +242,10 @@ function c
     $functionName = $parts[0]
     $functionArgs = if ($parts.Count -gt 1)
     {
-        $parts[1] 
+        $parts[1]
     } else
     {
-        "" 
+        ""
     }
     $holdError = ""
 
@@ -306,4 +306,3 @@ function c
         Write-Host $holdError
     }
 }
-
