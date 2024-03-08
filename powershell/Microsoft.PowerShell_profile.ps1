@@ -85,6 +85,8 @@ if (checkEnvironment)
 # Not work/ AKA Home
 if (-not (checkEnvironment))
 {
+
+    Invoke-Expression (& { (zoxide init powershell | Out-String) })
     . "$powershell_scripts_dir\home_scripts.ps1"
 }
 
@@ -123,7 +125,6 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 # Invoke-Expression (&starship init powershell)
-# Invoke-Expression (& { (zoxide init powershell | Out-String) })
 
 
 # BEGIN - Alias(s)

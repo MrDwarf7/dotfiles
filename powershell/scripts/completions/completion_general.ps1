@@ -4,7 +4,7 @@ using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
 
-if ($env:HOME_PROFILE -eq $false)
+if (-not $env:HOME_PROFILE -eq $true)
 {
     $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
 } else
@@ -38,7 +38,7 @@ Register-ArgumentCompleter -Native -CommandName typer -ScriptBlock $scriptblock
 
 
 # Import-Module PSReadLine
-Import-Module -Name CompletionPredictor
+# Import-Module -Name CompletionPredictor
 #PSReadLine Options set
 Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
 
