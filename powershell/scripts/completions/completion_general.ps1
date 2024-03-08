@@ -3,16 +3,6 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-
-if ($env:HOME_PROFILE -eq $false)
-{
-    $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
-} else
-{
-    $env:PSModulePath = $env:PSModulePath
-}
-
-
 # Import-Module PSReadLine
 
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
@@ -38,7 +28,7 @@ Register-ArgumentCompleter -Native -CommandName typer -ScriptBlock $scriptblock
 
 
 # Import-Module PSReadLine
-Import-Module -Name CompletionPredictor
+# Import-Module -Name CompletionPredictor
 #PSReadLine Options set
 Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
 
