@@ -49,8 +49,8 @@ function cx
             {
                 $dotfiles_dir
             }
-            Write-Host "From cx function call path variable is: ", $path
-            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
+            # Write-Host "From cx function call path variable is: ", $path
+            # Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
             Push-Location $path
         }
         "dotfiles"
@@ -62,8 +62,8 @@ function cx
             {
                 $dotfiles_dir
             }
-            Write-Host "From cx function call path variable is: ", $path
-            Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
+            # Write-Host "From cx function call path variable is: ", $path
+            # Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
             Push-Location $path
         }
         # matches function then matches argument to a pre defined function
