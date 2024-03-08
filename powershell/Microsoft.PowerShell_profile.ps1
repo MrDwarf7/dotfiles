@@ -3,7 +3,7 @@
 #
 # Typer-Cli completion.
 # Installed via pip install typer-cli
-
+$env:PSModulePath=[NullString]
 
 # Dotfiles copy
 $env:HOME_PROFILE = $false
@@ -11,19 +11,19 @@ $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
 
 $dotfiles_dir = "$HOME\dotfiles"
-$config_dir = "$dotfiles_dir\.config"
+# $config_dir = "$dotfiles_dir\.config"
 
-$work_app_dir = "C:\Applications"
-$work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
+# $work_app_dir = "C:\Applications"
+# $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 
 
 $powershell_dir = "$dotfiles_dir\powershell"
 $powershell_scripts_dir = "$powershell_dir\scripts"
-$powershell_completions = "$powershell_scripts_dir\completions\"
+# $powershell_completions = "$powershell_scripts_dir\completions\"
 
-$work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
-$home_theme = '1MrDwarf7Theme.omp.json'
-$backup_theme = 'chips.omp.json'
+# $work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
+# $home_theme = '1MrDwarf7Theme.omp.json'
+# $backup_theme = 'chips.omp.json'
 
 # Unused for time being as they just sit in my dotfiles atm anyway lol
 #
@@ -31,10 +31,6 @@ $backup_theme = 'chips.omp.json'
 # $home_scripts_dir = "D:\Documents\PowerShell\home_scripts"
 
 ### START MAIN SCRIPT
-Set-PSReadlineOption -BellStyle None
-Set-PSReadlineOption -EditMode Vi
-#
-
 
 # function MyViCliEditor
 # {
@@ -46,18 +42,12 @@ Set-PSReadlineOption -EditMode Vi
 $env:EDITOR = $env:VISUAL = 'nvim'
 
 
-# BEGIN - Alias(s)
-Import-Module DockerCompletion
-#Git aliases from Oh-my-zsh Git plugin for PWSH
-Import-Module git-aliases -DisableNameChecking
 
-Import-Module posh-cargo
-
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-if (Test-Path($ChocolateyProfile))
-{
-    Import-Module "$ChocolateyProfile"
-}
+# $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+# if (Test-Path($ChocolateyProfile))
+# {
+#     Import-Module "$ChocolateyProfile"
+# }
 # END - Alias(s)
 
 
@@ -66,11 +56,14 @@ function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
 {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
+
+
 # Work.sort of
 function checkEnvironment
 {
     if ($env:COMPUTERNAME -clike "*LG*")
     {
+        $env:HOME_PROFILE = $false
         return $true
     } else
     {
@@ -86,77 +79,20 @@ function checkEnvironment
 # Work
 if (checkEnvironment)
 {
-    . "$work_scripts_dir\navigation_func_work.ps1"
-
-    . "$work_scripts_dir\python_func_work.ps1"
-
-    . "$work_scripts_dir\shell_alias_func_work.ps1"
-
-    . "$work_scripts_dir\wsl_func_shell.ps1"
-
-    try
-    {
-        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$work_theme | Invoke-Expression
-    } catch
-    {
-        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
-    }
+    . "$powershell_scripts_dir\work_scripts.ps1"
 }
 
 # Not work/ AKA Home
 if (-not (checkEnvironment))
 {
-    # Not required at work
-    . "$powershell_scripts_dir\wsl_func_shell.ps1"
-
-    . "$powershell_scripts_dir\navigation_func_home.ps1"
-
-    . "$powershell_completions\completion_docker-compose.ps1"
-
-
-    try
-    {
-        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$home_theme | Invoke-Expression
-    } catch
-    {
-        oh-my-posh init pwsh --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\$backup_theme | Invoke-Expression
-    }
+    . "$powershell_scripts_dir\home_scripts.ps1"
 }
 
-. "$powershell_scripts_dir\vim_func_shell.ps1"
+. "$powershell_scripts_dir\general_scripts.ps1"
 
-. "$powershell_scripts_dir\helpful_func_general.ps1"
-
-. "$powershell_scripts_dir\match_statement_tests.ps1"
-
-. "$powershell_scripts_dir\helpful_func_python.ps1"
-
-. "$powershell_completions\completion_general.ps1"
-
-. "$powershell_completions\completion_gh-cli.ps1"
-
-. "$powershell_completions\completion_az-cli.ps1"
 
 #Raw Functions
 
-function workconf
-{
-    if (-not ($args))
-    {
-        Start-Process $work_scripts_dir
-    }
-    if ( $args)
-    {
-        if ($args -eq "vim")
-        {
-            vim $work_scripts_dir
-        }
-        if ($args -eq "code")
-        {
-            code $work_scripts_dir
-        }
-    }
-}
 
 # Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha
@@ -165,6 +101,8 @@ function workconf
 # {
 #     . $PROFILE
 # }
+
+
 
 function .
 {
@@ -184,5 +122,17 @@ function l
 }
 
 # if I decide to start using starship, well this is how I would do it.
-#Invoke-Expression (&starship init powershell)
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+# Invoke-Expression (&starship init powershell)
+# Invoke-Expression (& { (zoxide init powershell | Out-String) })
+
+
+# BEGIN - Alias(s)
+# Import-Module DockerCompletion
+#Git aliases from Oh-my-zsh Git plugin for PWSH
+# Import-Module git-aliases -DisableNameChecking
+# removed pending testings
+# Import-Module posh-cargo
+
+
+
+

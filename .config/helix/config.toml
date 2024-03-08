@@ -9,7 +9,7 @@ scrolloff = 6
 cursorline = true
 bufferline = "always"      # Options include always, never, multiple (Where more than one is present)
 completion-trigger-len = 1
-rulers = [80, 120]
+rulers = [90, 120]
 
 
 [editor.cursor-shape]
@@ -37,7 +37,6 @@ right = [
   "spacer",
 ]
 
-
 separator = "|"
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
@@ -50,7 +49,6 @@ git-ignore = true
 git-global = true
 ignore = true
 max-depth = 6
-
 
 [editor.indent-guides]
 render = true
@@ -65,43 +63,30 @@ skip-levels = 0
 '`' = '`'
 # '<' = '>'
 
-
 [editor.lsp]
 display-messages = true
 
-
-
-# [editor.picker]
-# C-u = "scoll_up"
-# C-k = "scoll_up"
-
-# C-d = "scoll_down"
-# C-j = "scoll_down"
-
-
 [keys.normal.space]
 x = ":buffer-close"
+
+F = "no_op"
+
 k = "no_op"
 a = "no_op"
-# b = "Buffers"
+b = "no_op"
 # w = "window_mode"
+
 
 
 j = "no_op"
 h = "no_op"
-
 s = "no_op"
 S = "no_op"
-
 y = "no_op"
 Y = "no_op"
-
 d = "no_op"
 D = "no_op"
-
-# p = "no_op"
 P = "no_op"
-
 r = "no_op"
 R = "no_op"
 
@@ -133,6 +118,11 @@ S = "workspace_symbol_picker"
 
 d = "workspace_diagnostics_picker"
 D = "diagnostics_picker"
+
+h = ":tree-sitter-subtree"
+t = ":tree-sitter-highlight-name"
+
+
 
 [keys.normal.space.w] # Window
 left = "no_op"
@@ -167,13 +157,47 @@ k = "swap_view_up"
 # [keys.popup]
 
 
+
+
+
+
+
+# [keys.normal]
+# d = [
+# "goto_next_diag",
+# "collapse_selection",
+# ]
+  
+
+
+
+
+
+
+
+
+
+
+
 [keys.normal]
 # Quick iteration on config changes
 C-9 = ":config-open"
 C-0 = ":config-reload"
 K = "hover"
-
 C-s = ":w" # Saving with Ctrl+s
+C-g =":show-directory"
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Centering viewport on page scrolling
 # C-u = ["half_page_up", "align_view_center"]

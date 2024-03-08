@@ -3,7 +3,18 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-Import-Module PSReadLine
+
+if ($env:HOME_PROFILE -eq $false)
+{
+    $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
+} else
+{
+    $env:PSModulePath = $env:PSModulePath
+}
+
+
+# Import-Module PSReadLine
+
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 #Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete ## Testing alternative Tab completion api call
 
@@ -26,7 +37,7 @@ $scriptblock = {
 Register-ArgumentCompleter -Native -CommandName typer -ScriptBlock $scriptblock
 
 
-Import-Module PSReadLine
+# Import-Module PSReadLine
 Import-Module -Name CompletionPredictor
 #PSReadLine Options set
 Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView -HistorySearchCursorMovesToEnd
@@ -351,6 +362,9 @@ Set-PSReadLineOption -CommandValidationHandler {
 
 ### END Scripting directly for PSReadLine module :
 
+
+Set-PSReadlineOption -BellStyle None
+Set-PSReadlineOption -EditMode Vi
 
 function onViModeChange
 {
