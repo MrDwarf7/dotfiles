@@ -122,6 +122,15 @@ M.lsp_server_setups = function(attach_fnc, capabilities_fnc)
 		flags = { debounce_text_changes = 300 },
 		root_dir = nvim_lsp.util.root_pattern("tailwind.config.*"),
 	})
+
+	-- nvim_lsp.powershell_es.setup({
+	-- 	on_attach = attach_fnc,
+	-- 	capabilities = capabilities_fnc,
+	-- 	filetypes = { "ps1", "psm1", "psd1" },
+	-- 	flags = { debounce_text_changes = 300 },
+	-- 	root_dir = nvim_lsp.util.root_pattern("*.ps1"),
+	-- 	cmd = "pwsh -NoLogo -NoProfile -Command & '$env:LOCALAPPDATA\\nvim-data\\mason\\packages\\powershell-editor-services/PowerShellEditorServices/Start-EditorServices.ps1' -BundledModulesPath '$env:LOCALAPPDATA\\nvim-data\\mason\\packages\\powershell-editor-services' -LogPath '$env:TEMP\\nvim/powershell_es.log' -SessionDetailsPath '$env:TEMP\\nvim/powershell_es.session.json' -FeatureFlags @() -AdditionalModules @() -HostName nvim -HostProfileId 0 -HostVersion 1.0.0 -Stdio -LogLevel Normal",
+	-- })
 end
 
 return M
