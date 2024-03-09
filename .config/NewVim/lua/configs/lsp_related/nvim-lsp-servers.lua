@@ -107,6 +107,36 @@ M.lsp_server_setups = function(attach_fnc, capabilities_fnc)
 		single_file_support = true,
 	}) -- End clangd
 
+	nvim_lsp.lua_ls.setup({
+		on_attach = function(_, client)
+			client.server_capabilities.hoverProvider = true
+			attach_fnc(_)
+		end,
+		capabilities = capabilities_fnc,
+		cmd = { "lua-language-server" },
+		filetypes = { "lua" },
+		root_dir = nvim_lsp_utils.root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
+		settings = {
+			Lua = {
+				runtime = {
+					version = "LuaJIT",
+					path = vim.split(package.path, ";"),
+				},
+				diagnostics = {
+					globals = { "vim" },
+				},
+				workspace = {
+					library = {
+						"${3rd}/luv/library",
+						unpack(vim.api.nvim_get_runtime_file("", true)),
+						-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+						-- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					},
+				},
+			},
+		},
+	}) -- End lua
+
 	-- nvim_lsp.tsserver.setup({
 	--     on_attach = function(_, client)
 	--         client.server_capabilities.hoverProvider = true
