@@ -2,25 +2,30 @@
 local fn = vim.fn
 
 if fn.has("nvim-0.9") == 1 then
-    vim.loader.enable()
+	vim.loader.enable()
 end
 
 if vim.g.neovide then
-    require("core.neovide")
-    require("core.options")
-    require("core.mappings")
-    -- require("core.autocmds")
+	require("core.neovide")
+	require("core.options")
+	require("core.mappings")
+	-- require("core.autocmds")
 end
 
 if vim.g.vscode then
-    require("core.options")
-    require("core.mappings")
-    require("core.autocmds")
-else
-    require("core.options")
-    require("core.mappings")
-    require("core.autocmds")
-    require("core.lazy")
+	print("Welcome to VSCode Neovim...")
+	require("vscode-neovim")
+	print("Local vscode required -> ")
+	require("vscode_conf").setup()
+	-- require("core.options")
+	-- require("core.mappings")
+	-- require("core.autocmds")
+	return
 end
+
+require("core.options")
+require("core.mappings")
+require("core.autocmds")
+require("core.lazy")
 
 ----------------------------
