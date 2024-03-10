@@ -3,6 +3,8 @@
 #
 # Typer-Cli completion.
 # Installed via pip install typer-cli
+
+$currentPSModulePath = $env:PSModulePath
 $env:PSModulePath=[NullString]
 
 # Dotfiles copy
@@ -86,6 +88,7 @@ if (checkEnvironment)
 if (-not (checkEnvironment))
 {
 
+    $env:PSModulePath = $currentPSModulePath
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
     . "$powershell_scripts_dir\home_scripts.ps1"
 }
@@ -125,15 +128,3 @@ function l
 
 # if I decide to start using starship, well this is how I would do it.
 # Invoke-Expression (&starship init powershell)
-
-
-# BEGIN - Alias(s)
-# Import-Module DockerCompletion
-#Git aliases from Oh-my-zsh Git plugin for PWSH
-# Import-Module git-aliases -DisableNameChecking
-# removed pending testings
-# Import-Module posh-cargo
-
-
-
-

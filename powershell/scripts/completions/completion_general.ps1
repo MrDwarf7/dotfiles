@@ -4,17 +4,15 @@ using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
 
+
+
+
 if (-not $env:HOME_PROFILE -eq $true)
 {
     $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
-} else
-{
-    $env:PSModulePath = $env:PSModulePath
 }
 
-
 # Import-Module PSReadLine
-
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete
 #Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete ## Testing alternative Tab completion api call
 
