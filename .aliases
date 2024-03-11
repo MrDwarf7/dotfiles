@@ -111,3 +111,12 @@ function watch_wrapper {
 }
 alias wne=watch_wrapper
 
+function watch_with_args {
+	if [ -z "$1" ]; then
+		watch -n 0.001 "ls -laht|tail -10|less -c -s --use-color"
+	else
+		watch -n 0.001 "bat --paging=always --decorations=always $1|less -c -s --use-color"
+	fi
+	return 0
+}
+alias wn=watch_with_args
