@@ -1,6 +1,3 @@
-########## yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
-# This will give vscode intellisense but causes issues in nvim
-
 gui:
   # stuff relating to the UI
   windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
