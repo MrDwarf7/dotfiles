@@ -81,3 +81,5 @@ alias basc='vim ~/.bashrc'
 source "$HOME/.aliases"
 
 source /usr/share/nvm/init-nvm.sh
+
+source /home/dwarf/.config/broot/launcher/bash/br

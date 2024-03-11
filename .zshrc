@@ -31,7 +31,7 @@ else
 fi
 
 export EDITOR='nvim'
-
+# export EDITOR='/usr/sbin/nvim'
 
 source "$HOME/.win_user"
 if [ -d "/mnt/c/Users" ]; then
@@ -301,3 +301,5 @@ export $(dbus-launch)
 # eval "$(starship init zsh)"
 
 eval "$(zoxide init zsh)"
+
+source /home/dwarf/.config/broot/launcher/bash/br
