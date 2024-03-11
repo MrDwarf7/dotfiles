@@ -64,6 +64,8 @@ SafeNewAlias -Alias rm -Command RemoveWrapper $args
 # New-Alias -Name which -Value where.exe
 SafeNewAlias -Alias which -Command where.exe
 
+SafeNewAlias -Alias br -Command broot.exe
+
 
 # Cargo Aliases
 #
