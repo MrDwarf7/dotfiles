@@ -4,7 +4,7 @@
 # Uncomment and change the value (true/false) to
 # specify whether bacon should start in summary mode
 #
-# summary = true
+summary = false
 
 # Uncomment and change the value (true/false) to
 # specify whether bacon should start with lines wrapped
@@ -14,7 +14,7 @@
 # In "reverse" mode, the focus is at the bottom, item
 # order is reversed, and the status bar is on top
 #
-# reverse = true
+reverse = true
 
 # Exporting "locations" lets you use them in an external
 # tool, for example as a list of jump locations in an IDE.
