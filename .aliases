@@ -106,3 +106,8 @@ alias dcdf="docker compose down --force"
 alias Db.="docker buildx build ."
 alias Db.t="docker buildx build . -t"
 
+function watch_wrapper {
+	watch -n 0.001 "$*" | bat --tabs 0 --decorations=always
+}
+alias wne=watch_wrapper
+
