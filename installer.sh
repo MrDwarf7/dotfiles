@@ -13,7 +13,6 @@
 # pipx install pip
 #
 
-
 # TODO: Incorporate the following into the script:
 # sudo systemctl enable paccache.timer
 # sudo systemctl start paccache.timer
@@ -66,6 +65,7 @@ packages_to_install=(
 	win32yank-bin
 	codelldb-bin
 	lldb
+	lld
 	lldb-vscode
 	atool
 	lynx
