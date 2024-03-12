@@ -5,34 +5,42 @@ local highlight = vim.highlight
 local opt = vim.opt
 
 local MainAutoCmdGroup = augroup("MainAutoCmdGroup", { clear = true })
-local LspAuGroup = augroup("LspAuGroup ", { clear = true })
+local GitConfig = augroup("GitConfig", { clear = true })
+local LspAuGroup = augroup("LspAuGroup", { clear = true })
 local format_sync_grp = augroup("GoFormat", {})
+local QToClose = augroup("QToClose", { clear = true })
+local UrlHighliting = augroup("UrlHighliting", { clear = true })
+local LastPost = augroup("LastPost", { clear = true })
+local TextYank = augroup("TextYank", { clear = true })
+local StripWhiteSpace = augroup("StripWhiteSpace", { clear = true })
+local AutoResize = augroup("AutoResize", { clear = true })
+local XmlParser = augroup("XmlParser", { clear = true })
 
 autocmd("BufReadPost", {
 	callback = function()
 		require("util.last_pos").last_pos()
 	end,
-	group = MainAutoCmdGroup,
+	group = LastPost,
 })
 
 autocmd("TextYankPost", {
 	callback = function()
 		highlight.on_yank({ timeout = 60 })
 	end,
-	group = MainAutoCmdGroup,
+	group = TextYank,
 })
 
 autocmd({ "BufWritePre" }, {
 	desc = "Strips white space on save",
 	pattern = "*",
 	command = [[%s/\s\+$//e]],
-	group = MainAutoCmdGroup,
+	group = StripWhiteSpace,
 })
 
 -- Auto resize window splits
 autocmd("VimResized", {
 	command = "wincmd =",
-	group = MainAutoCmdGroup,
+	group = AutoResize,
 })
 
 -- Set filetype for certain file-patterns.
@@ -41,7 +49,7 @@ autocmd("BufEnter", {
 	callback = function()
 		opt.filetype = "gitconfig"
 	end,
-	group = MainAutoCmdGroup,
+	group = GitConfig,
 })
 
 autocmd("BufEnter", {
@@ -49,7 +57,7 @@ autocmd("BufEnter", {
 	callback = function()
 		opt.filetype = "xml"
 	end,
-	group = MainAutoCmdGroup,
+	group = XmlParser,
 })
 
 autocmd("BufWinEnter", {
@@ -57,7 +65,7 @@ autocmd("BufWinEnter", {
 	callback = function(args)
 		require("util.q_to_close").q_to_close(args)
 	end,
-	group = MainAutoCmdGroup,
+	group = QToClose,
 })
 
 autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
@@ -65,7 +73,7 @@ autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
 	callback = function()
 		require("util.url_highlighting").url_highlight()
 	end,
-	group = MainAutoCmdGroup,
+	group = UrlHighliting,
 })
 
 autocmd("LspAttach", {

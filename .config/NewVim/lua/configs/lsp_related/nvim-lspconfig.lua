@@ -44,6 +44,21 @@ M.lsp_on_attach = function()
 	end, { desc = "workspace [S]ymbols" })
 
 	lsp_mappings.lsp_binds(opts)
+
+	-- adds border to lsp windows (ie: :LspInfo and stuff)
+	nvim_lsp_windows.default_options.border = "single"
+	lsp.handlers["textDocument/hover"] = handlers.hover
+	lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help
+	lsp.handlers["textDocument/diagnostics_border"] = handlers.diagnostics_border
+
+	-- Boorder for the <leader>lh command
+	vim.diagnostic.config({
+		virtual_text = true,
+		underline = true,
+		signs = true,
+		update_in_insert = true,
+		float = { border = "single" }, -- This line
+	})
 end
 
 -- Global global mappings
@@ -72,4 +87,5 @@ vim.diagnostic.config({
 local capabilities = lsp_capabilities.default_capabilities()
 
 nvim_lsp_servers_list.lsp_server_setups(M.lsp_on_attach, capabilities)
+
 return M
