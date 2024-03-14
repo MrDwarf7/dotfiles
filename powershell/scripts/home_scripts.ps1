@@ -26,5 +26,5 @@ Import-Module git-aliases -DisableNameChecking
 Import-Module posh-cargo
 Import-Module DockerCompletion
 Import-Module PSReadLine
-Import-Module -Name CompletionPredictor
+# Import-Module -Name CompletionPredictor
 . "$env:APPDATA\dystroy\broot\config\launcher\powershell\br.ps1"
