@@ -148,7 +148,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap gcc :action CommentByLineComment <CR>
-vnoremap gcc :action CommentByLineComment <CR> <Escape>
+vnoremap gcc :action CommentByLineComment <CR>
 
 nnoremap zc :action CollapseRegion<CR>
 vnoremap zc :action CollapseRegion<CR>
@@ -213,8 +213,8 @@ let g:WhichKeyDesc_find = "<Space>ft Find TODOs"
 nnoremap <Space>ft :action ActivateTODOToolWindow<CR>
 vnoremap <Space>ft :action ActivateTODOToolWindow<CR>
 
-nnoremap za :action ToggleFolding<CR>
-vnoremap za :action ToggleFolding<CR>
+nnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
+vnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
 
 
 
