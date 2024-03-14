@@ -14,8 +14,6 @@ map <Space>=<leader>
 " set timeoutlen=500
 set notimeout
 
-
-
 inoremap jj <ESC>
 nnoremap <ESC> :noh<CR>
 " noremap <ESC> jj
@@ -44,6 +42,7 @@ map \wq <Action>(SaveAndCloseActiveTab)
 " Common settings -------------------------
 set number relativenumber
 set clipboard+=unnamed
+set clipboard+=ideaput
 set clipboard+=ideaput
 
 set visualbell
@@ -80,7 +79,7 @@ set surround
 set quickscope
 set ideamarks
 
-let g:highlightedyank_highlight_duration = "80"
+let g:highlightedyank_highlight_duration = "60"
 " Trigger a highlight in the appropriate direction when pressing these keys:
 let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
@@ -121,8 +120,8 @@ map <A-a> :action copilot.applyInlays
 
 
 " Better scrolling via centering after page up/down
-nnoremap <C-U> <C-U>zz
-nnoremap <C-D> <C-D>zz
+" nnoremap <C-U> <C-U>zz
+" nnoremap <C-D> <C-D>zz
 
 
 
@@ -149,7 +148,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap gcc :action CommentByLineComment <CR>
-vnoremap gcc :action CommentByLineComment <CR>
+vnoremap gcc :action CommentByLineComment <CR> <Escape>
 
 nnoremap zc :action CollapseRegion<CR>
 vnoremap zc :action CollapseRegion<CR>
@@ -192,6 +191,7 @@ let g:WhichKeyDesc_find = "<Space>f Find"
 let g:WhichKeyDesc_find = "<Space>f/ Find Text in buffer"
 nnoremap <Space>f/ :action Find<CR>
 vnoremap <Space>f/ :action Find<CR>
+
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
 nnoremap <Space>ff :action GotoFile<CR>
 vnoremap <Space>ff :action GotoFile<CR>
@@ -199,7 +199,7 @@ let g:WhichKeyDesc_find = "<Space>fu Find Usages"
 nnoremap <Space>fu :action FindUsages<CR>
 vnoremap <Space>fu :action  FindUsages<CR>
 let g:WhichKeyDesc_find = "<Space>fp Find within Project"
-nnoremap <Space>fp :action FindInPath<CR>
+nnoremap <Space>fw :action FindInPath<CR>
 let g:WhichKeyDesc_find = "<Space>fr Find Recent Files"
 nnoremap <Space>fr :action RecentFiles <CR>
 let g:WhichKeyDesc_find = "<Space>fl Find Recent Location"
@@ -207,10 +207,16 @@ nnoremap <Space>fl :action RecentLocations<CR>
 let g:WhichKeyDesc_find = "<Space>fb Find Buffers (Same as Recent Files)"
 nnoremap <Space>fb :action RecentFiles <CR>
 vnoremap <Space>fb :action RecentFiles <CR>
+noremap <Space>fp :action ActivateProblemsViewToolWindow<CR>
 
 let g:WhichKeyDesc_find = "<Space>ft Find TODOs"
 nnoremap <Space>ft :action ActivateTODOToolWindow<CR>
 vnoremap <Space>ft :action ActivateTODOToolWindow<CR>
+
+nnoremap za :action ToggleFolding<CR>
+vnoremap za :action ToggleFolding<CR>
+
+
 
 
 
