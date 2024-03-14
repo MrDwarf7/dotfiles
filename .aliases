@@ -109,7 +109,7 @@ alias Db.t="docker buildx build . -t"
 function watch_wrapper {
 	watch -n 0.001 "$*" | bat --tabs 0 --decorations=always
 }
-alias wne=watch_wrapper
+alias wnw=watch_wrapper
 
 function watch_with_args {
 	if [ -z "$1" ]; then
