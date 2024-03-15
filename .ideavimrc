@@ -192,6 +192,11 @@ let g:WhichKeyDesc_find = "<Space>f/ Find Text in buffer"
 nnoremap <Space>f/ :action Find<CR>
 vnoremap <Space>f/ :action Find<CR>
 
+
+nnoremap <C-w><C-l> :action MoveElementRight<CR>
+nnoremap <C-w><C-h> :action MoveElementLeft<CR>
+
+
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
 nnoremap <Space>ff :action GotoFile<CR>
 vnoremap <Space>ff :action GotoFile<CR>
@@ -224,6 +229,13 @@ vnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
 let g:WhichKeyDesc_Goto = "<Space>g Goto
 nnoremap gd :action GotoDeclaration <CR>
 nnoremap gi :action GotoImplementation <CR>
+
+nnoremap gt :action GotoTypeDeclaration <CR>
+
+
+nnoremap ]d :action GotoNextError <CR>
+nnoremap [d :action GotoPreviousError <CR>
+
 
 let g:WhichKeyDesc_Goto = "<Space>gu Goto Usages"
 nnoremap <Space>gu :action FindUsages<CR>
@@ -336,11 +348,13 @@ nnoremap <Space>gp :action Vcs.Push<CR>
 " LSP specific binds -------------------------
 let g:WhichKeyDesc_LSP = "<Space>l +LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
-nnoremap <Space>lh :action ShowErrorDescription<CR>
 nnoremap <Space>lr :action RenameElement<CR>
 let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
-noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
-nnoremap <Space>lc :action ShowPopupMenu<CR>
+nnoremap <Space>lh :action ShowPopupMenu<CR>
+
+
+" nnoremap <Space>lh :action ShowErrorDescription<CR>
+" noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
 
 
 " Debug specific binds -------------------------
