@@ -4,13 +4,13 @@ vsync = true
 maximized = false
 srgb = false
 # idle = 15
-neovim-bin = "/usr/sbin/nvim"
+neovim-bin = "/usr/bin/nvim"
 frame = "full"
 
 [font]
 # regular = ["Fira Code Nerd Font"]
 # regular = [ "FiraMono Nerd Font" ]
-regular = [ "FiraMono Nerd Font Mono" ]
+regular = ["FiraMono Nerd Font Mono"]
 size = 14
 
 # [font.features]
