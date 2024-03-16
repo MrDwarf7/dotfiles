@@ -27,7 +27,7 @@ vim.notify = vscode.notify
 -- opt.showtabline = 2
 -- opt.mouse = "a"
 -- opt.backupcopy = "yes"
-opt.undolevels = 1000
+-- opt.undolevels = 1000
 opt.shortmess:append({ c = true, S = true })
 opt.shortmess = vim.opt.shortmess + { c = true, s = true, C = true, F = true, I = true, S = true, W = true }
 opt.showmode = true
@@ -78,8 +78,8 @@ end
 -- opt.spelllang = "en"
 -- opt.softtabstop = 4
 -- opt.swapfile = false
-opt.undofile = true
-opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+-- opt.undofile = true
+-- opt.undodir = vim.fn.stdpath("data") .. "/undodir"
 -- opt.smartindent = true
 -- opt.expandtab = true
 -- opt.shiftwidth = 4

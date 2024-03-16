@@ -45,35 +45,17 @@ return {
 	end),
 
 	map("n", "<C-k>", function()
-		print("Peek Docs")
+		print("Peek definition")
 		vscode.action("editor.action.peekDefinition")
 	end),
 
-	map("n", "<C-w>q", function()
-		print("Go to declaration")
-		vscode.action("workbench.action.closeActiveEditor")
-	end),
-
-	map("n", "[d", function()
-		print("Previous diagnostic")
-		vscode.call("editor.action.marker.prev")
-	end),
-
-	map("n", "[D", function()
-		print("Previous diagnostic in files")
-		vscode.call("editor.action.marker.prevInFiles")
-	end),
-
-	--
-	--
-
 	map("n", "]d", function()
-		print("Next diagnostic")
+		print("Next Diagnostic")
 		vscode.call("editor.action.marker.next")
 	end),
 
-	map("n", "]D", function()
-		print("Next diagnostic in files")
-		vscode.call("editor.action.marker.nextInFiles")
+	map("n", "[d", function()
+		print("Prev Diagnostic")
+		vscode.call("editor.action.marker.prev")
 	end),
 }

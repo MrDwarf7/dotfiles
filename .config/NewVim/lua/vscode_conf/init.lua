@@ -12,6 +12,7 @@ set clipboard+=unnamedplus
 
 local V = {}
 local vscode = require("vscode-neovim")
+
 V.vscode_setup = function()
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "

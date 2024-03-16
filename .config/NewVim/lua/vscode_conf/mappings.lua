@@ -50,8 +50,8 @@ map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
 map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
-map("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
-map("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
+map("n", "<Leader>pl", ":Lazy<CR>", { silent_opts, desc = "[l]azy" })
+map("n", "<Leader>pm", ":Mason<CR>", { silent_opts, desc = "[m]ason" })
 
 map("n", "dd", function() -- Empty/blank lines go into blackhole register
 	if #current_line() == 0 then
@@ -68,30 +68,26 @@ map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
 -- map("n", "<Leader>v", ":vsplit<CR>", silent_opts, { desc = "[v]-split" })
 -- map("n", "<Leader>s", ":split<CR>", silent_opts, { desc = "[s]plit" })
-map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
-map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
+map("n", "<C-w>e", "<C-w>=", { silent_opts, desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
+map("n", "<C-w>X", "<cmd>only<CR>", { silent_opts, desc = "buffers - CLOSE all except" })
 
-map("n", "<Leader>}", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
-map("n", "<Leader>{", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
-map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
-
-map("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
-
-map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
-
-map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
+map("n", "<Leader>}", ":bnext<CR>", { silent_opts, desc = "[n]ext" })
+map("n", "<Leader>{", ":bprev<CR>", { silent_opts, desc = "[p]revious" })
+map("n", "<Leader>x", ":bdelete<CR>", { silent_opts, desc = "[X]close" })
+map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", { silent_opts, desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
+map("n", '<Leader>"', ":Telescope neoclip<CR>", { silent_opts, desc = "Clipboard/Registers" })
 
 -- TODO: Basisically just move these to WK register
 
 -- map("n", "<Leader>b", "+[b]uffers")
-map("n", "<Leader>d", "+[d]ebug")
-map("n", "<Leader>p", "+[p]lugins", { desc = "+[p]lugins" })
-map("n", "<leader>g", "+[g]it", silent_opts, { desc = "[d]iffview" })
-map("n", "<leader>gd", "[d]iffview", silent_opts, { desc = "+[g]it" })
-map("n", "<Leader>f", "+[f]ind", { desc = "+[f]ind" })
-map("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
+-- map("n", "<Leader>d", "+[d]ebug")
+-- map("n", "<Leader>p", "+[p]lugins", { desc = "+[p]lugins" })
+-- map("n", "<leader>g", "+[g]it", silent_opts, { desc = "[d]iffview" })
+-- map("n", "<leader>gd", "[d]iffview", silent_opts, { desc = "+[g]it" })
+-- map("n", "<Leader>f", "+[f]ind", { desc = "+[f]ind" })
+-- map("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
 
-map("n", "<Leader>i", "+[i]harpoon", { desc = "+[i]harpoon" })
+-- map("n", "<Leader>i", "+[i]harpoon", { desc = "+[i]harpoon" })
 
 -- things not mapped yet:
 -- <Leader>lA -- Code [A]ction Saga
