@@ -53,7 +53,7 @@ fi
 
 
 if [ $WIN_AVAILABLE ]; then
-    alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl"
+    alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl NVIM_APPNAME=NewVim"
 fi
 
 
