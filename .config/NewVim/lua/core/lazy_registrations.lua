@@ -3,7 +3,7 @@ return {
 	{
 		{ "tpope/vim-fugitive", event = "VeryLazy" }, -- Automatic setup
 		{ "nvim-telescope/telescope-dap.nvim", event = "BufReadPost" }, -- Automatic setup
-		{ "tpope/vim-surround", event = "BufEnter" }, -- Automatic setup
+		-- { "tpope/vim-surround", event = "BufEnter" }, -- Automatic setup
 	},
 
 	-------------------------- PLUGIN SETUP BEGINS --------------------------
@@ -44,6 +44,7 @@ return {
 
 	{
 		"folke/trouble.nvim",
+		event = "BufReadPre",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
 			require("configs.trouble")
@@ -71,7 +72,14 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			{ "ThePrimeagen/harpoon", branch = "harpoon2" }, -- Telescope
-			{ "nvim-telescope/telescope-fzy-native.nvim", build = "make" }, -- Telescope
+			-- { "nvim-telescope/telescope-fzy-native.nvim", build = "make" }, -- Disabled for time being as buggy
+			{
+				"nvim-telescope/telescope-fzy-native.nvim",
+				build = "make",
+				cond = function()
+					return vim.fn.executable("make") == 1
+				end,
+			},
 			"AckslD/nvim-neoclip.lua", -- Telescope
 			"nvim-telescope/telescope-live-grep-args.nvim", -- Telescope
 			"cljoly/telescope-repo.nvim", -- Telescope
@@ -83,10 +91,12 @@ return {
 
 	{
 		"nvim-treesitter/nvim-treesitter",
-		event = "BufReadPost",
+		event = "BufEnter",
 		build = ":TSUpdate",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"nvim-treesitter/nvim-treesitter-context",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
@@ -119,7 +129,7 @@ return {
 
 	{
 		"NvChad/nvim-colorizer.lua",
-		-- event = "BufReadPost",
+		event = "VeryLazy",
 		ft = {
 			"css",
 			"html",
@@ -195,7 +205,7 @@ return {
 			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
-			require("configs.local_telescope_plugins.harpoon")
+			require("configs.harpoon")
 		end,
 	},
 
@@ -204,60 +214,38 @@ return {
 	------------ LSP stuff
 
 	{
-		"lvimuser/lsp-inlayhints.nvim",
-		event = "LspAttach",
-		config = function()
-			require("lsp-inlayhints").setup({})
-		end,
-	},
-
-	{
-		"williamboman/mason.nvim", -- KEEP ORDER (Mason, Mason-Lspconfig, nvim-lspconfig)
-		event = "BufEnter",
-		config = function()
-			require("configs.lsp_related.mason")
-		end,
-	},
-
-	{
-		"williamboman/mason-lspconfig.nvim", -- KEEP ORDER (Mason, Mason-Lspconfig, nvim-lspconfig)
-		event = "BufEnter",
-		dependencies = {
-			"williamboman/mason.nvim",
-		},
-		config = function()
-			require("configs.lsp_related.mason-lspconfig")
-		end,
-	},
-
-	{
-		"neovim/nvim-lspconfig", -- KEEP ORDER (Mason, Mason-Lspconfig, nvim-lspconfig) -- nvim-cmp requires this
+		"neovim/nvim-lspconfig",
 		event = {
 			"VeryLazy",
-			"BufReadPost",
+			-- "BufReadPost",
 			"BufWritePre",
-			"BufReadPre",
-			"InsertEnter", -- These ones I've added recently due to AU command issue?
+			-- "InsertEnter", -- These ones I've added recently due to AU command issue?
 		},
 		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
+			"nvim-telescope/telescope.nvim",
+			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, depends_on = "nvim-lspconfig" },
+			{ "folke/neodev.nvim", opts = {} },
+			{ "j-hui/fidget.nvim", lazy = false, opts = {} },
+			{ "williamboman/mason.nvim", lazy = false, event = "BufEnter" },
+			{ "williamboman/mason-lspconfig.nvim", lazy = false },
+			{ "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false, event = "BufEnter" },
 		},
 		config = function()
-			require("configs.lsp_related.nvim-lspconfig")
+			require("configs.lsp")
 		end,
 	},
 
-	{
-		"nvimdev/lspsaga.nvim", -- Okay this one is a BANGERRRRRRRRRRRR
-		event = "BufReadPost",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = function()
-			require("configs.lsp_related.lspsaga")
-		end,
-	},
+	-- {
+	-- 	"nvimdev/lspsaga.nvim", -- Okay this one is a BANGERRRRRRRRRRRR
+	-- 	event = "BufReadPost",
+	-- 	dependencies = {
+	-- 		"nvim-treesitter/nvim-treesitter",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	config = function()
+	-- 		require("configs.lsp_related.lspsaga")
+	-- 	end,
+	-- },
 
 	---- LSP specific plugins
 
@@ -265,12 +253,14 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^4",
 		ft = { "rust" },
-		event = "VeryLazy",
+		dependencies = {
+			{ "lvimuser/lsp-inlayhints.nvim", lazy = false },
+		},
 		config = function()
-			require("configs.lsp_related.rustaceanvim").rustaceanvim_setup()
+			require("configs.rustaceanvim").rustaceanvim_setup()
 		end,
 	},
-
+	--
 	{
 		"pmizio/typescript-tools.nvim",
 		ft = {
@@ -295,10 +285,11 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
+			{ "lvimuser/lsp-inlayhints.nvim", lazy = false, event = "LspAttach" },
 		},
 		opts = {},
 	},
-
+	--
 	{
 		"ray-x/go.nvim",
 		ft = { "go", "gomod" },
@@ -308,16 +299,17 @@ return {
 			"neovim/nvim-lspconfig",
 			"nvim-treesitter/nvim-treesitter",
 		},
+		event = { "CmdlineEnter" },
 		config = function()
-			require("configs.lsp_related.go")
+			require("go").setup()
 		end,
 	},
-
+	--
 	{
 		"Civitasv/cmake-tools.nvim",
 		ft = { "cmake", "cpp", "h", "hpp" },
 		config = function()
-			require("configs.lsp_related.cmake")
+			require("cmake-tools").setup({})
 		end,
 	},
 
@@ -325,9 +317,16 @@ return {
 
 	{
 		"j-hui/fidget.nvim",
-		lazy = false,
-		-- event = "BufReadPre",
+		event = "VeryLazy",
 		opts = {},
+	},
+
+	{
+		"lvimuser/lsp-inlayhints.nvim",
+		event = "VeryLazy",
+		config = function()
+			require("lsp-inlayhints").setup({})
+		end,
 	},
 
 	------------ END LSP stuff
@@ -415,8 +414,7 @@ return {
 			"onsails/lspkind.nvim",
 		},
 		config = function()
-			local full_setup = require("configs.cmp_related.cmp")
-			full_setup.cmp_full_setup()
+			require("configs.cmp").cmp_full_setup()
 		end,
 	},
 
@@ -424,7 +422,17 @@ return {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = function()
-			require("configs.cmp_related.autopairs")
+			require("nvim-autopairs").setup({
+				opts = {
+					fast_wrap = {},
+					disable_filetype = { "TelescopePrompt", "vim" },
+				},
+				config = function(_, opts)
+					require("nvim-autopairs").setup(opts)
+					local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+					require("cmp.event"):on("confirm_done", cmp_autopairs.on_confirm_done())
+				end,
+			})
 		end,
 	},
 
@@ -486,7 +494,7 @@ return {
 
 	{
 		"sindrets/diffview.nvim",
-		event = { "VeryLazy", "BufReadPost" },
+		event = { "VeryLazy" },
 		config = function()
 			require("configs.diffview")
 		end,
@@ -528,7 +536,7 @@ return {
 		"zbirenbaum/copilot.lua",
 		event = "BufReadPost",
 		config = function()
-			require("configs.cmp_related.copilot")
+			require("configs.copilot")
 		end,
 	},
 
@@ -540,7 +548,21 @@ return {
 			"hrsh7th/nvim-cmp",
 		},
 		config = function()
-			require("configs.cmp_related.copilot_cmp")
+			require("copilot_cmp").setup({
+				suggestion = { enabled = true },
+				panel = { enabled = false },
+			})
+		end,
+	},
+
+	{
+		"echasnovski/mini.nvim",
+		event = "BufReadPost",
+		config = function()
+			require("mini.ai").setup({
+				n_lines = 100,
+			})
+			require("mini.surround").setup()
 		end,
 	},
 

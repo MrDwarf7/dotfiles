@@ -6,7 +6,7 @@ local opt = vim.opt
 
 local MainAutoCmdGroup = augroup("MainAutoCmdGroup", { clear = true })
 local GitConfig = augroup("GitConfig", { clear = true })
-local LspAuGroup = augroup("LspAuGroup", { clear = true })
+-- local LspAuGroup = augroup("LspAuGroup", { clear = true })
 local format_sync_grp = augroup("GoFormat", {})
 local QToClose = augroup("QToClose", { clear = true })
 local UrlHighliting = augroup("UrlHighliting", { clear = true })
@@ -68,24 +68,25 @@ autocmd("BufWinEnter", {
 	group = QToClose,
 })
 
-autocmd({ "VimEnter", "FileType", "BufEnter", "WinEnter" }, {
+autocmd({ "VimEnter", "FileType", "BufReadPost" }, {
 	desc = "URL Highlighting",
+	pattern = "*.*",
 	callback = function()
 		require("util.url_highlighting").url_highlight()
 	end,
 	group = UrlHighliting,
 })
 
-autocmd("LspAttach", {
-	callback = function(ev)
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-		-- local opts = { buffer = ev.buf }
-		-- local vimlspbuf = vim.lsp.buf
-		local opts = { silent = true, nowait = true, buffer = ev.buf }
-		require("util.lsp-mappings").lsp_binds(opts)
-	end,
-	group = LspAuGroup,
-})
+-- autocmd("LspAttach", {
+-- 	callback = function(ev)
+-- 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+-- 		-- local opts = { buffer = ev.buf }
+-- 		-- local vimlspbuf = vim.lsp.buf
+-- 		local opts = { silent = true, nowait = true, buffer = ev.buf }
+-- 		require("util.lsp-mappings").lsp_binds(opts)
+-- 	end,
+-- 	group = LspAuGroup,
+-- })
 
 autocmd("BufWritePre", {
 	pattern = "*.go",
@@ -97,7 +98,7 @@ autocmd("BufWritePre", {
 
 autocmd("VimEnter", {
 	desc = "Auto select virtualenv Nvim open",
-	pattern = "*",
+	-- pattern = "*",
 	callback = function()
 		local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
 		if venv ~= "" then
