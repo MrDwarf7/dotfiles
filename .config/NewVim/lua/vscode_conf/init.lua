@@ -17,9 +17,6 @@ V.vscode_setup = function()
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
 
-	-- vim.g.vscode.mapleader = " "
-	-- vim.g.vscode.maplocalleader = " "
-
 	print("Vscode specific setup file loads...")
 	require("vscode_conf.options")
 	require("vscode_conf.mappings")

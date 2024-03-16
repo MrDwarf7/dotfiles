@@ -90,17 +90,6 @@ return {
 		end,
 	},
 
-	-- TEST:
-	{
-		"saecki/crates.nvim",
-		ft = { "toml", "rust" },
-		-- event = "VeryLazy",
-		tag = "stable",
-		config = function()
-			require("crates").setup()
-		end,
-	},
-
 	{
 		"kevinhwang91/nvim-ufo",
 		event = "BufReadPost",
