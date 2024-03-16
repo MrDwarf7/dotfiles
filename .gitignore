@@ -29,3 +29,4 @@ nvim_distros/omerxx/lazy-lock*
 .config/tmux/plugins/*
 .config/btop/*.log
 .config/lazygit/state*
+.config/broot/launcher*/**
