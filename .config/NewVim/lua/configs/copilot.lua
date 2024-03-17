@@ -1,6 +1,6 @@
-local copilot = require("copilot")
+local map = vim.keymap.set
 
-copilot.setup({
+require("copilot").setup({
 	panel = {
 		enabled = false, -- Temp disabled to test copilot_cmp
 		auto_refresh = false, -- This is the default setting
@@ -19,18 +19,18 @@ copilot.setup({
 	},
 
 	filetypes = { -- Defaults are all false basically
-		yaml = true,
-		markdown = true,
-		help = false,
+		cvs = false,
 		gitcommit = true,
 		gitrebase = true,
+		help = false,
 		hgcommit = false,
+		markdown = true,
 		svn = false,
-		cvs = false,
+		yaml = true,
 		["."] = true,
 	},
 	copilot_node_command = "node", -- What other ways can it be run??
 	server_opts_overrides = {},
 })
 
-vim.keymap.set("n", "<Leader>pp", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" })
+map("n", "<Leader>pp", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" })

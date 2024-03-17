@@ -76,7 +76,7 @@ map("n", "<Leader>}", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>{", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
-map("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
+-- map("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
 
 map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 

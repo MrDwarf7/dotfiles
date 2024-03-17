@@ -1,44 +1,52 @@
-local harpoon_main = require("harpoon")
-local telescope_conf = require("telescope.config").values
-
+-- local require("harpoon") = require("harpoon")
+-- local telescope_conf =
 local map = vim.keymap.set
 
-harpoon_main.setup()
+require("harpoon").setup()
 
 map("n", "<Leader>i", function()
-	harpoon_main:list():append()
+	require("harpoon"):list():append()
 end, { desc = "harpoon [i]t" })
 
-map("n", "<Leader>Hh", function()
-	harpoon_main.ui:toggle_quick_menu(harpoon_main:list())
+map("n", "<Leader>I", function()
+	require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
 end, { desc = "[h]arpoon menu" })
 
 map("n", "<Leader>H1", function()
-	harpoon_main:list():select(1)
+	require("harpoon"):list():select(1)
 end, { desc = "harpoon [1]" })
 
 map("n", "<Leader>H2", function()
-	harpoon_main:list():select(2)
+	require("harpoon"):list():select(2)
 end, { desc = "harpoon [2]" })
 
 map("n", "<Leader>H3", function()
-	harpoon_main:list():select(3)
+	require("harpoon"):list():select(3)
 end, { desc = "harpoon [3]" })
 
 map("n", "<Leader>H4", function()
-	harpoon_main:list():select(4)
+	require("harpoon"):list():select(4)
 end, { desc = "harpoon [4]" })
 
 map("n", "<Leader>H5", function()
-	harpoon_main:list():select(5)
+	require("harpoon"):list():select(5)
 end, { desc = "harpoon [5]" })
 
 map("n", "<Leader>[", function()
-	harpoon_main:list():prev()
+	require("harpoon"):list():prev()
 end, { desc = "harpoon [p]rev" })
 
 map("n", "<Leader>]", function()
-	harpoon_main:list():next()
+	require("harpoon"):list():next()
+end, { desc = "harpoon [n]ext" })
+
+-- Not entirely required, but can keep or remove idk
+map("n", "[i", function()
+	require("harpoon"):list():prev()
+end, { desc = "harpoon [p]rev" })
+
+map("n", "]i", function()
+	require("harpoon"):list():next()
 end, { desc = "harpoon [n]ext" })
 
 local function toggle_telescope(harpoon_files)
@@ -53,12 +61,12 @@ local function toggle_telescope(harpoon_files)
 			finder = require("telescope.finders").new_table({
 				results = file_paths,
 			}),
-			previewer = telescope_conf.file_previewer({}),
-			sorter = telescope_conf.generic_sorter({}),
+			previewer = require("telescope.config").values.file_previewer({}),
+			sorter = require("telescope.config").values.generic_sorter({}),
 		})
 		:find()
 end
 
 map("n", "<Leader>fi", function()
-	toggle_telescope(harpoon_main:list())
+	toggle_telescope(require("harpoon"):list())
 end, { desc = "Open Harpoon" })

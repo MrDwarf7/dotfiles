@@ -74,9 +74,9 @@ M.rustaceanvim_setup = function()
 				auto_focus = true,
 			},
 			inlay_hints = {
-				highlight = "NonText",
 				autoSetHints = true,
 				auto = true,
+				highlight = "NonText",
 			},
 		},
 		server = {
@@ -109,8 +109,7 @@ M.rustaceanvim_setup = function()
 			default_settings = {
 				["rust-analyzer"] = {
 					inlay_hints = {
-						typeHints = true,
-						-- parameterHints = true,
+						align = true,
 						bindingHints = true,
 						chainingHints = true,
 						closingBraceHints = true,
@@ -119,24 +118,24 @@ M.rustaceanvim_setup = function()
 						closureStyle = "rust_analyzer",
 						discriminationHints = true,
 						expressionAdjustmentHints = true,
-						mutableBorrowHints = true,
+						highlight = "Comment",
 						implicitDrops = true,
-						-- lifetimeEllisionHints = true,
 						lifetimeEllisionHints = {
 							enable = true,
 							useParamaterNames = true,
 						},
+						-- lifetimeEllisionHints = true,
+						maxLength = 120,
+						mutableBorrowHints = true,
 						parameterHints = {
 							enable = true,
 						},
+						-- parameterHints = true,
+						prefix = " » ",
 						rangeExclusiveHints = {
 							enable = true,
 						},
-
-						maxLength = 120,
-						align = true,
-						prefix = " » ",
-						highlight = "Comment",
+						typeHints = true,
 					},
 				},
 			},
@@ -144,26 +143,26 @@ M.rustaceanvim_setup = function()
 
 		dap = {
 			adapter = {
-				type = "executable",
 				command = "lldb-vscode",
 				name = "lldb",
+				type = "executable",
 			},
 			configuration = {
-				name = "lldb",
-				type = "lldb",
-				request = "launch",
-				program = "${file}",
-				cwd = vim.fn.getcwd(),
-				stopOnEntry = true,
 				args = {},
+				cwd = vim.fn.getcwd(),
 				env = {},
 				externalConsole = false,
 				MIMode = "gdb",
+				name = "lldb",
+				program = "${file}",
+				request = "launch",
+				stopOnEntry = true,
+				type = "lldb",
 				setupCommands = {
 					{
 						description = "Enable pretty-printing for gdb",
-						text = "-enable-pretty-printing",
 						ignoreFailures = true,
+						text = "-enable-pretty-printing",
 					},
 				},
 				sourceLanguages = { "rust" },

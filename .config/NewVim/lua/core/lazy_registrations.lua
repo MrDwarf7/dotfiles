@@ -2,7 +2,6 @@ return {
 
 	{
 		{ "tpope/vim-fugitive", event = "VeryLazy" }, -- Automatic setup
-		{ "nvim-telescope/telescope-dap.nvim", event = "BufReadPost" }, -- Automatic setup
 		-- { "tpope/vim-surround", event = "BufEnter" }, -- Automatic setup
 	},
 
@@ -62,17 +61,35 @@ return {
 		end,
 	},
 
-	--------------------- END BASICS
-	--------------------- BASICS TWO
+	-- Testing having telescope load really early
+	{
+		"nvim-telescope/telescope-fzy-native.nvim",
+		build = "make",
+		cond = function()
+			return vim.fn.executable("make") == 1
+		end,
+	},
 
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		event = { "VeryLazy", "BufReadPre" },
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			{ "ThePrimeagen/harpoon", branch = "harpoon2" }, -- Telescope
-			-- { "nvim-telescope/telescope-fzy-native.nvim", build = "make" }, -- Disabled for time being as buggy
+
+			{
+				"ThePrimeagen/harpoon",
+				lazy = true,
+				-- event = "VeryLazy",
+				branch = "harpoon2",
+				dependencies = {
+					"nvim-lua/plenary.nvim",
+				},
+				config = function()
+					require("configs.harpoon")
+				end,
+			},
+
 			{
 				"nvim-telescope/telescope-fzy-native.nvim",
 				build = "make",
@@ -88,6 +105,13 @@ return {
 			require("configs.telescope")
 		end,
 	},
+
+	{ "nvim-telescope/telescope-dap.nvim", event = "BufReadPost" }, -- Automatic setup
+
+	-- Testing having telescope load really early
+
+	--------------------- END BASICS
+	--------------------- BASICS TWO
 
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -123,7 +147,10 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
-			require("configs.lualine")
+			-- Move to extn if wanting to customize it at some point
+			require("lualine").setup({
+				theme = "tokyonight",
+			})
 		end,
 	},
 
@@ -196,18 +223,18 @@ return {
 
 	---- TELESCOPE PLUGINS
 
-	{
-		"ThePrimeagen/harpoon",
-		event = "VeryLazy",
-		branch = "harpoon2",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
-			require("configs.harpoon")
-		end,
-	},
+	-- {
+	-- 	"ThePrimeagen/harpoon",
+	-- 	event = "VeryLazy",
+	-- 	branch = "harpoon2",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- 	config = function()
+	-- 		require("configs.harpoon")
+	-- 	end,
+	-- },
 
 	---- END TELESCOPE PLUGINS
 	--------------------- END BASICS TWO
@@ -216,9 +243,9 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = {
-			"VeryLazy",
-			-- "BufReadPost",
-			"BufWritePre",
+			-- "VeryLazy",
+			"BufReadPost",
+			-- "BufWritePre",
 			-- "InsertEnter", -- These ones I've added recently due to AU command issue?
 		},
 		dependencies = {
@@ -471,7 +498,8 @@ return {
 
 	{
 		"kdheepak/lazygit.nvim",
-		event = "VeryLazy",
+		-- lazy = false,
+		-- event = "VeryLazy",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",

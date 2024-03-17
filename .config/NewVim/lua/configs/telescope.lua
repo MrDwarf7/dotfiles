@@ -1,26 +1,28 @@
-local telescope = require("telescope")
+-- local telescope = require("telescope")
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
-
 -- local previewer = require("telescope.previewers")
-
-local trouble = require("trouble.providers.telescope")
-
-local cmd = vim.cmd
-local map = vim.keymap.set
-
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
+-- local trouble = require("trouble.providers.telescope")
 
 -- require("fzy_native")
 -- require("live_grep_args")
 -- require("neoclip")
 -- require("notify")
-require("configs.harpoon")
+
+local map = vim.keymap.set
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
 
 -- require("telescope").load_extension("notify")
 
-telescope.setup({
+require("telescope").load_extension("fzy_native")
+require("telescope").load_extension("live_grep_args")
+require("telescope").load_extension("neoclip")
+require("telescope").load_extension("harpoon")
+require("telescope").load_extension("lazygit")
+require("configs.harpoon")
+
+require("telescope").setup({
 	defaults = {
 		vimgrep_arguments = {
 			"rg",
@@ -47,15 +49,15 @@ telescope.setup({
 			height = 0.80,
 			preview_cutoff = 120,
 		},
+		border = {},
+		color_devicons = true,
 		file_ignore_patterns = { "node_modules", ".venv", "venv" },
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		prompt_prefix = "   ",
 		selection_caret = "|> ",
-		winblend = 12,
-		border = {},
 		set_env = { ["COLORTERM"] = "truecolor" },
-		color_devicons = true,
+		winblend = 12,
 		mappings = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous,
@@ -64,7 +66,7 @@ telescope.setup({
 				["<C-p>"] = actions.move_selection_previous,
 				["<C-n>"] = actions.move_selection_next,
 
-				["<C-t>"] = trouble.open_with_trouble,
+				["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
 				["<C-q>"] = actions.close,
 				["<C-d>"] = actions.delete_buffer,
 			},
@@ -89,10 +91,14 @@ map("n", "<Leader>fw", builtin.live_grep, { desc = "[w]ord" })
 map("n", "<Leader>fb", builtin.buffers, { desc = "[b]uffers" })
 map("n", "<Leader>fr", builtin.oldfiles, { desc = "[r]ecents" })
 map("n", "<Leader>fl", builtin.resume, { desc = "[l]ast search" })
-map("n", "<Leader>f'", builtin.marks, { desc = "[']marks" })
 map("n", "<Leader>fj", builtin.jumplist, { desc = "[j]ump list" })
-map("n", "<Leader>fp", builtin.diagnostics, { desc = "[p]roblems (telescope)" })
 map("n", "<Leader>fV", builtin.vim_options, { desc = "[v]im options browser" })
+map("n", "<Leader>fg", builtin.git_files, { desc = "[g]it files" })
+map("n", "<Leader>fm", builtin.marks, { desc = "[m]arks" })
+map("n", "<Leader>fp", require("trouble").toggle, { desc = "[p]roblems - trouble" })
+map("n", "<Leader>fd", builtin.diagnostics, { desc = "[d]iagnostics (same as ld)" })
+
+map("n", "<Leader>pr", builtin.reloader, { desc = "[r]eloader" })
 
 map("n", "<Leader>ft", ":TodoTelescope<CR>", { desc = "[t]odo's" })
 
@@ -108,30 +114,25 @@ map("n", '<Leader>f"', ":Telescope neoclip<CR>", { noremap = true, silent = true
 
 map({ "n", "v" }, "<Leader>fs", function()
 	local word = vim.fn.expand("<cword>")
-	builtin.grep_string({ search = word })
+	require("telescope.builtin").grep_string({ search = word })
 end, { desc = "[s]earch [w]ord" })
 
 map({ "n", "v" }, "<Leader>fS", function()
 	local word = vim.fn.expand("<cWORD>")
-	builtin.grep_string({ search = word })
+	require("telescope.builtin").grep_string({ search = word })
 end, { desc = "[S]earch [W]ORD" })
 
 -- Telescope extension setups
 -------------------------------------------------
 
-require("telescope").load_extension("fzy_native")
-require("telescope").load_extension("live_grep_args")
-require("telescope").load_extension("neoclip")
-require("telescope").load_extension("harpoon")
-
 -- NOTE: Add 'extension' mappings here later
 
 -- Niche autocmd to fix TS highlinging in preview buffer windows
 
--- autocmd("User", {
---     pattern = "TelescopePreviewwerLoaded",
---     callback = function()
---         vim.opt_local.splitkeep = "cursor"
---     end,
---     group = augroup("TelescopePluginEvents", {}),
--- })
+autocmd("User", {
+	pattern = "TelescopePreviewwerLoaded",
+	callback = function()
+		vim.opt_local.splitkeep = "cursor"
+	end,
+	group = augroup("TelescopePluginEvents", {}),
+})

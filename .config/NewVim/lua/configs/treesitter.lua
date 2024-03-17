@@ -156,6 +156,8 @@ local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 -- map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move_next)
 -- map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_previous)
 
+-- NOTE: I honestly don't see a proper difference between these two
+--
 -- vim way: ; goes to the direction you were moving.
 map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
 map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
