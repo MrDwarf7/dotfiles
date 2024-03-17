@@ -38,7 +38,7 @@ local rustacean_vim_attach = function(event)
 		-- end
 	end, "format")
 
-	map("<Leader>lc", function()
+	map("<Leader>ll", function()
 		cmd.RustLsp("flyCheck")
 	end, "[c]heck")
 
