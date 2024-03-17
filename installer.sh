@@ -66,6 +66,7 @@ packages_to_install=(
 	codelldb-bin
 	lldb
 	lld
+	llvm
 	lldb-vscode
 	atool
 	lynx
@@ -73,6 +74,8 @@ packages_to_install=(
 	broot
 	# cmake-init  # install via yay, then install it INTO the pyenv env using ITS VERSION of pip
 )
+
+# zig from zrc?
 
 ### Function definitions:
 
