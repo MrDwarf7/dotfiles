@@ -1,10 +1,7 @@
-local winshift = require("winshift")
-
 local map = vim.keymap.set
-
 local silent_opts = { silent = true, noremap = true }
 
-winshift.setup({})
+require("winshift").setup({})
 
 map("n", "<Leader>w", "+[w]inShift", { desc = "+[w]inShift" })
 map("n", "<Leader>ww", ":WinShift<CR>", silent_opts)

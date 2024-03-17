@@ -1,10 +1,8 @@
-local illuminate = require("illuminate")
-
-illuminate.configure({
-    providers = {
-        "lsp",
-        "treesitter",
-        "regex",
-    },
-    delay = 100, -- Default value
+require("illuminate").configure({
+	providers = {
+		"lsp",
+		"regex",
+		"treesitter",
+	},
+	delay = 100, -- Default value
 })

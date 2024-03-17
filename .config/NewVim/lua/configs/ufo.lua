@@ -1,7 +1,6 @@
-local ufo = require("ufo")
 local map = vim.keymap.set
 
-ufo.setup({
+require("ufo").setup({
 	provider_selector = function(bufnr, filetype, buftype)
 		return { "treesitter", "indent" }
 	end,

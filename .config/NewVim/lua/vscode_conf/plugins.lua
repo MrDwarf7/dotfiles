@@ -4,8 +4,7 @@ return {
 		"folke/neodev.nvim",
 		event = "BufReadPost",
 		config = function()
-			local neodev = require("neodev")
-			neodev.setup({
+			require("neodev").setup({
 				library = {
 					plugins = {
 						"nvim-dap-ui",
@@ -24,10 +23,7 @@ return {
 		},
 		config = function()
 			local leap = require("leap")
-
 			pcall(leap.setup({}), "leap")
-
-			-- pcall required to prevent popup due to apparent 'conflict' with surround, lol
 			pcall(leap.create_default_mappings(), "leap")
 		end,
 	},
@@ -39,8 +35,7 @@ return {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
 		config = function()
-			local comment = require("Comment")
-			comment.setup({
+			require("Comment").setup({
 				pre_hook = function()
 					return vim.bo.commentstring
 				end,
@@ -53,10 +48,9 @@ return {
 		event = "BufReadPost",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			local todo = require("todo-comments")
 			local map = vim.keymap.set
 
-			todo.setup({
+			require("todo-comments").setup({
 				keywords = {
 					FIX = { icon = " ", color = "error" },
 					TODO = { icon = " ", color = "info" },
@@ -97,10 +91,8 @@ return {
 			"kevinhwang91/promise-async",
 		},
 		config = function()
-			local ufo = require("ufo")
 			local map = vim.keymap.set
-
-			ufo.setup({
+			require("ufo").setup({
 				provider_selector = function(bufnr, filetype, buftype)
 					return { "treesitter", "indent" }
 				end,

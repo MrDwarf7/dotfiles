@@ -1,38 +1,43 @@
+-- Date: 2021-10-27
+--
+-- Currently deprecate/not in use
+--
+--
+--
+
 local lspsaga = require("lspsaga")
 local cmd = vim.cmd
 local map = vim.api.nvim_set_keymap
 
 lspsaga.setup({
-    ui = {
-        sign = false,
-    },
-    rename = {
-        keymaps = {
-            quit = { "q", "<esc>" },
-            exec = "<CR>",
-        },
-        action_keys = {
-            quit = { "q", "<esc>" },
-            exec = "<CR>",
-        },
-        finder = {
-            keys = {
-                quit = { "q", "<esc>" },
-                vsplit = "v",
-                split = "s",
-            }
-        },
-        definition = {
-            keys = {
-                quit = { "q", "<esc>" },
-                vsplit = "v",
-                split = "s",
-            }
-        }
-
-    }
+	ui = {
+		sign = false,
+	},
+	rename = {
+		keymaps = {
+			quit = { "q", "<esc>" },
+			exec = "<CR>",
+		},
+		action_keys = {
+			quit = { "q", "<esc>" },
+			exec = "<CR>",
+		},
+		finder = {
+			keys = {
+				quit = { "q", "<esc>" },
+				vsplit = "v",
+				split = "s",
+			},
+		},
+		definition = {
+			keys = {
+				quit = { "q", "<esc>" },
+				vsplit = "v",
+				split = "s",
+			},
+		},
+	},
 })
-
 
 local opts = { noremap = true, silent = true }
 
@@ -55,7 +60,6 @@ map("n", "<Leader>lw", "<cmd>Lspsaga outline<CR>", { desc = "[outline]" })
 -- map("n", "<Leader>lR", "<cmd>Lspsaga rename<CR>", { desc = "SAGA [r]rename" }) -- This conflicts/overrides
 
 map("n", "<Leader>lt", "<cmd>Lspsaga peek_type_definition<CR>", { desc = "[t]ype def" })
-
 
 map("n", "<A-d>", "<cmd>Lspsaga term_toggle<CR>", { desc = "Toggle terminal" })
 map("n", "]l", "<cmd>Lspsaga diagnostic_jump_next", { desc = "[next]" })

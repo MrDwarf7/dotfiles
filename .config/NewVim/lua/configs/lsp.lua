@@ -1,11 +1,11 @@
 -- local v_cmd = vim.cmd
 -- local set_map = vim.keymap.set
 -- local lsp_buf = vim.lsp.buf
+-- local nvim_lsp_inbuilt_utils = require("lspconfig.util")
+
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 local handlers = require("util.lsp-handlers")
-
-local nvim_lsp_inbuilt_utils = require("lspconfig.util")
 
 autocmd("LspAttach", {
 	group = augroup("LspAuGroup", { clear = true }),
@@ -23,8 +23,17 @@ autocmd("LspAttach", {
 
 		map("<Leader>ls", require("telescope.builtin").lsp_document_symbols, "[S]ymbols document")
 		map("<Leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[S]ymbol workspace")
+
+		map("<Leader>lc", require("telescope.builtin").lsp_incoming_calls, "[c]alls incoming")
+		map("<Leader>lC", require("telescope.builtin").lsp_outgoing_calls, "[C]alls outgoing")
+		map("<Leader>lt", require("telescope.builtin").treesitter, "[T]reesitter symbols")
+
+		map("<Leader>ld", require("telescope.builtin").diagnostics, "[d]iagnostics")
+
 		map("<Leader>lr", vim.lsp.buf.rename, "[r]ename")
+
 		map("<Leader>la", vim.lsp.buf.code_action, "[a]ction")
+
 		map("K", vim.lsp.buf.hover, "Hoever Docs")
 
 		map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
@@ -66,6 +75,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 local servers = {
+	bashls = {},
 	biome = {},
 	clangd = {
 		cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
@@ -94,7 +104,7 @@ local servers = {
 	lua_ls = {
 		cmd = { "lua-language-server" },
 		filetypes = { "lua" },
-		root_dir = nvim_lsp_inbuilt_utils.root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
+		root_dir = require("lspconfig.util").root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
 		-- capabilities = {},
 		settings = {
 			Lua = {
@@ -126,7 +136,7 @@ local servers = {
 	pyright = {
 		cmd = { "pyright-langserver", "--stdio" },
 		filetypes = { "python" },
-		root_dir = nvim_lsp_inbuilt_utils.root_pattern(
+		root_dir = require("lspconfig.util").root_pattern(
 			".git",
 			"setup.py",
 			"setup.cfg",
@@ -161,7 +171,7 @@ local servers = {
 	tailwindcss = {
 		filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
 		flags = { debounce_text_changes = 300 },
-		root_dir = nvim_lsp_inbuilt_utils.root_pattern("tailwind.config.*"),
+		root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
 	},
 	-- tsserver = {
 	-- 	function(_)
@@ -194,11 +204,13 @@ local ensure_installed = vim.tbl_keys(servers or {})
 vim.list_extend(ensure_installed, {
 	"beautysh",
 	"black",
+	"clang-format",
 	"codelldb",
 	"debugpy",
 	"delve",
 	"isort",
 	"mypy",
+	"powershell_es",
 	"prettier",
 	"ruff",
 	"shfmt",
@@ -206,8 +218,6 @@ vim.list_extend(ensure_installed, {
 	"ts-standard",
 	"vulture",
 	"yamlfmt",
-	"clang-format",
-	"powershell_es",
 })
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
