@@ -61,8 +61,8 @@ map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
 map("n", "<Down>", ":resize -2<CR>", silent_opts)
 map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
-map("n", "<C-w>e", "<C-w>=", { silent_opts, desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
-map("n", "<C-w>X", "<cmd>only<CR>", { silent_opts, desc = "buffers - CLOSE all except" })
+map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
+map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
 
 map("n", "<Leader>}", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>{", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
