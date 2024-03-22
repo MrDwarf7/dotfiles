@@ -5,6 +5,7 @@ return {
 		-- { "tpope/vim-surround", event = "BufEnter" }, -- Automatic setup
 	},
 
+	{ "nvim-neotest/nvim-nio" },
 	-------------------------- PLUGIN SETUP BEGINS --------------------------
 	--------------------- BASICS
 
