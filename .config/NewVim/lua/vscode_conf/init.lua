@@ -26,8 +26,7 @@ V.vscode_setup = function()
 end
 
 V.setup = function()
-	local setup = V.vscode_setup()
-	return setup
+	return V.vscode_setup()
 end
 
 return V
