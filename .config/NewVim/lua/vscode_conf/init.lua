@@ -21,8 +21,8 @@ V.vscode_setup = function()
 	require("vscode_conf.options")
 	require("vscode_conf.mappings")
 	require("vscode_conf.autocmds")
-	require("vscode_conf.plugins")
-	require("vscode_conf.actions")
+	require("vscode_conf.plugins").vscode_plugins()
+	require("vscode_conf.actions").vscode_actions()
 end
 
 V.setup = function()

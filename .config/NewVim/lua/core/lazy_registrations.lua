@@ -279,6 +279,7 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
+		lazy = true,
 		version = "^4",
 		ft = { "rust" },
 		dependencies = {

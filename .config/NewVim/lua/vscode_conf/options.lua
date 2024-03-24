@@ -1,4 +1,4 @@
-print("Vscode Options file loads...")
+print("Vscode specific options file loads...")
 local vscode = require("vscode-neovim")
 local opt = vim.opt
 local g = vim.g

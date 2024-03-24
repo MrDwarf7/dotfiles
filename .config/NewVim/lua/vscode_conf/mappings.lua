@@ -45,9 +45,6 @@ map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
 map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
-map("n", "<Leader>pl", ":Lazy<CR>", silent_opts, { desc = "[l]azy" })
-map("n", "<Leader>pm", ":Mason<CR>", silent_opts, { desc = "[m]ason" })
-
 map("n", "dd", function() -- Empty/blank lines go into blackhole register
 	if #current_line() == 0 then
 		return '"_dd'
@@ -56,16 +53,14 @@ map("n", "dd", function() -- Empty/blank lines go into blackhole register
 	end
 end, { expr = true })
 
-map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
-map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
-map("n", "<Down>", ":resize -2<CR>", silent_opts)
-map("n", "<Up>", ":resize +2<CR>", silent_opts)
+-- map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
+-- map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
+-- map("n", "<Down>", ":resize -2<CR>", silent_opts)
+-- map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
-map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
+-- map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
 map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
 
-map("n", "<Leader>}", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
-map("n", "<Leader>{", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
