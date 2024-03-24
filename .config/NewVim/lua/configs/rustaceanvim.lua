@@ -3,9 +3,9 @@ local set_map = vim.keymap.set
 
 local M = {}
 
-local rustacean_vim_attach = function(event)
+M.rustacean_vim_attach = function(event)
 	local map = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "RUST: " .. desc })
 	end
 
 	map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
@@ -81,7 +81,7 @@ M.rustaceanvim_setup = function()
 		},
 		server = {
 			on_attach = function(client, bufnr)
-				rustacean_vim_attach(client)
+				M.rustacean_vim_attach(client)
 
 				require("lsp-inlayhints").on_attach(client, bufnr)
 				require("lsp-inlayhints").show()
