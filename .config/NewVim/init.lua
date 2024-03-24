@@ -16,9 +16,6 @@ if vim.g.vscode then
 	print("Welcome to VSCode Neovim...")
 	require("vscode-neovim")
 	print("Local vscode required -> ")
-	-- require("core.options")
-	-- require("core.mappings")
-	-- require("core.autocmds")
 	return require("vscode_conf").setup()
 end
 
