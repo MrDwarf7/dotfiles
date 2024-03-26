@@ -1,6 +1,6 @@
 --------
 
-local architecture = require("util.architecture").architechture()
+local architecture = require("util.architecture")
 local env = vim.env
 local opt = vim.opt
 local g = vim.g
@@ -12,11 +12,17 @@ local exists = vim.fn.exists
 -- Enable the Lua loader byte-compilation cache.
 -- g.did_load_filetypes = 1
 
-if architecture == "unix" then
-	vim.g.os = "unix"
-elseif architecture == "win32" then
+if architecture.is_windows() == true then
 	vim.g.os = "win32"
+elseif architecture.is_windows() == false then
+	vim.g.os = "unix"
 end
+
+-- if architecture == "unix" then
+-- 	vim.g.os = "unix"
+-- elseif architecture == "win32" then
+-- 	vim.g.os = "win32"
+-- end
 
 -- Global
 opt.fillchars = {
@@ -35,10 +41,10 @@ opt.listchars = {
 	nbsp = "␣",
 }
 
-if vim.g.os == "unix" then
-	opt.shell = "zsh"
-elseif vim.g.os == "win32" then
+if architecture.is_windows() == true then
 	opt.shell = "pwsh"
+elseif architecture.is_windows() == false then
+	opt.shell = "zsh"
 end
 
 opt.scrolloff = 6
