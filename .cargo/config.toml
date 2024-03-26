@@ -2,12 +2,20 @@
 [alias]
 b = "build"
 c = "check"
+ch = "check"
+u = "update"
+up = "upgrade"
+w = "watch"
+wq = "watch --quiet"
+wqc = "watch --quiet --clear"
+wqcr = "watch --quiet --clear --run"
 t = "test"
 r = "run"
+rq = "run --quiet"
 rr = "run --release"
 br = "build --release"
 cl = "clean"
-clipa = "clippy --all-targets --all-features -- -D warnings"
+clip = "clippy --all-targets --all-features -- -D warnings"
 clipP = "clippy -- -W clippy::pedantic"
 
 ## Other alias examples from docs
