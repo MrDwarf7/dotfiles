@@ -297,7 +297,7 @@ return {
 			"html",
 			"javascript",
 			"lua",
-			"markdown",
+			-- "markdown",
 			"scss",
 			"txt",
 			"vim",
