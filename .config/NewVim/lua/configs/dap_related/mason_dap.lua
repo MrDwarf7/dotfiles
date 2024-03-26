@@ -1,16 +1,17 @@
+local architecture = require("util.architecture")
 local ensure_installed_table = {}
 
-if vim.g.os == "unix" then
+if architecture.is_windows() == true then
 	ensure_installed_table = {
-		"bash-debug-adapter",
 		"chrome-debug-adapter",
 		"codelldb",
 		"cpptools",
 		"debugpy",
 		"firefox-debug-adapter",
 	}
-elseif vim.g.os == "win32" then
+elseif architecture.is_windows() == false then
 	ensure_installed_table = {
+		"bash-debug-adapter",
 		"chrome-debug-adapter",
 		"codelldb",
 		"cpptools",
