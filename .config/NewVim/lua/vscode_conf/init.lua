@@ -18,11 +18,11 @@ V.vscode_setup = function()
 	vim.g.maplocalleader = " "
 
 	print("Vscode specific setup file loads...")
+	require("vscode_conf.actions")
 	require("vscode_conf.options")
 	require("vscode_conf.mappings")
 	require("vscode_conf.autocmds")
 	require("vscode_conf.plugins").vscode_plugins()
-	require("vscode_conf.actions").vscode_actions()
 end
 
 V.setup = function()
