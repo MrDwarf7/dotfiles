@@ -96,14 +96,14 @@ autocmd("BufWritePre", {
 	group = format_sync_grp,
 })
 
-autocmd("VimEnter", {
-	desc = "Auto select virtualenv Nvim open",
-	-- pattern = "*",
-	callback = function()
-		local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
-		if venv ~= "" then
-			require("venv-selector").retrieve_from_cache()
-		end
-	end,
-	once = true,
-})
+-- autocmd("VimEnter", {
+-- 	desc = "Auto select virtualenv Nvim open",
+-- 	-- pattern = "*",
+-- 	callback = function()
+-- 		local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
+-- 		if venv ~= "" then
+-- 			require("venv-selector").retrieve_from_cache()
+-- 		end
+-- 	end,
+-- 	once = true,
+-- })

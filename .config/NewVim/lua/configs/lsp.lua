@@ -45,11 +45,11 @@ autocmd("LspAttach", {
 		map("[d", vim.diagnostic.goto_prev, "diag prev")
 
 		map("<Leader>lf", function()
-			if pcall(require, "conform") then
-				--              require("conform").format({ bufnr = event.buf })
-				-- else
-				vim.lsp.buf.format({ async = true })
-			end
+			-- if pcall(require, "conform") then
+			--              require("conform").format({ bufnr = event.buf })
+			-- else
+			vim.lsp.buf.format({ async = true })
+			-- end
 		end, "format")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -122,7 +122,7 @@ local servers = {
 				workspace = {
 					library = {
 						"${3rd}/luv/library",
-						unpack(vim.api.nvim_get_runtime_file("", true)),
+						-- unpack(vim.api.nvim_get_runtime_file("", true)),
 						-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
 						-- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 					},
@@ -219,6 +219,7 @@ vim.list_extend(ensure_installed, {
 	"vulture",
 	"yamlfmt",
 })
+
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })

@@ -47,7 +47,16 @@ return {
 		event = "BufReadPre",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
-			require("configs.trouble")
+			require("trouble").setup({})
+
+			vim.keymap.set("n", "]]", function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem NEXT" })
+
+			vim.keymap.set("n", "[[", function()
+				require("trouble").previous({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem PREV" })
+			-- require("configs.trouble")
 		end,
 	},
 
@@ -86,9 +95,9 @@ return {
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
-				config = function()
-					require("configs.harpoon")
-				end,
+				-- config = function()
+				-- 	require("configs.harpoon")
+				-- end,
 			},
 
 			{
@@ -119,19 +128,20 @@ return {
 		event = "BufEnter",
 		build = ":TSUpdate",
 		dependencies = {
+			"lewis6991/gitsigns.nvim",
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
-			require("configs.treesitter")
+			require("configs.treesitter").setup()
 		end,
 	},
 
 	{
 		"numToStr/Comment.nvim",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
@@ -187,7 +197,8 @@ return {
 		event = "BufReadPost",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("todo-comments").setup()
+			require("configs.todo-comments")
+			-- .setup()
 		end,
 	},
 
@@ -401,7 +412,7 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "BufReadPost",
 		config = function()
 			require("configs.lint")
 		end,
@@ -409,7 +420,7 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "BufWritePost",
 		config = function()
 			require("configs.conform")
 		end,
@@ -487,7 +498,7 @@ return {
 
 	{
 		"linux-cultist/venv-selector.nvim",
-		event = "LspAttach",
+		-- event = "BufRead",
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
@@ -501,14 +512,15 @@ return {
 	{
 		"kdheepak/lazygit.nvim",
 		-- lazy = false,
-		-- event = "VeryLazy",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
 		},
-		config = function()
-			require("configs.lazygit")
-		end,
+		-- opts = {},
+		-- config = function()
+		-- 	require("configs.lazygit")
+		-- end,
 	},
 
 	{
