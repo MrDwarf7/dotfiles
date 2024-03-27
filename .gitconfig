@@ -1,20 +1,13 @@
+[user]
+	email = 129040985+MrDwarf7@users.noreply.github.com
+	name = MrDwarf7
 [init]
 	defaultBranch = main
 [core]
 	editor = nvim
 	excludesFile = "$HOME/.gitignore_global"
-[credential "https://github.com"]
-	helper = !/usr/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = !/usr/bin/gh auth git-credential
-[credential]
-	helper = store
-	helper = /usr/bin/git-credential-manager
-[credential]
-	helper = store
-	helper = /mnt/c/Applications/Git/mingw64/bin/git-credential-manager.exe
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+[interactive]
+	singleKey = true
 [alias]
 	last = log -1 HEAD
 	wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
@@ -28,12 +21,28 @@
 	pa = push --all
 	rs = restore --staged
 	cm = commit -m
-	rlast = reflog -5 HEAD
+    rlast = reflog -5 HEAD
+    sut = branch --set-upstream-to
 [push]
     autoSetupRemote = true
+[difftool "sourcetree"]
+	cmd = "'' "
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-	required = true
-
+    required = true
+[credential "https://github.com"]
+    helper = !/usr/bin/gh auth git-credential
+    git-credential
+[credential "https://gist.github.com"]
+	helper = !/usr/bin/gh auth git-credential
+    git-credential
+[credential]
+	helper = store
+	helper = /usr/bin/git-credential-manager
+[credential "https://dev.azure.com"]
+	useHttpPath = true
