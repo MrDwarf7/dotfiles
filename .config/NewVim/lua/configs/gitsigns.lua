@@ -1,4 +1,6 @@
-require("gitsigns").setup({
+local gs = require("gitsigns")
+
+gs.setup({
 	signs = {
 		add = { text = "│" },
 		changedelete = { text = "~" },
@@ -24,9 +26,6 @@ require("gitsigns").setup({
 	on_attach = function()
 		local map = vim.keymap.set
 		local feedkeys = vim.api.nvim_feedkeys
-		-- require("util.gitsigns-mappings").gitsigns_mappings()
-
-		local gs = package.loaded.gitsigns
 
 		map("n", "[c", function()
 			gs.prev_hunk()
