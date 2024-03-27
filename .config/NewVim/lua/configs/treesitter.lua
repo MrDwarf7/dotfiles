@@ -51,19 +51,19 @@ require("nvim-treesitter.configs").setup({
 	},
 
 	indent = {
-		enable = true,
 		disable = function(lang, buf)
-			if
-				lang == "html"
-				or lang == "javascript"
-				or lang == "typescript"
-				or lang == "css"
-				or "rust"
-				or require("util.buffer").is_large(buf)
-			then
+			local indent_disabled = {
+				"html",
+				"javascript",
+				"typescript",
+				"css",
+				"rust",
+			}
+			if lang == vim.tbl_keys(indent_disabled) then
 				return true
 			end
 		end,
+		enable = true,
 	},
 
 	autotag = {
