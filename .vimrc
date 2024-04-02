@@ -47,7 +47,6 @@ set timeoutlen=200
 set mouse=a
 set showmode
 set clipboard=unnamedplus
-set clipboard+=un
 
 
 " Ignore compiled files
@@ -100,6 +99,7 @@ endif
 
 " Add a bit extra margin to the left
 set foldcolumn=1
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
