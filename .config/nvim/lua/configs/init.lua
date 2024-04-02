@@ -24,6 +24,7 @@ return {
 
 	"nvim-lua/plenary.nvim",
 	"JoosepAlviste/nvim-ts-context-commentstring",
+	"nvim-neotest/nvim-nio",
 
 	{
 		"folke/neodev.nvim",
