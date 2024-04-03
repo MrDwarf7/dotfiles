@@ -2,7 +2,8 @@
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 -- local previewer = require("telescope.previewers")
--- local trouble = require("trouble.providers.telescope")
+local trouble_prov = require("trouble.providers.telescope")
+local trouble = require("trouble")
 
 -- require("fzy_native")
 -- require("live_grep_args")
@@ -19,7 +20,7 @@ require("telescope").load_extension("fzy_native")
 require("telescope").load_extension("live_grep_args")
 require("telescope").load_extension("neoclip")
 require("telescope").load_extension("harpoon")
-require("telescope").load_extension("lazygit")
+-- require("telescope").load_extension("lazygit")
 require("configs.harpoon")
 
 require("telescope").setup({
@@ -51,7 +52,7 @@ require("telescope").setup({
 		},
 		border = {},
 		color_devicons = true,
-		file_ignore_patterns = { "node_modules", ".venv", "venv" },
+		file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental", "build" },
 		file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 		grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 		prompt_prefix = "   ",
@@ -66,9 +67,13 @@ require("telescope").setup({
 				["<C-p>"] = actions.move_selection_previous,
 				["<C-n>"] = actions.move_selection_next,
 
-				["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
+				["<C-t>"] = trouble_prov.open_with_trouble,
 				["<C-q>"] = actions.close,
 				["<C-d>"] = actions.delete_buffer,
+
+				["<C-s>"] = actions.select_horizontal,
+				["<C-l>"] = actions.select_vertical,
+
 			},
 			n = {
 				["q"] = actions.close,
@@ -79,6 +84,9 @@ require("telescope").setup({
 				["<C-p>"] = actions.move_selection_previous,
 				["<C-n>"] = actions.move_selection_next,
 				["<C-d>"] = actions.delete_buffer,
+
+				["<C-s>"] = actions.select_horizontal,
+				["<C-l>"] = actions.select_vertical,
 			},
 		},
 	},
@@ -95,7 +103,7 @@ map("n", "<Leader>fj", builtin.jumplist, { desc = "[j]ump list" })
 map("n", "<Leader>fV", builtin.vim_options, { desc = "[v]im options browser" })
 map("n", "<Leader>fg", builtin.git_files, { desc = "[g]it files" })
 map("n", "<Leader>fm", builtin.marks, { desc = "[m]arks" })
-map("n", "<Leader>fp", require("trouble").toggle, { desc = "[p]roblems - trouble" })
+map("n", "<Leader>fp", trouble.toggle, { desc = "[p]roblems - trouble" })
 map("n", "<Leader>fd", builtin.diagnostics, { desc = "[d]iagnostics (same as ld)" })
 
 map("n", "<Leader>pr", builtin.reloader, { desc = "[r]eloader" })
@@ -104,7 +112,7 @@ map("n", "<Leader>ft", ":TodoTelescope<CR>", { desc = "[t]odo's" })
 
 map("n", "<leader>/", function()
 	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 		winblend = 10,
 		previewer = false,
 	}))
@@ -114,12 +122,12 @@ map("n", '<Leader>f"', ":Telescope neoclip<CR>", { noremap = true, silent = true
 
 map({ "n", "v" }, "<Leader>fs", function()
 	local word = vim.fn.expand("<cword>")
-	require("telescope.builtin").grep_string({ search = word })
+	builtin.grep_string({ search = word })
 end, { desc = "[s]earch [w]ord" })
 
 map({ "n", "v" }, "<Leader>fS", function()
 	local word = vim.fn.expand("<cWORD>")
-	require("telescope.builtin").grep_string({ search = word })
+	builtin.grep_string({ search = word })
 end, { desc = "[S]earch [W]ORD" })
 
 -- Telescope extension setups
@@ -135,4 +143,17 @@ autocmd("User", {
 		vim.opt_local.splitkeep = "cursor"
 	end,
 	group = augroup("TelescopePluginEvents", {}),
+})
+
+autocmd("BufEnter", {
+	pattern = "*",
+	callback = function()
+		-- require("telescope").load_extension("lazygit")
+		require("lazygit.utils").project_root_dir()
+
+		-- local lzgt = package.loaded.lazygit or require("lazygit")
+		-- local lzgt_tele = require("telescope").load_extension("lazygit")
+		map("n", "<leader>gg", require("lazygit").lazygit, { desc = "[l]azy git" })
+		map("n", "<leader>gp", require("telescope").load_extension("lazygit").lazygit, { desc = "[p]rojects" })
+	end,
 })

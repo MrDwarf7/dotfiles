@@ -1,13 +1,7 @@
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
 local map = vim.keymap.set
--- local v = vim.v
-
--- local expor_noreplace = { expr = true, noremap = true }
-
 local silent_opts = { noremap = true, silent = true }
-
-local loud_opts = { noremap = true, silent = false }
 
 g.mapleader = " "
 g.maplocalleader = " "
@@ -30,8 +24,16 @@ map("v", ">", ">gv", silent_opts)
 -- map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- same as above but if mvoement greater than 5 then add to jump list
 
-map("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
-map("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
+map({ "n", "x" }, "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true, silent = true })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
+map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
+map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
 map("n", "n", "nzzzv", silent_opts)
 map("n", "N", "Nzzzv", silent_opts)
@@ -61,39 +63,66 @@ end, { expr = true })
 
 map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
 map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
+
+map("n", "<C-h>", ":vertical resize +2<CR>", silent_opts)
+map("n", "<C-l>", ":vertical resize -2<CR>", silent_opts)
 map("n", "<Down>", ":resize -2<CR>", silent_opts)
 map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
--- map("n", "<Leader>v", ":vsplit<CR>", silent_opts, { desc = "[v]-split" })
--- map("n", "<Leader>s", ":split<CR>", silent_opts, { desc = "[s]plit" })
 map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
 map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
+
+map("n", "]b", "<cmd>bnext<cr>", { desc = "[n]ext" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "[p]revious" })
+
+map("n", "<Leader>bN", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<Leader>bn", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
-map("n", "<Leader>}", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
-map("n", "<Leader>{", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
--- map("n", "<Leader>gc", ':Git commit -m "', silent_opts) -- Temp for the time being until lazygit // fugitive or something
+map("n", "[f", vim.cmd.cprev, { desc = "Previous Quickfix" })
+map("n", "]f", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 
+map("n", "<Leader>t'", ":Telescope<CR>", silent_opts, { desc = "Generic Telescope call" })
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
 
--- TODO: Basisically just move these to WK register
+---------- These should end up getting overwritten anyway, or some at least
 
--- things not mapped yet:
--- <Leader>lA -- Code [A]ction Saga
---
--- <Leader>lf -- [f]ormat (lsp)"
---
--- <Leader>lh -- "[h]over"
---
---<Leader>lR -- "[R]ename"
---
--- Not working after the LSP actually attaches lol
--- map("n", "<Leader>l", "+[l]sp", { desc = "+[l]sp" })
+local diagnostic_goto = function(next, severity)
+	local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+	severity = severity and vim.diagnostic.severity[severity] or nil
+	return function()
+		go({ severity = severity })
+	end
+end
+map("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
-----------------------------------------
+map("n", "<Leader>tl", function()
+	---@diagnostic disable-next-line: undefined-field
+	if vim.b.ts_highlight then
+		vim.treesitter.stop()
+	else
+		vim.treesitter.start()
+	end
+end, { desc = "Toggle Treesitter Highlight" })
+
+-------- maybe these work lol
+
+map("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
+map("t", "<C-h>", "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
+map("t", "<C-j>", "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
+map("t", "<C-k>", "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
+map("t", "<C-l>", "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
+map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+
+map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })

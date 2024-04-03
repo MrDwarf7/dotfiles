@@ -8,37 +8,13 @@ M.rustacean_vim_attach = function(event)
 		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "RUST: " .. desc })
 	end
 
-	map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
-	map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclration")
-
-	map("gr", require("telescope.builtin").lsp_references, "[G]oto [r]eferences")
-	map("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mpl")
-	map("gt", require("telescope.builtin").lsp_type_definitions, "[G]oto [t]ype def")
-
-	map("<Leader>ls", require("telescope.builtin").lsp_document_symbols, "[S]ymbols document")
-	map("<Leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[S]ymbol workspace")
-	map("<Leader>lr", vim.lsp.buf.rename, "[r]ename")
-	map("<Leader>la", vim.lsp.buf.code_action, "[a]ction")
-	map("K", vim.lsp.buf.hover, "Hoever Docs")
-
-	map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-
-	----------------------
-	map("gO", require("telescope.builtin").lsp_outgoing_calls, "[O]utgoing")
-	map("<Leader>lh", vim.diagnostic.open_float, "float")
-	map("]d", vim.diagnostic.goto_next, "diag next")
-	map("[d", vim.diagnostic.goto_prev, "diag prev")
+	vim.g.rustaceanvim.tools.code_actions.ui_select_fallback = true
 
 	map("<Leader>lf", function()
-		-- if pcall(require, "conform") then
-		-- 	print("pcall on conform -> return")
-		-- 	return
-		-- else
-		vim.lsp.buf.format({ async = true })
-		-- end
-	end, "format")
+		cmd.RustFmt()
+	end, "[f]ormat")
 
-	map("<Leader>ll", function()
+	map("<Leader>lc", function()
 		cmd.RustLsp("flyCheck")
 	end, "[c]heck")
 
@@ -53,16 +29,13 @@ M.rustacean_vim_attach = function(event)
 	map("<Leader>lh", function()
 		cmd.RustLsp("hover")
 	end, "[h]over")
+
+	map("<Leader>la", function()
+		cmd.RustLsp("codeAction")
+	end, "[a]ction")
 end
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
 M.rustaceanvim_setup = function()
-	-- local lsp_mappings = require("util.lsp-mappings")
-	-- local buffer = require("util.buffer")
-	-- local lsp_capabilities = require("util.lsp-capabilities")
-
 	if vim.opt.diff:get() then
 		cmd([[LspStop]])
 		return

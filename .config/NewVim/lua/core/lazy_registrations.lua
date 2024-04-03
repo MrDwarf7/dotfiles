@@ -47,7 +47,16 @@ return {
 		event = "BufReadPre",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
-			require("configs.trouble")
+			local map = vim.keymap.set
+			require("trouble").setup({})
+
+			map("n", "]]", function()
+				require("trouble").next({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem NEXT" })
+
+			map("n", "[[", function()
+				require("trouble").previous({ skip_groups = true, jump = true })
+			end, { silent = true, desc = "[p]robem PREV" })
 		end,
 	},
 
@@ -81,14 +90,11 @@ return {
 			{
 				"ThePrimeagen/harpoon",
 				lazy = true,
-				-- event = "VeryLazy",
 				branch = "harpoon2",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
-				config = function()
-					require("configs.harpoon")
-				end,
+				-- Config file is required from WITHIN telescope.lua
 			},
 
 			{
@@ -119,19 +125,21 @@ return {
 		event = "BufEnter",
 		build = ":TSUpdate",
 		dependencies = {
+			"lewis6991/gitsigns.nvim",
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			"nvim-treesitter/nvim-treesitter-textobjects",
 			"nvim-treesitter/nvim-treesitter-context",
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
-			require("configs.treesitter")
+			require("nvim-treesitter.install").compilers = { "gcc" } --NOTE: currently points to scoop/msys2/current/clang64/bin/gcc.exe
+			require("configs.treesitter").setup()
 		end,
 	},
 
 	{
 		"numToStr/Comment.nvim",
-		event = "BufReadPre",
+		event = "BufReadPost",
 		dependencies = {
 			"JoosepAlviste/nvim-ts-context-commentstring",
 		},
@@ -187,7 +195,8 @@ return {
 		event = "BufReadPost",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
-			require("todo-comments").setup()
+			require("configs.todo-comments")
+			-- .setup()
 		end,
 	},
 
@@ -251,12 +260,29 @@ return {
 		},
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, depends_on = "nvim-lspconfig" },
+			{
+				"folke/neoconf.nvim",
+				cmd = "Neoconf",
+				config = false,
+				depends_on = "nvim-lspconfig",
+			},
 			{ "folke/neodev.nvim", opts = {} },
-			{ "j-hui/fidget.nvim", lazy = false, opts = {} },
-			{ "williamboman/mason.nvim", lazy = false, event = "BufEnter" },
+			{
+				"j-hui/fidget.nvim",
+				lazy = false,
+				opts = {},
+			},
+			{
+				"williamboman/mason.nvim",
+				lazy = false,
+				event = "BufEnter",
+			},
 			{ "williamboman/mason-lspconfig.nvim", lazy = false },
-			{ "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false, event = "BufEnter" },
+			{
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				lazy = false,
+				event = "BufEnter",
+			},
 		},
 		config = function()
 			require("configs.lsp")
@@ -296,27 +322,25 @@ return {
 			"css",
 			"html",
 			"javascript",
-			-- "lua",
+			"lua",
 			-- "markdown",
 			"scss",
-			-- "txt",
-			-- "vim",
-			-- "yaml",
-			-- "json",
+			"txt",
+			"vim",
+			"yaml",
+			"json",
 			"typescript",
 			"typescriptreact",
 			"javascriptreact",
 			"norg",
 			"org",
-			-- "pandoc",
+			"pandoc",
 			"markdown",
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
-			-- {
-			"lvimuser/lsp-inlayhints.nvim",
-			-- lazy = false, event = "LspAttach" },
+			{ "lvimuser/lsp-inlayhints.nvim", lazy = false, event = "LspAttach" },
 		},
 		opts = {},
 	},
@@ -403,7 +427,7 @@ return {
 
 	{
 		"mfussenegger/nvim-lint",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "BufReadPost",
 		config = function()
 			require("configs.lint")
 		end,
@@ -411,7 +435,7 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "BufWritePre",
 		config = function()
 			require("configs.conform")
 		end,
@@ -425,23 +449,19 @@ return {
 		event = "InsertEnter",
 		dependencies = {
 			"neovim/nvim-lspconfig",
-			"hrsh7th/nvim-cmp",
+			"L3MON4D3/LuaSnip",
+
+			"zbirenbaum/copilot-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
-			"petertriho/cmp-git",
-			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
 
-			"L3MON4D3/LuaSnip",
-
 			"saadparwaiz1/cmp_luasnip",
-			"zbirenbaum/copilot-cmp",
-			-- "zbirenbaum/copilot.lua",
-
 			"saecki/crates.nvim",
 			"vrslev/cmp-pypi",
-
 			"onsails/lspkind.nvim",
 		},
 		config = function()
@@ -503,14 +523,15 @@ return {
 	{
 		"kdheepak/lazygit.nvim",
 		-- lazy = false,
-		-- event = "VeryLazy",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
 		},
-		config = function()
-			require("configs.lazygit")
-		end,
+		-- opts = {},
+		-- config = function()
+		-- 	require("configs.lazygit")
+		-- end,
 	},
 
 	{
@@ -595,6 +616,30 @@ return {
 				n_lines = 100,
 			})
 			require("mini.surround").setup()
+		end,
+	},
+
+	{
+		"stevearc/dressing.nvim",
+		event = "BufReadPost",
+		config = function()
+			require("configs.dressing")
+		end,
+	},
+
+	{
+		"chentoast/marks.nvim",
+		event = "BufReadPost",
+		config = function()
+			require("configs.marks")
+		end,
+	},
+
+	{
+		"rmagatti/goto-preview",
+		lazy = false,
+		config = function()
+			require("configs.goto_preview")
 		end,
 	},
 

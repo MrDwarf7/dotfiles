@@ -10,4 +10,5 @@ require("which-key").register({
 	["<Leader>p"] = { name = "+[P]lugins", _ = "which_key_ignore" },
 	["<Leader>w"] = { name = "+[W]inShift", _ = "which_key_ignore" },
 	["<Leader>gd"] = { name = "+[D]iffview", _ = "which_key_ignore" },
+	["gp"] = { name = "+[P]review", _ = "which_key_ignore" },
 })

@@ -1,19 +1,19 @@
-if not vim.g.vscode then
-	vim.g.vscode = {}
-	return
-end
+local V = {}
 
-print("Vscode_conf loads after checking vscode global variable...")
+---@return nil
+V.setup = function()
+	-- local vscode = require("vscode-neovim")
+	if not vim.g.vscode then
+		vim.g.vscode = {}
+		return
+	end
 
-vim.g.vscode_clipboard = vim.g.vscode_clipboard or "unnamedplus"
-vim.cmd([[
+	print("Vscode_conf loads after checking vscode global variable...")
+	vim.g.vscode_clipboard = vim.g.vscode_clipboard or "unnamedplus"
+	vim.cmd([[
 set clipboard+=unnamedplus
 ]])
 
-local V = {}
-local vscode = require("vscode-neovim")
-
-V.vscode_setup = function()
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
 
@@ -23,10 +23,6 @@ V.vscode_setup = function()
 	require("vscode_conf.mappings")
 	require("vscode_conf.autocmds")
 	require("vscode_conf.plugins").vscode_plugins()
-end
-
-V.setup = function()
-	return V.vscode_setup()
 end
 
 return V

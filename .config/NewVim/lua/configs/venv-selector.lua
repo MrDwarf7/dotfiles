@@ -8,7 +8,7 @@ require("venv-selector").setup({
 })
 
 local opts = { silent = true, nowait = true }
-autocmd("VimEnter", {
+autocmd("BufReadPost", {
 	desc = "Auto select virtualenv Nvim open",
 	pattern = "*",
 	callback = function()

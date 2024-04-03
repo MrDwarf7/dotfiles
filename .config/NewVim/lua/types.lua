@@ -1,0 +1,34 @@
+---@class LspAttach Event
+--
+---@class Event
+---@field buf number
+---@field data table
+--
+---@alias Windows "Windows_NT"
+---@alias Unix "uinux"
+---@alias Linux "Linux"
+---@alias MacOS "macos"
+--
+---@alias OperatingSystemType "Windows_NT"| "unix" | "Linux" | "macos"
+--
+---@class OperatingSystem
+---@field windows Windows
+---@field linux Linux
+---@field unix Unix
+---@field macos MacOS
+--
+--
+---@alias Zsh "zsh"
+---@alias Pwsh "pwsh"
+---@alias Powershell "powershell"
+---@alias Bash "bash"
+---@alias Fish "fish"
+--
+---@alias ShellType "zsh"|"pwsh"|"powershell"|"bash"|"fish"
+---@class Shells
+---@field zsh Zsh
+---@field pwsh Pwsh
+---@field powershell Powershell
+---@field bash Bash
+---@field fish Fish
+--

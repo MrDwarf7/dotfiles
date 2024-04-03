@@ -9,12 +9,19 @@ local handlers = require("util.lsp-handlers")
 
 autocmd("LspAttach", {
 	group = augroup("LspAuGroup", { clear = true }),
+	---@param event Event: LspAttach
 	callback = function(event)
+		--
+		---@param keys string
+		---@param func function
+		---@param desc string
+		---@return nil
 		local map = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
 
-		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
+		-- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
+		map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclration")
 
 		map("gr", require("telescope.builtin").lsp_references, "[G]oto [r]eferences")
@@ -24,18 +31,13 @@ autocmd("LspAttach", {
 		map("<Leader>ls", require("telescope.builtin").lsp_document_symbols, "[S]ymbols document")
 		map("<Leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[S]ymbol workspace")
 
-		map("<Leader>lc", require("telescope.builtin").lsp_incoming_calls, "[c]alls incoming")
-		map("<Leader>lC", require("telescope.builtin").lsp_outgoing_calls, "[C]alls outgoing")
+		map("<Leader>ll", require("telescope.builtin").lsp_incoming_calls, "ca[l]ls incoming")
+		map("<Leader>lL", require("telescope.builtin").lsp_outgoing_calls, "ca[L]ls outgoing")
 		map("<Leader>lt", require("telescope.builtin").treesitter, "[T]reesitter symbols")
-
 		map("<Leader>ld", require("telescope.builtin").diagnostics, "[d]iagnostics")
-
 		map("<Leader>lr", vim.lsp.buf.rename, "[r]ename")
-
 		map("<Leader>la", vim.lsp.buf.code_action, "[a]ction")
-
 		map("K", vim.lsp.buf.hover, "Hoever Docs")
-
 		map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
 		----------------------
@@ -45,12 +47,19 @@ autocmd("LspAttach", {
 		map("[d", vim.diagnostic.goto_prev, "diag prev")
 
 		map("<Leader>lf", function()
-			if pcall(require, "conform") then
-				--              require("conform").format({ bufnr = event.buf })
-				-- else
+			if package.loaded["conform"] then
+				require("conform").format()
+			elseif package.loaded["conform"] == nil then
 				vim.lsp.buf.format({ async = true })
 			end
 		end, "format")
+
+		local lsp_restart = function()
+			vim.lsp.stop_client(vim.lsp.get_active_clients())
+			vim.cmd([[ LspRestart<CR> ]])
+		end
+
+		map("<Leader>l%", lsp_restart, "Restart")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client.server_capabilities.documentHighlightProvider then
@@ -64,9 +73,7 @@ autocmd("LspAttach", {
 				callback = vim.lsp.buf.clear_references,
 			})
 		end
-
-		map("<Leader>l%", ":LspRestart<CR>", "Restart")
-
+		--
 		require("lsp-inlayhints").show()
 	end,
 })
@@ -122,7 +129,7 @@ local servers = {
 				workspace = {
 					library = {
 						"${3rd}/luv/library",
-						unpack(vim.api.nvim_get_runtime_file("", true)),
+						-- unpack(vim.api.nvim_get_runtime_file("", true)),
 						-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
 						-- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 					},
@@ -169,7 +176,15 @@ local servers = {
 	-- 		return true
 	-- 	end },
 	tailwindcss = {
-		filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		filetypes = {
+			"html",
+			"css",
+			"scss",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+		},
 		flags = { debounce_text_changes = 300 },
 		root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
 	},
@@ -219,6 +234,7 @@ vim.list_extend(ensure_installed, {
 	"vulture",
 	"yamlfmt",
 })
+
 require("mason-tool-installer").setup({
 	ensure_installed = ensure_installed,
 })
