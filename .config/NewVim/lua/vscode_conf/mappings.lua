@@ -1,12 +1,9 @@
 print("Vscode specific mappings file loads...")
-local vscode = require("vscode-neovim")
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
 local map = vim.keymap.set
 
 local silent_opts = { noremap = true, silent = true }
-
-local loud_opts = { noremap = true, silent = false }
 
 g.mapleader = " "
 g.maplocalleader = " "
