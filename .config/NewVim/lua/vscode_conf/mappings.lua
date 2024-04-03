@@ -24,8 +24,8 @@ map("v", ">", ">gv", silent_opts)
 -- map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- same as above but if mvoement greater than 5 then add to jump list
 
-map("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
-map("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
+map({ "n", "x" }, "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true, silent = true })
+map({ "n", "x" }, "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true, silent = true })
 
 map("n", "n", "nzzzv", silent_opts)
 map("n", "N", "Nzzzv", silent_opts)
