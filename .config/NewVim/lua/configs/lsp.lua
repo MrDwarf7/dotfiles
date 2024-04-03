@@ -9,7 +9,13 @@ local handlers = require("util.lsp-handlers")
 
 autocmd("LspAttach", {
 	group = augroup("LspAuGroup", { clear = true }),
+	---@param event Event: LspAttach
 	callback = function(event)
+		--
+		---@param keys string
+		---@param func function
+		---@param desc string
+		---@return nil
 		local map = function(keys, func, desc)
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
