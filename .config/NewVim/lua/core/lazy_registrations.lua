@@ -132,6 +132,7 @@ return {
 			"windwp/nvim-ts-autotag",
 		},
 		config = function()
+			require("nvim-treesitter.install").compilers = { "gcc" } --NOTE: currently points to scoop/msys2/current/clang64/bin/gcc.exe
 			require("configs.treesitter").setup()
 		end,
 	},
