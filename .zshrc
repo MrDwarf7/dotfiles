@@ -289,6 +289,11 @@ function dodf {
     pushd "$DATA_ON_DEMAND_NEXT/"
 }
 
+export BAT_CONFIG_PATH="$HOME/dotfiles/.config/bat/bat.conf"
+
+
+# Go things
+export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
 ### source dat zsh
