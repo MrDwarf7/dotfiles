@@ -54,6 +54,13 @@ autocmd("LspAttach", {
 			end
 		end, "format")
 
+		local lsp_restart = function()
+			vim.lsp.stop_client(vim.lsp.get_active_clients())
+			vim.cmd([[ LspRestart<CR> ]])
+		end
+
+		map("<Leader>l%", lsp_restart, "Restart")
+
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client.server_capabilities.documentHighlightProvider then
 			autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -66,9 +73,7 @@ autocmd("LspAttach", {
 				callback = vim.lsp.buf.clear_references,
 			})
 		end
-
-		map("<Leader>l%", ":LspRestart<CR>", "Restart")
-
+		--
 		require("lsp-inlayhints").show()
 	end,
 })
