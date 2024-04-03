@@ -20,7 +20,8 @@ autocmd("LspAttach", {
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
 
-		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
+		-- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
+		map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclration")
 
 		map("gr", require("telescope.builtin").lsp_references, "[G]oto [r]eferences")
@@ -30,18 +31,13 @@ autocmd("LspAttach", {
 		map("<Leader>ls", require("telescope.builtin").lsp_document_symbols, "[S]ymbols document")
 		map("<Leader>lS", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[S]ymbol workspace")
 
-		map("<Leader>lc", require("telescope.builtin").lsp_incoming_calls, "[c]alls incoming")
-		map("<Leader>lC", require("telescope.builtin").lsp_outgoing_calls, "[C]alls outgoing")
+		map("<Leader>ll", require("telescope.builtin").lsp_incoming_calls, "ca[l]ls incoming")
+		map("<Leader>lL", require("telescope.builtin").lsp_outgoing_calls, "ca[L]ls outgoing")
 		map("<Leader>lt", require("telescope.builtin").treesitter, "[T]reesitter symbols")
-
 		map("<Leader>ld", require("telescope.builtin").diagnostics, "[d]iagnostics")
-
 		map("<Leader>lr", vim.lsp.buf.rename, "[r]ename")
-
 		map("<Leader>la", vim.lsp.buf.code_action, "[a]ction")
-
 		map("K", vim.lsp.buf.hover, "Hoever Docs")
-
 		map("<C-k>", vim.lsp.buf.signature_help, "Signature Help")
 
 		----------------------
