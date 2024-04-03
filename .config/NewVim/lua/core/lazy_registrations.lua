@@ -260,12 +260,29 @@ return {
 		},
 		dependencies = {
 			"nvim-telescope/telescope.nvim",
-			{ "folke/neoconf.nvim", cmd = "Neoconf", config = false, depends_on = "nvim-lspconfig" },
+			{
+				"folke/neoconf.nvim",
+				cmd = "Neoconf",
+				config = false,
+				depends_on = "nvim-lspconfig",
+			},
 			{ "folke/neodev.nvim", opts = {} },
-			{ "j-hui/fidget.nvim", lazy = false, opts = {} },
-			{ "williamboman/mason.nvim", lazy = false, event = "BufEnter" },
+			{
+				"j-hui/fidget.nvim",
+				lazy = false,
+				opts = {},
+			},
+			{
+				"williamboman/mason.nvim",
+				lazy = false,
+				event = "BufEnter",
+			},
 			{ "williamboman/mason-lspconfig.nvim", lazy = false },
-			{ "WhoIsSethDaniel/mason-tool-installer.nvim", lazy = false, event = "BufEnter" },
+			{
+				"WhoIsSethDaniel/mason-tool-installer.nvim",
+				lazy = false,
+				event = "BufEnter",
+			},
 		},
 		config = function()
 			require("configs.lsp")
