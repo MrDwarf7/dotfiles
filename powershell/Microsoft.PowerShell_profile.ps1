@@ -46,6 +46,7 @@ $null = Register-ObjectEvent -InputObject $LazyLoadProfile -EventName Invocation
 $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
+$env:BAT_CONFIG_PATH = "$dotfiles_dir\.config\bat\bat.conf"
 
 $dotfiles_dir = "$HOME\dotfiles"
 # $config_dir = "$dotfiles_dir\.config"
@@ -120,6 +121,9 @@ if (checkEnvironment -eq $true)
 # Not work/ AKA Home
 if (-not (checkEnvironment))
 {
+
+    $env:PAGER = less
+    $env:BAT_PAGER = less -RF
 
     $env:PSModulePath = $currentPSModulePath
     Invoke-Expression (& { (zoxide init powershell | Out-String) })
