@@ -47,11 +47,11 @@ autocmd("LspAttach", {
 		map("[d", vim.diagnostic.goto_prev, "diag prev")
 
 		map("<Leader>lf", function()
-			-- if pcall(require, "conform") then
-			--              require("conform").format({ bufnr = event.buf })
-			-- else
-			vim.lsp.buf.format({ async = true })
-			-- end
+			if package.loaded["conform"] then
+				require("conform").format()
+			elseif package.loaded["conform"] == nil then
+				vim.lsp.buf.format({ async = true })
+			end
 		end, "format")
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
