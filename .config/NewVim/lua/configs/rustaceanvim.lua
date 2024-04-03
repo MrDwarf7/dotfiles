@@ -8,6 +8,7 @@ M.rustacean_vim_attach = function(event)
 		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "RUST: " .. desc })
 	end
 
+	vim.g.rustaceanvim.tools.code_actions.ui_select_fallback = true
 
 	map("<Leader>lf", function()
 		cmd.RustFmt()
@@ -28,8 +29,11 @@ M.rustacean_vim_attach = function(event)
 	map("<Leader>lh", function()
 		cmd.RustLsp("hover")
 	end, "[h]over")
-end
 
+	map("<Leader>la", function()
+		cmd.RustLsp("codeAction")
+	end, "[a]ction")
+end
 
 M.rustaceanvim_setup = function()
 	if vim.opt.diff:get() then
