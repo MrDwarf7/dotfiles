@@ -2,6 +2,7 @@ require("conform").setup({
 	formatters_by_ft = {
 		cpp = { "clang-format" },
 		javascript = { "biome" },
+		javascriptreact = { "biome" },
 		lua = { "stylua" },
 		powershell = { "powershell_es" },
 		python = function(bufnr)
@@ -15,6 +16,7 @@ require("conform").setup({
 		bash = { "shfmt" },
 		zsh = { "beautysh" },
 		typescript = { "biome" },
+		typescriptreact = { "biome" },
 		yaml = { "yamlfmt" },
 		rust = { "rustfmt" },
 	},
