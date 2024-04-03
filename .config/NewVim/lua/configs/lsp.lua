@@ -176,7 +176,15 @@ local servers = {
 	-- 		return true
 	-- 	end },
 	tailwindcss = {
-		filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact" },
+		filetypes = {
+			"html",
+			"css",
+			"scss",
+			"javascript",
+			"javascriptreact",
+			"typescript",
+			"typescriptreact",
+		},
 		flags = { debounce_text_changes = 300 },
 		root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
 	},
