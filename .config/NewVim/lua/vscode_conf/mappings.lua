@@ -73,6 +73,7 @@ map("n", "<Leader>bN", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
+map("n", "<Leader>t'", ":Telescope<CR>", silent_opts, { desc = "Generic Telescope call" })
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
 
 ---------- These should end up getting overwritten anyway, or some at least
