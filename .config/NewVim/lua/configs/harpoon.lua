@@ -1,5 +1,3 @@
--- local require("harpoon") = require("harpoon")
--- local telescope_conf =
 local map = vim.keymap.set
 
 require("harpoon").setup()

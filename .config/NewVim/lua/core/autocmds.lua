@@ -77,17 +77,6 @@ autocmd({ "VimEnter", "FileType", "BufReadPost" }, {
 	group = UrlHighliting,
 })
 
--- autocmd("LspAttach", {
--- 	callback = function(ev)
--- 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
--- 		-- local opts = { buffer = ev.buf }
--- 		-- local vimlspbuf = vim.lsp.buf
--- 		local opts = { silent = true, nowait = true, buffer = ev.buf }
--- 		require("util.lsp-mappings").lsp_binds(opts)
--- 	end,
--- 	group = LspAuGroup,
--- })
-
 autocmd("BufWritePre", {
 	pattern = "*.go",
 	callback = function()
@@ -95,6 +84,9 @@ autocmd("BufWritePre", {
 	end,
 	group = format_sync_grp,
 })
+
+
+
 
 -- autocmd("VimEnter", {
 -- 	desc = "Auto select virtualenv Nvim open",
