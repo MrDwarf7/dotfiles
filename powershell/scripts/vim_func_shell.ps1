@@ -39,6 +39,14 @@ function xvim
     nvim $args
 }
 
+function lzvim
+{
+    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+    $env:NVIM_APPNAME = "LazyVim"
+    nvim $args
+}
+
+
 function nvims()
 {
     $items = "Default", "omerxx"
