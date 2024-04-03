@@ -1,3 +1,4 @@
+---@diagnostic disable: redundant-parameter
 print("Vscode specific mappings file loads...")
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
