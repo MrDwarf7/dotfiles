@@ -41,6 +41,21 @@ gs.setup({
 			end)
 		end, { desc = "[n]ext hunk" })
 
+
+		map("n", "[h", function()
+			gs.prev_hunk()
+			vim.schedule(function()
+				feedkeys("zz", "n", false)
+			end)
+		end, { desc = "[p]revious hunk" })
+
+		map("n", "]h", function()
+			gs.next_hunk()
+			vim.schedule(function()
+				feedkeys("zz", "n", false)
+			end)
+		end, { desc = "[n]ext hunk" })
+
 		map("n", "<Leader>hp", gs.preview_hunk, { desc = "[p]review hunk" })
 
 		map("n", "<Leader>hs", gs.stage_hunk, { desc = "[s]tage hunk" })
