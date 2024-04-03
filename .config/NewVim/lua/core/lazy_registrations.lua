@@ -47,16 +47,16 @@ return {
 		event = "BufReadPre",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = function()
+			local map = vim.keymap.set
 			require("trouble").setup({})
 
-			vim.keymap.set("n", "]]", function()
+			map("n", "]]", function()
 				require("trouble").next({ skip_groups = true, jump = true })
 			end, { silent = true, desc = "[p]robem NEXT" })
 
-			vim.keymap.set("n", "[[", function()
+			map("n", "[[", function()
 				require("trouble").previous({ skip_groups = true, jump = true })
 			end, { silent = true, desc = "[p]robem PREV" })
-			-- require("configs.trouble")
 		end,
 	},
 
@@ -90,14 +90,11 @@ return {
 			{
 				"ThePrimeagen/harpoon",
 				lazy = true,
-				-- event = "VeryLazy",
 				branch = "harpoon2",
 				dependencies = {
 					"nvim-lua/plenary.nvim",
 				},
-				-- config = function()
-				-- 	require("configs.harpoon")
-				-- end,
+				-- Config file is required from WITHIN telescope.lua
 			},
 
 			{
