@@ -634,6 +634,15 @@ return {
 			require("configs.marks")
 		end,
 	},
+
+	{
+		"rmagatti/goto-preview",
+		lazy = false,
+		config = function()
+			require("configs.goto_preview")
+		end,
+	},
+
 	--------------------- END MISC
 	-------------------------- PLUGIN SETUP ENDS --------------------------
 }
