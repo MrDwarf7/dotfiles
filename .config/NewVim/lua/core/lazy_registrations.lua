@@ -626,6 +626,14 @@ return {
 			require("configs.dressing")
 		end,
 	},
+
+	{
+		"chentoast/marks.nvim",
+		event = "BufReadPost",
+		config = function()
+			require("configs.marks")
+		end,
+	},
 	--------------------- END MISC
 	-------------------------- PLUGIN SETUP ENDS --------------------------
 }
