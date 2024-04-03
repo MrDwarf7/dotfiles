@@ -10,10 +10,10 @@ M.rustacean_vim_attach = function(event)
 
 
 	map("<Leader>lf", function()
-		vim.lsp.buf.format({ async = true })
-	end, "format")
+		cmd.RustFmt()
+	end, "[f]ormat")
 
-	map("<Leader>ll", function()
+	map("<Leader>lc", function()
 		cmd.RustLsp("flyCheck")
 	end, "[c]heck")
 
