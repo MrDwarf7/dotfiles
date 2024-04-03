@@ -16,55 +16,119 @@ function SafeNewAlias
 }
 
 # Formatted via powershell version for now
-function fwhich
+function FWhich
 {
     param (
         [string]$cmd
     )
-    Get-Command -ErrorAction "SilentlyContinue" $cmd
-    | Format-Table Source
+    $commandInfo = Get-Command -ErrorAction "SilentlyContinue" $cmd
+    if ($commandInfo)
+    {
+        $commandInfo.Source
+    } else
+    {
+        Write-Output "Command not found: $cmd"
+    }
 }
 
-function RemoveWrapper
+
+function Remove-Wrapper
 {
-    if ($args -eq $null)
-    {
+    # Initialize flags and paths
+    $force = $false
+    $recurse = $false
+    $paths = @()
 
-        Remove-Item $args
-        return
+    # Process each argument
+    foreach ($arg in $args)
+    {
+        switch -Regex ($arg)
+        {
+            '^-(.*r.*)$'
+            { $recurse = $true
+            }
+            '^-(.*f.*)$'
+            { $force = $true
+            }
+            Default
+            { $paths += $arg
+            }
+        }
     }
 
-    if ($args.Contains("r") -or $args.Contains("R"))
-    {
-        Remove-Item -Recurse $args
-        return
-    }
+    Write-Host "Force: $force"
+    Write-Host "Recurse: $recurse"
+    Write-Host "Paths: $paths"
+    Write-Host "Args: $args"
 
-    if ($args.Contains("f") -or $args.Contains("F"))
+    foreach ($path in $paths)
     {
-        Remove-Item -Force $args
-        return
-    }
+        try
+        {
+            $resolvedPath = Resolve-Path -Path $path
 
-    if ($args.Contains("f") -or $args.Contains("F") -and $args.Contains("r") -or $args.Contains("R"))
-    {
-        Remove-Item -Force -Recurse $args
-        return
+            if (Test-Path $resolvedPath -PathType Container)
+            {
+                [System.IO.Directory]::Delete($resolvedPath, $recurse)
+            } else
+            {
+                if ($force)
+                {
+                    Set-ItemProperty -Path $resolvedPath -Name IsReadOnly -Value $false
+                }
+                [System.IO.File]::Delete($resolvedPath)
+            }
+        } catch
+        {
+            Write-Error "Failed to remove path:  $path"
+            Write-Error "Failed to remove res path:  $resolvedPath"
+            Write-Host "Force: $force"
+            Write-Host "Recurse: $recurse"
+            Write-Host "Paths: $paths"
+            Write-Host "Args: $args"
+        }
     }
 }
 
-# Generic Aliases
+function ManPageWindow
+{
+    param (
+        [string]$command
+    )
+    Get-Help -Name $command -ShowWindow
+}
+
+function ManPage
+{
+    param(
+        [string]$command
+    )
+    Get-Help -Name $command -Full | Out-String -Width 120 | less --quiet --silent --line-numbers
+    # | bat --paging=always --decorations=always
+}
+
+function CleanLess
+{
+    param(
+        $parsedArgs
+    )
+    return less --quiet --silent --line-numbers $parsedArgs
+}
+
+New-Alias -Name manwin -Value ManPageWindow -Force
+New-Alias -Name man -Value ManPage -Force
+
+# Not working as intended at all but eh
+SafeNewAlias -Alias less -Command CleanLess $args
+
+New-Alias -Name which -Value FWhich -Force
+New-Alias -Name rm -Value Remove-Wrapper -Force
+
+SafeNewAlias -Alias bpsa -Command sar
+SafeNewAlias -Alias br -Command broot.exe
 SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
-SafeNewAlias -Alias bpsa -Command sar
-SafeNewAlias -Alias rm -Command RemoveWrapper $args
-
-
-# New-Alias -Name which -Value where.exe
-SafeNewAlias -Alias which -Command where.exe
-
-SafeNewAlias -Alias br -Command broot.exe
 
 
 # Cargo Aliases
@@ -81,10 +145,3 @@ SafeNewAlias -Alias br -Command broot.exe
 # SafeNewAlias -Alias cu -Command CargoUpdate
 # SafeNewAlias -Alias cdoc -Command CargoDoc
 # SafeNewAlias -Alias cup -Command CargoUpgrade
-
-
-# SafeNewAlias -Alias goto -Command cx $args
-
-# Git Aliases - WIP
-#
-
