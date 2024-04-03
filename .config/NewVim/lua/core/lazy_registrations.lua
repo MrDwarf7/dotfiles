@@ -619,6 +619,13 @@ return {
 		end,
 	},
 
+	{
+		"stevearc/dressing.nvim",
+		event = "BufReadPost",
+		config = function()
+			require("configs.dressing")
+		end,
+	},
 	--------------------- END MISC
 	-------------------------- PLUGIN SETUP ENDS --------------------------
 }
