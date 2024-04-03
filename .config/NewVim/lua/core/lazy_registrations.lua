@@ -435,7 +435,7 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		event = "BufWritePost",
+		event = "BufWritePre",
 		config = function()
 			require("configs.conform")
 		end,
@@ -513,7 +513,7 @@ return {
 
 	{
 		"linux-cultist/venv-selector.nvim",
-		-- event = "BufRead",
+		event = "LspAttach",
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"nvim-telescope/telescope.nvim",
