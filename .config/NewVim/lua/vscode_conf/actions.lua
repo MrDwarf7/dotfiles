@@ -1,24 +1,8 @@
--- local M = {}
-
--- M.vscode_actions = function()
 print("vscode specific actions file loads...")
 local vscode = require("vscode-neovim")
 local map = vim.keymap.set
 
 print("Vscode specific actions file loads...")
-
--- map("n", "j", function()
--- 	print("j fnc ran")
--- 	vscode.call("v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'")
--- end)
---
--- map("n", "k", function()
--- 	print("k fnc ran")
--- 	vscode.call("v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'")
--- end)
-
--- map("n", "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true })
--- map("n", "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true })
 
 map("n", "gd", function()
 	print("Go to definition")
@@ -182,4 +166,3 @@ map("n", "zm", function()
 	vscode.call("editor.foldRecursively")
 end)
 -- end
--- return M
