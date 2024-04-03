@@ -92,3 +92,12 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
+map("n", "<Leader>tl", function()
+	---@diagnostic disable-next-line: undefined-field
+	if vim.b.ts_highlight then
+		vim.treesitter.stop()
+	else
+		vim.treesitter.start()
+	end
+end, { desc = "Toggle Treesitter Highlight" })
+
