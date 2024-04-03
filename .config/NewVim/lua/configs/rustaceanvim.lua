@@ -30,12 +30,7 @@ M.rustacean_vim_attach = function(event)
 	map("[d", vim.diagnostic.goto_prev, "diag prev")
 
 	map("<Leader>lf", function()
-		-- if pcall(require, "conform") then
-		-- 	print("pcall on conform -> return")
-		-- 	return
-		-- else
 		vim.lsp.buf.format({ async = true })
-		-- end
 	end, "format")
 
 	map("<Leader>ll", function()
@@ -55,14 +50,8 @@ M.rustacean_vim_attach = function(event)
 	end, "[h]over")
 end
 
--- local capabilities = vim.lsp.protocol.make_client_capabilities()
--- capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 M.rustaceanvim_setup = function()
-	-- local lsp_mappings = require("util.lsp-mappings")
-	-- local buffer = require("util.buffer")
-	-- local lsp_capabilities = require("util.lsp-capabilities")
-
 	if vim.opt.diff:get() then
 		cmd([[LspStop]])
 		return
