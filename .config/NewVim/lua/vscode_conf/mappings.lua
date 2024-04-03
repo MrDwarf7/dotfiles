@@ -58,12 +58,14 @@ map("n", "dd", function() -- Empty/blank lines go into blackhole register
 	end
 end, { expr = true })
 
--- map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
--- map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
--- map("n", "<Down>", ":resize -2<CR>", silent_opts)
--- map("n", "<Up>", ":resize +2<CR>", silent_opts)
+map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
+map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
 
--- map("n", "<C-w>e", "<C-w>=", silent_opts, { desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
+map("n", "<C-h>", ":vertical resize +2<CR>", silent_opts)
+map("n", "<C-l>", ":vertical resize -2<CR>", silent_opts)
+map("n", "<Down>", ":resize -2<CR>", silent_opts)
+map("n", "<Up>", ":resize +2<CR>", silent_opts)
+
 map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
 
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
