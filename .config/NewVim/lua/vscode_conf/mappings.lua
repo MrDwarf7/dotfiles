@@ -68,6 +68,9 @@ map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
 map("n", "<C-w>X", "<cmd>only<CR>", silent_opts, { desc = "buffers - CLOSE all except" })
 
+
+map("n", "<Leader>bN", "<cmd>enew<cr>", { desc = "New File" })
+
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
