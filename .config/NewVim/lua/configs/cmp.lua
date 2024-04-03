@@ -1,8 +1,32 @@
+-- VsCode colors for reference
+--
+-- -- gray
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrDeprecated", { bg = "NONE", strikethrough = true, fg = "#808080" })
+-- -- blue
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatch", { bg = "NONE", fg = "#569CD6" })
+-- vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpIntemAbbrMatch" })
+-- -- light blue
+-- vim.api.nvim_set_hl(0, "CmpItemKindVariable", { bg = "NONE", fg = "#9CDCFE" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindInterface", { link = "CmpItemKindVariable" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "CmpItemKindVariable" })
+-- -- pink
+-- vim.api.nvim_set_hl(0, "CmpItemKindFunction", { bg = "NONE", fg = "#C586C0" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "CmpItemKindFunction" })
+-- -- front
+-- vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
+-- vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
+
 local M = {}
 
-M.lspkind_setup = function()
-	require("lspkind").init({
-		mode = "symbol_text",
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
+
+---@param lspkind table
+---@return table
+M.lspkind_setup = function(lspkind)
+	--BUG:
+	lspkind.init({
+		mode = "symbol",
 		preset = "codicons",
 		symbol_map = {
 			Class = "󰠱",
@@ -33,19 +57,19 @@ M.lspkind_setup = function()
 			Variable = "󰀫",
 		},
 	})
-	vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 	return {
-		format = require("lspkind").cmp_format({
-			mode = "symbol",
+		--BUG:
+		format = lspkind.cmp_format({
+			mode = "symbol_text",
 			maxwidth = 80,
 			ellipsis_char = "...",
-			-- show_labelDetails = true,
+			show_labelDetails = false,
 			menu = {
-				buffer = "[Buffer]",
-				copilot = "[Copilot]",
+				buffer = "[Buf]",
+				copilot = "[Cop]",
 				crates = "[Crates]",
-				luasnip = "[LuaSnip]",
+				luasnip = "[LuaS]",
 				nvim_lsp = "[LSP]",
 				nvim_lua = "[lua]",
 				path = "[Path]",
@@ -54,6 +78,8 @@ M.lspkind_setup = function()
 	}
 end
 
+---@param cmp table
+---@return table
 M.cmp_mappings = function(cmp)
 	return {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
@@ -68,10 +94,22 @@ M.cmp_mappings = function(cmp)
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 
-		["<Tab>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Insert,
-			select = false,
+		["<CR>"] = cmp.mapping({
+			i = function(fallback)
+				if cmp.visible() and cmp.get_active_entry() then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				else
+					fallback()
+				end
+			end,
+			s = cmp.mapping.confirm({ select = true }),
+			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		}),
+
+		-- ["<Tab>"] = cmp.mapping.confirm({
+		-- 	behavior = cmp.ConfirmBehavior.Insert,
+		-- 	select = false,
+		-- }),
 
 		["<C-l>"] = cmp.mapping(function()
 			if require("luasnip").expand_or_locally_jumpable() then
@@ -83,26 +121,6 @@ M.cmp_mappings = function(cmp)
 				require("luasnip").jump(-1)
 			end
 		end, { "i", "s" }),
-
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- 	if cmp.visible() then
-		-- 		cmp.select_next_item()
-		-- 	elseif require("luasnip").expand_or_jumpable() then
-		-- 		vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { "i", "s" }),
-		--
-		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
-		-- 	if cmp.visible() then
-		-- 		cmp.select_prev_item()
-		-- 	elseif require("luasnip").jumpable(-1) then
-		-- 		vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { "i", "s" }),
 	}
 end
 
@@ -113,7 +131,10 @@ M.cmp_full_setup = function()
 		return
 	end
 
-	require("cmp").setup({
+	local cmp = require("cmp")
+	local lspkind = require("lspkind")
+
+	cmp.setup({
 		snippet = {
 			expand = function(args)
 				require("luasnip").lsp_expand(args.body)
@@ -125,10 +146,24 @@ M.cmp_full_setup = function()
 
 		window = {
 			completion = {
-				completion = require("cmp").config.window.bordered(),
-				winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
-				scrollbar = false,
+
+				-- border = {
+				-- 	{ "╭", "cmpDocBorder" },
+				-- 	{ "─", "cmpDocBorder" },
+				-- 	{ "╮", "cmpDocBorder" },
+				-- 	{ "│", "cmpDocBorder" },
+				-- 	{ "╯", "cmpDocBorder" },
+				-- 	{ "─", "cmpDocBorder" },
+				-- 	{ "╰", "cmpDocBorder" },
+				-- 	{ "│", "cmpDocBorder" },
+				-- },
+
+				completion = cmp.config.window.bordered(),
+				winhighlight = "Normal:CmpPmenu,CursorLine:Pmenu,Search:None",
+				winblend = 8,
+				scrollbar = true,
 			},
+
 			documentation = {
 				border = {
 					{ "╭", "cmpDocBorder" },
@@ -140,30 +175,30 @@ M.cmp_full_setup = function()
 					{ "╰", "cmpDocBorder" },
 					{ "│", "cmpDocBorder" },
 				},
-				winhighlight = "Normal:CmpDoc",
+				winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,Search:None",
+				winblend = 0,
+				scrollbar = false,
 			},
 		},
 
-		preselect = require("cmp").PreselectMode.None,
+		preselect = cmp.PreselectMode.None,
 
-		formatting = M.lspkind_setup(),
-		mapping = require("cmp").mapping.preset.insert(M.cmp_mappings(require("cmp"))),
+		formatting = M.lspkind_setup(lspkind),
+		mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp)),
 
 		sources = {
+			{ name = "nvim_lsp_signature_help", group_index = 2 },
 			{ name = "copilot", group_index = 2 },
 			{ name = "nvim_lsp", group_index = 2 },
-			{ name = "luasnip", group_index = 2 },
 			{ name = "buffer", group_index = 2, max_item_count = 15 },
-			{ name = "nvim_lua", group_index = 2 },
 			{ name = "path", group_index = 2 },
-			-- My additions here
-			-- { name = "nvim_lsp_signature_help", group_index = 3 },
-			{ name = "cmp-git" },
 			{ name = "cmp-cmdline" },
-			{ name = "cmp-luasnip-choice" },
+			{ name = "nvim_lua", group_index = 2 },
 
+			{ name = "luasnip", group_index = 3 },
 			{ name = "crates" },
 			{ name = "cmp-pypi" },
+			-- { name = "cmp-luasnip-choice" },
 		},
 	})
 end
