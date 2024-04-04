@@ -80,7 +80,7 @@ end
 
 ---@param cmp table
 ---@return table
-M.cmp_mappings = function(cmp)
+M.cmp_mappings = function(cmp, luasnip)
 	return {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
@@ -94,10 +94,12 @@ M.cmp_mappings = function(cmp)
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.close(),
 
-		["<CR>"] = cmp.mapping({
+		["<Tab>"] = cmp.mapping({
 			i = function(fallback)
-				if cmp.visible() and cmp.get_active_entry() then
-					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+				if
+					cmp.visible() -- and cmp.get_active_entry() ---- This was doing the awkward thing where having to C-j-k to get first item
+				then
+					cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true })
 				else
 					fallback()
 				end
@@ -107,13 +109,14 @@ M.cmp_mappings = function(cmp)
 		}),
 
 		["<C-l>"] = cmp.mapping(function()
-			if require("luasnip").expand_or_locally_jumpable() then
-				require("luasnip").expand_or_jump()
+			if luasnip.expand_or_locally_jumpable() then
+				luasnip.expand_or_jump()
 			end
 		end, { "i", "s" }),
+
 		["<C-h>"] = cmp.mapping(function()
-			if require("luasnip").locally_jumpable(-1) then
-				require("luasnip").jump(-1)
+			if luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
 			end
 		end, { "i", "s" }),
 	}
@@ -128,6 +131,7 @@ M.cmp_full_setup = function()
 
 	local cmp = require("cmp")
 	local lspkind = require("lspkind")
+	local luasnip = require("luasnip")
 
 	cmp.setup({
 		snippet = {
@@ -179,7 +183,8 @@ M.cmp_full_setup = function()
 		preselect = cmp.PreselectMode.None,
 
 		formatting = M.lspkind_setup(lspkind),
-		mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp)),
+
+		mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
 
 		sources = {
 			{ name = "nvim_lsp_signature_help", group_index = 2 },
