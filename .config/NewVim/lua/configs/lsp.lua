@@ -108,6 +108,7 @@ local servers = {
 	-- 	end,
 	-- },
 	html = {},
+	jsonls = {},
 	lua_ls = {
 		cmd = { "lua-language-server" },
 		filetypes = { "lua" },
@@ -223,7 +224,9 @@ vim.list_extend(ensure_installed, {
 	"codelldb",
 	"debugpy",
 	"delve",
+	"fixjson",
 	"isort",
+	"jsonlint",
 	"mypy",
 	"powershell_es",
 	"prettier",

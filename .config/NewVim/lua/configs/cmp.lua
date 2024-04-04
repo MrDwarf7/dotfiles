@@ -106,11 +106,6 @@ M.cmp_mappings = function(cmp)
 			c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 		}),
 
-		-- ["<Tab>"] = cmp.mapping.confirm({
-		-- 	behavior = cmp.ConfirmBehavior.Insert,
-		-- 	select = false,
-		-- }),
-
 		["<C-l>"] = cmp.mapping(function()
 			if require("luasnip").expand_or_locally_jumpable() then
 				require("luasnip").expand_or_jump()

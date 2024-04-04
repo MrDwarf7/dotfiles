@@ -5,10 +5,13 @@ require("lint").linter_by_ft = {
 	css = { "stylelint" },
 	docker = { "hadolint" },
 	javascript = { "biomejs" },
+	javascriptreact = { "biomejs" },
+	json = { "jsonlint" },
 	lua = { "luacheck" },
 	python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
 	sh = { "shellcheck" },
 	typescript = { "biomejs" },
+	typescriptreact = { "biomejs" },
 	vim = { "vint" },
 	yaml = { "yamllint" },
 }
