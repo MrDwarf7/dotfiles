@@ -6,6 +6,7 @@ require("lint").linter_by_ft = {
 	docker = { "hadolint" },
 	javascript = { "biomejs" },
 	javascriptreact = { "biomejs" },
+	json = { "jsonlint" },
 	lua = { "luacheck" },
 	python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
 	sh = { "shellcheck" },

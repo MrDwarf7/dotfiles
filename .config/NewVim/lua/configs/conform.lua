@@ -3,6 +3,7 @@ require("conform").setup({
 		cpp = { "clang-format" },
 		javascript = { "biome" },
 		javascriptreact = { "biome" },
+		json = { "fixjson", { "biome" } },
 		lua = { "stylua" },
 		powershell = { "powershell_es" },
 		python = function(bufnr)
