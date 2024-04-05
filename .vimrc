@@ -205,6 +205,31 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " Exit insert
 inoremap jj <Esc>
 
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+xnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+xnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+
+nnoremap <expr> n 'Nn'[v:searchforward].'zv'
+xnoremap <expr> n 'Nn'[v:searchforward].'zv'
+onoremap <expr> n 'Nn'[v:searchforward].'zv'
+
+nnoremap <expr> N 'nN'[v:searchforward].'zv'
+xnoremap <expr> N 'nN'[v:searchforward].'zv'
+onoremap <expr> N 'nN'[v:searchforward].'zv'
+
+
+nmap <Leader>? :terminal<CR>
+
+tmap <Esc><Esc> "<c-\\><c-n>"
+tmap <C-h> <cmd>wincmd h<CR>
+tmap <C-j> <cmd>wincmd j<CR>
+tmap <C-k> <cmd>wincmd k<CR>
+tmap <C-l> <cmd>wincmd l<CR>
+tmap <C-/> <cmd>close<cr>
+tmap <C-_> <cmd>close<cr>
 
 " Brackets
 " This technically opens a new line and brackets etc.
@@ -248,16 +273,23 @@ vmap p "_dP
 nnoremap <S-p> <S-p><CR>
 
 
-
 """ Window resizing
 nnoremap <Left> :vertical resize -2<CR>
 nnoremap <Right> :vertical resize +2<CR>
+
+nnoremap <C-h> :vertical resize +2<CR>
+nnoremap <C-l> :vertical resize -2<CR>
 
 nnoremap <C-w>, :vertical resize -10<CR>
 nnoremap <C-w>. :vertical resize +10<CR>
 
 nnoremap <Up> :resize -2<CR>
 nnoremap <Down> :resize +2<CR>
+
+
+nnoremap <C-w>e <C-w>=
+nnoremap <C-w>X <cmd>only<CR>
+
 
 " Recent messages
 nnoremap <Leader>um :messages<CR>
@@ -295,6 +327,12 @@ nmap <silent> <Esc> :nohl<CR>
 " Close the current buffer
 map <silent> <Leader>x :Bclose<CR>
 map <silent> <Leader>bx :Bclose<CR>:tabclose<CR>gT
+
+
+nmap ]b :bnext<CR>
+nmap [b :bprevious<CR>
+
+
 
 " Close all the buffers
 map <Leader>bw :bufdo bd<CR>
