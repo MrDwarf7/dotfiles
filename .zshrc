@@ -208,9 +208,11 @@ alias zshc="vim ~/.zshrc"
 alias ashc="vim ~/.aliases"
 
 # Vim related things
-alias xvim="NVIM_APPNAME=omerxx nvim"
-alias kvim="NVIM_APPNAME=kunzVim nvim"
-alias nevim="NVIM_APPNAME=NewVim nvim"
+alias ovim="NVIM_APPNAME=n_nvim nvim"
+
+# alias xvim="NVIM_APPNAME=omerxx nvim"
+# alias kvim="NVIM_APPNAME=kunzVim nvim"
+# alias nevim="NVIM_APPNAME=NewVim nvim"
 
 source "$HOME/.aliases"
 
