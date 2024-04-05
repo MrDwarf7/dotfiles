@@ -113,7 +113,7 @@ return {
 		end,
 	},
 
-	{ "nvim-telescope/telescope-dap.nvim", event = "BufReadPost" }, -- Automatic setup
+	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
 
 	-- Testing having telescope load really early
 
@@ -389,7 +389,7 @@ return {
 
 	{
 		"mfussenegger/nvim-dap",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "VeryLazy",
 		dependencies = {
 			-- "rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",

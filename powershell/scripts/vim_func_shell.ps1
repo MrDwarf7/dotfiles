@@ -28,7 +28,7 @@ function vim
 function nevim
 {
     $env:XDG_CONFIG_HOME = "$nvim_main_dir"
-    $env:NVIM_APPNAME = "NewVim"
+    $env:NVIM_APPNAME = "n_nvim"
     nvim $args
 }
 
