@@ -106,6 +106,20 @@ alias dcdf="docker compose down --force"
 alias Db.="docker buildx build ."
 alias Db.t="docker buildx build . -t"
 
+function top_five_words {
+	cat "$1" | tr -s ' ' '\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr | head -n 5
+}
+
+alias tfw=top_five_words
+
+
+function top_five_filetypes {
+    find . -type f | sed 's/.*\.//' | tr '[:upper:]' '[:lower:]' | grep -v '^$' | sort | uniq -c | sort -nr | head -n 5 | awk '{printf "%s files with extension .%s\n", $1, $2}'
+}
+
+alias tft=top_five_filetypes
+
+
 function watch_wrapper {
 	watch -n 0.001 "$*" | bat --tabs 0 --decorations=always
 }
@@ -120,3 +134,4 @@ function watch_with_args {
 	return 0
 }
 alias wn=watch_with_args
+
