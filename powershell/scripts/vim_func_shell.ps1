@@ -25,7 +25,7 @@ function vim
     nvim $args
 }
 
-function nevim
+function ovim
 {
     $env:XDG_CONFIG_HOME = "$nvim_main_dir"
     $env:NVIM_APPNAME = "n_nvim"
