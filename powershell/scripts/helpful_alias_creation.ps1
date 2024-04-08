@@ -115,6 +115,22 @@ function CleanLess
     return less --quiet --silent --line-numbers $parsedArgs
 }
 
+
+function ZoxideAdd
+{
+    zoxide add .
+}
+
+function ZoxideEdit
+{
+    zoxide edit
+}
+
+function ZoxideQuery
+{
+    zoxide query $args
+}
+
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
@@ -130,6 +146,9 @@ SafeNewAlias -Alias grep -Command Select-String
 SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 
+New-Alias -Name z. -Value ZoxideAdd -Force
+New-Alias -Name z.. -Value ZoxideEdit -Force
+New-Alias -Name zq -Value ZoxideQuery -Force
 
 # Cargo Aliases
 #
