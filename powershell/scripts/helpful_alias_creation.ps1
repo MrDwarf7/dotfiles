@@ -1,57 +1,49 @@
-function SafeNewAlias
-{
+
+function SafeNewAlias {
     param (
         [string]$Alias,
         [string]$Command
     )
-    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue))
-    {
+    if (-not (Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue)) {
         New-Alias -Name ${Alias} -Value ${Command}
     }
-    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command})
-    {
+    if ((Get-Alias -Name ${Alias} -ErrorAction SilentlyContinue).Definition -ne ${Command}) {
         Remove-Alias -Name ${Alias}
         New-Alias -Name ${Alias} -Value ${Command}
     }
 }
 
 # Formatted via powershell version for now
-function FWhich
-{
+function FWhich {
     param (
         [string]$cmd
     )
     $commandInfo = Get-Command -ErrorAction "SilentlyContinue" $cmd
-    if ($commandInfo)
-    {
+    if ($commandInfo) {
         $commandInfo.Source
-    } else
-    {
+    } else {
         Write-Output "Command not found: $cmd"
     }
 }
 
 
-function Remove-Wrapper
-{
+function Remove-Wrapper {
     # Initialize flags and paths
     $force = $false
     $recurse = $false
     $paths = @()
 
     # Process each argument
-    foreach ($arg in $args)
-    {
-        switch -Regex ($arg)
-        {
-            '^-(.*r.*)$'
-            { $recurse = $true
+    foreach ($arg in $args) {
+        switch -Regex ($arg) {
+            '^-(.*r.*)$' {
+                $recurse = $true
             }
-            '^-(.*f.*)$'
-            { $force = $true
+            '^-(.*f.*)$' {
+                $force = $true
             }
-            Default
-            { $paths += $arg
+            Default {
+                $paths += $arg
             }
         }
     }
@@ -61,25 +53,19 @@ function Remove-Wrapper
     Write-Host "Paths: $paths"
     Write-Host "Args: $args"
 
-    foreach ($path in $paths)
-    {
-        try
-        {
+    foreach ($path in $paths) {
+        try {
             $resolvedPath = Resolve-Path -Path $path
 
-            if (Test-Path $resolvedPath -PathType Container)
-            {
+            if (Test-Path $resolvedPath -PathType Container) {
                 [System.IO.Directory]::Delete($resolvedPath, $recurse)
-            } else
-            {
-                if ($force)
-                {
+            } else {
+                if ($force) {
                     Set-ItemProperty -Path $resolvedPath -Name IsReadOnly -Value $false
                 }
                 [System.IO.File]::Delete($resolvedPath)
             }
-        } catch
-        {
+        } catch {
             Write-Error "Failed to remove path:  $path"
             Write-Error "Failed to remove res path:  $resolvedPath"
             Write-Host "Force: $force"
@@ -90,16 +76,14 @@ function Remove-Wrapper
     }
 }
 
-function ManPageWindow
-{
+function ManPageWindow {
     param (
         [string]$command
     )
     Get-Help -Name $command -ShowWindow
 }
 
-function ManPage
-{
+function ManPage {
     param(
         [string]$command
     )
@@ -107,8 +91,7 @@ function ManPage
     # | bat --paging=always --decorations=always
 }
 
-function CleanLess
-{
+function CleanLess {
     param(
         $parsedArgs
     )
@@ -116,18 +99,15 @@ function CleanLess
 }
 
 
-function ZoxideAdd
-{
+function ZoxideAdd {
     zoxide add .
 }
 
-function ZoxideEdit
-{
+function ZoxideEdit {
     zoxide edit
 }
 
-function ZoxideQuery
-{
+function ZoxideQuery {
     zoxide query $args
 }
 
