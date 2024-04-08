@@ -79,6 +79,16 @@ map("n", "[m", function()
 	vscode.call("bookmarks.jumpToPrevious")
 end)
 
+map("n", "]t", function()
+	print("Next TODO")
+	vscode.call("todo-tree.goToNext")
+end)
+
+map("n", "[t", function()
+	print("Prev TODO")
+	vscode.call("todo-tree.goToPrevious")
+end)
+
 map("n", "<Left>", function()
 	print("Increase view width")
 	vscode.call("workbench.action.increaseViewWidth")
@@ -165,4 +175,5 @@ map("n", "zm", function()
 	print("Close folds recurse")
 	vscode.call("editor.foldRecursively")
 end)
+
 -- end
