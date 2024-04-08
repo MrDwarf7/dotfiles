@@ -17,11 +17,9 @@ function ubsh {
 function disloc {
     if (-not ($args)) {
     (Get-ChildItem HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | ForEach-Object { Get-ItemProperty $_.PSPath }) | Select-Object DistributionName, BasePath
-    }
-    elseif ($args -eq "v" -or "V") {
+    } elseif ($args -eq "v" -or "V") {
     (Get-ChildItem "HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss" -Recurse)
-    }
-    else {
+    } else {
         Write-Error ErrorAction
     }
 }

@@ -88,20 +88,16 @@ $env:EDITOR = $env:VISUAL = 'nvim'
 
 
 # BEGIN - Tooling Functions
-function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
-{
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
 # Work.sort of
-function checkEnvironment
-{
-    if ($env:COMPUTERNAME -clike "*LG*")
-    {
+function checkEnvironment {
+    if ($env:COMPUTERNAME -clike "*LG*") {
         $env:HOME_PROFILE = $false
         return $true
-    } else
-    {
+    } else {
         return $false
     }
 }
@@ -112,15 +108,13 @@ function checkEnvironment
 # END - Tooling Functions
 
 # Work
-if (checkEnvironment -eq $true)
-{
+if (checkEnvironment -eq $true) {
     $env:PSModulePath = $workDefaultPSModulePath
     . "$powershell_scripts_dir\work_scripts.ps1"
 }
 
 # Not work/ AKA Home
-if (-not (checkEnvironment))
-{
+if (-not (checkEnvironment)) {
 
     $env:PAGER = less
     $env:BAT_PAGER = less -RF
@@ -144,19 +138,16 @@ if (-not (checkEnvironment))
 #     . $PROFILE
 # }
 
-function .
-{
+function . {
     Start-Process .
 }
 
-function la
-{
+function la {
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function l
-{
+function l {
     param ($path = ".")
     Get-ChildItem $path -Force
     # [System.IO.Directory]::GetFiles($path) -Force

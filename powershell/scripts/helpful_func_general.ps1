@@ -9,85 +9,68 @@
 # $testing_projects = "Testing"
 
 # BEGIN - Shell functions / Helpful functions
-function cl
-{
+function cl {
     $cleanText = ""
     Add-Type -Assembly PresentationCore
     $clipText = (get-location).ToString() | Out-String -Stream
 
-    if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::"))
-    {
+    if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::")) {
         $clipText = $clipText.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
     }
     [Windows.Clipboard]::SetText($clipText)
 }
 
-function lzgt
-{
+function lzgt {
     lazygit $args
 }
 
-function lg
-{
+function lg {
     lazygit $args
 }
 
-function nf
-{
-    if (-not (neofetch --help))
-    {
-        try
-        {
+function nf {
+    if (-not (neofetch --help)) {
+        try {
             scoop install neofetch
-        } catch
-        {
+        } catch {
             scoop bucket add extras
-        } finally
-        {
+        } finally {
             scoop install neofetch
         }
     }
     neofetch
 }
 
-function lzd
-{
+function lzd {
     lazydocker $args
 }
 
-function gitgo
-{
+function gitgo {
     param(
         [string]$baseCommitMessage = "Bump"
     )
-    if ($args)
-    {
+    if ($args) {
         $argumentsIn = $args
     }
-    if (-not $args)
-    {
+    if (-not $args) {
         $argumentsIn = $baseCommitMessage
     }
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
 
-function scoopup
-{
+function scoopup {
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
 
-function nodeup
-{
+function nodeup {
     $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade
     # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
 
-function sysup
-{
-    if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED))
-    {
+function sysup {
+    if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED)) {
         $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     }
     scoopup
@@ -98,13 +81,11 @@ function sysup
     Write-Host
 }
 
-function npp
-{
+function npp {
     notepad++ $args
 }
 
-function scpdir
-{
+function scpdir {
     Push-Location "$env:USERPROFILE\scoop\"
     Get-ChildItem
 }
@@ -113,19 +94,16 @@ function scpdir
 
 
 
-function dot
-{
+function dot {
     param(
         $path
     )
     # Write-Host "From dot function call path variable is: ", $path
     # Write-Host "From dot function call literal args is: ", $args
 
-    $path = if ($path)
-    {
+    $path = if ($path) {
         Join-Path $dotfiles_dir $path.Replace('/', '\')
-    } else
-    {
+    } else {
         $dotfiles_dir
     }
     Push-Location "C:\"
@@ -140,60 +118,50 @@ function dot
 
 # END - Shell functions / Helpful functions
 
-function pro
-{
+function pro {
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower())
-    {
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower()) {
         # Reload the profile without clearing the console
         . $PROFILE
         Clear-Host
-    } else
-    {
+    } else {
         # Reload the profile and clear the console
         . $PROFILE
     }
 }
 
-function ca
-{
+function ca {
     param ($path = ".")
     Clear-Host
     Get-ChildItem $path -Force
 }
 
-function .
-{
+function . {
     Start-Process .
 }
 
-function la
-{
+function la {
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function l
-{
+function l {
     param ($path = ".")
     Get-ChildItem $path -Force
 }
 
-function cd2
-{
+function cd2 {
     Set-Location ../../
 }
 
-function touch
-{
+function touch {
     New-Item $args
 }
 
-function zip
-{
+function zip {
     param (
         [string]$ItemToCompress,
         [string]$OptionalDestination
@@ -201,19 +169,16 @@ function zip
     $ItemName = (Get-Item $ItemToCompress).Name
     $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
+    if ([String]::IsNullOrEmpty($OptionalDestination)) {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
-    } else
-    {
+    } else {
         Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
     }
 }
 
-function uzip
-{
+function uzip {
     param (
         [string]$ItemToUnzip,
         [string]$OptionalDestination
@@ -221,13 +186,11 @@ function uzip
     $ItemName = (Get-Item $ItemToUnzip).Name
     $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination))
-    {
+    if ([String]::IsNullOrEmpty($OptionalDestination)) {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
-    } else
-    {
+    } else {
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
     }
 }

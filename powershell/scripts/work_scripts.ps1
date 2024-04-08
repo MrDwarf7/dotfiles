@@ -24,20 +24,15 @@ $PYTHON_PATH=[NullString] | Select-Object -Property "Python3"
 # }
 
 
-function workconf
-{
-    if (-not ($args))
-    {
+function workconf {
+    if (-not ($args)) {
         Start-Process $work_scripts_dir
     }
-    if ( $args)
-    {
-        if ($args -eq "vim")
-        {
+    if ( $args) {
+        if ($args -eq "vim") {
             vim $work_scripts_dir
         }
-        if ($args -eq "code")
-        {
+        if ($args -eq "code") {
             code $work_scripts_dir
         }
     }

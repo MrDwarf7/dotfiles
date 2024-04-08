@@ -190,8 +190,7 @@ filter __gh_escapeStringWithSpecialChars {
                     # insert space after value
                     [System.Management.Automation.CompletionResult]::new($($comp.Name | __gh_escapeStringWithSpecialChars) + $Space, "$($comp.Name)", 'ParameterValue', "$($comp.Description)")
 
-                }
-                else {
+                } else {
                     # Add the proper number of spaces to align the descriptions
                     while ($comp.Name.Length -lt $Longest) {
                         $comp.Name = $comp.Name + " "
@@ -200,8 +199,7 @@ filter __gh_escapeStringWithSpecialChars {
                     # Check for empty description and only add parentheses if needed
                     if ($($comp.Description) -eq " " ) {
                         $Description = ""
-                    }
-                    else {
+                    } else {
                         $Description = "  ($($comp.Description))"
                     }
 

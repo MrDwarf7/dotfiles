@@ -35,13 +35,13 @@ function Resolve-ShortcutFile {
             Get-Content $fileName | Where-Object {
                 $_ -like "url=*"
             } |
-            Select-Object @{
-                Name       = 'ShortcutFile'
-                Expression = { Get-Item $fileName }
-            }, @{
-                Name       = 'Url'
-                Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
-            }
+                Select-Object @{
+                    Name       = 'ShortcutFile'
+                    Expression = { Get-Item $fileName }
+                }, @{
+                    Name       = 'Url'
+                    Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
+                }
         }
 
     }

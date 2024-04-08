@@ -58,8 +58,7 @@ function rmvenv {
     }
     if (checkEnvironment) {
         Remove-Item -r ./.venv
-    }
-    else {
+    } else {
         Remove-Item -Path ./.venv -Recurse -Force
     }
 }
