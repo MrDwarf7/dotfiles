@@ -139,7 +139,24 @@ local servers = {
 		},
 	},
 	marksman = {},
-	powershell_es = {},
+	powershell_es = {
+		filetypes = { "powershell", "ps1", "psm1", "psd1" },
+		-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
+		settings = {
+			powershell = {
+				codeFormatting = {
+					Preset = "OTBS",
+				},
+			},
+			scriptAnalysis = {
+				enable = true,
+			},
+			completion = {
+				enable = true,
+				useCommandDiscovery = true,
+			},
+		},
+	},
 	prismals = {},
 	pyright = {
 		cmd = { "pyright-langserver", "--stdio" },

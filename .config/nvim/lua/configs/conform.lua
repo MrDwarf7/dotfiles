@@ -1,3 +1,16 @@
+---@usage get_available_formatters("powershell_es", bufnr)
+---@param formatter string
+---@param buf number | nil
+---@return string[] | function | table | nil
+local get_available_formatters = function(formatter, buf)
+	local bufnr = buf or vim.api.nvim_get_current_buf()
+	if require("conform").get_formatter_info(formatter, bufnr).available then
+		return { formatter }
+	else
+		return { vim.lsp.buf.format({ async = true }) }
+	end
+end
+
 require("conform").setup({
 	formatters_by_ft = {
 		cpp = { "clang-format" },
@@ -5,7 +18,7 @@ require("conform").setup({
 		javascriptreact = { "biome" },
 		json = { "fixjson", { "biome" } },
 		lua = { "stylua" },
-		powershell = { "powershell_es" },
+		powershell = get_available_formatters("powershell_es"),
 		python = function(bufnr)
 			if require("conform").get_formatter_info("ruff_format", bufnr).available then
 				return { "ruff_format" }

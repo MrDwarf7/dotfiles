@@ -8,6 +8,7 @@ require("lint").linter_by_ft = {
 	javascriptreact = { "biomejs" },
 	json = { "jsonlint" },
 	lua = { "luacheck" },
+	powershell = { "powershell_es" },
 	python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
 	sh = { "shellcheck" },
 	typescript = { "biomejs" },
