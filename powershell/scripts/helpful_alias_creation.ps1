@@ -27,6 +27,24 @@ function FWhich {
 }
 
 
+function WhichCD {
+    param(
+        [string]$commandName
+    )
+
+    $execPath = (Get-Command $commandName).Source
+
+    if (-not $execPath) {
+        Write-Warning "Command not found: $commandName"
+        return
+    }
+
+    $directory = [System.IO.Path]::GetDirectoryName($execPath)
+
+    Set-Location -Path $directory
+}
+
+
 function Remove-Wrapper {
     # Initialize flags and paths
     $force = $false
@@ -118,6 +136,7 @@ New-Alias -Name man -Value ManPage -Force
 SafeNewAlias -Alias less -Command CleanLess $args
 
 New-Alias -Name which -Value FWhich -Force
+New-Alias -Name cdd -Value  WhichCD -Force
 New-Alias -Name rm -Value Remove-Wrapper -Force
 
 SafeNewAlias -Alias bpsa -Command sar
