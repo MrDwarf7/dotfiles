@@ -1,3 +1,4 @@
+---@diagnostic disable: redundant-parameter
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
 local map = vim.keymap.set
@@ -12,6 +13,7 @@ map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
 map("v", "p", '"_dP', silent_opts)
+map({ "i", "v", "n" }, "<C-s>", ":wa<CR>", silent_opts)
 
 map("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
