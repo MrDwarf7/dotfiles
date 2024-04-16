@@ -104,7 +104,7 @@ fi
 # fi
 
 # nvm
-# source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
 
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
