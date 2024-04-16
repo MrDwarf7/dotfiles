@@ -19,6 +19,11 @@ map("n", "<C-w>d", function()
 	vscode.action("editor.action.revealDefinitionAside")
 end)
 
+map("n", "<C-w>e", function()
+	print("Reset editor window sizes")
+	vscode.action("workbench.action.evenEditorWidths")
+end)
+
 map("n", "gr", function()
 	print("Go to references")
 	vscode.action("editor.action.goToReferences")
@@ -89,6 +94,7 @@ map("n", "[t", function()
 	vscode.call("todo-tree.goToPrevious")
 end)
 
+-- Non Ctrl variants
 map("n", "<Left>", function()
 	print("Increase view width")
 	vscode.call("workbench.action.increaseViewWidth")
@@ -108,6 +114,17 @@ end)
 map("n", "<Up>", function()
 	print("Decrease view height")
 	vscode.call("workbench.action.decreaseViewHeight")
+end)
+
+-- Ctrl variants
+map("n", "<C-Left>", function()
+	print("Increase view width")
+	vscode.call("workbench.action.increaseViewWidth")
+end)
+
+map("n", "<C-Right>", function()
+	print("Decrease view width")
+	vscode.call("workbench.action.decreaseViewWidth")
 end)
 
 map("n", "<C-Down>", function()
