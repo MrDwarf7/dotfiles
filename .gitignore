@@ -28,6 +28,9 @@ z.old/*
 .config/helix/runtime/
 !.config/helix/runtime/languages.toml
 !.config/helix/runtime/themes/
+!.config/helix/runtime/themes/*
+!.config/helix/runtime/themes/*/**
+
 
 .config/nvim/lazy-lock*
 
