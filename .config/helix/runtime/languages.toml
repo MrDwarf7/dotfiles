@@ -27,7 +27,7 @@ prisma-language-server = { command = "prisma-language-server", args = [
 
 slint-lsp = { command = "slint-lsp", args = [] }
 tailwindcss-ls = { command = "tailwindcss-language-server", args = ["--stdio"] }
-taplo = { command = "taplo", args = ["lsp", "stdio"] }
+# taplo = { command = "taplo", args = ["lsp", "stdio"] }
 yaml-language-server = { command = "yaml-language-server", args = ["--stdio"] }
 zls = { command = "zls" }
 
@@ -173,16 +173,12 @@ scope = "source.toml"
 injection-regex = "toml"
 file-types = ["toml", { glob = "poetry.lock" }, { glob = "Cargo.lock" }]
 comment-token = "#"
-language-servers = ["taplo"]
+language-servers = [ "taplo" ]
 indent = { tab-width = 2, unit = "  " }
-
-command = "taplo"
-args = ["lsp", "stdio"]
 
 [[grammar]]
 name = "toml"
 source = { git = "https://github.com/ikatyang/tree-sitter-toml", rev = "7cff70bbcbbc62001b465603ca1ea88edd668704" }
-
 # -----------------------------------------------------------------------------
 
 
