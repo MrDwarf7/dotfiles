@@ -25,11 +25,15 @@ z.old/*
 .config/jgit/*
 .config/scoop/*
 
-.config/helix/runtime/
-!.config/helix/runtime/languages.toml
-!.config/helix/runtime/themes/
-!.config/helix/runtime/themes/*
-!.config/helix/runtime/themes/*/**
+ .config/helix/runtime/grammars/*
+ 
+ .config/helix/runtime/queries/*
+
+# !.config/helix/runtime/languages.toml
+# !.config/helix/runtime/themes/
+# !.config/helix/runtime/themes/*
+# !.config/helix/runtime/themes/*/**
+# .config/helix/runtime/
 
 
 .config/nvim/lazy-lock*
