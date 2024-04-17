@@ -34,17 +34,8 @@ zls = { command = "zls" }
 
 # Formatting per lang
 
-[language-server.rust-analyzer]
-command = "rust-analyzer"
 
-[language-server.rust-analyzer.config]
-inlayHints.bindingModeHints.enable = true
-inlayHints.closingBraceHints.minLines = 10
-inlayHints.closureReturnTypeHints.enable = "always"
-inlayHints.discriminantHints.enable = "fieldless"
-inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-inlayHints.typeHints.hideClosureInitialization = false
-
+# END testing lsp stuff
 
 [[language]]
 name = "rust"
@@ -69,6 +60,63 @@ persistent-diagnostic-sources = ["rustc", "clippy"]
 '[' = ']'
 '"' = '"'
 '`' = '`'
+'<' = '>'
+# [language.config]
+
+# cachePriming.enable
+
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+inlayHints.closureReturnTypeHints.enable = "always"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+
+###
+inlayHints.closureStyle = "rust_analyzer"
+inlayHints.expressionAdjustmentHints.enable = "always"
+inlayHints.reborrowHints.enable = "always"
+
+
+inlayHints.closingBraceHints.enable = true
+inlayHints.typeHints.enable = true
+inlayHints.chainingHints.enable = true
+inlayHints.discriminationHints.enable = true
+inlayHints.semanticHighlighting.nonStandardTokens = true
+inlayHints.semanticHighlighting.operator.enable = true
+inlayHints.parameterHints.enable = true
+inlayHints.rangeExclusiveHints.enable = true
+inlayHints.maxLength.enable = 120
+###
+
+inlayHints.bindingModeHints.enable = true
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.typeHints.hideClosureInitialization = false
+
+###
+inlayHints.implicitDrops.enable = true
+inlayHints.lifetimeElisionHints.useParameterNames = true
+inlayHints.closureCaptureHints.enable = true
+###
+
+# START testing lsp stuff
+
+# text entries
+debug.engine = "vadimcn.vscode-lldb"
+check.command = "clippy"
+workspace.symbol.search.scope = "workspace_and_dependencies"
+# END text entries
+
+# bools
+diagnostics.useRustcErrorCode = true
+restartServerOnConfigChange = true
+completion.fullFunctionSignatures.enable = true
+hover.actions.references.enable = true
+semanticHighlighting.operator.specialization.enable = true
+# END bools
+
 
 [language.debugger]
 name = "lldb-vscode"
@@ -107,7 +155,6 @@ args = { attachCommands = [
     "file {1}",
     "attach {2}",
 ] }
-
 
 [[grammar]]
 name = "rust"

@@ -1,6 +1,6 @@
 # testing
 # theme = "molokai"
-theme = "tokyonight_storm"
+theme = "1_tokyonight_storm"
 
 [editor]
 line-number = "relative"
@@ -9,8 +9,16 @@ scrolloff = 6
 cursorline = true
 bufferline = "always"      # Options include always, never, multiple (Where more than one is present)
 completion-trigger-len = 1
+auto-info = true
 rulers = [90, 120]
+color-modes = true
+popup-border = "all"
 
+[editor.gutters]
+layout = ["spacer", "diagnostics", "line-numbers", "spacer", "diff"]
+
+[editor.gutters.line-numbers]
+min-width = 3
 
 [editor.cursor-shape]
 insert = "bar"
@@ -44,14 +52,16 @@ mode.select = "SELECT"
 
 
 [editor.file-picker]
-# hidden = false
+max-depth = 4
+hidden = false
+follow-symlinks = true
 git-ignore = true
 git-global = true
 ignore = true
-max-depth = 6
 
 [editor.indent-guides]
 render = true
+character = "▏"
 skip-levels = 0
 
 [editor.auto-pairs]
@@ -65,9 +75,29 @@ skip-levels = 0
 
 [editor.lsp]
 display-messages = true
+auto-signature-help = true
+display-inlay-hints = true
+
+
+
+[editor.whitespace.render] 
+tab = "all"
+space = "all"
+nbsp = "all"
+
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+
 
 [keys.normal.space]
 x = ":buffer-close"
+
+"n" = "goto_next_buffer"
+"p" = "goto_previous_buffer"
 
 F = "no_op"
 
@@ -76,7 +106,11 @@ a = "no_op"
 b = "no_op"
 # w = "window_mode"
 
-
+# [keys.normal.window]
+# C-h = "swap_view_left"
+# C-j = "swap_view_down"
+# C-k = "swap_view_up"
+# C-l = "swap_view_right"
 
 j = "no_op"
 h = "no_op"
@@ -90,7 +124,6 @@ P = "no_op"
 r = "no_op"
 R = "no_op"
 
-
 [keys.normal.space.f] # Find 
 f = "file_picker_in_current_directory"
 F = "file_picker"
@@ -100,9 +133,8 @@ P = "diagnostics_picker"
 l = "last_picker"
 j = "jumplist_picker"
 w = "global_search"
-#
 
-# [keys.normal.space.b]
+# [keys.normal.space]
 # n = "goto_next_buffer"
 # p = "goto_previous_buffer"
 
@@ -129,20 +161,24 @@ left = "no_op"
 right = "no_op"
 up = "no_op"
 down = "no_op"
-C-h = "no_op"
-C-j = "no_op"
-C-k = "no_op"
-C-l = "no_op"
+
+# C-h = "no_op"
+# C-j = "no_op"
+# C-k = "no_op"
+# C-l = "no_op"
+
 H = "no_op"
 L = "no_op"
 J = "no_op"
 K = "no_op"
 
 
+[keys.normal.space.w.w] # Window
+
 h = "swap_view_left"
-l = "swap_view_right"
 j = "swap_view_down"
 k = "swap_view_up"
+l = "swap_view_right"
 
 
 [keys.normal.space."="]
@@ -156,69 +192,45 @@ k = "swap_view_up"
 
 # [keys.popup]
 
-
-
-
-
-
-
 # [keys.normal]
 # d = [
 # "goto_next_diag",
 # "collapse_selection",
 # ]
-  
-
-
-
-
-
-
-
-
-
 
 
 [keys.normal]
 # Quick iteration on config changes
 C-9 = ":config-open"
-C-0 = ":config-reload"
+C-8 = ":config-reload"
 K = "hover"
 C-s = ":w" # Saving with Ctrl+s
 C-g =":show-directory"
 
 
+ # Centering viewport on page scrolling
+C-u = ["half_page_up", "align_view_center"]
+C-d = ["half_page_down", "align_view_center"]
 
+# C-u = ["half_page_up"]
+# C-d = ["half_page_down"]
 
+# C-e = ["scroll_down", "move_line_down"]
+# C-y = ["scroll_up", "move_line_up"]
 
-
-
-
-
-
-
-
-
-# Centering viewport on page scrolling
-# C-u = ["half_page_up", "align_view_center"]
-# C-d = ["half_page_down", "align_view_center"]
-
-C-u = ["half_page_up"]
-C-d = ["half_page_down"]
-
-C-e = ["scroll_down", "move_line_down"]
-C-y = ["scroll_up", "move_line_up"]
+C-e = ["scroll_down" ]
+C-y = ["scroll_up" ]
 
 # C-e = ["align_view_bottom", "move_line_down" ]
 # C-y = ["align_view_top", "move_line_up" ]
 
 # Select all, basic command but useful
-C-a = [
-  "goto_file_start",
-  "select_mode",
-  "extend_to_line_bounds",
-  "goto_file_end",
-]
+# C-a = [
+#   "goto_file_start",
+#   "select_mode",
+#   "extend_to_line_bounds",
+#   "goto_file_end",
+# ]
 
 
 # Tabbing through buffers. can't seem to get the other ones working too well sadly
@@ -274,6 +286,7 @@ S = "surround_add" # Would be nice to be able to do something after this but it 
 x = "delete_selection"
 p = ["paste_clipboard_after", "collapse_selection"]
 P = ["paste_clipboard_before", "collapse_selection"]
+
 # Would be nice to add ya and yi, but the surround commands can't be chained
 Y = [
   "extend_to_line_end",
@@ -389,7 +402,6 @@ G = [
 
 w = [
   "move_next_word_start",
-  "yank_main_selection_to_clipboard",
   "delete_selection",
 ]
 W = [
