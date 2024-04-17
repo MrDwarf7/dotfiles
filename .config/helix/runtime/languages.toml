@@ -6,21 +6,21 @@ clangd = { command = "clangd" }
 cmake-language-server = { command = "cmake-language-server" }
 docker-langserver = { command = "docker-langserver", args = ["--stdio"] }
 docker-compose-langserver = { command = "docker-compose-langserver", args = [
-  "--stdio",
+    "--stdio",
 ] }
 graphql-language-service = { command = "graphql-lsp", args = [
-  "server",
-  "-m",
-  "stream",
+    "server",
+    "-m",
+    "stream",
 ] }
 jsonnet-language-server = { command = "jsonnet-language-server", args = [
-  "-t",
-  "--lint",
+    "-t",
+    "--lint",
 ] }
 marksman = { command = "marksman", args = ["server"] }
 # omnisharp = { command = "OmniSharp", args = [ "--languageserver" ] } # Is the other for I think C++?
 prisma-language-server = { command = "prisma-language-server", args = [
-  "--stdio",
+    "--stdio",
 ] }
 # pylsp = { command = "pylsp" }
 # pylyzer = { command = "pylyzer", args = ["--server"] }
@@ -33,6 +33,19 @@ zls = { command = "zls" }
 
 
 # Formatting per lang
+
+[language-server.rust-analyzer]
+command = "rust-analyzer"
+
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable = true
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "always"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
+
+
 [[language]]
 name = "rust"
 scope = "source.rust"
@@ -42,9 +55,9 @@ roots = ["Cargo.toml", "Cargo.lock"]
 auto-format = true
 comment-tokens = ["//", "///", "//!"]
 block-comment-tokens = [
-  { start = "/*", end = "*/" },
-  { start = "/**", end = "*/" },
-  { start = "/*!", end = "*/" },
+    { start = "/*", end = "*/" },
+    { start = "/**", end = "*/" },
+    { start = "/*!", end = "*/" },
 ]
 language-servers = ["rust-analyzer"]
 indent = { tab-width = 4, unit = "    " }
@@ -60,7 +73,7 @@ persistent-diagnostic-sources = ["rustc", "clippy"]
 [language.debugger]
 name = "lldb-vscode"
 transport = "stdio"
-command = "lldb-vscode"
+command = "lldb-dap"
 
 [[language.debugger.templates]]
 name = "binary"
@@ -84,31 +97,21 @@ args = { pid = "{0}" }
 name = "gdbserver attach"
 request = "attach"
 completion = [
-  { name = "lldb connect url", default = "connect://localhost:3333" },
-  { name = "file", completion = "filename" },
-  "pid",
+    { name = "lldb connect url", default = "connect://localhost:3333" },
+    { name = "file", completion = "filename" },
+    "pid",
 ]
 args = { attachCommands = [
-  "platform select remote-gdb-server",
-  "platform connect {0}",
-  "file {1}",
-  "attach {2}",
+    "platform select remote-gdb-server",
+    "platform connect {0}",
+    "file {1}",
+    "attach {2}",
 ] }
 
-[language-server.rust-analyzer]
-command = "rust-analyzer"
-
-[language-server.rust-analyzer.config]
-inlayHints.bindingModeHints.enable = true
-inlayHints.closingBraceHints.minLines = 10
-inlayHints.closureReturnTypeHints.enable = "always"
-inlayHints.discriminantHints.enable = "fieldless"
-inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-inlayHints.typeHints.hideClosureInitialization = false
 
 [[grammar]]
 name = "rust"
-source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "0431a2c60828731f27491ee9fdefe25e250ce9c9" }
+source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "473634230435c18033384bebaa6d6a17c2523281" }
 
 
 # -----------------------------------------------------------------------------
@@ -234,17 +237,17 @@ name = "html"
 scope = "text.html.basic"
 injection-regex = "html"
 file-types = [
-  "html",
-  "htm",
-  "shtml",
-  "xhtml",
-  "xht",
-  "jsp",
-  "asp",
-  "aspx",
-  "jshtm",
-  "volt",
-  "rhtml",
+    "html",
+    "htm",
+    "shtml",
+    "xhtml",
+    "xht",
+    "jsp",
+    "asp",
+    "aspx",
+    "jshtm",
+    "volt",
+    "rhtml",
 ]
 block-comment-tokens = { start = "<!--", end = "-->" }
 language-servers = ["vscode-html-language-server"]
@@ -264,31 +267,31 @@ name = "python"
 # scope = "source.python"
 injection-regex = "python"
 file-types = [
-  "py",
-  "pyi",
-  "py3",
-  "pyw",
-  "ptl",
-  "rpy",
-  "cpy",
-  "ipy",
-  "pyt",
-  { glob = ".pythonstartup" },
-  { glob = ".pythonrc" },
-  { glob = "SConstruct" },
-  { glob = "SConscript" },
+    "py",
+    "pyi",
+    "py3",
+    "pyw",
+    "ptl",
+    "rpy",
+    "cpy",
+    "ipy",
+    "pyt",
+    { glob = ".pythonstartup" },
+    { glob = ".pythonrc" },
+    { glob = "SConstruct" },
+    { glob = "SConscript" },
 ]
 
 shebangs = ["python"]
 roots = [
-  ".",
-  "pyproject.toml",
-  "setup.py",
-  "poetry.lock",
-  "pyrightconfig.json",
-  "pdm.lock",
-  ".venv",
-  "venv",
+    ".",
+    "pyproject.toml",
+    "setup.py",
+    "poetry.lock",
+    "pyrightconfig.json",
+    "pdm.lock",
+    ".venv",
+    "venv",
 ]
 comment-token = "#"
 language-servers = ["pyright", "ruff"]
@@ -353,47 +356,47 @@ name = "bash"
 scope = "source.bash"
 injection-regex = "(shell|bash|zsh|sh)"
 file-types = [
-  "sh",
-  "bash",
-  "zsh",
-  "zshenv",
-  "zlogin",
-  "zlogout",
-  "zprofile",
-  "zshrc",
-  "eclass",
-  "ebuild",
-  "bazelrc",
-  "Renviron",
-  "zsh-theme",
-  "ksh",
-  "cshrc",
-  "tcshrc",
-  "bashrc_Apple_Terminal",
-  "zshrc_Apple_Terminal",
-  { glob = "tmux.conf" },
-  { glob = ".bash_history" },
-  { glob = ".bash_login" },
-  { glob = ".bash_logout" },
-  { glob = ".bash_profile" },
-  { glob = ".bashrc" },
-  { glob = ".profile" },
-  { glob = ".zshenv" },
-  { glob = ".zlogin" },
-  { glob = ".zlogout" },
-  { glob = ".zprofile" },
-  { glob = ".zshrc" },
-  { glob = ".zimrc" },
-  { glob = "APKBUILD" },
-  { glob = "PKGBUILD" },
-  { glob = ".bash_aliases" },
-  { glob = ".Renviron" },
-  { glob = ".xprofile" },
-  { glob = ".xsession" },
-  { glob = ".xsessionrc" },
-  { glob = ".yashrc" },
-  { glob = ".yash_profile" },
-  { glob = ".hushlogin" },
+    "sh",
+    "bash",
+    "zsh",
+    "zshenv",
+    "zlogin",
+    "zlogout",
+    "zprofile",
+    "zshrc",
+    "eclass",
+    "ebuild",
+    "bazelrc",
+    "Renviron",
+    "zsh-theme",
+    "ksh",
+    "cshrc",
+    "tcshrc",
+    "bashrc_Apple_Terminal",
+    "zshrc_Apple_Terminal",
+    { glob = "tmux.conf" },
+    { glob = ".bash_history" },
+    { glob = ".bash_login" },
+    { glob = ".bash_logout" },
+    { glob = ".bash_profile" },
+    { glob = ".bashrc" },
+    { glob = ".profile" },
+    { glob = ".zshenv" },
+    { glob = ".zlogin" },
+    { glob = ".zlogout" },
+    { glob = ".zprofile" },
+    { glob = ".zshrc" },
+    { glob = ".zimrc" },
+    { glob = "APKBUILD" },
+    { glob = "PKGBUILD" },
+    { glob = ".bash_aliases" },
+    { glob = ".Renviron" },
+    { glob = ".xprofile" },
+    { glob = ".xsession" },
+    { glob = ".xsessionrc" },
+    { glob = ".yashrc" },
+    { glob = ".yash_profile" },
+    { glob = ".hushlogin" },
 ]
 shebangs = ["sh", "bash", "dash", "zsh"]
 comment-token = "#"
@@ -407,6 +410,16 @@ source = { git = "https://github.com/tree-sitter/tree-sitter-bash", rev = "275ef
 
 # -----------------------------------------------------------------------------
 
+[language-server.lua-language-server]
+command = "lua-language-server"
+
+[language-server.lua-language-server.config.Lua.hint]
+enable = true
+arrayIndex = "Enable"
+setType = true
+paramName = "All"
+paramType = true
+await = true
 
 [[language]]
 name = "lua"
@@ -478,15 +491,15 @@ args = { console = "internalConsole", pid = "{0}" }
 name = "gdbserver attach"
 request = "attach"
 completion = [
-  { name = "lldb connect url", default = "connect://localhost:3333" },
-  { name = "file", completion = "filename" },
-  "pid",
+    { name = "lldb connect url", default = "connect://localhost:3333" },
+    { name = "file", completion = "filename" },
+    "pid",
 ]
 args = { console = "internalConsole", attachCommands = [
-  "platform select remote-gdb-server",
-  "platform connect {0}",
-  "file {1}",
-  "attach {2}",
+    "platform select remote-gdb-server",
+    "platform connect {0}",
+    "file {1}",
+    "attach {2}",
 ] }
 
 [[grammar]]
@@ -519,13 +532,13 @@ source = { git = "https://github.com/uyha/tree-sitter-cmake", rev = "6e51463ef30
 name = "make"
 scope = "source.make"
 file-types = [
-  { glob = "Makefile" },
-  { glob = "makefile" },
-  "make",
-  "mk",
-  "mak",
-  { glob = "GNUmakefile" },
-  { glob = "OCamlMakefile" },
+    { glob = "Makefile" },
+    { glob = "makefile" },
+    "make",
+    "mk",
+    "mak",
+    { glob = "GNUmakefile" },
+    { glob = "OCamlMakefile" },
 ]
 shebangs = ["make", "gmake"]
 injection-regex = "(make|makefile|Makefile|mk)"
@@ -605,16 +618,16 @@ name = "markdown"
 scope = "source.md"
 injection-regex = "md|markdown"
 file-types = [
-  "md",
-  "markdown",
-  "mkd",
-  "mdwn",
-  "mdown",
-  "markdn",
-  "mdtxt",
-  "mdtext",
-  "workbook",
-  { glob = "PULLREQ_EDITMSG" },
+    "md",
+    "markdown",
+    "mkd",
+    "mdwn",
+    "mdown",
+    "markdn",
+    "mdtxt",
+    "mdtext",
+    "workbook",
+    { glob = "PULLREQ_EDITMSG" },
 ]
 roots = [".marksman.toml"]
 language-servers = ["marksman", "markdown-oxide"]
@@ -650,18 +663,18 @@ scope = "source.dockerfile"
 injection-regex = "docker|dockerfile"
 roots = ["Dockerfile", "Containerfile"]
 file-types = [
-  "Dockerfile",
-  { glob = "Dockerfile" },
-  { glob = "Dockerfile.*" },
-  "dockerfile",
-  { glob = "dockerfile" },
-  { glob = "dockerfile.*" },
-  "Containerfile",
-  { glob = "Containerfile" },
-  { glob = "Containerfile.*" },
-  "containerfile",
-  { glob = "containerfile" },
-  { glob = "containerfile.*" },
+    "Dockerfile",
+    { glob = "Dockerfile" },
+    { glob = "Dockerfile.*" },
+    "dockerfile",
+    { glob = "dockerfile" },
+    { glob = "dockerfile.*" },
+    "Containerfile",
+    { glob = "Containerfile" },
+    { glob = "Containerfile.*" },
+    "containerfile",
+    { glob = "containerfile" },
+    { glob = "containerfile.*" },
 ]
 comment-token = "#"
 indent = { tab-width = 2, unit = "  " }
@@ -747,10 +760,10 @@ source = { git = "https://github.com/tree-sitter/tree-sitter-regex", rev = "e1cf
 name = "git-config"
 scope = "source.gitconfig"
 file-types = [
-  { glob = ".gitmodules" },
-  { glob = ".gitconfig" },
-  { glob = ".git/config" },
-  { glob = ".config/git/config" },
+    { glob = ".gitmodules" },
+    { glob = ".gitconfig" },
+    { glob = ".git/config" },
+    { glob = ".config/git/config" },
 ]
 injection-regex = "git-config"
 comment-token = "#"
@@ -778,15 +791,15 @@ source = { git = "https://github.com/mtoohey31/tree-sitter-gitattributes", rev =
 name = "git-ignore"
 scope = "source.gitignore"
 file-types = [
-  { glob = ".gitignore" },
-  { glob = ".gitignore_global" },
-  { glob = ".ignore" },
-  { glob = ".prettierignore" },
-  { glob = ".eslintignore" },
-  { glob = ".npmignore" },
-  { glob = "CODEOWNERS" },
-  { glob = ".config/helix/ignore" },
-  { glob = ".helix/ignore" },
+    { glob = ".gitignore" },
+    { glob = ".gitignore_global" },
+    { glob = ".ignore" },
+    { glob = ".prettierignore" },
+    { glob = ".eslintignore" },
+    { glob = ".npmignore" },
+    { glob = "CODEOWNERS" },
+    { glob = ".config/helix/ignore" },
+    { glob = ".helix/ignore" },
 ]
 injection-regex = "git-ignore"
 comment-token = "#"
@@ -855,65 +868,65 @@ name = "xml"
 scope = "source.xml"
 injection-regex = "xml"
 file-types = [
-  "xml",
-  "mobileconfig",
-  "plist",
-  "xib",
-  "storyboard",
-  "svg",
-  "xsd",
-  "gml",
-  "xaml",
-  "gir",
-  "rss",
-  "atom",
-  "opml",
-  "policy",
-  "ascx",
-  "axml",
-  "axaml",
-  "bpmn",
-  "cpt",
-  "csl",
-  "csproj.user",
-  "dita",
-  "ditamap",
-  "dtml",
-  "fxml",
-  "iml",
-  "isml",
-  "jmx",
-  "launch",
-  "menu",
-  "mxml",
-  "nuspec",
-  "osc",
-  "osm",
-  "pt",
-  "publishsettings",
-  "pubxml",
-  "pubxml.user",
-  "rbxlx",
-  "rbxmx",
-  "rng",
-  "shproj",
-  "tld",
-  "tmx",
-  "vbproj.user",
-  "vcxproj",
-  "vcxproj.filters",
-  "wsdl",
-  "wxi",
-  "wxs",
-  "xbl",
-  "xlf",
-  "xliff",
-  "xpdl",
-  "xul",
-  "xoml",
-  "musicxml",
-  "glif",
-  "ui",
+    "xml",
+    "mobileconfig",
+    "plist",
+    "xib",
+    "storyboard",
+    "svg",
+    "xsd",
+    "gml",
+    "xaml",
+    "gir",
+    "rss",
+    "atom",
+    "opml",
+    "policy",
+    "ascx",
+    "axml",
+    "axaml",
+    "bpmn",
+    "cpt",
+    "csl",
+    "csproj.user",
+    "dita",
+    "ditamap",
+    "dtml",
+    "fxml",
+    "iml",
+    "isml",
+    "jmx",
+    "launch",
+    "menu",
+    "mxml",
+    "nuspec",
+    "osc",
+    "osm",
+    "pt",
+    "publishsettings",
+    "pubxml",
+    "pubxml.user",
+    "rbxlx",
+    "rbxmx",
+    "rng",
+    "shproj",
+    "tld",
+    "tmx",
+    "vbproj.user",
+    "vcxproj",
+    "vcxproj.filters",
+    "wsdl",
+    "wxi",
+    "wxs",
+    "xbl",
+    "xlf",
+    "xliff",
+    "xpdl",
+    "xul",
+    "xoml",
+    "musicxml",
+    "glif",
+    "ui",
 ]
 block-comment-tokens = { start = "<!--", end = "-->" }
 indent = { tab-width = 2, unit = "  " }
@@ -938,10 +951,10 @@ source = { git = "https://github.com/RenjiSann/tree-sitter-xml", rev = "48a7c2b6
 name = "env"
 scope = "source.env"
 file-types = [
-  { glob = ".env" },
-  { glob = ".env.*" },
-  { glob = ".envrc" },
-  { glob = ".envrc.*" },
+    { glob = ".env" },
+    { glob = ".env.*" },
+    { glob = ".envrc" },
+    { glob = ".envrc.*" },
 ]
 injection-regex = "env"
 comment-token = "#"
@@ -952,28 +965,28 @@ grammar = "bash"
 name = "ini"
 scope = "source.ini"
 file-types = [
-  "ini",
-  # Systemd unit files
-  "service",
-  "automount",
-  "device",
-  "mount",
-  "path",
-  "service",
-  "slice",
-  "socket",
-  "swap",
-  "target",
-  "timer",
-  # Podman quadlets
-  "container",
-  "volume",
-  "kube",
-  "network",
-  { glob = ".editorconfig" },
-  "properties",
-  "cfg",
-  "directory",
+    "ini",
+    # Systemd unit files
+    "service",
+    "automount",
+    "device",
+    "mount",
+    "path",
+    "service",
+    "slice",
+    "socket",
+    "swap",
+    "target",
+    "timer",
+    # Podman quadlets
+    "container",
+    "volume",
+    "kube",
+    "network",
+    { glob = ".editorconfig" },
+    "properties",
+    "cfg",
+    "directory",
 ]
 injection-regex = "ini"
 comment-token = "#"
