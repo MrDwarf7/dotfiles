@@ -24,7 +24,9 @@ z.old/*
 .config/lazygit/*
 .config/jgit/*
 .config/scoop/*
-.config/helix/runtime/grammars/*
+
+.config/helix/runtime/
+!.config/helix/runtime/languages.toml
 
 .config/nvim/lazy-lock*
 
