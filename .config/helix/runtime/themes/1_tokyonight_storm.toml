@@ -1,6 +1,7 @@
 # Author: Paul Graydon <untimely.creation97@proton.me>
 
 inherits = "tokyonight"
+
 "ui.virtual.inlay-hint" = { bg = "bg", fg = "fg-gutter", modifiers = ["italic"] }
 "ui.virtual.inlay-hint.parameter" = {  bg = "bg-menu", fg = "fg-gutter", modifiers = [ "italic" ] }
 
