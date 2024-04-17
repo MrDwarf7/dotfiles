@@ -152,7 +152,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"kyazdani42/nvim-web-devicons",
+			-- "kyazdani42/nvim-web-devicons",
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
@@ -264,7 +264,6 @@ return {
 				"folke/neoconf.nvim",
 				cmd = "Neoconf",
 				config = false,
-				depends_on = "nvim-lspconfig",
 			},
 			{ "folke/neodev.nvim", opts = {} },
 			{
