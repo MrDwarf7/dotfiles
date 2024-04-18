@@ -24,6 +24,8 @@ z.old/*
 .config/lazygit/*
 .config/jgit/*
 .config/scoop/*
+.config/graphite/user_config*
+
 
  .config/helix/runtime/grammars/*
  
