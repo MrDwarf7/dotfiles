@@ -14,6 +14,8 @@ end
 require("conform").setup({
 	formatters_by_ft = {
 		cpp = { "clang-format" },
+		-- cs = { "omnisharp" },
+		cs = { "csharpier" },
 		javascript = { "biome" },
 		javascriptreact = { "biome" },
 		json = { "fixjson", { "biome" } },
@@ -43,7 +45,7 @@ require("conform").setup({
 			netrw = true,
 		}
 		return {
-			timeous_ms = 500,
+			timeous_ms = 600,
 			lsp_fallback = not disabled_ft[vim.bo[bufnr].filetype],
 		}
 	end,
