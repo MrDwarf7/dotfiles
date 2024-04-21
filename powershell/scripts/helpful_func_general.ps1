@@ -90,9 +90,17 @@ function scpdir {
     Get-ChildItem
 }
 
+function baconget {
+    $baconFile = "$dotfiles_dir\.config\bacon\bacon.toml"
+    $currentDir = Get-Location
 
-
-
+    if (-not (Test-Path $baconFile )) {
+        Write-Host "Bacon file not found at: $baconFile "
+        return
+    }
+    Copy-Item $baconFile $currentDir
+    Write-Host "Bacon file copied to: $currentDir"
+}
 
 function dot {
     param(
