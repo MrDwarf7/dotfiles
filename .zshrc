@@ -294,6 +294,22 @@ function dodf {
 export BAT_CONFIG_PATH="$HOME/dotfiles/.config/bat/bat.conf"
 
 
+function baconget {
+    bacon_file="$HOME/dotfiles/bacon.toml"
+    currentDir="$(pwd)"
+
+
+    if [[ ! -f "$bacon_file" ]]; then
+        echo "No bacon.toml file found"
+        return 1
+    fi
+
+    cp "$bacon_file" "$currentDir"
+    echo "Copied bacon.toml to $currentDir"
+}
+
+
+
 # Go things
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
