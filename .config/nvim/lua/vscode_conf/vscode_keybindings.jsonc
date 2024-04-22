@@ -1,0 +1,399 @@
+// [
+[
+	// NEOVIM KEYBINDINGS
+	{
+		"command": "whichkey.show",
+		"key": "space",
+		"when": "editorTextFocus && neovim.mode != insert && editorTextFocus"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "delete",
+		"when": "editorTextFocus && neovim.mode != insert",
+		"args": ":nohl<CR>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+q",
+		"when": "neovim.mode == normal",
+		"args": "<C-q>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+d",
+		"when": "neovim.mode != insert",
+		"args": "<C-d>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+u",
+		"when": "neovim.mode != insert",
+		"args": "<C-u>"
+	},
+	// editorTextFocus && !textCompareEditorActive
+	// FIX FOLDS HERE ____
+	{
+		"command": "cursorDown",
+		"key": "j",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "cursorUp",
+		"key": "k",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "cursorDown",
+		"key": "down",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "cursorUp",
+		"key": "up",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.toggleFold",
+		"key": "z a",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.unfoldAll",
+		"key": "z shift+r",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldAll",
+		"key": "z shift+m",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.unfold",
+		"key": "z o",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.unfoldRecursively",
+		"key": "z shift+o",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.fold",
+		"key": "z c",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldRecursively",
+		"key": "z shift+c",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel1",
+		"key": "z 1",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel2",
+		"key": "z 2",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel3",
+		"key": "z 3",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel4",
+		"key": "z 4",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel5",
+		"key": "z 5",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel6",
+		"key": "z 6",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldLevel7",
+		"key": "z 7",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.foldAllExcept",
+		"key": "z shift+v",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.gotoNextFold",
+		"key": "z j",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"command": "editor.gotoPreviousFold",
+		"key": "z k",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	// END FIX FOLDS HERE ____
+	{
+		"command": "vscode-neovim.compositeEscape1",
+		"key": "j",
+		"when": "editorTextFocus && neovim.mode == insert",
+		"args": "j"
+	},
+	{
+		"command": "editor.action.showHover",
+		"key": "shift+k",
+		"when": "neovim.init && neovim.mode == normal && editorTextFocus && editorHoverVisible"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+k",
+		"when": "editorTextFocus && widgetNavigationVisible && neovim.mode == insert",
+		"args": "<C-n>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+j",
+		"when": "neovim.mode == insert && editorTextFocus && widgetNavigationVisible",
+		"args": "<C-p>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+k",
+		"when": "editorTextFocus && widgetNavigationVisible && neovim.mode == insert",
+		"args": "<C-k>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+j",
+		"when": "neovim.mode == insert && editorTextFocus && widgetNavigationVisible",
+		"args": "<C-j>"
+	},
+	{
+		"key": "ctrl+shift+'",
+		"command": "workbench.action.togglePanel"
+	},
+	{
+		"command": "-workbench.action.togglePanel",
+		"key": "ctrl+k"
+	},
+	{
+		"command": "-workbench.action.togglePanel",
+		"key": "ctrl+j"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+j",
+		"when": "neovim.mode != insert && widgetNavigationVisible",
+		"args": "<C-n>"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+v",
+		"when": "neovim.mode != insert && filesExplorerFocus",
+		"args": "explorer.openToSide"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+k",
+		"when": "neovim.mode != insert && widgetNavigationVisible",
+		"args": "<C-p>"
+	},
+	{
+		"command": "-breadcrumbs.focus",
+		"key": "ctrl+shift+;",
+		"when": "breadcrumbsPossible && breadcrumbsVisible"
+	},
+	{
+		"command": "workbench.action.closeActiveEditor",
+		"key": "ctrl+w q",
+		"when": "editorTextFocus && filesExplorerFocus && searchViewletFocus && !terminalFocus"
+	},
+	{
+		"command": "vscode-neovim.send",
+		"key": "ctrl+q",
+		"when": "editorTextFocus && neovim.mode == insert ",
+		"args": "<C-q>"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "list.focusUp",
+		"when": "listFocus && !inputFocus"
+	},
+	{
+		"key": "up",
+		"command": "-list.focusUp",
+		"when": "listFocus && !inputFocus"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "selectPrevCodeAction",
+		"when": "codeActionMenuVisible"
+	},
+	{
+		"key": "up",
+		"command": "-selectPrevCodeAction",
+		"when": "codeActionMenuVisible"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "selectPrevSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "up",
+		"command": "-selectPrevSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "list.focusDown",
+		"when": "listFocus && !inputFocus"
+	},
+	{
+		"key": "down",
+		"command": "-list.focusDown",
+		"when": "listFocus && !inputFocus"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "selectNextCodeAction",
+		"when": "codeActionMenuVisible"
+	},
+	{
+		"key": "down",
+		"command": "-selectNextCodeAction",
+		"when": "codeActionMenuVisible"
+	},
+	{
+		"key": "ctrl+j",
+		"command": "selectNextSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "down",
+		"command": "-selectNextSuggestion",
+		"when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus || suggestWidgetVisible && textInputFocus && !suggestWidgetHasFocusedSuggestion"
+	},
+	{
+		"key": "ctrl+e",
+		"command": "-workbench.action.quickOpen"
+	},
+	{
+		"key": "ctrl+p",
+		"command": "-workbench.action.quickOpen"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quickOpenNavigateNextInViewPicker",
+		"when": "inQuickOpen && inViewsPicker"
+	},
+	{
+		"key": "ctrl+q",
+		"command": "-workbench.action.quickOpenView"
+	},
+	{
+		"key": "alt+f8",
+		"command": "-editor.action.marker.next",
+		"when": "editorFocus"
+	},
+	{
+		"key": "shift+alt+f8",
+		"command": "-editor.action.marker.prev",
+		"when": "editorFocus"
+	},
+	{
+		"key": "f8",
+		"command": "-editor.action.marker.nextInFiles",
+		"when": "editorFocus"
+	},
+	{
+		"key": "shift+f8",
+		"command": "-editor.action.marker.prevInFiles",
+		"when": "editorFocus"
+	},
+	{
+		"key": "ctrl+k ctrl+q",
+		"command": "-workbench.action.navigateToLastEditLocation"
+	},
+	{
+		"key": "shift+f12",
+		"command": "-editor.action.goToReferences",
+		"when": "editorHasReferenceProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+	},
+	{
+		"key": "ctrl+w e",
+		"command": "workbench.action.evenEditorWidths",
+		"when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+	},
+	{
+		"key": "ctrl+w =",
+		"command": "-workbench.action.evenEditorWidths",
+		"when": "!editorTextFocus && !terminalFocus && neovim.mode != 'cmdline'"
+	},
+	{
+		"command": "editor.action.dirtydiff.next",
+		"key": "] h",
+		"when": "editorTextFocus && neovim.mode == normal && !textCompareEditorActive"
+	},
+	{
+		"command": "editor.action.dirtydiff.previous",
+		"key": "[ h",
+		"when": "editorTextFocus && neovim.mode == normal && !textCompareEditorActive"
+	},
+	{
+		"command": "workbench.action.compareEditor.nextChange",
+		"key": "] c",
+		"when": "editorTextFocus && neovim.mode == normal && textCompareEditorActive"
+	},
+	{
+		"command": "workbench.action.compareEditor.nextChange",
+		"key": "[ c",
+		"when": "editorTextFocus && neovim.mode == normal && textCompareEditorActive"
+	},
+	{
+		"key": "] d",
+		"command": "editor.action.marker.next",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "[ d",
+		"command": "editor.action.marker.prev",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "[ shift+d",
+		"command": "editor.action.marker.prevInFiles",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "] shift+d",
+		"command": "editor.action.marker.nextInFiles",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "[ m",
+		"command": "bookmarks.jumpToPrevious",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "] m",
+		"command": "bookmarks.jumpToNext",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "[ t",
+		"command": "todo-tree.goToPrevious",
+		"when": "editorTextFocus && neovim.mode == normal"
+	},
+	{
+		"key": "] t",
+		"command": "todo-tree.goToNext",
+		"when": "editorTextFocus && neovim.mode == normal"
+	}
+]
+// ]
