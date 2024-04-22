@@ -16,6 +16,7 @@ require("conform").setup({
 		cpp = { "clang-format" },
 		-- cs = { "omnisharp" },
 		cs = { "csharpier" },
+		vb = { "csharpier" },
 		javascript = { "biome" },
 		javascriptreact = { "biome" },
 		json = { "fixjson", { "biome" } },
@@ -45,7 +46,7 @@ require("conform").setup({
 			netrw = true,
 		}
 		return {
-			timeous_ms = 600,
+			timeous_ms = 1000,
 			lsp_fallback = not disabled_ft[vim.bo[bufnr].filetype],
 		}
 	end,

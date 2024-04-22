@@ -3,6 +3,7 @@ local autocmd = vim.api.nvim_create_autocmd
 require("lint").linter_by_ft = {
 	cpp = { "cpplint", "clang-tidy" },
 	css = { "stylelint" },
+	-- cs = { "omnisharp" },
 	docker = { "hadolint" },
 	javascript = { "biomejs" },
 	javascriptreact = { "biomejs" },
