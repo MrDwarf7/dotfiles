@@ -27,6 +27,10 @@ return {
 	},
 
 	{
+		"xiyaowong/fast-cursor-move.nvim",
+	},
+
+	{
 		"folke/neodev.nvim",
 		event = "BufReadPost",
 		config = function()
