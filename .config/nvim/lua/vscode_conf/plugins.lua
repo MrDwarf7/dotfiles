@@ -24,9 +24,9 @@ M.vscode_plugins = function()
 			end,
 		},
 
-		{
-			"xiyaowong/fast-cursor-move.nvim",
-		},
+		-- {
+		-- 	"xiyaowong/fast-cursor-move.nvim",
+		-- },
 	}
 end
 
