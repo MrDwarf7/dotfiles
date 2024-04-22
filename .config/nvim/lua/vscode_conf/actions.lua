@@ -64,36 +64,6 @@ map("n", "<C-k>", function()
 	vscode.action("editor.action.peekDefinition")
 end)
 
-map("n", "]d", function()
-	print("Next Diagnostic")
-	vscode.call("editor.action.marker.next")
-end)
-
-map("n", "[d", function()
-	print("Prev Diagnostic")
-	vscode.call("editor.action.marker.prev")
-end)
-
-map("n", "]m", function()
-	print("Next Bookmark")
-	vscode.call("bookmarks.jumpToNext")
-end)
-
-map("n", "[m", function()
-	print("Prev Bookmark")
-	vscode.call("bookmarks.jumpToPrevious")
-end)
-
-map("n", "]t", function()
-	print("Next TODO")
-	vscode.call("todo-tree.goToNext")
-end)
-
-map("n", "[t", function()
-	print("Prev TODO")
-	vscode.call("todo-tree.goToPrevious")
-end)
-
 -- Non Ctrl variants
 map("n", "<Left>", function()
 	print("Increase view width")
@@ -152,45 +122,24 @@ map("n", "<C-w>m", function()
 	vscode.call("workbench.action.minimizeOtherEditors")
 end)
 
-map("n", "za", function()
-	print("Fold toggle")
-	vscode.call("editor.toggleFold")
-end)
-
--- unfold
-map("n", "zr", function()
-	print("Open fold")
-	vscode.call("editor.unfold")
-end)
-
--- unfold ALL
-map("n", "zR", function()
-	print("Open folds all")
-	vscode.call("editor.unfoldAll")
-end)
-
--- unfold recursively
-map("n", "zo", function()
-	print("Open folds recurse")
-	vscode.call("editor.unfoldRecursively")
-end)
-
--- fold
-map("n", "zc", function()
-	print("Close fold")
-	vscode.call("editor.fold")
-end)
-
--- fold ALL
-map("n", "zC", function()
-	print("Close all folds")
-	vscode.call("editor.foldAll")
-end)
-
--- fold recursively
-map("n", "zm", function()
-	print("Close folds recurse")
-	vscode.call("editor.foldRecursively")
-end)
-
--- end
+local silent_opts = { noremap = true, silent = true, expr = true }
+local function mapMove(key, direction)
+	vim.keymap.set("n", key, function()
+		local count = vim.v.count
+		local v = 1
+		local style = "wrappedLine"
+		if count > 0 then
+			v = count
+			style = "line"
+		end
+		vscode.action("cursorMove", {
+			args = {
+				to = direction,
+				by = style,
+				value = v,
+			},
+		})
+	end, silent_opts)
+end
+mapMove("k", "up")
+mapMove("j", "down")
