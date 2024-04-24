@@ -1,0 +1,1 @@
+$env:APPDATA\dystroy\bacon\config\prefs.toml
