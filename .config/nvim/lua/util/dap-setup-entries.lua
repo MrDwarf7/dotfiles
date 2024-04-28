@@ -3,7 +3,7 @@ local nvim_dap = require("dap")
 local M = {}
 
 M.debugpy_adapater = function()
-	---@type OperatingSystem
+	---@type OperatingSystems
 	local os_ver = vim.g.os
 
 	---@type string
@@ -20,7 +20,7 @@ M.debugpy_adapater = function()
 end
 
 M.venv_path = function()
-	---@type OperatingSystem
+	---@type OperatingSystems
 	local os_ver = vim.g.os
 
 	---@type string
