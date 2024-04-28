@@ -26,6 +26,7 @@ command = [
     "--all-targets",
     "--color",
     "always",
+    "--",
     "-W",
     "clippy::pedantic",
 ]
