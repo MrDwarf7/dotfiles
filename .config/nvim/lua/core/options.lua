@@ -1,6 +1,8 @@
 --------
 
 local architecture = require("util.architecture")
+local types = require("types")
+
 local env = vim.env
 local opt = vim.opt
 local g = vim.g
@@ -12,7 +14,35 @@ local exists = vim.fn.exists
 -- g.did_load_filetypes = 1
 
 vim.g.os = architecture.get_os()
-vim.g.shell = architecture.shell_setup(architecture.get_shell())
+
+vim.g.shell = "pwsh.exe"
+-- = architecture.shell_setup(architecture.get_shell(architecture.get_os()))
+
+if vim.g.os == "Windows_NT" then
+	vim.opt.shellcmdflag =
+		"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+	vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+	vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+	vim.opt.shellquote = ""
+	vim.opt.shellxquote = ""
+end
+
+local shell_s = architecture.get_shell("Windows_NT")
+local os_is_this = architecture.get_os()
+local shell_setup_test = architecture.shell_setup(shell_s)
+
+--- THIS WORKS............
+-- vim.g.os = architecture.get_os()
+--
+-- ---@type ShellType
+-- local shell = "pwsh"
+-- vim.g.shell = architecture.shell_setup(shell)
+--
+-- local t = architecture.get_os()
+-- print(t)
+--
+-- local t_s = architecture.get_shell(t)
+-- print(t_s)
 
 -- Global
 opt.fillchars = {
