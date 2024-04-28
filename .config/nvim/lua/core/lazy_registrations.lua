@@ -26,9 +26,10 @@ return {
 		opts = true,
 	},
 
-	{
-		"xiyaowong/fast-cursor-move.nvim",
-	},
+	-- {
+	-- 	"xiyaowong/fast-cursor-move.nvim",
+	-- 	lazy = false,
+	-- },
 
 	{
 		"folke/neodev.nvim",
@@ -118,6 +119,15 @@ return {
 	},
 
 	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
+
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		lazy = false,
+		config = function()
+			require("configs.toggleterm")
+		end,
+	},
 
 	-- Testing having telescope load really early
 
