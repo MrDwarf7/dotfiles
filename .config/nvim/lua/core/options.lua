@@ -44,7 +44,7 @@ opt.pumblend = 15 -- Popup blend
 opt.pumheight = 30 -- Maximum number of entries in a popup
 
 opt.autowrite = true -- Enable auto write, so that modified buffers are written when switching buffers.
-opt.conceallevel = 2
+opt.conceallevel = 0
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.inccommand = "nosplit" -- preview incremental substitute
 opt.shiftround = true -- Round indent
