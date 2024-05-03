@@ -237,10 +237,11 @@ local servers = {
 	ruff_lsp = {
 		cmd = { "ruff-lsp" },
 		filetypes = { "python" },
+		single_file_support = true,
 		on_attach = function(_, client)
 			client.server_capabilities.hoverProvider = false
 		end,
-		single_file_support = true,
+		capabilities = capabilities,
 	},
 
 	-- rust_analyzer = {

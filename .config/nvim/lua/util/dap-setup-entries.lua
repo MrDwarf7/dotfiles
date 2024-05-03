@@ -52,7 +52,7 @@ M.dap_entries_configs = function()
 			name = "Launch file",
 			program = "${file}",
 			pythonPath = function()
-				local python_path = M.venv_path()
+				local python_path = M.venv_path() or {}
 				return python_path
 			end,
 		},
