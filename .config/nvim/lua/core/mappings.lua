@@ -11,6 +11,15 @@ map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>E", "<cmd>Oil<CR>", { desc = "Oily" })
 
+map("n", "<Leader>e", function()
+	if not pcall(require, "mini.files") then
+		vim.cmd("lua require'mini.files'.open()")
+		-- require("mini.files").open()
+	else
+		vim.cmd("lua require'mini.files'.open()")
+	end
+end, { desc = "mini files [E]xplorer" })
+
 map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
