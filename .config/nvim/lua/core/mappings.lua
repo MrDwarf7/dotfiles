@@ -7,7 +7,9 @@ local silent_opts = { noremap = true, silent = true }
 g.mapleader = " "
 g.maplocalleader = " "
 
-map("n", "<Leader>e", vim.cmd.Ex, { desc = "[e]xplorer" })
+map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
+
+map("n", "<Leader>E", "<cmd>Oil<CR>", { desc = "Oily" })
 
 map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)

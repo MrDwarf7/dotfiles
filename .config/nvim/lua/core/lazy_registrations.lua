@@ -24,6 +24,14 @@ return {
 		lazy = false,
 		priority = 1000,
 		opts = true,
+	{
+		"stevearc/oil.nvim",
+		lazy = true,
+		event = "InsertEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("configs.oil")
+		end,
 	},
 
 	-- {
