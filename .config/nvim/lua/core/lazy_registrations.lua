@@ -20,15 +20,55 @@ return {
 	},
 
 	{
-		"prichrd/netrw.nvim",
-		lazy = false,
+		-- Standalone of it, so can use it non-laizly
+		"echasnovski/mini.files",
 		priority = 1000,
-		opts = true,
+		lazy = false,
+		version = false,
+		config = function()
+			require("mini.files").setup({
+				mappings = {
+					close = "q",
+					go_in = "l",
+					go_in_plus = "L",
+					go_out = "h",
+					go_out_plus = "H",
+					reset = "<BS>",
+					reveal_cwd = "@",
+					show_help = "g?",
+					synchronize = "=",
+					trim_left = "<",
+					trim_right = ">",
+				},
+				options = {
+					use_as_default_explorer = true,
+				},
+				windows = {
+					-- max_number = 5,
+					preview = true,
+					width_focus = 30,
+					width_nofocus = 25,
+					width_preview = 60,
+				},
+			})
+		end,
+	},
+
+	{
+		"stevearc/oil.nvim",
+		lazy = true,
+		event = "InsertEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("configs.oil")
+		end,
 	},
 
 	-- {
-	-- 	"xiyaowong/fast-cursor-move.nvim",
+	-- 	"prichrd/netrw.nvim",
 	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = true,
 	-- },
 
 	{

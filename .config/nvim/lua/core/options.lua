@@ -35,16 +35,6 @@ end
 
 --- THIS WORKS............
 -- vim.g.os = architecture.get_os()
---
--- ---@type ShellType
--- local shell = "pwsh"
--- vim.g.shell = architecture.shell_setup(shell)
---
--- local t = architecture.get_os()
--- print(t)
---
--- local t_s = architecture.get_shell(t)
--- print(t_s)
 
 -- Global
 opt.fillchars = {
