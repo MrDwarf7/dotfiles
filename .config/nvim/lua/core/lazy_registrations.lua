@@ -625,18 +625,18 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"gelguy/wilder.nvim",
-	-- 	event = "CmdlineEnter",
-	-- 	dependencies = {
-	-- 		"nvim-tree/nvim-web-devicons",
-	-- 		{ "romgrk/fzy-lua-native", build = "make" },
-	-- 		"nixprime/cpsm",
-	-- 	},
-	-- 	config = function()
-	-- 		require("configs.wilder")
-	-- 	end,
-	-- },
+	{
+		"gelguy/wilder.nvim",
+		event = "CmdlineEnter",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{ "romgrk/fzy-lua-native", build = "make" },
+			"nixprime/cpsm",
+		},
+		config = function()
+			require("configs.wilder")
+		end,
+	},
 
 	{
 		"zbirenbaum/copilot.lua",
