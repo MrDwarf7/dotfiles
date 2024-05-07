@@ -52,9 +52,9 @@ done
 fi
 
 
-if [ $WIN_AVAILABLE ]; then
-    alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl NVIM_APPNAME=NewVim"
-fi
+# if [ $WIN_AVAILABLE ]; then
+#     alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl NVIM_APPNAME=NewVim"
+# fi
 
 
 # Originally when I saw this, it was within the .zprofile, not within .zshrc
