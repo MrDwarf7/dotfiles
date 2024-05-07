@@ -59,7 +59,7 @@ function nvims() {
 }
 
 function nvd() {
-    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    $env:XDG_CONFIG_HOME = "$nvim_main_dir\"
     $env:NVIM_APPNAME = "nvim"
     neovide $args
 }
