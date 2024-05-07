@@ -1,6 +1,6 @@
-vim.o.guifont = "FiraCode Nerd Font:h12"
+vim.o.guifont = "Mononoki Nerd Font Mono:h11.0"
 vim.opt.linespace = 0 -- can also be a negative value
-vim.g.neovide_scale_factor = 0.8
+vim.g.neovide_scale_factor = 1.0
 
 vim.g.neovide_padding_top = 0
 vim.g.neovide_padding_bottom = 0
