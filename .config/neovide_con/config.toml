@@ -1,0 +1,11 @@
+wsl = true
+no-multigrid = false
+vsync = true
+maximized = false
+srgb = false
+# idle = 1|0
+# neovim
+
+[font]
+regular = ["FireCode Nerd Font"]
+size = 11.5

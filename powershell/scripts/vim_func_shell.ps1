@@ -58,15 +58,15 @@ function nvims() {
     nvim $args
 }
 
-function nvdx() {
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir\"
-    $env:NVIM_APPNAME = "omerxx"
+function nvd() {
+    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    $env:NVIM_APPNAME = "nvim"
     neovide $args
 }
 
-function nvdm() {
-    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
-    $env:NVIM_APPNAME = "nvim"
+function nvdx() {
+    $env:XDG_CONFIG_HOME = "$nvim_distro_dir\"
+    $env:NVIM_APPNAME = "omerxx"
     neovide $args
 }
 
