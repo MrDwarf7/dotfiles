@@ -1,4 +1,4 @@
-vim.o.guifont = "FiraCode Nerd Font:h14"
+vim.o.guifont = "FiraCode Nerd Font:h12"
 vim.opt.linespace = 0 -- can also be a negative value
 vim.g.neovide_scale_factor = 0.8
 
@@ -10,7 +10,7 @@ vim.g.neovide_padding_left = 0
 vim.g.neovide_refresh_rate = 60
 vim.g.neovide_refresh_rate_idle = 15
 
-vim.g.neovide_confirm_quit = false        -- defaults true
+vim.g.neovide_confirm_quit = false -- defaults true
 vim.g.neovide_remember_window_size = true -- can be overwritten by passing --size on the CLI
 
 -- Cursor settings:

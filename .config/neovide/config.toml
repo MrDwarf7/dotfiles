@@ -11,7 +11,7 @@ frame = "full"
 # regular = ["Fira Code Nerd Font"]
 # regular = [ "FiraMono Nerd Font" ]
 regular = ["FiraMono Nerd Font Mono"]
-size = 14
+size = 11.5
 
 # [font.features]
 # Fira_Code_Nerd_Font = ["-calt"]
