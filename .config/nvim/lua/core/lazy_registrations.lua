@@ -22,7 +22,7 @@ return {
 	{
 		-- Standalone of it, so can use it non-laizly
 		"echasnovski/mini.files",
-		priority = 1000,
+		-- priority = 1000,
 		lazy = false,
 		version = false,
 		config = function()
@@ -41,11 +41,11 @@ return {
 					trim_right = ">",
 				},
 				options = {
-					use_as_default_explorer = true,
+					use_as_default_explorer = false,
 				},
 				windows = {
 					-- max_number = 5,
-					preview = true,
+					preview = false,
 					width_focus = 30,
 					width_nofocus = 25,
 					width_preview = 60,
@@ -56,8 +56,8 @@ return {
 
 	{
 		"stevearc/oil.nvim",
-		lazy = true,
-		event = "InsertEnter",
+		lazy = false,
+		-- event = "InsertEnter",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
 			require("configs.oil")

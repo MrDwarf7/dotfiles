@@ -9,9 +9,9 @@ g.maplocalleader = " "
 
 map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
-map("n", "<Leader>E", "<cmd>Oil<CR>", { desc = "Oily" })
+map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
 
-map("n", "<Leader>e", function()
+map("n", "<Leader>E", function()
 	if not pcall(require, "mini.files") then
 		vim.cmd("lua require'mini.files'.open()")
 		-- require("mini.files").open()
