@@ -358,12 +358,9 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		lazy = true,
+		lazy = false,
 		version = "^4",
 		ft = { "rust" },
-		dependencies = {
-			{ "lvimuser/lsp-inlayhints.nvim", lazy = false },
-		},
 		config = function()
 			require("configs.rustaceanvim").rustaceanvim_setup()
 		end,
@@ -393,7 +390,6 @@ return {
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
-			{ "lvimuser/lsp-inlayhints.nvim", lazy = false, event = "LspAttach" },
 		},
 		opts = {},
 	},
@@ -427,14 +423,6 @@ return {
 		"j-hui/fidget.nvim",
 		event = "VeryLazy",
 		opts = {},
-	},
-
-	{
-		"lvimuser/lsp-inlayhints.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("lsp-inlayhints").setup({})
-		end,
 	},
 
 	------------ END LSP stuff
