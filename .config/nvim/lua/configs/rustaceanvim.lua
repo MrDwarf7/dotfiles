@@ -1,39 +1,6 @@
 local cmd = vim.cmd
-local set_map = vim.keymap.set
 
 local M = {}
-
-M.rustacean_vim_attach = function(event)
-	local map = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "RUST: " .. desc })
-	end
-
-	vim.g.rustaceanvim.tools.code_actions.ui_select_fallback = true
-
-	map("<Leader>lf", function()
-		cmd.RustFmt()
-	end, "[f]ormat")
-
-	map("<Leader>lc", function()
-		cmd.RustLsp("flyCheck")
-	end, "[c]heck")
-
-	map("<Leader>dd", function()
-		cmd.RustLsp("debuggables")
-	end, "[d]ebuggables")
-
-	map("<Leader>dr", function()
-		cmd.RustLsp("runnables")
-	end, "[r]un")
-
-	map("<Leader>lh", function()
-		cmd.RustLsp("hover")
-	end, "[h]over")
-
-	map("<Leader>la", function()
-		cmd.RustLsp("codeAction")
-	end, "[a]ction")
-end
 
 M.rustaceanvim_setup = function()
 	if vim.opt.diff:get() then
@@ -43,6 +10,11 @@ M.rustaceanvim_setup = function()
 
 	vim.g.rustaceanvim = {
 		tools = {
+			float_win_config = {
+				border = "single",
+				-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+				highlight = "Normal",
+			},
 			hover_actions = {
 				auto_focus = true,
 			},
@@ -53,32 +25,11 @@ M.rustaceanvim_setup = function()
 			},
 		},
 		server = {
-			on_attach = function(client, bufnr)
-				M.rustacean_vim_attach(client)
-
-				require("lsp-inlayhints").on_attach(client, bufnr)
-				require("lsp-inlayhints").show()
+			on_attach = function(_, _)
 				pcall(require, "dap-ui")
-
-				-- local opts = { buffer = true, bufnr = bufnr }
-				-- lsp_mappings.lsp_binds(opts)
-
-				if client.resolved_capabilities.document_formatting then
-					set_map("n", "<Leader>lf", function()
-						cmd.RustLsp("format")
-					end, { desc = "[f]ormat" })
-				end
-
-				if client.resolved_capabilities.document_range_formatting then
-					set_map("x", "<Leader>lf", function()
-						cmd.RustLsp("format")
-					end, { desc = "[f]ormat" })
-				end
-
-				vim.lsp.inlay_hint.enable(bufnr)
+				vim.lsp.inlay_hint.enable()
 			end,
 
-			-- capabilities = capabilities,
 			default_settings = {
 				["rust-analyzer"] = {
 					inlay_hints = {
