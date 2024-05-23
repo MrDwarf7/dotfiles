@@ -18,7 +18,11 @@ local XmlParser = augroup("XmlParser", { clear = true })
 
 autocmd("BufReadPost", {
 	callback = function()
-		require("util.last_pos").last_pos()
+		local last_pos = vim.fn.line("'\"")
+		if last_pos > 0 and last_pos <= vim.fn.line("$") then
+			vim.api.nvim_win_set_cursor(0, { last_pos, 0 })
+		end
+		-- require("util.last_pos").last_pos()
 	end,
 	group = LastPost,
 })
@@ -63,7 +67,30 @@ autocmd("BufEnter", {
 autocmd("BufWinEnter", {
 	desc = "Make q close help, man, quickfix, dap floats", -- Telescope and Mason and various other things
 	callback = function(args)
-		require("util.q_to_close").q_to_close(args)
+		local opt_val = vim.api.nvim_get_option_value
+		local t_con = vim.tbl_contains
+		local map = vim.keymap.set
+		local fn = vim.fn
+
+		local buftype = opt_val("buftype", { buf = args.buf })
+		if
+			t_con({
+				"help",
+				"nofile",
+				"quickfix",
+				"LspInfo",
+				":LspSaga",
+			}, buftype) and fn.maparg("q", "n") == ""
+		then
+			map("n", "q", "<cmd>close<cr>", {
+				desc = "Close window",
+				buffer = args.buf,
+				silent = true,
+				nowait = true,
+			})
+		end
+
+		-- require("util.q_to_close").q_to_close(args)
 	end,
 	group = QToClose,
 })
@@ -72,7 +99,33 @@ autocmd({ "VimEnter", "FileType", "BufReadPost" }, {
 	desc = "URL Highlighting",
 	pattern = "*.*",
 	callback = function()
-		require("util.url_highlighting").url_highlight()
+		local fn = vim.fn
+		local g = vim.g
+
+		vim.cmd([[
+    hi def link url Underlined
+    hi def link mailTo Underlined
+  ]])
+		local url_matcher =
+			"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+		--- Delete the syntax matching rules for URLs/URIs if set
+		local function delete_url_match()
+			for _, match in ipairs(fn.getmatches()) do
+				if match.group == "HighlightURL" then
+					fn.matchdelete(match.id)
+				end
+			end
+		end
+		--- Add syntax matching rules for highlighting URLs/URIs
+		local function set_url_match()
+			delete_url_match()
+			if g.highlighturl_enabled then
+				fn.matchadd("HighlightURL", url_matcher, 15)
+			end
+		end
+		set_url_match()
+
+		-- require("util.url_highlighting").url_highlight()
 	end,
 	group = UrlHighliting,
 })
@@ -84,9 +137,6 @@ autocmd("BufWritePre", {
 	end,
 	group = format_sync_grp,
 })
-
-
-
 
 -- autocmd("VimEnter", {
 -- 	desc = "Auto select virtualenv Nvim open",

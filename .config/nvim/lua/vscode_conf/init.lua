@@ -18,6 +18,7 @@ set clipboard+=unnamedplus
 	vim.g.maplocalleader = " "
 
 	print("Vscode specific setup file loads...")
+	require("vscode_conf.move_cursor")
 	require("vscode_conf.actions")
 	require("vscode_conf.options")
 	require("vscode_conf.mappings")

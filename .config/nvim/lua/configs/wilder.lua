@@ -10,7 +10,7 @@ wilder.setup({
 	num_workers = 4,
 })
 
--- wilder.set_option('use_python_remote_plugin', 0)
+wilder.set_option("use_python_remote_plugin", 0)
 
 wilder.set_option("pipeline", {
 	wilder.branch(

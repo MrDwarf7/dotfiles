@@ -19,6 +19,11 @@ map("n", "<C-w>d", function()
 	vscode.action("editor.action.revealDefinitionAside")
 end)
 
+map("n", "<C-w>e", function()
+	print("Reset editor window sizes")
+	vscode.action("workbench.action.evenEditorWidths")
+end)
+
 map("n", "gr", function()
 	print("Go to references")
 	vscode.action("editor.action.goToReferences")
@@ -59,26 +64,7 @@ map("n", "<C-k>", function()
 	vscode.action("editor.action.peekDefinition")
 end)
 
-map("n", "]d", function()
-	print("Next Diagnostic")
-	vscode.call("editor.action.marker.next")
-end)
-
-map("n", "[d", function()
-	print("Prev Diagnostic")
-	vscode.call("editor.action.marker.prev")
-end)
-
-map("n", "]m", function()
-	print("Next Bookmark")
-	vscode.call("bookmarks.jumpToNext")
-end)
-
-map("n", "[m", function()
-	print("Prev Bookmark")
-	vscode.call("bookmarks.jumpToPrevious")
-end)
-
+-- Non Ctrl variants
 map("n", "<Left>", function()
 	print("Increase view width")
 	vscode.call("workbench.action.increaseViewWidth")
@@ -98,6 +84,17 @@ end)
 map("n", "<Up>", function()
 	print("Decrease view height")
 	vscode.call("workbench.action.decreaseViewHeight")
+end)
+
+-- Ctrl variants
+map("n", "<C-Left>", function()
+	print("Increase view width")
+	vscode.call("workbench.action.increaseViewWidth")
+end)
+
+map("n", "<C-Right>", function()
+	print("Decrease view width")
+	vscode.call("workbench.action.decreaseViewWidth")
 end)
 
 map("n", "<C-Down>", function()
@@ -124,45 +121,3 @@ map("n", "<C-w>m", function()
 	print("Maxamize editor group")
 	vscode.call("workbench.action.minimizeOtherEditors")
 end)
-
-map("n", "za", function()
-	print("Fold toggle")
-	vscode.call("editor.toggleFold")
-end)
-
--- unfold
-map("n", "zr", function()
-	print("Open fold")
-	vscode.call("editor.unfold")
-end)
-
--- unfold ALL
-map("n", "zR", function()
-	print("Open folds all")
-	vscode.call("editor.unfoldAll")
-end)
-
--- unfold recursively
-map("n", "zo", function()
-	print("Open folds recurse")
-	vscode.call("editor.unfoldRecursively")
-end)
-
--- fold
-map("n", "zc", function()
-	print("Close fold")
-	vscode.call("editor.fold")
-end)
-
--- fold ALL
-map("n", "zC", function()
-	print("Close all folds")
-	vscode.call("editor.foldAll")
-end)
-
--- fold recursively
-map("n", "zm", function()
-	print("Close folds recurse")
-	vscode.call("editor.foldRecursively")
-end)
--- end

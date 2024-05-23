@@ -20,11 +20,60 @@ return {
 	},
 
 	{
-		"prichrd/netrw.nvim",
-		lazy = false,
-		priority = 1000,
-		opts = true,
+		"nvim-lua/plenary.nvim",
 	},
+
+	-- {
+	-- 	-- Standalone of it, so can use it non-laizly
+	-- 	"echasnovski/mini.files",
+	-- 	-- priority = 1000,
+	-- 	lazy = false,
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require("mini.files").setup({
+	-- 			mappings = {
+	-- 				close = "q",
+	-- 				go_in = "l",
+	-- 				go_in_plus = "L",
+	-- 				go_out = "h",
+	-- 				go_out_plus = "H",
+	-- 				reset = "<BS>",
+	-- 				reveal_cwd = "@",
+	-- 				show_help = "g?",
+	-- 				synchronize = "=",
+	-- 				trim_left = "<",
+	-- 				trim_right = ">",
+	-- 			},
+	-- 			options = {
+	-- 				use_as_default_explorer = false,
+	-- 			},
+	-- 			windows = {
+	-- 				-- max_number = 5,
+	-- 				preview = false,
+	-- 				width_focus = 30,
+	-- 				width_nofocus = 25,
+	-- 				width_preview = 60,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
+
+	{
+		"stevearc/oil.nvim",
+		lazy = false,
+		-- event = "InsertEnter",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("configs.oil")
+		end,
+	},
+
+	-- {
+	-- 	"prichrd/netrw.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1000,
+	-- 	opts = true,
+	-- },
 
 	{
 		"folke/neodev.nvim",
@@ -60,16 +109,16 @@ return {
 		end,
 	},
 
-	{
-		"ggandor/leap.nvim",
-		lazy = false,
-		dependencies = {
-			"tpope/vim-repeat",
-		},
-		config = function()
-			require("configs.leap")
-		end,
-	},
+	-- {
+	-- 	"ggandor/leap.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = {
+	-- 		"tpope/vim-repeat",
+	-- 	},
+	-- 	config = function()
+	-- 		require("configs.leap")
+	-- 	end,
+	-- },
 
 	-- Testing having telescope load really early
 	{
@@ -83,7 +132,8 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		event = "VeryLazy",
+		lazy = false,
+		-- event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 
@@ -113,7 +163,16 @@ return {
 		end,
 	},
 
-	{ "nvim-telescope/telescope-dap.nvim", event = "BufReadPost" }, -- Automatic setup
+	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
+
+	{
+		"akinsho/toggleterm.nvim",
+		version = "*",
+		lazy = false,
+		config = function()
+			require("configs.toggleterm")
+		end,
+	},
 
 	-- Testing having telescope load really early
 
@@ -152,7 +211,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		dependencies = {
-			"kyazdani42/nvim-web-devicons",
+			-- "kyazdani42/nvim-web-devicons",
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = function()
@@ -186,7 +245,14 @@ return {
 			"markdown",
 		},
 		config = function()
-			require("colorizer").setup()
+			require("colorizer").setup({
+				user_default_options = {
+					tailwind = "both",
+					css = true,
+					css_fn = true,
+					names = false,
+				},
+			})
 		end,
 	},
 
@@ -264,7 +330,6 @@ return {
 				"folke/neoconf.nvim",
 				cmd = "Neoconf",
 				config = false,
-				depends_on = "nvim-lspconfig",
 			},
 			{ "folke/neodev.nvim", opts = {} },
 			{
@@ -305,12 +370,9 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		lazy = true,
+		-- lazy = false,
 		version = "^4",
 		ft = { "rust" },
-		dependencies = {
-			{ "lvimuser/lsp-inlayhints.nvim", lazy = false },
-		},
 		config = function()
 			require("configs.rustaceanvim").rustaceanvim_setup()
 		end,
@@ -322,7 +384,7 @@ return {
 			"css",
 			"html",
 			"javascript",
-			"lua",
+			-- "lua",
 			-- "markdown",
 			"scss",
 			"txt",
@@ -332,15 +394,14 @@ return {
 			"typescript",
 			"typescriptreact",
 			"javascriptreact",
-			"norg",
-			"org",
+			-- "norg",
+			-- "org",
 			"pandoc",
 			"markdown",
 		},
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"neovim/nvim-lspconfig",
-			{ "lvimuser/lsp-inlayhints.nvim", lazy = false, event = "LspAttach" },
 		},
 		opts = {},
 	},
@@ -350,7 +411,7 @@ return {
 		ft = { "go", "gomod" },
 		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 		dependencies = { -- optional packages
-			"ray-x/guihua.lua",
+			{ "ray-x/guihua.lua", lazy = true },
 			"neovim/nvim-lspconfig",
 			"nvim-treesitter/nvim-treesitter",
 		},
@@ -376,20 +437,12 @@ return {
 		opts = {},
 	},
 
-	{
-		"lvimuser/lsp-inlayhints.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("lsp-inlayhints").setup({})
-		end,
-	},
-
 	------------ END LSP stuff
 	--------------------- DAP (kinda)
 
 	{
 		"mfussenegger/nvim-dap",
-		event = { "BufReadPost", "BufWritePre" },
+		event = "VeryLazy",
 		dependencies = {
 			-- "rcarriga/nvim-dap-ui",
 			"theHamsta/nvim-dap-virtual-text",
@@ -499,9 +552,11 @@ return {
 
 	{
 		"vrslev/cmp-pypi",
-		ft = { "toml", "python" },
+		ft = { "python" },
 		-- event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim", lazy = false },
+		},
 	},
 
 	--------------------- END COMPLETION
@@ -623,7 +678,18 @@ return {
 		"stevearc/dressing.nvim",
 		event = "BufReadPost",
 		config = function()
-			require("configs.dressing")
+			require("dressing").setup({
+				input = {
+					insert_only = false,
+					border = "rounded",
+				},
+				mappings = {
+					n = {
+						["q"] = "Close",
+					},
+				},
+			})
+			-- require("configs.dressing")
 		end,
 	},
 

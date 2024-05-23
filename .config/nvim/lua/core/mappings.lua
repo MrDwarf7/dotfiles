@@ -1,3 +1,4 @@
+---@diagnostic disable: redundant-parameter
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
 local map = vim.keymap.set
@@ -6,12 +7,24 @@ local silent_opts = { noremap = true, silent = true }
 g.mapleader = " "
 g.maplocalleader = " "
 
-map("n", "<Leader>e", vim.cmd.Ex, { desc = "[e]xplorer" })
+map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
+
+map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
+
+map("n", "<Leader>E", function()
+	if not pcall(require, "mini.files") then
+		vim.cmd("lua require'mini.files'.open()")
+		-- require("mini.files").open()
+	else
+		vim.cmd("lua require'mini.files'.open()")
+	end
+end, { desc = "mini files [E]xplorer" })
 
 map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
 map("v", "p", '"_dP', silent_opts)
+map({ "i", "v", "n" }, "<C-s>", ":wa<CR>", silent_opts)
 
 map("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
@@ -85,7 +98,7 @@ map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 map("n", "[f", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]f", vim.cmd.cnext, { desc = "Next Quickfix" })
 
-map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
+-- map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 
 map("n", "<Leader>t'", ":Telescope<CR>", silent_opts, { desc = "Generic Telescope call" })
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })

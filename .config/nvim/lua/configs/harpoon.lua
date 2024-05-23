@@ -3,7 +3,7 @@ local map = vim.keymap.set
 require("harpoon").setup()
 
 map("n", "<Leader>i", function()
-	require("harpoon"):list():append()
+	require("harpoon"):list():add()
 end, { desc = "harpoon [i]t" })
 
 map("n", "<Leader>I", function()

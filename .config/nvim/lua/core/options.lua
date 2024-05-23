@@ -1,18 +1,40 @@
 --------
 
 local architecture = require("util.architecture")
-local env = vim.env
+-- local types = require("types")
+
 local opt = vim.opt
 local g = vim.g
-local fn = vim.fn
-local cmd = vim.cmd
-local exists = vim.fn.exists
-
--- Enable the Lua loader byte-compilation cache.
--- g.did_load_filetypes = 1
-
+-- local env = vim.env
+-- local fn = vim.fn
+-- local cmd = vim.cmd
+-- local exists = vim.fn.exists
+--
 vim.g.os = architecture.get_os()
-vim.g.shell = architecture.shell_setup(architecture.get_shell())
+-- = architecture.shell_setup(architecture.get_shell(architecture.get_os()))
+
+if vim.g.os == "Windows_NT" then
+	vim.g.shell = "pwsh.exe"
+
+	local new_python = vim.env.USERPROFILE .. "\\scoop\\apps\\python\\current\\python.exe"
+	vim.g.python3_host_prog = new_python
+	vim.g.python_host_prog = new_python
+	vim.g.python = new_python
+
+	vim.opt.shellcmdflag =
+		"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+	vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+	vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+	vim.opt.shellquote = ""
+	vim.opt.shellxquote = ""
+end
+
+-- local shell_s = architecture.get_shell("Windows_NT")
+-- local os_is_this = architecture.get_os()
+-- local shell_setup_test = architecture.shell_setup(shell_s)
+
+--- THIS WORKS............
+-- vim.g.os = architecture.get_os()
 
 -- Global
 opt.fillchars = {
@@ -114,9 +136,9 @@ if vim.fn.has("nvim-0.10") == 1 then
 	opt.smoothscroll = true
 end
 
-g.loaded_node_provider = 1
-g.loaded_python3_provider = 1
-g.loaded_ruby_provider = 1
+-- g.loaded_node_provider = 1
+-- g.loaded_python3_provider = 1
+-- g.loaded_ruby_provider = 1
 
 -- Use ripgrep as grep tool
 vim.o.grepprg = "rg --vimgrep --no-heading"
@@ -134,4 +156,4 @@ vim.o.updatetime = 250
 --vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 g.skip_ts_context_commentstring_module = true
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme default")

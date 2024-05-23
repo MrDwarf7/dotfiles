@@ -11,6 +11,9 @@ autocmd("LspAttach", {
 	group = augroup("LspAuGroup", { clear = true }),
 	---@param event Event: LspAttach
 	callback = function(event)
+		-- if vim.lsp.client.name == "rust_analyzer" then
+		-- 	return true
+		-- end
 		--
 		---@param keys string
 		---@param func function
@@ -20,8 +23,8 @@ autocmd("LspAttach", {
 			vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 		end
 
-		-- map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
-		map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
+		map("gd", require("telescope.builtin").lsp_definitions, "[G]oto [d]efinition")
+		-- map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
 		map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclration")
 
 		map("gr", require("telescope.builtin").lsp_references, "[G]oto [r]eferences")
@@ -74,7 +77,8 @@ autocmd("LspAttach", {
 			})
 		end
 		--
-		require("lsp-inlayhints").show()
+
+		vim.lsp.inlay_hint.enable()
 	end,
 })
 
@@ -87,33 +91,20 @@ local servers = {
 	clangd = {
 		cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
 		single_file_support = true,
-		on_attach = function(_, client)
-			client.server_capabilities.documentFormattingProvider = false
-		end,
 		capabilities = capabilities,
 	},
 
 	cssls = {},
+
 	docker_compose_language_service = {},
 	dockerls = {},
-	eslint = {
-		on_attach = function(_, client)
-			client.server_capabilities.hoverProvider = false
-			client.server_capabilities.documentFormattingProvider = false
-		end,
-	},
-	-- gopls = {
-	-- 	function(_)
-	-- 		return true
-	-- 	end,
-	-- },
+	eslint = {},
 	html = {},
 	jsonls = {},
 	lua_ls = {
 		cmd = { "lua-language-server" },
 		filetypes = { "lua" },
 		root_dir = require("lspconfig.util").root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
-		-- capabilities = {},
 		settings = {
 			Lua = {
 				runtime = {
@@ -139,9 +130,80 @@ local servers = {
 		},
 	},
 	marksman = {},
-	powershell_es = {},
+	omnisharp = {
+		filetypes = { "cs", "vb" },
+		-- cmd = function()
+		-- 		local pid = vim.fn.getpid()
+		--
+		-- 		return {
+		-- 			"dotnet",
+		-- 			vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp.cmd --languageserver --hostPID" .. pid,
+		-- 		}
+		-- 	end,
+		-- 	root_dir = function()
+		-- 		return vim.loop.cwd()
+		-- 	end,
+		-- 	-- settings = {
+		-- 	-- 	FormattingOptions = {
+		-- 	-- 		-- Enables support for reading code style, naming convention and analyzer
+		-- 	-- 		-- settings from .editorconfig.
+		-- 	-- 		EnableEditorConfigSupport = true,
+		-- 	-- 		-- Specifies whether 'using' directives should be grouped and sorted during
+		-- 	-- 		-- document formatting.
+		-- 	-- 		OrganizeImports = nil,
+		-- 	-- 	},
+		-- 	--
+		-- 	-- 	MsBuild = {
+		-- 	-- 		-- If true, MSBuild project system will only load projects for files that
+		-- 	-- 		-- were opened in the editor. This setting is useful for big C# codebases
+		-- 	-- 		-- and allows for faster initialization of code navigation features only
+		-- 	-- 		-- for projects that are relevant to code that is being edited. With this
+		-- 	-- 		-- setting enabled OmniSharp may load fewer projects and may thus display
+		-- 	-- 		-- incomplete reference lists for symbols.
+		-- 	-- 		LoadProjectsOnDemand = nil,
+		-- 	-- 	},
+		-- 	-- 	RoslynExtensionsOptions = {
+		-- 	-- 		-- Enables support for roslyn analyzers, code fixes and rulesets.
+		-- 	-- 		EnableAnalyzersSupport = nil,
+		-- 	-- 		-- Enables support for showing unimported types and unimported extension
+		-- 	-- 		-- methods in completion lists. When committed, the appropriate using
+		-- 	-- 		-- directive will be added at the top of the current file. This option can
+		-- 	-- 		-- have a negative impact on initial completion responsiveness,
+		-- 	-- 		-- particularly for the first few completion sessions after opening a
+		-- 	-- 		-- solution.
+		-- 	-- 		EnableImportCompletion = nil,
+		-- 	-- 		-- Only run analyzers against open files when 'enableRoslynAnalyzers' is
+		-- 	-- 		-- true
+		-- 	-- 		AnalyzeOpenDocumentsOnly = nil,
+		-- 	-- 	},
+		-- 	-- 	Sdk = {
+		-- 	-- 		-- Specifies whether to include preview versions of the .NET SDK when
+		-- 	-- 		-- determining which version to use for project loading.
+		-- 	-- 		IncludePrereleases = true,
+		-- 	-- 	},
+		-- 	-- },
+	},
+	powershell_es = {
+		filetypes = { "powershell", "ps1", "psm1", "psd1" },
+		-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
+		settings = {
+			powershell = {
+				codeFormatting = {
+					Preset = "OTBS",
+				},
+			},
+			scriptAnalysis = {
+				enable = true,
+			},
+			completion = {
+				enable = true,
+				useCommandDiscovery = true,
+			},
+		},
+	},
 	prismals = {},
 	pyright = {
+
 		cmd = { "pyright-langserver", "--stdio" },
 		filetypes = { "python" },
 		root_dir = require("lspconfig.util").root_pattern(
@@ -153,6 +215,7 @@ local servers = {
 			".venv",
 			"venv"
 		),
+		on_attach = vim.lsp.inlay_hint.enable(),
 		settings = {
 			python = {
 				analysis = {
@@ -166,16 +229,16 @@ local servers = {
 	ruff_lsp = {
 		cmd = { "ruff-lsp" },
 		filetypes = { "python" },
-		on_attach = function(_, client)
-			client.server_capabilities.hoverProvider = false
-		end,
 		single_file_support = true,
+		-- on_attach = vim.lsp.inlay_hint.enable(),
+		-- 	function(_, client)
+		-- 	vim.lsp.inlay_hint.enable()
+		-- 	-- client.server_capabilities.hoverProvider = false
+		-- end,
+		capabilities = capabilities,
 	},
 
-	-- rust_analyzer = {
-	-- 	function(_)
-	-- 		return true
-	-- 	end },
+	-- rust_analyzer = {}
 	tailwindcss = {
 		filetypes = {
 			"html",
@@ -189,11 +252,7 @@ local servers = {
 		flags = { debounce_text_changes = 300 },
 		root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
 	},
-	-- tsserver = {
-	-- 	function(_)
-	-- 		return true
-	-- 	end },
-
+	-- tsserver = {}
 	taplo = {},
 	vimls = {},
 	yamlls = {},
@@ -236,6 +295,7 @@ vim.list_extend(ensure_installed, {
 	"ts-standard",
 	"vulture",
 	"yamlfmt",
+	"csharpier",
 })
 
 require("mason-tool-installer").setup({

@@ -3,7 +3,7 @@ local nvim_dap = require("dap")
 local M = {}
 
 M.debugpy_adapater = function()
-	---@type OperatingSystem
+	---@type OperatingSystems
 	local os_ver = vim.g.os
 
 	---@type string
@@ -20,7 +20,7 @@ M.debugpy_adapater = function()
 end
 
 M.venv_path = function()
-	---@type OperatingSystem
+	---@type OperatingSystems
 	local os_ver = vim.g.os
 
 	---@type string
@@ -52,7 +52,7 @@ M.dap_entries_configs = function()
 			name = "Launch file",
 			program = "${file}",
 			pythonPath = function()
-				local python_path = M.venv_path()
+				local python_path = M.venv_path() or {}
 				return python_path
 			end,
 		},
