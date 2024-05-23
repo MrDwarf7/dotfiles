@@ -1,15 +1,15 @@
 --------
 
 local architecture = require("util.architecture")
-local types = require("types")
+-- local types = require("types")
 
-local env = vim.env
 local opt = vim.opt
 local g = vim.g
-local fn = vim.fn
-local cmd = vim.cmd
-local exists = vim.fn.exists
-
+-- local env = vim.env
+-- local fn = vim.fn
+-- local cmd = vim.cmd
+-- local exists = vim.fn.exists
+--
 vim.g.os = architecture.get_os()
 -- = architecture.shell_setup(architecture.get_shell(architecture.get_os()))
 
@@ -156,4 +156,4 @@ vim.o.updatetime = 250
 --vim.wo.signcolumn = "yes"
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 g.skip_ts_context_commentstring_module = true
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme default")
