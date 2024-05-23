@@ -20,39 +20,43 @@ return {
 	},
 
 	{
-		-- Standalone of it, so can use it non-laizly
-		"echasnovski/mini.files",
-		-- priority = 1000,
-		lazy = false,
-		version = false,
-		config = function()
-			require("mini.files").setup({
-				mappings = {
-					close = "q",
-					go_in = "l",
-					go_in_plus = "L",
-					go_out = "h",
-					go_out_plus = "H",
-					reset = "<BS>",
-					reveal_cwd = "@",
-					show_help = "g?",
-					synchronize = "=",
-					trim_left = "<",
-					trim_right = ">",
-				},
-				options = {
-					use_as_default_explorer = false,
-				},
-				windows = {
-					-- max_number = 5,
-					preview = false,
-					width_focus = 30,
-					width_nofocus = 25,
-					width_preview = 60,
-				},
-			})
-		end,
+		"nvim-lua/plenary.nvim",
 	},
+
+	-- {
+	-- 	-- Standalone of it, so can use it non-laizly
+	-- 	"echasnovski/mini.files",
+	-- 	-- priority = 1000,
+	-- 	lazy = false,
+	-- 	version = false,
+	-- 	config = function()
+	-- 		require("mini.files").setup({
+	-- 			mappings = {
+	-- 				close = "q",
+	-- 				go_in = "l",
+	-- 				go_in_plus = "L",
+	-- 				go_out = "h",
+	-- 				go_out_plus = "H",
+	-- 				reset = "<BS>",
+	-- 				reveal_cwd = "@",
+	-- 				show_help = "g?",
+	-- 				synchronize = "=",
+	-- 				trim_left = "<",
+	-- 				trim_right = ">",
+	-- 			},
+	-- 			options = {
+	-- 				use_as_default_explorer = false,
+	-- 			},
+	-- 			windows = {
+	-- 				-- max_number = 5,
+	-- 				preview = false,
+	-- 				width_focus = 30,
+	-- 				width_nofocus = 25,
+	-- 				width_preview = 60,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 
 	{
 		"stevearc/oil.nvim",
@@ -105,16 +109,16 @@ return {
 		end,
 	},
 
-	{
-		"ggandor/leap.nvim",
-		lazy = false,
-		dependencies = {
-			"tpope/vim-repeat",
-		},
-		config = function()
-			require("configs.leap")
-		end,
-	},
+	-- {
+	-- 	"ggandor/leap.nvim",
+	-- 	lazy = false,
+	-- 	dependencies = {
+	-- 		"tpope/vim-repeat",
+	-- 	},
+	-- 	config = function()
+	-- 		require("configs.leap")
+	-- 	end,
+	-- },
 
 	-- Testing having telescope load really early
 	{
@@ -128,7 +132,8 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		event = "VeryLazy",
+		lazy = false,
+		-- event = "VeryLazy",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 
@@ -240,7 +245,14 @@ return {
 			"markdown",
 		},
 		config = function()
-			require("colorizer").setup()
+			require("colorizer").setup({
+				user_default_options = {
+					tailwind = "both",
+					css = true,
+					css_fn = true,
+					names = false,
+				},
+			})
 		end,
 	},
 
@@ -358,7 +370,7 @@ return {
 
 	{
 		"mrcjkb/rustaceanvim",
-		lazy = false,
+		-- lazy = false,
 		version = "^4",
 		ft = { "rust" },
 		config = function()
@@ -372,7 +384,7 @@ return {
 			"css",
 			"html",
 			"javascript",
-			"lua",
+			-- "lua",
 			-- "markdown",
 			"scss",
 			"txt",
@@ -382,8 +394,8 @@ return {
 			"typescript",
 			"typescriptreact",
 			"javascriptreact",
-			"norg",
-			"org",
+			-- "norg",
+			-- "org",
 			"pandoc",
 			"markdown",
 		},
@@ -399,7 +411,7 @@ return {
 		ft = { "go", "gomod" },
 		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 		dependencies = { -- optional packages
-			"ray-x/guihua.lua",
+			{ "ray-x/guihua.lua", lazy = true },
 			"neovim/nvim-lspconfig",
 			"nvim-treesitter/nvim-treesitter",
 		},
@@ -540,9 +552,11 @@ return {
 
 	{
 		"vrslev/cmp-pypi",
-		ft = { "toml", "python" },
+		ft = { "python" },
 		-- event = "VeryLazy",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			{ "nvim-lua/plenary.nvim", lazy = false },
+		},
 	},
 
 	--------------------- END COMPLETION
@@ -664,7 +678,18 @@ return {
 		"stevearc/dressing.nvim",
 		event = "BufReadPost",
 		config = function()
-			require("configs.dressing")
+			require("dressing").setup({
+				input = {
+					insert_only = false,
+					border = "rounded",
+				},
+				mappings = {
+					n = {
+						["q"] = "Close",
+					},
+				},
+			})
+			-- require("configs.dressing")
 		end,
 	},
 
