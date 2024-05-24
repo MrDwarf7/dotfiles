@@ -1,9 +1,9 @@
 # BEGIN - Vim things
 $dotfiles_dir = "$HOME\dotfiles"
 $dotfiles_config = "$dotfiles_dir\.config"
-
-$nvim_main_dir = "$dotfiles_config"
 $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
+
+# $nvim_main_dir = "$dotfiles_config"
 
 $scoop_dir = "$dotfiles_dir\scoop"
 
@@ -17,13 +17,13 @@ function hx {
 }
 
 function vim {
-    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    $env:XDG_CONFIG_HOME = "$dotfiles_config"
     $env:NVIM_APPNAME = "nvim"
     nvim $args
 }
 
 function ovim {
-    $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+    $env:XDG_CONFIG_HOME = "$dotfiles_config"
     $env:NVIM_APPNAME = "n_nvim"
     nvim $args
 }
@@ -50,7 +50,7 @@ function nvims() {
         return
     }
     if ($config -eq "default") {
-        $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+        $env:XDG_CONFIG_HOME = "$dotfiles_config"
         $config = ""
     }
     $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
@@ -59,7 +59,7 @@ function nvims() {
 }
 
 function nvd() {
-    $env:XDG_CONFIG_HOME = "$nvim_main_dir\"
+    $env:XDG_CONFIG_HOME = "$dotfiles_config\"
     $env:NVIM_APPNAME = "nvim"
     neovide $args
 }
@@ -79,7 +79,7 @@ function nvds() {
         return
     }
     if ($config -eq "default") {
-        $env:XDG_CONFIG_HOME = "$nvim_main_dir"
+        $env:XDG_CONFIG_HOME = "$dotfiles_config"
         $config = ""
     }
     $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
