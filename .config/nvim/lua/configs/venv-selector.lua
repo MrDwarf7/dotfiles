@@ -5,13 +5,13 @@
 --
 
 return {
-
 	"linux-cultist/venv-selector.nvim",
-	event = "LspAttach",
+	lazy = true,
+	event = "InsertEnter",
 	dependencies = {
-		"neovim/nvim-lspconfig",
-		"nvim-telescope/telescope.nvim",
-		"mfussenegger/nvim-dap-python",
+		-- "neovim/nvim-lspconfig",
+		-- "nvim-telescope/telescope.nvim",
+		-- "mfussenegger/nvim-dap-python",
 	},
 	config = function()
 		local autocmd = vim.api.nvim_create_autocmd

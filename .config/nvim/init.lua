@@ -1,6 +1,3 @@
--- https://github.com/bluz71/dotfiles/blob/master/nvim/init.lua
--- local fn = vim.fn
-
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -19,20 +16,20 @@ vim.opt.rtp:prepend(lazypath)
 vim.loader.enable()
 -- end
 
--- if vim.g.neovide then
--- 	return {
--- 		require("core.neovide"),
--- 		require("core.options"),
--- 		require("core.mappings"),
--- 	}
--- else
--- 	if vim.g.vscode then
--- 		print("Welcome to VSCode Neovim...")
--- 		require("vscode-neovim")
--- 		print("Local vscode required -> ")
--- 		return require("vscode_conf").setup()
--- 	end
--- end
+if vim.g.neovide then
+	return {
+		require("core.neovide"),
+		require("core.options"),
+		require("core.mappings"),
+	}
+else
+	if vim.g.vscode then
+		print("Welcome to VSCode Neovim...")
+		require("vscode-neovim")
+		print("Local vscode required -> ")
+		return require("vscode_conf").setup()
+	end
+end
 
 return {
 	require("core.options"),
@@ -44,6 +41,7 @@ return {
 		change_detection = {
 			notify = false,
 		},
+
 		performance = {
 
 			cache = {
@@ -88,6 +86,7 @@ return {
 				},
 			},
 		},
+
 		ui = {
 			size = { width = 0.7, height = 0.7 },
 			border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },

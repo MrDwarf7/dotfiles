@@ -1,7 +1,7 @@
 return {
 	"folke/neodev.nvim",
-	lazy = true,
-	event = "BufRead",
+	-- lazy = true,
+	-- event = "BufRead",
 	opts = {
 
 		library = {

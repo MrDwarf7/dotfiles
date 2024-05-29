@@ -3,7 +3,9 @@ local map = vim.keymap.set
 return {
 
 	"kevinhwang91/nvim-ufo",
-	event = "BufReadPost",
+	lazy = true,
+	event = "VeryLazy",
+	-- event = "BufReadPost",
 	dependencies = {
 		"kevinhwang91/promise-async",
 	},

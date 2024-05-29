@@ -1,10 +1,10 @@
 return {
 	"RRethy/vim-illuminate",
 	lazy = true,
-	event = "CursorHold",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-	},
+	-- event = "VeryLazy",
+	-- dependencies = {
+	-- 	"nvim-treesitter/nvim-treesitter",
+	-- },
 
 	config = function()
 		require("illuminate").configure({

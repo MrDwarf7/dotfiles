@@ -1,5 +1,3 @@
---
-
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 -- local previewer = require("telescope.previewers")
@@ -10,7 +8,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
 	lazy = false,
-	-- event = "VeryLazy",
+	event = "VeryLazy",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 
@@ -100,10 +98,6 @@ return {
 		local augroup = vim.api.nvim_create_augroup
 		local autocmd = vim.api.nvim_create_autocmd
 
-		require("telescope").load_extension("fzy_native")
-		require("telescope").load_extension("live_grep_args")
-		require("telescope").load_extension("neoclip")
-		require("telescope").load_extension("harpoon")
 		-- require("telescope").load_extension("lazygit")
 		-- require("configs.harpoon")
 
@@ -174,5 +168,10 @@ return {
 				end,
 			}),
 		})
+
+		require("telescope").load_extension("fzy_native")
+		require("telescope").load_extension("live_grep_args")
+		require("telescope").load_extension("neoclip")
+		require("telescope").load_extension("harpoon")
 	end,
 }

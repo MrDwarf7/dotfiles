@@ -143,8 +143,8 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 -- vim.lsp.inlay_hint.enable()
 
 map("n", "<Leader>ti", function()
-	if vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint) then
+	-- if vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint) then
 		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
 		vim.cmd("redraw!")
-	end
+	-- end
 end, { expr = true, desc = "Toggle Inlay Hints" })

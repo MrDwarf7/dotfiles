@@ -171,11 +171,11 @@
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	lazy = true,
-	event = "BufReadPre",
+	-- lazy = false,
+	-- event = "BufEnter",
 	build = ":TSUpdate",
 	dependencies = {
-		"lewis6991/gitsigns.nvim",
+		-- "lewis6991/gitsigns.nvim",
 		"JoosepAlviste/nvim-ts-context-commentstring",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"nvim-treesitter/nvim-treesitter-context",

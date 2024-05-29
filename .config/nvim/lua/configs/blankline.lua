@@ -2,9 +2,9 @@ return {
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufReadPost",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
+		-- dependencies = {
+		-- 	"nvim-treesitter/nvim-treesitter",
+		-- },
 		main = "ibl",
 		config = function()
 			local highlight = {
