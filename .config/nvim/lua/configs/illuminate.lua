@@ -1,8 +1,19 @@
-require("illuminate").configure({
-	providers = {
-		"lsp",
-		"regex",
-		"treesitter",
+return {
+	"RRethy/vim-illuminate",
+	lazy = true,
+	event = "CursorHold",
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
 	},
-	delay = 100, -- Default value
-})
+
+	config = function()
+		require("illuminate").configure({
+			providers = {
+				"lsp",
+				"regex",
+				"treesitter",
+			},
+			delay = 100, -- Default value
+		})
+	end,
+}

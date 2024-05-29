@@ -11,43 +11,56 @@ local get_available_formatters = function(formatter, buf)
 	end
 end
 
-require("conform").setup({
-	formatters_by_ft = {
-		cpp = { "clang-format" },
-		-- cs = { "omnisharp" },
-		cs = { "csharpier" },
-		vb = { "csharpier" },
-		javascript = { "biome" },
-		javascriptreact = { "biome" },
-		json = { "fixjson", { "biome" } },
-		lua = { "stylua" },
-		powershell = get_available_formatters("powershell_es"),
-		python = function(bufnr)
-			if require("conform").get_formatter_info("ruff_format", bufnr).available then
-				return { "ruff_format" }
-			else
-				return { "isort", "black" }
-			end
-		end,
-		sh = { "shfmt" },
-		bash = { "shfmt" },
-		zsh = { "beautysh" },
-		typescript = { "biome" },
-		typescriptreact = { "biome" },
-		yaml = { "yamlfmt" },
-		rust = { "rustfmt" },
-	},
+return {
 
-	notify_on_error = false,
-	format_on_save = function(bufnr)
-		local disabled_ft = {
-			c = true,
-			cpp = true,
-			netrw = true,
-		}
-		return {
-			timeous_ms = 1000,
-			lsp_fallback = not disabled_ft[vim.bo[bufnr].filetype],
-		}
-	end,
-})
+	"stevearc/conform.nvim",
+	lazy = true,
+	event = "BufWritePost",
+
+	opts = {
+		formatters_by_ft = {
+			cpp = { "clang-format" },
+			-- cs = { "omnisharp" },
+			cs = { "csharpier" },
+			vb = { "csharpier" },
+			javascript = { "biome" },
+			javascriptreact = { "biome" },
+			json = { "fixjson", { "biome" } },
+			lua = { "stylua" },
+			powershell = function(formatter, bufnr)
+				-- local formatter = "powershell_es"
+				get_available_formatters(formatter, bufnr)
+			end,
+
+			-- get_available_formatters("powershell_es"),
+			-- end,
+			python = function(bufnr)
+				if require("conform").get_formatter_info("ruff_format", bufnr).available then
+					return { "ruff_format" }
+				else
+					return { "isort", "black" }
+				end
+			end,
+			sh = { "shfmt" },
+			bash = { "shfmt" },
+			zsh = { "beautysh" },
+			typescript = { "biome" },
+			typescriptreact = { "biome" },
+			yaml = { "yamlfmt" },
+			rust = { "rustfmt" },
+		},
+
+		notify_on_error = false,
+		format_on_save = function(bufnr)
+			local disabled_ft = {
+				c = true,
+				cpp = true,
+				netrw = true,
+			}
+			return {
+				timeous_ms = 1000,
+				lsp_fallback = not disabled_ft[vim.bo[bufnr].filetype],
+			}
+		end,
+	},
+}

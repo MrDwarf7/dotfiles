@@ -1,8 +1,17 @@
-require("marks").setup({
-	default_mappings = true,
-})
+-- 	config = function()
+-- 		require("configs.marks")
+-- 	end,
+-- },
 
-require("which-key").register({
+return {
+	"chentoast/marks.nvim",
+	event = "BufReadPost",
+	opts = {
+
+		default_mappings = true,
+	},
+
+	-- require("which-key").register({
 	["m*"] = { name = "Set [m]ark abc/xyz etc.", _ = "which_key_ignore" },
 	["m,"] = { name = "[m]ark - Next avail (abc)", _ = "which_key_ignore" },
 	["m;"] = { name = "[m]ark - Next avail (curr. line)", _ = "which_key_ignore" },
@@ -38,8 +47,8 @@ require("which-key").register({
 	["dm8"] = { name = "[m]ark - delete group 8", _ = "which_key_ignore" },
 	["dm9"] = { name = "[m]ark - delete group 9", _ = "which_key_ignore" },
 
-	["m}"] = { name = "[m]ark - Same type (next)", _ = "which_key_ignore" },
+	["m},"] = { name = "[m]ark - Same type (next)", _ = "which_key_ignore" },
 	["m{"] = { name = "[m]ark - Same type (prev)", _ = "which_key_ignore" },
 
 	["dm="] = { name = "[m]ark - Delete bookmark under cursor", _ = "which_key_ignore" },
-})
+}
