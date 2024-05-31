@@ -2,14 +2,14 @@ return {
 
 	{ "tpope/vim-fugitive", event = "VeryLazy" }, -- Automatic setup
 
-	{ "nvim-neotest/nvim-nio" },
+	{ "nvim-neotest/nvim-nio", lazy = false },
 
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
 		priority = 999,
-		config = function()
+		init = function()
 			require("colorschemes.tokyonight")
 		end,
 	},
