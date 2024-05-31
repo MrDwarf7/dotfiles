@@ -171,8 +171,8 @@
 
 return {
 	"nvim-treesitter/nvim-treesitter",
-	-- lazy = false,
-	-- event = "BufEnter",
+	lazy = false,
+	event = "BufRead",
 	build = ":TSUpdate",
 	dependencies = {
 		-- "lewis6991/gitsigns.nvim",
