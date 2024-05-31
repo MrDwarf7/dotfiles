@@ -1,8 +1,9 @@
 local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
 -- local previewer = require("telescope.previewers")
-local trouble_prov = require("trouble.providers.telescope")
+-- local trouble_prov = require("trouble.providers.telescope")
 local trouble = require("trouble")
+local open_with_trouble = require("trouble.sources.telescope").open
 
 return {
 	"nvim-telescope/telescope.nvim",
@@ -68,7 +69,7 @@ return {
 					["<C-p>"] = actions.move_selection_previous,
 					["<C-n>"] = actions.move_selection_next,
 
-					["<C-t>"] = trouble_prov.open_with_trouble,
+					["<C-t>"] = open_with_trouble,
 					["<C-q>"] = actions.close,
 					["<C-d>"] = actions.delete_buffer,
 
