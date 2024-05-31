@@ -132,9 +132,9 @@ opt.signcolumn = "yes"
 opt.relativenumber = true
 opt.cursorline = true
 
-if vim.fn.has("nvim-0.10") == 1 then
-	opt.smoothscroll = true
-end
+-- if vim.fn.has("nvim-0.10") == 1 then
+opt.smoothscroll = true
+-- end
 
 -- g.loaded_node_provider = 1
 -- g.loaded_python3_provider = 1

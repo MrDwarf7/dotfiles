@@ -4,16 +4,18 @@ local autocmd = vim.api.nvim_create_autocmd
 local highlight = vim.highlight
 local opt = vim.opt
 
-local MainAutoCmdGroup = augroup("MainAutoCmdGroup", { clear = true })
-local GitConfig = augroup("GitConfig", { clear = true })
+-- local MainAutoCmdGroup = augroup("MainAutoCmdGroup", { clear = true })
 -- local LspAuGroup = augroup("LspAuGroup", { clear = true })
+-- local UrlHighliting = augroup("UrlHighliting", { clear = true })
+-- local LastPost = augroup("LastPost", { clear = true })
+-- local StripWhiteSpace = augroup("StripWhiteSpace", { clear = true })
+-- local AutoResize = augroup("AutoResize", { clear = true })
+
+
+local GitConfig = augroup("GitConfig", { clear = true })
+local TextYank = augroup("TextYank", { clear = true })
 local format_sync_grp = augroup("GoFormat", {})
 local QToClose = augroup("QToClose", { clear = true })
-local UrlHighliting = augroup("UrlHighliting", { clear = true })
-local LastPost = augroup("LastPost", { clear = true })
-local TextYank = augroup("TextYank", { clear = true })
-local StripWhiteSpace = augroup("StripWhiteSpace", { clear = true })
-local AutoResize = augroup("AutoResize", { clear = true })
 local XmlParser = augroup("XmlParser", { clear = true })
 
 autocmd("TextYankPost", {
