@@ -74,6 +74,8 @@ return {
 				-- 	return true
 				-- end,
 			})
+
+			vim.keymap.set("n", "<C-w>'", "<cmd>lua =require('oil').open_float()<CR>", { silent = true, desc = "oil" })
 		end,
 	},
 
