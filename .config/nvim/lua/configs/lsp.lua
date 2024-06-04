@@ -3,7 +3,6 @@ local augroup = vim.api.nvim_create_augroup
 
 return {
 	{
-
 		"neovim/nvim-lspconfig",
 		lazy = true,
 		event = {
@@ -129,6 +128,7 @@ return {
 
 				docker_compose_language_service = {},
 				dockerls = {},
+				-- erlangls = {},
 				eslint = {},
 				html = {},
 				jsonls = {},
@@ -297,6 +297,9 @@ return {
 			})
 
 			require("lspconfig.ui.windows").default_options.border = "single"
+
+			-- Currently isn't included in the mason-lspconfig
+			require("lspconfig").gleam.setup({})
 
 			vim.lsp.handlers["textDocument/hover"] = handlers.hover
 			vim.lsp.handlers["textDocument/signatureHelp"] = handlers.signature_help

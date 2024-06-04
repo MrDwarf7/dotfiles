@@ -22,6 +22,7 @@ return {
 			cpp = { "clang-format" },
 			-- cs = { "omnisharp" },
 			cs = { "csharpier" },
+			gleam = { "gleam" },
 			vb = { "csharpier" },
 			javascript = { "biome" },
 			javascriptreact = { "biome" },
