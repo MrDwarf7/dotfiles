@@ -124,83 +124,105 @@ end
 
 -----------------------------------------------------------------------------
 
-M.cmp_full_setup = function()
-	if vim.opt.diff:get() then
-		return
-	end
+return {
 
-	local cmp = require("cmp")
-	local lspkind = require("lspkind")
-	local luasnip = require("luasnip")
+	{
+		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
+		dependencies = {
+			"neovim/nvim-lspconfig",
+			"L3MON4D3/LuaSnip",
 
-	cmp.setup({
-		snippet = {
-			expand = function(args)
-				require("luasnip").lsp_expand(args.body)
-			end,
+			"zbirenbaum/copilot-cmp",
+			"hrsh7th/cmp-nvim-lsp",
+
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lua",
+
+			"saadparwaiz1/cmp_luasnip",
+			"saecki/crates.nvim",
+			"vrslev/cmp-pypi",
+			"onsails/lspkind.nvim",
 		},
-		completion = {
-			completeopt = "menu,menuone,noinsert",
-		},
+		config = function()
+			if vim.opt.diff:get() then
+				return
+			end
 
-		window = {
-			completion = {
+			local cmp = require("cmp")
+			local lspkind = require("lspkind")
+			local luasnip = require("luasnip")
 
-				-- border = {
-				-- 	{ "╭", "cmpDocBorder" },
-				-- 	{ "─", "cmpDocBorder" },
-				-- 	{ "╮", "cmpDocBorder" },
-				-- 	{ "│", "cmpDocBorder" },
-				-- 	{ "╯", "cmpDocBorder" },
-				-- 	{ "─", "cmpDocBorder" },
-				-- 	{ "╰", "cmpDocBorder" },
-				-- 	{ "│", "cmpDocBorder" },
-				-- },
-
-				completion = cmp.config.window.bordered(),
-				winhighlight = "Normal:CmpPmenu,CursorLine:Pmenu,Search:None",
-				winblend = 8,
-				scrollbar = true,
-			},
-
-			documentation = {
-				border = {
-					{ "╭", "cmpDocBorder" },
-					{ "─", "cmpDocBorder" },
-					{ "╮", "cmpDocBorder" },
-					{ "│", "cmpDocBorder" },
-					{ "╯", "cmpDocBorder" },
-					{ "─", "cmpDocBorder" },
-					{ "╰", "cmpDocBorder" },
-					{ "│", "cmpDocBorder" },
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						require("luasnip").lsp_expand(args.body)
+					end,
 				},
-				winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,Search:None",
-				winblend = 0,
-				scrollbar = false,
-			},
-		},
+				completion = {
+					completeopt = "menu,menuone,noinsert",
+				},
 
-		preselect = cmp.PreselectMode.None,
+				window = {
+					completion = {
 
-		formatting = M.lspkind_setup(lspkind),
+						-- border = {
+						-- 	{ "╭", "cmpDocBorder" },
+						-- 	{ "─", "cmpDocBorder" },
+						-- 	{ "╮", "cmpDocBorder" },
+						-- 	{ "│", "cmpDocBorder" },
+						-- 	{ "╯", "cmpDocBorder" },
+						-- 	{ "─", "cmpDocBorder" },
+						-- 	{ "╰", "cmpDocBorder" },
+						-- 	{ "│", "cmpDocBorder" },
+						-- },
 
-		mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
+						completion = cmp.config.window.bordered(),
+						winhighlight = "Normal:CmpPmenu,CursorLine:Pmenu,Search:None",
+						winblend = 8,
+						scrollbar = true,
+					},
 
-		sources = {
-			{ name = "nvim_lsp_signature_help", group_index = 2 },
-			{ name = "copilot", group_index = 2 },
-			{ name = "nvim_lsp", group_index = 2 },
-			{ name = "buffer", group_index = 2, max_item_count = 15 },
-			{ name = "path", group_index = 2 },
-			{ name = "cmp-cmdline" },
-			{ name = "nvim_lua", group_index = 2 },
+					documentation = {
+						border = {
+							{ "╭", "cmpDocBorder" },
+							{ "─", "cmpDocBorder" },
+							{ "╮", "cmpDocBorder" },
+							{ "│", "cmpDocBorder" },
+							{ "╯", "cmpDocBorder" },
+							{ "─", "cmpDocBorder" },
+							{ "╰", "cmpDocBorder" },
+							{ "│", "cmpDocBorder" },
+						},
+						winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,Search:None",
+						winblend = 0,
+						scrollbar = false,
+					},
+				},
 
-			{ name = "luasnip", group_index = 3 },
-			{ name = "crates" },
-			{ name = "cmp-pypi" },
-			-- { name = "cmp-luasnip-choice" },
-		},
-	})
-end
+				preselect = cmp.PreselectMode.None,
 
-return M
+				formatting = M.lspkind_setup(lspkind),
+
+				mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
+
+				sources = {
+					{ name = "nvim_lsp_signature_help", group_index = 2 },
+					{ name = "copilot", group_index = 2 },
+					{ name = "nvim_lsp", group_index = 2 },
+					{ name = "buffer", group_index = 2, max_item_count = 15 },
+					{ name = "path", group_index = 2 },
+					{ name = "cmp-cmdline" },
+					{ name = "nvim_lua", group_index = 2 },
+
+					{ name = "luasnip", group_index = 3 },
+					{ name = "crates" },
+					{ name = "cmp-pypi" },
+					-- { name = "cmp-luasnip-choice" },
+				},
+			})
+		end,
+	},
+}
