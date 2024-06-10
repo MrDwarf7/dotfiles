@@ -106,7 +106,7 @@ return {
 
 		map("n", "[C", function()
 			require("treesitter-context").go_to_context(vim.v.count1)
-		end, { silent = true })
+		end, { expr = true, silent = true })
 
 		-- M.treesitter_context()
 		-- M.treesitter_configs()
@@ -120,14 +120,14 @@ return {
 
 					keymaps = {
 						-- You can use the capture groups defined in textobjects.scm
-						["af"] = { query = "@function.outer", desc = "Select around function" },
-						["if"] = { query = "@function.inner", desc = "Select inner function" },
-						["ac"] = { query = "@class.outer", desc = "Select around function" },
+						["af"] = { expr = true, query = "@function.outer", desc = "Select around function" },
+						["if"] = { expr = true, query = "@function.inner", desc = "Select inner function" },
+						["ac"] = { expr = true, query = "@class.outer", desc = "Select around function" },
 						-- You can optionally set descriptions to the mappings (used in the desc parameter of
 						-- nvim_buf_set_keymap) which plugins like which-key display
-						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
+						["ic"] = { expr = true, query = "@class.inner", desc = "Select inner part of a class region" },
 						-- You can also use captures from other query groups like `locals.scm`
-						["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
+						["as"] = { expr = true, query = "@scope", query_group = "locals", desc = "Select language scope" },
 					},
 					selection_modes = {
 						["@parameter.outer"] = "v", -- charwise
@@ -150,18 +150,20 @@ return {
 
 		local gs = require("gitsigns")
 		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-
-		-- NOTE: I honestly don't see a proper difference between these two
 		--
-		-- vim way: ; goes to the direction you were moving.
-		map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-		map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-
-		-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-		map({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f)
-		map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F)
-		map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t)
-		map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T)
+		-- -- NOTE: I honestly don't see a proper difference between these two
+		-- --
+		-- -- vim way: ; goes to the direction you were moving.
+		-- map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+		-- map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+		--
+		-- -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+		-- map({ "n", "x", "o" }, "f", function()
+		-- 	ts_repeat_move.builtin_f()
+		-- end, { expr = true })
+		-- map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F, { expr = true })
+		-- map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t, { expr = true })
+		-- map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T, { expr = true })
 
 		-- make sure forward function comes first
 		local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
