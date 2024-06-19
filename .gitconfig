@@ -19,7 +19,8 @@
 	pa = push --all
 	rs = restore --staged
 	cm = commit -m
-	rlast = reflog -5 HEAD
+    rlast = reflog -5 HEAD
+    sut = branch --set-upstream-to
 [push]
 	autoSetupRemote = true
 [filter "lfs"]
