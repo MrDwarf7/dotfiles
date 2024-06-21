@@ -1,4 +1,3 @@
-
 function SafeNewAlias {
     param (
         [string]$Alias,
@@ -117,6 +116,12 @@ function CleanLess {
 }
 
 
+function CargoBuilEverything {
+    $command = "cargo build && cargo build --release $args"
+    Invoke-Expression $command
+}
+
+
 function ZoxideAdd {
     zoxide add .
 }
@@ -149,6 +154,9 @@ New-Alias -Name z. -Value ZoxideAdd -Force
 New-Alias -Name z.. -Value ZoxideEdit -Force
 New-Alias -Name zq -Value ZoxideQuery -Force
 
+
+New-Alias -Name cargos -Value CargoBuilEverything -Force
+
 # Cargo Aliases
 #
 # Not currently working while function c is in place
@@ -160,6 +168,9 @@ New-Alias -Name zq -Value ZoxideQuery -Force
 # SafeNewAlias -Alias ct -Command CargoTest
 # SafeNewAlias -Alias cc -Command CargoCheck
 # SafeNewAlias -Alias ccl -Command CargoClean
+# SafeNewAlias -Alias cu -Command CargoUpdate
+# SafeNewAlias -Alias cdoc -Command CargoDoc
+# SafeNewAlias -Alias cup -Command CargoUpgrade
 # SafeNewAlias -Alias cu -Command CargoUpdate
 # SafeNewAlias -Alias cdoc -Command CargoDoc
 # SafeNewAlias -Alias cup -Command CargoUpgrade
