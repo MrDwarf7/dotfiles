@@ -122,6 +122,12 @@ function CargoBuilEverything {
 }
 
 
+function CargoRunEverything {
+    $command = "cargo run && cargo run --release $args"
+    Invoke-Expression $command
+}
+
+
 function ZoxideAdd {
     zoxide add .
 }
@@ -156,6 +162,7 @@ New-Alias -Name zq -Value ZoxideQuery -Force
 
 
 New-Alias -Name cargos -Value CargoBuilEverything -Force
+New-Alias -Name cargosr -Value CargoRunEverything -Force
 
 # Cargo Aliases
 #
