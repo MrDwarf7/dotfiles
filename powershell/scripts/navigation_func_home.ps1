@@ -11,6 +11,8 @@ $data_on_demand_backend = "$data_on_demand\Data-On-Demand-Backend"
 $data_on_demand_next = "$data_on_demand\data-on-demand-next"
 $data_on_demand_frontend = "$home_gitwork_projects\Data-On-Demand-Frontend"
 
+$c_temp_folder = "C:\temp"
+
 
 function mgr {
     param(
@@ -61,4 +63,12 @@ function dodf {
     Get-ChildItem
 }
 
+
+function ctemp {
+    param(
+        [string]$path = $c_temp_folder  
+    )
+    Push-Location $path
+    Get-ChildItem
+}
 
