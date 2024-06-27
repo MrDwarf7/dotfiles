@@ -1,16 +1,17 @@
-local undotree = pcall(require, "undotree")
-local map = vim.keymap.set
-local g = vim.g
+-- local undotree = pcall(require, "undotree")
+-- local map = vim.keymap.set
+-- local g = vim.g
 
 return {
-
 	"mbbill/undotree",
 	event = "VeryLazy",
-	config = function()
-		g.undotree_HighlightChangedWithSign = 1
-		g.undotree_SetFocusWhenToggle = 1
-		g.undotree_WindowLayout = 1
-	end,
+	keys = {
 
-	map("n", "<Leader>u", ":UndotreeToggle<CR>", { desc = "[u]ndotree" }),
+		{ "<Leader>u", ":UndotreeToggle<CR>", desc = "[u]ndotree" },
+	},
+	init = function()
+		vim.g.undotree_HighlightChangedWithSign = 1
+		vim.g.undotree_SetFocusWhenToggle = 1
+		vim.g.undotree_WindowLayout = 1
+	end,
 }

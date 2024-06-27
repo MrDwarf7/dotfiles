@@ -4,20 +4,65 @@ return {
 	opts = {
 		default_mappings = false,
 	},
-	init = function()
-		---@param keys string
-		---@param func function
-		---@param desc string
-		---@return nil
-		local map = function(keys, func, desc)
-			vim.keymap.set("n", keys, func, { desc = "PREVIEW: " .. desc })
-		end
+	keys = {
+		{
+			"gpd",
+			function()
+				require("goto-preview").goto_preview_definition()
+			end,
+			desc = "[d]efinition",
+		},
 
-		map("gpd", require("goto-preview").goto_preview_definition, "[d]efinition")
-		map("gpD", require("goto-preview").goto_preview_declaration, "[D]eclaration")
-		map("gpr", require("goto-preview").goto_preview_references, "[r]eferences")
-		map("gpi", require("goto-preview").goto_preview_implementation, "[i]mpl")
-		map("gpt", require("goto-preview").goto_preview_type_definition, "[t]ype")
-		map("gP", require("goto-preview").close_all_win, "close all")
-	end,
+		{
+
+			"gpD",
+			function()
+				require("goto-preview").goto_preview_declaration()
+			end,
+			desc = "[D]eclaration",
+		},
+
+		{
+
+			"gpr",
+			function()
+				require("goto-preview").goto_preview_references()
+			end,
+			desc = "[r]eferences",
+		},
+
+		{
+			"gpi",
+			function()
+				require("goto-preview").goto_preview_implementation()
+			end,
+			desc = "[i]mpl",
+		},
+
+		{
+			"gpt",
+			function()
+				require("goto-preview").goto_preview_type_definition()
+			end,
+			desc = "[t]ype",
+		},
+
+		{
+			"gP",
+			function()
+				require("goto-preview").close_all_win()
+			end,
+			desc = "close all",
+		},
+	},
+
+	-- init = function()
+	-- 	---@param keys string
+	-- 	---@param func function
+	-- 	---@param desc string
+	-- 	---@return nil
+	-- 	local map = function(keys, func, desc)
+	-- 		vim.keymap.set("n", keys, func, { desc = "PREVIEW: " .. desc })
+	-- 	end
+	-- end,
 }

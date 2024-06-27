@@ -16,6 +16,7 @@ return {
 	"stevearc/conform.nvim",
 	lazy = true,
 	event = "BufWritePost",
+	cmd = "Format",
 
 	opts = {
 		formatters_by_ft = {

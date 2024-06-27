@@ -19,7 +19,10 @@ local OsEnum = {
 	macOS = "macos",
 }
 
-M.os_enum = OsEnum
+M.os_enum = function()
+	local os_e = OsEnum
+	return os_e
+end
 
 ---@class (exact) OperatingSystems
 ---@field windows "Windows_NT
@@ -35,7 +38,10 @@ local OsClass = {
 	macos = "macos",
 }
 
-M.os_class = OsClass
+M.os_class = function()
+	local os_class = OsClass
+	return os_class
+end
 
 ----- Os stuff done
 
@@ -54,7 +60,10 @@ local ShellsEnum = {
 	zsh = "zsh",
 }
 
-M.shells_enum = ShellsEnum
+M.shells_enum = function()
+	local shell_e = ShellsEnum
+	return shell_e
+end
 
 ---@class (exact) Shells
 ---@field bash "bash"
@@ -72,7 +81,10 @@ local ShellsClass = {
 	zsh = "zsh",
 }
 
-M.shells_class = ShellsClass
+M.shells_class = function()
+	local shells_c = ShellsClass
+	return shells_c
+end
 
 return M
 

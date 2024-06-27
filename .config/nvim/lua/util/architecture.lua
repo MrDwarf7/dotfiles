@@ -3,10 +3,10 @@ local M = {}
 local types = require("types")
 
 ---@type OperatingSystems
-local os_type = types.os_class
+local os_type = types.os_class()
 
 ---@type Shells
-local shells_t = types.shells_class
+local shells_t = types.shells_class()
 
 ----@type OperatingSystem
 -- local operating_systems = {
@@ -64,16 +64,16 @@ M.shell_setup = function(chosen_shell)
 	if chosen_shell == (shells_t.pwsh or chosen_shell == shells_t.powershell) then
 		-- Check if 'pwsh' is executable and set the shell accordingly
 
-		-- -- Setting shell command flags
-		-- vim.o.shellcmdflag =
-		-- 	"-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';"
-		-- -- Setting shell redirection
-		-- vim.o.shellredir = '2>&1 | %{ "$_" } | Out-File %s; exit $LastExitCode'
-		-- -- Setting shell pipe
-		-- vim.o.shellpipe = '2>&1 | %{ "$_" } | Tee-Object %s; exit $LastExitCode'
-		-- -- Setting shell quote options
-		-- vim.o.shellquote = ""
-		-- vim.o.shellxquote = ""
+		-- Setting shell command flags
+		vim.o.shellcmdflag =
+			"-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';"
+		-- Setting shell redirection
+		vim.o.shellredir = '2>&1 | %{ "$_" } | Out-File %s; exit $LastExitCode'
+		-- Setting shell pipe
+		vim.o.shellpipe = '2>&1 | %{ "$_" } | Tee-Object %s; exit $LastExitCode'
+		-- Setting shell quote options
+		vim.o.shellquote = ""
+		vim.o.shellxquote = ""
 
 		-- vim.opt.shellcmdflag =
 		-- 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"

@@ -1,7 +1,4 @@
-local map = vim.keymap.set
-
 return {
-
 	"kevinhwang91/nvim-ufo",
 	lazy = true,
 	event = "VeryLazy",
@@ -9,16 +6,26 @@ return {
 	dependencies = {
 		"kevinhwang91/promise-async",
 	},
-
+	keys = {
+		{
+			"zR",
+			function()
+				require("ufo").openAllFolds()
+			end,
+		},
+		{
+			"zM",
+			function()
+				require("ufo").closeAllFolds()
+			end,
+		},
+	},
 	opts = {
 		provider_selector = function(bufnr, filetype, buftype)
 			return { "treesitter", "indent" }
 		end,
 	},
-
-	config = function(_, opts)
-		require("ufo").setup(opts)
-		map("n", "zR", require("ufo").openAllFolds)
-		map("n", "zM", require("ufo").closeAllFolds)
-	end,
+	-- config = function(_, opts)
+	-- 	require("ufo").setup(opts)
+	-- end,
 }
