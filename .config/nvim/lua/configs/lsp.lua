@@ -165,11 +165,11 @@ end
 return {
 	{
 		"neovim/nvim-lspconfig",
-		lazy = false,
-		-- event = {
-		-- 	"BufReadPre",
-		-- 	"LspAttach",
-		-- },
+		-- lazy = false,
+		event = {
+			"BufReadPre",
+			"LspAttach",
+		},
 		dependencies = {
 			{ "nvim-telescope/telescope.nvim" },
 			{
