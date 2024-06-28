@@ -1,32 +1,26 @@
-local cmd = vim.cmd
-local bufnr = vim.api.nvim_get_current_buf()
+-- local bufnr = vim.api.nvim_get_current_buf()
+--
+--  vim.keymap.set("n", "<Leader>lf", function()
+--  	vim.cmd.RustFmt()
+--  end, { desc =  "[f]ormat"})
+--
+--  vim.keymap.set("n", "<Leader>lc", function()
+--  	vim.cmd.RustLsp("flyCheck")
+--  end, { desc = "[c]heck"})
+--
+--  vim.keymap.set("n", "<Leader>dd", function()
+--  	vim.cmd.RustLsp("debuggables")
+--  end, { desc = "[d]ebuggables"})
+--
+--  vim.keymap.set("n", "<Leader>dr", function()
+--  	vim.cmd.RustLsp("runnables")
+--  end, { desc =  "[r]un"})
+--
+--  vim.keymap.set("n", "<Leader>lh", function()
+--  	vim.cmd.RustLsp()
+--  end, { desc = "[h]over"})
+--
+--  vim.keymap.set("n", "<Leader>la", function()
+--  	vim.cmd.RustLsp('codeAction')
+--  end, {desc = "[a]ction", buffer = bufnr})
 
-local map = function(keys, func, desc)
-	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "RUST: " .. desc })
-end
-
--- vim.g.rustaceanvim.tools.code_actions.ui_select_fallback = true
-
-map("<Leader>lf", function()
-	cmd.RustFmt()
-end, "[f]ormat")
-
-map("<Leader>lc", function()
-	cmd.RustLsp("flyCheck")
-end, "[c]heck")
-
-map("<Leader>dd", function()
-	cmd.RustLsp("debuggables")
-end, "[d]ebuggables")
-
-map("<Leader>dr", function()
-	cmd.RustLsp("runnables")
-end, "[r]un")
-
-map("<Leader>lh", function()
-	cmd.RustLsp("hover")
-end, "[h]over")
-
-map("<Leader>la", function()
-	cmd.RustLsp("codeAction")
-end, "[a]ction")

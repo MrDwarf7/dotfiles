@@ -16,18 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 vim.loader.enable()
 -- end
 
-if vim.g.vscode then
-	print("Welcome to VSCode Neovim...")
-	require("vscode-neovim")
-	print("Local vscode required -> ")
-	return require("vscode_conf").setup()
-end
-
-if vim.g.neovide then
-	require("core.neovide")
-	require("core.options")
-	require("core.mappings")
-
+if vim.g.neovide == nil and vim.g.vscode == nil then
 	return {
 		require("core.options"),
 		require("core.mappings"),
@@ -92,7 +81,17 @@ if vim.g.neovide then
 	}
 end
 
-if vim.g.neovide == nil and vim.g.vscode == nil then
+if vim.g.vscode then
+	print("Welcome to VSCode Neovim...")
+	require("vscode-neovim")
+	print("Local vscode required -> ")
+	return require("vscode_conf").setup()
+end
+
+if vim.g.neovide then
+	-- require("core.neovide")
+	-- require("core.options")
+	-- require("core.mappings")
 	return {
 		require("core.options"),
 		require("core.mappings"),

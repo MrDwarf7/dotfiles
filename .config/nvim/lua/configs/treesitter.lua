@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	lazy = false,
+	lazy = true,
 	event = "BufRead",
 	build = ":TSUpdate",
 	dependencies = {
@@ -10,10 +10,21 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		"windwp/nvim-ts-autotag",
 	},
-	config = function()
-		local map = vim.keymap.set
 
-		require("nvim-treesitter.configs").setup({
+	keys = {
+
+		{
+			"[C",
+			function()
+				require("treesitter-context").go_to_context(vim.v.count1)
+			end,
+			expr = true,
+			silent = true,
+		},
+	},
+
+	opts = {
+		configs = {
 			ensure_installed = {
 				"bash",
 				"c",
@@ -43,7 +54,6 @@ return {
 				"vim",
 				"vimdoc",
 			},
-
 			highlight = {
 				enable = true,
 				disable = function(_, buf)
@@ -52,7 +62,6 @@ return {
 					end
 				end,
 			},
-
 			incremental_selection = {
 				enable = false,
 			},
@@ -79,7 +88,41 @@ return {
 
 			sync_install = false,
 			auto_install = true,
-		})
+		},
+	},
+
+	init = function(_, opts, buf)
+		local gs = require("gitsigns")
+		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+		--
+		-- -- NOTE: I honestly don't see a proper difference between these two
+		-- --
+		-- -- vim way: ; goes to the direction you were moving.
+		-- map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
+		-- map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
+		--
+		-- -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+		-- map({ "n", "x", "o" }, "f", function()
+		-- 	ts_repeat_move.builtin_f()
+		-- end, { expr = true })
+		-- map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F, { expr = true })
+		-- map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t, { expr = true })
+		-- map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T, { expr = true })
+
+		-- make sure forward function comes first
+		local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
+		-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
+
+		vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
+		vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
+
+		--
+	end,
+
+	config = function(_, opts)
+		local map = vim.keymap.set
+
+		require("nvim-treesitter.configs").setup(opts)
 
 		-- M.treesitter_main()
 
@@ -103,10 +146,6 @@ return {
 			zindex = 20, -- The Z-index of the context window
 			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
 		})
-
-		map("n", "[C", function()
-			require("treesitter-context").go_to_context(vim.v.count1)
-		end, { expr = true, silent = true })
 
 		-- M.treesitter_context()
 		-- M.treesitter_configs()
@@ -147,29 +186,5 @@ return {
 				},
 			},
 		})
-
-		local gs = require("gitsigns")
-		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-		--
-		-- -- NOTE: I honestly don't see a proper difference between these two
-		-- --
-		-- -- vim way: ; goes to the direction you were moving.
-		-- map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-		-- map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-		--
-		-- -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-		-- map({ "n", "x", "o" }, "f", function()
-		-- 	ts_repeat_move.builtin_f()
-		-- end, { expr = true })
-		-- map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F, { expr = true })
-		-- map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t, { expr = true })
-		-- map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T, { expr = true })
-
-		-- make sure forward function comes first
-		local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
-		-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
-
-		map({ "n", "x", "o" }, "]h", next_hunk_repeat)
-		map({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 	end,
 }

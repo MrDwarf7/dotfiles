@@ -1,6 +1,12 @@
 return {
 
-	{ "tpope/vim-fugitive", event = "VeryLazy" }, -- Automatic setup
+	{
+		"tpope/vim-fugitive",
+		event = "BufRead",
+		keys = {
+			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", { desc = "[g]it" } },
+		},
+	}, -- Automatic setup
 
 	{ "nvim-neotest/nvim-nio", lazy = false },
 
@@ -24,77 +30,87 @@ return {
 		lazy = false,
 		dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
 		priority = 1000,
+		keys = {
+			{ "<C-w>'", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+		},
+		opts = {
+			default_file_explorer = true,
+			win_options = {
+				wrap = false,
+				signcolumn = "no",
+				cursorcolumn = false,
+				foldcolumn = "0",
+				spell = false,
+				list = false,
+				conceallevel = 3, -- May want to change this to 0
+				concealcursor = "nvic",
+			},
+			keymaps = {
+				["g?"] = "actions.show_help",
 
-		config = function()
-			require("oil").setup({
+				["<CR>"] = "actions.select",
+				["<C-]>"] = "actions.select_vsplit",
+				["<C-[>"] = "actions.select_split",
 
-				default_file_explorer = true,
+				["<C-t>"] = "actions.select_tab",
+				["<C-p>"] = "actions.preview",
+				["<C-c>"] = "actions.close",
+				["<C-l>"] = "actions.refresh",
+				["-"] = "actions.parent",
 
-				win_options = {
-					wrap = false,
-					signcolumn = "no",
-					cursorcolumn = false,
-					foldcolumn = "0",
-					spell = false,
-					list = false,
-					conceallevel = 3, -- May want to change this to 0
-					concealcursor = "nvic",
-				},
-				keymaps = {
-					["g?"] = "actions.show_help",
+				["@"] = "actions.open_cwd",
 
-					["<CR>"] = "actions.select",
-					["<C-]>"] = "actions.select_vsplit",
-					["<C-[>"] = "actions.select_split",
-
-					["<C-t>"] = "actions.select_tab",
-					["<C-p>"] = "actions.preview",
-					["<C-c>"] = "actions.close",
-					["<C-l>"] = "actions.refresh",
-					["-"] = "actions.parent",
-
-					["@"] = "actions.open_cwd",
-
-					["`"] = "actions.cd",
-					["~"] = "actions.tcd",
-					["gs"] = "actions.change_sort",
-					["gx"] = "actions.open_external",
-					["g."] = "actions.toggle_hidden",
-					["g\\"] = "actions.toggle_trash",
-				},
-
-				view_options = {
-					show_hidden = true,
-				},
-				-- is_hidden_file = function(name, bufnr)
-				-- 	return vim.startswith(name, ".node_m")
-				-- end,
-				--
-				-- is_always_hidden = function(name, bufnr)
-				-- 	return true
-				-- end,
-			})
-
-			vim.keymap.set("n", "<C-w>'", "<cmd>lua =require('oil').open_float()<CR>", { silent = true, desc = "oil" })
-		end,
+				["`"] = "actions.cd",
+				["~"] = "actions.tcd",
+				["gs"] = "actions.change_sort",
+				["gx"] = "actions.open_external",
+				["g."] = "actions.toggle_hidden",
+				["g\\"] = "actions.toggle_trash",
+			},
+			view_options = {
+				show_hidden = true,
+			},
+		},
 	},
 
 	{
 		"folke/trouble.nvim",
+		lazy = false,
 		event = "BufReadPre",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = function()
-			local map = vim.keymap.set
-			require("trouble").setup({})
+		cmd = "Trouble",
+		keys = {
+			{ "<Leader>tt", "<cmd>Trouble<CR>", desc = "[t]rouble" },
 
-			map("n", "]]", function()
-				require("trouble").next({ skip_groups = true, jump = true })
-			end, { silent = true, desc = "[p]robem NEXT" })
+			{ "<Leader>vj", "<cmd>Trouble loclist toggle<CR>", desc = "[j]umplist/loclist" },
+			{ "<Leader>vz", "<cmd>Trouble qflist toggle<CR>", desc = "quickfix list" },
 
-			map("n", "[[", function()
-				require("trouble").previous({ skip_groups = true, jump = true })
-			end, { silent = true, desc = "[p]robem PREV" })
-		end,
+			{
+				"]]",
+				function()
+					require("trouble").next({ skip_groups = true, jump = true })
+				end,
+				mode = "n",
+				-- silent = true,
+				desc = "[p]robem NEXT",
+			},
+
+			{
+				"[[",
+				function()
+					require("trouble").previous({ skip_groups = true, jump = true })
+				end,
+				mode = "n",
+				-- silent = true,
+				desc = "[p]robem PREV",
+			},
+		},
+
+		opts = {},
+		-- local map = vim.keymap.set
+		-- require("trouble").setup({})
+
+		-- end,
 	},
 
 	{
@@ -108,6 +124,8 @@ return {
 
 	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
 
+	{ "AndreM222/copilot-lualine" },
+
 	{
 		"nvim-lualine/lualine.nvim",
 		lazy = true,
@@ -117,6 +135,38 @@ return {
 		},
 		opts = {
 			theme = "tokyonight",
+			sections = {
+				lualine_x = {
+					{
+						"copilot",
+						symbols = {
+							status = {
+								icons = {
+									enabled = " ",
+									sleep = " ", -- auto-trigger disabled
+									disabled = " ",
+									warning = " ",
+									unknown = " ",
+								},
+								hl = {
+									enabled = "#50FA7B",
+									sleep = "#AEB7D0",
+									disabled = "#6272A4",
+									warning = "#FFB86C",
+									unknown = "#FF5555",
+								},
+							},
+							-- spinners = require("copilot-lualine.spinners").dots,
+							spinner_color = "#6272A4",
+						},
+						show_colors = true,
+						show_loading = true,
+					},
+					"encoding",
+					"fileformat",
+					"filetype",
+				},
+			},
 		},
 	},
 
@@ -184,15 +234,18 @@ return {
 	{
 		"ray-x/go.nvim",
 		-- lazy = true,
-		-- event = "VeryLazy",
+		-- event = "Buf",
 		ft = { "go", "gomod" },
+		event = { "CmdlineEnter" },
 		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 		dependencies = { -- optional packages
-			{ "ray-x/guihua.lua", lazy = true },
+			{ "ray-x/guihua.lua" },
 			{ "neovim/nvim-lspconfig" },
 			{ "nvim-treesitter/nvim-treesitter" },
 		},
-		opts = {},
+		config = function()
+			require("go").setup()
+		end,
 	},
 
 	{
@@ -275,16 +328,6 @@ return {
 		ft = { "python" },
 		dependencies = {
 			{ "nvim-lua/plenary.nvim", lazy = false },
-		},
-	},
-
-	{
-		"kdheepak/lazygit.nvim",
-		-- lazy = false,
-		-- event = "VeryLazy",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
 		},
 	},
 

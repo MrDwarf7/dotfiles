@@ -1,0 +1,76 @@
+-- local bufnr = vim.api.nvim_get_current_buf()
+--
+-- local map = function(keys, func, desc)
+-- 	vim.keymap.set("n", keys, func, { buffer = bufnr, desc = "RUST: " .. desc })
+-- end
+--
+-- -- vim.g.rustaceanvim.tools.code_actions.ui_select_fallback = true
+--
+-- map("<Leader>lf", function()
+-- 	vim.cmd.RustFmt()
+-- end, "[f]ormat")
+--
+-- map("<Leader>lc", function()
+-- 	vim.cmd.RustLsp("flyCheck")
+-- end, "[c]heck")
+--
+-- map("<Leader>dd", function()
+-- 	vim.cmd.RustLsp("debuggables")
+-- end, "[d]ebuggables")
+--
+-- map("<Leader>dr", function()
+-- 	vim.cmd.RustLsp("runnables")
+-- end, "[r]un")
+--
+-- map("<Leader>lh", function()
+-- 	vim.cmd.RustLsp("hover")
+-- end, "[h]over")
+--
+-- map("<Leader>la", function()
+-- 	vim.cmd.RustLsp("codeAction")
+-- end, "[a]ction")
+--
+--
+--
+-- { "<Leader>lf", function()
+-- 	vim.cmd.RustFmt()
+-- 	end,
+-- 	desc= "[f]ormat" }
+--
+-- { "<Leader>lc", function()
+-- 	vim.cmd.RustLsp("flyCheck")
+-- 	end,
+-- 	desc = "[c]heck",
+-- 	vim.api.nvim_get_current_buf()
+-- }
+--
+-- { "<Leader>dd", function()
+-- 	vim.cmd.RustLsp("debuggables")
+-- 	end,
+-- 	desc = "[d]ebuggables" ,
+-- 	vim.api.nvim_get_current_buf()
+-- }
+--
+-- { "<Leader>dr", function()
+-- 	vim.cmd.RustLsp("runnables")
+-- 	end,
+-- 	desc = "[r]un" ,
+--
+-- 	vim.api.nvim_get_current_buf()
+-- }
+--
+-- { "<Leader>lh", function()
+-- 	vim.cmd.RustLsp({"hover", "action"})
+-- 	end,
+-- 	desc = "[h]over",
+--
+-- 	vim.api.nvim_get_current_buf()
+-- }
+--
+-- { "<Leader>la", function()
+-- 	vim.cmd.RustLsp("codeAction")
+-- 	end,
+-- 	desc =  "[a]ction",
+--
+-- 	vim.api.nvim_get_current_buf()
+-- }

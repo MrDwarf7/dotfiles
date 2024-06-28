@@ -1,16 +1,27 @@
-local map = vim.keymap.set
-
--- 	config = function()
--- 		require("configs.todo-comments")
--- 		-- .setup()
--- 	end,
--- },
-
 return {
-
 	"folke/todo-comments.nvim",
 	event = "BufReadPost",
 	dependencies = { "nvim-lua/plenary.nvim" },
+	keys = {
+
+		{
+			"]t",
+			function()
+				require("todo-comments").jump_next()
+			end,
+			desc = "Next todo comment",
+		},
+
+		{
+			"[t",
+			function()
+				require("todo-comments").jump_prev()
+			end,
+			desc = "Previous todo comment",
+		},
+
+		{ "<Leader>lt", ":TodoLocList<CR>", desc = "list [t]odo's", mode = "n" },
+	},
 	opts = {
 		keywords = {
 			FIX = { icon = " ", color = "error" },
@@ -32,14 +43,4 @@ return {
 			pattern = [[\b(KEYWORDS):]],
 		},
 	},
-
-	map("n", "]t", function()
-		require("todo-comments").jump_next()
-	end, { desc = "Next todo comment" }),
-
-	map("n", "[t", function()
-		require("todo-comments").jump_prev()
-	end, { desc = "Previous todo comment" }),
-
-	map("n", "<Leader>lt", ":TodoLocList<CR>", { desc = "list [t]odo's" }),
 }

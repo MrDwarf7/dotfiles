@@ -1,8 +1,17 @@
-local map = vim.keymap.set
-
 return {
 	"zbirenbaum/copilot.lua",
 	event = "BufReadPost",
+
+	keys = {
+		{
+			"<Leader>pp",
+			"<cmd>Copilot panel<CR>",
+			mode = "n",
+			{ desc = "copilot [P]" },
+		},
+	},
+	-- map("n", "<Leader>pp", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" }),
+
 	opts = {
 
 		panel = {
@@ -36,6 +45,4 @@ return {
 		copilot_node_command = "node", -- What other ways can it be run??
 		server_opts_overrides = {},
 	},
-
-	map("n", "<Leader>pp", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" }),
 }

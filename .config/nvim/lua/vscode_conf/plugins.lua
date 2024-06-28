@@ -6,7 +6,6 @@ local M = {}
 ---@usage require("vscode_conf.plugins").vscode_plugins()
 M.vscode_plugins = function()
 	print("Vscode specific plugins file loads...")
-
 	return {
 		{
 			"numToStr/Comment.nvim",
