@@ -1,6 +1,11 @@
 return {
 
-	{ "tpope/vim-fugitive", event = "BufRead" }, -- Automatic setup
+	{ "tpope/vim-fugitive", event = "BufRead",
+	keys = {
+		{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", {desc = "[g]it"} }
+
+	},
+}, -- Automatic setup
 
 	{ "nvim-neotest/nvim-nio", lazy = false },
 
