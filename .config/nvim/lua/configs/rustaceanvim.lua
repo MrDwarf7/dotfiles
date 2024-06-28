@@ -1,23 +1,62 @@
-local cmd = vim.cmd
-
--- 	config = function()
--- 		require("configs.rustaceanvim").rustaceanvim_setup()
--- 	end,
--- },
-
--- local M = {}
 
 return {
 	"mrcjkb/rustaceanvim",
 	-- lazy = false,
 	version = "^4",
 	ft = { "rust" },
+	event = { "LspAttach"},
+	-- keys = {
+	-- 	{ "<Leader>lf", function()
+	-- 		vim.cmd.RustFmt()
+	-- 		end,
+	-- 		desc= "[f]ormat" },
+	--
+	-- 	{ "<Leader>lc", function()
+	-- 		vim.cmd.RustLsp("flyCheck")
+	-- 		end,
+	-- 		desc = "[c]heck",
+	-- 	vim.api.nvim_get_current_buf()
+	-- 	},
+	--
+	-- 	{ "<Leader>dd", function()
+	-- 		vim.cmd.RustLsp("debuggables")
+	-- 		end,
+	-- 		desc = "[d]ebuggables" ,
+	-- 	vim.api.nvim_get_current_buf()
+	-- 	},
+	--
+	-- 	{ "<Leader>dr", function()
+	-- 		vim.cmd.RustLsp("runnables")
+	-- 		end,
+	-- 		desc = "[r]un" ,
+	--
+	-- 	vim.api.nvim_get_current_buf()
+	-- 	},
+	--
+	-- 	{ "<Leader>lh", function()
+	-- 		vim.cmd.RustLsp({"hover", "action"})
+	-- 		end,
+	-- 		desc = "[h]over",
+	--
+	-- 	vim.api.nvim_get_current_buf()
+	-- 	},
+	--
+	-- 	{ "<Leader>la", function()
+	-- 		vim.cmd.RustLsp("codeAction")
+	-- 		end,
+	-- 		desc =  "[a]ction",
+	-- 	vim.api.nvim_get_current_buf()
+	-- 	}
+	--
+	-- },
+
 	config = function()
 		-- rustaceanvim_setup = function()
 		-- 	if vim.opt.diff:get() then
 		-- 		cmd([[LspStop]])
 		-- 		return
 		-- 	end
+
 
 		vim.g.rustaceanvim = {
 			tools = {
@@ -38,6 +77,33 @@ return {
 			server = {
 				on_attach = function(_, _)
 					pcall(require, "dap-ui")
+
+local bufnr = vim.api.nvim_get_current_buf()
+
+ vim.keymap.set("n", "<Leader>lf", function()
+ 	vim.cmd.RustFmt()
+ end, { desc =  "[f]ormat"})
+
+ vim.keymap.set("n", "<Leader>lc", function()
+ 	vim.cmd.RustLsp("flyCheck")
+ end, { desc = "[c]heck"})
+
+ vim.keymap.set("n", "<Leader>dd", function()
+ 	vim.cmd.RustLsp("debuggables")
+ end, { desc = "[d]ebuggables"})
+
+ vim.keymap.set("n", "<Leader>dr", function()
+ 	vim.cmd.RustLsp("runnables")
+ end, { desc =  "[r]un"})
+
+ -- vim.keymap.set("n", "<Leader>lh", function()
+ -- 	vim.cmd.RustLsp("hover")
+ -- end, { desc = "[h]over"})
+
+ vim.keymap.set("n", "<Leader>la", function()
+ 	vim.cmd.RustLsp('codeAction')
+ end, {desc = "[a]ction", buffer = bufnr})
+
 					vim.lsp.inlay_hint.enable()
 				end,
 
