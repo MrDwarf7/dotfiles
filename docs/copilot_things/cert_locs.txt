@@ -1,0 +1,11 @@
+Everyone mentions this: 
+https://copilot-proxy.githubusercontent.com/v1/engines/copilot-codex
+
+
+End-point being hit when testing against GH's docs -- 
+https://copilot-proxy.githubusercontent.com/
+
+Get all the certs from this one, and add to master list. 
+
+
+
