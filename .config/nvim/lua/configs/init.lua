@@ -1,6 +1,6 @@
 return {
 
-	{ "tpope/vim-fugitive", event = "VeryLazy" }, -- Automatic setup
+	{ "tpope/vim-fugitive", event = "BufRead" }, -- Automatic setup
 
 	{ "nvim-neotest/nvim-nio", lazy = false },
 
