@@ -1,11 +1,21 @@
 return {
 
-	{ "tpope/vim-fugitive", event = "BufRead",
-	keys = {
-		{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", {desc = "[g]it"} }
+	{
+		"tpope/vim-fugitive",
+		event = "BufRead",
+		keys = {
+			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", { desc = "[g]it" } },
+		},
+	}, -- Automatic setup
 
+	{
+		"rbong/vim-flog",
+		lazy = true,
+		cmd = { "Flog", "Flogsplit", "Floggit" },
+		dependencies = {
+			"tpope/vim-fugitive",
+		},
 	},
-}, -- Automatic setup
 
 	{ "nvim-neotest/nvim-nio", lazy = false },
 
