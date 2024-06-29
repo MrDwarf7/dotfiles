@@ -1,7 +1,6 @@
 return {
 	"zbirenbaum/copilot.lua",
 	event = "BufReadPost",
-
 	keys = {
 		{
 			"<Leader>pp",
@@ -10,10 +9,7 @@ return {
 			{ desc = "copilot [P]" },
 		},
 	},
-	-- map("n", "<Leader>pp", "<cmd>Copilot panel<CR>", { desc = "copilot [P]" }),
-
 	opts = {
-
 		panel = {
 			enabled = false, -- Temp disabled to test copilot_cmp
 			auto_refresh = false, -- This is the default setting

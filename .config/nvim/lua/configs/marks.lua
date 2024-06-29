@@ -1,8 +1,3 @@
--- 	config = function()
--- 		require("configs.marks")
--- 	end,
--- },
-
 return {
 	"chentoast/marks.nvim",
 	event = "BufReadPost",
@@ -11,7 +6,6 @@ return {
 		default_mappings = true,
 	},
 
-	-- require("which-key").register({
 	["m*"] = { name = "Set [m]ark abc/xyz etc.", _ = "which_key_ignore" },
 	["m,"] = { name = "[m]ark - Next avail (abc)", _ = "which_key_ignore" },
 	["m;"] = { name = "[m]ark - Next avail (curr. line)", _ = "which_key_ignore" },

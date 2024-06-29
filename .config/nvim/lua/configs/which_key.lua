@@ -1,5 +1,4 @@
 return {
-
 	"folke/which-key.nvim", -- config call
 	event = "VeryLazy",
 	opts = {

@@ -1,16 +1,13 @@
 return {
-
 	"gelguy/wilder.nvim",
 	event = "CmdlineEnter",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		{ "romgrk/fzy-lua-native", build = "make" },
+		"romgrk/fzy-lua-native",
 		"nixprime/cpsm",
 	},
-
 	config = function()
 		local wilder = require("wilder") -- wildmenu improved
-
 		wilder.setup({
 			modes = { ":", "/", "?" },
 			next_key = "<Tab>",

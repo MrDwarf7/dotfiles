@@ -1,7 +1,4 @@
--- local map = vim.keymap.set
-
 return {
-
 	"sindrets/diffview.nvim",
 	event = "VeryLazy",
 	opts = {},
@@ -11,9 +8,3 @@ return {
 		{ "<Leader>gdf", "<cmd>DiffviewToggleFiles<CR>", mode = "n", desc = "[f]iles toggle" },
 	},
 }
-
--- require("diffview").setup({})
--- 	config = function()
--- 		require("configs.diffview")
--- 	end,
--- },

@@ -6,7 +6,6 @@ return {
 		"nvim-lua/plenary.nvim",
 	},
 	opts = {},
-
 	keys = {
 		{
 			"<Leader>i",

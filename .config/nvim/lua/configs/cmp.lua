@@ -125,104 +125,91 @@ end
 -----------------------------------------------------------------------------
 
 return {
+	"hrsh7th/nvim-cmp",
+	event = "InsertEnter",
+	dependencies = {
+		"neovim/nvim-lspconfig",
+		"L3MON4D3/LuaSnip",
 
-	{
-		"hrsh7th/nvim-cmp",
-		event = "InsertEnter",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-			"L3MON4D3/LuaSnip",
+		"zbirenbaum/copilot-cmp",
+		"hrsh7th/cmp-nvim-lsp",
 
-			"zbirenbaum/copilot-cmp",
-			"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/cmp-nvim-lua",
 
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lua",
-
-			"saadparwaiz1/cmp_luasnip",
-			"saecki/crates.nvim",
-			"vrslev/cmp-pypi",
-			"onsails/lspkind.nvim",
-		},
-		config = function()
-			if vim.opt.diff:get() then
-				return
-			end
-
-			local cmp = require("cmp")
-			local lspkind = require("lspkind")
-			local luasnip = require("luasnip")
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				completion = {
-					completeopt = "menu,menuone,noinsert",
-				},
-
-				window = {
-					completion = {
-
-						-- border = {
-						-- 	{ "╭", "cmpDocBorder" },
-						-- 	{ "─", "cmpDocBorder" },
-						-- 	{ "╮", "cmpDocBorder" },
-						-- 	{ "│", "cmpDocBorder" },
-						-- 	{ "╯", "cmpDocBorder" },
-						-- 	{ "─", "cmpDocBorder" },
-						-- 	{ "╰", "cmpDocBorder" },
-						-- 	{ "│", "cmpDocBorder" },
-						-- },
-
-						completion = cmp.config.window.bordered(),
-						winhighlight = "Normal:CmpPmenu,CursorLine:Pmenu,Search:None",
-						winblend = 8,
-						scrollbar = true,
-					},
-
-					documentation = {
-						border = {
-							{ "╭", "cmpDocBorder" },
-							{ "─", "cmpDocBorder" },
-							{ "╮", "cmpDocBorder" },
-							{ "│", "cmpDocBorder" },
-							{ "╯", "cmpDocBorder" },
-							{ "─", "cmpDocBorder" },
-							{ "╰", "cmpDocBorder" },
-							{ "│", "cmpDocBorder" },
-						},
-						winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,Search:None",
-						winblend = 0,
-						scrollbar = false,
-					},
-				},
-
-				preselect = cmp.PreselectMode.None,
-
-				formatting = M.lspkind_setup(lspkind),
-
-				mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
-
-				sources = {
-					{ name = "nvim_lsp_signature_help", group_index = 2 },
-					{ name = "copilot", group_index = 2 },
-					{ name = "nvim_lsp", group_index = 2 },
-					{ name = "buffer", group_index = 2, max_item_count = 15 },
-					{ name = "path", group_index = 2 },
-					{ name = "cmp-cmdline" },
-					{ name = "nvim_lua", group_index = 2 },
-
-					{ name = "luasnip", group_index = 3 },
-					{ name = "crates" },
-					{ name = "cmp-pypi" },
-					-- { name = "cmp-luasnip-choice" },
-				},
-			})
-		end,
+		"saadparwaiz1/cmp_luasnip",
+		"saecki/crates.nvim",
+		"vrslev/cmp-pypi",
+		"onsails/lspkind.nvim",
 	},
+
+	opts = function()
+		if vim.opt.diff:get() then
+			return
+		end
+		local luasnip = require("luasnip")
+		local cmp = require("cmp")
+
+		-- cmp.setup({
+		return {
+			snippet = {
+				expand = function(args)
+					require("luasnip").lsp_expand(args.body)
+				end,
+			},
+			completion = {
+				completeopt = "menu,menuone,noinsert",
+			},
+
+			window = {
+				completion = {
+					completion = cmp.config.window.bordered(),
+					winhighlight = "Normal:CmpPmenu,CursorLine:Pmenu,Search:None",
+					winblend = 8,
+					scrollbar = true,
+				},
+
+				documentation = {
+					border = {
+						{ "╭", "cmpDocBorder" },
+						{ "─", "cmpDocBorder" },
+						{ "╮", "cmpDocBorder" },
+						{ "│", "cmpDocBorder" },
+						{ "╯", "cmpDocBorder" },
+						{ "─", "cmpDocBorder" },
+						{ "╰", "cmpDocBorder" },
+						{ "│", "cmpDocBorder" },
+					},
+					winhighlight = "Normal:CmpPmenu,FloatBorder:Pmenu,Search:None",
+					winblend = 0,
+					scrollbar = false,
+				},
+			},
+
+			preselect = cmp.PreselectMode.None,
+
+			formatting = M.lspkind_setup(require("lspkind")),
+
+			mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
+
+			sources = {
+				{ name = "nvim_lsp_signature_help", group_index = 2 },
+				{ name = "copilot", group_index = 2 },
+				{ name = "nvim_lsp", group_index = 2 },
+				{ name = "buffer", group_index = 2, max_item_count = 15 },
+				{ name = "path", group_index = 2 },
+				{ name = "cmp-cmdline" },
+				{ name = "nvim_lua", group_index = 2 },
+
+				{ name = "luasnip", group_index = 3 },
+				{ name = "lazydev", group_index = 0 }, -- set group index to 0 to skip loading LuaLS completions
+				{ name = "crates" },
+				{ name = "cmp-pypi" },
+				-- { name = "cmp-luasnip-choice" },
+			},
+			-- })
+		}
+	end,
 }

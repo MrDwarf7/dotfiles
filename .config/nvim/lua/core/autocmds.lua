@@ -1,12 +1,9 @@
-local UserAutoCmd = vim.api.nvim_create_augroup("UserAutoCmd", { clear = true })
-local GitConfig = vim.api.nvim_create_augroup("GitConfig", { clear = true })
-
 return {
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
 			vim.highlight.on_yank({ timeout = 55 })
 		end,
-		group = UserAutoCmd,
+		group = vim.api.nvim_create_augroup("UserAutoCmd", { clear = true }),
 	}),
 
 	-- Set filetype for certain file-patterns.
@@ -15,7 +12,7 @@ return {
 		callback = function()
 			vim.opt.filetype = "gitconfig"
 		end,
-		group = GitConfig,
+		group = vim.api.nvim_create_augroup("GitConfig", { clear = true }),
 	}),
 
 	vim.api.nvim_create_autocmd("BufWritePre", {

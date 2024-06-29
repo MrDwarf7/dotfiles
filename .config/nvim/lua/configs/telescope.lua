@@ -1,16 +1,11 @@
--- local builtin = require("telescope.builtin")
--- local actions = require("telescope.actions")
-local previewers = require("telescope.previewers")
-local trouble = require("trouble")
-local open_with_trouble = require("trouble.sources.telescope").open
-
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
-	lazy = false,
-	event = "UIEnter",
+	-- lazy = false,
+	-- event = "UIEnter",
 	dependencies = {
-		{ "nvim-lua/plenary.nvim" },
+		"nvim-lua/plenary.nvim",
+		"folke/trouble.nvim",
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
 			build = "make",
@@ -18,12 +13,11 @@ return {
 				return vim.fn.executable("make") == 1
 			end,
 		},
-		{ "AckslD/nvim-neoclip.lua" }, -- Telescope
-		{ "nvim-telescope/telescope-live-grep-args.nvim" }, -- Telescope
+		"AckslD/nvim-neoclip.lua",
+		"nvim-telescope/telescope-live-grep-args.nvim",
 	},
 
 	keys = {
-		-- Mappings for telescope, that aren't part of pickers etc.
 		{
 			"<Leader>ff",
 			function()
@@ -99,7 +93,7 @@ return {
 		{
 			"<Leader>fp",
 			function()
-				trouble.toggle()
+				require("trouble").toggle()
 			end,
 			desc = "[p]roblems - trouble",
 		},
@@ -110,14 +104,6 @@ return {
 				require("telescope.builtin").diagnostics()
 			end,
 			desc = "[d]iagnostics (same as ld)",
-		},
-
-		{
-			"<Leader>gf",
-			function()
-				require("telescope.builtin").git_files()
-			end,
-			desc = "[g]it files",
 		},
 
 		{
@@ -165,41 +151,42 @@ return {
 		},
 	},
 
-	init = function()
-		return {
-			mappings = {
-				i = {
-					["<C-k>"] = require("telescope.actions").move_selection_previous,
-					["<C-j>"] = require("telescope.actions").move_selection_next,
+	-- init = function()
+	-- 	local my_default_maps = function()
+	-- 		return {
+	-- 			i = {
+	-- 				["<C-k>"] = require("telescope.actions").move_selection_previous,
+	-- 				["<C-j>"] = require("telescope.actions").move_selection_next,
+	--
+	-- 				["<C-p>"] = require("telescope.actions").move_selection_previous,
+	-- 				["<C-n>"] = require("telescope.actions").move_selection_next,
+	--
+	-- 				["<C-t>"] = require("trouble.sources.telescope").open,
+	-- 				["<C-q>"] = require("telescope.actions").close,
+	-- 				["<C-d>"] = require("telescope.actions").delete_buffer,
+	--
+	-- 				["<C-s>"] = require("telescope.actions").select_horizontal,
+	-- 				["<C-l>"] = require("telescope.actions").select_vertical,
+	-- 			},
+	-- 			n = {
+	-- 				["q"] = require("telescope.actions").close,
+	-- 				["<C-q>"] = require("telescope.actions").close,
+	-- 				["<esc>"] = require("telescope.actions").close,
+	-- 				["<C-k>"] = require("telescope.actions").move_selection_previous,
+	-- 				["<C-j>"] = require("telescope.actions").move_selection_next,
+	-- 				["<C-p>"] = require("telescope.actions").move_selection_previous,
+	-- 				["<C-n>"] = require("telescope.actions").move_selection_next,
+	-- 				["<C-d>"] = require("telescope.actions").delete_buffer,
+	--
+	-- 				["<C-s>"] = require("telescope.actions").select_horizontal,
+	-- 				["<C-l>"] = require("telescope.actions").select_vertical,
+	-- 			},
+	-- 		}
+	-- 	end
+	-- end,
 
-					["<C-p>"] = require("telescope.actions").move_selection_previous,
-					["<C-n>"] = require("telescope.actions").move_selection_next,
-
-					["<C-t>"] = open_with_trouble,
-					["<C-q>"] = require("telescope.actions").close,
-					["<C-d>"] = require("telescope.actions").delete_buffer,
-
-					["<C-s>"] = require("telescope.actions").select_horizontal,
-					["<C-l>"] = require("telescope.actions").select_vertical,
-				},
-				n = {
-					["q"] = require("telescope.actions").close,
-					["<C-q>"] = require("telescope.actions").close,
-					["<esc>"] = require("telescope.actions").close,
-					["<C-k>"] = require("telescope.actions").move_selection_previous,
-					["<C-j>"] = require("telescope.actions").move_selection_next,
-					["<C-p>"] = require("telescope.actions").move_selection_previous,
-					["<C-n>"] = require("telescope.actions").move_selection_next,
-					["<C-d>"] = require("telescope.actions").delete_buffer,
-
-					["<C-s>"] = require("telescope.actions").select_horizontal,
-					["<C-l>"] = require("telescope.actions").select_vertical,
-				},
-			},
-		}
-	end,
-
-	opts = function(opts)
+	opts = function()
+		local previewers = require("telescope.previewers")
 		return {
 			vimgrep_arguments = {
 				"rg",
@@ -235,24 +222,47 @@ return {
 			selection_caret = "|> ",
 			set_env = { ["COLORTERM"] = "truecolor" },
 			winblend = 12,
-			mapings = opts.defaults,
-			-------------------------------------------------
+
+			mappings = function()
+				local actions = require("telescope.actions")
+				return {
+					i = {
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
+
+						["<C-p>"] = actions.move_selection_previous,
+						["<C-n>"] = actions.move_selection_next,
+
+						["<C-t>"] = require("trouble.sources.telescope").open,
+						["<C-q>"] = actions.close,
+						["<C-d>"] = actions.delete_buffer,
+
+						["<C-s>"] = actions.select_horizontal,
+						["<C-l>"] = actions.select_vertical,
+					},
+					n = {
+						["q"] = actions.close,
+						["<C-q>"] = actions.close,
+						["<esc>"] = actions.close,
+						["<C-k>"] = actions.move_selection_previous,
+						["<C-j>"] = actions.move_selection_next,
+						["<C-p>"] = actions.move_selection_previous,
+						["<C-n>"] = actions.move_selection_next,
+						["<C-d>"] = actions.delete_buffer,
+
+						["<C-s>"] = actions.select_horizontal,
+						["<C-l>"] = actions.select_vertical,
+					},
+				}
+			end,
 		}
 	end,
 
 	config = function(_, opts)
-		require("telescope").load_extension("fzy_native")
-		require("telescope").load_extension("live_grep_args")
-		require("telescope").load_extension("neoclip")
-		require("telescope").load_extension("harpoon")
+		local telescope = require("telescope")
+		telescope.load_extension("fzy_native")
+		telescope.load_extension("live_grep_args")
+		telescope.load_extension("neoclip")
+		telescope.load_extension("harpoon")
 	end,
-
-	-- config = function(opts)
-	-- 	-- 	local map = vim.keymap.set
-	-- 	--
-	-- 	require("telescope").load_extension("fzy_native")
-	-- 	require("telescope").load_extension("live_grep_args")
-	-- 	require("telescope").load_extension("neoclip")
-	-- 	require("telescope").load_extension("harpoon")
-	-- end,
 }

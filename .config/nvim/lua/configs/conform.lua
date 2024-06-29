@@ -12,12 +12,10 @@ local get_available_formatters = function(formatter, buf)
 end
 
 return {
-
 	"stevearc/conform.nvim",
 	lazy = true,
 	event = "BufWritePost",
 	cmd = "Format",
-
 	opts = {
 		formatters_by_ft = {
 			cpp = { "clang-format" },
@@ -33,9 +31,6 @@ return {
 				-- local formatter = "powershell_es"
 				get_available_formatters(formatter, bufnr)
 			end,
-
-			-- get_available_formatters("powershell_es"),
-			-- end,
 			python = function(bufnr)
 				if require("conform").get_formatter_info("ruff_format", bufnr).available then
 					return { "ruff_format" }
@@ -58,6 +53,7 @@ return {
 				c = true,
 				cpp = true,
 				netrw = true,
+				rust = true,
 			}
 			return {
 				timeous_ms = 1000,

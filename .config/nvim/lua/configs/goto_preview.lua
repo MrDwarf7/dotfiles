@@ -55,14 +55,4 @@ return {
 			desc = "close all",
 		},
 	},
-
-	-- init = function()
-	-- 	---@param keys string
-	-- 	---@param func function
-	-- 	---@param desc string
-	-- 	---@return nil
-	-- 	local map = function(keys, func, desc)
-	-- 		vim.keymap.set("n", keys, func, { desc = "PREVIEW: " .. desc })
-	-- 	end
-	-- end,
 }
