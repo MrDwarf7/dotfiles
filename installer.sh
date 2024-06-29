@@ -72,6 +72,7 @@ packages_to_install=(
 	lynx
 	python-pdm
 	broot
+	dotnet-runtime
 	dotnet-sdk # current at time of writing - 8.0~
 	# cmake-init  # install via yay, then install it INTO the pyenv env using ITS VERSION of pip
 )
