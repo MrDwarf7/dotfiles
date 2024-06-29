@@ -326,3 +326,10 @@ export $(dbus-launch)
 eval "$(zoxide init zsh)"
 
 source /home/dwarf/.config/broot/launcher/bash/br
+
+if which "dotnet" &> /dev/null; then
+    export PATH="$PATH:/home/dwarf/.dotnet/tools"
+fi
+
+# export PATH="$PATH:/home/dwarf/.dotnet/tools"
+
