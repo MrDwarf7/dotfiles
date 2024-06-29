@@ -32,6 +32,9 @@ map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 map("v", "<", "<gv", silent_opts)
 map("v", ">", ">gv", silent_opts)
 
+map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
+map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+
 -- Remap for dealing with word wrap
 -- map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -144,7 +147,7 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 map("n", "<Leader>ti", function()
 	-- if vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint) then
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
-		vim.cmd("redraw!")
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
+	vim.cmd("redraw!")
 	-- end
 end, { expr = true, desc = "Toggle Inlay Hints" })
