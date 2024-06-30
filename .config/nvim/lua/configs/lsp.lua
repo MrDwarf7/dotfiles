@@ -215,6 +215,7 @@ return {
 				if package.loaded["conform"] then
 					require("conform").format()
 				elseif package.loaded["conform"] == nil then
+					pcall(require, "conform")
 					vim.lsp.buf.format({ async = true })
 				end
 			end,
