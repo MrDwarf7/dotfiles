@@ -18,12 +18,14 @@ V.setup = function()
 	vim.g.maplocalleader = " "
 
 	print("Vscode specific setup file loads...")
+	require("vscode-neovim")
 	require("vscode_conf.move_cursor")
 	require("vscode_conf.actions")
 	require("vscode_conf.options")
 	require("vscode_conf.mappings")
 
 	print("Vscode specific autocmds file loads...")
+
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
 			vim.highlight.on_yank({ timeout = 60 })
@@ -32,9 +34,6 @@ V.setup = function()
 	})
 
 	require("vscode_conf.plugins").vscode_plugins()
-
-
-
 end
 
 return V
