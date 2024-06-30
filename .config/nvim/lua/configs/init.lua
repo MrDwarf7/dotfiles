@@ -3,19 +3,19 @@ return {
 		"tpope/vim-fugitive",
 		event = "BufRead",
 		keys = {
-			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", { desc = "[g]it" } },
+			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", desc = "[g]it" },
 
-			{ "<Leader>gf", "<cmd>Git fetch<CR>", mode = "n", { desc = "fetch" } },
-			{ "<Leader>gF", "<cmd>Git fetch --all<CR>", mode = "n", { desc = "fetch --all" } },
+			{ "<Leader>gf", "<cmd>Git fetch<CR>", mode = "n", desc = "fetch" },
+			{ "<Leader>gF", "<cmd>Git fetch --all<CR>", mode = "n", desc = "fetch --all" },
 
-			{ "<Leader>gp", "<cmd>Git pull<CR>", mode = "n", { desc = "pull" } },
-			{ "<Leader>gP", "<cmd>Git push<CR>", mode = "n", { desc = "push" } },
+			{ "<Leader>gp", "<cmd>Git pull<CR>", mode = "n", desc = "pull" },
+			{ "<Leader>gP", "<cmd>Git push<CR>", mode = "n", desc = "push" },
 
-			{ "<Leader>gl", "<cmd>Gclog<CR>", mode = "n", { desc = "log [quickfix]" } },
-			{ "<Leader>gL", "<cmd>Gllog<CR>", mode = "n", { desc = "log [location]" } },
+			{ "<Leader>gl", "<cmd>Gclog<CR>", mode = "n", desc = "log [quickfix]" },
+			{ "<Leader>gL", "<cmd>Gllog<CR>", mode = "n", desc = "log [location]" },
 
-			{ "<Leader>gb", "<cmd>Git branch --all<CR>", mode = "n", { desc = "branch" } },
-			{ "<Leader>gs", "<cmd>Git status<CR>", mode = "n", { desc = "status" } },
+			{ "<Leader>gb", "<cmd>Git branch --all<CR>", mode = "n", desc = "branch" },
+			{ "<Leader>gs", "<cmd>Git status<CR>", mode = "n", desc = "status" },
 		},
 	},
 
@@ -23,6 +23,11 @@ return {
 		"rbong/vim-flog",
 		lazy = true,
 		cmd = { "Flog", "Flogsplit", "Floggit" },
+		keys = {
+
+			{ "<Leader>gR", "<cmd>Flog", mode = "n", desc = "Flog [tab]" },
+			{ "<Leader>gr", "<cmd>Flogsplit", mode = "n", desc = "Flog [split_list]" },
+		},
 		dependencies = {
 			"tpope/vim-fugitive",
 		},

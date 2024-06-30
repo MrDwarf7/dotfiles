@@ -35,6 +35,9 @@ map("v", ">", ">gv", silent_opts)
 map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
 map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
 
+map("n", "<Leader>t]", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
+map("n", "<Leader>t[", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+
 -- Remap for dealing with word wrap
 -- map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 -- map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -95,6 +98,9 @@ map("n", "<Leader>bN", "<cmd>enew<cr>", { desc = "New File" })
 
 map("n", "<Leader>bn", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
+
+map("n", "<Leader>b]", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
+map("n", "<Leader>b[", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 

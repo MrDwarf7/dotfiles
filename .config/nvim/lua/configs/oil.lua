@@ -1,13 +1,20 @@
 return {
 	"stevearc/oil.nvim",
 	lazy = false,
-	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
+	dependencies = { "nvim-tree/nvim-web-devicons", lazy = false },
 	priority = 1000,
 	keys = {
-		{ "<C-w>'", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+		{ "<C-w><Leader>", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
 	},
 	opts = {
+		columns = {
+			"icon", -- default
+			-- "permissions",
+			-- "size",
+			-- "mtime",
+		},
 		default_file_explorer = true,
+		skip_confirm_for_simple_edits = true, -- default: false
 		win_options = {
 			wrap = false,
 			signcolumn = "no",

@@ -2,7 +2,6 @@ return {
 	"chentoast/marks.nvim",
 	event = "BufReadPost",
 	opts = {
-
 		default_mappings = true,
 	},
 
