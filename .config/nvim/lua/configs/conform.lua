@@ -13,7 +13,7 @@ end
 
 return {
 	"stevearc/conform.nvim",
-	lazy = true,
+	lazy = false,
 	event = "BufWritePost",
 	cmd = "Format",
 	opts = {
@@ -53,7 +53,8 @@ return {
 				c = true,
 				cpp = true,
 				netrw = true,
-				rust = true,
+				oil = true,
+				treesitter = true,
 			}
 			return {
 				timeous_ms = 1000,

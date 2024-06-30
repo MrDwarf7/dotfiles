@@ -219,7 +219,7 @@ return {
 					vim.lsp.buf.format({ async = true })
 				end
 			end,
-			desc = "format",
+			desc = "format [lspconfig]",
 		},
 	},
 	-- stylua: ignore end
