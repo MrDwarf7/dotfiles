@@ -3,31 +3,6 @@
 
 local M = {}
 
--- M.hover = vim.lsp.with(vim.lsp.handlers.hover, {
--- 	border = "single",
--- })
---
--- M.signature_help = vim.lsp.with(vim.lsp.handlers.signature_help, {
--- 	border = "single",
--- })
---
--- M.diagnostics_border = vim.lsp.with(vim.lsp.handlers.diagnostic, {
--- 	border = "single",
--- })
-
--- M.my_handlers = function()
--- 	vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
--- 		border = "single",
--- 	})
---
--- 	vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
--- 		border = "single",
--- 	})
--- 	vim.lsp.handlers["textDocument/diagnostics_border"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
--- 		border = "single",
--- 	})
--- end
-
 M.capabilities = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())

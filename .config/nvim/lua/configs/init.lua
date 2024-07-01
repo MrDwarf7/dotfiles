@@ -25,8 +25,8 @@ return {
 		cmd = { "Flog", "Flogsplit", "Floggit" },
 		keys = {
 
-			{ "<Leader>gR", "<cmd>Flog", mode = "n", desc = "Flog [tab]" },
-			{ "<Leader>gr", "<cmd>Flogsplit", mode = "n", desc = "Flog [split_list]" },
+			{ "<Leader>gR", "<cmd>Flog<CR>", mode = "n", desc = "Flog [tab]" },
+			{ "<Leader>gr", "<cmd>Flogsplit<CR>", mode = "n", desc = "Flog [split_list]" },
 		},
 		dependencies = {
 			"tpope/vim-fugitive",
