@@ -33,4 +33,5 @@ elseif vim.g.neovide then
 		-- commons.core_setup(),
 		-- commons.common_setup(),
 	}
+
 end

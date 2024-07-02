@@ -5,16 +5,25 @@ c = "check"
 ch = "check"
 u = "update"
 up = "upgrade"
+
 w = "watch"
 wq = "watch --quiet"
 wqc = "watch --quiet --clear"
 wqcr = "watch --quiet --clear --run"
+
 t = "test"
+tv = "test --verbose"
+tq = "test --quiet"
+
 ta = "test --all"
+tav = "test --all --verbose"
+taq = "test --all --quiet"
+
 r = "run"
 rq = "run --quiet"
 rr = "run --release"
 br = "build --release"
+
 cl = "clean"
 clip = "clippy --all-targets --all-features -- -D warnings"
 clipP = "clippy -- -W clippy::pedantic"
