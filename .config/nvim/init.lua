@@ -21,17 +21,16 @@ if vim.g.neovide == nil and vim.g.vscode == nil then
 		-- commons.core_setup(),
 		-- commons.common_setup(),
 	}
-elseif vim.g.vscode then
+elseif vim.g.neovide == nil and vim.g.vscode then
 	print("Welcome to VSCode Neovim...")
 	return {
 		require("vscode_conf").setup(),
 	}
-elseif vim.g.neovide then
+elseif vim.g.vscode == nil and vim.g.neovide then
 	return {
 		require("core.neovide"),
 		commons.base(),
 		-- commons.core_setup(),
 		-- commons.common_setup(),
 	}
-
 end
