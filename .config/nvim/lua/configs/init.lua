@@ -16,6 +16,8 @@ return {
 
 			{ "<Leader>gb", "<cmd>Git branch --all<CR>", mode = "n", desc = "branch" },
 			{ "<Leader>gs", "<cmd>Git status<CR>", mode = "n", desc = "status" },
+
+			{ "<Leader>gm", "<cmd>Git mergetool<CR>", mode = "n", desc = "mergetool" },
 		},
 	},
 
