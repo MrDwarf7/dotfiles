@@ -104,6 +104,7 @@ return {
 				end)
 			end,
 			desc = "[p]revious hunk",
+			mode = { "n", "v" },
 		},
 
 		{
@@ -115,6 +116,7 @@ return {
 				end)
 			end,
 			desc = "[n]ext hunk",
+			mode = { "n", "v" },
 		},
 
 		{
@@ -126,6 +128,7 @@ return {
 				end)
 			end,
 			desc = "[p]revious hunk",
+			mode = { "n", "v" },
 		},
 
 		{
@@ -137,6 +140,7 @@ return {
 				end)
 			end,
 			desc = "[n]ext hunk",
+			mode = { "n", "v" },
 		},
 	},
 
