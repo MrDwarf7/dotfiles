@@ -24,7 +24,25 @@ map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
 map("v", "p", '"_dP', silent_opts)
-map({ "i", "v", "n" }, "<C-s>", ":wa<CR>", silent_opts)
+
+-- Handles saving via Ctrl + s in normal, visual and insert mode
+map("n", "<C-s>", ":wa<CR>", silent_opts)
+
+map("v", "<C-s>", function()
+	vim.api.nvim_buf_call(vim.api.nvim_get_current_buf(), function()
+		vim.cmd("wa")
+	end)
+end, silent_opts, { desc = "save" })
+
+map("i", "<C-s>", function()
+	vim.cmd("stopinsert")
+	local cur_pos = vim.api.nvim_win_get_cursor(0)
+	vim.api.nvim_buf_call(vim.api.nvim_get_current_buf(), function()
+		vim.cmd("wa")
+	end)
+	-- pcall because if the cursor is outside the original buffer length it will error
+	pcall(vim.api.nvim_win_set_cursor, 0, cur_pos)
+end, silent_opts, { desc = "save" })
 
 map("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
