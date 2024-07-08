@@ -287,6 +287,7 @@ return {
 			"debugpy",
 			"delve",
 			"fixjson",
+			"gopls",
 			"isort",
 			"jsonlint",
 			"mypy",
