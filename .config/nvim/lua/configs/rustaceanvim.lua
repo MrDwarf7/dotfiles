@@ -27,11 +27,6 @@ return {
 
 					local bufnr = vim.api.nvim_get_current_buf()
 
-					-- REMOVED - let conform.nvim handle this
-					-- vim.keymap.set("n", "<Leader>lf", function()
-					-- 	vim.cmd.RustFmt()
-					-- end, { desc = "[f]ormat" })
-
 					vim.keymap.set("n", "<Leader>lc", function()
 						vim.cmd.RustLsp("flyCheck")
 					end, { desc = "[c]heck" })
