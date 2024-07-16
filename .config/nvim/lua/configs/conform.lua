@@ -45,6 +45,7 @@ return {
 			typescriptreact = { "biome" },
 			yaml = { "yamlfmt" },
 			rust = { "rustfmt" },
+			zig = { "zigfmt" },
 		},
 
 		notify_on_error = false,
