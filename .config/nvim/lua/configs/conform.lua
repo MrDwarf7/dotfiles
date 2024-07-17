@@ -51,15 +51,36 @@ return {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
 			local disabled_ft = {
-				c = true,
-				cpp = true,
-				netrw = true,
-				oil = true,
-				treesitter = true,
+				"c",
+				"cpp",
+				"netrw",
+				"oil",
+				"treesitter",
 			}
+			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
+				return
+			end
+
 			return {
-				timeous_ms = 1000,
-				lsp_fallback = not disabled_ft[vim.bo[bufnr].filetype],
+				timeout_ms = 1000,
+				lsp_fallback = "fallback",
+			}
+		end,
+		format_after_save = function(bufnr)
+			local disabled_ft = {
+				"c",
+				"cpp",
+				"netrw",
+				"oil",
+				"treesitter",
+			}
+			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
+				return
+			end
+
+			return {
+				-- timeout_ms = 1000,
+				lsp_fallback = "fallback",
 			}
 		end,
 	},
