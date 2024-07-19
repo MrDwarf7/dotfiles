@@ -371,9 +371,40 @@ Set-PSReadLineKeyHandler -ViMode Command -Chord 'd,L' -ScriptBlock {
 # }
 
 
+######## testing
+# Define the custom key handler for 'j'
+# Set-PSReadLineKeyHandler -ViMode Insert -Chord "j" -ScriptBlock {
+#     $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+#     if ($key.Character -eq 'j') {
+#         [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+#     } elseif ($key.Character -eq 'k') {
+#         mapTwoLetterNormal 'j' 'k'
+#     } else {
+#         [Microsoft.PowerShell.PSConsoleReadLine]::Insert('j')
+#         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($key.Character)
+#     }
+# }
+#
+# # Define the custom key handler for 'k'
+# Set-PSReadLineKeyHandler -ViMode Insert -Chord "k" -ScriptBlock {
+#     $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+#     if ($key.Character -eq 'j') {
+#         # Handle k j combination
+#         # Place your custom logic here
+#         mapTwoLetterNormal 'k' 'j'
+#     } else {
+#         [Microsoft.PowerShell.PSConsoleReadLine]::Insert('k')
+#         [Microsoft.PowerShell.PSConsoleReadLine]::Insert($key.Character)
+#     }
+# }
+# This is not workihng
+# Set-PSReadLineKeyHandler -ViMode Insert -Chord "j" -ScriptBlock { mapTwoLetterNormal 'j' 'j' }
+######## testing
 
-# Set-PSReadLineKeyHandler -vimode insert -Chord "j" -ScriptBlock { mapTwoLetterNormal 'j' 'k' }
-Set-PSReadLineKeyHandler -ViMode Insert -Chord "j" -ScriptBlock { mapTwoLetterNormal 'j' 'j' }
+
+Set-PSReadLineKeyHandler -ViMode Insert -Chord "j" -ScriptBlock { mapTwoLetterNormal 'j' 'k' }
+Set-PSReadLineKeyHandler -ViMode Insert -Chord "k" -ScriptBlock { mapTwoLetterNormal 'k' 'j' }
+
 function mapTwoLetterNormal($a, $b) {
     mapTwoLetterFunc $a $b -func $function:setViCommandMode
 }

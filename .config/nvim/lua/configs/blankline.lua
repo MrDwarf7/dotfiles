@@ -26,6 +26,7 @@ return {
 						"norg",
 						"NvimTree",
 						"oil",
+						"Oil",
 						"org",
 						"orgagenda",
 						"txt",

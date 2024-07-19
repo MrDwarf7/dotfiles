@@ -69,12 +69,17 @@ function nodeup {
     # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
 
+function rustupgrader {
+    rustup update
+}
+
 function sysup {
     if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED)) {
         $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     }
     scoopup
     nodeup
+    rustupgrader
     winget upgrade JanDeDobbeleer.OhMyPosh -s winget
     Write-Host
     Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
@@ -126,12 +131,24 @@ function dot {
 
 # END - Shell functions / Helpful functions
 
+
+function refresh {
+    Import-Module "C:\ProgramData\chocolatey\helpers\chocolateyProfile.psm1";
+    refreshenv;
+    Write-Host "Chocolatey environment refreshed." -ForegroundColor Green;
+    if ($args.Count -gt 0) {
+        Write-Host "Extra arguments detected: $args" -ForegroundColor Yellow;
+        . pro $args;
+    }
+    . pro
+}
+
 function pro {
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleClear -contains $args[0].ToLower()) {
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0]) {
         # Reload the profile without clearing the console
         . $PROFILE
         Clear-Host

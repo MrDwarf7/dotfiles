@@ -1,5 +1,37 @@
+---@diagnostic disable: missing-fields
 -- local autocmd = vim.api.nvim_create_autocmd
 -- local augroup = vim.api.nvim_create_augroup
+
+local function cursor_holds(event)
+	local client = vim.lsp.get_client_by_id(event.data.client_id)
+	if client and client.server_capabilities.documentHighlightProvider then
+		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+			buffer = event.buf,
+			callback = vim.lsp.buf.document_highlight,
+		})
+
+		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+			buffer = event.buf,
+			callback = vim.lsp.buf.clear_references,
+		})
+	end
+end
+
+local function lsp_restart_handler(event)
+	---@param keys string
+	---@param func function
+	---@param desc string
+	---@return nil
+	local map = function(keys, func, desc)
+		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+	end
+	local lsp_restart = function()
+		vim.lsp.stop_client(vim.lsp.get_active_clients())
+		vim.cmd([[ LspRestart<CR> ]])
+	end
+
+	map("<Leader>l%", lsp_restart, "Restart")
+end
 
 local M = {}
 
@@ -94,7 +126,6 @@ M.servers = function(capabilities)
 		},
 		prismals = {},
 		pyright = {
-
 			cmd = { "pyright-langserver", "--stdio" },
 			filetypes = { "python" },
 			root_dir = require("lspconfig.util").root_pattern(
@@ -146,10 +177,9 @@ end
 
 return {
 	"neovim/nvim-lspconfig",
-	event = {
-		"BufReadPre",
-		"LspAttach",
-	},
+	lazy = false,
+	-- event = "LspAttach",
+	-- "BufReadPre",
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
 		{
@@ -205,38 +235,10 @@ return {
 
 	opts = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
-			---@param event Event: LspAttach
 			callback = function(event)
-				-- if vim.lsp.client.name == "rust_analyzer" then
-				-- 	return true
-				-- end
-				--
-				---@param keys string
-				---@param func function
-				---@param desc string
-				---@return nil
-				local map = function(keys, func, desc)
-					vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-				end
-				local lsp_restart = function()
-					vim.lsp.stop_client(vim.lsp.get_active_clients())
-					vim.cmd([[ LspRestart<CR> ]])
-				end
-
-				map("<Leader>l%", lsp_restart, "Restart")
-				local client = vim.lsp.get_client_by_id(event.data.client_id)
-				if client and client.server_capabilities.documentHighlightProvider then
-					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-						buffer = event.buf,
-						callback = vim.lsp.buf.document_highlight,
-					})
-
-					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-						buffer = event.buf,
-						callback = vim.lsp.buf.clear_references,
-					})
-				end
-				vim.lsp.inlay_hint.enable()
+				lsp_restart_handler(event)
+				cursor_holds(event)
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
 			end,
 			group = vim.api.nvim_create_augroup("LspAuGroup", { clear = true }),
 		})
@@ -279,7 +281,9 @@ return {
 		local servers = M.servers(capabilities)
 
 		-- Things that are not LSP servers, but are installable via Mason
-		local ensure_installed = vim.list_extend(vim.tbl_keys(M.servers(capabilities) or {}), {
+		local ensure_installed_array = vim.tbl_keys(servers) or {}
+
+		local ensure_installed = vim.list_extend(ensure_installed_array, {
 			"beautysh",
 			"black",
 			"clang-format",

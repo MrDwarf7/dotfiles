@@ -23,6 +23,9 @@ end, { desc = "mini files [E]xplorer" })
 map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
+map("i", "jk", "<Esc>", silent_opts)
+map("i", "kj", "<Esc>", silent_opts)
+
 map("v", "p", '"_dP', silent_opts)
 
 -- Handles saving via Ctrl + s in normal, visual and insert mode
