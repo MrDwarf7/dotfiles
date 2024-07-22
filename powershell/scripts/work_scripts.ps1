@@ -26,7 +26,7 @@ $PYTHON_PATH=[NullString] | Select-Object -Property "Python3"
 
 function workconf {
     if (-not ($args)) {
-        Start-Process $work_scripts_dir
+        Push-Location $work_scripts_dir
     }
     if ( $args) {
         if ($args -eq "vim") {

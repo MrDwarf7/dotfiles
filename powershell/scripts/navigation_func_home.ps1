@@ -64,11 +64,12 @@ function dodf {
 }
 
 
+
+
 function ctemp {
-    param(
-        [string]$path = $c_temp_folder  
-    )
-    Push-Location $path
-    Get-ChildItem
+    $c_temp_folder = "c:\temp"
+    push-location $c_temp_folder
+    get-childitem
 }
 
+new-alias -name ctmp -value ctemp  -force
