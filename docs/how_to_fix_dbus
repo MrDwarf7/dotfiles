@@ -27,7 +27,9 @@ then assess the state of the service itself and allow it to relink
 systemctl --failed
 
 ## This will return a failure on the CLI
-systemctl --user start user@1000.service 
+systemctl --user start user@1000.service
+
+
 
 
 ## This will generally show an error
