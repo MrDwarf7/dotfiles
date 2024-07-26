@@ -333,3 +333,4 @@ fi
 
 # export PATH="$PATH:/home/dwarf/.dotnet/tools"
 
+export PATH=$HOME/.local/bin:$PATH
