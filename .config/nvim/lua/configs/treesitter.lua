@@ -1,6 +1,6 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	lazy = true,
+	lazy = false,
 	event = "BufRead",
 	build = ":TSUpdate",
 	dependencies = {
@@ -12,7 +12,6 @@ return {
 	},
 
 	keys = {
-
 		{
 			"[C",
 			function()
@@ -20,6 +19,24 @@ return {
 			end,
 			expr = true,
 			silent = true,
+		},
+
+		{
+			"]h",
+			function()
+				require("gitsigns").next_hunk()
+			end,
+			expr = true,
+			mode = { "n", "x", "o" },
+		},
+
+		{
+			"[h",
+			function()
+				require("gitsigns").prev_hunk()
+			end,
+			expr = true,
+			mode = { "n", "x", "o" },
 		},
 	},
 
@@ -56,11 +73,11 @@ return {
 			},
 			highlight = {
 				enable = true,
-				disable = function(_, buf)
-					if require("util.buffer").is_large(buf) then
-						return true
-					end
-				end,
+				-- disable = function(_, buf)
+				-- 	if require("util.buffer").is_large(buf) then
+				-- 		return true
+				-- end
+				-- end,
 			},
 			incremental_selection = {
 				enable = false,
@@ -86,43 +103,47 @@ return {
 				enable = true,
 			},
 
-			sync_install = false,
+			sync_install = true,
 			auto_install = true,
+		},
+		textobjects = {
+			select = {
+				enable = true,
+				-- Automatically jump forward to textobj, similar to targets.vim
+				lookahead = true,
+
+				keymaps = {
+					-- You can use the capture groups defined in textobjects.scm
+					["af"] = { expr = true, query = "@function.outer", desc = "Select around function" },
+					["if"] = { expr = true, query = "@function.inner", desc = "Select inner function" },
+					["ac"] = { expr = true, query = "@class.outer", desc = "Select around function" },
+					-- You can optionally set descriptions to the mappings (used in the desc parameter of
+					-- nvim_buf_set_keymap) which plugins like which-key display
+					["ic"] = { expr = true, query = "@class.inner", desc = "Select inner part of a class region" },
+					-- You can also use captures from other query groups like `locals.scm`
+					["as"] = { expr = true, query = "@scope", query_group = "locals", desc = "Select language scope" },
+				},
+				selection_modes = {
+					["@parameter.outer"] = "v", -- charwise
+					["@function.outer"] = "V", -- linewise
+					["@class.outer"] = "<c-v>", -- blockwise
+				},
+				include_surrounding_whitespace = false,
+			},
+			lsp_interop = {
+				enable = true,
+				border = "single",
+				floating_preview_opts = {},
+				peek_definition_code = {
+					["<leader>lE"] = "@function.outer",
+					["<leader>le"] = "@class.outer",
+				},
+			},
 		},
 	},
 
-	init = function(_, opts, buf)
-		local gs = require("gitsigns")
-		local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
-		--
-		-- -- NOTE: I honestly don't see a proper difference between these two
-		-- --
-		-- -- vim way: ; goes to the direction you were moving.
-		-- map({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-		-- map({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
-		--
-		-- -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-		-- map({ "n", "x", "o" }, "f", function()
-		-- 	ts_repeat_move.builtin_f()
-		-- end, { expr = true })
-		-- map({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F, { expr = true })
-		-- map({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t, { expr = true })
-		-- map({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T, { expr = true })
-
-		-- make sure forward function comes first
-		local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(gs.next_hunk, gs.prev_hunk)
-		-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
-
-		vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
-		vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
-
-		--
-	end,
-
 	config = function(_, opts)
-		local map = vim.keymap.set
-
-		require("nvim-treesitter.configs").setup(opts)
+		require("nvim-treesitter").setup(opts)
 
 		-- M.treesitter_main()
 
@@ -145,46 +166,6 @@ return {
 			separator = nil,
 			zindex = 20, -- The Z-index of the context window
 			on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
-		})
-
-		-- M.treesitter_context()
-		-- M.treesitter_configs()
-
-		require("nvim-treesitter.configs").setup({
-			textobjects = {
-				select = {
-					enable = true,
-					-- Automatically jump forward to textobj, similar to targets.vim
-					lookahead = true,
-
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["af"] = { expr = true, query = "@function.outer", desc = "Select around function" },
-						["if"] = { expr = true, query = "@function.inner", desc = "Select inner function" },
-						["ac"] = { expr = true, query = "@class.outer", desc = "Select around function" },
-						-- You can optionally set descriptions to the mappings (used in the desc parameter of
-						-- nvim_buf_set_keymap) which plugins like which-key display
-						["ic"] = { expr = true, query = "@class.inner", desc = "Select inner part of a class region" },
-						-- You can also use captures from other query groups like `locals.scm`
-						["as"] = { expr = true, query = "@scope", query_group = "locals", desc = "Select language scope" },
-					},
-					selection_modes = {
-						["@parameter.outer"] = "v", -- charwise
-						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
-					},
-					include_surrounding_whitespace = false,
-				},
-				lsp_interop = {
-					enable = true,
-					border = "single",
-					floating_preview_opts = {},
-					peek_definition_code = {
-						["<leader>lE"] = "@function.outer",
-						["<leader>le"] = "@class.outer",
-					},
-				},
-			},
 		})
 	end,
 }

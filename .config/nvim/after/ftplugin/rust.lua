@@ -23,4 +23,3 @@
 --  vim.keymap.set("n", "<Leader>la", function()
 --  	vim.cmd.RustLsp('codeAction')
 --  end, {desc = "[a]ction", buffer = bufnr})
-

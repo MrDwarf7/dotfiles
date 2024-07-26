@@ -1,18 +1,8 @@
---------
-
 local architecture = require("util.architecture")
--- local types = require("types")
-
 local opt = vim.opt
 local g = vim.g
--- local env = vim.env
--- local fn = vim.fn
--- local cmd = vim.cmd
--- local exists = vim.fn.exists
---
-vim.g.os = architecture.get_os()
--- = architecture.shell_setup(architecture.get_shell(architecture.get_os()))
 
+vim.g.os = architecture.get_os()
 if vim.g.os == "Windows_NT" then
 	vim.g.shell = "pwsh.exe"
 

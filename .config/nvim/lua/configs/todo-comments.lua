@@ -3,7 +3,6 @@ return {
 	event = "BufReadPost",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	keys = {
-
 		{
 			"]t",
 			function()

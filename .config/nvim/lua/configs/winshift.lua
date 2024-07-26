@@ -13,6 +13,5 @@ return {
 		{ "<Leader>wK", ":WinShift far_up<CR>", silent = true, noremap = true },
 		{ "<Leader>wL", ":WinShift far_right<CR>", silent = true, noremap = true },
 	},
-
 	opts = {},
 }

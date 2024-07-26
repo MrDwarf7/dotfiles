@@ -23,14 +23,41 @@ end, { desc = "mini files [E]xplorer" })
 map("n", "<Esc>", ":nohl<CR>", silent_opts)
 map("v", "<Esc>", "<Esc>:nohl<CR>", silent_opts)
 map("i", "jj", "<Esc>", silent_opts)
+map("i", "jk", "<Esc>", silent_opts)
+map("i", "kj", "<Esc>", silent_opts)
+
 map("v", "p", '"_dP', silent_opts)
-map({ "i", "v", "n" }, "<C-s>", ":wa<CR>", silent_opts)
+
+-- Handles saving via Ctrl + s in normal, visual and insert mode
+map("n", "<C-s>", ":wa<CR>", silent_opts)
+
+map("v", "<C-s>", function()
+	vim.api.nvim_buf_call(vim.api.nvim_get_current_buf(), function()
+		vim.cmd("wa")
+	end)
+end, silent_opts, { desc = "save" })
+
+map("i", "<C-s>", function()
+	vim.cmd("stopinsert")
+	local cur_pos = vim.api.nvim_win_get_cursor(0)
+	vim.api.nvim_buf_call(vim.api.nvim_get_current_buf(), function()
+		vim.cmd("wa")
+	end)
+	-- pcall because if the cursor is outside the original buffer length it will error
+	pcall(vim.api.nvim_win_set_cursor, 0, cur_pos)
+end, silent_opts, { desc = "save" })
 
 map("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 
 map("v", "<", "<gv", silent_opts)
 map("v", ">", ">gv", silent_opts)
+
+map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
+map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+
+map("n", "<Leader>t]", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
+map("n", "<Leader>t[", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
 
 -- Remap for dealing with word wrap
 -- map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -93,6 +120,9 @@ map("n", "<Leader>bN", "<cmd>enew<cr>", { desc = "New File" })
 map("n", "<Leader>bn", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
+map("n", "<Leader>b]", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
+map("n", "<Leader>b[", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
+
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
 map("n", "[f", vim.cmd.cprev, { desc = "Previous Quickfix" })
@@ -144,7 +174,7 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 
 map("n", "<Leader>ti", function()
 	-- if vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint) then
-		vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
-		vim.cmd("redraw!")
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
+	vim.cmd("redraw!")
 	-- end
 end, { expr = true, desc = "Toggle Inlay Hints" })
