@@ -103,7 +103,7 @@ return {
 				enable = true,
 			},
 
-			sync_install = false,
+			sync_install = true,
 			auto_install = true,
 		},
 		textobjects = {
