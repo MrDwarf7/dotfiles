@@ -128,7 +128,7 @@ return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
 	dependencies = {
-		"neovim/nvim-lspconfig",
+		{ "neovim/nvim-lspconfig", lazy = true },
 		"L3MON4D3/LuaSnip",
 
 		"zbirenbaum/copilot-cmp",

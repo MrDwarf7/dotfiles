@@ -73,11 +73,11 @@ return {
 			},
 			highlight = {
 				enable = true,
-				disable = function(_, buf)
-					if require("util.buffer").is_large(buf) then
-						return true
-					end
-				end,
+				-- disable = function(_, buf)
+				-- 	if require("util.buffer").is_large(buf) then
+				-- 		return true
+				-- end
+				-- end,
 			},
 			incremental_selection = {
 				enable = false,

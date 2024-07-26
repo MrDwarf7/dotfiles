@@ -1,6 +1,6 @@
 return {
 	"rmagatti/goto-preview",
-	lazy = false,
+	-- lazy = false,
 	opts = {
 		default_mappings = false,
 	},

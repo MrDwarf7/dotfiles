@@ -13,8 +13,9 @@
 
 return {
 	"stevearc/conform.nvim",
-	lazy = false,
-	event = "BufWritePost",
+	-- lazy = false,
+	event = "LspAttach",
+	-- "BufWritePost",
 	cmd = "Format",
 	opts = {
 		formatters_by_ft = {
@@ -50,7 +51,6 @@ return {
 			typescriptreact = { "biome" },
 			yaml = { "yamlfmt" },
 			rust = { "rustfmt" },
-			zig = { "zigfmt" },
 		},
 
 		notify_on_error = false,
@@ -61,9 +61,10 @@ return {
 				"netrw",
 				"oil",
 				"treesitter",
+				"zig",
 			}
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
-				return
+				return nil
 			end
 
 			return {
@@ -78,9 +79,10 @@ return {
 				"netrw",
 				"oil",
 				"treesitter",
+				"zig",
 			}
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
-				return
+				return nil
 			end
 
 			return {

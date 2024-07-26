@@ -36,7 +36,7 @@ return {
 	},
 
 	{ "nvim-neotest/nvim-nio", lazy = false },
-	{ "folke/neoconf.nvim", cmd = "Neoconf", opts = {} },
+	{ "folke/neoconf.nvim", lazy = false, cmd = "Neoconf", opts = {} },
 	{
 		"folke/lazydev.nvim",
 		ft = "lua",

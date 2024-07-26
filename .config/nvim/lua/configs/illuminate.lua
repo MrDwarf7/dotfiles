@@ -1,7 +1,7 @@
 return {
 	"RRethy/vim-illuminate",
-	lzy = false,
-	opts = function()
+	lazy = false,
+	config = function()
 		return {
 			configure = {
 				providers = {

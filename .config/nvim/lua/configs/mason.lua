@@ -1,6 +1,6 @@
 return {
 	"williamboman/mason.nvim",
-	lazy = false,
+	-- lazy = false,
 	-- event = "BufEnter",
 	keys = {
 		{

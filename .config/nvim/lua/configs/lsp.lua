@@ -18,22 +18,21 @@ local function cursor_holds(event)
 end
 
 local function lsp_restart_handler(event)
-	---@param keys string
-	---@param func function
-	---@param desc string
-	---@return nil
-	local map = function(keys, func, desc)
-		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-	end
 	local lsp_restart = function()
 		vim.lsp.stop_client(vim.lsp.get_active_clients())
 		vim.cmd([[ LspRestart<CR> ]])
 	end
 
-	map("<Leader>l%", lsp_restart, "Restart")
+	vim.keymap.set("n", "<Leader>l%", function()
+		lsp_restart()
+	end, { desc = "Restart" })
 end
 
 local M = {}
+
+local home = vim.env.HOME
+local zls_exe = home .. "/.zls/zls.exe"
+local zig_exe = home .. "/.zig/zig.exe"
 
 M.capabilities = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -171,22 +170,21 @@ M.servers = function(capabilities)
 		taplo = {},
 		vimls = {},
 		yamlls = {},
-		zls = {},
 	}
 end
 
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
-	-- event = "LspAttach",
-	-- "BufReadPre",
+	-- lazy = false,
+	event = "BufReadPre",
+	-- "LspAttach",
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
-		{
-			"folke/neoconf.nvim",
-			cmd = "Neoconf",
-			lazy = true,
-		},
+		-- {
+		-- 	"folke/neoconf.nvim",
+		-- 	cmd = "Neoconf",
+		-- 	lazy = true,
+		-- },
 		"folke/lazydev.nvim",
 		"j-hui/fidget.nvim",
 		"williamboman/mason.nvim",
@@ -218,8 +216,10 @@ return {
 		{ "[d", function() vim.diagnostic.goto_prev() end, desc = "diag prev" },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
+					print("Conform required FROM LSP.lua --- IF")
 					require("conform").format()
 				elseif package.loaded["conform"] == nil then
+					print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 					vim.lsp.buf.format({ async = true })
 				end
@@ -240,7 +240,7 @@ return {
 				cursor_holds(event)
 				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
 			end,
-			group = vim.api.nvim_create_augroup("LspAuGroup", { clear = true }),
+			-- group = vim.api.nvim_create_augroup("LspAuGroup", { clear = true }),
 		})
 
 		vim.diagnostic.config({
@@ -275,7 +275,7 @@ return {
 		})
 	end,
 
-	config = function(opts)
+	config = function(_)
 		local lsp_config = require("lspconfig")
 		local capabilities = M.capabilities()
 		local servers = M.servers(capabilities)
@@ -315,6 +315,7 @@ return {
 			"gopls",
 			"rust_analyzer",
 			"tsserver",
+			"zig",
 		}
 
 		require("mason-lspconfig").setup({
@@ -331,6 +332,31 @@ return {
 		})
 		-- Currently isn't included in the mason-lspconfig
 		lsp_config.gleam.setup({})
+		lsp_config.zls.setup({
+			cmd = { zls_exe },
+			capabilities = vim.tbl_deep_extend("force", {}, capabilities or {}),
+			settings = {
+				zls = {
+					zig_exe_path = zig_exe,
+					enableAutofix = true,
+					enable_snippets = true,
+					enable_ast_check_diagnostics = true,
+					enable_autofix = true,
+					enable_import_embedfile_argument_completions = true,
+					warn_style = true,
+					enable_semantic_tokens = true,
+					enable_inlay_hints = true,
+					inlay_hints_hide_redundant_param_names = true,
+					inlay_hints_hide_redundant_param_names_last_token = true,
+					operator_completions = true,
+					include_at_in_builtins = true,
+					max_detail_length = 1048576,
+				},
+			},
+		})
+
+		----@diagnostic disable-next-line: missing-fields
+		--lsp_config.zls.setup({})
 
 		require("lspconfig.ui.windows").default_options.border = "single"
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {

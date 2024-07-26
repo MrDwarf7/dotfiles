@@ -3,7 +3,7 @@ return {
 	-- lazy = false,
 	version = "^4",
 	ft = { "rust" },
-	event = { "LspAttach" },
+	-- event = { "LspAttach" },
 	config = function()
 		vim.g.rustaceanvim = {
 			tools = {

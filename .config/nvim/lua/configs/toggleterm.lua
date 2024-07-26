@@ -13,14 +13,13 @@ return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
 	lazy = false,
-	-- init = function()
-	-- 	M.term()
-	-- end,
+	init = function()
+		M.term()
+	end,
 	opts = {
 		open_mapping = {
 			"<A-;>",
 		},
-		shell = M.term(),
 		size = 20,
 		hide_numbers = true,
 		shade_filetypes = {},
