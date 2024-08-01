@@ -98,6 +98,11 @@ return {
 			panel = { enabled = false },
 		},
 	},
+
+	{
+		"Airbus5717/c3.vim",
+		lazy = false,
+	},
 }
 
 -- {

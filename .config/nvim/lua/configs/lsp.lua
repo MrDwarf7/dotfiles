@@ -102,6 +102,7 @@ M.servers = function(capabilities)
 			},
 		},
 		marksman = {},
+		ols = {},
 		omnisharp = {
 			filetypes = { "cs", "vb" },
 		},
