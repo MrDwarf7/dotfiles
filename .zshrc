@@ -6,21 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zs
     source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-### SSH agent things
-systemctl --user enable ssh-agent
-systemctl --user start ssh-agent
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}ssh-agent.socket"
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    ssh-agent -t 1h > "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
-    if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
-        source "${XDG_RUNTIME_DIR}ssh-agent.env" > /dev/null
-    fi
-fi
-
-# If you come from bash you might have to change your $PATH.
 ### comp install
-
 if [ -d "$HOME/.xdg/" ]; then
     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
 else
@@ -41,6 +27,7 @@ if [ -d "/mnt/c/Users" ]; then
     "/mnt/c/Applications/Microsoft VS Code/bin"
     "/mnt/c/WINDOWS"
 )
+export SSH_AGENT_SOCK=$SSH_AUTH_SOCK
 export WIN_AVAILABLE=true
 alias .="explorer.exe"
 for given_path in $WIN_PATHS[@]; do
