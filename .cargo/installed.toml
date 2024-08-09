@@ -1,0 +1,6 @@
+#
+[all]
+packages = [
+    "cargo-cache"
+]
+
