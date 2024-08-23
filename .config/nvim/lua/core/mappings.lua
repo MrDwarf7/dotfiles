@@ -28,6 +28,15 @@ map("i", "kj", "<Esc>", silent_opts)
 
 map("v", "p", '"_dP', silent_opts)
 
+-- Add undo break-points ---- testing
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+
+-- commenting lines above and below
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
+
 -- Handles saving via Ctrl + s in normal, visual and insert mode
 map("n", "<C-s>", ":wa<CR>", silent_opts)
 

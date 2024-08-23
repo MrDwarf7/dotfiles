@@ -209,12 +209,11 @@ return {
 		{ "<Leader>ld", function() require("telescope.builtin").diagnostics() end, desc = "[d]iagnostics" },
 		{ "<Leader>lr", function() vim.lsp.buf.rename() end, desc = "[r]ename" },
 		{ "<Leader>la", function() vim.lsp.buf.code_action() end, desc = "[a]ction" },
+		{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
 		{ "K", function() vim.lsp.buf.hover() end, desc = "Hoever Docs" },
 		{ "<C-k>", vim.lsp.buf.signature_help, "Signature Help" },
 		{ "gO", function() require("telescope.builtin").lsp_outgoing_calls() end, desc = "[O]utgoing" },
 		{ "<Leader>lh", function() vim.diagnostic.open_float() end, desc = "float", },
-		{ "]d", function() vim.diagnostic.goto_next() end, desc = "diag next" },
-		{ "[d", function() vim.diagnostic.goto_prev() end, desc = "diag prev" },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
 					print("Conform required FROM LSP.lua --- IF")
