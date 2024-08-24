@@ -118,7 +118,6 @@ fi
 
 function mypath {
     # echo $PATH | tr ':' '\n'
-
     # Alternative impl. Zsh
     if (($+PATH)); then
         echo "$#path element(s):"
@@ -139,7 +138,6 @@ function mypath {
     # else
     #   echo "PATH unset"
     # fi
-
 }
 
 
@@ -176,9 +174,8 @@ plugins=(
 # source "$dotdir/.config/.oh-my-zsh/plugins/zsh-starship/starship.plugin.zsh"
 # source "$dotdir/.config/.oh-my-zsh/plugins/git-plugin/git.plugin.zsh"
 
-
-
 export NODE_TLS_REJECT_UNAUTHORIZED=0
+
 # VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 VI_MODE_SET_CURSOR=true
 
