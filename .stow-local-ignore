@@ -1,0 +1,10 @@
+.git
+docs
+tools
+.cargo
+.stow-local-ignore
+README.md
+git-clone-worktrees.sh
+git-filter-repo
+installer.sh
+.config/systemd

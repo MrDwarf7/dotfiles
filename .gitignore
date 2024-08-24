@@ -31,3 +31,10 @@ nvim_distros/omerxx/lazy-lock*
 .config/lazygit/state*
 .config/broot/launcher/br
 .config/broot/launcher**/*
+
+.config/.oh-my-zsh/plugins/
+.config/.oh-my-zsh/themes/
+.config/.oh-my-zsh/templates/
+!.config/.oh-my-zsh/plugins/git-plugin
+!.config/.oh-my-zsh/plugins/zsh-starship
+

@@ -2,56 +2,62 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-    source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#    source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
+
+
+export XDG_CONFIG_HOME="$HOME/.config"
+
 
 ### comp install
-if [ -d "$HOME/.xdg/" ]; then
-    HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
-else
-    if [ -d "$HOME/.xdg" ]; then
-        mkdir -p ~/.xdg
-        HISTFILE=~/.xdg/.histfile
-    fi
-fi
+# if [ -d "$HOME/.xdg/" ]; then
+#     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
+# else
+#     if [ -d "$HOME/.xdg" ]; then
+#         mkdir -p ~/.xdg
+#         HISTFILE=~/.xdg/.histfile
+#     fi
+# fi
 
 export EDITOR='nvim'
 # export EDITOR='/usr/sbin/nvim'
 
-source "$HOME/.win_user"
 if [ -d "/mnt/c/Users" ]; then
+    source "$HOME/.win_user"
     local WIN_PATHS=(
-    "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
-    "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
-    "/mnt/c/Applications/Microsoft VS Code/bin"
-    "/mnt/c/WINDOWS"
-)
-export SSH_AGENT_SOCK=$SSH_AUTH_SOCK
-export WIN_AVAILABLE=true
-alias .="explorer.exe"
-for given_path in $WIN_PATHS[@]; do
-    local exists_in_path=$(echo $PATH | grep $given_path)
-    if [ -z "$exists_in_path" ]; then
-        export PATH="$given_path:$PATH"
+        "/mnt/c/Users/$WIN_USER/AppData/Local/Programs/Microsoft VS Code/bin"
+        "/mnt/c/Users/$WIN_USER/AppData/Roaming/Code/User/globalStorage/ms-vscode-remote.remote-containers/cli-bin"
+        "/mnt/c/Applications/Microsoft VS Code/bin"
+        "/mnt/c/WINDOWS"
+    )
+    export SSH_AGENT_SOCK=$SSH_AUTH_SOCK
+    export WIN_AVAILABLE=true
+    alias .="explorer.exe"
+    for given_path in $WIN_PATHS[@]; do
+        local exists_in_path=$(echo $PATH | grep $given_path)
+        if [ -z "$exists_in_path" ]; then
+            export PATH="$given_path:$PATH"
+        fi
+    done
+    if [ $WIN_AVAILABLE ]; then
+        alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl NVIM_APPNAME=NewVim"
     fi
-done
+
+    # Originally when I saw this, it was within the .zprofile, not within .zshrc
+    if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
+        if systemctl status docker 2>&1 | grep -q "is not running"; then
+            wsl --exe --distribution "${WSL_DISTRO_NAME}" --user root \
+                --exec systemctl start docker > /dev/null 2>&1 && \
+                --exec systemctl start dockerd > /dev/null 2>&1
+        fi
+    fi
+
+    function cl {
+        pwd | win32yank.exe -i
+    }
 fi
 
-
-# if [ $WIN_AVAILABLE ]; then
-#     alias neovide="/mnt/c/Users/$WIN_USER/scoop/shims/neovide.exe --wsl NVIM_APPNAME=NewVim"
-# fi
-
-
-# Originally when I saw this, it was within the .zprofile, not within .zshrc
-if grep -q "microsoft" /proc/version > /dev/null 2>&1; then
-    if systemctl status docker 2>&1 | grep -q "is not running"; then
-        wsl --exe --distribution "${WSL_DISTRO_NAME}" --user root \
-            --exec systemctl start docker > /dev/null 2>&1 && \
-            --exec systemctl start dockerd > /dev/null 2>&1
-    fi
-fi
 
 
 HISTSIZE=1000
@@ -91,7 +97,8 @@ fi
 # fi
 
 # nvm
-source /usr/share/nvm/init-nvm.sh
+# TODO:
+# source /usr/share/nvm/init-nvm.sh
 
 # Created by `pipx` on 2023-10-26 10:01:20
 if pacman -Qi "python-pipx" &> /dev/null; then
@@ -109,34 +116,29 @@ if pacman -Qi "pyenv" &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-
-function cl {
-    pwd | win32yank.exe -i
-}
-
 function mypath {
     # echo $PATH | tr ':' '\n'
 
-# Alternative impl. Zsh
-if (($+PATH)); then
-    echo "$#path element(s):"
-    printf '%q\n' "$path[@]"
-else
-    echo "PATH unset"
-fi
+    # Alternative impl. Zsh
+    if (($+PATH)); then
+        echo "$#path element(s):"
+        printf '%q\n' "$path[@]"
+    else
+        echo "PATH unset"
+    fi
 
-# Alternative impl. POSIX complient shells
-# if [ -n "${PATH+.}" ]; then
-#   (
-#     set -o noglob
-#     IFS=:
-#     set -- $PATH''
-#     echo "$# element(s):"
-#     printf '"%s"\n' "$@"
-#   )
-# else
-#   echo "PATH unset"
-# fi
+    # Alternative impl. POSIX complient shells
+    # if [ -n "${PATH+.}" ]; then
+    #   (
+    #     set -o noglob
+    #     IFS=:
+    #     set -- $PATH''
+    #     echo "$# element(s):"
+    #     printf '"%s"\n' "$@"
+    #   )
+    # else
+    #   echo "PATH unset"
+    # fi
 
 }
 
@@ -208,37 +210,37 @@ source "$HOME/.aliases"
 ### functions
 function dot {
     pushd $DOTDIR &&
-        git fetch --all &&
-        git status
-    }
+    git fetch --all &&
+    git status
+}
 
-    function gitgo {
-        if [ -z "$1" ]; then
-            git status &&
-                git add --all &&
-                git commit --all -m "Bump from Linux" &&
-                git push
-        else
-                            git status &&
-                                git add --all &&
-                                git commit --all -m "$1" &&
-                                git push
-        fi
-    }
+function gitgo {
+    if [ -z "$1" ]; then
+        git status &&
+        git add --all &&
+        git commit --all -m "Bump from Linux" &&
+        git push
+    else
+        git status &&
+        git add --all &&
+        git commit --all -m "$1" &&
+        git push
+    fi
+}
 
-    function avenv {
-        source ./.venv/bin/activate &&
-            echo "Activated virtual environment" &&
-        }
+function avenv {
+    source ./.venv/bin/activate &&
+    echo "Activated virtual environment" &&
+}
 
-        function rmvenv {
-            if [ -d "./.venv" ]; then
-                rm -rf ./.venv &&
-                    echo "Removed virtual environment"
-                                else
-                                    echo "No virtual environment found"
-            fi
-        }
+function rmvenv {
+    if [ -d "./.venv" ]; then
+        rm -rf ./.venv &&
+        echo "Removed virtual environment"
+    else
+        echo "No virtual environment found"
+    fi
+}
 
 
 # function sevim() {
@@ -284,7 +286,7 @@ export BAT_CONFIG_PATH="$HOME/dotfiles/.config/bat/bat.conf"
 
 
 function baconget {
-    bacon_file="$HOME/dotfiles/bacon.toml"
+    bacon_file="$HOME/dotfiles/tools/bacon.toml"
     currentDir="$(pwd)"
 
 
@@ -307,7 +309,7 @@ export PATH=$PATH:$GOPATH/bin
 source $ZSH/oh-my-zsh.sh
 
 ### Fixes ssh-agent / dbus on launch issues - mostly for WSL verson of Arch
-export $(dbus-launch)
+#export $(dbus-launch)
 
 ### 'Normal' way of starting starship
 # eval "$(starship init zsh)"
