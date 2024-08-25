@@ -59,6 +59,10 @@ if ! shopt -oq posix; then
     fi
 fi
 
+alias .b='source ~/.bashrc'
+alias basc='vim ~/.bashrc'
+source "$HOME/.aliases"
+
 export PATH="$PATH:/usr/local/go/bin"
 
 # export NVM_DIR="$HOME/.config/nvm"
@@ -79,5 +83,6 @@ alias basc='vim ~/.bashrc'
 source "$HOME/.aliases"
 
 # source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
 
 # source /home/dwarf/.config/broot/launcher/bash/br
