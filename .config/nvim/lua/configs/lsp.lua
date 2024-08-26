@@ -216,10 +216,10 @@ return {
 		{ "<Leader>lh", function() vim.diagnostic.open_float() end, desc = "float", },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
-					print("Conform required FROM LSP.lua --- IF")
+					-- print("Conform required FROM LSP.lua --- IF")
 					require("conform").format()
 				elseif package.loaded["conform"] == nil then
-					print("Conform required FROM LSP.lua --- ELSEIF")
+					-- print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 					vim.lsp.buf.format({ async = true })
 				end

@@ -2,6 +2,8 @@ local architecture = require("util.architecture")
 local opt = vim.opt
 local g = vim.g
 
+vim.lsp.inlay_hint.enable()
+
 vim.g.os = architecture.get_os()
 if vim.g.os == "Windows_NT" then
 	vim.g.shell = "pwsh.exe"
