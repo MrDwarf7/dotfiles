@@ -78,7 +78,13 @@ return {
 	},
 
 	{
+		"MunifTanjim/nui.nvim",
+		enabled = false,
+	},
+
+	{
 		"rcarriga/nvim-notify",
+		enabled = false,
 		keys = function()
 			return {
 				{
@@ -122,7 +128,7 @@ return {
 	{
 		"stevearc/oil.nvim",
 		lazy = false,
-		dependencies = { "nvim-tree/nvim-web-devicons", lazy = false },
+		-- dependencies = { "nvim-tree/nvim-web-devicons", lazy = false },
 		priority = 1000,
 		keys = {
 			{ "<C-w><Leader>", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },

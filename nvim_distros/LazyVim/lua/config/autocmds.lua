@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
 vim.api.nvim_create_autocmd("BufReadPost", {
 	group = augroup("last_loc"),
 	callback = function(event)
-		local exclude = { "gitcommit" }
+		local exclude = { "gitcommit", "oil", "Oil", "fugitive", "flog" }
 		local buf = event.buf
 		if vim.tbl_contains(exclude, vim.bo[buf].filetype) or vim.b[buf].lazyvim_last_loc then
 			return
