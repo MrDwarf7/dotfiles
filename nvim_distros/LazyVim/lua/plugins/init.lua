@@ -14,6 +14,31 @@ return {
 		keys = { { "<Leader>ug", false } },
 		enabled = false,
 	},
+
+	{
+		"MunifTanjim/nui.nvim",
+		-- enabled = false,
+	},
+
+	{
+		"rcarriga/nvim-notify",
+		-- enabled = false,
+		keys = function()
+			return {
+				{
+					"<leader>nn",
+					function()
+						require("notify").dismiss({ silent = true, pending = true })
+					end,
+					desc = "dismiss [n]otice",
+				},
+			}
+		end,
+		opts = {
+			stages = "static",
+		},
+	},
+
 	--#endregion Disabled
 
 	--#region Default_keymap_changes
@@ -74,30 +99,6 @@ return {
 		},
 		dependencies = {
 			"tpope/vim-fugitive",
-		},
-	},
-
-	{
-		"MunifTanjim/nui.nvim",
-		enabled = false,
-	},
-
-	{
-		"rcarriga/nvim-notify",
-		enabled = false,
-		keys = function()
-			return {
-				{
-					"<leader>nn",
-					function()
-						require("notify").dismiss({ silent = true, pending = true })
-					end,
-					desc = "dismiss [n]otice",
-				},
-			}
-		end,
-		opts = {
-			stages = "static",
 		},
 	},
 
