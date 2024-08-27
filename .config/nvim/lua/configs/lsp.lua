@@ -49,6 +49,7 @@ M.servers = function(capabilities)
 			single_file_support = true,
 			capabilities = capabilities,
 		},
+		neocmake = {},
 
 		cssls = {},
 
@@ -287,6 +288,8 @@ return {
 			"beautysh",
 			"black",
 			"clang-format",
+			"cmakelang",
+			"cmakelint",
 			"codelldb",
 			"debugpy",
 			"delve",
