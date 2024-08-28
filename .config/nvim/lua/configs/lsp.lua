@@ -216,10 +216,8 @@ return {
 		{ "[d", function() vim.diagnostic.goto_prev() end, desc = "diag prev" },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
-					print("Conform required FROM LSP.lua --- IF")
 					require("conform").format()
 				elseif package.loaded["conform"] == nil then
-					print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 					vim.lsp.buf.format({ async = true })
 				end
