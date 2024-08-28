@@ -1,14 +1,28 @@
 #!/bin/bash
 #
 # Geberal/Bash Aliases
-alias l='ls -lah --color=auto'
-alias ls='ls -lh --color=auto'
+
+alias l='exa -lah'
+alias ls='exa-lh --color=auto --icons'
+alias lt='eza -a --tree --level=1 --icons'
+
+alias cls='clear'
+alias ca='cls && exa -lah --icons'
+
+alias vi='/usr/sbin/vim'
+alias vim='/usr/sbin/nvim'
+alias nvim='/usr/sbin/nvim'
+
+alias nf='fastfetch'
+alias ff='fastfetch'
+
+alias .z="source ~/.zshrc"
+alias zshc="vim ~/.zshrc"
+alias ashc="vim ~/.aliases"
 
 alias ppath='echo $PATH'
 alias nf='neofetch'
 
-alias cls='clear'
-alias ca='cls && l'
 #alias bat='/usr/bin/batcat'
 
 alias grep='grep --color=auto'
@@ -27,6 +41,7 @@ alias yays='yay -S'
 alias yayss='yay -Ss'
 
 alias sysup="sudo pacman -Syu && yay -Syu"
+alias shutdown='systemctl poweroff'
 
 # Cargo Aliases
 alias cb='cargo build'
@@ -54,20 +69,20 @@ alias cwqc='cargo watch -q -c'
 alias cwqcr='cargo watch -q -c -x run'
 
 if [ "$WIN_AVAILABLE" ]; then
-	# rust / cargo related
-	alias cbw='cargo build --target x86_64-pc-windows-gnu'
-	alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
-	alias crw='cargo run --target x86_64-pc-windows-gnu'
-	alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
-	alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
-	alias cbaw='cargo build --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-pc-windows-gnu'
+    # rust / cargo related
+    alias cbw='cargo build --target x86_64-pc-windows-gnu'
+    alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
+    alias crw='cargo run --target x86_64-pc-windows-gnu'
+    alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
+    alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
+    alias cbaw='cargo build --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-pc-windows-gnu'
 
-	alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
-	alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
-	alias cble='cba && cbra && cb && cbr'
+    alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
+    alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
+    alias cble='cba && cbra && cb && cbr'
 
-	# vs code
-	# alias code=launch_code_wsl
+    # vs code
+    # alias code=launch_code_wsl
 
 fi
 
@@ -107,11 +122,10 @@ alias Db.="docker buildx build ."
 alias Db.t="docker buildx build . -t"
 
 function top_five_words {
-	cat "$1" | tr -s ' ' '\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr | head -n 5
+    cat "$1" | tr -s ' ' '\n' | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr | head -n 5
 }
 
 alias tfw=top_five_words
-
 
 function top_five_filetypes {
     find . -type f | sed 's/.*\.//' | tr '[:upper:]' '[:lower:]' | grep -v '^$' | sort | uniq -c | sort -nr | head -n 5 | awk '{printf "%s files with extension .%s\n", $1, $2}'
@@ -119,19 +133,17 @@ function top_five_filetypes {
 
 alias tft=top_five_filetypes
 
-
 function watch_wrapper {
-	watch -n 0.001 "$*" | bat --tabs 0 --decorations=always
+    watch -n 0.001 "$*" | bat --tabs 0 --decorations=always
 }
 alias wnw=watch_wrapper
 
 function watch_with_args {
-	if [ -z "$1" ]; then
-		watch -n 0.001 "ls -laht|tail -10|less -c -s --use-color"
-	else
-		watch -n 0.001 "bat --paging=always --decorations=always $1|less -c -s --use-color"
-	fi
-	return 0
+    if [ -z "$1" ]; then
+        watch -n 0.001 "ls -laht|tail -10|less -c -s --use-color"
+    else
+        watch -n 0.001 "bat --paging=always --decorations=always $1|less -c -s --use-color"
+    fi
+    return 0
 }
 alias wn=watch_with_args
-
