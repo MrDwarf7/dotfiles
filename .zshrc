@@ -72,7 +72,7 @@ autoload -U bashcompinit
 bashcompinit
 
 ### setting variales for pathing
-DOTDIR=$HOME/dotfiles
+DOTDIR="$HOME/dotfiles"
 GITHUB_PROJECTS=$HOME/documents/GitHub_Projects
 GITHUB_WORK_PROJECTS=$HOME/documents/GitHub_WorkProjects
 
