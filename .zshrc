@@ -110,6 +110,11 @@ if pacman -Qi "python-pipx" &> /dev/null; then
 fi
 
 
+# Go things
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+
 if pacman -Qi "pyenv" &> /dev/null; then
     export PYENV_ROOT="$XDG_CONFIG_HOME/.pyenv"
     command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
@@ -146,6 +151,12 @@ if pacman -Qi "rustup" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.cargo/bin"
 fi
 
+
+if which "dotnet" &> /dev/null; then
+    export PATH="$PATH:/home/dwarf/.dotnet/tools"
+fi
+# export PATH="$PATH:/home/dwarf/.dotnet/tools"
+
 # pnpm current - via NVM
 export PNPM_HOME="$HOME/.xdg/data/pnpm"
 
@@ -156,17 +167,24 @@ case ":$PATH:" in
     *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
+export PATH=$HOME/.local/bin:$PATH
+
+
 ### zsh plugins
 plugins=(
-    git
     archlinux
-    zsh-autosuggestions
-    zsh-syntax-highlighting
-    #pdm # pretty sure this doesn't work
+    copybuffer
+    copyfile
+    dirhistory
     docker
     gh
-    vi-mode
+    git
+    #pdm # pretty sure this doesn't work
     # starship
+    sudo
+    vi-mode
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
 # IF USING STARSHIP, UNCOMMENT
@@ -296,29 +314,20 @@ function baconget {
     echo "Copied bacon.toml to $currentDir"
 }
 
-
-
-# Go things
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-### source dat zsh
-source $ZSH/oh-my-zsh.sh
+source /home/dwarf/.config/broot/launcher/bash/br
 
 ### Fixes ssh-agent / dbus on launch issues - mostly for WSL verson of Arch
 #export $(dbus-launch)
-
 ### 'Normal' way of starting starship
 # eval "$(starship init zsh)"
 
+source <(fzf --zsh)
+
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
 eval "$(zoxide init zsh)"
+### source dat zsh
+source $ZSH/oh-my-zsh.sh
 
-source /home/dwarf/.config/broot/launcher/bash/br
+unset alias l
+alias l="exa -lah"
 
-if which "dotnet" &> /dev/null; then
-    export PATH="$PATH:/home/dwarf/.dotnet/tools"
-fi
-
-# export PATH="$PATH:/home/dwarf/.dotnet/tools"
-
-export PATH=$HOME/.local/bin:$PATH
