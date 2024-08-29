@@ -16,8 +16,11 @@ alias vi='/usr/sbin/vim'
 alias vim='/usr/sbin/nvim'
 alias nvim='/usr/sbin/nvim'
 
-alias nf='fastfetch'
-alias ff='fastfetch'
+alias ff='fastfetch --config examples/13'  # prev on load
+alias ff2='fastfetch --config examples/8'  # color swatch
+alias ff3='fastfetch --config examples/21' # bright colors
+alias nf='fastfetch --config examples/2'   # big fancy
+alias pf='fastfetch --config examples/11'  # minimal
 
 alias .z="source ~/.zshrc"
 alias zshc="vim ~/.zshrc"
