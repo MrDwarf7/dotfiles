@@ -5,9 +5,12 @@
 alias l='exa -lah'
 alias ls='exa-lh --color=auto --icons'
 alias lt='eza -a --tree --level=1 --icons'
+alias ldo='exa -ld .* --icons'
 
 alias cls='clear'
 alias ca='cls && exa -lah --icons'
+
+alias zq='zoxide query $1'
 
 alias vi='/usr/sbin/vim'
 alias vim='/usr/sbin/nvim'
@@ -99,7 +102,6 @@ alias zel='zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; echo "")
 alias zela='zellij a'
 
 # Misc things
-
 alias neo='neofetch'
 alias dea='deactivate'
 
