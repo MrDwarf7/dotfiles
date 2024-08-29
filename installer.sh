@@ -78,6 +78,8 @@ packages_to_install=(
     meson
     eza
     oh-my-posh
+    tlrc # tldr (aka tldr-pages) client -- Rust version
+    # eg the AUR package is heavily outdated (last updated: Sep 2022)
     navi
 )
 
