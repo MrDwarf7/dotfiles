@@ -84,7 +84,6 @@ DATA_ON_DEMAND_NEXT=$DATA_ON_DEMAND_BASE/data-on-demand-next
 export ZSH="$XDG_CONFIG_HOME/.oh-my-zsh"
 export P10K="$XDG_CONFIG_HOME/.p10k.zsh"
 export ZSH_THEME="powerlevel10k/powerlevel10k"
-
 [[ ! -f $XDG_CONFIG_HOME/.p10k.zsh ]] || source $P10K
 
 
@@ -121,35 +120,21 @@ if pacman -Qi "pyenv" &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
-function mypath {
-    # echo $PATH | tr ':' '\n'
-    # Alternative impl. Zsh
-    if (($+PATH)); then
-        echo "$#path element(s):"
-        printf '%q\n' "$path[@]"
-    else
-        echo "PATH unset"
-    fi
-
-    # Alternative impl. POSIX complient shells
-    # if [ -n "${PATH+.}" ]; then
-    #   (
-    #     set -o noglob
-    #     IFS=:
-    #     set -- $PATH''
-    #     echo "$# element(s):"
-    #     printf '"%s"\n' "$@"
-    #   )
-    # else
-    #   echo "PATH unset"
-    # fi
-}
 
 
 # Rust/Cargo via pacman
 if pacman -Qi "rustup" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.cargo/bin"
 fi
+
+
+if pacman -Qi "navi" &> /dev/null; then
+    eval "$(navi widget zsh)"
+fi
+if [ ! -d "$XDG_DATA_HOME/navi/cheats" ]; then
+    navi repo add denisidoro/cheats
+fi
+
 
 
 if which "dotnet" &> /dev/null; then
@@ -169,6 +154,8 @@ esac
 
 export PATH=$HOME/.local/bin:$PATH
 
+# export $ZSHZ_DATA="$HOME/$XDG_CONFIG_HOME/.zshz"
+
 
 ### zsh plugins
 plugins=(
@@ -177,12 +164,17 @@ plugins=(
     copyfile
     dirhistory
     docker
+    # eza
     gh
     git
     #pdm # pretty sure this doesn't work
+    ssh
     # starship
-    sudo
+    # sudo ## useful but hitting esc twice is the default- issue with vi-mode
+    tldr
     vi-mode
+    # z
+    zoxide
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
@@ -223,6 +215,33 @@ alias ovim="NVIM_APPNAME=n_nvim nvim"
 source "$HOME/.aliases"
 
 ### functions
+
+
+function mypath {
+    # echo $PATH | tr ':' '\n'
+    # Alternative impl. Zsh
+    if (($+PATH)); then
+        echo "$#path element(s):"
+        printf '%q\n' "$path[@]"
+    else
+        echo "PATH unset"
+    fi
+
+    # Alternative impl. POSIX complient shells
+    # if [ -n "${PATH+.}" ]; then
+    #   (
+    #     set -o noglob
+    #     IFS=:
+    #     set -- $PATH''
+    #     echo "$# element(s):"
+    #     printf '"%s"\n' "$@"
+    #   )
+    # else
+    #   echo "PATH unset"
+    # fi
+
+}
+
 function dot {
     pushd $DOTDIR &&
     git fetch --all &&
@@ -323,8 +342,12 @@ source /home/dwarf/.config/broot/launcher/bash/br
 
 source <(fzf --zsh)
 
-eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
+# Other commandline style -- needs work though
+# eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/zen.toml)"
+
+# there is also the 'z' plugin, but it needs config cos it breaks a bunch of things
 eval "$(zoxide init zsh)"
+
 ### source dat zsh
 source $ZSH/oh-my-zsh.sh
 
