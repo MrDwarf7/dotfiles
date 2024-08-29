@@ -78,6 +78,7 @@ packages_to_install=(
     meson
     eza
     oh-my-posh
+    navi
 )
 
 # zig from zrc?
