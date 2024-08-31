@@ -127,8 +127,8 @@ if (-not (checkEnvironment)) {
 . "$powershell_scripts_dir\general_scripts.ps1"
 
 
+Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 #Raw Functions
-
 
 # Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha

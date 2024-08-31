@@ -42,7 +42,6 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
-
 				{ path = "LazyVim", words = { "LazyVim" } },
 			},
 		},
