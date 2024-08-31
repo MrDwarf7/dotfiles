@@ -139,6 +139,8 @@ map("n", "]f", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
 
+-- map("n", "<Leader>gt", ":Octo ", silent_opts, { desc = "Oc[t]o" })
+
 map("n", "<Leader>t'", ":Telescope<CR>", silent_opts, { desc = "Generic Telescope call" })
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
 
