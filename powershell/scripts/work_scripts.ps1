@@ -1,3 +1,4 @@
+
 $work_app_dir = "C:\Applications"
 # $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
@@ -37,4 +38,3 @@ function workconf {
         }
     }
 }
-

@@ -1,3 +1,4 @@
+
 function archsh {
     & 'C:\Windows\system32\wsl.exe' -d Arch --cd ~ --user dwarf
 }
@@ -36,4 +37,3 @@ function wsllv {
 function wsls {
     wsl --shutdown
 }
-

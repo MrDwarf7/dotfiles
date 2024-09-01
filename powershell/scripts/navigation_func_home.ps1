@@ -63,9 +63,6 @@ function dodf {
     Get-ChildItem
 }
 
-
-
-
 function ctemp {
     $c_temp_folder = "c:\temp"
     push-location $c_temp_folder

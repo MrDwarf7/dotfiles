@@ -22,4 +22,3 @@ function RemoteProcessLauncher {
     Start-Process -FilePath $ProcessPath -ArgumentList $additionalArgs -PassThru
 
 }
-

@@ -1,3 +1,4 @@
+
 function sign_executable {
     param(
         [string]$exePath,
@@ -47,5 +48,3 @@ function sign_executable {
 
     Write-Host "EXE signed successfully."
 }
-
-
