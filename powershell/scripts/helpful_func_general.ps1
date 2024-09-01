@@ -158,9 +158,8 @@ function SourceProfile {
     }
 }
 
-New-Alias -Name .p -Value SourceProfile  -Force
-
-New-Alias -Name pro -Value SourceProfile  -Force
+New-Alias -Name p -Value SourceProfile -Force
+New-Alias -Name pro -Value SourceProfile -Force
 
 function ca {
     param ($path = ".")

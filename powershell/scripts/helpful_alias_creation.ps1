@@ -172,20 +172,3 @@ New-Alias -Name cargosr -Value CargoRunEverything -Force
 
 New-Alias -Name rst -Value NavigateToRust -Force
 
-# Cargo Aliases
-#
-# Not currently working while function c is in place
-# SafeNewAlias -Alias cb -Command CargoBuild
-# SafeNewAlias -Alias cr -Command CargoRun
-# SafeNewAlias -Alias crq -Command CargoRunQuiet
-# SafeNewAlias -Alias cbr -Command CargoBuildRelease
-# SafeNewAlias -Alias crr -Command CargoRunRelease
-# SafeNewAlias -Alias ct -Command CargoTest
-# SafeNewAlias -Alias cc -Command CargoCheck
-# SafeNewAlias -Alias ccl -Command CargoClean
-# SafeNewAlias -Alias cu -Command CargoUpdate
-# SafeNewAlias -Alias cdoc -Command CargoDoc
-# SafeNewAlias -Alias cup -Command CargoUpgrade
-# SafeNewAlias -Alias cu -Command CargoUpdate
-# SafeNewAlias -Alias cdoc -Command CargoDoc
-# SafeNewAlias -Alias cup -Command CargoUpgrade
