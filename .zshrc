@@ -9,7 +9,6 @@
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
-
 ### comp install
 # if [ -d "$HOME/.xdg/" ]; then
 #     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
@@ -57,7 +56,6 @@ if [ -d "/mnt/c/Users" ]; then
         pwd | win32yank.exe -i
     }
 fi
-
 
 
 HISTSIZE=1000
@@ -121,7 +119,6 @@ if pacman -Qi "pyenv" &> /dev/null; then
 fi
 
 
-
 # Rust/Cargo via pacman
 if pacman -Qi "rustup" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.cargo/bin"
@@ -130,11 +127,11 @@ fi
 
 if pacman -Qi "navi" &> /dev/null; then
     eval "$(navi widget zsh)"
+    echo "Checking if the navi sheet dir exists..."
+    if [ ! -d "$XDG_DATA_HOME/navi/cheats" ]; then
+        navi repo add denisidoro/cheats
+    fi
 fi
-if [ ! -d "$XDG_DATA_HOME/navi/cheats" ]; then
-    navi repo add denisidoro/cheats
-fi
-
 
 
 if which "dotnet" &> /dev/null; then
