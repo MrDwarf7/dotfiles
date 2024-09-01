@@ -140,6 +140,12 @@ function ZoxideQuery {
     zoxide query $args
 }
 
+
+function NavigateToRust {
+    Invoke-Expression "z Rust"
+}
+
+
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
@@ -163,6 +169,8 @@ New-Alias -Name zq -Value ZoxideQuery -Force
 
 New-Alias -Name cargos -Value CargoBuilEverything -Force
 New-Alias -Name cargosr -Value CargoRunEverything -Force
+
+New-Alias -Name rst -Value NavigateToRust -Force
 
 # Cargo Aliases
 #
