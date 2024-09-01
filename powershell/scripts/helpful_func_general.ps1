@@ -10,7 +10,7 @@
 
 # BEGIN - Shell functions / Helpful functions
 function cl {
-    $cleanText = ""
+    # $cleanText = ""
     Add-Type -Assembly PresentationCore
     $clipText = (get-location).ToString() | Out-String -Stream
 
@@ -138,12 +138,12 @@ function refresh {
     Write-Host "Chocolatey environment refreshed." -ForegroundColor Green;
     if ($args.Count -gt 0) {
         Write-Host "Extra arguments detected: $args" -ForegroundColor Yellow;
-        . pro $args;
+        . SourceProfile  $args;
     }
-    . pro
+    . SourceProfile  
 }
 
-function pro {
+function SourceProfile {
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
@@ -157,6 +157,10 @@ function pro {
         . $PROFILE
     }
 }
+
+New-Alias -Name .p -Value SourceProfile  -Force
+
+New-Alias -Name pro -Value SourceProfile  -Force
 
 function ca {
     param ($path = ".")
