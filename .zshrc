@@ -127,8 +127,8 @@ fi
 
 if pacman -Qi "navi" &> /dev/null; then
     eval "$(navi widget zsh)"
-    echo "Checking if the navi sheet dir exists..."
     if [ ! -d "$XDG_DATA_HOME/navi/cheats" ]; then
+        # echo "Checking if the navi sheet dir exists..."
         navi repo add denisidoro/cheats
     fi
 fi
