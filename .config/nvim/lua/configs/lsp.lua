@@ -107,24 +107,34 @@ M.servers = function(capabilities)
 		omnisharp = {
 			filetypes = { "cs", "vb" },
 		},
-		powershell_es = {
-			filetypes = { "powershell", "ps1", "psm1", "psd1" },
-			-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
-			settings = {
-				powershell = {
-					codeFormatting = {
-						Preset = "OTBS",
-					},
-				},
-				scriptAnalysis = {
-					enable = true,
-				},
-				completion = {
-					enable = true,
-					useCommandDiscovery = true,
-				},
-			},
-		},
+		-- powershell_es = {
+		-- 	cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "Invoke-EditorServices" },
+		-- 	filetypes = { "powershell", "ps1", "psm1", "psd1" },
+		-- 	root_dir = require("lspconfig.util").root_pattern(
+		-- 		".git",
+		-- 		".editorconfig",
+		-- 		".gitignore",
+		-- 		".ps1",
+		-- 		".psm1",
+		-- 		".psd1"
+		-- 	),
+		-- 	-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
+		-- 	bundle_path = "~/AppData/Local/nvim-data/mason/packages/powershell-editor-services",
+		-- 	settings = {
+		-- 		powershell = {
+		-- 			codeFormatting = {
+		-- 				Preset = "OTBS",
+		-- 			},
+		-- 		},
+		-- 		scriptAnalysis = {
+		-- 			enable = true,
+		-- 		},
+		-- 		completion = {
+		-- 			enable = true,
+		-- 			useCommandDiscovery = true,
+		-- 		},
+		-- 	},
+		-- },
 		prismals = {},
 		pyright = {
 			cmd = { "pyright-langserver", "--stdio" },
@@ -316,6 +326,7 @@ return {
 		local plugin_handled = {
 			"cmake",
 			"gopls",
+			"powershell_es",
 			"rust_analyzer",
 			"tsserver",
 			"zig",

@@ -11,6 +11,11 @@ map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
 
+map("n", "<Leader>tl", "<cmd>vsplit<CR>:vertical resize 90<CR>:term<CR>", { desc = "Terminal" })
+map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>", { desc = "Terminal" })
+
+-- { noremap = true, silent = true, desc = "Start pwsh" })
+
 map("n", "<Leader>E", function()
 	if not pcall(require, "mini.files") then
 		vim.cmd("lua require'mini.files'.open()")
@@ -64,6 +69,9 @@ map("v", ">", ">gv", silent_opts)
 
 map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
 map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+map("n", "<Leader>to", "<cmd>tabnew<CR>", silent_opts, { desc = "New Tab" })
+map("n", "<Leader>tc", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
+map("n", "<Leader>tx", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
 
 map("n", "<Leader>t]", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
 map("n", "<Leader>t[", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
@@ -161,7 +169,7 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
-map("n", "<Leader>tl", function()
+map("n", "<Leader>ty", function()
 	---@diagnostic disable-next-line: undefined-field
 	if vim.b.ts_highlight then
 		vim.treesitter.stop()
