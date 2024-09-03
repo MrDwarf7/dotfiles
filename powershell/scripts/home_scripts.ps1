@@ -13,6 +13,10 @@ $backup_theme = 'chips.omp.json'
 
 . "$powershell_completions\completion_docker-compose.ps1"
 
+. "$powershell_completions\ein_completions.ps1"
+
+. "$powershell_completions\gix_completions.ps1"
+
 
 try {
     oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$home_theme | Invoke-Expression

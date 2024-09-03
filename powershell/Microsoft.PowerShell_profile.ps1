@@ -126,7 +126,6 @@ if (-not (checkEnvironment)) {
 
 . "$powershell_scripts_dir\general_scripts.ps1"
 
-
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 #Raw Functions
 
