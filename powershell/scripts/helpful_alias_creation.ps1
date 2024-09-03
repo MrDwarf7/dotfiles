@@ -145,6 +145,20 @@ function NavigateToRust {
     Invoke-Expression "z Rust"
 }
 
+function time { 
+    $Command = "$args";
+    Measure-Command { 
+        Invoke-Expression $Command 2>&1 | Out-Default
+    }
+}
+
+function timen { 
+    $Command = "$args";
+    Measure-Command { 
+        Invoke-Expression $Command 2>&1 | Out-Null
+    }
+}
+
 
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
@@ -171,4 +185,7 @@ New-Alias -Name cargos -Value CargoBuilEverything -Force
 New-Alias -Name cargosr -Value CargoRunEverything -Force
 
 New-Alias -Name rst -Value NavigateToRust -Force
+
+New-Alias -Name clif -Value cargo-clif -Force
+New-Alias -Name cliff -Value cargo-clif -Force
 
