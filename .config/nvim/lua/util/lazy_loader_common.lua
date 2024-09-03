@@ -72,4 +72,8 @@ M.base = function()
 	}
 end
 
-return M
+return {
+	M.base(),
+	-- M.core_setup(),
+	-- M.common_setup(),
+}

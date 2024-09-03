@@ -38,7 +38,7 @@ vim.opt.timeoutlen = 350
 -- end
 
 -- Use ripgrep as grep tool
-vim.o.grepprg = "rg --vimgrep --no-heading"
+vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 vim.o.breakindent = true
 vim.o.updatetime = 250

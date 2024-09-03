@@ -133,7 +133,7 @@ opt.smoothscroll = true
 -- g.loaded_ruby_provider = 1
 
 -- Use ripgrep as grep tool
-vim.o.grepprg = "rg --vimgrep --no-heading"
+vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 vim.o.foldcolumn = "1"

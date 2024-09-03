@@ -1,4 +1,3 @@
-local commons = require("util.lazy_loader_common")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -10,27 +9,32 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-
 vim.opt.rtp:prepend(lazypath)
-
 vim.loader.enable()
 
-if vim.g.neovide == nil and vim.g.vscode == nil then
-	return {
-		commons.base(),
-		-- commons.core_setup(),
-		-- commons.common_setup(),
-	}
-elseif vim.g.neovide == nil and vim.g.vscode then
-	print("Welcome to VSCode Neovim...")
-	return {
-		require("vscode_conf").setup(),
-	}
-elseif vim.g.vscode == nil and vim.g.neovide then
-	return {
-		require("core.neovide"),
-		commons.base(),
-		-- commons.core_setup(),
-		-- commons.common_setup(),
-	}
+local f = function()
+	if vim.g.neovide == nil and vim.g.vscode == nil then
+		return {
+			require("util.lazy_loader_common"),
+			-- commons.base(),
+			-- commons.core_setup(),
+			-- commons.common_setup(),
+		}
+	elseif vim.g.neovide == nil and vim.g.vscode then
+		print("Welcome to VSCode Neovim...")
+		return require("util.lazy_load_vscode")
+	elseif vim.g.vscode == nil and vim.g.neovide then
+		return {
+			require("core.neovide"),
+			require("util.lazy_loader_common"),
+			-- commons.core_setup(),
+			-- commons.common_setup(),
+		}
+	end
 end
+
+f()
+
+-- return {
+-- 	f(),
+-- }
