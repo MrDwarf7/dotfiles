@@ -1,15 +1,11 @@
-# testing
+############### BACKUP CONFIG ################
+##############################################
 ################  HELIX CONFIG ###############
 # theme = "molokai"
 theme = "1_tokyonight_storm"
 
-
-##############################################
-########### Generic editor section ###########
-##############################################
-
 [editor]
-# evil = true
+evil = true
 line-number = "relative"
 scrolloff = 6
 # shell = ""
@@ -82,8 +78,7 @@ auto-signature-help = true
 display-inlay-hints = true
 
 
-
-[editor.whitespace.render] 
+[editor.whitespace.render]
 tab = "all"
 space = "all"
 nbsp = "all"
@@ -95,14 +90,6 @@ nbsp = "⍽"
 nnbsp = "␣"
 tab = "→"
 
-##############################################
-######### END Generic editor section #########  
-##############################################
-
-
-##############################################
-########### Leader Key assignments ###########
-##############################################
 
 [keys.normal.space]
 x = ":buffer-close"
@@ -166,7 +153,6 @@ h = ":tree-sitter-subtree"
 t = ":tree-sitter-highlight-name"
 
 
-
 [keys.normal.space.w] # Window
 left = "no_op"
 right = "no_op"
@@ -210,21 +196,16 @@ l = "swap_view_right"
 # ]
 
 
-##############################################
-######### END Leader Key assignments #########
-##############################################
-
-
 [keys.normal]
 # Quick iteration on config changes
 C-9 = ":config-open"
 C-8 = ":config-reload"
 K = "hover"
-C-s = ":w" # Saving with Ctrl+s
-C-g =":show-directory"
+C-s = ":w"              # Saving with Ctrl+s
+C-g = ":show-directory"
 
 
- # Centering viewport on page scrolling
+# Centering viewport on page scrolling
 C-u = ["half_page_up", "align_view_center"]
 C-d = ["half_page_down", "align_view_center"]
 

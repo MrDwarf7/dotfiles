@@ -1,0 +1,15 @@
+# Author: Paul Graydon <untimely.creation97@proton.me>
+
+inherits = "tokyonight"
+
+"ui.virtual.inlay-hint" = { bg = "bg", fg = "fg-gutter", modifiers = ["italic"] }
+"ui.virtual.inlay-hint.parameter" = {  bg = "bg-menu", fg = "fg-gutter", modifiers = [ "italic" ] }
+
+[palette]
+border = "#1d202f"
+bg = "#24283b"
+bg-inlay = "#233745"
+bg-highlight = "#373d5a"
+bg-menu = "#1f2335"
+bg-visual = "#2e3c64"
+border-highlight = "#29a4bd"
