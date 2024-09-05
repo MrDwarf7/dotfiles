@@ -111,6 +111,12 @@ fi
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
+# ZVM
+export ZVM_PATH="$XDG_CONFIG_HOME/.zvm"
+export ZVM_INSTALL="$XDG_CONFIG_HOME/.zvm/self"
+export PATH="$PATH:$XDG_CONFIG_HOME/.zvm/bin"
+export PATH="$PATH:$ZVM_INSTALL/"
+
 
 if pacman -Qi "pyenv" &> /dev/null; then
     export PYENV_ROOT="$XDG_CONFIG_HOME/.pyenv"

@@ -15,6 +15,7 @@ alias zq='zoxide query $1'
 alias vi='/usr/sbin/vim'
 alias vim='/usr/sbin/nvim'
 alias nvim='/usr/sbin/nvim'
+alias hx='/usr/bin/helix'
 
 alias ff='fastfetch --config examples/13'  # prev on load
 alias ff2='fastfetch --config examples/8'  # color swatch
@@ -48,6 +49,15 @@ alias yayss='yay -Ss'
 
 alias sysup="sudo pacman -Syu && yay -Syu"
 alias shutdown='systemctl poweroff'
+
+alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-update-all='export TMPFILE="$(mktemp)"; \
+    sudo true; \
+    rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+      && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+      && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+      && ua-drop-caches \
+      && yay -Syyu --noconfirm'
 
 # Cargo Aliases
 alias cb='cargo build'
