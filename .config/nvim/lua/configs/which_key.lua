@@ -21,6 +21,7 @@ return {
 			{ "<Leader>gd", group = "+[D]iffview" },
 			{ "gp", group = "+[P]review" },
 
+			{ "<Leader>d", group = "+[D]BUI" },
 			--
 			-- --#region GH.nvim // gh.nvim // github-cli // gh-cli
 			-- -- stylua: ignore start

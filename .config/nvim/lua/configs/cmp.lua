@@ -124,6 +124,16 @@ end
 
 -----------------------------------------------------------------------------
 
+-- M.sql_cmp = function(cmp)
+-- 	cmp.setup.filetype({ "sql" }, {
+-- 		sources = {
+-- 			{ name = "kristijanhusak/vim-dadbod-completion", group_index = 2 },
+-- 			{ name = "copilot", group_index = 2 },
+-- 			{ name = "buffer" },
+-- 		},
+-- 	})
+-- end
+
 return {
 	"hrsh7th/nvim-cmp",
 	event = "InsertEnter",
@@ -209,7 +219,7 @@ return {
 				{ name = "cmp-pypi" },
 				-- { name = "cmp-luasnip-choice" },
 			},
-			-- })
+			-- filetype = M.sql_cmp(cmp),
 		}
 	end,
 }
