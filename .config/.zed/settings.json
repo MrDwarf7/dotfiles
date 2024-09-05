@@ -1,0 +1,82 @@
+{
+  "assistant": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-3-5-sonnet-20240620"
+    },
+    "version": "2"
+  },
+  "vim_mode": true,
+  "preferred_line_length": 120,
+  "show_wrap_guides": true,
+  "wrap_guides": [100, 120],
+  "ui_font_size": 14.5,
+  "buffer_font_size": 12.0,
+  "cursor_blink": false,
+  "relative_line_numbers": true,
+  "terminal": {
+    "shell": {
+      "with_arguments": {
+        "program": "pwsh.exe",
+        "args": ["-NoLogo"]
+      }
+    },
+    "font_family": "Mononoki Nerd Font Mono"
+  },
+  "scrollbar": {
+    "show": "never"
+  },
+  "vertical_scroll_margin": 2,
+  "gutter": {
+    "line_numbers": true
+  },
+  "theme": {
+    "mode": "system",
+    "light": "Tokyo Night",
+    "dark": "Tokyo Night"
+  },
+  "buffer_font_features": {
+    "calt": false
+  },
+  "buffer_font_family": "Cascadia Mono",
+  // "buffer_font_family": "Mononoki Nerd Font Mono",
+  "buffer_font_weight": 100,
+
+  "indent_guides": {
+    "enabled": true,
+    "line_width": 1,
+    "active_line_width": 1,
+    "coloring": "indent_aware",
+    "background_coloring": "disabled"
+  },
+
+  "show_inline_completions": true,
+  "features": {
+    "inline_completion_provider": "copilot"
+  },
+
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "check": {
+          "command": "clippy"
+        }
+      }
+    }
+  },
+
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "edit_debounce_ms": 700,
+    "scroll_debounce_ms": 50
+  },
+
+  "vim": {
+    "use_system_clipboard": "always",
+    "use_multiline_find": true,
+    "use_smartcase_find": true
+  }
+}
