@@ -102,6 +102,18 @@ function checkEnvironment {
     }
 }
 
+function ClifOrCargo() {
+    if (Test-CommandExists "clif" ) {
+        Invoke-Expression "clif $args"
+    } else {
+        Invoke-Expression "cargo $args"
+    }
+}
+
+New-Alias -Name cargo -Value ClifOrCargo -Force
+
+
+
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
 

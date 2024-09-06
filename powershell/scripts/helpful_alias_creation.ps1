@@ -185,7 +185,6 @@ function fastfetchin() {
 }
 
 
-
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
