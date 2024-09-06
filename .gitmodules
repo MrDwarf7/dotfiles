@@ -1,0 +1,3 @@
+[submodule "installer"]
+	path = installer
+	url = git@github.com:MrDwarf7/MAGA_make_arch_great_again.git
