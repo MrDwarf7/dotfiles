@@ -6,12 +6,13 @@ return {
 	cmd = "Trouble",
 	keys = {
 		{ "<Leader>tt", "<cmd>Trouble<CR>", desc = "[t]rouble" },
-		{ "<Leader>vj", "<cmd>Trouble loclist toggle<CR>", desc = "[j]umplist/loclist" },
-		{ "<Leader>vz", "<cmd>Trouble qflist toggle<CR>", desc = "quickfix list" },
+		{ "<Leader>f]", "<cmd>Trouble loclist toggle<CR>", desc = "trouble - [j]ump" },
+		{ "<Leader>f[", "<cmd>Trouble qflist toggle<CR>", desc = "trouble - qflist" },
+		{ "<Leader>lq", "<cmd>Trouble qflist toggle<CR>", desc = "trouble - qflist" },
 		{
 			"]]",
 			function()
-				require("trouble").next({ skip_groups = true, jump = true })
+				require("trouble").next(_, { skip_groups = true, jump = true })
 			end,
 			mode = "n",
 			desc = "[p]robem NEXT",

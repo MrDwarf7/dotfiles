@@ -63,6 +63,7 @@ return {
 				"treesitter",
 				"zig",
 			}
+
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
 				return nil
 			end
@@ -80,6 +81,7 @@ return {
 				"oil",
 				"treesitter",
 				"zig",
+				"persistence",
 			}
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
 				return nil

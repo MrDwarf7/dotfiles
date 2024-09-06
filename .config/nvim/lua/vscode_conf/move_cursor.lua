@@ -1,3 +1,5 @@
+---@deprecated
+
 local M = {}
 
 M.moveInLine = function(d)

@@ -49,6 +49,7 @@ M.servers = function(capabilities)
 			single_file_support = true,
 			capabilities = capabilities,
 		},
+		neocmake = {},
 
 		cssls = {},
 
@@ -102,27 +103,38 @@ M.servers = function(capabilities)
 			},
 		},
 		marksman = {},
+		ols = {},
 		omnisharp = {
 			filetypes = { "cs", "vb" },
 		},
-		powershell_es = {
-			filetypes = { "powershell", "ps1", "psm1", "psd1" },
-			-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
-			settings = {
-				powershell = {
-					codeFormatting = {
-						Preset = "OTBS",
-					},
-				},
-				scriptAnalysis = {
-					enable = true,
-				},
-				completion = {
-					enable = true,
-					useCommandDiscovery = true,
-				},
-			},
-		},
+		-- powershell_es = {
+		-- 	cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "Invoke-EditorServices" },
+		-- 	filetypes = { "powershell", "ps1", "psm1", "psd1" },
+		-- 	root_dir = require("lspconfig.util").root_pattern(
+		-- 		".git",
+		-- 		".editorconfig",
+		-- 		".gitignore",
+		-- 		".ps1",
+		-- 		".psm1",
+		-- 		".psd1"
+		-- 	),
+		-- 	-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
+		-- 	bundle_path = "~/AppData/Local/nvim-data/mason/packages/powershell-editor-services",
+		-- 	settings = {
+		-- 		powershell = {
+		-- 			codeFormatting = {
+		-- 				Preset = "OTBS",
+		-- 			},
+		-- 		},
+		-- 		scriptAnalysis = {
+		-- 			enable = true,
+		-- 		},
+		-- 		completion = {
+		-- 			enable = true,
+		-- 			useCommandDiscovery = true,
+		-- 		},
+		-- 	},
+		-- },
 		prismals = {},
 		pyright = {
 			cmd = { "pyright-langserver", "--stdio" },
@@ -208,16 +220,17 @@ return {
 		{ "<Leader>ld", function() require("telescope.builtin").diagnostics() end, desc = "[d]iagnostics" },
 		{ "<Leader>lr", function() vim.lsp.buf.rename() end, desc = "[r]ename" },
 		{ "<Leader>la", function() vim.lsp.buf.code_action() end, desc = "[a]ction" },
+		{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
 		{ "K", function() vim.lsp.buf.hover() end, desc = "Hoever Docs" },
 		{ "<C-k>", vim.lsp.buf.signature_help, "Signature Help" },
 		{ "gO", function() require("telescope.builtin").lsp_outgoing_calls() end, desc = "[O]utgoing" },
 		{ "<Leader>lh", function() vim.diagnostic.open_float() end, desc = "float", },
-		{ "]d", function() vim.diagnostic.goto_next() end, desc = "diag next" },
-		{ "[d", function() vim.diagnostic.goto_prev() end, desc = "diag prev" },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
+					-- print("Conform required FROM LSP.lua --- IF")
 					require("conform").format()
 				elseif package.loaded["conform"] == nil then
+					-- print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 					vim.lsp.buf.format({ async = true })
 				end
@@ -285,6 +298,8 @@ return {
 			"beautysh",
 			"black",
 			"clang-format",
+			"cmakelang",
+			"cmakelint",
 			"codelldb",
 			"debugpy",
 			"delve",
@@ -311,6 +326,7 @@ return {
 		local plugin_handled = {
 			"cmake",
 			"gopls",
+			"powershell_es",
 			"rust_analyzer",
 			"tsserver",
 			"zig",

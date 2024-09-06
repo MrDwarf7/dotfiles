@@ -1,7 +1,7 @@
 return {
 	"williamboman/mason.nvim",
-	-- lazy = false,
-	-- event = "BufEnter",
+	lazy = false,
+	event = "BufEnter",
 	keys = {
 		{
 			"<Leader>pm",

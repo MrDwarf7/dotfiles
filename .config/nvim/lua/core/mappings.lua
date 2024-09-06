@@ -11,6 +11,11 @@ map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
 
+map("n", "<Leader>tl", "<cmd>vsplit<CR>:vertical resize 90<CR>:term<CR>", { desc = "Terminal" })
+map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>", { desc = "Terminal" })
+
+-- { noremap = true, silent = true, desc = "Start pwsh" })
+
 map("n", "<Leader>E", function()
 	if not pcall(require, "mini.files") then
 		vim.cmd("lua require'mini.files'.open()")
@@ -27,6 +32,15 @@ map("i", "jk", "<Esc>", silent_opts)
 map("i", "kj", "<Esc>", silent_opts)
 
 map("v", "p", '"_dP', silent_opts)
+
+-- Add undo break-points ---- testing
+map("i", ",", ",<c-g>u")
+map("i", ".", ".<c-g>u")
+map("i", ";", ";<c-g>u")
+
+-- commenting lines above and below
+map("n", "gco", "o<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Below" })
+map("n", "gcO", "O<esc>Vcx<esc><cmd>normal gcc<cr>fxa<bs>", { desc = "Add Comment Above" })
 
 -- Handles saving via Ctrl + s in normal, visual and insert mode
 map("n", "<C-s>", ":wa<CR>", silent_opts)
@@ -55,6 +69,9 @@ map("v", ">", ">gv", silent_opts)
 
 map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
 map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+map("n", "<Leader>to", "<cmd>tabnew<CR>", silent_opts, { desc = "New Tab" })
+map("n", "<Leader>tc", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
+map("n", "<Leader>tx", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
 
 map("n", "<Leader>t]", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
 map("n", "<Leader>t[", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
@@ -123,12 +140,15 @@ map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>b]", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>b[", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
+map("n", "<Leader>bc", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
 map("n", "[f", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]f", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- map("n", "<Leader>?", ":vsplit<CR>:terminal<CR>A", silent_opts, { desc = "Inbuilt Term" }) -- Temp for the time being until lazygit // fugitive or something
+
+-- map("n", "<Leader>gt", ":Octo ", silent_opts, { desc = "Oc[t]o" })
 
 map("n", "<Leader>t'", ":Telescope<CR>", silent_opts, { desc = "Generic Telescope call" })
 map("n", '<Leader>"', ":Telescope neoclip<CR>", silent_opts, { desc = "Clipboard/Registers" })
@@ -150,7 +170,7 @@ map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
-map("n", "<Leader>tl", function()
+map("n", "<Leader>ty", function()
 	---@diagnostic disable-next-line: undefined-field
 	if vim.b.ts_highlight then
 		vim.treesitter.stop()

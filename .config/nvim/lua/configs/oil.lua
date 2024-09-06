@@ -17,7 +17,7 @@ return {
 		skip_confirm_for_simple_edits = true, -- default: false
 		win_options = {
 			wrap = false,
-			signcolumn = "no",
+			signcolumn = "yes:2",
 			cursorcolumn = false,
 			foldcolumn = "0",
 			spell = false,

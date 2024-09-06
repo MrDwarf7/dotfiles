@@ -190,12 +190,15 @@ return {
 		return {
 			vimgrep_arguments = {
 				"rg",
+				"--vimgrep",
 				"--color=never",
 				"--no-heading",
 				"--with-filename",
 				"--line-number",
 				"--column",
 				"--smart-case",
+				"--no-ignore",
+				"--hidden",
 			},
 			layout_strategy = "horizontal",
 			layout_config = {

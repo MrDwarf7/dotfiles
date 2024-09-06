@@ -5,6 +5,7 @@ return {
 		require("lint").linter_by_ft = {
 			cpp = { "cpplint", "clang-tidy" },
 			css = { "stylelint" },
+			cmake = { "cmakelint " },
 			-- cs = { "omnisharp" },
 			docker = { "hadolint" },
 			javascript = { "biomejs" },

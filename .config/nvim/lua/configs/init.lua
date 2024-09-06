@@ -42,7 +42,6 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
-
 				{ path = "LazyVim", words = { "LazyVim" } },
 			},
 		},
@@ -72,7 +71,29 @@ return {
 
 	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
 	{ "AndreM222/copilot-lualine" },
-	{ "Civitasv/cmake-tools.nvim", ft = { "cmake", "cpp", "h", "hpp" }, opts = {} },
+
+	{
+		"Civitasv/cmake-tools.nvim",
+		ft = { "cmake", "cpp", "h", "hpp" },
+		init = function()
+			local loaded = false
+			local function check()
+				local cwd = vim.uv.cwd()
+				if vim.fn.filereadable(cwd .. "/CmakeLists.txt") == 1 then
+					require("lazy").load({ plugins = "cmake-tools.nvim" })
+					loaded = true
+				end
+			end
+			check()
+			vim.api.nvim_create_autocmd("DirChanged", {
+				callback = function()
+					if not loaded then
+						check()
+					end
+				end,
+			})
+		end,
+	},
 	{ "j-hui/fidget.nvim", opts = {} },
 
 	-- { "j-hui/fidget.nvim", lazy = true, event = "VeryLazy", opts = {} },
@@ -97,6 +118,11 @@ return {
 			suggestion = { enabled = true },
 			panel = { enabled = false },
 		},
+	},
+
+	{
+		"Airbus5717/c3.vim",
+		lazy = false,
 	},
 }
 
