@@ -13,6 +13,7 @@ git clone --recurse-submodules
 
 otherwise just clone the repo as you normally would.
 
+
 ## Update OhMyPosh using this command -
 
 winget upgrade JanDeDobbeleer.OhMyPosh -s winget
@@ -35,10 +36,10 @@ From the GitHub repo, states it's aiming to achieve a similar goal to GNU Stow, 
 Install-Module PSReadLine
 ```
 
+
 ### Consider installing CompletionPredictor alongside PSReadLine also
 
 - (Optional, but recommended)
-
 
 ```ps1
 Install-Module -Name CompletionPredictor -Repository PSGallery
@@ -46,7 +47,6 @@ Install-Module -Name CompletionPredictor -Repository PSGallery
 
 
 ## Importing: PSReadLine
-
 
 ```ps1
 Import-Module PSReadLine
@@ -72,6 +72,7 @@ This can be done with the following command:
 New-Item -Path $profile -Type File -Force
 ```
 
+
 ## Importing: CompletionPredictor
 
 Importing this can also be done the same as above, by adding to $PROFILE.
@@ -80,8 +81,7 @@ Importing this can also be done the same as above, by adding to $PROFILE.
 Import-Module -Name CompletionPredictor
 ```
 
-
-### (Optional)
+- (Optional)
 
 Consider moving/redirecting your profile loading to somewhere on local storage for loading speeds.
 If currently loading from One - Drive or another online source.
@@ -110,6 +110,7 @@ $profile = "C:\Location\Of\Your\Choosing\ProfileHoldingFolder\Microsoft.PowerShe
 `https://ohmyposh.dev/`
 
 For any of the PSReadLine commands that you may find online for custimization from other Uers, ensure you add this to the VERY top of your $PROFILE
+
 
 ### Importing deps
 
@@ -144,12 +145,11 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 
 [ ] - CompletionQueryItems
 
-    ```ps1
-    Install-Module -Name Azure
-    ```
-
+```ps1
+Install-Module -Name Azure
+```
 
 [ ] - (WIP) Scoop batch installer
-    
-    Other content that makes up the profile as a whole can be found under the ./docs/ foler
+
+- Other content that makes up the profile as a whole can be found under the ./docs/ foler
 
