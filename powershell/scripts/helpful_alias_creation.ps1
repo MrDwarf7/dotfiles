@@ -159,6 +159,32 @@ function timen {
     }
 }
 
+function ffff() {
+    $max = 23;
+    $min = 2;
+
+    Clear-Host;
+    for ($i = $min; $i -lt $max; $i++) {
+        Write-Host
+        Write-Host
+        Write-Host "Example $i"
+
+        $config = "examples/$i";
+        Invoke-Expression "fastfetch --config $config";
+    }
+}
+
+function fastfetchin() {
+    $num = 21
+    $config = "--config examples/$num"
+
+    Write-Host
+    Write-Host
+    Invoke-Expression "fastfetch $config";
+    Write-Host
+}
+
+
 
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
@@ -189,3 +215,4 @@ New-Alias -Name rst -Value NavigateToRust -Force
 New-Alias -Name clif -Value cargo-clif -Force
 New-Alias -Name cliff -Value cargo-clif -Force
 
+New-Alias -Name ff -Value fastfetchin -Force
