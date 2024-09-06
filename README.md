@@ -35,7 +35,11 @@ From the GitHub repo, states it's aiming to achieve a similar goal to GNU Stow, 
 Install-Module PSReadLine
 ```
 
-(Optional - but recommended) Consider installing CompletionPredictor alongside PSReadLine also
+### Consider installing CompletionPredictor alongside PSReadLine also
+
+- (Optional, but recommended)
+
+
 ```ps1
 Install-Module -Name CompletionPredictor -Repository PSGallery
 ```
@@ -139,11 +143,13 @@ Set-PSReadLineOption -PredictionViewStyle ListView
 ## Misc available options:
 
 [ ] - CompletionQueryItems
+
     ```ps1
     Install-Module -Name Azure
     ```
 
 
 [ ] - (WIP) Scoop batch installer
+    
     Other content that makes up the profile as a whole can be found under the ./docs/ foler
 
