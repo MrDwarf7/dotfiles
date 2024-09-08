@@ -24,7 +24,7 @@
 -- 	silent = true,
 -- })
 
----@return nil
+---@return table
 local setup = function()
 	-- local vscode = require("vscode-neovim")
 	-- if not vim.g.vscode then
@@ -35,30 +35,30 @@ local setup = function()
 	vim.g.vscode_clipboard = vim.g.vscode_clipboard or "unnamedplus"
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
-
 	return {
 		print("Vscode_conf loads after checking vscode global variable..."),
 		vim.cmd([[
 		set clipboard+=unnamedplus
 		]]),
 
-		print("Vscode specific setup file loads..."),
+		print("Vscode init.lua loads..."),
 		require("vscode_conf.actions"),
 		require("vscode_conf.options"),
 		require("vscode_conf.mappings"),
+		require("vscode_conf.plugins"),
 
-		print("Vscode specific autocmds file loads..."),
-
+		print("Vscode specific autocmds section loads..."),
 		vim.api.nvim_create_autocmd("TextYankPost", {
 			callback = function()
 				vim.highlight.on_yank({ timeout = 60 })
 			end,
 			group = vim.api.nvim_create_augroup("TextYank", { clear = true }),
 		}),
-		require("vscode_conf.plugins").vscode_plugins(),
 	}
 end
 
-setup()
+return {
+	setup(),
+}
 
 -- return V

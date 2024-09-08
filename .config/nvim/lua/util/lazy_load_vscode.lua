@@ -1,8 +1,6 @@
--- local V = {}
-
 return {
 	require("lazy").setup("vscode_conf", {
-		defaults = { lazy = true },
+		defaults = { lazy = false },
 		change_detection = {
 			notify = false,
 		},
