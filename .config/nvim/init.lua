@@ -1,3 +1,4 @@
+local M = {}
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -12,7 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.loader.enable()
 
-local f = function()
+M.setup = function()
 	if vim.g.neovide == nil and vim.g.vscode == nil then
 		return {
 			require("util.lazy_loader_common"),
@@ -33,8 +34,6 @@ local f = function()
 	end
 end
 
-f()
-
--- return {
--- 	f(),
--- }
+return {
+	M.setup(),
+}
