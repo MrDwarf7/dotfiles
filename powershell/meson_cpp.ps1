@@ -4,9 +4,9 @@ $Global:dummyText = "int main() {
     return 0;
 }"
 
-function Check-Meson-Existence {
+function CheckMesonExistence {
     $meson = Get-Command meson
-    if ($meson -eq $null) {
+    if ($null -eq $meson) {
         Write-Host "Meson is not installed. Please install it."
         Write-Host "Consider running scoop install meson"
         Read-Host "Would you like to install it now? (y/n)"
@@ -20,7 +20,7 @@ function Check-Meson-Existence {
 }
 
 
-function Init-C-Meson {
+function InitCMeson {
     Invoke-Expression "echo $dummyText > main.cpp"
     Mkdir build
     Invoke-Expression Build-Script
@@ -31,7 +31,7 @@ function Build-Script {
     Invoke-Expression $runnable
 }
 
-function Run-The-Exe {
+function RunTheExe {
     $build_dir = Join-Path $current "build"
     $exe_name = "$current_dir_name.exe"
     $runnable = "$build_dir/$exe_name"
