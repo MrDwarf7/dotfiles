@@ -111,7 +111,8 @@ function ClifOrCargo() {
 }
 
 New-Alias -Name cargo -Value ClifOrCargo -Force
-
+New-Alias -Name clif -Value cargo-clif -Force
+New-Alias -Name cliff -Value cargo-clif -Force
 
 
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1

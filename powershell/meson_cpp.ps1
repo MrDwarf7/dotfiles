@@ -23,10 +23,10 @@ function CheckMesonExistence {
 function InitCMeson {
     Invoke-Expression "echo $dummyText > main.cpp"
     Mkdir build
-    Invoke-Expression Build-Script
+    Invoke-Expression BuildScript
 }
 
-function Build-Script {
+function BuildScript {
     $runnable = "ninja -C build"
     Invoke-Expression $runnable
 }
@@ -38,17 +38,17 @@ function RunTheExe {
     Invoke-Expression $runnable
 }
 
-function Build-Run {
-    Build-Script
-    Run-The-Exe
+function BuildRun {
+    BuildScript
+    RunTheExe
 }
 
-function Show-New-Commands {
+function ShowNewCommands {
     $cols=@(
-    [PSCustomObject]@{Command="c"; Description="Init-C-Meson"},
-    [PSCustomObject]@{Command="b"; Description="Build-Script"},
-    [PSCustomObject]@{Command="rr"; Description="Run-The-Exe"},
-    [PSCustomObject]@{Command="br"; Description="Build-Run"}
+    [PSCustomObject]@{Command="mc"; Description="InitCMeson"},
+    [PSCustomObject]@{Command="mb"; Description="BuildScript"},
+    [PSCustomObject]@{Command="mr"; Description="RunTheExe"},
+    [PSCustomObject]@{Command="mbr"; Description="BuildRun"}
     )
 
     $cols | Format-Table -AutoSize
@@ -58,13 +58,21 @@ function Show-New-Commands {
 }
 
 function main {
-    New-Alias -Name c -Value Init-C-Meson -Force
-    New-Alias -Name b -Value Build-Script -Force
-    New-Alias -Name rr -Value Run-The-Exe -Force
-    New-Alias -Name br -Value Build-Run -Force
 
-    Invoke-Expression Check-Meson-Existence
-    Invoke-Expression Show-New-Commands
+    Invoke-Expression CheckMesonExistence
+    Invoke-Expression ShowNewCommands
 }
 
-Invoke-Expression main
+if ($MyInvocation.InvocationName -eq ".\meson_cpp.ps1") {
+    Invoke-Expression main
+}
+
+# if ($LASTEXITCODE -ne 0) {
+#     return Write-Host "Error: $LASTEXITCODE"
+# }
+
+
+New-Alias -Name mc -Value InitCMeson -Force
+New-Alias -Name mb -Value BuildScript -Force
+New-Alias -Name mr -Value RunTheExe -Force
+New-Alias -Name mbr -Value BuildRun -Force
