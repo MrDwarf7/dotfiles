@@ -191,13 +191,13 @@
       "shift-g": "menu::SelectLast",
       "g g": "menu::SelectFirst"
     }
-  },
-
-  {
-    "context": "ProjectPanel && not_editing && !vim_mode == insert",
-    "bindings": {
-      "l": "project_panel::OpenPermanent"
-      // "l": "project_panel::ExpandSelectedEntry"
-    }
   }
+
+  // {
+  //   "context": "ProjectPanel && not_editing && !vim_mode == insert",
+  //   "bindings": {
+  //     // "l": "project_panel::OpenPermanent"
+  //     // "l": "project_panel::ExpandSelectedEntry"
+  //   }
+  // }
 ]
