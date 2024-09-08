@@ -1,40 +1,40 @@
 -- This fix is no longer needed, huzzah!
 -- local V = {}
 --
--- local moveCursor = function(d)
--- 	return function()
--- 		if vim.v.count == 0 and vim.fn.reg_recording() == "" and vim.fn.reg_executing() == "" then
--- 			return "g" .. d
--- 		else
--- 			return d
--- 		end
--- 	end
--- end
---
---
--- vim.keymap.set("", "k", moveCursor("k"), {
--- 	expr = true,
--- 	remap = true,
--- 	silent = true,
--- })
---
--- vim.keymap.set("", "j", moveCursor("j"), {
--- 	expr = true,
--- 	remap = true,
--- 	silent = true,
--- })
+local moveCursor = function(d)
+	return function()
+		if vim.v.count == 0 and vim.fn.reg_recording() == "" and vim.fn.reg_executing() == "" then
+			return "g" .. d
+		else
+			return d
+		end
+	end
+end
 
 ---@return table
 local setup = function()
-	-- local vscode = require("vscode-neovim")
-	-- if not vim.g.vscode then
-	-- 	vim.g.vscode = {}
-	-- 	return
-	-- end
+	local vscode = require("vscode-neovim")
+	if not vim.g.vscode then
+		vim.g.vscode = {}
+		return {}
+	end
 
 	vim.g.vscode_clipboard = vim.g.vscode_clipboard or "unnamedplus"
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
+
+	vim.keymap.set("", "k", moveCursor("k"), {
+		expr = true,
+		remap = true,
+		silent = true,
+	})
+
+	vim.keymap.set("", "j", moveCursor("j"), {
+		expr = true,
+		remap = true,
+		silent = true,
+	})
+
 	return {
 		print("Vscode_conf loads after checking vscode global variable..."),
 		vim.cmd([[

@@ -16,8 +16,6 @@ return {
 	dependencies = {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
-	opts = {},
-
 	config = function()
 		require("Comment").setup({
 			pre_hook = function()
