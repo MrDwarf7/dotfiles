@@ -11,8 +11,8 @@ map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
 
-map("n", "<Leader>tl", "<cmd>vsplit<CR>:vertical resize 90<CR>:term<CR>", { desc = "Terminal" })
-map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>", { desc = "Terminal" })
+map("n", "<Leader>tl", "<cmd>vsplit<CR>:vertical resize 90<CR>:term<CR>A", { desc = "Terminal" })
+map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>A", { desc = "Terminal" })
 
 -- { noremap = true, silent = true, desc = "Start pwsh" })
 
