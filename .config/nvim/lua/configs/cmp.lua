@@ -205,9 +205,9 @@ return {
 			mapping = cmp.mapping.preset.insert(M.cmp_mappings(cmp, luasnip)),
 
 			sources = {
+				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "nvim_lsp_signature_help", group_index = 2 },
 				{ name = "copilot", group_index = 2 },
-				{ name = "nvim_lsp", group_index = 2 },
 				{ name = "buffer", group_index = 2, max_item_count = 15 },
 				{ name = "path", group_index = 2 },
 				{ name = "cmp-cmdline" },
