@@ -6,7 +6,6 @@
 #    source "${XDG_CACHE_HOME:-$HOME/.xdg/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
-
 export XDG_CONFIG_HOME="$HOME/.config"
 
 ### comp install
