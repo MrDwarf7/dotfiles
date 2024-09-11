@@ -24,7 +24,8 @@ packages_to_install=(
     autossh
     curl
     wget
-    reflector
+    # reflector
+    rate-mirrors
     namcap
     neofetch
     zip
@@ -39,7 +40,8 @@ packages_to_install=(
     go
     nvim
     tree
-    ranger
+    yazi
+    # ranger
     ripgrep
     fd
     sd
@@ -184,17 +186,25 @@ function install_yay() {
 }
 
 function setup_mirrors() {
-
     # check paccman output for if reflector exists
     # if not, install it
     # if yes, proceed with updating mirrors
-    if ! pacman -Qi reflector &>/dev/null; then
+
+    local ua-update-all='export TMPFILE="$(mktemp)"; \
+        sudo true; \
+        rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+        && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+        && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+        && ua-drop-caches \
+        && yay -Syyu --noconfirm'
+
+    if ! pacman -Qi rate-mirrors &>/dev/null; then
         echo "Reflector is not installed. Installing now."
-        sudo pacman -S reflector
+        yay -S rate-mirrors
     else
         echo "Reflector is installed. Proceeding with mirror update."
     fi
-    reflector --verbose -l 200 -n 20 -p http --sort rate --save /etc/pacman.d/mirrorlist
+    ua-update-all
     echo "Mirrors updated."
     return 0
 }
@@ -218,16 +228,24 @@ function main_installation() {
 
     sudo pacman -Syyu --noconfirm
 
-    yay -S --needed --noconfirm "${package_array[@]}"
-}
+    for package in "${package_array[@]}"; do
+        if ! pacman -Qi "$package" &>/dev/null; then
+            echo "$package is not installed."
+            yay -S --needed --noconfirm "${package_array[@]}"
+        else
+            echo "$package is installed."
+            package_array=("${package_array[@]/$package}")
+        fi
+    done
+
 
 # Rust setup
 function rust_setup() {
     sudo pacman -S rustup
     rustup default stable
-    cargo
-    rustc
-    rustup
+    # cargo
+    # rustc
+    # rustup
     echo "Rust setup complete."
     return 0
 }
