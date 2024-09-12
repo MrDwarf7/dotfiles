@@ -1,3 +1,4 @@
+# Common editor & OS files
 **/*/.ruff_cache/
 **/*/.idea/
 **/*/.bash_history
