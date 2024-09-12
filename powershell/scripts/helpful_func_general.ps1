@@ -29,7 +29,7 @@ function lg {
 }
 
 function nf {
-    if (-not (neofetch --help)) {
+    if (-not (fastfetch --help)) {
         try {
             scoop install neofetch
         } catch {
@@ -38,7 +38,17 @@ function nf {
             scoop install neofetch
         }
     }
-    neofetch
+   fastfetch 
+}
+
+function yy {
+    $tmp = [System.IO.Path]::GetTempFileName()
+    yazi $args --cwd-file="$tmp"
+    $cwd = Get-Content -Path $tmp
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+        Set-Location -LiteralPath $cwd
+    }
+    Remove-Item -Path $tmp
 }
 
 function lzd {

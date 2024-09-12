@@ -78,6 +78,7 @@ $powershell_scripts_dir = "$powershell_dir\scripts"
 # FunctionName | Invoke-Expression, this works but needs a handler for it
 
 $env:EDITOR = $env:VISUAL = 'nvim'
+$env:EDITOR = 'nvim'
 
 # $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 # if (Test-Path($ChocolateyProfile))
