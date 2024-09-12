@@ -11,8 +11,7 @@ z.old/*
 .z.old/
 .z.old/*
 
-
-.config/nvim/lazy-lock*
+.config/nvim/lazy-lock
 .config/lazygit/state*
 
 main_nvim/*
@@ -24,7 +23,7 @@ nvim_distros/*
 !nvim_distros/old.nvims/*
 !nvim_distros/TestVim/*
 !nvim_distros/omerxx/
-nvim_distros/omerxx/lazy-lock*
+nvim_distros/omerxx/lazy-lock
 
 .config/tmux/plugins/*
 .config/btop/*.log
