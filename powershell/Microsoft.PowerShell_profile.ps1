@@ -47,7 +47,8 @@ $env:HOME_PROFILE = $false
 $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
 $env:BAT_CONFIG_PATH = "$dotfiles_dir\.config\bat\bat.conf"
-$env:YAZI_CONFIG_HOME="$dotfiles_dir\.config\yazi"
+# $env:YAZI_CONFIG_HOME="$HOME\dotfiles\.config\yazi"
+
 
 $dotfiles_dir = "$HOME\dotfiles"
 # $config_dir = "$dotfiles_dir\.config"
