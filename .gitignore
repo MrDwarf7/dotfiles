@@ -12,13 +12,11 @@ z.old/*
 .z.old/
 .z.old/*
 
-
 .config/gh
 .config/github-copilot
 .config/lazygit
 .config/jgit
 .config/scoop
-
 
 .config/gh/*
 .config/github-copilot/*
@@ -26,7 +24,6 @@ z.old/*
 .config/jgit/*
 .config/scoop/*
 .config/graphite/user_config*
-
 
  .config/helix/runtime/grammars/*
  
@@ -38,18 +35,13 @@ z.old/*
 # !.config/helix/runtime/themes/*/**
 # .config/helix/runtime/
 
-
-.config/nvim/lazy-lock*
+.config/nvim/lazy-lock
 
 nvim_distros/*
-
 !nvim_distros/omerxx/
-nvim_distros/omerxx/lazy-lock*
-
-
+nvim_distros/omerxx/lazy-lock
 !nvim_distros/LazyVim/
-nvim_distros/LazyVim/lazy-lock*
+nvim_distros/LazyVim/lazy-lock
 
 
 .config/lazygit/state.*
-
