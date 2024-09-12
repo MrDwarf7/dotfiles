@@ -44,4 +44,6 @@ nvim_distros/omerxx/lazy-lock
 nvim_distros/LazyVim/lazy-lock
 
 
+
+
 .config/lazygit/state.*
