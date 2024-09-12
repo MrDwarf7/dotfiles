@@ -17,13 +17,10 @@ M.setup = function()
 	if vim.g.neovide == nil and vim.g.vscode == nil then
 		return {
 			require("util.lazy_loader_common"),
-			-- commons.base(),
-			-- commons.core_setup(),
-			-- commons.common_setup(),
 		}
 	elseif vim.g.neovide == nil and vim.g.vscode then
 		print("Welcome to VSCode Neovim...")
-		return require("util.lazy_load_vscode")
+		return { require("util.lazy_load_vscode") }
 	elseif vim.g.vscode == nil and vim.g.neovide then
 		return {
 			require("core.neovide"),

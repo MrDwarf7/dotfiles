@@ -1,189 +1,9 @@
----@diagnostic disable: missing-fields
--- local autocmd = vim.api.nvim_create_autocmd
--- local augroup = vim.api.nvim_create_augroup
-
-local function cursor_holds(event)
-	local client = vim.lsp.get_client_by_id(event.data.client_id)
-	if client and client.server_capabilities.documentHighlightProvider then
-		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-			buffer = event.buf,
-			callback = vim.lsp.buf.document_highlight,
-		})
-
-		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-			buffer = event.buf,
-			callback = vim.lsp.buf.clear_references,
-		})
-	end
-end
-
-local function lsp_restart_handler(event)
-	local lsp_restart = function()
-		vim.lsp.stop_client(vim.lsp.get_active_clients())
-		vim.cmd([[ LspRestart<CR> ]])
-	end
-
-	vim.keymap.set("n", "<Leader>l%", function()
-		lsp_restart()
-	end, { desc = "Restart" })
-end
-
 local M = {}
+local lsp_server_utils = require("util.lsp_servers")
 
 local home = vim.env.HOME
 local zls_exe = home .. "/.zls/zls.exe"
 local zig_exe = home .. "/.zig/zig.exe"
-
-M.capabilities = function()
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-	return capabilities
-end
-
-M.servers = function(capabilities)
-	return {
-		bashls = {},
-		biome = {},
-		clangd = {
-			cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
-			single_file_support = true,
-			capabilities = capabilities,
-		},
-		neocmake = {},
-
-		cssls = {},
-
-		docker_compose_language_service = {},
-		dockerls = {},
-		-- erlangls = {},
-		eslint = {},
-		html = {},
-		jsonls = {},
-		lua_ls = {
-			cmd = { "lua-language-server" },
-			filetypes = { "lua" },
-			root_dir = require("lspconfig.util").root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
-			settings = {
-				Lua = {
-					runtime = {
-						version = "LuaJIT",
-						path = vim.split(package.path, ";"),
-					},
-					completion = {
-						callSnippet = "Replace",
-					},
-					diagnostics = {
-						disable = { "missing-fields" },
-						globals = { "vim" },
-					},
-					workspace = {
-						checkThirdParty = true,
-						codeLens = {
-							enable = true,
-						},
-						completion = {
-							callSnippet = "Replace",
-						},
-						doc = {
-							privateName = { "^_" },
-						},
-						hint = {
-							enable = true,
-							setType = false,
-							paramType = true,
-						},
-						library = {
-							"${3rd}/luv/library",
-							-- unpack(vim.api.nvim_get_runtime_file("", true)),
-							-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-							-- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-						},
-					},
-				},
-			},
-		},
-		marksman = {},
-		ols = {},
-		omnisharp = {
-			filetypes = { "cs", "vb" },
-		},
-		-- powershell_es = {
-		-- 	cmd = { "pwsh", "-NoLogo", "-NoProfile", "-Command", "Invoke-EditorServices" },
-		-- 	filetypes = { "powershell", "ps1", "psm1", "psd1" },
-		-- 	root_dir = require("lspconfig.util").root_pattern(
-		-- 		".git",
-		-- 		".editorconfig",
-		-- 		".gitignore",
-		-- 		".ps1",
-		-- 		".psm1",
-		-- 		".psd1"
-		-- 	),
-		-- 	-- bundle_path = vim.fn.stdpath("data") .. "/mason/packages/powershell-editor-services/PowerShellEditorServices",
-		-- 	bundle_path = "~/AppData/Local/nvim-data/mason/packages/powershell-editor-services",
-		-- 	settings = {
-		-- 		powershell = {
-		-- 			codeFormatting = {
-		-- 				Preset = "OTBS",
-		-- 			},
-		-- 		},
-		-- 		scriptAnalysis = {
-		-- 			enable = true,
-		-- 		},
-		-- 		completion = {
-		-- 			enable = true,
-		-- 			useCommandDiscovery = true,
-		-- 		},
-		-- 	},
-		-- },
-		prismals = {},
-		pyright = {
-			cmd = { "pyright-langserver", "--stdio" },
-			filetypes = { "python" },
-			root_dir = require("lspconfig.util").root_pattern(
-				".git",
-				"setup.py",
-				"setup.cfg",
-				"pyproject.toml",
-				"requirements.txt",
-				".venv",
-				"venv"
-			),
-			on_attach = vim.lsp.inlay_hint.enable(),
-			settings = {
-				python = {
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "workspace",
-						useLibraryCodeForTypes = true,
-					},
-				},
-			},
-		},
-		ruff_lsp = {
-			cmd = { "ruff-lsp" },
-			filetypes = { "python" },
-			single_file_support = true,
-			capabilities = capabilities,
-		},
-
-		tailwindcss = {
-			filetypes = {
-				"html",
-				"css",
-				"scss",
-				"javascript",
-				"javascriptreact",
-				"typescript",
-				"typescriptreact",
-			},
-			flags = { debounce_text_changes = 300 },
-			root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
-		},
-		taplo = {},
-		vimls = {},
-		yamlls = {},
-	}
-end
 
 return {
 	"neovim/nvim-lspconfig",
@@ -191,17 +11,10 @@ return {
 	event = "BufReadPre",
 	-- "LspAttach",
 	dependencies = {
-		"nvim-telescope/telescope.nvim",
-		-- {
-		-- 	"folke/neoconf.nvim",
-		-- 	cmd = "Neoconf",
-		-- 	lazy = true,
-		-- },
-		"folke/lazydev.nvim",
-		"j-hui/fidget.nvim",
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		-- { "nvim-telescope/telescope.nvim", lazy = true },
+		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
+		{ "folke/lazydev.nvim" },
+		{ "j-hui/fidget.nvim" },
 	},
 
 	-- stylua: ignore start
@@ -240,58 +53,14 @@ return {
 	},
 	-- stylua: ignore end
 
-	init = function()
-		require("configs.mason")
-	end,
-
 	opts = function()
-		vim.api.nvim_create_autocmd("LspAttach", {
-			callback = function(event)
-				lsp_restart_handler(event)
-				cursor_holds(event)
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(vim.lsp.inlay_hint))
-			end,
-			-- group = vim.api.nvim_create_augroup("LspAuGroup", { clear = true }),
-		})
+		local servers = lsp_server_utils[1]
+		local capabilities = lsp_server_utils[2]
+		local mason_lsp = require("mason-lspconfig")
+		local mason_tools = require("mason-tool-installer")
 
-		vim.diagnostic.config({
-			virtual_text = {
-				spacing = 4,
-				source = "if_many",
-				prefix = "icons",
-			},
-			underline = true,
-			severity_sort = true,
-			signs = true,
-			update_in_insert = false,
-			float = { border = "single" }, -- This line
-			inlay_hints = {
-				enabled = true,
-			},
-			codelens = {
-				enabled = true,
-			},
-			document_highlight = {
-				enabled = true,
-			},
-			--
-			capabilities = {
-				workspace = {
-					fileOperations = {
-						didRename = true,
-						willRename = true,
-					},
-				},
-			},
-		})
-	end,
+		require("configs.mason")
 
-	config = function(_)
-		local lsp_config = require("lspconfig")
-		local capabilities = M.capabilities()
-		local servers = M.servers(capabilities)
-
-		-- Things that are not LSP servers, but are installable via Mason
 		local ensure_installed_array = vim.tbl_keys(servers) or {}
 
 		local ensure_installed = vim.list_extend(ensure_installed_array, {
@@ -319,10 +88,15 @@ return {
 			"csharpier",
 		})
 
-		require("mason-tool-installer").setup({
+		mason_tools.setup({
 			ensure_installed = ensure_installed,
 		})
 
+		local lsp_config = require("lspconfig")
+
+		-- local servers = lsp_server_utils[1]
+		-- local capabilities = lsp_server_utils[2]
+		-- local mason_tools = require("mason-tool-installer")
 		local plugin_handled = {
 			"cmake",
 			"gopls",
@@ -332,19 +106,17 @@ return {
 			"zig",
 		}
 
-		require("mason-lspconfig").setup({
-			handlers = {
-				function(server_name)
-					if server_name == vim.tbl_keys(plugin_handled) then
-						return true
-					end
-					local server = servers[server_name] or {}
-					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-					lsp_config[server_name].setup(server)
-				end,
-			},
+		require("lspconfig.ui.windows").default_options.border = "single"
+		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+			border = "single",
 		})
-		-- Currently isn't included in the mason-lspconfig
+		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+			border = "single",
+		})
+		vim.lsp.handlers["textDocument/diagnostics_border"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
+			border = "single",
+		})
+
 		lsp_config.gleam.setup({})
 		lsp_config.zls.setup({
 			cmd = { zls_exe },
@@ -369,18 +141,87 @@ return {
 			},
 		})
 
-		----@diagnostic disable-next-line: missing-fields
-		--lsp_config.zls.setup({})
+		return {
 
-		require("lspconfig.ui.windows").default_options.border = "single"
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "single",
-		})
-		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-			border = "single",
-		})
-		vim.lsp.handlers["textDocument/diagnostics_border"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
-			border = "single",
-		})
+			require("mason-lspconfig").setup({
+				handlers = {
+					function(server_name)
+						if server_name == vim.tbl_keys(plugin_handled) then
+							return true
+						end
+						local server = servers[server_name] or {}
+						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities or {})
+						lsp_config[server_name].setup(server)
+					end,
+				},
+			}),
+			-- Currently isn't included in the mason-lspconfig
+			-- }
+
+			vim.diagnostic.config({
+				virtual_text = {
+					spacing = 4,
+					source = "if_many",
+					prefix = "icons",
+				},
+				underline = true,
+				severity_sort = true,
+				signs = true,
+				update_in_insert = false,
+				float = { border = "single" }, -- This line
+				inlay_hints = {
+					enabled = true,
+				},
+				codelens = {
+					enabled = true,
+				},
+				document_highlight = {
+					enabled = true,
+				},
+				--
+				capabilities = {
+					workspace = {
+						fileOperations = {
+							didRename = true,
+							willRename = true,
+						},
+					},
+				},
+			}),
+		}
+	end,
+
+	config = function(opts)
+		return opts
 	end,
 }
+
+---@diagnostic disable: missing-fields
+-- local autocmd = vim.api.nvim_create_autocmd
+-- local augroup = vim.api.nvim_create_augroup
+
+-- local function cursor_holds(event)
+-- 	local client = vim.lsp.get_client_by_id(event.data.client_id)
+-- 	if client and client.server_capabilities.documentHighlightProvider then
+-- 		vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+-- 			buffer = event.buf,
+-- 			callback = vim.lsp.buf.document_highlight,
+-- 		})
+--
+-- 		vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+-- 			buffer = event.buf,
+-- 			callback = vim.lsp.buf.clear_references,
+-- 		})
+-- 	end
+-- end
+--
+-- local function lsp_restart_handler(event)
+-- 	local lsp_restart = function()
+-- 		vim.lsp.stop_client(vim.lsp.get_active_clients())
+-- 		vim.cmd([[ LspRestart<CR> ]])
+-- 	end
+--
+-- 	vim.keymap.set("n", "<Leader>l%", function()
+-- 		lsp_restart()
+-- 	end, { desc = "Restart" })
+-- end

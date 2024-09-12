@@ -146,6 +146,10 @@ return {
 		"Airbus5717/c3.vim",
 		ft = { "c3", "c3c" },
 	},
+
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 }
 
 -- {
