@@ -4,5 +4,12 @@ show_hidden = true
 
 [opener]
 edit = [
-    { run = 'nvim "$@"', block = true },
+    { run = "nvim %*", block = true, for = "windows" },
+    { run = 'nvim "$@"', block = true, for = "unix" },
 ]
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", run = "glow" },
+]
+
