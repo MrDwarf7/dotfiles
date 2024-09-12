@@ -1,7 +1,7 @@
 -- local fn = vim.fn
 local nvim_dap = require("dap")
 local dap_setups = require("util.dap-setup-entries")
-local dap_mappings = require("util.dap-mappings")
+local dap_mappings = require("util.dap-keys")
 local dap_virtual_text = require("nvim-dap-virtual-text")
 
 nvim_dap.config = function() end

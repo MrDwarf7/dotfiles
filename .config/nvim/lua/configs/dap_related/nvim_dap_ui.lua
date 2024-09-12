@@ -12,5 +12,5 @@ require("dap").listeners.before.launch.nvim_dap_ui_config = function()
 	require("dapui").open()
 end
 
-require("util.dap-ui-mappings").dap_ui_binds()
+require("util.dap-ui-keys").dap_ui_binds()
 require("nvim-dap-virtual-text").setup()
