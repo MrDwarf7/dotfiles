@@ -335,6 +335,17 @@ function baconget {
     echo "Copied bacon.toml to $currentDir"
 }
 
+export YAZI_CONFIG_HOME="$HOME/dotfiles/.config/yazi"
+
+function yy() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
 source /home/dwarf/.config/broot/launcher/bash/br
 
 ### Fixes ssh-agent / dbus on launch issues - mostly for WSL verson of Arch
