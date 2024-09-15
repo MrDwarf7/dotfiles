@@ -48,6 +48,11 @@ return {
 	},
 
 	{
+		"wsdjeg/vim-fetch",
+		lazy = false,
+	},
+
+	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
@@ -56,6 +61,18 @@ return {
 			require("colorschemes.tokyonight")
 		end,
 	},
+
+	-- Black and white color scheme, simple & elegant
+	-- {
+	--    "zenbones-theme/zenbones.nvim",
+	--    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+	--    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+	--    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+	--    dependencies = "rktjmp/lush.nvim",
+	--    lazy = false,
+	--    priority = 1000,
+	--    opts = {},
+	-- },
 
 	{ "nvim-lua/plenary.nvim" },
 	{ "romgrk/fzy-lua-native", build = "make" },
@@ -105,6 +122,11 @@ return {
 		dependencies = {
 			{ "nvim-lua/plenary.nvim", lazy = false },
 		},
+		"saecki/crates.nvim",
+		lazy = false,
+		ft = { "toml", "rust" },
+		tag = "stable",
+		opts = {},
 	},
 
 	{
@@ -122,8 +144,12 @@ return {
 
 	{
 		"Airbus5717/c3.vim",
-		lazy = false,
+		ft = { "c3", "c3c" },
 	},
+
+	{ "williamboman/mason.nvim" },
+	{ "williamboman/mason-lspconfig.nvim" },
+	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 }
 
 -- {

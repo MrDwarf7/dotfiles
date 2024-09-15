@@ -3,10 +3,11 @@ return {
 	event = "CmdlineEnter",
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"romgrk/fzy-lua-native",
+		-- "romgrk/fzy-lua-native",
 		"nixprime/cpsm",
 	},
-	config = function()
+
+	opts = function()
 		local wilder = require("wilder") -- wildmenu improved
 		wilder.setup({
 			modes = { ":", "/", "?" },
@@ -80,5 +81,9 @@ return {
     cmap <expr> <C-n> wilder#in_context() ? wilder#next() : "\<C-n>"
     cmap <expr> <C-p> wilder#in_context() ? wilder#previous() : "\<C-p>"
     ]])
+	end,
+
+	config = function(opts)
+		return opts
 	end,
 }

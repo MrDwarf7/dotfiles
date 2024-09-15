@@ -145,7 +145,7 @@ return {
 	},
 
 	config = function(_, opts)
-		require("nvim-treesitter").setup(opts)
+		require("nvim-treesitter").setup()
 
 		-- M.treesitter_main()
 

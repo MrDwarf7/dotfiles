@@ -18,6 +18,7 @@ return {
 			{ "<Leader>p", group = "+[P]lugins" },
 			{ "<Leader>w", group = "+[W]inShift" },
 			{ "<Leader>t", group = "+[T]oggles" },
+			{ "<Leader>y", group = "+[Y]ank" },
 			{ "<Leader>gd", group = "+[D]iffview" },
 			{ "gp", group = "+[P]review" },
 
