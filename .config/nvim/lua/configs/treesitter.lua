@@ -45,9 +45,9 @@ return {
 			ensure_installed = {
 				"bash",
 				"c",
+				"cmake",
 				"cpp",
 				"c_sharp",
-				"cmake",
 				"css",
 				"embedded_template",
 				"gitattributes",
@@ -59,6 +59,7 @@ return {
 				"html",
 				"javascript",
 				"json",
+				"kdl",
 				"lua",
 				"markdown",
 				"markdown_inline",
@@ -146,8 +147,6 @@ return {
 
 	config = function(_, opts)
 		require("nvim-treesitter").setup()
-
-		-- M.treesitter_main()
 
 		require("ts_context_commentstring").setup({
 			enable_auto_comment = true,
