@@ -1,5 +1,2 @@
-# [flavor]
-# use = "tokyo-night"
-
-# [manager] 
-# syntect_theme = "/home/dotfiles/.config/yazi/themes/tokyo-night."
+[flavor]
+use = "tokyo-night"
