@@ -26,7 +26,7 @@ return {
 			vb = { "csharpier" },
 			javascript = { "biome" },
 			javascriptreact = { "biome" },
-			json = { "fixjson", { "biome" } },
+			json = { "fixjson", "biome" },
 			lua = { "stylua" },
 			powershell = function(formatter, bufnr)
 				bufnr = bufnr or vim.api.nvim_get_current_buf()
