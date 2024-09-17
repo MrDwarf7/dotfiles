@@ -47,17 +47,22 @@ alias yayup='yay -Syu'
 alias yays='yay -S'
 alias yayss='yay -Ss'
 
-alias sysup="sudo pacman -Syu && yay -Syu"
+# Paru aliases
+alias parup='paru -Syu'
+alias pars='paru -S'
+alias parss='paru -Ss'
+
+alias sysup="sudo pacman -Syu && paru -Syu"
 alias shutdown='systemctl poweroff'
 
-alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+alias ua-drop-caches='sudo paccache -rk3; paru -Sc --aur --noconfirm'
 alias ua-update-all='export TMPFILE="$(mktemp)"; \
     sudo true; \
     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
       && ua-drop-caches \
-      && yay -Syyu --noconfirm'
+      && paru -Syyu --noconfirm'
 
 # Cargo Aliases
 alias cb='cargo build'
@@ -163,11 +168,11 @@ function watch_with_args {
 }
 alias wn=watch_with_args
 
-alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
-alias ua-update-all='export TMPFILE="$(mktemp)"; \
-    sudo true; \
-    rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
-      && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
-      && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
-      && ua-drop-caches \
-      && yay -Syyu --noconfirm'
+# alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
+# alias ua-update-all='export TMPFILE="$(mktemp)"; \
+#     sudo true; \
+#     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+#       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+#       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+#       && ua-drop-caches \
+#       && yay -Syyu --noconfirm'
