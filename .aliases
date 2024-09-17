@@ -48,6 +48,7 @@ alias yays='yay -S'
 alias yayss='yay -Ss'
 
 # Paru aliases
+alias par='paru'
 alias parup='paru -Syu'
 alias pars='paru -S'
 alias parss='paru -Ss'
