@@ -230,6 +230,7 @@ keybinds clear-defaults=true {
 
         unbind "Alt h"
         unbind "Alt Left"
+        unbind "Left"
         unbind "Alt l"
         unbind "Alt Right"
         unbind "Alt j"
@@ -371,18 +372,33 @@ themes {
         white 255 255 255
     }
 
+    tokyo-night {
+        fg 169 177 214
+        bg 26 27 38
+        black 56 62 90
+        red 249 51 87
+        green 158 206 106
+        yellow 224 175 104
+        blue 122 162 247
+        magenta 187 154 247
+        cyan 42 195 222
+        white 192 202 245
+        orange 255 158 100
+    }
 }
 
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "catppuccin-mocha"
+theme "tokyo-night"
 //theme ""
 
 // The name of the default layout to load on startup
 // Default: "default"
+// default_layout "compact"
+// default_layout "default"
 //
-default_layout "compact"
+default_layout "editor"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal || (normal, locked)
