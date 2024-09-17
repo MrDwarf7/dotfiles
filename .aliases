@@ -2,14 +2,22 @@
 #
 # Geberal/Bash Aliases
 
-alias la="$LIST_CLIENT -lah"
-alias l="$LIST_CLIENT -a --tree --level=2 --icons=always"
+# Provide ALL info (etc)
+alias l="$LIST_CLIENT -lah --color=always --level=1"
 
-alias ls="$LIST_CLIENT-lh --color=auto --icons=always"
-alias ldo="$LIST_CLIENT -ld .* --icons"
+# provide standard levels (ie: hiddens but not list etc.)
+alias ls="$LIST_CLIENT -ah --color=automatic"
+
+# Simple list with icons included, less clutter
+alias lt="$LIST_CLIENT -a --tree --level=2 --icons=always"
+
+# same as ls with extra info
+alias la="$LIST_CLIENT -a --tree --level=1 --icons=always"
+
+# alias ldo="$LIST_CLIENT -ld .* --icons"
 
 alias cls='clear'
-alias ca="cls && lt"
+alias ca="clear && $LIST_CLIENT -a --tree --level=1 --icons=always"
 
 alias zq="zoxide query $1"
 
@@ -184,3 +192,5 @@ function watch_with_args {
     return 0
 }
 alias wn=watch_with_args
+
+unset alias l

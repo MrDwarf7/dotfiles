@@ -88,7 +88,7 @@ fi
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
-setopt CORRECT
+# setopt CORRECT
 bindkey -e # End of lines configured by zsh-newuser-install
 zstyle :compinstall filename '/home/dwarf/.zshrc' # compinstall
 autoload -Uz compinit # compinstall
@@ -253,7 +253,6 @@ alias ashc="vim $HOME/.aliases"
 # Vim related things
 alias ovim="NVIM_APPNAME=n_nvim nvim"
 
-source "$HOME/.aliases"
 
 ### functions
 
@@ -434,5 +433,5 @@ eval "$(zoxide init zsh)"
 source $ZSH/oh-my-zsh.sh
 
 unset alias l
-alias l="$LIST_CLIENT -lah"
+source "$HOME/.aliases"
 
