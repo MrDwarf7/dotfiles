@@ -46,7 +46,7 @@ set timeoutlen=200
 set mouse=a
 set showmode
 set clipboard=unnamedplus
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 
 " Ignore compiled files

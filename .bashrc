@@ -82,7 +82,11 @@ alias basc='vim ~/.bashrc'
 
 source "$HOME/.aliases"
 
+# USE asdf OR mise instead going forward I thin
 # source /usr/share/nvm/init-nvm.sh
-source /usr/share/nvm/init-nvm.sh
+
+if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
+    source /usr/share/nvm/init-nvm.sh
+fi
 
 # source /home/dwarf/.config/broot/launcher/bash/br

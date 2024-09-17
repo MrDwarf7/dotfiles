@@ -88,6 +88,7 @@ if pacman -Qi "sccache" &> /dev/null; then
     export RUSTC_WRAPPER=sccache
 fi
 
+# USE asdf OR mise instead going forward I thin
 # if pacman -Qi "nvm" &> /dev/null; then
 #     "nvm alias default 21.6.2"
 # fi
