@@ -81,6 +81,7 @@ fi
 HISTSIZE=1000
 SAVEHIST=1000
 unsetopt beep
+setopt CORRECT
 bindkey -e # End of lines configured by zsh-newuser-install
 zstyle :compinstall filename '/home/dwarf/.zshrc' # compinstall
 autoload -Uz compinit # compinstall
