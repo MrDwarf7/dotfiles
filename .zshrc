@@ -8,6 +8,22 @@
 
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# function export_if_pacman {
+#     local input = "$1"
+#
+# }
+
+# function export_with_prefix {
+#     local input = "$1"
+#
+# }
+
+# function export_with_append_to_path {
+#     local input = "$1"
+#
+# }
+
+
 ### comp install
 # if [ -d "$HOME/.xdg/" ]; then
 #     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
@@ -211,10 +227,6 @@ alias ashc="vim ~/.aliases"
 # Vim related things
 alias ovim="NVIM_APPNAME=n_nvim nvim"
 
-# alias xvim="NVIM_APPNAME=omerxx nvim"
-# alias kvim="NVIM_APPNAME=kunzVim nvim"
-# alias nevim="NVIM_APPNAME=NewVim nvim"
-
 source "$HOME/.aliases"
 
 ### functions
@@ -338,7 +350,7 @@ function baconget {
 
 export YAZI_CONFIG_HOME="$HOME/dotfiles/.config/yazi"
 
-function yy() {
+function yy {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
     yazi "$@" --cwd-file="$tmp"
     if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
