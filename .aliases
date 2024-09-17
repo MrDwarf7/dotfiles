@@ -34,7 +34,7 @@ alias nf='neofetch'
 
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+alias egrep='grep -E --color=auto'
 
 # Pacman aliases
 alias pac='sudo pacman'
