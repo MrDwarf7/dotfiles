@@ -24,6 +24,12 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # }
 
 
+if pacman -Qi "paru" &> /dev/null; then
+    export PKG_MANAGER=paru
+else
+    export PKG_MANAGER=yay
+fi
+
 ### comp install
 # if [ -d "$HOME/.xdg/" ]; then
 #     HISTFILE=~/.xdg/.histfile # Lines configured by zsh-newuser-install
@@ -71,7 +77,6 @@ if [ -d "/mnt/c/Users" ]; then
         pwd | win32yank.exe -i
     }
 fi
-
 
 HISTSIZE=1000
 SAVEHIST=1000
@@ -216,13 +221,26 @@ bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode
 
 
-alias vi='/usr/sbin/vim'
-alias vim='/usr/sbin/nvim'
-alias nvim='/usr/sbin/nvim'
+# alias vi='/usr/sbin/vim'
+# alias vim='/usr/sbin/nvim'
+# alias nvim='/usr/sbin/nvim'
 
-alias .z="source ~/.zshrc"
-alias zshc="vim ~/.zshrc"
-alias ashc="vim ~/.aliases"
+if pacman -Qi "nvim" &> /dev/null; then
+    alias vi='/usr/sbin/vim'
+    alias vim='/usr/sbin/nvim'
+    alias nvim='/usr/sbin/nvim'
+fi
+
+if pacman -Qi "neovim" &> /dev/null; then
+    alias vi='/usr/sbin/vim'
+    alias vim='/usr/sbin/nvim'
+    alias nvim='/usr/sbin/nvim'
+fi
+
+
+alias .z="source $HOME/.zshrc"
+alias zshc="vim $HOME/.zshrc"
+alias ashc="vim $HOME/.aliases"
 
 # Vim related things
 alias ovim="NVIM_APPNAME=n_nvim nvim"
@@ -359,7 +377,9 @@ function yy {
     rm -f -- "$tmp"
 }
 
-source /home/dwarf/.config/broot/launcher/bash/br
+if pacman -Qi "broot" &> /dev/null; then
+    source $HOME/.config/broot/launcher/bash/br
+fi
 
 ### Fixes ssh-agent / dbus on launch issues - mostly for WSL verson of Arch
 #export $(dbus-launch)
