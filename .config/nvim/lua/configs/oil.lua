@@ -19,7 +19,9 @@ return {
 		view_options = {
 			show_hidden = true,
 			is_always_hidden = function(name, bufnr)
-				return name == ".." or name == "node_modules"
+				return name == "node_modules"
+				-- name == ".." or
+				-- Above would hide the 'up directory' entry in the list
 			end,
 		},
 
