@@ -351,6 +351,34 @@ function dodf {
 
 export BAT_CONFIG_PATH="$HOME/dotfiles/.config/bat/bat.conf"
 
+function rust_updater {
+    rustup update
+}
+
+function mirror_updater {
+    function ua_drop_caches {
+        sudo paccache -rk3;
+        $PKG_MANAGER -Sc --aur --noconfirm
+    }
+    export TMPFILE='$(mktemp)';
+    sudo true;
+    rate-mirrors --save=$TMPFILE arch --max-delay=21600
+    sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
+    sudo mv $TMPFILE /etc/pacman.d/mirrorlist
+    ua_drop_caches 
+    $PKG_MANAGER -Syyu --noconfirm
+}
+
+# date -u -r ./git-clone-worktrees.sh +"%Y_%m_%d : %j Time: %T"
+# function file_outdated {
+# }
+
+function upgrader {
+    mirror_updater
+    rust_updater 
+}
+
+alias sysup=upgrader
 
 function baconget {
     bacon_file="$HOME/dotfiles/tools/bacon.toml"
