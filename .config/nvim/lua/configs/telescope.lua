@@ -101,9 +101,17 @@ return {
 		{
 			"<Leader>fd",
 			function()
+				require("telescope.builtin").fd()
+			end,
+			desc = "FzfLua(Oil)",
+		},
+
+		{
+			"<Leader>fD",
+			function()
 				require("telescope.builtin").diagnostics()
 			end,
-			desc = "[d]iagnostics (same as ld)",
+			desc = "[D]iagnostics (same as ld)",
 		},
 
 		{
@@ -197,7 +205,7 @@ return {
 				"--line-number",
 				"--column",
 				"--smart-case",
-				"--no-ignore",
+				-- "--no-ignore",
 				"--hidden",
 			},
 			layout_strategy = "horizontal",
@@ -218,7 +226,7 @@ return {
 			},
 			border = {},
 			color_devicons = true,
-			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental", "build" },
+			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
 			file_previewer = previewers.vim_buffer_cat.new,
 			grep_previewer = previewers.vim_buffer_vimgrep.new,
 			prompt_prefix = "   ",

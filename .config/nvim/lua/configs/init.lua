@@ -43,6 +43,8 @@ return {
 		opts = {
 			library = {
 				{ path = "LazyVim", words = { "LazyVim" } },
+				{ path = "wezterm-types", words = { "wezterm" } },
+				-- { path = "luvit-meta/library", words = { "vim%.uv" } },
 			},
 		},
 	},
