@@ -23,11 +23,18 @@ export XDG_CONFIG_HOME="$HOME/.config"
 #
 # }
 
-
 if pacman -Qi "paru" &> /dev/null; then
     export PKG_MANAGER=paru
 else
     export PKG_MANAGER=yay
+fi
+
+if pacman -Qi "eza" &> /dev/null; then
+    export LIST_CLIENT=eza
+elif pacman -Qi "exa" &> /dev/null; then
+    export LIST_CLIENT=exa
+else
+    export LIST_CLIENT=ls
 fi
 
 ### comp install
@@ -366,7 +373,7 @@ function mirror_updater {
     rate-mirrors --save=$TMPFILE arch --max-delay=21600
     sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
     sudo mv $TMPFILE /etc/pacman.d/mirrorlist
-    ua_drop_caches 
+    ua_drop_caches
     $PKG_MANAGER -Syyu --noconfirm
 }
 
@@ -376,7 +383,7 @@ function mirror_updater {
 
 function upgrader {
     mirror_updater
-    rust_updater 
+    rust_updater
 }
 
 alias sysup=upgrader
@@ -427,5 +434,5 @@ eval "$(zoxide init zsh)"
 source $ZSH/oh-my-zsh.sh
 
 unset alias l
-alias l="exa -lah"
+alias l="$LIST_CLIENT -lah"
 

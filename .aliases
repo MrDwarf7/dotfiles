@@ -2,15 +2,16 @@
 #
 # Geberal/Bash Aliases
 
-alias l='exa -lah'
-alias ls='exa-lh --color=auto --icons'
-alias lt='eza -a --tree --level=1 --icons'
-alias ldo='exa -ld .* --icons'
+alias la="$LIST_CLIENT -lah"
+alias l="$LIST_CLIENT -a --tree --level=2 --icons=always"
+
+alias ls="$LIST_CLIENT-lh --color=auto --icons=always"
+alias ldo="$LIST_CLIENT -ld .* --icons"
 
 alias cls='clear'
-alias ca='cls && exa -lah --icons'
+alias ca="cls && lt"
 
-alias zq='zoxide query $1'
+alias zq="zoxide query $1"
 
 alias vi='/usr/sbin/vim'
 alias vim='/usr/sbin/nvim'
@@ -38,18 +39,20 @@ alias egrep='grep -E --color=auto'
 
 # Pacman aliases
 alias pac='sudo pacman'
-alias pacup='sudo pacman -Syu'
+alias pacup='sudo pacman -Syyu'
 alias pacs='sudo pacman -S'
 alias pacss='pacman -Ss'
 
 # yay aliases
+alias yaysiv='yay -Siv'
 alias yayup='yay -Syu'
 alias yays='yay -S'
 alias yayss='yay -Ss'
 
 # Paru aliases
 alias par='paru'
-alias parup='paru -Syu'
+alias parsiv='paru -Siv'
+alias parup='paru -Syyu'
 alias pars='paru -S'
 alias parss='paru -Ss'
 
@@ -126,6 +129,7 @@ alias wyo="win32yank.exe -o"
 
 alias cd2='cd ../..'
 alias cd3='cd ../../..'
+alias cd4='cd ../../../..'
 
 # Zellij
 
