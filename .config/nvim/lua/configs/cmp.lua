@@ -7,7 +7,7 @@ return {
 		"neovim/nvim-lspconfig",
 		"L3MON4D3/LuaSnip",
 
-		{ "zbirenbaum/copilot-cmp", opts = true }, -- event = "InsertEnter",
+		{ "zbirenbaum/copilot-cmp", opts = {} }, -- event = "InsertEnter",
 		{ "hrsh7th/cmp-nvim-lsp", lazy = false },
 
 		"hrsh7th/cmp-buffer",
@@ -17,7 +17,7 @@ return {
 
 		{ "folke/lazydev.nvim", opts = {} },
 		"saadparwaiz1/cmp_luasnip",
-		{ "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = true },
+		{ "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },
 		"vrslev/cmp-pypi",
 		"onsails/lspkind.nvim",
 	},

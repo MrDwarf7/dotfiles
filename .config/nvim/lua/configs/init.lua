@@ -183,7 +183,7 @@ return {
 	{ "williamboman/mason-lspconfig.nvim" },
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
-	{ "RRethy/vim-illuminate", lazy = true, configure = true },
+	{ "RRethy/vim-illuminate", lazy = true },
 }
 
 -- {
