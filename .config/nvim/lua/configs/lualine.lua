@@ -1,9 +1,9 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	lazy = true,
-	event = "VeryLazy",
+	event = "CursorMoved",
 	dependencies = {
-		"nvim-tree/nvim-web-devicons",
+		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
 	opts = {
 		theme = "tokyonight",

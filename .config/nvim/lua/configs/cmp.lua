@@ -17,7 +17,7 @@ return {
 
 		{ "folke/lazydev.nvim", opts = {} },
 		"saadparwaiz1/cmp_luasnip",
-		"saecki/crates.nvim",
+		{ "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = true },
 		"vrslev/cmp-pypi",
 		"onsails/lspkind.nvim",
 	},

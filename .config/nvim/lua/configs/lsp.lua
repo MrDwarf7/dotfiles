@@ -9,7 +9,7 @@
 return {
 	"neovim/nvim-lspconfig",
 	-- lazy = false,
-	event = "BufReadPre",
+	event = "UIEnter",
 	-- "LspAttach",
 	dependencies = {
 		-- { "nvim-telescope/telescope.nvim", lazy = true },
