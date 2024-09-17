@@ -13,8 +13,18 @@ return {
 			-- "size",
 			-- "mtime",
 		},
+
 		default_file_explorer = true,
 		skip_confirm_for_simple_edits = true, -- default: false
+		view_options = {
+			show_hidden = true,
+			is_always_hidden = function(name, bufnr)
+				return name == "node_modules"
+				-- name == ".." or
+				-- Above would hide the 'up directory' entry in the list
+			end,
+		},
+
 		win_options = {
 			wrap = false,
 			signcolumn = "yes:2",
@@ -25,6 +35,7 @@ return {
 			conceallevel = 3, -- May want to change this to 0
 			concealcursor = "nvic",
 		},
+
 		keymaps = {
 			["g?"] = "actions.show_help",
 
@@ -46,9 +57,6 @@ return {
 			["gx"] = "actions.open_external",
 			["g."] = "actions.toggle_hidden",
 			["g\\"] = "actions.toggle_trash",
-		},
-		view_options = {
-			show_hidden = true,
 		},
 	},
 }

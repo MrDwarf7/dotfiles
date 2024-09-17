@@ -57,14 +57,14 @@ return {
 			desc = "harpoon [5]",
 		},
 		{
-			"<Leader>[",
+			"<C-z>",
 			function()
 				require("harpoon"):list():prev()
 			end,
 			desc = "harpoon [p]rev",
 		},
 		{
-			"<Leader>]",
+			"<C-x>",
 			function()
 				require("harpoon"):list():next()
 			end,
