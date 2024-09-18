@@ -1,3 +1,7 @@
+-- Can only call the assignment like a function because
+-- metatable is set to call it on ___call
+local converter = require("util.convert_filepath")
+
 return {
 	"stevearc/oil.nvim",
 	lazy = false,
@@ -5,6 +9,30 @@ return {
 	priority = 1000,
 	keys = {
 		{ "<C-w><Leader>", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+
+		{
+			"<Leader>yc",
+			function()
+				local filepath = vim.fn.expand("%")
+				filepath = converter(filepath)
+				vim.fn.setreg("+", filepath) -- write to clippoard
+			end,
+			desc = "[c]urrent",
+			noremap = true,
+			silent = true,
+		},
+
+		{
+			"<leader>yC",
+			function()
+				local filepath = vim.fn.expand("%")
+				filepath = converter(filepath)
+				vim.fn.setreg("+", filepath) -- write to clippoard
+			end,
+			desc = "[c]urrent",
+			noremap = true,
+			silent = true,
+		},
 	},
 	opts = {
 		columns = {
