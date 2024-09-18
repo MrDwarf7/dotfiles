@@ -7,18 +7,6 @@ local silent_opts = { noremap = true, silent = true }
 g.mapleader = " "
 g.maplocalleader = " "
 
-vim.keymap.set("n", "<leader>yc", function()
-	local filepath = vim.fn.expand("%")
-	vim.fn.setreg("+", filepath) -- write to clippoard
-end, { desc = "[c]urrent", noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>yC", function()
-	local filepath = vim.fn.expand("%")
-	-- if vim.g.os == "Windows_NT" then
-	-- end
-	vim.fn.setreg("+", filepath) -- write to clippoard
-end, { desc = "[c]urrent", noremap = true, silent = true })
-
 map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
