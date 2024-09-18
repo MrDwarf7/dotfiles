@@ -433,5 +433,6 @@ eval "$(zoxide init zsh)"
 source $ZSH/oh-my-zsh.sh
 
 unset alias l
+# eval "$(atuin init zsh --disable-up-arrow)"
 source "$HOME/.aliases.zsh"
 
