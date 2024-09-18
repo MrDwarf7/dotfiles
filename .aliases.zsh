@@ -1,5 +1,5 @@
-#!/bin/bash
-#
+#!/sbin/zsh
+
 # Geberal/Bash Aliases
 
 # Provide ALL info (etc)
@@ -68,24 +68,24 @@ alias shutdown='systemctl poweroff'
 
 # alias ua-drop-caches="sudo paccache -rk3; $PKG_MANAGER -Sc --aur --noconfirm"
 # alias ua-update-all="export TMPFILE='$(mktemp)'; \
-#     sudo true; \
-#     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
-#       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
-#       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
-#       && ua-drop-caches \
-#       && $PKG_MANAGER -Syyu --noconfirm"
+    #     sudo true; \
+    #     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+    #       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+    #       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+    #       && ua-drop-caches \
+    #       && $PKG_MANAGER -Syyu --noconfirm"
 #
 # alias sysup="sudo pacman -Syu && $PKG_MANAGER -Syu"
 
 #### Original
 # alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
 # alias ua-update-all='export TMPFILE="$(mktemp)"; \
-#     sudo true; \
-#     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
-#       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
-#       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
-#       && ua-drop-caches \
-#       && yay -Syyu --noconfirm'
+    #     sudo true; \
+    #     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
+    #       && sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup \
+    #       && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
+    #       && ua-drop-caches \
+    #       && yay -Syyu --noconfirm'
 #### Original END
 
 # Cargo Aliases

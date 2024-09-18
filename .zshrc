@@ -248,7 +248,7 @@ fi
 
 alias .z="source $HOME/.zshrc"
 alias zshc="vim $HOME/.zshrc"
-alias ashc="vim $HOME/.aliases"
+alias ashc="vim $HOME/.aliases.zsh"
 
 # Vim related things
 alias ovim="NVIM_APPNAME=n_nvim nvim"
@@ -433,5 +433,5 @@ eval "$(zoxide init zsh)"
 source $ZSH/oh-my-zsh.sh
 
 unset alias l
-source "$HOME/.aliases"
+source "$HOME/.aliases.zsh"
 
