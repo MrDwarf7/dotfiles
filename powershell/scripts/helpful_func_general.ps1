@@ -171,24 +171,8 @@ function SourceProfile {
 New-Alias -Name p -Value SourceProfile -Force
 New-Alias -Name pro -Value SourceProfile -Force
 
-function ca {
-    param ($path = ".")
-    Clear-Host
-    Get-ChildItem $path -Force
-}
-
 function . {
     Start-Process .
-}
-
-function la {
-    param ($path = ".")
-    Get-ChildItem $path -Force
-}
-
-function l {
-    param ($path = ".")
-    Get-ChildItem $path -Force
 }
 
 function cd2 {
@@ -232,5 +216,4 @@ function uzip {
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
     }
 }
-
 # END - Linux Functions

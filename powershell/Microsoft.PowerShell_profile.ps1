@@ -79,6 +79,7 @@ $powershell_scripts_dir = "$powershell_dir\scripts"
 
 $env:EDITOR = $env:VISUAL = 'nvim'
 $env:EDITOR = 'nvim'
+# $env:LIST_CLIENT = "eza"
 
 # $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 # if (Test-Path($ChocolateyProfile))
@@ -92,6 +93,11 @@ $env:EDITOR = 'nvim'
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
+
+
+if (Test-CommandExists "eza") {
+    $env:LIST_CLIENT = "eza"
+} 
 
 # Work.sort of
 function checkEnvironment {
@@ -145,25 +151,34 @@ Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 # Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha
 
+
+
+if ($env:LIST_CLIENT -eq "eza") {
+    . "$powershell_completions\eza_aliases.ps1"
+} else {
+    . "$powershell_completions\system_ls_aliases.ps1"
+}
+
+
 # function pro
 # {
 #     . $PROFILE
 # }
 
-function . {
-    Start-Process .
-}
-
-function la {
-    param ($path = ".")
-    Get-ChildItem $path -Force
-}
-
-function l {
-    param ($path = ".")
-    Get-ChildItem $path -Force
-    # [System.IO.Directory]::GetFiles($path) -Force
-}
+# function . {
+#     Start-Process .
+# }
+#
+# function la {
+#     param ($path = ".")
+#     Get-ChildItem $path -Force
+# }
+#
+# function l {
+#     param ($path = ".")
+#     Get-ChildItem $path -Force
+#     # [System.IO.Directory]::GetFiles($path) -Force
+# }
 
 # if I decide to start using starship, well this is how I would do it.
 # Invoke-Expression (&starship init powershell)
