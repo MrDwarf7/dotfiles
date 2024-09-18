@@ -6,7 +6,7 @@ return {
 		{
 			"]t",
 			function()
-				require("todo-comments").jump_next()
+				return require("todo-comments").jump_next()
 			end,
 			desc = "Next todo comment",
 		},
@@ -14,7 +14,7 @@ return {
 		{
 			"[t",
 			function()
-				require("todo-comments").jump_prev()
+				return require("todo-comments").jump_prev()
 			end,
 			desc = "Previous todo comment",
 		},

@@ -10,13 +10,13 @@ return {
 		{
 			"zR",
 			function()
-				require("ufo").openAllFolds()
+				return require("ufo").openAllFolds()
 			end,
 		},
 		{
 			"zM",
 			function()
-				require("ufo").closeAllFolds()
+				return require("ufo").closeAllFolds()
 			end,
 		},
 	},

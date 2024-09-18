@@ -10,6 +10,6 @@ return {
 		{ "nvim-treesitter/nvim-treesitter", lazy = true },
 	},
 	config = function()
-		require("go").setup()
+		return require("go").setup()
 	end,
 }

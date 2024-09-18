@@ -8,7 +8,7 @@ return {
 		{
 			"gpd",
 			function()
-				require("goto-preview").goto_preview_definition()
+				return require("goto-preview").goto_preview_definition()
 			end,
 			desc = "[d]efinition",
 		},
@@ -17,7 +17,7 @@ return {
 
 			"gpD",
 			function()
-				require("goto-preview").goto_preview_declaration()
+				return require("goto-preview").goto_preview_declaration()
 			end,
 			desc = "[D]eclaration",
 		},
@@ -26,7 +26,7 @@ return {
 
 			"gpr",
 			function()
-				require("goto-preview").goto_preview_references()
+				return require("goto-preview").goto_preview_references()
 			end,
 			desc = "[r]eferences",
 		},
@@ -34,7 +34,7 @@ return {
 		{
 			"gpi",
 			function()
-				require("goto-preview").goto_preview_implementation()
+				return require("goto-preview").goto_preview_implementation()
 			end,
 			desc = "[i]mpl",
 		},
@@ -42,7 +42,7 @@ return {
 		{
 			"gpt",
 			function()
-				require("goto-preview").goto_preview_type_definition()
+				return require("goto-preview").goto_preview_type_definition()
 			end,
 			desc = "[t]ype",
 		},
@@ -50,7 +50,7 @@ return {
 		{
 			"gP",
 			function()
-				require("goto-preview").close_all_win()
+				return require("goto-preview").close_all_win()
 			end,
 			desc = "close all",
 		},

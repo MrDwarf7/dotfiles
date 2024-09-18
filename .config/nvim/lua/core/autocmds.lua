@@ -1,4 +1,3 @@
-
 return {
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
@@ -49,6 +48,11 @@ return {
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(event)
 			local client = vim.lsp.get_client_by_id(event.data.client_id)
+			local buf_name = vim.api.nvim_buf_get_name(0)
+			if string.find(buf_name, ".obsidian.vimrc") then
+				vim.api.nvim_buf_set_option(0, "filetype", "vim")
+				return
+			end
 			if client and client.server_capabilities.documentHighlightProvider then
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 					buffer = event.buf,
@@ -61,6 +65,33 @@ return {
 				})
 			end
 		end,
+	}),
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.txt",
+		callback = function()
+			vim.bo.textwidth = 0
+			vim.bo.wrapmargin = 12
+			vim.bo.formatoptions = "jcroqnt" -- jcroqnt
+			vim.opt.wrap = true
+			vim.bo.expandtab = false
+
+			-- vim.cmd([[ set textwidth=0 ]])
+			-- vim.cmd([[ set wrapmargin=8 ]])
+			-- vim.cmd([[ set formatoptions+=t ]])
+			-- vim.cmd([[ set formatoptions-=l ]])
+		end,
+		group = vim.api.nvim_create_augroup("NoExpandTab", { clear = true }),
+	}),
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.md",
+		callback = function()
+			vim.opt.textwidth = 80
+			vim.opt.wrap = true
+			vim.bo.expandtab = false
+		end,
+		group = vim.api.nvim_create_augroup("MarkdownOptions", { clear = true }),
 	}),
 
 	-- vim.api.nvim_create_autocmd("BufWritePre", {

@@ -14,7 +14,7 @@
 return {
 	"stevearc/conform.nvim",
 	-- lazy = false,
-	event = "LspAttach",
+	event = "VeryLazy",
 	-- "BufWritePost",
 	cmd = "Format",
 	opts = {
@@ -44,7 +44,10 @@ return {
 					return { "isort", "black" }
 				end
 			end,
+			markdown = { "prettier" },
+
 			sh = { "shfmt" },
+			sql = { "sql_formatter" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },
@@ -56,6 +59,7 @@ return {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
 			local disabled_ft = {
+				"AvanteInput",
 				"c",
 				"cpp",
 				"netrw",
@@ -75,6 +79,7 @@ return {
 		end,
 		format_after_save = function(bufnr)
 			local disabled_ft = {
+				"AvanteInput",
 				"c",
 				"cpp",
 				"netrw",

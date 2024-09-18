@@ -25,6 +25,7 @@ M.servers = function()
 
 		cssls = {},
 
+		deno = {},
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
@@ -76,6 +77,8 @@ M.servers = function()
 			},
 		},
 		marksman = {},
+		markdown_oxide = {},
+
 		ols = {},
 		omnisharp = {
 			filetypes = { "cs", "vb" },
@@ -157,7 +160,7 @@ M.servers = function()
 		yamlls = {},
 		zls = {
 			cmd = { zls_exe },
-			capabilities = vim.tbl_deep_extend("force", {}, M.capabilities() or {}),
+			capabilities = vim.tbl_deep_extend("keep", M.capabilities() or {}, {}),
 			settings = {
 				zls = {
 					zig_exe_path = zig_exe,

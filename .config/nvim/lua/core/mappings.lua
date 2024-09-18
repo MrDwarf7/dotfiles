@@ -7,18 +7,6 @@ local silent_opts = { noremap = true, silent = true }
 g.mapleader = " "
 g.maplocalleader = " "
 
-vim.keymap.set("n", "<leader>yc", function()
-	local filepath = vim.fn.expand("%")
-	vim.fn.setreg("+", filepath) -- write to clippoard
-end, { desc = "[c]urrent", noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>yC", function()
-	local filepath = vim.fn.expand("%")
-	-- if vim.g.os == "Windows_NT" then
-	-- end
-	vim.fn.setreg("+", filepath) -- write to clippoard
-end, { desc = "[c]urrent", noremap = true, silent = true })
-
 map("n", "<Leader><Left>", vim.cmd.Ex, { desc = "netrw" })
 
 map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
@@ -27,6 +15,16 @@ map("n", "<Leader>tl", "<cmd>vsplit<CR>:vertical resize 90<CR>:term<CR>A", { des
 map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>A", { desc = "Terminal" })
 
 -- { noremap = true, silent = true, desc = "Start pwsh" })
+
+map("n", "<Leader>fW", function()
+	local win_view = vim.fn.winsaveview()
+	local word = vim.fn.expand("<cword>")
+	vim.cmd("exec '%s/" .. word .. "//gn'")
+	vim.fn.winrestview(win_view)
+
+	-- Can remove this if highlighting is preferred
+	vim.cmd([[ exec "nohl" ]])
+end, { desc = "Word count" })
 
 map("n", "<Leader>E", function()
 	if not pcall(require, "mini.files") then

@@ -1,11 +1,23 @@
+local icons = require("util.icons")
+local actions = require("telescope.actions")
+local git_icons = {
+	added = icons.gitAdd,
+	changed = icons.gitChange,
+	copied = ">",
+	deleted = icons.gitRemove,
+	renamed = "➡",
+	unmerged = "‡",
+	untracked = "?",
+}
+
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
-	-- lazy = false,
-	-- event = "UIEnter",
+	lazy = true,
+	event = "UIEnter",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"folke/trouble.nvim",
+		{ "folke/trouble.nvim", lazy = true },
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
 			build = "make",
@@ -13,15 +25,15 @@ return {
 				return vim.fn.executable("make") == 1
 			end,
 		},
-		"AckslD/nvim-neoclip.lua",
-		"nvim-telescope/telescope-live-grep-args.nvim",
+		{ "AckslD/nvim-neoclip.lua", lazy = true },
+		{ "nvim-telescope/telescope-live-grep-args.nvim", lazy = true },
 	},
 
 	keys = {
 		{
 			"<Leader>ff",
 			function()
-				require("telescope.builtin").find_files()
+				return require("telescope.builtin").find_files()
 			end,
 			desc = "[f]iles",
 		},
@@ -29,7 +41,7 @@ return {
 		{
 			"<Leader>fw",
 			function()
-				require("telescope.builtin").live_grep()
+				return require("telescope.builtin").live_grep()
 			end,
 			desc = "[w]ord",
 		},
@@ -37,7 +49,7 @@ return {
 		{
 			"<Leader>fb",
 			function()
-				require("telescope.builtin").buffers()
+				return require("telescope.builtin").buffers()
 			end,
 			desc = "[b]uffers",
 		},
@@ -45,7 +57,7 @@ return {
 		{
 			"<Leader>fr",
 			function()
-				require("telescope.builtin").oldfiles()
+				return require("telescope.builtin").oldfiles()
 			end,
 			desc = "[r]ecents",
 		},
@@ -53,7 +65,7 @@ return {
 		{
 			"<Leader>fl",
 			function()
-				require("telescope.builtin").resume()
+				return require("telescope.builtin").resume()
 			end,
 			desc = "[l]ast search",
 		},
@@ -61,7 +73,7 @@ return {
 		{
 			"<Leader>fj",
 			function()
-				require("telescope.builtin").jumplist()
+				return require("telescope.builtin").jumplist()
 			end,
 			desc = "[j]ump list",
 		},
@@ -69,7 +81,7 @@ return {
 		{
 			"<Leader>fV",
 			function()
-				require("telescope.builtin").vim_options()
+				return require("telescope.builtin").vim_options()
 			end,
 			desc = "[v]im options browser",
 		},
@@ -77,7 +89,7 @@ return {
 		{
 			"<Leader>fg",
 			function()
-				require("telescope.builtin").git_files()
+				return require("telescope.builtin").git_files()
 			end,
 			desc = "[g]it files",
 		},
@@ -85,23 +97,15 @@ return {
 		{
 			"<Leader>fm",
 			function()
-				require("telescope.builtin").marks()
+				return require("telescope.builtin").marks()
 			end,
 			desc = "[m]arks",
 		},
 
 		{
-			"<Leader>fp",
-			function()
-				require("trouble").toggle()
-			end,
-			desc = "[p]roblems - trouble",
-		},
-
-		{
 			"<Leader>fd",
 			function()
-				require("telescope.builtin").fd()
+				return require("telescope.builtin").fd()
 			end,
 			desc = "FzfLua(Oil)",
 		},
@@ -109,7 +113,7 @@ return {
 		{
 			"<Leader>fD",
 			function()
-				require("telescope.builtin").diagnostics()
+				return require("telescope.builtin").diagnostics()
 			end,
 			desc = "[D]iagnostics (same as ld)",
 		},
@@ -117,7 +121,7 @@ return {
 		{
 			"<Leader>pr",
 			function()
-				require("telescope.builtin").reloader()
+				return require("telescope.builtin").reloader()
 			end,
 			desc = "[r]eloader",
 		},
@@ -128,7 +132,7 @@ return {
 			"<leader>/",
 			function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
-				require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				return require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
 					winblend = 10,
 					previewer = false,
 				}))
@@ -142,7 +146,7 @@ return {
 			"<Leader>fs",
 			function()
 				local word = vim.fn.expand("<cword>")
-				require("telescope.builtin").grep_string({ search = word })
+				return require("telescope.builtin").grep_string({ search = word })
 			end,
 			desc = "[s]earch [w]ord",
 			mode = { "n", "v" },
@@ -152,50 +156,19 @@ return {
 			"<Leader>fS",
 			function()
 				local word = vim.fn.expand("<cWORD>")
-				require("telescope.builtin").grep_string({ search = word })
+				return require("telescope.builtin").grep_string({ search = word })
 			end,
 			desc = "[S]earch [W]ORD",
 			mode = { "n", "v" },
 		},
 	},
 
-	-- init = function()
-	-- 	local my_default_maps = function()
-	-- 		return {
-	-- 			i = {
-	-- 				["<C-k>"] = require("telescope.actions").move_selection_previous,
-	-- 				["<C-j>"] = require("telescope.actions").move_selection_next,
-	--
-	-- 				["<C-p>"] = require("telescope.actions").move_selection_previous,
-	-- 				["<C-n>"] = require("telescope.actions").move_selection_next,
-	--
-	-- 				["<C-t>"] = require("trouble.sources.telescope").open,
-	-- 				["<C-q>"] = require("telescope.actions").close,
-	-- 				["<C-d>"] = require("telescope.actions").delete_buffer,
-	--
-	-- 				["<C-s>"] = require("telescope.actions").select_horizontal,
-	-- 				["<C-l>"] = require("telescope.actions").select_vertical,
-	-- 			},
-	-- 			n = {
-	-- 				["q"] = require("telescope.actions").close,
-	-- 				["<C-q>"] = require("telescope.actions").close,
-	-- 				["<esc>"] = require("telescope.actions").close,
-	-- 				["<C-k>"] = require("telescope.actions").move_selection_previous,
-	-- 				["<C-j>"] = require("telescope.actions").move_selection_next,
-	-- 				["<C-p>"] = require("telescope.actions").move_selection_previous,
-	-- 				["<C-n>"] = require("telescope.actions").move_selection_next,
-	-- 				["<C-d>"] = require("telescope.actions").delete_buffer,
-	--
-	-- 				["<C-s>"] = require("telescope.actions").select_horizontal,
-	-- 				["<C-l>"] = require("telescope.actions").select_vertical,
-	-- 			},
-	-- 		}
-	-- 	end
-	-- end,
+	opts = {
+		defaults = {
+			border = true,
+			hl_result_eol = true,
+			multi_icon = "",
 
-	opts = function()
-		local previewers = require("telescope.previewers")
-		return {
 			vimgrep_arguments = {
 				"rg",
 				"--vimgrep",
@@ -208,6 +181,7 @@ return {
 				-- "--no-ignore",
 				"--hidden",
 			},
+
 			layout_strategy = "horizontal",
 			layout_config = {
 				horizontal = {
@@ -224,57 +198,78 @@ return {
 				height = 0.80,
 				preview_cutoff = 120,
 			},
-			border = {},
-			color_devicons = true,
-			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
-			file_previewer = previewers.vim_buffer_cat.new,
-			grep_previewer = previewers.vim_buffer_vimgrep.new,
+			--- NEW:
+			file_sorter = require("telescope.sorters").get_fzy_sorter,
+
 			prompt_prefix = "   ",
+			color_devicons = true,
+			git_icons = git_icons,
+			sorting_strategy = "descending",
+
+			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+			grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+			qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+
+			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
+
+			mappings = {
+				i = {
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
+
+					-- ["<C-t>"] = require("trouble.sources.telescope").open,
+					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+					["<C-x>"] = actions.delete_buffer,
+					--["<C-d>"] = actions.delete_buffer,
+
+					["<C-[>"] = actions.select_horizontal,
+					["<C-]>"] = actions.select_vertical,
+
+					["<C-h>"] = actions.cycle_previewers_next,
+					["<C-l>"] = actions.cycle_previewers_prev,
+				},
+
+				n = {
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
+
+					-- ["<C-t>"] = trouble_ts.open,
+					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+					["<C-x>"] = actions.delete_buffer,
+
+					["q"] = actions.close,
+					["<Esc>"] = actions.close,
+
+					["<C-[>"] = actions.select_horizontal,
+					["<C-]>"] = actions.select_vertical,
+
+					["<C-h>"] = actions.cycle_previewers_next,
+					["<C-l>"] = actions.cycle_previewers_prev,
+				},
+			},
+
 			selection_caret = "|> ",
 			set_env = { ["COLORTERM"] = "truecolor" },
 			winblend = 12,
-
-			mappings = function()
-				local actions = require("telescope.actions")
-				return {
-					i = {
-						["<C-k>"] = actions.move_selection_previous,
-						["<C-j>"] = actions.move_selection_next,
-
-						["<C-p>"] = actions.move_selection_previous,
-						["<C-n>"] = actions.move_selection_next,
-
-						["<C-t>"] = require("trouble.sources.telescope").open,
-						["<C-q>"] = actions.close,
-						["<C-d>"] = actions.delete_buffer,
-
-						["<C-s>"] = actions.select_horizontal,
-						["<C-l>"] = actions.select_vertical,
-					},
-					n = {
-						["q"] = actions.close,
-						["<C-q>"] = actions.close,
-						["<esc>"] = actions.close,
-						["<C-k>"] = actions.move_selection_previous,
-						["<C-j>"] = actions.move_selection_next,
-						["<C-p>"] = actions.move_selection_previous,
-						["<C-n>"] = actions.move_selection_next,
-						["<C-d>"] = actions.delete_buffer,
-
-						["<C-s>"] = actions.select_horizontal,
-						["<C-l>"] = actions.select_vertical,
-					},
-				}
-			end,
-		}
-	end,
+		},
+		extensions = {
+			fzy_native = {
+				override_generic_sorter = false,
+				override_file_sorter = true,
+				case_mode = "smart_case",
+			},
+		},
+	},
 
 	config = function(_, opts)
-		local telescope = require("telescope")
-		telescope.load_extension("fzy_native")
-		telescope.load_extension("live_grep_args")
-		telescope.load_extension("neoclip")
-		telescope.load_extension("harpoon")
-		return opts
+		require("telescope").load_extension("fzy_native")
+		require("telescope").load_extension("live_grep_args")
+		require("telescope").load_extension("neoclip")
+		require("telescope").load_extension("harpoon")
+		require("telescope").setup(opts)
 	end,
 }

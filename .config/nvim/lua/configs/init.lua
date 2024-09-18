@@ -95,8 +95,9 @@ return {
 				on_highlights = function(highlights, colors) end,
 			}
 		end,
-		config = function()
+		config = function(_, opts)
 			vim.cmd.colorscheme("tokyonight-storm")
+			return opts
 		end,
 	},
 
@@ -134,7 +135,8 @@ return {
 	{
 		"Civitasv/cmake-tools.nvim",
 		ft = { "cmake", "cpp", "h", "hpp" },
-		init = function()
+		-- previously init = function()
+		config = function(_)
 			local loaded = false
 			local function check()
 				local cwd = vim.uv.cwd()
@@ -153,7 +155,11 @@ return {
 			})
 		end,
 	},
-	{ "j-hui/fidget.nvim", opts = {} },
+	{
+		"j-hui/fidget.nvim",
+		lazy = true,
+		opts = {},
+	},
 
 	-- { "j-hui/fidget.nvim", lazy = true, event = "VeryLazy", opts = {} },
 	-- { "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },

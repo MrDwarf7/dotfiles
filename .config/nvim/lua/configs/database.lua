@@ -9,7 +9,11 @@ return {
 		"kristijanhusak/vim-dadbod-ui",
 		dependencies = {
 			{ "tpope/vim-dadbod", lazy = true },
-			{ "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql", "mssql" }, lazy = true }, -- Optional
+			{
+				"kristijanhusak/vim-dadbod-completion",
+				ft = { "sql", "mysql", "plsql", "mssql" },
+				lazy = true,
+			}, -- Optional
 		},
 		keys = {
 
@@ -60,27 +64,10 @@ return {
 			"DBUILastQueryInfo",
 		},
 
-		opts = {
-			db_completion = function()
-				require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
-			end,
-		},
-
-		config = function(_, opts)
-			-- Your DBUI configuration
+		opts = function()
 			vim.g.db_ui_use_nerd_fonts = 1
 			vim.g.db_ui_auto_execute_table_helpers = 1
-			-- vim.g.db_ui_show_help = 0 -- Disable help block at top left
 			vim.g.db_ui_winwidth = 35
-
-			-- vim.g.db_ui_save_location = vim.fn.stdpath("cache") .. "/db_ui_save_location"
-
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {
-					"sql",
-				},
-				command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
-			})
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = {
@@ -90,29 +77,75 @@ return {
 					"mssql",
 					"tsql",
 				},
-				callback = function()
-					vim.schedule(opts.db_completion)
+				callback = function(opts)
+					-- vim.schedule(opts.db_completion)
+					vim.schedule(function()
+						return require("cmp").setup.buffer({
+							sources = {
+								{ name = "vim-dadbod-completion" },
+								{ name = "copilot" },
+								{ name = "buffer" },
+								{ name = "nvm_lsp" },
+							},
+						})
+					end)
 				end,
 			})
 		end,
+
+		-- Now we just hand them straight out/to the plugin
+
+		config = function(_, opts)
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"sql",
+				},
+				command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+			})
+			return opts
+		end,
 	},
-
-	------------------ testing
-
-	-- {
-	-- 	"kndndrj/nvim-dbee",
-	-- 	lazy = false,
-	-- 	dependencies = {
-	-- 		"MunifTanjim/nui.nvim",
-	-- 	},
-	-- 	build = function()
-	-- 		-- Install tries to automatically detect the install method.
-	-- 		-- if it fails, try calling it with one of these parameters:
-	-- 		--    "curl", "wget", "bitsadmin", "go"
-	-- 		require("dbee").install("go")
-	-- 	end,
-	-- 	config = function()
-	-- 		require("dbee").setup(--[[optional config]])
-	-- 	end,
-	-- },
 }
+
+-- opts
+-- Your DBUI configuration
+-- vim.g.db_ui_show_help = 0 -- Disable help block at top left
+-- vim.g.db_ui_use_nerd_fonts = 1
+-- vim.g.db_ui_auto_execute_table_helpers = 1
+-- vim.g.db_ui_winwidth = 35
+--
+-- vim.g.db_ui_save_location = vim.fn.stdpath("cache") .. "/db_ui_save_location"
+-- local opts = {
+-- 	db_completion = function()
+-- 		return require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+-- 	end,
+-- }
+-- config = function(_, opts)
+-- 	-- Your DBUI configuration
+-- 	vim.g.db_ui_use_nerd_fonts = 1
+-- 	vim.g.db_ui_auto_execute_table_helpers = 1
+-- 	-- vim.g.db_ui_show_help = 0 -- Disable help block at top left
+-- 	vim.g.db_ui_winwidth = 35
+--
+-- 	-- vim.g.db_ui_save_location = vim.fn.stdpath("cache") .. "/db_ui_save_location"
+--
+-- 	vim.api.nvim_create_autocmd("FileType", {
+-- 		pattern = {
+-- 			"sql",
+-- 		},
+-- 		command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+-- 	})
+--
+-- 	vim.api.nvim_create_autocmd("FileType", {
+-- 		pattern = {
+-- 			"sql",
+-- 			"mysql",
+-- 			"plsql",
+-- 			"mssql",
+-- 			"tsql",
+-- 		},
+-- 		callback = function()
+-- 			vim.schedule(opts.db_completion)
+-- 		end,
+-- 	})
+-- end,

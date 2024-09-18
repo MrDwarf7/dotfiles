@@ -9,6 +9,7 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
 vim.opt.rtp:prepend(lazypath)
 vim.loader.enable()
 
@@ -16,10 +17,10 @@ if vim.g.neovide == nil and vim.g.vscode == nil then
 	return {
 		require("util.lazy_loader_common"),
 	}
-elseif vim.g.neovide == nil and vim.g.vscode then
+elseif vim.g.vscode then
 	print("Welcome to VSCode Neovim...")
 	return { require("util.lazy_load_vscode") }
-elseif vim.g.vscode == nil and vim.g.neovide then
+else
 	return {
 		require("core.neovide"),
 		require("util.lazy_loader_common"),
