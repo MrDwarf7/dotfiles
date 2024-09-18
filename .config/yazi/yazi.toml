@@ -10,6 +10,32 @@ edit = [
 
 [plugin]
 prepend_previewers = [
-  { name = "*.md", run = "glow" },
+    # { name = "*.md", run = "glow" },
+    { name = "*.md", run = "rich-preview" }, # for markdown (.md) files
+
+    { mime = "text/csv", run = "miller" },
+    { name = "*.csv", run = "rich-preview"}, # for csv files
+
+    { name = "*.ipynb", run = "rich-preview"}, # for jupyter notebooks (.ipynb)
+    { name = "*.json", run = "rich-preview"}, # for json (.json) files
+
+    { mime = "application/*zip", run = "ouch" },
+    { mime = "application/x-tar", run = "ouch" },
+    { mime = "application/x-bzip2", run = "ouch" },
+    { mime = "application/x-7z-compressed", run = "ouch" },
+    { mime = "application/x-rar", run = "ouch" },
+    { mime = "application/x-xz", run = "ouch" },
+
+]
+prepend_fetcher = [
+    { id = "git", name = "*", run = "git"},
+    { id = "git", name = "*/", run = "git"},
 ]
 
+# Setting up binds for it also
+# https://github.com/ndtoan96/ouch.yazi
+
+# https://github.com/dedukun/relative-motions.yazi
+# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
+
+append_previewers = [{ name = "*", run = "hexyl" }]
