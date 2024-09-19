@@ -134,7 +134,8 @@ return {
 	{
 		"Civitasv/cmake-tools.nvim",
 		ft = { "cmake", "cpp", "h", "hpp" },
-		init = function()
+		-- previously init = function()
+		config = function(_)
 			local loaded = false
 			local function check()
 				local cwd = vim.uv.cwd()
