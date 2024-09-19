@@ -1,9 +1,12 @@
+local queries = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/queries"
+vim.opt.runtimepath:append(queries)
+
 return {
 	"nvim-treesitter/nvim-treesitter",
-	lazy = true,
+	lazy = false,
 	event = "BufRead",
 	build = ":TSUpdate",
-	install = ":TSInstall",
+	--install = ":TSInstall",
 	dependencies = {
 		-- "lewis6991/gitsigns.nvim",
 		{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = {
