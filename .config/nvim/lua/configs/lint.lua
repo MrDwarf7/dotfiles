@@ -15,6 +15,7 @@ return {
 			powershell = { "powershell_es" },
 			python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
 			sh = { "shellcheck" },
+			sql = { "sqlfluff" },
 			typescript = { "biomejs" },
 			typescriptreact = { "biomejs" },
 			vim = { "vint" },
