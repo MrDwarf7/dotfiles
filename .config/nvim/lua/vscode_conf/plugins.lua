@@ -12,29 +12,18 @@ print("Vscode specific plugins file loads...")
 
 return {
 	"numToStr/Comment.nvim",
-	lazy = false,
+	event = "BufReadPost",
 	dependencies = {
 		"JoosepAlviste/nvim-ts-context-commentstring",
 	},
-	-- opts = {},
-	config = function()
-		require("Comment").setup({
-			pre_hook = function()
-				return vim.bo.commentstring
-			end,
-		})
+	opts = {
+		pre_hook = function()
+			return vim.bo.commentstring
+		end,
+	},
+
+	config = function(_, opts)
+		opts = opts or vim.tbl_extend("force", opts, {})
+		require("Comment").setup(opts)
 	end,
 }
-
--- return {
--- 	"numToStr/Comment.nvim",
--- 	event = "BufReadPost",
--- 	dependencies = {
--- 		"JoosepAlviste/nvim-ts-context-commentstring",
--- 	},
--- 	opts = {
--- 		pre_hook = function()
--- 			return vim.bo.commentstring
--- 		end,
--- 	},
--- }
