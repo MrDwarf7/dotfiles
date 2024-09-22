@@ -1,3 +1,13 @@
+local highlight = {
+	"RainbowRed",
+	"RainbowYellow",
+	"RainbowBlue",
+	"RainbowOrange",
+	"RainbowGreen",
+	"RainbowViolet",
+	"RainbowCyan",
+}
+
 return {
 	"lukas-reineke/indent-blankline.nvim",
 	lazt = false,
@@ -9,54 +19,42 @@ return {
 
 	-- init = function() end,
 
-	opts = function(highlight)
-		return {
-			exclude = {
-				filetypes = {
-					"AvanteInput",
-					"dbout",
-					"Diffview",
-					"flutterToolsOutline",
-					"git",
-					"gitcommit",
-					"help",
-					"log",
-					"markdown",
-					"Neogit",
-					"neo-tree-popup",
-					"norg",
-					"NvimTree",
-					"oil",
-					"Oil",
-					"org",
-					"orgagenda",
-					"txt",
-					"undotree",
-				},
+	opts = {
+		exclude = {
+			filetypes = {
+				"AvanteInput",
+				"dbout",
+				"Diffview",
+				"flutterToolsOutline",
+				"git",
+				"gitcommit",
+				"help",
+				"log",
+				"markdown",
+				"Neogit",
+				"neo-tree-popup",
+				"norg",
+				"NvimTree",
+				"oil",
+				"Oil",
+				"org",
+				"orgagenda",
+				"txt",
+				"undotree",
 			},
-			indent = {
-				char = "│", -- ▏┆ ┊ 
-				tab_char = "│",
-			},
-			scope = {
-				char = "▎",
-				show_start = true,
-				highlight = highlight,
-			},
-		}
-	end,
+		},
+		indent = {
+			char = "│", -- ▏┆ ┊ 
+			tab_char = "│",
+		},
+		scope = {
+			char = "▎",
+			show_start = true,
+			highlight = highlight,
+		},
+	},
 
-	config = function()
-		local highlight = {
-			"RainbowRed",
-			"RainbowYellow",
-			"RainbowBlue",
-			"RainbowOrange",
-			"RainbowGreen",
-			"RainbowViolet",
-			"RainbowCyan",
-		}
-
+	config = function(_, opts)
 		vim.g.rainbow_delimiters = { highlight = highlight }
 		local hooks = require("ibl.hooks")
 

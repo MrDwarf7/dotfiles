@@ -21,32 +21,32 @@ return {
 	-- stylua: ignore start
 	keys = {
 		-- map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
-		{ "gd", function() require("telescope.builtin").lsp_definitions() end, desc = "[G]oto [d]efinition" },
-		{ "gD", function() vim.lsp.buf.declaration() end, "[G]oto [D]eclration" },
-		{ "gr", function() require("telescope.builtin").lsp_references() end, desc = "[G]oto [r]eferences" },
-		{ "gi", function() require("telescope.builtin").lsp_implementations() end, desc = "[G]oto [I]mpl" },
-		{ "gt", function() require("telescope.builtin").lsp_type_definitions() end, desc = "[G]oto [t]ype def" },
-		{ "<Leader>ls", function() require("telescope.builtin").lsp_document_symbols() end, desc = "[S]ymbols document" },
-		{ "<Leader>lS", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "[S]ymbol workspace" },
-		{ "<Leader>ll", function() require("telescope.builtin").lsp_incoming_calls() end, desc = "ca[l]ls incoming" },
-		{ "<Leader>lL", function() require("telescope.builtin").lsp_outgoing_calls() end, desc = "ca[L]ls outgoing" },
-		{ "<Leader>lt", function() require("telescope.builtin").treesitter() end, desc = "[T]reesitter symbols" },
-		{ "<Leader>ld", function() require("telescope.builtin").diagnostics() end, desc = "[d]iagnostics" },
-		{ "<Leader>lr", function() vim.lsp.buf.rename() end, desc = "[r]ename" },
-		{ "<Leader>la", function() vim.lsp.buf.code_action() end, desc = "[a]ction" },
+		{ "gd", function() return require("telescope.builtin").lsp_definitions() end, desc = "[G]oto [d]efinition" },
+		{ "gD", function() return vim.lsp.buf.declaration() end, "[G]oto [D]eclration" },
+		{ "gr", function() return require("telescope.builtin").lsp_references() end, desc = "[G]oto [r]eferences" },
+		{ "gi", function() return require("telescope.builtin").lsp_implementations() end, desc = "[G]oto [I]mpl" },
+		{ "gt", function() return require("telescope.builtin").lsp_type_definitions() end, desc = "[G]oto [t]ype def" },
+		{ "<Leader>ls", function() return require("telescope.builtin").lsp_document_symbols() end, desc = "[S]ymbols document" },
+		{ "<Leader>lS", function() return require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "[S]ymbol workspace" },
+		{ "<Leader>ll", function() return require("telescope.builtin").lsp_incoming_calls() end, desc = "ca[l]ls incoming" },
+		{ "<Leader>lL", function() return require("telescope.builtin").lsp_outgoing_calls() end, desc = "ca[L]ls outgoing" },
+		{ "<Leader>lt", function() return require("telescope.builtin").treesitter() end, desc = "[T]reesitter symbols" },
+		{ "<Leader>ld", function() return require("telescope.builtin").diagnostics() end, desc = "[d]iagnostics" },
+		{ "<Leader>lr", function() return vim.lsp.buf.rename() end, desc = "[r]ename" },
+		{ "<Leader>la", function() return vim.lsp.buf.code_action() end, desc = "[a]ction" },
 		{ "<leader>lI", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-		{ "K", function() vim.lsp.buf.hover() end, desc = "Hoever Docs" },
+		{ "K", function() return vim.lsp.buf.hover() end, desc = "Hoever Docs" },
 		{ "<C-k>", vim.lsp.buf.signature_help, "Signature Help" },
-		{ "gO", function() require("telescope.builtin").lsp_outgoing_calls() end, desc = "[O]utgoing" },
-		{ "<Leader>lh", function() vim.diagnostic.open_float() end, desc = "float", },
+		{ "gO", function() return require("telescope.builtin").lsp_outgoing_calls() end, desc = "[O]utgoing" },
+		{ "<Leader>lh", function() return vim.diagnostic.open_float() end, desc = "float", },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
 					-- print("Conform required FROM LSP.lua --- IF")
-					require("conform").format()
+					return require("conform").format()
 				elseif package.loaded["conform"] == nil then
 					-- print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
-					vim.lsp.buf.format({ async = true })
+				return vim.lsp.buf.format({ async = true })
 				end
 			end,
 			desc = "format [lspconfig]",

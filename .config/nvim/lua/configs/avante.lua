@@ -1,3 +1,7 @@
+---@class Builder
+---@field build string
+
+---@return boolean
 local abs_path = function()
 	if vim.g.os == "Windows_NT" then
 		return true
@@ -6,14 +10,29 @@ local abs_path = function()
 	end
 end
 
+---@return Builder
 local builder = function()
 	if vim.g.os == "Windows_NT" then
-		return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
+		return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" ---@type Builder -- for windows
 	else
-		return "make"
+		return "make" ---@type Builder
 	end
 end
 
+---@return nil
+local lib_loader = function()
+	if not package.loaded["avante_lib"] then
+		---@type fun(): nil
+		return require("avante_lib").load()
+	end
+	-- HACK: No idea if this even works lmfao
+	if package.loaded["avante_lib"] then
+		---@type fun(): nil
+		return _G.avante_lib.load()
+	end
+end
+
+---@return LazySpec
 return {
 	"yetone/avante.nvim",
 	event = "VeryLazy",
@@ -55,9 +74,30 @@ return {
 			},
 		},
 	},
-	opts = {
-		-- add any opts here
-		provider = "openai",
+	keys = {
+		{
+			"<Leader>ta",
+			function()
+				return require("avante").toggle()
+			end,
+			desc = "Toggle Avante",
+		},
+		{
+			"<Leader>tA",
+			"<cmd>AvanteClear<CR>",
+			desc = "Clear Avante",
+		},
 	},
+
+	-- init = lib_loader(),
+
+	opts = function()
+		lib_loader()
+		-- add any opts here
+		return {
+			provider = "openai",
+		}
+	end,
+	-- },
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 }

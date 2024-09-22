@@ -11,7 +11,7 @@ return {
 		{
 			"<Leader>hp",
 			function()
-				require("gitsigns").preview_hunk()
+				return require("gitsigns").preview_hunk()
 			end,
 			desc = "[p]review hunk",
 		},
@@ -19,7 +19,7 @@ return {
 		{
 			"<Leader>hs",
 			function()
-				require("gitsigns").stage_hunk()
+				return require("gitsigns").stage_hunk()
 			end,
 			desc = "[s]tage hunk",
 		},
@@ -28,7 +28,7 @@ return {
 			--
 			"<Leader>hr",
 			function()
-				require("gitsigns").reset_hunk()
+				return require("gitsigns").reset_hunk()
 			end,
 			desc = "[r]eset hunk",
 		},
@@ -36,7 +36,7 @@ return {
 		{
 			"<Leader>hR",
 			function()
-				require("gitsigns").reset_buffer()
+				return require("gitsigns").reset_buffer()
 			end,
 			desc = "[R]eset buffer",
 		},
@@ -44,7 +44,7 @@ return {
 		{
 			"<Leader>hS",
 			function()
-				require("gitsigns").stage_buffer()
+				return require("gitsigns").stage_buffer()
 			end,
 			desc = "[S]tage buffer",
 		},
@@ -52,7 +52,7 @@ return {
 		{
 			"<Leader>hu",
 			function()
-				require("gitsigns").undo_stage_hunk()
+				return require("gitsigns").undo_stage_hunk()
 			end,
 			desc = "[u]ndo stage",
 		},
@@ -60,7 +60,7 @@ return {
 		{
 			"<Leader>hb",
 			function()
-				require("gitsigns").blame_line({ full = true })
+				return require("gitsigns").blame_line({ full = true })
 			end,
 			desc = "[b]lame line",
 		},
@@ -68,21 +68,21 @@ return {
 		{
 			"<Leader>hT",
 			function()
-				require("gitsigns").toggle_current_line_blame()
+				return require("gitsigns").toggle_current_line_blame()
 			end,
 			desc = "[T]oggle deleted",
 		},
 		{
 			"<Leader>ht",
 			function()
-				require("gitsigns").toggle_deleted()
+				return require("gitsigns").toggle_deleted()
 			end,
 			desc = "[t]oggle blame",
 		},
 		{
 			"<Leader>hd",
 			function()
-				require("gitsigns").diffthis()
+				return require("gitsigns").diffthis()
 			end,
 			desc = "[d]iff this",
 		},
@@ -90,7 +90,7 @@ return {
 		{
 			"<Leader>hD",
 			function()
-				require("gitsigns").diffthis("main")
+				return require("gitsigns").diffthis("main")
 			end,
 			desc = "[D]iff main",
 		},

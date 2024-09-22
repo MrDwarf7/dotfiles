@@ -60,29 +60,12 @@ return {
 			"DBUILastQueryInfo",
 		},
 
-		opts = {
-			db_completion = function()
-				require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
-			end,
-		},
-
-		config = function(_, opts)
-			-- Your DBUI configuration
+		opts = function()
 			vim.g.db_ui_use_nerd_fonts = 1
 			vim.g.db_ui_auto_execute_table_helpers = 1
-			-- vim.g.db_ui_show_help = 0 -- Disable help block at top left
 			vim.g.db_ui_winwidth = 35
 
-			-- vim.g.db_ui_save_location = vim.fn.stdpath("cache") .. "/db_ui_save_location"
-
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {
-					"sql",
-				},
-				command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
-			})
-
-			vim.api.nvim_create_autocmd("FileType", {
+			return vim.api.nvim_create_autocmd("FileType", {
 				pattern = {
 					"sql",
 					"mysql",
@@ -90,12 +73,14 @@ return {
 					"mssql",
 					"tsql",
 				},
-				callback = function()
-					vim.schedule(opts.db_completion)
+				callback = function(opts)
+					-- vim.schedule(opts.db_completion)
+					vim.schedule(function()
+						return require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+					end)
 				end,
 			})
 		end,
-	},
 
 	------------------ testing
 

@@ -5,7 +5,7 @@ return {
 			"ldelossa/litee.nvim",
 			opts = {},
 			config = function()
-				require("litee.lib").setup()
+				return require("litee.lib").setup()
 			end,
 		},
 	},
@@ -56,6 +56,6 @@ return {
 	},
 
 	config = function()
-		require("litee.gh").setup()
+		return require("litee.gh").setup()
 	end,
 }

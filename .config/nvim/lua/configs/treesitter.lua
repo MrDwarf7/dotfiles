@@ -40,7 +40,7 @@ return {
 		{
 			"[C",
 			function()
-				require("treesitter-context").go_to_context(vim.v.count1)
+				return require("treesitter-context").go_to_context(vim.v.count1)
 			end,
 			expr = true,
 			silent = true,
@@ -49,7 +49,7 @@ return {
 		{
 			"]h",
 			function()
-				require("gitsigns").next_hunk()
+				return require("gitsigns").next_hunk()
 			end,
 			expr = true,
 			mode = { "n", "x", "o" },
@@ -58,7 +58,7 @@ return {
 		{
 			"[h",
 			function()
-				require("gitsigns").prev_hunk()
+				return require("gitsigns").prev_hunk()
 			end,
 			expr = true,
 			mode = { "n", "x", "o" },

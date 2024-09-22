@@ -95,8 +95,9 @@ return {
 				on_highlights = function(highlights, colors) end,
 			}
 		end,
-		config = function()
+		config = function(_, opts)
 			vim.cmd.colorscheme("tokyonight-storm")
+			return opts
 		end,
 	},
 

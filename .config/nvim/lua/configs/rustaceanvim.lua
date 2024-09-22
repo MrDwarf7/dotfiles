@@ -5,7 +5,7 @@ return {
 	ft = { "rust" },
 	-- event = { "LspAttach" },
 	config = function()
-		vim.g.rustaceanvim = {
+		local opts = {
 			tools = {
 				float_win_config = {
 					border = "single",
@@ -127,6 +127,8 @@ return {
 				},
 			},
 		}
+		vim.g.rustaceanvim = opts
+		return opts
 	end,
 }
 
