@@ -82,6 +82,7 @@ return {
 			"go",
 			"html",
 			"javascript",
+			"just",
 			"json",
 			"lua",
 			"markdown",

@@ -13,6 +13,7 @@ return {
 		return {
 			exclude = {
 				filetypes = {
+					"AvanteInput",
 					"dbout",
 					"Diffview",
 					"flutterToolsOutline",

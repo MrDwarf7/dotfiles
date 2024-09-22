@@ -57,6 +57,7 @@ return {
 		notify_on_error = false,
 		format_on_save = function(bufnr)
 			local disabled_ft = {
+				"AvanteInput",
 				"c",
 				"cpp",
 				"netrw",
@@ -76,6 +77,7 @@ return {
 		end,
 		format_after_save = function(bufnr)
 			local disabled_ft = {
+				"AvanteInput",
 				"c",
 				"cpp",
 				"netrw",
