@@ -9,7 +9,17 @@ return {
 			{ "<Leader>gF", "<cmd>Git fetch --all<CR>", mode = "n", desc = "fetch --all" },
 
 			{ "<Leader>gp", "<cmd>Git pull<CR>", mode = "n", desc = "pull" },
-			{ "<Leader>gP", "<cmd>Git push<CR>", mode = "n", desc = "push" },
+			{
+				"<Leader>gP",
+				function()
+					vim.schedule(function()
+						vim.cmd([[ Git push ]])
+					end)
+				end,
+				mode = "n",
+				desc = "push",
+			},
+			-- "<cmd>Git push<CR>", mode = "n", desc = "push" },
 
 			{ "<Leader>gl", "<cmd>Gclog<CR>", mode = "n", desc = "log [quickfix]" },
 			{ "<Leader>gL", "<cmd>Gllog<CR>", mode = "n", desc = "log [location]" },
