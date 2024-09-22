@@ -20,7 +20,8 @@ return {
 				desc = "push",
 			},
 			-- "<cmd>Git push<CR>", mode = "n", desc = "push" },
-
+			--
+			--
 			{ "<Leader>gl", "<cmd>Gclog<CR>", mode = "n", desc = "log [quickfix]" },
 			{ "<Leader>gL", "<cmd>Gllog<CR>", mode = "n", desc = "log [location]" },
 
