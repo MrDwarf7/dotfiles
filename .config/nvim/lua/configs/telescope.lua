@@ -1,5 +1,5 @@
 local icons = require("util.icons")
-
+local actions = require("telescope.actions")
 local git_icons = {
 	added = icons.gitAdd,
 	changed = icons.gitChange,
@@ -9,49 +9,6 @@ local git_icons = {
 	unmerged = "‡",
 	untracked = "?",
 }
-
-local mappings = function()
-	local actions = require("telescope.actions")
-	return {
-		i = {
-			["<C-k>"] = actions.move_selection_previous,
-			["<C-j>"] = actions.move_selection_next,
-			["<C-p>"] = actions.move_selection_previous,
-			["<C-n>"] = actions.move_selection_next,
-
-			-- ["<C-t>"] = require("trouble.sources.telescope").open,
-			["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
-			["<C-x>"] = actions.delete_buffer,
-			--["<C-d>"] = actions.delete_buffer,
-
-			["<C-[>"] = actions.select_horizontal,
-			["<C-]>"] = actions.select_vertical,
-
-			["<C-h>"] = actions.cycle_previewers_next,
-			["<C-l>"] = actions.cycle_previewers_prev,
-		},
-
-		n = {
-			["<C-k>"] = actions.move_selection_previous,
-			["<C-j>"] = actions.move_selection_next,
-			["<C-p>"] = actions.move_selection_previous,
-			["<C-n>"] = actions.move_selection_next,
-
-			-- ["<C-t>"] = trouble_ts.open,
-			["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
-			["<C-x>"] = actions.delete_buffer,
-
-			["q"] = actions.close,
-			["<Esc>"] = actions.close,
-
-			["<C-[>"] = actions.select_horizontal,
-			["<C-]>"] = actions.select_vertical,
-
-			["<C-h>"] = actions.cycle_previewers_next,
-			["<C-l>"] = actions.cycle_previewers_prev,
-		},
-	}
-end
 
 return {
 	"nvim-telescope/telescope.nvim",
@@ -255,7 +212,45 @@ return {
 
 			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
 
-			mappings = mappings(),
+			mappings = {
+				i = {
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
+
+					-- ["<C-t>"] = require("trouble.sources.telescope").open,
+					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+					["<C-x>"] = actions.delete_buffer,
+					--["<C-d>"] = actions.delete_buffer,
+
+					["<C-[>"] = actions.select_horizontal,
+					["<C-]>"] = actions.select_vertical,
+
+					["<C-h>"] = actions.cycle_previewers_next,
+					["<C-l>"] = actions.cycle_previewers_prev,
+				},
+
+				n = {
+					["<C-k>"] = actions.move_selection_previous,
+					["<C-j>"] = actions.move_selection_next,
+					["<C-p>"] = actions.move_selection_previous,
+					["<C-n>"] = actions.move_selection_next,
+
+					-- ["<C-t>"] = trouble_ts.open,
+					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+					["<C-x>"] = actions.delete_buffer,
+
+					["q"] = actions.close,
+					["<Esc>"] = actions.close,
+
+					["<C-[>"] = actions.select_horizontal,
+					["<C-]>"] = actions.select_vertical,
+
+					["<C-h>"] = actions.cycle_previewers_next,
+					["<C-l>"] = actions.cycle_previewers_prev,
+				},
+			},
 
 			selection_caret = "|> ",
 			set_env = { ["COLORTERM"] = "truecolor" },
