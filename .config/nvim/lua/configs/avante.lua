@@ -1,5 +1,4 @@
----@class Builder
----@field build string
+---@alias LazySpec table
 
 ---@return boolean
 local abs_path = function()
@@ -10,10 +9,12 @@ local abs_path = function()
 	end
 end
 
+---@alias Builder string
+
 ---@return Builder
 local builder = function()
 	if vim.g.os == "Windows_NT" then
-		return "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" ---@type Builder -- for windows
+		return "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" ---@type Builder -- for windows
 	else
 		return "make" ---@type Builder
 	end
@@ -25,22 +26,19 @@ local lib_loader = function()
 		---@type fun(): nil
 		return require("avante_lib").load()
 	end
-	-- HACK: No idea if this even works lmfao
-	if package.loaded["avante_lib"] then
-		---@type fun(): nil
-		return _G.avante_lib.load()
-	end
+	---@type fun(): nil
+	require("avante_lib").load()
 end
 
 ---@return LazySpec
 return {
 	"yetone/avante.nvim",
-	event = "VeryLazy",
-	lazy = false,
+	event = { "VeryLazy", "BufReadPost" },
+	lazy = true,
 	version = false, -- set this if you want to always pull the latest change
 	build = builder(),
 	-- build = "make",
-	-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- for windows
+	-- build = "pwsh -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false", -- for windows
 	dependencies = {
 		"stevearc/dressing.nvim",
 		"nvim-lua/plenary.nvim",
@@ -89,11 +87,10 @@ return {
 		},
 	},
 
-	-- init = lib_loader(),
-
 	opts = function()
 		lib_loader()
 		-- add any opts here
+		require("avante_lib").load()
 		return {
 			provider = "openai",
 		}
