@@ -77,6 +77,7 @@ return {
 			"ruff",
 			"shfmt",
 			"stylua",
+			"sqlfluff",
 			"ts-standard",
 			"vulture",
 			"yamlfmt",
@@ -157,7 +158,13 @@ return {
 
 		require("configs.mason")
 		vim.diagnostic.config(opts.diagnostic_config)
-		require("mason-tool-installer").setup(opts.mason_tools or {})
-		require("mason-lspconfig").setup(opts.mason_lsp_config)
+
+		vim.defer_fn(function()
+			require("mason-tool-installer").setup(opts.mason_tools or {})
+		end, 0)
+
+		vim.defer_fn(function()
+			require("mason-lspconfig").setup(opts.mason_lsp_config)
+		end, 0)
 	end,
 }

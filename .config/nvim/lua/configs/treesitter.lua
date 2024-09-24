@@ -186,9 +186,19 @@ return {
 	},
 
 	config = function(_, opts)
+		-- vim.defer_fn(function()
+		-- 	vim.defer_fn(function()
 		require("nvim-treesitter.configs").setup(opts)
+		-- end, 1)
+
+		-- vim.defer_fn(function()
 		require("ts_context_commentstring").setup(opts)
+		-- end, 2)
+
+		-- vim.defer_fn(function()
 		require("treesitter-context").setup(opts)
+		-- 	end, 3)
+		-- end, 1000)
 	end,
 
 	-- 	require("nvim-treesitter").setup(opts.opts_treesitter)

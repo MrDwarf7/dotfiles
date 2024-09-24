@@ -180,6 +180,8 @@ opt.smoothscroll = true
 -- g.loaded_python3_provider = 1
 -- g.loaded_ruby_provider = 1
 
+g.sql_type_default = "mssql"
+
 -- Use ripgrep as grep tool
 vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"

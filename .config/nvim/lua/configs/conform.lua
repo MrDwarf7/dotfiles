@@ -45,7 +45,7 @@ return {
 				end
 			end,
 			sh = { "shfmt" },
-			sql = { "sqlfmt" },
+			sql = { "sql-formatter" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },
