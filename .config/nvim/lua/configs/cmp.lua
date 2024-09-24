@@ -147,6 +147,7 @@ return {
 				{ name = "cmp-pypi", ft = { "py", "python" } }, -- TODO:
 				{ name = "cmp-luasnip-choice" },
 				{ name = "lazydev", group_index = 0 },
+				-- { name = "vim-dadbod-completion", },
 			},
 		}
 

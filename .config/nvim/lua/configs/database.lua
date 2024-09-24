@@ -65,7 +65,7 @@ return {
 			vim.g.db_ui_auto_execute_table_helpers = 1
 			vim.g.db_ui_winwidth = 35
 
-			return vim.api.nvim_create_autocmd("FileType", {
+			vim.api.nvim_create_autocmd("FileType", {
 				pattern = {
 					"sql",
 					"mysql",
@@ -76,7 +76,14 @@ return {
 				callback = function(opts)
 					-- vim.schedule(opts.db_completion)
 					vim.schedule(function()
-						return require("cmp").setup.buffer({ sources = { { name = "vim-dadbod-completion" } } })
+						return require("cmp").setup.buffer({
+							sources = {
+								{ name = "vim-dadbod-completion" },
+								{ name = "copilot" },
+								{ name = "buffer" },
+								{ name = "nvm_lsp" },
+							},
+						})
 					end)
 				end,
 			})
