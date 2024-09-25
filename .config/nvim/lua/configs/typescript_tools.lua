@@ -5,7 +5,6 @@ return {
 		"html",
 		"javascript",
 		-- "lua",
-		-- "markdown",
 		"scss",
 		"txt",
 		"vim",

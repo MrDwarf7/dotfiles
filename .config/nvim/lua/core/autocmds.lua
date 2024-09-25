@@ -48,6 +48,11 @@ return {
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(event)
 			local client = vim.lsp.get_client_by_id(event.data.client_id)
+			local buf_name = vim.api.nvim_buf_get_name(0)
+			if string.find(buf_name, ".obsidian.vimrc") then
+				vim.api.nvim_buf_set_option(0, "filetype", "vim")
+				return
+			end
 			if client and client.server_capabilities.documentHighlightProvider then
 				vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 					buffer = event.buf,

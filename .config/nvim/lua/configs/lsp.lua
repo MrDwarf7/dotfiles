@@ -8,8 +8,8 @@
 
 return {
 	"neovim/nvim-lspconfig",
-	-- lazy = false,
-	event = "UIEnter",
+	lazy = false,
+	event = "BufReadPre",
 	-- "LspAttach",
 	dependencies = {
 		-- { "nvim-telescope/telescope.nvim", lazy = true },
@@ -72,7 +72,7 @@ return {
 			"gopls",
 			"isort",
 			"jsonlint",
-			"markdown_oxide",
+			--"markdown_oxide",
 			"mdsf",
 			"mdslw",
 			"mypy",
