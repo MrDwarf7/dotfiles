@@ -48,6 +48,8 @@ return {
 			},
 		},
 	},
-	-- })
-	-- end,
+	config = function(_, opts)
+		-- opts = opts or {}
+		require("copilot").setup(opts)
+	end,
 }

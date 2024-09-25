@@ -155,7 +155,11 @@ return {
 			})
 		end,
 	},
-	{ "j-hui/fidget.nvim", opts = {} },
+	{
+		"j-hui/fidget.nvim",
+		lazy = true,
+		opts = {},
+	},
 
 	-- { "j-hui/fidget.nvim", lazy = true, event = "VeryLazy", opts = {} },
 	-- { "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },

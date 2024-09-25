@@ -15,7 +15,7 @@ return {
 		-- { "nvim-telescope/telescope.nvim", lazy = true },
 		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
 		{ "folke/lazydev.nvim", lazy = true },
-		{ "j-hui/fidget.nvim" },
+		{ "j-hui/fidget.nvim", event = "VeryLazy" },
 	},
 
 	-- stylua: ignore start
@@ -61,6 +61,7 @@ return {
 		local ensure_installed = vim.list_extend(vim.tbl_keys(servers) or {}, {
 			"beautysh",
 			"black",
+			"cbfmt",
 			"clang-format",
 			"cmakelang",
 			"cmakelint",
@@ -71,6 +72,9 @@ return {
 			"gopls",
 			"isort",
 			"jsonlint",
+			"markdown_oxide",
+			"mdsf",
+			"mdslw",
 			"mypy",
 			"powershell_es",
 			"prettier",
@@ -159,12 +163,12 @@ return {
 		require("configs.mason")
 		vim.diagnostic.config(opts.diagnostic_config)
 
-		vim.defer_fn(function()
-			require("mason-tool-installer").setup(opts.mason_tools or {})
-		end, 0)
+		-- vim.defer_fn(function()
+		require("mason-tool-installer").setup(opts.mason_tools)
+		-- end, 0)
 
-		vim.defer_fn(function()
-			require("mason-lspconfig").setup(opts.mason_lsp_config)
-		end, 0)
+		-- vim.defer_fn(function()
+		require("mason-lspconfig").setup(opts.mason_lsp_config)
+		-- end, 0)
 	end,
 }

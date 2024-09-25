@@ -14,7 +14,7 @@
 return {
 	"stevearc/conform.nvim",
 	-- lazy = false,
-	event = "LspAttach",
+	event = "VeryLazy",
 	-- "BufWritePost",
 	cmd = "Format",
 	opts = {
@@ -44,8 +44,10 @@ return {
 					return { "isort", "black" }
 				end
 			end,
+			markdown = { "prettier" },
+
 			sh = { "shfmt" },
-			sql = { "sql-formatter" },
+			sql = { "sql_formatter" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },

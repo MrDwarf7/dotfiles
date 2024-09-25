@@ -25,6 +25,7 @@ M.servers = function()
 
 		cssls = {},
 
+		deno = {},
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
