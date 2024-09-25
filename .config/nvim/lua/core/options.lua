@@ -4,59 +4,6 @@ local g = vim.g
 
 vim.lsp.inlay_hint.enable()
 
--- local function shell_setup(shell)
--- vim.o.shell = shell or vim.o.shell
--- 	-- Special handling for pwsh
--- 	if shell == "pwsh" or shell == "powershell" then
--- 		-- Check if 'pwsh' is executable and set the shell accordingly
--- 		if vim.fn.executable("pwsh") == 1 then
--- 			vim.o.shell = "pwsh"
--- 			-- vim.o.shell = "pwsh"
--- 		elseif vim.fn.executable("powershell") == 1 then
--- 			vim.o.shell = "powershell"
--- 		else
--- 			return error("PowerShell is not installed")
--- 		end
--- 		-- Setting shell command flags
--- 		vim.o.shellcmdflag =
--- 			"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$NO_COLOR=$true;"
---
--- 		-- Setting shell redirection
--- vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
--- 		-- Setting shell pipe
--- vim.o.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
---
--- 		-- Setting shell quote options
--- 		vim.o.shellquote = ""
--- 		vim.o.shellxquote = ""
--- 	else -- Default shell
--- 		vim.o.shell = shell
--- 	end
--- end
-
--- shell_setup("pwsh")
-
--- vim.g.os = architecture.get_os()
-
--- shell_setup("pwsh")
-
--- local new_python = vim.env.USERPROFILE .. "\\scoop\\apps\\python\\current\\python.exe"
--- vim.g.python3_host_prog = new_python
--- vim.g.python_host_prog = new_python
--- vim.g.python = new_python
-
--- vim.opt.shellcmdflag =
--- 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
--- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
--- vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
--- vim.opt.shellquote = ""
--- vim.opt.shellxquote = ""
--- end
-
--- local shell_s = architecture.get_shell("Windows_NT")
--- local os_is_this = architecture.get_os()
--- local shell_setup_test = architecture.shell_setup(shell_s)
-
 --- THIS WORKS............
 vim.g.os = require("util.architecture").get_os()
 
@@ -199,3 +146,50 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 g.skip_ts_context_commentstring_module = true
 vim.cmd("colorscheme default")
+
+-- local function shell_setup(shell)
+-- vim.o.shell = shell or vim.o.shell
+-- 	-- Special handling for pwsh
+-- 	if shell == "pwsh" or shell == "powershell" then
+-- 		-- Check if 'pwsh' is executable and set the shell accordingly
+-- 		if vim.fn.executable("pwsh") == 1 then
+-- 			vim.o.shell = "pwsh"
+-- 			-- vim.o.shell = "pwsh"
+-- 		elseif vim.fn.executable("powershell") == 1 then
+-- 			vim.o.shell = "powershell"
+-- 		else
+-- 			return error("PowerShell is not installed")
+-- 		end
+-- 		-- Setting shell command flags
+-- 		vim.o.shellcmdflag =
+-- 			"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$NO_COLOR=$true;"
+--
+-- 		-- Setting shell redirection
+-- vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+-- 		-- Setting shell pipe
+-- vim.o.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
+--
+-- 		-- Setting shell quote options
+-- 		vim.o.shellquote = ""
+-- 		vim.o.shellxquote = ""
+-- 	else -- Default shell
+-- 		vim.o.shell = shell
+-- 	end
+-- end
+-- shell_setup("pwsh")
+-- vim.g.os = architecture.get_os()
+-- shell_setup("pwsh")
+-- local new_python = vim.env.USERPROFILE .. "\\scoop\\apps\\python\\current\\python.exe"
+-- vim.g.python3_host_prog = new_python
+-- vim.g.python_host_prog = new_python
+-- vim.g.python = new_python
+-- vim.opt.shellcmdflag =
+-- 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+-- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+-- vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+-- vim.opt.shellquote = ""
+-- vim.opt.shellxquote = ""
+-- end
+-- local shell_s = architecture.get_shell("Windows_NT")
+-- local os_is_this = architecture.get_os()
+-- local shell_setup_test = architecture.shell_setup(shell_s)
