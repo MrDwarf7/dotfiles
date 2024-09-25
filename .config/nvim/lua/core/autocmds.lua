@@ -1,4 +1,3 @@
-
 return {
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
@@ -61,6 +60,33 @@ return {
 				})
 			end
 		end,
+	}),
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.txt",
+		callback = function()
+			vim.bo.textwidth = 0
+			vim.bo.wrapmargin = 12
+			vim.bo.formatoptions = "jcroqnt" -- jcroqnt
+			vim.opt.wrap = true
+			vim.bo.expandtab = false
+
+			-- vim.cmd([[ set textwidth=0 ]])
+			-- vim.cmd([[ set wrapmargin=8 ]])
+			-- vim.cmd([[ set formatoptions+=t ]])
+			-- vim.cmd([[ set formatoptions-=l ]])
+		end,
+		group = vim.api.nvim_create_augroup("NoExpandTab", { clear = true }),
+	}),
+
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.md",
+		callback = function()
+			vim.opt.textwidth = 80
+			vim.opt.wrap = true
+			vim.bo.expandtab = false
+		end,
+		group = vim.api.nvim_create_augroup("MarkdownOptions", { clear = true }),
 	}),
 
 	-- vim.api.nvim_create_autocmd("BufWritePre", {
