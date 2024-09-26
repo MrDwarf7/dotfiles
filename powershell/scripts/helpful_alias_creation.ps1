@@ -212,3 +212,9 @@ New-Alias -Name cargosr -Value CargoRunEverything -Force
 New-Alias -Name rst -Value NavigateToRust -Force
 
 New-Alias -Name ff -Value fastfetchin -Force
+
+New-Alias -Name aw -Value launchwsl -Force
+
+function launchwsl {
+    wsl.exe -d Arch --cd ~
+}
