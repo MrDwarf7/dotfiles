@@ -18,3 +18,5 @@ $powershell_completions = "$powershell_scripts_dir\completions\"
 . "$powershell_completions\completion_gh-cli.ps1"
 
 . "$powershell_completions\completion_az-cli.ps1"
+
+. "$powershell_completions\completions_atac.ps1"

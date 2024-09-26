@@ -99,6 +99,12 @@ if (Test-CommandExists "eza") {
     $env:LIST_CLIENT = "eza"
 } 
 
+
+if (Test-CommandExists "atac") {
+    $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
+} 
+
+
 # Work.sort of
 function checkEnvironment {
     if ($env:COMPUTERNAME -clike "*LG*") {
@@ -150,7 +156,6 @@ Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
 # Linux Functions # these are also present in the scripts/helpful_func_general.ps1
 # I just don't want it breaking with the amount I change things haha
-
 
 
 if ($env:LIST_CLIENT -eq "eza") {
