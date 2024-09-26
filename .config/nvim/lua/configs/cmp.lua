@@ -7,7 +7,7 @@ return {
 		"neovim/nvim-lspconfig",
 		"L3MON4D3/LuaSnip",
 
-		{ "zbirenbaum/copilot-cmp", opts = {} }, -- event = "InsertEnter",
+		{ "zbirenbaum/copilot-cmp" }, -- event = "InsertEnter",
 		{ "hrsh7th/cmp-nvim-lsp", opts = {} },
 
 		"hrsh7th/cmp-buffer",
@@ -147,6 +147,7 @@ return {
 				{ name = "cmp-pypi", ft = { "py", "python" } }, -- TODO:
 				{ name = "cmp-luasnip-choice" },
 				{ name = "lazydev", group_index = 0 },
+				-- { name = "vim-dadbod-completion", },
 			},
 		}
 

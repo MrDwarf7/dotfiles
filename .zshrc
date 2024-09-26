@@ -174,6 +174,10 @@ if which "dotnet" &> /dev/null; then
 fi
 # export PATH="$PATH:/home/dwarf/.dotnet/tools"
 
+if [ -f "$HOME/.config/.secret_stuff" ]; then
+    source "$HOME/.config/.secret_stuff"
+fi
+
 # pnpm current - via NVM
 export PNPM_HOME="$HOME/.xdg/data/pnpm"
 

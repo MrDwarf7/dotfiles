@@ -16,6 +16,16 @@ map("n", "<Leader>tk", "<cmd>tabnew<CR>:term<CR>A", { desc = "Terminal" })
 
 -- { noremap = true, silent = true, desc = "Start pwsh" })
 
+map("n", "<Leader>fW", function()
+	local win_view = vim.fn.winsaveview()
+	local word = vim.fn.expand("<cword>")
+	vim.cmd("exec '%s/" .. word .. "//gn'")
+	vim.fn.winrestview(win_view)
+
+	-- Can remove this if highlighting is preferred
+	vim.cmd([[ exec "nohl" ]])
+end, { desc = "Word count" })
+
 map("n", "<Leader>E", function()
 	if not pcall(require, "mini.files") then
 		vim.cmd("lua require'mini.files'.open()")
