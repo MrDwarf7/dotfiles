@@ -87,13 +87,23 @@ return {
 		},
 	},
 
+	-- init = function()
+	-- 	lib_loader()
+	-- end,
+
 	opts = function()
-		lib_loader()
+		-- require("avante_lib").load()
 		-- add any opts here
-		require("avante_lib").load()
+		-- require("avante_lib").load()
 		return {
 			provider = "openai",
 		}
+	end,
+	config = function(_, opts)
+		-- lib_loader()
+		require("avante").setup(opts)
+		-- require("avante_lib").load()
+		-- add any config here
 	end,
 	-- },
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
