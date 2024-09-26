@@ -73,7 +73,7 @@ return {
 			"isort",
 			"jsonlint",
 			--"markdown_oxide",
-			"mdsf",
+			-- "mdsf",
 			"mdslw",
 			"mypy",
 			"powershell_es",

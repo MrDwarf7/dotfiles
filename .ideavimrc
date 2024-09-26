@@ -6,7 +6,7 @@
 syntax on
 
 " Necessities
-nnoremap mapleader=" "
+" nnoremap mapleader=" "
 vnoremap mapleader=" "
 nnoremap mapleader=" "
 map <Space>=<leader>
@@ -14,36 +14,11 @@ map <Space>=<leader>
 " set timeoutlen=500
 set notimeout
 
-inoremap jj <ESC>
-nnoremap <ESC> :noh<CR>
-" noremap <ESC> jj
-nnoremap <C-c> <Esc>
-vnoremap <C-c> <Esc>
-
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-h> <C-w>h
-noremap <C-l> <C-w>l
-
-map \ww <Action>(SaveDocument)
-map \wa <Action>(SaveAll)
-map \q <Action>(CloseActiveTab)
-" map \qa <Action>(Exit)
-map \wqa <Action>(SaveAllAndExit)
-map \wq <Action>(SaveAndCloseActiveTab)
-
-
-
-
-
-
-" nnoremap <Space> :nop<CR>
-
 " Common settings -------------------------
 set number relativenumber
 set clipboard+=unnamed
 set clipboard+=ideaput
-set clipboard+=ideaput
+" set clipboard+=ideaput
 
 set visualbell
 set noerrorbells
@@ -55,9 +30,7 @@ set ignorecase
 set smartcase
 set hlsearch
 set showmatch
-
 set showmode
-
 
 " Idea specific settings ------------------
 set ideajoin
@@ -67,7 +40,7 @@ set ideajoin
 Plug 'machakann/vim-highlightedyank'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
+" Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -87,20 +60,14 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_highlight_on_keys = ['f', 'F', 's', 'S']
 
 " let g:WhichKey_SortOrder = by_description
-let g:WhichKey_FontSize	= 15
+let g:WhichKey_FontSize	= 12
 " close the popup and don't process formerly typed keys
 let g:WhichKey_ProcessUnknownMappings = "false"
 " let g:WhichKey_DefaultDelay = 500
-map <Space>q <Plug>(easymotion-f)
-map <Space>Q <Plug>(easymotion-s)
+" map <Space>q <Plug>(easymotion-f)
+" map <Space>Q <Plug>(easymotion-s)
 
 " let g:NERDTreeMapMenu = "m"
-
-" if NERDTreeFocus == 1
-"    map a :action NewFile
-" end
-
-
 
 
 
@@ -125,15 +92,45 @@ map <A-a> :action copilot.applyInlays
 
 
 
-nnoremap <C-A> gg<S-v>G
+" nnoremap <C-A> gg<S-v>G
 let g:WhichKeyDesc_commentray_prefix = "gc"
 let g:WhichKeyDesc_commentray_action = "gcc"
 
+
 " Handler specific binds -------------------------
-sethandler <C-j> a:vim
-sethandler <C-k> a:vim
-sethandler <C-h> a:vim
-sethandler <C-l> a:vim
+" sethandler <C-j> a:vim
+" sethandler <C-k> a:vim
+" sethandler <C-h> a:vim
+" sethandler <C-l> a:vim
+
+
+" sethandler <C-d> a:vim
+" sethandler <C-u> a:vim
+
+
+inoremap kj <ESC>
+inoremap jk <ESC>
+inoremap jj <ESC>
+inoremap kk <ESC>
+
+nnoremap <ESC> :noh<CR>
+nnoremap <C-c> <Esc>
+vnoremap <C-c> <Esc>
+
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-h> <C-w>h
+" noremap <C-l> <C-w>l
+
+map \ww <Action>(SaveDocument)
+map \wa <Action>(SaveAll)
+map \q <Action>(CloseActiveTab)
+" map \qa <Action>(Exit)
+map \wqa <Action>(SaveAllAndExit)
+map \wq <Action>(SaveAndCloseActiveTab)
+
+" nnoremap <Space> :nop<CR>
+
 
 
 " ------------------------- GENERAL -------------------------
@@ -148,7 +145,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap gcc :action CommentByLineComment <CR>
-vnoremap gcc :action CommentByLineComment <CR>
+vnoremap gc :action CommentByLineComment <CR>
 
 nnoremap zc :action CollapseRegion<CR>
 vnoremap zc :action CollapseRegion<CR>
@@ -170,12 +167,14 @@ nnoremap <A-k> :action MoveLineUp<CR>
 
 
 " Navigation specific binds -------------------------
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
+" nnoremap <c-h> <c-w>h
+" nnoremap <c-l> <c-w>l
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
+
 let g:WhichKeyDesc_NerdTree = "<Space>e NERD Tree"
 nnoremap <Space>e :NERDTreeFocus<CR>
+
 " nnoremap <Space>e :NERDTreeToggle<CR>
 "nnoremap <C-j> :action Up
 
@@ -196,6 +195,8 @@ vnoremap <Space>f/ :action Find<CR>
 nnoremap <C-w><C-l> :action MoveElementRight<CR>
 nnoremap <C-w><C-h> :action MoveElementLeft<CR>
 
+nnoremap <C-w>q :action CloseContent<CR>
+
 
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
 nnoremap <Space>ff :action GotoFile<CR>
@@ -203,6 +204,11 @@ vnoremap <Space>ff :action GotoFile<CR>
 let g:WhichKeyDesc_find = "<Space>fu Find Usages"
 nnoremap <Space>fu :action FindUsages<CR>
 vnoremap <Space>fu :action  FindUsages<CR>
+
+" let g:WhichKeyDesc_Goto = "<Space>gu Goto Usages"
+" nnoremap <Space>gu :action FindUsages<CR>
+" vnoremap <Space>gu :action  FindUsages<CR>
+
 let g:WhichKeyDesc_find = "<Space>fp Find within Project"
 nnoremap <Space>fw :action FindInPath<CR>
 let g:WhichKeyDesc_find = "<Space>fr Find Recent Files"
@@ -222,9 +228,6 @@ nnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
 vnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
 
 
-
-
-
 " Goto Binds -------------------------
 let g:WhichKeyDesc_Goto = "<Space>g Goto
 nnoremap gd :action GotoDeclaration <CR>
@@ -237,9 +240,6 @@ nnoremap ]d :action GotoNextError <CR>
 nnoremap [d :action GotoPreviousError <CR>
 
 
-let g:WhichKeyDesc_Goto = "<Space>gu Goto Usages"
-nnoremap <Space>gu :action FindUsages<CR>
-vnoremap <Space>gu :action  FindUsages<CR>
 
 nnoremap gT :action GotoTest <CR>
 nnoremap gh :action Back <CR>
@@ -302,25 +302,29 @@ map <Space>bn :action NextTab<CR>
 map <Space>bp :action PreviousTab<CR>
 map <Space>bp :action PreviousTab<CR>
 
-let g:WhichKeyDesc_Split = "<Space>bv Split Vertically"
-nnoremap <Space>bv :action SplitVertically<CR>
-
-let g:WhichKeyDesc_HSplit = "<Space>bs Split Horizontally"
-nnoremap <Space>bs :action SplitHorizontally<CR>
+" let g:WhichKeyDesc_Split = "<Space>bv Split Vertically"
+" nnoremap <Space>bv :action SplitVertically<CR>
+"
+" let g:WhichKeyDesc_HSplit = "<Space>bs Split Horizontally"
+" nnoremap <Space>bs :action SplitHorizontally<CR>
 
 
 
 let g:WhichKeyDesc_Close = "<Space>x Close Buffer"
 nnoremap <Space>x :action CloseEditor<CR>
 
-let g:WhichKeyDesc_Split = "<Space>v Split Vertically"
-nnoremap <Space>v :action SplitVertically<CR>
 
-let g:WhichKeyDesc_HSplit = "<Space>s Split Horizontally"
-nnoremap <Space>s :action SplitHorizontally<CR>
+let g:WhichKeyDesc_Close = "<Space>bc Close Buffer"
+nnoremap <Space>bc :action CloseEditor<CR>
+
+" let g:WhichKeyDesc_Split = "<Space>v Split Vertically"
+" nnoremap <Space>v :action SplitVertically<CR>
+"
+" let g:WhichKeyDesc_HSplit = "<Space>s Split Horizontally"
+" nnoremap <Space>s :action SplitHorizontally<CR>
 
 nnoremap <C-w>u :action Unsplit<CR>
-nnoremap <C-w>t :action MoveEditorToOppositeTabGroup<CR>
+nnoremap <C-w>bF :action MoveEditorToOppositeTabGroup<CR>
 nnoremap <Space>bh :action HideAllWindows <CR>
 
 " Toggles/UI specific binds -------------------------
@@ -329,7 +333,8 @@ nnoremap <Space>tt :action ActivateTerminalToolWindow<CR>
 nnoremap <Space>td :action ActivateDebugToolWindow<CR>
 let g:WhichKeyDesc_Toggle_Nerd = "<Space>tb NERD Tree Bar"
 nnoremap <Space>tb :NERDTreeToggle<CR>
-nnoremap <Space>tp :action ActivatePythonConsoleToolWindow<CR>
+
+" nnoremap <Space>tp :action ActivatePythonConsoleToolWindow<CR>
 
 
 
@@ -351,6 +356,7 @@ nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lr :action RenameElement<CR>
 let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
 nnoremap <Space>lh :action ShowPopupMenu<CR>
+nnoremap <Space>lf :action ReformatCode<CR>
 
 
 " nnoremap <Space>lh :action ShowErrorDescription<CR>
