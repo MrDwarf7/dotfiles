@@ -48,6 +48,7 @@ return {
 
 			sh = { "shfmt" },
 			sql = { "sql_formatter" },
+			surql = { "sqlfluff" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },

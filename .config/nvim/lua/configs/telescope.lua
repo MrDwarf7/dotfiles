@@ -1,5 +1,7 @@
 local icons = require("util.icons")
 local actions = require("telescope.actions")
+local themes = require("telescope.themes")
+
 local git_icons = {
 	added = icons.gitAdd,
 	changed = icons.gitChange,
@@ -9,6 +11,19 @@ local git_icons = {
 	unmerged = "‡",
 	untracked = "?",
 }
+
+-- Checks to see if a plugin is loaded
+-- if it is then we call the function
+--
+-- Generally used to call a plugin or submodule owned by the parent
+---@param plugin string: The name of the plugin
+---@param fn function: The function to call
+---@return nil
+local function if_loaded(plugin, fn)
+	if package.loaded[plugin] then
+		fn()
+	end
+end
 
 return {
 	"nvim-telescope/telescope.nvim",
@@ -33,7 +48,11 @@ return {
 		{
 			"<Leader>ff",
 			function()
-				return require("telescope.builtin").find_files()
+				return require("telescope.builtin").find_files(require("telescope.themes").get_ivy({
+					initial_mode = "insert",
+					-- winblend = 10,
+					previewer = true,
+				}))
 			end,
 			desc = "[f]iles",
 		},
@@ -49,7 +68,11 @@ return {
 		{
 			"<Leader>fb",
 			function()
-				return require("telescope.builtin").buffers()
+				return require("telescope.builtin").buffers(require("telescope.themes").get_ivy({
+					sort_mru = true,
+					sort_lastused = true,
+					initial_mode = "normal",
+				}))
 			end,
 			desc = "[b]uffers",
 		},
@@ -57,7 +80,13 @@ return {
 		{
 			"<Leader>fr",
 			function()
-				return require("telescope.builtin").oldfiles()
+				return require("telescope.builtin").oldfiles(require("telescope.themes").get_ivy({
+					height = 35,
+					sorting_strategy = "ascending",
+					sort_mru = false,
+					sort_lastused = true,
+					initial_mode = "insert",
+				}))
 			end,
 			desc = "[r]ecents",
 		},
@@ -133,6 +162,7 @@ return {
 			function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
 				return require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+					initial_mode = "insert",
 					winblend = 10,
 					previewer = false,
 				}))
@@ -184,6 +214,10 @@ return {
 
 			layout_strategy = "horizontal",
 			layout_config = {
+				width = 0.87,
+				height = 0.80,
+				preview_cutoff = 120,
+
 				horizontal = {
 					prompt_position = "bottom",
 					preview_width = 0.55,
@@ -194,9 +228,6 @@ return {
 					-- preview_width = 0.55,
 					-- results_width = 0.8,
 				},
-				width = 0.87,
-				height = 0.80,
-				preview_cutoff = 120,
 			},
 			--- NEW:
 			file_sorter = require("telescope.sorters").get_fzy_sorter,
@@ -223,6 +254,7 @@ return {
 					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
 					["<C-x>"] = actions.delete_buffer,
 					--["<C-d>"] = actions.delete_buffer,
+					["<Esc>"] = actions.close,
 
 					["<C-[>"] = actions.select_horizontal,
 					["<C-]>"] = actions.select_vertical,
@@ -240,8 +272,9 @@ return {
 					-- ["<C-t>"] = trouble_ts.open,
 					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
 					["<C-x>"] = actions.delete_buffer,
+					["d"] = actions.delete_buffer,
 
-					["q"] = actions.close,
+					-- ["q"] = actions.close,
 					["<Esc>"] = actions.close,
 
 					["<C-[>"] = actions.select_horizontal,
@@ -256,6 +289,7 @@ return {
 			set_env = { ["COLORTERM"] = "truecolor" },
 			winblend = 12,
 		},
+
 		extensions = {
 			fzy_native = {
 				override_generic_sorter = false,
@@ -266,10 +300,18 @@ return {
 	},
 
 	config = function(_, opts)
-		require("telescope").load_extension("fzy_native")
-		require("telescope").load_extension("live_grep_args")
-		require("telescope").load_extension("neoclip")
-		require("telescope").load_extension("harpoon")
+		local extensions = {
+			"fzy_native",
+			"live_grep_args",
+			"neoclip",
+			"harpoon",
+		}
+
+		if_loaded("telescope", function()
+			for _, ext in ipairs(extensions) do
+				require("telescope").load_extension(ext)
+			end
+		end)
 		require("telescope").setup(opts)
 	end,
 }

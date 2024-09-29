@@ -15,6 +15,16 @@ return {
 		group = vim.api.nvim_create_augroup("GitConfig", { clear = true }),
 	}),
 
+	-- Set filetype for certain file-patterns.
+	vim.api.nvim_create_autocmd("BufEnter", {
+		pattern = "*.surql",
+		callback = function()
+			vim.opt.filetype = "surrealdb"
+			vim.opt.filetype = "sql"
+		end,
+		group = vim.api.nvim_create_augroup("GitConfig", { clear = true }),
+	}),
+
 	vim.api.nvim_create_autocmd("BufWritePre", {
 		pattern = "*.go",
 		callback = function()
