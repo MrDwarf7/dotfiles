@@ -197,6 +197,10 @@ nnoremap <C-w><C-h> :action MoveElementLeft<CR>
 
 nnoremap <C-w>q :action CloseContent<CR>
 
+let g:WhichKeyDesc_find = "<Space>o DataSource choose"
+let g:WhichKeyDesc_find = "<Space>fo DataSource choose"
+nnoremap <Space>o :action Console.Jdbc.ChooseDataSource<CR>
+nnoremap <Space>fo :action Console.Jdbc.ChooseDataSource<CR>
 
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
 nnoremap <Space>ff :action GotoFile<CR>
@@ -250,8 +254,9 @@ nnoremap gs :action GotoSuperMethod <CR>
 nnoremap g, :action JumpToLastChange <CR>
 nnoremap g. :action JumpToNextChange <CR>
 
-nnoremap gc :action GotoClass <CR>
-vnoremap gc :action GotoClass <CR>
+nnoremap gtc :action GotoClass <CR>
+" vnoremap gc :action GotoClass <CR>
+" Conflicts with tpope/vim-commentary / Comment
 nnoremap gf :action GotoFile <CR>
 vnoremap gf :action GotoFile <CR>
 
@@ -355,39 +360,43 @@ let g:WhichKeyDesc_LSP = "<Space>l +LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lr :action RenameElement<CR>
 let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
-nnoremap <Space>lh :action ShowPopupMenu<CR>
+
+nnoremap <S-k> :action ShowErrorDescription<CR>
+nnoremap <Space>lh :action ShowErrorDescription<CR>
+
+nnoremap <Space>la :action ShowIntentionActions<CR>
+" nnoremap <Space>la :action ShowPopupMenu<CR>
 nnoremap <Space>lf :action ReformatCode<CR>
 
 
 " nnoremap <Space>lh :action ShowErrorDescription<CR>
 " noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
 
-
 " Debug specific binds -------------------------
-let g:WhichKeyDesc_Debug = "<Space>d +Debug"
+let g:WhichKeyDesc_Debug = "<Space>D +Debug"
 " noremap <Space>d
-nnoremap <Space>db :action ToggleLineBreakpoint<CR>
-nnoremap <Space>dr :action Debug<CR>
-nnoremap <Space>dR :action Rerun<CR>
-nnoremap <Space>ds :action Stop<CR>
-nnoremap <Space>dc :action Resume<CR>
+nnoremap <Space>Db :action ToggleLineBreakpoint<CR>
+nnoremap <Space>Dr :action Debug<CR>
+nnoremap <Space>DR :action Rerun<CR>
+nnoremap <Space>Ds :action Stop<CR>
+nnoremap <Space>Dc :action Resume<CR>
 
 let g:WhichKeyDesc_Debug = "<Space>dw Debug Window"
-nnoremap <Space>dw :action ActivateDebugToolWindow<CR>
+nnoremap <Space>Dw :action ActivateDebugToolWindow<CR>
 "nnoremap <Space>ge :action Generate<CR>
 
 let g:WhichKeyDesc_Run = "<Space>r Run Current"
 nnoremap <Space>r :action RunClass<CR>
 
 " map <Space>dc :action Resume<CR>
-nnoremap <Space>do :action StepOver<CR>
-nnoremap <Space>di :action StepInto<CR>
-nnoremap <Space>dO :action StepOut<CR>
-nnoremap <Space>d; :action RunToCursor<CR>
-nnoremap <Space>d' :action ViewBreakpoints<CR>
-nnoremap <Space>de :action EvaluateExpression<CR>
-nnoremap <Space>d" :action DebugViewBreakpoints<CR>
-nnoremap <Space>de :action DebugEvaluateExpression<CR>
+nnoremap <Space>Do :action StepOver<CR>
+nnoremap <Space>Di :action StepInto<CR>
+nnoremap <Space>DO :action StepOut<CR>
+nnoremap <Space>D; :action RunToCursor<CR>
+nnoremap <Space>D' :action ViewBreakpoints<CR>
+nnoremap <Space>De :action EvaluateExpression<CR>
+nnoremap <Space>D" :action DebugViewBreakpoints<CR>
+nnoremap <Space>De :action DebugEvaluateExpression<CR>
 
 " Crap set by Pycharm originally Binds -------------------------
 "" Map <Space>d to start debug
