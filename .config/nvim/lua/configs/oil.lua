@@ -33,7 +33,13 @@ return {
 			noremap = true,
 			silent = true,
 		},
+		{
+			"<Leader>f/",
+			":Oil ",
+			desc = "<cmd>Oil",
+		},
 	},
+
 	opts = {
 		columns = {
 			"icon", -- default
