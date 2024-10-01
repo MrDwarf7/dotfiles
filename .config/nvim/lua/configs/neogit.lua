@@ -1,14 +1,15 @@
 return {
 	"NeogitOrg/neogit",
-	event = "VeryLazy",
+	lazy = true,
+	-- event = "VeryLazy",
 	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = false }, -- required
+		{ "nvim-lua/plenary.nvim", lazy = true }, -- required
 		{ "sindrets/diffview.nvim", lazy = true }, -- optional - Diff integration
 
 		-- Only one of these is needed.
-		{ "nvim-telescope/telescope.nvim", event = "VeryLazy" }, -- optional
-		{ "ibhagwan/fzf-lua", lazy = false }, -- optional
-		{ "echasnovski/mini.pick", lazy = false }, -- optional
+		{ "nvim-telescope/telescope.nvim", lazy = true }, -- optional
+		{ "ibhagwan/fzf-lua", lazy = true }, -- optional
+		{ "echasnovski/mini.pick", lazy = true }, -- optional
 	},
 	keys = {
 		{
@@ -79,6 +80,7 @@ return {
 			desc = "mergetool",
 		},
 	},
+
 	config = function()
 		require("neogit").setup({
 			console_timeout = 2000,
@@ -92,21 +94,18 @@ return {
 			disable_relative_line_numbers = true,
 
 			signs = {
-				hunk = { "", "" }, -- { first is icon nextg to the hunk header label, I assume the second one is the changes?? }
-				item = { "", "" }, --		{ first is item closed, second one is item open }}
-				section = { "-", "" }, --		{ first is speceal stuff (like stashes/recent commits),  second one is the header icon next to unstages changes etc. }}
-				--debug = { "D", "DV" },
+				hunk = { "", "" }, -- [ first is icon nextg to the hunk header label, I assume the second one is the changes?? ]
+				item = { "", "" }, --		[ first is item closed, second one is item open ]
+				section = { "-", "" }, --		[ first is speceal stuff (like stashes/recent commits),  second one is the header icon next to unstages changes etc. ]
 			},
 
 			integrations = {
-				-- diffview = true,
 				fzf_lua = true,
 				mini_pick = true,
 				telescope = true,
 			},
 
 			mappings = {
-
 				commit_editor = {
 					["q"] = "Close",
 					["<m-p>"] = "PrevMessage",
