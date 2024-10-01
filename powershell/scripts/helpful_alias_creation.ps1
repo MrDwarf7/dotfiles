@@ -184,7 +184,6 @@ function fastfetchin() {
     Write-Host
 }
 
-
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
@@ -205,7 +204,6 @@ New-Alias -Name z. -Value ZoxideAdd -Force
 New-Alias -Name z.. -Value ZoxideEdit -Force
 New-Alias -Name zq -Value ZoxideQuery -Force
 
-
 New-Alias -Name cargos -Value CargoBuilEverything -Force
 New-Alias -Name cargosr -Value CargoRunEverything -Force
 
@@ -214,7 +212,6 @@ New-Alias -Name rst -Value NavigateToRust -Force
 New-Alias -Name ff -Value fastfetchin -Force
 
 New-Alias -Name aw -Value launchwsl -Force
-
 function launchwsl {
     wsl.exe -d Arch --cd ~
 }

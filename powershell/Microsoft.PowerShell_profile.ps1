@@ -18,7 +18,6 @@ $LazyLoadProfile = [PowerShell]::Create()
     Import-Module C:\Applications\PowerShell_start\Modules\posh-git\1.1.0\posh-git.psm1
 '@)
 
-
 $LazyLoadProfileRunspace = [RunspaceFactory]::CreateRunspace()
 $LazyLoadProfile.Runspace = $LazyLoadProfileRunspace
 $LazyLoadProfileRunspace.Open()
@@ -48,63 +47,25 @@ $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
 $env:BAT_CONFIG_PATH = "$dotfiles_dir\.config\bat\bat.conf"
 $env:BAT_THEME="Monokai Extended Bright"
-
-$dotfiles_dir = "$HOME\dotfiles"
-# $config_dir = "$dotfiles_dir\.config"
-
-# $work_app_dir = "C:\Applications"
-# $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
-
-
-$powershell_dir = "$dotfiles_dir\powershell"
-$powershell_scripts_dir = "$powershell_dir\scripts"
-# $powershell_completions = "$powershell_scripts_dir\completions\"
-
-# $work_theme = '1Custom_Work_powerlevel10k_rainbow.omp.json'
-# $home_theme = '1MrDwarf7Theme.omp.json'
-# $backup_theme = 'chips.omp.json'
-
-# Unused for time being as they just sit in my dotfiles atm anyway lol
-#
-# $home_GitHub = "E:\GitHub"
-# $home_scripts_dir = "D:\Documents\PowerShell\home_scripts"
-
-### START MAIN SCRIPT
-
-# function MyViCliEditor
-# {
-#     $env:XDG_CONFIG_HOME = "$dotfiles_dir"
-#     nvim -u $HOME\.vimrc
-# }
-# FunctionName | Invoke-Expression, this works but needs a handler for it
-
 $env:EDITOR = $env:VISUAL = 'nvim'
 $env:EDITOR = 'nvim'
-# $env:LIST_CLIENT = "eza"
 
-# $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-# if (Test-Path($ChocolateyProfile))
-# {
-#     Import-Module "$ChocolateyProfile"
-# }
-# END - Alias(s)
-
+$dotfiles_dir = "$HOME\dotfiles"
+$powershell_dir = "$dotfiles_dir\powershell"
+$powershell_scripts_dir = "$powershell_dir\scripts"
 
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-
 if (Test-CommandExists "eza") {
     $env:LIST_CLIENT = "eza"
 } 
 
-
 if (Test-CommandExists "atac") {
     $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
 } 
-
 
 # Work.sort of
 function checkEnvironment {
@@ -116,21 +77,8 @@ function checkEnvironment {
     }
 }
 
-# function ClifOrCargo() {
-#     if (Test-CommandExists "clif" ) {
-#         Invoke-Expression "clif $args"
-#     } 
-#     Invoke-Expression "cargo $args"
-# }
-
-# New-Alias -Name cargo -Value ClifOrCargo -Force
-# New-Alias -Name clif -Value cargo-clif -Force
-# New-Alias -Name cliff -Value cargo-clif -Force
-
-
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
-
 # END - Tooling Functions
 
 # Work
@@ -153,11 +101,6 @@ if (-not (checkEnvironment)) {
 . "$powershell_scripts_dir\general_scripts.ps1"
 
 Invoke-Expression -Command $(gh completion -s powershell | Out-String)
-#Raw Functions
-
-# Linux Functions # these are also present in the scripts/helpful_func_general.ps1
-# I just don't want it breaking with the amount I change things haha
-
 
 if ($env:LIST_CLIENT -eq "eza") {
     . "$powershell_completions\eza_aliases.ps1"
@@ -165,26 +108,3 @@ if ($env:LIST_CLIENT -eq "eza") {
     . "$powershell_completions\system_ls_aliases.ps1"
 }
 
-
-# function pro
-# {
-#     . $PROFILE
-# }
-
-# function . {
-#     Start-Process .
-# }
-#
-# function la {
-#     param ($path = ".")
-#     Get-ChildItem $path -Force
-# }
-#
-# function l {
-#     param ($path = ".")
-#     Get-ChildItem $path -Force
-#     # [System.IO.Directory]::GetFiles($path) -Force
-# }
-
-# if I decide to start using starship, well this is how I would do it.
-# Invoke-Expression (&starship init powershell)

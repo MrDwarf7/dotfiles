@@ -96,9 +96,9 @@ function sysup {
     Write-Host
 }
 
-function npp {
-    notepad++ $args
-}
+# function npp {
+#     notepad++ $args
+# }
 
 function scpdir {
     Push-Location "$env:USERPROFILE\scoop\"
@@ -150,7 +150,7 @@ function refresh {
         Write-Host "Extra arguments detected: $args" -ForegroundColor Yellow;
         . SourceProfile  $args;
     }
-    . SourceProfile  
+    . SourceProfile
 }
 
 function SourceProfile {
