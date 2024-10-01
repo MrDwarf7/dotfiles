@@ -130,7 +130,7 @@ opt.smoothscroll = true
 g.sql_type_default = "mssql"
 
 -- Use ripgrep as grep tool
-vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
+vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 vim.o.foldcolumn = "1"

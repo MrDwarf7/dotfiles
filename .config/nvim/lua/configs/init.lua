@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-fugitive",
+		enabled = false,
 		event = "BufRead",
 		keys = {
 			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", desc = "[g]it" },
@@ -23,6 +24,7 @@ return {
 
 	{
 		"rbong/vim-flog",
+		enabled = false,
 		lazy = true,
 		cmd = { "Flog", "Flogsplit", "Floggit" },
 		keys = {

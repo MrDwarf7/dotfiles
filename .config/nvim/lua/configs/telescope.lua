@@ -32,7 +32,7 @@ return {
 	event = "UIEnter",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		{ "folke/trouble.nvim", lazy = true },
+		-- { "folke/trouble.nvim", lazy = true },
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
 			build = "make",
@@ -60,7 +60,11 @@ return {
 		{
 			"<Leader>fw",
 			function()
-				return require("telescope.builtin").live_grep()
+				return require("telescope.builtin").live_grep(require("telescope.themes").get_ivy({
+					initial_mode = "insert",
+					previewer = true,
+					sorting_strategy = "ascending",
+				}))
 			end,
 			desc = "[w]ord",
 		},
@@ -241,7 +245,7 @@ return {
 			grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 			qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
+			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental", ".git", ".hg", ".svn" },
 
 			mappings = {
 				i = {

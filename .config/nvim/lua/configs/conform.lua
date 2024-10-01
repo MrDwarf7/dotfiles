@@ -65,6 +65,8 @@ return {
 				"cpp",
 				"netrw",
 				"oil",
+				"Neogit",
+				"neogit",
 				"treesitter",
 				"zig",
 			}
@@ -85,6 +87,8 @@ return {
 				"cpp",
 				"netrw",
 				"oil",
+				"Neogit",
+				"neogit",
 				"treesitter",
 				"zig",
 				"persistence",
