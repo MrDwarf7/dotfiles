@@ -215,3 +215,6 @@ New-Alias -Name aw -Value launchwsl -Force
 function launchwsl {
     wsl.exe -d Arch --cd ~
 }
+
+New-Alias -Name c -Value cat -Force
+New-Alias -Name b -Value bat -Force
