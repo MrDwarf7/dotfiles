@@ -57,6 +57,17 @@ return {
 	},
 
 	{
+		"rcarriga/nvim-notify",
+		lazy = false,
+		opts = function()
+			vim.notify = require("notify")
+			return {
+				background_color = "#00000000",
+			}
+		end,
+	},
+
+	{
 		"folke/tokyonight.nvim",
 		lazy = false,
 		enabled = true,
