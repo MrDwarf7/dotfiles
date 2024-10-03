@@ -84,6 +84,7 @@ return {
 	config = function()
 		require("neogit").setup({
 			console_timeout = 2000,
+			auto_show_console = false,
 			graph_style = "unicode",
 			use_default_keymaps = false,
 			merge_editor = {
@@ -159,7 +160,7 @@ return {
 					["A"] = "CherryPickPopup",
 					["B"] = "BisectPopup",
 					["b"] = "BranchPopup",
-					["C"] = "CommitPopup",
+					["c"] = "CommitPopup",
 					["d"] = "DiffPopup",
 					["f"] = "FetchPopup",
 					["i"] = "IgnorePopup",
