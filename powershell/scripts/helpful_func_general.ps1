@@ -141,6 +141,11 @@ function dot {
 
 # END - Shell functions / Helpful functions
 
+function IsSymbolicLink([string]$path) {
+    $file = Get-Item $path -Force -ErrorAction SIlentlyContinue
+    return [bool]($file.Attributes -band [IO.FileAttributes]::ReparsePoint)
+}
+New-Alias -Name isym -Value IsSymbolicLink -Force
 
 function refresh {
     Import-Module "C:\ProgramData\chocolatey\helpers\chocolateyProfile.psm1";

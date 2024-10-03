@@ -184,6 +184,8 @@ function fastfetchin() {
     Write-Host
 }
 
+. "$powershell_scripts_dir\symbolic_junction.ps1"
+
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
@@ -197,7 +199,7 @@ New-Alias -Name rm -Value Remove-Wrapper -Force
 SafeNewAlias -Alias bpsa -Command sar
 SafeNewAlias -Alias br -Command broot.exe
 SafeNewAlias -Alias grep -Command Select-String
-SafeNewAlias -Alias ln -Command New-SymLink
+# SafeNewAlias -Alias ln -Command New-SymLink
 SafeNewAlias -Alias npp -Command notepad++.exe
 
 New-Alias -Name z. -Value ZoxideAdd -Force

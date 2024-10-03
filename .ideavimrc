@@ -10,6 +10,7 @@ syntax on
 vnoremap mapleader=" "
 nnoremap mapleader=" "
 map <Space>=<leader>
+map <Space><Esc> <Esc>
 
 " set timeoutlen=500
 set notimeout
@@ -133,19 +134,32 @@ map \wq <Action>(SaveAndCloseActiveTab)
 
 
 
+" Fold / Folds / Folding
+
+
+nnoremap za :action ExpandCollapseToggleAction<CR>
+vnoremap za :action ExpandCollapseToggleAction<CR>
+
+
+" nnoremap zM :action CollapseAllRegions<CR>
+" vnoremap zM :action CollapseAllRegions<CR>
+
+
+
+
 " ------------------------- GENERAL -------------------------
 " Formatting -------------------------
 let g:WhichKeyDesc_Formatting = "=="
 let g:WhichKeyDesc_Formatting = "--"
-nnoremap == :action ReformatCode <CR>
-vnoremap == :action ReformatCode <CR>
-nnoremap -- :action OptimizeImports <CR>
-vnoremap -- :action OptimizeImports <CR>
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>
+nnoremap -- :action OptimizeImports<CR>
+vnoremap -- :action OptimizeImports<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap gcc :action CommentByLineComment <CR>
-vnoremap gc :action CommentByLineComment <CR>
+nnoremap gcc :action CommentByLineComment<CR>
+vnoremap gc :action CommentByLineComment<CR>
 
 nnoremap zc :action CollapseRegion<CR>
 vnoremap zc :action CollapseRegion<CR>
@@ -216,12 +230,12 @@ vnoremap <Space>fu :action  FindUsages<CR>
 let g:WhichKeyDesc_find = "<Space>fp Find within Project"
 nnoremap <Space>fw :action FindInPath<CR>
 let g:WhichKeyDesc_find = "<Space>fr Find Recent Files"
-nnoremap <Space>fr :action RecentFiles <CR>
+nnoremap <Space>fr :action RecentFiles<CR>
 let g:WhichKeyDesc_find = "<Space>fl Find Recent Location"
 nnoremap <Space>fl :action RecentLocations<CR>
 let g:WhichKeyDesc_find = "<Space>fb Find Buffers (Same as Recent Files)"
-nnoremap <Space>fb :action RecentFiles <CR>
-vnoremap <Space>fb :action RecentFiles <CR>
+nnoremap <Space>fb :action RecentFiles<CR>
+vnoremap <Space>fb :action RecentFiles<CR>
 noremap <Space>fp :action ActivateProblemsViewToolWindow<CR>
 
 let g:WhichKeyDesc_find = "<Space>ft Find TODOs"
@@ -233,38 +247,39 @@ vnoremap <Space>ti :action ToggleInlayHintsGloballyAction<CR>
 
 
 " Goto Binds -------------------------
-let g:WhichKeyDesc_Goto = "<Space>g Goto
-nnoremap gd :action GotoDeclaration <CR>
-nnoremap gi :action GotoImplementation <CR>
+let g:WhichKeyDesc_Goto = "g +Goto"
+"<Space>g Goto
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
 
-nnoremap gt :action GotoTypeDeclaration <CR>
-
-
-nnoremap ]d :action GotoNextError <CR>
-nnoremap [d :action GotoPreviousError <CR>
+nnoremap gt :action GotoTypeDeclaration<CR>
 
 
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
 
-nnoremap gT :action GotoTest <CR>
-nnoremap gh :action Back <CR>
-nnoremap gl :action Forward <CR>
-nnoremap gj :action MethodDown <CR>
-nnoremap gk :action MethodUp <CR>
-nnoremap gs :action GotoSuperMethod <CR>
-nnoremap g, :action JumpToLastChange <CR>
-nnoremap g. :action JumpToNextChange <CR>
 
-nnoremap gtc :action GotoClass <CR>
-" vnoremap gc :action GotoClass <CR>
+
+nnoremap gT :action GotoTest<CR>
+nnoremap gh :action Back<CR>
+nnoremap gl :action Forward<CR>
+nnoremap gj :action MethodDown<CR>
+nnoremap gk :action MethodUp<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap g, :action JumpToLastChange<CR>
+nnoremap g. :action JumpToNextChange<CR>
+
+nnoremap gtc :action GotoClass<CR>
+" vnoremap gc :action GotoClass<CR>
 " Conflicts with tpope/vim-commentary / Comment
-nnoremap gf :action GotoFile <CR>
-vnoremap gf :action GotoFile <CR>
+nnoremap gf :action GotoFile<CR>
+vnoremap gf :action GotoFile<CR>
 
-nnoremap <Space>gq :action QuickList.Git <CR>
+nnoremap <Space>gq :action QuickList.Git<CR>
 
 let g:WhichKeyDesc_New = "<Space>n +New"
-nnoremap <Space>ns :action NewScratchFile <CR>
-nnoremap <Space>ne :action NewElementSamePlace <CR>
+nnoremap <Space>ns :action NewScratchFile<CR>
+nnoremap <Space>ne :action NewElementSamePlace<CR>
 " vnoremap <Space>re :action Replace<CR>
 " nnoremap <Space>re :action Replace<CR>
 " vnoremap / :action Find<CR>
@@ -330,7 +345,7 @@ nnoremap <Space>bc :action CloseEditor<CR>
 
 nnoremap <C-w>u :action Unsplit<CR>
 nnoremap <C-w>bF :action MoveEditorToOppositeTabGroup<CR>
-nnoremap <Space>bh :action HideAllWindows <CR>
+nnoremap <Space>bh :action HideAllWindows<CR>
 
 " Toggles/UI specific binds -------------------------
 let g:WhichKeyDesc_Toggle = "<Space>t +Toggles"
@@ -369,34 +384,46 @@ nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lf :action ReformatCode<CR>
 
 
+let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [file]"
+nnoremap <Space>lf :action Cargo.RustfmtFile<CR>
+let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [project]"
+nnoremap <Space>lF :action Cargo.RustfmtCargoProject<CR>
+
+
+" RUST specific binds -------------------------
+
+nnoremap <Space>C :action Cargo.RunCargoCommand<CR>
+vnoremap <Space>C :action Cargo.RunCargoCommand<CR>
+
+
 " nnoremap <Space>lh :action ShowErrorDescription<CR>
 " noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
 
 " Debug specific binds -------------------------
-let g:WhichKeyDesc_Debug = "<Space>D +Debug"
+let g:WhichKeyDesc_Debug = "<Space>d +Debug"
 " noremap <Space>d
-nnoremap <Space>Db :action ToggleLineBreakpoint<CR>
-nnoremap <Space>Dr :action Debug<CR>
-nnoremap <Space>DR :action Rerun<CR>
-nnoremap <Space>Ds :action Stop<CR>
-nnoremap <Space>Dc :action Resume<CR>
+nnoremap <Space>db :action ToggleLineBreakpoint<CR>
+nnoremap <Space>dr :action Debug<CR>
+nnoremap <Space>dR :action Rerun<CR>
+nnoremap <Space>ds :action Stop<CR>
+nnoremap <Space>dc :action Resume<CR>
 
 let g:WhichKeyDesc_Debug = "<Space>dw Debug Window"
-nnoremap <Space>Dw :action ActivateDebugToolWindow<CR>
+nnoremap <Space>dw :action ActivateDebugToolWindow<CR>
 "nnoremap <Space>ge :action Generate<CR>
 
 let g:WhichKeyDesc_Run = "<Space>r Run Current"
 nnoremap <Space>r :action RunClass<CR>
 
 " map <Space>dc :action Resume<CR>
-nnoremap <Space>Do :action StepOver<CR>
-nnoremap <Space>Di :action StepInto<CR>
-nnoremap <Space>DO :action StepOut<CR>
-nnoremap <Space>D; :action RunToCursor<CR>
-nnoremap <Space>D' :action ViewBreakpoints<CR>
-nnoremap <Space>De :action EvaluateExpression<CR>
-nnoremap <Space>D" :action DebugViewBreakpoints<CR>
-nnoremap <Space>De :action DebugEvaluateExpression<CR>
+nnoremap <Space>do :action StepOver<CR>
+nnoremap <Space>di :action StepInto<CR>
+nnoremap <Space>dO :action StepOut<CR>
+nnoremap <Space>d; :action RunToCursor<CR>
+nnoremap <Space>d' :action ViewBreakpoints<CR>
+nnoremap <Space>de :action EvaluateExpression<CR>
+nnoremap <Space>d" :action DebugViewBreakpoints<CR>
+nnoremap <Space>de :action DebugEvaluateExpression<CR>
 
 " Crap set by Pycharm originally Binds -------------------------
 "" Map <Space>d to start debug
