@@ -141,11 +141,13 @@ nnoremap za :action ExpandCollapseToggleAction<CR>
 vnoremap za :action ExpandCollapseToggleAction<CR>
 
 
+" nnoremap za :action ExpandCollapseToggleAction<CR>
+
+" Creates a fold 
+vnoremap zf :action CollapseSelection<CR><ESC>
+
 " nnoremap zM :action CollapseAllRegions<CR>
 " vnoremap zM :action CollapseAllRegions<CR>
-
-
-
 
 " ------------------------- GENERAL -------------------------
 " Formatting -------------------------
@@ -205,6 +207,7 @@ let g:WhichKeyDesc_find = "<Space>f/ Find Text in buffer"
 nnoremap <Space>f/ :action Find<CR>
 vnoremap <Space>f/ :action Find<CR>
 
+nnoremap <Space>fi :action QuickImplementations<CR>
 
 nnoremap <C-w><C-l> :action MoveElementRight<CR>
 nnoremap <C-w><C-h> :action MoveElementLeft<CR>
@@ -251,8 +254,9 @@ let g:WhichKeyDesc_Goto = "g +Goto"
 "<Space>g Goto
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
-
 nnoremap gt :action GotoTypeDeclaration<CR>
+
+nnoremap gI :action QuickImplementations<CR>
 
 
 nnoremap ]d :action GotoNextError<CR>
@@ -379,9 +383,14 @@ let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
 nnoremap <S-k> :action ShowErrorDescription<CR>
 nnoremap <Space>lh :action ShowErrorDescription<CR>
 
+noremap <Space>ld :action ActivateProblemsViewToolWindow<CR>
+
 nnoremap <Space>la :action ShowIntentionActions<CR>
 " nnoremap <Space>la :action ShowPopupMenu<CR>
 nnoremap <Space>lf :action ReformatCode<CR>
+
+nnoremap <Space>li :action QuickImplementations<CR>
+
 
 
 let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [file]"
