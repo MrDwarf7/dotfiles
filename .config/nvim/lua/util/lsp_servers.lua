@@ -25,11 +25,11 @@ M.servers = function()
 
 		cssls = {},
 
-		deno = {},
+		-- deno = {},
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
-		eslint = {},
+		-- eslint = {},
 		-- gleam = {},
 		html = {},
 		jsonls = {},
