@@ -82,7 +82,7 @@ return {
 	},
 
 	config = function()
-		require("neogit").setup({
+		return require("neogit").setup({
 			console_timeout = 2000,
 			auto_show_console = false,
 			graph_style = "unicode",
