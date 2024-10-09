@@ -36,7 +36,6 @@ return {
 					return { vim.lsp.buf.format({ async = true }) }
 				end
 			end,
-
 			python = function(bufnr)
 				if require("conform").get_formatter_info("ruff_format", bufnr).available then
 					return { "ruff_format" }

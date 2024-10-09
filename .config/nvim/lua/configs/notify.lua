@@ -26,6 +26,6 @@ return {
 		}
 	end,
 	config = function(_, opts)
-		require("notify").setup(opts)
+		return require("notify").setup(opts)
 	end,
 }
