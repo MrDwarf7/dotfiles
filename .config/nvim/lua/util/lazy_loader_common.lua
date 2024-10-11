@@ -11,6 +11,10 @@ end
 M.common_setup = function()
 	return {
 		require("lazy").setup("configs", {
+			dev = {
+				path = vim.g.my_dev,
+				fallback = true,
+			},
 			defaults = { lazy = true },
 			change_detection = {
 				notify = false,
