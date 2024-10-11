@@ -1,5 +1,6 @@
 return {
 	"NeogitOrg/neogit",
+	dev = require("util.maybe").maybe_dev("neogit"),
 	lazy = true,
 	-- event = "VeryLazy",
 	dependencies = {
@@ -82,7 +83,7 @@ return {
 	},
 
 	config = function()
-		return require("neogit").setup({
+		require("neogit").setup({
 			console_timeout = 2000,
 			auto_show_console = false,
 			graph_style = "unicode",
@@ -119,7 +120,6 @@ return {
 					["<C-c><C-c>"] = "Submit",
 					["<C-c><C-k>"] = "Abort",
 				},
-
 				rebase_editor = {
 					["p"] = "Pick",
 					["r"] = "Reword",
@@ -142,7 +142,6 @@ return {
 					["<C-c><C-c>"] = "Submit",
 					["<C-c><C-k>"] = "Abort",
 				},
-
 				finder = {
 					["<CR>"] = "Select",
 					["<C-c>"] = "Close",
@@ -154,7 +153,6 @@ return {
 					["<tab>"] = "MultiselectToggleNext",
 					["<s-tab>"] = "MultiselectTogglePrevious",
 				},
-
 				popup = {
 					["?"] = "HelpPopup",
 					["A"] = "CherryPickPopup",
@@ -176,7 +174,6 @@ return {
 					["X"] = "ResetPopup",
 					["Z"] = "StashPopup",
 				},
-
 				status = {
 					["q"] = "Close",
 					["I"] = "InitRepo",

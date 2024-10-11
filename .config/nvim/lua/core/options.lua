@@ -1,6 +1,7 @@
 -- local architecture =
 local opt = vim.opt
 local g = vim.g
+local check = require("util.check_if")
 
 vim.lsp.inlay_hint.enable()
 
@@ -20,6 +21,17 @@ if vim.g.os == "Windows_NT" then
 	}
 	for k, v in pairs(powershell_opts) do
 		vim.o[k] = v
+	end
+end
+
+if vim.g.os == "Windows_NT" then
+	if check.smkdir(vim.g.os, "C:\\nvim_dev") then
+		vim.g.my_dev = "C:\\nvim_dev"
+	end
+else
+	local nix_dev = vim.fn.expand("$HOME") .. "/documents/nvim_dev"
+	if check.smkdir(vim.g.os, nix_dev) then
+		vim.g.my_dev = nix_dev
 	end
 end
 
