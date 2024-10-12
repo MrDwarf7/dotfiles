@@ -77,7 +77,7 @@ M.servers = function()
 			},
 		},
 		marksman = {},
-		markdown_oxide = {},
+		-- markdown_oxide = {},
 
 		ols = {},
 		omnisharp = {
