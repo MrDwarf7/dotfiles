@@ -121,7 +121,7 @@ M.servers = function()
 				"setup.cfg",
 				"pyproject.toml",
 				"requirements.txt",
-				".venv",
+				"\\.venv",
 				"venv"
 			),
 			on_attach = vim.lsp.inlay_hint.enable(),

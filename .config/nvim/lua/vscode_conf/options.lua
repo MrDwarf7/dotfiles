@@ -39,7 +39,7 @@ set clipboard+=unnamedplus
 	-- end
 
 	-- Use ripgrep as grep tool
-	vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
+	vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden --no-ignore-dot"
 	vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 	vim.o.breakindent = true
 	vim.o.updatetime = 250

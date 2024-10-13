@@ -16,9 +16,9 @@
 **/*/target/**/*.sql
 
 # Common data files
-**/*/data/*.csv
-**/*/data/*.xlsx
-**/*/data/*.xlsm
+data/*.csv
+data/*.xlsx
+data/*.xlsm
 
 # Common compile output
 **/*/debug/

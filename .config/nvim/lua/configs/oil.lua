@@ -52,8 +52,12 @@ return {
 		skip_confirm_for_simple_edits = true, -- default: false
 		view_options = {
 			show_hidden = true,
+			is_hidden_file = function(name, bufnr)
+				return false
+			end,
 			is_always_hidden = function(name, bufnr)
-				return name == "node_modules"
+				return false
+				-- return name == "node_modules"
 				-- name == ".." or
 				-- Above would hide the 'up directory' entry in the list
 			end,

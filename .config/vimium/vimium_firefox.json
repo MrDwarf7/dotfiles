@@ -1,0 +1,24 @@
+{
+	"keyMappings": "# Insert your preferred key mappings here.\nunmap ?\nunmap /\nunmap `\n\nunmap H\nunmap J\nunmap K\nunmap L\n\nmap J nextTab\nmap K previousTab\n\nmap H goBack\nmap L goForward\n\nmap ' Marks.activateGotoMode\n\nmap ` showHelp\nmap ? enterFindMode\nmap : enterFindMode\n\nmap <c-o> goBack\n# this is a capital i not a lowercase L\nmap <c-i> goForward\n\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp",
+	"scrollStepSize": 45,
+	"grabBackFocus": true,
+	"settingsVersion": "2.1.2",
+	"exclusionRules": [
+		{
+			"passKeys": "h",
+			"pattern": "https?://www.youtube.com/*"
+		},
+		{
+			"passKeys": "j",
+			"pattern": "https?://www.youtube.com/*"
+		},
+		{
+			"passKeys": "k",
+			"pattern": "https?://www.youtube.com/*"
+		},
+		{
+			"passKeys": "l",
+			"pattern": "https?://www.youtube.com/*"
+		}
+	]
+}

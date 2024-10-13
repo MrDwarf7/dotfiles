@@ -1,33 +1,20 @@
 # Common editor & OS files
-LazyVim/lazy-lock.json
-.idea
-.idea/
-.idea/*
+# LazyVim/lazy-lock.json
+# .config/gh/
+# .config/github-copilot
+# .config/lazygit
+# .config/jgit
+# .config/scoop
 
-z.old
-z.old/
-z.old/*
+# .config/gh/*
+#.config/github-copilot/*
+# .config/lazygit/*
+# .config/jgit/*
+# .config/scoop/*
+# .config/graphite/user_config*
 
-.z.old
-.z.old/
-.z.old/*
-
-.config/gh
-.config/github-copilot
-.config/lazygit
-.config/jgit
-.config/scoop
-
-.config/gh/*
-.config/github-copilot/*
-.config/lazygit/*
-.config/jgit/*
-.config/scoop/*
-.config/graphite/user_config*
-
- .config/helix/runtime/grammars/*
- 
- .config/helix/runtime/queries/*
+# .config/helix/runtime/grammars/*
+# .config/helix/runtime/queries/*
 
 # !.config/helix/runtime/languages.toml
 # !.config/helix/runtime/themes/
@@ -35,15 +22,12 @@ z.old/*
 # !.config/helix/runtime/themes/*/**
 # .config/helix/runtime/
 
-.config/nvim/lazy-lock
+# .config/nvim/lazy-lock
 
-nvim_distros/*
-!nvim_distros/omerxx/
-nvim_distros/omerxx/lazy-lock
-!nvim_distros/LazyVim/
-nvim_distros/LazyVim/lazy-lock
+# nvim_distros/*
+# !nvim_distros/omerxx/
+# nvim_distros/omerxx/lazy-lock
+# !nvim_distros/LazyVim/
+# nvim_distros/LazyVim/lazy-lock
 
-
-
-
-.config/lazygit/state.*
+# .config/lazygit/state.*

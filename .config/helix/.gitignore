@@ -1,3 +1,7 @@
-grammars/
-queries/
-tutor
+runtime/grammars/
+runtime/queries/
+runtime/tutor
+
+./runtime/grammars/
+./runtime/queries/
+./runtime/tutor
