@@ -1,4 +1,7 @@
 {
+  "auto_update_extensions": {
+    "biome": false
+  },
   "assistant": {
     "default_model": {
       "provider": "anthropic",
@@ -20,8 +23,20 @@
         "program": "pwsh.exe",
         "args": ["-NoLogo"]
       }
-    },
-    "font_family": "Mononoki Nerd Font Mono"
+    }
+    //     "program": "pwsh.exe"
+    //     // "with_arguments": {
+    //     //   "program": "pwsh",
+    //     //   "args": ["-NoLogo", "-Command"]
+    //     // }
+    //   }
+    //   // "shell": {
+    //   //   "with_arguments": {
+    //   //     "program": "pwsh.exe",
+    //   //     "args": ["-NoLogo"]
+    //   //   }
+    // },
+    //   // "font_family": "Mononoki Nerd Font Mono"
   },
   "scrollbar": {
     "show": "never"
