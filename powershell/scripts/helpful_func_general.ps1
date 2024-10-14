@@ -69,6 +69,14 @@ function gitgo {
     return
 }
 
+function gfp {
+    Write-Host "Fetching all remotes and pulling all branches." -ForegroundColor DarkBlue
+    git fetch --all $args;
+    Write-Host "Pulling all branches." -ForegroundColor DarkYellow
+    git pull --all $args;
+    return
+}
+
 function scoopup {
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
