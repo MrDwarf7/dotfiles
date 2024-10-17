@@ -16,7 +16,7 @@ gui:
     optionsTextColor:
       - blue
   showAllContainers: true
-  returnImmediately: false
+  returnImmediately: true
   wrapMainPanel: true
   # Side panel width as a ratio of the screen's width
   sidePanelWidth: 0.333
