@@ -1,5 +1,5 @@
 -- This fix is no longer needed, huzzah!
--- local V = {}
+local V = {}
 --
 local moveCursor = function(d)
 	return function()
@@ -12,7 +12,7 @@ local moveCursor = function(d)
 end
 
 ---@return table
-local setup = function()
+V.setup = function()
 	local vscode = require("vscode-neovim")
 	if not vim.g.vscode then
 		vim.g.vscode = {}
@@ -58,7 +58,7 @@ local setup = function()
 end
 
 return {
-	setup(),
+	V.setup(),
 }
 
 -- return V
