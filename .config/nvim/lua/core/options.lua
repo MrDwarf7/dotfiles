@@ -7,17 +7,22 @@ vim.lsp.inlay_hint.enable()
 
 --- THIS WORKS............
 vim.g.os = require("util.architecture").get_os()
-
 if vim.g.os == "Windows_NT" then
 	local powershell_opts = {
 		shell = "pwsh",
-		-- vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell" or "pwsh.exe",
-		shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-		-- shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-		shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-		shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		shellcmdflag = "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;",
+		shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
+		shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode',
 		shellquote = "",
 		shellxquote = "",
+
+		-- Original settings
+		-- shell = "pwsh",
+		-- shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+		-- shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		-- shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		-- shellquote = "",
+		-- shellxquote = "",
 	}
 	for k, v in pairs(powershell_opts) do
 		vim.o[k] = v
