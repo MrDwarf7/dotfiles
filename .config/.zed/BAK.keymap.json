@@ -1,0 +1,247 @@
+[
+  // {
+  //   "context": "Editor && vim_mode == insert && showing_completions",
+  //   "bindings": {
+  //   }
+  // },
+
+  // {
+  //   "context": "Editor",
+  //   "bindings": {
+  //     "ctrl-k": "vim::Up",
+  //     "ctrl-h": null
+  //   }
+  // },
+  // {
+  //   "context": "BufferSearchBar",
+  //   "bindings": {
+  //     "ctrl-h": null
+  //   }
+  // },
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      // "ctrl-w": null,
+
+      "b": "vim::PreviousSubwordStart",
+      "shift-h": "vim::FirstNonWhitespace",
+      "shift-l": "vim::EndOfLine",
+      "ctrl-w ctrl-h": ["workspace::SwapPaneInDirection", "Left"],
+      "ctrl-w ctrl-l": ["workspace::SwapPaneInDirection", "Right"],
+      "ctrl-w ctrl-k": ["workspace::SwapPaneInDirection", "Up"],
+      "ctrl-w ctrl-j": ["workspace::SwapPaneInDirection", "Down"],
+
+      "ctrl-w ctrl-v": "pane::SplitRight",
+      "ctrl-w v": "pane::SplitRight",
+      "ctrl-w shift-s": "pane::SplitDown",
+      "ctrl-w ctrl-s": "pane::SplitDown",
+      "ctrl-w s": "pane::SplitDown",
+      "ctrl-shift-;": "terminal_panel::ToggleFocus",
+      "space f f": "file_finder::Toggle",
+      "space e": "project_panel::ToggleFocus",
+      "space t b": ["workspace::ToggleLeftDock", "escape"],
+      "space l s": "outline::Toggle", // Workspace symbols
+      "space l a": "editor::ToggleCodeActions",
+      "space l h": "editor::Hover",
+      "g r": "editor::FindAllReferences",
+      "ctrl-w q": "pane::CloseActiveItem",
+      "] c": "editor::GoToHunk",
+      "[ c": "editor::GoToPrevHunk",
+      "space t i": "editor::ToggleInlayHints",
+      "space f w": "vim::Search",
+      "shift-r": null,
+
+      "shift-m": "vim::WindowMiddle"
+      // "shift-l": "vim::WindowBottom",
+
+      // "ctrl-l": null,
+      // "ctrl-k": null,
+      // "ctrl-h": null
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "up": "editor::ContextMenuPrev",
+      "down": "editor::ContextMenuNext",
+      "pageup": "editor::ContextMenuFirst",
+      "pagedown": "editor::ContextMenuLast",
+      "ctrl-n": "editor::ContextMenuNext",
+      "ctrl-p": "editor::ContextMenuPrev",
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrev" // TODO: This is a hack to prevent the default binding from hanging
+    }
+  },
+  // {
+  //   "context": "Editor && VimControl && !VimWaiting && !menu",
+  //   "bindings": {
+  //     "z a": "editor::UnfoldLines"
+  //   }
+  // },
+  {
+    "context": "vim_mode == insert",
+    "bindings": {
+      "j j": "vim::NormalBefore",
+      "j k": "vim::NormalBefore",
+      "k j": "vim::NormalBefore",
+      "k k": "vim::NormalBefore",
+      // "ctrl-w": "editor::DeleteToPreviousWordStart",
+      // "ctrl-k": null,
+      "ctrl-f": null,
+      "ctrl-b": null
+
+      // "ctrl-shift i": "assistant::InlineAssist",
+      // "ctrl-shift y": "editor::ShowInlineCompletion"
+    }
+  },
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "shift-s": [
+        "vim::PushOperator",
+        {
+          "AddSurrounds": {}
+        }
+      ],
+      ">": ["vim::Indent", "vim::RestoreVisualSelection"],
+      "<": ["vim::Outdent", "vim::RestoreVisualSelection"]
+    }
+  },
+  {
+    "context": "EmptyPane || SharedScreen",
+    "bindings": {
+      "space f f": "file_finder::Toggle"
+      // "ctrl-w h": "file_finder::Toggle"
+    }
+  },
+  {
+    "context": "vim_mode == waiting",
+    "bindings": {
+      "ctrl-k": "vim::NormalBefore"
+    }
+  },
+
+  {
+    "context": "Dock",
+    "bindings": {
+      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-shift-:": "terminal_panel::ToggleFocus",
+      "ctrl-b": null,
+      "ctrl-n": "menu::SelectNext",
+      "ctrl-p": "menu::SelectPrev",
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrev"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-tab": "pane::ActivateNextItem",
+      "ctrl-shift-tab": "pane::ActivatePrevItem"
+    }
+  },
+  {
+    "context": "Pane && != vim_mode == insert", // Had to be more specific via ! vim_mode == insert
+    "bindings": {
+      // "ctrl-w": null,
+      "ctrl-w q": "pane::CloseActiveItem"
+      // "ctrl-k u": null,
+      // "ctrl-k w": null
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-shift-;": "workspace::ToggleBottomDock"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "workspace::NewFile",
+      "d": "project_panel::Delete",
+      "shift-d": "project_panel::Delete",
+      "r": "project_panel::Rename",
+      "x": "project_panel::Cut",
+      "y": "project_panel::Copy",
+      "p": "project_panel::Paste"
+    }
+  },
+
+  {
+    // netrw compatibility
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "%": null,
+      "d": null,
+      "shift-r": null,
+      "shift-d": null,
+
+      ":": "command_palette::Toggle",
+
+      "a": "project_panel::NewFile",
+
+      "/": "project_panel::NewSearchInDirectory",
+
+      "A": "project_panel::NewDirectory",
+
+      "enter": "project_panel::OpenPermanent",
+      "escape": "project_panel::ToggleFocus",
+      "h": "project_panel::CollapseSelectedEntry",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrev",
+      "l": "project_panel::ExpandSelectedEntry",
+      "o": "project_panel::OpenPermanent",
+
+      "d": "project_panel::Delete",
+      "r": "project_panel::Rename",
+
+      "t": "project_panel::OpenPermanent",
+      "v": "project_panel::OpenPermanent",
+      "p": "project_panel::Open",
+      "x": "project_panel::RevealInFileManager",
+      "s": "project_panel::OpenWithSystem",
+      "shift-g": "menu::SelectLast",
+      "g g": "menu::SelectFirst",
+      "-": "project_panel::SelectParent",
+      "ctrl-6": "pane::AlternateFile"
+    }
+  }
+
+  // {
+  //   "context": "ProjectPanel && not_editing",
+  //   "bindings": {
+  //     ":": "command_palette::Toggle",
+  //     "%": "project_panel::NewFile",
+  //     "a": "project_panel::NewFile",
+  //     "A": "project_panel::NewDirectory",
+  //     "d": "project_panel::Delete",
+  //     "r": "project_panel::Rename",
+  //     "shift-r": "project_panel::Rename",
+  //     "x": "project_panel::Cut",
+  //     "y": "project_panel::Copy",
+  //     "p": "project_panel::Paste",
+  //     "l": "project_panel::OpenPermanent",
+  //     // "l": "project_panel::ExpandSelectedEntry",
+  //     "shift-d": "project_panel::Delete",
+  //     "shift-g": "menu::SelectLast",
+  //     "g g": "menu::SelectFirst"
+  //   }
+  // }
+
+  // {
+  //   "context": "ProjectPanel && not_editing && !vim_mode == insert",
+  //   "bindings": {
+  //     // "l": "project_panel::OpenPermanent"
+  //     // "l": "project_panel::ExpandSelectedEntry"
+  //   }
+  // }
+]
