@@ -1,139 +1,135 @@
-local actions = function()
-	print("Vscode specific actions file loads...")
-	local vscode = require("vscode")
-	-- local map = vim.keymap.set
+local vscode = require("vscode")
+print("Vscode specific actions file loads...")
 
+return {
 	vim.keymap.set("i", "jj", function()
 		vscode.action("vscode-neovim.escape")
-	end)
+	end),
 
 	vim.keymap.set("i", "kj", function()
 		vscode.action("vscode-neovim.escape")
-	end)
+	end),
 
 	vim.keymap.set("i", "jk", function()
 		vscode.action("vscode-neovim.escape")
-	end)
+	end),
 
 	vim.keymap.set("n", "gd", function()
 		print("Go to definition")
 		vscode.action("editor.action.revealDefinition")
-	end)
+	end),
 
 	vim.keymap.set("n", "gD", function()
 		print("Go to declaration")
 		vscode.action("editor.action.revealDeclaration")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-w>d", function()
 		print("Go to declaration")
 		vscode.action("editor.action.revealDefinitionAside")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-w>e", function()
 		print("Reset editor window sizes")
 		vscode.action("workbench.action.evenEditorWidths")
-	end)
+	end),
 
 	vim.keymap.set("n", "gr", function()
 		print("Go to references")
 		vscode.action("editor.action.goToReferences")
-	end)
+	end),
 
 	vim.keymap.set("n", "gi", function()
 		print("Go to implementation")
 		vscode.action("editor.action.goToImplementation")
-	end)
+	end),
 
 	vim.keymap.set("n", "gI", function()
 		print("Go to last edit location")
 		vscode.action("workbench.action.navigateToLastEditLocation")
-	end)
+	end),
 
 	vim.keymap.set("n", "gt", function()
 		print("Go to type definition")
 		vscode.action("editor.action.goToTypeDefinition")
-	end)
+	end),
 
 	vim.keymap.set("n", "gO", function()
 		print("Goto Symbol")
 		vscode.action("workbench.action.gotoSymbol")
-	end)
+	end),
 
 	vim.keymap.set("n", "K", function()
 		print("Hover")
 		vscode.call("editor.action.showHover")
-	end)
+	end),
 
 	vim.keymap.set("n", "gp", function()
 		print("Peek Declaration")
 		vscode.call("editor.action.peekDeclaration")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-k>", function()
 		print("Peek definition")
 		vscode.action("editor.action.peekDefinition")
-	end)
+	end),
 
-	-- Non Ctrl variants
+	-- Non Ctrl variants,
 	vim.keymap.set("n", "<Left>", function()
 		print("Increase view width")
 		vscode.call("workbench.action.increaseViewWidth")
-	end)
+	end),
 
 	vim.keymap.set("n", "<Right>", function()
 		print("Decrease view width")
 		vscode.call("workbench.action.decreaseViewWidth")
-	end)
+	end),
 
 	-- This are 'inverted' to an extent, because you're changing the actual editor size
 	vim.keymap.set("n", "<Down>", function()
 		print("Increase view height")
 		vscode.call("workbench.action.increaseViewHeight")
-	end)
+	end),
 
 	vim.keymap.set("n", "<Up>", function()
 		print("Decrease view height")
 		vscode.call("workbench.action.decreaseViewHeight")
-	end)
+	end),
 
-	-- Ctrl variants
+	-- Ctrl variants,
 	vim.keymap.set("n", "<C-Left>", function()
 		print("Increase view width")
 		vscode.call("workbench.action.increaseViewWidth")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-Right>", function()
 		print("Decrease view width")
 		vscode.call("workbench.action.decreaseViewWidth")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-Down>", function()
 		print("Increase view size")
 		vscode.call("workbench.action.increaseViewSize")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-Up>", function()
 		print("Decrease view size")
 		vscode.call("workbench.action.decreaseViewSize")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-w>e", function()
 		print("Reset view size")
 		vscode.call("workbench.action.evenEditorWidths")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-w>t", function()
 		print("Last editor closed")
 		vscode.call("workbench.action.reopenClosedEditor")
-	end)
+	end),
 
 	vim.keymap.set("n", "<C-w>m", function()
 		print("Maxamize editor group")
 		vscode.call("workbench.action.minimizeOtherEditors")
-	end)
-end
-
-return {
-	actions(),
+	end),
+	-- actions(),
 }

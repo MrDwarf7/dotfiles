@@ -1,6 +1,6 @@
 print("Vscode specific options file loads...")
 
-local opts = function()
+local function options()
 	vim.notify = require("vscode-neovim").notify
 
 	vim.opt.shortmess:append({ c = true, S = true })
@@ -39,7 +39,7 @@ set clipboard+=unnamedplus
 	-- end
 
 	-- Use ripgrep as grep tool
-	vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden --no-ignore-dot"
+	vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 	vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 	vim.o.breakindent = true
 	vim.o.updatetime = 250
@@ -48,5 +48,5 @@ set clipboard+=unnamedplus
 end
 
 return {
-	opts(),
+	options(),
 }
