@@ -82,6 +82,7 @@ return {
 			"shfmt",
 			"stylua",
 			"sqlfluff",
+			"sql-formatter",
 			"ts-standard",
 			"vulture",
 			"yamlfmt",
