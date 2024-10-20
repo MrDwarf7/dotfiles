@@ -1,3 +1,4 @@
+-- cannot let lazy handle this stuff cos it doesn't run in a loop,
 return {
 	require("lazy").setup("vscode_conf", {
 		defaults = { lazy = false },
@@ -7,7 +8,7 @@ return {
 		performance = {
 			cache = {
 				-- enabled = true,
-				path = vim.fn.stdpath("cache") .. "/lazy",
+				-- path = vim.fn.stdpath("cache") .. "/lazy",
 				-- disable_events = { "VimEnter", "BufReadPre" },
 				ttl = 3600 * 24 * 7,
 			},
