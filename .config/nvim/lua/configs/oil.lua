@@ -8,7 +8,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons", lazy = false },
 	priority = 1000,
 	keys = {
-		{ "<C-w><Leader>", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+		{ "<C-w>E", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
 
 		{
 			"<Leader>yc",

@@ -28,37 +28,37 @@ return {
 
 			-- TODO: create a func. that makes a tab --/ if a tab already exists with the DBUI open, then switch to it
 			{
-				"<Leader>do",
+				"<Leader>so",
 				"<cmd>DBUI<CR>",
 				desc = "DB UI",
 			},
 
 			{
-				"<Leader>dO",
+				"<Leader>sO",
 				"<cmd>DBUI<CR>",
 				desc = "DB UI",
 			},
 
 			{
-				"<Leader>dt",
+				"<Leader>st",
 				"<cmd>DBUIToggle<CR>",
 				desc = "DB Toggle",
 			},
 
 			{
-				"<Leader>da",
+				"<Leader>sa",
 				"<cmd>DBUIAddConnection<CR>",
 				desc = "DB Add Con.",
 			},
 
 			{
-				"<Leader>df",
+				"<Leader>sf",
 				"<cmd>DBUIFindBuffer<CR>",
 				desc = "DB Find Buff.",
 			},
 
 			{
-				"<Leader>dn",
+				"<Leader>sn",
 				"<cmd>DBUIHideNotifications<CR>",
 				desc = "DB Find Buff.",
 			},
