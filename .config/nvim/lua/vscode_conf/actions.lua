@@ -150,5 +150,31 @@ return {
 		print("Maxamize editor group")
 		require("vscode").call("workbench.action.minimizeOtherEditors")
 	end),
+
+	-- vim.keymap.set("n", "<Leader>tp", function()
+	-- 	print("Toggle problems panel")
+	-- 	require("vscode").action("workbench.actions.table.problems.view.viewAsTree")
+	-- end),
+	--
+	-- vim.keymap.set("n", "<Leader>tP", function()
+	-- 	print("Toggle problems panel")
+	-- 	require("vscode").action("workbench.actions.table.problems.view.viewAsTable")
+	-- end),
+
+	-- "binding": [
+	--     {
+	--         "key": "p",
+	--         "name": "Toggle problems panel view type",
+	--         "when": "editorTextFocus && neovim.mode != insert ",
+	--         "command": "workbench.actions.table.problems.view.viewAsTree",
+	--     },
+	--     {
+	--         "key": "P",
+	--         "name": "Toggle problems panel view type",
+	--         "when": "editorTextFocus && neovim.mode != insert ",
+	--         "command": "workbench.actions.table.problems.view.viewAsTable",
+	--     }
+	-- ]
+
 	-- actions(),
 }
