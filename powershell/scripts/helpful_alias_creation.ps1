@@ -220,3 +220,5 @@ function launchwsl {
 
 New-Alias -Name c -Value cat -Force
 New-Alias -Name b -Value bat -Force
+
+New-Alias -Name gu -Value gitui -Force
