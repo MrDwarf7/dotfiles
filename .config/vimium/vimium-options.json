@@ -1,6 +1,6 @@
 {
   "hideHud": true,
-  "keyMappings": "# Insert your preferred key mappings here.\nunmap ?\nunmap /\nunmap `\n\nunmap H\nunmap J\nunmap K\nunmap L\n\nunmap r\nmap R reload\n\n# Pinning\nunmap <a-p>\nmap gp togglePinTab\n\nmap J nextTab\nmap K previousTab\n\nmap H goBack\nmap L goForward\n\nmap ' Marks.activateGotoMode\n\nmap ` showHelp\nmap ? enterFindMode\nmap : enterFindMode\n\nmap <c-o> goBack\n# this is a capital i not a lowercase L\nmap <c-i> goForward\n\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp",
+  "keyMappings": "# Insert your preferred key mappings here.\nunmap ?\nunmap /\nunmap `\n\nunmap H\nunmap J\nunmap K\nunmap L\n\nmap gr restoreTab\n\nunmap r\nmap R reload\n\n# Pinning\nunmap <a-p>\nmap gp togglePinTab\n\nmap J nextTab\nmap K previousTab\n\nmap H goBack\nmap L goForward\n\nmap ' Marks.activateGotoMode\n\nmap ` showHelp\nmap ? enterFindMode\nmap : enterFindMode\n\nmap <c-o> goBack\n# this is a capital i not a lowercase L\nmap <c-i> goForward\n\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp",
   "scrollStepSize": 50,
   "grabBackFocus": true,
   "settingsVersion": "2.1.2",
@@ -23,8 +23,12 @@
       "pattern": "https?://www.youtube.com/*"
     },
     {
-      "passKeys": "",
-      "pattern": "https?://monkeytype.com/*"
+      "passKeys": "f",
+      "pattern": "https?://www.youtube.com/*"
+    },
+    {
+      "passKeys": "m",
+      "pattern": "https?://www.youtube.com/*"
     }
   ]
 }
