@@ -92,7 +92,6 @@ if (checkEnvironment -eq $true) {
 
 # Not work/ AKA Home
 if (-not (checkEnvironment)) {
-
     # $env:PAGER = less
     # $env:BAT_PAGER = less -RF
 

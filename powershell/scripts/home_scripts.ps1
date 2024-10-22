@@ -24,6 +24,7 @@ try {
     oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$backup_theme | Invoke-Expression
 }
 
+Import-Module gsudoModule
 Import-Module git-aliases -DisableNameChecking
 Import-Module posh-cargo
 Import-Module DockerCompletion
