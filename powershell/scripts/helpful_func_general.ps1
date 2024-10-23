@@ -108,9 +108,9 @@ function sysup {
 #     notepad++ $args
 # }
 
-function scpdir {
+function scp {
     Push-Location "$env:USERPROFILE\scoop\"
-    Get-ChildItem
+    la
 }
 
 function baconget {
@@ -139,7 +139,7 @@ function dot {
     }
     Push-Location "C:\"
     Push-Location $path
-    Get-ChildItem
+    la
     Write-Host "Fetching: "
     git fetch
     Write-Host "Status: "

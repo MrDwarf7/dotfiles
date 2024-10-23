@@ -84,7 +84,7 @@ opt.showtabline = 2
 opt.mouse = "a"
 opt.backupcopy = "yes"
 opt.undolevels = 1000
-opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true }
+-- opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true, w = true, a = true, l = true }
 opt.showmode = false
 opt.hidden = true
 opt.splitright = true
@@ -93,7 +93,7 @@ opt.wrapscan = true
 opt.wrap = false -- Added, test with other plugins etc
 opt.backup = false
 opt.writebackup = false
-opt.showcmd = true
+opt.showcmd = false
 opt.showmatch = true
 opt.ignorecase = true
 opt.hlsearch = true
@@ -105,8 +105,11 @@ opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
 opt.completeopt = { "menu", "menuone", "noselect" }
 
+-- Setting cmdheight=0 for use with lualine and wezterm/tmux
 vim.cmd([[
 set clipboard+=unnamedplus
+set cmdheight=0
+set shortmess+=csCFISWwal
 ]])
 
 opt.laststatus = 3
