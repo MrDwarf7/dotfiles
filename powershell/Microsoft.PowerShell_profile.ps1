@@ -51,7 +51,7 @@ $env:EDITOR = $env:VISUAL = 'nvim'
 $env:EDITOR = 'nvim'
 $env:FZF_DEFAULT_COMMAND = 'fd --type file'
 $env:FZF_CTRL_T_COMMAND = '$env:FZF_DEFAULT_COMMAND'
-
+$env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 
 $dotfiles_dir = "$HOME\dotfiles"
 $powershell_dir = "$dotfiles_dir\powershell"

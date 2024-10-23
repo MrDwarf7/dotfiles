@@ -2,8 +2,6 @@ $powershell_dir = "$dotfiles_dir\powershell"
 $powershell_scripts_dir = "$powershell_dir\scripts"
 $powershell_completions = "$powershell_scripts_dir\completions\"
 
-$home_theme = '1MrDwarf7Theme.omp.json'
-$backup_theme = 'chips.omp.json'
 
 
 # Not required at work
@@ -18,11 +16,13 @@ $backup_theme = 'chips.omp.json'
 . "$powershell_completions\gix_completions.ps1"
 
 
-try {
-    oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$home_theme | Invoke-Expression
-} catch {
-    oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$backup_theme | Invoke-Expression
-}
+# $home_theme = '1MrDwarf7Theme.omp.json'
+# $backup_theme = 'chips.omp.json'
+# try {
+#     oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$home_theme | Invoke-Expression
+# } catch {
+#     oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$backup_theme | Invoke-Expression
+# }
 
 Import-Module gsudoModule
 Import-Module git-aliases -DisableNameChecking
