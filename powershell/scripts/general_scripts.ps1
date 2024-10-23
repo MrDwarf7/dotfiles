@@ -20,3 +20,6 @@ $powershell_completions = "$powershell_scripts_dir\completions\"
 . "$powershell_completions\completion_az-cli.ps1"
 
 . "$powershell_completions\completions_atac.ps1"
+
+# Starship now handles via gneral, not oh-my-posh split for themes etc.
+Invoke-Expression (&starship init powershell)

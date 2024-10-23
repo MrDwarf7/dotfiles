@@ -20,7 +20,7 @@ function mgr {
 
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
 function wgr {
@@ -28,7 +28,7 @@ function wgr {
         [string]$path = $home_gitwork_projects
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
 function dod {
@@ -36,7 +36,7 @@ function dod {
         [string]$path = $data_on_demand
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
 function dodb {
@@ -44,7 +44,7 @@ function dodb {
         [string]$path = $data_on_demand_backend
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
 function dodn {
@@ -52,7 +52,7 @@ function dodn {
         [string]$path = $data_on_demand_next
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
 function dodf {
@@ -60,13 +60,13 @@ function dodf {
         [string]$path = $data_on_demand_frontend
     )
     Push-Location $path
-    Get-ChildItem
+    la
 }
 
-function ctemp {
+function tmp {
     $c_temp_folder = "c:\temp"
-    push-location $c_temp_folder
-    get-childitem
+    Push-Location $c_temp_folder
+    la
 }
 
 new-alias -name ctmp -value ctemp  -force
