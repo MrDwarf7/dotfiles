@@ -29,6 +29,10 @@
     {
       "passKeys": "m",
       "pattern": "https?://www.youtube.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://monkeytype.com/*"
     }
   ]
 }
