@@ -3,13 +3,31 @@ local wezterm = require("wezterm")
 ---@type Action
 local act = wezterm.action
 
-local pwsh = "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
+local ENV = "";
+-- local pwsh = "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
+
+local pwsh = "";
+
+-- If this doesn't exist we are at work
+local child_res = wezterm.run_child_process("C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe", { "-NoLogo" });
+
+if child_res[3] == false or 0 ~= child_res[1] then
+	ENV = "work"
+else
+	ENV = "home"
+end
+
+if ENV == "work" then
+	pwsh = "C:\\Applications\\PowerShell_start\\Powershell_linked\\pwsh.exe"
+else
+	pwsh = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
+end
 
 ---@type Config
 local config = {}
 -- maybe works to fix win pathing?
-config.__index = config
-config.__path = config.__path or (...):match('(.*[\\/])')
+-- config.__index = config
+-- config.__path = config.__path or (...):match('(.*[\\/])')
 
 config = wezterm.config_builder()
 
@@ -188,162 +206,11 @@ config.hyperlink_rules = {
 }
 
 
-
 -- config.inactive_pane_hsb = {
 --    saturation = 0.9,
 --    brightness = 0.65,
 -- }
 
 
-
--- table.insert(mykeys, { key = "n", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) })
---
--- table.insert(mykeys, { key = "f", mods = "LEADER", action = "ToggleFullScreen" })
---
--- table.insert(mykeys, { key = "[", mods = "LEADER", action = act.MoveTabRelative(-1) })
--- table.insert(mykeys, { key = "]", mods = "LEADER", action = act.MoveTabRelative(1) })
---
--- table.insert(mykeys, { key = "H", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) })
--- table.insert(
--- 	mykeys,
--- 	{ key = "V", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) }
--- )
---
--- table.insert(mykeys, { key = "h", mods = "LEADER", action = act({ ActivatePaneDirection = "Left" }) })
--- table.insert(mykeys, { key = "j", mods = "LEADER", action = act({ ActivatePaneDirection = "Down" }) })
--- table.insert(mykeys, { key = "k", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) })
--- table.insert(mykeys, { key = "l", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) })
---
--- table.insert(mykeys, { key = "h", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Left", 1 }) })
--- table.insert(mykeys, { key = "j", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Down", 1 }) })
--- table.insert(mykeys, { key = "k", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Up", 1 }) })
--- table.insert(mykeys, { key = "l", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Right", 1 }) })
---
--- table.insert(mykeys, { key = "c", mods = "LEADER", action = act.ActivateCopyMode })
---
--- table.insert(mykeys, { key = "q", mods = "LEADER", action = act.QuickSelect })
---
--- table.insert(mykeys, { key = "s", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) })
-
-
-
-
-
-
-
-
-
-
-
-
 ---@type Config
 return config
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--- return {
--- 	-- The basics really
--- 	automatically_reload_config = true,
--- 	enable_tab_bar = false,
--- 	enable_wayland = false,
--- 	default_prog = { pwsh, "-NoLogo"},
--- 	enable_scroll_bar = false,
--- 	window_close_confirmation = "NeverPrompt",
---
--- 	-- Font settings
--- 	font = wezterm.font("JetBrains Mono"),
--- 	font_size = 10.0,
--- 	harfbuzz_features = {"calt=0", "clig=0", "liga=0", "zero"},
---
--- 	-- Visual
--- 	-- -- Rendering settings
---
--- 	animation_fps = 60,
--- 	max_fps = 60,
--- 	front_end = "WebGpu",
--- 	webgpu_power_preference = "HighPerformance",
--- 	-- = "Integrated GPU",
--- 	-- -- Cursor settings
---
--- 	default_cursor_style = "SteadyBlock",
--- 	cursor_blink_rate = 0,
---
--- 	-- -- Appearance settings
--- 	color_scheme = "Tokyo Night",
--- 	window_background_opacity = 0.95,
--- 	window_padding = {
--- 		left = 0,
--- 		right = 0,
--- 		top = 1,
--- 		bottom = 0,
--- 	},
---
--- 	mouse_bindings = {
--- 		{
--- 			event = { Up = { streak = 1, button = "Left"}},
--- 			mods = "NONE",
--- 			action = wezterm.action.Nop,
--- 		},
--- 	},
--- }
