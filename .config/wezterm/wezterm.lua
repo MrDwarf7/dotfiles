@@ -2,6 +2,8 @@
 local wezterm = require("wezterm")
 ---@type Action
 local act = wezterm.action
+
+---@diagnostic disable-next-line: unused-local
 local mux = wezterm.mux
 
 ---@alias Work string
@@ -37,6 +39,8 @@ config.exit_behavior_messaging = "Verbose"
 config.status_update_interval = 1000
 
 config.audible_bell = "Disabled"
+
+wezterm.home_dir = os.getenv("HOME")
 
 -- Font settings
 
@@ -79,10 +83,10 @@ config.window_padding = {
 config.initial_cols = 150
 config.initial_rows = 32
 
-wezterm.on("gui-startup", function()
+wezterm.on("gui-startup", function(cmd)
 	local x = 80
 	local y = 80
-	window:set_position(x, y)
+	return window:set_position(x, y)
 end)
 
 config.enable_scroll_bar = true
@@ -109,6 +113,7 @@ config.scrollback_lines = 10000
 
 -- -- Leader key
 
+-- config.leader = { key = "Space", mods = "CTRL" }
 config.leader = { key = "a", mods = "CTRL" }
 
 -- -- Tab switching
@@ -131,12 +136,13 @@ end
 ---@type KeyOp[]
 local key_ops = {
 	-- Tabs
-	{ key = "t", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+	{ key = "n", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+
+	-- { key = "Nmod.SUPER", mods = "", action = act.SpawnWindow },
 	{ key = "F", mods = "LEADER", action = "ToggleFullScreen" },
-	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
-	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
-	{ key = "H", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-	{ key = "V", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+
+	{ key = "\\", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+	{ key = "-", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
 
 	-- Panes
 	{ key = "h", mods = "LEADER", action = act({ ActivatePaneDirection = "Left" }) },
@@ -144,17 +150,64 @@ local key_ops = {
 	{ key = "k", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) },
 	{ key = "l", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) },
 
+	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
+
 	-- Pane resizing
-	{ key = "h", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Left", 1 }) },
-	{ key = "j", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Down", 1 }) },
-	{ key = "k", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Up", 1 }) },
-	{ key = "l", mods = "CTRL|ALT", action = act.AdjustPaneSize({ "Right", 1 }) },
+	{ key = "LeftArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+	{ key = "DownArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
+	{ key = "UpArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "RightArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
+
+	-- Tabs
+	-- Was either this or q and e, mapping w to close instead of q
+	{ key = "h", mods = "LEADER|CTRL", action = act.ActivateTabRelative(-1) },
+	{ key = "l", mods = "LEADER|CTRL", action = act.ActivateTabRelative(1) },
+
+	-- These MOVE the current pane +1 / -1
+	-- { key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
+	-- { key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
 
 	-- Modes
 	--TODO: This seems to think I'm still in 'copy mode' even though it's not actually in it
 	{ key = "y", mods = "LEADER", action = act.ActivateCopyMode },
 	{ key = "s", mods = "LEADER", action = act.QuickSelect },
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
+
+	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+	{ key = "P", mods = "LEADER", action = act.PaneSelect({ alphabet = "123456789", mode = "SwapWithActiveKeepFocus" }) },
+
+	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
+	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
+
+	{
+		key = "u",
+		mods = "LEADER",
+		action = wezterm.action.QuickSelectArgs({
+			label = "open url",
+			patterns = {
+				"\\((https?://\\S+)\\)",
+				"\\[(https?://\\S+)\\]",
+				"\\{(https?://\\S+)\\}",
+				"<(https?://\\S+)>",
+				"\\bhttps?://\\S+[)/a-zA-Z0-9-]+",
+			},
+			action = wezterm.action_callback(function(window, pane)
+				local url = window:get_selection_text_for_pane(pane)
+				wezterm.log_info("opening: " .. url)
+				wezterm.open_with(url)
+			end),
+		}),
+	},
+}
+
+config.mouse_bindings = {
+	-- Ctrl-click will open the link under the mouse cursor
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CTRL",
+		action = act.OpenLinkAtMouseCursor,
+	},
 }
 
 for _, key_op in ipairs(key_ops) do
