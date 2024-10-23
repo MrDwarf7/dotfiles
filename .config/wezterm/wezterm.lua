@@ -2,55 +2,50 @@
 local wezterm = require("wezterm")
 ---@type Action
 local act = wezterm.action
+local mux = wezterm.mux
 
-local ENV = "";
--- local pwsh = "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
+---@alias Work string
+---@alias Home string
 
-local pwsh = "";
-
--- If this doesn't exist we are at work
-local child_res = wezterm.run_child_process("C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe", { "-NoLogo" });
-
-if child_res[3] == false or 0 ~= child_res[1] then
-	ENV = "work"
-else
-	ENV = "home"
-end
-
-if ENV == "work" then
-	pwsh = "C:\\Applications\\PowerShell_start\\Powershell_linked\\pwsh.exe"
-else
-	pwsh = "C:\\Program Files\\PowerShell\\7\\pwsh.exe"
-end
+---@alias ENV Work | Home
+local ENV = os.getenv("HOME_PROFILE")
 
 ---@type Config
 local config = {}
--- maybe works to fix win pathing?
--- config.__index = config
+config.__index = config
+-- This WILL break the config
 -- config.__path = config.__path or (...):match('(.*[\\/])')
+
+local shell = "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
+local work_shell = "C:\\Applications\\PowerShell_start\\Powershell_linked\\pwsh.exe"
+
+if ENV ~= nil then
+	shell = shell
+else
+	shell = work_shell
+end
 
 config = wezterm.config_builder()
 
 config.automatically_reload_config = true
 config.enable_tab_bar = false
 config.enable_wayland = false
-config.default_prog = { pwsh, "-NoLogo"}
+config.default_prog = { shell, "-NoLogo" }
 config.window_close_confirmation = "NeverPrompt"
 
-config.exit_behavior_messaging = 'Verbose'
+config.exit_behavior_messaging = "Verbose"
 config.status_update_interval = 1000
 
-
 config.audible_bell = "Disabled"
-
 
 -- Font settings
 
 ---@diagnostic disable-next-line: param-type-mismatch
-config.font = wezterm.font("JetBrains Mono", { weight = "Medium", italic = false, stretch = "Normal" })
+config.font = wezterm.font("Mononoki Nerd Font Mono", { weight = "Light", italic = false, stretch = "Normal" })
+-- config.font = wezterm.font("JetBrains Mono", { weight = "Medium", italic = false, stretch = "Normal" })
 
-config.font_size = 10.0
-config.harfbuzz_features = {"calt=0", "clig=0", "liga=0", "zero"}
+config.font_size = 11
+config.harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" }
 
 -- Visual
 -- -- Rendering settings
@@ -62,16 +57,14 @@ config.webgpu_power_preference = "HighPerformance"
 
 -- -- Cursor settings
 
-
 -- config.default_cursor_style = "SteadyBlock"
 -- config.cursor_blink_rate = 0
 
 config.animation_fps = 144
-config.cursor_blink_ease_in = 'Linear'
-config.cursor_blink_ease_out = 'EaseOut'
+config.cursor_blink_ease_in = "Linear"
+config.cursor_blink_ease_out = "EaseOut"
 config.cursor_blink_rate = 1000
 config.default_cursor_style = "BlinkingBlock"
-
 
 -- -- Appearance settings
 config.color_scheme = "Tokyo Night"
@@ -80,9 +73,17 @@ config.window_padding = {
 	left = 1,
 	right = 0,
 	top = 2,
-	bottom = 0
+	bottom = 0,
 }
 
+config.initial_cols = 150
+config.initial_rows = 32
+
+wezterm.on("gui-startup", function()
+	local x = 80
+	local y = 80
+	window:set_position(x, y)
+end)
 
 config.enable_scroll_bar = true
 config.window_decorations = "RESIZE"
@@ -90,13 +91,13 @@ config.window_decorations = "RESIZE"
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.show_tab_index_in_tab_bar = true
+config.tab_bar_at_bottom = true
 config.switch_to_last_active_tab_when_closing_tab = false
 config.text_background_opacity = 0.6
 
-
 config.mouse_bindings = {
 	{
-		event = { Up = { streak = 1, button = "Left"}},
+		event = { Up = { streak = 1, button = "Left" } },
 		mods = "NONE",
 		action = wezterm.action.Nop,
 	},
@@ -122,21 +123,16 @@ for i = 1, 8 do
 	})
 end
 
-
-
-
 ---@class KeyOp
 ---@field key string
 ---@field mods string
 ---@field action Action
 
-
-
 ---@type KeyOp[]
 local key_ops = {
 	-- Tabs
 	{ key = "t", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
-	{ key = "f", mods = "LEADER", action = "ToggleFullScreen" },
+	{ key = "F", mods = "LEADER", action = "ToggleFullScreen" },
 	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
 	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
 	{ key = "H", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
@@ -159,7 +155,6 @@ local key_ops = {
 	{ key = "y", mods = "LEADER", action = act.ActivateCopyMode },
 	{ key = "s", mods = "LEADER", action = act.QuickSelect },
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
-
 }
 
 for _, key_op in ipairs(key_ops) do
@@ -171,46 +166,49 @@ config.keys = my_keys
 config.hyperlink_rules = {
 	-- Matches: a URL in parens: (URL)
 	{
-		regex = '\\((\\w+://\\S+)\\)',
-		format = '$1',
+		regex = "\\((\\w+://\\S+)\\)",
+		format = "$1",
 		highlight = 1,
 	},
 	-- Matches: a URL in brackets: [URL]
 	{
-		regex = '\\[(\\w+://\\S+)\\]',
-		format = '$1',
+		regex = "\\[(\\w+://\\S+)\\]",
+		format = "$1",
 		highlight = 1,
 	},
 	-- Matches: a URL in curly braces: {URL}
 	{
-		regex = '\\{(\\w+://\\S+)\\}',
-		format = '$1',
+		regex = "\\{(\\w+://\\S+)\\}",
+		format = "$1",
 		highlight = 1,
 	},
 	-- Matches: a URL in angle brackets: <URL>
 	{
-		regex = '<(\\w+://\\S+)>',
-		format = '$1',
+		regex = "<(\\w+://\\S+)>",
+		format = "$1",
 		highlight = 1,
 	},
 	-- Then handle URLs not wrapped in brackets
 	{
-		regex = '\\b\\w+://\\S+[)/a-zA-Z0-9-]+',
-		format = '$0',
+		regex = "\\b\\w+://\\S+[)/a-zA-Z0-9-]+",
+		format = "$0",
 	},
 	-- implicit mailto link
 	{
-		regex = '\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b',
-		format = 'mailto:$0',
+		regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
+		format = "mailto:$0",
 	},
 }
 
+-- config.ssh_domains = {}
+-- config.ssh_backend =
+
+-- config.default_gui_startup_args = {}
 
 -- config.inactive_pane_hsb = {
 --    saturation = 0.9,
 --    brightness = 0.65,
 -- }
-
 
 ---@type Config
 return config
