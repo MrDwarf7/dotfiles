@@ -9,10 +9,13 @@ local mux = wezterm.mux
 ---@alias Error string
 
 --- Converts an environment variable to a number correctly
----@param number string|number
----@return number|string|Error
+---@param number string
+---@return number|string|nil
 local function EnvToInt(number)
 	local env_v = os.getenv(number)
+	if type(number) == "nil" then
+		return error("Could not find environment variable '" .. number .. "'")
+	end
 	return math.floor(tonumber(env_v)) or error("Could not cast '" .. tostring(number) .. "' to number. '")
 end
 
@@ -20,10 +23,11 @@ local function env(value)
 	return os.getenv(value) or error("Could not find environment variable '" .. value .. "'")
 end
 
-----@alias Work string
-----@alias Home string
-----@alias ENV Work | Home
---local ENV = os.getenv("HOME_PROFILE")
+local shell = env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
+local max_fps = EnvToInt("WZT_MAX_FPS") or 230
+local front_end = env("WZT_GPU_FRONTEND") or "WebGpu"
+local webgpu_power_preference = env("WZT_GPU_POWER_PREF") or "HighPerformance"
+local animation_fps = EnvToInt("WZT_ANIM_FPS") or 144
 
 ---@class Config
 local config = {}
@@ -37,7 +41,6 @@ config.automatically_reload_config = true
 config.enable_tab_bar = false
 config.enable_wayland = false
 
-local shell = env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
 config.default_prog = { shell, "-NoLogo" }
 config.window_close_confirmation = "NeverPrompt"
 
@@ -45,7 +48,7 @@ config.exit_behavior_messaging = "Verbose"
 
 config.audible_bell = "Disabled"
 
-wezterm.home_dir = env("USERPROFILE")
+wezterm.home_dir = env("HOME")
 
 -- Font settings
 
@@ -58,31 +61,49 @@ config.harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" }
 
 -- Visual
 -- -- Rendering settings
-config.status_update_interval = 1000
+config.status_update_interval = 10000
 
-config.animation_fps = 60
-
-config.max_fps = EnvToInt("WZT_MAX_FPS") or 230
-config.front_end = env("WZT_GPU_FRONTEND") or "WebGpu"
-config.webgpu_power_preference = env("WZT_GPU_POWER_PREF") or "HighPerformance"
+config.max_fps = max_fps
+config.front_end = front_end
+config.webgpu_power_preference = webgpu_power_preference
 
 -- -- Cursor settings
 
-config.animation_fps = EnvToInt("WZT_ANIM_FPS") or 144
-config.cursor_blink_ease_in = "Linear"
-config.cursor_blink_ease_out = "EaseOut"
+config.animation_fps = animation_fps
+
+if config.animation_fps ~= 144 then
+	print("Animation FPS NOT 144, it is: " .. config.animation_fps)
+	config.cursor_blink_ease_in = "Constant"
+	config.cursor_blink_ease_out = "Constant"
+else
+	config.cursor_blink_ease_in = "Linear"
+	config.cursor_blink_ease_out = "EaseOut"
+end
+
 -- config.cursor_blink_rate = 1000
 -- config.default_cursor_style = "BlinkingBlock"
 config.default_cursor_style = "SteadyBlock"
 config.cursor_blink_rate = 0
 
 -- -- Appearance settings
-config.color_scheme = "Tokyo Night"
+-- -- Dark THemes
+-- config.color_scheme = "Tokyo Night"
+-- config.color_scheme = "tokyonight_night"
+-- config.color_scheme = "Tokyo Night Moon"
+config.color_scheme = "Tokyo Night Storm"
+
+-- -- Light Themes
+-- config.color_scheme = "tokyonight-day"
+-- config.color_scheme = "Tokyo Night Day"
+-- config.color_scheme = "Tokyo Night Light (Gogh)"
+--
+--
+-- config.colors.gutter
 config.window_background_opacity = 1.0 --.95
 config.window_padding = {
-	left = 1,
+	left = 0,
 	right = 0,
-	top = 2,
+	top = 0,
 	bottom = 0,
 }
 
@@ -101,6 +122,8 @@ config.window_decorations = "RESIZE"
 config.enable_tab_bar = true
 config.use_fancy_tab_bar = false
 config.show_tab_index_in_tab_bar = true
+-- config.tab_bar_style = ""
+config.tab_max_width = 20
 config.tab_bar_at_bottom = true
 config.switch_to_last_active_tab_when_closing_tab = false
 config.text_background_opacity = 1.0 --0.6
@@ -116,8 +139,8 @@ config.mouse_bindings = {
 config.scrollback_lines = 10000
 
 config.inactive_pane_hsb = {
-	saturation = 0.9,
-	brightness = 0.85,
+	saturation = 0.92,
+	brightness = 0.80,
 }
 
 -- Keybindings
@@ -126,8 +149,6 @@ config.inactive_pane_hsb = {
 
 -- config.leader = { key = "Space", mods = "CTRL" }
 config.leader = { key = "a", mods = "CTRL" }
-
--- -- Tab switching
 
 local my_keys = {}
 for i = 1, 8 do
@@ -218,6 +239,12 @@ config.mouse_bindings = {
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "CTRL",
 		action = act.OpenLinkAtMouseCursor,
+	},
+
+	{
+		event = { Drag = { streak = 1, button = "Left" } },
+		mods = "CTRL|SHIFT",
+		action = act.StartWindowDrag,
 	},
 }
 
