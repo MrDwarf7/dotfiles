@@ -81,8 +81,12 @@ function checkEnvironment {
 }
 
 # Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
+# ALIAS
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
 # END - Tooling Functions
+
+Invoke-Expression (& { (zoxide init powershell | Out-String) })
+Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
 # Work
 if (checkEnvironment -eq $true) {
@@ -96,13 +100,18 @@ if (-not (checkEnvironment)) {
     # $env:BAT_PAGER = less -RF
 
     $env:PSModulePath = $currentPSModulePath
-    Invoke-Expression (& { (zoxide init powershell | Out-String) })
+    # TODO: Actually add this as an env key at home also not here
+
+    # $env:WZT_GPU_FRONTEND = "WebGPU"
+    # $env:WZT_GPU_POWER_PREF = "HighPerformance"
+
+    # This is now static for all profiles
+    # Invoke-Expression (& { (zoxide init powershell | Out-String) })
     . "$powershell_scripts_dir\home_scripts.ps1"
 }
 
 . "$powershell_scripts_dir\general_scripts.ps1"
 
-Invoke-Expression -Command $(gh completion -s powershell | Out-String)
 
 if ($env:LIST_CLIENT -eq "eza") {
     . "$powershell_completions\eza_aliases.ps1"

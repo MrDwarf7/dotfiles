@@ -24,7 +24,7 @@ function FWhich {
         Write-Output "Command not found: $cmd"
     }
 }
-
+New-Alias -Name which -Value FWhich -Force
 
 function WhichCD {
     param(
@@ -42,6 +42,7 @@ function WhichCD {
 
     Set-Location -Path $directory
 }
+New-Alias -Name cdd -Value WhichCD -Force
 
 
 function Remove-Wrapper {
@@ -93,6 +94,13 @@ function Remove-Wrapper {
     }
 }
 
+function TempDir {
+    $c_temp_folder = "c:\temp"
+    Push-Location $c_temp_folder
+    la
+}
+New-Alias -Name tmp -Value TempDir -Force
+
 function ManPageWindow {
     param (
         [string]$command
@@ -114,7 +122,8 @@ function CleanLess {
     )
     return less --quiet --silent --line-numbers $parsedArgs
 }
-
+# Not working as intended at all but eh
+SafeNewAlias -Alias less -Command CleanLess $args
 
 function CargoBuilEverything {
     $command = "cargo build && cargo build --release $args"
@@ -189,11 +198,7 @@ function fastfetchin() {
 New-Alias -Name manwin -Value ManPageWindow -Force
 New-Alias -Name man -Value ManPage -Force
 
-# Not working as intended at all but eh
-SafeNewAlias -Alias less -Command CleanLess $args
 
-New-Alias -Name which -Value FWhich -Force
-New-Alias -Name cdd -Value  WhichCD -Force
 New-Alias -Name rm -Value Remove-Wrapper -Force
 
 SafeNewAlias -Alias bpsa -Command sar

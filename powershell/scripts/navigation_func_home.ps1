@@ -63,10 +63,3 @@ function dodf {
     la
 }
 
-function tmp {
-    $c_temp_folder = "c:\temp"
-    Push-Location $c_temp_folder
-    la
-}
-
-new-alias -name ctmp -value ctemp  -force
