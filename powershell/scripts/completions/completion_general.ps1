@@ -3,9 +3,9 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
-if (-not $env:HOME_PROFILE -eq $true) {
-    $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
-}
+# if (-not $env:HOME_PROFILE -eq $true) {
+#     $env:PSModulePath ="C:\Applications\PowerShell_start\Modules"
+# }
 
 # Import-Module PSReadLine
 Set-PSReadLineKeyHandler -Chord Tab -Function MenuComplete

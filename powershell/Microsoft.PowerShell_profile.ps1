@@ -3,45 +3,25 @@
 #
 # Typer-Cli completion.
 # Installed via pip install typer-cli
+Invoke-Expression (
+    [System.Text.StringBuilder]::new().Append("Invoke-Expression (&starship init powershell)").
+        Append("`n").
+        Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
+        Append("`n").
+        Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })") 
+    ).ToString() 
+| Out-Null
 
+$dotfiles_dir = "$HOME\dotfiles"
+$powershell_dir = "$dotfiles_dir\powershell"
+$powershell_scripts_dir = "$powershell_dir\scripts"
+
+# Store current PSModulePath before we wipe it
 $currentPSModulePath = $env:PSModulePath
+# Set a var for work PSModulePath 
 $workDefaultPSModulePath = "C:\Applications\PowerShell_start\Modules"
 $env:PSModulePath=[NullString]
 $env:PYTHON_PATH=[NullString]
-# Invoke-Expression (& { (zoxide init powershell | Out-String) })
-
-# $LazyLoadProfile = [PowerShell]::Create()
-# [void]$LazyLoadProfile.AddScript(@'
-#     Import-Module DockerCompletion
-#     Import-Module PSReadLine
-#     Import-Module -Name CompletionPredictor
-#     Import-Module C:\Applications\PowerShell_start\Modules\posh-git\1.1.0\posh-git.psm1
-# '@)
-#
-# $LazyLoadProfileRunspace = [RunspaceFactory]::CreateRunspace()
-# $LazyLoadProfile.Runspace = $LazyLoadProfileRunspace
-# $LazyLoadProfileRunspace.Open()
-# [void]$LazyLoadProfile.BeginInvoke()
-#
-# $null = Register-ObjectEvent -InputObject $LazyLoadProfile -EventName InvocationStateChanged -Action {
-#     Import-Module PSReadLine
-#     Import-Module posh-git
-#     Import-Module -Name DockerCompletion
-#     Import-Module PSReadLine
-#     Import-Module -Name CompletionPredictor
-#     # Import-Module "$HOME\scoop\apps\posh-git\1.1.0\posh-git.psm1"
-#     # Import-Module C:\Applications\PowerShell_start\Modules\posh-git\1.1.0\posh-git.psm1
-#     # $global:GitPromptSettings.DefaultPromptPrefix.Text = '$(Get-Date -f "MM-dd HH:mm:ss") '
-#     # $global:GitPromptSettings.DefaultPromptPrefix.ForegroundColor = [ConsoleColor]::Magenta
-#     # $global:GitPromptSettings.DefaultPromptBeforeSuffix.Text = '`n'
-#     # $global:GitPromptSettings.DefaultPromptAfterSuffix.Text = ''
-#     #
-#     $LazyLoadProfile.Dispose()
-#     $LazyLoadProfileRunspace.Close()
-#     $LazyLoadProfileRunspace.Dispose()
-# }
-#
-
 
 # Dotfiles copy
 $env:HOME_PROFILE = $false
@@ -55,9 +35,6 @@ $env:FZF_DEFAULT_COMMAND = 'fd --type file'
 $env:FZF_CTRL_T_COMMAND = '$env:FZF_DEFAULT_COMMAND'
 $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 
-$dotfiles_dir = "$HOME\dotfiles"
-$powershell_dir = "$dotfiles_dir\powershell"
-$powershell_scripts_dir = "$powershell_dir\scripts"
 
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
@@ -87,9 +64,6 @@ function checkEnvironment {
 . "$powershell_scripts_dir\helpful_alias_creation.ps1"
 # END - Tooling Functions
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
-Invoke-Expression -Command $(gh completion -s powershell | Out-String)
-
 # Work
 if (checkEnvironment -eq $true) {
     $env:PSModulePath = $workDefaultPSModulePath
@@ -104,10 +78,6 @@ if (-not (checkEnvironment)) {
     # $env:BAT_PAGER = less -RF
 
     $env:PSModulePath = $currentPSModulePath
-    # TODO: Actually add this as an env key at home also not here
-
-    # $env:WZT_GPU_FRONTEND = "WebGPU"
-    # $env:WZT_GPU_POWER_PREF = "HighPerformance"
 
     # This is now static for all profiles
     # Invoke-Expression (& { (zoxide init powershell | Out-String) })
@@ -116,10 +86,8 @@ if (-not (checkEnvironment)) {
 
 . "$powershell_scripts_dir\general_scripts.ps1"
 
-
 if ($env:LIST_CLIENT -eq "eza") {
     . "$powershell_completions\eza_aliases.ps1"
 } else {
     . "$powershell_completions\system_ls_aliases.ps1"
 }
-

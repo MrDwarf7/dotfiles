@@ -40,7 +40,7 @@ function CreateNewSymbolic {
     New-SymbolicJunction -folderToResolveTo $folderToResolveTo -turnFolderIntoSym $turnFolderIntoSym | Out-Null;
 }
 
-New-Alias -Name ln -Value CreateNewSymbolic -Force;
+# New-Alias -Name ln -Value CreateNewSymbolic -Force;
 
 function Remove-SymbolicJunction([string]$pathToUnlink) {
     $pathToUnlink = HandleRelativePath $null $pathToUnlink;
@@ -56,4 +56,14 @@ function Remove-SymbolicJunction([string]$pathToUnlink) {
     };
 }
 
-New-Alias -name unlink -Value Remove-SymbolicJunction -Force;
+
+# New-Alias -name unlink -Value Remove-SymbolicJunction -Force;
+
+$null = Invoke-Expression (
+    [System.Text.StringBuilder]::new().
+        Append("New-Alias -name unlink -Value Remove-SymbolicJunction -Force").
+        Append("`n").
+        Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
+    ToString()
+    ) > $null;
+
