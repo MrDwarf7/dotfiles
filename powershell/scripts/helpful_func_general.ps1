@@ -140,11 +140,10 @@ function dot {
     Push-Location "C:\"
     Push-Location $path
     la
-    Write-Host "Fetching: " && git fetch
-    # git fetch
-    Write-Host "Status: " && git status
-    # git status
-    return
+    Write-Host "Fetching: "
+    git fetch
+    Write-Host "Status: "
+    git status
 }
 
 # END - Shell functions / Helpful functions
