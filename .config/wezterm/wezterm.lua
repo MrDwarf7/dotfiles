@@ -13,7 +13,7 @@ local mux = wezterm.mux
 ---@return number|string|nil
 local function EnvToInt(number)
 	local env_v = os.getenv(number)
-	if type(number) == "nil" then
+	if type(number) == "nil" or type(number) == nil then
 		return error("Could not find environment variable '" .. number .. "'")
 	end
 	return math.floor(tonumber(env_v)) or error("Could not cast '" .. tostring(number) .. "' to number. '")
@@ -24,7 +24,7 @@ local function env(value)
 end
 
 local shell = env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
-local max_fps = EnvToInt("WZT_MAX_FPS") or 230
+local max_fps = EnvToInt("WZT_MAX_FPS") or 144
 local front_end = env("WZT_GPU_FRONTEND") or "WebGpu"
 local webgpu_power_preference = env("WZT_GPU_POWER_PREF") or "HighPerformance"
 local animation_fps = EnvToInt("WZT_ANIM_FPS") or 144
@@ -99,7 +99,7 @@ config.color_scheme = "Tokyo Night Storm"
 --
 --
 -- config.colors.gutter
-config.window_background_opacity = 1.0 --.95
+config.window_background_opacity = 1
 config.window_padding = {
 	left = 0,
 	right = 0,
