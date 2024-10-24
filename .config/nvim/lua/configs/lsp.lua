@@ -8,7 +8,7 @@
 
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
+	lazy = true,
 	event = "BufReadPre",
 	-- "LspAttach",
 	dependencies = {

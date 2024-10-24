@@ -2,6 +2,7 @@ local hlk_opts = { noremap = true, silent = true }
 
 return {
 	"kevinhwang91/nvim-hlslens",
+	lazy = true,
 	event = "VeryLazy",
 	config = function()
 		require("hlslens").setup({

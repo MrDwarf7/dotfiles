@@ -26,20 +26,21 @@ local extensions = {
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
-	lazy = false,
-	event = "UIEnter",
+	-- lazy = true,
+	-- event = "BufReadPost",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
+		{ "nvim-lua/plenary.nvim", lazy = true, event = "VeryLazy" },
 		-- { "folke/trouble.nvim", lazy = true },
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
-			lazy = false,
+			lazy = true,
+			event = "VeryLazy",
 			build = "make",
 			cond = function()
 				return vim.fn.executable("make") == 1
 			end,
 		},
-		{ "AckslD/nvim-neoclip.lua", lazy = true },
+		{ "AckslD/nvim-neoclip.lua", lazy = true, event = "VeryLazy" },
 		{ "nvim-telescope/telescope-live-grep-args.nvim", lazy = true },
 	},
 

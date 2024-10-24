@@ -5,16 +5,21 @@ return {
 	{
 
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
-		event = "BufRead",
+		lazy = true,
+		event = "VeryLazy",
 		build = ":TSUpdate",
 		--install = ":TSInstall",
 		dependencies = {
 			-- "lewis6991/gitsigns.nvim",
-			{ "JoosepAlviste/nvim-ts-context-commentstring", lazy = true, opts = {
-				enable_auto_comment = true,
-			} },
-			"nvim-treesitter/nvim-treesitter-textobjects",
+			{
+				"JoosepAlviste/nvim-ts-context-commentstring",
+				lazy = true,
+				event = "VeryLazy",
+				opts = {
+					enable_auto_comment = true,
+				},
+			},
+			-- { "nvim-treesitter/nvim-treesitter-textobjects", lazy = true, event = "VeryLazy" },
 			{
 				"nvim-treesitter/nvim-treesitter-context",
 				lazy = true,
@@ -35,7 +40,7 @@ return {
 					},
 				},
 			},
-			"windwp/nvim-ts-autotag",
+			{ "windwp/nvim-ts-autotag", lazy = true },
 		},
 
 		keys = {
@@ -135,40 +140,40 @@ return {
 
 			sync_install = true,
 			auto_install = true,
-			textobjects = {
-				select = {
-					enable = true,
-					-- Automatically jump forward to textobj, similar to targets.vim
-					lookahead = true,
-
-					keymaps = {
-						-- You can use the capture groups defined in textobjects.scm
-						["af"] = { expr = true, query = "@function.outer", desc = "Select around function" },
-						["if"] = { expr = true, query = "@function.inner", desc = "Select inner function" },
-						["ac"] = { expr = true, query = "@class.outer", desc = "Select around function" },
-						-- You can optionally set descriptions to the mappings (used in the desc parameter of
-						-- nvim_buf_set_keymap) which plugins like which-key display
-						["ic"] = { expr = true, query = "@class.inner", desc = "Select inner part of a class region" },
-						-- You can also use captures from other query groups like `locals.scm`
-						["as"] = { expr = true, query = "@scope", query_group = "locals", desc = "Select language scope" },
-					},
-					selection_modes = {
-						["@parameter.outer"] = "v", -- charwise
-						["@function.outer"] = "V", -- linewise
-						["@class.outer"] = "<c-v>", -- blockwise
-					},
-					include_surrounding_whitespace = false,
-				},
-				lsp_interop = {
-					enable = true,
-					border = "single",
-					floating_preview_opts = {},
-					peek_definition_code = {
-						["<leader>lE"] = "@function.outer",
-						["<leader>le"] = "@class.outer",
-					},
-				},
-			},
+			-- textobjects = {
+			-- 	select = {
+			-- 		enable = true,
+			-- 		-- Automatically jump forward to textobj, similar to targets.vim
+			-- 		lookahead = true,
+			--
+			-- 		keymaps = {
+			-- 			-- You can use the capture groups defined in textobjects.scm
+			-- 			["af"] = { expr = true, query = "@function.outer", desc = "Select around function" },
+			-- 			["if"] = { expr = true, query = "@function.inner", desc = "Select inner function" },
+			-- 			["ac"] = { expr = true, query = "@class.outer", desc = "Select around function" },
+			-- 			-- You can optionally set descriptions to the mappings (used in the desc parameter of
+			-- 			-- nvim_buf_set_keymap) which plugins like which-key display
+			-- 			["ic"] = { expr = true, query = "@class.inner", desc = "Select inner part of a class region" },
+			-- 			-- You can also use captures from other query groups like `locals.scm`
+			-- 			["as"] = { expr = true, query = "@scope", query_group = "locals", desc = "Select language scope" },
+			-- 		},
+			-- 		selection_modes = {
+			-- 			["@parameter.outer"] = "v", -- charwise
+			-- 			["@function.outer"] = "V", -- linewise
+			-- 			["@class.outer"] = "<c-v>", -- blockwise
+			-- 		},
+			-- 		include_surrounding_whitespace = false,
+			-- 	},
+			-- 	lsp_interop = {
+			-- 		enable = true,
+			-- 		border = "single",
+			-- 		floating_preview_opts = {},
+			-- 		peek_definition_code = {
+			-- 			["<leader>lE"] = "@function.outer",
+			-- 			["<leader>le"] = "@class.outer",
+			-- 		},
+			-- 	},
+			-- },
 			-- opts_comment_string = {
 			-- 	enable_auto_comment = true,
 			-- },
@@ -234,7 +239,8 @@ return {
 	},
 	{
 		"dariuscorvus/tree-sitter-surrealdb.nvim",
-		lazy = false,
+		lazy = true,
+		ft = "sql",
 		dependencies = { "nvim-treesitter/nvim-treesitter" },
 		config = function()
 			require("tree-sitter-surrealdb").setup()

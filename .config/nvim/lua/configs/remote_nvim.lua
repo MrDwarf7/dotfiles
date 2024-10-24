@@ -1,5 +1,4 @@
 local utils = require("remote-nvim.utils")
-
 local ssh_folder = function()
 	if vim.g.os == "Windows_NT" then
 		local path = vim.fn.expand("$USERPROFILE") .. "\\.ssh"
@@ -13,7 +12,8 @@ end
 
 return {
 	"amitds1997/remote-nvim.nvim",
-	lazy = false,
+	enabled = false,
+	lazy = true,
 	version = "*", -- Pin to GitHub releases
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- For standard functions
