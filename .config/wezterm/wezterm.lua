@@ -6,41 +6,46 @@ local act = wezterm.action
 ---@diagnostic disable-next-line: unused-local
 local mux = wezterm.mux
 
----@alias Work string
----@alias Home string
+---@alias Error string
 
----@alias ENV Work | Home
-local ENV = os.getenv("HOME_PROFILE")
+--- Converts an environment variable to a number correctly
+---@param number string|number
+---@return number|string|Error
+local function EnvToInt(number)
+	local env_v = os.getenv(number)
+	return math.floor(tonumber(env_v)) or error("Could not cast '" .. tostring(number) .. "' to number. '")
+end
 
----@type Config
+local function env(value)
+	return os.getenv(value) or error("Could not find environment variable '" .. value .. "'")
+end
+
+----@alias Work string
+----@alias Home string
+----@alias ENV Work | Home
+--local ENV = os.getenv("HOME_PROFILE")
+
+---@class Config
 local config = {}
 config.__index = config
 -- This WILL break the config
 -- config.__path = config.__path or (...):match('(.*[\\/])')
-
-local shell = "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
-local work_shell = "C:\\Applications\\PowerShell_start\\Powershell_linked\\pwsh.exe"
-
-if ENV ~= nil then
-	shell = shell
-else
-	shell = work_shell
-end
 
 config = wezterm.config_builder()
 
 config.automatically_reload_config = true
 config.enable_tab_bar = false
 config.enable_wayland = false
+
+local shell = env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
 config.default_prog = { shell, "-NoLogo" }
 config.window_close_confirmation = "NeverPrompt"
 
 config.exit_behavior_messaging = "Verbose"
-config.status_update_interval = 1000
 
 config.audible_bell = "Disabled"
 
-wezterm.home_dir = os.getenv("HOME")
+wezterm.home_dir = env("USERPROFILE")
 
 -- Font settings
 
@@ -53,26 +58,27 @@ config.harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" }
 
 -- Visual
 -- -- Rendering settings
+config.status_update_interval = 1000
 
 config.animation_fps = 60
-config.max_fps = 230
-config.front_end = "WebGpu"
-config.webgpu_power_preference = "HighPerformance"
+
+config.max_fps = EnvToInt("WZT_MAX_FPS") or 230
+config.front_end = env("WZT_GPU_FRONTEND") or "WebGpu"
+config.webgpu_power_preference = env("WZT_GPU_POWER_PREF") or "HighPerformance"
 
 -- -- Cursor settings
 
--- config.default_cursor_style = "SteadyBlock"
--- config.cursor_blink_rate = 0
-
-config.animation_fps = 144
+config.animation_fps = EnvToInt("WZT_ANIM_FPS") or 144
 config.cursor_blink_ease_in = "Linear"
 config.cursor_blink_ease_out = "EaseOut"
-config.cursor_blink_rate = 1000
-config.default_cursor_style = "BlinkingBlock"
+-- config.cursor_blink_rate = 1000
+-- config.default_cursor_style = "BlinkingBlock"
+config.default_cursor_style = "SteadyBlock"
+config.cursor_blink_rate = 0
 
 -- -- Appearance settings
 config.color_scheme = "Tokyo Night"
-config.window_background_opacity = 0.95
+config.window_background_opacity = 1.0 --.95
 config.window_padding = {
 	left = 1,
 	right = 0,
@@ -83,11 +89,11 @@ config.window_padding = {
 config.initial_cols = 150
 config.initial_rows = 32
 
-wezterm.on("gui-startup", function(cmd)
-	local x = 80
-	local y = 80
-	return window:set_position(x, y)
-end)
+-- wezterm.on("gui-startup", function(cmd)
+-- 	local x = 80
+-- 	local y = 80
+-- 	return window:set_position(x, y)
+-- end)
 
 config.enable_scroll_bar = true
 config.window_decorations = "RESIZE"
@@ -97,7 +103,7 @@ config.use_fancy_tab_bar = false
 config.show_tab_index_in_tab_bar = true
 config.tab_bar_at_bottom = true
 config.switch_to_last_active_tab_when_closing_tab = false
-config.text_background_opacity = 0.6
+config.text_background_opacity = 1.0 --0.6
 
 config.mouse_bindings = {
 	{
@@ -108,6 +114,11 @@ config.mouse_bindings = {
 }
 
 config.scrollback_lines = 10000
+
+config.inactive_pane_hsb = {
+	saturation = 0.9,
+	brightness = 0.85,
+}
 
 -- Keybindings
 
@@ -178,7 +189,7 @@ local key_ops = {
 
 	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
 	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
-	{ key = "c", mods = "CTRL", action = act.CopyTo("Clipboard") },
+	{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
 
 	{
 		key = "u",
@@ -255,13 +266,7 @@ config.hyperlink_rules = {
 
 -- config.ssh_domains = {}
 -- config.ssh_backend =
-
 -- config.default_gui_startup_args = {}
-
--- config.inactive_pane_hsb = {
---    saturation = 0.9,
---    brightness = 0.65,
--- }
 
 ---@type Config
 return config
