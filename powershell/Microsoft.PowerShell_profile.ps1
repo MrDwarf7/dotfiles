@@ -11,8 +11,7 @@ Invoke-Expression (
         Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
         Append("`n").
         Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })") 
-    ).ToString() 
- > $null
+    ).ToString() > $null
 
 # $prompt = ""
 # function Invoke-Starship-PreCommand {
