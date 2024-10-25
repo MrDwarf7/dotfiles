@@ -62,7 +62,7 @@ return {
 		enabled = true,
 		priority = 999,
 		opts = function()
-			return {
+			local opts = {
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
 				style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
@@ -97,16 +97,15 @@ return {
 				----@param colors ColorScheme
 				-- on_highlights = function(highlights, colors) end,
 			}
-		end,
-		config = function(_, opts)
 			vim.cmd.colorscheme("tokyonight-" .. opts.style)
 			return opts
 		end,
+		-- config = function(_, opts)
+		-- 	vim.cmd.colorscheme("tokyonight-" .. opts.style)
+		-- 	-- require("tokyonight").setup(opts)
+		-- 	return opts
+		-- end,
 	},
-
-	-- init = function()
-	-- 	require("colorschemes.tokyonight")
-	-- end,
 
 	-- Black and white color scheme, simple & elegant
 	-- {
