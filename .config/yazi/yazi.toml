@@ -10,11 +10,17 @@
 show_hidden = true
 show_symlink = true
 
-
 [opener]
 edit = [
+    # { run = "nvim %*", orphan = true, for = "windows" },
     { run = "nvim %*", block = true, for = "windows" },
     { run = 'nvim "$@"', block = true, for = "unix" },
+]
+
+[open]
+prepend_rules = [
+    { name = ".gitconfig", run = "nvim %*", use = [ "open", "edit" ], for = "windows"},
+    { name = ".gitconfig", run = "nvim $@", use = [ "open", "edit" ], for = "unix" },
 ]
 
 [plugin]
@@ -36,6 +42,9 @@ prepend_previewers = [
         { mime = "application/x-rar", run = "ouch" },
         { mime = "application/x-xz", run = "ouch" },
         { mime = "application/toml", run = "nvim %*" },
+
+        { mime = ".gitconfig", run = "nvim %*", for = "windows" },
+        { mime = ".gitconfig", run = "nvim $@", for = "unix" },
 ]
 
 prepend_fetchers = [

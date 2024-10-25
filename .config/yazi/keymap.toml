@@ -3,6 +3,85 @@
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
 [[manager.prepend_keymap]]
+on = "<Enter>"
+run = "@"
+desc = "EMPTY"
+
+[[manager.prepend_keymap]]
+on = "A"
+run = "create"
+desc = "Create a file (ends with / for directories)"
+
+# Fix copying commands lol
+#
+# Defaults
+# [[manager.prepend_keymap]]
+# on = [ "c", "c" ]
+# run = "copy path"
+# desc = "Copy the file path"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "d" ]
+# run = "copy dirname"
+# desc = "Copy the directory path"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "f" ]
+# run = "copy filename"
+# desc = "Copy the filename"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "n" ]
+# run = "copy name_without_ext"
+# desc = "Copy the filename without extension"
+
+[[manager.prepend_keymap]]
+on = [ "y", "f" ]
+run = "copy path"
+desc = "Copy the file path"
+
+[[manager.prepend_keymap]]
+on = [ "y", "c" ]
+run = "copy dirname"
+desc = "Copy the directory path"
+
+[[manager.prepend_keymap]]
+on = [ "y", "N" ]
+run = "copy filename"
+desc = "Copy the filename"
+
+[[manager.prepend_keymap]]
+on = [ "y", "N" ]
+run = "copy name_without_ext"
+desc = "Copy the filename without extension"
+
+# We also need to replace the commands for normal y and Y
+[[manager.prepend_keymap]]
+on = [ "y", "y" ]
+run = "yank"
+desc = "Yank selected files (copy)"
+
+[[manager.prepend_keymap]]
+on = [ "<C-y>" ]
+run = "unyank"
+desc = "Cancel the yank status"
+
+[[manager.prepend_keymap]]
+on = "<Space>"
+run = "select --state=none"
+desc = "Toggle the current selection state"
+
+[[manager.prepend_keymap]]
+on = "V"
+run = "visual_mode"
+desc = "Enter visual mode (selection mode)"
+
+[[manager.prepend_keymap]]
+on = "v"
+run = "visual_mode --unset"
+desc = "Enter visual mode (unset mode)"
+
+[[manager.prepend_keymap]]
 on   = [ "g", "d" ]
 run  = "plugin diff"
 desc = "Diff the selected with the hovered file"
@@ -12,10 +91,10 @@ on   = [ "g", "i" ]
 run  = "plugin lazygit"
 desc = "run lazygit"
 
-# [[manager.prepend_keymap]]
-# on = "l"
-# run = "plugin --sync smart-enter"
-# desc = "Enter the child directory or open the file"
+[[manager.prepend_keymap]]
+on = "l"
+run = "plugin --sync smart-enter"
+desc = "Enter the child directory or open the file"
 
 # https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
 # [[manager.prepend_keymap]]
@@ -80,3 +159,21 @@ desc = "Compress with ouch"
 on = ["="]
 run = "plugin eza-preview"
 desc = "Toggle tree/list preview"
+
+[help]
+keymap = [
+	{ on = "<Esc>", run = "escape", desc = "Clear the filter, or hide the help" },
+	{ on = "<C-[>", run = "escape", desc = "Clear the filter, or hide the help" },
+	{ on = "q",     run = "close",  desc = "Exit the process" },
+	{ on = "<C-c>", run = "close",  desc = "Hide the help" },
+
+	# Navigation
+	{ on = "k", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "j", run = "arrow 1",  desc = "Move cursor down" },
+
+	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
+	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
+
+	# Filtering
+	{ on = "/", run = "filter", desc = "Apply a filter for the help items" },
+]
