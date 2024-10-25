@@ -199,7 +199,12 @@ Config.hyperlink_rules = {
 	},
 }
 
--- config.ssh_domains = {}
+Config.ssh_domains = {
+	{
+		name = "the_yeti",
+		remote_address = "the_yeti",
+	},
+}
 -- config.ssh_backend =
 -- config.default_gui_startup_args = {}
 

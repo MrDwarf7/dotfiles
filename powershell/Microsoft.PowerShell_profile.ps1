@@ -12,7 +12,7 @@ Invoke-Expression (
         Append("`n").
         Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })") 
     ).ToString() 
-| Out-Null
+ > $null
 
 # $prompt = ""
 # function Invoke-Starship-PreCommand {
