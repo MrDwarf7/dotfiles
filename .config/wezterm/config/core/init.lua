@@ -46,17 +46,17 @@ function Core.setup()
 		window_decorations = "RESIZE",
 		window_close_confirmation = "NeverPrompt",
 		automatically_reload_config = true,
-		color_scheme = "Tokyo Night Storm",
+		swallow_mouse_click_on_pane_focus = false,
 
+		color_scheme = "Tokyo Night Storm",
 		-- -- Dark THemes
-		-- config.color_scheme = "Tokyo Night"
-		-- config.color_scheme = "tokyonight_night"
-		-- config.color_scheme = "Tokyo Night Moon"
-		-- config.color_scheme = core.color_scheme
+		-- color_scheme = "Tokyo Night",
+		-- color_scheme = "tokyonight_night",
+		-- color_scheme = "Tokyo Night Moon",
 		-- -- Light Themes
-		-- config.color_scheme = "tokyonight-day"
-		-- config.color_scheme = "Tokyo Night Day"
-		-- config.color_scheme = "Tokyo Night Light (Gogh)"
+		-- color_scheme = "tokyonight-day",
+		-- color_scheme = "Tokyo Night Day",
+		-- color_scheme = "Tokyo Night Light (Gogh)",
 
 		window_padding = {
 			left = 0,
@@ -64,7 +64,7 @@ function Core.setup()
 			top = 0,
 			bottom = 0,
 		},
-		window_background_opacity = 0.92,
+		window_background_opacity = 0.8,
 		inactive_pane_hsb = {
 			saturation = 0.92,
 			brightness = 0.80,
@@ -78,13 +78,13 @@ function Core.setup()
 		font = wezterm.font("Mononoki Nerd Font Mono", { italic = false, stretch = "Normal" }),
 		font_size = 11.0,
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
-		text_background_opacity = 1, --0.6
+		text_background_opacity = 1.0, --0.6
 
 		-- -- Cursor
 		cursor_blink_ease_in = Core.set_blink_ease_in(),
 		cursor_blink_ease_out = Core.set_blink_ease_out(),
 		default_cursor_style = "SteadyBlock",
-		cursor_blink_rate = 0,
+		cursor_blink_rate = 960,
 
 		-- -- Perf & Rendering
 		max_fps = utils.envtoint("WZT_MAX_FPS"),
