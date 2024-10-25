@@ -15,7 +15,7 @@ function ClearAndList {
         $ag = $args
     )
     Clear-Host
-    $eza_args = "-a --tree --level=1 --icons=always";
+    $eza_args = "-a --tree --level=1 --icons=always --follow-symlinks";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 
@@ -25,7 +25,7 @@ function EasyList {
     param (
         $ag = $args
     )
-    $eza_args = "-alh --color=always --level=1";
+    $eza_args = "-alh --color=always --level=1 --follow-symlinks";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 
@@ -35,7 +35,7 @@ function AltList {
     param (
         $ag = $args
     )
-    $eza_args = "-a --tree --level=1 --icons=always";
+    $eza_args = "-a --tree --level=1 --icons=always --follow-symlinks";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 
@@ -45,7 +45,7 @@ function ListTree {
     param (
         $ag = $args
     )
-    $eza_args = "-a --tree --level=2 --icons=always";
+    $eza_args = "-a --tree --level=2 --icons=always --follow-symlinks";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 
