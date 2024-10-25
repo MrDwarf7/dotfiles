@@ -91,6 +91,7 @@ function Core.setup()
 		animation_fps = utils.envtoint("WZT_ANIM_FPS"),
 		front_end = utils.env("WZT_GPU_FRONTEND"),
 		webgpu_power_preference = utils.env("WZT_GPU_POWER_PREF"),
+
 		default_prog = { Core.shell(), "-NoLogo" },
 
 		-- home_dir = utils.env("HOME"),

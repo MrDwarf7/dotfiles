@@ -109,6 +109,8 @@ local key_ops = {
 	{ key = "y", mods = "LEADER", action = act.ActivateCopyMode },
 	{ key = "s", mods = "LEADER", action = act.QuickSelect },
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
+	--- TODO: See what the other modes are
+	-- TODO: Bindings for opacity
 
 	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
 	{ key = "P", mods = "LEADER", action = act.PaneSelect({ alphabet = "123456789", mode = "SwapWithActiveKeepFocus" }) },
