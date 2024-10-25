@@ -33,10 +33,7 @@ Config.__index = Config
 Config = wezterm.config_builder()
 
 -- Required AFTER the builder call lol
-local c = require("config.core")
-print(c)
 Config = require("config.core").setup()
-print("CONFIG SETUP", Config)
 
 -- Keybindings
 -- -- Leader key
