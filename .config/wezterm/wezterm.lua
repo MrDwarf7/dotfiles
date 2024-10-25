@@ -1,3 +1,18 @@
+-- NOTE: To get this working on Windows, you will NEED to place it on the rtp.
+--NOTE: easiest one is to::  ln ~\dotfiles\.config\wezterm ~\.wezterm
+
+--
+-- config ||| Top level
+--
+-- CORE ||| 'basic settings' if you will
+-- { Generic(Shells/domains or Domains, Toolbar, Scheme etc etc.), Window, Font }
+--
+-- RENDER ||| Rendering settings & will require dep/util (Font, fnc for gpu thing etc.)
+--
+-- BINDS ||| Keybindings
+--
+-- KEY_TABLES ||| Keybinding extension tables
+--
 ---@type Wezterm
 local wezterm = require("wezterm")
 ---@type Action
@@ -8,127 +23,25 @@ local mux = wezterm.mux
 
 ---@alias Error string
 
---- Converts an environment variable to a number correctly
----@param number string
----@return number|string|nil
-local function EnvToInt(number)
-	local env_v = os.getenv(number)
-	if type(number) == "nil" or type(number) == nil then
-		return error("Could not find environment variable '" .. number .. "'")
-	end
-	return math.floor(tonumber(env_v)) or error("Could not cast '" .. tostring(number) .. "' to number. '")
-end
-
-local function env(value)
-	return os.getenv(value) or error("Could not find environment variable '" .. value .. "'")
-end
-
-local shell = env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
-local max_fps = EnvToInt("WZT_MAX_FPS") or 144
-local front_end = env("WZT_GPU_FRONTEND") or "WebGpu"
-local webgpu_power_preference = env("WZT_GPU_POWER_PREF") or "HighPerformance"
-local animation_fps = EnvToInt("WZT_ANIM_FPS") or 144
-
 ---@class Config
-local config = {}
-config.__index = config
+local Config = {}
+Config.__index = Config
+
 -- This WILL break the config
--- config.__path = config.__path or (...):match('(.*[\\/])')
+-- Config.__path = Config.__path or (...):match("(.*[\\/])")
 
-config = wezterm.config_builder()
+Config = wezterm.config_builder()
 
-config.automatically_reload_config = true
-config.enable_tab_bar = false
-config.enable_wayland = false
+-- Required AFTER the builder call lol
+local c = require("config.core")
+print(c)
+Config = require("config.core").setup()
+print("CONFIG SETUP", Config)
 
-config.default_prog = { shell, "-NoLogo" }
-config.window_close_confirmation = "NeverPrompt"
+-- Keybindings
+-- -- Leader key
 
-config.exit_behavior_messaging = "Verbose"
-
-config.audible_bell = "Disabled"
-
-wezterm.home_dir = env("HOME")
-
--- Font settings
-
----@diagnostic disable-next-line: param-type-mismatch
-config.font = wezterm.font("Mononoki Nerd Font Mono", { weight = "Light", italic = false, stretch = "Normal" })
--- config.font = wezterm.font("JetBrains Mono", { weight = "Medium", italic = false, stretch = "Normal" })
-
-config.font_size = 11
-config.harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" }
-
--- Visual
--- -- Rendering settings
-config.status_update_interval = 10000
-
-config.max_fps = max_fps
-config.front_end = front_end
-config.webgpu_power_preference = webgpu_power_preference
-
--- -- Cursor settings
-
-config.animation_fps = animation_fps
-
-if config.animation_fps ~= 144 then
-	print("Animation FPS NOT 144, it is: " .. config.animation_fps)
-	config.cursor_blink_ease_in = "Constant"
-	config.cursor_blink_ease_out = "Constant"
-else
-	config.cursor_blink_ease_in = "Linear"
-	config.cursor_blink_ease_out = "EaseOut"
-end
-
--- config.cursor_blink_rate = 1000
--- config.default_cursor_style = "BlinkingBlock"
-config.default_cursor_style = "SteadyBlock"
-config.cursor_blink_rate = 0
-
--- -- Appearance settings
--- -- Dark THemes
--- config.color_scheme = "Tokyo Night"
--- config.color_scheme = "tokyonight_night"
--- config.color_scheme = "Tokyo Night Moon"
-config.color_scheme = "Tokyo Night Storm"
-
--- -- Light Themes
--- config.color_scheme = "tokyonight-day"
--- config.color_scheme = "Tokyo Night Day"
--- config.color_scheme = "Tokyo Night Light (Gogh)"
---
---
--- config.colors.gutter
-config.window_background_opacity = 1
-config.window_padding = {
-	left = 0,
-	right = 0,
-	top = 0,
-	bottom = 0,
-}
-
-config.initial_cols = 150
-config.initial_rows = 32
-
--- wezterm.on("gui-startup", function(cmd)
--- 	local x = 80
--- 	local y = 80
--- 	return window:set_position(x, y)
--- end)
-
-config.enable_scroll_bar = true
-config.window_decorations = "RESIZE"
-
-config.enable_tab_bar = true
-config.use_fancy_tab_bar = false
-config.show_tab_index_in_tab_bar = true
--- config.tab_bar_style = ""
-config.tab_max_width = 20
-config.tab_bar_at_bottom = true
-config.switch_to_last_active_tab_when_closing_tab = false
-config.text_background_opacity = 1.0 --0.6
-
-config.mouse_bindings = {
+Config.mouse_bindings = {
 	{
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "NONE",
@@ -136,19 +49,8 @@ config.mouse_bindings = {
 	},
 }
 
-config.scrollback_lines = 10000
-
-config.inactive_pane_hsb = {
-	saturation = 0.92,
-	brightness = 0.80,
-}
-
--- Keybindings
-
--- -- Leader key
-
 -- config.leader = { key = "Space", mods = "CTRL" }
-config.leader = { key = "a", mods = "CTRL" }
+Config.leader = { key = "a", mods = "CTRL" }
 
 local my_keys = {}
 for i = 1, 8 do
@@ -188,7 +90,7 @@ local key_ops = {
 	{ key = "k", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) },
 	{ key = "l", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) },
 
-	{ key = "q", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
+	{ key = "d", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
 
 	-- Pane resizing
 	{ key = "LeftArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
@@ -239,7 +141,7 @@ local key_ops = {
 	},
 }
 
-config.mouse_bindings = {
+Config.mouse_bindings = {
 	-- Ctrl-click will open the link under the mouse cursor
 	{
 		event = { Up = { streak = 1, button = "Left" } },
@@ -258,9 +160,9 @@ for _, key_op in ipairs(key_ops) do
 	table.insert(my_keys, key_op)
 end
 
-config.keys = my_keys
+Config.keys = my_keys
 
-config.hyperlink_rules = {
+Config.hyperlink_rules = {
 	-- Matches: a URL in parens: (URL)
 	{
 		regex = "\\((\\w+://\\S+)\\)",
@@ -302,4 +204,4 @@ config.hyperlink_rules = {
 -- config.default_gui_startup_args = {}
 
 ---@type Config
-return config
+return Config
