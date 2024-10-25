@@ -158,6 +158,12 @@ for i = 1, 8 do
 		mods = "CTRL",
 		action = act({ ActivateTab = i - 1 }),
 	})
+
+	table.insert(my_keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = act({ ActivateTab = i - 1 }),
+	})
 end
 
 ---@class KeyOp
