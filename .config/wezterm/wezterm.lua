@@ -200,6 +200,9 @@ Config.ssh_domains = {
 	{
 		name = "the_yeti",
 		remote_address = "the_yeti",
+		multiplexing = "WezTerm",
+		default_prog = { "powershell.exe", "-NoLogo" },
+		local_echo_threshold_ms = 10,
 	},
 }
 -- config.ssh_backend =
