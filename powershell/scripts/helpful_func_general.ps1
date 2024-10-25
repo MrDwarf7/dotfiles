@@ -41,7 +41,7 @@ function nf {
    fastfetch 
 }
 
-function yy {
+function y {
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"
     $cwd = Get-Content -Path $tmp
