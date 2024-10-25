@@ -1,0 +1,22 @@
+# Setting the env variable
+# CLINK_PROFILE
+# to this folder will load this up
+
+# other one for the stored settings is
+# CLINK_SETTINGS
+# which is stored in %APPDATA%\clink normally
+
+# Some common Readline config settings.
+
+set editing-mode vi
+set colored-stats                 on   # Turn on completion colors.
+set colored-completion-prefix     on   # Color the typed completion prefix.
+
+# Some config settings that only work in Clink.
+ 
+$if clink
+set search-ignore-case            on   # Case insensitive history searches.
+set completion-auto-query-items   on   # Prompt before showing completions if they'll exceed half the screen.
+$endif
+
+# Add your keybindings here...
