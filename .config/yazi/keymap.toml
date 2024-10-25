@@ -1,10 +1,82 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
 [[manager.prepend_keymap]]
 on   = [ "g", "d" ]
 run  = "plugin diff"
 desc = "Diff the selected with the hovered file"
 
-
 [[manager.prepend_keymap]]
 on   = [ "g", "i" ]
 run  = "plugin lazygit"
 desc = "run lazygit"
+
+# [[manager.prepend_keymap]]
+# on = "l"
+# run = "plugin --sync smart-enter"
+# desc = "Enter the child directory or open the file"
+
+# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
+# [[manager.prepend_keymap]]
+# on   = "/"
+# run  = "plugin jump-to-char"
+# desc = "Jump to char"
+
+# https://github.com/dedukun/relative-motions.yazi
+[[manager.prepend_keymap]]
+on = [ "1" ]
+run = "plugin relative-motions --args=1"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "2" ]
+run = "plugin relative-motions --args=2"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "3" ]
+run = "plugin relative-motions --args=3"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "4" ]
+run = "plugin relative-motions --args=4"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "5" ]
+run = "plugin relative-motions --args=5"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "6" ]
+run = "plugin relative-motions --args=6"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "7" ]
+run = "plugin relative-motions --args=7"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "8" ]
+run = "plugin relative-motions --args=8"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "9" ]
+run = "plugin relative-motions --args=9"
+desc = "Move in relative steps"
+
+# https://github.com/ndtoan96/ouch.yazi
+[[manager.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch --args=zip"
+desc = "Compress with ouch"
+
+# https://github.com/sharklasers996/eza-preview.yazi
+[[manager.prepend_keymap]]
+on = ["="]
+run = "plugin eza-preview"
+desc = "Toggle tree/list preview"
