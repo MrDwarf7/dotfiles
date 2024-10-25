@@ -15,42 +15,42 @@ return {
 			desc = "harpoon [i]t",
 		},
 		{
-			"<Leader>I",
+			"<Leader>H",
 			function()
 				return require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
 			end,
 			desc = "[h]arpoon menu",
 		},
 		{
-			"<Leader>H1",
+			"<Leader>1",
 			function()
 				return require("harpoon"):list():select(1)
 			end,
 			desc = "harpoon [1]",
 		},
 		{
-			"<Leader>H2",
+			"<Leader>2",
 			function()
 				return require("harpoon"):list():select(2)
 			end,
 			desc = "harpoon [2]",
 		},
 		{
-			"<Leader>H3",
+			"<Leader>3",
 			function()
 				return require("harpoon"):list():select(3)
 			end,
 			desc = "harpoon [3]",
 		},
 		{
-			"<Leader>H4",
+			"<Leader>4",
 			function()
 				return require("harpoon"):list():select(4)
 			end,
 			desc = "harpoon [4]",
 		},
 		{
-			"<Leader>H5",
+			"<Leader>5",
 			function()
 				return require("harpoon"):list():select(5)
 			end,
