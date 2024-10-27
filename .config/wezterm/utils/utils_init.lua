@@ -1,6 +1,6 @@
----@type config.utils.Utils: table
+---@type config.Utils: table
 
----@class Utils: config.utils.Utils
+---@class Utils: config.Utils
 ---@field envtoint fun(number: string): number|string|nil
 ---@field env fun(value: string): string|nil
 local Utils = {}
@@ -22,6 +22,24 @@ end
 ---@return string|nil
 function Utils.env(value)
 	return os.getenv(value) or error("Could not find environment variable '" .. value .. "'")
+end
+
+function Utils.set_blink_ease_in()
+	local anim = Utils.envtoint("WZT_ANIM_FPS")
+	if anim ~= 144 then
+		return "Constant"
+	else
+		return "Linear"
+	end
+end
+
+function Utils.set_blink_ease_out()
+	local anim = Utils.envtoint("WZT_ANIM_FPS")
+	if anim ~= 144 then
+		return "Constant"
+	else
+		return "EaseOut"
+	end
 end
 
 return setmetatable(Utils, {

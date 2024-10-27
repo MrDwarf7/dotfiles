@@ -1,31 +1,30 @@
 local utils = require("utils.utils_init")
 local gpu_adapter = require("utils.gpu_adapter")
 
-local function set_blink_ease_in()
-	local anim = utils.envtoint("WZT_ANIM_FPS")
-	if anim ~= 144 then
-		return "Constant"
-	else
-		return "Linear"
-	end
-end
+-- local cursor_in = utils.set_blink_ease_in
+-- local cursor_out = utils.set_blink_ease_out
 
-local function set_blink_ease_out()
-	local anim = utils.envtoint("WZT_ANIM_FPS")
-	if anim ~= 144 then
-		return "Constant"
-	else
-		return "EaseOut"
-	end
-end
-
-return {
-	window_decorations = "RESIZE", -- Border
-
+local utils_computed = {
+	cursor_in = utils.set_blink_ease_in(),
+	cursor_out = utils.set_blink_ease_out(),
 	animation_fps = utils.envtoint("WZT_ANIM_FPS"), -- Animation FPS
 	max_fps = utils.envtoint("WZT_MAX_FPS"), -- Total possible/MAX fps
 	front_end = utils.env("WZT_GPU_FRONTEND"), -- Frontend for rendering
 	webgpu_power_preference = utils.env("WZT_GPU_POWER_PREF"), -- power pref
+}
+
+return {
+	window_decorations = "RESIZE", -- Border
+
+	animation_fps = utils_computed.animation_fps,
+	-- utils.envtoint("WZT_ANIM_FPS"), -- Animation FPS
+	max_fps = utils_computed.max_fps,
+	-- utils.envtoint("WZT_MAX_FPS"), -- Total possible/MAX fps
+	front_end = utils_computed.front_end,
+	-- utils.env("WZT_GPU_FRONTEND"), -- Frontend for rendering
+	webgpu_power_preference = utils_computed.webgpu_power_preference,
+	-- utils.env("WZT_GPU_POWER_PREF"), -- power pref
+
 	-- NOTE:
 	webgpu_preferred_adapter = gpu_adapter:pick_best(), -- chooser for the adapter
 
@@ -63,9 +62,15 @@ return {
 		brightness = 0.80,
 	},
 
+	-- local cursor_in = set_blink_ease_in()
+	-- local cursor_out = set_blink_ease_out()
+
 	-- Cursor
-	cursor_blink_ease_in = set_blink_ease_in(),
-	cursor_blink_ease_out = set_blink_ease_out(),
+	cursor_blink_ease_in = utils_computed.cursor_in,
+	-- cursor_in(),
+	cursor_blink_ease_out = utils_computed.cursor_out,
+
+	-- cursor_out(),
 	default_cursor_style = "SteadyBlock",
 	cursor_blink_rate = 960,
 }
