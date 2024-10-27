@@ -64,7 +64,7 @@ function Core.setup()
 			top = 0,
 			bottom = 0,
 		},
-		window_background_opacity = 0.8,
+		window_background_opacity = 1.0,
 		inactive_pane_hsb = {
 			saturation = 0.92,
 			brightness = 0.80,
