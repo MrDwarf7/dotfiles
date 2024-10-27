@@ -1,4 +1,3 @@
-local utils = require("remote-nvim.utils")
 local ssh_folder = function()
 	if vim.g.os == "Windows_NT" then
 		local path = vim.fn.expand("$USERPROFILE") .. "\\.ssh"
@@ -20,16 +19,20 @@ return {
 		"MunifTanjim/nui.nvim", -- To build the plugin UI
 		"nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
 	},
-	opts = {
-		ssh_config = {
+	opts = function()
+		local utils = require("remote-nvim.utils")
+		return {
 
-			-- ssh_config = true,
-			ssh_config_file_paths = { utils.path_join(true, ssh_folder(), "config") },
-		},
-		-- offline_mode = {
-		-- 	enabled = true,
-		-- },
-	},
+			ssh_config = {
+
+				-- ssh_config = true,
+				ssh_config_file_paths = { utils.path_join(true, ssh_folder(), "config") },
+			},
+			-- offline_mode = {
+			-- 	enabled = true,
+			-- },
+		}
+	end,
 	config = function(o, opts)
 		local rem = require("remote-nvim")
 		-- Testing if I can force via deep/or access certain nested(s)

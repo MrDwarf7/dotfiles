@@ -119,7 +119,7 @@ return {
 			virtual_text = {
 				spacing = 4,
 				source = "if_many",
-				prefix = "icons",
+				prefix = "",
 			},
 			underline = true,
 			severity_sort = true,

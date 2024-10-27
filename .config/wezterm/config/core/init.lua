@@ -75,7 +75,8 @@ function Core.setup()
 		scrollback_lines = 3000,
 
 		-- -- Font
-		font = wezterm.font("Mononoki Nerd Font Mono", { italic = false, stretch = "Normal" }),
+		font = wezterm.font("Mononoki Nerd Font Mono", { weight = "Medium", italic = false }),
+		-- font = wezterm.font("JetBrains Mono", { weight = "Medium", italic = false, stretch = "Normal" }),
 		font_size = 11.0,
 		harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
 		text_background_opacity = 1.0, --0.6
