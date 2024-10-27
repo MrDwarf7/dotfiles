@@ -10,15 +10,16 @@ local keys = {}
 -- end
 local leader = { key = "a", mods = "CTRL" }
 
+local tab_keys = {}
 for i = 1, 8 do
 	-- ctrl + a -> number to activate that tab
-	table.insert(keys, {
+	table.insert(tab_keys, {
 		key = tostring(i),
 		mods = "CTRL",
 		action = act({ ActivateTab = i - 1 }),
 	})
 
-	table.insert(keys, {
+	table.insert(tab_keys, {
 		key = tostring(i),
 		mods = "LEADER",
 		action = act({ ActivateTab = i - 1 }),
@@ -32,7 +33,10 @@ end
 ---@type KeyOp[]
 local key_opts = {
 	-- Tabs
-	{ key = "n", mods = "LEADER", action = act({ SpawnTab = "CurrentPaneDomain" }) },
+	{ key = "n", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
+	{ key = "N", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "m", mods = "LEADER", action = act.SpawnTab({ DomainName = "WSL:Arch" }) },
+	-- act({ SpawnTab = "CurrentPaneDomain" }) },
 
 	-- { key = "Nmod.SUPER", mods = "", action = act.SpawnWindow },
 	{ key = "F", mods = "LEADER", action = "ToggleFullScreen" },
@@ -58,6 +62,13 @@ local key_opts = {
 	-- Was either this or q and e, mapping w to close instead of q
 	{ key = "h", mods = "LEADER|CTRL", action = act.ActivateTabRelative(-1) },
 	{ key = "l", mods = "LEADER|CTRL", action = act.ActivateTabRelative(1) },
+	{ key = "[", mods = "CTRL", action = act.MoveTabRelative(-1) },
+	{ key = "]", mods = "CTRL", action = act.MoveTabRelative(1) },
+
+	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
+
+	-- { key = ">", mods = "LEADER", action = wezterm.action.EmitEvent("less-opaque") },
+	-- { key = "<", mods = "LEADER", action = wezterm.action.EmitEvent("more-opaque") },
 
 	-- These MOVE the current pane +1 / -1
 	-- { key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
@@ -95,6 +106,8 @@ local key_opts = {
 			end),
 		}),
 	},
+
+	table.unpack(tab_keys),
 }
 
 for _, key_op in ipairs(key_opts) do

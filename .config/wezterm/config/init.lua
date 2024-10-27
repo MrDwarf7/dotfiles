@@ -1,4 +1,3 @@
-
 local wezterm = require('wezterm')
 
 ---@class Config
