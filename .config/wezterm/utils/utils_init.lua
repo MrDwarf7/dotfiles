@@ -5,7 +5,7 @@
 ---@field env fun(value: string): string|nil
 local Utils = {}
 Utils.__index = Utils
-Utils.vim = require("config.utils.vim_helpers")
+-- Utils.vim = require("utils.vim_helpers")
 
 --- Converts an environment variable to a number correctly
 ---@param number string
