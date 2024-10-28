@@ -33,8 +33,8 @@ end
 ---@type KeyOp[]
 local key_opts = {
 	-- Tabs
-	{ key = "n", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
-	{ key = "N", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "t", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
+	{ key = "T", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "m", mods = "LEADER", action = act.SpawnTab({ DomainName = "WSL:Arch" }) },
 	-- act({ SpawnTab = "CurrentPaneDomain" }) },
 
@@ -62,8 +62,8 @@ local key_opts = {
 	-- Was either this or q and e, mapping w to close instead of q
 	{ key = "h", mods = "LEADER|CTRL", action = act.ActivateTabRelative(-1) },
 	{ key = "l", mods = "LEADER|CTRL", action = act.ActivateTabRelative(1) },
-	{ key = "[", mods = "CTRL", action = act.MoveTabRelative(-1) },
-	{ key = "]", mods = "CTRL", action = act.MoveTabRelative(1) },
+	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
+	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
 
 	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
 
@@ -76,14 +76,20 @@ local key_opts = {
 
 	-- Modes
 	{ key = "y", mods = "LEADER", action = act.ActivateCopyMode },
-	{ key = "s", mods = "LEADER", action = act.QuickSelect },
+	{ key = "g", mods = "LEADER", action = act.QuickSelect }, -- 'Grab'
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
 	-- TODO: Bindings for opacity
 
-	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
-	{ key = "P", mods = "LEADER", action = act.PaneSelect({ alphabet = "123456789", mode = "SwapWithActiveKeepFocus" }) },
+	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
 
-	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
+	{
+		key = "w",
+		mods = "LEADER|CTRL",
+		action = act.PaneSelect({ alphabet = "123456789", mode = "SwapWithActiveKeepFocus" }),
+	},
+
+	{ key = "Y", mods = "LEADER", action = act.ShowTabNavigator },
+
 	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 	{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
 

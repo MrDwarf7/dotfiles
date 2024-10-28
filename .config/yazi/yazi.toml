@@ -12,10 +12,28 @@ show_symlink = true
 
 [opener]
 edit = [
-    # { run = "nvim %*", orphan = true, for = "windows" },
-    { run = "nvim %*", block = true, for = "windows" },
     { run = 'nvim "$@"', block = true, for = "unix" },
+    # { run = "nvim %*", orphan = true, desc = "nvim", for = "windows" },
+    { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
 ]
+
+open = [
+    # { run = "nvim %*", orphan = true, desc = "nvim", for = "windows" },
+    { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
+]
+
+reveal = [
+
+]
+
+extract = [
+
+]
+
+play = [
+
+]
+
 
 [open]
 prepend_rules = [

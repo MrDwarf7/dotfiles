@@ -6,7 +6,7 @@ local platform = require("utils.platform")
 local font_size = platform.is_linux and 12.0 or 11.0
 
 return {
-	font = wezterm.font("Mononoki Nerd Font Mono", { weight = "Medium", italic = false }),
+	font = wezterm.font("Mononoki Nerd Font Mono", { weight = "Regular", italic = false }),
 	font_size = font_size,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
 

@@ -7,8 +7,11 @@
 // Note:
 // find `KeysList` type in src/keys/key_list.rs for all possible keys.
 // every key not overwritten via the config file will use the default specified there
+
+// ln -s ~\dotfiles\.config\gitui ~\Appdata\Roaming\gitui
+
 (
-    open_help: Some(( code: F(1), modifiers: "")),
+    open_help: Some(( code: Char('`'), modifiers: "")),
 
     move_left: Some(( code: Char('h'), modifiers: "")),
     move_right: Some(( code: Char('l'), modifiers: "")),
