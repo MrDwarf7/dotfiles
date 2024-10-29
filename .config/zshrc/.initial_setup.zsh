@@ -67,7 +67,7 @@ export_if_pacman "eza" "LIST_CLIENT" "exa"
 
 export_if_pacman "sccache" "RUSTC_WRAPPER"
 
-export_path_if_pacman "python-pipx" "PIPX_HOME" "$HOME/.xdg/data/pipx"
+export_path_if_pacman "python-pipx" "PIPX_HOME" "$HOME/.xdg/share/pipx"
 export_path_if_pacman "python-pipx" "PIPX_BIN_DIR" "$HOME/.xdg/local/bin"
 export_path_if_pacman "python-pipx" "PIPX_MAN_DIR" "$HOME/.xdg/local/man"
 

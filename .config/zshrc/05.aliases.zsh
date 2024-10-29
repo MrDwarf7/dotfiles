@@ -4,7 +4,6 @@
 
 # Provide ALL info (etc)
 alias l="$LIST_CLIENT -lah --color=always --level=1"
-
 # provide standard levels (ie: hiddens but not list etc.)
 alias ls="$LIST_CLIENT -ah --color=automatic"
 
@@ -123,23 +122,6 @@ alias cwq='cargo watch -q'
 alias cwqc='cargo watch -q -c'
 alias cwqcr='cargo watch -q -c -x run'
 
-if [ "$WIN_AVAILABLE" ]; then
-    # rust / cargo related
-    alias cbw='cargo build --target x86_64-pc-windows-gnu'
-    alias cbrw='cargo build --release --target x86_64-pc-windows-gnu'
-    alias crw='cargo run --target x86_64-pc-windows-gnu'
-    alias crqw='cargo run -q --target x86_64-pc-windows-gnu'
-    alias crrw='cargo run --release --target x86_64-pc-windows-gnu'
-    alias cbaw='cargo build --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-pc-windows-gnu'
-
-    alias cba='cargo build --target x86_64-pc-windows-gnu && cargo build --target x86_64-unknown-linux-gnu'
-    alias cbra='cargo build --release --target x86_64-pc-windows-gnu && cargo build --release --target x86_64-unknown-linux-gnu'
-    alias cble='cba && cbra && cb && cbr'
-
-    # vs code
-    # alias code=launch_code_wsl
-
-fi
 
 alias wy="win32yank.exe"
 alias wyi="win32yank.exe -i"

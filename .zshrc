@@ -30,10 +30,10 @@ ZSHRC_CONFIG=$DOTDIR/.config/zshrc
 
 ###################
 ###################
-if [[ $INITIAL_SETUP = "" || $INITIAL_SETUP = " " ]]; then
-    echo "Current value of Initial is: $INITIAL_SETUP, setting initial"
-    export INITIAL_SETUP=0
-fi
+# if [[ $INITIAL_SETUP = "" || $INITIAL_SETUP = " " ]]; then
+#     echo "Current value of Initial is: $INITIAL_SETUP, setting initial"
+#     export INITIAL_SETUP=0
+# fi
 ###################
 ###################
 
@@ -51,11 +51,11 @@ bashcompinit
 
 ###################
 ###################
-if [[ $INITIAL_SETUP != 1 ]]; then
-    echo "Running initial"
-    source "$ZSHRC_CONFIG/.initial_setup.zsh"
-    export INITIAL_SETUP=1
-fi
+# if [[ $INITIAL_SETUP != 1 ]]; then
+#     echo "Running initial"
+source "$ZSHRC_CONFIG/.initial_setup.zsh"
+# export INITIAL_SETUP=1
+# fi
 ###################
 ###################
 

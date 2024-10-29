@@ -11,7 +11,6 @@ export DATA_ON_DEMAND_BACK=$DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
 export DATA_ON_DEMAND_FRONT=$DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
 export DATA_ON_DEMAND_NEXT=$DATA_ON_DEMAND_BASE/data-on-demand-next
 
-
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 
