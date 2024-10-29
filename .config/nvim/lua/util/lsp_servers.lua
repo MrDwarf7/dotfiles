@@ -25,11 +25,11 @@ M.servers = function()
 
 		cssls = {},
 
-		deno = {},
+		-- deno = {},
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
-		eslint = {},
+		-- eslint = {},
 		-- gleam = {},
 		html = {},
 		jsonls = {},
@@ -77,7 +77,7 @@ M.servers = function()
 			},
 		},
 		marksman = {},
-		markdown_oxide = {},
+		-- markdown_oxide = {},
 
 		ols = {},
 		omnisharp = {
@@ -121,7 +121,7 @@ M.servers = function()
 				"setup.cfg",
 				"pyproject.toml",
 				"requirements.txt",
-				".venv",
+				"\\.venv",
 				"venv"
 			),
 			on_attach = vim.lsp.inlay_hint.enable(),

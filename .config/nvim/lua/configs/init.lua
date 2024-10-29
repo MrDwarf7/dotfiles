@@ -1,6 +1,7 @@
 return {
 	{
 		"tpope/vim-fugitive",
+		enabled = false,
 		event = "BufRead",
 		keys = {
 			{ "<Leader>gg", "<cmd>Git<CR>", mode = "n", desc = "[g]it" },
@@ -23,6 +24,7 @@ return {
 
 	{
 		"rbong/vim-flog",
+		enabled = false,
 		lazy = true,
 		cmd = { "Flog", "Flogsplit", "Floggit" },
 		keys = {
@@ -60,12 +62,13 @@ return {
 		enabled = true,
 		priority = 999,
 		opts = function()
-			return {
+			local opts = {
 				-- your configuration comes here
 				-- or leave it empty to use the default settings
 				style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+				-- style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
 				transparent = false, -- Enable this to disable setting the background color
-				terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+				terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
 				styles = {
 					-- Style to be applied to different syntax groups
 					-- Value is any valid attr-list value for `:help nvim_set_hl`
@@ -85,25 +88,24 @@ return {
 
 				--- You can override specific color groups to use other groups or a hex color
 				--- function will be called with a ColorScheme table
-				---@param colors ColorScheme
-				on_colors = function(colors) end,
+				----@param colors ColorScheme
+				-- on_colors = function(colors) end,
 
 				--- You can override specific highlights to use other groups or a hex color
 				--- function will be called with a Highlights and ColorScheme table
-				---@param highlights Highlights
-				---@param colors ColorScheme
-				on_highlights = function(highlights, colors) end,
+				----@param highlights Highlights
+				----@param colors ColorScheme
+				-- on_highlights = function(highlights, colors) end,
 			}
-		end,
-		config = function(_, opts)
-			vim.cmd.colorscheme("tokyonight-storm")
+			vim.cmd.colorscheme("tokyonight-" .. opts.style)
 			return opts
 		end,
+		-- config = function(_, opts)
+		-- 	vim.cmd.colorscheme("tokyonight-" .. opts.style)
+		-- 	-- require("tokyonight").setup(opts)
+		-- 	return opts
+		-- end,
 	},
-
-	-- init = function()
-	-- 	require("colorschemes.tokyonight")
-	-- end,
 
 	-- Black and white color scheme, simple & elegant
 	-- {

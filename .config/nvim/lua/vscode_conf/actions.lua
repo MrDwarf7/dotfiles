@@ -1,139 +1,180 @@
-local actions = function()
-	print("Vscode specific actions file loads...")
-	local vscode = require("vscode")
-	-- local map = vim.keymap.set
+-- local vscode = require("vscode")
+print("Vscode specific actions file loads...")
+
+return {
+	-- vim.keymap.set("n", "j", function()
+	-- 	require("vscode").call("editor.cursorDown")
+	-- end),
+	--
+	-- vim.keymap.set("n", "k", function()
+	-- 	require("vscode").call("editor.cursorDown")
+	-- end),
 
 	vim.keymap.set("i", "jj", function()
-		vscode.action("vscode-neovim.escape")
-	end)
+		require("vscode").action("vscode-neovim.escape")
+	end),
 
 	vim.keymap.set("i", "kj", function()
-		vscode.action("vscode-neovim.escape")
-	end)
+		require("vscode").action("vscode-neovim.escape")
+	end),
 
 	vim.keymap.set("i", "jk", function()
-		vscode.action("vscode-neovim.escape")
-	end)
+		require("vscode").action("vscode-neovim.escape")
+	end),
 
 	vim.keymap.set("n", "gd", function()
 		print("Go to definition")
-		vscode.action("editor.action.revealDefinition")
-	end)
+		require("vscode").action("editor.action.revealDefinition")
+	end),
 
 	vim.keymap.set("n", "gD", function()
 		print("Go to declaration")
-		vscode.action("editor.action.revealDeclaration")
-	end)
+		require("vscode").action("editor.action.revealDeclaration")
+	end),
 
 	vim.keymap.set("n", "<C-w>d", function()
 		print("Go to declaration")
-		vscode.action("editor.action.revealDefinitionAside")
-	end)
+		require("vscode").action("editor.action.revealDefinitionAside")
+	end),
 
 	vim.keymap.set("n", "<C-w>e", function()
 		print("Reset editor window sizes")
-		vscode.action("workbench.action.evenEditorWidths")
-	end)
+		require("vscode").action("workbench.action.evenEditorWidths")
+	end),
 
 	vim.keymap.set("n", "gr", function()
 		print("Go to references")
-		vscode.action("editor.action.goToReferences")
-	end)
+		require("vscode").action("editor.action.goToReferences")
+	end),
 
 	vim.keymap.set("n", "gi", function()
 		print("Go to implementation")
-		vscode.action("editor.action.goToImplementation")
-	end)
+		require("vscode").action("editor.action.goToImplementation")
+	end),
 
 	vim.keymap.set("n", "gI", function()
 		print("Go to last edit location")
-		vscode.action("workbench.action.navigateToLastEditLocation")
-	end)
+		require("vscode").action("workbench.action.navigateToLastEditLocation")
+	end),
 
 	vim.keymap.set("n", "gt", function()
 		print("Go to type definition")
-		vscode.action("editor.action.goToTypeDefinition")
-	end)
+		require("vscode").action("editor.action.goToTypeDefinition")
+	end),
 
 	vim.keymap.set("n", "gO", function()
 		print("Goto Symbol")
-		vscode.action("workbench.action.gotoSymbol")
-	end)
+		require("vscode").action("workbench.action.gotoSymbol")
+	end),
 
 	vim.keymap.set("n", "K", function()
 		print("Hover")
-		vscode.call("editor.action.showHover")
-	end)
+		require("vscode").call("editor.action.showHover")
+	end),
 
 	vim.keymap.set("n", "gp", function()
 		print("Peek Declaration")
-		vscode.call("editor.action.peekDeclaration")
-	end)
+		require("vscode").call("editor.action.peekDeclaration")
+	end),
 
 	vim.keymap.set("n", "<C-k>", function()
 		print("Peek definition")
-		vscode.action("editor.action.peekDefinition")
-	end)
+		require("vscode").action("editor.action.peekDefinition")
+	end),
 
-	-- Non Ctrl variants
+	-- Non Ctrl variants,
 	vim.keymap.set("n", "<Left>", function()
 		print("Increase view width")
-		vscode.call("workbench.action.increaseViewWidth")
-	end)
+		require("vscode").call("workbench.action.increaseViewWidth")
+	end),
 
 	vim.keymap.set("n", "<Right>", function()
 		print("Decrease view width")
-		vscode.call("workbench.action.decreaseViewWidth")
-	end)
+		require("vscode").call("workbench.action.decreaseViewWidth")
+	end),
 
 	-- This are 'inverted' to an extent, because you're changing the actual editor size
 	vim.keymap.set("n", "<Down>", function()
 		print("Increase view height")
-		vscode.call("workbench.action.increaseViewHeight")
-	end)
+		require("vscode").call("workbench.action.increaseViewHeight")
+	end),
 
 	vim.keymap.set("n", "<Up>", function()
 		print("Decrease view height")
-		vscode.call("workbench.action.decreaseViewHeight")
-	end)
+		require("vscode").call("workbench.action.decreaseViewHeight")
+	end),
 
-	-- Ctrl variants
+	-- Ctrl variants,
 	vim.keymap.set("n", "<C-Left>", function()
 		print("Increase view width")
-		vscode.call("workbench.action.increaseViewWidth")
-	end)
+		require("vscode").call("workbench.action.increaseViewWidth")
+	end),
 
 	vim.keymap.set("n", "<C-Right>", function()
 		print("Decrease view width")
-		vscode.call("workbench.action.decreaseViewWidth")
-	end)
+		require("vscode").call("workbench.action.decreaseViewWidth")
+	end),
+
+	-- Ctrl variants,
+	vim.keymap.set("n", "<C-h>", function()
+		print("Increase view width")
+		require("vscode").call("workbench.action.increaseViewWidth")
+	end),
+
+	vim.keymap.set("n", "<C-l>", function()
+		print("Decrease view width")
+		require("vscode").call("workbench.action.decreaseViewWidth")
+	end),
 
 	vim.keymap.set("n", "<C-Down>", function()
 		print("Increase view size")
-		vscode.call("workbench.action.increaseViewSize")
-	end)
+		require("vscode").call("workbench.action.increaseViewSize")
+	end),
 
 	vim.keymap.set("n", "<C-Up>", function()
 		print("Decrease view size")
-		vscode.call("workbench.action.decreaseViewSize")
-	end)
+		require("vscode").call("workbench.action.decreaseViewSize")
+	end),
 
 	vim.keymap.set("n", "<C-w>e", function()
 		print("Reset view size")
-		vscode.call("workbench.action.evenEditorWidths")
-	end)
+		require("vscode").call("workbench.action.evenEditorWidths")
+	end),
 
 	vim.keymap.set("n", "<C-w>t", function()
 		print("Last editor closed")
-		vscode.call("workbench.action.reopenClosedEditor")
-	end)
+		require("vscode").call("workbench.action.reopenClosedEditor")
+	end),
 
 	vim.keymap.set("n", "<C-w>m", function()
 		print("Maxamize editor group")
-		vscode.call("workbench.action.minimizeOtherEditors")
-	end)
-end
+		require("vscode").call("workbench.action.minimizeOtherEditors")
+	end),
 
-return {
-	actions(),
+	-- vim.keymap.set("n", "<Leader>tp", function()
+	-- 	print("Toggle problems panel")
+	-- 	require("vscode").action("workbench.actions.table.problems.view.viewAsTree")
+	-- end),
+	--
+	-- vim.keymap.set("n", "<Leader>tP", function()
+	-- 	print("Toggle problems panel")
+	-- 	require("vscode").action("workbench.actions.table.problems.view.viewAsTable")
+	-- end),
+
+	-- "binding": [
+	--     {
+	--         "key": "p",
+	--         "name": "Toggle problems panel view type",
+	--         "when": "editorTextFocus && neovim.mode != insert ",
+	--         "command": "workbench.actions.table.problems.view.viewAsTree",
+	--     },
+	--     {
+	--         "key": "P",
+	--         "name": "Toggle problems panel view type",
+	--         "when": "editorTextFocus && neovim.mode != insert ",
+	--         "command": "workbench.actions.table.problems.view.viewAsTable",
+	--     }
+	-- ]
+
+	-- actions(),
 }

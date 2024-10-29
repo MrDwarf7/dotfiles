@@ -27,7 +27,7 @@ M.venv_path = function()
 	local path_set
 
 	if vim.g.os == os_ver.windows then
-		path_set = vim.fn.getcwd() .. "/.venv/Scripts/python.exe"
+		path_set = vim.fn.getcwd() .. "/\\.venv/Scripts/python.exe"
 	elseif vim.g.os == os_ver.unix or vim.g.os == os_ver.linux then
 		path_set = vim.fn.getcwd() .. "/.venv/bin/python"
 	end

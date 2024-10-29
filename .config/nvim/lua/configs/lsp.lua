@@ -8,7 +8,7 @@
 
 return {
 	"neovim/nvim-lspconfig",
-	lazy = false,
+	lazy = true,
 	event = "BufReadPre",
 	-- "LspAttach",
 	dependencies = {
@@ -82,6 +82,7 @@ return {
 			"shfmt",
 			"stylua",
 			"sqlfluff",
+			"sql-formatter",
 			"ts-standard",
 			"vulture",
 			"yamlfmt",
@@ -118,7 +119,7 @@ return {
 			virtual_text = {
 				spacing = 4,
 				source = "if_many",
-				prefix = "icons",
+				prefix = "",
 			},
 			underline = true,
 			severity_sort = true,

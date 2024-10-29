@@ -19,7 +19,7 @@ if vim.g.neovide == nil and vim.g.vscode == nil then
 	}
 elseif vim.g.vscode then
 	print("Welcome to VSCode Neovim...")
-	return { require("util.lazy_load_vscode") }
+	return { require("vscode_conf") }
 else
 	return {
 		require("core.neovide"),

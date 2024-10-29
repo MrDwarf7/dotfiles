@@ -32,6 +32,7 @@ return {
 				"log",
 				"markdown",
 				"Neogit",
+				"neogit",
 				"neo-tree-popup",
 				"norg",
 				"NvimTree",

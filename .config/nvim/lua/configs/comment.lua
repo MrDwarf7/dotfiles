@@ -1,3 +1,6 @@
+-- local ft = require("Comment.ft")
+-- ft.set("jsonc", "//%s")
+
 return {
 	"numToStr/Comment.nvim",
 	event = "BufReadPost",
@@ -8,6 +11,9 @@ return {
 		pre_hook = function()
 			return vim.bo.commentstring
 		end,
+		ft = {
+			jsonc = "//%s",
+		},
 	},
 
 	config = function(_, opts)

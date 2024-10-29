@@ -12,7 +12,7 @@ return {
 		{
 			"]]",
 			function()
-				return require("trouble").next(_, { skip_groups = true, jump = true })
+				return require("trouble").next({ skip_groups = true, jump = true })
 			end,
 			mode = "n",
 			desc = "[p]robem NEXT",

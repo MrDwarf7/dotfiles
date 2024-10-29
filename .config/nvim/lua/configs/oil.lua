@@ -8,7 +8,7 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons", lazy = false },
 	priority = 1000,
 	keys = {
-		{ "<C-w><Leader>", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+		{ "<C-w>E", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
 
 		{
 			"<Leader>yc",
@@ -33,7 +33,13 @@ return {
 			noremap = true,
 			silent = true,
 		},
+		{
+			"<Leader>f/",
+			":Oil ",
+			desc = "<cmd>Oil",
+		},
 	},
+
 	opts = {
 		columns = {
 			"icon", -- default
@@ -46,8 +52,12 @@ return {
 		skip_confirm_for_simple_edits = true, -- default: false
 		view_options = {
 			show_hidden = true,
+			is_hidden_file = function(name, bufnr)
+				return false
+			end,
 			is_always_hidden = function(name, bufnr)
-				return name == "node_modules"
+				return false
+				-- return name == "node_modules"
 				-- name == ".." or
 				-- Above would hide the 'up directory' entry in the list
 			end,

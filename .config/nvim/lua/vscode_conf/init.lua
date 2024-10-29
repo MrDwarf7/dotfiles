@@ -1,64 +1,77 @@
--- This fix is no longer needed, huzzah!
--- local V = {}
+-- local vscode = require("vscode-neovim")
+print("Vscode specific init file loads...")
+local vscode = require("vscode-neovim")
+
+-- local moveCursor = function(d)
+-- 	return function()
+-- 		if vim.v.count == 0 and vim.fn.reg_recording() == "" and vim.fn.reg_executing() == "" then
+-- 			return "g" .. d
+-- 		else
+-- 			return d
+-- 		end
+-- 	end
+-- end
+
+-- vim.keymap.set("", "k", function()
+-- 	return moveCursor("k")
+-- end, { expr = true, remap = true, silent = true })
 --
-local moveCursor = function(d)
-	return function()
-		if vim.v.count == 0 and vim.fn.reg_recording() == "" and vim.fn.reg_executing() == "" then
-			return "g" .. d
-		else
-			return d
-		end
-	end
-end
+-- vim.keymap.set("", "j", function()
+-- 	return moveCursor("j")
+-- end, { expr = true, remap = true, silent = true })
 
 ---@return table
 local setup = function()
-	local vscode = require("vscode-neovim")
 	if not vim.g.vscode then
-		vim.g.vscode = {}
+		vim.g.vscode = nil
 		return {}
 	end
+	local function mapMove(key, direction)
+		-- print("Mapping move key: ", key, direction)
+		vim.keymap.set("n", key, function()
+			local count = vim.v.count
+			local v = 1
+			local style = "wrappedLine"
+			if count > 0 then
+				v = count
+				style = "line"
+			end
+			vscode.action("cursorMove", {
+				args = {
+					to = direction,
+					by = style,
+					value = v,
+				},
+			})
+		end)
+	end
+
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		callback = function()
+			vim.highlight.on_yank({ timeout = 60 })
+		end,
+		group = vim.api.nvim_create_augroup("TextYank", { clear = true }),
+	})
 
 	vim.g.vscode_clipboard = vim.g.vscode_clipboard or "unnamedplus"
 	vim.g.mapleader = " "
 	vim.g.maplocalleader = " "
 
-	vim.keymap.set("", "k", moveCursor("k"), {
-		expr = true,
-		remap = true,
-		silent = true,
-	})
-
-	vim.keymap.set("", "j", moveCursor("j"), {
-		expr = true,
-		remap = true,
-		silent = true,
-	})
+	require("vscode_conf.actions")
+	require("vscode_conf.mappings")
+	require("vscode_conf.options")
+	require("vscode_conf.plugins")
 
 	return {
-		print("Vscode_conf loads after checking vscode global variable..."),
+		mapMove("k", "up"),
+		mapMove("j", "down"),
+		print("Init. returning..."),
 		vim.cmd([[
 		set clipboard+=unnamedplus
 		]]),
-
-		print("Vscode init.lua loads..."),
-		require("vscode_conf.actions"),
-		require("vscode_conf.options"),
-		require("vscode_conf.mappings"),
-		require("vscode_conf.plugins"),
-
-		print("Vscode specific autocmds section loads..."),
-		vim.api.nvim_create_autocmd("TextYankPost", {
-			callback = function()
-				vim.highlight.on_yank({ timeout = 60 })
-			end,
-			group = vim.api.nvim_create_augroup("TextYank", { clear = true }),
-		}),
 	}
 end
 
 return {
 	setup(),
 }
-
--- return V

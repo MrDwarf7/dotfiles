@@ -71,6 +71,12 @@ map("i", "<C-s>", function()
 	pcall(vim.api.nvim_win_set_cursor, 0, cur_pos)
 end, silent_opts, { desc = "save" })
 
+map("n", "<Leader>ye", function()
+	require("util.clear_string_encoder")(vim.api.nvim_get_current_buf())
+end, { desc = "Clear Encoding" })
+
+map("n", "<Leader>ym", "<cmd>messages<CR>", { desc = "Messages" })
+
 map("v", "<C-j>", ":m '>+1<CR>gv=gv", silent_opts) -- Shifting lines down / move
 map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 

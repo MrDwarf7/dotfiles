@@ -1,25 +1,42 @@
 -- local architecture =
 local opt = vim.opt
 local g = vim.g
+local check = require("util.check_if")
 
 vim.lsp.inlay_hint.enable()
 
 --- THIS WORKS............
 vim.g.os = require("util.architecture").get_os()
-
 if vim.g.os == "Windows_NT" then
 	local powershell_opts = {
 		shell = "pwsh",
-		-- vim.fn.executable("pwsh") == 1 and "pwsh" or "powershell" or "pwsh.exe",
-		shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
-		-- shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait",
-		shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
-		shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		shellcmdflag = "-NoProfile -NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering = [System.Management.Automation.OutputRendering]::PlainText;",
+		shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode',
+		shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode',
 		shellquote = "",
 		shellxquote = "",
+
+		-- Original settings
+		-- shell = "pwsh",
+		-- shellcmdflag = "-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;",
+		-- shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		-- shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode",
+		-- shellquote = "",
+		-- shellxquote = "",
 	}
 	for k, v in pairs(powershell_opts) do
 		vim.o[k] = v
+	end
+end
+
+if vim.g.os == "Windows_NT" then
+	if check.smkdir(vim.g.os, "C:\\nvim_dev") then
+		vim.g.my_dev = "C:\\nvim_dev"
+	end
+else
+	local nix_dev = vim.fn.expand("$HOME") .. "/documents/nvim_dev"
+	if check.smkdir(vim.g.os, nix_dev) then
+		vim.g.my_dev = nix_dev
 	end
 end
 
@@ -67,7 +84,7 @@ opt.showtabline = 2
 opt.mouse = "a"
 opt.backupcopy = "yes"
 opt.undolevels = 1000
-opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true }
+-- opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true, w = true, a = true, l = true }
 opt.showmode = false
 opt.hidden = true
 opt.splitright = true
@@ -76,7 +93,7 @@ opt.wrapscan = true
 opt.wrap = false -- Added, test with other plugins etc
 opt.backup = false
 opt.writebackup = false
-opt.showcmd = true
+opt.showcmd = false
 opt.showmatch = true
 opt.ignorecase = true
 opt.hlsearch = true
@@ -88,8 +105,11 @@ opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
 opt.completeopt = { "menu", "menuone", "noselect" }
 
+-- Setting cmdheight=0 for use with lualine and wezterm/tmux
 vim.cmd([[
 set clipboard+=unnamedplus
+set cmdheight=0
+set shortmess+=csCFISWwal
 ]])
 
 opt.laststatus = 3
@@ -130,7 +150,7 @@ opt.smoothscroll = true
 g.sql_type_default = "mssql"
 
 -- Use ripgrep as grep tool
-vim.o.grepprg = "rg --vimgrep --no-heading --no-ignore --hidden"
+vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
 
 vim.o.foldcolumn = "1"
@@ -146,50 +166,3 @@ vim.o.updatetime = 250
 vim.o.termguicolors = true -- Disabled as moved to init for lazy/notfiy
 g.skip_ts_context_commentstring_module = true
 vim.cmd("colorscheme default")
-
--- local function shell_setup(shell)
--- vim.o.shell = shell or vim.o.shell
--- 	-- Special handling for pwsh
--- 	if shell == "pwsh" or shell == "powershell" then
--- 		-- Check if 'pwsh' is executable and set the shell accordingly
--- 		if vim.fn.executable("pwsh") == 1 then
--- 			vim.o.shell = "pwsh"
--- 			-- vim.o.shell = "pwsh"
--- 		elseif vim.fn.executable("powershell") == 1 then
--- 			vim.o.shell = "powershell"
--- 		else
--- 			return error("PowerShell is not installed")
--- 		end
--- 		-- Setting shell command flags
--- 		vim.o.shellcmdflag =
--- 			"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$NO_COLOR=$true;"
---
--- 		-- Setting shell redirection
--- vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
--- 		-- Setting shell pipe
--- vim.o.shellpipe = '2>&1 | %%{ "$_" } | Tee-Object %s; exit $LastExitCode'
---
--- 		-- Setting shell quote options
--- 		vim.o.shellquote = ""
--- 		vim.o.shellxquote = ""
--- 	else -- Default shell
--- 		vim.o.shell = shell
--- 	end
--- end
--- shell_setup("pwsh")
--- vim.g.os = architecture.get_os()
--- shell_setup("pwsh")
--- local new_python = vim.env.USERPROFILE .. "\\scoop\\apps\\python\\current\\python.exe"
--- vim.g.python3_host_prog = new_python
--- vim.g.python_host_prog = new_python
--- vim.g.python = new_python
--- vim.opt.shellcmdflag =
--- 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
--- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
--- vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
--- vim.opt.shellquote = ""
--- vim.opt.shellxquote = ""
--- end
--- local shell_s = architecture.get_shell("Windows_NT")
--- local os_is_this = architecture.get_os()
--- local shell_setup_test = architecture.shell_setup(shell_s)

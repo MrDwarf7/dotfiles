@@ -36,7 +36,6 @@ return {
 					return { vim.lsp.buf.format({ async = true }) }
 				end
 			end,
-
 			python = function(bufnr)
 				if require("conform").get_formatter_info("ruff_format", bufnr).available then
 					return { "ruff_format" }
@@ -48,6 +47,7 @@ return {
 
 			sh = { "shfmt" },
 			sql = { "sql_formatter" },
+			surql = { "sqlfluff" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },
@@ -64,6 +64,8 @@ return {
 				"cpp",
 				"netrw",
 				"oil",
+				"Neogit",
+				"neogit",
 				"treesitter",
 				"zig",
 			}
@@ -84,6 +86,8 @@ return {
 				"cpp",
 				"netrw",
 				"oil",
+				"Neogit",
+				"neogit",
 				"treesitter",
 				"zig",
 				"persistence",

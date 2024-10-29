@@ -1,5 +1,11 @@
-local icons = require("util.icons")
+local telescope = require("telescope")
+local builtin = require("telescope.builtin")
 local actions = require("telescope.actions")
+local themes = require("telescope.themes")
+local telescope_config = require("telescope.config")
+
+local icons = require("util.icons")
+
 local git_icons = {
 	added = icons.gitAdd,
 	changed = icons.gitChange,
@@ -10,22 +16,31 @@ local git_icons = {
 	untracked = "?",
 }
 
+local extensions = {
+	"fzy_native",
+	"live_grep_args",
+	"neoclip",
+	"harpoon",
+}
+
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
-	lazy = true,
-	event = "UIEnter",
+	-- lazy = true,
+	-- event = "BufReadPost",
 	dependencies = {
-		"nvim-lua/plenary.nvim",
-		{ "folke/trouble.nvim", lazy = true },
+		{ "nvim-lua/plenary.nvim", lazy = true, event = "VeryLazy" },
+		-- { "folke/trouble.nvim", lazy = true },
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
+			lazy = true,
+			event = "VeryLazy",
 			build = "make",
 			cond = function()
 				return vim.fn.executable("make") == 1
 			end,
 		},
-		{ "AckslD/nvim-neoclip.lua", lazy = true },
+		{ "AckslD/nvim-neoclip.lua", lazy = true, event = "VeryLazy" },
 		{ "nvim-telescope/telescope-live-grep-args.nvim", lazy = true },
 	},
 
@@ -33,7 +48,16 @@ return {
 		{
 			"<Leader>ff",
 			function()
-				return require("telescope.builtin").find_files()
+				builtin.find_files(themes.get_ivy({
+					{
+						follow = true,
+						hidden = true,
+						no_ignore = true,
+						no_ignore_parent = true,
+						dependencies = { "fd" },
+						previewer = telescope_config,
+					},
+				}))
 			end,
 			desc = "[f]iles",
 		},
@@ -41,7 +65,18 @@ return {
 		{
 			"<Leader>fw",
 			function()
-				return require("telescope.builtin").live_grep()
+				return builtin.live_grep(themes.get_ivy({
+					{
+						initial_mode = "insert",
+						previewer = telescope_config,
+						sorting_strategy = "ascending",
+						follow = true,
+						hidden = true,
+						no_ignore = true,
+						no_ignore_parent = true,
+						dependencies = { "fd" },
+					},
+				}))
 			end,
 			desc = "[w]ord",
 		},
@@ -49,7 +84,11 @@ return {
 		{
 			"<Leader>fb",
 			function()
-				return require("telescope.builtin").buffers()
+				return builtin.buffers(themes.get_ivy({
+					sort_mru = true,
+					sort_lastused = true,
+					initial_mode = "normal",
+				}))
 			end,
 			desc = "[b]uffers",
 		},
@@ -57,7 +96,13 @@ return {
 		{
 			"<Leader>fr",
 			function()
-				return require("telescope.builtin").oldfiles()
+				return builtin.oldfiles(themes.get_ivy({
+					height = 35,
+					sorting_strategy = "ascending",
+					sort_mru = false,
+					sort_lastused = true,
+					initial_mode = "insert",
+				}))
 			end,
 			desc = "[r]ecents",
 		},
@@ -65,7 +110,7 @@ return {
 		{
 			"<Leader>fl",
 			function()
-				return require("telescope.builtin").resume()
+				return builtin.resume()
 			end,
 			desc = "[l]ast search",
 		},
@@ -73,7 +118,7 @@ return {
 		{
 			"<Leader>fj",
 			function()
-				return require("telescope.builtin").jumplist()
+				return builtin.jumplist()
 			end,
 			desc = "[j]ump list",
 		},
@@ -81,7 +126,7 @@ return {
 		{
 			"<Leader>fV",
 			function()
-				return require("telescope.builtin").vim_options()
+				return builtin.vim_options()
 			end,
 			desc = "[v]im options browser",
 		},
@@ -89,7 +134,18 @@ return {
 		{
 			"<Leader>fg",
 			function()
-				return require("telescope.builtin").git_files()
+				return builtin.git_files(themes.get_ivy({
+					{
+						initial_mode = "insert",
+						previewer = telescope_config,
+						sorting_strategy = "ascending",
+						follow = true,
+						hidden = true,
+						no_ignore = true,
+						no_ignore_parent = true,
+						dependencies = { "fd" },
+					},
+				}))
 			end,
 			desc = "[g]it files",
 		},
@@ -97,7 +153,7 @@ return {
 		{
 			"<Leader>fm",
 			function()
-				return require("telescope.builtin").marks()
+				return builtin.marks()
 			end,
 			desc = "[m]arks",
 		},
@@ -105,7 +161,7 @@ return {
 		{
 			"<Leader>fd",
 			function()
-				return require("telescope.builtin").fd()
+				return builtin.fd()
 			end,
 			desc = "FzfLua(Oil)",
 		},
@@ -113,7 +169,7 @@ return {
 		{
 			"<Leader>fD",
 			function()
-				return require("telescope.builtin").diagnostics()
+				return builtin.diagnostics()
 			end,
 			desc = "[D]iagnostics (same as ld)",
 		},
@@ -121,7 +177,7 @@ return {
 		{
 			"<Leader>pr",
 			function()
-				return require("telescope.builtin").reloader()
+				return builtin.reloader()
 			end,
 			desc = "[r]eloader",
 		},
@@ -132,7 +188,8 @@ return {
 			"<leader>/",
 			function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
-				return require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+				return builtin.current_buffer_fuzzy_find(themes.get_dropdown({
+					initial_mode = "insert",
 					winblend = 10,
 					previewer = false,
 				}))
@@ -146,7 +203,7 @@ return {
 			"<Leader>fs",
 			function()
 				local word = vim.fn.expand("<cword>")
-				return require("telescope.builtin").grep_string({ search = word })
+				return builtin.grep_string({ search = word })
 			end,
 			desc = "[s]earch [w]ord",
 			mode = { "n", "v" },
@@ -156,7 +213,7 @@ return {
 			"<Leader>fS",
 			function()
 				local word = vim.fn.expand("<cWORD>")
-				return require("telescope.builtin").grep_string({ search = word })
+				return builtin.grep_string({ search = word })
 			end,
 			desc = "[S]earch [W]ORD",
 			mode = { "n", "v" },
@@ -165,25 +222,13 @@ return {
 
 	opts = {
 		defaults = {
-			border = true,
-			hl_result_eol = true,
-			multi_icon = "",
-
-			vimgrep_arguments = {
-				"rg",
-				"--vimgrep",
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-				"--smart-case",
-				-- "--no-ignore",
-				"--hidden",
-			},
-
+			sorting_strategy = "descending", -- Default
 			layout_strategy = "horizontal",
 			layout_config = {
+				width = 0.87,
+				height = 0.80,
+				preview_cutoff = 120,
+
 				horizontal = {
 					prompt_position = "bottom",
 					preview_width = 0.55,
@@ -194,68 +239,71 @@ return {
 					-- preview_width = 0.55,
 					-- results_width = 0.8,
 				},
-				width = 0.87,
-				height = 0.80,
-				preview_cutoff = 120,
 			},
-			--- NEW:
-			file_sorter = require("telescope.sorters").get_fzy_sorter,
-
+			winblend = 12,
 			prompt_prefix = "   ",
-			color_devicons = true,
-			git_icons = git_icons,
-			sorting_strategy = "descending",
+			initial_mode = "insert",
+			border = true,
+			path_display = {
+				hidden = false,
+			},
+			-- default_mappings = {}, -- Not recommended to touch
 
+			vimgrep_arguments = {
+				"rg",
+				-- "--vimgrep",
+				"--color=never",
+				"--no-heading",
+				"--with-filename",
+				"--line-number",
+				"--column",
+				"--smart-case",
+				-- All abovve are default
+				"--no-ignore",
+				"--no-ignore-files",
+				"--hidden",
+			},
+			file_sorter = require("telescope.sorters").get_fzy_sorter,
+			generic_sorter = require("telescope.sorters").get_fzy_sorter,
+
+			-- Escapes for the \. are important, it's a table of REGEX
+			-- Cannot ignore "node_modules" because this same pattern is used for LSP servers :/
+			--"\\.venv", "venv",
+			file_ignore_patterns = { "deps", "incremental", "\\.git", "\\.hg", "\\.svn" },
 			file_previewer = require("telescope.previewers").vim_buffer_cat.new,
 			grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
 			qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
 
-			file_ignore_patterns = { "node_modules", ".venv", "venv", "deps", "incremental" },
+			hl_result_eol = true,
+			multi_icon = "",
 
-			mappings = {
-				i = {
-					["<C-k>"] = actions.move_selection_previous,
-					["<C-j>"] = actions.move_selection_next,
-					["<C-p>"] = actions.move_selection_previous,
-					["<C-n>"] = actions.move_selection_next,
-
-					-- ["<C-t>"] = require("trouble.sources.telescope").open,
-					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
-					["<C-x>"] = actions.delete_buffer,
-					--["<C-d>"] = actions.delete_buffer,
-
-					["<C-[>"] = actions.select_horizontal,
-					["<C-]>"] = actions.select_vertical,
-
-					["<C-h>"] = actions.cycle_previewers_next,
-					["<C-l>"] = actions.cycle_previewers_prev,
-				},
-
-				n = {
-					["<C-k>"] = actions.move_selection_previous,
-					["<C-j>"] = actions.move_selection_next,
-					["<C-p>"] = actions.move_selection_previous,
-					["<C-n>"] = actions.move_selection_next,
-
-					-- ["<C-t>"] = trouble_ts.open,
-					["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
-					["<C-x>"] = actions.delete_buffer,
-
-					["q"] = actions.close,
-					["<Esc>"] = actions.close,
-
-					["<C-[>"] = actions.select_horizontal,
-					["<C-]>"] = actions.select_vertical,
-
-					["<C-h>"] = actions.cycle_previewers_next,
-					["<C-l>"] = actions.cycle_previewers_prev,
-				},
+			previewer = {
+				file_previewer = themes.get_ivy({
+					initial_mode = "insert",
+					-- winblend = 10,
+					previewer = true,
+				}),
 			},
+
+			--- NEW:
+
+			color_devicons = true,
+			git_icons = git_icons,
 
 			selection_caret = "|> ",
 			set_env = { ["COLORTERM"] = "truecolor" },
-			winblend = 12,
 		},
+		--#endregion defaults
+
+		--#region pickers
+		pickers = {
+			find_files = {
+				file_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*", "--no-ignore", "--no-ignore-files" },
+			},
+		},
+		--#endregion pickers
+
+		--#region extensions
 		extensions = {
 			fzy_native = {
 				override_generic_sorter = false,
@@ -263,13 +311,81 @@ return {
 				case_mode = "smart_case",
 			},
 		},
+
+		--#endregion extensions
 	},
 
 	config = function(_, opts)
-		require("telescope").load_extension("fzy_native")
-		require("telescope").load_extension("live_grep_args")
-		require("telescope").load_extension("neoclip")
-		require("telescope").load_extension("harpoon")
-		require("telescope").setup(opts)
+		actions = actions or require("telescope.actions")
+
+		opts.mappings = {
+			i = {
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-p>"] = actions.move_selection_previous,
+				["<C-n>"] = actions.move_selection_next,
+
+				-- ["<C-t>"] = require("trouble.sources.telescope").open,
+				["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+				["<C-x>"] = actions.delete_buffer,
+				--["<C-d>"] = actions.delete_buffer,
+				["<c-c>"] = function(prompt_bufnr)
+					local action_set = require("telescope.actions.set")
+					return action_set.close(prompt_bufnr)
+				end,
+
+				["<C-[>"] = actions.select_horizontal,
+				["<C-]>"] = actions.select_vertical,
+
+				-- ["<C-h>"] = actions.cycle_previewers_next,
+				-- ["<C-l>"] = actions.cycle_previewers_prev,
+			},
+
+			n = {
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-p>"] = actions.move_selection_previous,
+				["<C-n>"] = actions.move_selection_next,
+
+				-- ["<C-t>"] = trouble_ts.open,
+				["<C-t>"] = actions.smart_send_to_qflist + actions.open_qflist,
+				["<C-x>"] = actions.delete_buffer,
+				["d"] = actions.delete_buffer,
+
+				["<esc>"] = function(prompt_bufnr)
+					local action_set = require("telescope.actions.set")
+					return action_set.close(prompt_bufnr)
+				end,
+
+				["<C-[>"] = actions.select_horizontal,
+				["<C-]>"] = actions.select_vertical,
+
+				-- ["<C-h>"] = actions.cycle_previewers_next,
+				-- ["<C-l>"] = actions.cycle_previewers_prev,
+			},
+		}
+
+		telescope.setup(opts)
+
+		-- Checks to see if a plugin is loaded
+		-- if it is then we call the function
+		--
+		-- Generally used to call a plugin or submodule owned by the parent
+		---@param plugin string: The name of the plugin
+		---@param fn function: The function to call
+		---@return nil
+		local function if_loaded(plugin, fn)
+			if package.loaded[plugin] then
+				fn()
+			end
+		end
+
+		if_loaded("telescope", function()
+			for _, ext in ipairs(extensions) do
+				telescope.load_extension(ext)
+			end
+		end)
+
+		-- telescope.extensions
 	end,
 }
