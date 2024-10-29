@@ -1,0 +1,10 @@
+{
+	"workspace.checkThirdParty": false,
+	"diagnostics.disable": ["duplicate-doc-field", "assign-type-mismatch"],
+	"workspace.library": ["./types"],
+	"runtime.version": "Lua 5.1",
+	"hint.enable": true,
+	"completion.autoRequire": true,
+	"completion.callSnippet": "Replace",
+	"completion.displayContext": 8
+}
