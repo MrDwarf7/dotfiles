@@ -1,5 +1,5 @@
 [plugin]
-deps = [{ use = "Reledia/glow", rev = "4e016fa" }, { use = "Reledia/miller", rev = "40e0265" }, { use = "Reledia/hexyl", rev = "f845ea5" }, { use = "AnirudhG07/rich-preview", rev = "9bcf154" }, { use = "yazi-rs/plugins:diff", rev = "0b9f325" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "yazi-rs/plugins:git", rev = "0b9f325" }]
+deps = [{ use = "Reledia/glow", rev = "f52b382" }, { use = "Reledia/miller", rev = "40e0265" }, { use = "Reledia/hexyl", rev = "ccc0a4a" }, { use = "AnirudhG07/rich-preview", rev = "fe43219" }, { use = "yazi-rs/plugins:diff", rev = "ad52adf" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "yazi-rs/plugins:git", rev = "ad52adf" }, { use = "yazi-rs/plugins:mime-ext", rev = "ad52adf" }, { use = "yazi-rs/plugins:jump-to-char", rev = "ad52adf" }, { use = "dedukun/relative-motions", rev = "d8dd68f" }, { use = "sharklasers996/eza-preview", rev = "7ca4c25" }]
 
 [flavor]
 deps = []

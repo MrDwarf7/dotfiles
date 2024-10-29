@@ -1,41 +1,84 @@
 # yazi.toml
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
+# YAZI_CONFIG_HOME :: This needs to be on path and pointed to this DIR
+# YAZI_FILE_ONE :: This needs to be pointed DIRECTLY at Git's file.exe binary (Yes. THE BINARY ITSELF)
+
 [manager]
 show_hidden = true
+show_symlink = true
 
 [opener]
 edit = [
-    { run = "nvim %*", block = true, for = "windows" },
     { run = 'nvim "$@"', block = true, for = "unix" },
+    # { run = "nvim %*", orphan = true, desc = "nvim", for = "windows" },
+    { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
+]
+
+open = [
+    # { run = "nvim %*", orphan = true, desc = "nvim", for = "windows" },
+    { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
+]
+
+reveal = [
+
+]
+
+extract = [
+
+]
+
+play = [
+
+]
+
+
+[open]
+prepend_rules = [
+    { name = ".gitconfig", run = "nvim %*", use = [ "open", "edit" ], for = "windows"},
+    { name = ".gitconfig", run = "nvim $@", use = [ "open", "edit" ], for = "unix" },
 ]
 
 [plugin]
 prepend_previewers = [
+    # https://github.com/sharklasers996/eza-preview.yazi
+        # { name = "*/", run = "eza-preview"},
+        # https://github.com/AnirudhG07/rich-preview.yazi
+        { name = "*.md", run = "rich-preview" },
+        { mime = "text/csv", run = "miller" },
+        # { name = "*.csv", run = "rich-preview" }, # for csv files
+        { name = "*.ipynb", run = "rich-preview" }, # for jupyter notebooks (.ipynb)
+        { name = "*.json", run = "rich-preview" },  # for json (.json) files
+
+        # https://github.com/ndtoan96/ouch.yazi
+        { mime = "application/*zip", run = "ouch" },
+        { mime = "application/x-tar", run = "ouch" },
+        { mime = "application/x-bzip2", run = "ouch" },
+        { mime = "application/x-7z-compressed", run = "ouch" },
+        { mime = "application/x-rar", run = "ouch" },
+        { mime = "application/x-xz", run = "ouch" },
+        { mime = "application/toml", run = "nvim %*" },
+
+        { mime = ".gitconfig", run = "nvim %*", for = "windows" },
+        { mime = ".gitconfig", run = "nvim $@", for = "unix" },
+]
+
+prepend_fetchers = [
+    { id = "git", name = "*", run = "git" },
+    { id = "git", name = "*/", run = "git" },
+]
+
+append_previewers = [
+    { name = "*", run = "hexyl" },
+    # # https://github.com/Reledia/glow.yazi
     # { name = "*.md", run = "glow" },
-    { name = "*.md", run = "rich-preview" }, # for markdown (.md) files
-
-    { mime = "text/csv", run = "miller" },
-    { name = "*.csv", run = "rich-preview"}, # for csv files
-
-    { name = "*.ipynb", run = "rich-preview"}, # for jupyter notebooks (.ipynb)
-    { name = "*.json", run = "rich-preview"}, # for json (.json) files
-
-    { mime = "application/*zip", run = "ouch" },
-    { mime = "application/x-tar", run = "ouch" },
-    { mime = "application/x-bzip2", run = "ouch" },
-    { mime = "application/x-7z-compressed", run = "ouch" },
-    { mime = "application/x-rar", run = "ouch" },
-    { mime = "application/x-xz", run = "ouch" },
-
-]
-prepend_fetcher = [
-    { id = "git", name = "*", run = "git"},
-    { id = "git", name = "*/", run = "git"},
 ]
 
-# Setting up binds for it also
-# https://github.com/ndtoan96/ouch.yazi
-
-# https://github.com/dedukun/relative-motions.yazi
-# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
-
-append_previewers = [{ name = "*", run = "hexyl" }]
+# [[plugin.prepend_fetchers]]
+# id   = "mime"
+# if   = "!mime"
+# name = "*"
+# run  = "mime-ext"
+# prio = "high"

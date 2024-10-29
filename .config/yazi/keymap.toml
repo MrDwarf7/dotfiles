@@ -1,10 +1,190 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+"$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
+
+# [[manager.prepend_keymap]]
+# on = "<Enter>"
+# run = "@"
+# desc = "EMPTY"
+
+[[manager.prepend_keymap]]
+on = "<Enter>"
+run = "plugin --sync smart-enter"
+desc = "Enter child dir, or open file"
+
+
+# shift enter to open a dir
+
+
+# backspace to go up a dir
+
+[[manager.prepend_keymap]]
+on = "A"
+run = "create"
+desc = "Create a file (ends with / for directories)"
+
+# Fix copying commands lol
+#
+# Defaults
+# [[manager.prepend_keymap]]
+# on = [ "c", "c" ]
+# run = "copy path"
+# desc = "Copy the file path"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "d" ]
+# run = "copy dirname"
+# desc = "Copy the directory path"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "f" ]
+# run = "copy filename"
+# desc = "Copy the filename"
+#
+# [[manager.prepend_keymap]]
+# on = [ "c", "n" ]
+# run = "copy name_without_ext"
+# desc = "Copy the filename without extension"
+
+[[manager.prepend_keymap]]
+on = [ "y", "f" ]
+run = "copy path"
+desc = "Copy the file path"
+
+[[manager.prepend_keymap]]
+on = [ "y", "c" ]
+run = "copy dirname"
+desc = "Copy the directory path"
+
+[[manager.prepend_keymap]]
+on = [ "y", "N" ]
+run = "copy filename"
+desc = "Copy the filename"
+
+[[manager.prepend_keymap]]
+on = [ "y", "N" ]
+run = "copy name_without_ext"
+desc = "Copy the filename without extension"
+
+# We also need to replace the commands for normal y and Y
+[[manager.prepend_keymap]]
+on = [ "y", "y" ]
+run = "yank"
+desc = "Yank selected files (copy)"
+
+[[manager.prepend_keymap]]
+on = [ "<C-y>" ]
+run = "unyank"
+desc = "Cancel the yank status"
+
+[[manager.prepend_keymap]]
+on = "<Space>"
+run = "select --state=none"
+desc = "Toggle the current selection state"
+
+[[manager.prepend_keymap]]
+on = "V"
+run = "visual_mode"
+desc = "Enter visual mode (selection mode)"
+
+[[manager.prepend_keymap]]
+on = "v"
+run = "visual_mode --unset"
+desc = "Enter visual mode (unset mode)"
+
 [[manager.prepend_keymap]]
 on   = [ "g", "d" ]
 run  = "plugin diff"
 desc = "Diff the selected with the hovered file"
 
-
 [[manager.prepend_keymap]]
 on   = [ "g", "i" ]
 run  = "plugin lazygit"
 desc = "run lazygit"
+
+[[manager.prepend_keymap]]
+on = "l"
+run = "plugin --sync smart-enter"
+desc = "Enter the child directory or open the file"
+
+# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
+# [[manager.prepend_keymap]]
+# on   = "/"
+# run  = "plugin jump-to-char"
+# desc = "Jump to char"
+
+# https://github.com/dedukun/relative-motions.yazi
+[[manager.prepend_keymap]]
+on = [ "1" ]
+run = "plugin relative-motions --args=1"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "2" ]
+run = "plugin relative-motions --args=2"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "3" ]
+run = "plugin relative-motions --args=3"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "4" ]
+run = "plugin relative-motions --args=4"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "5" ]
+run = "plugin relative-motions --args=5"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "6" ]
+run = "plugin relative-motions --args=6"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "7" ]
+run = "plugin relative-motions --args=7"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "8" ]
+run = "plugin relative-motions --args=8"
+desc = "Move in relative steps"
+
+[[manager.prepend_keymap]]
+on = [ "9" ]
+run = "plugin relative-motions --args=9"
+desc = "Move in relative steps"
+
+# https://github.com/ndtoan96/ouch.yazi
+[[manager.prepend_keymap]]
+on = ["C"]
+run = "plugin ouch --args=zip"
+desc = "Compress with ouch"
+
+# https://github.com/sharklasers996/eza-preview.yazi
+[[manager.prepend_keymap]]
+on = ["="]
+run = "plugin eza-preview"
+desc = "Toggle tree/list preview"
+
+[help]
+keymap = [
+	{ on = "<Esc>", run = "escape", desc = "Clear the filter, or hide the help" },
+	{ on = "<C-[>", run = "escape", desc = "Clear the filter, or hide the help" },
+	{ on = "q",     run = "close",  desc = "Exit the process" },
+	{ on = "<C-c>", run = "close",  desc = "Hide the help" },
+
+	# Navigation
+	{ on = "k", run = "arrow -1", desc = "Move cursor up" },
+	{ on = "j", run = "arrow 1",  desc = "Move cursor down" },
+
+	{ on = "<Up>",   run = "arrow -1", desc = "Move cursor up" },
+	{ on = "<Down>", run = "arrow 1",  desc = "Move cursor down" },
+
+	# Filtering
+	{ on = "/", run = "filter", desc = "Apply a filter for the help items" },
+]
