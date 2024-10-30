@@ -25,3 +25,8 @@ export PATH=$HOME/.local/bin:$PATH
 export NODE_TLS_REJECT_UNAUTHORIZED=0
 
 export YAZI_CONFIG_HOME="$HOME/dotfiles/.config/yazi"
+
+export WZT_ANIM_FPS=144
+export WZT_MAX_FPS=144
+export WZT_GPU_FRONTEND="OpenGL"
+export WZT_GPU_POWER_PREF="HighPerformance"
