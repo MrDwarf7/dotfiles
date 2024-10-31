@@ -14,7 +14,7 @@
 return {
 	"stevearc/conform.nvim",
 	-- lazy = false,
-	event = "VeryLazy",
+	event = "BufWritePre",
 	-- "BufWritePost",
 	cmd = "Format",
 	opts = {
@@ -47,7 +47,7 @@ return {
 
 			sh = { "shfmt" },
 			sql = { "sql_formatter" },
-			surql = { "sqlfluff" },
+			surql = { "sql_formatter" },
 			bash = { "shfmt" },
 			zsh = { "beautysh" },
 			typescript = { "biome" },
