@@ -6,7 +6,7 @@ return {
 			remote_address = "the_yeti",
 			multiplexing = "WezTerm",
 			default_prog = { "powershell.exe", "-NoLogo" },
-			local_echo_threshold_ms = 10,
+			-- local_echo_threshold_ms = 15,
 		},
 	},
 	-- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
