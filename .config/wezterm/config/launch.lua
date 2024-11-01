@@ -3,7 +3,7 @@ local utils = require("utils.utils_init")
 
 local function shell()
 	if platform.is_win then
-		return utils.env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe" -- TODO: Move to shell/launchers module
+		return utils.env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
 	elseif platform.is_linux or platform.is_mac then
 		return utils.env("SHELL") or "/bin/bash"
 	end

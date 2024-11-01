@@ -62,8 +62,9 @@ local key_opts = {
 	-- Was either this or q and e, mapping w to close instead of q
 	{ key = "h", mods = "LEADER|CTRL", action = act.ActivateTabRelative(-1) },
 	{ key = "l", mods = "LEADER|CTRL", action = act.ActivateTabRelative(1) },
-	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
-	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
+
+	{ key = "L", mods = "LEADER|SHIFT", action = act.MoveTabRelative(1) },
+	{ key = "H", mods = "LEADER|SHIFT", action = act.MoveTabRelative(-1) },
 
 	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
 
@@ -80,7 +81,7 @@ local key_opts = {
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
 	-- TODO: Bindings for opacity
 
-	{ key = "w", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS" }) },
+	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
 
 	{
 		key = "w",
