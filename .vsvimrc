@@ -1,0 +1,513 @@
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Enable filetype plugins
+" filetype plugin on
+" filetype indent on
+
+" Set to auto read when a file is changed from the outside
+" set autoread
+au FocusGained,BufEnter * silent! checktime
+
+" With a map leader it's possible to do extra key combinations
+" like <Leader>w saves the current file
+let mapleader = " "
+let maplocalleader = " "
+
+" :W sudo saves the file
+" (useful for handling the permission-denied error)
+" command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VIM user interface
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set 7 lines to the cursor - when moving vertically using j/k
+set so=3
+
+" Avoid garbled characters in Chinese language windows OS
+let $LANG='en'
+" set langmenu=en
+" source $VIMRUNTIME/delmenu.vim
+" source $VIMRUNTIME/menu.vim
+
+" Turn on the Wild menu
+" set wildmenu
+
+" Pers custom
+" set splitright
+" set splitbelow
+set number
+set relativenumber
+set timeoutlen=200
+" set mouse=a
+" set showmode
+set clipboard=unnamedplus
+" set clipboard+=unnamedplus
+
+
+" Ignore compiled files
+" set wildignore=*.o,*~,*.pyc
+" if has("win16") || has("win32")
+" set wildignore+=.git\*,.hg\*,.svn\*
+" else
+"     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store
+" endif
+
+" Always show current position
+" set ruler
+
+" Height of the command bar
+" set cmdheight=1
+
+" A buffer becomes hidden when it is abandoned
+" set hid
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+" set whichwrap+=<,>,h,l
+
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+" Don't redraw while executing macros (good performance config)
+" set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" Show matching brackets when text indicator is over them
+" set showmatch
+
+" How many tenths of a second to blink when matching brackets
+" set mat=2
+
+" No annoying sound on errors
+" set noerrorbells
+set novisualbell
+" set t_vb=
+set tm=500
+
+" Properly disable sound on errors on MacVim
+" if has("gui_macvim")
+"     autocmd GUIEnter * set vb t_vb=
+" endif
+
+" Add a bit extra margin to the left
+" set foldcolumn=1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable syntax highlighting
+" syntax enable
+
+" Set regular expression engine automatically
+" set regexpengine=0
+
+" Enable 256 colors palette in Gnome Terminal
+" if $COLORTERM == 'gnome-terminal'
+"     set t_Co=256
+" endif
+
+" try
+"     colorscheme habamax
+" catch
+" endtry
+
+" These are very good base themes
+" colorscheme habamax
+" colorscheme slate
+
+" Wildcharm - very dark
+" colorscheme wildcharm
+
+" Less preferred but not horrid
+" colorscheme sorbet
+" Zai is not good
+" colorscheme zaibatsu
+" colorscheme lunarperche
+
+" set background=dark
+
+" Set extra options when running in GUI mode
+" if has("gui_running")
+"     set guioptions-=T
+"     set guioptions-=e
+"     set t_Co=256
+"     set guitablabel=%M\ %t
+" endif
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Use Unix as the standard file type
+" set ffs=unix,dos,mac
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Files, backups and undo
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Turn backup off, since most stuff is in SVN, git etc. anyway...
+" set nobackup
+" set nowb
+" set noswapfile
+" set undolevels=1000
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Text, tab and indent related
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+" set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" Linebreak on 500 characters
+" set lbr
+set tw=500
+
+" set ai "Auto indent
+set si "Smart indent
+set nowrap "Wrap lines
+
+
+""""""""""""""""""""""""""""""
+" => Visual mode related
+""""""""""""""""""""""""""""""
+" Visual mode pressing * or # searches for the current selection
+" Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" vnoremap <Leader>d "_d
+" nnoremap <Leader>d "_d
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Custom mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Base
+
+" Exit insert
+inoremap jj <Esc>
+
+" nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+" nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+"
+" xnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+" xnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
+
+
+" nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj' <expr> <CR>
+" nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk' <expr> <CR>
+
+xnoremap <expr> j gj
+xnoremap <expr> k gk
+
+nnoremap <expr> j gj
+nnoremap <expr> k gk
+
+
+
+nnoremap <expr> n 'Nn'[v:searchforward].'zv'
+xnoremap <expr> n 'Nn'[v:searchforward].'zv'
+onoremap <expr> n 'Nn'[v:searchforward].'zv'
+
+nnoremap <expr> N 'nN'[v:searchforward].'zv'
+xnoremap <expr> N 'nN'[v:searchforward].'zv'
+onoremap <expr> N 'nN'[v:searchforward].'zv'
+
+
+nmap <Leader>? :terminal<CR>
+
+" tmap <Esc><Esc> "<c-\\><c-n>"
+" tmap <C-h> <cmd>wincmd h<CR>
+" tmap <C-j> <cmd>wincmd j<CR>
+" tmap <C-k> <cmd>wincmd k<CR>
+" tmap <C-l> <cmd>wincmd l<CR>
+" tmap <C-/> <cmd>close<cr>
+" tmap <C-_> <cmd>close<cr>
+
+" Brackets
+" This technically opens a new line and brackets etc.
+" inoremap { {<CR>}<Esc>ko<Tab>
+inoremap { {}<Esc>i
+inoremap " ""<Esc>i
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+
+
+" Easy Save
+noremap <C-s> :w!<CR>
+" Quick Quit
+noremap <S-z> :q!<CR>
+" Select All
+nnoremap <C-a> gg<S-v>G
+
+
+""" Movement
+
+" Scrolling
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+
+" Home / End
+nnoremap <S-h> ^
+nnoremap <S-l> $
+
+vnoremap <S-h> ^
+vnoremap <S-l> $
+
+""" Sub modes/operations - yank, delete etc
+nnoremap y<S-h> y^
+nnoremap y<S-l> y$
+
+nnoremap d<S-h> d^
+nnoremap d<S-l> d$
+
+""" Pasting
+vmap p "_dP
+nnoremap <S-p> <S-p><CR>
+
+
+""" Window resizing
+nnoremap <Left> :vertical resize -2<CR>
+nnoremap <Right> :vertical resize +2<CR>
+
+nnoremap <C-h> :vertical resize +2<CR>
+nnoremap <C-l> :vertical resize -2<CR>
+
+nnoremap <C-w>, :vertical resize -10<CR>
+nnoremap <C-w>. :vertical resize +10<CR>
+
+nnoremap <Up> :resize -2<CR>
+nnoremap <Down> :resize +2<CR>
+
+
+nnoremap <C-w>e <C-w>=
+nnoremap <C-w>X <cmd>only<CR>
+
+
+" Recent messages
+nnoremap <Leader>um :messages<CR>
+
+nnoremap <Leader>e :Explore<CR>
+
+
+vnoremap p "_dP
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+vnoremap < <gv
+vnoremap > >gv
+
+"nnoremap dd "_dd
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+" map <space> /
+" map <C-space> ?
+
+" Disable highlight when <Leader><CR> is pressed
+" map <silent> <Leader><CR> :noh<CR>
+" nmap <silent> <Del> :noh<CR>
+nmap <silent> <Esc> :nohl<CR>
+
+" Smart way to move between windows
+" map <C-j> <C-W>j
+" map <C-k> <C-W>k
+" map <C-h> <C-W>h
+" map <C-l> <C-W>l
+
+" Close the current buffer
+map <silent> <Leader>x :Bclose<CR>
+map <silent> <Leader>bx :Bclose<CR>:tabclose<CR>gT
+
+
+nmap ]b :bnext<CR>
+nmap [b :bprevious<CR>
+
+
+
+" Close all the buffers
+map <Leader>bw :bufdo bd<CR>
+
+map <Leader>l :bnext<CR>
+map <Leader>h :bprevious<CR>
+
+map <Leader>bn :bnext<CR>
+map <Leader>bp :bprevious<CR>
+
+" Useful mappings for managing tabs
+" Tab Open
+map <Leader>to :tabnew<CR>
+
+" Tab next / prev
+map <Leader>tn :tabnext<CR>
+map <Leader>tp :tabprevious<CR>
+
+" tab zero = Only one, closes other
+map <Leader>tz :tabonly<CR>
+
+" Tab x / kill / close
+map <Leader>tx :tabclose<CR>
+
+map <Leader>tm :tabmove
+" map <Leader>t<Leader> :tabnext<CR>
+
+" Let 'te' toggle between this and the last accessed tab
+" Tab Toggle
+let g:lasttab = 1
+nmap <Leader>tt :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <Leader>te :tabedit <C-r>=escape(expand("%:p:h"), " ")<CR>/
+
+" Switch CWD to the directory of the open buffer
+map <Leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" Specify the behavior when switching between buffers
+" try
+"   set switchbuf=useopen,usetab,newtab
+"   set stal=2
+" catch
+" endtry
+
+" Return to last edit position when opening files (You want this!)
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+
+""""""""""""""""""""""""""""""
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
+
+" Format the status line
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+" map 0 ^
+
+" Move a line of text using ALT+[jk] or Command+[jk] on mac
+nmap <A-j> mz:m+<CR>`z
+nmap <A-k> mz:m-2<CR>`z
+vmap <A-j> :m'>+<CR>`<my`>mzgv`yo`z
+vmap <A-k> :m'<-2<CR>`>my`<mzgv`yo`z
+
+"if has("mac") || has("macunix")
+"  nmap <D-j> <M-j>
+"  nmap <D-k> <M-k>
+"  vmap <D-j> <M-j>
+"  vmap <D-k> <M-k>
+"endif
+
+" Delete trailing white space on save, useful for some filetypes ;)
+" fun! CleanExtraSpaces()
+"     let save_cursor = getpos(".")
+"     let old_query = getreg('/')
+"     silent! %s/\s\+$//e
+"     call setpos('.', save_cursor)
+"     call setreg('/', old_query)
+" endfun
+
+" if has("autocmd")
+"     autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
+" endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Misc <Leader>u
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <Leader>uf mmHmt:%s/<C-V><CR>//ge<CR>'tzt'm
+
+" Pressing <Leader>us will toggle and untoggle spell checking
+map <Leader>us :setlocal spell!<CR>
+
+" Quickly open a buffer for scribble
+map <Leader>un :e ~/buffer<CR>
+
+" Quickly open a markdown buffer for scribble
+map <Leader>nd :e ~/buffer.md<CR>
+
+" Toggle paste mode on and off
+map <Leader>up :setlocal paste!<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" Don't close window, when deleting a buffer
+" command! Bclose call <SID>BufcloseCloseIt()
+" function! <SID>BufcloseCloseIt()
+"     let l:currentBufNum = bufnr("%")
+"     let l:alternateBufNum = bufnr("#")
+"
+"     if buflisted(l:alternateBufNum)
+"         buffer #
+"     else
+"         bnext
+"     endif
+"
+"     if bufnr("%") == l:currentBufNum
+"         new
+"     endif
+"
+"     if buflisted(l:currentBufNum)
+"         execute("bdelete! ".l:currentBufNum)
+"     endif
+" endfunction
+"
+" function! CmdLine(str)
+"     call feedkeys(":" . a:str)
+" endfunction
+"
+" function! VisualSelection(direction, extra_filter) range
+"     let l:saved_reg = @"
+"     execute "normal! vgvy"
+"
+"     let l:pattern = escape(@", "\\/.*'$^~[]")
+"     let l:pattern = substitute(l:pattern, "\n$", "", "")
+"
+"     if a:direction == 'gv'
+"         call CmdLine("Ack '" . l:pattern . "' " )
+"     elseif a:direction == 'replace'
+"         call CmdLine("%s" . '/'. l:pattern . '/')
+"     endif
+"
+"     let @/ = l:pattern
+"     let @" = l:saved_reg
+" endfunction
+"
