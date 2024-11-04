@@ -10,6 +10,9 @@ mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_CACHE_HOME $XDG_CA
 set -gx PAGER less
 set -gx VISUAL nvim
 set -gx EDITOR nvim
+set -gx SHELL fish
+
+set -gx fish_greeting
 
 set -gx GITHUB_PROJECTS $HOME/documents/GitHub_Projects
 set -gx GITHUB_WORK_PROJECTS $HOME/documents/GitHub_WorkProjects

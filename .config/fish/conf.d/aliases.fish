@@ -13,3 +13,5 @@ alias parsu "paru -Syu"
 
 alias shutdown 'systemctl poweroff'
 alias sysup upgrader
+
+alias vim 'nvim'
