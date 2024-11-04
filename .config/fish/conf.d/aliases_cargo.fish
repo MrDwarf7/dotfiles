@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+#
 # if $WIN_AVAILABLE = true; then
 #     # rust / cargo related
 #     alias cbw='cargo build --target x86_64-pc-windows-gnu'

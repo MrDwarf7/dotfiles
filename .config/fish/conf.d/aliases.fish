@@ -1,3 +1,5 @@
+#!/usr/bin/env fish
+#
 # alias shutdown='systemctl poweroff'
 # alias llll 'ls -lah'
 

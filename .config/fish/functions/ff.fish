@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-
 function ff
     set -l example $argv[1]
 

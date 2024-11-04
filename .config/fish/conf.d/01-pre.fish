@@ -1,3 +1,4 @@
+#!/usr/bin/env fish
 #
 02export_if_pacman "paru" "PKG_MANAGER" "yay"
 02export_if_pacman "eza" "LIST_CLIENT" "exa"
