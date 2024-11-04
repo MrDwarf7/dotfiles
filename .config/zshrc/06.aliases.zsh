@@ -18,6 +18,9 @@ alias la="$LIST_CLIENT -a --tree --level=1 --icons=always"
 alias cls='clear'
 alias ca="clear && $LIST_CLIENT -a --tree --level=1 --icons=always"
 
+alias c="cat"
+alias b="bat"
+
 alias zq="zoxide query $1"
 
 alias .z="source $HOME/.zshrc"

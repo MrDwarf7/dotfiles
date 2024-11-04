@@ -35,4 +35,7 @@ fish_add_path --prepend $HOME/.local/bin
 set -gx NODE_TLS_REJECT_UNAUTHORIZED 0
 set -gx YAZI_CONFIG_HOME $HOME/dotfiles/.config/yazi
 
+set -gx STARSHIP_CONFIG $HOME/dotfiles/.config/starship/starship.toml
+
+
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
