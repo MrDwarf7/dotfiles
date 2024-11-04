@@ -13,6 +13,7 @@ set -gx VISUAL nvim
 set -gx EDITOR nvim
 set -gx SHELL fish
 
+# Removes the greeting text
 set -gx fish_greeting
 
 set -gx GITHUB_PROJECTS $HOME/documents/GitHub_Projects
@@ -27,6 +28,8 @@ set -gx DATA_ON_DEMAND_NEXT $DATA_ON_DEMAND_BASE/data-on-demand-next
 set -gx ZVM_PATH $XDG_CONFIG_HOME/.zvm
 set -gx ZVM_INSTALL $XDG_CONFIG_HOME/.zvm/self
 
+set -gx DOT_DIR $HOME/dotfiles
+set -gx DOT_CONFIG $DOT_DIR/.config
 
 fish_add_path --append $XDG_CONFIG_HOME/.zvm/bin
 fish_add_path --append $ZVM_INSTALL
@@ -40,6 +43,5 @@ set -gx NODE_TLS_REJECT_UNAUTHORIZED 0
 set -gx YAZI_CONFIG_HOME $HOME/dotfiles/.config/yazi
 
 set -gx STARSHIP_CONFIG $HOME/dotfiles/.config/starship/starship.toml
-
 
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
