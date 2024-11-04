@@ -11,12 +11,17 @@ set history=500
 
 " Set to auto read when a file is changed from the outside
 " set autoread
-au FocusGained,BufEnter * silent! checktime
+" au FocusGained,BufEnter * silent! checktime
 
 " With a map leader it's possible to do extra key combinations
 " like <Leader>w saves the current file
-let mapleader = " "
-let maplocalleader = " "
+
+" let mapleader = " "
+" let maplocalleader = " "
+
+
+let mapleader = "<Space>"
+let maplocalleader = "<Space>"
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
@@ -145,7 +150,7 @@ set tm=500
 " endif
 
 " Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
+" set encoding=utf8
 
 " Use Unix as the standard file type
 " set ffs=unix,dos,mac
@@ -179,7 +184,7 @@ set tabstop=4
 set tw=500
 
 " set ai "Auto indent
-set si "Smart indent
+" set si "Smart indent
 set nowrap "Wrap lines
 
 
@@ -195,6 +200,11 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " nnoremap <Leader>d "_d
 
 
+nnoremap <C-w>h :vsc View.SolutionExplorer<CR>
+nnoremap <Space>e :vsc View.SolutionExplorer<CR>
+
+
+nnoremap <C-w>q :vsc File.Close<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -308,7 +318,7 @@ nnoremap <C-w>X <cmd>only<CR>
 " Recent messages
 nnoremap <Leader>um :messages<CR>
 
-nnoremap <Leader>e :Explore<CR>
+" nnoremap <Leader>e :Explore<CR>
 
 
 vnoremap p "_dP
@@ -339,23 +349,16 @@ nmap <silent> <Esc> :nohl<CR>
 " map <C-l> <C-W>l
 
 " Close the current buffer
-map <silent> <Leader>x :Bclose<CR>
-map <silent> <Leader>bx :Bclose<CR>:tabclose<CR>gT
+" map <silent> <Leader>x :Bclose<CR>
+" map <silent> <Leader>bx :Bclose<CR>:tabclose<CR>gT
 
 
-nmap ]b :bnext<CR>
-nmap [b :bprevious<CR>
+" nmap ]b :bnext<CR>
+" nmap [b :bprevious<CR>
 
+map <Space>bn :tabnext<CR>
+map <Space>bp :tabprevious<CR>
 
-
-" Close all the buffers
-map <Leader>bw :bufdo bd<CR>
-
-map <Leader>l :bnext<CR>
-map <Leader>h :bprevious<CR>
-
-map <Leader>bn :bnext<CR>
-map <Leader>bp :bprevious<CR>
 
 " Useful mappings for managing tabs
 " Tab Open
@@ -367,9 +370,6 @@ map <Leader>tp :tabprevious<CR>
 
 " tab zero = Only one, closes other
 map <Leader>tz :tabonly<CR>
-
-" Tab x / kill / close
-map <Leader>tx :tabclose<CR>
 
 map <Leader>tm :tabmove
 " map <Leader>t<Leader> :tabnext<CR>
@@ -416,10 +416,11 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " map 0 ^
 
 " Move a line of text using ALT+[jk] or Command+[jk] on mac
-nmap <A-j> mz:m+<CR>`z
-nmap <A-k> mz:m-2<CR>`z
-vmap <A-j> :m'>+<CR>`<my`>mzgv`yo`z
-vmap <A-k> :m'<-2<CR>`>my`<mzgv`yo`z
+nmap <C-j> mz:m+<CR>`z
+nmap <C-k> mz:m-2<CR>`z
+vmap <C-j> :m'>+<CR>`<my`>mzgv`yo`z
+vmap <C-k> :m'<-2<CR>`>my`<mzgv`yo`z
+
 
 "if has("mac") || has("macunix")
 "  nmap <D-j> <M-j>
@@ -461,16 +462,30 @@ map <Leader>nd :e ~/buffer.md<CR>
 map <Leader>up :setlocal paste!<CR>
 
 
+" nnoremap gd :vsc Edit.GoToDefinition<CR>
+nnoremap gp :vsc Edit.PeekDefinition<CR>
+
+nnoremap gt :vsc Edit.GoToTypeDefinition<CR>
+nnoremap gd :vsc Edit.GoToTypeDefinition<CR>
+
+
+nnoremap <C-i> :vsc View.NavigateForward<CR>
+nnoremap <C-o> :vsc View.NavigateBackward<CR>
+
+" nnoremap <Space>la :vsc EditorContextMenus.CodeLens.CodeLensOptions
+
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
+" function! HasPaste()
+"     if &paste
+"         return 'PASTE MODE  '
+"     endif
+"     return ''
+" endfunction
 
 " Don't close window, when deleting a buffer
 " command! Bclose call <SID>BufcloseCloseIt()
