@@ -55,6 +55,12 @@ local key_opts = {
 	{ key = "RightArrow", mods = "CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
 
 	-- Panes still
+	{ key = "h", mods = "LEADER", action = act({ ActivatePaneDirection = "Left" }) },
+	{ key = "j", mods = "LEADER", action = act({ ActivatePaneDirection = "Down" }) },
+	{ key = "k", mods = "LEADER", action = act({ ActivatePaneDirection = "Up" }) },
+	{ key = "l", mods = "LEADER", action = act({ ActivatePaneDirection = "Right" }) },
+
+	-- Literally just redeundancy binds from habit
 	{ key = "h", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Left" }) },
 	{ key = "j", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Down" }) },
 	{ key = "k", mods = "LEADER|CTRL", action = act({ ActivatePaneDirection = "Up" }) },
@@ -62,11 +68,14 @@ local key_opts = {
 
 	-- Tabs
 	-- Was either this or q and e, mapping w to close instead of q
-	{ key = "h", mods = "LEADER", action = act.ActivateTabRelative(-1) }, -- Moving
-	{ key = "l", mods = "LEADER", action = act.ActivateTabRelative(1) }, -- Moving
+	--
+	--
+	-- Could potentially just remove this honestly - use CTRL + [1-9] or use the switcher via leader + ctrl P
+	{ key = "H", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(-1) }, -- Moving
+	{ key = "L", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(1) }, -- Moving
 
-	{ key = "L", mods = "LEADER|SHIFT", action = act.MoveTabRelative(1) },
-	{ key = "H", mods = "LEADER|SHIFT", action = act.MoveTabRelative(-1) },
+	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
+	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
 
 	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
 
@@ -83,7 +92,8 @@ local key_opts = {
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
 	-- TODO: Bindings for opacity
 
-	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
+	{ key = "p", mods = "LEADER|CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
+	{ key = "b", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{
 		key = "w",
