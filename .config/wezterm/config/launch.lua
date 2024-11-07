@@ -1,6 +1,8 @@
 local platform = require("utils.platform")
 local utils = require("utils.utils_init")
 
+-- working commit
+-- 6a8ac7f5
 local function shell()
 	if platform.is_win then
 		return utils.env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
