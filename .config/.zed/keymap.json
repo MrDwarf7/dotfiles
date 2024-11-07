@@ -7,8 +7,20 @@
       "h": "vim::Left",
       "left": "vim::Left",
       "backspace": "vim::Backspace",
-      "j": "vim::Down",
-      "down": "vim::Down",
+      // Honestly not too sure what this solves lol
+      "j": [
+        "vim::Down",
+        {
+          "displayLines": true
+        }
+      ],
+      // Honestly not too sure what this solves lol
+      "down": [
+        "vim::Down",
+        {
+          "displayLines": true
+        }
+      ],
       "ctrl-j": "vim::Down",
       "enter": "vim::NextLineStart",
       "ctrl-m": "vim::NextLineStart",
@@ -20,7 +32,7 @@
       "up": "vim::Up",
       "l": "vim::Right",
       "right": "vim::Right",
-      "space": "vim::Space",
+      "space": ["vim::PushOperator", "vim::Space"],
 
       "$": "vim::EndOfLine",
       "shift-l": "vim::EndOfLine",
@@ -104,6 +116,8 @@
       "g shift-t": "pane::ActivatePrevItem",
 
       "g d": "editor::GoToDefinition",
+      "g r": "editor::FindAllReferences", // Might be buggy?
+
       "g shift-d": "editor::GoToDeclaration",
       "g y": "editor::GoToTypeDefinition",
       "g shift-i": "editor::GoToImplementation",
@@ -168,7 +182,53 @@
       "8": ["vim::Number", 8],
       "9": ["vim::Number", 9],
       // window related commands (ctrl-w X)
-      "ctrl-w": null,
+      // "ctrl-w": null,
+      "ctrl-6": "pane::AlternateFile"
+    }
+  },
+
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu",
+    "bindings": {
+      ///////// using keystroke interp
+      // "space e": ["workspace::SendKeystrokes", ": projectpaneltogglefocus enter"],
+      // "space shift-e": ["workspace::SendKeystrokes", ": RevealInProjectPanel enter"],
+      // "space b n": ["workspace::SendKeystrokes", ": ActivateNextItem enter"],
+      // "space b p": ["workspace::SendKeystrokes", ": ActivatePrevItem enter"],
+      // "space f f": ["workspace::SendKeystrokes", ": filefindertoggle enter"],
+      // "space f w": ["workspace::SendKeystrokes", ": panedeploysearch enter"],
+      // "space l a": ["workspace::SendKeystrokes", ": togglecodeactions enter"],
+      // "space l h": ["workspace::SendKeystrokes", ": editorhover enter"],
+      // "space l s": ["workspace::SendKeystrokes", ": outlinetoggle enter"],
+      // "space h p": ["workspace::SendKeystrokes", ": editorToggleHunkDiff enter"],
+      // "space h shift-p": ["workspace::SendKeystrokes", ": editorExpandAllHunkDiffs enter"],
+      // "space h r": ["workspace::SendKeystrokes", ": editorrevertselectedhunks enter"],
+      // "space h b": ["workspace::SendKeystrokes", ": editortogglegitblameinline enter"],
+      // "space h shift-b": ["workspace::SendKeystrokes", ": editortogglegitblame enter"],
+      // "space t b": ["workspace::SendKeystrokes", ": workspacetoggleleftdoc enter"],
+      // "space t i": ["workspace::SendKeystrokes", ": editortoggleinlayhints enter"],
+
+      /////// Not using weird keystroke interp.
+      "space e": "project_panel::ToggleFocus",
+
+      "space b n": "pane::ActivateNextItem",
+      "space b p": "pane::ActivatePrevItem",
+      "space f f": "file_finder::Toggle",
+      "space f w": "buffer_search::Deploy",
+      "space f shift-w": "pane::DeploySearch",
+
+      "space l a": "editor::ToggleCodeActions",
+      "space l h": "editor::Hover",
+      "space l s": "outline::Toggle",
+      "space h p": "editor::ToggleHunkDiff",
+      "space h shift-p": "editor::ExpandAllHunkDiffs",
+      "space h r": "editor::RevertSelectedHunks",
+      "space h b": "editor::ToggleGitBlameInline",
+      "space h shift-b": "editor::ToggleGitBlame",
+      "space t b": "workspace::ToggleLeftDock",
+      "space t i": "editor::ToggleInlayHints",
+
+      "ctrl-w t": "pane::ReopenClosedItem",
       "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
       "ctrl-w right": ["workspace::ActivatePaneInDirection", "Right"],
       "ctrl-w up": ["workspace::ActivatePaneInDirection", "Up"],
@@ -226,9 +286,6 @@
       "ctrl-w ctrl-q": ["pane::CloseActiveItem", { "saveIntent": "skip" }],
       "ctrl-w q": ["pane::CloseActiveItem", { "saveIntent": "saveAll" }],
 
-      // "ctrl-w q": "pane::CloseAllItems",
-      // "ctrl-w ctrl-q": "pane::CloseAllItems",
-
       "ctrl-w o": "workspace::CloseInactiveTabsAndPanes",
       "ctrl-w ctrl-o": "workspace::CloseInactiveTabsAndPanes",
       "ctrl-w n": "workspace::NewFileSplitHorizontal",
@@ -238,8 +295,7 @@
       "ctrl-w shift-d": "editor::GoToTypeDefinitionSplit",
       "ctrl-w g shift-d": "editor::GoToTypeDefinitionSplit",
       "ctrl-w space": "editor::OpenExcerptsSplit",
-      "ctrl-w g space": "editor::OpenExcerptsSplit",
-      "ctrl-6": "pane::AlternateFile"
+      "ctrl-w g space": "editor::OpenExcerptsSplit"
     }
   },
 
@@ -248,6 +304,8 @@
     "bindings": {
       "escape": "editor::Cancel",
       "ctrl-[": "editor::Cancel",
+
+      "space": ["vim::PushOperator", "vim::Space"],
 
       ":": "command_palette::Toggle",
       ".": "vim::Repeat",
@@ -305,40 +363,10 @@
       "] h": ["editor::GoToHunk", "editor::ToggleHunkDiff"],
       "[ h": ["editor::GoToPrevHunk", "editor::ToggleHunkDiff"],
 
-      "g c": ["vim::PushOperator", "ToggleComments"],
-
-      // [+]Base
-      "space e": "project_panel::ToggleFocus",
-
-      // [+]Buffers
-      "space b n": "pane::ActivateNextItem",
-      "space b p": "pane::ActivatePrevItem",
-
-      // [+]Files
-      "space f f": "file_finder::Toggle",
-      "space f w": "pane::DeploySearch",
-
-      // [+]LSP
-      "space l a": "editor::ToggleCodeActions",
-      "space l h": "editor::Hover",
-      "space l s": "outline::Toggle", // Workspace symbols
-      "space l f": "editor::Format",
-
-      "g r": "editor::FindAllReferences", // Might be buggy?
-
-      // [+]Hunks
-      "space h p": "editor::ToggleHunkDiff",
-      "space h P": "editor::ExpandAllHunkDiffs",
-      "space h r": "editor::RevertSelectedHunks",
-      "space h b": "editor::ToggleGitBlameInline",
-      "space h B": "editor::ToggleGitBlame",
-
-      // [+]Toggles
-      // "space t b": ["workspace::ToggleLeftDock", "escape"]
-      "space t b": "workspace::ToggleLeftDock",
-      "space t i": "editor::ToggleInlayHints"
+      "g c": ["vim::PushOperator", "ToggleComments"]
     }
   },
+
   {
     "context": "VimControl && VimCount",
     "bindings": {
@@ -602,6 +630,7 @@
       "g /": "pane::DeploySearch"
     }
   },
+
   {
     // netrw compatibility
     "context": "ProjectPanel && not_editing",
@@ -667,247 +696,20 @@
   {
     "context": "Pane",
     "bindings": {
-      "space f L": "pane::ReopenClosedItem",
-      "space t p": "pane::TogglePinTab",
+      // "space f L": "pane::ReopenClosedItem",
+      // "space t p": "pane::TogglePinTab",
       "ctrl-shift-t": "pane::ReopenClosedItem"
     }
+  },
+
+  {
+    "context": "Workspace",
+    "bindings": {
+      "ctrl-j": null,
+      "ctrl-k": null
+      // "ctrl-j": "editor::ContextMenuNext",
+      //     "ctrl-n": "editor::ContextMenuNext"
+      // "ctrl-k": "editor::ContextMenuPrev"
+    }
   }
-
-  // CONTEXT_MENU_TEST 1
-  // {
-  //   "context": "Editor && (showing_code_actions || showing_completions)",
-  //   "bindings": {
-  //     "up": "editor::ContextMenuPrev",
-  //     "down": "editor::ContextMenuNext",
-  //     "pageup": "editor::ContextMenuFirst",
-  //     "pagedown": "editor::ContextMenuLast",
-
-  //     "ctrl-n": "editor::ContextMenuNext",
-  //     "ctrl-p": "editor::ContextMenuPrev",
-  //     "ctrl-j": "editor::ContextMenuNext",
-  //     "ctrl-k": "editor::ContextMenuPrev" // TODO: This is a hack to prevent the default binding from hanging
-  //   }
-  // }
 ]
-
-//   {
-//     "context": "VimControl && !menu",
-//     "bindings": {
-//       // "ctrl-w": null,
-//       "ctrl-shift-;": "terminal_panel::ToggleFocus",
-
-//       "space e": "project_panel::ToggleFocus",
-
-//       "space f f": "file_finder::Toggle",
-//       "space f w": "vim::Search",
-
-//       "space l a": "editor::ToggleCodeActions",
-//       "space l h": "editor::Hover",
-//       "space l s": "outline::Toggle", // Workspace symbols
-//       "g r": "editor::FindAllReferences",
-
-//       "space t b": ["workspace::ToggleLeftDock", "escape"],
-//       "space t i": "editor::ToggleInlayHints",
-
-//       "ctrl-w q": "pane::CloseActiveItem",
-//       "] c": "editor::GoToHunk",
-//       "[ c": "editor::GoToPrevHunk",
-//       "shift-r": null,
-
-//       "shift-m": "vim::WindowMiddle"
-//       // "shift-l": "vim::WindowBottom",
-
-//       // "ctrl-l": null,
-//       // "ctrl-k": null,
-//       // "ctrl-h": null
-//     }
-//   },
-//
-//
-// ////////////////////
-//   {
-//     "context": "Editor && (showing_code_actions || showing_completions)",
-//     "bindings": {
-//       "up": "editor::ContextMenuPrev",
-//       "down": "editor::ContextMenuNext",
-//       "pageup": "editor::ContextMenuFirst",
-//       "pagedown": "editor::ContextMenuLast",
-//       "ctrl-n": "editor::ContextMenuNext",
-//       "ctrl-p": "editor::ContextMenuPrev",
-//       "ctrl-j": "editor::ContextMenuNext",
-//       "ctrl-k": "editor::ContextMenuPrev" // TODO: This is a hack to prevent the default binding from hanging
-//     }
-//   },
-//   // {
-//   //   "context": "Editor && VimControl && !VimWaiting && !menu",
-//   //   "bindings": {
-//   //     "z a": "editor::UnfoldLines"
-//   //   }
-//   // },
-//   {
-//     "context": "vim_mode == insert",
-//     "bindings": {
-//       "j j": "vim::NormalBefore",
-//       "j k": "vim::NormalBefore",
-//       "k j": "vim::NormalBefore",
-//       "k k": "vim::NormalBefore",
-//       // "ctrl-w": "editor::DeleteToPreviousWordStart",
-//       // "ctrl-k": null,
-//       "ctrl-f": null,
-//       "ctrl-b": null
-
-//       // "ctrl-shift i": "assistant::InlineAssist",
-//       // "ctrl-shift y": "editor::ShowInlineCompletion"
-//     }
-//   },
-//   {
-//     "context": "vim_mode == visual",
-//     "bindings": {
-//       "shift-s": [
-//         "vim::PushOperator",
-//         {
-//           "AddSurrounds": {}
-//         }
-//       ],
-//       ">": ["vim::Indent", "vim::RestoreVisualSelection"],
-//       "<": ["vim::Outdent", "vim::RestoreVisualSelection"]
-//     }
-//   },
-//   {
-//     "context": "EmptyPane || SharedScreen",
-//     "bindings": {
-//       "space f f": "file_finder::Toggle"
-//       // "ctrl-w h": "file_finder::Toggle"
-//     }
-//   },
-//   {
-//     "context": "vim_mode == waiting",
-//     "bindings": {
-//       "ctrl-k": "vim::NormalBefore"
-//     }
-//   },
-
-//   {
-//     "context": "Dock",
-//     "bindings": {
-//       "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
-//       "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
-//       "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
-//       "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
-//     }
-//   },
-//   {
-//     "context": "Workspace",
-//     "bindings": {
-//       "ctrl-shift-:": "terminal_panel::ToggleFocus",
-//       "ctrl-b": null,
-//       "ctrl-n": "menu::SelectNext",
-//       "ctrl-p": "menu::SelectPrev",
-//       "ctrl-j": "menu::SelectNext",
-//       "ctrl-k": "menu::SelectPrev"
-//     }
-//   },
-//   {
-//     "context": "Editor",
-//     "bindings": {
-//       "ctrl-tab": "pane::ActivateNextItem",
-//       "ctrl-shift-tab": "pane::ActivatePrevItem"
-//     }
-//   },
-//   {
-//     "context": "Pane && != vim_mode == insert", // Had to be more specific via ! vim_mode == insert
-//     "bindings": {
-//       // "ctrl-w": null,
-//       "ctrl-w q": "pane::CloseActiveItem"
-//       // "ctrl-k u": null,
-//       // "ctrl-k w": null
-//     }
-//   },
-//   {
-//     "context": "Terminal",
-//     "bindings": {
-//       "ctrl-shift-;": "workspace::ToggleBottomDock"
-//     }
-//   },
-//   {
-//     "context": "ProjectPanel && not_editing",
-//     "bindings": {
-//       "a": "workspace::NewFile",
-//       "d": "project_panel::Delete",
-//       "shift-d": "project_panel::Delete",
-//       "r": "project_panel::Rename",
-//       "x": "project_panel::Cut",
-//       "y": "project_panel::Copy",
-//       "p": "project_panel::Paste"
-//     }
-//   },
-
-//   {
-//     // netrw compatibility
-//     "context": "ProjectPanel && not_editing",
-//     "bindings": {
-//       "%": null,
-//       "d": null,
-//       "shift-r": null,
-//       "shift-d": null,
-
-//       ":": "command_palette::Toggle",
-
-//       "a": "project_panel::NewFile",
-
-//       "/": "project_panel::NewSearchInDirectory",
-
-//       "A": "project_panel::NewDirectory",
-
-//       "enter": "project_panel::OpenPermanent",
-//       "escape": "project_panel::ToggleFocus",
-//       "h": "project_panel::CollapseSelectedEntry",
-//       "j": "menu::SelectNext",
-//       "k": "menu::SelectPrev",
-//       "l": "project_panel::ExpandSelectedEntry",
-//       "o": "project_panel::OpenPermanent",
-
-//       "d": "project_panel::Delete",
-//       "r": "project_panel::Rename",
-
-//       "t": "project_panel::OpenPermanent",
-//       "v": "project_panel::OpenPermanent",
-//       "p": "project_panel::Open",
-//       "x": "project_panel::RevealInFileManager",
-//       "s": "project_panel::OpenWithSystem",
-//       "shift-g": "menu::SelectLast",
-//       "g g": "menu::SelectFirst",
-//       "-": "project_panel::SelectParent",
-//       "ctrl-6": "pane::AlternateFile"
-//     }
-//   }
-
-//   // {
-//   //   "context": "ProjectPanel && not_editing",
-//   //   "bindings": {
-//   //     ":": "command_palette::Toggle",
-//   //     "%": "project_panel::NewFile",
-//   //     "a": "project_panel::NewFile",
-//   //     "A": "project_panel::NewDirectory",
-//   //     "d": "project_panel::Delete",
-//   //     "r": "project_panel::Rename",
-//   //     "shift-r": "project_panel::Rename",
-//   //     "x": "project_panel::Cut",
-//   //     "y": "project_panel::Copy",
-//   //     "p": "project_panel::Paste",
-//   //     "l": "project_panel::OpenPermanent",
-//   //     // "l": "project_panel::ExpandSelectedEntry",
-//   //     "shift-d": "project_panel::Delete",
-//   //     "shift-g": "menu::SelectLast",
-//   //     "g g": "menu::SelectFirst"
-//   //   }
-//   // }
-
-//   // {
-//   //   "context": "ProjectPanel && not_editing && !vim_mode == insert",
-//   //   "bindings": {
-//   //     // "l": "project_panel::OpenPermanent"
-//   //     // "l": "project_panel::ExpandSelectedEntry"
-//   //   }
-//   // }
-// ]

@@ -13,8 +13,24 @@
   "preferred_line_length": 120,
   "show_wrap_guides": true,
   "wrap_guides": [100, 120],
+  "soft_wrap": null,
+
   "ui_font_size": 14.5,
+  "ui_font_family": "Zed Plex Mono",
+  "ui_font_weight": 400.0,
+  "ui_font_features": {
+    "calt": false
+  },
+
+  "buffer_line_height": "standard",
+
   "buffer_font_size": 12.0,
+  "buffer_font_family": "Zed Plex Mono",
+  "buffer_font_weight": 400.0,
+  "buffer_font_features": {
+    "calt": false
+  },
+
   "cursor_blink": false,
   "relative_line_numbers": true,
   "terminal": {
@@ -24,19 +40,6 @@
         "args": ["-NoLogo"]
       }
     }
-    //     "program": "pwsh.exe"
-    //     // "with_arguments": {
-    //     //   "program": "pwsh",
-    //     //   "args": ["-NoLogo", "-Command"]
-    //     // }
-    //   }
-    //   // "shell": {
-    //   //   "with_arguments": {
-    //   //     "program": "pwsh.exe",
-    //   //     "args": ["-NoLogo"]
-    //   //   }
-    // },
-    //   // "font_family": "Mononoki Nerd Font Mono"
   },
   "scrollbar": {
     "show": "never"
@@ -48,14 +51,8 @@
   "theme": {
     "mode": "system",
     "light": "Tokyo Night",
-    "dark": "Tokyo Night"
+    "dark": "Tokyo Night Storm"
   },
-  "buffer_font_features": {
-    "calt": false
-  },
-  "buffer_font_family": "Cascadia Mono",
-  // "buffer_font_family": "Mononoki Nerd Font Mono",
-  "buffer_font_weight": 100,
 
   "indent_guides": {
     "enabled": true,
