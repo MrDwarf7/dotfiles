@@ -110,6 +110,7 @@ return {
 					end
 					local server = servers[server_name] or {}
 					server.capabilities = vim.tbl_deep_extend("force", {}, capabilities or {})
+					assert(server, "Server not found") -- Catches if server is nil, will also provide the name for depr. server(s)
 					require("lspconfig")[server_name].setup(server)
 				end,
 			},
