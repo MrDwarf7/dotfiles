@@ -127,6 +127,26 @@ desc = "Enter the child directory or open the file"
 # run  = "plugin jump-to-char"
 # desc = "Jump to char"
 
+
+# Fixing mtime and ctime
+[[manager.prepend_keymap]]
+on = ["m", "m"]
+run = "linemode mtime_better"
+desc = "Linemode: mtime_better"
+
+####### Cannot get these to work correctly :L
+# [[manager.prepend_keymap]]
+# on = [ ",", "m" ]
+# run = [ "sort mtime --reverse=no", "linemode mtime_better" ]
+# desc = "Sort by modified time"
+#
+#
+# [[manager.prepend_keymap]]
+# on = [ ",", "M" ]
+# run = [ "sort mtime --reverse", "linemode mtime_better" ]
+# desc = "Sort by modified time (reverse)"
+
+
 # https://github.com/dedukun/relative-motions.yazi
 [[manager.prepend_keymap]]
 on = ["1"]
