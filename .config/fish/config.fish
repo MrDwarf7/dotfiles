@@ -14,6 +14,7 @@ if status is-interactive
     fish_vi_key_bindings
     zoxide init fish | source
     source (/usr/sbin/starship init fish --print-full-init | psub)
+    source (/bin/mise activate fish | psub)
 
     set -x fish_cursor_default block
     set -x fish_cursor_insert line
