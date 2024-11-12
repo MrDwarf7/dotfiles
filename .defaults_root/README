@@ -1,0 +1,8 @@
+# https://mise.jdx.dev/getting-started.html
+
+# paru -S --noconfirm mise
+
+MISE
+
+Place this in the root of your user dir ( ~/.default.**** )
+Mise will pick them up and install the listed items as part of whatever package manage they're associated with
