@@ -135,12 +135,12 @@ M.servers = function()
 				},
 			},
 		},
-		ruff_lsp = {
-			cmd = { "ruff-lsp" },
-			filetypes = { "python" },
-			single_file_support = true,
-			capabilities = M.capabilities,
-		},
+		-- ruff_lsp = {
+		-- 	cmd = { "ruff-lsp" },
+		-- 	filetypes = { "python" },
+		-- 	single_file_support = true,
+		-- 	capabilities = M.capabilities,
+		-- },
 
 		tailwindcss = {
 			filetypes = {

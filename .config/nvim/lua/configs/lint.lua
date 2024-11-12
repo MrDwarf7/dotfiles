@@ -12,7 +12,7 @@ return {
 		json = { "jsonlint" },
 		lua = { "luacheck" },
 		powershell = { "powershell_es" },
-		python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
+		python = { "ruff", "mypy", "vulture", { "ruff" } },
 		sh = { "shellcheck" },
 		sql = { "sqlfluff" },
 		typescript = { "biomejs" },
