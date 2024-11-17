@@ -1,6 +1,10 @@
 #!/usr/bin/env fish
 
 function lg 
-    set -gx lg lazygit $argv
-    $lg
+    if test -z $argv
+        set -gx lg lazygit $argv
+        $lg
+    else
+        lazygit $argv
+    end
 end

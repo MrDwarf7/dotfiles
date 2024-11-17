@@ -1,6 +1,5 @@
 #!/usr/bin/env fish
 
-
 function lt
     if test -z $LIST_CLIENT
         echo "LIST_CLIENT is not set"
