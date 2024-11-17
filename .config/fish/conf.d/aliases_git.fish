@@ -127,6 +127,8 @@ alias gvt "git verify-tag $args"
 alias gwch "git whatchanged -p --abbrev-commit --pretty=medium $args"
 # gwip
 
+alias gfp "git fetch --all && git pull --all"
+
 #
 ##### These will need to be functions (And converted to fish) #####
 # as they store a variable during execution
