@@ -1,4 +1,7 @@
-# Changes for xdg dir when using fish 
+#!/usr/bin/env fish
+#
+
+#Changes for xdg dir when using fish 
 # must be done via one of the dirs listed in
 # 'man 5 enviornment.d'
 # ~/.config/environment.d/*.conf
@@ -8,15 +11,25 @@
 # /usr/lib/environment.d/*.conf
 # /etc/environment
 
-
 if status is-interactive
     # Commands to run in interactive sessions can go here
-    fish_vi_key_bindings
-    zoxide init fish | source
-    source (/usr/sbin/starship init fish --print-full-init | psub)
-    source (/bin/mise activate fish | psub)
 
-    set -x fish_cursor_default block
-    set -x fish_cursor_insert line
-    set -x fish_cursor_visual block
+    # Immediately call starship -- subsequent redraws are handled by the 
+    # call under ./functions/fish_prompt.fish
+    source (/usr/sbin/starship init fish --print-full-init | psub)
+    commandline -f repaint
+
+    fish_vi_key_bindings
+
+    # Handled by ./conf.d/01-pre.fish
+    # zoxide init fish | source
+    
+    # This is now a part of the ./functions/fish_prompt.fish file
+    # source (/usr/sbin/starship init fish --print-full-init | psub)
+
+    # Handled by conf.d/01-pre.fish
+    # source (/bin/mise activate fish | psub)
+
+    mise activate fish | source
+
 end

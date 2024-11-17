@@ -38,11 +38,6 @@ $character"""
 [fill]
 symbol = " "
 
-
-
-# $character
-
-
 # [fill]
 # symbol = " "
 
@@ -50,6 +45,7 @@ symbol = " "
 success_symbol = " [❯](purple)"
 error_symbol = " [❯](red)"
 vimcmd_symbol = " [❮](green)"
+vimcmd_visual_symbol = " [❯](yellow)"
 
 # [character]
 # format = "$symbol "

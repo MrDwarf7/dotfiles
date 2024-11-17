@@ -1,11 +1,17 @@
 #!/usr/bin/env fish
 #
 set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
-set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data/
+set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data
 set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state
 set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/cache
 set -q XDG_CACHE_LOCAL_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/local
 mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_CACHE_HOME $XDG_CACHE_LOCAL_HOME
+
+# Fix wezterm/starship rendering the cursor always as a block
+set -gx fish_vi_force_cursor 1
+set fish_cursor_default block blink
+set fish_cursor_insert line blink
+set fish_cursor_visual block blink
 
 # Set editor variables.
 set -gx PAGER less
@@ -43,5 +49,9 @@ set -gx NODE_TLS_REJECT_UNAUTHORIZED 0
 set -gx YAZI_CONFIG_HOME $HOME/dotfiles/.config/yazi
 
 set -gx STARSHIP_CONFIG $HOME/dotfiles/.config/starship/starship.toml
+set -gx WZT_ANIM_FPS 144
+set -gx WZT_MAX_FPS 144
+set -gx WZT_GPU_FRONTEND WebGpu
+set -gx WZT_GPU_POWER_PREF HighPerformance
 
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
