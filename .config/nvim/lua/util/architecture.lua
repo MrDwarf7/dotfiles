@@ -48,7 +48,7 @@ M.get_shell = function(os_name)
 	if os_name == os_type.windows then
 		return shells_t.pwsh
 	elseif os_name == os_type.linux then
-		return shells_t.fish
+		return shells_t.zsh
 	else
 		return shells_t.bash
 	end
@@ -58,7 +58,7 @@ end
 ---@param chosen_shell ShellsTypeEnum
 ---@return ShellsTypeEnum?
 M.shell_setup = function(chosen_shell)
-	if chosen_shell == shells_t.zsh or chosen_shell == shells_t.fish then
+	if chosen_shell == shells_t.zsh then
 		return
 	end
 	if chosen_shell == (shells_t.pwsh or chosen_shell == shells_t.powershell) then
@@ -74,6 +74,13 @@ M.shell_setup = function(chosen_shell)
 		-- Setting shell quote options
 		vim.o.shellquote = ""
 		vim.o.shellxquote = ""
+
+		-- vim.opt.shellcmdflag =
+		-- 	"-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+		-- vim.opt.shellredir = "-RedirectStandardOutput %s -NoNewWindow -Wait"
+		-- vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+		-- vim.opt.shellquote = ""
+		-- vim.opt.shellxquote = ""
 
 		return chosen_shell
 	end
