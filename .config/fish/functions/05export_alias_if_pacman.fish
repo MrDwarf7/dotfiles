@@ -1,5 +1,15 @@
 #!/usr/bin/env fish
 
+# Exports an alias by checking pacman for the program
+#
+# Parameters:
+# $1: The program to check for
+# $2: The alias name
+# $3: The alias value
+#
+# Returns:
+# 0 if the program is found
+# 1 if the program is not found
 function 05export_alias_if_pacman
     set -l program_one $argv[1]
     set -l alias_name $argv[2]
