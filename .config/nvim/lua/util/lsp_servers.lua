@@ -135,14 +135,6 @@ M.servers = function()
 				},
 			},
 		},
-		-- ruhttp://lgnrvbpd401:8080/Data/RPAVMLinks.htmlff_lsp = {
-
-		-- ruff = {
-		-- 	cmd = { "ruff" },
-		-- 	filetypes = { "python" },
-		-- 	single_file_support = true,
-		-- 	capabilities = M.capabilities,
-		-- },
 		ruff = {
 			filetypes = { "python" },
 		},
