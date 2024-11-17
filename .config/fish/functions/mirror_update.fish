@@ -36,6 +36,8 @@ function mirror_update
     sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
     sudo mv $TMPFILE /etc/pacman.d/mirrorlist
     sudo chown root:root /etc/pacman.d/mirrorlist # Re-secure the mirrorlist file before leaving sudo
+    # Make it readable by everyone
+    sudo chmod 644 /etc/pacman.d/mirrorlist
 
 
     ua_drop_caches
