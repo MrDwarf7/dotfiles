@@ -33,8 +33,8 @@ end
 ---@type KeyOp[]
 local key_opts = {
 	-- Tabs
-	{ key = "t", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
-	{ key = "T", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+	{ key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
+	{ key = "C", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
 	{ key = "m", mods = "LEADER", action = act.SpawnTab({ DomainName = "WSL:Arch" }) },
 	-- act({ SpawnTab = "CurrentPaneDomain" }) },
 
@@ -74,8 +74,8 @@ local key_opts = {
 	{ key = "H", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(-1) }, -- Moving
 	{ key = "L", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(1) }, -- Moving
 
-	{ key = "n", mods = "LEADER", action = act.MoveTabRelative(1) },
-	{ key = "p", mods = "LEADER", action = act.MoveTabRelative(-1) },
+	{ key = ".", mods = "LEADER", action = act.MoveTabRelative(1) },
+	{ key = ",", mods = "LEADER", action = act.MoveTabRelative(-1) },
 
 	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
 
@@ -93,6 +93,8 @@ local key_opts = {
 	-- TODO: Bindings for opacity
 
 	{ key = "p", mods = "LEADER|CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
+	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
+
 	{ key = "b", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{
