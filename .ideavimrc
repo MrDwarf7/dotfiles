@@ -12,7 +12,7 @@ nnoremap mapleader=" "
 map <Space>=<leader>
 map <Space><Esc> <Esc>
 
-map <Esc> <Esc><Esc>
+nmap <Esc> <Esc>
 
 " set timeoutlen=500
 set notimeout
@@ -98,6 +98,9 @@ map <A-a> :action copilot.applyInlays
 " nnoremap <C-A> gg<S-v>G
 let g:WhichKeyDesc_commentray_prefix = "gc"
 let g:WhichKeyDesc_commentray_action = "gcc"
+
+" Set up the 'Reopen Closed Tab' command via Ctrl+w r && Ctrl+w t
+
 
 
 " Handler specific binds -------------------------
@@ -225,9 +228,21 @@ let g:WhichKeyDesc_find = "<Space>fo DataSource choose"
 nnoremap <Space>o :action Console.Jdbc.ChooseDataSource<CR>
 nnoremap <Space>fo :action Console.Jdbc.ChooseDataSource<CR>
 
+
+
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
+
 nnoremap <Space>ff :action GotoFile<CR>
 vnoremap <Space>ff :action GotoFile<CR>
+
+
+" FUZZIER
+" map <Space>ff <action>(com.mituuz.fuzzier.Fuzzier)
+" map <Space>mf <action>(com.mituuz.fuzzier.FuzzyMover)
+" map <Space>gf <action>(com.mituuz.fuzzier.FuzzierVCS)
+
+
+
 let g:WhichKeyDesc_find = "<Space>fu Find Usages"
 nnoremap <Space>fu :action FindUsages<CR>
 vnoremap <Space>fu :action  FindUsages<CR>
@@ -319,6 +334,8 @@ nnoremap m1 :action ToggleBookmark6<CR>
 nnoremap m2 :action ToggleBookmark7<CR>
 nnoremap m3 :action ToggleBookmark8<CR>
 nnoremap m4 :action ToggleBookmark9<CR>
+nnoremap md :action Bookmarks<CR>
+nnoremap <Space>M :action Bookmarks<CR>
 
 nnoremap `m :action GotoBookmark0<CR>
 nnoremap `n :action GotoBookmark1<CR>
@@ -342,6 +359,9 @@ nnoremap <TAB> :action NextTab<CR>
 map <Space>bn :action NextTab<CR>
 map <Space>bp :action PreviousTab<CR>
 
+
+
+
 map <Space>b. :action PinActiveEditorTab<CR>
 
 nnoremap <C-w>e :action tabshifter.Actions.EqualSizeSplit<CR>
@@ -350,6 +370,8 @@ nnoremap <C-w><C-l> :action TabShiftActions.ShiftRight<CR>
 nnoremap <C-w><C-h> :action TabShiftActions.ShiftLeft<CR>
 nnoremap <C-w><C-k> :action TabShiftActions.ShiftUp<CR>
 nnoremap <C-w><C-j> :action TabShiftActions.ShiftDown<CR>
+
+nnoremap <C-w>t :action ReopenClosedTab<CR>
 
 nnoremap <C-l> :action TabShiftActions.StretchRight<CR>
 nnoremap <C-h> :action TabShiftActions.StretchLeft<CR>
