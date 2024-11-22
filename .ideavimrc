@@ -9,10 +9,10 @@ syntax on
 " nnoremap mapleader=" "
 vnoremap mapleader=" "
 nnoremap mapleader=" "
-map <Space>=<leader>
+" map <Space>=<leader>
 map <Space><Esc> <Esc>
 
-nmap <Esc> <Esc>
+map <Esc> <Esc><Esc>
 
 " set timeoutlen=500
 set notimeout
@@ -46,14 +46,17 @@ Plug 'tpope/vim-surround'
 " Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
-Plug 'vim-scripts/ReplaceWithRegister'
+Plug 'vim-scripts/ReplaceWithRegister' " This may not be required due to having the _dP binding? But it also handles newline yanks into non-newline pastes
+Plug 'dbakker/vim-paragraph-motion'
 
 " Plugin activation / Specifics------------------
+" set sneak " Is now depr.
 set which-key
-set sneak
 set surround
 set quickscope
 set ideamarks
+set peekaboo
+
 
 let g:highlightedyank_highlight_duration = "60"
 " Trigger a highlight in the appropriate direction when pressing these keys:
@@ -69,18 +72,13 @@ let g:WhichKey_ProcessUnknownMappings = "false"
 " let g:WhichKey_DefaultDelay = 500
 " map <Space>q <Plug>(easymotion-f)
 " map <Space>Q <Plug>(easymotion-s)
-
 " let g:NERDTreeMapMenu = "m"
-
-
-
 
 " ------------------------- KEYMAPS -------------------------
 
 " Misc / Out of the way binds -------------------------
 nnoremap \e :action Openfile ~/dotfiles/.ideavimrc<CR>
-nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR><ESC>
-
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
 
 " Copilot settings"
 map <A-a> :action copilot.applyInlays
@@ -93,14 +91,9 @@ map <A-a> :action copilot.applyInlays
 " nnoremap <C-U> <C-U>zz
 " nnoremap <C-D> <C-D>zz
 
-
-
 " nnoremap <C-A> gg<S-v>G
 let g:WhichKeyDesc_commentray_prefix = "gc"
 let g:WhichKeyDesc_commentray_action = "gcc"
-
-" Set up the 'Reopen Closed Tab' command via Ctrl+w r && Ctrl+w t
-
 
 
 " Handler specific binds -------------------------
@@ -112,7 +105,6 @@ let g:WhichKeyDesc_commentray_action = "gcc"
 
 " sethandler <C-d> a:vim
 " sethandler <C-u> a:vim
-
 
 inoremap kj <ESC>
 inoremap jk <ESC>
@@ -141,14 +133,9 @@ map \wq <Action>(SaveAndCloseActiveTab)
 " nnoremap <Space> :nop<CR>
 
 
-
 " Fold / Folds / Folding
-
-
 nnoremap za :action ExpandCollapseToggleAction<CR>
 vnoremap za :action ExpandCollapseToggleAction<CR>
-
-
 " nnoremap za :action ExpandCollapseToggleAction<CR>
 
 " Creates a fold
@@ -182,7 +169,6 @@ nnoremap zf :action ExpandRegion<CR>
 vnoremap <A-j> :action :m'>+<CR>gv=gv
 vnoremap <A-k> :action :m-2<CR>gv=gv
 
-
 vnoremap <A-j> :action MoveLineDown<CR>
 nnoremap <A-j> :action MoveLineDown<CR>
 
@@ -198,9 +184,9 @@ nnoremap <A-k> :action MoveLineUp<CR>
 
 let g:WhichKeyDesc_NerdTree = "<Space>e NERD Tree"
 nnoremap <Space>e :NERDTreeFocus<CR>
+" set g:NERDTreeMapNewFile = 'a'
+" set g:NERDTreeMapNewDir = '<S-a>'
 
-" nnoremap <Space>e :NERDTreeToggle<CR>
-"nnoremap <C-j> :action Up
 
 " Text Navigation specific binds -------------------------
 nnoremap <S-Tab> :action PreviousTab<CR>
@@ -216,7 +202,6 @@ nnoremap <Space>f/ :action Find<CR>
 vnoremap <Space>f/ :action Find<CR>
 
 nnoremap <Space>fi :action QuickImplementations<CR>
-
 " nnoremap <C-w><C-l> :action MoveElementRight<CR>
 " nnoremap <C-w><C-h> :action MoveElementLeft<CR>
 
@@ -228,21 +213,9 @@ let g:WhichKeyDesc_find = "<Space>fo DataSource choose"
 nnoremap <Space>o :action Console.Jdbc.ChooseDataSource<CR>
 nnoremap <Space>fo :action Console.Jdbc.ChooseDataSource<CR>
 
-
-
 let g:WhichKeyDesc_find = "<Space>ff Find Files"
-
 nnoremap <Space>ff :action GotoFile<CR>
 vnoremap <Space>ff :action GotoFile<CR>
-
-
-" FUZZIER
-" map <Space>ff <action>(com.mituuz.fuzzier.Fuzzier)
-" map <Space>mf <action>(com.mituuz.fuzzier.FuzzyMover)
-" map <Space>gf <action>(com.mituuz.fuzzier.FuzzierVCS)
-
-
-
 let g:WhichKeyDesc_find = "<Space>fu Find Usages"
 nnoremap <Space>fu :action FindUsages<CR>
 vnoremap <Space>fu :action  FindUsages<CR>
@@ -294,8 +267,6 @@ nnoremap gI :action QuickImplementations<CR>
 nnoremap ]d :action GotoNextError<CR>
 nnoremap [d :action GotoPreviousError<CR>
 
-
-
 nnoremap gT :action GotoTest<CR>
 nnoremap gh :action Back<CR>
 nnoremap gl :action Forward<CR>
@@ -334,8 +305,6 @@ nnoremap m1 :action ToggleBookmark6<CR>
 nnoremap m2 :action ToggleBookmark7<CR>
 nnoremap m3 :action ToggleBookmark8<CR>
 nnoremap m4 :action ToggleBookmark9<CR>
-nnoremap md :action Bookmarks<CR>
-nnoremap <Space>M :action Bookmarks<CR>
 
 nnoremap `m :action GotoBookmark0<CR>
 nnoremap `n :action GotoBookmark1<CR>
@@ -359,9 +328,6 @@ nnoremap <TAB> :action NextTab<CR>
 map <Space>bn :action NextTab<CR>
 map <Space>bp :action PreviousTab<CR>
 
-
-
-
 map <Space>b. :action PinActiveEditorTab<CR>
 
 nnoremap <C-w>e :action tabshifter.Actions.EqualSizeSplit<CR>
@@ -370,8 +336,6 @@ nnoremap <C-w><C-l> :action TabShiftActions.ShiftRight<CR>
 nnoremap <C-w><C-h> :action TabShiftActions.ShiftLeft<CR>
 nnoremap <C-w><C-k> :action TabShiftActions.ShiftUp<CR>
 nnoremap <C-w><C-j> :action TabShiftActions.ShiftDown<CR>
-
-nnoremap <C-w>t :action ReopenClosedTab<CR>
 
 nnoremap <C-l> :action TabShiftActions.StretchRight<CR>
 nnoremap <C-h> :action TabShiftActions.StretchLeft<CR>
@@ -399,9 +363,7 @@ nnoremap <Space>tt :action ActivateTerminalToolWindow<CR>
 nnoremap <Space>tD :action ActivateDebugToolWindow<CR>
 let g:WhichKeyDesc_Toggle_Nerd = "<Space>tb NERD Tree Bar"
 nnoremap <Space>tb :NERDTreeToggle<CR>
-
 " nnoremap <Space>tp :action ActivatePythonConsoleToolWindow<CR>
-
 
 
 " nnoremap <C-/>: :action ActivateTerminalToolWindow<CR>
@@ -425,22 +387,15 @@ nnoremap <Space>gU :action ChangesView.Revert<CR>
 nnoremap <Space>gP :action Git.Push<CR>
 nnoremap <Space>gp :action Git.Pull<CR>
 
-
 nnoremap <Space>hp :action VcsShowCurrentChangeMarker<CR>
 nnoremap <Space>hd :action Diff.ShowDiff<CR>
 
-
-
-
-
-
-
+" Git GoTo specific binds -------------------------
 nnoremap ]c :action VcsShowNextChangeMarker<CR>
 nnoremap [c :action VcsShowPrevChangeMarker<CR>
 
 nnoremap ]9 :action VcsShowNextChangeMarker<CR>
 nnoremap [9 :action VcsShowPrevChangeMarker<CR>
-
 
 nnoremap ]h :action NextDiff<CR>
 nnoremap [h :action PreviousDiff<CR>
@@ -450,11 +405,6 @@ nnoremap [- :action PreviousDiff<CR>
 
 nnoremap <Space>td :action Diff.FocusOppositePane<CR>
 
-
-
-
-
-
 " These are ctrl-e / ctrl-y inside the docs flyout
 " ScrollPane-unitScrollDown
 " ScrollPane-unitScrollUp
@@ -463,22 +413,11 @@ nnoremap <Space>td :action Diff.FocusOppositePane<CR>
 " ScrollPane-ScrollDown
 " ScrollPane-ScrollUp
 
-
 " LSP specific binds -------------------------
 let g:WhichKeyDesc_LSP = "<Space>l +LSP"
 nnoremap <Space>la :action ShowIntentionActions<CR>
 nnoremap <Space>lr :action RenameElement<CR>
-
 nnoremap <Space>lR :action Refactorings.QuickListPopupAction<CR>
-
-
-
-
-
-
-
-
-
 
 let g:WhichKeyDesc_LSP = "<Space>lp LSP Problems"
 
@@ -489,24 +428,20 @@ noremap <Space>ld :action ActivateProblemsViewToolWindow<CR>
 
 nnoremap <Space>la :action ShowIntentionActions<CR>
 " nnoremap <Space>la :action ShowPopupMenu<CR>
-nnoremap <Space>lf :action ReformatCode<CR>
-
 nnoremap <Space>li :action QuickImplementations<CR>
 
 
-
-let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [file]"
-nnoremap <Space>lf :action Cargo.RustfmtFile<CR>
-let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [project]"
-nnoremap <Space>lF :action Cargo.RustfmtCargoProject<CR>
+nnoremap <Space>lf :action ReformatCode<CR>
+" let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [file]"
+" nnoremap <Space>lf :action Cargo.RustfmtFile<CR>
+" let g:WhichKeyDesc_LSP = "<Space>lf Cargo fmt [project]"
+" nnoremap <Space>lF :action Cargo.RustfmtCargoProject<CR>
 
 
 " RUST specific binds -------------------------
 
 nnoremap <Space>C :action Cargo.RunCargoCommand<CR>
 vnoremap <Space>C :action Cargo.RunCargoCommand<CR>
-
-
 " nnoremap <Space>lh :action ShowErrorDescription<CR>
 " noremap <Space>lp :action ActivateProblemsViewToolWindow<CR>
 
@@ -544,3 +479,4 @@ nnoremap <Space>de :action DebugEvaluateExpression<CR>
 "" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
 "" Map \r to the Reformat Code action
 "map \r <Action>(ReformatCode)
+
