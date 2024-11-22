@@ -1,0 +1,12 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+syntax on
+
+nnoremap \e :action Openfile ~/dotfiles/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR><ESC>
+
+source ~/dotfiles/.ideavimrc_after_ataman
+
