@@ -108,6 +108,8 @@ let g:WhichKeyDesc_commentray_prefix = "gc"
 let g:WhichKeyDesc_commentray_action = "gcc"
 
 
+
+
 " Generic binds -------------------------
 
 inoremap kj <ESC>
@@ -317,6 +319,8 @@ nnoremap [- :action PreviousDiff<CR>
 " LSP specific binds -------------------------
 
 nnoremap <S-k> :action ShowErrorDescription<CR>
+
+nnoremap <S-k> :action QuickJavaDoc<CR>
 
 " RUST specific binds -------------------------
 " _____________
