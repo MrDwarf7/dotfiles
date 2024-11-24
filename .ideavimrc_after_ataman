@@ -12,14 +12,15 @@
 
 syntax on
 
+map <Up> k
+map <Down> j
+
 " Necessities
 " nnoremap mapleader=" "
 " vnoremap mapleader=" "
 " nnoremap mapleader=" "
 
 map <Esc> <Esc><Esc>
-nnoremap <Space> :action LeaderAction<CR>
-vnoremap <Space> :action LeaderAction<CR>
 
 
 " set timeoutlen=500
@@ -204,8 +205,8 @@ map <S-l> $
 
 nnoremap <C-w>q :action CloseContent<CR>
 
-nnoremap gr :action FindUsages<CR>
-vnoremap gr :action  FindUsages<CR>
+nnoremap gR :action FindUsages<CR>
+vnoremap gR :action  FindUsages<CR>
 
 
 " Toggle reader/easy read whatever - Only for the current doc comment
@@ -217,10 +218,9 @@ let g:WhichKeyDesc_Goto = "g +Goto"
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
+" Acts as a 'peek'
+nnoremap gp :action QuickImplementations<CR>
 nnoremap gt :action GotoTypeDeclaration<CR>
-
-nnoremap gI :action QuickImplementations<CR>
-
 
 nnoremap ]d :action GotoNextError<CR>
 nnoremap [d :action GotoPreviousError<CR>
@@ -234,7 +234,7 @@ nnoremap gs :action GotoSuperMethod<CR>
 nnoremap g, :action JumpToLastChange<CR>
 nnoremap g. :action JumpToNextChange<CR>
 
-nnoremap gtc :action GotoClass<CR>
+nnoremap gC :action GotoClass<CR>
 " vnoremap gc :action GotoClass<CR>
 " Conflicts with tpope/vim-commentary / Comment
 nnoremap gf :action GotoFile<CR>
@@ -327,3 +327,8 @@ nnoremap <S-k> :action QuickJavaDoc<CR>
 
 " Debug specific binds -------------------------
 " _____________
+
+" tnoremap <Esc> <C-\><C-n>
+
+nnoremap <Space> :action LeaderAction<CR>
+vnoremap <Space> :action LeaderAction<CR>
