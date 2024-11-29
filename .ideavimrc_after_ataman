@@ -117,6 +117,7 @@ inoremap kj <ESC>
 inoremap jk <ESC>
 inoremap jj <ESC>
 inoremap kk <ESC>
+inoremap <S-CR> <CR>
 
 nnoremap <ESC> :noh<CR>
 nnoremap <C-c> <Esc>
