@@ -1,9 +1,5 @@
 local M = {}
 
-local home = vim.env.HOME
-local zls_exe = home .. "/.zls/zls.exe"
-local zig_exe = home .. "/.zig/zig.exe"
-
 M.capabilities = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
@@ -155,28 +151,29 @@ M.servers = function()
 		taplo = {},
 		vimls = {},
 		yamlls = {},
-		zls = {
-			cmd = { zls_exe },
-			capabilities = vim.tbl_deep_extend("keep", M.capabilities() or {}, {}),
-			settings = {
-				zls = {
-					zig_exe_path = zig_exe,
-					enableAutofix = true,
-					enable_snippets = true,
-					enable_ast_check_diagnostics = true,
-					enable_autofix = true,
-					enable_import_embedfile_argument_completions = true,
-					warn_style = true,
-					enable_semantic_tokens = true,
-					enable_inlay_hints = true,
-					inlay_hints_hide_redundant_param_names = true,
-					inlay_hints_hide_redundant_param_names_last_token = true,
-					operator_completions = true,
-					include_at_in_builtins = true,
-					max_detail_length = 1048576,
-				},
+		zls = {},
+		-- zls = {
+		-- 	cmd = { zls_exe },
+		-- 	capabilities = vim.tbl_deep_extend("keep", M.capabilities() or {}, {}),
+		settings = {
+			zls = {
+				-- zig_exe_path = zig_exe,
+				enableAutofix = true,
+				enable_snippets = true,
+				enable_ast_check_diagnostics = true,
+				enable_autofix = true,
+				enable_import_embedfile_argument_completions = true,
+				warn_style = true,
+				enable_semantic_tokens = true,
+				enable_inlay_hints = true,
+				inlay_hints_hide_redundant_param_names = true,
+				inlay_hints_hide_redundant_param_names_last_token = true,
+				operator_completions = true,
+				include_at_in_builtins = true,
+				max_detail_length = 1048576,
 			},
 		},
+		-- },
 	}
 end
 
