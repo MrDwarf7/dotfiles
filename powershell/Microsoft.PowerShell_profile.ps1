@@ -11,8 +11,10 @@ Invoke-Expression (
         Append("`n").
         Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
         Append("`n").
-        Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })") 
-    ).ToString() > $null
+        Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })").
+        Append("`n").
+        Append("Invoke-Expression (& { (carapace _carapace | Out-String) })")
+    ).ToString() > $null -ErrorAction SilentlyContinue
 
 # $prompt = ""
 # function Invoke-Starship-PreCommand {
@@ -48,6 +50,7 @@ $env:EDITOR = 'nvim'
 $env:FZF_DEFAULT_COMMAND = 'fd --type file'
 $env:FZF_CTRL_T_COMMAND = '$env:FZF_DEFAULT_COMMAND'
 $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
+$env:CARAPACE_BRIDGES = 'all'
 
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
