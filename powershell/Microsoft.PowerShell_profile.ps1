@@ -4,7 +4,8 @@
 # Typer-Cli completion.
 # Installed via pip install typer-cli
 
-
+# String builder voodoo - shown to be bette performance than either sets or a loop lol...
+# This is something used wherever multiple invocations are needed for other parts of the profile
 Invoke-Expression (
     [System.Text.StringBuilder]::new().Append("Invoke-Expression (&starship init powershell)").
         Append("`n").
@@ -48,7 +49,6 @@ $env:FZF_DEFAULT_COMMAND = 'fd --type file'
 $env:FZF_CTRL_T_COMMAND = '$env:FZF_DEFAULT_COMMAND'
 $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 
-
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
@@ -80,8 +80,6 @@ function checkEnvironment {
 # Work
 if (checkEnvironment -eq $true) {
     $env:PSModulePath = $workDefaultPSModulePath
-
-
     . "$powershell_scripts_dir\work_scripts.ps1"
 }
 
@@ -89,14 +87,11 @@ if (checkEnvironment -eq $true) {
 if (-not (checkEnvironment)) {
     # $env:PAGER = less
     # $env:BAT_PAGER = less -RF
-
     $env:PSModulePath = $currentPSModulePath
-
-    # This is now static for all profiles
-    # Invoke-Expression (& { (zoxide init powershell | Out-String) })
     . "$powershell_scripts_dir\home_scripts.ps1"
 }
 
+# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
 . "$powershell_scripts_dir\general_scripts.ps1"
 
 if ($env:LIST_CLIENT -eq "eza") {
