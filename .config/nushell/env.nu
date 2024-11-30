@@ -99,3 +99,5 @@ $env.NU_PLUGIN_DIRS = [
 
 # To load from a custom file you can use:
 # source ($nu.default-config-dir | path join 'custom.nu')
+
+starship init nu | save -f ~/dotfiles/.config/starship/init.nu
