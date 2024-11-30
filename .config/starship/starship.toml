@@ -225,7 +225,7 @@ version_format = "${raw}"
 # format = '[ $symbol ($version )]($style)'
 format = "([$symbol($version)]($style))"
 # symbol = "⊃ "
-version_format = "${major}.${minor}(.$path)"
+version_format = "${major}.${minor}"
 symbol = "🦀 "
 
 
