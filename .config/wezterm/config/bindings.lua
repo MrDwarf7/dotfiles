@@ -10,6 +10,9 @@ local keys = {}
 -- end
 local leader = { key = "a", mods = "CTRL" }
 
+local launcher_flags = { flags = "FUZZY|TABS|DOMAINS|LAUNCH_MENU_ITEMS" }
+local launch_menu = { flags = "LAUNCH_MENU_ITEMS" }
+
 local tab_keys = {}
 for i = 1, 8 do
 	-- ctrl + a -> number to activate that tab
@@ -92,10 +95,12 @@ local key_opts = {
 	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
 	-- TODO: Bindings for opacity
 
-	{ key = "p", mods = "LEADER|CTRL", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
-	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs({ flags = "FUZZY|TABS|DOMAINS" }) },
+	{ key = "p", mods = "LEADER|CTRL", action = act.ShowLauncherArgs(launcher_flags) },
+	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs(launcher_flags) },
 
-	{ key = "b", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "b", mods = "LEADER", action = act.ShowLauncherArgs(launch_menu) },
+
+	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{
 		key = "w",
