@@ -21,5 +21,11 @@ return {
 			default_cwd = "/home/dwarf",
 			-- default_prog = { "fish", "-l" },
 		},
+		{
+			name = "WSL:NixOS",
+			distribution = "NixOS",
+			username = "dwarf",
+			default_cwd = "/home/dwarf",
+		},
 	},
 }
