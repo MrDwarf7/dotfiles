@@ -55,8 +55,10 @@ return {
 	-- stylua: ignore end
 
 	opts = function(_, opts)
-		local servers = require("util.lsp_servers")[1]
-		local capabilities = require("util.lsp_servers")[2]
+		-- local servers = require("util.lsp_servers")[1]
+		-- local capabilities = require("util.lsp_servers")[2]
+		local servers = require("util.lsp_servers").servers()
+		local capabilities = require("util.lsp_servers").capabilities()
 
 		local ensure_installed = vim.list_extend(vim.tbl_keys(servers) or {}, {
 			"beautysh",
