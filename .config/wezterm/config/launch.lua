@@ -23,7 +23,7 @@ table.insert(options.launch_menu, { label = "Nushell", args = { "nu" } })
 
 if platform.is_win then
 	options.default_prog = { shell(), "-NoLogo" }
-	table.insert(options.launch_menu, { label = "Pwsh", args = { "pwsh" } })
+	table.insert(options.launch_menu, { label = "Pwsh", args = { "pwsh", "-NoLogo" } })
 	table.insert(options.launch_menu, { label = "Pwsh -NoProfile", args = { "pwsh", "-NoProfile" } })
 	table.insert(options.launch_menu, { label = "cmd", args = { "cmd" } })
 	-- options.launch_menu = {
