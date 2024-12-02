@@ -10,7 +10,7 @@ local keys = {}
 -- end
 local leader = { key = "a", mods = "CTRL" }
 
-local launcher_flags = { flags = "FUZZY|TABS|DOMAINS|LAUNCH_MENU_ITEMS" }
+local launcher_flags = { flags = "FUZZY|DOMAINS|LAUNCH_MENU_ITEMS" }
 local launch_menu = { flags = "LAUNCH_MENU_ITEMS" }
 
 local tab_keys = {}
