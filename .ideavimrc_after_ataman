@@ -65,6 +65,7 @@ set surround
 set quickscope
 set ideamarks
 set peekaboo
+set NERDTree
 
 
 " Ataman keybinds - https://github.com/Mishkun/ataman-intellij
@@ -85,7 +86,6 @@ let g:WhichKey_ProcessUnknownMappings = "false"
 " let g:WhichKey_DefaultDelay = 500
 
 
-" let g:NERDTreeMapMenu = "m"
 
 " ------------------------- KEYMAPS -------------------------
 
@@ -188,8 +188,27 @@ nnoremap <A-k> :action MoveLineUp<CR>
 " nnoremap <Space>e :NERDTreeFocus<CR>
 " nnoremap <C-Space> :NERDTreeFocus<CR>
 
-" set g:NERDTreeMapNewFile = 'a'
-" set g:NERDTreeMapNewDir = '<S-a>'
+
+" src/main/java/com/maddyhome/idea/vim/extension/nerdtree/NerdTree.kt
+
+
+" let g:NERDTreeMapMenu = "m"
+
+let g:NERDTreeMapNewFile='a'
+
+let g:NERDTreeMapNewDir='%'
+let g:NERDTreeMapNewDir='A'
+
+let g:NERDTreeMapPreview='<Tab>'
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapRename='r'
+
+let g:NERDTreeMapToggle='gz'
+
+" map 
+" $Cut
+
+
 
 " Text Navigation specific binds -------------------------
 nnoremap <S-Tab> :action PreviousTab<CR>
