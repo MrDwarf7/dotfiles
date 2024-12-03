@@ -9,45 +9,57 @@ $web_projects = "Web"
 $testing_projects = "Testing"
 
 
-function cx {
+function cx
+{
     param(
         [string]$command
     )
     # Splitting
     $parts = $command -split '/', 2
     $functionName = $parts[0]
-    $functionArgs = if ($parts.Count -gt 1) {
+    $functionArgs = if ($parts.Count -gt 1)
+    {
         $parts[1]
-    } else {
+    } else
+    {
         ""
     }
-    $environment = if (checkEnvironment) {
+    $environment = if (checkEnvironment)
+    {
         "work"
-    } else {
+    } else
+    {
         "home"
     }
     $holdError = ""
 
     # Top level switch finds the function name
-    switch ($functionName) {
+    switch ($functionName)
+    {
         # Requires full path after function part
         # ie: dot/powershell
         # dot/powershell/Scripts
         #
-        "dot" {
-            $path = if ($functionArgs) {
+        "dot"
+        {
+            $path = if ($functionArgs)
+            {
                 Join-Path $dotfiles_dir $functionArgs.Replace('/', '\')
-            } else {
+            } else
+            {
                 $dotfiles_dir
             }
             # Write-Host "From cx function call path variable is: ", $path
             # Write-Host "From cx function call functionArgs variable is: ", $functionArgsost
             Push-Location $path
         }
-        "dotfiles" {
-            $path = if ($functionArgs) {
+        "dotfiles"
+        {
+            $path = if ($functionArgs)
+            {
                 Join-Path $dotfiles_dir $functionArgs.Replace('/', '\')
-            } else {
+            } else
+            {
                 $dotfiles_dir
             }
             # Write-Host "From cx function call path variable is: ", $path
@@ -58,19 +70,25 @@ function cx {
         # ie: dod/b -> $data_on_demand_backend function
         # dod/f -> $data_on_demand_frontend function
         #
-        "dod" {
-            switch ($functionArgs) {
-                "b" {
+        "dod"
+        {
+            switch ($functionArgs)
+            {
+                "b"
+                {
                     Push-Location $data_on_demand_backend
                 }
                 # "f" {Push-Location $data_on_demand_frontend}
-                "f" {
+                "f"
+                {
                     Push-Location $data_on_demand_next
                 }
-                "n" {
+                "n"
+                {
                     Push-Location $data_on_demand_next
                 }
-                default {
+                default
+                {
                     Push-Location $data_on_demand
                 }
             }
@@ -81,44 +99,58 @@ function cx {
         # ie: mgr/d -> $gitwork_projects or $home_GitHub/$docker_projects ( where $docker_projects = "Docker" as defined in a variable)
         # mgr/p -> $gitwork_projects or $home_GitHub/$python_projects ( where $python_projects = "Python" as defined in a variable)
         #
-        "mgr" {
-            $pathable = if ($environment -eq "work") {
+        "mgr"
+        {
+            $pathable = if ($environment -eq "work")
+            {
                 $git_projects
-            } else {
+            } else
+            {
                 $home_GitHub
             }
             Write-Host "Pathable just after the env check is: ", $pathablet
             Write-Host "Env variable as: ", $environment
 
-            $path = switch ($functionArgs) {
-                "data" {
+            $path = switch ($functionArgs)
+            {
+                "data"
+                {
                     Join-Path $pathable $data_projects
                 }
-                "dl" {
+                "dl"
+                {
                     Join-Path $pathable $downloaded
                 }
-                "d" {
+                "d"
+                {
                     Join-Path $pathable $docker_projects
                 }
-                "g" {
+                "g"
+                {
                     Join-Path $pathable $go_projects
                 }
-                "powershell" {
+                "powershell"
+                {
                     Join-Path $pathable $powershell_projects
                 }
-                "p" {
+                "p"
+                {
                     Join-Path $pathable $python_projects
                 }
-                "r" {
+                "r"
+                {
                     Join-Path $pathable $rust_projects
                 }
-                "w" {
+                "w"
+                {
                     Join-Path $pathable $web_projects
                 }
-                "t" {
+                "t"
+                {
                     Join-Path $pathable $testing_projects
                 }
-                default {
+                default
+                {
                     Join-Path $pathable $functionArgs.Replace('/', '\')
                 }
             }
@@ -127,44 +159,58 @@ function cx {
             Push-Location $path
         }
 
-        "wgr" {
-            $pathable = if ($environment -eq "work") {
+        "wgr"
+        {
+            $pathable = if ($environment -eq "work")
+            {
                 $gitwork_projects
-            } else {
+            } else
+            {
                 $home_gitwork_projects
             }
             Write-Host "Pathable just after the env check is: ", $pathable
             Write-Host "Env variable as: ", $environment
 
-            $path = switch ($functionArgs) {
-                "data" {
+            $path = switch ($functionArgs)
+            {
+                "data"
+                {
                     Join-Path $pathable $data_projects
                 }
-                "dl" {
+                "dl"
+                {
                     Join-Path $pathable $downloaded
                 }
-                "d" {
+                "d"
+                {
                     Join-Path $pathable $docker_projects
                 }
-                "g" {
+                "g"
+                {
                     Join-Path $pathable $go_projects
                 }
-                "powershell" {
+                "powershell"
+                {
                     Join-Path $pathable $powershell_projects
                 }
-                "p" {
+                "p"
+                {
                     Join-Path $pathable $python_projects
                 }
-                "r" {
+                "r"
+                {
                     Join-Path $pathable $rust_projects
                 }
-                "w" {
+                "w"
+                {
                     Join-Path $pathable $web_projects
                 }
-                "t" {
+                "t"
+                {
                     Join-Path $pathable $testing_projects
                 }
-                default {
+                default
+                {
                     Join-Path $pathable $functionArgs.Replace('/', '\')
                 }
             }
@@ -172,71 +218,90 @@ function cx {
             Write-Host "Path variable is: ", $path
             Push-Location $path
         }
-        default {
+        default
+        {
             $holdError = "Function $functionName not recognized, or isn't a part of the switch handler { cx = Custom CD commands }"
         }
     }
     Get-ChildItem
-    if ($holdError) {
+    if ($holdError)
+    {
         Write-Host
         Write-Host $holdError
     }
 }
 
 
-function c {
+function c
+{
     param(
         [string]$command
     )
     # Splitting
     $parts = $command -split '/', $command.Length
     $functionName = $parts[0]
-    $functionArgs = if ($parts.Count -gt 1) {
+    $functionArgs = if ($parts.Count -gt 1)
+    {
         $parts[1]
-    } else {
+    } else
+    {
         ""
     }
     $holdError = ""
 
-    switch ($functionName) {
-        "b" {
+    switch ($functionName)
+    {
+        "b"
+        {
             cargo build $functionArgsbui
         }
-        "r" {
+        "r"
+        {
             cargo run $functionArgs
         }
-        "rq" {
+        "rq"
+        {
             cargo run -q $functionArgs
         }
-        "br" {
+        "br"
+        {
             cargo build --release $functionArgsbui
         }
-        "rr" {
+        "rr"
+        {
             cargo run --release $functionArgs
         }
-        "t" {
+        "t"
+        {
             cargo test $functionArgs
         }
-        "cc" {
+        "cc"
+        {
             cargo check $functionArgs
         }
-        "cl" {
+        "cl"
+        {
             cargo clean $functionArgs
         }
-        "u" {
+        "u"
+        {
             cargo update $functionArgs
         }
-        "doc" {
+        "doc"
+        {
             cargo doc $functionArgs
         }
-        "up" {
+        "up"
+        {
             cargo upgrade $functionArgs
         }
-        default {
+        default
+        {
             $holdError = "Function $functionName not recognized, or isn't a part of the switch handler { c = Cargo }"
         }
     }
-    if ($holdError) {
+    if ($holdError)
+    {
         Write-Host
         Write-Host $holdError
     }

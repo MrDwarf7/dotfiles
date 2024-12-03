@@ -9,67 +9,83 @@
 # $testing_projects = "Testing"
 
 # BEGIN - Shell functions / Helpful functions
-function cl {
+function cl
+{
     # $cleanText = ""
     Add-Type -Assembly PresentationCore
     $clipText = (get-location).ToString() | Out-String -Stream
 
-    if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::")) {
+    if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::"))
+    {
         $clipText = $clipText.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
     }
     [Windows.Clipboard]::SetText($clipText)
 }
 
-function lzgt {
+function lzgt
+{
     lazygit $args
 }
 
-function lg {
+function lg
+{
     lazygit $args
 }
 
-function nf {
-    if (-not (fastfetch --help)) {
-        try {
+function nf
+{
+    if (-not (fastfetch --help))
+    {
+        try
+        {
             scoop install neofetch
-        } catch {
+        } catch
+        {
             scoop bucket add extras
-        } finally {
+        } finally
+        {
             scoop install neofetch
         }
     }
-   fastfetch 
+    fastfetch 
 }
 
-function y {
+function y
+{
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"
     $cwd = Get-Content -Path $tmp
-    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+    if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path)
+    {
         Set-Location -LiteralPath $cwd
     }
     Remove-Item -Path $tmp
 }
 
-function lzd {
+function lzd
+{
     lazydocker $args
 }
 
-function gitgo {
+function gitgo
+{
     param(
         [string]$baseCommitMessage = "Bump"
     )
-    if ($args) {
+    if ($args)
+    {
         $argumentsIn = $args
     }
-    if (-not $args) {
+    if (-not $args)
+    {
         $argumentsIn = $baseCommitMessage
     }
     gst && gaa && gcam "$($argumentsIn)." && git push
     return
 }
 
-function gfp {
+function gfp
+{
     Write-Host "Fetching all remotes and pulling all branches." -ForegroundColor DarkBlue
     git fetch --all $args;
     Write-Host "Pulling all branches." -ForegroundColor DarkYellow
@@ -77,29 +93,39 @@ function gfp {
     return
 }
 
-function scoopup {
+function scoopup
+{
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
 
-function nodeup {
+function nodeup
+{
     $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade
     # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
 
-function rustupgrader {
+function rustupgrader
+{
     rustup update
 }
 
-function sysup {
-    if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED)) {
+function sysup
+{
+    if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED))
+    {
         $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     }
     scoopup
     nodeup
     rustupgrader
     winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-    Write-Host
+    Write-Host 
+    if (checkEnvironment -eq $true)
+    {
+        Write-Host "Running second rustupgrader"
+        rustupgrader
+    }
     Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
     Write-Host
 }
@@ -108,16 +134,19 @@ function sysup {
 #     notepad++ $args
 # }
 
-function scp {
+function scp
+{
     Push-Location "$env:USERPROFILE\scoop\"
     la
 }
 
-function baconget {
+function baconget
+{
     $baconFile = "$dotfiles_dir\.config\bacon\bacon.toml"
     $currentDir = Get-Location
 
-    if (-not (Test-Path $baconFile )) {
+    if (-not (Test-Path $baconFile ))
+    {
         Write-Host "Bacon file not found at: $baconFile "
         return
     }
@@ -125,16 +154,19 @@ function baconget {
     Write-Host "Bacon file copied to: $currentDir"
 }
 
-function dot {
+function dot
+{
     param(
         $path
     )
     # Write-Host "From dot function call path variable is: ", $path
     # Write-Host "From dot function call literal args is: ", $args
 
-    $path = if ($path) {
+    $path = if ($path)
+    {
         Join-Path $dotfiles_dir $path.Replace('/', '\')
-    } else {
+    } else
+    {
         $dotfiles_dir
     }
     Push-Location "C:\"
@@ -148,33 +180,39 @@ function dot {
 
 # END - Shell functions / Helpful functions
 
-function IsSymbolicLink([string]$path) {
+function IsSymbolicLink([string]$path)
+{
     $file = Get-Item $path -Force -ErrorAction SIlentlyContinue
     return [bool]($file.Attributes -band [IO.FileAttributes]::ReparsePoint)
 }
 New-Alias -Name isym -Value IsSymbolicLink -Force
 
-function refresh {
+function refresh
+{
     Import-Module "C:\ProgramData\chocolatey\helpers\chocolateyProfile.psm1";
     refreshenv;
     Write-Host "Chocolatey environment refreshed." -ForegroundColor Green;
-    if ($args.Count -gt 0) {
+    if ($args.Count -gt 0)
+    {
         Write-Host "Extra arguments detected: $args" -ForegroundColor Yellow;
         . SourceProfile  $args;
     }
     . SourceProfile
 }
 
-function SourceProfile {
+function SourceProfile
+{
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 
     # Check if noClear argument is one of the specified values
-    if ($args.Count -gt 0 -and $possibleClear -contains $args[0]) {
+    if ($args.Count -gt 0 -and $possibleClear -contains $args[0])
+    {
         # Reload the profile without clearing the console
         . $PROFILE
         Clear-Host
-    } else {
+    } else
+    {
         # Reload the profile and clear the console
         . $PROFILE
     }
@@ -183,19 +221,23 @@ function SourceProfile {
 New-Alias -Name p -Value SourceProfile -Force
 New-Alias -Name pro -Value SourceProfile -Force
 
-function . {
+function .
+{
     Start-Process .
 }
 
-function cd2 {
+function cd2
+{
     Set-Location ../../
 }
 
-function touch {
+function touch
+{
     New-Item $args
 }
 
-function zip {
+function zip
+{
     param (
         [string]$ItemToCompress,
         [string]$OptionalDestination
@@ -203,16 +245,19 @@ function zip {
     $ItemName = (Get-Item $ItemToCompress).Name
     $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination)) {
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
-    } else {
+    } else
+    {
         Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
     }
 }
 
-function uzip {
+function uzip
+{
     param (
         [string]$ItemToUnzip,
         [string]$OptionalDestination
@@ -220,11 +265,13 @@ function uzip {
     $ItemName = (Get-Item $ItemToUnzip).Name
     $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
 
-    if ([String]::IsNullOrEmpty($OptionalDestination)) {
+    if ([String]::IsNullOrEmpty($OptionalDestination))
+    {
         $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
 
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
-    } else {
+    } else
+    {
         Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
     }
 }

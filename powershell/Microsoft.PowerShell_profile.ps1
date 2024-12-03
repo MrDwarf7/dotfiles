@@ -4,17 +4,18 @@
 # Typer-Cli completion.
 # Installed via pip install typer-cli
 
+
 # String builder voodoo - shown to be bette performance than either sets or a loop lol...
 # This is something used wherever multiple invocations are needed for other parts of the profile
 Invoke-Expression (
     [System.Text.StringBuilder]::new().Append("Invoke-Expression (&starship init powershell)").
-        Append("`n").
-        Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
-        Append("`n").
-        Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })").
-        Append("`n").
-        Append("Invoke-Expression (& { (carapace _carapace | Out-String) })")
-    ).ToString() > $null -ErrorAction SilentlyContinue
+    Append("`n").
+    Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
+    Append("`n").
+    Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })").
+    Append("`n").
+    Append("Invoke-Expression (& { (carapace _carapace | Out-String) })")
+).ToString() > $null -ErrorAction SilentlyContinue
 
 # $prompt = ""
 # function Invoke-Starship-PreCommand {
@@ -53,24 +54,30 @@ $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 $env:CARAPACE_BRIDGES = 'all'
 
 # BEGIN - Tooling Functions
-function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
+{
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-if (Test-CommandExists "eza") {
+if (Test-CommandExists "eza")
+{
     $env:LIST_CLIENT = "eza"
 } 
 
-if (Test-CommandExists "atac") {
+if (Test-CommandExists "atac")
+{
     $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
 } 
 
 # Work.sort of
-function checkEnvironment {
-    if ($env:COMPUTERNAME -clike "*LG*") {
+function checkEnvironment
+{
+    if ($env:COMPUTERNAME -clike "*LG*")
+    {
         $env:HOME_PROFILE = $false
         return $true
-    } else {
+    } else
+    {
         return $false
     }
 }
@@ -81,13 +88,15 @@ function checkEnvironment {
 # END - Tooling Functions
 
 # Work
-if (checkEnvironment -eq $true) {
+if (checkEnvironment -eq $true)
+{
     $env:PSModulePath = $workDefaultPSModulePath
     . "$powershell_scripts_dir\work_scripts.ps1"
 }
 
 # Not work/ AKA Home
-if (-not (checkEnvironment)) {
+if (-not (checkEnvironment))
+{
     # $env:PAGER = less
     # $env:BAT_PAGER = less -RF
     $env:PSModulePath = $currentPSModulePath
@@ -97,8 +106,40 @@ if (-not (checkEnvironment)) {
 # Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
 . "$powershell_scripts_dir\general_scripts.ps1"
 
-if ($env:LIST_CLIENT -eq "eza") {
+if ($env:LIST_CLIENT -eq "eza")
+{
     . "$powershell_completions\eza_aliases.ps1"
-} else {
+} else
+{
+    . "$powershell_completions\system_ls_aliases.ps1"
+}
+# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
+. "$powershell_scripts_dir\general_scripts.ps1"
+
+if ($env:LIST_CLIENT -eq "eza")
+{
+    . "$powershell_completions\eza_aliases.ps1"
+} else
+{
+    . "$powershell_completions\system_ls_aliases.ps1"
+}
+# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
+. "$powershell_scripts_dir\general_scripts.ps1"
+
+if ($env:LIST_CLIENT -eq "eza")
+{
+    . "$powershell_completions\eza_aliases.ps1"
+} else
+{
+    . "$powershell_completions\system_ls_aliases.ps1"
+}
+# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
+. "$powershell_scripts_dir\general_scripts.ps1"
+
+if ($env:LIST_CLIENT -eq "eza")
+{
+    . "$powershell_completions\eza_aliases.ps1"
+} else
+{
     . "$powershell_completions\system_ls_aliases.ps1"
 }

@@ -1,6 +1,7 @@
 $env:HOME_PROFILE = $true
 # BEGIN - Navigation functions
 
+
 $home_GitHub = "E:\GitHub"
 $home_gitwork_projects = "$home_GitHub\GitWork_Projects"
 
