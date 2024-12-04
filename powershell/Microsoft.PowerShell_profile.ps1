@@ -113,33 +113,3 @@ if ($env:LIST_CLIENT -eq "eza")
 {
     . "$powershell_completions\system_ls_aliases.ps1"
 }
-# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
-. "$powershell_scripts_dir\general_scripts.ps1"
-
-if ($env:LIST_CLIENT -eq "eza")
-{
-    . "$powershell_completions\eza_aliases.ps1"
-} else
-{
-    . "$powershell_completions\system_ls_aliases.ps1"
-}
-# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
-. "$powershell_scripts_dir\general_scripts.ps1"
-
-if ($env:LIST_CLIENT -eq "eza")
-{
-    . "$powershell_completions\eza_aliases.ps1"
-} else
-{
-    . "$powershell_completions\system_ls_aliases.ps1"
-}
-# Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
-. "$powershell_scripts_dir\general_scripts.ps1"
-
-if ($env:LIST_CLIENT -eq "eza")
-{
-    . "$powershell_completions\eza_aliases.ps1"
-} else
-{
-    . "$powershell_completions\system_ls_aliases.ps1"
-}
