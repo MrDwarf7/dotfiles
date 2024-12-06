@@ -4,8 +4,8 @@
   },
   "assistant": {
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-3-5-sonnet-20240620"
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
@@ -51,7 +51,7 @@
   "theme": {
     "mode": "system",
     "light": "Tokyo Night",
-    "dark": "Tokyo Night Storm"
+    "dark": "Tokyo Night"
   },
 
   "indent_guides": {

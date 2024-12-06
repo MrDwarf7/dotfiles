@@ -220,6 +220,7 @@
       "space l a": "editor::ToggleCodeActions",
       "space l h": "editor::Hover",
       "space l s": "outline::Toggle",
+      // "space l f": "editor::Format", // This doesn't work
       "space h p": "editor::ToggleHunkDiff",
       "space h shift-p": "editor::ExpandAllHunkDiffs",
       "space h r": "editor::RevertSelectedHunks",
