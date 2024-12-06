@@ -96,11 +96,11 @@ git:
   parseEmoji: false
 os:
   copyToClipboardCmd: 'win32yank.exe -i' # See 'Custom Command for Copying to Clipboard' section
-  editPreset: '' # see 'Configuring File Editing' section
-  edit: ''
-  editAtLine: ''
-  editAtLineAndWait: ''
-  open: ''
+  editPreset: 'nvim {{filename}}' # see 'Configuring File Editing' section
+  edit: 'nvim {{filename}}'
+  editAtLine: 'nvim {{filename}}:{{line}}'
+  editAtLineAndWait: 'nvim {{filename}}:{{line}}'
+  open: 'nvim {{filename}}'
   openLink: ''
 refresher:
   refreshInterval: 10 # File/submodule refresh interval in seconds. Auto-refresh can be disabled via option 'git.autoRefresh'.
