@@ -93,6 +93,11 @@ function gfp
     return
 }
 
+function poshup
+{
+    winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+}
+
 function scoopup
 {
     scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
@@ -116,11 +121,12 @@ function sysup
     {
         $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
     }
+
     scoopup
     nodeup
     rustupgrader
-    winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-    Write-Host 
+    poshup
+
     if (checkEnvironment -eq $true)
     {
         Write-Host "Running second rustupgrader"
