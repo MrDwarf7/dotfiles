@@ -95,7 +95,7 @@ git:
   disableForcePushing: false
   parseEmoji: false
 os:
-  copyToClipboardCmd: 'win32yank.exe -i' # See 'Custom Command for Copying to Clipboard' section
+  copyToClipboardCmd: 'echo {{text}} | win32yank.exe -i --crlf $_' # See 'Custom Command for Copying to Clipboard' section
   editPreset: 'nvim {{filename}}' # see 'Configuring File Editing' section
   edit: 'nvim {{filename}}'
   editAtLine: 'nvim {{filename}}:{{line}}'
