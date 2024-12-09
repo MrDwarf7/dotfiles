@@ -45,7 +45,7 @@ function ListTree {
     param (
         $ag = $args
     )
-    $eza_args = "-a --tree --level=2 --icons=always --follow-symlinks";
+    $eza_args = "-a --tree --level=3 --icons=always --follow-symlinks";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 

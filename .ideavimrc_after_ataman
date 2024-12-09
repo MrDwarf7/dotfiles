@@ -202,7 +202,6 @@ let g:NERDTreeMapNewDir='A'
 let g:NERDTreeMapPreview='<Tab>'
 let g:NERDTreeMapActivateNode = 'l'
 let g:NERDTreeMapRename='r'
-
 let g:NERDTreeMapToggle='gz'
 
 " map 

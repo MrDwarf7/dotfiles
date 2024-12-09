@@ -253,6 +253,8 @@ $null = Invoke-Expression (
         Append("New-Alias -Name tmp -Value TempDir -Force").
         Append("`n").
         Append("New-Alias -Name aw -Value launchwsl -Force").
+        Append("`n").
+        Append("New-Alias -Name ma -Value makers $args -Force").
     ToString()
 ) > $null;
 

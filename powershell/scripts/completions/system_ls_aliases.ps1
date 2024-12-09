@@ -1,6 +1,7 @@
 $env:LIST_CLIENT = "ls";
 
-function ClearAndList {
+function ClearAndList
+{
     param ($path = ".")
     Clear-Host;
     Get-ChildItem $path -Force;
@@ -8,13 +9,15 @@ function ClearAndList {
 New-Alias -Name ca -Value ClearAndList -Force
 
 
-function EasyList {
+function EasyList
+{
     param ($path = ".")
     Get-ChildItem $path -Force;
 }
 New-Alias -Name l -Value EasyList -Force
 
-function AltList {
+function AltList
+{
     param ($path = ".")
     Get-ChildItem $path -Force;
 }
