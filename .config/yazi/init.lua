@@ -7,7 +7,7 @@ require("relative-motions"):setup({ only_motions = true })
 -- THEME.git_deleted = ui.Style():fg("red"):bold()
 
 function Linemode:mtime_better()
-	local time = math.floor(self._file.cha.modified or 0)
+	local time = math.floor(self._file.cha.mtime or 0)
 	if time == 0 then
 		time = ""
 	else

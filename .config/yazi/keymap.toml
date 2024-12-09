@@ -9,7 +9,7 @@
 
 [[manager.prepend_keymap]]
 on = "<Enter>"
-run = "plugin --sync smart-enter"
+run = "plugin smart-enter"
 desc = "Enter child dir, or open file"
 
 # shift enter to open a dir
@@ -118,7 +118,7 @@ desc = "run lazygit"
 
 [[manager.prepend_keymap]]
 on = "l"
-run = "plugin --sync smart-enter"
+run = "plugin smart-enter"
 desc = "Enter the child directory or open the file"
 
 # https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
