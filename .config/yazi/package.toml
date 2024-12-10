@@ -1,5 +1,5 @@
 [plugin]
-deps = [{ use = "Reledia/glow", rev = "c2ed51e" }, { use = "Reledia/miller", rev = "40e0265" }, { use = "Reledia/hexyl", rev = "39d3d4e" }, { use = "AnirudhG07/rich-preview", rev = "ee465a5" }, { use = "yazi-rs/plugins:diff", rev = "ec97f88" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "yazi-rs/plugins:git", rev = "ec97f88" }, { use = "yazi-rs/plugins:mime-ext", rev = "ec97f88" }, { use = "yazi-rs/plugins:jump-to-char", rev = "ec97f88" }, { use = "dedukun/relative-motions", rev = "df97039" }, { use = "sharklasers996/eza-preview", rev = "7ca4c25" }]
+deps = [{ use = "Reledia/glow", rev = "c2ed51e" }, { use = "Reledia/miller", rev = "40e0265" }, { use = "Reledia/hexyl", rev = "39d3d4e" }, { use = "AnirudhG07/rich-preview", rev = "8be4d27" }, { use = "yazi-rs/plugins:diff", rev = "ec97f88" }, { use = "Lil-Dank/lazygit", rev = "c82794f" }, { use = "yazi-rs/plugins:git", rev = "ec97f88" }, { use = "yazi-rs/plugins:mime-ext", rev = "ec97f88" }, { use = "yazi-rs/plugins:jump-to-char", rev = "ec97f88" }, { use = "dedukun/relative-motions", rev = "df97039" }, { use = "sharklasers996/eza-preview", rev = "7ca4c25" }, { use = "yazi-rs/plugins:smart-enter", rev = "ec97f88" }]
 
 [flavor]
 deps = []
