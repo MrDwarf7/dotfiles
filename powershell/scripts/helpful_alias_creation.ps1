@@ -214,6 +214,12 @@ function launchwsl {
     wsl.exe -d Arch --cd ~
 }
 
+function GitPushAlias {
+    git push $args
+}
+
+
+
 $null = Invoke-Expression (
     [System.Text.StringBuilder]::new().
         Append("New-Alias -Name npp -Value notepad++.exe -Force").
@@ -255,6 +261,8 @@ $null = Invoke-Expression (
         Append("New-Alias -Name aw -Value launchwsl -Force").
         Append("`n").
         Append("New-Alias -Name ma -Value makers $args -Force").
+        Append("`n").
+        Append("New-Alias -Name gp -Value GitPushAlias -Force").
     ToString()
 ) > $null;
 

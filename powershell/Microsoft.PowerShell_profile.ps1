@@ -5,6 +5,7 @@
 # Installed via pip install typer-cli
 
 
+
 # String builder voodoo - shown to be bette performance than either sets or a loop lol...
 # This is something used wherever multiple invocations are needed for other parts of the profile
 Invoke-Expression (
