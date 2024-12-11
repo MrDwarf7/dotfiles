@@ -51,7 +51,7 @@ set idearefactormode=keep
 " set ideastatusicon=gray
 
 
-sethandler <S-j> n:ide i:vim
+sethandler <S-j> n:vim i:vim
 
 " Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 Plug 'machakann/vim-highlightedyank'
@@ -198,6 +198,8 @@ nnoremap <A-k> :action MoveLineUp<CR>
 
 
 " let g:NERDTreeMapMenu = "m"
+
+let g:NERDTreeMapToggleZoom=''
 
 let g:NERDTreeMapNewFile='a'
 
