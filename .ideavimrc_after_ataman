@@ -46,7 +46,12 @@ set showmode
 
 " Idea specific settings ------------------
 set ideajoin
+set idearefactormode=keep
+" let g:idearefactormode = "keep"
 " set ideastatusicon=gray
+
+
+sethandler <S-j> n:ide i:vim
 
 " Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 Plug 'machakann/vim-highlightedyank'
@@ -60,7 +65,7 @@ Plug 'dbakker/vim-paragraph-motion'
 
 " Plugin activation / Specifics------------------
 " set sneak " Is now depr.
-set which-key
+" set which-key
 set surround
 set quickscope
 set ideamarks
@@ -80,9 +85,9 @@ let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 let g:qs_highlight_on_keys = ['f', 'F', 's', 'S']
 
 " let g:WhichKey_SortOrder = by_description
-let g:WhichKey_FontSize	= 12
+" let g:WhichKey_FontSize	= 12
 " close the popup and don't process formerly typed keys
-let g:WhichKey_ProcessUnknownMappings = "false"
+" let g:WhichKey_ProcessUnknownMappings = "false"
 " let g:WhichKey_DefaultDelay = 500
 
 
@@ -105,8 +110,8 @@ map <A-a> :action copilot.applyInlays
 " nnoremap <C-D> <C-D>zz
 
 " nnoremap <C-A> gg<S-v>G
-let g:WhichKeyDesc_commentray_prefix = "gc"
-let g:WhichKeyDesc_commentray_action = "gcc"
+" let g:WhichKeyDesc_commentray_prefix = "gc"
+" let g:WhichKeyDesc_commentray_action = "gcc"
 
 
 
@@ -119,7 +124,7 @@ inoremap jj <ESC>
 inoremap kk <ESC>
 inoremap <S-CR> <CR>
 
-nnoremap <ESC> :noh<CR>
+nnoremap <ESC> :noh<CR><ESC>
 nnoremap <C-c> <Esc>
 vnoremap <C-c> <Esc>
 
@@ -152,8 +157,8 @@ vnoremap zf :action CollapseSelection<CR><ESC>
 
 " ------------------------- GENERAL -------------------------
 " Formatting -------------------------
-let g:WhichKeyDesc_Formatting = "=="
-let g:WhichKeyDesc_Formatting = "--"
+" let g:WhichKeyDesc_Formatting = "=="
+" let g:WhichKeyDesc_Formatting = "--"
 nnoremap == :action ReformatCode<CR>
 vnoremap == :action ReformatCode<CR>
 nnoremap -- :action OptimizeImports<CR>
@@ -233,7 +238,7 @@ vnoremap gR :action  FindUsages<CR>
 " Toggle reader/easy read whatever - For entire file/all
 
 " Goto Binds -------------------------
-let g:WhichKeyDesc_Goto = "g +Goto"
+" let g:WhichKeyDesc_Goto = "g +Goto"
 
 nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
