@@ -192,6 +192,7 @@ return {
 	{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 	{ "RRethy/vim-illuminate", lazy = true },
+	{ "tridactyl/vim-tridactyl", ft = "tridactyl" },
 }
 
 -- {
