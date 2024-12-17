@@ -140,7 +140,7 @@ function sysup
 #     notepad++ $args
 # }
 
-function scp
+function scpr
 {
     Push-Location "$env:USERPROFILE\scoop\"
     la
