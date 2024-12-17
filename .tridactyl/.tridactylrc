@@ -79,6 +79,7 @@ bind gl buffer #
 
 bind gh home
 bind gH home true
+bind gk tabduplicate
 bind p clipboard open
 bind P clipboard tabopen
 
