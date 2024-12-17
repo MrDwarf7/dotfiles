@@ -211,8 +211,9 @@ let g:NERDTreeMapActivateNode = 'l'
 let g:NERDTreeMapRename='r'
 let g:NERDTreeMapToggle='gz'
 
-" map 
-" $Cut
+let g:NERDTreeMapCloseDir=''
+let g:NERDTreeMapCloseChildren=''
+
 
 
 

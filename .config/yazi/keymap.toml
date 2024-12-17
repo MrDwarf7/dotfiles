@@ -93,7 +93,7 @@ desc = "Cancel the yank status"
 
 [[manager.prepend_keymap]]
 on = "<Space>"
-run = "select --state=none"
+run = "toggle --state=none"
 desc = "Toggle the current selection state"
 
 [[manager.prepend_keymap]]
