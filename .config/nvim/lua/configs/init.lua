@@ -41,6 +41,7 @@ return {
 	{ "folke/neoconf.nvim", lazy = false, cmd = "Neoconf", opts = {} },
 	{
 		"folke/lazydev.nvim",
+		lazy = false,
 		ft = "lua",
 		opts = {
 			library = {

@@ -106,7 +106,7 @@ return {
 
 		opts.mason_lsp_config = {
 			handlers = {
-				function(server_name)
+				function(server_name) ---@param server_name string | table
 					if server_name == vim.tbl_keys(opts.plugin_handled) then
 						return true
 					end
