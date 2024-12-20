@@ -1,6 +1,6 @@
 return {
 	"NeogitOrg/neogit",
-	dev = require("util.maybe").maybe_dev("neogit"),
+	-- dev = require("util.maybe").maybe_dev("neogit"),
 	lazy = true,
 	-- event = "VeryLazy",
 	dependencies = {

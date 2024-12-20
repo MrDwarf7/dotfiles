@@ -6,20 +6,11 @@
 
 -- local telescope_builtin = require("telescope.builtin")
 
-return {
-	"neovim/nvim-lspconfig",
-	lazy = true,
-	event = "BufReadPre",
-	-- "LspAttach",
-	dependencies = {
-		-- { "nvim-telescope/telescope.nvim", lazy = true },
-		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
-		{ "folke/lazydev.nvim", lazy = true },
-		{ "j-hui/fidget.nvim", event = "VeryLazy" },
-	},
-
+--- LSP Keymaps / binds
+---@return table
+local function lsp_maps()
 	-- stylua: ignore start
-	keys = {
+	return {
 		-- map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
 		{ "gd", function() return require("telescope.builtin").lsp_definitions() end, desc = "[G]oto [d]efinition" },
 		{ "gD", function() return vim.lsp.buf.declaration() end, "[G]oto [D]eclration" },
@@ -41,19 +32,30 @@ return {
 		{ "<Leader>lh", function() return vim.diagnostic.open_float() end, desc = "float", },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
-					-- print("Conform required FROM LSP.lua --- IF")
 					return require("conform").format()
 				elseif package.loaded["conform"] == nil then
-					-- print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 				return vim.lsp.buf.format({ async = true })
 				end
 			end,
 			desc = "format [lspconfig]",
-		},
-	},
-	-- stylua: ignore end
+		}
+	}
+end
 
+return {
+	"neovim/nvim-lspconfig",
+	lazy = true,
+	event = "BufReadPre",
+	-- "LspAttach",
+	dependencies = {
+		-- { "nvim-telescope/telescope.nvim", lazy = true },
+		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
+		{ "folke/lazydev.nvim", lazy = true },
+		{ "j-hui/fidget.nvim", event = "VeryLazy" },
+	},
+
+	keys = lsp_maps(),
 	opts = function(_, opts)
 		-- local servers = require("util.lsp_servers")[1]
 		-- local capabilities = require("util.lsp_servers")[2]
@@ -163,16 +165,18 @@ return {
 		vim.lsp.handlers["textDocument/diagnostics_border"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
 			border = "single",
 		})
-
-		require("configs.mason")
+		-- require("configs.mason")
 		vim.diagnostic.config(opts.diagnostic_config)
 
 		-- vim.defer_fn(function()
 		require("mason-tool-installer").setup(opts.mason_tools)
 		-- end, 0)
 
+		local mason_lspconfig = require("mason-lspconfig")
+
 		-- vim.defer_fn(function()
-		require("mason-lspconfig").setup(opts.mason_lsp_config)
+		mason_lspconfig.setup(opts.mason_lsp_config)
 		-- end, 0)
+		mason_lspconfig.setup_handlers(opts.mason_lsp_config.handlers)
 	end,
 }

@@ -22,7 +22,21 @@ M.servers = function()
 
 		cssls = {},
 
-		-- deno = {},
+		-- deno = {
+		-- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+		-- 	settings = {
+		-- 		deno = {
+		-- 			enable = true,
+		-- 			suggest = {
+		-- 				imports = {
+		-- 					hosts = {
+		-- 						["https://deno.land"] = true,
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
