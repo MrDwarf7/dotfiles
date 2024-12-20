@@ -8,7 +8,7 @@ end
 
 return {
 	"sigmaSd/deno-nvim",
-	lazy = true,
+	lazy = false,
 
 	dependencies = {
 		{ "neovim/nvim-lspconfig", lazy = true },
