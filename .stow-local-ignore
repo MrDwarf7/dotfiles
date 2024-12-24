@@ -1,10 +1,13 @@
 .git
 docs
+install_lists
+installer
 tools
-.cargo
+.gitignore
+.gitmodules
+.ignore_filespaths
 .stow-local-ignore
 README.md
 git-clone-worktrees.sh
 git-filter-repo
-installer.sh
-.config/systemd
+old_.aliases.zsh

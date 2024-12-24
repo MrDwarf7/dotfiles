@@ -1,5 +1,6 @@
 ./scoop
 scoop/
+./gh/hosts.*
 
 ./jgit
 jgit
