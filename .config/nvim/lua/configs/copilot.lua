@@ -11,10 +11,6 @@ return {
 		},
 	},
 	opts = {
-
-		-- config = function()
-		-- 	require("copilot").setup({
-
 		panel = {
 			enabled = false, -- Temp disabled to test copilot_cmp
 			auto_refresh = false, -- This is the default setting
@@ -48,8 +44,9 @@ return {
 			},
 		},
 	},
-	config = function(_, opts)
-		-- opts = opts or {}
-		require("copilot").setup(opts)
-	end,
+
+	-- config = function(_, opts)
+	-- 	-- opts = opts or {}
+	-- 	require("copilot").setup(opts)
+	-- end,
 }

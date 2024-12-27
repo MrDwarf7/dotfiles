@@ -59,42 +59,41 @@ return {
 	opts = function(_, opts)
 		-- local servers = require("util.lsp_servers")[1]
 		-- local capabilities = require("util.lsp_servers")[2]
-		local servers = require("util.lsp_servers").servers()
+		local servers_file = require("util.lsp_servers")
+		local servers = servers_file()
 		local capabilities = require("util.lsp_servers").capabilities()
 
-		local ensure_installed = vim.list_extend(vim.tbl_keys(servers) or {}, {
-			"beautysh",
-			"black",
-			"cbfmt",
-			"clang-format",
-			"cmakelang",
-			"cmakelint",
-			"codelldb",
-			"debugpy",
-			"delve",
-			"fixjson",
-			"gopls",
-			"isort",
-			"jsonlint",
-			--"markdown_oxide",
-			-- "mdsf",
-			"mdslw",
-			"mypy",
-			"powershell_es",
-			"prettier",
-			"ruff",
-			"shfmt",
-			"stylua",
-			"sqlfluff",
-			"sql-formatter",
-			"ts-standard",
-			"vulture",
-			"yamlfmt",
-			"csharpier",
-		})
-
 		opts.mason_tools = {
-			ensure_installed = ensure_installed,
+			ensure_installed = servers_file:extend_list({
+				"beautysh",
+				"black",
+				"cbfmt",
+				"clang-format",
+				"cmakelang",
+				"cmakelint",
+				"codelldb",
+				"debugpy",
+				"delve",
+				"fixjson",
+				"gopls",
+				"isort",
+				"jsonlint",
+				--"markdown_oxide",
+				-- "mdsf",
+				"mdslw",
+				"mypy",
+				"powershell_es",
+				"prettier",
+				"ruff",
+				"shfmt",
+				"stylua",
+				"sqlfluff",
+				"sql-formatter",
+				"ts-standard",
+				"vulture",
+				"yamlfmt",
+				"csharpier",
+			}),
 		}
 
 		opts.plugin_handled = {

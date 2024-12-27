@@ -1,4 +1,120 @@
+-----@alias snacks.Config table<string, any>
+
+_G.dd = function(...)
+	Snacks.debug.inspect(...)
+end
+_G.bt = function()
+	Snacks.debug.backtrace()
+end
+vim.print = _G.dd
+
 return {
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		---@type snacks.Config
+		opts = {
+			animate = { enabled = true },
+			bigfile = { enabled = true },
+			bufdelete = {
+				enabled = true,
+				notify = true,
+				size = 1.5 * 1024 * 1024, -- 1.5 MB
+			},
+			dashboard = require("util.snack_dashboard"),
+			debug = { enabled = true },
+			dim = { enabled = true, animate = { enabled = false } },
+			-- git = { enable = true },
+			-- gitbrowse = { enable = true },
+			indent = {
+				enabled = true,
+
+				animate = {
+					duration = {
+						step = 15,
+					},
+				},
+				-- scope = {
+				-- 	char = "▎",
+				-- },
+				chunk = {
+					enabled = true,
+					only_current = true,
+					char = {
+						corner_top = "┌",
+						corner_bottom = "└",
+						-- corner_top = "╭",
+						-- corner_bottom = "╰",
+						horizontal = "─",
+						vertical = "│",
+						arrow = ">",
+					},
+				},
+				blank = {
+					char = ">>>",
+				},
+			},
+
+			-- animate = {
+			-- 	enabled = false,
+			-- }
+			input = { enabled = true },
+			lazygit = { enabled = true, configure = true },
+			-- notifier = { enabled = true },
+			-- notify = { enabled = true },
+			-- profiler = { enabled = true },
+			quickfile = { enabled = true },
+			scope = { enabled = true },
+			-- scroll = { enabled = true, animate = { duration = { step = 5, total = 100 } } },
+			statuscolumn = { enabled = true },
+			-- toggle = {
+			-- 	enabled = true,
+			-- 	map = vim.keymap.set,
+			-- 	which_key = true,
+			-- },
+			-- words = { enabled = true },
+		},
+		keys = {
+			-- stylua: ignore start
+			{ "<Leader>td", function() local dim = require("snacks").dim if dim.enabled ~= nil and dim.enabled == true then dim.disable() else dim.enable() end end },
+			{ "<Leader>go", function() local lg = require("snacks").lazygit Snacks.lazygit() end },
+			{ "<Leader>t.", function() Snacks.scratch() end, desc = "Toggle Scratch" },
+			{ "<Leader>.", function() Snacks.scratch.select() end, desc = "Select Scratch" },
+			{ "<Leader>`", function () Snacks.terminal() end, desc = "Open Terminal" },
+
+			-- { "<Leader>pq", function() local prof = require("snacks").profiler Snacks.toggle.profiler():map("<Leader>pq") end },
+			-- { "<Leader>pw", function() Snacks.profiler.scratch() end, desc = "Profiler Window" },
+			-- stylua: ignore end
+		},
+		init = function()
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "VeryLazy",
+				callback = function()
+					-- Debugging functions -- can use dd(thing) or bt() for debug print & backtrace
+					-- end debugging
+
+					-- end callback
+				end,
+			})
+
+			-- vim.api.nvim_create_autocmd("LspProgress", {
+			-- 	---@param ev { data: {client_id: integer, params: lsp.ProgressParams }}
+			-- 	callback = function(ev)
+			-- 		local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+			-- 		vim.notify(vim.lsp.status(), "info", {
+			-- 			id = "lsp_progress",
+			-- 			title = "LSP Progress",
+			-- 			opts = function(notif)
+			-- 				notif.icon = ev.data.params.value.kind == "end" and " "
+			-- 					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+			-- 			end,
+			-- 		})
+			-- 	end,
+			-- })
+		end,
+	},
+
 	{
 		"folke/tokyonight.nvim",
 		lazy = false,
@@ -198,7 +314,11 @@ return {
 	-- { "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },
 	-- { "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = true },
 
-	{ "vrslev/cmp-pypi", ft = { "python" }, dependencies = { { "nvim-lua/plenary.nvim", lazy = false } } },
+	{
+		"vrslev/cmp-pypi",
+		ft = { "python" },
+		dependencies = { { "nvim-lua/plenary.nvim", lazy = false } },
+	},
 
 	{
 		"zbirenbaum/copilot-cmp",

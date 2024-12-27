@@ -1,13 +1,25 @@
 local M = {}
 
+setmetatable(M, {
+	__call = function(self)
+		return self.servers()
+	end,
+	__index = function(self, key)
+		if type(key) == "string" then
+			dd(key)
+			return self.servers()[key]
+		end
+	end,
+})
+
 M.capabilities = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 	return capabilities
 end
 
--- return {
 M.servers = function()
+	local self = M
 	-- local capabilities = M.capabilities()
 	return {
 		bacon = {},
@@ -16,7 +28,7 @@ M.servers = function()
 		clangd = {
 			cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
 			single_file_support = true,
-			capabilities = M.capabilities,
+			capabilities = self:capabilities(),
 		},
 		neocmake = {},
 
@@ -193,13 +205,16 @@ M.servers = function()
 	}
 end
 
--- M.setup = function()
--- 	local capabilities = M.capabilities()
--- 	local servers = M.servers()
--- 	return {
--- 		capabilities = capabilities,
--- 		servers = servers,
--- 	}
--- end
+M.keys = function(self)
+	return vim.tbl_keys(self:servers())
+end
+
+M.extend_table = function(self, tbl)
+	return vim.tbl_extend("force", self:servers(), tbl)
+end
+
+M.extend_list = function(self, tbl)
+	return vim.list_extend(self:keys(), tbl)
+end
 
 return M
