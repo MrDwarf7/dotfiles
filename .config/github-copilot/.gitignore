@@ -2,3 +2,6 @@
 
 hosts.json
 hosts.*
+./iu*/**/*
+iu*/**/*
+/iu*/**/*
