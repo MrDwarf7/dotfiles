@@ -71,7 +71,7 @@ run = "copy dirname"
 desc = "Copy the directory path"
 
 [[manager.prepend_keymap]]
-on = ["y", "N"]
+on = ["y", "n"]
 run = "copy filename"
 desc = "Copy the filename"
 
