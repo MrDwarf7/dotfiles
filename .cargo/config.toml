@@ -32,6 +32,13 @@ clipP = "clippy -- -W clippy::pedantic"
 [build]
 rustc-wrapper = 'C:\Users\<< YOUR USERNAME>>\scoop\shims\sccache.exe'
 
+## Experimental features
+[unstable]
+codegen-backend = true
+
+[profile.dev]
+codegen-backend = "cranelift"
+
 ## Other alias examples from docs
 # recursive_example = "rr --example recursions"
 # space_example = ["run", "--release", "--", "\"command list\""]
