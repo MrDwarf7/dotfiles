@@ -1,11 +1,6 @@
 #!/usr/bin/env fish
 
 function fish_user_key_bindings
-    # bind -M insert -m default jk backward-char force-repaint
-    # bind -M insert -m default jj backward-char force-repaint
-    # bind -M insert -m default kj backward-char force-repaint
-    # bind -M insert -m default kk backward-char force-repaint
-
     set -x fish_sequence_key_delay_ms 160
 
     bind -M default H beginning-of-line
