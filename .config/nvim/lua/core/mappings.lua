@@ -156,8 +156,22 @@ map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>b]", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>b[", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
-map("n", "<Leader>bc", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
-map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
+map("n", "<Leader>bc", function()
+	require("snacks").bufdelete()
+end, silent_opts, { desc = "[X]close" })
+
+map("n", "<Leader>x", function()
+	require("snacks").bufdelete()
+end, silent_opts, { desc = "[X]close" })
+
+map("n", "<Leader><S-x>", function()
+	require("snacks").bufdelete().all(_)
+end, silent_opts, { desc = "[X]close" })
+
+-- map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
+
+-- map("n", "<Leader>bc", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
+-- map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 
 map("n", "[f", vim.cmd.cprev, { desc = "Previous Quickfix" })
 map("n", "]f", vim.cmd.cnext, { desc = "Next Quickfix" })

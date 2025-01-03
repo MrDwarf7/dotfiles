@@ -67,7 +67,7 @@ return {
 				"Neogit",
 				"neogit",
 				"treesitter",
-				"zig",
+				-- "zig",
 			}
 
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
@@ -89,7 +89,7 @@ return {
 				"Neogit",
 				"neogit",
 				"treesitter",
-				"zig",
+				-- "zig",
 				"persistence",
 			}
 			if vim.tbl_contains(disabled_ft, vim.bo[bufnr].filetype) then
@@ -102,4 +102,14 @@ return {
 			}
 		end,
 	},
+
+	setup = function(_, opts)
+		-- Conditional formatter
+		if vim.g.os == "Linux" or vim.g.os == "unix" then
+			if vim.fn.system("nixos-version") == 0 then
+				opts.formatters_by_ft.nix = { "nixfmt" }
+			end
+		end
+		require("conform").setup(opts)
+	end,
 }

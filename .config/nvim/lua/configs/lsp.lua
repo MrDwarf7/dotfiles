@@ -6,20 +6,11 @@
 
 -- local telescope_builtin = require("telescope.builtin")
 
-return {
-	"neovim/nvim-lspconfig",
-	lazy = true,
-	event = "BufReadPre",
-	-- "LspAttach",
-	dependencies = {
-		-- { "nvim-telescope/telescope.nvim", lazy = true },
-		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
-		{ "folke/lazydev.nvim", lazy = true },
-		{ "j-hui/fidget.nvim", event = "VeryLazy" },
-	},
-
+--- LSP Keymaps / binds
+---@return table
+local function lsp_maps()
 	-- stylua: ignore start
-	keys = {
+	return {
 		-- map("gd", vim.lsp.buf.definition, "[G]oto [d]efinition") -- Prefer built-in
 		{ "gd", function() return require("telescope.builtin").lsp_definitions() end, desc = "[G]oto [d]efinition" },
 		{ "gD", function() return vim.lsp.buf.declaration() end, "[G]oto [D]eclration" },
@@ -41,56 +32,68 @@ return {
 		{ "<Leader>lh", function() return vim.diagnostic.open_float() end, desc = "float", },
 		{ "<Leader>lf", function()
 				if package.loaded["conform"] then
-					-- print("Conform required FROM LSP.lua --- IF")
 					return require("conform").format()
 				elseif package.loaded["conform"] == nil then
-					-- print("Conform required FROM LSP.lua --- ELSEIF")
 					pcall(require, "conform")
 				return vim.lsp.buf.format({ async = true })
 				end
 			end,
 			desc = "format [lspconfig]",
-		},
+		}
+	}
+end
+
+return {
+	"neovim/nvim-lspconfig",
+	lazy = true,
+	event = "BufReadPre",
+	-- "LspAttach",
+	dependencies = {
+		-- { "nvim-telescope/telescope.nvim", lazy = true },
+		{ "folke/neoconf.nvim", cmd = "Neoconf", lazy = true },
+		{ "folke/lazydev.nvim", lazy = true },
+		{ "j-hui/fidget.nvim", event = "VeryLazy" },
 	},
-	-- stylua: ignore end
 
+	keys = lsp_maps(),
 	opts = function(_, opts)
-		local servers = require("util.lsp_servers")[1]
-		local capabilities = require("util.lsp_servers")[2]
-
-		local ensure_installed = vim.list_extend(vim.tbl_keys(servers) or {}, {
-			"beautysh",
-			"black",
-			"cbfmt",
-			"clang-format",
-			"cmakelang",
-			"cmakelint",
-			"codelldb",
-			"debugpy",
-			"delve",
-			"fixjson",
-			"gopls",
-			"isort",
-			"jsonlint",
-			--"markdown_oxide",
-			-- "mdsf",
-			"mdslw",
-			"mypy",
-			"powershell_es",
-			"prettier",
-			"ruff",
-			"shfmt",
-			"stylua",
-			"sqlfluff",
-			"sql-formatter",
-			"ts-standard",
-			"vulture",
-			"yamlfmt",
-			"csharpier",
-		})
+		-- local servers = require("util.lsp_servers")[1]
+		-- local capabilities = require("util.lsp_servers")[2]
+		local servers_file = require("util.lsp_servers")
+		local servers = servers_file()
+		local capabilities = require("util.lsp_servers").capabilities()
 
 		opts.mason_tools = {
-			ensure_installed = ensure_installed,
+			ensure_installed = servers_file:extend_list({
+				"beautysh",
+				"black",
+				"cbfmt",
+				"clang-format",
+				"cmakelang",
+				"cmakelint",
+				"codelldb",
+				"debugpy",
+				"delve",
+				"fixjson",
+				"gopls",
+				"isort",
+				"jsonlint",
+				--"markdown_oxide",
+				-- "mdsf",
+				"mdslw",
+				"mypy",
+				"powershell_es",
+				"prettier",
+				"ruff",
+				"shfmt",
+				"stylua",
+				"sqlfluff",
+				"sql-formatter",
+				"ts-standard",
+				"vulture",
+				"yamlfmt",
+				"csharpier",
+			}),
 		}
 
 		opts.plugin_handled = {
@@ -104,7 +107,7 @@ return {
 
 		opts.mason_lsp_config = {
 			handlers = {
-				function(server_name)
+				function(server_name) ---@param server_name string | table
 					if server_name == vim.tbl_keys(opts.plugin_handled) then
 						return true
 					end
@@ -161,16 +164,18 @@ return {
 		vim.lsp.handlers["textDocument/diagnostics_border"] = vim.lsp.with(vim.lsp.handlers.diagnostic, {
 			border = "single",
 		})
-
-		require("configs.mason")
+		-- require("configs.mason")
 		vim.diagnostic.config(opts.diagnostic_config)
 
 		-- vim.defer_fn(function()
 		require("mason-tool-installer").setup(opts.mason_tools)
 		-- end, 0)
 
+		local mason_lspconfig = require("mason-lspconfig")
+
 		-- vim.defer_fn(function()
-		require("mason-lspconfig").setup(opts.mason_lsp_config)
+		mason_lspconfig.setup(opts.mason_lsp_config)
 		-- end, 0)
+		mason_lspconfig.setup_handlers(opts.mason_lsp_config.handlers)
 	end,
 }

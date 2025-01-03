@@ -1,8 +1,16 @@
 local M = {}
 
-local home = vim.env.HOME
-local zls_exe = home .. "/.zls/zls.exe"
-local zig_exe = home .. "/.zig/zig.exe"
+setmetatable(M, {
+	__call = function(self)
+		return self.servers()
+	end,
+	__index = function(self, key)
+		if type(key) == "string" then
+			dd(key)
+			return self.servers()[key]
+		end
+	end,
+})
 
 M.capabilities = function()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -10,22 +18,37 @@ M.capabilities = function()
 	return capabilities
 end
 
--- return {
 M.servers = function()
+	local self = M
 	-- local capabilities = M.capabilities()
-	return {
+	local servers = {
+		bacon = {},
 		bashls = {},
 		biome = {},
 		clangd = {
 			cmd = { "clangd", "--background-index", "--offset-encoding=utf-16" },
 			single_file_support = true,
-			capabilities = M.capabilities,
+			capabilities = self:capabilities(),
 		},
 		neocmake = {},
 
 		cssls = {},
 
-		-- deno = {},
+		-- deno = {
+		-- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
+		-- 	settings = {
+		-- 		deno = {
+		-- 			enable = true,
+		-- 			suggest = {
+		-- 				imports = {
+		-- 					hosts = {
+		-- 						["https://deno.land"] = true,
+		-- 					},
+		-- 				},
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 		docker_compose_language_service = {},
 		dockerls = {},
 		-- erlangls = {},
@@ -135,7 +158,6 @@ M.servers = function()
 				},
 			},
 		},
-		-- ruhttp://lgnrvbpd401:8080/Data/RPAVMLinks.htmlff_lsp = {
 		ruff = {
 			filetypes = { "python" },
 		},
@@ -157,11 +179,12 @@ M.servers = function()
 		vimls = {},
 		yamlls = {},
 		zls = {
-			cmd = { zls_exe },
-			capabilities = vim.tbl_deep_extend("keep", M.capabilities() or {}, {}),
+			-- zls = {
+			-- 	cmd = { zls_exe },
+			-- 	capabilities = vim.tbl_deep_extend("keep", M.capabilities() or {}, {}),
 			settings = {
 				zls = {
-					zig_exe_path = zig_exe,
+					-- zig_exe_path = zig_exe,
 					enableAutofix = true,
 					enable_snippets = true,
 					enable_ast_check_diagnostics = true,
@@ -177,20 +200,32 @@ M.servers = function()
 					max_detail_length = 1048576,
 				},
 			},
+			-- },
 		},
 	}
+
+	-- Coniditional servers
+	if vim.g.os == "Linux" or vim.g.os == "unix" then
+		-- check if we're on nixOS
+		if vim.fn.system("nixos-version") == 0 then
+			table.insert(servers, "nixd")
+			servers.nixd = {}
+		end
+	end
+
+	return servers
 end
 
--- M.setup = function()
--- 	local capabilities = M.capabilities()
--- 	local servers = M.servers()
--- 	return {
--- 		capabilities = capabilities,
--- 		servers = servers,
--- 	}
--- end
+M.keys = function(self)
+	return vim.tbl_keys(self:servers())
+end
 
-return {
-	M.servers(),
-	M.capabilities(),
-}
+M.extend_table = function(self, tbl)
+	return vim.tbl_extend("force", self:servers(), tbl)
+end
+
+M.extend_list = function(self, tbl)
+	return vim.list_extend(self:keys(), tbl)
+end
+
+return M

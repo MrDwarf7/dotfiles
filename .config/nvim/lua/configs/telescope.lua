@@ -318,7 +318,8 @@ return {
 	config = function(_, opts)
 		actions = actions or require("telescope.actions")
 
-		opts.mappings = {
+		-- opts.mappings = {
+		local t = {
 			i = {
 				["<C-k>"] = actions.move_selection_previous,
 				["<C-j>"] = actions.move_selection_next,
@@ -364,6 +365,9 @@ return {
 				-- ["<C-l>"] = actions.cycle_previewers_prev,
 			},
 		}
+
+		opts.mappings = {}
+		table.insert(opts.mappings, t)
 
 		telescope.setup(opts)
 

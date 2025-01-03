@@ -1,48 +1,23 @@
 return {
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		lazy = false,
-		ft = { "markdown", "Avante" },
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-			-- "echasnovski/mini.nvim", -- if you use the mini.nvim suite
-			-- 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-			opts = {
-				file_types = { "markdown", "Avante" },
-			},
-
-			keys = {
-				{
-					"<Leader>tm",
-					function()
-						require("render-markdown").toggle()
-					end,
-					desc = "Toggle markdown preview",
-				},
-			},
+	"MeanderingProgrammer/render-markdown.nvim",
+	lazy = true,
+	ft = { "markdown", "Avante", "help" },
+	dependencies = {
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
+		-- "echasnovski/mini.nvim", -- if you use the mini.nvim suite
+		-- 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+		opts = {
+			file_types = { "markdown", "Avante" },
 		},
-		{
-			-- install without yarn or npm
-			-- {
-			-- 	"iamcco/markdown-preview.nvim",
-			-- 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-			-- 	lazy = false,
-			-- 	ft = { "markdown" },
-			-- 	build = function()
-			-- 		vim.fn["mkdp#util#install"]()
-			-- 	end,
-			-- },
 
-			-- install with yarn or npm
+		keys = {
 			{
-				"iamcco/markdown-preview.nvim",
-				cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-				build = "cd app && pnpm install",
-				init = function()
-					vim.g.mkdp_filetypes = { "markdown" }
+				"<Leader>tm",
+				function()
+					require("render-markdown").toggle()
 				end,
-				ft = { "markdown" },
+				desc = "Toggle markdown preview",
 			},
 		},
 	},

@@ -30,8 +30,41 @@ return {
 		-- local luasnip = require("luasnip")
 		local cmp = require("cmp")
 
+		require("lspkind").init({
+			mode = "symbol",
+			preset = "codicons",
+			symbol_map = {
+				Class = "󰠱",
+				Color = "󰏘",
+				Constant = "󰏿",
+				Constructor = "",
+				Copilot = "",
+				Enum = "",
+				EnumMember = "",
+				Event = "",
+				Field = "󰜢",
+				File = "󰈙",
+				Folder = "󰉋",
+				Function = "󰊕",
+				Interface = "",
+				Keyword = "󰌋",
+				Method = "󰆧",
+				Module = "",
+				Operator = "󰆕",
+				Property = "󰜢",
+				Reference = "󰈇",
+				Snippet = "",
+				Struct = "󰙅",
+				Text = "󰉿",
+				TypeParameter = "",
+				Unit = "󰑭",
+				Value = "󰎠",
+				Variable = "󰀫",
+			},
+		})
+
 		-- opts.cmp_config =
-		opts = {
+		return {
 			snippet = {
 				expand = function(args)
 					vim.snippet.expand(args.body)
@@ -153,39 +186,5 @@ return {
 
 		-- opts.lspkind_config = {}
 		-- local lspkind_config = {}
-		require("lspkind").init({
-			mode = "symbol",
-			preset = "codicons",
-			symbol_map = {
-				Class = "󰠱",
-				Color = "󰏘",
-				Constant = "󰏿",
-				Constructor = "",
-				Copilot = "",
-				Enum = "",
-				EnumMember = "",
-				Event = "",
-				Field = "󰜢",
-				File = "󰈙",
-				Folder = "󰉋",
-				Function = "󰊕",
-				Interface = "",
-				Keyword = "󰌋",
-				Method = "󰆧",
-				Module = "",
-				Operator = "󰆕",
-				Property = "󰜢",
-				Reference = "󰈇",
-				Snippet = "",
-				Struct = "󰙅",
-				Text = "󰉿",
-				TypeParameter = "",
-				Unit = "󰑭",
-				Value = "󰎠",
-				Variable = "󰀫",
-			},
-		})
-
-		return opts
 	end,
 }

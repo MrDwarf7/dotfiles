@@ -97,6 +97,7 @@ return {
 			"regex",
 			"rust",
 			"scss",
+			-- "surrealdb",
 			"toml",
 			"tsx",
 			"typescript",

@@ -5,10 +5,13 @@ return {
 	dependencies = {
 		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
-	opts = function(_, opts)
-		local trouble = require("trouble")
 
-		local symbols = trouble.statusline({
+	opts = function(_, opts)
+		if opts == nil then
+			opts = {}
+		end
+
+		local symbols = require("trouble").statusline({
 			mode = "lsp_document_symbols",
 			groups = {},
 			title = false,
@@ -17,7 +20,7 @@ return {
 			hl_group = "lualine_c_normal",
 		})
 
-		vim.tbl_deep_extend("force", {}, opts, {
+		return table.insert(opts, {
 			theme = "tokyonight",
 			sections = {
 				lualine_c = {
