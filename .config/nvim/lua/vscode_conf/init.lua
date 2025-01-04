@@ -2,24 +2,6 @@
 print("Vscode specific init file loads...")
 local vscode = require("vscode-neovim")
 
--- local moveCursor = function(d)
--- 	return function()
--- 		if vim.v.count == 0 and vim.fn.reg_recording() == "" and vim.fn.reg_executing() == "" then
--- 			return "g" .. d
--- 		else
--- 			return d
--- 		end
--- 	end
--- end
-
--- vim.keymap.set("", "k", function()
--- 	return moveCursor("k")
--- end, { expr = true, remap = true, silent = true })
---
--- vim.keymap.set("", "j", function()
--- 	return moveCursor("j")
--- end, { expr = true, remap = true, silent = true })
-
 ---@return table
 local setup = function()
 	if not vim.g.vscode then
