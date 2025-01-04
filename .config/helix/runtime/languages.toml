@@ -18,6 +18,9 @@ jsonnet-language-server = { command = "jsonnet-language-server", args = [
     "--lint",
 ] }
 marksman = { command = "marksman", args = ["server"] }
+nil = { command = "nil" }
+nixd = { command = "nixd" }
+
 # omnisharp = { command = "OmniSharp", args = [ "--languageserver" ] } # Is the other for I think C++?
 prisma-language-server = { command = "prisma-language-server", args = [
     "--stdio",
@@ -371,6 +374,25 @@ indent = { tab-width = 2, unit = "  " }
 [[grammar]]
 name = "css"
 source = { git = "https://github.com/tree-sitter/tree-sitter-css", rev = "769203d0f9abe1a9a691ac2b9fe4bb4397a73c51" }
+
+
+# -----------------------------------------------------------------------------
+
+
+[[language]]
+name = "nix"
+scope = "source.nix"
+injection-regex = "nix"
+file-types = ["nix"]
+shebangs = []
+comment-token = "#"
+language-servers = [ "nil", "nixd" ]
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "nix"
+source = { git = "https://github.com/nix-community/tree-sitter-nix", rev = "1b69cf1fa92366eefbe6863c184e5d2ece5f187d" }
+
 
 
 # -----------------------------------------------------------------------------

@@ -9,7 +9,7 @@ theme = "1_tokyonight_storm"
 ##############################################
 
 [editor]
-# evil = true
+evil = true
 line-number = "relative"
 scrolloff = 6
 # shell = ""
@@ -149,6 +149,10 @@ w = "global_search"
 # n = "goto_next_buffer"
 # p = "goto_previous_buffer"
 
+# Toggles
+[keys.normal.space.t]
+i = ":toggle-option lsp.display-inlay-hints"
+
 
 [keys.normal.space.l] # LSP
 f = ":format"
@@ -225,11 +229,11 @@ C-g =":show-directory"
 
 
  # Centering viewport on page scrolling
-C-u = ["half_page_up", "align_view_center"]
-C-d = ["half_page_down", "align_view_center"]
+# C-u = ["half_page_up", "align_view_center"]
+# C-d = ["half_page_down", "align_view_center"]
 
-# C-u = ["half_page_up"]
-# C-d = ["half_page_down"]
+C-u = ["half_page_up"]
+C-d = ["half_page_down"]
 
 # C-e = ["scroll_down", "move_line_down"]
 # C-y = ["scroll_up", "move_line_up"]
@@ -626,8 +630,15 @@ C-backspace = [
 ]
 # move_prev_long_word_start
 
+# handles jj and jk
 [keys.insert.j]
 j = "normal_mode"
+k = "normal_mode"
+
+# handles kk and kj
+[keys.insert.k]
+j = "normal_mode"
+k = "normal_mode"
 
 
 [keys.select]
