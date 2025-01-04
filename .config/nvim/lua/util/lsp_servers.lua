@@ -21,7 +21,7 @@ end
 M.servers = function()
 	local self = M
 	-- local capabilities = M.capabilities()
-	return {
+	local servers = {
 		bacon = {},
 		bashls = {},
 		biome = {},
@@ -203,6 +203,17 @@ M.servers = function()
 			-- },
 		},
 	}
+
+	-- Coniditional servers
+	if vim.g.os == "Linux" or vim.g.os == "unix" then
+		-- check if we're on nixOS
+		if vim.fn.system("nixos-version") == 0 then
+			table.insert(servers, "nixd")
+			servers.nixd = {}
+		end
+	end
+
+	return servers
 end
 
 M.keys = function(self)
