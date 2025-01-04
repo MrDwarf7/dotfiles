@@ -8,6 +8,12 @@ return {
 			default_prog = { "powershell.exe", "-NoLogo" },
 			-- local_echo_threshold_ms = 15,
 		},
+		{
+			name = "nixbook",
+			remote_address = "nixbook",
+			multiplexing = "WezTerm",
+			default_prog = { "fish", "-l" },
+		},
 	},
 	-- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
 	unix_domains = {},
