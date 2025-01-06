@@ -1,0 +1,4 @@
+# ./plugins
+# plugins/
+# !plugins/smart-enter.*
+!/plugins

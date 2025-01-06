@@ -61,6 +61,11 @@ prepend_previewers = [
         { mime = "application/x-7z-compressed", run = "ouch" },
         { mime = "application/x-rar", run = "ouch" },
         { mime = "application/x-xz", run = "ouch" },
+
+        { mime = "application/zstd", run = "ouch" },
+        { mime = "application/x-zstd", run = "ouch" },
+        { mime = "application/x-zstd-compressed-tar", run = "ouch" },
+
         { mime = "application/toml", run = "nvim %*" },
 
         { mime = ".gitconfig", run = "nvim %*", for = "windows" },
