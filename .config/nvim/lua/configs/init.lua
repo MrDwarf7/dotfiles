@@ -22,7 +22,7 @@ return {
 				notify = true,
 				size = 1.5 * 1024 * 1024, -- 1.5 MB
 			},
-			dashboard = require("util.snack_dashboard"),
+			-- dashboard = require("util.snack_dashboard"),
 			debug = { enabled = true },
 			dim = { enabled = true, animate = { enabled = false } },
 			-- git = { enable = true },
