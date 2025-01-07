@@ -4,5 +4,8 @@
         "assign-type-mismatch",
         "duplicate-doc-field",
         "duplicate-set-field"
+    ],
+    "diagnostics.globals": [
+        "vim"
     ]
 }
