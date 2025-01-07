@@ -39,6 +39,7 @@
     undoh = reset --hard HEAD~1
     unst = restore --staged
     uncm = reset --soft HEAD~1
+    reorder = rebase -i HEAD~5
 [push]
     autoSetupRemote = true
 [difftool "sourcetree"]
