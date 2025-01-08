@@ -1,3 +1,6 @@
+# Resides in Appdata/Local
+# Anything in AppData/Raoming is no longer used
+
 gui:
   # stuff relating to the UI
   windowSize: 'normal' # one of 'normal' | 'half' | 'full' default is 'normal'
@@ -126,8 +129,8 @@ keybinding:
     nextItem: '<down>' # go one line down
     prevItem-alt: 'k' # go one line up
     nextItem-alt: 'j' # go one line down
-    prevPage: '<c-p>' # go to next page in list -- NOTE:
-    nextPage: '<c-n>' # go to previous page in list -- NOTE:
+    prevPage: '<c-u>' # go to next page in list -- NOTE:
+    nextPage: '<c-d>' # go to previous page in list -- NOTE:
     gotoTop: 'g' # go to top of list
     gotoBottom: 'G' # go to bottom of list
     scrollLeft: 'H' # scroll left within list view
@@ -153,8 +156,8 @@ keybinding:
     scrollDownMain: '<pgdown>' # main panel scroll down
     scrollUpMain-alt1: 'K' # main panel scroll up
     scrollDownMain-alt1: 'J' # main panel scroll down
-    scrollUpMain-alt2: '<c-u>' # main panel scroll up
-    scrollDownMain-alt2: '<c-d>' # main panel scroll down
+    scrollUpMain-alt2: '<c-y>' # main panel scroll up
+    scrollDownMain-alt2: '<c-e>' # main panel scroll down
     executeShellCommand: ':'
     createRebaseOptionsMenu: 'm'
     pushFiles: 'P'
@@ -169,14 +172,14 @@ keybinding:
     redo: '<c-z>'
     filteringMenu: '<c-b>'
     diffingMenu: 'W'
-    diffingMenu-alt: '<c-e>' # deprecated
+    diffingMenu-alt: <disabled>
     copyToClipboard: '<c-o>'
     submitEditorText: '<enter>'
     extrasMenu: '@'
     toggleWhitespaceInDiffView: '<c-w>'
     increaseContextInDiffView: '}'
     decreaseContextInDiffView: '{'
-    toggleRangeSelect: 'v'
+    toggleRangeSelect: 'V'
     rangeSelectUp: '<s-up>'
     rangeSelectDown: '<s-down>'
   status:
@@ -231,7 +234,8 @@ keybinding:
     tagCommit: 'T'
     checkoutCommit: '<space>'
     resetCherryPick: '<c-R>'
-    #copyCommitMessageToClipboard: '<c-y>'
+    copyCommitAttributeToClipboard: y
+    # copyCommitMessageToClipboard: '<c-y>'
 
     openLogMenu: '<c-l>'
     viewBisectOptions: 'b'
