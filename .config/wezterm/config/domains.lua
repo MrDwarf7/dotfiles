@@ -5,7 +5,7 @@ return {
 			name = "the_yeti",
 			remote_address = "the_yeti",
 			multiplexing = "WezTerm",
-			default_prog = { "powershell.exe", "-NoLogo" },
+			default_prog = { "pwsh.exe", "-NoLogo" },
 			-- local_echo_threshold_ms = 15,
 		},
 		{
