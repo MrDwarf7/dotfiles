@@ -43,7 +43,7 @@ $env:PYTHON_PATH=[NullString]
 
 # Dotfiles copy
 $env:HOME_PROFILE = $false
-$env:POSH_GIT_ENABLED = $true
+# $env:POSH_GIT_ENABLED = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
 $env:BAT_CONFIG_PATH = "$dotfiles_dir\.config\bat\bat.conf"
 $env:BAT_THEME="Monokai Extended Bright"

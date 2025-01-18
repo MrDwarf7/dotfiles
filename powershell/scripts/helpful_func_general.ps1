@@ -93,10 +93,10 @@ function gfp
     return
 }
 
-function poshup
-{
-    winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-}
+# function poshup
+# {
+#     winget upgrade JanDeDobbeleer.OhMyPosh -s winget
+# }
 
 function scoopup
 {
@@ -125,7 +125,7 @@ function sysup
     scoopup
     nodeup
     rustupgrader
-    poshup
+    # poshup
 
     if (checkEnvironment -eq $true)
     {

@@ -26,7 +26,7 @@ $powershell_completions = "$powershell_scripts_dir\completions\"
 
 Import-Module gsudoModule
 Import-Module git-aliases -DisableNameChecking
-Import-Module posh-cargo
+# Import-Module posh-cargo
 Import-Module DockerCompletion
 Import-Module PSReadLine
 
