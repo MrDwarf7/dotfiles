@@ -1,13 +1,10 @@
 local capabilities = require("util.lsp_servers").capabilities()
 
---- Root pattern to handle Deno
----@return table
-local function root_pat()
-	return {
-		root = { "package.json " },
-		exclude = { "deno.json", "deno.jsonc" },
-	}
-end
+-------- Root pattern to handle Deno
+--------@return table
+-----local function root_pat()
+-----	return
+-----end
 
 --- TSServer capabilities
 ---@param opts? table
@@ -50,7 +47,10 @@ return {
 		opts = vim.tbl_deep_extend("force", opts, {
 			settings = {
 				capabilities = capabilities,
-				root_dir = root_pat(),
+				root_dir = {
+					root = { "package.json " },
+					exclude = { "deno.json", "deno.jsonc" },
+				},
 				single_file_support = false,
 				tsserver_file_preferences = tsserv_cap(),
 				tsserver_plugins = {

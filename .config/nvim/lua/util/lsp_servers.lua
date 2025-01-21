@@ -33,6 +33,7 @@ M.servers = function()
 		neocmake = {},
 
 		cssls = {},
+		deno = {},
 
 		-- deno = {
 		-- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
