@@ -1,5 +1,9 @@
 local M = {}
 
+vim.g.markdown_denced_languaged = {
+	"ts=typescript",
+}
+
 setmetatable(M, {
 	__call = function(self)
 		return self.servers()
