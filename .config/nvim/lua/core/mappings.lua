@@ -1,4 +1,5 @@
 ---@diagnostic disable: redundant-parameter
+local text_ins_fns = require("util.text_insertions")
 local current_line = vim.api.nvim_get_current_line
 local g = vim.g
 local map = vim.keymap.set
@@ -228,3 +229,7 @@ map("n", "<Leader>ti", function()
 	vim.cmd("redraw!")
 	-- end
 end, { expr = true, desc = "Toggle Inlay Hints" })
+
+map("n", "<Leader>t-", function()
+	text_ins_fns.text_breaker_line("#", 5, "-", 100)
+end)
