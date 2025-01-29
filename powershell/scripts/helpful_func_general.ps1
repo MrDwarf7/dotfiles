@@ -62,6 +62,32 @@ function y
     Remove-Item -Path $tmp
 }
 
+function DustExclude {
+    param(
+    [string]$path = "."
+    )
+    $p = $path;
+    $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\'"
+
+    if ($null -eq $p) {
+        $p = ""
+    } elseif ($p -eq 'C' -or 'c' -or "C:\" -or "c:\") {
+        $p = "C:\"
+    } else {
+        $p = $p # not empty && not c = cwd
+    }
+
+    if (-not (Test-CommandExists "dust.exe"))
+    {
+        Write-Host "Dust command found."
+        return
+    }
+
+    dust.exe $exclude $p $args
+}
+
+New-Alias -Name dustex -Value DustExclude -Force
+
 function lzd
 {
     lazydocker $args
