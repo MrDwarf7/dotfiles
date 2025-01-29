@@ -7,6 +7,10 @@
       "h": "vim::Left",
       "left": "vim::Left",
       "backspace": "vim::Backspace",
+      "ctrl-shift-i": "assistant::InlineAssist",
+      // "ctrl->": "assistant::QuoteSelection",
+      // "ctrl-<": "assistant::InsertIntoEditor",
+
       // Honestly not too sure what this solves lol
       "j": [
         "vim::Down",
@@ -32,7 +36,7 @@
       "up": "vim::Up",
       "l": "vim::Right",
       "right": "vim::Right",
-      "space": ["vim::PushOperator", "vim::Space"],
+      // "space": ["vim::PushOperator", "vim::Space"], // RECENT
 
       "$": "vim::EndOfLine",
       "shift-l": "vim::EndOfLine",
@@ -122,7 +126,7 @@
       "g y": "editor::GoToTypeDefinition",
       "g shift-i": "editor::GoToImplementation",
       "g x": "editor::OpenUrl",
-      "g f": "editor::OpenFile",
+      "g f": "editor::OpenSelectedFilename",
       "g n": "vim::SelectNextMatch",
       "g shift-n": "vim::SelectPreviousMatch",
       "g l": "vim::SelectNext",
@@ -190,6 +194,7 @@
   {
     "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
+      "space escape": ["vim::NormalBefore", "vim::Right"],
       ///////// using keystroke interp
       // "space e": ["workspace::SendKeystrokes", ": projectpaneltogglefocus enter"],
       // "space shift-e": ["workspace::SendKeystrokes", ": RevealInProjectPanel enter"],
@@ -220,14 +225,15 @@
       "space l a": "editor::ToggleCodeActions",
       "space l h": "editor::Hover",
       "space l s": "outline::Toggle",
-      "space l shift-f": "editor::Format", // This doesn't work
-      "space h p": "editor::ToggleHunkDiff",
+      "space l f": "editor::Format", // This doesn't work
+      // "space h p": "editor::ToggleHunkDiff", // RECENT
       "space h shift-p": "editor::ExpandAllHunkDiffs",
       "space h r": "editor::RevertSelectedHunks",
       "space h b": "editor::ToggleGitBlameInline",
       "space h shift-b": "editor::ToggleGitBlame",
       "space t b": "workspace::ToggleLeftDock",
       "space t i": "editor::ToggleInlayHints",
+      "space t a": "assistant::ToggleFocus",
 
       "ctrl-w t": "pane::ReopenClosedItem",
       "ctrl-w left": ["workspace::ActivatePaneInDirection", "Left"],
@@ -306,7 +312,7 @@
       "escape": "editor::Cancel",
       "ctrl-[": "editor::Cancel",
 
-      "space": ["vim::PushOperator", "vim::Space"],
+      // "space": ["vim::PushOperator", "vim::Space"], // RECENT
 
       ":": "command_palette::Toggle",
       ".": "vim::Repeat",
@@ -437,6 +443,7 @@
       "j k": "vim::NormalBefore",
       "k j": "vim::NormalBefore",
       "k k": "vim::NormalBefore",
+      "ctrl-shift-i": "assistant::InlineAssist",
 
       "escape": "vim::NormalBefore",
       "ctrl-c": "vim::NormalBefore",
@@ -451,7 +458,9 @@
       "ctrl-u": "editor::DeleteToBeginningOfLine",
       "ctrl-t": "vim::Indent",
       "ctrl-d": "vim::Outdent",
-      "ctrl-k": ["vim::PushOperator", { "Digraph": {} }],
+      "ctrl-j": "editor::ContextMenuNext", // FINALLYYYYYYYYYYYYYYYYYYYYYY
+      "ctrl-k": "editor::ContextMenuPrev", // FINALLYYYYYYYYYYYYYYYYYYYYYY
+      // "ctrl-k": ["vim::PushOperator", { "Digraph": {} }],
       "ctrl-r": ["vim::PushOperator", "Register"]
     }
   },
@@ -552,7 +561,7 @@
     "bindings": {
       "d": "vim::CurrentLine",
       "s": ["vim::PushOperator", "DeleteSurrounds"],
-      "o": "editor::ToggleHunkDiff", // "d o"
+      // "o": "editor::ToggleHunkDiff", // "d o" // RECENT
       "p": "editor::RevertSelectedHunks" // "d p"
     }
   },
@@ -713,4 +722,19 @@
       // "ctrl-k": "editor::ContextMenuPrev"
     }
   }
+
+  // {
+  //   "context": "AssistantPanel",
+  //   "bindings": {
+  //     "ctrl-k c": "assistant::CopyCode",
+  //     "ctrl-shift-e": "project_panel::ToggleFocus",
+  //     "ctrl-g": "search::SelectNextMatch",
+  //     "ctrl-shift-g": "search::SelectPrevMatch",
+  //     "ctrl-alt-/": "assistant::ToggleModelSelector",
+  //     "ctrl-k h": "assistant::DeployHistory",
+  //     "ctrl-k l": "assistant::DeployPromptLibrary",
+  //     "new": "assistant::NewContext",
+  //     "ctrl-n": "assistant::NewContext"
+  //   }
+  // }
 ]

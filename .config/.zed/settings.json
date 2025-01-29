@@ -4,8 +4,9 @@
   },
   "assistant": {
     "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-3-5-sonnet-latest"
+      "provider": "ollama",
+      "model": "deepseek-r1:14b"
+      // "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
@@ -24,9 +25,9 @@
 
   "buffer_line_height": "standard",
 
-  "buffer_font_size": 12.0,
+  "buffer_font_size": 13.0,
   "buffer_font_family": "Zed Plex Mono",
-  "buffer_font_weight": 400.0,
+  // "buffer_font_weight": 400.0,
   "buffer_font_features": {
     "calt": false
   },
@@ -51,7 +52,7 @@
   "theme": {
     "mode": "system",
     "light": "Tokyo Night",
-    "dark": "Tokyo Night"
+    "dark": "Catppuccin Macchiato"
   },
 
   "indent_guides": {
@@ -136,6 +137,8 @@
   "vim": {
     "use_system_clipboard": "always",
     "use_multiline_find": true,
-    "use_smartcase_find": true
+    "use_smartcase_find": true,
+    "highlight_on_yank_duration": 60,
+    "toggle_relative_line_numbers": false
   }
 }
