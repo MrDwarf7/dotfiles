@@ -43,9 +43,10 @@ New-Alias -Name l -Value AltList -Force
 
 function ListTree {
     param (
-        $ag = $args
+        [string]$ag = $args,
+        [int]$d = 3
     )
-    $eza_args = "-a --color=always --follow-symlinks --icons=always --git --tree --level=3";
+    $eza_args = "-a --color=always --follow-symlinks --icons=always --git --tree --level=$d";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
 
