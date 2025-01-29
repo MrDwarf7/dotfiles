@@ -30,6 +30,6 @@ if status is-interactive
     # Handled by conf.d/01-pre.fish
     # source (/bin/mise activate fish | psub)
 
-    mise activate fish | source
+    # mise activate fish | source
 
 end
