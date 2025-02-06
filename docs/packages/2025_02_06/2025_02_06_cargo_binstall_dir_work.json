@@ -1,0 +1,13 @@
+{
+  "name": "cargo-watch",
+  "version_req": "*",
+  "current_version": "8.5.2",
+  "source": {
+    "source_type": "Registry",
+    "url": "https://github.com/rust-lang/crates.io-index"
+  },
+  "target": "x86_64-pc-windows-msvc",
+  "bins": [
+    "cargo-watch.exe"
+  ]
+}

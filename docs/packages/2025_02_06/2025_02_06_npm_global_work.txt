@@ -1,0 +1,4 @@
+C:\Users\boughbl\scoop\apps\nodejs\current -> .\
++-- corepack@0.31.0
+`-- npm@11.1.0
+
