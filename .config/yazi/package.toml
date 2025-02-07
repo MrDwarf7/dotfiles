@@ -1,34 +1,4 @@
 [[plugin.deps]]
-use = "MrDwarf7/hexyl"
-rev = "f085e8c"
-hash = "e6951bbb9cb62e352cc323dda2878cf6"
-
-[[plugin.deps]]
-use = "Reledia/glow"
-rev = "5ce76dc"
-hash = "52e5f5c602962e7cbf874da28f52ba45"
-
-[[plugin.deps]]
-use = "Reledia/miller"
-rev = "40e0265"
-hash = "2d6d77583162aaf0a599e7a3091b5878"
-
-[[plugin.deps]]
-use = "AnirudhG07/rich-preview"
-rev = "6752254"
-hash = "c9a3d0731e7d7340e2c6d6126b1f3aa3"
-
-[[plugin.deps]]
-use = "yazi-rs/plugins:diff"
-rev = "02d18be"
-hash = "284f6694e3b1a4afd686acf1052acd90"
-
-[[plugin.deps]]
-use = "Lil-Dank/lazygit"
-rev = "c82794f"
-hash = "2b0c33928986f126d5c5a4cac31a6b46"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:git"
 rev = "02d18be"
 hash = "4d6a07559118975e2dee983d27474d70"
@@ -44,11 +14,6 @@ rev = "02d18be"
 hash = "72c66a0b3d60f8377eb9db5e1d8b60b2"
 
 [[plugin.deps]]
-use = "dedukun/relative-motions"
-rev = "0d9c8cf"
-hash = "561ad872c77b95360c2657c5e8d395ed"
-
-[[plugin.deps]]
 use = "sharklasers996/eza-preview"
 rev = "7ca4c25"
 hash = "d1efd1931dd738af0d6e4f41dd491313"
@@ -57,6 +22,41 @@ hash = "d1efd1931dd738af0d6e4f41dd491313"
 use = "yazi-rs/plugins:smart-enter"
 rev = "02d18be"
 hash = "c1a2739e9ef2d837030ccb4267be3ed1"
+
+[[plugin.deps]]
+use = "MrDwarf7/glow"
+rev = "9677ea8"
+hash = "6d4dcabf15383cd9c0a916c70df9b829"
+
+[[plugin.deps]]
+use = "MrDwarf7/hexyl"
+rev = "683dce2"
+hash = "e6951bbb9cb62e352cc323dda2878cf6"
+
+[[plugin.deps]]
+use = "MrDwarf7/miller"
+rev = "1950fdb"
+hash = "c640692d228841b338cacbdf3dd8b27a"
+
+[[plugin.deps]]
+use = "MrDwarf7/rich-preview"
+rev = "6567dc7"
+hash = "f6d196c67bcc63da3eee9cb74a8f0774"
+
+[[plugin.deps]]
+use = "MrDwarf7/relative-motions"
+rev = "172dc45"
+hash = "e9818023e35dec80e7c4b9be88b3313e"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "ce6fb75"
+hash = "ed6c185514109d7c5463f609282b220c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "02d18be"
+hash = "284f6694e3b1a4afd686acf1052acd90"
 
 [flavor]
 deps = []

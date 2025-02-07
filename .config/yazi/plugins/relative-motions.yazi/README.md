@@ -13,18 +13,10 @@ https://github.com/dedukun/relative-motions.yazi/assets/25795432/04fb186a-5efe-4
 If you use the latest Yazi from main branch
 
 ```sh
-ya pack -a dedukun/relative-motions
+ya pack -a MrDwarf7/relative-motions
 ```
 
 If you are using <= v0.3.3
-
-```sh
-# Linux/macOS
-git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git ~/.config/yazi/plugins/relative-motions.yazi
-
-# Windows
-git clone --branch 0.3.3 https://github.com/dedukun/relative-motions.yazi.git %AppData%\yazi\config\plugins\relative-motions.yazi
-```
 
 ## Configuration
 
@@ -35,47 +27,47 @@ If you want to use the numbers directly to start a motion add this to your `keym
 ```toml
 [[manager.prepend_keymap]]
 on = [ "1" ]
-run = "plugin relative-motions --args=1"
+run = "plugin relative-motions 1"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "2" ]
-run = "plugin relative-motions --args=2"
+run = "plugin relative-motions 2"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "3" ]
-run = "plugin relative-motions --args=3"
+run = "plugin relative-motions 3"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "4" ]
-run = "plugin relative-motions --args=4"
+run = "plugin relative-motions 4"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "5" ]
-run = "plugin relative-motions --args=5"
+run = "plugin relative-motions 5"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "6" ]
-run = "plugin relative-motions --args=6"
+run = "plugin relative-motions 6"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "7" ]
-run = "plugin relative-motions --args=7"
+run = "plugin relative-motions 7"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "8" ]
-run = "plugin relative-motions --args=8"
+run = "plugin relative-motions 8"
 desc = "Move in relative steps"
 
 [[manager.prepend_keymap]]
 on = [ "9" ]
-run = "plugin relative-motions --args=9"
+run = "plugin relative-motions 9"
 desc = "Move in relative steps"
 ```
 
@@ -113,7 +105,7 @@ require("relative-motions"):setup({ show_numbers="relative", show_motion = true,
 > The `show_numbers` and `show_motion` functionalities overwrite [`Current:redraw`](https://github.com/sxyazi/yazi/blob/e3c91115a2c096724303a0b364e7625691e4beba/yazi-plugin/preset/components/current.lua#L28)
 > and [`Status:children_redraw`](https://github.com/sxyazi/yazi/blob/e3c91115a2c096724303a0b364e7625691e4beba/yazi-plugin/preset/components/status.lua#L177) respectively.
 > If you have custom implementations for any of this functions
-> you can add the provided `Entity:number` and `Status:motion` to your implementations, just check [here](https://github.com/dedukun/relative-motions.yazi/blob/main/init.lua#L126) how we are doing things.
+> you can add the provided `Entity:number` and `Status:motion` to your implementations, just check [here](https://github.com/MrDwarf7/relative-motions.yazi/blob/main/main.lua#L126) how we are doing things.
 
 ## Usage
 

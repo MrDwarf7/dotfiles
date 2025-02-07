@@ -22,12 +22,12 @@ Preview file types using `rich` command in Yazi. This plugin allows preview for 
 To install this plugin, simply run-
 
 ```bash
-ya pack -a AnirudhG07/rich-preview
+ya pack -a MrDwarf7/rich-preview
 ## For linux and MacOS
-git clone https://github.com/AnirudhG07/rich-preview.yazi.git ~/.config/yazi/plugins/rich-preview.yazi
+git clone https://github.com/MrDwarf7/rich-preview.yazi.git ~/.config/yazi/plugins/rich-preview.yazi
 
 ## For Windows
-git clone https://github.com/AnirudhG07/rich-preview.yazi.git %AppData%\yazi\config\plugins\rich-preview.yazi
+git clone https://github.com/MrDwarf7/rich-preview.yazi.git %AppData%\yazi\config\plugins\rich-preview.yazi
 ```
 
 ## Usages

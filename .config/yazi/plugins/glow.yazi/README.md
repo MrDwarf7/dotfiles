@@ -3,7 +3,7 @@
 Plugin for [Yazi](https://github.com/sxyazi/yazi) to preview markdown files with [glow](https://github.com/charmbracelet/glow). To install, run the below mentioned command:
 
 ```bash
-ya pack -a Reledia/glow
+ya pack -a MrDwarf7/glow
 ```
 
 then include it in your `yazi.toml` to use:
@@ -19,8 +19,9 @@ Make sure you have [glow](https://github.com/charmbracelet/glow) installed, and 
 
 ## Feature
 
-+ You can modify line wrap in `init.lua`, the current value is 55.
-+ You can press `ctrl+e` to scroll up and `ctrl+y` to scroll down the readme file in preview panel in yazi: (add this to `keymap.toml`)
+- You can modify line wrap in `init.lua`, the current value is 55.
+- You can press `ctrl+e` to scroll up and `ctrl+y` to scroll down the readme file in preview panel in yazi: (add this to `keymap.toml`)
+
 ```toml
 prepend_keymap = [
     # glow.yazi

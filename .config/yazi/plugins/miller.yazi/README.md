@@ -1,6 +1,6 @@
 # miller.yazi
 
-[Miller](https://github.com/johnkerl/miller) now in [yazi](https://github.com/sxyazi/yazi). To install, use the command `ya pack -a Reledia/miller` and add to your `yazi.toml`:
+[Miller](https://github.com/johnkerl/miller) now in [yazi](https://github.com/sxyazi/yazi). To install, use the command `ya pack -a MrDwarf7/miller` and add to your `yazi.toml`:
 
 ```toml
 [plugin]
@@ -11,7 +11,7 @@ prepend_previewers = [
 
 ## Preview
 
-![preview](https://github.com/Reledia/miller.yazi/blob/main/preview.png?raw=true)
+![preview](https://github.com/MrDwarf7/miller.yazi/blob/main/preview.png?raw=true)
 
 ## Color
 
