@@ -29,6 +29,7 @@ set findhighlighttimeout 10000
 set smoothscroll true
 
 " No longer do weird tablose + tabprev
+unbind d
 unbind D 
 " No longer use p as direct paste for searching - use ctrl for it
 unbind p 
