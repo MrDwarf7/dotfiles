@@ -62,6 +62,11 @@ function y
     Remove-Item -Path $tmp
 }
 
+function t 
+{
+    tv $args
+}
+
 function DustExclude {
     param(
     [string]$path = "."
