@@ -71,15 +71,14 @@ function DustExclude {
     param(
     [string]$path = "."
     )
-    $p = $path;
     $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\'"
 
-    if ($null -eq $p) {
-        $p = ""
-    } elseif ($p -eq 'C' -or 'c' -or "C:\" -or "c:\") {
-        $p = "C:\"
+    if ($null -eq $path) {
+        $path = $path
+    } elseif ($path -eq 'C' -or 'c' -or "C:\" -or "c:\") {
+        $path = "C:\"
     } else {
-        $p = $p # not empty && not c = cwd
+        $path = $path # not empty && not c = cwd
     }
 
     if (-not (Test-CommandExists "dust.exe"))
@@ -88,7 +87,9 @@ function DustExclude {
         return
     }
 
-    dust.exe $exclude $p $args
+    Write-Host "Running Dust with exclude flags."
+
+    dust.exe $exclude $path $args
 }
 
 New-Alias -Name dustex -Value DustExclude -Force
