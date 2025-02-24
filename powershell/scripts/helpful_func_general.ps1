@@ -71,14 +71,14 @@ function DustExclude {
     param(
     [string]$path = "."
     )
-    $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\'"
+    $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\*'"
 
     if ($null -eq $path) {
         $path = $path
     } elseif ($path -eq 'C' -or 'c' -or "C:\" -or "c:\") {
         $path = "C:\"
     } else {
-        $path = $path # not empty && not c = cwd
+        $path = $path # not empty && not c drive
     }
 
     if (-not (Test-CommandExists "dust.exe"))
