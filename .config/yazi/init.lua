@@ -1,11 +1,11 @@
 ---@diagnostic disable: cast-local-type
 require("git"):setup()
 
-require("starship"):setup({
-	hide_flags = false,
-	flags_after_prompt = true,
-	config_file = "~\\dotfiles\\.config\\starship\\starship_yazi.toml", -- Slightly altered version to deal with Yazi's spacing at top of panel
-})
+-- require("starship"):setup({
+-- 	hide_flags = false,
+-- 	flags_after_prompt = true,
+-- 	config_file = "~\\dotfiles\\.config\\starship\\starship_yazi.toml", -- Slightly altered version to deal with Yazi's spacing at top of panel
+-- })
 
 require("relative-motions"):setup({ only_motions = true })
 
