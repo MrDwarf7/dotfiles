@@ -1,4 +1,5 @@
 import os
+import re
 import subprocess
 import json
 from datetime import datetime
@@ -7,8 +8,11 @@ from json.decoder import JSONDecodeError
 
 home_profile = os.environ.get("HOME_PROFILE")
 user_home = os.environ.get("USERPROFILE")
+username = os.environ.get("USERNAME")
 
 date_str = datetime.now().strftime("%Y_%m_%d")
+
+removal_pattern = r"C:\\Users\\.*?\\"
 
 
 file_command_map = {
@@ -90,15 +94,19 @@ def dump_mapped(output_dir):
             filename = f"{date_str}_{filename_base}_{suffix}.txt"
 
         result = run_command(command)
+
         if result is not None:
             try:
                 # We attempt to parse the result as JSON
                 # If it fails we just write it normally; as a txt file
                 data = json.loads(result)
                 json_filename = filename.replace(".txt", ".json")
+                filename = json_filename  # re-assign required to ensure we still clear anything
+                print("Write json")
                 write_as_json(json_filename, data)
 
             except JSONDecodeError as _:
+                print("Write default")
                 write_as_default(filename, result)
                 continue
 
@@ -108,6 +116,33 @@ def dump_mapped(output_dir):
             except FileNotFoundError as fnfe:
                 print(f"Error: {fnfe}")
                 continue
+
+            print("Removing stuff")
+            replace_username(filename)
+
+
+def replace_username(file_path: str, replacement="USERNAME") -> None:
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            content = file.read()
+
+            new_content = re.sub(
+                r"C:\\Users\\([A-zA-Z0-9._-]+)\\",
+                rf"C:\\Users\\{replacement}\\",
+                content,
+            )
+
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(new_content)
+    except FileNotFoundError as fnfe:
+        print(f"Error: {fnfe}")
+        return None
+    except re.error as ree:
+        print(f"Error: {ree}")
+        return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 
 def main():
