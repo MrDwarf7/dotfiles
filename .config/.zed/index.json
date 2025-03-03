@@ -113,17 +113,17 @@
               "GraphQL"
             ],
             "language_ids": {
-              "JSON": "json",
+              "Svelte": "svelte",
+              "JSONC": "jsonc",
               "Astro": "astro",
               "JavaScript": "javascript",
-              "CSS": "css",
-              "JSONC": "jsonc",
               "TSX": "typescriptreact",
               "JSX": "javascriptreact",
-              "Vue.js": "vuejs",
-              "GraphQL": "graphql",
               "TypeScript": "typescript",
-              "Svelte": "svelte"
+              "JSON": "json",
+              "CSS": "css",
+              "Vue.js": "vuejs",
+              "GraphQL": "graphql"
             },
             "code_action_kinds": null
           }
@@ -139,7 +139,7 @@
       "manifest": {
         "id": "catppuccin",
         "name": "Catppuccin",
-        "version": "0.2.19",
+        "version": "0.2.20",
         "schema_version": 1,
         "description": "🦀 Soothing pastel theme for Zed",
         "repository": "https://github.com/catppuccin/zed",
@@ -275,7 +275,7 @@
       "manifest": {
         "id": "deno",
         "name": "Deno",
-        "version": "0.0.2",
+        "version": "0.1.0",
         "schema_version": 1,
         "description": "Deno support.",
         "repository": "https://github.com/zed-industries/zed",
@@ -284,7 +284,7 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.0.6"
+          "version": "0.1.0"
         },
         "themes": [],
         "icon_themes": [],
@@ -300,8 +300,8 @@
               "JSDoc"
             ],
             "language_ids": {
-              "TypeScript": "typescript",
               "TSX": "typescriptreact",
+              "TypeScript": "typescript",
               "JavaScript": "javascript"
             },
             "code_action_kinds": [
@@ -427,12 +427,12 @@
               "CSS"
             ],
             "language_ids": {
+              "ERB": "eruby",
+              "PHP": "php",
+              "HTML": "html",
               "TSX": "typescriptreact",
               "CSS": "css",
-              "HTML": "html",
-              "PHP": "php",
-              "JavaScript": "javascriptreact",
-              "ERB": "eruby"
+              "JavaScript": "javascriptreact"
             },
             "code_action_kinds": null
           }
@@ -548,7 +548,7 @@
       "manifest": {
         "id": "gleam",
         "name": "Gleam",
-        "version": "0.2.1",
+        "version": "0.3.0",
         "schema_version": 1,
         "description": "Gleam support.",
         "repository": "https://github.com/gleam-lang/zed-gleam",
@@ -567,7 +567,7 @@
         "grammars": {
           "gleam": {
             "repository": "https://github.com/gleam-lang/tree-sitter-gleam",
-            "rev": "426e67087fd62be5f4533581b5916b2cf010fb5b",
+            "rev": "066704e4826699e754d351e3bbe12bf2e51de9d8",
             "path": null
           }
         },
@@ -597,8 +597,8 @@
       "manifest": {
         "id": "graphene",
         "name": "Graphene Theme",
-        "version": "0.2.0",
-        "schema_version": 0,
+        "version": "0.2.1",
+        "schema_version": 1,
         "description": "A practical dark theme for Zed.",
         "repository": "https://github.com/adinack/graphene",
         "authors": [
@@ -654,8 +654,8 @@
             "language": "HTML",
             "languages": [],
             "language_ids": {
-              "HTML": "html",
-              "CSS": "css"
+              "CSS": "css",
+              "HTML": "html"
             },
             "code_action_kinds": null
           }
@@ -671,9 +671,9 @@
       "manifest": {
         "id": "ini",
         "name": "ini",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "schema_version": 1,
-        "description": "Ini support and conf, config etc too",
+        "description": "Support for ini and related config files (ini, conf, cfg, config, editorconfig) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
         "repository": "https://github.com/bajrangCoder/zed-ini",
         "authors": [
           "Raunak Raj <bajrangcoders@gmail.com>"
@@ -926,10 +926,10 @@
       "manifest": {
         "id": "meson",
         "name": "Meson",
-        "version": "0.2.0",
+        "version": "0.3.0",
         "schema_version": 1,
         "description": "Meson language support for the Zed editor",
-        "repository": "https://codeberg.org/hanna/zed-meson",
+        "repository": "https://github.com/hqnna/zed-meson",
         "authors": [
           "hanna rose <hanna@hanna.lol>"
         ],
@@ -1089,9 +1089,9 @@
       "manifest": {
         "id": "nu",
         "name": "Nu",
-        "version": "0.0.3",
+        "version": "0.0.6",
         "schema_version": 1,
-        "description": "Nu language support for Zed",
+        "description": "Nushell language support for Zed",
         "repository": "https://github.com/zed-extensions/nu",
         "authors": [
           "Mikayla Maki <mikayla@zed.dev>",
@@ -1100,7 +1100,7 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.0.6"
+          "version": "0.2.0"
         },
         "themes": [],
         "icon_themes": [],
@@ -1110,7 +1110,7 @@
         "grammars": {
           "nu": {
             "repository": "https://github.com/nushell/tree-sitter-nu",
-            "rev": "b090676f0205f52debb93745b9ad788385583276",
+            "rev": "b99dc3b7b26337d84f95c0de4dda81077b03e5c7",
             "path": null
           }
         },
@@ -1179,12 +1179,13 @@
       "manifest": {
         "id": "prisma",
         "name": "Prisma",
-        "version": "0.0.4",
+        "version": "0.1.0",
         "schema_version": 1,
         "description": "Prisma support.",
-        "repository": "https://github.com/zed-industries/zed",
+        "repository": "https://github.com/zed-extensions/prisma",
         "authors": [
-          "Matthew Gramigna <matthewgramigna@gmail.com>"
+          "Matthew Gramigna <matthewgramigna@gmail.com>",
+          "Victor Quiroz <git@victorhqc.com>"
         ],
         "lib": {
           "kind": "Rust",
@@ -1198,7 +1199,7 @@
         "grammars": {
           "prisma": {
             "repository": "https://github.com/victorhqc/tree-sitter-prisma",
-            "rev": "eca2596a355b1a9952b4f80f8f9caed300a272b5",
+            "rev": "beeac50812da9765e29cbb2af1324783033cdca3",
             "path": null
           }
         },
@@ -1249,6 +1250,42 @@
             "language": null,
             "languages": [
               "Proto"
+            ],
+            "language_ids": {},
+            "code_action_kinds": null
+          }
+        },
+        "context_servers": {},
+        "slash_commands": {},
+        "indexed_docs_providers": {},
+        "snippets": null
+      },
+      "dev": false
+    },
+    "pylsp": {
+      "manifest": {
+        "id": "pylsp",
+        "name": "Python LSP",
+        "version": "0.0.1",
+        "schema_version": 1,
+        "description": "python-lsp extension for Zed",
+        "repository": "https://github.com/rgbkrk/python-lsp-zed-extension",
+        "authors": [
+          "Kyle Kelley <rgbkrk@gmail.com>"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.6"
+        },
+        "themes": [],
+        "icon_themes": [],
+        "languages": [],
+        "grammars": {},
+        "language_servers": {
+          "pylsp": {
+            "language": null,
+            "languages": [
+              "Python"
             ],
             "language_ids": {},
             "code_action_kinds": null
@@ -1372,8 +1409,8 @@
       "manifest": {
         "id": "the-dark-side",
         "name": "The Dark Side",
-        "version": "0.2.5",
-        "schema_version": 0,
+        "version": "0.3.0",
+        "schema_version": 1,
         "description": "Join the dark side.",
         "repository": "https://github.com/Imgkl/the-dark-side",
         "authors": [
@@ -1436,7 +1473,7 @@
       "manifest": {
         "id": "tokyo-night",
         "name": "Tokyo Night Themes",
-        "version": "0.4.0",
+        "version": "0.5.0",
         "schema_version": 1,
         "description": "Tokyo Night Themes",
         "repository": "https://github.com/ssaunderss/zed-tokyo-night",
@@ -1465,7 +1502,7 @@
       "manifest": {
         "id": "toml",
         "name": "TOML",
-        "version": "0.1.2",
+        "version": "0.1.3",
         "schema_version": 1,
         "description": "TOML support.",
         "repository": "https://github.com/zed-industries/zed",
@@ -2015,7 +2052,7 @@
         "path_suffixes": [
           "nu"
         ],
-        "first_line_pattern": null
+        "first_line_pattern": "^#!.*\\b(?:nu)\\b"
       },
       "hidden": false,
       "grammar": "nu"
@@ -2143,7 +2180,18 @@
           "ini",
           "conf",
           "cfg",
-          "config"
+          "config",
+          ".editorconfig",
+          "automount",
+          "mount",
+          "path",
+          "scope",
+          "service",
+          "slice",
+          "socket",
+          "swap",
+          "target",
+          "timer"
         ],
         "first_line_pattern": null
       },
