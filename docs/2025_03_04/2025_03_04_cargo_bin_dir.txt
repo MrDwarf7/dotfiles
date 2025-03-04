@@ -1,0 +1,10 @@
+Permissions Size User  Date Modified Name
+drwxr-xr-x     - dwarf 24 Apr  2024  .
+drwxr-xr-x     - dwarf 12 Feb 17:02  ..
+.rwxr-xr-x   31M dwarf 24 Apr  2024  cargo-binstall
+.rwxr-xr-x  7.0M dwarf  5 Mar  2024  cargo-cache
+.rwxr-xr-x   24M dwarf 22 Jan  2024  cargo-modules
+.rwxr-xr-x  7.5M dwarf  1 Mar  2024  cargo-watch
+.rwxr-xr-x  7.1M dwarf 22 Mar  2024  cargo-zigbuild
+.rwxr-xr-x   35M dwarf 29 Feb  2024  polars
+.rwxr-xr-x  8.7M dwarf 11 Jan  2024  rustlings
