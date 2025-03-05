@@ -113,6 +113,26 @@ function Utils.tbl_deep_extend(behavior, ...)
 	return result
 end
 
+function Utils.url_matcher()
+	local wezterm = require("wezterm")
+	require("wezterm")
+	return wezterm.action.QuickSelectArgs({
+		label = "open url",
+		patterns = {
+			"\\((https?://\\S+)\\)",
+			"\\[(https?://\\S+)\\]",
+			"\\{(https?://\\S+)\\}",
+			"<(https?://\\S+)>",
+			"\\bhttps?://\\S+[)/a-zA-Z0-9-]+",
+		},
+		action = wezterm.action_callback(function(window, pane)
+			local url = window:get_selection_text_for_pane(pane)
+			wezterm.log_info("opening: " .. url)
+			wezterm.open_with(url)
+		end),
+	})
+end
+
 return setmetatable(Utils, {
 	__index = Utils,
 	__path = (...):match("(.*[\\/])"),
