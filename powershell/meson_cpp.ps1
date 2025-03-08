@@ -72,7 +72,6 @@ if ($MyInvocation.InvocationName -eq ".\meson_cpp.ps1") {
 #     return Write-Host "Error: $LASTEXITCODE"
 # }
 
-
 New-Alias -Name mc -Value InitCMeson -Force
 New-Alias -Name mb -Value BuildScript -Force
 New-Alias -Name mr -Value RunTheExe -Force

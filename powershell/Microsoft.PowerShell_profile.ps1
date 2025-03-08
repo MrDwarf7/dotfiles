@@ -1,11 +1,3 @@
-#Update OhMyPosh using this command -
-# winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-#
-# Typer-Cli completion.
-# Installed via pip install typer-cli
-
-
-
 # String builder voodoo - shown to be bette performance than either sets or a loop lol...
 # This is something used wherever multiple invocations are needed for other parts of the profile
 Invoke-Expression (
@@ -42,10 +34,10 @@ $env:PSModulePath=[NullString]
 $env:PYTHON_PATH=[NullString]
 
 # Dotfiles copy
-$env:HOME_PROFILE = $false
-# $env:POSH_GIT_ENABLED = $true
+$env:HOME_PROFILE = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
-$env:BAT_CONFIG_PATH = "$dotfiles_dir\.config\bat\bat.conf"
+$env:BAT_CONFIG_DIR = "$dotfiles_dir\.config\bat"
+$env:BAT_CONFIG_PATH = "$env:BAT_CONFIG_DIR\bat.conf"
 $env:BAT_THEME="Monokai Extended Bright"
 $env:EDITOR = $env:VISUAL = 'nvim'
 $env:EDITOR = 'nvim'
@@ -55,62 +47,58 @@ $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 $env:CARAPACE_BRIDGES = 'all'
 
 # BEGIN - Tooling Functions
-function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command)
-{
+function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
     return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
-if (Test-CommandExists "eza")
-{
+if (Test-CommandExists "eza") {
     $env:LIST_CLIENT = "eza"
 } 
 
-if (Test-CommandExists "atac")
-{
+if (Test-CommandExists "atac") {
     $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
 } 
 
 # Work.sort of
-function checkEnvironment
-{
-    if ($env:COMPUTERNAME -clike "*LG*")
-    {
+function isWorkMachine  {
+    if ($env:COMPUTERNAME -clike "*LG*") {
         $env:HOME_PROFILE = $false
-        return $true
-    } else
-    {
-        return $false
+        return [bool]$true 
+    } else {
+        return [bool]$false
     }
 }
 
-# Ensure safe creation of aliases, all aliases are created in the helpful_alias_creation.ps1
+# Ensure safe creation of aliases, all aliases are created in the alias_creation.ps1
 # ALIAS
-. "$powershell_scripts_dir\helpful_alias_creation.ps1"
+. "$powershell_scripts_dir\.alias_creation.ps1"
 # END - Tooling Functions
 
 # Work
-if (checkEnvironment -eq $true)
-{
+if (isWorkMachine -eq $true) {
     $env:PSModulePath = $workDefaultPSModulePath
-    . "$powershell_scripts_dir\work_scripts.ps1"
+    . "$powershell_scripts_dir\.profile_work.ps1"
 }
 
 # Not work/ AKA Home
-if (-not (checkEnvironment))
-{
+if (-not (isWorkMachine)) {
     # $env:PAGER = less
     # $env:BAT_PAGER = less -RF
     $env:PSModulePath = $currentPSModulePath
-    . "$powershell_scripts_dir\home_scripts.ps1"
+    . "$powershell_scripts_dir\.profile_home.ps1"
 }
 
 # Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
-. "$powershell_scripts_dir\general_scripts.ps1"
+. "$powershell_scripts_dir\.profile_general.ps1"
 
-if ($env:LIST_CLIENT -eq "eza")
-{
-    . "$powershell_completions\eza_aliases.ps1"
-} else
-{
-    . "$powershell_completions\system_ls_aliases.ps1"
+if ($env:LIST_CLIENT -eq "eza") {
+    . "$powershell_completions\.alias_eza.ps1"
+} else {
+    . "$powershell_completions\.alias_system_ls.ps1"
 }
+
+Write-Host -NoNewLine "`e[5 q" # Set the cursor to a blinking line.
+Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward

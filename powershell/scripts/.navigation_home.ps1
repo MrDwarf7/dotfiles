@@ -1,10 +1,8 @@
 $env:HOME_PROFILE = $true
 # BEGIN - Navigation functions
 
-
 $home_GitHub = "E:\GitHub"
 $home_gitwork_projects = "$home_GitHub\GitWork_Projects"
-
 
 $data_on_demand = "$home_gitwork_projects\Data-On-Demand"
 
@@ -13,7 +11,6 @@ $data_on_demand_next = "$data_on_demand\data-on-demand-next"
 $data_on_demand_frontend = "$home_gitwork_projects\Data-On-Demand-Frontend"
 
 $c_temp_folder = "C:\temp"
-
 
 function mgr {
     param(
@@ -63,4 +60,3 @@ function dodf {
     Push-Location $path
     la
 }
-

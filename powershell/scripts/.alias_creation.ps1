@@ -122,13 +122,12 @@ function ManPage {
 }
 
 function CleanLess {
-    param(
-        $parsedArgs
-    )
-    return less --quiet --silent --line-numbers $parsedArgs
+    return less --quiet --silent --line-numbers $args
 }
 # Not working as intended at all but eh
-SafeNewAlias -Alias less -Command CleanLess $args
+# New-Alias -Name lessp -Value CleanLess -Force
+# New-Alias -Name lessp -Value CleanLess -Force
+# SafeNewAlias -Alias lessp -Command CleanLess $args
 
 function CargoBuilEverything {
     $command = "cargo build && cargo build --release $args"

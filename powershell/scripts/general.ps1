@@ -157,9 +157,8 @@ function sysup
     scoopup
     nodeup
     rustupgrader
-    # poshup
 
-    if (checkEnvironment -eq $true)
+    if (isWorkMachine -eq $true)
     {
         Write-Host "Running second rustupgrader"
         rustupgrader
@@ -225,8 +224,7 @@ function IsSymbolicLink([string]$path)
 }
 New-Alias -Name isym -Value IsSymbolicLink -Force
 
-function refresh
-{
+function refresh {
     Import-Module "C:\ProgramData\chocolatey\helpers\chocolateyProfile.psm1";
     refreshenv;
     Write-Host "Chocolatey environment refreshed." -ForegroundColor Green;
@@ -238,8 +236,7 @@ function refresh
     . SourceProfile
 }
 
-function SourceProfile
-{
+function SourceProfile {
     # Define the possible values for no-clear
     $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
 

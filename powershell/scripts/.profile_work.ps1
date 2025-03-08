@@ -1,9 +1,7 @@
 # Import-Module PSReadLine
-# Import-Module posh-git
-# Import-Module posh-cargo
+# Import-Module git-aliases -DisableNameChecking
 Import-Module -Name DockerCompletion
 Import-Module -Name CompletionPredictor
-# Import-Module git-aliases -DisableNameChecking
 
 $work_app_dir = "C:\Applications"
 $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
@@ -13,23 +11,10 @@ $work_scripts_dir = "$work_app_dir\PowerShell_start\scripts"
 
 $PYTHON_PATH=[NullString] | Select-Object -Property "Python3"
 
-
 . "$work_scripts_dir\navigation_func_work.ps1"
-
 . "$work_scripts_dir\python_func_work.ps1"
-
 . "$work_scripts_dir\shell_alias_func_work.ps1"
-
 . "$work_scripts_dir\wsl_func_shell.ps1"
-
-# try
-# {
-# oh-my-posh init pwsh --config $HOME\dotfiles\powershell\omp_themes\$work_theme | Invoke-Expression
-# } catch
-# {
-#     oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\$backup_theme | Invoke-Expression
-# }
-
 
 function workconf {
     if (-not ($args)) {
