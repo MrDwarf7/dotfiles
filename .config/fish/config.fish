@@ -16,8 +16,12 @@ if status is-interactive
 
     # Immediately call starship -- subsequent redraws are handled by the 
     # call under ./functions/fish_prompt.fish
-    source (/usr/sbin/starship init fish --print-full-init | psub)
-    commandline -f repaint
+    # source (/usr/sbin/starship init fish --print-full-init | psub)
+    if test -e /usr/sbin/starship
+        /usr/sbin/starship init fish | source
+    # commandline -f repaint
+    end
+    # /usr/sbin/starship init fish
 
     fish_vi_key_bindings
 

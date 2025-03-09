@@ -5,7 +5,7 @@ SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/local
 SETUVAR --export XDG_CONFIG_HOME:/home/dwarf/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/dwarf/\x2exdg/data
 SETUVAR --export XDG_STATE_HOME:/home/dwarf/\x2exdg/state
-SETUVAR __fish_initialized:3400
+SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:969896
 SETUVAR fish_color_cancel:\x2d\x2dreverse
 SETUVAR fish_color_command:c397d8
@@ -26,7 +26,7 @@ SETUVAR fish_color_option:\x1d
 SETUVAR fish_color_param:7aa6da
 SETUVAR fish_color_quote:b9ca4a
 SETUVAR fish_color_redirection:70c0b1
-SETUVAR fish_color_search_match:bryellow\x1e\x2d\x2dbackground\x3dbrblack
+SETUVAR fish_color_search_match:white\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_selection:white\x1e\x2d\x2dbold\x1e\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_color_status:red
 SETUVAR fish_color_user:brgreen
@@ -45,4 +45,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/dwarf/\x2elocal/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self
+SETUVAR fish_user_paths:/home/dwarf/\x2exdg/bin\x1e/home/dwarf/\x2elocal/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self

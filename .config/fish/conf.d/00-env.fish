@@ -40,6 +40,7 @@ set -gx DOT_CONFIG $DOT_DIR/.config
 fish_add_path --append $XDG_CONFIG_HOME/.zvm/bin
 fish_add_path --append $ZVM_INSTALL
 fish_add_path --prepend $HOME/.local/bin
+fish_add_path --prepend $HOME/.xdg/bin
 
 # set -gx PATH $PATH $XDG_CONFIG_HOME/.zvm/bin
 # set -gx PATH $PATH $ZVM_INSTALL/
