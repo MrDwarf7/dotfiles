@@ -48,11 +48,12 @@ prepend_previewers = [
     # https://github.com/sharklasers996/eza-preview.yazi
         # { name = "*/", run = "eza-preview"},
         # https://github.com/AnirudhG07/rich-preview.yazi
-        { name = "*.md", run = "rich-preview" },
         { mime = "text/csv", run = "miller" },
+        { name = "*.md", run = "rich-preview" },
         # { name = "*.csv", run = "rich-preview" }, # for csv files
         { name = "*.ipynb", run = "rich-preview" }, # for jupyter notebooks (.ipynb)
         { name = "*.json", run = "rich-preview" },  # for json (.json) files
+        { name = "*.jsonc", run = "rich-preview" },  # for jsonc (.jsonc) files
 
         # https://github.com/ndtoan96/ouch.yazi
         { mime = "application/*zip", run = "ouch" },

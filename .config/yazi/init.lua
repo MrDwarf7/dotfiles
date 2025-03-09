@@ -33,3 +33,9 @@ function Linemode:ctime_better()
 	-- local size = self._file:size()
 	-- return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "", time))
 end
+
+-- require("starship"):setup({
+-- 	hide_flags = false,
+-- 	flags_after_prompt = true,
+-- 	config_file = "~\\dotfiles\\.config\\starship\\starship_yazi.toml", -- Slightly altered version to deal with Yazi's spacing at top of panel
+-- })

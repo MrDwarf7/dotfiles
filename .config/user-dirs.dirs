@@ -13,6 +13,6 @@ XDG_STATE_HOME="$HOME/.xdg/state"
 #XDG_PUBLICSHARE_DIR="$HOME/Public"
 XDG_DOCUMENTS_DIR="$HOME/documents"
 #XDG_MUSIC_DIR="$HOME/Music"
-#XDG_PICTURES_DIR="$HOME/Pictures"
+XDG_PICTURES_DIR="$HOME/Pictures"
 #XDG_VIDEOS_DIR="$HOME/Videos"
 ########
