@@ -1,17 +1,17 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "02d18be"
-hash = "4d6a07559118975e2dee983d27474d70"
+rev = "2bf70d8"
+hash = "b81ba7d0cf117afafb6d04993a6c5734"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "02d18be"
-hash = "c005b4a9820c2d5ee815bee8ffc94cab"
+rev = "2bf70d8"
+hash = "f5c30a3ae4961042e7c4b48e53d09b7e"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "02d18be"
-hash = "72c66a0b3d60f8377eb9db5e1d8b60b2"
+rev = "2bf70d8"
+hash = "26481b6f47c9ea3bc6dfffd8c8b7e369"
 
 [[plugin.deps]]
 use = "sharklasers996/eza-preview"
@@ -20,33 +20,28 @@ hash = "d1efd1931dd738af0d6e4f41dd491313"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "02d18be"
-hash = "c1a2739e9ef2d837030ccb4267be3ed1"
+rev = "2bf70d8"
+hash = "f67b2a8848a95940bf5ae22762cc56f7"
 
 [[plugin.deps]]
-use = "MrDwarf7/glow"
-rev = "9677ea8"
-hash = "6d4dcabf15383cd9c0a916c70df9b829"
+use = "Reledia/glow"
+rev = "c76bf4f"
+hash = "a6b78bf9af5390e3a85a6951fbb7b93"
 
 [[plugin.deps]]
-use = "MrDwarf7/hexyl"
-rev = "683dce2"
-hash = "e6951bbb9cb62e352cc323dda2878cf6"
+use = "Reledia/hexyl"
+rev = "228a9ef"
+hash = "cdc65cfe4e60e1bf5afe5769d074fa9c"
 
 [[plugin.deps]]
-use = "MrDwarf7/miller"
-rev = "1950fdb"
-hash = "c640692d228841b338cacbdf3dd8b27a"
+use = "Reledia/miller"
+rev = "40e0265"
+hash = "2d6d77583162aaf0a599e7a3091b5878"
 
 [[plugin.deps]]
-use = "MrDwarf7/rich-preview"
-rev = "6567dc7"
-hash = "f6d196c67bcc63da3eee9cb74a8f0774"
-
-[[plugin.deps]]
-use = "MrDwarf7/relative-motions"
-rev = "172dc45"
-hash = "e9818023e35dec80e7c4b9be88b3313e"
+use = "AnirudhG07/rich-preview"
+rev = "2559e5f"
+hash = "c9a3d0731e7d7340e2c6d6126b1f3aa3"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
@@ -55,13 +50,18 @@ hash = "ed6c185514109d7c5463f609282b220c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "02d18be"
-hash = "284f6694e3b1a4afd686acf1052acd90"
+rev = "2bf70d8"
+hash = "cca530e4da8784d56398d0b0d7726490"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "f6939fb"
+rev = "6c639b4"
 hash = "a25dd6fcb2faad0f8804c1193b1d0361"
+
+[[plugin.deps]]
+use = "dedukun/relative-motions"
+rev = "8103065"
+hash = "9f13f0740fa3a0c18e47ec6fb62ddfaa"
 
 [flavor]
 deps = []
