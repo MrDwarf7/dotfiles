@@ -30,7 +30,15 @@ local lib_loader = function()
 	require("avante_lib").load()
 end
 
-if os.getenv("HOME_PROFILE") ~= tostring(true) then
+-- local is_home = os.environ.getenv("HOME_PROFILE") == tostring(true)
+
+local lower_str = function(str)
+	return string.format("%s", str):lower()
+end
+
+if lower_str(os.getenv("HOME_PROFILE")) ~= lower_str("true") then
+	print("Avante is not enabled")
+	print("value using getenv is: ", os.getenv("HOME_PROFILE"))
 	return {}
 else
 	---@return LazySpec
