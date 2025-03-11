@@ -3,11 +3,18 @@ $env:LIST_CLIENT = "eza $args";
 function RunEza {
     param (
         $Path,
-        $CliArgs = ""
+        $CliArgs
     )
-    $executable = "eza";
-    $eza_args = "$CliArgs $Path";
-    & Invoke-Expression "$executable $eza_args";
+    if (-not $Path) {
+        $Path = ".";
+    }
+    # Write-Host "Running eza with: $CliArgs $Path";
+    & Invoke-Expression("eza $CliArgs `"$Path`"");
+
+    ## Previous way of doing this lol
+    # $executable = "eza";
+    # $eza_args = "$CliArgs $Path";
+    # & Invoke-Expression "$executable $eza_args";
 }
 
 function ClearAndList {
@@ -18,7 +25,6 @@ function ClearAndList {
     $eza_args = "-lah --color=always --follow-symlinks --icons=always --git";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
-
 New-Alias -Name ca -Value ClearAndList -Force;
 
 function EasyList {
@@ -28,7 +34,6 @@ function EasyList {
     $eza_args = "-lah --color=always --follow-symlinks --icons=always";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
-
 New-Alias -Name la -Value EasyList -Force;
 
 function AltList {
@@ -38,7 +43,6 @@ function AltList {
     $eza_args = "-a --color=always --follow-symlinks --icons=always --git --tree --level=1";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
-
 New-Alias -Name l -Value AltList -Force
 
 function ListTree {
@@ -46,8 +50,8 @@ function ListTree {
         [string]$ag = $args,
         [int]$d = 3
     )
+
     $eza_args = "-a --color=always --follow-symlinks --icons=always --git --tree --level=$d";
     & RunEza -Path $ag -CliArgs $eza_args;
 }
-
 New-Alias -Name lt -Value ListTree -Force;
