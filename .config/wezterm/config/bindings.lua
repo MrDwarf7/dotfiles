@@ -141,6 +141,8 @@ local key_table_opts = {
 		{ key = "H", mods = "SHIFT", action = act.CopyMode("MoveToStartOfLineContent") },
 		{ key = "L", mods = "NONE", action = act.CopyMode("MoveToEndOfLineContent") },
 		{ key = "L", mods = "SHIFT", action = act.CopyMode("MoveToEndOfLineContent") },
+		-- { key = "Q", mods = "CTRL", action = act.CopyMode("MoveToEndOfLineContent") },
+		{ key = "q", mods = "CTRL", action = act.CopyMode({ SetSelectionMode = "Block" }) },
 
 		{ key = "e", mods = "CTRL", action = act.CopyMode({ MoveByPage = 0.1 }) },
 		{ key = "y", mods = "CTRL", action = act.CopyMode({ MoveByPage = -0.1 }) },
