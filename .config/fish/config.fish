@@ -19,9 +19,13 @@ if status is-interactive
     # source (/usr/sbin/starship init fish --print-full-init | psub)
     if test -e /usr/sbin/starship
         /usr/sbin/starship init fish | source
-    # commandline -f repaint
+        commandline -f repaint
     end
     # /usr/sbin/starship init fish
+
+    # if test -e /bin/direnv 
+    #     direnv hook fish | source
+    # end
 
     fish_vi_key_bindings
 
