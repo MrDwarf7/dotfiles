@@ -217,7 +217,9 @@ function GitPushAlias {
     git push $args
 }
 
-
+function GitLastFive {
+    git reflog -5 $args
+}
 
 $null = Invoke-Expression (
     [System.Text.StringBuilder]::new().
@@ -262,6 +264,8 @@ $null = Invoke-Expression (
         Append("New-Alias -Name ma -Value makers $args -Force").
         Append("`n").
         Append("New-Alias -Name gp -Value GitPushAlias -Force").
+        Append("`n").
+        Append("New-Alias -Name grl -Value GitLastFive -Force").
     ToString()
 ) > $null;
 

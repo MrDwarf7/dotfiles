@@ -82,20 +82,21 @@ style = "#00afff"
 
 [os.symbols]
 "Alpine" = ""
-"Arch" =  ""
+"Arch" = ""
 "CentOS" = ""
 #"CoreOS" = ""
 "Debian" = ""
 "Fedora" = ""
 "Gentoo" = ""
-"Linux" =  ""
+"Linux" = ""
 "Macos" = ""
-"NixOS" =  ""
+"NixOS" = ""
 "Windows" = ""
 # "Manjaro" = ""
 # "Mint" =  ""
 # "Raspbian" =  ""
 # "Ubuntu" = ""
+
 
 [directory]
 # read_only = " "
@@ -162,7 +163,14 @@ detect_files = ["CMakeLists.txt", "CMakeCache.txt"]
 [docker_context]
 symbol = " "
 format = "([$symbol$context]($style))"
-detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile', '.dockerignore', 'compose.yml', 'compose.yaml']
+detect_files = [
+    'docker-compose.yml',
+    'docker-compose.yaml',
+    'Dockerfile',
+    '.dockerignore',
+    'compose.yml',
+    'compose.yaml',
+]
 
 [dotnet]
 symbol = '.NET '
@@ -197,7 +205,6 @@ format = "[${symbol}nix ${state} ]($style)"
 [nodejs]
 symbol = " "
 format = "([$symbol($version)]($style))"
-
 
 [package]
 symbol = "◨ "
