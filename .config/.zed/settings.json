@@ -2,11 +2,14 @@
   "auto_update_extensions": {
     "biome": false
   },
+  "file_finder": {
+    "file_icons": true
+  },
+  "auto_signature_help": false,
   "assistant": {
     "default_model": {
       "provider": "ollama",
       "model": "deepseek-r1:14b"
-      // "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
@@ -27,7 +30,6 @@
 
   "buffer_font_size": 13.0,
   "buffer_font_family": "Zed Plex Mono",
-  // "buffer_font_weight": 400.0,
   "buffer_font_features": {
     "calt": false
   },
@@ -63,9 +65,9 @@
     "background_coloring": "disabled"
   },
 
-  "show_inline_completions": true,
+  "show_edit_predictions": true,
   "features": {
-    "inline_completion_provider": "copilot"
+    "edit_prediction_provider": "copilot"
   },
 
   "lsp": {
@@ -77,12 +79,6 @@
         "completion": {
           "snippets": {
             "custom": {
-              // "Arc::new(Mutex::new())": {
-              //   "postfix": "arcmut",
-              //   "body": ["Arc::new(Mutex::new(${receiver}))"],
-              //   "requires": ["std::sync::Arc", "std::sync::Mutex"],
-              //   "scope": "expr"
-              // },
               "Arc::new": {
                 "postfix": "arc",
                 "body": ["Arc::new(${receiver})"],

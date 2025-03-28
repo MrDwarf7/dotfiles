@@ -31,7 +31,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -73,7 +74,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -81,7 +83,7 @@
       "manifest": {
         "id": "biome",
         "name": "Biome",
-        "version": "0.1.3",
+        "version": "0.1.5",
         "schema_version": 1,
         "description": "Biome support for Zed",
         "repository": "https://github.com/biomejs/biome-zed",
@@ -90,7 +92,7 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.0.6"
+          "version": "0.3.0"
         },
         "themes": [],
         "icon_themes": [],
@@ -110,28 +112,33 @@
               "JSON",
               "JSONC",
               "CSS",
-              "GraphQL"
+              "GraphQL",
+              "HTML"
             ],
             "language_ids": {
-              "Svelte": "svelte",
-              "JSONC": "jsonc",
-              "Astro": "astro",
               "JavaScript": "javascript",
+              "Astro": "astro",
+              "JSONC": "jsonc",
+              "Vue.js": "vuejs",
               "TSX": "typescriptreact",
+              "Svelte": "svelte",
+              "GraphQL": "graphql",
               "JSX": "javascriptreact",
               "TypeScript": "typescript",
+              "HTML": "html",
               "JSON": "json",
-              "CSS": "css",
-              "Vue.js": "vuejs",
-              "GraphQL": "graphql"
+              "CSS": "css"
             },
-            "code_action_kinds": null
+            "code_action_kinds": [
+              "quickfix"
+            ]
           }
         },
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -139,7 +146,7 @@
       "manifest": {
         "id": "catppuccin",
         "name": "Catppuccin",
-        "version": "0.2.20",
+        "version": "0.2.21",
         "schema_version": 1,
         "description": "🦀 Soothing pastel theme for Zed",
         "repository": "https://github.com/catppuccin/zed",
@@ -161,7 +168,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -190,7 +198,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -198,10 +207,10 @@
       "manifest": {
         "id": "csharp",
         "name": "C#",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "schema_version": 1,
         "description": "C# support.",
-        "repository": "https://github.com/zed-industries/zed",
+        "repository": "https://github.com/zed-extensions/csharp",
         "authors": [
           "fminkowski <fminkowski@gmail.com>"
         ],
@@ -232,7 +241,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -267,7 +277,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -275,10 +286,10 @@
       "manifest": {
         "id": "deno",
         "name": "Deno",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "schema_version": 1,
         "description": "Deno support.",
-        "repository": "https://github.com/zed-industries/zed",
+        "repository": "https://github.com/zed-extensions/deno",
         "authors": [
           "Lino Le Van <11367844+lino-levan@users.noreply.github.com>"
         ],
@@ -300,9 +311,9 @@
               "JSDoc"
             ],
             "language_ids": {
+              "JavaScript": "javascript",
               "TSX": "typescriptreact",
-              "TypeScript": "typescript",
-              "JavaScript": "javascript"
+              "TypeScript": "typescript"
             },
             "code_action_kinds": [
               "quickfix",
@@ -315,7 +326,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -349,7 +361,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -392,7 +405,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -427,12 +441,12 @@
               "CSS"
             ],
             "language_ids": {
-              "ERB": "eruby",
-              "PHP": "php",
               "HTML": "html",
-              "TSX": "typescriptreact",
               "CSS": "css",
-              "JavaScript": "javascriptreact"
+              "PHP": "php",
+              "TSX": "typescriptreact",
+              "JavaScript": "javascriptreact",
+              "ERB": "eruby"
             },
             "code_action_kinds": null
           }
@@ -440,7 +454,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -475,7 +490,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -540,7 +556,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -548,7 +565,7 @@
       "manifest": {
         "id": "gleam",
         "name": "Gleam",
-        "version": "0.3.0",
+        "version": "0.4.0",
         "schema_version": 1,
         "description": "Gleam support.",
         "repository": "https://github.com/gleam-lang/zed-gleam",
@@ -589,7 +606,8 @@
         "indexed_docs_providers": {
           "gleam-hexdocs": {}
         },
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -618,7 +636,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -626,7 +645,7 @@
       "manifest": {
         "id": "html",
         "name": "HTML",
-        "version": "0.1.5",
+        "version": "0.2.0",
         "schema_version": 1,
         "description": "HTML support.",
         "repository": "https://github.com/zed-industries/zed",
@@ -654,8 +673,8 @@
             "language": "HTML",
             "languages": [],
             "language_ids": {
-              "CSS": "css",
-              "HTML": "html"
+              "HTML": "html",
+              "CSS": "css"
             },
             "code_action_kinds": null
           }
@@ -663,7 +682,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -698,7 +718,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -706,7 +727,7 @@
       "manifest": {
         "id": "just",
         "name": "Justfile",
-        "version": "0.1.3",
+        "version": "0.1.4",
         "schema_version": 1,
         "description": "Justfile syntax highlighting",
         "repository": "https://github.com/jackTabsCode/zed-just",
@@ -725,7 +746,7 @@
         "grammars": {
           "just": {
             "repository": "https://github.com/IndianBoy42/tree-sitter-just",
-            "rev": "792717c262df6d6fa285c1136a11c23cedadcb0c",
+            "rev": "3f90d24eb8c8d9e8c74fee7120d79c3ec7229f26",
             "path": null
           }
         },
@@ -733,7 +754,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -768,7 +790,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -805,7 +828,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -813,10 +837,10 @@
       "manifest": {
         "id": "lua",
         "name": "Lua",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "schema_version": 1,
         "description": "Lua support.",
-        "repository": "https://github.com/zed-industries/zed",
+        "repository": "https://github.com/zed-extensions/lua",
         "authors": [
           "Max Brunsfeld <max@zed.dev>"
         ],
@@ -847,7 +871,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -855,14 +880,15 @@
       "manifest": {
         "id": "make",
         "name": "Make",
-        "version": "1.0.1",
+        "version": "1.1.0",
         "schema_version": 1,
         "description": "Makefile syntax highlighting",
         "repository": "https://github.com/caius/zed-make",
         "authors": [
           "Caius Durling <dev@caius.name>",
           "d1y <chenhonzhou@gmail.com>",
-          "Marshall Bowers <elliott.codes@gmail.com>"
+          "Marshall Bowers <elliott.codes@gmail.com>",
+          "Luke Naylor <luke@grahamnaylor.net>"
         ],
         "lib": {
           "kind": null,
@@ -875,8 +901,8 @@
         ],
         "grammars": {
           "make": {
-            "repository": "https://github.com/caius/tree-sitter-make",
-            "rev": "b35c2714e73d2846b26061b06cda4fa56d61e3a5",
+            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-make",
+            "rev": "5e9e8f8ff3387b0edcaa90f46ddf3629f4cfeb1d",
             "path": null
           }
         },
@@ -884,7 +910,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -918,7 +945,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -962,7 +990,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1004,7 +1033,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1033,7 +1063,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1081,7 +1112,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1127,7 +1159,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1171,7 +1204,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1214,7 +1248,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1258,7 +1293,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1294,7 +1330,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1329,7 +1366,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1363,7 +1401,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1401,7 +1440,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1430,7 +1470,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1465,7 +1506,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1494,7 +1536,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1537,7 +1580,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1566,7 +1610,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1595,7 +1640,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     },
@@ -1603,10 +1649,10 @@
       "manifest": {
         "id": "zig",
         "name": "Zig",
-        "version": "0.3.3",
+        "version": "0.3.4",
         "schema_version": 1,
         "description": "Zig support.",
-        "repository": "https://github.com/zed-industries/zed",
+        "repository": "https://github.com/zed-extensions/zig",
         "authors": [
           "Allan Calix <contact@acx.dev>"
         ],
@@ -1637,7 +1683,8 @@
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null
+        "snippets": null,
+        "capabilities": []
       },
       "dev": false
     }
@@ -1958,10 +2005,7 @@
           "justfile",
           "Justfile",
           "JUSTFILE",
-          ".justfile",
-          ".Justfile",
-          ".JUSTFILE",
-          ".just"
+          "just"
         ],
         "first_line_pattern": null
       },

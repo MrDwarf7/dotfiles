@@ -1,10 +1,13 @@
-./hosts.*
+!/versions.json
+*
 
-hosts.json
-hosts.*
-./iu*/**/*
-iu*/**/*
-/iu*/**/*
-
-iu/
-cl/
+# ./hosts.*
+#
+# hosts.json
+# hosts.*
+# ./iu*/**/*
+# iu*/**/*
+# /iu*/**/*
+#
+# iu/
+# cl/

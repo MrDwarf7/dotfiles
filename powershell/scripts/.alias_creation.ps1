@@ -269,6 +269,17 @@ $null = Invoke-Expression (
     ToString()
 ) > $null;
 
+
+function GoLangUpdateTool {
+    param(
+        $arguments = $args
+    )
+    $g = "$HOME\go\bin\gup"
+    Invoke-Expression("$g $arguments")
+    
+}
+
+New-Alias -Name glup -Value GoLangUpdateTool -Force
 # | Out-Null
 
 # New-Alias -Name manwin -Value ManPageWindow -Force

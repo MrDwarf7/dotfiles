@@ -74,7 +74,7 @@ end, silent_opts, { desc = "save" })
 
 map("n", "<Leader>ye", function()
 	require("util.clear_string_encoder")(vim.api.nvim_get_current_buf())
-end, { desc = "Clear Encoding" })
+end, { desc = "Clear Encoding Unicode" })
 
 map("n", "<Leader>ym", "<cmd>messages<CR>", { desc = "Messages" })
 
