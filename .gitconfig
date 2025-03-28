@@ -1,13 +1,19 @@
 [user]
     email = 129040985+MrDwarf7@users.noreply.github.com
     name = MrDwarf7
+    signingkey = 128F0B6383638B0C
+; [commit]
+; 	gpgsign = true
+; [tag]
+; 	gpgSign = true
 [init]
     defaultBranch = main
 [core]
-    editor = nvim
+	editor = nvim
     excludesFile = "$HOME/.gitignore_global"
     pager = delta
-    autocrlf = input
+	sharedRepository = all
+	autocrlf = false
 	symlinks = true
 [interactive]
     singleKey = true
@@ -44,11 +50,6 @@
     reorder = rebase -i HEAD~5
 [push]
     autoSetupRemote = true
-[difftool "sourcetree"]
-    cmd = "'' "
-[mergetool "sourcetree"]
-    cmd = "'' "
-    trustExitCode = true
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
