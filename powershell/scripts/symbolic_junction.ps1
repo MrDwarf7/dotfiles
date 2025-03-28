@@ -30,6 +30,11 @@ function CreateNewSymbolic {
     $folderToResolveTo = $args[0];
     $turnFolderIntoSym = $args[1];
 
+    if ($null -eq $folderToResolveTo -or $null -eq $turnFolderIntoSym) {
+        Write-Host "Please provide a folder to resolve to and a folder to turn into a symbolic link.";
+        return;
+    }
+
     $folderToResolveTo = HandleRelativePath $null $folderToResolveTo;
     $turnFolderIntoSym = HandleRelativePath $null $turnFolderIntoSym;
 
@@ -56,14 +61,11 @@ function Remove-SymbolicJunction([string]$pathToUnlink) {
     };
 }
 
-
-# New-Alias -name unlink -Value Remove-SymbolicJunction -Force;
-
-$null = Invoke-Expression (
-    [System.Text.StringBuilder]::new().
-        Append("New-Alias -name unlink -Value Remove-SymbolicJunction -Force").
-        Append("`n").
-        Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
-    ToString()
-    ) > $null;
+# $null = Invoke-Expression (
+#     [System.Text.StringBuilder]::new().
+#         Append("New-Alias -name unlink -Value Remove-SymbolicJunction -Force").
+#         Append("`n").
+#         Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
+#     ToString()
+#     ) > $null;
 

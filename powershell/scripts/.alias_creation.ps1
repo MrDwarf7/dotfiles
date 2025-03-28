@@ -29,7 +29,6 @@ function FWhich {
         Write-Output "Command not found: $cmd"
     }
 }
-# New-Alias -Name which -Value FWhich -Force
 
 function WhichCD {
     param(
@@ -42,9 +41,7 @@ function WhichCD {
         Write-Warning "Command not found: $commandName"
         return
     }
-
     $directory = [System.IO.Path]::GetDirectoryName($execPath)
-
     Set-Location -Path $directory
 }
 # New-Alias -Name cdd -Value WhichCD -Force
@@ -104,7 +101,7 @@ function TempDir {
     Push-Location $c_temp_folder
     la
 }
-New-Alias -Name tmp -Value TempDir -Force
+
 
 function ManPageWindow {
     param (
@@ -124,22 +121,21 @@ function ManPage {
 function CleanLess {
     return less --quiet --silent --line-numbers $args
 }
+
 # Not working as intended at all but eh
 # New-Alias -Name lessp -Value CleanLess -Force
 # New-Alias -Name lessp -Value CleanLess -Force
 # SafeNewAlias -Alias lessp -Command CleanLess $args
 
-function CargoBuilEverything {
+function CargoBuildEverything {
     $command = "cargo build && cargo build --release $args"
     Invoke-Expression $command
 }
-
 
 function CargoRunEverything {
     $command = "cargo run && cargo run --release $args"
     Invoke-Expression $command
 }
-
 
 function ZoxideAdd {
     zoxide add .
@@ -200,7 +196,6 @@ function fastfetchin() {
         Write-Output "fastfetch is not installed"
         return
     }
-
     Write-Host
     Write-Host
     Invoke-Expression "fastfetch $config";
@@ -247,7 +242,7 @@ $null = Invoke-Expression (
         Append("`n").
         Append("New-Alias -Name zq -Value ZoxideQuery -Force").
         Append("`n").
-        Append("New-Alias -Name cargos -Value CargoBuilEverything -Force").
+        Append("New-Alias -Name cargos -Value CargoBuildEverything -Force").
         Append("`n").
         Append("New-Alias -Name cargosr -Value CargoRunEverything -Force").
         Append("`n").
@@ -266,152 +261,36 @@ $null = Invoke-Expression (
         Append("New-Alias -Name gp -Value GitPushAlias -Force").
         Append("`n").
         Append("New-Alias -Name grl -Value GitLastFive -Force").
+        Append("`n").
+        Append("New-Alias -Name aa -Value jj $args -Force").
+        Append("`n").
+        Append("New-Alias -Name ja -Value jj $args -Force").
+        Append("`n").
+        Append("New-Alias -Name dustex -Value DustExclude $args -Force").
+        Append("`n").
+        Append("New-Alias -Name isym -Value IsSymbolicLink -Force").
+        Append("`n").
+        Append("New-Alias -Name t -Value tv $args -Force").
+        Append("`n").
+        Append("New-Alias -Name lzd -Value lazydocker $args -Force").
+        Append("`n").
+        Append("New-Alias -Name lg -Value lazygit $args -Force").
+        Append("`n").
+        Append("New-Alias -Name lzgt -Value lazygit $args -Force").
+        Append("`n").
+        Append("New-Alias -name unlink -Value Remove-SymbolicJunction -Force").
+        Append("`n").
+        Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
     ToString()
 ) > $null;
 
-
+# Required due to alias clash with Git-Aliases
 function GoLangUpdateTool {
     param(
         $arguments = $args
     )
     $g = "$HOME\go\bin\gup"
     Invoke-Expression("$g $arguments")
-    
 }
-
+# Required due to alias clash with Git-Aliases
 New-Alias -Name glup -Value GoLangUpdateTool -Force
-# | Out-Null
-
-# New-Alias -Name manwin -Value ManPageWindow -Force
-# New-Alias -Name man -Value ManPage -Force
-# New-Alias -Name rm -Value Remove-Wrapper -Force
-# New-Alias -Name z. -Value ZoxideAdd -Force
-# New-Alias -Name z.. -Value ZoxideEdit -Force
-# New-Alias -Name zq -Value ZoxideQuery -Force
-# New-Alias -Name cargos -Value CargoBuilEverything -Force
-# New-Alias -Name cargosr -Value CargoRunEverything -Force
-# New-Alias -Name ff -Value fastfetchin -Force
-#
-#
-# function launchwsl {
-#     wsl.exe -d Arch --cd ~
-# }
-# New-Alias -Name aw -Value launchwsl -Force
-#
-# # New-Alias -Name rst -Value NavigateToRust -Force
-# # New-Alias -Name c -Value cat -Force
-# # New-Alias -Name b -Value bat -Force
-# # New-Alias -Name gu -Value gitui -Force
-#
-#
-# SafeNewAlias -Alias bpsa -Command sar
-# SafeNewAlias -Alias br -Command broot.exe
-# SafeNewAlias -Alias grep -Command Select-String
-# # SafeNewAlias -Alias ln -Command New-SymLink
-# # SafeNewAlias -Alias npp -Command notepad++.exe
-#
-#
-
-
-
-
-
-
-
-#
-# Testing things 
-# function InvokeAliases() {
-#     param(
-#         [List[string]]$list
-#     )
-#     $null = foreach($alias in $list) {
-#         Invoke-Expression $alias > $null
-#     }
-# }
-#
-# $list_holder = [System.Collections.Generic.List[string]]::new();
-# function AssembleList() {
-#     param(
-#         [string]$alias,
-#         [List[string]]$list
-#     )
-#     $list.Add($alias)
-#     return $list
-# }
-#
-# $aliases_bare = @(
-#         New-Alias -Name npp -Value 'notepad++.exe' -Force
-#         New-Alias -Name c -Value cat -Force
-#         New-Alias -Name b -Value bat -Force
-#         New-Alias -Name gu -Value gitui -Force
-#         New-Alias -Name rst -Value NavigateToRust -Force
-#         New-Alias -Name grep -Value Select-String -Force
-#         New-Alias -Name manwin -Value ManPageWindow -Force
-#         New-Alias -Name man -Value ManPage -Force
-#         New-Alias -Name rm -Value Remove-Wrapper -Force
-#         New-Alias -Name z. -Value ZoxideAdd -Force
-#         New-Alias -Name z.. -Value ZoxideEdit -Force
-#         New-Alias -Name zq -Value ZoxideQuery -Force
-#         New-Alias -Name cargos -Value CargoBuilEverything -Force
-#         New-Alias -Name cargosr -Value CargoRunEverything -Force
-#         New-Alias -Name ff -Value fastfetchin -Force
-#         New-Alias -Name cdd -Value WhichCD -Force
-#         New-Alias -Name which -Value FWhich -Force
-#         New-Alias -Name tmp -Value TempDir -Force
-#         New-Alias -Name aw -Value launchwsl -Force
-# )
-# Write-Host "Aliases: $aliases_bare"
-# $list_holder = foreach ($alias in $aliases_bare) {
-#     $list_holder = AssembleList -alias $alias -list $list_holder
-# }
-# Write-Host( "List Holder: $list_holder")
-# InvokeAliases -list $list_holder
-
-
-
-
-
-
-# $list_holder = AssembleList -alias "New-Alias -Name npp -Value notepad++.exe -Force" -list $list_holder
-
-
-# $alias_list = [List[string]]::new();
-# $alias_list.
-#         Add("New-Alias -Name npp -Value notepad++.exe -Force").
-#         Add("New-Alias -Name c -Value cat -Force").
-#         Add("New-Alias -Name b -Value bat -Force").
-#         Add("New-Alias -Name gu -Value gitui -Force").
-#         Add("New-Alias -Name rst -Value NavigateToRust -Force").
-#         Add("New-Alias -Name grep -Value Select-String -Force").
-#         Add("New-Alias -Name manwin -Value ManPageWindow -Force").
-#         Add("New-Alias -Name man -Value ManPage -Force").
-#         Add("New-Alias -Name rm -Value Remove-Wrapper -Force").
-#         Add("New-Alias -Name z. -Value ZoxideAdd -Force").
-#         Add("New-Alias -Name z.. -Value ZoxideEdit -Force").
-#         Add("New-Alias -Name zq -Value ZoxideQuery -Force").
-#         Add("New-Alias -Name cargos -Value CargoBuilEverything -Force").
-#         Add("New-Alias -Name cargosr -Value CargoRunEverything -Force").
-#         Add("New-Alias -Name ff -Value fastfetchin -Force").
-#         Add("New-Alias -Name cdd -Value WhichCD -Force").
-#         Add("New-Alias -Name which -Value FWhich -Force").
-#         Add("New-Alias -Name tmp -Value TempDir -Force").
-#         Add("New-Alias -Name aw -Value launchwsl -Force")
-
-# "New-Alias -Name npp -Value notepad++.exe -Force",
-#         "New-Alias -Name c -Value cat -Force",
-#         "New-Alias -Name b -Value bat -Force",
-#         "New-Alias -Name gu -Value gitui -Force",
-#         "New-Alias -Name rst -Value NavigateToRust -Force",
-#         "New-Alias -Name grep -Value Select-String -Force",
-#         "New-Alias -Name manwin -Value ManPageWindow -Force",
-#         "New-Alias -Name man -Value ManPage -Force",
-#         "New-Alias -Name rm -Value Remove-Wrapper -Force",
-#         "New-Alias -Name z. -Value ZoxideAdd -Force",
-#         "New-Alias -Name z.. -Value ZoxideEdit -Force",
-#         "New-Alias -Name zq -Value ZoxideQuery -Force",
-#         "New-Alias -Name cargos -Value CargoBuilEverything -Force",
-#         "New-Alias -Name cargosr -Value CargoRunEverything -Force",
-#         "New-Alias -Name ff -Value fastfetchin -Force",
-#         "New-Alias -Name cdd -Value WhichCD -Force",
-#         "New-Alias -Name which -Value FWhich -Force",
-#         "New-Alias -Name tmp -Value TempDir -Force",

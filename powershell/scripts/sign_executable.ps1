@@ -41,10 +41,8 @@ function sign_executable {
         Write-Error "signtool.exe not found at the path: $signtoolPath"
         return
     }
-
     # Sign the EXE
     $signCmd = "& `"$signtoolPath`" sign /f `"$certPath`" /p password `"$exePath`" /fd SHA256"
     Invoke-Expression $signCmd
-
     Write-Host "EXE signed successfully."
 }

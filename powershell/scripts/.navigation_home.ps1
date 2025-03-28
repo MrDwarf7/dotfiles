@@ -12,6 +12,26 @@ $data_on_demand_frontend = "$home_gitwork_projects\Data-On-Demand-Frontend"
 
 $c_temp_folder = "C:\temp"
 
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+# New-Alias -Name __ -Value _________________ -Force
+
+# function GenericMoveTo {
+#     param(
+#         [string]$path = $args,
+#         $pipe = $_
+#
+#     )
+#     Write-Host("Args: $args, pipeline: $pipe")
+#     Push-Location $path
+#     la
+# }
+
+
 function mgr {
     param(
         [string]$path = $home_GitHub

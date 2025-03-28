@@ -26,7 +26,6 @@ function pmv() {
             $mainCommand = python -m venv .venv
         }
     }
-
     $mainCommand
     Push-Location .\.venv\Scripts
     .\activate

@@ -3,7 +3,7 @@ function RemoteProcessLauncher {
     param(
         [string]$ProcessFolder,
         [string]$ProcessExecutable,
-        $additionalArgs = $args
+        $arguments = $args
     )
 
     if ([String]::IsNullOrEmpty($ProcessFolder)) {
@@ -15,10 +15,7 @@ function RemoteProcessLauncher {
         Write-Host "ProcessExecutable is null or empty, defaulting."
         $ProcessExecutable = "notepad.exe"
     }
-
     $ProcessPath = "$ProcessFolder\$ProcessExecutable"
     # Write-Host "ProcessPath: $ProcessPath"
-
-    Start-Process -FilePath $ProcessPath -ArgumentList $additionalArgs -PassThru
-
+    Start-Process -FilePath $ProcessPath -ArgumentList $arguments -PassThru
 }

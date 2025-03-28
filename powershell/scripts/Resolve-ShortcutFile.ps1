@@ -1,5 +1,4 @@
 function Resolve-ShortcutFile {
-
     <#
     .Synopsis
         Resolves an Internet shortcut file to the web site the shortcut references
@@ -30,20 +29,17 @@ function Resolve-ShortcutFile {
         $fileName
     )
     process {
-
         if ($fileName -like "*.url") {
             Get-Content $fileName | Where-Object {
                 $_ -like "url=*"
             } |
-                Select-Object @{
-                    Name       = 'ShortcutFile'
-                    Expression = { Get-Item $fileName }
-                }, @{
-                    Name       = 'Url'
-                    Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
-                }
+            Select-Object @{
+                Name       = 'ShortcutFile'
+                Expression = { Get-Item $fileName }
+            }, @{
+                Name       = 'Url'
+                Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
+            }
         }
-
     }
-
 }

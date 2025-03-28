@@ -1,4 +1,3 @@
-
 function archsh {
     & 'C:\Windows\system32\wsl.exe' -d Arch --cd ~ --user dwarf
 }
@@ -24,7 +23,6 @@ function disloc {
         Write-Error ErrorAction
     }
 }
-
 # END - Shell functions
 
 #Easily open unix related terminals
