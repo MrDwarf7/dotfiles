@@ -116,18 +116,18 @@
               "HTML"
             ],
             "language_ids": {
-              "JavaScript": "javascript",
-              "Astro": "astro",
               "JSONC": "jsonc",
-              "Vue.js": "vuejs",
-              "TSX": "typescriptreact",
-              "Svelte": "svelte",
-              "GraphQL": "graphql",
-              "JSX": "javascriptreact",
+              "Astro": "astro",
               "TypeScript": "typescript",
               "HTML": "html",
-              "JSON": "json",
-              "CSS": "css"
+              "Vue.js": "vuejs",
+              "JavaScript": "javascript",
+              "Svelte": "svelte",
+              "TSX": "typescriptreact",
+              "CSS": "css",
+              "GraphQL": "graphql",
+              "JSX": "javascriptreact",
+              "JSON": "json"
             },
             "code_action_kinds": [
               "quickfix"
@@ -162,6 +162,37 @@
           "themes/catppuccin-mauve.json"
         ],
         "icon_themes": [],
+        "languages": [],
+        "grammars": {},
+        "language_servers": {},
+        "context_servers": {},
+        "slash_commands": {},
+        "indexed_docs_providers": {},
+        "snippets": null,
+        "capabilities": []
+      },
+      "dev": false
+    },
+    "colored-zed-icons-theme": {
+      "manifest": {
+        "id": "colored-zed-icons-theme",
+        "name": "Colored Zed Icons Theme",
+        "version": "0.3.1",
+        "schema_version": 1,
+        "description": "Default Zed icons, but colored!",
+        "repository": "https://github.com/TheRedXD/zed-icons-colored-theme",
+        "authors": [
+          "TheRedXD",
+          "Zed Industries <support@zed.dev>"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "themes": [],
+        "icon_themes": [
+          "icon_themes/colored-zed-icons-theme.json"
+        ],
         "languages": [],
         "grammars": {},
         "language_servers": {},
@@ -311,9 +342,9 @@
               "JSDoc"
             ],
             "language_ids": {
-              "JavaScript": "javascript",
               "TSX": "typescriptreact",
-              "TypeScript": "typescript"
+              "TypeScript": "typescript",
+              "JavaScript": "javascript"
             },
             "code_action_kinds": [
               "quickfix",
@@ -442,11 +473,11 @@
             ],
             "language_ids": {
               "HTML": "html",
-              "CSS": "css",
-              "PHP": "php",
+              "ERB": "eruby",
               "TSX": "typescriptreact",
               "JavaScript": "javascriptreact",
-              "ERB": "eruby"
+              "PHP": "php",
+              "CSS": "css"
             },
             "code_action_kinds": null
           }
@@ -673,8 +704,8 @@
             "language": "HTML",
             "languages": [],
             "language_ids": {
-              "HTML": "html",
-              "CSS": "css"
+              "CSS": "css",
+              "HTML": "html"
             },
             "code_action_kinds": null
           }
@@ -915,6 +946,41 @@
       },
       "dev": false
     },
+    "markdown-oxide": {
+      "manifest": {
+        "id": "markdown-oxide",
+        "name": "Markdown Oxide",
+        "version": "0.0.4",
+        "schema_version": 1,
+        "description": "Obsidian-Inspired PKM Language Server for Zed",
+        "repository": "https://github.com/Feel-ix-343/markdown-oxide",
+        "authors": [
+          "Felix Zeller <felixazeller@gmail.com>"
+        ],
+        "lib": {
+          "kind": "Rust",
+          "version": "0.0.4"
+        },
+        "themes": [],
+        "icon_themes": [],
+        "languages": [],
+        "grammars": {},
+        "language_servers": {
+          "markdown-oxide": {
+            "language": "Markdown",
+            "languages": [],
+            "language_ids": {},
+            "code_action_kinds": null
+          }
+        },
+        "context_servers": {},
+        "slash_commands": {},
+        "indexed_docs_providers": {},
+        "snippets": null,
+        "capabilities": []
+      },
+      "dev": false
+    },
     "marksman": {
       "manifest": {
         "id": "marksman",
@@ -942,6 +1008,36 @@
             "code_action_kinds": null
           }
         },
+        "context_servers": {},
+        "slash_commands": {},
+        "indexed_docs_providers": {},
+        "snippets": null,
+        "capabilities": []
+      },
+      "dev": false
+    },
+    "material-icon-theme": {
+      "manifest": {
+        "id": "material-icon-theme",
+        "name": "Material Icon Theme",
+        "version": "0.1.2",
+        "schema_version": 1,
+        "description": "Material Design icons.",
+        "repository": "https://github.com/zed-extensions/material-icon-theme",
+        "authors": [
+          "Zed Industries <support@zed.dev>"
+        ],
+        "lib": {
+          "kind": null,
+          "version": null
+        },
+        "themes": [],
+        "icon_themes": [
+          "icon_themes/material-icon-theme.json"
+        ],
+        "languages": [],
+        "grammars": {},
+        "language_servers": {},
         "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
@@ -1815,7 +1911,20 @@
       "path": "themes\\zedokai.json"
     }
   },
-  "icon_themes": {},
+  "icon_themes": {
+    "Colored Zed Icons Theme Dark": {
+      "extension": "colored-zed-icons-theme",
+      "path": "icon_themes\\colored-zed-icons-theme.json"
+    },
+    "Colored Zed Icons Theme Light": {
+      "extension": "colored-zed-icons-theme",
+      "path": "icon_themes\\colored-zed-icons-theme.json"
+    },
+    "Material Icon Theme": {
+      "extension": "material-icon-theme",
+      "path": "icon_themes\\material-icon-theme.json"
+    }
+  },
   "languages": {
     "Assembly": {
       "extension": "assembly",

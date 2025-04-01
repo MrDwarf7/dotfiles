@@ -43,6 +43,7 @@
       "}": "vim::EndOfParagraph",
       "(": "vim::SentenceBackward",
       ")": "vim::SentenceForward",
+
       "|": "vim::GoToColumn",
       // Word motions
       "w": "vim::NextWordStart",
@@ -462,11 +463,14 @@
   {
     "context": "vim_mode == insert",
     "bindings": {
-      "j j": "vim::NormalBefore",
+      // "j j": "vim::NormalBefore",
       "j k": "vim::NormalBefore",
       "k j": "vim::NormalBefore",
-      "k k": "vim::NormalBefore",
+      // "k k": "vim::NormalBefore",
       "ctrl-shift-i": "assistant::InlineAssist",
+
+      "(": null,
+      ")": null,
 
       "escape": "vim::NormalBefore",
       "ctrl-c": "vim::NormalBefore",
@@ -483,6 +487,8 @@
       "ctrl-d": "vim::Outdent",
       "ctrl-j": "editor::ContextMenuNext", // FINALLYYYYYYYYYYYYYYYYYYYYYY
       "ctrl-k": "editor::ContextMenuPrevious", // FINALLYYYYYYYYYYYYYYYYYYYYYY
+      "ctrl-e": "vim::LineDown",
+      "ctrl-y": "vim::LineUp",
       // "ctrl-k": ["vim::PushOperator", { "Digraph": {} }],
       "ctrl-r": "vim::PushRegister"
     }
@@ -492,11 +498,22 @@
     "context": "Picker || menu || command_palette || Picker > Editor",
     "bindings": {
       "ctrl-k": "menu::SelectPrevious",
-      "ctrl-j": "menu::SelectNext"
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-w": "editor::DeleteToPreviousWordStart"
       // "ctrl-j": ["workspace::SendKeystrokes", "down"],
       // "ctrl-k": ["workspace::SendKeystrokes", "up"]
     }
   },
+
+  {
+    "context": "Picker || menu || command_palette",
+    "bindings": {
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+      "ctrl-j": ["workspace::SendKeystrokes", "down"],
+      "ctrl-k": ["workspace::SendKeystrokes", "up"]
+    }
+  },
+
   {
     "context": "vim_mode == replace",
     "bindings": {
@@ -667,6 +684,7 @@
       // "%": "project_panel::NewFile",
       "a": "project_panel::NewFile",
       "shift-a": "project_panel::NewDirectory",
+      // TODO: Need to handle getting OUT of this page via ctrl-w q -- as it's exp. ctrl-w
       "/": "project_panel::NewSearchInDirectory",
       // "d": "project_panel::NewDirectory",
       "d": "project_panel::Delete",
