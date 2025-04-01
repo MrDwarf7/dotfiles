@@ -41,6 +41,31 @@ function nf {
     fastfetch 
 }
 
+enum CursorStyle
+{
+  block_blink = 1
+  block = 2
+  underline_blink = 3
+  underline = 4
+  bar_blink = 5
+  bar = 6
+}
+
+<#
+  .SYNOPSIS
+  set cursor style
+#>
+function Set-CursorStyle
+{
+  param (
+    # style
+    [Parameter(Mandatory)]
+    [CursorStyle]$Style
+  )
+  
+  Write-Output "`e[$([int]$Style) q"
+}
+
 function y {
     $tmp = [System.IO.Path]::GetTempFileName()
     yazi $args --cwd-file="$tmp"
@@ -49,6 +74,7 @@ function y {
         Set-Location -LiteralPath $cwd
     }
     Remove-Item -Path $tmp
+    # Set-CursorStyle -Style bar
 }
 
 function DustExclude {
@@ -106,7 +132,8 @@ function scoopup {
 
 function nodeup {
     $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
-    pnpm -g update && pnpm -g upgrade && yarn global upgrade && npm -g update && npm -g upgrade
+    # && yarn global upgrade  ## Yarn is no longer really a package manger, it's more a project manager now
+    pnpm -g update && pnpm -g upgrade && npm -g update && npm -g upgrade
     # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
 
