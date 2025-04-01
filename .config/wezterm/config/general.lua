@@ -1,4 +1,5 @@
 return {
+	-- debug_key_events = true,
 	window_close_confirmation = "NeverPrompt",
 	automatically_reload_config = true,
 	swallow_mouse_click_on_pane_focus = false,
