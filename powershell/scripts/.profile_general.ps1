@@ -10,3 +10,5 @@ $powershell_completions = "$powershell_scripts_dir\completions"
 . "$powershell_completions\az-cli.ps1"
 . "$powershell_completions\atac.ps1"
 . "$powershell_completions\general.ps1"
+. "$powershell_completions\jj.ps1"
+. "$powershell_completions\jj_aa.ps1" # Same as jj
