@@ -9,6 +9,7 @@ alias gapa "git add --patch $args"
 alias gau "git add --update $args"
 alias gb "git branch $args"
 alias gba "git branch -a $args"
+alias grl "git reglog -5 $args"
 # gbda               
 alias gbl "git blame -b -w $args"
 alias gbnm "git branch --no-merged $args"
