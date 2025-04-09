@@ -5,19 +5,19 @@ import json
 from datetime import datetime
 from json.decoder import JSONDecodeError
 
+DEFAULT_TEMPLATE_USERNAME = r"$env:USERNAME"
 
 home_profile = os.environ.get("HOME_PROFILE")
 user_home = os.environ.get("USERPROFILE")
-username = os.environ.get("USERNAME")
 
 date_str = datetime.now().strftime("%Y_%m_%d")
 
-removal_pattern = r"C:\\Users\\.*?\\"
-
-
+# Uses cmd commands, now pwsh
 file_command_map = {
+    # scoop
     "scoop": "scoop list",
     "scoop_export": "scoop export",
+    # end scoop
     "gh_cli_extensions": "gh extension list",
     #
     # python
@@ -29,20 +29,22 @@ file_command_map = {
     #
     # rust
     "cargo_list": "cargo --list",
-    "cargo_bin_dir": f"ls {user_home}\\.cargo\\bin",
-    "cargo_binstall_dir": f"cat {user_home}\\.cargo\\binstall\\crates-v1.json",
+    "cargo_bin_dir": f"dir {user_home}\\.cargo\\bin",
+    "cargo_binstall_dir": f"type {user_home}\\.cargo\\binstall\\crates-v1.json | jq",  # This isn't actually valid JSON, that's fine
     # end rust
     #
     # node
     "npm_global": "npm list -g",
     "pnpm": "pnpm list -g",
-    "yarn_global": "yarn global list",
+    # "yarn_global": "yarn global list",
     # end node
 }
 
 
 def run_command(command):
     try:
+        # Debugging purposes
+        # print(f"Run res: {subprocess.run(command, shell=True, check=True)}")
         output = subprocess.check_output(
             command, shell=True, text=True, stderr=subprocess.STDOUT
         )
@@ -52,63 +54,51 @@ def run_command(command):
         return None
 
 
-exacts = ["non_package.txt"]
-# def dump_exacts():
-#     for file in exacts:
-#         filename = f"{date_str}_{file}"
-#         with open(filename, "w") as f:
-#             # Can add specific logic ?
-#             pass
-#         print(f"Exacts -- Generated: {filename}")
-
-
-def write_as_json(filename, data):
+def write_out(filename, data) -> None:
     print(f"Writing to {filename}")
-    with open(filename, "w") as f:
-        json.dump(data, f, indent=2)
+    if filename.endswith(".json"):
+        with open(filename, "w") as f:
+            json.dump(data, f, indent=2)
+            print(f"Generated: {filename}")
+        return  # Let the scope finish for file closure/cleanup
+    else:
+        with open(filename, "w") as f:
+            f.write(data)
     print(f"Generated: {filename}")
 
 
-def write_as_default(filename, data):
-    print(f"Writing to {filename}")
-    with open(filename, "w") as f:
-        f.write(data)
-    print(f"Generated: {filename}")
+def create_file_path(filename_base, output_dir=None) -> str:
+    filename = ""
+    suffix = (
+        "work"
+        if home_profile == "False" or home_profile == "false" or home_profile is False
+        else "home"
+    )
+    if output_dir is not None:
+        filename = os.path.join(output_dir, f"{date_str}_{filename_base}_{suffix}.txt")
+    else:
+        filename = f"{date_str}_{filename_base}_{suffix}.txt"
+    return filename
 
 
-def dump_mapped(output_dir):
+def dump_mapped(output_dir) -> None:
     for filename_base, command in file_command_map.items():
-        print()
-        suffix = (
-            "work"
-            if home_profile == "False"
-            or home_profile == "false"
-            or home_profile is False
-            else "home"
-        )
-        if output_dir is not None:
-            filename = os.path.join(
-                output_dir, f"{date_str}_{filename_base}_{suffix}.txt"
-            )
-        else:
-            filename = f"{date_str}_{filename_base}_{suffix}.txt"
+        file_path = create_file_path(filename_base=filename_base, output_dir=output_dir)
+        print(f"\nCommand: {command}")
+        result = run_command(command=command)
 
-        result = run_command(command)
-
-        if result is not None:
+        if result is not None:  # This is 'Ok', command successful and produced output
             try:
-                # We attempt to parse the result as JSON
-                # If it fails we just write it normally; as a txt file
-                data = json.loads(result)
-                json_filename = filename.replace(".txt", ".json")
-                filename = json_filename  # re-assign required to ensure we still clear anything
+                # print(f"Parsing result as JSON: {result}")
+                # We attempt to parse the result as JSON. If it fails we just write it normally; as a txt file
+                result = json.loads(result)
+                file_path = file_path.replace(".txt", ".json")
                 print("Write json")
-                write_as_json(json_filename, data)
+                write_out(filename=file_path, data=result)
 
             except JSONDecodeError as _:
                 print("Write default")
-                write_as_default(filename, result)
-                continue
+                write_out(filename=file_path, data=result)
 
             except subprocess.CalledProcessError as spcpe:
                 print(f"Error: {spcpe}")
@@ -117,23 +107,28 @@ def dump_mapped(output_dir):
                 print(f"Error: {fnfe}")
                 continue
 
-            print("Removing stuff")
-            replace_username(filename)
 
+def clean(file_path, replacement=DEFAULT_TEMPLATE_USERNAME) -> None:
+    print(f"Removing username from file: {file_path}")
 
-def replace_username(file_path: str, replacement="USERNAME") -> None:
     try:
         with open(file_path, "r", encoding="utf-8") as file:
+            # Get initial content
             content = file.read()
 
-            new_content = re.sub(
+            # Remove unicode characters
+            content = re.sub(r"\x1b\[[ -?]*[@-~]", "", content)
+
+            # Remove username from file
+            content = re.sub(
                 r"C:\\Users\\([A-zA-Z0-9._-]+)\\",
                 rf"C:\\Users\\{replacement}\\",
                 content,
             )
 
             with open(file_path, "w", encoding="utf-8") as f:
-                f.write(new_content)
+                f.write(content)
+
     except FileNotFoundError as fnfe:
         print(f"Error: {fnfe}")
         return None
@@ -148,14 +143,17 @@ def replace_username(file_path: str, replacement="USERNAME") -> None:
 def main():
     output_dir = date_str
 
-    print(f"Make directory if not exists >> {output_dir}")
+    print(f"Make directory if not exists > {output_dir}")
     os.makedirs(output_dir, exist_ok=True)
 
-    print("Dump mapped >>")
+    print("Dump mapped >")
     dump_mapped(output_dir=output_dir)
+    print()
 
-    # print("Dump exacts >>")
-    # dump_exacts()
+    for file in os.listdir(output_dir):
+        file_path = os.path.join(output_dir, file)
+        if os.path.isfile(file_path):
+            clean(file_path=file_path)
 
 
 if __name__ == "__main__":
