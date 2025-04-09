@@ -1,0 +1,6 @@
+aider-chat v0.72.3
+- aider.exe
+posting v2.3.0
+- posting.exe
+ruff v0.9.9
+- ruff.exe
