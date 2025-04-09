@@ -52,7 +52,7 @@ return {
 					exclude = { "deno.json", "deno.jsonc" },
 				},
 				single_file_support = false,
-				tsserver_file_preferences = tsserv_cap(),
+				tsserver_file_preferences = tsserv_cap(opts),
 				tsserver_plugins = {
 					"@types/node",
 					"@types/react",

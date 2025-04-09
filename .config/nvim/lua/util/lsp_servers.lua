@@ -37,7 +37,7 @@ M.servers = function()
 		neocmake = {},
 
 		cssls = {},
-		deno = {},
+		-- deno = {}, -- commented due to conflict with tsserver
 
 		-- deno = {
 		-- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),

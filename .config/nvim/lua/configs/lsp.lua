@@ -101,7 +101,7 @@ return {
 			"gopls",
 			"powershell_es",
 			"rust_analyzer",
-			"tsserver",
+			-- "tsserver",
 			"zig",
 		}
 
