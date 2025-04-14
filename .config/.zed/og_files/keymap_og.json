@@ -218,8 +218,6 @@
       "space l h": "editor::Hover",
       "space l s": "outline::Toggle",
       "space l f": "editor::Format",
-      "space l d": "diagnostics::Deploy",
-      "space l p": "diagnostics::Deploy",
       "space h p": "editor::ToggleSelectedDiffHunks", // RECENT
       "space h shift-p": "editor::ExpandAllDiffHunks",
 
