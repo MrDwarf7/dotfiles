@@ -89,7 +89,7 @@
   "git_panel": {
     "default_width": 320
   },
-  "hide_mouse": "on_typing_and_movement",
+  "hide_mouse_while_typing": true,
   "icon_theme": "Material Icon Theme",
   "jsx_tag_auto_close": {
     "enabled": true
@@ -177,7 +177,7 @@
   "wrap_guides": [100, 120],
   "soft_wrap": null,
 
-  "ui_font_size": 16.0,
+  "ui_font_size": 14.5,
   "ui_font_family": "Zed Plex Mono",
   "ui_font_weight": 400.0,
   "ui_font_features": {
@@ -186,7 +186,7 @@
 
   "buffer_line_height": "standard",
 
-  "buffer_font_size": 16.0,
+  "buffer_font_size": 13.0,
   "buffer_font_family": "Zed Plex Mono",
   "buffer_font_features": {
     "calt": false,
@@ -294,7 +294,6 @@
     },
 
     "nix": {
-      // "format_on_save": "on",
       "initialization_options": {
         "experimental": {
           "nix": {
@@ -302,34 +301,10 @@
             "enableNixFlake": true
           }
         }
-      }
-    }
-  },
-
-  "languages": {
-    "TOML": {
-      "inlay_hints": {
-        "enabled": true
-      }
-      // "format_on_save": "on",
-      // "formatter": {
-      //   "external": {
-      //     "command": "taplo",
-      //     "arguments": ["format", "--stdin-filepath", "${buffer_path"]
-      //   }
-      // }
-    },
-    "Nix": {
-      "inlay_hints": {
-        "enabled": true,
-        "show_other_hints": true,
-        "show_type_hints": true,
-        "show_parameter_hints": true
       },
       "formatter": {
-        "external": {
-          "command": "alejandra"
-        }
+        "command": "alejandra",
+        "args": ["-c"]
       }
     }
   },
