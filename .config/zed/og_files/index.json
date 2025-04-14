@@ -16,7 +16,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/asm"
         ],
@@ -28,11 +27,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -52,7 +49,6 @@
           "version": "0.0.4"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/bash"
         ],
@@ -71,11 +67,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -83,7 +77,7 @@
       "manifest": {
         "id": "biome",
         "name": "Biome",
-        "version": "0.1.5",
+        "version": "0.1.1",
         "schema_version": 1,
         "description": "Biome support for Zed",
         "repository": "https://github.com/biomejs/biome-zed",
@@ -92,10 +86,9 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.3.0"
+          "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {
@@ -111,126 +104,54 @@
               "Svelte",
               "JSON",
               "JSONC",
-              "CSS",
-              "GraphQL",
-              "HTML"
+              "CSS"
             ],
             "language_ids": {
-              "JSONC": "jsonc",
+              "JSX": "javascriptreact",
+              "JSON": "json",
               "Astro": "astro",
+              "CSS": "css",
               "TypeScript": "typescript",
-              "HTML": "html",
               "Vue.js": "vuejs",
               "JavaScript": "javascript",
               "Svelte": "svelte",
               "TSX": "typescriptreact",
-              "CSS": "css",
-              "GraphQL": "graphql",
-              "JSX": "javascriptreact",
-              "JSON": "json"
+              "JSONC": "jsonc"
             },
-            "code_action_kinds": [
-              "quickfix"
-            ]
+            "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
     "catppuccin": {
       "manifest": {
         "id": "catppuccin",
-        "name": "Catppuccin",
-        "version": "0.2.21",
+        "name": "Catppuccin Themes",
+        "version": "0.2.10",
         "schema_version": 1,
         "description": "🦀 Soothing pastel theme for Zed",
         "repository": "https://github.com/catppuccin/zed",
         "authors": [
-          "Catppuccin <releases@catppuccin.dev>"
+          "Andrew Tec <andrewtec@enjoi.dev>"
         ],
         "lib": {
           "kind": null,
           "version": null
         },
         "themes": [
-          "themes/catppuccin-no-italics-mauve.json",
-          "themes/catppuccin-mauve.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "colored-zed-icons-theme": {
-      "manifest": {
-        "id": "colored-zed-icons-theme",
-        "name": "Colored Zed Icons Theme",
-        "version": "0.3.1",
-        "schema_version": 1,
-        "description": "Default Zed icons, but colored!",
-        "repository": "https://github.com/TheRedXD/zed-icons-colored-theme",
-        "authors": [
-          "TheRedXD",
-          "Zed Industries <support@zed.dev>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [],
-        "icon_themes": [
-          "icon_themes/colored-zed-icons-theme.json"
+          "themes/catppuccin-mauve.json",
+          "themes/catppuccin-no-italics-mauve.json"
         ],
         "languages": [],
         "grammars": {},
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "colorizer": {
-      "manifest": {
-        "id": "colorizer",
-        "name": "Colorizer",
-        "version": "0.0.4",
-        "schema_version": 1,
-        "description": "Colorizer is a vibrant Zed code editor theme that enhances readability with rich, contrasting colors, making your coding experience both efficient and enjoyable.",
-        "repository": "https://github.com/tamimhasandev/colorizer",
-        "authors": [
-          "Md Tamim Hasan <tamimhasandev@gmail.com>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [
-          "themes/colorizer.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -238,19 +159,18 @@
       "manifest": {
         "id": "csharp",
         "name": "C#",
-        "version": "0.1.2",
+        "version": "0.0.2",
         "schema_version": 1,
         "description": "C# support.",
-        "repository": "https://github.com/zed-extensions/csharp",
+        "repository": "https://github.com/zed-industries/zed",
         "authors": [
           "fminkowski <fminkowski@gmail.com>"
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.1.0"
+          "version": "0.0.4"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/csharp"
         ],
@@ -269,11 +189,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -293,7 +211,6 @@
           "version": "0.0.4"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/csv"
         ],
@@ -305,60 +222,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "deno": {
-      "manifest": {
-        "id": "deno",
-        "name": "Deno",
-        "version": "0.1.1",
-        "schema_version": 1,
-        "description": "Deno support.",
-        "repository": "https://github.com/zed-extensions/deno",
-        "authors": [
-          "Lino Le Van <11367844+lino-levan@users.noreply.github.com>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.1.0"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {
-          "deno": {
-            "language": null,
-            "languages": [
-              "TypeScript",
-              "TSX",
-              "JavaScript",
-              "JSDoc"
-            ],
-            "language_ids": {
-              "TSX": "typescriptreact",
-              "TypeScript": "typescript",
-              "JavaScript": "javascript"
-            },
-            "code_action_kinds": [
-              "quickfix",
-              "refactor",
-              "refactor.extract",
-              "source"
-            ]
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -378,7 +244,6 @@
           "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {
@@ -389,11 +254,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -414,7 +277,6 @@
           "version": "0.0.4"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/dockerfile"
         ],
@@ -433,11 +295,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -457,7 +317,6 @@
           "version": "0.0.4"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {
@@ -473,56 +332,18 @@
             ],
             "language_ids": {
               "HTML": "html",
-              "ERB": "eruby",
-              "TSX": "typescriptreact",
-              "JavaScript": "javascriptreact",
               "PHP": "php",
-              "CSS": "css"
+              "TSX": "typescriptreact",
+              "CSS": "css",
+              "JavaScript": "javascriptreact",
+              "ERB": "eruby"
             },
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "fish": {
-      "manifest": {
-        "id": "fish",
-        "name": "Fish",
-        "version": "0.0.8",
-        "schema_version": 0,
-        "description": "Fish language support for Zed",
-        "repository": "https://github.com/hasit/zed-fish",
-        "authors": [
-          "Hasit Mistry <hasitnm@gmail.com>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/fish"
-        ],
-        "grammars": {
-          "fish": {
-            "repository": "https://github.com/ram02z/tree-sitter-fish",
-            "rev": "a78aef9abc395c600c38a037ac779afc7e3cc9e0",
-            "path": null
-          }
-        },
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -542,7 +363,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/gitconfig",
           "languages/diff",
@@ -584,11 +404,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -596,10 +414,10 @@
       "manifest": {
         "id": "gleam",
         "name": "Gleam",
-        "version": "0.4.0",
+        "version": "0.2.0",
         "schema_version": 1,
         "description": "Gleam support.",
-        "repository": "https://github.com/gleam-lang/zed-gleam",
+        "repository": "https://github.com/zed-industries/zed",
         "authors": [
           "Marshall Bowers <elliott.codes@gmail.com>"
         ],
@@ -608,14 +426,13 @@
           "version": "0.1.0"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/gleam"
         ],
         "grammars": {
           "gleam": {
             "repository": "https://github.com/gleam-lang/tree-sitter-gleam",
-            "rev": "066704e4826699e754d351e3bbe12bf2e51de9d8",
+            "rev": "426e67087fd62be5f4533581b5916b2cf010fb5b",
             "path": null
           }
         },
@@ -627,7 +444,6 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {
           "gleam-project": {
             "description": "Returns information about the current Gleam project.",
@@ -637,38 +453,7 @@
         "indexed_docs_providers": {
           "gleam-hexdocs": {}
         },
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "graphene": {
-      "manifest": {
-        "id": "graphene",
-        "name": "Graphene Theme",
-        "version": "0.2.1",
-        "schema_version": 1,
-        "description": "A practical dark theme for Zed.",
-        "repository": "https://github.com/adinack/graphene",
-        "authors": [
-          "AdinAck <adinackerman@gmail.com>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [
-          "themes/graphene.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -676,7 +461,7 @@
       "manifest": {
         "id": "html",
         "name": "HTML",
-        "version": "0.2.0",
+        "version": "0.1.2",
         "schema_version": 1,
         "description": "HTML support.",
         "repository": "https://github.com/zed-industries/zed",
@@ -685,10 +470,9 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.1.0"
+          "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/html"
         ],
@@ -704,17 +488,15 @@
             "language": "HTML",
             "languages": [],
             "language_ids": {
-              "CSS": "css",
-              "HTML": "html"
+              "HTML": "html",
+              "CSS": "css"
             },
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -722,9 +504,9 @@
       "manifest": {
         "id": "ini",
         "name": "ini",
-        "version": "0.0.4",
+        "version": "0.0.2",
         "schema_version": 1,
-        "description": "Support for ini and related config files (ini, conf, cfg, config, editorconfig) and systemd unit files (automount, mount, path, scope, service, slice, socket, swap, target, timer)",
+        "description": "Ini support.",
         "repository": "https://github.com/bajrangCoder/zed-ini",
         "authors": [
           "Raunak Raj <bajrangcoders@gmail.com>"
@@ -734,7 +516,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/ini"
         ],
@@ -746,47 +527,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "just": {
-      "manifest": {
-        "id": "just",
-        "name": "Justfile",
-        "version": "0.1.4",
-        "schema_version": 1,
-        "description": "Justfile syntax highlighting",
-        "repository": "https://github.com/jackTabsCode/zed-just",
-        "authors": [
-          "Jack T. <jack@jackt.space>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/just"
-        ],
-        "grammars": {
-          "just": {
-            "repository": "https://github.com/IndianBoy42/tree-sitter-just",
-            "rev": "3f90d24eb8c8d9e8c74fee7120d79c3ec7229f26",
-            "path": null
-          }
-        },
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -806,7 +549,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/kdl"
         ],
@@ -818,49 +560,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "log": {
-      "manifest": {
-        "id": "log",
-        "name": "LOG",
-        "version": "0.0.6",
-        "schema_version": 1,
-        "description": "Syntax highlighting for log files.",
-        "repository": "https://github.com/nervenes/zed-log",
-        "authors": [
-          "nervenes",
-          "notpeter",
-          "d1y"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/log"
-        ],
-        "grammars": {
-          "log": {
-            "repository": "https://github.com/Tudyx/tree-sitter-log",
-            "rev": "62cfe307e942af3417171243b599cc7deac5eab9",
-            "path": null
-          }
-        },
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -868,19 +570,18 @@
       "manifest": {
         "id": "lua",
         "name": "Lua",
-        "version": "0.1.2",
+        "version": "0.0.3",
         "schema_version": 1,
         "description": "Lua support.",
-        "repository": "https://github.com/zed-extensions/lua",
+        "repository": "https://github.com/zed-industries/zed",
         "authors": [
           "Max Brunsfeld <max@zed.dev>"
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.1.0"
+          "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/lua"
         ],
@@ -899,11 +600,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -911,73 +610,34 @@
       "manifest": {
         "id": "make",
         "name": "Make",
-        "version": "1.1.0",
+        "version": "1.0.1",
         "schema_version": 1,
         "description": "Makefile syntax highlighting",
         "repository": "https://github.com/caius/zed-make",
         "authors": [
           "Caius Durling <dev@caius.name>",
           "d1y <chenhonzhou@gmail.com>",
-          "Marshall Bowers <elliott.codes@gmail.com>",
-          "Luke Naylor <luke@grahamnaylor.net>"
+          "Marshall Bowers <elliott.codes@gmail.com>"
         ],
         "lib": {
           "kind": null,
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/make"
         ],
         "grammars": {
           "make": {
-            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-make",
-            "rev": "5e9e8f8ff3387b0edcaa90f46ddf3629f4cfeb1d",
+            "repository": "https://github.com/caius/tree-sitter-make",
+            "rev": "b35c2714e73d2846b26061b06cda4fa56d61e3a5",
             "path": null
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "markdown-oxide": {
-      "manifest": {
-        "id": "markdown-oxide",
-        "name": "Markdown Oxide",
-        "version": "0.0.4",
-        "schema_version": 1,
-        "description": "Obsidian-Inspired PKM Language Server for Zed",
-        "repository": "https://github.com/Feel-ix-343/markdown-oxide",
-        "authors": [
-          "Felix Zeller <felixazeller@gmail.com>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.0.4"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {
-          "markdown-oxide": {
-            "language": "Markdown",
-            "languages": [],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -985,7 +645,7 @@
       "manifest": {
         "id": "marksman",
         "name": "Marksman",
-        "version": "0.0.3",
+        "version": "0.0.2",
         "schema_version": 1,
         "description": "Marksman support for Markdown files.",
         "repository": "https://github.com/vitallium/zed-marksman",
@@ -994,10 +654,9 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.2.0"
+          "version": "0.1.0"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {
@@ -1008,41 +667,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "material-icon-theme": {
-      "manifest": {
-        "id": "material-icon-theme",
-        "name": "Material Icon Theme",
-        "version": "0.1.2",
-        "schema_version": 1,
-        "description": "Material Design icons.",
-        "repository": "https://github.com/zed-extensions/material-icon-theme",
-        "authors": [
-          "Zed Industries <support@zed.dev>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [],
-        "icon_themes": [
-          "icon_themes/material-icon-theme.json"
-        ],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1050,7 +677,7 @@
       "manifest": {
         "id": "meson",
         "name": "Meson",
-        "version": "0.3.0",
+        "version": "0.1.1",
         "schema_version": 1,
         "description": "Meson language support for the Zed editor",
         "repository": "https://github.com/hqnna/zed-meson",
@@ -1062,7 +689,6 @@
           "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/meson"
         ],
@@ -1083,11 +709,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1107,7 +731,6 @@
           "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/cmake"
         ],
@@ -1126,137 +749,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "new-darcula": {
-      "manifest": {
-        "id": "new-darcula",
-        "name": "New Darcula Theme",
-        "version": "1.0.7",
-        "schema_version": 1,
-        "description": "🔮 Ultra clean take on the JetBrains Darcula theme mixed with a hint of GitHub UI.",
-        "repository": "https://github.com/e-simpson/new-darcula-z",
-        "authors": [
-          "Evan Simpson <evan@evan.news>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [
-          "themes/newdarcula.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "nix": {
-      "manifest": {
-        "id": "nix",
-        "name": "Nix",
-        "version": "0.1.1",
-        "schema_version": 1,
-        "description": "Nix support.",
-        "repository": "https://github.com/zed-extensions/nix",
-        "authors": [
-          "Hasit Mistry <hasitnm@gmail.com>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.1.0"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/nix"
-        ],
-        "grammars": {
-          "nix": {
-            "repository": "https://github.com/nix-community/tree-sitter-nix",
-            "rev": "b3cda619248e7dd0f216088bd152f59ce0bbe488",
-            "path": null
-          }
-        },
-        "language_servers": {
-          "nil": {
-            "language": "Nix",
-            "languages": [],
-            "language_ids": {},
-            "code_action_kinds": null
-          },
-          "nixd": {
-            "language": "Nix",
-            "languages": [],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "nu": {
-      "manifest": {
-        "id": "nu",
-        "name": "Nu",
-        "version": "0.0.6",
-        "schema_version": 1,
-        "description": "Nushell language support for Zed",
-        "repository": "https://github.com/zed-extensions/nu",
-        "authors": [
-          "Mikayla Maki <mikayla@zed.dev>",
-          "Joseph Lyons <joseph@zed.dev>",
-          "Darren Schroeder"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.2.0"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/nu"
-        ],
-        "grammars": {
-          "nu": {
-            "repository": "https://github.com/nushell/tree-sitter-nu",
-            "rev": "b99dc3b7b26337d84f95c0de4dda81077b03e5c7",
-            "path": null
-          }
-        },
-        "language_servers": {
-          "nu": {
-            "language": null,
-            "languages": [
-              "Nu"
-            ],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1276,7 +771,6 @@
           "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/powershell"
         ],
@@ -1297,137 +791,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "prisma": {
-      "manifest": {
-        "id": "prisma",
-        "name": "Prisma",
-        "version": "0.1.0",
-        "schema_version": 1,
-        "description": "Prisma support.",
-        "repository": "https://github.com/zed-extensions/prisma",
-        "authors": [
-          "Matthew Gramigna <matthewgramigna@gmail.com>",
-          "Victor Quiroz <git@victorhqc.com>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.1.0"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/prisma"
-        ],
-        "grammars": {
-          "prisma": {
-            "repository": "https://github.com/victorhqc/tree-sitter-prisma",
-            "rev": "beeac50812da9765e29cbb2af1324783033cdca3",
-            "path": null
-          }
-        },
-        "language_servers": {
-          "prisma-language-server": {
-            "language": "Prisma",
-            "languages": [],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "proto": {
-      "manifest": {
-        "id": "proto",
-        "name": "Proto",
-        "version": "0.2.1",
-        "schema_version": 1,
-        "description": "Protocol Buffers support.",
-        "repository": "https://github.com/zed-industries/zed",
-        "authors": [
-          "Zed Industries <support@zed.dev>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.1.0"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [
-          "languages/proto"
-        ],
-        "grammars": {
-          "proto": {
-            "repository": "https://github.com/zed-industries/tree-sitter-proto",
-            "rev": "0848bd30a64be48772e15fbb9d5ba8c0cc5772ad",
-            "path": null
-          }
-        },
-        "language_servers": {
-          "protobuf-language-server": {
-            "language": null,
-            "languages": [
-              "Proto"
-            ],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "pylsp": {
-      "manifest": {
-        "id": "pylsp",
-        "name": "Python LSP",
-        "version": "0.0.1",
-        "schema_version": 1,
-        "description": "python-lsp extension for Zed",
-        "repository": "https://github.com/rgbkrk/python-lsp-zed-extension",
-        "authors": [
-          "Kyle Kelley <rgbkrk@gmail.com>"
-        ],
-        "lib": {
-          "kind": "Rust",
-          "version": "0.0.6"
-        },
-        "themes": [],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {
-          "pylsp": {
-            "language": null,
-            "languages": [
-              "Python"
-            ],
-            "language_ids": {},
-            "code_action_kinds": null
-          }
-        },
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1447,7 +813,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/ron"
         ],
@@ -1459,46 +824,91 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
-    "ruff": {
+    "snippets": {
       "manifest": {
-        "id": "ruff",
-        "name": "Ruff",
-        "version": "0.1.0",
+        "id": "snippets",
+        "name": "Snippets",
+        "version": "0.0.5",
         "schema_version": 1,
-        "description": "Support for Ruff, the Python linter and formatter",
+        "description": "Support for language-agnostic snippets, provided by simple-completion-language-server",
         "repository": "https://github.com/zed-industries/zed",
         "authors": [],
         "lib": {
           "kind": "Rust",
-          "version": "0.1.0"
+          "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {
-          "ruff": {
+          "snippet-completion-server": {
             "language": null,
             "languages": [
-              "Python"
+              "Astro",
+              "Clojure",
+              "C",
+              "C++",
+              "C#",
+              "Dart",
+              "Dockerfile",
+              "Elixir",
+              "Elm",
+              "ERB",
+              "Erlang",
+              "Gleam",
+              "GLSL",
+              "Go",
+              "Haskell",
+              "HCL",
+              "HEEX",
+              "HTML",
+              "JavaScript",
+              "JSDoc",
+              "JSON",
+              "Lua",
+              "Markdown",
+              "OCaml",
+              "PHP",
+              "Python",
+              "Prisma",
+              "PureScript",
+              "Racket",
+              "Ruby",
+              "Rust",
+              "Scheme",
+              "Shell Script",
+              "Svelte",
+              "Terraform",
+              "TOML",
+              "TypeScript",
+              "TSX",
+              "Uiua",
+              "Vue.js",
+              "Zig"
             ],
-            "language_ids": {},
+            "language_ids": {
+              "HTML": "html",
+              "TypeScript": "typescript",
+              "CSS": "css",
+              "Vue.js": "vue",
+              "JavaScript": "javascript",
+              "PHP": "php",
+              "Terraform": "terraform",
+              "Terraform Vars": "terraform-vars",
+              "TSX": "typescriptreact"
+            },
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1521,7 +931,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/sql"
         ],
@@ -1533,11 +942,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1545,8 +952,8 @@
       "manifest": {
         "id": "the-dark-side",
         "name": "The Dark Side",
-        "version": "0.3.0",
-        "schema_version": 1,
+        "version": "0.2.5",
+        "schema_version": 0,
         "description": "Join the dark side.",
         "repository": "https://github.com/Imgkl/the-dark-side",
         "authors": [
@@ -1559,15 +966,12 @@
         "themes": [
           "themes/the-dark-side.json"
         ],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1587,7 +991,6 @@
           "version": null
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/tmux"
         ],
@@ -1599,11 +1002,9 @@
           }
         },
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1611,7 +1012,7 @@
       "manifest": {
         "id": "tokyo-night",
         "name": "Tokyo Night Themes",
-        "version": "0.5.0",
+        "version": "0.4.0",
         "schema_version": 1,
         "description": "Tokyo Night Themes",
         "repository": "https://github.com/ssaunderss/zed-tokyo-night",
@@ -1625,15 +1026,12 @@
         "themes": [
           "themes/tokyo-night.json"
         ],
-        "icon_themes": [],
         "languages": [],
         "grammars": {},
         "language_servers": {},
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1641,7 +1039,7 @@
       "manifest": {
         "id": "toml",
         "name": "TOML",
-        "version": "0.1.3",
+        "version": "0.1.1",
         "schema_version": 1,
         "description": "TOML support.",
         "repository": "https://github.com/zed-industries/zed",
@@ -1651,10 +1049,9 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.1.0"
+          "version": "0.0.6"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/toml"
         ],
@@ -1673,71 +1070,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "xy-zed": {
-      "manifest": {
-        "id": "xy-zed",
-        "name": "XY-Zed Theme",
-        "version": "0.1.1",
-        "schema_version": 1,
-        "description": "🐈‍⬛ A sleek and sophisticated dark theme with vibrant, intelligent syntax highlighting. Please report issues ➩",
-        "repository": "https://github.com/zarifpour/xy-zed",
-        "authors": [
-          "Daniel Zarifpour <z@rifpour.xyz>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [
-          "themes/xy-zed.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
-      },
-      "dev": false
-    },
-    "zedokai": {
-      "manifest": {
-        "id": "zedokai",
-        "name": "Zedokai",
-        "version": "1.2.1",
-        "schema_version": 1,
-        "description": "a theme for Zed based on the Monokai Pro color scheme",
-        "repository": "https://github.com/slymax/zedokai",
-        "authors": [
-          "slymax <contact@slymax.com>"
-        ],
-        "lib": {
-          "kind": null,
-          "version": null
-        },
-        "themes": [
-          "themes/zedokai.json"
-        ],
-        "icon_themes": [],
-        "languages": [],
-        "grammars": {},
-        "language_servers": {},
-        "context_servers": {},
-        "slash_commands": {},
-        "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     },
@@ -1745,10 +1080,10 @@
       "manifest": {
         "id": "zig",
         "name": "Zig",
-        "version": "0.3.4",
+        "version": "0.3.0",
         "schema_version": 1,
         "description": "Zig support.",
-        "repository": "https://github.com/zed-extensions/zig",
+        "repository": "https://github.com/zed-industries/zed",
         "authors": [
           "Allan Calix <contact@acx.dev>"
         ],
@@ -1757,14 +1092,13 @@
           "version": "0.1.0"
         },
         "themes": [],
-        "icon_themes": [],
         "languages": [
           "languages/zig"
         ],
         "grammars": {
           "zig": {
-            "repository": "https://github.com/tree-sitter-grammars/tree-sitter-zig",
-            "rev": "eb7d58c2dc4fbeea4745019dee8df013034ae66b",
+            "repository": "https://github.com/maxxnino/tree-sitter-zig",
+            "rev": "0d08703e4c3f426ec61695d7617415fff97029bd",
             "path": null
           }
         },
@@ -1776,11 +1110,9 @@
             "code_action_kinds": null
           }
         },
-        "context_servers": {},
         "slash_commands": {},
         "indexed_docs_providers": {},
-        "snippets": null,
-        "capabilities": []
+        "snippets": null
       },
       "dev": false
     }
@@ -1818,22 +1150,6 @@
       "extension": "catppuccin",
       "path": "themes\\catppuccin-no-italics-mauve.json"
     },
-    "Colorizer": {
-      "extension": "colorizer",
-      "path": "themes\\colorizer.json"
-    },
-    "Colorizer Pro": {
-      "extension": "colorizer",
-      "path": "themes\\colorizer.json"
-    },
-    "Graphene": {
-      "extension": "graphene",
-      "path": "themes\\graphene.json"
-    },
-    "New Darcula": {
-      "extension": "new-darcula",
-      "path": "themes\\newdarcula.json"
-    },
     "The Dark Side": {
       "extension": "the-dark-side",
       "path": "themes\\the-dark-side.json"
@@ -1849,80 +1165,6 @@
     "Tokyo Night Storm": {
       "extension": "tokyo-night",
       "path": "themes\\tokyo-night.json"
-    },
-    "XY-Zed": {
-      "extension": "xy-zed",
-      "path": "themes\\xy-zed.json"
-    },
-    "Zedokai": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai (Filter Machine)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai (Filter Octagon)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai (Filter Ristretto)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai (Filter Spectrum)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Classic": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker (Filter Machine)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker (Filter Octagon)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker (Filter Ristretto)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker (Filter Spectrum)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Darker Classic": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Light": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    },
-    "Zedokai Light (Filter Sun)": {
-      "extension": "zedokai",
-      "path": "themes\\zedokai.json"
-    }
-  },
-  "icon_themes": {
-    "Colored Zed Icons Theme Dark": {
-      "extension": "colored-zed-icons-theme",
-      "path": "icon_themes\\colored-zed-icons-theme.json"
-    },
-    "Colored Zed Icons Theme Light": {
-      "extension": "colored-zed-icons-theme",
-      "path": "icon_themes\\colored-zed-icons-theme.json"
-    },
-    "Material Icon Theme": {
-      "extension": "material-icon-theme",
-      "path": "icon_themes\\material-icon-theme.json"
     }
   },
   "languages": {
@@ -1937,7 +1179,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "asm"
     },
     "CMake": {
@@ -1950,7 +1191,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "cmake"
     },
     "CSV": {
@@ -1962,7 +1202,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "csv"
     },
     "CSharp": {
@@ -1974,7 +1213,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "c_sharp"
     },
     "Diff": {
@@ -1986,7 +1224,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "diff"
     },
     "Dockerfile": {
@@ -1999,20 +1236,7 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "dockerfile"
-    },
-    "Fish": {
-      "extension": "fish",
-      "path": "languages\\fish",
-      "matcher": {
-        "path_suffixes": [
-          "fish"
-        ],
-        "first_line_pattern": "^#!.*\\bfish\\b"
-      },
-      "hidden": false,
-      "grammar": "fish"
     },
     "Git Attributes": {
       "extension": "git-firefly",
@@ -2023,7 +1247,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "gitattributes"
     },
     "Git Commit": {
@@ -2039,7 +1262,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "git_commit"
     },
     "Git Config": {
@@ -2052,7 +1274,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "git_config"
     },
     "Git Ignore": {
@@ -2065,7 +1286,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "gitignore"
     },
     "Git Rebase": {
@@ -2077,7 +1297,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "git_rebase"
     },
     "Gleam": {
@@ -2089,7 +1308,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "gleam"
     },
     "HTML": {
@@ -2103,23 +1321,7 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "html"
-    },
-    "Just": {
-      "extension": "just",
-      "path": "languages\\just",
-      "matcher": {
-        "path_suffixes": [
-          "justfile",
-          "Justfile",
-          "JUSTFILE",
-          "just"
-        ],
-        "first_line_pattern": null
-      },
-      "hidden": false,
-      "grammar": "just"
     },
     "Kdl": {
       "extension": "kdl",
@@ -2130,20 +1332,7 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "kdl"
-    },
-    "LOG": {
-      "extension": "log",
-      "path": "languages\\log",
-      "matcher": {
-        "path_suffixes": [
-          "log"
-        ],
-        "first_line_pattern": null
-      },
-      "hidden": false,
-      "grammar": "log"
     },
     "Lua": {
       "extension": "lua",
@@ -2154,7 +1343,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "lua"
     },
     "Make": {
@@ -2171,7 +1359,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "make"
     },
     "Meson": {
@@ -2183,32 +1370,7 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "meson"
-    },
-    "Nix": {
-      "extension": "nix",
-      "path": "languages\\nix",
-      "matcher": {
-        "path_suffixes": [
-          "nix"
-        ],
-        "first_line_pattern": null
-      },
-      "hidden": false,
-      "grammar": "nix"
-    },
-    "Nu": {
-      "extension": "nu",
-      "path": "languages\\nu",
-      "matcher": {
-        "path_suffixes": [
-          "nu"
-        ],
-        "first_line_pattern": "^#!.*\\b(?:nu)\\b"
-      },
-      "hidden": false,
-      "grammar": "nu"
     },
     "PowerShell": {
       "extension": "powershell",
@@ -2219,32 +1381,7 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "powershell"
-    },
-    "Prisma": {
-      "extension": "prisma",
-      "path": "languages\\prisma",
-      "matcher": {
-        "path_suffixes": [
-          "prisma"
-        ],
-        "first_line_pattern": null
-      },
-      "hidden": false,
-      "grammar": "prisma"
-    },
-    "Proto": {
-      "extension": "proto",
-      "path": "languages\\proto",
-      "matcher": {
-        "path_suffixes": [
-          "proto"
-        ],
-        "first_line_pattern": null
-      },
-      "hidden": false,
-      "grammar": "proto"
     },
     "RON": {
       "extension": "ron",
@@ -2255,7 +1392,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "ron"
     },
     "SQL": {
@@ -2267,7 +1403,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "sql"
     },
     "Shell Script": {
@@ -2294,7 +1429,6 @@
         ],
         "first_line_pattern": "^#!.*\\b(?:ba|z)?sh\\b"
       },
-      "hidden": false,
       "grammar": "bash"
     },
     "TOML": {
@@ -2303,13 +1437,10 @@
       "matcher": {
         "path_suffixes": [
           "Cargo.lock",
-          "toml",
-          "Pipfile",
-          "uv.lock"
+          "toml"
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "toml"
     },
     "Zig": {
@@ -2322,7 +1453,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "zig"
     },
     "ini": {
@@ -2330,25 +1460,10 @@
       "path": "languages\\ini",
       "matcher": {
         "path_suffixes": [
-          "ini",
-          "conf",
-          "cfg",
-          "config",
-          ".editorconfig",
-          "automount",
-          "mount",
-          "path",
-          "scope",
-          "service",
-          "slice",
-          "socket",
-          "swap",
-          "target",
-          "timer"
+          "ini"
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "ini"
     },
     "tmux": {
@@ -2361,7 +1476,6 @@
         ],
         "first_line_pattern": null
       },
-      "hidden": false,
       "grammar": "tmux"
     }
   }
