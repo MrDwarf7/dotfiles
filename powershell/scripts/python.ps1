@@ -1,5 +1,9 @@
 # BEGIN - Python Functions
 
+function PythonUpdater() {
+    pip freeze | ForEach-Object{$_.split('==')[0]} | ForEach-Object{pip install --upgrade $_}
+}
+
 function pmv() {
     param(
         [switch]$py3
