@@ -116,18 +116,18 @@
               "HTML"
             ],
             "language_ids": {
-              "CSS": "css",
-              "JSX": "javascriptreact",
+              "Vue.js": "vuejs",
               "Svelte": "svelte",
+              "CSS": "css",
+              "GraphQL": "graphql",
               "Astro": "astro",
-              "JSON": "json",
               "TSX": "typescriptreact",
+              "JSON": "json",
+              "JSX": "javascriptreact",
+              "JSONC": "jsonc",
               "TypeScript": "typescript",
               "HTML": "html",
-              "JavaScript": "javascript",
-              "Vue.js": "vuejs",
-              "JSONC": "jsonc",
-              "GraphQL": "graphql"
+              "JavaScript": "javascript"
             },
             "code_action_kinds": [
               "quickfix"
@@ -146,12 +146,12 @@
       "manifest": {
         "id": "catppuccin",
         "name": "Catppuccin",
-        "version": "0.2.21",
+        "version": "0.2.22",
         "schema_version": 1,
         "description": "🦀 Soothing pastel theme for Zed",
         "repository": "https://github.com/catppuccin/zed",
         "authors": [
-          "Catppuccin <releases@catppuccin.dev>"
+          "Catppuccin <releases@catppuccin.com>"
         ],
         "lib": {
           "kind": null,
@@ -342,9 +342,9 @@
               "JSDoc"
             ],
             "language_ids": {
+              "JavaScript": "javascript",
               "TSX": "typescriptreact",
-              "TypeScript": "typescript",
-              "JavaScript": "javascript"
+              "TypeScript": "typescript"
             },
             "code_action_kinds": [
               "quickfix",
@@ -472,12 +472,12 @@
               "CSS"
             ],
             "language_ids": {
-              "ERB": "eruby",
-              "CSS": "css",
-              "TSX": "typescriptreact",
               "HTML": "html",
+              "JavaScript": "javascriptreact",
               "PHP": "php",
-              "JavaScript": "javascriptreact"
+              "ERB": "eruby",
+              "TSX": "typescriptreact",
+              "CSS": "css"
             },
             "code_action_kinds": null
           }
@@ -704,8 +704,8 @@
             "language": "HTML",
             "languages": [],
             "language_ids": {
-              "HTML": "html",
-              "CSS": "css"
+              "CSS": "css",
+              "HTML": "html"
             },
             "code_action_kinds": null
           }
@@ -1095,7 +1095,7 @@
       "manifest": {
         "id": "neocmake",
         "name": "NeoCMake",
-        "version": "0.0.5",
+        "version": "0.0.6",
         "schema_version": 1,
         "description": "CMake grammar and lsp with neocmakelsp",
         "repository": "https://github.com/k0tran/zed_neocmake",
@@ -1104,7 +1104,7 @@
         ],
         "lib": {
           "kind": "Rust",
-          "version": "0.0.6"
+          "version": "0.3.0"
         },
         "themes": [],
         "icon_themes": [],

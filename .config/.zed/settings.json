@@ -331,6 +331,17 @@
           "command": "alejandra"
         }
       }
+    },
+
+    "HTML": {
+      "completions": {
+        "lsp": true
+      },
+      "prettier": {
+        "allowed": true,
+        "parser": null,
+        "plugins": []
+      }
     }
   },
 
