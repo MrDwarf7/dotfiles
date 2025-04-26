@@ -9,8 +9,15 @@ require("git"):setup()
 
 require("relative-motions"):setup({ only_motions = true })
 
-THEME.git_modified = ui.Style():fg("blue")
-THEME.git_deleted = ui.Style():fg("red"):bold()
+th.git = th.git or {}
+th.git_modified = ui.Style():fg("blue")
+th.git_deleted = ui.Style():fg("red"):bold()
+
+th.git.modified_sign = "M"
+th.git.deleted_sign = "D"
+th.git.added_sign = "A"
+th.git.untracked_sign = "U"
+th.git.updated_sign = "u"
 
 function Linemode:mtime_better()
 	local time = math.floor(self._file.cha.mtime or 0)
