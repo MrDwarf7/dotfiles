@@ -5,6 +5,8 @@ local types = require("types")
 ---@type OperatingSystems
 local os_type = types.os_class()
 
+M.OsType = nil
+
 ---@type Shells
 local shells_t = types.shells_class()
 
@@ -24,16 +26,71 @@ local shells_t = types.shells_class()
 -- 	fish = "fish",
 -- }
 
+---@class Architecture
+---@field OsClass OperatingSystems
+---@field ShellsEnum ShellsTypeEnum
+---@field ShellsClass Shells
+---@field ValidShell ShellsTypeEnum
+
+-- setmetatable(M, {
+-- 	__call = function(m, ...)
+-- 		return m.maybe_dev(...)
+-- 	end,
+-- })
+
+--- Convert any value to a string and lower case
+---@param str any
+---@return string
+M.lower_str = function(str)
+	return string.format("%s", str):lower()
+end
+
+--- Check if the HOME_PROFILE environment variable is set to true
+---@return boolean
+M.home_check = function()
+	M.HomeCheck = nil
+	M.GetEnvValue = nil
+
+	local h = M.lower_str(M.lower_str(os.getenv("HOME_PROFILE")))
+	M.GetEnvValue = h
+	-- lower_str(lower_str(os.getenv("HOME_PROFILE"))) -- is true if the env variable HOME_PROFILE is set as true, everything else is automatically false
+	if not M.GetEnvValue then
+		M.HomeCheck = false
+		return false
+	else
+		M.HomeCheck = true or nil
+		return true
+	end
+end
+
+--- Check if the system is Windows
 ---@return boolean
 M.is_windows = function()
-	if vim.fn.has(os_type.windows) == 1 then
+	-- M.IsWindows = nil
+	if M.get_os() == os_type.windows then
 		return true
 	else
 		return false
 	end
 end
 
----
+--- Universal function to handle checking if
+--- the system is Windows && if the HOME_PROFILE env variable is set to true
+---@return boolean
+M.should_load = function()
+	-- Cache IsWindows check
+	local win = M.is_windows()
+	local home = M.home_check()
+
+	if win then
+		return home -- returns a bool, true if the env variable HOME_PROFILE is set as true
+		-- M.home_check()
+	else -- Linux system, always disable Avante on linux systems
+		return false
+	end
+end
+
+--- Gets the current operating system as a type of OperatingSystemEnum
 ---@return OperatingSystemEnum
 M.get_os = function()
 	---@type OperatingSystemEnum
@@ -45,11 +102,15 @@ end
 ---@param os_name OperatingSystemEnum
 ---@return ShellsTypeEnum | string
 M.get_shell = function(os_name)
+	M.ValidShell = nil
 	if os_name == os_type.windows then
+		M.ValidShell = shells_t.pwsh or shells_t.powershell
 		return shells_t.pwsh
 	elseif os_name == os_type.linux then
+		M.ValidShell = shells_t.bash
 		return shells_t.zsh
 	else
+		M.ValidShell = shells_t.bash
 		return shells_t.bash
 	end
 end
