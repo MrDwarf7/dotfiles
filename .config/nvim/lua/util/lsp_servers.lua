@@ -1,5 +1,9 @@
 local M = {}
 
+vim.g.markdown_denced_languaged = {
+	"ts=typescript",
+}
+
 setmetatable(M, {
 	__call = function(self)
 		return self.servers()
@@ -33,6 +37,7 @@ M.servers = function()
 		neocmake = {},
 
 		cssls = {},
+		-- deno = {}, -- commented due to conflict with tsserver
 
 		-- deno = {
 		-- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),

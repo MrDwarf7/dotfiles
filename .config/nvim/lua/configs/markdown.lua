@@ -1,6 +1,6 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
-	lazy = true,
+	lazy = false,
 	ft = { "markdown", "Avante", "help" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
