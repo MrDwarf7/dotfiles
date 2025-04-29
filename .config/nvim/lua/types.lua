@@ -39,8 +39,8 @@ local OsClass = {
 }
 
 M.os_class = function()
-	local os_class = OsClass
-	return os_class
+	M.OsClass = OsClass
+	return M.OsClass
 end
 
 ----- Os stuff done
@@ -61,8 +61,10 @@ local ShellsEnum = {
 }
 
 M.shells_enum = function()
-	local shell_e = ShellsEnum
-	return shell_e
+	M.ShellsEnum = ShellsEnum
+	return M.ShellsEnum
+	-- local shell_e = ShellsEnum
+	-- return shell_e
 end
 
 ---@class (exact) Shells
@@ -82,8 +84,10 @@ local ShellsClass = {
 }
 
 M.shells_class = function()
-	local shells_c = ShellsClass
-	return shells_c
+	M.ShellsClass = ShellsClass
+	return M.ShellsClass
+	-- local shells_c = ShellsClass
+	-- return shells_c
 end
 
 return M
