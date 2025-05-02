@@ -277,3 +277,174 @@ function uzip {
     }
 }
 # END - Linux Functions
+
+
+### Version 1
+function ListBlockDevices2 {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $false)][Alias("l")]
+        [switch]$List
+    )
+
+    # Helper function to format sizes in a human-readable format
+    function Format-Size {
+        param ($size)
+        if ([string]::IsNullOrEmpty($size)) {
+            $size = 0
+        }
+        if ($size -ge 1TB) {
+            "{0:N2} TB" -f ($size / 1TB)
+        } elseif ($size -ge 1GB) {
+            "{0:N2} GB" -f ($size / 1GB)
+        } elseif ($size -ge 1MB) {
+            "{0:N2} MB" -f ($size / 1MB)
+        } else {
+            "$size bytes"
+        }
+    }
+
+    # Retrieve all disks and volumes
+    $disks = Get-Disk
+    $volumes = Get-Volume | Select-Object *, @{Name="PartitionGuid"; Expression={ 
+        if ($_.UniqueId -match '\\\\\?\\Volume\{([^\}]+)\}\\') { $matches[1] } 
+        else { $null } 
+    }}
+
+    if ($List) {
+        # List view: flat table format
+        $items = @()
+        foreach ($disk in $disks) {
+            $items += [PSCustomObject]@{
+                Name       = "disk$($disk.Number)"
+                # FriendlyName = $disk.FriendlyName
+                Type       = "disk"
+                Size       = Format-Size $disk.TotalSize
+                FSType     = "N/A"
+                MountPoint = "N/A"
+            }
+            $partitions = Get-Partition -DiskNumber $disk.Number -ErrorAction SilentlyContinue
+            foreach ($partition in $partitions) {
+                $volume = $volumes | Where-Object { $_.PartitionGuid -eq $partition.Guid }
+                $fsType = if ($volume) { $volume.FileSystemType } else { "N/A" }
+                $mountPoint = if ($volume.DriveLetter) { "$($volume.DriveLetter):" } else { "N/A" }
+                $items += [PSCustomObject]@{
+                    Name       = "disk$($disk.Number)p$($partition.PartitionNumber)"
+                    Type       = "part"
+                    Size       = Format-Size $partition.Size
+                    FSType     = $fsType
+                    MountPoint = $mountPoint
+                }
+            }
+        }
+        $items | Format-Table -AutoSize
+    } else {
+        # Tree view: hierarchical format
+        foreach ($disk in $disks) {
+            Write-Host("");
+            Write-Host "DISK $($disk.Number): $($disk.FriendlyName), $(Format-Size $disk.TotalSize)"
+            $partitions = Get-Partition -DiskNumber $disk.Number -ErrorAction SilentlyContinue
+            foreach ($partition in $partitions) {
+                $volume = $volumes | Where-Object { $_.PartitionGuid -eq $partition.Guid }
+                $driveLetter = if ($volume.DriveLetter) { "$($volume.DriveLetter):" } else { "N/A" }
+                $fsType = if ($volume) { $volume.FileSystemType } else { "N/A" }
+                Write-Host "  PART $($partition.PartitionNumber): $(Format-Size $partition.Size), $($partition.Type), $driveLetter, $fsType"
+            }
+        }
+    }
+}
+New-Alias -Name lsblk2 -Value ListBlockDevices2 -Force
+
+function ListBlockDevices {
+    [CmdletBinding()]
+    param (
+        [Parameter(Mandatory = $false)][Alias("a")]
+        [switch]$All,
+        [Parameter(Mandatory = $false)][Alias("l")]
+        [switch]$List,
+        [Parameter(Mandatory = $false)][Alias("fs")]
+        [switch]$FileSystem,
+        [Parameter(Mandatory = $false)][Alias("i")]
+        [switch]$IncludeHealth,
+        [Parameter(Mandatory = $false)][Alias("s")]
+        [switch]$Size,
+        [Parameter(Mandatory = $false)][Alias("h")]
+        [switch]$Help
+    )
+
+    # Lazy import them after we've actually called the fn
+    Import-Module "$powershell_scripts_dir\list_block\with_formatters.psm1"
+    Import-Module "$powershell_scripts_dir\list_block\build_object.psm1"
+    Import-Module "$powershell_scripts_dir\list_block\helpers.psm1"
+
+    if ($Help) {
+        Get-LsblkHelp
+        return
+    }
+
+    $ShouldSplitIfNonListArgs = @($All, $FileSystem, $IncludeHealth, $Size)
+    $ShouldSplitIfNonListArgsRef = [ref]$ShouldSplitIfNonListArgs
+
+    # Get all disks    # Get all partitions         # Get all volumes      # Get disk details from WMI
+    $disks = Get-Disk; $partitions = Get-Partition; $volumes = Get-Volume; $wmiDisks = Get-WmiObject -Class Win32_DiskDrive;
+
+    # Create a hashtable to store the results
+    $results = @()
+    $resultsBuffer = [ref]$results
+
+    # Build disk objects
+    BuildDiskObject -ResultsBuffer $resultsBuffer `
+                    -Disks $disks `
+                    -Partitions $partitions `
+                    -Volumes $volumes `
+                    -WmiDisks $wmiDisks
+
+    # ensure we have a valid results buffer
+    if (-not $resultsBuffer.Value) {
+        Write-Host "No disks found."
+        return
+    }
+    # Retrieve the results from the buffer & assign to the results variable
+    $results = $resultsBuffer.Value
+
+    $ResultsBufferRef = [ref]$results
+    $SizeRef = [ref]$Size
+    $AllRef = [ref]$All
+    $FileSystemRef = [ref]$FileSystem
+    $IncludeHealthRef = [ref]$IncludeHealth
+
+
+    # Format and display the results
+    if ($List) {
+        # List format (similar to lsblk -l)
+        $flatList = @()
+
+        $FlatListRef = [ref]$flatList
+
+        WithList -ResultsBufferRef $ResultsBufferRef `
+        -FlatListRef $FlatListRef `
+        -SizeRef $SizeRef `
+        -AllRef $AllRef `
+        -FileSystemRef $FileSystemRef `
+        -IncludeHealthRef $IncludeHealthRef
+
+        $flatList | Format-Table -AutoSize
+
+    } else { # Default to a 'tree' style output
+
+        # $outputBuf = [string]::Empty
+        # $OutputBufRef = [ref]$outputBuf
+
+        WithTree -ResultsBufferRef $ResultsBufferRef `
+        -SizeRef $SizeRef `
+        -AllRef $AllRef `
+        -FileSystemRef $FileSystemRef `
+        -IncludeHealthRef $IncludeHealthRef `
+        -ShouldSplitIfNonListArgs $ShouldSplitIfNonListArgsRef
+
+        # Write-Host $outputBuf
+
+    }
+}
+New-Alias -Name lsblk -Value ListBlockDevices -Force
+
