@@ -8,3 +8,7 @@ old_nvim/
 LazyVim/    
 LazyVim_og/ 
 
+github-copilot
+**/github-copilot
+*/github-copilot
+
