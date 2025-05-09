@@ -33,50 +33,50 @@ $c_temp_folder = "C:\temp"
 
 
 function mgr {
-    param(
-        [string]$path = $home_GitHub
+  param(
+    [string]$path = $home_GitHub
 
-    )
-    Push-Location $path
-    la
+  )
+  Push-Location $path
+  la
 }
 
 function wgr {
-    param(
-        [string]$path = $home_gitwork_projects
-    )
-    Push-Location $path
-    la
+  param(
+    [string]$path = $home_gitwork_projects
+  )
+  Push-Location $path
+  la
 }
 
 function dod {
-    param(
-        [string]$path = $data_on_demand
-    )
-    Push-Location $path
-    la
+  param(
+    [string]$path = $data_on_demand
+  )
+  Push-Location $path
+  la
 }
 
 function dodb {
-    param(
-        [string]$path = $data_on_demand_backend
-    )
-    Push-Location $path
-    la
+  param(
+    [string]$path = $data_on_demand_backend
+  )
+  Push-Location $path
+  la
 }
 
 function dodn {
-    param(
-        [string]$path = $data_on_demand_next
-    )
-    Push-Location $path
-    la
+  param(
+    [string]$path = $data_on_demand_next
+  )
+  Push-Location $path
+  la
 }
 
 function dodf {
-    param(
-        [string]$path = $data_on_demand_frontend
-    )
-    Push-Location $path
-    la
+  param(
+    [string]$path = $data_on_demand_frontend
+  )
+  Push-Location $path
+  la
 }

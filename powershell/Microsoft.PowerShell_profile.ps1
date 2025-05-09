@@ -1,13 +1,13 @@
 # String builder voodoo - shown to be bette performance than either sets or a loop lol...
 # This is something used wherever multiple invocations are needed for other parts of the profile
 Invoke-Expression (
-    [System.Text.StringBuilder]::new().Append("Invoke-Expression (&starship init powershell)").
-    Append("`n").
-    Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
-    Append("`n").
-    Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })").
-    Append("`n").
-    Append("Invoke-Expression (& { (carapace _carapace | Out-String) })")
+  [System.Text.StringBuilder]::new().Append("Invoke-Expression (&starship init powershell)").
+  Append("`n").
+  Append("Invoke-Expression (& { (zoxide init powershell | Out-String) })").
+  Append("`n").
+  Append("Invoke-Expression (& { (gh completion -s powershell | Out-String) })").
+  Append("`n").
+  Append("Invoke-Expression (& { (carapace _carapace | Out-String) })")
 ).ToString() > $null -ErrorAction SilentlyContinue
 
 # $prompt = ""
@@ -22,8 +22,8 @@ Invoke-Expression (
 # }
 
 
-$dotfiles_dir = "$HOME\dotfiles"
 $powershell_dir = "$dotfiles_dir\powershell"
+$dotfiles_dir = "$HOME\dotfiles"
 $powershell_scripts_dir = "$powershell_dir\scripts"
 
 # Store current PSModulePath before we wipe it
@@ -48,25 +48,25 @@ $env:CARAPACE_BRIDGES = 'all'
 
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
-    return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
+  return [bool](Get-Command $Command -ErrorAction SilentlyContinue)
 }
 
 if (Test-CommandExists "eza") {
-    $env:LIST_CLIENT = "eza"
+  $env:LIST_CLIENT = "eza"
 } 
 
 if (Test-CommandExists "atac") {
-    $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
+  $env:ATAC_KEY_BINDINGS = "$dotfiles_dir\.config\atac\key_bindings.toml"
 } 
 
 # Work.sort of
 function isWorkMachine  {
-    if ($env:COMPUTERNAME -clike "*LG*") {
-        $env:HOME_PROFILE = $false
-        return [bool]$true 
-    } else {
-        return [bool]$false
-    }
+  if ($env:COMPUTERNAME -clike "*LG*") {
+    $env:HOME_PROFILE = $false
+    return [bool]$true 
+  } else {
+    return [bool]$false
+  }
 }
 
 # Ensure safe creation of aliases, all aliases are created in the alias_creation.ps1
@@ -76,25 +76,25 @@ function isWorkMachine  {
 
 # Work
 if (isWorkMachine -eq $true) {
-    $env:PSModulePath = $workDefaultPSModulePath
-    . "$powershell_scripts_dir\.profile_work.ps1"
+  $env:PSModulePath = $workDefaultPSModulePath
+  . "$powershell_scripts_dir\.profile_work.ps1"
 }
 
 # Not work/ AKA Home
 if (-not (isWorkMachine)) {
-    # $env:PAGER = less
-    # $env:BAT_PAGER = less -RF
-    $env:PSModulePath = $currentPSModulePath
-    . "$powershell_scripts_dir\.profile_home.ps1"
+  # $env:PAGER = less
+  # $env:BAT_PAGER = less -RF
+  $env:PSModulePath = $currentPSModulePath
+  . "$powershell_scripts_dir\.profile_home.ps1"
 }
 
 # Has - [vim, func_gen, func_py, comp_gen, comp_gh, comp_az, comp_atac]
 . "$powershell_scripts_dir\.profile_general.ps1"
 
 if ($env:LIST_CLIENT -eq "eza") {
-    . "$powershell_completions\.alias_eza.ps1"
+  . "$powershell_completions\.alias_eza.ps1"
 } else {
-    . "$powershell_completions\.alias_system_ls.ps1"
+  . "$powershell_completions\.alias_system_ls.ps1"
 }
 
 Write-Host -NoNewLine "`e[5 q" # Set the cursor to a blinking line.

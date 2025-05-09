@@ -8,83 +8,83 @@ $nvim_distro_dir = "$dotfiles_dir\nvim_distros"
 $scoop_dir = "$dotfiles_dir\scoop"
 
 function nhx {
-    $config = "$dotfiles_config\helix\config.toml"
+  $config = "$dotfiles_config\helix\config.toml"
 
-    if ($args[0] -eq "_noprofile") {
-        $config = ""
-    }
-    hx --config $config $args
+  if ($args[0] -eq "_noprofile") {
+    $config = ""
+  }
+  hx --config $config $args
 }
 
 function vim {
-    $env:XDG_CONFIG_HOME = "$dotfiles_config"
-    $env:NVIM_APPNAME = "nvim"
-    nvim $args
+  $env:XDG_CONFIG_HOME = "$dotfiles_config"
+  $env:NVIM_APPNAME = "nvim"
+  nvim $args
 }
 
 function ovim {
-    $env:XDG_CONFIG_HOME = "$dotfiles_config"
-    $env:NVIM_APPNAME = "n_nvim"
-    nvim $args
+  $env:XDG_CONFIG_HOME = "$dotfiles_config"
+  $env:NVIM_APPNAME = "n_nvim"
+  nvim $args
 }
 
 function xvim {
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = "omerxx"
-    nvim $args
+  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:NVIM_APPNAME = "omerxx"
+  nvim $args
 }
 
 function lzvim {
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = "LazyVim"
-    nvim $args
+  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:NVIM_APPNAME = "LazyVim"
+  nvim $args
 }
 
 function nvd() {
-    $env:XDG_CONFIG_HOME = "$dotfiles_config\"
-    $env:NVIM_APPNAME = "nvim"
-    neovide $args
+  $env:XDG_CONFIG_HOME = "$dotfiles_config\"
+  $env:NVIM_APPNAME = "nvim"
+  neovide $args
 }
 
 function nvdx() {
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir\"
-    $env:NVIM_APPNAME = "omerxx"
-    neovide $args
+  $env:XDG_CONFIG_HOME = "$nvim_distro_dir\"
+  $env:NVIM_APPNAME = "omerxx"
+  neovide $args
 }
 
 
 function nvims() {
-    $items = "Default", "LazyVim", "omerxx"
-    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+  $items = "Default", "LazyVim", "omerxx"
+  $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
-    if ([string]::IsNullOrEmpty($config)) {
-        Write-Output "Nothing selected"
-        return
-    }
-    if ($config -eq "default") {
-        $env:XDG_CONFIG_HOME = "$dotfiles_config"
-        $config = ""
-    }
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = $config
-    nvim $args
+  if ([string]::IsNullOrEmpty($config)) {
+    Write-Output "Nothing selected"
+    return
+  }
+  if ($config -eq "default") {
+    $env:XDG_CONFIG_HOME = "$dotfiles_config"
+    $config = ""
+  }
+  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:NVIM_APPNAME = $config
+  nvim $args
 }
 
 
 function nvds() {
-    $items = "Default", "LazyVim", "omerxx"
-    $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
+  $items = "Default", "LazyVim", "omerxx"
+  $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
-    if ([string]::IsNullOrEmpty($config)) {
-        Write-Output "Nothing selected"
-        return
-    }
-    if ($config -eq "default") {
-        $env:XDG_CONFIG_HOME = "$dotfiles_config"
-        $config = ""
-    }
-    $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-    $env:NVIM_APPNAME = $config
-    neovide --multigrid --vsync $args
+  if ([string]::IsNullOrEmpty($config)) {
+    Write-Output "Nothing selected"
+    return
+  }
+  if ($config -eq "default") {
+    $env:XDG_CONFIG_HOME = "$dotfiles_config"
+    $config = ""
+  }
+  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:NVIM_APPNAME = $config
+  neovide --multigrid --vsync $args
 }
 # END - Vim things

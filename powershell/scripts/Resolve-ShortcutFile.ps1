@@ -1,5 +1,5 @@
 function Resolve-ShortcutFile {
-    <#
+  <#
     .Synopsis
         Resolves an Internet shortcut file to the web site the shortcut references
     .Description
@@ -19,27 +19,27 @@ function Resolve-ShortcutFile {
     .Link
         Where-Object
     #>
-    param(
-        [Parameter(
-            ValueFromPipeline = $true,
-            ValueFromPipelineByPropertyName = $true,
-            Position = 0)]
-        [Alias("FullName")]
-        [string]
-        $fileName
-    )
-    process {
-        if ($fileName -like "*.url") {
-            Get-Content $fileName | Where-Object {
-                $_ -like "url=*"
-            } |
-            Select-Object @{
-                Name       = 'ShortcutFile'
-                Expression = { Get-Item $fileName }
-            }, @{
-                Name       = 'Url'
-                Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
-            }
+  param(
+    [Parameter(
+      ValueFromPipeline = $true,
+      ValueFromPipelineByPropertyName = $true,
+      Position = 0)]
+    [Alias("FullName")]
+    [string]
+    $fileName
+  )
+  process {
+    if ($fileName -like "*.url") {
+      Get-Content $fileName | Where-Object {
+        $_ -like "url=*"
+      } |
+        Select-Object @{
+          Name       = 'ShortcutFile'
+          Expression = { Get-Item $fileName }
+        }, @{
+          Name       = 'Url'
+          Expression = { $_.Substring($_.IndexOf("=") + 1 ) }
         }
     }
+  }
 }

@@ -78,80 +78,80 @@ Set-PSReadlineOption -BellStyle None
 Set-PSReadlineOption -EditMode Vi
 
 function onViModeChange {
-    if ($args[0] -eq 'Command') {
-        # Set the cursor to a blinking block.
-        Write-Host -NoNewLine "`e[1 q"
-    } else {
-        # Set the cursor to a blinking line.
-        Write-Host -NoNewLine "`e[5 q"
-    }
+  if ($args[0] -eq 'Command') {
+    # Set the cursor to a blinking block.
+    Write-Host -NoNewLine "`e[1 q"
+  } else {
+    # Set the cursor to a blinking line.
+    Write-Host -NoNewLine "`e[5 q"
+  }
 }
 
 Set-PSReadLineOption -ViModeIndicator Script -ViModeChangeHandler $function:onViModeChange
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'L' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::EndOfLine()
 }
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'H' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::GotoFirstNonBlankOfLine()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::GotoFirstNonBlankOfLine()
 }
 
 Set-PSReadLineKeyHandler -ViMode Insert -Key "Ctrl+w" -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::BackwardDeleteWord()
 }
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'y,H' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::ViYankBeginningOfLine()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::ViYankBeginningOfLine()
 }
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'y,L' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::ViYankToEndOfLine()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::ViYankToEndOfLine()
 }
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'd,H' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::BeginningOfLine()
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteToEnd()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::BeginningOfLine()
+  [Microsoft.PowerShell.PSConsoleReadLine]::DeleteToEnd()
 }
 
 Set-PSReadLineKeyHandler -ViMode Command -Key 'd,L' -ScriptBlock {
-    # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
-    [Microsoft.PowerShell.PSConsoleReadLine]::DeleteToEnd()
+  # [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::DeleteToEnd()
 }
 
 function setViCommandMode {
-    [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
+  [Microsoft.PowerShell.PSConsoleReadLine]::ViCommandMode()
 }
 
 function mapTwoLetterFunc($a,$b,$func) {
-    if (-not ([Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode())) {
-        return
-    }
+  if (-not ([Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode())) {
+    return
+  }
 
-    # if ([Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode()) {
-    $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+  # if ([Microsoft.PowerShell.PSConsoleReadLine]::InViInsertMode()) {
+  $key = $host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 
-    if ($key.Character -eq $b) {
-        &$func
+  if ($key.Character -eq $b) {
+    &$func
+  } else {
+    [Microsoft.Powershell.PSConsoleReadLine]::Insert("$a")
+    # Representation of modifiers (like shift) when ReadKey uses IncludeKeyDown
+    if ($key.Character -eq 0x00) {
+      return
     } else {
-        [Microsoft.Powershell.PSConsoleReadLine]::Insert("$a")
-        # Representation of modifiers (like shift) when ReadKey uses IncludeKeyDown
-        if ($key.Character -eq 0x00) {
-            return
-        } else {
-            # Insert func above converts escape characters to their literals, e.g.
-            # converts return to ^M. This doesn't.
-            $wshell = New-Object -ComObject wscript.shell
-            $wshell.SendKeys("{$($key.Character)}")
-        }
+      # Insert func above converts escape characters to their literals, e.g.
+      # converts return to ^M. This doesn't.
+      $wshell = New-Object -ComObject wscript.shell
+      $wshell.SendKeys("{$($key.Character)}")
     }
-    # }
+  }
+  # }
 
 }
 
@@ -175,18 +175,18 @@ Set-PSReadLineKeyHandler -ViMode Insert -Key "k" -ScriptBlock { mapTwoLetterFunc
 # }
 
 function ViModeVisualEditor {
+  $ViMode = $null
+  if ($global:PSVersionTable.PSVersion.Major -ge 7) {
     $ViMode = $null
-    if ($global:PSVersionTable.PSVersion.Major -ge 7) {
-        $ViMode = $null
-        switch ($global:PSReadline.ViMode.Mode) {
-            "Insert" {
-                $ViMode = "I"
-            }
-            "VisualCharacter" {
-                $ViMode = "V"
-            }
-        }
+    switch ($global:PSReadline.ViMode.Mode) {
+      "Insert" {
+        $ViMode = "I"
+      }
+      "VisualCharacter" {
+        $ViMode = "V"
+      }
     }
-    return $ViMode
+  }
+  return $ViMode
 }
 ### END ViMode / Vi Mode / Vim
