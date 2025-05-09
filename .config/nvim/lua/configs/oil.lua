@@ -77,6 +77,9 @@ return {
 		keymaps = {
 			["g?"] = "actions.show_help",
 
+			-- NEW:
+			["<ESC>"] = "<ESC><cmd>nohl<CR>",
+
 			["<CR>"] = "actions.select",
 			["<C-]>"] = "actions.select_vsplit",
 			["<C-[>"] = "actions.select_split",

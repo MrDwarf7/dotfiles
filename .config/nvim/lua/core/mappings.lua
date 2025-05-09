@@ -84,8 +84,9 @@ map("v", "<C-k>", ":m '<-2<CR>gv=gv", silent_opts) -- Shifting lines up / move
 map("v", "<", "<gv", silent_opts)
 map("v", ">", ">gv", silent_opts)
 
-map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
-map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+-- map("n", "<Leader>tn", "<cmd>tabnext<CR>", silent_opts, { desc = "Next Tab" })
+-- map("n", "<Leader>tp", "<cmd>tabprevious<CR>", silent_opts, { desc = "Previous Tab" })
+
 map("n", "<Leader>to", "<cmd>tabnew<CR>", silent_opts, { desc = "New Tab" })
 map("n", "<Leader>tc", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
 map("n", "<Leader>tx", "<cmd>tabclose<CR>", silent_opts, { desc = "Close Tab" })
@@ -157,17 +158,25 @@ map("n", "<Leader>bp", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 map("n", "<Leader>b]", ":bnext<CR>", silent_opts, { desc = "[n]ext" })
 map("n", "<Leader>b[", ":bprev<CR>", silent_opts, { desc = "[p]revious" })
 
+map("n", "<leader>bd", function()
+	require("snacks").bufdelete()
+end, { desc = "Delete Buffer" })
+map("n", "<leader>bo", function()
+	require("snacks").bufdelete.other()
+end, { desc = "Delete Other Buffers" })
+map("n", "<leader>bD", "<cmd>:bd<cr>", { desc = "Delete Buffer and Window" })
+
 map("n", "<Leader>bc", function()
 	require("snacks").bufdelete()
 end, silent_opts, { desc = "[X]close" })
 
-map("n", "<Leader>x", function()
-	require("snacks").bufdelete()
-end, silent_opts, { desc = "[X]close" })
-
-map("n", "<Leader><S-x>", function()
-	require("snacks").bufdelete().all(_)
-end, silent_opts, { desc = "[X]close" })
+-- map("n", "<Leader>x", function()
+-- 	require("snacks").bufdelete()
+-- end, silent_opts, { desc = "[X]close" })
+--
+-- map("n", "<Leader><S-x>", function()
+-- 	require("snacks").bufdelete().all(_)
+-- end, silent_opts, { desc = "[X]close" })
 
 -- map("n", "<Leader>x", ":bdelete<CR>", silent_opts, { desc = "[X]close" })
 

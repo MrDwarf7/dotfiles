@@ -1,9 +1,15 @@
+local function augroup(name, opts)
+	opts = opts or { clear = true }
+	return vim.api.nvim_create_augroup(name, opts)
+end
+
 return {
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
 			vim.highlight.on_yank({ timeout = 55 })
 		end,
-		group = vim.api.nvim_create_augroup("UserAutoCmd", { clear = true }),
+		group = augroup("UserAutoCmd"),
+		-- vim.api.nvim_create_augroup("UserAutoCmd", { clear = true }),
 	}),
 
 	-- Set filetype for certain file-patterns.
@@ -12,7 +18,8 @@ return {
 		callback = function()
 			vim.opt.filetype = "gitconfig"
 		end,
-		group = vim.api.nvim_create_augroup("GitConfig", { clear = true }),
+		group = augroup("GitConfig"),
+		-- vim.api.nvim_create_augroup("GitConfig", { clear = true }),
 	}),
 
 	-- Set filetype for certain file-patterns.
@@ -30,7 +37,8 @@ return {
 		callback = function()
 			require("go.format").gofmt()
 		end,
-		group = vim.api.nvim_create_augroup("GoFormat", {}),
+		group = augroup("GoFormat", {}),
+		-- vim.api.nvim_create_augroup("GoFormat", {}),
 	}),
 
 	-- Niche autocmd to fix TS highlinging in preview buffer windows
@@ -39,14 +47,15 @@ return {
 		callback = function()
 			vim.opt_local.splitkeep = "cursor"
 		end,
-		group = vim.api.nvim_create_augroup("TelescopePluginEvents", {}),
+		group = augroup("TelescopePluginEvents", {}),
+		-- vim.api.nvim_create_augroup("TelescopePluginEvents", {}),
 	}),
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(ev)
 			local lsp_restart = function()
-				vim.lsp.stop_client(vim.lsp.get_active_clients())
-				vim.cmd([[ LspRestart<CR> ]])
+				vim.lsp.stop_client(vim.lsp.get_clients({ bufnr = ev.buf }))
+				vim.cmd([[ LspRestart ]])
 			end
 
 			vim.keymap.set("n", "<Leader>l%", function()
@@ -102,6 +111,17 @@ return {
 			vim.bo.expandtab = false
 		end,
 		group = vim.api.nvim_create_augroup("MarkdownOptions", { clear = true }),
+	}),
+
+	vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+		group = vim.api.nvim_create_augroup("AutoCreateDir", { clear = true }),
+		callback = function(event)
+			if event.match:match("^%w%w+:[\\/][\\/]") then
+				return
+			end
+			local file = vim.uv.fs_realpath(event.match) or event.match
+			vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
+		end,
 	}),
 
 	-- vim.api.nvim_create_autocmd("BufWritePre", {

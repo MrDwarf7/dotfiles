@@ -8,6 +8,7 @@ return {
 	init = function()
 		local wk = require("which-key")
 		wk.add({
+			{ "<Leader>a", group = "+[A]vante" },
 			{ "<Leader>b", group = "+[B]uffers" },
 			{ "<Leader>d", group = "+[D]ebug" },
 			{ "<Leader>f", group = "+[F]ind" },
@@ -20,6 +21,11 @@ return {
 			{ "<Leader>t", group = "+[T]oggles" },
 			{ "<Leader>y", group = "+[Y]ank" },
 			{ "<Leader>gd", group = "+[D]iffview" },
+			{ "<Leader>x", group = "+[T]rouble" },
+			{ "<Leader>s", group = "+[D]b" },
+			{ "<Leader>n", group = "+[N]otificaitons" },
+			{ "<Leader>nn", group = "Dismiss" },
+
 			{ "gp", group = "+[P]review" },
 
 			{ "<Leader>d", group = "+[D]BUI" },

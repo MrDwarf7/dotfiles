@@ -82,7 +82,13 @@ return {
 			{ "<Leader>t.", function() Snacks.scratch() end, desc = "Toggle Scratch" },
 			{ "<Leader>.", function() Snacks.scratch.select() end, desc = "Select Scratch" },
 			{ "<Leader>`", function () Snacks.terminal() end, desc = "Open Terminal" },
-
+			{ "<Leader>tn", function ()
+				if Snacks.config.picker and Snacks.config.picker.enabled then
+					Snacks.picker.notifications()
+				else
+					Snacks.notifier.show_history()
+				end
+			end, desc = "Notifications History"},
 			-- { "<Leader>pq", function() local prof = require("snacks").profiler Snacks.toggle.profiler():map("<Leader>pq") end },
 			-- { "<Leader>pw", function() Snacks.profiler.scratch() end, desc = "Profiler Window" },
 			-- stylua: ignore end
