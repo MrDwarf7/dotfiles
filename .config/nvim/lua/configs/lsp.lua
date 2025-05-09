@@ -82,7 +82,6 @@ return {
 				-- "mdsf",
 				"mdslw",
 				"mypy",
-				"powershell_es",
 				"prettier",
 				"ruff",
 				"shfmt",
@@ -127,8 +126,8 @@ return {
 			},
 			underline = true,
 			severity_sort = true,
-			signs = true,
 			update_in_insert = false,
+			signs = true,
 			float = { border = "single" }, -- This line
 			inlay_hints = {
 				enabled = true,
