@@ -90,10 +90,24 @@ function DustExclude {
   }
 
   if (-not (Test-CommandExists "dust.exe")) {
-    Write-Host "Dust command found."
-    return
-  }
-  Write-Host "Running Dust with exclude flags."
+    Write-Host("Dust command found.");
+    $answer = Read-Host("Would you like to install it? (Y/n)");
+    # powershell_es ignore start
+    switch ($answer.Trim().ToLower()) {
+      "y" {
+        scoop install dust
+      };
+      "n" {
+        Write-Host("Dust not installed.");
+      };
+      default {
+        scoop install dust 
+      };
+    };
+    DustExclude $args; # Recurse call after installing dust, using same args
+  };
+  Write-Host("Running Dust with exclude flags.");
+
   dust.exe $exclude $path $args
 }
 
@@ -119,47 +133,67 @@ function gfp {
   return
 }
 
-# function poshup
-# {
-#     winget upgrade JanDeDobbeleer.OhMyPosh -s winget
-# }
-
-function scoopup {
+function ScoopUpgrade {
   scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
 }
+New-Alias -Name scoopup -Value ScoopUpgrade -Force
 
-function nodeup {
+function NodeUpgrade {
   $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
   # && yarn global upgrade  ## Yarn is no longer really a package manger, it's more a project manager now
   pnpm -g update && pnpm -g upgrade && npm -g update && npm -g upgrade
   # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
+New-Alias -Name nodeup -Value NodeUpgrade -Force
 
-function rustupgrader {
+function RustUpgrader {
   rustup update
 }
+New-Alias -Name rupper -Value RustUpgrader -Force
 
-function sysup {
+function CargoBinUpdater() {
+  if (-not (Test-CommandExists("cargo install-update"))) {
+    # Install the updater tool
+    cargo install cargo-update
+  }
+  cargo install-update -a
+}
+New-Alias -Name cbu -Value CargoBinUpdater -Force
+
+function SystemUpgrade {
   if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED)) {
     $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
   }
 
-  scoopup
-  nodeup
-  rustupgrader
+  ScoopUpgrade
+  NodeUpgrade
+  RustUpgrader
 
   if (isWorkMachine -eq $true) {
-    Write-Host "Running second rustupgrader"
-    rustupgrader
+    Write-Host "Running second RustUpgrader"
+    RustUpgrader
   }
-  Write-Host "System update complete [scoopup, nodeup]" -NoNewline -ForegroundColor Green -BackgroundColor Black
+  # We want to update rust first, then call update for the tooling bins
+  CargoBinUpdater
+
+  Write-Host "System update complete [ScoopUpgrade, NodeUpgrade]" -NoNewline -ForegroundColor Green -BackgroundColor Black
   Write-Host
 }
+New-Alias -Name sysup -Value SystemUpgrade -Force
 
 function scpd {
   Push-Location "$env:USERPROFILE\scoop\"
   la
 }
+
+function CargoBinList() {
+  if (-not (Test-CommandExists("cargo install-update"))) {
+    # Install the updater tool
+    cargo install cargo-update
+  }
+  cargo install-update -l
+}
+New-Alias -Name cbl -Value CargoBinList -Force
 
 function baconget {
   $baconFile = "$dotfiles_dir\.config\bacon\bacon.toml"
