@@ -7,7 +7,14 @@ return {
 
     -- Remove
     keys[#keys + 1] = { "<leader>cR", false }
-    --function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" }
+		keys[#keys + 1] = { "<c-k>", false }
+    keys[#keys + 1] = { "<Leader>ca", false }
+    keys[#keys + 1] = { "<Leader>cA", false }
+    keys[#keys + 1] = { "<Leader>cc", false }
+    keys[#keys + 1] = { "<Leader>cC", false }
+    keys[#keys + 1] = { "<Leader>cl", false }
+    keys[#keys + 1] = { "<Leader>cr", false }
+
 
     keys[#keys + 1] = { "<Leader>l<S-i>", "<CMD>LspInfo<CR>", desc = "Lsp Info" }
     --  gd
@@ -20,12 +27,6 @@ return {
     keys[#keys + 1] = { "<leader>lr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
     keys[#keys + 1] = { "<Leader>lh", vim.diagnostic.open_float, desc = "float" }
 
-    keys[#keys + 1] = { "<Leader>ca", false }
-    keys[#keys + 1] = { "<Leader>cA", false }
-    keys[#keys + 1] = { "<Leader>cc", false }
-    keys[#keys + 1] = { "<Leader>cC", false }
-    keys[#keys + 1] = { "<Leader>cl", false }
-    keys[#keys + 1] = { "<Leader>cr", false }
   -- stylua: ignore end
 
     local ret = {
