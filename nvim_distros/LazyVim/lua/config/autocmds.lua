@@ -30,3 +30,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Added
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "sql",
+  },
+  command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+})
