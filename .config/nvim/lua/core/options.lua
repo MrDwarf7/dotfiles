@@ -63,6 +63,7 @@ opt.foldenable = true
 opt.foldnestmax = 4
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
+
 -- opt.foldexpr = "indent"
 -- opt.foldmethod = "syntax"
 
@@ -73,6 +74,7 @@ opt.autowrite = true -- Enable auto write, so that modified buffers are written 
 opt.conceallevel = 0
 opt.formatoptions = "jcroqlnt" -- tcqj
 opt.inccommand = "nosplit" -- preview incremental substitute
+opt.jumpoptions = "view" -- Define how the jumplist attempts to restore the cursor position
 opt.shiftround = true -- Round indent
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
@@ -83,7 +85,7 @@ opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "glob
 opt.showtabline = 2
 opt.mouse = "a"
 opt.backupcopy = "yes"
-opt.undolevels = 1000
+opt.undolevels = 10000
 -- opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true, w = true, a = true, l = true }
 opt.showmode = false
 opt.hidden = true
@@ -103,11 +105,12 @@ opt.joinspaces = false
 opt.title = true
 opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
-opt.completeopt = { "menu", "menuone", "noselect" }
+opt.completeopt = "menu,menuone,noselect"
 
 -- Setting cmdheight=0 for use with lualine and wezterm/tmux
+opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+
 vim.cmd([[
-set clipboard+=unnamedplus
 set cmdheight=0
 set shortmess+=csCFISWwal
 ]])
@@ -150,8 +153,8 @@ opt.smoothscroll = true
 g.sql_type_default = "mssql"
 
 -- Use ripgrep as grep tool
-vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 vim.o.grepformat = "%f:%l:%c:%m,%f:%l:%m"
+vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 
 vim.o.foldcolumn = "1"
 vim.o.foldlevel = 99

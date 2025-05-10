@@ -1,7 +1,7 @@
 return {
 	"mrcjkb/rustaceanvim",
 	-- lazy = false,
-	version = "^4",
+	version = vim.fn.has("nvim-0.10.0") == 0 and "^4" or false,
 	ft = { "rust" },
 	-- event = { "LspAttach" },
 	config = function()
@@ -57,12 +57,28 @@ return {
 						},
 						-- Add clippy lints for Rust.
 						checkOnSave = true,
+						diagnostics = {
+							enable = diagnostics == "rust-analyzer",
+						},
 						procMacro = {
 							enable = true,
 							ignored = {
 								["async-trait"] = { "async_trait" },
 								["napi-derive"] = { "napi" },
 								["async-recursion"] = { "async_recursion" },
+							},
+						},
+						files = {
+							excludeDirs = {
+								".direnv",
+								".git",
+								".github",
+								".gitlab",
+								"bin",
+								"node_modules",
+								"target",
+								"venv",
+								".venv",
 							},
 						},
 
