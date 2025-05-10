@@ -31,6 +31,7 @@ file_command_map = {
     "cargo_list": "cargo --list",
     "cargo_bin_dir": f"dir {user_home}\\.cargo\\bin",
     "cargo_binstall_dir": f"type {user_home}\\.cargo\\binstall\\crates-v1.json | jq",  # This isn't actually valid JSON, that's fine
+    "cargo_bin_list": "cargo install-update -l",
     # end rust
     #
     # node
