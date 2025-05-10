@@ -31,3 +31,4 @@
 # nvim_distros/LazyVim/lazy-lock
 
 # .config/lazygit/state.*
+**/*/config.json*
