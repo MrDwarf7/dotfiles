@@ -186,8 +186,8 @@
 
   "buffer_line_height": "standard",
 
-  "buffer_font_size": 14.0,
-  "buffer_font_family": "Zed Plex Mono",
+  "buffer_font_size": 13.0,
+  "buffer_font_family": "MesloLGSDZ Nerd Font Mono",
   "buffer_font_features": {
     "calt": false,
     "clig": false,
@@ -227,7 +227,7 @@
   "theme": {
     "mode": "system",
     "light": "Tokyo Night Storm",
-    "dark": "Tokyo Night Storm"
+    "dark": "Catppuccin Mocha"
   },
 
   "indent_guides": {
