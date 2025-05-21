@@ -1,0 +1,8 @@
+[project]
+name = "qutebrowser_config"
+version = "0.1.0"
+description = "It's a browser config"
+requires-python = ">=3.12"
+dependencies = [
+    "qutebrowser>=3.5.0",
+]

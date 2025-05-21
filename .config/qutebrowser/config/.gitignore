@@ -1,0 +1,15 @@
+bookmarks
+bookmarks/
+bookmarks/*
+
+*quickmarks*
+
+.venv
+.venv/
+.venv/*
+
+.archived_autocn
+.archived_autocn/
+.archived_autocn/*
+
+.python-version
