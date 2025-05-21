@@ -94,6 +94,8 @@ map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 map("n", "<C-w>e", "<C-w>=", { noremap = true, silent = true, desc = "[e]qualize" }) -- ctrl + w + = : easier to hit to equalize the width of buffers
 
+map("v", "p", '"_dP', { noremap = true, silent = true })
+
 map("n", "<Leader>lf", function()
   LazyVim.format({ force = true })
 end, { desc = "Format" })

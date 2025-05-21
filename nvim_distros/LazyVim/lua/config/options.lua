@@ -2,6 +2,8 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+local folding = require("utils.folding")
+
 local opt = vim.opt
 
 -- vim.g.snacks_animate = true
@@ -28,6 +30,9 @@ opt.fillchars = {
   diff = "╱",
   eob = " ",
 }
+opt.foldcolumn = "1"
+opt.foldenable = true
+
 opt.listchars = {
   tab = ">>>",
   trail = "·",
@@ -65,7 +70,8 @@ opt.shortmess:append({
   a = true,
   l = true,
 })
-
+-- TEST:
+-- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.splitkeep = "topline" -- default WAS "screen"
 
 opt.timeoutlen = vim.g.vscode and 1000 or 350
@@ -77,15 +83,18 @@ opt.wrap = false -- Added, test with other plugins etc
 
 -- BUG: Something here isn't letting me use <S-v>kkk<Space>L-stuff> will need to look tldr; (foldmethod == "expr") != true
 -- ||
-if vim.fn.has("nvim-0.10") == 1 then
-  opt.smoothscroll = true
-  opt.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
-  opt.foldmethod = "expr"
-  opt.foldtext = ""
-else
-  opt.foldmethod = "indent"
-  opt.foldtext = "v:lua.require('lazyvim.util').ui.foldtext()"
-end
+-- if vim.fn.has("nvim-0.10") == 1 then
+--   opt.smoothscroll = true
+--   opt.foldexpr = "v:lua.require('lazyvim.util').ui.foldexpr()"
+--   opt.foldmethod = "expr"
+--   opt.foldtext = ""
+-- else
+
+opt.foldmethod = "indent"
+-- opt.foldexpr = folding.foldtext()
+opt.foldexpr = "v:lua.require('lazyvim.util').ui.foldtext()"
+
+-- end
 
 vim.g.markdown_recommended_style = 0
 

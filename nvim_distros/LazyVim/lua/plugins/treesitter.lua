@@ -63,6 +63,33 @@ return {
       -- end,
       enable = true,
     },
+
+    textobjects = {
+      move = {
+        enable = false,
+        goto_next_start = {
+          ["]f"] = "@function.outer",
+          ["]o"] = "@class.outer",
+          ["]a"] = "@parameter.inner",
+        },
+        goto_next_end = {
+          ["]F"] = "@function.outer",
+          ["]O"] = "@class.outer",
+          ["]A"] = "@parameter.inner",
+        },
+        goto_previous_start = {
+          ["[f"] = "@function.outer",
+          ["[o"] = "@class.outer",
+          ["[a"] = "@parameter.inner",
+        },
+        goto_previous_end = {
+          ["[F"] = "@function.outer",
+          ["[O"] = "@class.outer",
+          ["[A"] = "@parameter.inner",
+        },
+      },
+    },
+
     autotag = {
       enable = true,
     },

@@ -41,6 +41,9 @@ return {
     { "<Leader>fD", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
     { "<Leader>fd", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
 
+    { "<Leader>lD", "<cmd>FzfLua diagnostics_document<cr>", desc = "Document Diagnostics" },
+    { "<Leader>ld", "<cmd>FzfLua diagnostics_workspace<cr>", desc = "Workspace Diagnostics" },
+
     { "<Leader>fw", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
     { "<Leader>fW", LazyVim.pick("live_grep"), desc = "Grep (Root Dir)" },
 
