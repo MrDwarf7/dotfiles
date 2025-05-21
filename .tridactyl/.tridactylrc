@@ -257,3 +257,8 @@ seturl www.google.com followpagepatterns.prev Previous
 " To ignore a site etc.
 autocmd FullscreenEnter www\.youtube\.com.* mode ignore
 autocmd DocStart www\.monkeytype\.com.* mode ignore
+
+autocmd DocStart http(s)?\.excalidraw\.com.* 
+autocmd DocStart .*excalidraw\.com.* 
+" autocmd DocStart www\.excalidraw\.com.* mode ignore
+
