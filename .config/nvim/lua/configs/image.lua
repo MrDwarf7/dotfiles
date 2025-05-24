@@ -1,12 +1,12 @@
 return {
-	{
-		"vhyrro/luarocks.nvim",
-		lazy = false,
-		priority = 1001, -- Builds things, so needs to be loaded early af
-		opts = {
-			rocks = { "magick" },
-		},
-	},
+	-- {
+	-- 	"vhyrro/luarocks.nvim",
+	-- 	lazy = false,
+	-- 	priority = 1001, -- Builds things, so needs to be loaded early af
+	-- 	opts = {
+	-- 		rocks = { "magick" },
+	-- 	},
+	-- },
 	{
 		"3rd/image.nvim",
 		lazy = true,
