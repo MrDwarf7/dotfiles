@@ -23,55 +23,13 @@ using namespace System.Management.Automation.Language
 # }
 
 #PSReadLine functions start.
-# Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-# Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
-# Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
-# This key handler shows the entire or filtered history using Out-GridView.
-# Set-PSReadLineKeyHandler -Key F7 `
-#     -BriefDescription History `
-#     -LongDescription 'Show command history' `
-#     -ScriptBlock {
-#     $pattern = $null
-#     [Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$pattern, [ref]$null)
-#     if ($pattern) {
-#         $pattern = [regex]::Escape($pattern)
-#     }
-#
-#     $history = [System.Collections.ArrayList]@(
-#         $last = ''
-#         $lines = ''
-#         foreach ($line in [System.IO.File]::ReadLines((Get-PSReadLineOption).HistorySavePath)) {
-#             if ($line.EndsWith('`')) {
-#                 $line = $line.Substring(0, $line.Length - 1)
-#                 $lines = if ($lines) {
-#                     "$lines`n$line"
-#                 } else {
-#                     $line
-#                 }
-#                 continue
-#             }
-#
-#             if ($lines) {
-#                 $line = "$lines`n$line"
-#                 $lines = ''
-#             }
-#
-#             if (($line -cne $last) -and (!$pattern -or ($line -match $pattern))) {
-#                 $last = $line
-#                 $line
-#             }
-#         }
-#     )
-#     $history.Reverse()
-#
-#     $command = $history | Out-GridView -Title History -PassThru
-#     if ($command) {
-#         [Microsoft.PowerShell.PSConsoleReadLine]::RevertLine()
-#         [Microsoft.PowerShell.PSConsoleReadLine]::Insert(($command -join "`n"))
-#     }
-# }
-### END Scripting directly for PSReadLine module :
+# if (Test-CommandExists "fzf") {
+# Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+# Set-PSReadLineKeyHandler -ViMode Command -Key 'Ctrl+r' -ScriptBlock {
+#   Invoke-FuzzyHistory
+# };
+# };
 
 ### START ViMode / Vi Mode / Vim
 Set-PSReadlineOption -BellStyle None
@@ -189,4 +147,98 @@ function ViModeVisualEditor {
   }
   return $ViMode
 }
+
+
+## Standin for fzf as Powershell has to use different handlers because commands like 'head' aren't native
+# See: https://github.com/kelleyma49/PSFzf/blob/67d8a5e53c3331cb3fe07ffb9ebdf244a66032dc/docs/Invoke-Fzf.md
+#      for commands 
+Set-PSReadLineKeyHandler -ViMode Insert -Key 'Ctrl+r' -ScriptBlock {
+  # Import-Module PSFzf
+  Invoke-FuzzyHistory
+}
+
+Set-PSReadLineKeyHandler -ViMode Command -Key 'Ctrl+r' -ScriptBlock {
+  # Import-Module PSFzf
+  [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()
+  Invoke-FuzzyHistory
+}
+
+
+### This shit soooooooo buggy
+
+# Set-PSReadLineKeyHandler -ViMode Insert -Key 'Alt+w' -ScriptBlock {
+#   # Import-Module PSFzf
+#   Invoke-PsFzfRipgrep -SearchString ""
+# }
+#
+# Set-PSReadLineKeyHandler -ViMode Command -Key 'Alt+w' -ScriptBlock {
+#   # Import-Module PSFzf
+#   [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()
+#   Invoke-PsFzfRipgrep -SearchString ""
+# }
+#
+# function Invoke-FzfScoop {
+#   param(
+#     [string]$SubCommand = "info"
+#   );
+#
+#   $result = $null;
+#   [System.Collections.ArrayList]$installedApps = New-Object System.Collections.ArrayList;
+#
+#   # PERF: usage of native c/c++/c# would be leagues better here.....
+#   $scoopPath = (Get-Command("scoop") -ErrorAction Ignore).Path
+#
+#   if (Test-CommandExists "scoop") {
+#     # Get and build the existing list of applications for searching
+#     Get-ChildItem "$(Split-Path $scoopPath)\..\apps" | ForEach-Object {
+#       $installedApps.Add($_.Name) > $null;
+#     };
+#
+#     $result = $installedApps | Invoke-Fzf -Header "Scoop Installed Apps" -Multi -Preview "scoop info {}" -PreviewWindow wrap
+#   };
+#
+#   if ($null -eq $result) {
+#     Write-Host "No scoop apps found." -ForegroundColor Yellow;
+#     return;
+#   };
+#
+#   # $cmd = "scoop $SubCommand $result";
+#   #
+#   # Write-Host("Command value is: $cmd")
+#   # Invoke-Expression -Command $cmd -ErrorAction Stop;
+# };
+#
+# Set-PSReadLineKeyHandler -ViMode Insert -Key 'Alt+s' -ScriptBlock {
+#   # Import-Module PSFzf
+#   & Invoke-FzfScoop
+# };
+#
+# Set-PSReadLineKeyHandler -ViMode Command -Key 'Alt+s' -ScriptBlock {
+#   # Import-Module PSFzf
+#   [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()
+#   & Invoke-FzfScoop
+# }
+#
+# Set-PSReadLineKeyHandler -ViMode Insert -Key 'Alt+x' -ScriptBlock {
+#   # Import-Module PSFzf
+#   Invoke-FuzzyKillProcess
+# };
+#
+# Set-PSReadLineKeyHandler -ViMode Command -Key 'Alt+x' -ScriptBlock {
+#   # Import-Module PSFzf
+#   # [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()
+#   # Invoke-FzfScoop "list"
+# }
+#
+# Set-PSReadLineKeyHandler -ViMode Insert -Key 'Alt+g' -ScriptBlock {
+#   # Import-Module PSFzf
+#   Invoke-FuzzyGitStatus
+# };
+#
+# Set-PSReadLineKeyHandler -ViMode Command -Key 'Alt+x' -ScriptBlock {
+#   [Microsoft.PowerShell.PSConsoleReadLine]::ViInsertMode()
+#   Invoke-FuzzyGitStatus
+# }
+
+
 ### END ViMode / Vi Mode / Vim
