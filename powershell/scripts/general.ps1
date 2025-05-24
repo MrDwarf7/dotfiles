@@ -41,28 +41,28 @@ function nf {
   fastfetch 
 }
 
-enum CursorStyle {
-  block_blink = 1
-  block = 2
-  underline_blink = 3
-  underline = 4
-  bar_blink = 5
-  bar = 6
-}
+# enum CursorStyle {
+#   block_blink = 1
+#   block = 2
+#   underline_blink = 3
+#   underline = 4
+#   bar_blink = 5
+#   bar = 6
+# }
 
 <#
   .SYNOPSIS
   set cursor style
 #>
-function Set-CursorStyle {
-  param (
-    # style
-    [Parameter(Mandatory)]
-    [CursorStyle]$Style
-  )
-  
-  Write-Output "`e[$([int]$Style) q"
-}
+# function Set-CursorStyle {
+#   param (
+#     # style
+#     [Parameter(Mandatory)]
+#     [CursorStyle]$Style
+#   )
+#
+#   Write-Output "`e[$([int]$Style) q"
+# }
 
 function y {
   $tmp = [System.IO.Path]::GetTempFileName()
