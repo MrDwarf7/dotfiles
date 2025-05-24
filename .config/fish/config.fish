@@ -28,6 +28,7 @@ if status is-interactive
     # end
 
     fish_vi_key_bindings
+    fzf --fish | source
 
     # Handled by ./conf.d/01-pre.fish
     # zoxide init fish | source
