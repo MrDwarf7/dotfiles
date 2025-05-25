@@ -26,8 +26,10 @@ c.scrolling.smooth = False  # smooth scrolling -- NOTE smooth scrolling does not
 # c.scroll_px = 100
 
 
-c.url.default_page = "https://www.google.com/"
+c.url.default_page = "https://www.google.com"
+c.url.start_pages = ["https://www.google.com/"]
 # c.url.default_page = "about:blank"
+
 
 c.url.searchengines = {
     # note - if you use duckduckgo, you can make use of its built in bangs, of which there are many! https://duckduckgo.com/bangs
@@ -51,8 +53,11 @@ c.completion.open_categories = [
     "history",
     "filesystem",
 ]
+c.editor.command = ["neovide", '+"normal! {line}G{column}|"', "{file}"]
+# ["neovide", "+'{line}G{column}|'", "{file}"]
 
-# config.load_autoconfig()
+
+config.load_autoconfig(False)
 
 c.auto_save.session = True
 
@@ -65,7 +70,7 @@ def add_to_sorted_lst(ext_list, new_vals):
     return sorted(ext_list + new_vals)
 
 
-c.input.insert_mode.auto_load = False
+c.input.insert_mode.auto_load = True
 
 config.set("input.insert_mode.leave_on_load", True, "https://github.com")
 

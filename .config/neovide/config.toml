@@ -1,0 +1,10 @@
+wsl = false
+no-multigrid = false
+vsync = true
+maximized = false
+srgb = false
+# idle = 1|0
+# neovim
+
+# [font]
+# normal = ["Mononoki Nerd Font Mono"]

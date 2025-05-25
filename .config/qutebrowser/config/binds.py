@@ -32,11 +32,14 @@ config.bind("k", "scroll-px 0 -150")
 config.bind("j", "scroll-px 0 150")
 
 
-config.bind("t", "cmd-set-text -s :open -t")
+config.bind("t", "cmd-set-text -s :open !g")
 config.bind("T", "cmd-set-text -s :open -t !g ")
 
 config.bind("o", "cmd-set-text :open {url:pretty}")
 config.bind("O", "cmd-set-text :open -t -r {url:pretty}")
+config.bind("<HOME>", ":home")
+config.bind("<Ctrl+h>", "nop")
+config.bind("<Ctrl+b>", ":bookmark-list")
 
 
 config.bind("b", "cmd-set-text -sr :tab-focus")
@@ -45,11 +48,39 @@ config.bind("b", "cmd-set-text -sr :tab-focus")
 config.bind("'", "cmd-set-text -s :quickmark-load")
 config.bind('"', "cmd-set-text -s :quickmark-load -t")
 
+config.bind("cs", "config-source")
+
+config.bind("zi", "zoom-in")
+config.bind("zo", "zoom-out")
+config.bind("zz", "zoom 100%")
+config.bind("zn", "clear-messages")
+
+
+config.bind(">", "tab-move +")
+config.bind("<", "tab-move -")
+
+
+config.bind("K", "tab-prev")
+config.bind("J", "tab-next")
+
+
+config.bind("<Ctrl+Shift+Tab>", "tab-prev")
+config.bind("<Ctrl+Tab>", "tab-next")
+
+
+config.bind("yi", "tab-clone")
+config.bind(":q", "tab-close")
+
+
+config.bind("<Ctrl+o>", "back")
+config.bind("<Ctrl+i>", "forward")
+
+
 # keybinding changes
 # config.bind('=', 'cmd-set-text -s :open')
 # config.bind('h', 'history')
 # config.bind("cs", "cmd-set-text -s :config-source")
-config.bind("cs", "config-source")
+
 # config.bind('tH', 'config-cycle tabs.show multiple never')
 # config.bind('sH', 'config-cycle statusbar.show always never')
 # config.bind('T', 'hint links tab')
@@ -89,29 +120,3 @@ config.bind("cs", "config-source")
 # config.bind("tCH", "config-cycle -p -u *://*.{url:host}/* content.cookies.accept all no-3rdparty never ;; reload")
 # config.bind("tcu", "config-cycle -p -t -u {url} content.cookies.accept all no-3rdparty never ;; reload")
 # config.bind("tCu", "config-cycle -p -u {url} content.cookies.accept all no-3rdparty never ;; reload")
-
-
-config.bind("zi", "zoom-in")
-config.bind("zo", "zoom-out")
-config.bind("zz", "zoom 100%")
-config.bind("zn", "clear-messages")
-
-
-config.bind(">", "tab-move +")
-config.bind("<", "tab-move -")
-
-
-config.bind("K", "tab-prev")
-config.bind("J", "tab-next")
-
-
-config.bind("<Ctrl+Shift+Tab>", "tab-prev")
-config.bind("<Ctrl+Tab>", "tab-next")
-
-
-config.bind("yi", "tab-clone")
-config.bind(":q", "tab-close")
-
-
-config.bind("<Ctrl+o>", "back")
-config.bind("<Ctrl+i>", "forward")
