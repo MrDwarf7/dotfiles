@@ -97,7 +97,7 @@ if ($env:LIST_CLIENT -eq "eza") {
   . "$powershell_completions\.alias_system_ls.ps1"
 }
 
-Write-Host -NoNewLine "`e[5 q" # Set the cursor to a blinking line.
+Write-Host -NoNewLine "`e[5 q" # Set the cursor to a blinking line. (Fixes some bugs with wezterm -> starship interp)
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 # Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward

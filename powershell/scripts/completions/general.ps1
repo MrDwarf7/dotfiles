@@ -148,7 +148,6 @@ function ViModeVisualEditor {
   return $ViMode
 }
 
-
 ## Standin for fzf as Powershell has to use different handlers because commands like 'head' aren't native
 # See: https://github.com/kelleyma49/PSFzf/blob/67d8a5e53c3331cb3fe07ffb9ebdf244a66032dc/docs/Invoke-Fzf.md
 #      for commands 
