@@ -130,12 +130,13 @@ if os.path.exists(config.configdir / "theme.py"):
 c.tabs.position = "left"
 c.tabs.padding = {"top": 4, "bottom": 4, "left": 9, "right": 9}
 c.tabs.indicator.width = 2  # tab indicators (little line thing)
-c.tabs.width = "7%"
+c.tabs.width = "10%"
 
 
 # Fonts
 c.fonts.default_family = []
-c.fonts.default_size = "11pt"
+c.fonts.default_size = "12pt"
+c.fonts.hints = "bold 14pt monospace"  # hint size / hint font
 c.fonts.web.family.fixed = "monospace"
 c.fonts.web.family.sans_serif = "monospace"
 c.fonts.web.family.serif = "monospace"
@@ -157,8 +158,8 @@ c.content.webrtc_ip_handling_policy = "default-public-interface-only"
 # config.set("content.webrtc_ip_handling_policy", "default-public-interface-only")
 c.content.cookies.accept = "all"
 # config.set("content.cookies.accept", "all")
-c.content.cookies.store = True
-# config.set("content.cookies.store", True)
+# c.content.cookies.store = True
+config.set("content.cookies.store", True)
 c.content.javascript.enabled = True
 # config.set("content.javascript.enabled", True)  #### Setup keybinds
 

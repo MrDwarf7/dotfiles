@@ -18,6 +18,7 @@ def alias_chained(key, *commands):
 # Aliases
 c.aliases["q"] = "tab-close"
 c.aliases["wa"] = "session-save"
+# c.aliases["ls"] = "cmd-set-text -s :session-load"
 alias_chained("wq", "session-save", "tab-close")
 
 
@@ -44,6 +45,7 @@ config.bind("<Ctrl+b>", ":bookmark-list")
 
 config.bind("b", "cmd-set-text -sr :tab-focus")
 
+config.bind("gs", "cmd-set-text -s :session-load")
 
 config.bind("'", "cmd-set-text -s :quickmark-load")
 config.bind('"', "cmd-set-text -s :quickmark-load -t")
@@ -54,6 +56,7 @@ config.bind("zi", "zoom-in")
 config.bind("zo", "zoom-out")
 config.bind("zz", "zoom 100%")
 config.bind("zn", "clear-messages")
+config.bind("cn", "clear-messages")
 
 
 config.bind(">", "tab-move +")
