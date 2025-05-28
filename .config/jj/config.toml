@@ -1,0 +1,8 @@
+[user]
+name = "MrDwarf7"
+email = "129040985+MrDwarf7@users.noreply.github.com"
+
+[ui]
+conflict-marker-style = "git"
+default-command = "log"
+diff-editor = ":builtin"
