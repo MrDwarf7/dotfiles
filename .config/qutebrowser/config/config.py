@@ -146,7 +146,7 @@ c.fonts.web.family.standard = "monospace"
 # Privacy
 c.completion.cmd_history_max_items = 1
 # config.set("completion.cmd_history_max_items", 1)
-c.content.private_browsing = True
+c.content.private_browsing = False
 # config.set("content.private_browsing", True)
 
 config.set("content.webgl", False, "*")
