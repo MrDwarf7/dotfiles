@@ -15,6 +15,7 @@
 	sharedRepository = all
 	autocrlf = false
 	symlinks = true
+  attributesfile = ~/.gitattributes
 [interactive]
     singleKey = true
     diffFilter = delta --color-only
@@ -26,6 +27,9 @@
     ; side-by-side = true
 [merge]
     conflictstyle = diff3
+[merge "mergiraf"]
+  name = mergiraf
+  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [diff]
     colorMoved = default
 [alias]
