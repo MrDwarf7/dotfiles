@@ -18,7 +18,8 @@ if status is-interactive
     # call under ./functions/fish_prompt.fish
     # source (/usr/sbin/starship init fish --print-full-init | psub)
     if test -e /usr/sbin/starship
-        /usr/sbin/starship init fish | source
+        # /usr/sbin/starship init fish | source
+        command starship init fish | source
         commandline -f repaint
     end
     # /usr/sbin/starship init fish
@@ -28,7 +29,7 @@ if status is-interactive
     # end
 
     fish_vi_key_bindings
-    fzf --fish | source
+    command fzf --fish | source
 
     # Handled by ./conf.d/01-pre.fish
     # zoxide init fish | source
