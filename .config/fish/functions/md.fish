@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 
 function md 
-    mkdir -p $argv
+    command mkdir -p $argv
 end

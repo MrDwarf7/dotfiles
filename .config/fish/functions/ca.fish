@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 
 function ca --description 'Clear screen and run ls'
-    cls && exa -a --tree --level=1 --icons=always
+    command clear 
+    command eza -lah --color=always --follow-symlinks --icons=always --git
 end

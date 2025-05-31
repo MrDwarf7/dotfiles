@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 
 function dodn
-    pushd $DATA_ON_DEMAND_NEXT
+    pushd $DATA_ON_DEMAND_NEXT || return 1
 end

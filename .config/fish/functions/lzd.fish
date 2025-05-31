@@ -2,5 +2,5 @@
 
 function lzd
     alias lzd lazydocker $argv
-    $lzd
+    command lazydocker $argv
 end

@@ -17,7 +17,7 @@ function 01eval_if_pacman
     # echo "1.0: Checking for $program_one"
     # echo "1.0: Evaluating $expr"
 
-    if pacman -Qi "$program_one" &> /dev/null
+    if command pacman -Qi "$program_one" &> /dev/null
         # echo "1.1: Evaluating $expr"
         source <(eval $expr | psub)
         return 0

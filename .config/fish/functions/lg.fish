@@ -2,9 +2,10 @@
 
 function lg 
     if test -z $argv
-        set -gx lg lazygit $argv
-        $lg
+        set -gx lg lazygit
+        # $lg
+        command lazygit $argv
     else
-        lazygit $argv
+        command lazygit $argv
     end
 end

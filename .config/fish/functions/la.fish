@@ -7,5 +7,5 @@ function la
 
         return 1
     end
-    $LIST_CLIENT -a --tree --level=1 --icons=always $argv
+    command $LIST_CLIENT -lah --color=always --follow-symlinks --icons=always --git $argv
 end

@@ -6,5 +6,5 @@ function l
         set -gx LIST_CLIENT "ls"
         return 1
     end
-    $LIST_CLIENT -lah --color=always --level=1 $argv
+    command $LIST_CLIENT -lah --color=always --follow-symlinks --icons=always --git $argv
 end

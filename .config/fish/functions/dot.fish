@@ -2,6 +2,6 @@
 
 function dot
     pushd ~/dotfiles || return 1
-    git fetch --all
-    git status
+    command git fetch --all
+    command git status
 end
