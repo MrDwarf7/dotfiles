@@ -27,15 +27,6 @@ function ClearAndList {
 }
 New-Alias -Name ca -Value ClearAndList -Force;
 
-function EasyList {
-  param (
-    $ag = $args
-  )
-  $eza_args = "-lah --color=always --follow-symlinks --icons=always";
-  & RunEza -Path $ag -CliArgs $eza_args;
-}
-New-Alias -Name la -Value EasyList -Force;
-
 function AltList {
   param (
     $ag = $args
@@ -44,6 +35,15 @@ function AltList {
   & RunEza -Path $ag -CliArgs $eza_args;
 }
 New-Alias -Name l -Value AltList -Force
+
+function EasyList {
+  param (
+    $ag = $args
+  )
+  $eza_args = "-lah --color=always --follow-symlinks --icons=always";
+  & RunEza -Path $ag -CliArgs $eza_args;
+}
+New-Alias -Name la -Value EasyList -Force;
 
 function ListTree {
   param (
