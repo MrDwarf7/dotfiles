@@ -2,5 +2,5 @@
 
 function avenv 
     source ./.venv/bin/activate
-    echo "Activated virtual environment"
+    printf "Activated virtual environment\n"
 end

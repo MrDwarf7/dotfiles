@@ -3,8 +3,8 @@
 function rmvenv 
     if test -d "./.venv"
         rm -rf ./.venv
-        echo "Removed virtual environment"
+        printf "Removed virtual environment\n"
     else
-        echo "No virtual environment found"
+        printf "No virtual environment found\n"
     end
 end

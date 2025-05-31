@@ -1,7 +1,11 @@
 #!/usr/bin/env fish
 
 function dot
-    pushd ~/dotfiles || return 1
-    command git fetch --all
+    if test "$(pwd)" != "$HOME/dotfiles"
+        printf "Moving to: %s\n" "$HOME/dotfiles"
+        pushd ~/dotfiles || return 1
+    end
+    printf "Fetching... \n"
+    command git fetch
     command git status
 end

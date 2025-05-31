@@ -2,7 +2,7 @@
 
 function ls
     if test -z $LIST_CLIENT
-        echo "LIST_CLIENT is not set"
+        printf "LIST_CLIENT is not set\n"
         set -gx LIST_CLIENT "ls"
         return 1
     end
