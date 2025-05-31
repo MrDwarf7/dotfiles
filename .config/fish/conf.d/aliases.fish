@@ -14,6 +14,7 @@ alias parss "paru -Ss"
 alias parsu "paru -Syu" 
 
 alias shutdown 'systemctl poweroff'
-alias sysup upgrader
+# alias sysup upgrader
 
+# alias v 'vim'
 alias vim 'nvim'
