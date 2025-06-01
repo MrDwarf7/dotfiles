@@ -47,7 +47,7 @@ if arch.should_load() then
 	return {
 		"yetone/avante.nvim",
 		enabled = true,
-		event = { "VeryLazy", "BufReadPost" },
+		event = "InsertEnter",
 		lazy = true,
 		version = false, -- set this if you want to always pull the latest change
 		build = builder(),

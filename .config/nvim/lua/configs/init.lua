@@ -284,7 +284,7 @@ return {
 		-- end,
 	},
 
-	{ "nvim-telescope/telescope-dap.nvim", event = "VeryLazy" }, -- Automatic setup
+	{ "nvim-telescope/telescope-dap.nvim", lazy = true }, -- Automatic setup
 	{ "AndreM222/copilot-lualine" },
 
 	{

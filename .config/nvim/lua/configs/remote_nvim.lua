@@ -15,9 +15,9 @@ return {
 	lazy = true,
 	version = "*", -- Pin to GitHub releases
 	dependencies = {
-		"nvim-lua/plenary.nvim", -- For standard functions
-		"MunifTanjim/nui.nvim", -- To build the plugin UI
-		"nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+		{ "nvim-lua/plenary.nvim", lazy = true }, -- For standard functions
+		{ "MunifTanjim/nui.nvim", lazy = true }, -- To build the plugin UI
+		{ "nvim-telescope/telescope.nvim", lazy = true }, -- For picking b/w different remote methods
 	},
 	opts = function()
 		local utils = require("remote-nvim.utils")

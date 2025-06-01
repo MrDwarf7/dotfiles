@@ -2,89 +2,70 @@ return {
 	"ThePrimeagen/harpoon",
 	lazy = true,
 	branch = "harpoon2",
+	event = "BufWinEnter",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim", lazy = true },
 	},
 	opts = {},
-	keys = {
-		{
-			"<Leader>i",
-			function()
-				return require("harpoon"):list():add()
-			end,
-			desc = "harpoon [i]t",
-		},
-		{
-			"<Leader>H",
-			function()
-				return require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
-			end,
-			desc = "[h]arpoon menu",
-		},
-		{
-			"<Leader>1",
-			function()
-				return require("harpoon"):list():select(1)
-			end,
-			desc = "harpoon [1]",
-		},
-		{
-			"<Leader>2",
-			function()
-				return require("harpoon"):list():select(2)
-			end,
-			desc = "harpoon [2]",
-		},
-		{
-			"<Leader>3",
-			function()
-				return require("harpoon"):list():select(3)
-			end,
-			desc = "harpoon [3]",
-		},
-		{
-			"<Leader>4",
-			function()
-				return require("harpoon"):list():select(4)
-			end,
-			desc = "harpoon [4]",
-		},
-		{
-			"<Leader>5",
-			function()
-				return require("harpoon"):list():select(5)
-			end,
-			desc = "harpoon [5]",
-		},
-		{
-			"<C-z>",
-			function()
-				return require("harpoon"):list():prev()
-			end,
-			desc = "harpoon [p]rev",
-		},
-		{
-			"<C-x>",
-			function()
-				return require("harpoon"):list():next()
-			end,
-			desc = "harpoon [n]ext",
-		},
-		{
-			"[i",
-			function()
-				return require("harpoon"):list():prev()
-			end,
-			desc = "harpoon [p]rev",
-		},
-		{
-			"]i",
-			function()
-				return require("harpoon"):list():next()
-			end,
-			desc = "harpoon [n]ext",
-		},
-	},
+	keys = function()
+		local keys = {
+			{
+				"<Leader>i",
+				function()
+					return require("harpoon"):list():add()
+				end,
+				desc = "harpoon [i]t",
+			},
+			{
+				"<Leader>fh",
+				function()
+					return require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+				end,
+				desc = "[h]arpoon menu",
+			},
+			{
+				"<C-z>",
+				function()
+					return require("harpoon"):list():prev()
+				end,
+				desc = "harpoon [p]rev",
+			},
+			{
+				"<C-x>",
+				function()
+					return require("harpoon"):list():next()
+				end,
+				desc = "harpoon [n]ext",
+			},
+			{
+				"[i",
+				function()
+					return require("harpoon"):list():prev()
+				end,
+				desc = "harpoon [p]rev",
+			},
+			{
+				"]i",
+				function()
+					return require("harpoon"):list():next()
+				end,
+				desc = "harpoon [n]ext",
+			},
+		}
+
+		for i = 1, 5 do
+			table.insert(keys, {
+				"<Leader>" .. i,
+				function()
+					require("harpoon"):list():select(i)
+				end,
+				desc = "Harpoon to " .. i,
+			})
+		end
+
+		return keys
+	end,
+
 	config = function(_, opts)
 		local function toggle_telescope(harpoon_files)
 			local file_paths = {}

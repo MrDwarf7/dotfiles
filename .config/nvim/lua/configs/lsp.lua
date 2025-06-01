@@ -116,6 +116,11 @@ return {
 					require("lspconfig")[server_name].setup(server)
 				end,
 			},
+			-- NEW :: 2025_06_01
+			ensure_installed = servers,
+			automatic_enable = {
+				exclude = opts.plugin_handled,
+			},
 		}
 
 		opts.diagnostic_config = {
@@ -166,15 +171,7 @@ return {
 		-- require("configs.mason")
 		vim.diagnostic.config(opts.diagnostic_config)
 
-		-- vim.defer_fn(function()
 		require("mason-tool-installer").setup(opts.mason_tools)
-		-- end, 0)
-
-		local mason_lspconfig = require("mason-lspconfig")
-
-		-- vim.defer_fn(function()
-		mason_lspconfig.setup(opts.mason_lsp_config)
-		-- end, 0)
-		mason_lspconfig.setup_handlers(opts.mason_lsp_config.handlers)
+		require("mason-lspconfig").setup(opts.mason_lsp_config)
 	end,
 }
