@@ -1,6 +1,6 @@
 return {
   "conform.nvim",
-  lazy = false,
+  lazy = true,
   keys = {
     { "<leader>cF", false },
     {
