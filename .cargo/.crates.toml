@@ -1,0 +1,62 @@
+[v1]
+"atac 0.20.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
+"bacon 3.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
+"cargo-binstall 1.12.6 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
+"cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
+"cargo-feature 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-feature.exe"]
+"cargo-generate 0.23.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-generate.exe"]
+"cargo-insta 1.43.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-insta.exe"]
+"cargo-llvm-cov 0.6.16 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-llvm-cov.exe"]
+"cargo-machete 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-machete.exe"]
+"cargo-make 0.37.24 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-make.exe",
+    "makers.exe",
+]
+"cargo-nextest 0.9.97 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
+"cargo-udeps 0.1.55 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
+"cargo-update 16.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-install-update-config.exe",
+    "cargo-install-update.exe",
+]
+"cargo-watch 8.5.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-watch.exe"]
+"cargo-workspaces 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-workspaces.exe",
+    "cargo-ws.exe",
+]
+"cargo-zigbuild 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-zigbuild.exe"]
+"create-tauri-app 4.5.10 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-create-tauri-app.exe"]
+"cross 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cross-util.exe",
+    "cross.exe",
+]
+"diffedit3 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["diffedit3.exe"]
+"duckscript_cli 0.11.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["duck.exe"]
+"gitoxide 0.38.0 (git+https://github.com/Byron/gitoxide#0e2f831836ca13d7bc62d416c32e413b9823fe60)" = [
+    "ein.exe",
+    "gix.exe",
+]
+"just 1.40.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
+"knope 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["knope.exe"]
+"lazyjj 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["lazyjj.exe"]
+"loco 0.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["loco.exe"]
+"polars-cli 0.9.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["polars.exe"]
+"sea-orm-cli 1.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "sea-orm-cli.exe",
+    "sea.exe",
+]
+"taplo-cli 0.10.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["taplo.exe"]
+"tauri-cli 2.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-tauri.exe"]
+"tenki 1.11.0 (git+https://github.com/ckaznable/tenki.git#9b4b668d39c242b37a7110a4ca89c2fc319aa178)" = ["tenki.exe"]
+"tokio-console 0.1.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["tokio-console.exe"]
+"trunk 0.21.14 (registry+https://github.com/rust-lang/crates.io-index)" = ["trunk.exe"]
+"wasm-bindgen-cli 0.2.100 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "wasm-bindgen-test-runner.exe",
+    "wasm-bindgen.exe",
+    "wasm2es6js.exe",
+]
+"wasm-pack 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-pack.exe"]
+"wasm-tools 1.232.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]
+"websocat 1.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["websocat.exe"]
+"welds-cli 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["welds.exe"]
+"xh 0.24.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["xh.exe"]
+"cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
