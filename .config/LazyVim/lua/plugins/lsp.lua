@@ -1,6 +1,9 @@
+---@diagnostic disable: undefined-global
 return {
   {
     "nvim-lspconfig",
+    lazy = true,
+    -- event = "VeryLazy",
   -- stylua: ignore start
   opts = function()
     local keys = require("lazyvim.plugins.lsp.keymaps").get()
