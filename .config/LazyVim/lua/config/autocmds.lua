@@ -37,3 +37,20 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
 })
+
+-- Hides copilot suggestions on menu open
+vim.api.nvim_create_autocmd("User", {
+  pattern = "BlinkCmpMenuOpen",
+  callback = function()
+    require("copilot.suggestion").dismiss()
+    vim.b.copilot_suggestion_hidden = true
+  end,
+})
+
+-- re-shows copilot suggestions on menu close
+vim.api.nvim_create_autocmd("User", {
+  pattern = "BlinkCmpMenuClose",
+  callback = function()
+    vim.b.copilot_suggestion_hidden = false
+  end,
+})

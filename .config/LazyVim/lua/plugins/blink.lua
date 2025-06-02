@@ -1,6 +1,6 @@
+-- Stand-in for cmp / cmp.lua / cmp-nvim-lsp
 return {
   "blink.cmp",
-
   dependencies = {
     { "saghen/blink.compat" },
     { "L3MON4D3/LuaSnip" },
@@ -23,7 +23,12 @@ return {
   opts = {
     completion = {
       -- DOC BORDER
-      menu = { border = "single" },
+      menu = {
+        min_width = 10,
+        max_width = 100, -- 80 is default in blink docs
+        max_height = 40, -- default is 20, (or does it use LazyVim's options.pumheight setting? -- changing it here overrides it anyway)
+        border = "single",
+      },
       documentation = {
         auto_show = true,
         auto_show_delay_ms = 100,
@@ -34,7 +39,21 @@ return {
       },
     },
     -- DOC BORDER
-    signature = { window = { border = "single" } },
+    signature = {
+      -- signature.enabled = true will show a little 'mini' function signature above/next to completion as you enter (__) <- this space
+      -- but this is a LOT when the docs flyout is there AS WELL
+      enabled = false, -- defaults to off (same as docs)
+      triger = {
+        enabled = true,
+      },
+      window = {
+        -- min_width = 1,
+        -- max_width = 100,
+        -- max_height = 10,
+        border = "single",
+        show_documentation = false, -- ############## This is the little one
+      },
+    },
 
     -- cmdline = {
     --   enabled = true,
@@ -44,6 +63,7 @@ return {
       preset = "super-tab",
       ["<C-j>"] = { "select_next", "fallback" },
       ["<C-k>"] = { "select_prev", "fallback" },
+      -- ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<C-Space>"] = {
         function(cmp)
           cmp.show({
