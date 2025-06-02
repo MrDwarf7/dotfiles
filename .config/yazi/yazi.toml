@@ -5,7 +5,7 @@
 # YAZI_CONFIG_HOME :: This needs to be on path and pointed to this DIR
 # YAZI_FILE_ONE :: This needs to be pointed DIRECTLY at Git's file.exe binary (Yes. THE BINARY ITSELF)
 
-[manager]
+[mgr]
 show_hidden = true
 show_symlink = true
 linemode = "mtime_better"
