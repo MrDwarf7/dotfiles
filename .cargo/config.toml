@@ -5,11 +5,11 @@ c = "check"
 ch = "check"
 u = "update"
 up = "upgrade"
-
 w = "watch"
 wq = "watch --quiet"
 wqc = "watch --quiet --clear"
 wqcr = "watch --quiet --clear --run"
+#wm = "watch -- -q -c -w tests/ -x 'test quick_dev -q --target-dir target/tmp -- --nocapture'"
 
 t = "test"
 tv = "test --verbose"
@@ -28,9 +28,8 @@ cl = "clean"
 clip = "clippy --all-targets --all-features -- -D warnings"
 clipP = "clippy -- -W clippy::pedantic"
 
-
-[build]
-rustc-wrapper = 'C:\Users\<< YOUR USERNAME>>\scoop\shims\sccache.exe'
+# [build]
+# rustc-wrapper = 'C:\Users\<< YOUR USERNAME>>\scoop\shims\sccache.exe'
 
 ## Experimental features
 [unstable]
@@ -49,3 +48,18 @@ codegen-backend = "cranelift"
 [target.x86_64-pc-windows-gnu]
 linker = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\gcc.exe'
 ar = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\ar.exe'
+
+# [unstable]
+# codegen-backend = true
+#
+# [profile.dev]
+# codegen-backend = "cranelift"
+
+# https://doc.rust-lang.org/cargo/reference/unstable.html?highlight=trim-paths#automatic-garbage-collection
+# [gc.auto]
+
+
+
+
+
+

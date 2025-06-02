@@ -1,6 +1,5 @@
 [v1]
 "atac 0.20.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
-"bacon 3.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
 "cargo-binstall 1.12.6 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
 "cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
 "cargo-feature 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-feature.exe"]
@@ -35,7 +34,9 @@
     "ein.exe",
     "gix.exe",
 ]
+"helix-term 24.3.0 (path+file:///E:/GitHub/Testing/helix/helix-term)" = ["hx.exe"]
 "just 1.40.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
+"kill_open_programs 0.1.0 (path+file:///E:/GitHub/Rust/kill_open_programs)" = ["kill_open_programs.exe"]
 "knope 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["knope.exe"]
 "lazyjj 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["lazyjj.exe"]
 "loco 0.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["loco.exe"]
@@ -60,3 +61,6 @@
 "welds-cli 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["welds.exe"]
 "xh 0.24.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["xh.exe"]
 "cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
+"bacon 3.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
+"cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
+"dioxus-cli 0.7.0-alpha.1 (git+https://github.com/DioxusLabs/dioxus.git#662cf0d90261b8540796225b78913b620ea34a8f)" = ["dx.exe"]
