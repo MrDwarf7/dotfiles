@@ -1,0 +1,4 @@
+Using Python 3.12.8 environment at: C:\Users\$env:USERNAME\cpython-3.12.8-windows-x86_64-none
+Package Version
+------- -------
+pip     24.3.1

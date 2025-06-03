@@ -1,0 +1,77 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 227C-717F
+
+ Directory of C:\Users\$env:USERNAME\bin
+
+03/06/2025  03:16 AM    <DIR>          .
+03/06/2025  07:14 PM    <DIR>          ..
+26/05/2025  04:56 AM        15,028,736 atac.exe
+02/06/2025  04:37 AM         6,409,216 bacon.exe
+31/05/2025  10:07 PM        14,431,232 cargo-binstall.exe
+10/05/2025  01:38 PM        14,132,224 cargo-binstall.exe~RF36d2967.TMP
+03/04/2025  05:37 PM        23,993,856 cargo-binstall.exe~RF3b499899.TMP
+17/05/2025  12:49 PM        14,279,680 cargo-binstall.exe~RF6d884a7.TMP
+14/08/2024  10:13 PM           710,144 cargo-build-docker.exe
+12/09/2022  12:14 AM         4,273,152 cargo-cache.exe
+04/03/2025  10:10 AM    <SYMLINK>      cargo-clippy.exe [C:\Users\$env:USERNAME\rustup.exe]
+28/04/2025  11:02 PM           906,240 cargo-create-tauri-app.exe
+09/10/2024  05:13 PM         1,886,720 cargo-feature.exe
+04/03/2025  10:10 AM    <SYMLINK>      cargo-fmt.exe [C:\Users\$env:USERNAME\rustup.exe]
+07/04/2025  07:46 AM        13,390,848 cargo-generate.exe
+10/05/2025  01:38 PM         6,395,392 cargo-insta.exe
+10/05/2025  01:21 PM         3,426,304 cargo-install-update-config.exe
+10/05/2025  01:21 PM         4,244,480 cargo-install-update.exe
+30/03/2025  08:15 PM         4,065,280 cargo-llvm-cov.exe
+25/02/2025  06:09 AM         6,026,752 cargo-machete.exe
+20/01/2025  11:47 PM        10,080,256 cargo-make.exe
+04/03/2025  10:10 AM    <SYMLINK>      cargo-miri.exe [C:\Users\$env:USERNAME\rustup.exe]
+30/05/2025  02:33 PM        14,300,160 cargo-nextest.exe
+02/06/2025  04:21 PM        20,090,880 cargo-outdated.exe
+10/05/2025  01:39 PM        15,317,504 cargo-tauri.exe
+10/05/2025  01:38 PM        15,965,184 cargo-udeps.exe
+10/05/2025  01:38 PM         2,432,000 cargo-watch.exe
+27/05/2025  07:33 PM        10,148,864 cargo-workspaces.exe
+27/05/2025  07:33 PM        10,148,864 cargo-ws.exe
+27/04/2025  02:32 AM         3,459,072 cargo-zigbuild.exe
+04/03/2025  10:10 AM    <SYMLINK>      cargo.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      clippy-driver.exe [C:\Users\$env:USERNAME\rustup.exe]
+14/08/2024  09:57 PM         1,804,288 cross-util.exe
+14/08/2024  09:57 PM         1,764,352 cross.exe
+28/05/2025  03:48 PM         6,556,672 diffedit3.exe
+19/01/2025  08:44 PM         6,883,840 duck.exe
+02/06/2025  04:30 PM        86,658,048 dx.exe
+03/09/2024  09:56 PM        10,411,520 ein.exe
+03/09/2024  09:57 PM        20,729,856 gix.exe
+03/06/2025  03:16 AM        21,959,168 hx.exe
+10/05/2025  01:38 PM         4,388,352 just.exe
+09/04/2025  09:51 PM           200,704 kill_open_programs.exe
+10/05/2025  01:39 PM        12,452,864 knope.exe
+07/05/2025  11:18 PM         4,339,200 lazyjj.exe
+28/03/2025  01:33 AM         9,897,984 loco.exe
+20/01/2025  11:47 PM        10,080,256 makers.exe
+13/01/2025  11:48 PM        36,838,912 polars.exe
+04/03/2025  10:10 AM    <SYMLINK>      rls.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rust-analyzer.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rust-gdb.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rust-gdbgui.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rust-lldb.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rustc.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rustdoc.exe [C:\Users\$env:USERNAME\rustup.exe]
+04/03/2025  10:10 AM    <SYMLINK>      rustfmt.exe [C:\Users\$env:USERNAME\rustup.exe]
+06/05/2025  01:06 AM        13,551,616 rustup.exe
+28/05/2025  11:12 AM        11,988,480 sea-orm-cli.exe
+28/05/2025  11:12 AM        11,988,480 sea.exe
+24/05/2025  06:33 AM        13,228,032 taplo.exe
+06/09/2024  06:45 PM           658,944 tenki.exe
+09/11/2024  09:22 PM         6,673,920 tokio-console.exe
+10/05/2025  01:40 PM        28,074,496 trunk.exe
+13/01/2025  09:21 AM         8,234,496 wasm-bindgen-test-runner.exe
+13/01/2025  09:21 AM         5,240,832 wasm-bindgen.exe
+30/10/2024  04:35 AM         5,640,192 wasm-pack.exe
+28/05/2025  11:12 AM        15,461,888 wasm-tools.exe
+13/01/2025  09:21 AM         2,575,360 wasm2es6js.exe
+12/11/2024  11:45 AM         3,496,960 websocat.exe
+11/05/2025  02:41 PM        12,987,392 welds.exe
+10/05/2025  01:40 PM         9,668,096 xh.exe
+              68 File(s)    619,978,240 bytes
+               2 Dir(s)  126,256,979,968 bytes free

@@ -1,0 +1,10 @@
+aider-chat v0.84.0
+- aider.exe
+basedpyright v1.29.2
+- basedpyright-langserver.exe
+- basedpyright.exe
+warning: Ignoring malformed tool `django-stubs` (run `uv tool uninstall django-stubs` to remove)
+posting v2.7.0
+- posting.exe
+ruff v0.11.12
+- ruff.exe
