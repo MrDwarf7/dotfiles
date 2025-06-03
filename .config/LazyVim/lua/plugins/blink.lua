@@ -25,7 +25,7 @@ return {
       -- DOC BORDER
       menu = {
         min_width = 10,
-        max_width = 100, -- 80 is default in blink docs
+        -- max_width = 100, -- 80 is default in blink docs
         max_height = 40, -- default is 20, (or does it use LazyVim's options.pumheight setting? -- changing it here overrides it anyway)
         border = "single",
       },
@@ -43,7 +43,7 @@ return {
       -- signature.enabled = true will show a little 'mini' function signature above/next to completion as you enter (__) <- this space
       -- but this is a LOT when the docs flyout is there AS WELL
       enabled = false, -- defaults to off (same as docs)
-      triger = {
+      trigger = {
         enabled = true,
       },
       window = {
@@ -83,13 +83,14 @@ return {
     },
 
     sources = {
-      default = { "lazydev" },
+      default = { "lazydev", "lsp", "buffer", "snippets", "path" },
       per_filetype = {
-        -- sql = { "dadbod" },
+        sql = { "dadbod" },
         lua = { inherit_defaults = true, "lazydev" },
       },
 
       providers = {
+        dadbod = { module = "vim_dadbod_completion.blink" },
         lazydev = {
           name = "LazyDev",
           -- module = require("lazydev.intergrations.blink"),
