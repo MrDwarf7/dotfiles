@@ -9,6 +9,9 @@ local opt = vim.opt
 -- vim.g.snacks_animate = true
 vim.lsp.inlay_hint.enable()
 
+vim.g.lazyvim_python_lsp = "pyright" -- Also can use "basedpyright"
+vim.g.lazyvim_python_ruff = "ruff" -- Also supports "ruff-lsp" for the old version
+
 vim.g.os = require("utils.arch").get_os()
 vim.g.lazyvim_prettier_needs_config = true
 vim.g.lazyvim_rust_diagnostics = "rust-analyzer"

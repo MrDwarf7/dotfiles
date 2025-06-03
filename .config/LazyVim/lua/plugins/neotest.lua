@@ -6,6 +6,10 @@ return {
     opts = {
       adapters = {
         "neotest-plenary",
+        ["neotest-python"] = {
+          runner = "pytest",
+          python = ".venv/scripts/activate", -- .ps1
+        },
 
         -------- Rust adapters - PICK ONE --------
         ["rustaceanvim.neotest"] = {},

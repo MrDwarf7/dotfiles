@@ -6,6 +6,7 @@ return {
     enabled = diagnosticls == "bacon-ls",
   },
   bashls = {},
+  basedpyright = {}, -- ???
   biome = {},
   clangd = {
     -- TODO:
@@ -138,7 +139,28 @@ return {
     },
   },
   ruff = {
+    cmd_env = { RUFF_TRACE = "messages" },
+    init_options = {
+      settings = {
+        logLevel = "error",
+      },
+    },
+    keys = {
+      {
+        "<Leader>lo",
+        LazyVim.lsp.action["source.organizeImports"],
+        desc = "Organize Imports",
+      },
+    },
     filetypes = { "python" },
+    ------ most of this is already setup via LazyVim's extra for lang.python
+    -- setup = {
+    -- [ruff] = function(_, opts)
+    -- 	LazyVim.lsp.on_attach(function(client, _)
+    -- 		client.server_capabilities.hoverProvider = false
+    -- 	end, ruff)
+    -- end
+    -- }
   },
 
   rust_analyzer = { enabled = false }, -- NOTE: If using bacon_ls then this is FALSE OTHERWISE -> enabled = true;
