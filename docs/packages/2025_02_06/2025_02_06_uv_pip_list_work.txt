@@ -1,5 +1,0 @@
-Using Python 3.9.5 environment at: C:\Program Files\python3.9.5
-Package    Version
----------- -------
-pip        21.1.1
-setuptools 56.0.0

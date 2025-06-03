@@ -1,6 +1,0 @@
-gh actions-importer	github/gh-actions-importer	v1.3.6
-gh copilot	github/gh-copilot	v1.0.6
-gh dash	dlvhdr/gh-dash	v4.11.0
-gh eco	jrnxf/gh-eco	v0.1.5
-gh poi	seachicken/gh-poi	v0.13.0
-gh projects	github/gh-projects	v2.5.1

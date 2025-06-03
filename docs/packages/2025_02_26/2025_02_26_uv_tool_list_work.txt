@@ -1,7 +1,0 @@
-nuitka v2.5.4
-- nuitka-run.cmd
-- nuitka.cmd
-posting v2.3.0
-- posting.exe
-ruff v0.9.2
-- ruff.exe
