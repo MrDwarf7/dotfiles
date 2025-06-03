@@ -10,6 +10,7 @@ return {
       ensure_installed = {
         "bacon",
         "beautysh",
+        "basedpyright",
         "black",
         "c3-lsp",
         "cbfmt",

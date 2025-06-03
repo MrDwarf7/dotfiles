@@ -6,7 +6,34 @@ return {
     enabled = diagnosticls == "bacon-ls",
   },
   bashls = {},
-  basedpyright = {}, -- ???
+  basedpyright = {
+    cmd = { "basedpyright-langserver", "--stdio" },
+    filetypes = { "python" },
+    root_markers = {
+      ".git",
+      "setup.py",
+      "setup.cfg",
+      "pyproject.toml",
+      "requirements.txt",
+      "\\.venv",
+      "venv",
+      --
+      "Pipfile",
+      "pyrightconfig.json",
+    },
+    settings = {
+      -- pyright = {
+      --   config = vim.fn.getcwd() .. "/pyrightconfig.json",
+      -- },
+      basedpyright = {
+        analysis = {
+          autoSearchPaths = true,
+          diagnosticMode = "workspace",
+          useLibraryCodeForTypes = true,
+        },
+      },
+    },
+  }, -- ???
   biome = {},
   clangd = {
     -- TODO:
@@ -115,36 +142,36 @@ return {
   },
   prismals = {},
 
-  pyright = {
-    cmd = { "pyright-langserver", "--stdio" },
-    filetypes = { "python" },
-    root_dir = require("lspconfig.util").root_pattern(
-      ".git",
-      "setup.py",
-      "setup.cfg",
-      "pyproject.toml",
-      "requirements.txt",
-      "\\.venv",
-      "venv"
-    ),
-    on_attach = vim.lsp.inlay_hint.enable(),
-    settings = {
-      python = {
-        analysis = {
-          autoSearchPaths = true,
-          diagnosticMode = "workspace",
-          useLibraryCodeForTypes = true,
-        },
-      },
-    },
-  },
+  -- pyright = {
+  --   cmd = { "pyright-langserver", "--stdio" },
+  --   filetypes = { "python" },
+  --   root_dir = require("lspconfig.util").root_pattern(
+  --     ".git",
+  --     "setup.py",
+  --     "setup.cfg",
+  --     "pyproject.toml",
+  --     "requirements.txt",
+  --     "\\.venv",
+  --     "venv"
+  --   ),
+  --   on_attach = vim.lsp.inlay_hint.enable(),
+  --   settings = {
+  --     python = {
+  --       analysis = {
+  --         autoSearchPaths = true,
+  --         diagnosticMode = "workspace",
+  --         useLibraryCodeForTypes = true,
+  --       },
+  --     },
+  --   },
+  -- },
   ruff = {
-    cmd_env = { RUFF_TRACE = "messages" },
-    init_options = {
-      settings = {
-        logLevel = "error",
-      },
-    },
+    -- cmd_env = { RUFF_TRACE = "messages" },
+    -- init_options = {
+    --   settings = {
+    --     logLevel = "error",
+    --   },
+    -- },
     keys = {
       {
         "<Leader>lo",
@@ -152,7 +179,7 @@ return {
         desc = "Organize Imports",
       },
     },
-    filetypes = { "python" },
+    -- filetypes = { "python" },
     ------ most of this is already setup via LazyVim's extra for lang.python
     -- setup = {
     -- [ruff] = function(_, opts)
