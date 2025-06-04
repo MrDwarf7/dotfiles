@@ -58,8 +58,6 @@
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-[credential]
-    helper = /mnt/c/Applications/Git/mingw64/bin/git-credential-manager.exe
 ; THESE PATHS CANNOT BE INTERPOLATED
 [credential "https://github.com"]
     helper = !'gh\\current\\bin\\gh.exe' auth git-credential
@@ -70,3 +68,5 @@
 [safe]
     directory = *
     directory = E:/Github*/**/*
+[pull]
+	rebase = true
