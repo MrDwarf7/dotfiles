@@ -745,17 +745,6 @@ function vim
     nvim $args
 }
 
-function dvim
-{
-    $env:XDG_CONFIG_HOME = "$env:HOMEPATH/dotfiles/nvim_distros"
-    $env:NVIM_APPNAME = "LazyVim"
-    # if ($env:HOME_PROFILE) {
-    #     neovide $args
-    # } elseif (Test-CommandExists nvim){
-    nvim $args
-}
-# }
-# Neovide being buggy as hell, commented out for time being
 
 function nvims()
 {
