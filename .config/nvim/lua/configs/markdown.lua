@@ -1,6 +1,7 @@
 return {
 	"MeanderingProgrammer/render-markdown.nvim",
-	lazy = false,
+	lazy = true,
+	event = "LspAttach",
 	ft = { "markdown", "Avante", "help" },
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",

@@ -2,10 +2,10 @@ return {
 	"pwntester/octo.nvim",
 	-- lazy = false,
 	dependencies = {
-		"nvim-lua/plenary.nvim",
-		"nvim-telescope/telescope.nvim",
+		{ "nvim-lua/plenary.nvim", lazy = true },
+		{ "nvim-telescope/telescope.nvim", lazy = true },
 		-- OR 'ibhagwan/fzf-lua',
-		"nvim-tree/nvim-web-devicons",
+		{ "nvim-tree/nvim-web-devicons", lazy = true },
 	},
 	keys = {
 		{

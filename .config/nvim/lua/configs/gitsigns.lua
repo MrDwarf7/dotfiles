@@ -168,7 +168,8 @@ return {
 		max_file_length = 40000, -- Disable if file is longer than this (in lines)
 		on_attach = function()
 			local map = vim.keymap.set
-			local gs = require("gitsigns")
+			local gs = package.loaded.gitsigns
+			-- require("gitsigns")
 			map("o", "ih", gs.select_hunk, { desc = "select hunk" })
 			map("x", "ih", gs.select_hunk, { desc = "select hunk" })
 		end,

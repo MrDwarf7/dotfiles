@@ -2,24 +2,25 @@ vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
 return {
 	"hrsh7th/nvim-cmp",
+	lazy = true,
 	event = "InsertEnter",
 	dependencies = {
-		"neovim/nvim-lspconfig",
-		"L3MON4D3/LuaSnip",
+		{ "neovim/nvim-lspconfig", lazy = true },
+		{ "L3MON4D3/LuaSnip", lazy = true },
 
-		{ "zbirenbaum/copilot-cmp" }, -- event = "InsertEnter",
-		{ "hrsh7th/cmp-nvim-lsp", opts = {} },
+		{ "zbirenbaum/copilot-cmp", lazy = true }, -- event = "InsertEnter",
+		{ "hrsh7th/cmp-nvim-lsp", lazy = true, opts = {} },
 
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lua",
+		{ "hrsh7th/cmp-buffer", lazy = true },
+		{ "hrsh7th/cmp-path", lazy = true },
+		{ "hrsh7th/cmp-cmdline", lazy = true },
+		{ "hrsh7th/cmp-nvim-lua", lazy = true },
 
-		{ "folke/lazydev.nvim", opts = {} },
-		"saadparwaiz1/cmp_luasnip",
-		{ "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },
-		"vrslev/cmp-pypi",
-		"onsails/lspkind.nvim",
+		{ "folke/lazydev.nvim", opts = {}, lazy = true },
+		{ "saadparwaiz1/cmp_luasnip", lazy = true },
+		{ "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {}, lazy = true },
+		{ "vrslev/cmp-pypi", lazy = true },
+		{ "onsails/lspkind.nvim", lazy = true },
 	},
 
 	opts = function(_, opts)

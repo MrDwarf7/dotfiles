@@ -10,7 +10,6 @@ return {
 			end,
 			desc = "Next todo comment",
 		},
-
 		{
 			"[t",
 			function()

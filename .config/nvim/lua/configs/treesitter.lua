@@ -4,7 +4,7 @@ vim.opt.runtimepath:append(queries)
 return {
 	"nvim-treesitter/nvim-treesitter",
 	lazy = true,
-	event = "VeryLazy",
+	event = "BufWinEnter",
 	build = ":TSUpdate",
 	--install = ":TSInstall",
 	dependencies = {
@@ -12,7 +12,7 @@ return {
 		{
 			"JoosepAlviste/nvim-ts-context-commentstring",
 			lazy = true,
-			event = "VeryLazy",
+			-- event = "VeryLazy",
 			opts = {
 				enable_auto_comment = true,
 			},
@@ -45,7 +45,7 @@ return {
 		{
 			"[C",
 			function()
-				return require("treesitter-context").go_to_context(vim.v.count1)
+				require("treesitter-context").go_to_context(vim.v.count1)
 			end,
 			expr = true,
 			silent = true,
@@ -54,7 +54,7 @@ return {
 		{
 			"]h",
 			function()
-				return require("gitsigns").next_hunk()
+				require("gitsigns").next_hunk()
 			end,
 			expr = true,
 			mode = { "n", "x", "o" },
@@ -63,7 +63,7 @@ return {
 		{
 			"[h",
 			function()
-				return require("gitsigns").prev_hunk()
+				require("gitsigns").prev_hunk()
 			end,
 			expr = true,
 			mode = { "n", "x", "o" },

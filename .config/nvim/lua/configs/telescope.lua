@@ -26,21 +26,21 @@ local extensions = {
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
-	-- lazy = true,
-	-- event = "BufReadPost",
+	lazy = true,
+	event = "BufWinEnter", -- as late as possible
 	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = true, event = "VeryLazy" },
+		{ "nvim-lua/plenary.nvim", lazy = true },
 		-- { "folke/trouble.nvim", lazy = true },
 		{
 			"nvim-telescope/telescope-fzy-native.nvim",
 			lazy = true,
-			event = "VeryLazy",
+			-- event = "VeryLazy",
 			build = "make",
 			cond = function()
 				return vim.fn.executable("make") == 1
 			end,
 		},
-		{ "AckslD/nvim-neoclip.lua", lazy = true, event = "VeryLazy" },
+		{ "AckslD/nvim-neoclip.lua", lazy = true },
 		{ "nvim-telescope/telescope-live-grep-args.nvim", lazy = true },
 	},
 
@@ -65,7 +65,7 @@ return {
 		{
 			"<Leader>fw",
 			function()
-				return builtin.live_grep(themes.get_ivy({
+				builtin.live_grep(themes.get_ivy({
 					{
 						initial_mode = "insert",
 						previewer = telescope_config,
@@ -96,7 +96,7 @@ return {
 		{
 			"<Leader>fr",
 			function()
-				return builtin.oldfiles(themes.get_ivy({
+				builtin.oldfiles(themes.get_ivy({
 					height = 35,
 					sorting_strategy = "ascending",
 					sort_mru = false,
@@ -110,7 +110,7 @@ return {
 		{
 			"<Leader>fl",
 			function()
-				return builtin.resume()
+				builtin.resume()
 			end,
 			desc = "[l]ast search",
 		},
@@ -118,7 +118,7 @@ return {
 		{
 			"<Leader>fj",
 			function()
-				return builtin.jumplist()
+				builtin.jumplist()
 			end,
 			desc = "[j]ump list",
 		},
@@ -126,7 +126,7 @@ return {
 		{
 			"<Leader>fV",
 			function()
-				return builtin.vim_options()
+				builtin.vim_options()
 			end,
 			desc = "[v]im options browser",
 		},
@@ -134,7 +134,7 @@ return {
 		{
 			"<Leader>fg",
 			function()
-				return builtin.git_files(themes.get_ivy({
+				builtin.git_files(themes.get_ivy({
 					{
 						initial_mode = "insert",
 						previewer = telescope_config,
@@ -153,7 +153,7 @@ return {
 		{
 			"<Leader>fm",
 			function()
-				return builtin.marks()
+				builtin.marks()
 			end,
 			desc = "[m]arks",
 		},
@@ -161,7 +161,7 @@ return {
 		{
 			"<Leader>fd",
 			function()
-				return builtin.fd()
+				builtin.fd()
 			end,
 			desc = "FzfLua(Oil)",
 		},
@@ -169,7 +169,7 @@ return {
 		{
 			"<Leader>fD",
 			function()
-				return builtin.diagnostics()
+				builtin.diagnostics()
 			end,
 			desc = "[D]iagnostics (same as ld)",
 		},
@@ -177,7 +177,7 @@ return {
 		{
 			"<Leader>pr",
 			function()
-				return builtin.reloader()
+				builtin.reloader()
 			end,
 			desc = "[r]eloader",
 		},
@@ -188,7 +188,7 @@ return {
 			"<leader>/",
 			function()
 				-- You can pass additional configuration to telescope to change theme, layout, etc.
-				return builtin.current_buffer_fuzzy_find(themes.get_dropdown({
+				builtin.current_buffer_fuzzy_find(themes.get_dropdown({
 					initial_mode = "insert",
 					winblend = 10,
 					previewer = false,
@@ -203,7 +203,7 @@ return {
 			"<Leader>fs",
 			function()
 				local word = vim.fn.expand("<cword>")
-				return builtin.grep_string({ search = word })
+				builtin.grep_string({ search = word })
 			end,
 			desc = "[s]earch [w]ord",
 			mode = { "n", "v" },
@@ -213,7 +213,7 @@ return {
 			"<Leader>fS",
 			function()
 				local word = vim.fn.expand("<cWORD>")
-				return builtin.grep_string({ search = word })
+				builtin.grep_string({ search = word })
 			end,
 			desc = "[S]earch [W]ORD",
 			mode = { "n", "v" },
