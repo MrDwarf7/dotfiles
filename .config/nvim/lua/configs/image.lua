@@ -3,9 +3,14 @@ return {
 		"vhyrro/luarocks.nvim",
 		lazy = false,
 		priority = 1001, -- Builds things, so needs to be loaded early af
-		opts = {
-			rocks = { "magick" },
-		},
+		opts = function()
+			local arch = require("util.architecture").get_os()
+			local rocks = {}
+			if arch == "windows" then
+				table.insert(rocks, "magick")
+			end
+			return rocks
+		end,
 	},
 	{
 		"3rd/image.nvim",
