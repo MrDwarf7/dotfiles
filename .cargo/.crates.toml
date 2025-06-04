@@ -1,7 +1,9 @@
 [v1]
 "atac 0.20.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
+"bacon 3.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
 "cargo-binstall 1.12.6 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
 "cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
+"cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
 "cargo-feature 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-feature.exe"]
 "cargo-generate 0.23.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-generate.exe"]
 "cargo-insta 1.43.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-insta.exe"]
@@ -12,7 +14,7 @@
     "makers.exe",
 ]
 "cargo-nextest 0.9.97 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
-"cargo-udeps 0.1.55 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
+"cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
 "cargo-update 16.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cargo-install-update-config.exe",
     "cargo-install-update.exe",
@@ -29,12 +31,13 @@
     "cross.exe",
 ]
 "diffedit3 0.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["diffedit3.exe"]
+"dioxus-cli 0.7.0-alpha.1 (git+https://github.com/DioxusLabs/dioxus.git#662cf0d90261b8540796225b78913b620ea34a8f)" = ["dx.exe"]
 "duckscript_cli 0.11.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["duck.exe"]
 "gitoxide 0.38.0 (git+https://github.com/Byron/gitoxide#0e2f831836ca13d7bc62d416c32e413b9823fe60)" = [
     "ein.exe",
     "gix.exe",
 ]
-"helix-term 24.3.0 (path+file:///E:/GitHub/Testing/helix/helix-term)" = ["hx.exe"]
+"helix-term 25.1.0 (path+file:///E:/GitHub/Rust/OTHER_people/evil-helix/helix-term)" = ["hx.exe"]
 "just 1.40.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
 "kill_open_programs 0.1.0 (path+file:///E:/GitHub/Rust/kill_open_programs)" = ["kill_open_programs.exe"]
 "knope 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["knope.exe"]
@@ -56,11 +59,8 @@
     "wasm2es6js.exe",
 ]
 "wasm-pack 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-pack.exe"]
-"wasm-tools 1.232.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]
 "websocat 1.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["websocat.exe"]
 "welds-cli 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["welds.exe"]
 "xh 0.24.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["xh.exe"]
-"cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
-"bacon 3.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
-"cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
-"dioxus-cli 0.7.0-alpha.1 (git+https://github.com/DioxusLabs/dioxus.git#662cf0d90261b8540796225b78913b620ea34a8f)" = ["dx.exe"]
+"cargo-udeps 0.1.56 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
+"wasm-tools 1.233.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]

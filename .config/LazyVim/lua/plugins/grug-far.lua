@@ -13,7 +13,7 @@ return {
   "grug-far.nvim",
   keys = {
     {
-      "<Leader>lR",
+      "<Leader>lp",
       function()
         invoke()
       end,
