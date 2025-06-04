@@ -33,7 +33,7 @@ if status is-interactive
 
     # Handled by ./conf.d/01-pre.fish
     # zoxide init fish | source
-    
+
     # This is now a part of the ./functions/fish_prompt.fish file
     # source (/usr/sbin/starship init fish --print-full-init | psub)
 
