@@ -22,21 +22,9 @@ function vim {
   nvim $args
 }
 
-function ovim {
-  $env:XDG_CONFIG_HOME = "$dotfiles_config"
-  $env:NVIM_APPNAME = "n_nvim"
-  nvim $args
-}
-
-function xvim {
-  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
-  $env:NVIM_APPNAME = "omerxx"
-  nvim $args
-}
-
 function lzvim {
     $env:XDG_CONFIG_HOME = "$dotfiles_config"
-    $env:NVIM_APPNAME = "LazyVim"
+    $env:NVIM_APPNAME = "lazyvim"
     nvim $args
 }
 
@@ -47,7 +35,7 @@ function nvd() {
 }
 
 function nvims() {
-  $items = "Default", "LazyVim"
+  $items = "default", "lazyvim"
   $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
   if ([string]::IsNullOrEmpty($config)) {
@@ -58,14 +46,15 @@ function nvims() {
     $env:XDG_CONFIG_HOME = "$dotfiles_config"
     $config = ""
   }
-  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:XDG_CONFIG_HOME = "$dotfiles_config"
+  # $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
   $env:NVIM_APPNAME = $config
   nvim $args
 }
 
 
 function nvds() {
-  $items = "Default", "LazyVim", "omerxx"
+  $items = "default", "lazyvim"
   $config = $items | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0
 
   if ([string]::IsNullOrEmpty($config)) {
@@ -76,7 +65,8 @@ function nvds() {
     $env:XDG_CONFIG_HOME = "$dotfiles_config"
     $config = ""
   }
-  $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
+  $env:XDG_CONFIG_HOME = "$dotfiles_config"
+  # $env:XDG_CONFIG_HOME = "$nvim_distro_dir"
   $env:NVIM_APPNAME = $config
   neovide --multigrid --vsync $args
 }
