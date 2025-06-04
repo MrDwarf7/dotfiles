@@ -17,7 +17,6 @@ c.colors.statusbar.command.bg = "#00000000"
 # c.url.default_page = ""
 
 c.tabs.title.format = "{audio}{current_title}"
-c.fonts.web.size.default = 20
 
 # c.hints.mode = ""
 
@@ -136,7 +135,11 @@ c.tabs.width = "10%"
 
 # Fonts
 c.fonts.default_family = []
-c.fonts.default_size = "12pt"
+c.fonts.default_size = "12pt"  # the UI's font size
+# c.fonts.web.size.minimum = 12 ## default is 0
+# c.fonts.web.size.minimum_logical = 14 ## default is 6
+# c.fonts.web.size.default = 21
+# c.fonts.web.size.default_fixed = 21
 c.fonts.hints = "bold 14pt monospace"  # hint size / hint font
 c.fonts.web.family.fixed = "monospace"
 c.fonts.web.family.sans_serif = "monospace"
@@ -150,7 +153,8 @@ c.completion.cmd_history_max_items = 1
 c.content.private_browsing = False
 # config.set("content.private_browsing", True)
 
-config.set("content.webgl", False, "*")
+# config.set("content.webgl", False, "*")
+config.set("content.webgl", True, "*")
 c.content.canvas_reading = False
 # config.set("content.canvas_reading", False)
 c.content.geolocation = False
