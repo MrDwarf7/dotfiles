@@ -37,3 +37,5 @@ nvim_distros/omerxx/lazy-lock
 !.config/.oh-my-zsh/plugins/git-plugin
 !.config/.oh-my-zsh/plugins/zsh-starship
 
+
+install_lists
