@@ -15,3 +15,4 @@ bookmarks/*
 .python-version
 
 to_fix/
+autoconfig.yml

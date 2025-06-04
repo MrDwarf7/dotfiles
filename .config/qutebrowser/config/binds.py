@@ -34,7 +34,11 @@ config.bind("j", "scroll-px 0 150")
 
 
 config.bind("t", "cmd-set-text -s :open !g")
-config.bind("T", "cmd-set-text -s :open -t !g ")
+config.bind("<Ctrl+t>", "cmd-set-text -s :open -t")
+config.unbind("T")  # Have to 'unbind' T as it's a very built in binding
+config.bind("T", "cmd-set-text -s :open -t !g")
+
+config.bind("<Ctrl+l>", "cmd-set-text :open -t {url:pretty}")
 
 config.bind("o", "cmd-set-text :open {url:pretty}")
 config.bind("O", "cmd-set-text :open -t -r {url:pretty}")
