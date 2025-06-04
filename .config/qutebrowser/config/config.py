@@ -30,6 +30,7 @@ c.url.default_page = "https://www.google.com"
 c.url.start_pages = ["https://www.google.com/"]
 # c.url.default_page = "about:blank"
 
+c.content.javascript.clipboard = "access-paste"
 
 c.url.searchengines = {
     # note - if you use duckduckgo, you can make use of its built in bangs, of which there are many! https://duckduckgo.com/bangs
