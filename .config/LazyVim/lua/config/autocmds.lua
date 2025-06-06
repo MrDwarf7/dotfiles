@@ -35,7 +35,26 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = {
     "sql",
   },
-  command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+  callback = function()
+    vim.b.dadbod_completion = true
+    vim.cmd([[setlocal omnifunc=vim_dadbod_completion#omni]])
+  end,
+  -- Previously - not callback, and was set to command key
+  -- command = [[setlocal omnifunc=vim_dadbod_completion#omni]],
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "gitconfig",
+    ".gitconfig",
+  },
+  -- commmand = vim.cmd([[ setlocal commentstring=#\ %s ]]),
+  callback = function()
+    local comment_str = vim.filetype.get_option("gitconfig", "commentstring")
+    if comment_str ~= "#" then
+      vim.cmd([[ setlocal commentstring=#\ %s ]])
+    end
+  end,
 })
 
 -- Hides copilot suggestions on menu open
