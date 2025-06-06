@@ -40,9 +40,10 @@ edit = [
   { run = "code %*", orphan = true, for = "windows", desc = "VsCode" },
 ]
 open = [
+  # { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
   { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
   { run = 'open "$@"', desc = "Open", for = "macos" },
-  { run = 'start "" "%1"', orphan = true, desc = "Open", for = "windows" },
+
   { run = 'termux-open "$1"', desc = "Open", for = "android" },
 ]
 reveal = [
