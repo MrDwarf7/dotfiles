@@ -11,34 +11,26 @@
 # BEGIN - Shell functions / Helpful functions
 function cl {
   # $cleanText = ""
-  Add-Type -Assembly PresentationCore
-  $clipText = (get-location).ToString() | Out-String -Stream
+  Add-Type -Assembly PresentationCore;
+  $clipText = (get-location).ToString() | Out-String -Stream;
 
   if ($clipText.StartsWith("Microsoft.PowerShell.Core\FileSystem::")) {
-    $clipText = $clipText.Replace("Microsoft.PowerShell.Core\FileSystem::", "")
+    $clipText = $clipText.Replace("Microsoft.PowerShell.Core\FileSystem::", "");
   }
-  [Windows.Clipboard]::SetText($clipText)
+  [Windows.Clipboard]::SetText($clipText);
 }
-
-# function lzgt {
-#     lazygit $args
-# }
-#
-# function lg {
-#     lazygit $args
-# }
 
 function nf {
   if (-not (fastfetch --help)) {
     try {
-      scoop install neofetch
+      scoop install neofetch;
     } catch {
-      scoop bucket add extras
+      scoop bucket add extras;
     } finally {
-      scoop install neofetch
-    }
-  }
-  fastfetch 
+      scoop install neofetch;
+    };
+  };
+  fastfetch ;
 }
 
 # enum CursorStyle {
@@ -65,29 +57,29 @@ function nf {
 # }
 
 function y {
-  $tmp = [System.IO.Path]::GetTempFileName()
-  yazi $args --cwd-file="$tmp"
-  $cwd = Get-Content -Path $tmp
+  $tmp = [System.IO.Path]::GetTempFileName();
+  yazi $args --cwd-file="$tmp";
+  $cwd = Get-Content -Path $tmp;
   if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
-    Set-Location -LiteralPath $cwd
-  }
-  Remove-Item -Path $tmp
+    Set-Location -LiteralPath $cwd;
+  };
+  Remove-Item -Path $tmp;
   # Set-CursorStyle -Style bar
 }
 
 function DustExclude {
   param(
     [string]$path = "."
-  )
-  $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\*'"
+  );
+  $exclude = "-X C:\Windows -X 'C:\Program Files\' -X C:\ProgramData -X 'C:\Program Files (x86)\' -X 'C:\Applications\GitWork_Projects\Arch_WSL\*'";
 
   if ($null -eq $path) {
-    $path = $path
+    $path = $path;
   } elseif ($path -eq 'C' -or 'c' -or "C:\" -or "c:\") {
-    $path = "C:\"
+    $path = "C:\";
   } else {
-    $path = $path # not empty && not c drive
-  }
+    $path = $path # not empty && not c drive;
+  };
 
   if (-not (Test-CommandExists "dust.exe")) {
     Write-Host("Dust command found.");
@@ -95,34 +87,34 @@ function DustExclude {
     # powershell_es ignore start
     switch ($answer.Trim().ToLower()) {
       "y" {
-        scoop install dust
+        scoop install dust;
       };
       "n" {
         Write-Host("Dust not installed.");
       };
       default {
-        scoop install dust 
+        scoop install dust ;
       };
     };
     DustExclude $args; # Recurse call after installing dust, using same args
   };
   Write-Host("Running Dust with exclude flags.");
 
-  dust.exe $exclude $path $args
-}
+  dust.exe $exclude $path $args;
+};
 
 function gitgo {
   param(
     [string]$baseCommitMessage = "Bump"
-  )
+  );
   if ($args) {
-    $argumentsIn = $args
-  }
+    $argumentsIn = $args;
+  };
   if (-not $args) {
-    $argumentsIn = $baseCommitMessage
+    $argumentsIn = $baseCommitMessage;
   }
-  gst && gaa && gcam "$($argumentsIn)." && git push
-  return
+  gst && gaa && gcam "$($argumentsIn)." && git push;
+  return;
 }
 
 function gfp {
@@ -130,109 +122,109 @@ function gfp {
   git fetch --all $args;
   Write-Host "Pulling all branches." -ForegroundColor DarkYellow
   git pull --all $args;
-  return
+  return;
 }
 
 function ScoopUpgrade {
-  scoop update && scoop update --all && scoop cleanup * && scoop cache rm *
+  scoop update && scoop update --all && scoop cleanup * && scoop cache rm *;
 }
-New-Alias -Name scoopup -Value ScoopUpgrade -Force
+New-Alias -Name scoopup -Value ScoopUpgrade -Force;
 
 function NodeUpgrade {
-  $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
+  $env:NODE_TLS_REJECT_UNAUTHORIZED = "0";
   # && yarn global upgrade  ## Yarn is no longer really a package manger, it's more a project manager now
-  pnpm -g update && pnpm -g upgrade && npm -g update && npm -g upgrade
+  pnpm -g update && pnpm -g upgrade && npm -g update && npm -g upgrade;
   # unset $env:NODE_TLS_REJECT_UNAUTHORIZED
 }
-New-Alias -Name nodeup -Value NodeUpgrade -Force
+New-Alias -Name nodeup -Value NodeUpgrade -Force;
 
 function RustUpgrader {
-  rustup update
+  rustup update;
 }
-New-Alias -Name rupper -Value RustUpgrader -Force
+New-Alias -Name rupper -Value RustUpgrader -Force;
 
 function CargoBinUpdater() {
   if (-not (Test-CommandExists("cargo install-update"))) {
     # Install the updater tool
-    cargo install cargo-update
-  }
-  cargo install-update -a
+    cargo install cargo-update;
+  };
+  cargo install-update -a;
 }
-New-Alias -Name cbu -Value CargoBinUpdater -Force
+New-Alias -Name cbu -Value CargoBinUpdater -Force;
 
 function SystemUpgrade {
   if (-not ($env:NODE_TLS_REJECT_UNAUTHORIZED)) {
-    $env:NODE_TLS_REJECT_UNAUTHORIZED = "0"
-  }
+    $env:NODE_TLS_REJECT_UNAUTHORIZED = "0";
+  };
 
-  ScoopUpgrade
-  NodeUpgrade
-  RustUpgrader
+  ScoopUpgrade;
+  NodeUpgrade;
+  RustUpgrader;
 
   if (isWorkMachine -eq $true) {
-    Write-Host "Running second RustUpgrader"
-    RustUpgrader
-  }
+    Write-Host "Running second RustUpgrader";
+    RustUpgrader;
+  };
   # We want to update rust first, then call update for the tooling bins
-  CargoBinUpdater
+  CargoBinUpdater;
 
-  Write-Host "System update complete [ScoopUpgrade, NodeUpgrade]" -NoNewline -ForegroundColor Green -BackgroundColor Black
-  Write-Host
+  Write-Host "System update complete [ScoopUpgrade, NodeUpgrade]" -NoNewline -ForegroundColor Green -BackgroundColor Black;
+  Write-Host;
 }
-New-Alias -Name sysup -Value SystemUpgrade -Force
+New-Alias -Name sysup -Value SystemUpgrade -Force;
 
 function scpd {
-  Push-Location "$env:USERPROFILE\scoop\"
-  la
+  Push-Location "$env:USERPROFILE\scoop\";
+  la;
 }
 
 function CargoBinList() {
   if (-not (Test-CommandExists("cargo install-update"))) {
     # Install the updater tool
-    cargo install cargo-update
-  }
-  cargo install-update -l
+    cargo install cargo-update;
+  };
+  cargo install-update -l;
 }
-New-Alias -Name cbl -Value CargoBinList -Force
+New-Alias -Name cbl -Value CargoBinList -Force;
 
 function baconget {
-  $baconFile = "$dotfiles_dir\.config\bacon\bacon.toml"
-  $currentDir = Get-Location
+  $baconFile = "$dotfiles_dir\.config\bacon\bacon.toml";
+  $currentDir = Get-Location;
 
   if (-not (Test-Path $baconFile )) {
-    Write-Host "Bacon file not found at: $baconFile "
-    return
-  }
-  Copy-Item $baconFile $currentDir
-  Write-Host "Bacon file copied to: $currentDir"
+    Write-Host "Bacon file not found at: $baconFile ";
+    return;
+  };
+  Copy-Item $baconFile $currentDir;
+  Write-Host "Bacon file copied to: $currentDir";
 }
 
 function dot {
   param(
-    $path
-  )
+    [string]$path
+  );
   # Write-Host "From dot function call path variable is: ", $path
   # Write-Host "From dot function call literal args is: ", $args
 
   $path = if ($path) {
-    Join-Path $dotfiles_dir $path.Replace('/', '\')
+    Join-Path $dotfiles_dir $path.Replace('/', '\');
   } else {
-    $dotfiles_dir
-  }
-  Push-Location "C:\"
-  Push-Location $path
-  la
-  Write-Host "Fetching: "
-  git fetch
-  Write-Host "Status: "
-  git status
+    $dotfiles_dir;
+  };
+  Push-Location "C:\";
+  Push-Location $path;
+  la;
+  Write-Host "Fetching: ";
+  git fetch;
+  Write-Host "Status: ";
+  git status;
 }
 
 # END - Shell functions / Helpful functions
 
 function IsSymbolicLink([string]$path) {
-  $file = Get-Item $path -Force -ErrorAction SIlentlyContinue
-  return [bool]($file.Attributes -band [IO.FileAttributes]::ReparsePoint)
+  $file = Get-Item $path -Force -ErrorAction SIlentlyContinue;
+  return [bool]($file.Attributes -band [IO.FileAttributes]::ReparsePoint);
 }
 
 function refresh {
@@ -242,71 +234,74 @@ function refresh {
   if ($args.Count -gt 0) {
     Write-Host "Extra arguments detected: $args" -ForegroundColor Yellow;
     . SourceProfile  $args;
-  }
-  . SourceProfile
+  };
+  . SourceProfile;
 }
 
 function SourceProfile {
   # Define the possible values for no-clear
-  $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe"
+  $possibleClear = "c", "-", "cls", "clear", "-clear", "clr", "screen", "-screen", "clear-screen", "-clear-screen", "cls-", "clr", "cl", "BEGONE", "THOT", "wipe";
 
   # Check if noClear argument is one of the specified values
   if ($args.Count -gt 0 -and $possibleClear -contains $args[0]) {
     # Reload the profile without clearing the console
-    . $PROFILE
-    Clear-Host
+    . $PROFILE;
+    Clear-Host;
   } else {
     # Reload the profile and clear the console
-    . $PROFILE
-  }
+    . $PROFILE;
+  };
 }
-New-Alias -Name p -Value SourceProfile -Force
-New-Alias -Name pro -Value SourceProfile -Force
+New-Alias -Name p -Value SourceProfile -Force;
+New-Alias -Name pro -Value SourceProfile -Force;
 
 function . {
-  Start-Process .
+  Start-Process .;
+  return;
 }
 
 function cd2 {
-  Set-Location ../../
+  Set-Location ../../;
+  return;
 }
 
 function touch {
-  New-Item $args
+  New-Item $args;
+  return;
 }
 
 function zip {
   param (
     [string]$ItemToCompress,
     [string]$OptionalDestination
-  )
-  $ItemName = (Get-Item $ItemToCompress).Name
-  $ParentFolder = (Split-Path -Path $ItemToCompress -Parent)
+  );
+  $ItemName = (Get-Item $ItemToCompress).Name;
+  $ParentFolder = (Split-Path -Path $ItemToCompress -Parent);
 
   if ([String]::IsNullOrEmpty($OptionalDestination)) {
-    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
-
-    Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip"
+    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName;
+    Compress-Archive -Path $ItemToCompress -DestinationPath "$DefaultLocation.zip";
   } else {
-    Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip"
-  }
+    Compress-Archive -Path $ItemToCompress -DestinationPath "$OptionalDestination\$ItemName.zip";
+  };
+  return;
 }
 
 function uzip {
   param (
     [string]$ItemToUnzip,
     [string]$OptionalDestination
-  )
-  $ItemName = (Get-Item $ItemToUnzip).Name
-  $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent)
+  );
+  $ItemName = (Get-Item $ItemToUnzip).Name;
+  $ParentFolder = (Split-Path -Path $ItemToUnzip -Parent);
 
   if ([String]::IsNullOrEmpty($OptionalDestination)) {
-    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName
-
-    Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName"
+    $DefaultLocation = Join-Path -Path $ParentFolder -ChildPath $ItemName;
+    Expand-Archive -Path $ItemToUnzip -DestinationPath "$DefaultLocation\$ItemName";
   } else {
-    Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\"
-  }
+    Expand-Archive -Path $ItemToUnzip -DestinationPath "$OptionalDestination\";
+  };
+  return;
 }
 # END - Linux Functions
 
@@ -317,34 +312,34 @@ function ListBlockDevices2 {
   param (
     [Parameter(Mandatory = $false)][Alias("l")]
     [switch]$List
-  )
+  );
 
   # Helper function to format sizes in a human-readable format
   function Format-Size {
-    param ($size)
+    param ($size);
     if ([string]::IsNullOrEmpty($size)) {
       $size = 0
-    }
+    };
     if ($size -ge 1TB) {
-      "{0:N2} TB" -f ($size / 1TB)
+      "{0:N2} TB" -f ($size / 1TB);
     } elseif ($size -ge 1GB) {
-      "{0:N2} GB" -f ($size / 1GB)
+      "{0:N2} GB" -f ($size / 1GB);
     } elseif ($size -ge 1MB) {
-      "{0:N2} MB" -f ($size / 1MB)
+      "{0:N2} MB" -f ($size / 1MB);
     } else {
-      "$size bytes"
-    }
-  }
+      "$size bytes";
+    };
+  };
 
   # Retrieve all disks and volumes
-  $disks = Get-Disk
+  $disks = Get-Disk;
   $volumes = Get-Volume | Select-Object *, @{Name="PartitionGuid"; Expression={ 
       if ($_.UniqueId -match '\\\\\?\\Volume\{([^\}]+)\}\\') {
-        $matches[1] 
+        $matches[1] ;
       } else {
-        $null 
-      } 
-    }
+        $null ;
+      } ;
+    };
   }
 
   if ($List) {
@@ -359,19 +354,19 @@ function ListBlockDevices2 {
         FSType     = "N/A"
         MountPoint = "N/A"
       }
-      $partitions = Get-Partition -DiskNumber $disk.Number -ErrorAction SilentlyContinue
+      $partitions = Get-Partition -DiskNumber $disk.Number -ErrorAction SilentlyContinue;
       foreach ($partition in $partitions) {
-        $volume = $volumes | Where-Object { $_.PartitionGuid -eq $partition.Guid }
+        $volume = $volumes | Where-Object { $_.PartitionGuid -eq $partition.Guid };
         $fsType = if ($volume) {
-          $volume.FileSystemType 
+          $volume.FileSystemType;
         } else {
-          "N/A" 
-        }
+          "N/A" ;
+        };
         $mountPoint = if ($volume.DriveLetter) {
-          "$($volume.DriveLetter):" 
+          "$($volume.DriveLetter):";
         } else {
-          "N/A" 
-        }
+          "N/A";
+        };
         $items += [PSCustomObject]@{
           Name       = "disk$($disk.Number)p$($partition.PartitionNumber)"
           Type       = "part"
@@ -379,9 +374,9 @@ function ListBlockDevices2 {
           FSType     = $fsType
           MountPoint = $mountPoint
         }
-      }
-    }
-    $items | Format-Table -AutoSize
+      };
+    };
+    $items | Format-Table -AutoSize;
   } else {
     # Tree view: hierarchical format
     foreach ($disk in $disks) {
@@ -391,21 +386,21 @@ function ListBlockDevices2 {
       foreach ($partition in $partitions) {
         $volume = $volumes | Where-Object { $_.PartitionGuid -eq $partition.Guid }
         $driveLetter = if ($volume.DriveLetter) {
-          "$($volume.DriveLetter):" 
+          "$($volume.DriveLetter):";
         } else {
-          "N/A" 
-        }
+          "N/A";
+        };
         $fsType = if ($volume) {
-          $volume.FileSystemType 
+          $volume.FileSystemType;
         } else {
-          "N/A" 
-        }
-        Write-Host "  PART $($partition.PartitionNumber): $(Format-Size $partition.Size), $($partition.Type), $driveLetter, $fsType"
-      }
-    }
-  }
+          "N/A";
+        };
+        Write-Host "  PART $($partition.PartitionNumber): $(Format-Size $partition.Size), $($partition.Type), $driveLetter, $fsType";
+      };
+    };
+  };
 }
-New-Alias -Name lsblk2 -Value ListBlockDevices2 -Force
+New-Alias -Name lsblk2 -Value ListBlockDevices2 -Force;
 
 function ListBlockDevices {
   [CmdletBinding()]
@@ -422,27 +417,26 @@ function ListBlockDevices {
     [switch]$Size,
     [Parameter(Mandatory = $false)][Alias("h")]
     [switch]$Help
-  )
-
+  );
   # Lazy import them after we've actually called the fn
-  Import-Module "$powershell_scripts_dir\list_block\with_formatters.psm1"
-  Import-Module "$powershell_scripts_dir\list_block\build_object.psm1"
-  Import-Module "$powershell_scripts_dir\list_block\helpers.psm1"
+  Import-Module "$powershell_scripts_dir\list_block\with_formatters.psm1";
+  Import-Module "$powershell_scripts_dir\list_block\build_object.psm1";
+  Import-Module "$powershell_scripts_dir\list_block\helpers.psm1";
 
   if ($Help) {
-    Get-LsblkHelp
-    return
-  }
+    Get-LsblkHelp;
+    return;
+  };
 
-  $ShouldSplitIfNonListArgs = @($All, $FileSystem, $IncludeHealth, $Size)
-  $ShouldSplitIfNonListArgsRef = [ref]$ShouldSplitIfNonListArgs
+  $ShouldSplitIfNonListArgs = @($All, $FileSystem, $IncludeHealth, $Size);
+  $ShouldSplitIfNonListArgsRef = [ref]$ShouldSplitIfNonListArgs;
 
   # Get all disks    # Get all partitions         # Get all volumes      # Get disk details from WMI
   $disks = Get-Disk; $partitions = Get-Partition; $volumes = Get-Volume; $wmiDisks = Get-WmiObject -Class Win32_DiskDrive;
 
   # Create a hashtable to store the results
-  $results = @()
-  $resultsBuffer = [ref]$results
+  $results = @();
+  $resultsBuffer = [ref]$results;
 
   # Build disk objects
   BuildDiskObject -ResultsBuffer $resultsBuffer `
@@ -453,25 +447,24 @@ function ListBlockDevices {
 
   # ensure we have a valid results buffer
   if (-not $resultsBuffer.Value) {
-    Write-Host "No disks found."
-    return
-  }
+    Write-Host "No disks found.";
+    return;
+  };
   # Retrieve the results from the buffer & assign to the results variable
-  $results = $resultsBuffer.Value
+  $results = $resultsBuffer.Value;
 
-  $ResultsBufferRef = [ref]$results
-  $SizeRef = [ref]$Size
-  $AllRef = [ref]$All
-  $FileSystemRef = [ref]$FileSystem
-  $IncludeHealthRef = [ref]$IncludeHealth
+  $ResultsBufferRef = [ref]$results;
+  $SizeRef = [ref]$Size;
+  $AllRef = [ref]$All;
+  $FileSystemRef = [ref]$FileSystem;
+  $IncludeHealthRef = [ref]$IncludeHealth;
 
 
   # Format and display the results
   if ($List) {
     # List format (similar to lsblk -l)
-    $flatList = @()
-
-    $FlatListRef = [ref]$flatList
+    $flatList = @();
+    $FlatListRef = [ref]$flatList;
 
     WithList -ResultsBufferRef $ResultsBufferRef `
       -FlatListRef $FlatListRef `
@@ -480,22 +473,22 @@ function ListBlockDevices {
       -FileSystemRef $FileSystemRef `
       -IncludeHealthRef $IncludeHealthRef
 
-    $flatList | Format-Table -AutoSize
-
+    $flatList | Format-Table -AutoSize;
   } else {
     # Default to a 'tree' style output
 
     # $outputBuf = [string]::Empty
     # $OutputBufRef = [ref]$outputBuf
-
     WithTree -ResultsBufferRef $ResultsBufferRef `
       -SizeRef $SizeRef `
       -AllRef $AllRef `
       -FileSystemRef $FileSystemRef `
       -IncludeHealthRef $IncludeHealthRef `
       -ShouldSplitIfNonListArgs $ShouldSplitIfNonListArgsRef
-
     # Write-Host $outputBuf
+  };
+}
+New-Alias -Name lsblk -Value ListBlockDevices -Force
 
   }
 }
