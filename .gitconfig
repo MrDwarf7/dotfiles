@@ -9,8 +9,8 @@
     defaultBranch = main
 [core]
 	editor = nvim
-    excludesFile = "$HOME/.gitignore_global"
-    pager = delta
+  excludesFile = "$HOME/.gitignore_global"
+  pager = delta
 	sharedRepository = all
 	autocrlf = false
 	symlinks = true
