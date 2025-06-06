@@ -490,7 +490,94 @@ function ListBlockDevices {
 }
 New-Alias -Name lsblk -Value ListBlockDevices -Force
 
+function Invoke-LineFilter {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $false, ValueFromPipeline = $false, Position = 0)]
+    [string]$Path,
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$InputObject,
+    [Parameter(Mandatory = $false)]
+    [scriptblock]$FilterScript,
+    [Parameter()]
+    [hashtable]$Parameters = @{}
+  );
+    
+  begin {
+    $pipelineInput = @();
   }
+    
+  process {
+    if ($null -ne $InputObject) {
+      $pipelineInput += $InputObject;
+    };
+  };
+    
+  end {
+    if ($pipelineInput.Count -gt 0) {
+      & $FilterScript -InputData $pipelineInput -Path $Path @Parameters;
+    } elseif ($Path) {
+      if (-not (Test-Path $Path)) {
+        Write-Error "File not found: $Path";
+        return;
+      }; & $FilterScript -Path $Path @Parameters;
+    } else {
+      Write-Error "Please provide either a file path or pipeline input"; 
+    };
+  };
 }
-New-Alias -Name lsblk -Value ListBlockDevices -Force
 
+function Get-Head {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $false)]
+    [string]$Path,
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$InputObject,
+    [Parameter()][Alias('n')]
+    [int]$Lines = 10
+  );
+
+  $headFilter = {
+    param($InputData, $FilePath, $Lines);
+    if ($InputData) {
+      $InputData | Select-Object -First $Lines;
+    } else {
+      Get-Content $Path -Head $Lines;
+    };
+  };
+  Invoke-LineFilter -Path $Path -InputObject $InputObject -FilterScript $headFilter -Parameters @{Lines = $Lines};
+}
+
+function Get-Tail {
+  [CmdletBinding()]
+  param(
+    [Parameter(Mandatory = $false, Position = 0, ValueFromPipeline = $false)]
+    [string]$Path,
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$InputObject,
+    [Parameter()][Alias('n')]
+    [int]$Lines = 10,
+    [Parameter()][Alias('f')]
+    [switch]$Follow
+  );
+
+  $tailFilter = {
+    param($InputData, $FilePath, $Lines, $Follow);
+    if ($InputData) {
+      if ($Follow) {
+        Write-Warning "Follow mode (-f) is not supported with pipeline input";
+      };
+      $InputData | Select-Object -Last $Lines;
+    } else {
+      if ($Follow) {
+        Get-Content $Path -Tail $Lines -Wait;
+      } else {
+        Get-Content $Path -Tail $Lines;
+      };
+    };
+  };
+  Invoke-LineFilter -Path $Path -InputObject $InputObject -FilterScript $tailFilter -Parameters @{Lines = $Lines; Follow = $Follow};
+}
+Set-Alias -Name head -Value Get-Head;
+Set-Alias -Name tail -Value Get-Tail;
