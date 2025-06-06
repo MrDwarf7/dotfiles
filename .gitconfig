@@ -1,74 +1,74 @@
 [user]
-    email = 129040985+MrDwarf7@users.noreply.github.com
-    name = MrDwarf7
+	email = 129040985+MrDwarf7@users.noreply.github.com
+	name = MrDwarf7
 ; [commit]
 ; 	gpgsign = true
 ; [tag]
 ; 	gpgSign = true
 [init]
-    defaultBranch = main
+	defaultBranch = main
 [core]
 	editor = nvim
-  excludesFile = "$HOME/.gitignore_global"
-  pager = delta
+	excludesFile = "$HOME/.gitignore_global"
+	pager = delta
 	sharedRepository = all
 	autocrlf = false
 	symlinks = true
-  attributesfile = ~/.gitattributes
-  ; windows setting mostly
-  fscache = false
+	attributesfile = ~/.gitattributes
+	; windows setting mostly
+	fscache = false
 [interactive]
-    singleKey = true
-    diffFilter = delta --color-only
+	singleKey = true
+	diffFilter = delta --color-only
 [delta]
-    navigate = true
-    dark = true
-    ; light = true
-    line-numbers = true
-    ; side-by-side = true
+	navigate = true
+	dark = true
+	; light = true
+	line-numbers = true
+	; side-by-side = true
 [merge]
-    conflictstyle = diff3
+	conflictstyle = diff3
 [merge "mergiraf"]
-  name = mergiraf
-  driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 [diff]
-    colorMoved = default
+	colorMoved = default
 [alias]
-    last = log -1 HEAD
-    wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
-    wta = worktree add
-    wtl = worktree list
-    wtr = worktree remove
-    wtm = worktree move
-    s- = switch -
-    fa = fetch --all
-    pla = pull --all
-    pa = push --all
-    rs = restore --staged
-    cm = commit -m
-    rlast = reflog -5 HEAD
-    sut = branch --set-upstream-to
-    undo = reset --soft HEAD~1
-    undoh = reset --hard HEAD~1
-    unst = restore --staged
-    uncm = reset --soft HEAD~1
-    reorder = rebase -i HEAD~5
+	last = log -1 HEAD
+	wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
+	wta = worktree add
+	wtl = worktree list
+	wtr = worktree remove
+	wtm = worktree move
+	s- = switch -
+	fa = fetch --all
+	pla = pull --all
+	pa = push --all
+	rs = restore --staged
+	cm = commit -m
+	rlast = reflog -5 HEAD
+	sut = branch --set-upstream-to
+	undo = reset --soft HEAD~1
+	undoh = reset --hard HEAD~1
+	unst = restore --staged
+	uncm = reset --soft HEAD~1
+	reorder = rebase -i HEAD~5
 [push]
-    autoSetupRemote = true
+	autoSetupRemote = true
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 ; THESE PATHS CANNOT BE INTERPOLATED
 [credential "https://github.com"]
-    helper = !'gh\\current\\bin\\gh.exe' auth git-credential
+	helper = !'gh\\current\\bin\\gh.exe' auth git-credential
 [credential "https://gist.github.com"]
-    helper = !'gh\\current\\bin\\gh.exe' auth git-credential
+	helper = !'gh\\current\\bin\\gh.exe' auth git-credential
 [http]
-    sslVerify = false
+	sslVerify = false
 [safe]
-    directory = *
-    directory = E:/Github*/**/*
+	directory = *
+	directory = E:/Github*/**/*
 [pull]
 	rebase = true
