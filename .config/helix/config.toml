@@ -298,8 +298,17 @@ D = [ "extend_to_line_end_newline", "evil_delete_immediate" ]
 
 # S = "surround_add" # Would be nice to be able to do something after this but it isn't chainable
 
-w = ["evil_next_word_start", "move_char_right", "collapse_selection"]
-W = ["evil_next_long_word_start", "move_char_right", "collapse_selection"]
+# w = ["evil_next_word_start", "move_char_right", "collapse_selection"]
+# W = ["evil_next_long_word_start", "move_char_right", "collapse_selection"]
+
+# e = ["evil_next_word_end", "collapse_selection"]
+# E = ["evil_next_long_word_end", "collapse_selection"]
+
+# b = ["evil_prev_word_start", "collapse_selection"]
+# B = ["evil_prev_long_word_start", "collapse_selection"]
+
+w = ["evil_next_word_start", "collapse_selection"]
+W = ["evil_next_long_word_start", "collapse_selection"]
 
 e = ["evil_next_word_end", "collapse_selection"]
 E = ["evil_next_long_word_end", "collapse_selection"]
@@ -440,7 +449,7 @@ c = { c = "toggle_comments" }
 g = "goto_file_start"
 
 
-# [keys.normal.c]
+[keys.normal.c]
 # # i = ["select_textobject_inner"]
 # # a = [ ["select_textobject_around"] "yank_main_selection_to_clipboard", "delete_selection", "insert_mode" ]
 # # a = {w = ["select_textobject_around", "yank_main_selection_to_clipboard", "delete_selection", "insert_mode"] }
