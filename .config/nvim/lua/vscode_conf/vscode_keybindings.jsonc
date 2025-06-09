@@ -137,6 +137,12 @@
 		"key": "z k",
 		"when": "editorTextFocus && neovim.mode == normal"
 	},
+	{
+		"command": "editor.createFoldingRangeFromSelection",
+		"key": "z f",
+		"when": "editorTextFocus && foldingEnabled && neovim.mode == visual"
+	},
+	//
 	// END FIX FOLDS HERE ____
 	{
 		"command": "vscode-neovim.compositeEscape1",
