@@ -119,6 +119,8 @@ bind x tabclose
 
 bind gx0 tabclosealltoleft
 bind gx$ tabclosealltoright
+bind g< tabmove -1
+bind g> tabmove +1
 bind << tabmove -1
 bind >> tabmove +1
 bind u undo
@@ -256,9 +258,11 @@ seturl www.google.com followpagepatterns.prev Previous
 
 " To ignore a site etc.
 autocmd FullscreenEnter www\.youtube\.com.* mode ignore
-autocmd DocStart www\.monkeytype\.com.* mode ignore
 
-autocmd DocStart http(s)?\.excalidraw\.com.* 
-autocmd DocStart .*excalidraw\.com.* 
-" autocmd DocStart www\.excalidraw\.com.* mode ignore
+" use the below for the start of commands re: blacklistadd 
+" (http[s]?)?(:\/\/)?
+
+blacklistadd (http[s]?)?(:\/\/)?monkeytype\.com.*
+blacklistadd (http[s]?)?(:\/\/)?web.getmatter.com.*
+blacklistadd (http[s]?)?(:\/\/)?excalidraw.com.*
 
