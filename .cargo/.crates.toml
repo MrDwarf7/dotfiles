@@ -1,7 +1,6 @@
 [v1]
 "atac 0.20.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
 "bacon 3.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
-"cargo-binstall 1.12.6 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
 "cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
 "cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
 "cargo-feature 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-feature.exe"]
@@ -13,9 +12,9 @@
     "cargo-make.exe",
     "makers.exe",
 ]
-"cargo-nextest 0.9.97 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
 "cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
-"cargo-update 16.3.0 (registry+https://github.com/rust-lang/crates.io-index)" = [
+"cargo-udeps 0.1.56 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
+"cargo-update 16.3.1 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cargo-install-update-config.exe",
     "cargo-install-update.exe",
 ]
@@ -59,8 +58,9 @@
     "wasm2es6js.exe",
 ]
 "wasm-pack 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-pack.exe"]
+"wasm-tools 1.233.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]
 "websocat 1.14.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["websocat.exe"]
 "welds-cli 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["welds.exe"]
 "xh 0.24.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["xh.exe"]
-"cargo-udeps 0.1.56 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
-"wasm-tools 1.233.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]
+"cargo-binstall 1.12.7 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
+"cargo-nextest 0.9.98 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
