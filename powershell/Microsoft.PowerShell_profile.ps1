@@ -33,6 +33,13 @@ $workDefaultPSModulePath = "C:\Applications\PowerShell_start\Modules"
 $env:PSModulePath=[NullString]
 $env:PYTHON_PATH=[NullString]
 
+# Add '$HOME\bin' to the PATH
+if (-not (Test-Path "$HOME\bin")) {
+  New-Item -ItemType Directory -Path "$HOME\bin" | Out-Null
+}
+if (-not "$HOME\bin" -in $env:PATH) {
+  $env:PATH = "$HOME\bin;$env:PATH"
+}
 # Dotfiles copy
 $env:HOME_PROFILE = $true
 $env:PDM_IGNORE_ACTIVE_VENV = $true
