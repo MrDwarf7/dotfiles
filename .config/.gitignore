@@ -6,3 +6,6 @@ jgit
 
 ./_ww_wezterm
 _ww_wezterm
+
+cabal
+cabal/
