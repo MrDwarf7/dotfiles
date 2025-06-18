@@ -3,7 +3,7 @@ return {
   opts = {
     linters_by_ft = {
 
-      cpp = { "cpplint", "clang-tidy" },
+      cpp = { "cpplint" },
       css = { "stylelint" },
       cmake = { "cmakelint " },
       -- cs = { "omnisharp" },
