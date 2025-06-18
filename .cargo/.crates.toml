@@ -1,6 +1,5 @@
 [v1]
 "atac 0.20.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
-"bacon 3.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
 "cargo-binstall 1.13.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
 "cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
 "cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
@@ -13,7 +12,6 @@
     "cargo-make.exe",
     "makers.exe",
 ]
-"cargo-nextest 0.9.98 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
 "cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
 "cargo-udeps 0.1.56 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
 "cargo-update 16.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = [
@@ -26,7 +24,6 @@
     "cargo-ws.exe",
 ]
 "cargo-zigbuild 0.20.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-zigbuild.exe"]
-"create-tauri-app 4.5.10 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-create-tauri-app.exe"]
 "cross 0.2.5 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cross-util.exe",
     "cross.exe",
@@ -64,3 +61,10 @@
 "welds-cli 0.4.13 (registry+https://github.com/rust-lang/crates.io-index)" = ["welds.exe"]
 "xh 0.24.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["xh.exe"]
 "wasm-tools 1.235.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["wasm-tools.exe"]
+"flamegraph 0.6.8 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-flamegraph.exe",
+    "flamegraph.exe",
+]
+"bacon 3.16.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["bacon.exe"]
+"cargo-nextest 0.9.99 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
+"create-tauri-app 4.6.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-create-tauri-app.exe"]
