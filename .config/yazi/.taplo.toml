@@ -1,0 +1,31 @@
+include = ["*.toml"]
+exclude = [
+  "plugins",
+  "plugins/*",
+  "plugins/**",
+  "plugins/**/*",
+  "themes",
+  "themes/*",
+  "themes/**",
+  "themes/**/",
+]
+
+#[formatting]
+
+[[rule]]
+include = [
+  "**/Cargo.toml",
+  ".taplo.toml",
+  "Cargo.toml",
+  "keymap.toml",
+  "theme.toml",
+  "yazi.toml",
+  "theme.toml",
+]
+
+[rule.formatting]
+align_entries        = true
+align_comments       = true
+array_trailing_comma = true
+column_width         = 100   # May require to be longer
+inline_table_expand  = false

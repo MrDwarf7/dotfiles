@@ -68,5 +68,3 @@ keymap = [
   # Filtering
   { on = "/", run = "filter", desc = "Apply a filter for the Help items" },
 ]
-
-
