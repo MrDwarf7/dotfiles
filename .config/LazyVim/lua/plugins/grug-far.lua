@@ -13,6 +13,14 @@ return {
   "grug-far.nvim",
   keys = {
     {
+      "<Leader>f/",
+      function()
+        invoke()
+      end,
+      mode = { "n", "v" },
+      desc = "Search & Replace",
+    },
+    {
       "<Leader>lp",
       function()
         invoke()

@@ -6,14 +6,27 @@ return {
     {
       "<Leader>lf",
       function()
-        require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+        if
+          vim.g.autofmrat == nil
+          or vim.g.autoformat == false
+          or vim.b.autoformat == nil
+          or vim.b.autoformat == false
+        then
+          return
+        else
+          require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
+        end
       end,
       mode = { "n", "v" },
       desc = "Format Injected Langs",
     },
   },
-  opts = function(opts)
-    local insert_opts = {
+  opts = function(_, opts)
+    -- vim.print(opts)
+
+    return vim.tbl_deep_extend("force", opts or {}, {
+
+      -- local insert_opts = {
       -- These are the defaults set by lazy anyway
       default_format_opts = {
         timeout_ms = 3000,
@@ -62,7 +75,7 @@ return {
       },
 
       notify_on_error = false,
-    }
-    table.insert(opts, insert_opts)
+    })
+    -- table.insert(opts, insert_opts)
   end,
 }

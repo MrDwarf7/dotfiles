@@ -31,7 +31,7 @@ return {
     --   silent = true,
     -- },
     {
-      "<Leader>f/",
+      "<Leader>fz",
       ":Oil ",
       desc = "<cmd>Oil",
     },

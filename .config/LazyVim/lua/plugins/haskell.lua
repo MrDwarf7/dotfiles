@@ -9,7 +9,7 @@
 return {
   "haskell-tools.nvim",
   version = "^5",
-  lazy = false,
+  lazy = true,
   ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
   dependencies = {
     { "nvim-telescope/telescope.nvim", optional = true },
