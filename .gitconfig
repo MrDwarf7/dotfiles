@@ -37,9 +37,9 @@
   line-numbers = true
   side-by-side = true
 # [delta "ov-diff"]
-  # Overloading the pager used by delta when using git diff
-  # Same pattern that delta uses when it uses the default (less)
-  # usinv ov section feature brings a better expr.
+  #  Overloading the pager used by delta when using git diff
+  #  Same pattern that delta uses when it uses the default (less)
+  #  usinv ov section feature brings a better expr.
 #  pager=ov -F --section-delimiter '^(commit|added:|removed:|renamed:|Δ)' --section-header --pattern '•'
 # [delta "ov-log"]
 #  pager=ov -F --section-delimiter '^commit' --section-header-num 3
