@@ -2,7 +2,6 @@
 
 The dotfiles for both local and remote dev setup
 
-
 ## Cloning the repo
 
 If you're on a fresh install and need the installer, you can run:
@@ -17,7 +16,6 @@ If you don't have the .gitmodules file denoting the link already run
 git submodule update --init
 ```
 
-
 If you DO have the .gitmodules file, but the folder is empty, just run this
 
 ```ps1
@@ -26,14 +24,12 @@ git submodule update
 
 otherwise just clone the repo as you normally would.
 
-
 ## Update OhMyPosh using this command -
 
 winget upgrade JanDeDobbeleer.OhMyPosh -s winget
 Reqs/commands
 PowerShellGet v1.6.0 or higher - can run "Get-Module" without quotes to check
 IF lower, run - Install-Module -Name PowerShellGet -Force
-
 
 ## PSDOtfiles
 
@@ -42,13 +38,11 @@ IF lower, run - Install-Module -Name PowerShellGet -Force
 [PSDotFiles Repo](https://github.com/ralish/PSDotFiles)
 From the GitHub repo, states it's aiming to achieve a similar goal to GNU Stow, for Windows/PowerShell systems.
 
-
 ## PSReadLine
 
 ```ps1
 Install-Module PSReadLine
 ```
-
 
 ### Consider installing CompletionPredictor alongside PSReadLine also
 
@@ -57,7 +51,6 @@ Install-Module PSReadLine
 ```ps1
 Install-Module -Name CompletionPredictor -Repository PSGallery
 ```
-
 
 ## Importing: PSReadLine
 
@@ -85,7 +78,6 @@ This can be done with the following command:
 New-Item -Path $profile -Type File -Force
 ```
 
-
 ## Importing: CompletionPredictor
 
 Importing this can also be done the same as above, by adding to $PROFILE.
@@ -107,7 +99,7 @@ $EDITOR $PROFILE
 
 You will be opening the END-POINT file, not the re-direct, be aware of this and decide if you wish to move ALL your code to the new file (Recommended)
 
-To do this, open the base version of $PROFILE from the above step, and use the following command to move the 
+To do this, open the base version of $PROFILE from the above step, and use the following command to move the
 $PROFILE it's loading to location of your choice.
 
 There is also a `profile_stub.ps1` provided in the ./powershell/ directory
@@ -117,13 +109,11 @@ $profile = "C:\Location\Of\Your\Choosing\ProfileHoldingFolder\Microsoft.PowerShe
 . $profile
 ```
 
-
-## Oh-My-Posh for prompt styling control etc.
+## Oh-My-Posh for prompt styling control etc
 
 `https://ohmyposh.dev/`
 
 For any of the PSReadLine commands that you may find online for custimization from other Uers, ensure you add this to the VERY top of your $PROFILE
-
 
 ### Importing deps
 
@@ -154,7 +144,7 @@ Set-PSReadlineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle Lis
 Set-PSReadLineOption -PredictionViewStyle ListView
 ```
 
-## Misc available options:
+## Misc available options
 
 [ ] - CompletionQueryItems
 
@@ -165,4 +155,3 @@ Install-Module -Name Azure
 [ ] - (WIP) Scoop batch installer
 
 - Other content that makes up the profile as a whole can be found under the ./docs/ foler
-
