@@ -41,9 +41,10 @@ return {
       end,
     })
     -- print(vim.inspect(opts))
-    return vim.tbl_deep_extend("force", opts or {}, {
-      -- animate = true,
+    local myopts = {
+      animate = false,
       -- bigfile = true,
+      words = false,
       bufdelete = {
         enabled = true,
         notify = true,
@@ -79,9 +80,10 @@ return {
           char = ">>>",
         },
       },
-      picker = {
-        enabled = true,
-      },
-    })
+      -- picker = {
+      --   enabled = true,
+      -- },
+    }
+    vim.tbl_deep_extend("force", opts or {}, myopts)
   end,
 }
