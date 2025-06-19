@@ -45,9 +45,9 @@ codegen-backend = "cranelift"
 # ensure that rust is installed WITHIN the msys2 environment
 # ensure that the CORRECT verison of msys2 is at the top of path.
 # This should be fine if you're using clang64 for c/c++ too.
-[target.x86_64-pc-windows-gnu]
-linker = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\gcc.exe'
-ar = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\ar.exe'
+# [target.x86_64-pc-windows-gnu]
+# linker = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\gcc.exe'
+# ar = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\ar.exe'
 
 # [unstable]
 # codegen-backend = true
