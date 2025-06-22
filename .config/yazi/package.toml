@@ -1,32 +1,32 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "55bf699"
-hash = "67b545921d00ba3350be48c3e5a7379"
+rev = "3d1efb7"
+hash = "b2aa4b0b07cfc554a2546fcff48869ad"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "55bf699"
-hash = "b644a1f360d1adfccf76ab01ff2b3b2d"
+rev = "3d1efb7"
+hash = "d7467b0a216c9b1a43932bf15d8255c7"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "55bf699"
-hash = "26481b6f47c9ea3bc6dfffd8c8b7e369"
+rev = "3d1efb7"
+hash = "6d1fdb3792f6c003ab8ec0266c5eb142"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "55bf699"
-hash = "f67b2a8848a95940bf5ae22762cc56f7"
+rev = "3d1efb7"
+hash = "afb539b8877c08a04129af6d90aa395c"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "55bf699"
-hash = "cca530e4da8784d56398d0b0d7726490"
+rev = "3d1efb7"
+hash = "d601446a35750846682d4a67882b7dc2"
 
 [[plugin.deps]]
 use = "Reledia/glow"
-rev = "2da96e3"
-hash = "f9ee1436e3b853508d87f7d49dce56e6"
+rev = "bd3eaa5"
+hash = "92b5c58159a51c567f82b618cee2b78"
 
 [[plugin.deps]]
 use = "Reledia/hexyl"
@@ -40,23 +40,23 @@ hash = "2d6d77583162aaf0a599e7a3091b5878"
 
 [[plugin.deps]]
 use = "AnirudhG07/rich-preview"
-rev = "fdcf373"
-hash = "bd1737dd44b202f412122e6a3b378d4c"
+rev = "843c3fa"
+hash = "b4040931f0d2f9670ddb4923e55cd881"
 
 [[plugin.deps]]
 use = "ndtoan96/ouch"
-rev = "2496cd9"
-hash = "5b9dea47776a30946cfbf83232d18fb1"
+rev = "1ee69a5"
+hash = "63679f3daf8551ff8755be38b5ced0f"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "6fde3b2"
-hash = "7ddb7a790746fd91ecdd0350cc5a5d8c"
+rev = "6a0f3f7"
+hash = "d5a74d95c2e8194ac352c5e10e81e64f"
 
 [[plugin.deps]]
 use = "dedukun/relative-motions"
-rev = "ce2e890"
-hash = "23915860e59348bf4166778bb0e606f7"
+rev = "2e3b617"
+hash = "b67ee12053113983273e9118a7d1272b"
 
 [[plugin.deps]]
 use = "sharklasers996/eza-preview"
