@@ -10,14 +10,14 @@
 # Returns:
 # 0 if the program is found
 # 1 if the program is not found
-function 04export_onto_path_if_pacman 
+function 04export_onto_path_if_pacman
     set -l value $argv[1]
     set -l env_var $argv[2]
 
     # echo "4.0: Checking for $value"
     # echo "4.0: Setting $env_var"
 
-    if 00valid_pacman $value
+    if 00valid_pacman "$value"
         # echo "4.1: Setting $env_var to $value"
         #
         # set -gx PATH $PATH $env_var

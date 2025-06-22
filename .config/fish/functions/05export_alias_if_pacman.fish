@@ -19,7 +19,7 @@ function 05export_alias_if_pacman
     # echo "5.0: Setting $alias_name"
     # echo "5.0: Falling back to $alias_value"
 
-    if 00valid_pacman $program_one
+    if 00valid_pacman "$program_one"
         # echo "5.1: Setting $alias_name to $alias_value"
         alias $alias_name=$alias_value
         return 0

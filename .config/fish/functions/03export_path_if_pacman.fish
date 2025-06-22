@@ -20,7 +20,7 @@ function 03export_path_if_pacman
     # echo "3.0: Setting $env_var"
     # echo "3.0: Falling back to $fallback_prog"
 
-    if 00valid_pacman $program_one
+    if 00valid_pacman "$program_one"
         # echo "3.1: Setting $env_var to $path_value"
         set -gx $env_var $path_value
         return 0

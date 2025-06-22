@@ -17,7 +17,7 @@ function 06source_if_pacman
     # echo "6.0: Checking for $program_one"
     # echo "6.0: Sourcing $file"
 
-    if 00valid_pacman $program_one
+    if 00valid_pacman "$program_one"
         # echo "6.1: Sourcing $file"
         source $file
         return 0

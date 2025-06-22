@@ -20,7 +20,7 @@ function 02export_if_pacman
     # echo "2.0: Setting $env_var"
     # echo "2.0: Falling back to $fallback"
 
-    if 00valid_pacman $program_one
+    if 00valid_pacman "$program_one"
         # echo "2.1: Found $program_one"
         set -gx $env_var $program_one
         return 0
