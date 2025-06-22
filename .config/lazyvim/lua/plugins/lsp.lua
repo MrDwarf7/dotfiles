@@ -5,8 +5,10 @@ return {
     lazy = true,
     -- event = "VeryLazy",
   -- stylua: ignore start
-  opts = function()
+  opts = function(opts)
     local keys = require("lazyvim.plugins.lsp.keymaps").get()
+
+			local my_servers = require("utils.lsp_servers")
 
     -- Remove
     keys[#keys + 1] = { "<leader>cR", false }
@@ -86,7 +88,7 @@ return {
         timeout_ms = nil,
       },
       -- LSP Server Settings
-      servers = require("utils.lsp_servers"),
+      servers = vim.tbl_deep_extend("force", my_servers, opts.servers or {}),
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
       setup = {

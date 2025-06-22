@@ -6,7 +6,7 @@ local folding = require("utils.folding")
 
 local opt = vim.opt
 
--- vim.g.snacks_animate = true
+vim.g.snacks_animate = false
 vim.lsp.inlay_hint.enable()
 
 vim.g.lazyvim_python_lsp = "basedpyright" -- Also can use "basedpyright"

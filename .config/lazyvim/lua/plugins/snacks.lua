@@ -27,10 +27,24 @@ return {
 			end, desc = "Notifications History"},
     -- stylua: ignore end
   },
-  opts = function(opts)
-    return {
-      -- animate = true,
+  opts = function(_, opts)
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+        vim.print = _G.dd
+      end,
+    })
+    -- print(vim.inspect(opts))
+    local myopts = {
+      animate = false,
       -- bigfile = true,
+      words = false,
       bufdelete = {
         enabled = true,
         notify = true,
@@ -66,6 +80,10 @@ return {
           char = ">>>",
         },
       },
+      -- picker = {
+      --   enabled = true,
+      -- },
     }
+    vim.tbl_deep_extend("force", opts or {}, myopts)
   end,
 }
