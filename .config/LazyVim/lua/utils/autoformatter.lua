@@ -7,16 +7,16 @@
 ---@field toggle_autoformat fun(effect_global?: boolean, bufnr?: number): void
 local M = {}
 
-setmetatable(M, {
-  __index = function(t, k)
-    if LazyVim.format[k] then
-      return LazyVim.format[k]
-    end
-    ---@diagnostic disable-next-line: no-unknown
-    t[k] = require("lazyvim.util.format." .. k)
-    return t[k]
-  end,
-})
+-- setmetatable(M, {
+--   __index = function(t, k)
+--     if LazyVim.format[k] then
+--       return LazyVim.format[k]
+--     end
+--     ---@diagnostic disable-next-line: no-unknown
+--     t[k] = require("lazyvim.util.format." .. k)
+--     return t[k]
+--   end,
+-- })
 
 --- Resets both (Global | Buffer) to true
 M.formatters_reset = function()
