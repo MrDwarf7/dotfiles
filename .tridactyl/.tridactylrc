@@ -25,13 +25,9 @@ set hintfiltermode simple
 
 set findcase insensitive
 " Time in MS
-set findhighlighttimeout 10000
+set findhighlighttimeout 2000
 set smoothscroll true
 
-" No longer do weird tablose + tabprev
-unbind d
-unbind D 
-" No longer use p as direct paste for searching - use ctrl for it
 unbind p 
 
 " URL Binds
@@ -41,8 +37,6 @@ bindurl www.google.com gi composite focusinput -l ; text.end_of_line
 bindurl ^https://web.whatsapp.com f hint -c [tabindex]:not(.two)>div,a
 bindurl ^https://web.whatsapp.com F hint -bc [tabindex]:not(.two)>div,a
 
-" Very generic binds
-bind <Esc> nohlsearch
 
 " Binds
 bind ;C composite hint_focus; !s xdotool key Menu
@@ -108,13 +102,14 @@ bind H back
 bind L forward
 bind <C-o> jumpprev
 bind <C-i> jumpnext
-" bind d tabclose
-" bind D composite tabprev; tabclose #
+
+bind d tabclose
+bind D composite tabprev; tabclose #
 
 " Tabs 
 " Vertical tabs are organized backwards
-bind K tabprev
-bind J tabnext
+bind <S-k> tabprev +1
+bind <S-j> tabnext +1
 bind x tabclose
 
 bind gx0 tabclosealltoleft
@@ -133,8 +128,6 @@ bind gi focusinput -l
 bind g? rot13
 bind g! jumble
 bind g; changelistjump -1
-" bind K tabprev
-" bind J tabnext
 bind gt tabnext_gt
 bind gT tabprev
 bind g^ tabfirst
@@ -226,8 +219,15 @@ bind <S-Insert> mode ignore
 bind <AC-Escape> mode ignore
 bind <AC-`> mode ignore
 bind <S-Escape> mode ignore
-bind <Escape> composite mode normal ; hidecmdline
-bind <C-[> composite mode normal ; hidecmdline
+
+
+" we need to bind it as a command because of how it's read in
+command composite_escape_call composite clearsearchhighlight ; hidecmdline ; mode normal
+
+bind <Escape> composite_escape_call 
+bind <C-[> composite_escape_call 
+
+""""""""" bind <C-[> composite mode normal ; hidecmdline
 bind a current_url bmark
 bind A bmark
 bind zi zoom 0.1 true
