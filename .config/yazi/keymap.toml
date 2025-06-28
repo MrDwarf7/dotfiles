@@ -2,205 +2,54 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/keymap.json"
 
-# [[manager.prepend_keymap]]
-# on = "<Enter>"
-# run = "@"
-# desc = "EMPTY"
+[mgr]
 
-[[manager.prepend_keymap]]
-on = "<Enter>"
-run = "plugin smart-enter"
-desc = "Enter child dir, or open file"
+prepend_keymap = [
+  { on = "o", run = "open --interactive", desc = "Open Selected files interactively" },
+  { on = "O", run = "open", desc = "Open Selected files" },
+  { on = "<Enter>", run = "plugin smart-enter", desc = "Enter child dir, or open file" },
+  # { on = "<Enter>", run = "@", desc = "EMPTY" },
+  { on = "A", run = "create", desc = "Create a file (ends with / for directories)" },
+  { on = "Q", run = "quit", desc = "Quit the process" },
+  { on = "q", run = "quit --no-cwd-file", desc = "Quit the process without outputting cwd-file" },
+  { on = "<C-c>", run = "close", desc = "Close the current tab, or quit if it's last" },
+  # { on = [ "c", "c" ], run = "copy path", desc = "Copy the file path" },
+  # { on = [ "c", "d" ], run = "copy dirname", desc = "Copy the directory path" },
+  # { on = [ "c", "f" ], run = "copy filename", desc = "Copy the filename" },
+  # { on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+  { on = ["y", "f"], run = "copy path", desc = "Copy the file path" },
+  { on = ["y", "c"], run = "copy dirname", desc = "Copy the directory path" },
+  { on = ["y", "n"], run = "copy filename", desc = "Copy the filename" },
+  { on = ["y", "N"], run = "copy name_without_ext", desc = "Copy the filename without extension" },
+  { on = ["y", "y"], run = "yank", desc = "Yank selected files (copy)" },
+  { on = ["<C-y>"], run = "unyank", desc = "Cancel the yank status" },
+  { on = "<Space>", run = "toggle --state=none", desc = "Toggle the current selection state" },
+  { on = "V", run = "visual_mode", desc = "Enter visual mode (selection mode)" },
+  { on = "v", run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
+  { on = ["g", "d"], run = "plugin diff", desc = "Diff the selected with the hovered file" },
+  { on = ["g", "i"], run = "plugin lazygit", desc = "run lazygit" },
+  { on = "l", run = "plugin smart-enter", desc = "Enter the child directory or open the file" },
+  # { on = "/", run = "plugin jump-to-char", desc = "Jump to char" },
+  { on = ["m", "m"], run = "linemode mtime_better", desc = "Linemode: mtime_better" },
+  # { on = [ ",", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime_better" ], desc = "Sort by modified time" },
+  # { on = [ ",", "M" ], run = [ "sort mtime --reverse", "linemode mtime_better" ], desc = "Sort by modified time (reverse)" },
+  { on = ["1"], run = "plugin relative-motions 1", desc = "Move in relative steps" },
+  { on = ["2"], run = "plugin relative-motions 2", desc = "Move in relative steps" },
+  { on = ["3"], run = "plugin relative-motions 3", desc = "Move in relative steps" },
+  { on = ["4"], run = "plugin relative-motions 4", desc = "Move in relative steps" },
+  { on = ["5"], run = "plugin relative-motions 5", desc = "Move in relative steps" },
+  { on = ["6"], run = "plugin relative-motions 6", desc = "Move in relative steps" },
+  { on = ["7"], run = "plugin relative-motions 7", desc = "Move in relative steps" },
+  { on = ["8"], run = "plugin relative-motions 8", desc = "Move in relative steps" },
+  { on = ["9"], run = "plugin relative-motions 9", desc = "Move in relative steps" },
+  { on = ["C"], run = "plugin ouch zip", desc = "Compress with ouch" },
+  { on = ["="], run = "plugin eza-preview", desc = "Toggle tree/list preview" },
+]
 
-# shift enter to open a dir
-# backspace to go up a dir
-
-[[manager.prepend_keymap]]
-on = "A"
-run = "create"
-desc = "Create a file (ends with / for directories)"
-
-# Swapping the C-c and q keys, drop via C-c now
-[[manager.prepend_keymap]]
-on = "Q"
-run = "quit"
-desc = "Quit the process"
-
-[[manager.prepend_keymap]]
-on = "q"
-run = "quit --no-cwd-file"
-desc = "Quit the process without outputting cwd-file"
-
-[[manager.prepend_keymap]]
-on = "<C-c>"
-run = "close"
-desc = "Close the current tab, or quit if it's last"
-
-# Fix copying commands lol
-#
-# Defaults
-# [[manager.prepend_keymap]]
-# on = [ "c", "c" ]
-# run = "copy path"
-# desc = "Copy the file path"
-#
-# [[manager.prepend_keymap]]
-# on = [ "c", "d" ]
-# run = "copy dirname"
-# desc = "Copy the directory path"
-#
-# [[manager.prepend_keymap]]
-# on = [ "c", "f" ]
-# run = "copy filename"
-# desc = "Copy the filename"
-#
-# [[manager.prepend_keymap]]
-# on = [ "c", "n" ]
-# run = "copy name_without_ext"
-# desc = "Copy the filename without extension"
-
-[[manager.prepend_keymap]]
-on = ["y", "f"]
-run = "copy path"
-desc = "Copy the file path"
-
-[[manager.prepend_keymap]]
-on = ["y", "c"]
-run = "copy dirname"
-desc = "Copy the directory path"
-
-[[manager.prepend_keymap]]
-on = ["y", "n"]
-run = "copy filename"
-desc = "Copy the filename"
-
-[[manager.prepend_keymap]]
-on = ["y", "N"]
-run = "copy name_without_ext"
-desc = "Copy the filename without extension"
-
-# We also need to replace the commands for normal y and Y
-[[manager.prepend_keymap]]
-on = ["y", "y"]
-run = "yank"
-desc = "Yank selected files (copy)"
-
-[[manager.prepend_keymap]]
-on = ["<C-y>"]
-run = "unyank"
-desc = "Cancel the yank status"
-
-[[manager.prepend_keymap]]
-on = "<Space>"
-run = "toggle --state=none"
-desc = "Toggle the current selection state"
-
-[[manager.prepend_keymap]]
-on = "V"
-run = "visual_mode"
-desc = "Enter visual mode (selection mode)"
-
-[[manager.prepend_keymap]]
-on = "v"
-run = "visual_mode --unset"
-desc = "Enter visual mode (unset mode)"
-
-[[manager.prepend_keymap]]
-on = ["g", "d"]
-run = "plugin diff"
-desc = "Diff the selected with the hovered file"
-
-[[manager.prepend_keymap]]
-on = ["g", "i"]
-run = "plugin lazygit"
-desc = "run lazygit"
-
-[[manager.prepend_keymap]]
-on = "l"
-run = "plugin smart-enter"
-desc = "Enter the child directory or open the file"
-
-# https://github.com/yazi-rs/plugins/tree/main/jump-to-char.yazi
-# [[manager.prepend_keymap]]
-# on   = "/"
-# run  = "plugin jump-to-char"
-# desc = "Jump to char"
-
-# Fixing mtime and ctime
-[[manager.prepend_keymap]]
-on = ["m", "m"]
-run = "linemode mtime_better"
-desc = "Linemode: mtime_better"
-
-####### Cannot get these to work correctly :L
-# [[manager.prepend_keymap]]
-# on = [ ",", "m" ]
-# run = [ "sort mtime --reverse=no", "linemode mtime_better" ]
-# desc = "Sort by modified time"
-#
-#
-# [[manager.prepend_keymap]]
-# on = [ ",", "M" ]
-# run = [ "sort mtime --reverse", "linemode mtime_better" ]
-# desc = "Sort by modified time (reverse)"
-
-# https://github.com/dedukun/relative-motions.yazi
-[[manager.prepend_keymap]]
-on = ["1"]
-run = "plugin relative-motions 1"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["2"]
-run = "plugin relative-motions 2"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["3"]
-run = "plugin relative-motions 3"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["4"]
-run = "plugin relative-motions 4"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["5"]
-run = "plugin relative-motions 5"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["6"]
-run = "plugin relative-motions 6"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["7"]
-run = "plugin relative-motions 7"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["8"]
-run = "plugin relative-motions 8"
-desc = "Move in relative steps"
-
-[[manager.prepend_keymap]]
-on = ["9"]
-run = "plugin relative-motions 9"
-desc = "Move in relative steps"
-
-# https://github.com/ndtoan96/ouch.yazi
-[[manager.prepend_keymap]]
-on = ["C"]
-run = "plugin ouch zip"
-desc = "Compress with ouch"
-
-# https://github.com/sharklasers996/eza-preview.yazi
-[[manager.prepend_keymap]]
-on = ["="]
-run = "plugin eza-preview"
-desc = "Toggle tree/list preview"
+# keymap = [
+#   { on = "~",    run = "help", desc = "Open help" },
+#   { on = "<F1>", run = "help", desc = "Open help" },
+# ]
 
 [help]
 keymap = [
@@ -217,6 +66,5 @@ keymap = [
   { on = "<Down>", run = "arrow 1", desc = "Move cursor down" },
 
   # Filtering
-  { on = "/", run = "filter", desc = "Apply a filter for the help items" },
+  { on = "/", run = "filter", desc = "Apply a filter for the Help items" },
 ]
-
