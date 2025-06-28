@@ -1,5 +1,5 @@
 {
-  "assistant": {
+  "agent": {
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-3-7-sonnet-thinking-latest"
@@ -177,7 +177,7 @@
   "wrap_guides": [100, 120],
   "soft_wrap": null,
 
-  "ui_font_size": 16.0,
+  "ui_font_size": 15.0,
   "ui_font_family": "Zed Plex Mono",
   "ui_font_weight": 400.0,
   "ui_font_features": {
@@ -186,7 +186,7 @@
 
   "buffer_line_height": "standard",
 
-  "buffer_font_size": 16.0,
+  "buffer_font_size": 14.5,
   "buffer_font_family": "Zed Plex Mono",
   "buffer_font_features": {
     "calt": false,
