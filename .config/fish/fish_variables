@@ -1,6 +1,7 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export CARAPACE_BRIDGES:all
+SETUVAR --export XDG_BIN_HOME:/home/dwarf/\x2exdg/bin
 SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/local
 SETUVAR --export XDG_CONFIG_HOME:/home/dwarf/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/dwarf/\x2exdg/data
@@ -45,4 +46,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3dbrblack
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/dwarf/\x2eghcup/bin\x1e/home/dwarf/\x2exdg/bin\x1e/home/dwarf/\x2elocal/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self
+SETUVAR fish_user_paths:/home/dwarf/\x2eghcup/bin\x1e/home/dwarf/\x2exdg/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self
