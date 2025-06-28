@@ -1,0 +1,35 @@
+#############################
+### ENVIRONMENT VARIABLES ###
+#############################
+
+# See https://wiki.hyprland.org/Configuring/Environment-variables/
+env = GBM_BACKEND=nvidia-drm  ## it causes issues like Hyprland crashing so care
+# firefox
+#env = MOZ_ENABLE_WAYLAND,1
+#env = __NV_PRIME_RENDER_OFFLOAD,1 
+#env = __VK_LAYER_NV_optimus,NVIDIA_only
+#env = WLR_DRM_NO_ATOMIC,1
+# vulkan
+#env = WLR_RENDERER,vulkan
+env = QT_QPA_PLATFORMTHEME,qt5ct
+env = GDK_BACKEND,wayland,x11
+env = QT_QPA_PLATFORM,wayland;xcb
+env = CLUTTER_BACKEND,wayland
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_DESKTOP,Hyprland
+env = XDG_SESSION_TYPE,wayland
+env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+env = QT_AUTO_SCREEN_SCALE_FACTOR,1  # Removed duplicate
+env = WLR_RENDERER_ALLOW_SOFTWARE,1
+env = XCURSOR_SIZE,24
+env = GTK_THEME,Adwaita:dark
+# NVIDIA 
+# This is from Hyprland Wiki but my Hyprland keeps crashing when I enabled this variables
+env = WLR_NO_HARDWARE_CURSORS,1  # Uncommented; enable if needed for NVIDIA
+env = LIBVA_DRIVER_NAME,nvidia
+env = __GL_GSYNC_ALLOWED,1
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = NVD_BACKEND,direct
+
+env = ELECTRON_OZONE_PLATFORM_HINT,wayland
+env = XCURSOR_THEME,Bibata-Modern-Classic
