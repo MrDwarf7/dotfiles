@@ -14,6 +14,11 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
+    # source our secrets file if it exists
+    if test -f ~/.secrets/secrets.fish
+        source ~/.secrets/secrets.fish
+    end
+
     # Immediately call starship -- subsequent redraws are handled by the 
     # call under ./functions/fish_prompt.fish
     # source (/usr/sbin/starship init fish --print-full-init | psub)
