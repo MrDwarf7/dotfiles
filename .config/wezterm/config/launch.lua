@@ -13,7 +13,11 @@ local function shell()
 		end
 		-- return utils.env("SHELL") or "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe"
 	elseif platform.is_linux or platform.is_mac then
-		return utils.env("SHELL") or "/bin/bash"
+		if utils.env("SHELL") ~= nil then
+			return utils.env("SHELL")
+		else
+			return { "fish" }
+		end
 	end
 end
 -- default_prog = { shell(), "-NoLogo" }

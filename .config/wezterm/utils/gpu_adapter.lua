@@ -87,7 +87,7 @@ function GpuAdapters:pick_best()
 
 	if not adapters_options then
 		adapters_options = self.Other
-		preferred_backend = "OpenGL"
+		preferred_backend = "Gl"
 	end
 
 	if not adapters_options then
