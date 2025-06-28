@@ -9,12 +9,57 @@ w = "watch"
 wq = "watch --quiet"
 wqc = "watch --quiet --clear"
 wqcr = "watch --quiet --clear --run"
+#wm = "watch -- -q -c -w tests/ -x 'test quick_dev -q --target-dir target/tmp -- --nocapture'"
+
 t = "test"
+tv = "test --verbose"
+tq = "test --quiet"
+
 ta = "test --all"
+tav = "test --all --verbose"
+taq = "test --all --quiet"
+
 r = "run"
 rq = "run --quiet"
 rr = "run --release"
 br = "build --release"
+
 cl = "clean"
 clip = "clippy --all-targets --all-features -- -D warnings"
 clipP = "clippy -- -W clippy::pedantic"
+
+# [build]
+# rustc-wrapper = 'C:\Users\<< YOUR USERNAME>>\scoop\shims\sccache.exe'
+
+## Experimental features
+[unstable]
+codegen-backend = true
+
+[profile.dev]
+codegen-backend = "cranelift"
+
+## Other alias examples from docs
+# recursive_example = "rr --example recursions"
+# space_example = ["run", "--release", "--", "\"command list\""]
+
+# ensure that rust is installed WITHIN the msys2 environment
+# ensure that the CORRECT verison of msys2 is at the top of path.
+# This should be fine if you're using clang64 for c/c++ too.
+# [target.x86_64-pc-windows-gnu]
+# linker = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\gcc.exe'
+# ar = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\ar.exe'
+
+# [unstable]
+# codegen-backend = true
+#
+# [profile.dev]
+# codegen-backend = "cranelift"
+
+# https://doc.rust-lang.org/cargo/reference/unstable.html?highlight=trim-paths#automatic-garbage-collection
+# [gc.auto]
+
+
+
+
+
+
