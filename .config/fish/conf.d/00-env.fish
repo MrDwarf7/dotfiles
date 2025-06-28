@@ -1,10 +1,12 @@
 #!/usr/bin/env fish
 #
 set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
-set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data
-set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state
+
+set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.xdg/bin
 set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/cache
 set -q XDG_CACHE_LOCAL_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/local
+set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data
+set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state
 mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_CACHE_HOME $XDG_CACHE_LOCAL_HOME
 
 # Fix wezterm/starship rendering the cursor always as a block
@@ -39,7 +41,7 @@ set -gx DOT_CONFIG $DOT_DIR/.config
 
 fish_add_path --append $XDG_CONFIG_HOME/.zvm/bin
 fish_add_path --append $ZVM_INSTALL
-fish_add_path --prepend $HOME/.local/bin
+# fish_add_path --prepend $HOME/.local/bin
 fish_add_path --prepend $HOME/.xdg/bin
 
 # set -gx PATH $PATH $XDG_CONFIG_HOME/.zvm/bin
