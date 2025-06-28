@@ -1,0 +1,359 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Also - 
+" Ctrl-k for ideavim --- 
+" You need to have Up + Down handled as k / j and change the vim settings for the Vim plugin to be handled by the IDE
+
+" Bind the IDE = Up == k, Down == j
+" Change the VIM plugin inside the IDE to defer to the IDE for handling the keys
+
+syntax on
+
+map <Up> k
+map <Down> j
+
+" Necessities
+" nnoremap mapleader=" "
+" vnoremap mapleader=" "
+" nnoremap mapleader=" "
+
+map <Esc> <Esc><Esc>
+
+
+" set timeoutlen=500
+set notimeout
+
+" Common settings -------------------------
+set number relativenumber
+set clipboard+=unnamed
+set clipboard+=ideaput
+" set clipboard+=ideaput
+
+set visualbell
+set noerrorbells
+set scrolloff=8
+
+" Search settings
+set incsearch
+set ignorecase
+set smartcase
+set hlsearch
+set showmatch
+set showmode
+
+" Idea specific settings ------------------
+set ideajoin
+set idearefactormode=keep
+" let g:idearefactormode = "keep"
+" set ideastatusicon=gray
+
+
+sethandler <S-j> n:vim i:vim
+
+" Plugins ------------------ --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+" Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdtree'
+Plug 'tommcdo/vim-exchange'
+Plug 'vim-scripts/ReplaceWithRegister' " This may not be required due to having the _dP binding? But it also handles newline yanks into non-newline pastes
+Plug 'dbakker/vim-paragraph-motion'
+
+" Plugin activation / Specifics------------------
+" set sneak " Is now depr.
+" set which-key
+set surround
+set quickscope
+set ideamarks
+set peekaboo
+set NERDTree
+
+
+" Ataman keybinds - https://github.com/Mishkun/ataman-intellij
+" The relevant '.atamanrc.config' must be in $home
+
+
+let g:highlightedyank_highlight_duration = "60"
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = [ 'f', 'F', 't', 'T', 's', 'S' ]
+
+
+" let g:WhichKey_SortOrder = by_description
+" let g:WhichKey_FontSize	= 12
+" close the popup and don't process formerly typed keys
+" let g:WhichKey_ProcessUnknownMappings = "false"
+" let g:WhichKey_DefaultDelay = 500
+
+
+
+" ------------------------- KEYMAPS -------------------------
+
+" Misc / Out of the way binds -------------------------
+nnoremap \e :action Openfile ~/dotfiles/.ideavimrc<CR>
+nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
+
+" Copilot settings"
+map <A-a> :action copilot.applyInlays
+
+" Saving related binds -------------------------
+" let g:WhichKeyDesc_Command = ":ww Write current document"
+
+
+" Better scrolling via centering after page up/down
+" nnoremap <C-U> <C-U>zz
+" nnoremap <C-D> <C-D>zz
+
+" nnoremap <C-A> gg<S-v>G
+" let g:WhichKeyDesc_commentray_prefix = "gc"
+" let g:WhichKeyDesc_commentray_action = "gcc"
+
+
+
+
+" Generic binds -------------------------
+
+inoremap kj <ESC>
+inoremap jk <ESC>
+inoremap jj <ESC>
+inoremap kk <ESC>
+inoremap <S-CR> <CR>
+
+nnoremap <ESC> :noh<CR><ESC>
+nnoremap <C-c> <Esc>
+vnoremap <C-c> <Esc>
+
+
+vnoremap p "_dP
+
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-h> <C-w>h
+" noremap <C-l> <C-w>l
+
+map \ww <Action>(SaveDocument)
+map \wa <Action>(SaveAll)
+map \q <Action>(CloseActiveTab)
+" map \qa <Action>(Exit)
+map \wqa <Action>(SaveAllAndExit)
+map \wq <Action>(SaveAndCloseActiveTab)
+
+
+" Fold / Folds / Folding
+nnoremap za :action ExpandCollapseToggleAction<CR>
+vnoremap za :action ExpandCollapseToggleAction<CR>
+" nnoremap za :action ExpandCollapseToggleAction<CR>
+
+" Creates a fold
+vnoremap zf :action CollapseSelection<CR><ESC>
+
+" nnoremap zM :action CollapseAllRegions<CR>
+" vnoremap zM :action CollapseAllRegions<CR>
+
+" ------------------------- GENERAL -------------------------
+" Formatting -------------------------
+" let g:WhichKeyDesc_Formatting = "=="
+" let g:WhichKeyDesc_Formatting = "--"
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>
+nnoremap -- :action OptimizeImports<CR>
+vnoremap -- :action OptimizeImports<CR>
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap gcc :action CommentByLineComment<CR>k
+vnoremap gc :action CommentByLineComment<CR>k
+
+nnoremap zc :action CollapseRegion<CR>
+vnoremap zc :action CollapseRegion<CR>
+nnoremap zo :action ExpandRegion<CR>
+vnoremap zo :action ExpandRegion<CR>
+
+nnoremap zf :action CollapseRegion<CR>
+nnoremap zf :action ExpandRegion<CR>
+
+vnoremap <A-j> :action :m'>+<CR>gv=gv
+vnoremap <A-k> :action :m-2<CR>gv=gv
+
+vnoremap <A-j> :action MoveLineDown<CR>
+nnoremap <A-j> :action MoveLineDown<CR>
+
+vnoremap <A-k> :action MoveLineUp<CR>
+nnoremap <A-k> :action MoveLineUp<CR>
+
+
+" Navigation specific binds -------------------------
+" let g:WhichKeyDesc_NerdTree = "<Space>e NERD Tree"
+" Leave this off cos using ataman as leader key interferes with using space, and isn't bindable
+" nnoremap <Space>e :NERDTreeFocus<CR>
+" nnoremap <C-Space> :NERDTreeFocus<CR>
+
+
+" src/main/java/com/maddyhome/idea/vim/extension/nerdtree/NerdTree.kt
+
+
+" let g:NERDTreeMapMenu = "m"
+
+let g:NERDTreeMapToggleZoom=''
+
+let g:NERDTreeMapNewFile='a'
+
+let g:NERDTreeMapNewDir='%'
+let g:NERDTreeMapNewDir='A'
+
+let g:NERDTreeMapPreview='<Tab>'
+let g:NERDTreeMapActivateNode = 'l'
+let g:NERDTreeMapRename='r'
+let g:NERDTreeMapToggle='gz'
+
+let g:NERDTreeMapCloseDir=''
+let g:NERDTreeMapCloseChildren=''
+
+
+
+
+" Text Navigation specific binds -------------------------
+nnoremap <S-Tab> :action PreviousTab<CR>
+nnoremap <Tab> :action NextTab<CR>
+map <S-h> ^
+map <S-l> $
+
+
+" Find Binds -------------------------
+" --------
+
+" nnoremap <C-w><C-l> :action MoveElementRight<CR>
+" nnoremap <C-w><C-h> :action MoveElementLeft<CR>
+
+nnoremap <C-w>q :action CloseContent<CR>
+
+nnoremap gR :action FindUsages<CR>
+vnoremap gR :action  FindUsages<CR>
+
+
+" Toggle reader/easy read whatever - Only for the current doc comment
+
+" Toggle reader/easy read whatever - For entire file/all
+
+" Goto Binds -------------------------
+" let g:WhichKeyDesc_Goto = "g +Goto"
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gi :action GotoImplementation<CR>
+" Acts as a 'peek'
+nnoremap gp :action QuickImplementations<CR>
+nnoremap gt :action GotoTypeDeclaration<CR>
+
+nnoremap ]d :action GotoNextError<CR>
+nnoremap [d :action GotoPreviousError<CR>
+
+nnoremap gT :action GotoTest<CR>
+nnoremap gh :action Back<CR>
+nnoremap gl :action Forward<CR>
+nnoremap gj :action MethodDown<CR>
+nnoremap gk :action MethodUp<CR>
+nnoremap gs :action GotoSuperMethod<CR>
+nnoremap g, :action JumpToLastChange<CR>
+nnoremap g. :action JumpToNextChange<CR>
+
+nnoremap gC :action GotoClass<CR>
+" vnoremap gc :action GotoClass<CR>
+" Conflicts with tpope/vim-commentary / Comment
+nnoremap gf :action GotoFile<CR>
+vnoremap gf :action GotoFile<CR>
+
+" vnoremap / :action Find<CR>
+" nnoremap / :action Find<CR>
+
+" Mark Binds ------------------------
+"Map common used global vim letter bookmarks to Intellij number bookmarks
+
+nnoremap mm :action ToggleBookmark0<CR>
+nnoremap mn :action ToggleBookmark1<CR>
+nnoremap mh :action ToggleBookmark2<CR>
+nnoremap mj :action ToggleBookmark3<CR>
+nnoremap mk :action ToggleBookmark4<CR>
+nnoremap ml :action ToggleBookmark5<CR>
+nnoremap m1 :action ToggleBookmark6<CR>
+nnoremap m2 :action ToggleBookmark7<CR>
+nnoremap m3 :action ToggleBookmark8<CR>
+nnoremap m4 :action ToggleBookmark9<CR>
+
+nnoremap `m :action GotoBookmark0<CR>
+nnoremap `n :action GotoBookmark1<CR>
+nnoremap `h :action GotoBookmark2<CR>
+nnoremap `j :action GotoBookmark3<CR>
+nnoremap `k :action GotoBookmark4<CR>
+nnoremap `l :action GotoBookmark5<CR>
+nnoremap `1 :action GotoBookmark6<CR>
+nnoremap `2 :action GotoBookmark7<CR>
+nnoremap `3 :action GotoBookmark8<CR>
+nnoremap `4 :action GotoBookmark9<CR>
+
+"Use Intellij letter bookmarks comes with an annoying popup window.
+
+" Buffer Binds -------------------------
+
+nnoremap <S-TAB> :action PreviousTab<CR>
+nnoremap <TAB> :action NextTab<CR>
+
+nnoremap <C-w>r :action ReopenClosedTab<CR>
+nnoremap <C-w>t :action ReopenClosedTab<CR>
+
+nnoremap <C-w>u :action Unsplit<CR>
+nnoremap <C-w>- :action MoveEditorToOppositeTabGroup<CR>
+
+nnoremap <C-w>e :action tabshifter.Actions.EqualSizeSplit<CR>
+
+nnoremap <C-w><C-l> :action TabShiftActions.ShiftRight<CR>
+nnoremap <C-w><C-h> :action TabShiftActions.ShiftLeft<CR>
+nnoremap <C-w><C-k> :action TabShiftActions.ShiftUp<CR>
+nnoremap <C-w><C-j> :action TabShiftActions.ShiftDown<CR>
+
+nnoremap <C-l> :action TabShiftActions.StretchRight<CR>
+nnoremap <C-h> :action TabShiftActions.StretchLeft<CR>
+
+nnoremap <C-Right> :action TabShiftActions.StretchRight<CR>
+nnoremap <C-Left> :action TabShiftActions.StretchLeft<CR>
+nnoremap <C-Up> :action TabShiftActions.StretchUp<CR>
+nnoremap <C-Down> :action TabShiftActions.StretchDown<CR>
+
+" Toggles/UI specific binds -------------------------
+
+" nnoremap <C-/>: :action ActivateTerminalToolWindow<CR>
+
+" Git / Source control specific binds -------------------------
+
+" Git GoTo specific binds -------------------------
+nnoremap ]c :action VcsShowNextChangeMarker<CR>
+nnoremap [c :action VcsShowPrevChangeMarker<CR>
+
+nnoremap ]9 :action VcsShowNextChangeMarker<CR>
+nnoremap [9 :action VcsShowPrevChangeMarker<CR>
+
+nnoremap ]h :action NextDiff<CR>
+nnoremap [h :action PreviousDiff<CR>
+
+nnoremap ]- :action NextDiff<CR>
+nnoremap [- :action PreviousDiff<CR>
+
+
+" LSP specific binds -------------------------
+
+nnoremap <S-k> :action ShowErrorDescription<CR>
+
+nnoremap <S-k> :action QuickJavaDoc<CR>
+
+" RUST specific binds -------------------------
+" _____________
+
+" Debug specific binds -------------------------
+" _____________
+
+" tnoremap <Esc> <C-\><C-n>
+
+nnoremap <Space> :action LeaderAction<CR>
+vnoremap <Space> :action LeaderAction<CR>
