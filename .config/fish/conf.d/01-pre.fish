@@ -33,4 +33,6 @@
 # 06source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
 
 01eval_if_pacman zoxide "zoxide init fish | source"
+
+01eval_if_pacman jj "jj util completion fish | source"
 # 01eval_if_pacman "mise" "mise activate fish | source"
