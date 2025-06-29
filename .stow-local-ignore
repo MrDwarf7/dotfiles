@@ -1,8 +1,15 @@
+# Folders
+
 .git
 docs
+
 install_lists
+
 installer
 tools
+
+# Files
+
 .gitignore
 .gitmodules
 .ignore_filespaths

@@ -50,10 +50,10 @@ unset alias l
 # source "$HOME/.aliases.zsh"
 
 if [[ $ZSHRC_LOADED = 1 ]]
-    then
-        echo "ZSHRC has already been loaded"
-        return 0
-    fi
+then
+    echo "ZSHRC has already been loaded"
+    return 0
+fi
 
 source "$ZSHRC_CONFIG/01.initial_setup.zsh"
 
