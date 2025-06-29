@@ -32,7 +32,6 @@ set -gx DATA_ON_DEMAND_BACK $DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
 set -gx DATA_ON_DEMAND_FRONT $DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
 set -gx DATA_ON_DEMAND_NEXT $DATA_ON_DEMAND_BASE/data-on-demand-next
 
-
 set -gx ZVM_PATH $XDG_CONFIG_HOME/.zvm
 set -gx ZVM_INSTALL $XDG_CONFIG_HOME/.zvm/self
 
@@ -58,6 +57,6 @@ set -gx WZT_GPU_FRONTEND WebGpu
 set -gx WZT_GPU_POWER_PREF HighPerformance
 
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
-set -Ux CARAPACE_BRIDGES 'all'
+set -Ux CARAPACE_BRIDGES all
 
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
