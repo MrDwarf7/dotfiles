@@ -1,0 +1,12 @@
+# export HYPRLAND_TRACE = 1               # - Enables more verbose logging.
+# export HYPRLAND_NO_RT = 1               # - Disables realtime priority setting by Hyprland.
+# export HYPRLAND_NO_SD_NOTIFY = 1        # - If systemd, disables the sd_notify calls.
+# export HYPRLAND_NO_SD_VARS = 1          # - Disables management of variables in systemd and dbus activation environments.
+# export HYPRLAND_CONFIG                  # - Specifies where you want your Hyprland configuration.
+
+# export AQ_TRACE = 1                     # - Enables more verbose logging. 
+# export AQ_DRM_DEVICES =                 # - Set an explicit list of DRM devices (GPUs) to use. It’s a colon-separated list of paths, with the first being the primary. E.g. /dev/dri/card1:/dev/dri/card0
+# export AQ_MGPU_NO_EXPLICIT = 1          # - Disables explicit syncing on mgpu buffers
+# export AQ_NO_MODIFIERS = 1              # - Disables modifiers for DRM buffers
+
+export AQ_NO_ATOMIC,1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.

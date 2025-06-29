@@ -3,33 +3,54 @@
 #############################
 
 # See https://wiki.hyprland.org/Configuring/Environment-variables/
-env = GBM_BACKEND=nvidia-drm  ## it causes issues like Hyprland crashing so care
-# firefox
-#env = MOZ_ENABLE_WAYLAND,1
-#env = __NV_PRIME_RENDER_OFFLOAD,1 
-#env = __VK_LAYER_NV_optimus,NVIDIA_only
-#env = WLR_DRM_NO_ATOMIC,1
-# vulkan
-#env = WLR_RENDERER,vulkan
-env = QT_QPA_PLATFORMTHEME,qt5ct
-env = GDK_BACKEND,wayland,x11
-env = QT_QPA_PLATFORM,wayland;xcb
-env = CLUTTER_BACKEND,wayland
-env = XDG_CURRENT_DESKTOP,Hyprland
-env = XDG_SESSION_DESKTOP,Hyprland
-env = XDG_SESSION_TYPE,wayland
-env = QT_WAYLAND_DISABLE_WINDOWDECORATION,1
-env = QT_AUTO_SCREEN_SCALE_FACTOR,1  # Removed duplicate
-env = WLR_RENDERER_ALLOW_SOFTWARE,1
-env = XCURSOR_SIZE,24
-env = GTK_THEME,Adwaita:dark
-# NVIDIA 
-# This is from Hyprland Wiki but my Hyprland keeps crashing when I enabled this variables
-env = WLR_NO_HARDWARE_CURSORS,1  # Uncommented; enable if needed for NVIDIA
-env = LIBVA_DRIVER_NAME,nvidia
-env = __GL_GSYNC_ALLOWED,1
-env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-env = NVD_BACKEND,direct
 
-env = ELECTRON_OZONE_PLATFORM_HINT,wayland
-env = XCURSOR_THEME,Bibata-Modern-Classic
+# Toolkit Backend Variables
+export GDK_BACKEND,wayland,x11
+export QT_QPA_PLATFORM,wayland;xcb
+export SDL_VIDEODRIVER,wayland # Set to x11 if games that provider older version of SDL have compat. issues
+export CLUTTER_BACKEND,wayland
+
+# XDG Specifications
+export XDG_CURRENT_DESKTOP,Hyprland
+export XDG_SESSION_TYPE,wayland
+export XDG_SESSION_DESKTOP,Hyprland
+
+# Qt Variables
+export QT_AUTO_SCREEN_SCALE_FACTOR,1  # Removed duplicate
+# export QT_QPA_PLATFORM,wayland;xcb
+export QT_WAYLAND_DISABLE_WINDOWDECORATION,1
+export QT_QPA_PLATFORMTHEME,qt5ct
+
+
+# NVIDIA Specific 
+export GBM_BACKEND,nvidia-drm                # it causes issues like Hyprland crashing so care
+export __GLX_VENDOR_LIBRARY_NAME,nvidia
+export LIBVA_DRIVER_NAME,nvidia
+export __GL_GSYNC_ALLOWED,1                  # - Controls if G-Sync capable monitors should use Variable Refresh Rate (VRR)
+export __GL_VRR_ALLOWED,0                    # - Controls if Adaptive Sync should be used. Recommended to set as 0 to avoid having problems with some games
+
+
+# Themeing Related Variables
+export GTK_THEME,Adwaita:dark
+export XCURSOR_THEME,Bibata-Modern-Classic
+export XCURSOR_SIZE,24
+
+
+# From other sections of docs
+
+export WLR_RENDERER_ALLOW_SOFTWARE,1
+export WLR_NO_HARDWARE_CURSORS,1  # Uncommented; enable if needed for NVIDIA
+export NVD_BACKEND,direct
+export ELECTRON_OZONE_PLATFORM_HINT,wayland
+
+# firefox
+export MOZ_ENABLE_WAYLAND,1
+
+
+# Older variables that were already/still are; commented out.
+#
+#export __NV_PRIME_RENDER_OFFLOAD,1 
+#export __VK_LAYER_NV_optimus,NVIDIA_only
+#export WLR_DRM_NO_ATOMIC,1
+# vulkan
+#export WLR_RENDERER,vulkan
