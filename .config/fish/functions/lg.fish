@@ -2,8 +2,7 @@
 
 function lg 
     if test -z $argv
-        set -gx lg lazygit
-        # $lg
+        alias lg lazygit $argv
         command lazygit $argv
     else
         command lazygit $argv
