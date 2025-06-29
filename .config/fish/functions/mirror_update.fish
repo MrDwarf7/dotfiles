@@ -33,15 +33,15 @@ function mirror_update
     rate-mirrors --save=$TMPFILE arch --max-delay=21600
 
     printf "Moving mirrorlist from %s to /etc/pacman.d/mirrorlist\n" $TMPFILE
-    sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
-    sudo mv $TMPFILE /etc/pacman.d/mirrorlist
-    sudo chown root:root /etc/pacman.d/mirrorlist # Re-secure the mirrorlist file before leaving sudo
+    sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup || return 1
+    sudo mv $TMPFILE /etc/pacman.d/mirrorlist || return 1
+    sudo chown root:root /etc/pacman.d/mirrorlist                                   # Re-secure the mirrorlist file before leaving sudo
     # Make it readable by everyone
     sudo chmod 644 /etc/pacman.d/mirrorlist
 
 
     ua_drop_caches
-    $PKG_MANAGER -Syyu --noconfirm
+    $PKG_MANAGER -Syyu --noconfirm || return $status
 
     # rate-mirrors --save=$TMPFILE arch --max-delay=21600
     # sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup

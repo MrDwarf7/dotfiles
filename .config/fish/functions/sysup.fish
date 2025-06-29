@@ -1,7 +1,6 @@
 #!/usr/bin/env fish
 
 function sysup --description 'System update function'
-    mirror_update
-    # rust_update
+    mirror_update || return $status
     command rustup update
 end
