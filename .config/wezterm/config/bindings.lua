@@ -85,8 +85,8 @@ local key_opts = {
 	{ key = "L", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(1) }, -- Moving
 
 	-- TODO: Perhaps we can use TAB // SHIFT+Tab for moving them?
-	{ key = ".", mods = "LEADER", action = act.MoveTabRelative(1) },
 	{ key = ",", mods = "LEADER", action = act.MoveTabRelative(-1) },
+	{ key = ".", mods = "LEADER", action = act.MoveTabRelative(1) },
 
 	-- { key = "r", mods = "LEADER", action = act.EmitEvent("tabs.manual-update-tab-title") },
 
