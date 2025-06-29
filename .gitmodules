@@ -1,3 +1,6 @@
 [submodule "installer"]
 	path = installer
 	url = git@github.com:MrDwarf7/MAGA_make_arch_great_again.git
+[submodule ".config/ghostty/ghostty-shaders"]
+	path = .config/ghostty/ghostty-shaders
+	url = https://github.com/hackr-sh/ghostty-shaders.git
