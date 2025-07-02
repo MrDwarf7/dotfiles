@@ -46,9 +46,9 @@
     "ein.exe",
     "gix.exe",
 ]
-"helix-term 25.1.0 (path+file:///E:/GitHub/Rust/OTHER_people/evil-helix/helix-term)" = ["hx.exe"]
+# "helix-term 25.1.0 (path+file:///E:/GitHub/Rust/OTHER_people/evil-helix/helix-term)" = ["hx.exe"]
+# "kill_open_programs 0.1.0 (path+file:///E:/GitHub/Rust/kill_open_programs)" = ["kill_open_programs.exe"]
 "just 1.40.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
-"kill_open_programs 0.1.0 (path+file:///E:/GitHub/Rust/kill_open_programs)" = ["kill_open_programs.exe"]
 "knope 0.21.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["knope.exe"]
 "lazyjj 0.5.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["lazyjj.exe"]
 "loco 0.15.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["loco.exe"]
