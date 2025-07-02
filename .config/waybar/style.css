@@ -1,0 +1,254 @@
+/* -- very old way when using wal / pywal to generate colors -- */
+/* @import url('../../.cache/wal/colors-waybar.css'); */
+
+
+/* @define-color foreground #aebecb; */
+/* @define-color background #12171f; */
+/* @define-color cursor #aebecb; */
+
+/* @define-color color0 #12171f; */
+/* @define-color color1 #3B4454; */
+/* @define-color color2 #3D4D63; */
+/* @define-color color3 #505364; */
+/* @define-color color4 #A95D66; */
+/* @define-color color5 #A2857D; */
+/* @define-color color6 #597190; */
+/* @define-color color7 #aebecb; */
+/* @define-color color8 #79858e; */
+/* @define-color color9 #3B4454; */
+/* @define-color color10 #3D4D63; */
+/* @define-color color11 #505364; */
+/* @define-color color12 #A95D66; */
+/* @define-color color13 #A2857D; */
+/* @define-color color14 #597190; */
+/* @define-color color15 #aebecb; */
+
+@import url('./defines.css');
+
+* {
+    font-size: 14px;
+    font-family: "Mononoki Nerd Font", monospace;
+    /* font-size: 15px; */
+    /* font-family: "CodeNewRoman Nerd Font Propo"; */
+}
+
+window#waybar {
+    all: unset;
+}
+
+.modules-left {
+    padding: 7px;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background: alpha(@background, .6);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+.modules-center {
+    padding: 7px;
+    margin-top: 10px;
+    margin-right: 0px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    border-radius: 10px;
+    background: alpha(@background, .6);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+    min-width: 150.5px;
+}
+
+.modules-right {
+    padding: 7px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    border-radius: 10px;
+    background: alpha(@background, .6);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+tooltip {
+    background: @background;
+    color: @color7;
+}
+
+#clock:hover,
+#custom-pacman:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover {
+    transition: all .3s ease;
+    color: @color9;
+}
+
+#custom-notification {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+}
+
+#clock {
+    font-size: 16px;
+    padding: 0px 5px;
+    color: @color7;
+    transition: all .3s ease;
+}
+
+#custom-pacman {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+
+}
+
+#workspaces {
+    padding: 0px 5px;
+    text-shadow: none;
+}
+
+#workspaces button {
+    all: unset;
+    margin-top: 0px;
+    margin-right: 3px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    padding: 0px 2px;
+    color: rgba(0, 0, 0, 0);
+    text-shadow: none;
+    background: @color2;
+    border-radius: 50%;
+    transition: all .3s;
+    min-width: 15px;
+}
+
+#workspaces button:hover {
+    color: rgba(0, 0, 0, 0);
+    border: none;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.active {
+    border: none;
+    padding: 0px 2px;
+    border-radius: 10px;
+    background-color: #64727D;
+    min-width: 30px;
+}
+
+#workspaces button.active:hover {
+    background: @color2;
+}
+
+#workspaces button.empty {
+    color: transparent;
+    border: none;
+    background: alpha(@background, .5);
+}
+
+#workspaces button.empty:hover {
+    color: rgba(0, 0, 0, 0);
+    border: none;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.empty.active {
+    color: rgba(0, 0, 0, 0);
+    border: none;
+    text-shadow: none;
+    background: @color1;
+}
+
+#workspaces button.empty.active:hover {
+    background: @color2;
+}
+
+#bluetooth {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+}
+
+#network {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+}
+
+#battery {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+}
+
+#battery.charging {
+    color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+    color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#group-expand {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
+
+#custom-expand {
+    padding: 0px 5px;
+    color: alpha(@foreground, .2);
+    text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+    transition: all .3s ease;
+}
+
+#custom-expand:hover {
+    color: rgba(255, 255, 255, .2);
+    text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
+}
+
+#custom-colorpicker {
+    padding: 0px 5px;
+}
+
+#cpu,
+#memory,
+#temperature {
+    padding: 0px 5px;
+    transition: all .3s ease;
+    color: @color7;
+}
+
+#custom-endpoint {
+    color: transparent;
+    text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+}
+
+#tray {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
+
+#tray menu * {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
+
+#tray menu separator {
+    padding: 0px 5px;
+    transition: all .3s ease;
+}
