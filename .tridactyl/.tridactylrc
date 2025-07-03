@@ -29,6 +29,11 @@ set findhighlighttimeout 2000
 set smoothscroll true
 
 unbind p 
+unbind j
+unbind k
+
+unbind <S-j>
+unbind <S-k>
 
 " URL Binds
 bindurl ^https://github.com gi hint -Vc .AppHeader-searchButton
@@ -108,8 +113,12 @@ bind D composite tabprev; tabclose #
 
 " Tabs 
 " Vertical tabs are organized backwards
-bind <S-k> tabprev +1
-bind <S-j> tabnext +1
+" bind <S-k> tabprev
+" bind <S-j> tabnext
+
+bind K tabprev
+bind J tabnext
+
 bind x tabclose
 
 bind gx0 tabclosealltoleft
