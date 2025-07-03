@@ -63,6 +63,9 @@ Plug 'tommcdo/vim-exchange'
 Plug 'vim-scripts/ReplaceWithRegister' " This may not be required due to having the _dP binding? But it also handles newline yanks into non-newline pastes
 Plug 'dbakker/vim-paragraph-motion'
 
+" fuzzy finder plugin, not sure if Plug will handle it tho
+" Plug 'MituuZ/fuzzier'
+
 " Plugin activation / Specifics------------------
 " set sneak " Is now depr.
 " set which-key
