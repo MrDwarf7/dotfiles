@@ -7,7 +7,7 @@ email = "129040985+MrDwarf7@users.noreply.github.com"
 "diff removed token" = { bg = "#221111" }                  #, underline = false }
 
 [ui]
-default-command = "log"         # disable the message banner
+default-command = ["log", "--limit", "10"] # disable the message banner
 conflict-marker-style = "git"
 diff-editor = ":builtin"
 diff-formatter = ":color-words"
