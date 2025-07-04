@@ -6,3 +6,7 @@ email = "129040985+MrDwarf7@users.noreply.github.com"
 conflict-marker-style = "git"
 default-command = "log"
 diff-editor = ":builtin"
+
+[revset-aliases]
+_ = '@'
+H = '@'
