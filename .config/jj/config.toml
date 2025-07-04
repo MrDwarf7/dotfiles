@@ -2,8 +2,14 @@
 name = "MrDwarf7"
 email = "129040985+MrDwarf7@users.noreply.github.com"
 
+[colors]
+"diff added token" = { bg = "#002200", underline = false } # same color as "green"
+"diff removed token" = { bg = "#221111" }                  #, underline = false }
+
 [ui]
+default-command = "log"         # disable the message banner
 conflict-marker-style = "git"
-default-command = "log"
 diff-editor = ":builtin"
+diff-formatter = ":color-words"
+# diff-formatter = [ "delta", "--color-only", "$left", "$right" ] # ":color-words" (default) | ":git" | ":summary" | ":stat" | ":types" | ":name-only" | (some external tool)
 pager = ":builtin"
