@@ -37,11 +37,28 @@
   },
   "custom/notification": {
     "tooltip": false,
-    "format": "",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+      "none": " ",
+      "dnd-notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+      "dnd-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
     "escape": true
   },
+  // "custom/notification": {
+  //   "tooltip": false,
+  //   "format": "",
+  //   "on-click": "swaync-client -t -sw",
+  //   "on-click-right": "swaync-client -d -sw",
+  //   "escape": true
+  //       
+  // },
   "custom/terminal": {
     "tooltip": "Start your terminal",
     "format": "|_|",
@@ -80,7 +97,7 @@
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\n{device_address}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}\n{device_address}\n{device_battery_percentage}%",
-    "on-click-right": "blueman-manager",
+    "on-click-right": "blueman-manager"
   },
   "battery": {
     "interval": 30,
