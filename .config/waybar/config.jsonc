@@ -39,12 +39,13 @@
     "tooltip": false,
     "format": "",
     "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
   "custom/terminal": {
     "tooltip": "Start your terminal",
     "format": "|_|",
-    "on-click": "wezterm",
+    "on-click": "wezterm"
   },
   "clock": {
     "format": "{:%I:%M:%S %p} ",

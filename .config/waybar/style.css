@@ -76,6 +76,7 @@ tooltip {
     color: @color7;
 }
 
+#custom-terminal:hover,
 #clock:hover,
 #custom-pacman:hover,
 #custom-notification:hover,
@@ -86,7 +87,15 @@ tooltip {
 #memory:hover,
 #temperature:hover {
     transition: all .3s ease;
+    color: @color8;
+}
+
+
+#custom-terminal {
+    padding: 0px 5px;
+    transition: all .3s ease;
     color: @color7;
+
 }
 
 #custom-notification {
