@@ -23,7 +23,8 @@
 /* @define-color color14 #597190; */
 /* @define-color color15 #aebecb; */
 
-@import url('./defines.css');
+/* @import url('./defines.css'); */
+@import url('./waybar-colors.css');
 
 * {
     font-size: 14px;
@@ -85,7 +86,7 @@ tooltip {
 #memory:hover,
 #temperature:hover {
     transition: all .3s ease;
-    color: @color9;
+    color: @color7;
 }
 
 #custom-notification {
@@ -131,7 +132,8 @@ tooltip {
 #workspaces button:hover {
     color: rgba(0, 0, 0, 0);
     border: none;
-    background: rgba(0, 0, 0, 0.2);
+    background: @color7;
+        /* rgba(0, 0, 0, 0.2); */
 }
 
 #workspaces button.active {
@@ -162,7 +164,7 @@ tooltip {
     color: rgba(0, 0, 0, 0);
     border: none;
     text-shadow: none;
-    background: @color1;
+    background: @color2;
 }
 
 #workspaces button.empty.active:hover {
