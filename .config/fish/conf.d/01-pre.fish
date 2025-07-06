@@ -35,4 +35,5 @@
 01eval_if_pacman zoxide "zoxide init fish | source"
 
 01eval_if_pacman jj "jj util completion fish | source"
+01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 # 01eval_if_pacman "mise" "mise activate fish | source"
