@@ -12,7 +12,7 @@ return {
 	font_size = font_size,
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
 	-- There's a setting here for something along the lines of missing_unicode_fonts or similar we can set
-	warn_about_missing_glyphs = true,
+	warn_about_missing_glyphs = false,
 
 	text_background_opacity = 1.0, --0.6
 
