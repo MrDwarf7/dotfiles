@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set utility "playerctl"
+set utility playerctl
 set player spotify
 set volume_increment 0.1
 
@@ -14,7 +14,7 @@ function base_command
 end
 
 function curl_track_img
-    curl -s (base_command metadata mpris:artUrl)| wezterm imgcat
+    curl -s (base_command metadata mpris:artUrl) | wezterm imgcat
 end
 
 function info_generator
@@ -28,73 +28,71 @@ function info_generator
 
 end
 
-
 function psp --description "[P]layerctl [S][P]otify"
     # set base_command (playerctl -p spotify)
     set check_running (playerctl -l)
 
-    if test -z $argv[1] 
+    if test -z $argv[1]
         printf "Must supply an argument"
         return 2
     end
     set com $argv[1]
 
-
-    if $check_running &> /dev/null -ne "spotify"
+    if $check_running &>/dev/null -ne spotify
         printf "This commands required spotify to be running!"
         return 1
     end
 
     # length check
 
-   switch $com
+    switch $com
         # Basic player commands
-    case 'n'
-        base_command "next"
-        return $status
-    case 'p'
-        base_command "previous"
-        return $status
-    case 'st'
-        base_command "stop"
-        return $status
-    case 'pl'
-        base_command "play"
-        return $status
+        case n
+            base_command next
+            return $status
+        case p
+            base_command previous
+            return $status
+        case st
+            base_command stop
+            return $status
+        case pl
+            base_command play
+            return $status
 
-        # Volume controls
-    case 'vu'
-        base_command volume $volume_increment+
-        return $status
-    case 'vd'
-        base_command volume $volume_increment-
-        return $status
+            # Volume controls
+        case vu
+            base_command volume $volume_increment+
+            return $status
+        case vd
+            base_command volume $volume_increment-
+            return $status
 
-        # Loop controls
-    case 'lpt'
-        base_command loop "Track"
-        return $status
-    case 'lpp'
-        base_command loop "Playlist"
-        return $status
-    case 'lpn'
-        base_command loop "None"
-        return $status
+            # Loop controls
+        case lpt
+            base_command loop Track
+            return $status
+        case lpp
+            base_command loop Playlist
+            return $status
+        case lpn
+            base_command loop None
+            return $status
 
-        # Info command
-    case 'i'
-        base_command metadata
-        return $status
-  
-    case 'oo'
-        info_generator
-        # base_command metadata
-        return $status
+            # Info command
+        case i
+            base_command metadata
+            return $status
 
-        # Default case handler
-    case '*'
-        printf 'No argument recognized.'
-        return 3
+        case oo
+            info_generator
+            # base_command metadata
+            return $status
+
+            # Default case handler
+        case '*'
+            printf 'No argument recognized.'
+            return 3
     end
     # We auto handle the fallthrough via * so, shouldn't really get here tbh
     return 99
