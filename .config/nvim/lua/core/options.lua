@@ -34,7 +34,7 @@ if vim.g.os == "Windows_NT" then
 		vim.g.my_dev = "C:\\nvim_dev"
 	end
 else
-	local nix_dev = vim.fn.expand("$HOME") .. "/documents/nvim_dev"
+	local nix_dev = vim.fn.expand("$HOME") .. "/Documents/nvim_dev"
 	if check.smkdir(vim.g.os, nix_dev) then
 		vim.g.my_dev = nix_dev
 	end
