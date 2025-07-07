@@ -24,8 +24,8 @@ set -gx SHELL fish
 # Removes the greeting text
 set -gx fish_greeting
 
-set -gx GITHUB_PROJECTS $HOME/documents/GitHub_Projects
-set -gx GITHUB_WORK_PROJECTS $HOME/documents/GitHub_WorkProjects
+set -gx GITHUB_PROJECTS $HOME/Documents/GitHub_Projects
+set -gx GITHUB_WORK_PROJECTS $HOME/Documents/GitHub_WorkProjects
 
 set -gx DATA_ON_DEMAND_BASE $GITHUB_WORK_PROJECTS/Web/Data-On-Demand
 set -gx DATA_ON_DEMAND_BACK $DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
@@ -41,6 +41,7 @@ set -gx DOT_CONFIG $DOT_DIR/.config
 fish_add_path --append $XDG_CONFIG_HOME/.zvm/bin
 fish_add_path --append $ZVM_INSTALL
 # fish_add_path --prepend $HOME/.local/bin
+fish_add_path --prepend $HOME/.xdg/data/JetBrains/Toolbox/scripts
 fish_add_path --prepend $HOME/.xdg/bin
 
 # set -gx PATH $PATH $XDG_CONFIG_HOME/.zvm/bin
