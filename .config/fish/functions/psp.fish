@@ -38,7 +38,7 @@ function psp --description "[P]layerctl [S][P]otify"
     end
     set com $argv[1]
 
-    if $check_running &>/dev/null -ne spotify
+    if test $check_running &>/dev/null -ne spotify
         printf "This commands required spotify to be running!"
         return 1
     end
