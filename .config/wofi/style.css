@@ -18,7 +18,7 @@ window {
   all: unset;
   padding: 20px;
   border-radius: 0px;
-  background-color: alpha(#121826, .8);
+  background-color: alpha(#0A0A0C, .8);
 }
 
 #inner-box {
@@ -47,8 +47,8 @@ window {
   outline: none;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
   border-radius: 10px;
-  background-color: alpha(121826, .2);
-  color: #B9A8B5;
+  background-color: alpha(0A0A0C, .2);
+  color: #B2B2B4;
 }
 
 /* magnifying class on input box */
@@ -73,7 +73,7 @@ window {
   margin: 4px;
   border: none;
   outline: none;
-  color: #B9A8B5;
+  color: #B2B2B4;
 }
 
 /* List items being searched */
@@ -85,7 +85,7 @@ window {
 
 #entry arrow {
   border: none;
-  color: #927B8D;
+  color: #89888C;
 }
 
 #entry:selected {
@@ -98,9 +98,9 @@ window {
 }
 
 #entry:selected #text {
-  color: #C2586C;
+  color: #A093AA;
 }
 
 #entry:drop(active) {
-  background-color: #675663;
+  background-color: #605F62;
 }
