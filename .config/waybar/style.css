@@ -132,7 +132,7 @@ tooltip {
   padding: 0px 2px;
   color: rgba(0, 0, 0, 0);
   text-shadow: none;
-  background: @color2;
+  background: @color4;
   border-radius: 50%;
   transition: all .3s;
   min-width: 15px;
@@ -154,7 +154,7 @@ tooltip {
 }
 
 #workspaces button.active:hover {
-  background: @color2;
+  background: @color6;
 }
 
 #workspaces button.empty {
@@ -173,11 +173,11 @@ tooltip {
   color: rgba(0, 0, 0, 0);
   border: none;
   text-shadow: none;
-  background: @color2;
+  background: @color8;
 }
 
 #workspaces button.empty.active:hover {
-  background: @color2;
+  background: @color8;
 }
 
 #bluetooth {
