@@ -51,6 +51,7 @@ alpha = 60
 ## Css templates
 
 wofi.template = 'colors-wofi.css'
+# wofi.target = '~/.config/wofi/wofi-colors.css'
 wofi.target = '~/.config/wofi/style.css'
 
 waybar.template = 'colors-waybar.css'
