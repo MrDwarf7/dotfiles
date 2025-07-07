@@ -54,6 +54,9 @@ wofi.template = 'colors-wofi.css'
 # wofi.target = '~/.config/wofi/wofi-colors.css'
 wofi.target = '~/.config/wofi/style.css'
 
+tofi.template = 'colors-tofi'
+tofi.target = '~/.config/tofi/config'
+
 waybar.template = 'colors-waybar.css'
 waybar.target = '~/.config/waybar/waybar-colors.css'
 

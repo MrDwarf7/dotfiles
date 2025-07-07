@@ -18,7 +18,7 @@ window {
   all: unset;
   padding: 20px;
   border-radius: 0px;
-  background-color: alpha({{background}}, .8);
+  background-color: {{background | strip}}{{80 | alpha_hexa}};
 }
 
 #inner-box {
@@ -47,7 +47,7 @@ window {
   outline: none;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
   border-radius: 10px;
-  background-color: alpha({{background | strip}}, .2);
+  background-color: {{background | strip}}{{20 | alpha_hexa}};
   color: {{foreground}};
 }
 
