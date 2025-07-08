@@ -23,7 +23,10 @@
 		"Linemode"
 	],
 	"diagnostics.disable": [
-		"unused-local"
+		"unused-local",
+		"missing-fields",
+		"undefined-global",
+		"inject-field"
 	],
 	"completion.autoRequire": false
 }
