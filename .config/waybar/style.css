@@ -1,30 +1,6 @@
-/* -- very old way when using wal / pywal to generate colors -- */
-/* @import url('../../.cache/wal/colors-waybar.css'); */
-
-
-/* @define-color foreground #aebecb; */
-/* @define-color background #12171f; */
-/* @define-color cursor #aebecb; */
-
-/* @define-color color0 #12171f; */
-/* @define-color color1 #3B4454; */
-/* @define-color color2 #3D4D63; */
-/* @define-color color3 #505364; */
-/* @define-color color4 #A95D66; */
-/* @define-color color5 #A2857D; */
-/* @define-color color6 #597190; */
-/* @define-color color7 #aebecb; */
-/* @define-color color8 #79858e; */
-/* @define-color color9 #3B4454; */
-/* @define-color color10 #3D4D63; */
-/* @define-color color11 #505364; */
-/* @define-color color12 #A95D66; */
-/* @define-color color13 #A2857D; */
-/* @define-color color14 #597190; */
-/* @define-color color15 #aebecb; */
-
-/* @import url('./defines.css'); */
-@import url('./waybar-colors.css');
+/* ####################################################### */
+/* ### This entire file is managed entirely by wallust ### */
+/* ####################################################### */
 
 * {
   font-size: 14px;
@@ -44,7 +20,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 10px;
   border-radius: 10px;
-  background: alpha(@background, .6);
+  background: 01060799;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -55,7 +31,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: alpha(@background, .6);
+  background: 01060799;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
   min-width: 150.5px;
 }
@@ -67,13 +43,13 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: alpha(@background, .6);
+  background: 01060799;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
 tooltip {
-  background: @background;
-  color: @color7;
+  background: #010607;
+  color: #798184;
 }
 
 #custom-terminal:hover,
@@ -87,35 +63,25 @@ tooltip {
 #memory:hover,
 #temperature:hover {
   transition: all .3s ease;
-  color: @color8;
+  color: #545A5C;
 }
 
 
-#custom-terminal {
+#custom-terminal,
+#custom-notification,
+#custom-pacman
+{
   padding: 0px 5px;
   transition: all .3s ease;
-  color: @color7;
+  color: #798184;
 
-}
-
-#custom-notification {
-  padding: 0px 5px;
-  transition: all .3s ease;
-  color: @color7;
 }
 
 #clock {
   font-size: 16px;
   padding: 0px 5px;
-  color: @color7;
   transition: all .3s ease;
-}
-
-#custom-pacman {
-  padding: 0px 5px;
-  transition: all .3s ease;
-  color: @color7;
-
+  color: #798184;
 }
 
 #workspaces {
@@ -132,7 +98,7 @@ tooltip {
   padding: 0px 2px;
   color: rgba(0, 0, 0, 0);
   text-shadow: none;
-  background: @color4;
+  background: #974D3D;
   border-radius: 50%;
   transition: all .3s;
   min-width: 15px;
@@ -141,8 +107,7 @@ tooltip {
 #workspaces button:hover {
   color: rgba(0, 0, 0, 0);
   border: none;
-  background: @color7;
-  /* rgba(0, 0, 0, 0.2); */
+  background: #798184;
 }
 
 #workspaces button.active {
@@ -154,13 +119,13 @@ tooltip {
 }
 
 #workspaces button.active:hover {
-  background: @color6;
+  background: #597BA5;
 }
 
 #workspaces button.empty {
   color: transparent;
   border: none;
-  background: alpha(@background, .5);
+  background: #01060780;
 }
 
 #workspaces button.empty:hover {
@@ -173,29 +138,20 @@ tooltip {
   color: rgba(0, 0, 0, 0);
   border: none;
   text-shadow: none;
-  background: @color8;
+  background: #545A5C;
 }
 
 #workspaces button.empty.active:hover {
-  background: @color8;
+  background: #545A5C;
 }
 
-#bluetooth {
+#bluetooth,
+#network,
+#battery
+{
   padding: 0px 5px;
   transition: all .3s ease;
-  color: @color7;
-}
-
-#network {
-  padding: 0px 5px;
-  transition: all .3s ease;
-  color: @color7;
-}
-
-#battery {
-  padding: 0px 5px;
-  transition: all .3s ease;
-  color: @color7;
+  color: #798184;
 }
 
 #battery.charging {
@@ -222,7 +178,7 @@ tooltip {
 
 #custom-expand {
   padding: 0px 5px;
-  color: alpha(@foreground, .2);
+  color: #A7ADAE33;
   text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
   transition: all .3s ease;
 }
@@ -241,7 +197,7 @@ tooltip {
 #temperature {
   padding: 0px 5px;
   transition: all .3s ease;
-  color: @color7;
+  color: #798184;
 }
 
 #custom-endpoint {
