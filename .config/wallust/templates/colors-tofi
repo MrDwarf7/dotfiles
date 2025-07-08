@@ -71,11 +71,11 @@
 	# alternate-result-background-corner-radius = 0
 
     ## Selection text
-	selection-color = {{cursor}}{{100 | alpha_hexa}}
+	selection-color = {{color2}}{{100 | alpha_hexa}}
 	selection-background = #FFFFFF00
 	selection-background-padding = 0
 	selection-background-corner-radius = 0
-	selection-match-color = {{color3 | lighten(0.5)}}{{90 | alpha_hexa}}
+	selection-match-color = {{cursor | lighten(0.2)}}{{90 | alpha_hexa}}
 
 #
 ### Text cursor theme
@@ -128,7 +128,7 @@
 	height = 600
 
 	# Window background color
-    background-color = {{background | darken(0.2)}}{{70 | alpha_hexa}}
+    background-color = {{background | darken(0.1)}}{{60 | alpha_hexa}}
     #0A0A0CCC
 
 	# Width of the border outlines in pixels.
