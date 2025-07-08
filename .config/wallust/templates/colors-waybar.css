@@ -3,8 +3,8 @@
 /* ####################################################### */
 
 * {
-  font-size: 14px;
   font-family: "Mononoki Nerd Font", monospace;
+  font-size: 16px;
   /* font-size: 15px; */
   /* font-family: "CodeNewRoman Nerd Font Propo"; */
 }
@@ -20,7 +20,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 10px;
   border-radius: 10px;
-  background: {{background | strip}}{{60 | alpha_hexa }};
+  background: alpha({{background}}, .6);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -31,7 +31,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: {{background | strip}}{{60 | alpha_hexa }};
+  background: alpha({{background}}, .6);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
   min-width: 150.5px;
 }
@@ -43,7 +43,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: {{background | strip}}{{60 | alpha_hexa }};
+  background: alpha({{background}}, 0.6);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -119,13 +119,13 @@ tooltip {
 }
 
 #workspaces button.active:hover {
-  background: {{color6}};
+  background: {{color4}};
 }
 
 #workspaces button.empty {
   color: transparent;
   border: none;
-  background: {{background}}{{50 | alpha_hexa }};
+  background: alpha({{background}}, .5);
 }
 
 #workspaces button.empty:hover {
@@ -178,7 +178,7 @@ tooltip {
 
 #custom-expand {
   padding: 0px 5px;
-  color: {{foreground}}{{20 | alpha_hexa}};
+  color: alpha({{foreground}}, .2);
   text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
   transition: all .3s ease;
 }
