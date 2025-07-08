@@ -32,11 +32,11 @@ clipP = "clippy -- -W clippy::pedantic"
 # rustc-wrapper = 'C:\Users\<< YOUR USERNAME>>\scoop\shims\sccache.exe'
 
 ## Experimental features
-[unstable]
-codegen-backend = true
+# [unstable]
+# codegen-backend = true
 
-[profile.dev]
-codegen-backend = "cranelift"
+# [profile.dev]
+# codegen-backend = "cranelift"
 
 ## Other alias examples from docs
 # recursive_example = "rr --example recursions"
