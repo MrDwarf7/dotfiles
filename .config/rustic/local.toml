@@ -1,0 +1,47 @@
+# rustic config file to backup /home, /etc and /root to a local repository
+#
+# backup usage: "rustic -P local backup
+# cleanup:      "rustic -P local forget --prune
+#
+# global options: These options are used for all commands.
+[global]
+log-level = "debug"
+# log-file = "/var/log/rustic/2025_07_08__2.log"
+
+
+[repository]
+repository = "/mnt/linux_data/rustic/"
+# password-file = "/root/.secret/rustic_secret"
+password-file = "/home/dwarf/.secret/rustic_secret"
+
+no-cache = true # no cache needed for local repository
+
+[forget]
+keep-hourly = 20
+keep-daily = 14
+keep-weekly = 8
+keep-monthly = 24
+keep-yearly = 10
+
+[backup]
+exclude-if-present = [".nobackup", "CACHEDIR.TAG"]
+one-file-system = true
+
+[[backup.snapshots]]
+sources = ["/home"]
+git-ignore = false
+globs = [
+  #
+  "!/home/*/.cache/*",
+  "!/home/*/.nuget/*",
+  "!/home/*/Downloads/arch_linux_isos/*",
+  "!/home/*/Documents/GitHub_Projects/**/.venv",
+  "!/home/*/Documents/GitHub_Projects/Rust/*/target/",
+  "!/home/*/Documents/GitHub_Projects/Web/**/node_modules",
+]
+
+[[backup.snapshots]]
+sources = ["/etc"]
+
+[[backup.snapshots]]
+sources = ["/root"]
