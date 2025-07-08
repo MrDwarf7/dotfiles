@@ -1,21 +1,221 @@
-@define-color foreground {{foreground}};
-@define-color background {{background}};
+/* ####################################################### */
+/* ### This entire file is managed entirely by wallust ### */
+/* ####################################################### */
 
-@define-color cursor {{cursor}};
+* {
+  font-size: 14px;
+  font-family: "Mononoki Nerd Font", monospace;
+  /* font-size: 15px; */
+  /* font-family: "CodeNewRoman Nerd Font Propo"; */
+}
 
-@define-color color0 {{color0}};
-@define-color color1 {{color1}};
-@define-color color2 {{color2}};
-@define-color color3 {{color3}};
-@define-color color4 {{color4}};
-@define-color color5 {{color5}};
-@define-color color6 {{color6}};
-@define-color color7 {{color7}};
-@define-color color8 {{color8}};
-@define-color color9 {{color9}};
-@define-color color10 {{color10}};
-@define-color color11 {{color11}};
-@define-color color12 {{color12}};
-@define-color color13 {{color13}};
-@define-color color14 {{color14}};
-@define-color color15 {{color15}};
+window#waybar {
+  all: unset;
+}
+
+.modules-left {
+  padding: 7px;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  border-radius: 10px;
+  background: {{background | strip}}{{60 | alpha_hexa }};
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+.modules-center {
+  padding: 7px;
+  margin-top: 10px;
+  margin-right: 0px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  border-radius: 10px;
+  background: {{background | strip}}{{60 | alpha_hexa }};
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+  min-width: 150.5px;
+}
+
+.modules-right {
+  padding: 7px;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  margin-left: 0px;
+  border-radius: 10px;
+  background: {{background | strip}}{{60 | alpha_hexa }};
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+}
+
+tooltip {
+  background: {{background}};
+  color: {{color7}};
+}
+
+#custom-terminal:hover,
+#clock:hover,
+#custom-pacman:hover,
+#custom-notification:hover,
+#bluetooth:hover,
+#network:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover {
+  transition: all .3s ease;
+  color: {{color8}};
+}
+
+
+#custom-terminal,
+#custom-notification,
+#custom-pacman
+{
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: {{color7}};
+
+}
+
+#clock {
+  font-size: 16px;
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#workspaces {
+  padding: 0px 5px;
+  text-shadow: none;
+}
+
+#workspaces button {
+  all: unset;
+  margin-top: 0px;
+  margin-right: 3px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  padding: 0px 2px;
+  color: rgba(0, 0, 0, 0);
+  text-shadow: none;
+  background: {{color4}};
+  border-radius: 50%;
+  transition: all .3s;
+  min-width: 15px;
+}
+
+#workspaces button:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  background: {{color7}};
+}
+
+#workspaces button.active {
+  border: none;
+  padding: 0px 2px;
+  border-radius: 10px;
+  background-color: #64727D;
+  min-width: 30px;
+}
+
+#workspaces button.active:hover {
+  background: {{color6}};
+}
+
+#workspaces button.empty {
+  color: transparent;
+  border: none;
+  background: {{background}}{{50 | alpha_hexa }};
+}
+
+#workspaces button.empty:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
+}
+
+#workspaces button.empty.active {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  text-shadow: none;
+  background: {{color8}};
+}
+
+#workspaces button.empty.active:hover {
+  background: {{color8}};
+}
+
+#bluetooth,
+#network,
+#battery
+{
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#battery.charging {
+  color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#group-expand {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#custom-expand {
+  padding: 0px 5px;
+  color: {{foreground}}{{20 | alpha_hexa}};
+  text-shadow: 0px 0px 2px rgba(0, 0, 0, .7);
+  transition: all .3s ease;
+}
+
+#custom-expand:hover {
+  color: rgba(255, 255, 255, .2);
+  text-shadow: 0px 0px 2px rgba(255, 255, 255, .5);
+}
+
+#custom-colorpicker {
+  padding: 0px 5px;
+}
+
+#cpu,
+#memory,
+#temperature {
+  padding: 0px 5px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#custom-endpoint {
+  color: transparent;
+  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+}
+
+#tray {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#tray menu * {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
