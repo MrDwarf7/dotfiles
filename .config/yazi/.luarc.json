@@ -1,0 +1,29 @@
+{
+	"$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+	"runtime.version": "Lua 5.4",
+	"workspace.library": [
+		"~/.config/yazi/plugins/types.yazi/",
+		"~/.config/yazi/plugins/diff.yazi/",
+		"~/.config/yazi/plugins/git.yazi/",
+		"~/.config/yazi/plugins/glow.yazi/",
+		"~/.config/yazi/plugins/hexyl.yazi/",
+		"~/.config/yazi/plugins/jump-to-char.yazi/",
+		"~/.config/yazi/plugins/miller.yazi/",
+		"~/.config/yazi/plugins/mime-ext.yazi/",
+		"~/.config/yazi/plugins/ouch.yazi/",
+		"~/.config/yazi/plugins/relative-motions.yazi/",
+		"~/.config/yazi/plugins/rich-preview.yazi/",
+		"~/.config/yazi/plugins/smart-enter.yazi/",
+		"~/.config/yazi/plugins/toggle-pane.yazi/",
+		"~/.config/yazi/plugins/types.yazi/"
+	],
+	"diagnostics.globals": [
+		"Status",
+		"th",
+		"Linemode"
+	],
+	"diagnostics.disable": [
+		"unused-local"
+	],
+	"completion.autoRequire": false
+}

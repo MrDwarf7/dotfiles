@@ -1,12 +1,6 @@
 ---@diagnostic disable: cast-local-type
 require("git"):setup()
 
--- require("starship"):setup({
--- 	hide_flags = false,
--- 	flags_after_prompt = true,
--- 	config_file = "~\\dotfiles\\.config\\starship\\starship_yazi.toml", -- Slightly altered version to deal with Yazi's spacing at top of panel
--- })
-
 require("relative-motions"):setup({ only_motions = true })
 
 th.git = th.git or {}
@@ -46,3 +40,28 @@ function Linemode:ctime_better()
 	-- local size = self._file:size()
 	-- return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "", time))
 end
+
+-- Show symlink(s) for the hovered item in the status bar (bar at bottom), similar to in the dir listings
+Status:children_add(function(self)
+	local h = self._current.hovered
+	if h and h.link_to then
+		return " -> " .. tostring(h.link_to)
+	else
+		return ""
+	end
+end, 3300, Status.LEFT)
+
+-- Show user/group of the hovered item (files) in the status bar
+Status:children_add(function()
+	local h = cx.active.current.hovered
+	if not h or ya.target_family() ~= "unix" then
+		return ""
+	end
+
+	return ui.Line({
+		ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
+		":",
+		ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
+		" ",
+	})
+end, 500, Status.RIGHT)
