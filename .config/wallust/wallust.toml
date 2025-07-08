@@ -49,8 +49,8 @@ alpha = 60
 
 
 ## Css templates
-pallete.template = '.pallete.css'
-pallete.target = '~/.config/.pallete.css'
+pallete.template = '.palette.css'
+pallete.target = '~/.config/.palette.css'
 
 
 wofi.template = 'colors-wofi.css'

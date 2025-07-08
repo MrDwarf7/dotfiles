@@ -1,9 +1,9 @@
 @define-color foreground {{foreground}};
-@define-color foreground20 {{foreground}}{{20 | alpha_hexa}};
+/* @define-color foreground20 {{foreground}}{{20 | alpha_hexa}}; */
 
 @define-color background {{background}};
-@define-color background50 {{background}}{{50 | alpha_hexa }};
-@define-color background60 {{background}}{{60 | alpha_hexa }};
+/* @define-color background50 {{background}}{{50 | alpha_hexa }}; */
+/* @define-color background60 {{background}}{{60 | alpha_hexa }}; */
 
 @define-color cursor {{cursor}};
 
