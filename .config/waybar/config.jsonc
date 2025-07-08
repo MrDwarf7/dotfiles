@@ -35,30 +35,29 @@
       ]
     }
   },
+  // "custom/notification": {
+  //   "tooltip": false,
+  //   "format": "{icon}",
+  //   "format-icons": {
+  //     "notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+  //     "none": " ",
+  //     "dnd-notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+  //     "dnd-none": " "
+  //   },
+  //   "return-type": "json",
+  //   "exec-if": "which swaync-client",
+  //   "exec": "swaync-client -swb",
+  //   "on-click": "sleep 0.1 && swaync-client -t -sw",
+  //   "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+  //   "escape": true
+  // },
   "custom/notification": {
     "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
-      "none": " ",
-      "dnd-notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
-      "dnd-none": " "
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
+    "format": "",
     "on-click": "sleep 0.1 && swaync-client -t -sw",
     "on-click-right": "sleep 0.1 && swaync-client -d -sw",
     "escape": true
   },
-  // "custom/notification": {
-  //   "tooltip": false,
-  //   "format": "",
-  //   "on-click": "swaync-client -t -sw",
-  //   "on-click-right": "swaync-client -d -sw",
-  //   "escape": true
-  //       
-  // },
   "custom/terminal": {
     "tooltip": "Start your terminal",
     "format": "|_|",
@@ -87,6 +86,7 @@
     "tooltip-format-ethernet": "{ifname} 🖧 ",
     "on-click": "wezterm nmtui"
   },
+
   "bluetooth": {
     "format-on": "󰂯",
     "format-off": "BT-off",
@@ -117,7 +117,7 @@
       "󰂀",
       "󰂂",
       "󰁹"
-    ],
+    ]
   },
   "custom/pacman": {
     "format": "󰅢 {}",
@@ -126,7 +126,7 @@
     "exec-if": "exit 0",
     "on-click": "wezterm -e fish -c 'sysup; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
     "signal": 8,
-    "tooltip": false,
+    "tooltip": false
   },
   "custom/expand": {
     "format": "",
@@ -150,7 +150,7 @@
       "memory",
       "temperature",
       "custom/endpoint"
-    ],
+    ]
   },
   "cpu": {
     "format": "󰻠",
@@ -161,10 +161,10 @@
   },
   "temperature": {
     "critical-threshold": 80,
-    "format": "",
+    "format": ""
   },
   "tray": {
     "icon-size": 14,
     "spacing": 10
-  },
+  }
 }
