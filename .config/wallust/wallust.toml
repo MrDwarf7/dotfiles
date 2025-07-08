@@ -49,6 +49,9 @@ alpha = 60
 
 
 ## Css templates
+pallete.template = '.pallete.css'
+pallete.target = '~/.config/.pallete.css'
+
 
 wofi.template = 'colors-wofi.css'
 # wofi.target = '~/.config/wofi/wofi-colors.css'
@@ -57,10 +60,19 @@ wofi.target = '~/.config/wofi/style.css'
 tofi.template = 'colors-tofi'
 tofi.target = '~/.config/tofi/config'
 
+# waybar.template = 'colors-waybar.css'
+# waybar.target = '~/.config/waybar/waybar-colors.css'
+
 waybar.template = 'colors-waybar.css'
-waybar.target = '~/.config/waybar/waybar-colors.css'
+waybar.target = '~/.config/waybar/style.css'
+
+
+wlogout.template = 'colors-wlogout.css'
+wlogout.target = '~/.config/wlogout/style.css'
+
 
 ## Conf templates
+
 
 hypr.template = 'colors-hypr.conf'
 hypr.target = '~/.config/hypr/hypr-colors.conf'
