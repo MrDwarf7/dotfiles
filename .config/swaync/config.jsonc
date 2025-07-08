@@ -1,14 +1,14 @@
 {
   "$schema": "/etc/xdg/swaync/configSchema.json",
   "control-center-layer": "top",
-  "control-center-width": 300,
+  "control-center-width": 350,
   "control-center-margin-top": 8,
   "control-center-margin-bottom": 8,
   "control-center-margin-right": 0,
   "control-center-margin-left": 8,
   "positionX": "left",
   "positionY": "bottom",
-  "layer": "bottom",
+  "layer": "overlay",
   "layer-shell": true,
   "cssPriority": "application",
   "notification-2fa-action": true,
@@ -69,7 +69,7 @@
         },
         {
           "label": "",
-          "command": "kitty nmtui"
+          "command": "wezterm nmtui"
         },
         {
           "label": "",
@@ -86,15 +86,15 @@
         },
         {
           "label": "󰈙",
-          "command": "kitty bash -i -c 'Docs'"
+          "command": "wezterm bash -i -c 'Docs'"
         },
         {
           "label": "",
-          "command": "kitty bash -i -c 'Settings'"
+          "command": "wezterm bash -i -c 'Settings'"
         },
         {
           "label": "",
-          "command": "kitty bash -i -c 'tasks'"
+          "command": "wezterm bash -i -c 'tasks'"
         },
         {
           "label": "",

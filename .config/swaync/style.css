@@ -1,12 +1,4 @@
-/* @import url('../../.cache/wal/colors-waybar.css'); */
-@define background #000000;
-@define text #ffffffff;
-
-@define color15 #ffffffff;
-@define color9 #ffffffff;
-@define mycolor #ffffffff;
-
-
+@import url('../.pallete.css');
 @define-color mpris-album-art-overlay alpha(@background, 0.55);
 @define-color mpris-button-hover alpha(@background, 0.50);
 @define-color text @color15;
@@ -290,7 +282,7 @@
 }
 
 .widget-buttons-grid {
-  font-family: "CodeNewRoman Nerd Font Propo";
+  font-family: "Mononoki Nerd Font", monospace;
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 8px;
