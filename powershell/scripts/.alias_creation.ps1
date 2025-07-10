@@ -216,6 +216,10 @@ function GitLastFive {
   git reflog -5 $args
 }
 
+function GitBranchlessWrapper {
+  git-branchless wrap -- $args
+}
+
 $null = Invoke-Expression (
   [System.Text.StringBuilder]::new().
   Append("New-Alias -Name npp -Value notepad++.exe -Force").
@@ -281,6 +285,8 @@ $null = Invoke-Expression (
   Append("New-Alias -name unlink -Value Remove-SymbolicJunction -Force").
   Append("`n").
   Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
+  Append("`n").
+  Append("New-Alias -Name git -Value GitBranchlessWrapper $args -Force").
   ToString()
 ) > $null;
 
