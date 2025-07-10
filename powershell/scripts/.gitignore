@@ -1,0 +1,8 @@
+# Ensure Ripgrep (rg) doesn't ignore these files
+!.alias_creation.*
+!.func_vim_shell.*
+!.func_wsl_shell.*
+!.navigation_home.*
+!.profile_general.*
+!.profile_home.*
+!.profile_work.*
