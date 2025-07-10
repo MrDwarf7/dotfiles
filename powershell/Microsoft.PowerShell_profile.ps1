@@ -52,6 +52,7 @@ $env:FZF_DEFAULT_COMMAND = 'fd --type file'
 $env:FZF_CTRL_T_COMMAND = '$env:FZF_DEFAULT_COMMAND'
 $env:STARSHIP_CONFIG = "$dotfiles_dir\.config\starship\starship.toml"
 $env:CARAPACE_BRIDGES = 'all'
+$env:JJ_CONFIG = "$dotfiles_dir\.config\jj\config.toml"
 
 # BEGIN - Tooling Functions
 function Test-CommandExists ([Parameter(Mandatory = $true)][string] $Command) {
