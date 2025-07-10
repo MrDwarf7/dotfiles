@@ -3,19 +3,15 @@
 "cargo-binstall 1.14.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-binstall.exe"]
 "cargo-build-docker 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-build-docker.exe"]
 "cargo-cache 0.8.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-cache.exe"]
-"cargo-expand 1.0.111 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-expand.exe"]
 "cargo-feature 0.7.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-feature.exe"]
 "cargo-generate 0.23.3 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-generate.exe"]
 "cargo-insta 1.43.1 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-insta.exe"]
-"cargo-llvm-cov 0.6.16 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-llvm-cov.exe"]
 "cargo-machete 0.8.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-machete.exe"]
 "cargo-make 0.37.24 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cargo-make.exe",
     "makers.exe",
 ]
-"cargo-nextest 0.9.99 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
 "cargo-outdated 0.17.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-outdated.exe"]
-"cargo-udeps 0.1.56 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
 "cargo-update 16.3.2 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cargo-install-update-config.exe",
     "cargo-install-update.exe",
@@ -73,3 +69,7 @@
 "tauri-cli 2.6.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-tauri.exe"]
 "atac 0.20.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["atac.exe"]
 "just 1.41.0 (registry+https://github.com/rust-lang/crates.io-index)" = ["just.exe"]
+"cargo-expand 1.0.112 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-expand.exe"]
+"cargo-llvm-cov 0.6.17 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-llvm-cov.exe"]
+"cargo-nextest 0.9.100 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-nextest.exe"]
+"cargo-udeps 0.1.57 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-udeps.exe"]
