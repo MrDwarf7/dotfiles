@@ -216,8 +216,17 @@ function GitLastFive {
   git reflog -5 $args
 }
 
+# Have to do this weird handling due to the escape via `--` 
+# in how git-branchless wrap works, where we re-4ssign the raw args.
+#
+# Note: You do NOT want to pass `$args` in via the New-Alias component,
+# NOR do you want to bind via -Commands $args
 function GitBranchlessWrapper {
-  git-branchless wrap -- $args
+  param(
+    [string]$Commands = $args
+  )
+  $base = "git-branchless wrap --"
+  Invoke-Expression "$base $Commands"
 }
 
 $null = Invoke-Expression (
@@ -286,7 +295,7 @@ $null = Invoke-Expression (
   Append("`n").
   Append("New-Alias -Name ln -Value CreateNewSymbolic -Force").
   Append("`n").
-  Append("New-Alias -Name git -Value GitBranchlessWrapper $args -Force").
+  Append("New-Alias -Name git -Value GitBranchlessWrapper -Force").
   ToString()
 ) > $null;
 
