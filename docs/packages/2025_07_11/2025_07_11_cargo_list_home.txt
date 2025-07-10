@@ -19,9 +19,11 @@ Installed Commands:
     create-tauri-app
     d                    alias: doc
     doc                  Build a package's documentation
+    expand
     feature
     fetch                Fetch dependencies of a package from the network
     fix                  Automatically fix lint warnings reported by rustc
+    flamegraph
     fmt                  Formats all bin and lib files of the current crate using rustfmt.
     generate
     generate-lockfile    Generate the lockfile for a package
@@ -59,6 +61,7 @@ Installed Commands:
     rustc                Compile a package, and pass extra options to the compiler
     rustdoc              Build a package's documentation, using specified custom flags.
     search               Search packages in the registry. Default registry is crates.io
+    sqlx
     t                    alias: test
     ta                   alias: test --all
     taq                  alias: test --all --quiet

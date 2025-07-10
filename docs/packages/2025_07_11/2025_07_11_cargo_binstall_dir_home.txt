@@ -1,7 +1,7 @@
 {
   "name": "atac",
-  "version_req": "=0.20.1",
-  "current_version": "0.20.1",
+  "version_req": "=0.20.2",
+  "current_version": "0.20.2",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -13,8 +13,8 @@
 }
 {
   "name": "bacon",
-  "version_req": "=3.15.0",
-  "current_version": "3.15.0",
+  "version_req": "=3.16.0",
+  "current_version": "3.16.0",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -26,8 +26,8 @@
 }
 {
   "name": "cargo-binstall",
-  "version_req": "=1.12.6",
-  "current_version": "1.12.6",
+  "version_req": "=1.14.1",
+  "current_version": "1.14.1",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -48,6 +48,19 @@
   "target": "x86_64-pc-windows-msvc",
   "bins": [
     "cargo-cache.exe"
+  ]
+}
+{
+  "name": "cargo-expand",
+  "version_req": "=1.0.112",
+  "current_version": "1.0.112",
+  "source": {
+    "source_type": "Registry",
+    "url": "https://github.com/rust-lang/crates.io-index"
+  },
+  "target": "x86_64-pc-windows-msvc",
+  "bins": [
+    "cargo-expand.exe"
   ]
 }
 {
@@ -77,6 +90,19 @@
   ]
 }
 {
+  "name": "cargo-llvm-cov",
+  "version_req": "=0.6.17",
+  "current_version": "0.6.17",
+  "source": {
+    "source_type": "Registry",
+    "url": "https://github.com/rust-lang/crates.io-index"
+  },
+  "target": "x86_64-pc-windows-msvc",
+  "bins": [
+    "cargo-llvm-cov.exe"
+  ]
+}
+{
   "name": "cargo-machete",
   "version_req": "=0.8.0",
   "current_version": "0.8.0",
@@ -91,8 +117,8 @@
 }
 {
   "name": "cargo-nextest",
-  "version_req": "=0.9.97",
-  "current_version": "0.9.97",
+  "version_req": "=0.9.100",
+  "current_version": "0.9.100",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -117,8 +143,8 @@
 }
 {
   "name": "cargo-udeps",
-  "version_req": "=0.1.55",
-  "current_version": "0.1.55",
+  "version_req": "=0.1.57",
+  "current_version": "0.1.57",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -170,8 +196,8 @@
 }
 {
   "name": "create-tauri-app",
-  "version_req": "=4.5.10",
-  "current_version": "4.5.10",
+  "version_req": "=4.6.0",
+  "current_version": "4.6.0",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -208,9 +234,23 @@
   ]
 }
 {
+  "name": "flamegraph",
+  "version_req": "*",
+  "current_version": "0.6.8",
+  "source": {
+    "source_type": "Registry",
+    "url": "https://github.com/rust-lang/crates.io-index"
+  },
+  "target": "x86_64-pc-windows-msvc",
+  "bins": [
+    "cargo-flamegraph.exe",
+    "flamegraph.exe"
+  ]
+}
+{
   "name": "just",
-  "version_req": "=1.40.0",
-  "current_version": "1.40.0",
+  "version_req": "=1.41.0",
+  "current_version": "1.41.0",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -288,8 +328,8 @@
 }
 {
   "name": "tauri-cli",
-  "version_req": "=2.5.0",
-  "current_version": "2.5.0",
+  "version_req": "=2.6.2",
+  "current_version": "2.6.2",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"
@@ -355,8 +395,8 @@
 }
 {
   "name": "wasm-tools",
-  "version_req": "=1.232.0",
-  "current_version": "1.232.0",
+  "version_req": "=1.235.0",
+  "current_version": "1.235.0",
   "source": {
     "source_type": "Registry",
     "url": "https://github.com/rust-lang/crates.io-index"

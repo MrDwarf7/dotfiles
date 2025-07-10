@@ -3,32 +3,39 @@
 
  Directory of C:\Users\$env:USERNAME\bin
 
-03/06/2025  03:16 AM    <DIR>          .
-03/06/2025  07:14 PM    <DIR>          ..
-26/05/2025  04:56 AM        15,028,736 atac.exe
-02/06/2025  04:37 AM         6,409,216 bacon.exe
-31/05/2025  10:07 PM        14,431,232 cargo-binstall.exe
+10/07/2025  08:26 PM    <DIR>          .
+10/07/2025  10:31 PM    <DIR>          ..
+30/06/2025  03:15 AM        15,628,800 atac.exe
+16/06/2025  02:35 AM         6,664,704 bacon.exe
+23/06/2025  08:10 PM        14,445,568 cargo-binstall.exe
+31/05/2025  10:07 PM        14,431,232 cargo-binstall.exe~RF1e4c6218.TMP
+09/06/2025  12:27 PM        14,439,936 cargo-binstall.exe~RF29808580.TMP
 10/05/2025  01:38 PM        14,132,224 cargo-binstall.exe~RF36d2967.TMP
 03/04/2025  05:37 PM        23,993,856 cargo-binstall.exe~RF3b499899.TMP
 17/05/2025  12:49 PM        14,279,680 cargo-binstall.exe~RF6d884a7.TMP
+22/06/2025  03:56 PM        14,444,544 cargo-binstall.exe~RF707dd.TMP
+11/06/2025  04:39 PM        14,467,072 cargo-binstall.exe~RF795f4.TMP
 14/08/2024  10:13 PM           710,144 cargo-build-docker.exe
 12/09/2022  12:14 AM         4,273,152 cargo-cache.exe
 04/03/2025  10:10 AM    <SYMLINK>      cargo-clippy.exe [C:\Users\$env:USERNAME\rustup.exe]
-28/04/2025  11:02 PM           906,240 cargo-create-tauri-app.exe
+18/06/2025  03:24 AM           838,656 cargo-create-tauri-app.exe
+09/07/2025  04:42 PM         7,179,776 cargo-expand.exe
 09/10/2024  05:13 PM         1,886,720 cargo-feature.exe
+28/04/2025  09:13 PM         5,637,632 cargo-flamegraph.exe
 04/03/2025  10:10 AM    <SYMLINK>      cargo-fmt.exe [C:\Users\$env:USERNAME\rustup.exe]
 07/04/2025  07:46 AM        13,390,848 cargo-generate.exe
 10/05/2025  01:38 PM         6,395,392 cargo-insta.exe
-10/05/2025  01:21 PM         3,426,304 cargo-install-update-config.exe
-10/05/2025  01:21 PM         4,244,480 cargo-install-update.exe
-30/03/2025  08:15 PM         4,065,280 cargo-llvm-cov.exe
+29/06/2025  04:25 PM         9,016,379 cargo-install-update-config.exe
+29/06/2025  04:25 PM         9,389,660 cargo-install-update.exe
+06/07/2025  02:53 PM         4,354,048 cargo-llvm-cov.exe
 25/02/2025  06:09 AM         6,026,752 cargo-machete.exe
 20/01/2025  11:47 PM        10,080,256 cargo-make.exe
 04/03/2025  10:10 AM    <SYMLINK>      cargo-miri.exe [C:\Users\$env:USERNAME\rustup.exe]
-30/05/2025  02:33 PM        14,300,160 cargo-nextest.exe
+08/07/2025  05:32 AM        14,677,504 cargo-nextest.exe
 02/06/2025  04:21 PM        20,090,880 cargo-outdated.exe
-10/05/2025  01:39 PM        15,317,504 cargo-tauri.exe
-10/05/2025  01:38 PM        15,965,184 cargo-udeps.exe
+23/06/2025  07:28 PM         7,535,616 cargo-sqlx.exe
+29/06/2025  04:26 PM        15,448,576 cargo-tauri.exe
+10/07/2025  08:26 PM        16,464,896 cargo-udeps.exe
 10/05/2025  01:38 PM         2,432,000 cargo-watch.exe
 27/05/2025  07:33 PM        10,148,864 cargo-workspaces.exe
 27/05/2025  07:33 PM        10,148,864 cargo-ws.exe
@@ -37,15 +44,19 @@
 04/03/2025  10:10 AM    <SYMLINK>      clippy-driver.exe [C:\Users\$env:USERNAME\rustup.exe]
 14/08/2024  09:57 PM         1,804,288 cross-util.exe
 14/08/2024  09:57 PM         1,764,352 cross.exe
+03/07/2025  05:51 PM           657,408 daktilo-completions.exe
+03/07/2025  05:51 PM           560,640 daktilo-mangen.exe
+03/07/2025  05:51 PM         5,418,496 daktilo.exe
 28/05/2025  03:48 PM         6,556,672 diffedit3.exe
 19/01/2025  08:44 PM         6,883,840 duck.exe
 02/06/2025  04:30 PM        86,658,048 dx.exe
 03/09/2024  09:56 PM        10,411,520 ein.exe
+28/04/2025  09:13 PM         5,217,792 flamegraph.exe
 03/09/2024  09:57 PM        20,729,856 gix.exe
 03/06/2025  03:16 AM        21,959,168 hx.exe
-10/05/2025  01:38 PM         4,388,352 just.exe
+03/07/2025  01:07 AM         4,443,136 just.exe
 09/04/2025  09:51 PM           200,704 kill_open_programs.exe
-10/05/2025  01:39 PM        12,452,864 knope.exe
+23/06/2025  08:11 PM         9,622,528 knope.exe
 07/05/2025  11:18 PM         4,339,200 lazyjj.exe
 28/03/2025  01:33 AM         9,897,984 loco.exe
 20/01/2025  11:47 PM        10,080,256 makers.exe
@@ -59,8 +70,9 @@
 04/03/2025  10:10 AM    <SYMLINK>      rustdoc.exe [C:\Users\$env:USERNAME\rustup.exe]
 04/03/2025  10:10 AM    <SYMLINK>      rustfmt.exe [C:\Users\$env:USERNAME\rustup.exe]
 06/05/2025  01:06 AM        13,551,616 rustup.exe
-28/05/2025  11:12 AM        11,988,480 sea-orm-cli.exe
-28/05/2025  11:12 AM        11,988,480 sea.exe
+29/06/2025  04:26 PM        22,887,441 sea-orm-cli.exe
+29/06/2025  04:26 PM        22,887,382 sea.exe
+23/06/2025  07:28 PM         7,531,008 sqlx.exe
 24/05/2025  06:33 AM        13,228,032 taplo.exe
 06/09/2024  06:45 PM           658,944 tenki.exe
 09/11/2024  09:22 PM         6,673,920 tokio-console.exe
@@ -68,10 +80,10 @@
 13/01/2025  09:21 AM         8,234,496 wasm-bindgen-test-runner.exe
 13/01/2025  09:21 AM         5,240,832 wasm-bindgen.exe
 30/10/2024  04:35 AM         5,640,192 wasm-pack.exe
-28/05/2025  11:12 AM        15,461,888 wasm-tools.exe
+14/06/2025  10:30 PM        15,571,456 wasm-tools.exe
 13/01/2025  09:21 AM         2,575,360 wasm2es6js.exe
 12/11/2024  11:45 AM         3,496,960 websocat.exe
 11/05/2025  02:41 PM        12,987,392 welds.exe
 10/05/2025  01:40 PM         9,668,096 xh.exe
-              68 File(s)    619,978,240 bytes
-               2 Dir(s)  126,256,979,968 bytes free
+              80 File(s)    749,465,726 bytes
+               2 Dir(s)  97,626,214,400 bytes free

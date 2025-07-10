@@ -1,3 +1,0 @@
-C:\Users\$env:USERNAME\bin
-`-- corepack@0.32.0
-
