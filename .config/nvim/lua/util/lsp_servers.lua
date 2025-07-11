@@ -60,11 +60,19 @@ M.servers = function()
 		-- eslint = {},
 		-- gleam = {},
 		html = {},
+		-- hyprls = {},
 		jsonls = {},
 		lua_ls = {
 			cmd = { "lua-language-server" },
 			filetypes = { "lua" },
-			root_dir = require("lspconfig.util").root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
+			root_dir = require("lspconfig.util").root_pattern(
+				".git",
+				".luacheckrc",
+				".luarocks",
+				"lua.config.*",
+				".vim",
+				"nvim"
+			),
 			settings = {
 				Lua = {
 					runtime = {
@@ -93,6 +101,9 @@ M.servers = function()
 							enable = true,
 							setType = false,
 							paramType = true,
+							paramName = "Disable",
+							semicolon = "Disable",
+							arrayIndex = "Disable",
 						},
 						library = {
 							"${3rd}/luv/library",
@@ -100,6 +111,9 @@ M.servers = function()
 							-- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
 							-- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 						},
+					},
+					telemetry = {
+						enable = false,
 					},
 				},
 			},
@@ -212,6 +226,8 @@ M.servers = function()
 	-- Coniditional servers
 	if vim.g.os == "Linux" or vim.g.os == "unix" then
 		-- check if we're on nixOS
+		table.insert(servers, "hyprls")
+
 		if vim.fn.system("nixos-version") == 0 then
 			table.insert(servers, "nixd")
 			servers.nixd = {}

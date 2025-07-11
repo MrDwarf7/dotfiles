@@ -1,4 +1,5 @@
 local converter = require("utils.filepath_converter")
+
 return {
   "stevearc/oil.nvim",
   lazy = false,
@@ -95,17 +96,18 @@ return {
       ["g."] = "actions.toggle_hidden",
       ["g\\"] = "actions.toggle_trash",
 
+      -- directory path
       ["<Leader>yc"] = function()
-        local filepath = vim.fn.expand("%")
-        filepath = converter(filepath)
-        vim.fn.setreg("+", filepath) -- write to clippoard
+        vim.fn.setreg("+", converter.handle_filepath()) -- write to clippoard
       end,
       -- { desc = "[c]urrent", noremap = true, silent = true },
 
+      -- full_path (incl. filename + extension)
       ["<leader>yC"] = function()
-        local filepath = vim.fn.expand("%")
-        filepath = converter(filepath)
-        vim.fn.setreg("+", filepath) -- write to clippoard
+        -- local filepath = vim.fn.expand("%")
+        -- filepath = converter.handle_filepath(filepath)
+        -- vim.fn.setreg("+", filepath) -- write to clippoard
+        vim.fn.setreg("+", converter.handle_filepath()) -- write to clippoard
       end,
       -- desc = "[c]urrent",
       -- noremap = true,

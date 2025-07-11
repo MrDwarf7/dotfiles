@@ -1,3 +1,19 @@
+---@meta
+
+---@alias vim vim
+---@alias PathBuf string
+---@alias FileName string
+---@alias FullPathMap [PathBuf]
+
+---@alias LinuxPathBuf PathBuf
+---@alias WindowsPathBuf PathBuf
+
+---@class Types
+---@field os_enum_lower fun(): EOperatingSystemEnumLower
+---@field os_enum fun(): EOperatingSystemEnum
+---@field os_class fun(): OperatingSystems
+---@field shells_enum fun(): ShellsTypeEnum
+---@field shells_class fun(): Shells
 local M = {}
 
 ---@class LspAttach Event
@@ -11,7 +27,19 @@ local M = {}
 -----@alias Unix "unix"
 -----@alias MacOS "macos"
 
----@enum OperatingSystemEnum
+---@enum EOperatingSystemEnumLower
+local OsEnumLower = {
+	linux = "linux",
+	windows_nt = "windows_nt",
+	macos = "macos",
+}
+
+M.os_enum_lower = function()
+	local os_e_l = OsEnumLower
+	return os_e_l
+end
+
+---@enum EOperatingSystemEnum
 local OsEnum = {
 	windows = "Windows_NT",
 	linux = "Linux",

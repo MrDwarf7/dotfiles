@@ -1,9 +1,15 @@
 ----- Items marked with TODO are to be turned back on
 ----- Items marked with NOTE will likely need to be tweaked
 
-return {
+local arch = require("utils.arch")
+
+---@class LspServers
+---@field servers table<string, table>
+local M = {}
+
+M.servers = {
   bacon_ls = {
-    enabled = diagnosticls == "bacon-ls",
+    enabled = diagnostics == "bacon-ls",
   },
   bashls = {},
   basedpyright = {
@@ -97,11 +103,20 @@ return {
   -- eslint = {},
   -- gleam = {},
   html = {},
+  hyprls = {},
   jsonls = {},
   lua_ls = {
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
-    root_dir = require("lspconfig.util").root_pattern(".git", ".luacheckrc", ".luarocks", "lua.config.*"),
+    root_dir = require("lspconfig.util").root_pattern(
+      ".git",
+      ".luacheckrc",
+      ".luarc.json",
+      ".luarocks",
+      "lua.config.*",
+      ".vim",
+      "nvim"
+    ),
     settings = {
       Lua = {
         runtime = {
@@ -113,10 +128,11 @@ return {
         },
         diagnostics = {
           disable = { "missing-fields" },
-          globals = { "vim" },
+          globals = { "vim", "require" },
         },
         workspace = {
           checkThirdParty = true,
+          library = vim.api.nvim_get_runtime_file("", true),
         },
         codeLens = {
           enable = true,
@@ -140,6 +156,9 @@ return {
             -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
             -- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
+        },
+        telemetry = {
+          enable = false,
         },
       },
     },
@@ -261,3 +280,5 @@ return {
     },
   },
 }
+
+return M
