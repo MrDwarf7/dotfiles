@@ -40,24 +40,25 @@
 	#     Radius of background box corners in pixels
 
     ## Prompt text theme
-	prompt-background = #010506FF
-	prompt-background-padding = 20
-	prompt-background-corner-radius = 10
+	prompt-background = #01060700
+	prompt-background-padding = 0
+	prompt-background-corner-radius = 0
 
 	## Placeholder text theme
-    placeholder-color = #EDEFEFA8
-	placeholder-background = #010506FF
-	placeholder-background-padding = 20
-	placeholder-background-corner-radius = 10
+    placeholder-color = #AB688BFF
+    # #EDEFEFA8
+	placeholder-background = #01050600
+	placeholder-background-padding = 0
+	placeholder-background-corner-radius = 0
 
 	## Input text theme
-    input-background = #010506FF 
-	input-background-padding = 20
-	input-background-corner-radius = 10
+    input-background = #01050600 
+	input-background-padding = 0
+	input-background-corner-radius = 0
 
     ## Default result text theme
 	default-result-background = #00000000
-	default-result-background-padding = 10
+	default-result-background-padding = 0
 	default-result-background-corner-radius = 0
 
 	## Alternate (even-numbered) result text theme
@@ -105,7 +106,7 @@
 	prompt-padding = 0
 
 	# Placeholder input text.
-	placeholder-text = ""
+	placeholder-text = "..."
 
 	# Maximum number of results to display.
 	# If 0, tofi will draw as many results as it can fit in the window.
@@ -128,7 +129,7 @@
 	height = 600
 
 	# Window background color
-    background-color = #01050699
+    background-color = #010506BF
     #0A0A0CCC
 
 	# Width of the border outlines in pixels.
