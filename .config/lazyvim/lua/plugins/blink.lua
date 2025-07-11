@@ -13,7 +13,7 @@ return {
     -- "hrsh7th/cmp-cmdline",
     -- "hrsh7th/cmp-nvim-lua",
     --
-    -- { "folke/lazydev.nvim", opts = {} },
+    { "folke/lazydev.nvim", opts = {} },
     -- "saadparwaiz1/cmp_luasnip",
     -- { "saecki/crates.nvim", ft = { "toml", "rust" }, tag = "stable", opts = {} },
     -- "vrslev/cmp-pypi",
