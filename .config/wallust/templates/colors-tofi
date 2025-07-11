@@ -40,24 +40,25 @@
 	#     Radius of background box corners in pixels
 
     ## Prompt text theme
-	prompt-background = {{background | darken(0.2)}}{{100 | alpha_hexa}}
-	prompt-background-padding = 20
-	prompt-background-corner-radius = 10
+	prompt-background = {{background}}{{0 | alpha_hexa}}
+	prompt-background-padding = 0
+	prompt-background-corner-radius = 0
 
 	## Placeholder text theme
-    placeholder-color = {{foreground | lighten(0.8)}}{{66 | alpha_hexa}}
-	placeholder-background = {{background | darken(0.2)}}{{100 | alpha_hexa}}
-	placeholder-background-padding = 20
-	placeholder-background-corner-radius = 10
+    placeholder-color = {{cursor}}{{100 | alpha_hexa}}
+    # {{foreground | lighten(0.8)}}{{66 | alpha_hexa}}
+	placeholder-background = {{background | darken(0.2)}}{{0 | alpha_hexa}}
+	placeholder-background-padding = 0
+	placeholder-background-corner-radius = 0
 
 	## Input text theme
-    input-background = {{background | darken(0.2)}}{{100 | alpha_hexa}} 
-	input-background-padding = 20
-	input-background-corner-radius = 10
+    input-background = {{background | darken(0.2)}}{{0 | alpha_hexa}} 
+	input-background-padding = 0
+	input-background-corner-radius = 0
 
     ## Default result text theme
 	default-result-background = #00000000
-	default-result-background-padding = 10
+	default-result-background-padding = 0
 	default-result-background-corner-radius = 0
 
 	## Alternate (even-numbered) result text theme
@@ -105,7 +106,7 @@
 	prompt-padding = 0
 
 	# Placeholder input text.
-	placeholder-text = ""
+	placeholder-text = "..."
 
 	# Maximum number of results to display.
 	# If 0, tofi will draw as many results as it can fit in the window.
@@ -128,7 +129,7 @@
 	height = 600
 
 	# Window background color
-    background-color = {{background | darken(0.1)}}{{60 | alpha_hexa}}
+    background-color = {{background | darken(0.1)}}{{75 | alpha_hexa}}
     #0A0A0CCC
 
 	# Width of the border outlines in pixels.
