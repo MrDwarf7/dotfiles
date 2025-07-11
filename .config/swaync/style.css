@@ -1,11 +1,14 @@
-@import url('../.pallete.css');
+@import url('../.palette.css');
+
 @define-color mpris-album-art-overlay alpha(@background, 0.55);
 @define-color mpris-button-hover alpha(@background, 0.50);
-@define-color text @color15;
-@define-color bg alpha(@background, .5);
-@define-color bg-hover alpha(@background, .8);
-@define-color mycolor @color9;
-@define-color border-color alpha(@mycolor, 0.15);
+/* @define-color text @color15; */
+@define-color text @foreground;
+@define-color bg alpha(@background, .7);
+@define-color bg-hover alpha(@color7, .8);
+@define-color accentcolor @color2;
+
+@define-color border-color alpha(@accentcolor, 0.15);
 
 @keyframes fadeIn {
   0% {
@@ -34,14 +37,14 @@
 .floating-notifications.background .notification-background .notification .notification-content {}
 
 .notification {
-  background: alpha(@mycolor, .5);
+  background: alpha(@accentcolor, .5);
 
 }
 
 .control-center .notification-row .notification-background .notification {
   margin-top: 0.150rem;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
-  background: alpha(@mycolor, .3);
+  background: alpha(@accentcolor, .3);
 
 }
 
@@ -60,7 +63,7 @@
 }
 
 .notification widget:hover {
-  background: alpha(@mycolor, .2);
+  background: alpha(@accentcolor, .2);
 }
 
 .floating-notifications.background .notification-background .notification .notification-content,
@@ -166,7 +169,7 @@
   border: none;
   box-shadow: none;
   margin-right: 0px;
-  margin-top: 3px;
+  margin-top: 4px;
   margin-bottom: unset;
   padding-bottom: unset;
   min-height: 20px;
@@ -319,7 +322,7 @@
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
-  background: @mycolor;
+  background: @accentcolor;
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked label {
@@ -343,7 +346,7 @@ trough {
 
 trough highlight {
   padding: 5px;
-  background: @mycolor;
+  background: @accentcolor;
   border-radius: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
   transition: all .7s ease;
@@ -351,7 +354,7 @@ trough highlight {
 
 trough highlight:hover {
   padding: 5px;
-  background: @mycolor;
+  background: @accentcolor;
   border-radius: 20px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
   transition: all .7s ease;
