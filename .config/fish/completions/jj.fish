@@ -1,27 +1,27 @@
 # Print an optspec for argparse to handle cmd's options that are independent of any subcommand.
 function __fish_jj_global_optspecs
-	string join \n R/repository= ignore-working-copy ignore-immutable at-operation= debug color= quiet no-pager config= config-toml= config-file= h/help V/version
+    string join \n R/repository= ignore-working-copy ignore-immutable at-operation= debug color= quiet no-pager config= config-toml= config-file= h/help V/version
 end
 
 function __fish_jj_needs_command
-	# Figure out if the current invocation already has a command.
-	set -l cmd (commandline -opc)
-	set -e cmd[1]
-	argparse -s (__fish_jj_global_optspecs) -- $cmd 2>/dev/null
-	or return
-	if set -q argv[1]
-		# Also print the command, so this can be used to figure out what it is.
-		echo $argv[1]
-		return 1
-	end
-	return 0
+    # Figure out if the current invocation already has a command.
+    set -l cmd (commandline -opc)
+    set -e cmd[1]
+    argparse -s (__fish_jj_global_optspecs) -- $cmd 2>/dev/null
+    or return
+    if set -q argv[1]
+        # Also print the command, so this can be used to figure out what it is.
+        echo $argv[1]
+        return 1
+    end
+    return 0
 end
 
 function __fish_jj_using_subcommand
-	set -l cmd (__fish_jj_needs_command)
-	test -z "$cmd"
-	and return 1
-	contains -- $cmd[1] $argv
+    set -l cmd (__fish_jj_needs_command)
+    test -z "$cmd"
+    and return 1
+    contains -- $cmd[1] $argv
 end
 
 complete -c jj -n "__fish_jj_needs_command" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
