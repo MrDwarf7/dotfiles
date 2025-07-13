@@ -36,7 +36,7 @@
     ],
     "widget-config": {
         "title": {
-            "text": "Notification Center",
+            "text": "Notifs",
             "clear-all-button": true,
             "button-text": "󰆴"
         },
@@ -53,10 +53,6 @@
         },
         "buttons-grid": {
             "actions": [
-                {
-                    "label": " ",
-                    "command": "wezterm nmtui"
-                },
                 {
                     "label": "",
                     "command": "webapp-manager"
