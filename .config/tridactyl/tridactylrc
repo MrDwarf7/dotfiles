@@ -108,8 +108,8 @@ bind D composite tabprev; tabclose #
 
 " Tabs 
 " Vertical tabs are organized backwards
-bind <S-k> tabprev +1
-bind <S-j> tabnext +1
+bind K tabprev
+bind J tabnext
 bind x tabclose
 
 bind gx0 tabclosealltoleft
