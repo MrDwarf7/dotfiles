@@ -17,11 +17,11 @@ password-file = "/home/dwarf/.secret/rustic_secret"
 no-cache = true # no cache needed for local repository
 
 [forget]
-keep-hourly = 20
-keep-daily = 14
-keep-weekly = 8
-keep-monthly = 24
-keep-yearly = 10
+keep-hourly = 6
+keep-daily = 8
+keep-weekly = 4
+keep-monthly = 6
+keep-yearly = 1
 
 [backup]
 exclude-if-present = [".nobackup", "CACHEDIR.TAG"]
@@ -32,16 +32,85 @@ sources = ["/home"]
 git-ignore = false
 globs = [
   #
+  "!/home/*/.secret(s)?/*",
+  #
   "!/home/*/.cache/*",
   "!/home/*/.nuget/*",
+  "!/home/*/.npm/*",
+  "!/home/*/.java/*",
+  "!/home/*/.ghcup/*",
+  "!/home/*/.dotnet/*",
+  "!/home/*/go/pkg/mod/golang.org",
+  "!/home/*/.rustup/downloads/*",
+  "!/home/*/.rustup/tmp/*",
+  "!/home/*/.rustup/toolchains/*",
+  "!/home/*/.stack/*",
+  "!/home/*/.steam/*",
+  "!/home/*/.vscode/*",
+  "!/home/*/.config/.pnpm/*",
+  "!/home/*/.config/Code/*",
+  "!/home/*/.config/chromium/Default/*",
+  "!/home/*/.config/Docker*/*",
+  "!/home/*/.config/BetterDiscord/*",
   "!/home/*/Downloads/arch_linux_isos/*",
+  # "!/home/*/Documents/ArchISOMaker/*",
   "!/home/*/Documents/GitHub_Projects/**/.venv",
   "!/home/*/Documents/GitHub_Projects/Rust/*/target/",
   "!/home/*/Documents/GitHub_Projects/Web/**/node_modules",
+
+  "!/home/*/.local/*/pnpm/*",
+  "!/home/*/.local/NuGet/*",
+
+  "!/home/*/.xdg/*/pnpm/*",
+
+  "!/home/*/.xdg/cache/*",
+  "!/home/*/.xdg/local/spotify/*",
+  "!/home/*/.xdg/local/swww/*",
+  "!/home/*/.xdg/local/sccache/*",
+  "!/home/*/.xdg/local/fish/*",
+  "!/home/*/.xdg/local/paru/*",
+  "!/home/*/.xdg/local/go-build/*",
+
+  "!/home/*/.xdg/local/node/*",
+  "!/home/*/.xdg/local/node-gyp/*",
+  "!/home/*/.xdg/local/node*/*",
+
+  "!/home/*/.xdg/local/mise/*",
+  "!/home/*/.xdg/local/chromium/*",
+  "!/home/*/.xdg/local/zed/*",
+  "!/home/*/.xdg/local/zen/*",
+  "!/home/*/.xdg/local/zig/*",
+
+  "!/home/*/.xdg/local/JetBrains/*/intellij-rust/*",
+  "!/home/*/.xdg/local/JetBrains/*/index/*",
+
+  "!/home/*/.xdg/data/Steam/steamapps/common/*",
+  "!/home/*/.xdg/data/Steam/steamapps/compatdata/*",
+  "!/home/*/.xdg/data/Steam/steamrt64/*",
+  "!/home/*/.xdg/data/Steam/resource/*",
+  "!/home/*/.xdg/data/Steam/graphics/*",
+  "!/home/*/.xdg/data/Steam/public/*",
+  "!/home/*/.xdg/data/Steam/ubuntu12_32/*",
+  "!/home/*/.xdg/data/Steam/ubuntu12_64/*",
+  "!/home/*/.xdg/data/Trash/*",
+
+  "!/home/*/.xdg/data/lazyvim/mason/*",
+  "!/home/*/.xdg/data/nvim/mason/*",
+
+  "!/home/*/.xdg/data/lazyvim/lazy/*",
+  "!/home/*/.xdg/data/nvim/lazy/*",
+
+  "!/home/*/.xdg/data/zed/extensions/installed/*",
+  "!/home/*/.xdg/data/zed/extensions/work/*",
+
+  "!/home/*/.xdg/data/mise/*",
+  "!/home/*/.xdg/data/zed/node/*",
+  "!/home/*/.xdg/data/containers/*",
+  "!/home/*/.xdg/data/containers/*",
 ]
 
 [[backup.snapshots]]
 sources = ["/etc"]
 
-[[backup.snapshots]]
-sources = ["/root"]
+# [[backup.snapshots]]
+# sources = ["/root"]
