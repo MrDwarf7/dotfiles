@@ -8,6 +8,7 @@
       "left": "vim::Left",
       "backspace": "vim::WrappingLeft",
       "ctrl-shift-i": "assistant::InlineAssist",
+
       // "ctrl->": "assistant::QuoteSelection",
       // "ctrl-<": "assistant::InsertIntoEditor",
 
@@ -178,7 +179,11 @@
       "9": ["vim::Number", 9],
       // window related commands (ctrl-w X)
       // "ctrl-w": null,
-      "ctrl-6": "pane::AlternateFile"
+      "ctrl-6": "pane::AlternateFile",
+
+      // "ctrl-:": "editor::ToggleInlayHints"
+      "ctrl-:": "terminal_panel::ToggleFocus"
+      // "ctrl-shift-i": "agent::ToggleFocus"
     }
   },
 
@@ -222,6 +227,7 @@
       "space l p": "diagnostics::Deploy",
       "space h p": "editor::ToggleSelectedDiffHunks", // RECENT
       "space h shift-p": "editor::ExpandAllDiffHunks",
+      "space t t": "workspace::NewTerminal",
 
       // GIT // git
       "space g shift-i": "git::Init",
@@ -249,8 +255,13 @@
       // "space h shift-b": "editor::ToggleGitBlame",
       "space h shift-b": "git::Blame",
       "space t b": "workspace::ToggleLeftDock",
+      "space t v": "workspace::CloseAllDocks",
+      // "space t shift-b": ["pane::CloseAllItems", { "close_pinned": false }],
+
       "space t i": "editor::ToggleInlayHints",
-      "space t a": "assistant::ToggleFocus",
+      "space t a": "agent::ToggleFocus",
+      // When in insert mode, we use inline assist
+      "ctrl-shift-i": "agent::ToggleFocus",
 
       "ctrl-w t": "pane::ReopenClosedItem",
       "ctrl-w left": "workspace::ActivatePaneLeft",
@@ -268,19 +279,20 @@
       //       "ctrl-w ctrl-k": ["workspace::SwapPaneInDirection", "Up"],
       //       "ctrl-w ctrl-j": ["workspace::SwapPaneInDirection", "Down"],
 
-      "ctrl-w ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-w ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-w ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-w ctrl-j": "workspace::ActivatePaneDown",
+      // "ctrl-w ctrl-h": "workspace::ActivatePaneLeft",
+      // "ctrl-w ctrl-l": "workspace::ActivatePaneRight",
+      // "ctrl-w ctrl-k": "workspace::ActivatePaneUp",
+      // "ctrl-w ctrl-j": "workspace::ActivatePaneDown",
+
+      "ctrl-w ctrl-h": "workspace::SwapPaneLeft",
+      "ctrl-w ctrl-l": "workspace::SwapPaneRight",
+      "ctrl-w ctrl-k": "workspace::SwapPaneUp",
+      "ctrl-w ctrl-j": "workspace::SwapPaneDown",
 
       "ctrl-w shift-left": "workspace::SwapPaneLeft",
       "ctrl-w shift-right": "workspace::SwapPaneRight",
       "ctrl-w shift-up": "workspace::SwapPaneUp",
       "ctrl-w shift-down": "workspace::SwapPaneDown",
-      "ctrl-w shift-h": "workspace::SwapPaneLeft",
-      "ctrl-w shift-l": "workspace::SwapPaneRight",
-      "ctrl-w shift-k": "workspace::SwapPaneUp",
-      "ctrl-w shift-j": "workspace::SwapPaneDown",
 
       "ctrl-w g t": "pane::ActivateNextItem",
       "ctrl-w ctrl-g t": "pane::ActivateNextItem",
@@ -744,7 +756,15 @@
     "bindings": {
       // "space f L": "pane::ReopenClosedItem",
       // "space t p": "pane::TogglePinTab",
+      // "ctrl-shift-\"": ["pane::CloseAllItems", { "close_pinned": true }]
       "ctrl-shift-t": "pane::ReopenClosedItem"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "`": "terminal_panel::ToggleFocus",
+      "ctrl-:": "terminal_panel::ToggleFocus"
     }
   },
   {
