@@ -49,6 +49,10 @@ clipP = "clippy -- -W clippy::pedantic"
 # linker = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\gcc.exe'
 # ar = 'C:\Users\<< YOUR USERNAME >>\scoop\apps\msys2\current\clang64\bin\ar.exe'
 
+[target.'cfg(target_os = linux)']
+# linker = "clang"
+rustflags = ["-C", "link-arg=-fuse-ld=mold"]
+
 # [unstable]
 # codegen-backend = true
 #
