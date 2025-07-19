@@ -22,93 +22,105 @@ esac
 
 force_color_prompt=yes
 
-aliases_file=$HOME/.aliases
-bashrc=~/.bashrc
-bash_completion=/usr/share/bash-completion/bash_completion
-bash_completion_fallback=/etc/bash_completion
-go_bin=/usr/local/go/bin
-pnpm_dir=$HOME/.xdg/data/pnpm
-
 if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-  else
-    color_prompt=
-  fi
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
+    else
+        color_prompt=
+    fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-  # shellcheck disable=SC2025
-  PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-  #PS1='[\u@\h \W]\$ '
+    # shellcheck disable=SC2025
+    PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='[\u@\h \W]\$ '
 else
-  PS1='\u@\h:\w\$ '
+    PS1='\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-  # shellcheck disable=SC2015
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias l='ls -al --color=auto'
-  alias ls='ls -l --color=auto'
+    # shellcheck disable=SC2015
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias l='ls -al --color=auto'
+    alias ls='ls -l --color=auto'
 
-  alias grep='grep --color=auto'
-  alias fgrep='fgrep --color=auto'
-  alias egrep='egrep --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
 fi
 
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    # shellcheck source=/usr/share/bash-completion/bash_completion
-    source "$bash_completion"
-  elif [ -f /etc/bash_completion ]; then
-    # shellcheck source=/etc/bash_completion
-    source "$bash_completion_fallback"
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        # shellcheck source=/usr/share/bash-completion/bash_completion
+        source "$bash_completion"
+    elif [ -f /etc/bash_completion ]; then
+        # shellcheck source=/etc/bash_completion
+        source "$bash_completion_fallback"
+    fi
 fi
+
+# ----------------------------
+
+bashrc="$HOME/.bashrc"
+
+# -----------------------------------------------------
+# ALIASES
+# -----------------------------------------------------
+
+alias gst="git status"
+alias ga="git add"
+alias gaa="git add --all"
+alias gc="git commit"
+alias gp="git push"
+alias gl="git pull"
+alias gstash="git stash"
+alias gco="git checkout"
+
+alias .b="source $bashrc"
+alias basc="vim $bashrc"
+
+alias cls='clear'
+alias neo='neofetch'
+alias pf='pfetch'
+alias l='exa -al'
+alias shutdown='systemctl poweroff'
+
+alias vi='/usr/bin/vim'
+alias vim='nvim'
+alias matrix='cmatrix'
+
+function dot {
+    folder=~/dotfiles/
+    cd $folder || exit
+    if [ -z "$1" ]; then
+        (cd $folder && git fetch && git status)
+    else
+        (cd $folder && git fetch && git status)
+    fi
+}
+
+# ------------------
+# Path stuff
+# -----------------
 
 if [[ -d "$go_bin" ]]; then
-  export GOBIN="$go_bin"
-  export PATH="$PATH:$go_bin"
+    export GOBIN="$go_bin"
+    export PATH="$PATH:$go_bin"
 fi
 
-# export NVM_DIR="$HOME/.config/nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+# # Created by `pipx` on 2023-10-26 10:01:20
+# eval "$(register-python-argcomplete pipx)"
 
-# pnpm
-if [[ -d $pnpm_dir ]]; then
-  export PNPM_HOME="$pnpm_dir"
-else
-  mkdir -p "$pnpm_dir"
-  export PNPM_HOME="$pnpm_dir"
-fi
+export ZSH=/home/dwarf/.zshrc
+export PATH="$PATH:/home/dwarf/.local/bin"
 
-case ":$PATH:" in
-*":$PNPM_HOME:"*) ;;
-*) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+eval "$(starship init bash)"
 
-alias .b='source $bashrc'
-alias basc='vim $bashrc'
+echo ""
+pfetch
 
-# Wrap the alias sourcing in a safety incase we don't have the file
-
-if [[ -f $aliases_file ]]; then
-  # shellcheck source=$HOME/.aliases
-  source "$aliases_file"
-fi
-
-# USE asdf OR mise instead going forward I thin
-# source /usr/share/nvm/init-nvm.sh
-
-# if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
-#   source /usr/share/nvm/init-nvm.sh
-# fi
-
-# source /home/dwarf/.config/broot/launcher/bash/br
