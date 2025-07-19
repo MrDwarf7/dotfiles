@@ -1,5 +1,4 @@
 #!/usr/bin/env fish
-#
 
 #Changes for xdg dir when using fish 
 # must be done via one of the dirs listed in
@@ -14,12 +13,7 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
 
-    # source our secrets file if it exists
-    if test -f ~/.secrets/secrets.fish
-        source ~/.secrets/secrets.fish
-    end
-
-    # Immediately call starship -- subsequent redraws are handled by the 
+    # Immediately call starship -- subsequent redraws are handled by the
     # call under ./functions/fish_prompt.fish
     # source (/usr/sbin/starship init fish --print-full-init | psub)
     if test -e /usr/sbin/starship
@@ -27,24 +21,21 @@ if status is-interactive
         command starship init fish | source
         commandline -f repaint
     end
-    # /usr/sbin/starship init fish
+
+    # source our secrets file if it exists
+    if test -f ~/.secrets/secrets.fish
+        source ~/.secrets/secrets.fish
+    end
 
     # if test -e /bin/direnv 
     #     direnv hook fish | source
     # end
 
     fish_vi_key_bindings
-    command fzf --fish | source
-
-    # Handled by ./conf.d/01-pre.fish
-    # zoxide init fish | source
-
-    # This is now a part of the ./functions/fish_prompt.fish file
-    # source (/usr/sbin/starship init fish --print-full-init | psub)
 
     # Handled by conf.d/01-pre.fish
-    # source (/bin/mise activate fish | psub)
+    # command fzf --fish | source
+    # mise activate fish | source   ## -- but being buggy
 
-    # mise activate fish | source
-
+    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" > /dev/null 2> /dev/null; or true
 end
