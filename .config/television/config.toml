@@ -107,7 +107,7 @@ toggle_preview = "ctrl-o"
 # Quit the application
 # Scrolling through entries
 # Select an entry
-select_entry = "enter"
+# select_entry = "enter"
 # Toggle the send to channel mode
 # Toggle the help bar
 # Toggle the preview panel
