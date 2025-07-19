@@ -1,6 +1,8 @@
 [user]
     email = 129040985+MrDwarf7@users.noreply.github.com
     name = MrDwarf7
+    signingkey = FC64448BB9335DC61650C1ECD616C6D6C6E3DACE
+    gpgsign = true
 [init]
     defaultBranch = main
 [core]
