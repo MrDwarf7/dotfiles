@@ -72,6 +72,8 @@ return {
 				"cmakelang",
 				"cmakelint",
 				"codelldb",
+				"cpplint",
+				"csharpier",
 				"debugpy",
 				"delve",
 				"fixjson",
@@ -85,13 +87,12 @@ return {
 				"prettier",
 				"ruff",
 				"shfmt",
-				"stylua",
 				"sqlfluff",
 				"sql-formatter",
+				"stylua",
 				"ts-standard",
 				"vulture",
 				"yamlfmt",
-				"csharpier",
 			}),
 		}
 
