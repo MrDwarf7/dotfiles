@@ -2,6 +2,13 @@
 name = "MrDwarf7"
 email = "129040985+MrDwarf7@users.noreply.github.com"
 
+[signing]
+behavior = "own"
+backend = "gpg"
+
+[git]
+auto-local-bookmark = true
+
 [colors]
 "diff added token" = { bg = "#002200", underline = false } # same color as "green"
 "diff removed token" = { bg = "#221111" }                  #, underline = false }
