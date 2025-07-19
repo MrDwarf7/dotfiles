@@ -1,5 +1,14 @@
 {
   "context_servers": {
+    "Context7": {
+      "source": "custom",
+      "enabled": true,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
+    },
     "postgres-context-server": {
       "source": "extension",
       "enabled": false,
@@ -18,6 +27,8 @@
     }
   },
   "agent": {
+    "always_allow_tool_actions": true,
+    "default_profile": "write",
     "default_model": {
       "provider": "zed.dev",
       "model": "claude-sonnet-4-thinking"
