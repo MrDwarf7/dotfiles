@@ -38,6 +38,8 @@ globs = [
   "!/home/*/.nuget/*",
   "!/home/*/.npm/*",
   "!/home/*/.java/*",
+  "!/home/*/.ocaml/*",
+  "!/home/*/.opam/*",
   "!/home/*/.ghcup/*",
   "!/home/*/.dotnet/*",
   "!/home/*/go/pkg/mod/golang.org",
