@@ -20,14 +20,13 @@
   "agent": {
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4"
+      "model": "claude-sonnet-4-thinking"
     },
     "default_width": 700,
     "editor_model": {
       "model": "claude-3-7-sonnet-thinking-latest",
       "provider": "zed.dev"
     },
-    "version": "2"
   },
   "lsp_highlight_debounce": 50,
   "auto_update_extensions": {
