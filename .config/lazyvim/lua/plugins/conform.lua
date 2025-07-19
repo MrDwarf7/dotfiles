@@ -59,6 +59,7 @@ return {
           end
         end,
         markdown = { "prettier" },
+        ocaml = { "ocamlformat" },
 
         sh = { "shfmt" },
         sql = { "sql_formatter" },

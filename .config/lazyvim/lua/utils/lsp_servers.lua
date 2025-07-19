@@ -167,6 +167,25 @@ M.servers = {
   -- markdown_oxide = {},
 
   ols = {},
+  ocamlls = {
+    cmd = { "ocamllsp", "--stdio" },
+    filetypes = { "ocaml", "reason" },
+    root_dir = require("lspconfig.util").root_pattern("dune-project", "dune-workspace", "dune"),
+    settings = {
+      ocamllsp = {
+        diagnostics = {
+          enable = true,
+        },
+        formatting = {
+          enable = true,
+        },
+        symbols = {
+          enable = true,
+        },
+      },
+    },
+  },
+  ocamllsp = {},
   omnisharp = {
     filetypes = { "cs", "vb" },
   },
