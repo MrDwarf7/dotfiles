@@ -22,7 +22,7 @@
 	#
 	# All text defaults to this color if not otherwise specified.
 	# text-color = #B2B2B4
-    text-color = {{foreground | lighten(0.5)}}{{100 | alpha_hexa}}
+    text-color = {{foreground | lighten(0.8)}}{{100 | alpha_hexa}}
 
 	# All pieces of text have the same theming attributes available:
 	#
@@ -72,11 +72,11 @@
 	# alternate-result-background-corner-radius = 0
 
     ## Selection text
-	selection-color = {{color2}}{{100 | alpha_hexa}}
+	selection-color = {{color1 | lighten(0.2)}}{{100 | alpha_hexa}}
 	selection-background = #FFFFFF00
 	selection-background-padding = 0
 	selection-background-corner-radius = 0
-	selection-match-color = {{cursor | lighten(0.2)}}{{90 | alpha_hexa}}
+	selection-match-color = {{color2 | lighten(0.2)}}{{90 | alpha_hexa}}
 
 #
 ### Text cursor theme

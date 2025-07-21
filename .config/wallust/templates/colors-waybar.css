@@ -20,7 +20,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 10px;
   border-radius: 10px;
-  background: alpha({{background}}, .6);
+  background: alpha({{background}}, 0.65);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -31,7 +31,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: alpha({{background}}, .6);
+  background: alpha({{background}}, 0.65);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
   min-width: 150.5px;
 }
@@ -43,7 +43,7 @@ window#waybar {
   margin-bottom: 5px;
   margin-left: 0px;
   border-radius: 10px;
-  background: alpha({{background}}, 0.6);
+  background: alpha({{background}}, 0.65);
   box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
 }
 
@@ -68,16 +68,15 @@ tooltip {
   color: {{color8}};
 }
 
+/* LEFT */
 
-#custom-terminal,
-#custom-notification,
-#custom-pacman,
-#mpris
-{
-  padding: 0px 5px;
+#custom-notification {
+  padding-top: 0px;
+  padding-right: 8px;
+  padding-bottom: 0px;
+  padding-left: 6px;
   transition: all .3s ease;
   color: {{color7}};
-
 }
 
 #clock {
@@ -86,6 +85,125 @@ tooltip {
   transition: all .3s ease;
   color: {{color7}};
 }
+
+#custom-pacman {
+  padding: 0px 6px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#custom-terminal {
+  padding-top: 0px;
+  padding-right: 10px;
+  padding-bottom: 0px;
+  padding-left: 8px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#tray {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#tray menu * {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#tray menu separator {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#mpris {
+  padding: 0px 6px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+/* LEFT END */
+
+
+
+/* MIDDLE */
+
+#workspaces {
+  padding: 0px 5px;
+  text-shadow: none;
+}
+
+#workspaces button {
+  all: unset;
+  margin-top: 0px;
+  margin-right: 2px;
+  margin-bottom: 0px;
+  margin-left: 2px;
+
+  padding-top: 0px;
+  padding-right: 2px;
+  padding-bottom: 0px;
+  padding-left: 2px;
+
+  color: rgba(0, 0, 0, 0);
+  text-shadow: none;
+  background: {{color1}};
+  border-radius: 50%;
+  transition: all .3s;
+  min-width: 14px;
+}
+
+
+#workspaces button:hover {
+  color: rgba(0, 0, 0, 0);
+  border: none;
+background: {{color4 | darken(0.2)}};
+}
+
+#workspaces button.active {
+  border: none;
+  padding: 0px 2px;
+  border-radius: 10px;
+  background-color: {{color4}};
+  min-width: 30px;
+}
+
+#workspaces button.active:hover {
+background: {{color4 | lighten(0.2)}};
+}
+
+#workspaces button.empty {
+  /* color: transparent; */
+  color: rgba(0, 0, 0, 0);
+  border: none;
+  background: alpha({{background}}, .50);
+}
+
+
+#workspaces button.empty:hover {
+  /* color: rgba(0, 0, 0, 0); */
+  /* border: none; */
+  /* text-shadow: none; */
+  /* text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5); */
+  background: {{color4 | darken(0.2)}};
+}
+
+#workspaces button.empty.active {
+  /* color: rgba(0, 0, 0, 0); */
+  border: none;
+  text-shadow: none;
+  background: {{color8}};
+}
+
+#workspaces button.empty.active:hover {
+  color: rgba(0, 0, 0, 0);
+  background: {{background}};
+}
+
+/* MIDDLE END */
+
+
+/* RIGHT */
 
 #taskbar {
     all: unset;
@@ -100,10 +218,6 @@ tooltip {
     box-shadow: 0px 0px 2px rgba(0, 0, 0, .3);
 }
 
-#workspaces {
-  padding: 0px 5px;
-  text-shadow: none;
-}
 
 #taskbar button {
     all: unset;
@@ -120,100 +234,17 @@ tooltip {
     min-width: 18px;
 }
 
-
-#workspaces button {
-  all: unset;
-  margin-top: 0px;
-  margin-right: 3px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  padding: 0px 2px;
-  color: rgba(0, 0, 0, 0);
-  text-shadow: none;
-  background: {{color4}};
-  border-radius: 50%;
-  transition: all .3s;
-  min-width: 15px;
-}
-
 #taskbar button:hover {
     color: rgba(0, 0, 0, 0);
     border: none;
-    background: {{color4}};
+    background: {{color1}};
 }
 
-#workspaces button:hover {
-  color: rgba(0, 0, 0, 0);
-  border: none;
-  background: {{color7}};
-}
-
-#workspaces button.active {
-  border: none;
-  padding: 0px 2px;
-  border-radius: 10px;
-  background-color: {{color15}};
-  min-width: 30px;
-}
-
-#workspaces button.active:hover {
-  background: {{color4}};
-}
-
-#workspaces button.empty {
-  color: transparent;
-  border: none;
-  background: alpha({{background}}, .5);
-}
-
-#workspaces button.empty:hover {
-  color: rgba(0, 0, 0, 0);
-  border: none;
-  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, .5);
-}
-
-#workspaces button.empty.active {
-  color: rgba(0, 0, 0, 0);
-  border: none;
-  text-shadow: none;
-  background: {{color8}};
-}
-
-#workspaces button.empty.active:hover {
-  background: {{color8}};
-}
-
-
-#pulseaudio,
-#bluetooth,
-#network,
-#battery
-{
-  padding: 0px 5px;
+#pulseaudio {
+  padding: 0px 8px;
   transition: all .3s ease;
   color: {{color7}};
-}
 
-#battery.charging {
-  color: #26A65B;
-}
-
-#battery.warning:not(.charging) {
-  color: #ffbe61;
-}
-
-#battery.critical:not(.charging) {
-  color: #f53c3c;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#group-expand {
-  padding: 0px 5px;
-  transition: all .3s ease;
 }
 
 #custom-expand {
@@ -240,23 +271,67 @@ tooltip {
   color: {{color7}};
 }
 
+#group-expand {
+  padding: 0px 5px;
+  transition: all .3s ease;
+}
+
+#bluetooth,
+#network,
+#battery
+{
+  padding: 0px 8px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#battery.charging {
+  color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+  color: #ffbe61;
+}
+
+#battery.critical:not(.charging) {
+  color: #f53c3c;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#idle_inhibitor:hover {
+  transition: all .3s ease;
+  color: {{color8}};
+}
+
+#idle_inhibitor {
+  padding: 0px 8px;
+  transition: all .3s ease;
+  color: {{color7}};
+}
+
+#idle_inhibitor.activated {
+  color: {{color5}};
+  transition: all .3s ease;
+}
+
+#idle_inhibitor.deactivated {
+  color: {{color7}};
+  transition: all .3s ease;
+}
+
+/* RIGHT END */
+
+/* MISC */
 
 #custom-endpoint {
-  color: transparent;
-  text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1);
+  padding: 0px 5px;
+  color: {{color7}};
+  /* text-shadow: 0px 0px 1.5px rgba(0, 0, 0, 1); */
 }
 
-#tray {
-  padding: 0px 5px;
-  transition: all .3s ease;
-}
+/* MISC END */
 
-#tray menu * {
-  padding: 0px 5px;
-  transition: all .3s ease;
-}
-
-#tray menu separator {
-  padding: 0px 5px;
-  transition: all .3s ease;
-}

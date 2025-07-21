@@ -18,7 +18,7 @@ window {
   all: unset;
   padding: 20px;
   border-radius: 0px;
-  background-color: 010607CC;
+  background-color: 010508CC;
 }
 
 #inner-box {
@@ -47,8 +47,8 @@ window {
   outline: none;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
   border-radius: 10px;
-  background-color: 01060733;
-  color: #A7ADAE;
+  background-color: 01050833;
+  color: #A7ACAE;
 }
 
 /* magnifying class on input box */
@@ -73,7 +73,7 @@ window {
   margin: 4px;
   border: none;
   outline: none;
-  color: #A7ADAE;
+  color: #A7ACAE;
 }
 
 /* List items being searched */
@@ -85,7 +85,7 @@ window {
 
 #entry arrow {
   border: none;
-  color: #798184;
+  color: #798084;
 }
 
 #entry:selected {
@@ -98,7 +98,7 @@ window {
 }
 
 #entry:selected #text {
-  color: #AB688B;
+  color: #C3906B;
 }
 
 #entry:drop(active) {
