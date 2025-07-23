@@ -35,6 +35,9 @@ function sysup --description 'System update function'
         end
     end
 
+    printf "Disabling mise...\n"
+    command mise deactivate > /dev/null
+
     if test $skip_mirror = true
         _generic_update || return $status
     else
@@ -42,11 +45,12 @@ function sysup --description 'System update function'
         _generic_update || return $status
     end
 
-    if test $skip_rustup = true
-        command rustup update
-    else
-        rustup_update || return $status
+    if test $skip_rustup != true
+        command rustup update || return $status
     end
+
+    printf "Re-enabling mise...\n"
+    command mise activate > /dev/null
 
     return $status
 end
