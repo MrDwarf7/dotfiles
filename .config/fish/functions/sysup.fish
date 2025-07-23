@@ -16,17 +16,18 @@ function sysup --description 'System update function'
     argparse --name=sysup 's/skip=' -- $argv
     or return
 
-    set -l skip_mirror 1
-    set -l skip_rustup 1
+    # Should skip 1 = true, 0 = false
+    set -l skip_mirror false
+    set -l skip_rustup false
 
     # Loop here allows for supporting additional items in the switch/case later if wanted
     if set -q _flag_skip 
         for char in (string split '' $_flag_skip)
             switch $char
             case m
-                set skip_mirror 0
+                set skip_mirror true
             case r
-                set skip_rustup 0
+                set skip_rustup true
             case '*'
                 echo "Invalid skip value: $_flag_skip" >&2 
                 return 1
@@ -34,13 +35,17 @@ function sysup --description 'System update function'
         end
     end
 
-    if test $skip_mirror -eq 1
+    if test $skip_mirror = true
+        _generic_update || return $status
+    else
         mirror_update || return $status
         _generic_update || return $status
     end
 
-    if test $skip_rustup -eq 1
+    if test $skip_rustup = true
         command rustup update
+    else
+        rustup_update || return $status
     end
 
     return $status
