@@ -37,7 +37,8 @@
     "lazyvim.plugins.extras.lang.zig",
     "lazyvim.plugins.extras.lsp.neoconf",
     "lazyvim.plugins.extras.test.core",
-    "lazyvim.plugins.extras.util.dot"
+    "lazyvim.plugins.extras.util.dot",
+    "lazyvim.plugins.extras.util.octo"
   ],
   "install_version": 8,
   "news": {
