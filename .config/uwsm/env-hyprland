@@ -9,4 +9,5 @@
 # export AQ_MGPU_NO_EXPLICIT = 1          # - Disables explicit syncing on mgpu buffers
 # export AQ_NO_MODIFIERS = 1              # - Disables modifiers for DRM buffers
 
-export AQ_NO_ATOMIC,1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.
+# export AQ_NO_ATOMIC,1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.
+# export AQ_NO_ATOMIC=1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.
