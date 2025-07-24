@@ -9,8 +9,8 @@ window {
 }
 
 button {
-    color: #C1C5C6E6;
-    background: #01050866;
+    color: #C4C5C9E6;
+    background: #0E0E0E66;
 
 	/* font-family: 'Material Symbols Outlined'; */
     font-family: "Mononoki Nerd Font", monospace;
@@ -31,7 +31,7 @@ button:active,
 button:hover {
 	border-radius: 4rem;
     outline-style: none;
-	background-color: #E7D3C433;
+	background-color: #DAD1C133;
 }
 
 
