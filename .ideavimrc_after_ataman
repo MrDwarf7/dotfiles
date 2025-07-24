@@ -28,7 +28,7 @@ set notimeout
 
 " Common settings -------------------------
 set number relativenumber
-set clipboard+=unnamed
+set clipboard+=unnamedplus
 set clipboard+=ideaput
 " set clipboard+=ideaput
 
@@ -60,7 +60,7 @@ Plug 'tpope/vim-surround'
 " Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdtree'
 Plug 'tommcdo/vim-exchange'
-Plug 'vim-scripts/ReplaceWithRegister' " This may not be required due to having the _dP binding? But it also handles newline yanks into non-newline pastes
+" Plug 'vim-scripts/ReplaceWithRegister' " This may not be required due to having the _dP binding? But it also handles newline yanks into non-newline pastes
 Plug 'dbakker/vim-paragraph-motion'
 
 " Plugin activation / Specifics------------------
