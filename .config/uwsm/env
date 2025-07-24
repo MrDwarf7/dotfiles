@@ -35,6 +35,10 @@ export __GL_VRR_ALLOWED=0                    # - Controls if Adaptive Sync shoul
 # export GTK_THEME,Adwaita:dark
 # export GTK_THEME,Tokyonight-Dark-B
 export GTK_THEME=Tokyonight-Dark-B
+
+export HYPRCURSOR_THEME=Hyprcursor-Bibata-Modern-Classic
+export HYPRCURSOR_SIZE=24
+
 export XCURSOR_THEME=Bibata-Modern-Classic
 export XCURSOR_SIZE=24
 
