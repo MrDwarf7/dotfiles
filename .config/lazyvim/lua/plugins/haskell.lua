@@ -8,6 +8,7 @@
 
 return {
   "haskell-tools.nvim",
+  enabled = false,
   version = "^5",
   lazy = true,
   ft = { "haskell", "lhaskell", "cabal", "cabalproject" },
