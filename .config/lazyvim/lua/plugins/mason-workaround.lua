@@ -8,7 +8,7 @@ return {
     },
     opts = {
       ensure_installed = {
-        "bacon",
+        -- "bacon",
         "basedpyright",
         "beautysh",
         "black",

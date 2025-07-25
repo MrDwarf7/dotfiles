@@ -8,9 +8,9 @@ local arch = require("utils.arch")
 local M = {}
 
 M.servers = {
-  bacon_ls = {
-    enabled = diagnostics == "bacon-ls",
-  },
+  -- bacon_ls = {
+  --   enabled = diagnostics == "bacon-ls",
+  -- },
   bashls = {},
   basedpyright = {
     cmd = { "basedpyright-langserver", "--stdio" },

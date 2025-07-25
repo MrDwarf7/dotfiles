@@ -94,7 +94,7 @@ mdel("n", "<Leader>fn")
 --- Non-basics ---
 ---
 
-map("i", "jj", "<Esc>", silent_opts)
+-- map("i", "jj", "<Esc>", silent_opts)
 map("i", "jk", "<Esc>", silent_opts)
 map("i", "kj", "<Esc>", silent_opts)
 map("i", "kk", "<Esc>", silent_opts)
