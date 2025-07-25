@@ -32,6 +32,10 @@ set -gx DATA_ON_DEMAND_BACK $DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
 set -gx DATA_ON_DEMAND_FRONT $DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
 set -gx DATA_ON_DEMAND_NEXT $DATA_ON_DEMAND_BASE/data-on-demand-next
 
+# This is technically a bug - Fish parses the env variables a little weird because of how it handles string 
+# interactions with set. We have to escape the asterisk so it's passed through to zoxide and not the shell.
+set -gx _ZO_EXCLUDE_DIRS $HOME/go:$HOME/go/\*
+
 set -gx ZVM_PATH $XDG_CONFIG_HOME/.zvm
 set -gx ZVM_INSTALL $XDG_CONFIG_HOME/.zvm/self
 
