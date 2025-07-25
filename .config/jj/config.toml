@@ -24,7 +24,7 @@ pager = ":builtin"
 
 [aliases]
 s = ["util", "exec", "--", "bash", "-c", """
-jj status
+jj show -s "$@"
 """, ""]
 #    ^^
 # This last empty string will become "$0" in bash, so your actual arguments
@@ -32,5 +32,18 @@ jj status
 
 
 sh = ["util", "exec", "--", "bash", "-c", """
-jj show
+jj show "$@"
 """, ""]
+
+
+as_commits = [
+  "util",
+  "exec",
+  "--",
+  "bash",
+  "-c",
+  """
+jj log --no-pager --color=never --template "commit_id" | sed -E -e "s/^(.*\\s+)(\\w?\\d?)?(\\~?\\s+\\(\\w+\\s?\\w+\\))?/\\2\\3/g" -e "s/^([\\│|\\├\\|\\─|\\╯|\\╮])*//g"
+""",
+  "",
+]

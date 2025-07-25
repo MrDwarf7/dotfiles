@@ -1,0 +1,10 @@
+[metadata]
+name = "jj-diff"
+description = "A channel for showing the current state of a jj repository"
+requirements = ["jj"]
+
+[source]
+command = "jj diff --color=always --name-only --no-pager"
+
+[preview]
+command = "jj diff --color=always --no-pager '{}'"

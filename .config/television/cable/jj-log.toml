@@ -1,0 +1,16 @@
+[metadata]
+name = "jj-log"
+description = "A channel for showing the current state of a jj repository"
+requirements = ["jj"]
+
+[source]
+# If we double parse it it's pre-slow honestly
+# sed -E "s/^(.*\s+)(\w?\d?)?(\~\s+\(\w+\s?\w+\))?/\2\3/g" | sed -E "s/^([\│|\├\|\─|\╯|\╮])*//g"'
+#
+# This alias `as_commits` is set up in the actual jj config.toml file. At the time of writing 
+# this (2025_07_29) it's basically the below command:
+# 'jj log --no-pager --color=never --template "commit_id" | sed -E -e "s/^(.*\s+)(\w?\d?)?(\~?\s+\(\w+\s?\w+\))?/\2\3/g" -e "s/^([\│|\├\|\─|\╯|\╮])*//g"'
+command = "jj --no-pager --color=never as_commits"
+
+[preview]
+command = "jj show --color=always --no-pager -r '{}'"
