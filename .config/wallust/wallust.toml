@@ -49,31 +49,27 @@ alpha = 60
 
 
 ## Css templates
+#
 pallete.template = '.palette.css'
 pallete.target = '~/.config/.palette.css'
-
-
-wofi.template = 'colors-wofi.css'
-# wofi.target = '~/.config/wofi/wofi-colors.css'
-wofi.target = '~/.config/wofi/style.css'
-
-tofi.template = 'colors-tofi'
-tofi.target = '~/.config/tofi/config'
-
-# waybar.template = 'colors-waybar.css'
-# waybar.target = '~/.config/waybar/waybar-colors.css'
 
 waybar.template = 'colors-waybar.css'
 waybar.target = '~/.config/waybar/style.css'
 
+tofi.template = 'colors-tofi'
+tofi.target = '~/.config/tofi/config'
+
+wofi.template = 'colors-wofi.css'
+wofi.target = '~/.config/wofi/style.css'
 
 wlogout.template = 'colors-wlogout.css'
 wlogout.target = '~/.config/wlogout/style.css'
 
+swaync.template = 'colors-swaync.css'
+swaync.target = '~/.config/swaync/style.css'
 
 ## Conf templates
-
-
+#
 hypr.template = 'colors-hypr.conf'
 hypr.target = '~/.config/hypr/hypr-colors.conf'
 
@@ -84,10 +80,8 @@ hyprpaper.target = '~/.config/hypr/hyprpaper.conf'
 ghostty.template = 'colors-ghostty.conf'
 ghostty.target = '~/.config/ghostty/ghostty-colors.conf'
 
-
 ## Other
-
-
+#
 # cava.template = 'colors-cava'
 # cava.target = '~/.xdg/cache/cava/cava-colors.css'
 
