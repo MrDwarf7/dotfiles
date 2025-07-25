@@ -41,6 +41,9 @@ require("lazy").setup({
   change_detection = {
     notify = false,
   },
+  dev = {
+    path = "~/Documents/nvim_dev",
+  },
   performance = {
     -- cache = {
     --   -- enabled = true,
