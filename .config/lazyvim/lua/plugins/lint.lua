@@ -2,7 +2,7 @@ return {
   "nvim-lint",
   opts = {
     linters_by_ft = {
-
+      fish = { "fish" },
       cpp = { "cpplint" },
       css = { "stylelint" },
       cmake = { "cmakelint " },
@@ -11,7 +11,7 @@ return {
       javascript = { "biomejs" },
       javascriptreact = { "biomejs" },
       json = { "jsonlint" },
-      lua = { "luacheck" },
+      -- lua = { "luacheck" },
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
       -- python = { "ruff", "mypy", "vulture" },

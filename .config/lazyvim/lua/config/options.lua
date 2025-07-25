@@ -77,6 +77,9 @@ opt.shortmess:append({
 -- opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
 opt.splitkeep = "topline" -- default WAS "screen"
 
+-- LSP border (Also affects which-key though...)
+-- opt.winborder = "single"
+
 opt.timeoutlen = vim.g.vscode and 1000 or 350
 opt.updatetime = 250
 opt.winminwidth = 6 -- Minimum window width

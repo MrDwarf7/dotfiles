@@ -3,6 +3,14 @@ return {
   {
     "nvim-lspconfig",
     lazy = true,
+    dependencies = {
+      -- {
+      --   "folke/neoconf.nvim",
+      --   lazy = false,
+      --   cmd = "Neoconf",
+      --   opts = {},
+      -- },
+    },
 		-- event = "VeryLazy",
 		-- stylua: ignore start
 		opts = function(opts)
@@ -88,7 +96,8 @@ return {
 					timeout_ms = nil,
 				},
 				-- LSP Server Settings
-				servers = vim.tbl_deep_extend("force", lsp_servers.servers, opts.servers or {}),
+				servers = lsp_servers.servers,
+					-- vim.tbl_deep_extend("force", lsp_servers.servers, opts.servers or {}),
 				-- you can do any additional lsp server setup here
 				-- return true if you don't want this server to be setup with lspconfig
 				setup = {

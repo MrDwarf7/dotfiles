@@ -3,8 +3,8 @@
 
 local arch = require("utils.arch")
 
----@class LspServers
----@field servers table<string, table>
+-----@class LspServers
+-----@field servers table<string, table>
 local M = {}
 
 M.servers = {
@@ -77,8 +77,10 @@ M.servers = {
     -- single_file_support = true,
     -- capabilities = self:capabilities(),
   },
-  neocmake = {},
+
   cssls = {},
+  cssmodules_ls = {},
+  css_variables = {},
 
   -- deno = {}, -- commented due to conflict with tsserver
 
@@ -106,8 +108,45 @@ M.servers = {
   hyprls = {},
   jsonls = {},
   lua_ls = {
+    on_init = function(client)
+      if client.workspace_folders then
+        local path = client.workspace_folders[1].name
+        if
+          path ~= vim.fn.stdpath("config")
+          and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+        then
+          return
+        end
+      end
+
+      client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+        runtime = {
+          version = "LuaJIT",
+          path = {
+            "lua/?.lua",
+            "lua/?/init.lua",
+          },
+        },
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            vim.env.VIMRUNTIME,
+          },
+        },
+      })
+    end,
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
+    root_markers = {
+      ".luarc.json",
+      ".luarc.jsonc",
+      ".luacheckrc",
+      ".stylua.toml",
+      "stylua.toml",
+      "selene.toml",
+      "selene.yml",
+      ".git",
+    },
     root_dir = require("lspconfig.util").root_pattern(
       ".git",
       ".luacheckrc",
@@ -131,8 +170,23 @@ M.servers = {
           globals = { "vim", "require" },
         },
         workspace = {
-          checkThirdParty = true,
-          library = vim.api.nvim_get_runtime_file("", true),
+          checkThirdParty = false,
+
+          library = {
+            vim.env.VIMRUNTIME,
+            vim.api.nvim_get_runtime_file("", true),
+            "$VIMRUNTIME",
+            "$VIMRUNTIME/lua",
+            -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            "${3rd}/luv/library",
+            "${3rd]/busted/library",
+            "${3rd]/luaassert/library",
+            "lua",
+            -- unpack(vim.api.nvim_get_runtime_file("", true)),
+            -- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          },
+
+          -- library = vim.api.nvim_get_runtime_file("", true),
         },
         codeLens = {
           enable = true,
@@ -151,9 +205,14 @@ M.servers = {
             arrayIndex = "Disable",
           },
           library = {
-            "${3rd}/luv/library",
-            -- unpack(vim.api.nvim_get_runtime_file("", true)),
+            "$VIMRUNTIME",
+            "$VIMRUNTIME/lua",
             -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            "${3rd}/luv/library",
+            "${3rd]/busted/library",
+            "${3rd]/luaassert/library",
+            "lua",
+            -- unpack(vim.api.nvim_get_runtime_file("", true)),
             -- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
         },
@@ -165,6 +224,8 @@ M.servers = {
   },
   marksman = {},
   -- markdown_oxide = {},
+
+  neocmake = {},
 
   ols = {},
   ocamlls = {
