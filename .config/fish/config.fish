@@ -23,8 +23,8 @@ if status is-interactive
     end
 
     # source our secrets file if it exists
-    if test -f ~/.secrets/secrets.fish
-        source ~/.secrets/secrets.fish
+    if test -e "$HOME/.secrets/secrets.fish"
+        source "$HOME/.secrets/secrets.fish"
     end
 
     # if test -e /bin/direnv 
