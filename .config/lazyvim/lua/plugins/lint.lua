@@ -11,6 +11,7 @@ return {
       javascript = { "biomejs" },
       javascriptreact = { "biomejs" },
       json = { "jsonlint" },
+      -- markdown = { "markdownlint-cli2" },
       -- lua = { "luacheck" },
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },

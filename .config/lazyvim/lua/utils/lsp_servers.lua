@@ -222,7 +222,7 @@ M.servers = {
       },
     },
   },
-  marksman = {},
+  -- marksman = {},
   -- markdown_oxide = {},
 
   neocmake = {},

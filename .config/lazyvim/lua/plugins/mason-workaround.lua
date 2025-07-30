@@ -26,6 +26,8 @@ return {
         "gopls",
         "isort",
         "jsonlint",
+        "markdownlint-cli2",
+        -- "markdown-toc",
         --"markdown_oxide",
         -- "mdsf",
         "mdslw",
