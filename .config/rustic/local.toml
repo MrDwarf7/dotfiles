@@ -5,7 +5,7 @@
 #
 # global options: These options are used for all commands.
 [global]
-log-level = "debug"
+log-level = "info"
 # log-file = "/var/log/rustic/2025_07_08__2.log"
 
 
@@ -62,6 +62,8 @@ globs = [
 
   "!/home/*/.local/*/pnpm/*",
   "!/home/*/.local/NuGet/*",
+  "!/home/*/.local/share/ice/*",
+  "!/home/*/.docker/*",
 
   "!/home/*/.xdg/*/pnpm/*",
 
@@ -86,6 +88,7 @@ globs = [
   "!/home/*/.xdg/local/JetBrains/*/intellij-rust/*",
   "!/home/*/.xdg/local/JetBrains/*/index/*",
 
+  "!/home/*/.xdg/data/Steam/*",
   "!/home/*/.xdg/data/Steam/steamapps/common/*",
   "!/home/*/.xdg/data/Steam/steamapps/compatdata/*",
   "!/home/*/.xdg/data/Steam/steamrt64/*",
@@ -94,7 +97,10 @@ globs = [
   "!/home/*/.xdg/data/Steam/public/*",
   "!/home/*/.xdg/data/Steam/ubuntu12_32/*",
   "!/home/*/.xdg/data/Steam/ubuntu12_64/*",
+
   "!/home/*/.xdg/data/Trash/*",
+  "!/home/*/.xdg/data/JetBrains/*",
+  "!/home/*/.xdg/data/NexusMods*/*",
 
   "!/home/*/.xdg/data/lazyvim/mason/*",
   "!/home/*/.xdg/data/nvim/mason/*",
