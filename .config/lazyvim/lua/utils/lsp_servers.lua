@@ -128,7 +128,7 @@ M.servers = {
           },
         },
         workspace = {
-          checkThirdParty = false,
+          checkThirdParty = true,
           library = {
             vim.env.VIMRUNTIME,
           },
@@ -170,8 +170,7 @@ M.servers = {
           globals = { "vim", "require" },
         },
         workspace = {
-          checkThirdParty = false,
-
+          checkThirdParty = true,
           library = {
             vim.env.VIMRUNTIME,
             vim.api.nvim_get_runtime_file("", true),
@@ -270,7 +269,7 @@ M.servers = {
   --   },
   -- },
   prismals = {},
-
+  -- svelte_language_server = {},
   -- pyright = {
   --   cmd = { "pyright-langserver", "--stdio" },
   --   filetypes = { "python" },
