@@ -19,7 +19,7 @@
 function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     if test -z "$PKG_MANAGER"
         printf "NOTE: PKG_MANAGER not set, defaulting to yay\n"
-        set -l PKG_MANAGER "yay"
+        set -l PKG_MANAGER yay
     end
 
     sudo true
@@ -27,15 +27,31 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
 
     printf "Creating temporary file\n"
     set -l TMPFILE (mktemp)
+
+    if test $status -ne 0
+        if test -z "$TMPFILE"
+            printf "Failed to create temporary file\n"
+            printf "mktemp failed with status %d\n" $status
+            return 1
+        end
+        printf "mktemp failed with status %d\n" $status
+        return $status
+    end
+
     printf "Temporary file created: %s\n" $TMPFILE
 
     printf "Updating mirrors\n"
     rate-mirrors --save=$TMPFILE arch --max-delay=21600
 
+    if test $status -ne 0
+        printf "rate-mirrors failed with status %d\n" $status
+        return $status
+    end
+
     printf "Moving mirrorlist from %s to /etc/pacman.d/mirrorlist\n" $TMPFILE
     sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup || return 1
     sudo mv $TMPFILE /etc/pacman.d/mirrorlist || return 2
-    sudo chown root:root /etc/pacman.d/mirrorlist || return 3                                   # Re-secure the mirrorlist file before leaving sudo
+    sudo chown root:root /etc/pacman.d/mirrorlist || return 3 # Re-secure the mirrorlist file before leaving sudo
     # Make it readable by everyone
     sudo chmod 644 /etc/pacman.d/mirrorlist || return 4
 
@@ -58,7 +74,6 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     end
     return 0
 end
-
 
 # Drops the cache for the package manager and AUR
 # System Dependencies:
