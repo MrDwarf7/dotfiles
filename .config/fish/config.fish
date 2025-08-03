@@ -23,8 +23,8 @@ if status is-interactive
     end
 
     # source our secrets file if it exists
-    if test -e "$HOME/.secrets/secrets.fish"
-        source "$HOME/.secrets/secrets.fish"
+    if test -e "$HOME/.secret/secrets.fish"
+        source "$HOME/.secret/secrets.fish"
     end
 
     # if test -e /bin/direnv 
@@ -37,5 +37,12 @@ if status is-interactive
     # command fzf --fish | source
     # mise activate fish | source   ## -- but being buggy
 
-    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" > /dev/null 2> /dev/null; or true
+    # pnpm
+    set -gx PNPM_HOME "/home/dwarf/.xdg/data/pnpm"
+    if not string match -q -- $PNPM_HOME $PATH
+        set -gx PATH "$PNPM_HOME" $PATH
+    end
+    # pnpm end
+
+    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" >/dev/null 2>/dev/null; or true
 end
