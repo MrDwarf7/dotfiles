@@ -118,7 +118,7 @@ map <A-a> :action copilot.applyInlays
 
 inoremap kj <ESC>
 inoremap jk <ESC>
-inoremap jj <ESC>
+" inoremap jj <ESC>
 inoremap kk <ESC>
 inoremap <S-CR> <CR>
 
