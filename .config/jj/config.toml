@@ -27,6 +27,7 @@ diff-formatter = ":git"
 # pager = ":builtin"
 pager = ["delta", "delta", "--pager", "less -FRX"]
 graph.style = "curved"                             # Default
+merge-editor = ":builtin"
 
 
 [template-aliases]
@@ -126,7 +127,7 @@ draft_commit_description = '''
      "\n" ++
      "\nJJ: ignore-rest\n" ++
      "\n",
-     diff.git(72)
+     diff.git(32)
    ) 
 '''
 
