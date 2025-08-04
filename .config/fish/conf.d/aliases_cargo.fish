@@ -19,6 +19,7 @@
 
 alias cb 'cargo build'
 alias cbr 'cargo build --release'
+alias cba 'cargo build && cargo build --release'
 
 alias cr 'cargo run'
 alias crq 'cargo run -q'
