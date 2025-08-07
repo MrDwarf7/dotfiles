@@ -6,6 +6,10 @@
 
 # Toolkit Backend Variables
 export GDK_BACKEND=wayland,x11
+#
+# Aug 07 16:17:40 Fortress uwsm_env-preloader[1065]: /home/dwarf/.config/uwsm/env: line 9: xcb: command not found
+# Apparently ;xcb not found?
+#
 export QT_QPA_PLATFORM=wayland;xcb
 export SDL_VIDEODRIVER=wayland # Set to x11 if games that provider older version of SDL have compat. issues
 export CLUTTER_BACKEND=wayland

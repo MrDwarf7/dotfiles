@@ -384,6 +384,7 @@ gpd = ['git', 'push', '--deleted']
 
 gr = ["git", "remote"]
 grl = ["git", "remote", "list"]
+grv = ["git", "remote", "list"]    # habit
 gra = ["git", "remote", "add"]
 grr = ["git", "remote", "remove"]
 grrm = ["git", "remote", "rename"]

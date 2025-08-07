@@ -44,16 +44,20 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = {
-    "gitconfig",
-    ".gitconfig",
-  },
-  -- commmand = vim.cmd([[ setlocal commentstring=#\ %s ]]),
+  pattern = { "gitconfig", ".gitconfig" },
   callback = function()
     local comment_str = vim.filetype.get_option("gitconfig", "commentstring")
     if comment_str ~= "#" then
       vim.cmd([[ setlocal commentstring=#\ %s ]])
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { ".gitignore_global", ".gitignore_local", ".gitignore.local", ".gitignore.global" },
+  callback = function()
+    vim.cmd([[ set ft=gitignore ]])
+    -- vim.bo.filetype = "gitignore"
   end,
 })
 
