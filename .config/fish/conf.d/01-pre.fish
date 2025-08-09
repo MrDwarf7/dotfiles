@@ -38,3 +38,6 @@
 01eval_if_pacman jj "jj util completion fish | source"
 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 01eval_if_pacman mise "mise activate fish | source"
+
+# 01eval_if_pacman bob "source '~/.local/share/bob/env/env.fish'"
+06source_if_pacman bob "$HOME/.local/share/bob/env/env.fish"
