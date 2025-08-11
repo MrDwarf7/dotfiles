@@ -15,13 +15,13 @@
 # 03export_path_if_pacman "pyenv" "PATH" "$PYENV_ROOT/bin $PATH"
 # 01eval_if_pacman "pyenv" "pyenv init -"
 
-05export_alias_if_pacman nvim vi /usr/sbin/vim
-05export_alias_if_pacman nvim vim /usr/sbin/nvim
-05export_alias_if_pacman nvim nvim /usr/sbin/nvim
+# /usr/bin/nvim
+# 05export_alias_if_pacman nvim vi vi
+# 05export_alias_if_pacman nvim vim nvim
 
-05export_alias_if_pacman neovim vi /usr/sbin/vim
-05export_alias_if_pacman neovim vim /usr/sbin/nvim
-05export_alias_if_pacman neovim nvim /usr/sbin/nvim
+# basically, vi = older 'vim', vim = 'neovim'
+05export_alias_if_pacman neovim vi rvim
+05export_alias_if_pacman neovim vim nvim
 
 05export_alias_if_pacman helix hx /usr/bin/helix
 
