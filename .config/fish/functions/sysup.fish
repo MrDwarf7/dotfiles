@@ -21,28 +21,30 @@ function sysup --description 'System update function'
     set -l skip_rustup false
 
     # Loop here allows for supporting additional items in the switch/case later if wanted
-    if set -q _flag_skip 
+    if set -q _flag_skip
         for char in (string split '' $_flag_skip)
             switch $char
-            case m
-                set skip_mirror true
-            case r
-                set skip_rustup true
-            case '*'
-                echo "Invalid skip value: $_flag_skip" >&2 
-                return 1
+                case m
+                    set skip_mirror true
+                case r
+                    set skip_rustup true
+                case '*'
+                    echo "Invalid skip value: $_flag_skip" >&2
+                    return 1
             end
         end
     end
 
     printf "Disabling mise...\n"
-    command mise deactivate > /dev/null
+    command mise deactivate >/dev/null
 
     if test $skip_mirror = true
         _generic_update || return $status
+        # _generic_cache_drop || return $status
     else
         mirror_update || return $status
         _generic_update || return $status
+        # _generic_cache_drop || return $status
     end
 
     if test $skip_rustup != true
@@ -50,7 +52,7 @@ function sysup --description 'System update function'
     end
 
     printf "Re-enabling mise...\n"
-    command mise activate > /dev/null
+    command mise activate >/dev/null
 
     return $status
 end

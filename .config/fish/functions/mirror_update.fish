@@ -55,8 +55,6 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     # Make it readable by everyone
     sudo chmod 644 /etc/pacman.d/mirrorlist || return 4
 
-    ua_drop_caches
-
     # _generic_update || return $status
     # $PKG_MANAGER -Syyu --noconfirm || return $status
 
@@ -82,9 +80,3 @@ end
 # Globals Variables:
 #   PKG_MANAGER (yay/paru)
 #
-function ua_drop_caches --description 'Drop package manager and AUR caches'
-    printf "Dropping caches\n"
-    sudo true
-    sudo paccache -rk3
-    $PKG_MANAGER -Sc --aur --noconfirm
-end
