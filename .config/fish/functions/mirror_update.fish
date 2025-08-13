@@ -26,7 +26,9 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
 
     printf "Creating temporary file\n"
-    set -l TMPFILE (mktemp)
+    set -g TMPFILE (mktemp)
+    set -g COUNTRY AUS
+    set -g DISTRO arch
 
     if test $status -ne 0
         if test -z "$TMPFILE"
@@ -41,7 +43,14 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     printf "Temporary file created: %s\n" $TMPFILE
 
     printf "Updating mirrors\n"
-    rate-mirrors --save=$TMPFILE arch --max-delay=21600
+    # rate-mirrors --save=$TMPFILE arch --max-delay=21600
+    write_mirrorlist $TMPFILE $COUNTRY $DISTRO || return $status
+
+    # if test -z "$mirror_list_file"
+    #     if test "$TMPFILE" -ef "$mirror_list_file"
+    #         set -l TMPFILE $mirror_list_file
+    #     end
+    # end
 
     if test $status -ne 0
         printf "rate-mirrors failed with status %d\n" $status
@@ -73,10 +82,42 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     return 0
 end
 
-# Drops the cache for the package manager and AUR
+# Runs the rate-mirrors command to write the mirrorlist to a file
 # System Dependencies:
-#   sudo, paccache, false, yay/paru
-#
-# Globals Variables:
-#   PKG_MANAGER (yay/paru)
-#
+# 
+# Arguments:
+#   $argv[1] - mirror_listfile - The file to write the mirrorlist to
+#   $argv[2] - country - The entry country to use for the mirrorlist (default: AUS)
+#   $argv[3] - distro - The distro that the mirrorlist is for (default: arch)
+function write_mirrorlist --description 'Write the current mirrorlist to a file'
+    set mirror_list_file $argv[1]
+    if not test -n "$mirror_list_file"
+        printf "No mirror list file specified, using /tmp/mirrorlist\n"
+        set -g TMPFILE $mirror_list_file
+    end
+
+    set -l entry_country $argv[2]
+    if not test -n "$entry_country"
+        printf "No entry country specified, using AUS\n"
+        set -g COUNTRY AUS
+    end
+
+    set -l distro $argv[3] || set -l distro arch
+    if not test -n "$distro"
+        printf "No distro specified, using arch\n"
+        set -g DISTRO arch
+    end
+
+    # 90_000ms -> 1.5 minutes (1min + 30 seconds)
+    # 30_000ms -> 30 seconds
+
+    command rate-mirrors --save=$mirror_list_file \
+        --per-mirror-timeout 90000 \
+        --entry-country $COUNTRY \
+        --top-mirrors-number-to-retest 15 \
+        --disable-comments-in-file $DISTRO \
+        --max-delay=30000
+    # --max-delay=21600
+
+    return $status
+end
