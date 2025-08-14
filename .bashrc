@@ -23,45 +23,45 @@ esac
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        # We have color support; assume it's compliant with Ecma-48
-        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-        # a case would tend to support setf rather than setaf.)
-        color_prompt=yes
-    else
-        color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
+  else
+    color_prompt=
+  fi
 fi
 
 if [ "$color_prompt" = yes ]; then
-    # shellcheck disable=SC2025
-    PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    #PS1='[\u@\h \W]\$ '
+  # shellcheck disable=SC2025
+  PS1='\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+  #PS1='[\u@\h \W]\$ '
 else
-    PS1='\u@\h:\w\$ '
+  PS1='\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    # shellcheck disable=SC2015
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias l='ls -al --color=auto'
-    alias ls='ls -l --color=auto'
+  # shellcheck disable=SC2015
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias l='ls -al --color=auto'
+  alias ls='ls -l --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 if ! shopt -oq posix; then
-    if [ -f /usr/share/bash-completion/bash_completion ]; then
-        # shellcheck source=/usr/share/bash-completion/bash_completion
-        source "$bash_completion"
-    elif [ -f /etc/bash_completion ]; then
-        # shellcheck source=/etc/bash_completion
-        source "$bash_completion_fallback"
-    fi
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    # shellcheck source=/usr/share/bash-completion/bash_completion
+    source "$bash_completion"
+  elif [ -f /etc/bash_completion ]; then
+    # shellcheck source=/etc/bash_completion
+    source "$bash_completion_fallback"
+  fi
 fi
 
 # ----------------------------
@@ -85,6 +85,7 @@ alias .b="source $bashrc"
 alias basc="vim $bashrc"
 
 alias cls='clear'
+alias ca='clear && l'
 alias neo='neofetch'
 alias pf='pfetch'
 alias l='exa -al'
@@ -95,13 +96,13 @@ alias vim='nvim'
 alias matrix='cmatrix'
 
 function dot {
-    folder=~/dotfiles/
-    cd $folder || exit
-    if [ -z "$1" ]; then
-        (cd $folder && git fetch && git status)
-    else
-        (cd $folder && git fetch && git status)
-    fi
+  folder=~/dotfiles/
+  cd $folder || exit
+  if [ -z "$1" ]; then
+    (cd $folder && git fetch && git status)
+  else
+    (cd $folder && git fetch && git status)
+  fi
 }
 
 # ------------------
@@ -109,8 +110,8 @@ function dot {
 # -----------------
 
 if [[ -d "$go_bin" ]]; then
-    export GOBIN="$go_bin"
-    export PATH="$PATH:$go_bin"
+  export GOBIN="$go_bin"
+  export PATH="$PATH:$go_bin"
 fi
 
 # # Created by `pipx` on 2023-10-26 10:01:20
@@ -123,4 +124,3 @@ eval "$(starship init bash)"
 
 echo ""
 pfetch
-
