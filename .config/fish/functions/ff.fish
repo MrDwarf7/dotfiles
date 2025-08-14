@@ -5,7 +5,7 @@ function ff
 
     if test -z $example
         command clear
-        command fastfetch --config examples/13  # prev on load
+        command fastfetch --config examples/13 # prev on load
     else
         command clear
         command fastfetch --config examples/$example
