@@ -46,12 +46,6 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     # rate-mirrors --save=$TMPFILE arch --max-delay=21600
     write_mirrorlist $TMPFILE $COUNTRY $DISTRO || return $status
 
-    # if test -z "$mirror_list_file"
-    #     if test "$TMPFILE" -ef "$mirror_list_file"
-    #         set -l TMPFILE $mirror_list_file
-    #     end
-    # end
-
     if test $status -ne 0
         printf "rate-mirrors failed with status %d\n" $status
         return $status
@@ -91,33 +85,77 @@ end
 #   $argv[3] - distro - The distro that the mirrorlist is for (default: arch)
 function write_mirrorlist --description 'Write the current mirrorlist to a file'
     set mirror_list_file $argv[1]
-    if not test -n "$mirror_list_file"
-        printf "No mirror list file specified, using /tmp/mirrorlist\n"
+    if not test -n "$mirror_list_file" || test -z "$mirror_list_file"
+        printf "No mirror list file specified, using default: /tmp/mirrorlist\n"
+        set -g TMPFILE /tmp/mirrorlist
+    else
         set -g TMPFILE $mirror_list_file
+        printf "Using mirror list file: %s\n" $mirror_list_file
     end
 
     set -l entry_country $argv[2]
-    if not test -n "$entry_country"
+    if not test -n "$entry_country" || test -z "$entry_country"
         printf "No entry country specified, using AUS\n"
         set -g COUNTRY AUS
+    else
+        set -g COUNTRY $entry_country
+        printf "Using entry country: %s\n" $COUNTRY
     end
 
     set -l distro $argv[3] || set -l distro arch
     if not test -n "$distro"
         printf "No distro specified, using arch\n"
-        set -g DISTRO arch
+        #                    Read file          |     pull out NAME="Arch Linux"         "Arch Linux" / first part 'arch', lower | remove newlines
+        set -l extract (command cat /etc/os-release | grep -E '^NAME=("\w+(\s\w+)?")+' | sed -z -E 's/(NAME\=)"(\w+)(\s+\w+)"/\L\2/' | tr -d '\r\n')
+
+        if test -z "$extract"
+            printf "Failed to extract distro from /etc/os-release, using arch\n"
+            set -g DISTRO arch
+        else
+            printf "Extracted distro from /etc/os-release: %s\n" $extract
+            set -g DISTRO $extract
+        end
+
     end
+
+    # If we want to try 'caching' against already tested mirrors at some stage (ie: ones already in the mirrorlist)
+    # Would need to combine with writing to a file and probs diffing etc. (and using grep over rg for compat.)
+    # cat /etc/pacman.d/mirrorlist | rg --pcre2 -o -e 'http[s]?\:\/\/(\w+[.-])+(\w+)?\/?(archlinux)?' | rate-mirrors stdin
 
     # 90_000ms -> 1.5 minutes (1min + 30 seconds)
     # 30_000ms -> 30 seconds
 
-    command rate-mirrors --save=$mirror_list_file \
-        --per-mirror-timeout 90000 \
+    # Ideally we move these to a string builder via a loop pattern at some point
+    # can then also handle printing in the loop
+
+    set -l per_mirror_timeout 90000
+    set -l top_retest 15
+    # set -l fetch_mirror_timeout 30000 ## default
+    set -l fetch_mirror_timeout 90000
+
+    set -l mirror_list_file $TMPFILE
+    set -l TMPFILE $mirror_list_file
+
+    set -l nn "\n\n"
+
+    printf "Running rate-mirrors with the following parameters:$nn"
+    printf "  mirror_list_file: %s\n" $TMPFILE
+    printf "  per_mirror_timeout: $per_mirror_timeout ms\n"
+    printf "  entry_country: %s\n" $COUNTRY
+    printf "  top_retest: %d\n" $top_retest
+    printf "  distro: %s\n" $distro
+    printf "  fetch_mirror_timeout: $fetch_mirror_timeout ms$nn"
+
+    command rate-mirrors --save $TMPFILE \
+        --per-mirror-timeout $per_mirror_timeout \
         --entry-country $COUNTRY \
-        --top-mirrors-number-to-retest 15 \
+        --top-mirrors-number-to-retest $top_retest \
         --disable-comments-in-file $DISTRO \
-        --max-delay=30000
-    # --max-delay=21600
+        --fetch-mirrors-timeout $fetch_mirror_timeout
+    # --max-delay=$fetch_mirror_timeout
+
+    # command rate-mirrors --save=$TMPFILE \
+    #     --disable-comments-in-file $DISTRO
 
     return $status
 end
