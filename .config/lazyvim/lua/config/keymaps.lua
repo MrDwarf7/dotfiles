@@ -184,3 +184,15 @@ map("n", "<Leader>ft", ":lua Snacks.picker.todo_comments()<CR>", silent_opts("[F
 map('n', "<Leader>ft", ":lua Snacks.picker.todo_comments({ keywords = { 'TODO', 'FIX', 'FIXME', 'NOTE', 'IMP' } })<CR>", silent_opts("[F]ind [T]odo's" ))
 
 -- stylua: ignore end
+
+------@see _ lua/plugins/marks.lua:35
+---local docs = {}
+-- map("n", "[m", function()
+--   local marks = require("marks")
+--   marks.prev()
+-- end)
+--
+-- map("n", "]m", function()
+--   local marks = require("marks")
+--   marks.next()
+-- end)

@@ -2,10 +2,26 @@ return {
   "chentoast/marks.nvim",
   event = "BufReadPost",
   opts = {
-    default_mappings = true,
+    default_mappings = false,
+
+    -- Default mappings --
+    mappings = {
+      set = "m",
+      set_next = "m,",
+      toggle = "m;",
+      next = "m]",
+      prev = "m[",
+      preview = "m:",
+      next_bookmark = "m}",
+      prev_bookmark = "m{",
+      delete = "dm",
+      delete_line = "dm-",
+      delete_bookmark = "dm=",
+      delete_buf = "dm<Leader>",
+    },
   },
 
-  ["m*"] = { name = "Set [m]ark abc/xyz etc.", _ = "which_key_ignore" },
+  ["m"] = { name = "Set [m]ark abc/xyz etc.", _ = "which_key_ignore" },
   ["m,"] = { name = "[m]ark - Next avail (abc)", _ = "which_key_ignore" },
   ["m;"] = { name = "[m]ark - Next avail (curr. line)", _ = "which_key_ignore" },
   ["dm*"] = { name = "[m]ark - delete mark abc/xyz", _ = "which_key_ignore" },
@@ -15,6 +31,10 @@ return {
 
   ["m]"] = { name = "Next [m]ark", _ = "which_key_ignore" },
   ["m["] = { name = "Prev [m]ark", _ = "which_key_ignore" },
+
+  -- Conflicts with 'Next/Prev Method' (TStextObjects?) --
+  -- ["]m"] = { name = "Next [m]ark", _ = "which_key_ignore" },
+  -- ["[m"] = { name = "Prev [m]ark", _ = "which_key_ignore" },
 
   ["m:"] = { name = "Preview mark (prompt via preview)", _ = "which_key_ignore" },
 
@@ -40,8 +60,8 @@ return {
   ["dm8"] = { name = "[m]ark - delete group 8", _ = "which_key_ignore" },
   ["dm9"] = { name = "[m]ark - delete group 9", _ = "which_key_ignore" },
 
-  ["m},"] = { name = "[m]ark - Same type (next)", _ = "which_key_ignore" },
+  ["m}"] = { name = "[m]ark - Same type (next)", _ = "which_key_ignore" },
   ["m{"] = { name = "[m]ark - Same type (prev)", _ = "which_key_ignore" },
 
-  ["dm="] = { name = "[m]ark - Delete bookmark under cursor", _ = "which_key_ignore" },
+  -- ["dm="] = { name = "[m]ark - Delete bookmark under cursor", _ = "which_key_ignore" },
 }
