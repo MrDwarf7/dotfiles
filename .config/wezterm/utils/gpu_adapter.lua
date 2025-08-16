@@ -1,85 +1,56 @@
-local wezterm = require("wezterm")
-local platform = require("utils.platform")
+---@alias mywez.WeztermGPUBackend 'Vulkan'|'Metal'|'Gl'|'Dx12'
+---@alias mywez.WeztermGPUDeviceType 'DiscreteGpu'|'IntegratedGpu'|'Cpu'|'Other'
+---@alias mywez.AdapterMap { [mywez.WeztermGPUBackend]: GpuInfo? }?
 
----@alias WeztermGPUBackend 'Vulkan'|'Metal'|'Gl'|'Dx12'
----@alias WeztermGPUDeviceType 'DiscreteGpu'|'IntegratedGpu'|'Cpu'|'Other'
-
----@class WeztermGPUAdapter
----@field name string
----@field backend WeztermGPUBackend
----@field device number
----@field device_type WeztermGPUDeviceType
----@field driver? string
----@field driver_info? string
----@field vendor string
-
----@alias AdapterMap { [WeztermGPUBackend]: WeztermGPUAdapter|nil }|nil
-
----@class GpuAdapters
----@field __backends WeztermGPUBackend[]
----@field __preferred_backend WeztermGPUBackend
----@field __preferred_device_type WeztermGPUDeviceType
----@field DiscreteGpu AdapterMap
----@field IntegratedGpu AdapterMap
----@field Cpu AdapterMap
----@field Other AdapterMap
-local GpuAdapters = {}
-GpuAdapters.__index = GpuAdapters
-
----See `https://github.com/gfx-rs/wgpu#supported-platforms` for more info on available backends
-GpuAdapters.AVAILABLE_BACKENDS = {
-	windows = { "Dx12", "Vulkan", "Gl" },
-	linux = { "Vulkan", "Gl" },
-	mac = { "Metal" },
+---@class mywez.GpuAdapters
+---@field __backends mywez.WeztermGPUBackend[]
+---@field __preferred_backend mywez.WeztermGPUBackend
+---@field __preferred_device_type mywez.WeztermGPUDeviceType
+---@field DiscreteGpu mywez.AdapterMap
+---@field IntegratedGpu mywez.AdapterMap
+---@field Cpu mywez.AdapterMap
+---@field Other mywez.AdapterMap
+---@field ENUMERATED_GPUS GpuInfo[]
+---@field AVAILABLE_BACKENDS table<string, mywez.WeztermGPUBackend[]>
+---@field init fun(self: mywez.GpuAdapters): mywez.GpuAdapters
+---@field pick_best fun(self: mywez.GpuAdapters): GpuInfo?
+---@field pick_manual fun(self: mywez.GpuAdapters, backend: mywez.WeztermGPUBackend, device_type: mywez.WeztermGPUDeviceType): GpuInfo?
+local GpuAdapters = {
+	DiscreteGpu = nil,
+	IntegratedGpu = nil,
+	Cpu = nil,
+	Other = nil,
+	AVAILABLE_BACKENDS = {
+		mac = { "Metal" },
+		windows = { "Dx12", "Vulkan", "Gl" },
+		linux = { "Vulkan", "Gl" },
+	},
+	ENUMERATED_GPUS = require("wezterm").gui.enumerate_gpus(),
 }
 
----@type WeztermGPUAdapter[]
-GpuAdapters.ENUMERATED_GPUS = wezterm.gui.enumerate_gpus()
-
----@return GpuAdapters
 ---@private
-function GpuAdapters:init()
-	local initial = {
-		__backends = self.AVAILABLE_BACKENDS[platform.os],
-		__preferred_backend = self.AVAILABLE_BACKENDS[platform.os][1],
-		DiscreteGpu = nil,
-		IntegratedGpu = nil,
-		Cpu = nil,
-		Other = nil,
-	}
+GpuAdapters.__index = GpuAdapters
 
-	-- iterate over the enumerated GPUs and create a lookup table (`AdapterMap`)
-	for _, adapter in ipairs(self.ENUMERATED_GPUS) do
-		if not initial[adapter.device_type] then
-			initial[adapter.device_type] = {}
-		end
-		initial[adapter.device_type][adapter.backend] = adapter
-	end
-
-	local gpu_adapters = setmetatable(initial, self)
-
-	return gpu_adapters
-end
-
----Will pick the best adapter based on the following criteria:
----   1. Best GPU available (Discrete > Integrated > Other (for wgpu's OpenGl implementation on Discrete GPU) > Cpu)
----   2. Best graphics API available (based off my very scientific scroll a big log file in neovim test 😁)
+--- Will pick the best adapter based on the following criteria:
+---    1. Best GPU available (Discrete > Integrated > Other (for wgpu's OpenGl implementation on Discrete GPU) > Cpu)
+---    2. Best graphics API available (based off my very scientific scroll a big log file in neovim test 😁)
 ---
----Graphics API choices are based on the platform:
----   - Windows: Dx12 > Vulkan > OpenGl
----   - Linux: Vulkan > OpenGl
----   - Mac: Metal
----@see GpuAdapters.AVAILABLE_BACKENDS
+--- Graphics API choices are based on the platform:
+---    - Windows: Dx12 > Vulkan > OpenGl
+---    - Linux: Vulkan > OpenGl
+---    - Mac: Metal
+--- @see mywez.GpuAdapters.AVAILABLE_BACKENDS
 ---
----If the best adapter combo is not found, it will return `nil` and lets Wezterm decide the best adapter.
+--- If the best adapter combo is not found, it will return `nil` and lets Wezterm decide the best adapter.
 ---
----Please note these are my own personal preferences and may not be the best for your system.
----If you want to manually choose the adapter, use `GpuAdapters:pick_manual(backend, device_type)`
----Or feel free to re-arrange `GpuAdapters.AVAILABLE_BACKENDS` to you liking
----@return WeztermGPUAdapter|nil
+--- Please note these are my own personal preferences and may not be the best for your system.
+--- If you want to manually choose the adapter, use `GpuAdapters:pick_manual(backend, device_type)`
+--- Or feel free to re-arrange `GpuAdapters.AVAILABLE_BACKENDS` to you liking
 function GpuAdapters:pick_best()
 	local adapters_options = self.DiscreteGpu
 	local preferred_backend = self.__preferred_backend
+	---@type Wezterm
+	local wezterm = require("wezterm")
 
 	if not adapters_options then
 		adapters_options = self.IntegratedGpu
@@ -109,13 +80,12 @@ function GpuAdapters:pick_best()
 	return adapter_choice
 end
 
----Manually pick the adapter based on the backend and device type.
----If the adapter is not found, it will return nil and lets Wezterm decide the best adapter.
----@param backend WeztermGPUBackend
----@param device_type WeztermGPUDeviceType
----@return WeztermGPUAdapter|nil
+--- Manually pick the adapter based on the backend and device type.
+--- If the adapter is not found, it will return nil and lets Wezterm decide the best adapter.
 function GpuAdapters:pick_manual(backend, device_type)
 	local adapters_options = self[device_type]
+	---@type Wezterm
+	local wezterm = require("wezterm")
 
 	if not adapters_options then
 		wezterm.log_error("No GPU adapters found. Using Default Adapter.")
@@ -132,4 +102,34 @@ function GpuAdapters:pick_manual(backend, device_type)
 	return adapter_choice
 end
 
+function GpuAdapters:init()
+	---@type mywez.Platform
+	local Platform = require("utils.platform")
+
+	----@type mywez.GpuAdapters
+	-- local initial = GpuAdapters
+
+	self.__backends = self.AVAILABLE_BACKENDS[Platform.os]
+	self.__preferred_backend = self.AVAILABLE_BACKENDS[Platform.os][1]
+
+	-- iterate over the enumerated GPUs and create a lookup table (`mywez.AdapterMap`)
+	for _, adapter in ipairs(self.ENUMERATED_GPUS) do
+		if not self[adapter.device_type] then
+			self[adapter.device_type] = {}
+		end
+		self[adapter.device_type][adapter.backend] = adapter ---@type GpuInfo
+	end
+
+	------@type mywez.Debug
+	---local Debug = require("utils.debug")
+	-- Debug.recursive_print(self, 2, {}, 24)
+
+	setmetatable(self, {
+		__index = GpuAdapters,
+	})
+
+	return self
+end
+
+---@return mywez.GpuAdapters
 return GpuAdapters:init()

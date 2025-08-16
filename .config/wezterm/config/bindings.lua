@@ -1,20 +1,47 @@
+---@type Wezterm
 local wezterm = require("wezterm")
 local act = wezterm.action
-local utils = require("utils.utils_init")
+
+---@type mywez.Utils
+local Utils = require("utils.utils_init")
 -- local platform = require("utils.platform")
 
+---@class KeyOp
+---@field key Key
+---@field mods Modifiers
+---@field action Action
+
+---@alias KeyList { number: table<KeyOp> }
+
+---@type KeyList
 local keys = {}
+
+-- (field) Wezterm.Gui.default_key_tables: fun():KeyDefault|Key[]
+
+---@type KeyList
 local key_tables = {}
 
 -- if platform is x then
 -- 	keys.leader = thing
 -- 	-- -- then change mods = "LEADER" to mods = keys.leader
 -- end
+---@type LeaderKey
 local leader = { key = "a", mods = "CTRL" }
 
+---@alias Flags "FUZZY|DOMAINS|LAUNCH_MENU_ITEMS"
+---@alias FlagKey "flags"
+---@alias LauncherFlags table<FlagKey, Flags>
+
+---@alias LauncherMenuItems "LAUNCH_MENU_ITEMS"
+---@alias LauncherMenu table<FlagKey, LauncherMenuItems>
+
+---@type LauncherFlags
 local launcher_flags = { flags = "FUZZY|DOMAINS|LAUNCH_MENU_ITEMS" }
+
+---@type LauncherMenu
 local launch_menu = { flags = "LAUNCH_MENU_ITEMS" }
 
+---@type KeyList
 local tab_keys = {}
 for i = 1, 8 do
 	-- local t = utils.tbl_deep_extend("force", tab_keys, {
@@ -37,11 +64,7 @@ for i = 1, 8 do
 	})
 end
 
----@class KeyOp
----@field key string
----@field mods string
----@field action Action
----@type KeyOp[]
+---@type KeyList
 local key_opts = {
 	-- Tabs
 	{ key = "c", mods = "LEADER", action = act.SpawnTab("DefaultDomain") },
@@ -127,14 +150,15 @@ local key_opts = {
 	{
 		key = "u",
 		mods = "LEADER",
-		action = utils.url_matcher(),
+		action = Utils.url_matcher(),
 	},
 
 	table.unpack(tab_keys),
 }
 
-utils.merge_tables(keys, key_opts)
+Utils.merge_tables(keys, key_opts)
 
+---@type KeyList
 local key_table_opts = {
 	copy_mode = {
 		{ key = "H", mods = "NONE", action = act.CopyMode("MoveToStartOfLineContent") },
@@ -176,8 +200,9 @@ for k, v in pairs(wezterm.gui.default_key_tables()) do
 	key_tables[k] = v
 end
 
-utils.merge_tables(key_tables, key_table_opts)
+Utils.merge_tables(key_tables, key_table_opts)
 
+---@type MouseBindingBase
 local mouse_bindings = {
 	{
 		-- Ctrl-click will open the link under the mouse cursor
@@ -193,6 +218,7 @@ local mouse_bindings = {
 	},
 }
 
+---@type ActionCallback
 wezterm.on("update-right-status", function(window, pane)
 	local name = window:active_key_table()
 	if name then

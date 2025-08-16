@@ -1,9 +1,48 @@
+---@class mywez
+local M = {}
+
+---@alias mywez.Mod.table table<mywez.Mod.options, any>
+---@alias mywez.Mod.options string
+---@alias mywez.Mod mywez.Mod.table | mywez.Mod.options
+
+---@type mywez.Config
 local Config = require("config")
 
-return Config:init()
-	:append(require("config.appearance"))
-	:append(require("config.bindings"))
-	:append(require("config.domains"))
-	:append(require("config.fonts"))
-	:append(require("config.general"))
-	:append(require("config.launch")).options
+-- ---@type mywez.PluginManager
+-- local PluginManager = require("plugins")
+-- Config.plugin = PluginManager:init(Config)
+
+-- ---@type Wezterm
+-- local wezterm = require("wezterm")
+-- Config:configs(wezterm, {
+-- 	config_specs = {
+-- 		appearance = "config.appearance",
+-- 		bindings = "config.bindings",
+-- 		domains = "config.domains",
+-- 		fonts = "config.fonts",
+-- 		general = "config.general",
+-- 		launch = "config.launch",
+-- 	},
+-- 	plugin_sepcs = {
+-- 		bars = "plugins.bars",
+-- 		sessionizer = "plugins.sessionizer",
+-- 	},
+-- })
+
+Config --
+	:append("appearance")
+	:append("bindings")
+	:append("domains")
+	:append("fonts")
+	:append("general")
+	:append("launch")
+
+---@type Wezterm
+local wezterm = require("wezterm")
+---@type mywez.PluginManager
+local PluginManager = require("plugins")
+
+PluginManager:apply_to_config(wezterm, Config.options)
+
+---@return mywez.Config
+return Config.options

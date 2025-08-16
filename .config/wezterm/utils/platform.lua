@@ -1,16 +1,28 @@
+---@type Wezterm
 local wezterm = require("wezterm")
-
-local function is_found(str, pattern)
-	return string.find(str, pattern) ~= nil
-end
 
 ---@alias PlatformType 'windows' | 'linux' | 'mac'
 
----@return {os: PlatformType, is_win: boolean, is_linux: boolean, is_mac: boolean}
-local function platform()
-	local is_win = is_found(wezterm.target_triple, "windows")
-	local is_linux = is_found(wezterm.target_triple, "linux")
-	local is_mac = is_found(wezterm.target_triple, "apple")
+---@class mywez.Platform
+---@field os PlatformType
+---@field is_win boolean
+---@field is_linux boolean
+---@field is_mac boolean
+---@field init fun(self: mywez.Platform): mywez.Platform
+---@field is_found fun(str: string, pattern: string): boolean
+local Platform = {}
+
+---@private
+Platform.__index = Platform
+
+Platform.is_found = function(str, pattern)
+	return string.find(str, pattern) ~= nil
+end
+
+function Platform:init()
+	local is_win = self.is_found(wezterm.target_triple, "windows")
+	local is_linux = self.is_found(wezterm.target_triple, "linux")
+	local is_mac = self.is_found(wezterm.target_triple, "apple")
 	local os
 
 	if is_win then
@@ -23,14 +35,17 @@ local function platform()
 		error("Unknown platform")
 	end
 
-	return {
-		os = os,
-		is_win = is_win,
-		is_linux = is_linux,
-		is_mac = is_mac,
-	}
+	self.os = os
+	self.is_win = is_win
+	self.is_linux = is_linux
+	self.is_mac = is_mac
+
+	setmetatable(self, {
+		__index = Platform,
+	})
+
+	return self
 end
 
-local _platform = platform()
-
-return _platform
+---@return mywez.Platform
+return Platform:init()

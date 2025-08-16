@@ -1,5 +1,8 @@
+---@type Wezterm
 local wezterm = require("wezterm")
-local platform = require("utils.platform")
+
+---@type mywez.Platform
+-- local Platform = require("utils.platform")
 
 -- local font = 'Maple Mono SC NF'
 -- local font_family = "JetBrainsMono Nerd Font"
@@ -7,9 +10,11 @@ local font_family = "FiraCode Nerd Font Mono"
 local font_size = 10.5
 -- platform.is_linux and 12.0 or 11.0
 
+---@return FontFamilyExtendedAttributes
 return {
 	font = wezterm.font(font_family, { weight = "Regular", italic = false }),
 	font_size = font_size,
+	---@type FontFamilyExtendedAttributes
 	harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
 	-- There's a setting here for something along the lines of missing_unicode_fonts or similar we can set
 	warn_about_missing_glyphs = false,

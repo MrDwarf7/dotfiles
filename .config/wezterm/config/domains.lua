@@ -1,5 +1,12 @@
+---@class mywez.Domains
+---@field ssh_domains SshDomain[]
+---@field unix_domains UnixDomain[]
+---@field wsl_domains WslDomain[]
+
+---@return mywez.Domains
 return {
 	-- ref: https://wezfurlong.org/wezterm/config/lua/SshDomain.html
+	---@type SshDomain
 	ssh_domains = {
 		{
 			name = "the_yeti",
@@ -16,9 +23,11 @@ return {
 		},
 	},
 	-- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
+	---@type UnixDomain
 	unix_domains = {},
 
 	-- ref: https://wezfurlong.org/wezterm/config/lua/WslDomain.html
+	---@type WslDomain
 	wsl_domains = {
 		{
 			name = "WSL:Arch",
