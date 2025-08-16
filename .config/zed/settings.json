@@ -4,14 +4,22 @@
       "source": "custom",
       "enabled": true,
       "command": "docker",
-      "args": ["mcp", "gateway", "run"],
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ],
       "env": {}
     },
     "docker-mcp": {
       "source": "custom",
       "enabled": true,
       "command": "docker",
-      "args": ["mcp", "gateway", "run"],
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ],
       "env": {}
     },
     "container-use-mcp": {
@@ -30,7 +38,10 @@
       "source": "custom",
       "enabled": false,
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "postgres-context-server": {
       "source": "extension",
@@ -41,7 +52,11 @@
       "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ],
       "env": {}
     }
   },
@@ -80,7 +95,9 @@
     }
   },
   "enable_language_server": true,
-  "file_scan_exclusions": ["**/target/**"],
+  "file_scan_exclusions": [
+    "**/target/**"
+  ],
   "git": {
     "git_gutter": "tracked_files",
     "gutter_debounce": null,
@@ -156,7 +173,10 @@
   "vim_mode": true,
   "preferred_line_length": 120,
   "show_wrap_guides": true,
-  "wrap_guides": [100, 120],
+  "wrap_guides": [
+    100,
+    120
+  ],
   "soft_wrap": null,
   "ui_font_size": 15,
   "ui_font_family": "Zed Plex Mono",
@@ -165,7 +185,7 @@
     "calt": false
   },
   "buffer_line_height": "standard",
-  "buffer_font_size": 14.0,
+  "buffer_font_size": 14,
   "buffer_font_family": "Zed Plex Mono",
   "buffer_font_features": {
     "calt": false,
@@ -188,7 +208,9 @@
     "shell": {
       "with_arguments": {
         "program": "pwsh.exe",
-        "args": ["-NoLogo"]
+        "args": [
+          "-NoLogo"
+        ]
       }
     }
   },
@@ -232,35 +254,47 @@
             "custom": {
               "Arc::new": {
                 "postfix": "arc",
-                "body": ["Arc::new(${receiver})"],
+                "body": [
+                  "Arc::new(${receiver})"
+                ],
                 "requires": "std::sync::Arc",
                 "scope": "expr"
               },
               "Some": {
                 "postfix": "some",
-                "body": ["Some(${receiver})"],
+                "body": [
+                  "Some(${receiver})"
+                ],
                 "scope": "expr"
               },
               "Ok": {
                 "postfix": "ok",
-                "body": ["Ok(${receiver})"],
+                "body": [
+                  "Ok(${receiver})"
+                ],
                 "scope": "expr"
               },
               "Rc::new": {
                 "postfix": "rc",
-                "body": ["Rc::new(${receiver})"],
+                "body": [
+                  "Rc::new(${receiver})"
+                ],
                 "requires": "std::rc::Rc",
                 "scope": "expr"
               },
               "Box::pin": {
                 "postfix": "boxpin",
-                "body": ["Box::pin(${receiver})"],
+                "body": [
+                  "Box::pin(${receiver})"
+                ],
                 "requires": "std::boxed::Box",
                 "scope": "expr"
               },
               "vec!": {
                 "postfix": "vec",
-                "body": ["vec![${receiver}]"],
+                "body": [
+                  "vec![${receiver}]"
+                ],
                 "description": "vec![]",
                 "scope": "expr"
               }
