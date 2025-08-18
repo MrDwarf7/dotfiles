@@ -35,8 +35,12 @@ function sysup --description 'System update function'
         end
     end
 
-    printf "Disabling mise...\n"
-    command mise deactivate >/dev/null
+    if test -z (command mise >/dev/null 2>&1)
+        printf "Disabling mise...\n"
+        command mise deactivate >/dev/null
+    else
+        printf "mise not found, skipping deactivation.\n"
+    end
 
     if test $skip_mirror = true
         099generic_update || return $status
@@ -51,8 +55,12 @@ function sysup --description 'System update function'
         command rustup update || return $status
     end
 
-    printf "Re-enabling mise...\n"
-    command mise activate >/dev/null
+    if test -z (command mise >/dev/null 2>&1)
+        printf "Re-enabling mise...\n"
+        command mise activate >/dev/null
+    else
+        printf "mise not found, skipping re-activation.\n"
+    end
 
     return $status
 end
