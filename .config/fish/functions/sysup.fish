@@ -39,11 +39,11 @@ function sysup --description 'System update function'
     command mise deactivate >/dev/null
 
     if test $skip_mirror = true
-        _generic_update || return $status
-        # _generic_cache_drop || return $status
+        099generic_update || return $status
+        # 099generic_update || return $status
     else
         mirror_update || return $status
-        _generic_update || return $status
+        099generic_update || return $status
         # _generic_cache_drop || return $status
     end
 
