@@ -1,0 +1,1 @@
+sudo pacman -S --needed $(cat right_list.txt | awk '{print $1}')
