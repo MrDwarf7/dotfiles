@@ -10,6 +10,6 @@
 function 099generic_cache_drop --description 'Drop package manager and AUR caches'
     printf "Dropping caches\n"
     sudo true
-    sudo paccache -rk3
+    sudo paccache -rk2
     $PKG_MANAGER -Sc --aur --noconfirm
 end

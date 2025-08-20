@@ -44,11 +44,10 @@ function sysup --description 'System update function'
 
     if test $skip_mirror = true
         099generic_update || return $status
-        # 099generic_update || return $status
     else
         mirror_update || return $status
         099generic_update || return $status
-        # _generic_cache_drop || return $status
+        099generic_cache_drop || return $status
     end
 
     if test $skip_rustup != true
@@ -57,7 +56,7 @@ function sysup --description 'System update function'
 
     if test -z (command mise >/dev/null 2>&1)
         printf "Re-enabling mise...\n"
-        command mise activate >/dev/null
+        command mise activate fish | source
     else
         printf "mise not found, skipping re-activation.\n"
     end
