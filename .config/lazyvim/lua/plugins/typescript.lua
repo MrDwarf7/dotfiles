@@ -31,7 +31,7 @@ end
 
 return {
   "pmizio/typescript-tools.nvim",
-  lazy = true,
+  -- lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-lspconfig",

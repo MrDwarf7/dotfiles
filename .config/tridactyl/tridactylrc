@@ -266,4 +266,4 @@ blacklistadd (http[s]?)?(:\/\/)?monkeytype\.com.*
 blacklistadd (http[s]?)?(:\/\/)?web.getmatter.com.*
 blacklistadd (http[s]?)?(:\/\/)?excalidraw.com.*
 blacklistadd (http[s]?)?(:\/\/)?octobox.io.*
-
+blacklistadd (http[s]?)?(:\/\/)?neetcode.io.*
