@@ -2,7 +2,8 @@
 # VERSION: 3.0
 SETUVAR --export CARAPACE_BRIDGES:all
 SETUVAR --export XDG_BIN_HOME:/home/dwarf/\x2exdg/bin
-SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/local
+SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/cache
+SETUVAR --export XDG_CACHE_LOCAL_HOME:/home/dwarf/\x2exdg/local
 SETUVAR --export XDG_CONFIG_HOME:/home/dwarf/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/dwarf/\x2exdg/data
 SETUVAR --export XDG_STATE_HOME:/home/dwarf/\x2exdg/state
