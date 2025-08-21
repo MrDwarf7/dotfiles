@@ -4,8 +4,7 @@
 02export_if_pacman eza LIST_CLIENT exa
 02export_if_pacman sccache RUSTC_WRAPPER ""
 
-# Haskell & Haskell devtools
-04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
+# 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
 
 # 03export_path_if_pacman "python-pipx" "PIPX_HOME" "$XDG_CACHE_HOME/pipx"
 # 03export_path_if_pacman "python-pipx" "PIPX_BIN_DIR" "$XDG_CACHE_HOME/pipx/bin"

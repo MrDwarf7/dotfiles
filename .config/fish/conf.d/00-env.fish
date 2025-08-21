@@ -32,7 +32,7 @@ set -gx DATA_ON_DEMAND_BACK $DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
 set -gx DATA_ON_DEMAND_FRONT $DATA_ON_DEMAND_BASE/Data-On-Demand-Frontend
 set -gx DATA_ON_DEMAND_NEXT $DATA_ON_DEMAND_BASE/data-on-demand-next
 
-# This is technically a bug - Fish parses the env variables a little weird because of how it handles string 
+# This is technically a bug - Fish parses the env variables a little weird because of how it handles string
 # interactions with set. We have to escape the asterisk so it's passed through to zoxide and not the shell.
 set -gx _ZO_EXCLUDE_DIRS '$HOME/go:$HOME/go/*'
 
@@ -47,6 +47,9 @@ fish_add_path --append $ZVM_INSTALL
 # fish_add_path --prepend $HOME/.local/bin
 fish_add_path --prepend $HOME/.xdg/data/JetBrains/Toolbox/scripts
 fish_add_path --prepend $HOME/.xdg/bin
+
+# Haskell & Haskell devtools check - (pacman -Q | rg -i ghcup). It's installed but no toolchains rn (2025_08_21)
+fish_add_path --prepend $HOME/.ghcup/bin
 
 # set -gx PATH $PATH $XDG_CONFIG_HOME/.zvm/bin
 # set -gx PATH $PATH $ZVM_INSTALL/
