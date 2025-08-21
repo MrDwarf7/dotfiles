@@ -199,6 +199,8 @@ jj log -n 10 --no-pager -r "stack(@) | present(trunk())"
 # init
 init = ['git', 'init', '--colocate']
 
+gi = ["git", "init", "--colocate"]
+
 # clone
 cl = ['git', 'clone', '--colocate']
 # clone github
@@ -214,6 +216,7 @@ clsu = [
   '-c',
   'jj cl git@github.com:$(jj config get user.username)/$0',
 ]
+
 
 gc = ['git', 'clone', '--colocate']
 gcl = ['git', 'clone', '--colocate']
