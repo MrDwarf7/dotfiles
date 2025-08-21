@@ -168,8 +168,11 @@ jj log -n 20 --no-pager -r 'all()'
 # status
 s = ["show", "-s"]
 sf = ["util", "exec", "--", "bash", "-c", """
-jj l --no-graph -r @ -T 'if(empty, "", diff.summary() ++ "\\n")'
+jj l --no-graph -r @ -T 'if(empty, "", diff.summary())'
 """, ""]
+
+# previously:
+# jj l --no-graph -r @ -T 'if(empty, "", diff.summary() ++ "\\n")'
 
 # sf = [
 #   'log',
