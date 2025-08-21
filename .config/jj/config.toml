@@ -368,7 +368,7 @@ g = ["git"]
 # pull
 gf = ['git', 'fetch', '--all-remotes']
 gfa = ['util', 'exec', '--', 'bash', '-c', 'jj gf && jj rbt']
-gfw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj f']
+gfw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fl']
 gfar = ['util', 'exec', '--', 'bash', '-c', 'jj gfa && jj rbta']
 gfaw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fa']
 
