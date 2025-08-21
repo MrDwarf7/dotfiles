@@ -11,15 +11,19 @@
 # Globals Variables:
 #   PKG_MANAGER (yay/paru)
 #
-# Calls: 
+# Calls:
 #   ua_drop_caches
 #
 # Returns:
 #   $status ($status != 0, otherwise 0)
 function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     if test -z "$PKG_MANAGER"
-        printf "NOTE: PKG_MANAGER not set, defaulting to yay\n"
-        set -l PKG_MANAGER yay
+        printf "NOTE: PKG_MANAGER not set, defaulting to paru if installed.\n"
+        if test -z (command -v paru)
+            set -gx PKG_MANAGER yay
+        end
+        set -gx PKG_MANAGER paru
+        printf "Using PKG_MANAGER: %s\n" $PKG_MANAGER
     end
 
     sudo true
@@ -78,7 +82,7 @@ end
 
 # Runs the rate-mirrors command to write the mirrorlist to a file
 # System Dependencies:
-# 
+#
 # Arguments:
 #   $argv[1] - mirror_listfile - The file to write the mirrorlist to
 #   $argv[2] - country - The entry country to use for the mirrorlist (default: AUS)
@@ -105,17 +109,22 @@ function write_mirrorlist --description 'Write the current mirrorlist to a file'
     set -l distro $argv[3] || set -l distro arch
     if not test -n "$distro"
         printf "No distro specified, using arch\n"
-        #                    Read file          |     pull out NAME="Arch Linux"         "Arch Linux" / first part 'arch', lower | remove newlines
-        set -l extract (command cat /etc/os-release | grep -E '^NAME=("\w+(\s\w+)?")+' | sed -z -E 's/(NAME\=)"(\w+)(\s+\w+)"/\L\2/' | tr -d '\r\n')
+        set -l extract ""
+        if test (command lsb_release)
+            set extract (lsb_release -si | tr '[:upper:]' '[:lower:]' | tr -d '\r\n') # Last `| tr is` isn't really required, but keeps same pattern
+        else
+            # We tried a short-hand; R.I.P - have to use grep->sed regex lol
+            #                    Read file          |     pull out NAME="Arch Linux"         "Arch Linux" / first part 'arch', lower | remove newlines
+            set extract (command cat /etc/os-release | grep -E '^NAME=("\w+(\s\w+)?")+' | sed -z -E 's/(NAME\=)"(\w+)(\s+\w+)"/\L\2/' | tr -d '\r\n')
+        end
 
-        if test -z "$extract"
+        if test -z "$extract" # we failed (somehow) for both lsb_release and catting the /etc/os-release file (Despite argv[3] -> default arch)
             printf "Failed to extract distro from /etc/os-release, using arch\n"
             set -g DISTRO arch
         else
             printf "Extracted distro from /etc/os-release: %s\n" $extract
             set -g DISTRO $extract
         end
-
     end
 
     # If we want to try 'caching' against already tested mirrors at some stage (ie: ones already in the mirrorlist)
@@ -132,6 +141,7 @@ function write_mirrorlist --description 'Write the current mirrorlist to a file'
     set -l top_retest 15
     # set -l fetch_mirror_timeout 30000 ## default
     set -l fetch_mirror_timeout 90000
+    set -l max_delay 21600
 
     set -l mirror_list_file $TMPFILE
     set -l TMPFILE $mirror_list_file
@@ -146,16 +156,15 @@ function write_mirrorlist --description 'Write the current mirrorlist to a file'
     printf "  distro: %s\n" $distro
     printf "  fetch_mirror_timeout: $fetch_mirror_timeout ms$nn"
 
-    command rate-mirrors --save $TMPFILE \
+    rate-mirrors --save $TMPFILE \
         --per-mirror-timeout $per_mirror_timeout \
         --entry-country $COUNTRY \
         --top-mirrors-number-to-retest $top_retest \
-        --disable-comments-in-file $DISTRO \
-        --fetch-mirrors-timeout $fetch_mirror_timeout
-    # --max-delay=$fetch_mirror_timeout
-
-    # command rate-mirrors --save=$TMPFILE \
-    #     --disable-comments-in-file $DISTRO
+        --disable-comments-in-file \
+        $DISTRO \
+        --max-delay $max_delay \
+        --fetch-mirrors-timeout $fetch_mirror_timeout \
+        || return $status
 
     return $status
 end
