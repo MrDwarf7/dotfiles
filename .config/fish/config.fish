@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-#Changes for xdg dir when using fish 
+#Changes for xdg dir when using fish
 # must be done via one of the dirs listed in
 # 'man 5 enviornment.d'
 # ~/.config/environment.d/*.conf
@@ -27,7 +27,7 @@ if status is-interactive
         source "$HOME/.secret/secrets.fish"
     end
 
-    # if test -e /bin/direnv 
+    # if test -e /bin/direnv
     #     direnv hook fish | source
     # end
 

@@ -28,8 +28,6 @@ function 02export_if_pacman
         # echo "2.2: Using fallback $fallback_prog"
         set -gx $env_var $fallback_prog
         return 0
-    else
-        return 1
     end
     return 1
 end
