@@ -19,14 +19,34 @@ write-change-id-header = true
 [ui]
 # default-command = ["log", "--limit", "10"] # disable the message banner
 default-command = "default"
-conflict-marker-style = "git"
+conflict-marker-style = "diff" #  "diff" | "snapshot" | "git"
 diff-editor = ":builtin"
-diff-formatter = ":git"
+# diff-formatter = ":git"
 # diff-formatter = ":color-words"
-# diff-formatter = [ "delta", "--color-only", "$left", "$right" ] # ":color-words" (default) | ":git" | ":summary" | ":stat" | ":types" | ":name-only" | (some external tool)
+diff-formatter = [
+  "delta",
+  "--color-only",
+  "-s",
+  "-n",
+  "--line-numbers-left-format",
+  "{nm:^3}",
+  "--line-numbers-right-format",
+  "{np:^3}│",
+  "$left",
+  "$right",
+  #
+]
+
+# '{nm:^2}' --line-numbers-right-format '{np:^2}'
+
+# ":color-words" (default) | ":git" | ":summary" | ":stat" | ":types" | ":name-only" | (some external tool)
 # pager = ":builtin"
-pager = ["delta", "delta", "--pager", "less -FRX"]
-graph.style = "curved"                             # Default
+
+# Previously was:
+# pager = ["delta", "delta", "--pager", "less -FRX"]
+pager = ["delta", "--pager", "less -FRX"]
+
+graph.style = "curved"    # Default
 merge-editor = ":builtin"
 
 
@@ -306,10 +326,10 @@ rbta = [
   '--destination',
   'trunk()',
   '--branch',
-  'all:(visible_heads() & mutable())',
+  '(visible_heads() & mutable())',
 ]
 rbts = ['rebase', '--skip-emptied', '--destination', 'trunk()', '--source']
-rbtse = [
+rbtsh = [
   'rebase',
   '--skip-emptied',
   '--destination',
@@ -397,7 +417,8 @@ grrm = ["git", "remote", "rename"]
 grs = ["git", "remote", "set-url"]
 
 # pr
-pro = [
+## pull request create
+prc = [
   'util',
   'exec',
   '--',
@@ -405,8 +426,22 @@ pro = [
   '-c',
   'gh pr create --head $(jj blbh -T name)',
 ]
-pr = ['util', 'exec', '--', 'bash', '-c', 'jj gpbh && jj pro']
-prow = [
+
+# original naming
+# pro = [
+#   'util',
+#   'exec',
+#   '--',
+#   'bash',
+#   '-c',
+#   'gh pr create --head $(jj blbh -T name)',
+# ]
+
+## pull request update
+pru = ['util', 'exec', '--', 'bash', '-c', 'jj gpbh && jj prc']
+
+## pull request create head
+prch = [
   'util',
   'exec',
   '--',
@@ -414,7 +449,17 @@ prow = [
   '-c',
   'gh pr create --head $(jj bluh -T name)',
 ]
-prw = ['util', 'exec', '--', 'bash', '-c', 'jj bluh && jj prow']
+
+## pull request create until head
+prcnh = ['util', 'exec', '--', 'bash', '-c', 'jj bluh && jj prch']
+
+# pr checkout (have to do via git/gh until jj get a pr checkout/fetch refs command)
+
+## pull request list (using gh / gh-cli)
+prls = ['util', 'exec', '--', 'bash', '-c', 'gh pr list']
+
+## pull request checkout (using gh / gh-cli)
+prco = ['util', 'exec', '--', 'bash', '-c', 'gh pr checkout $0']
 
 
 # op
@@ -468,6 +513,8 @@ jj log -T 'builtin_log_compact_full_description' "$@"
 one = ["util", "exec", "--", "bash", "-c", """
 jj log -T 'builtin_log_oneline' "$@"
 """, ""]
+
+o = ["one"]
 
 # --color=never --template "commit_id" | sed -E -e "s/^(.*\\s+)(\\w?\\d?)?(\\~?\\s+\\(\\w+\\s?\\w+\\))?/\\2\\3/g" -e "s/^([\\│|\\├\\|\\─|\\╯|\\╮])*//g"
 as_commits = ["util", "exec", "--", "bash", "-c", """
