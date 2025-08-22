@@ -36,6 +36,9 @@ end
 ---@type PartiallyApplied<vim.keymap.set.Opts>
 local silent_opts = mod()
 
+pcall(mdel, "n", "<Leader>r")
+pcall(mdel, "n", "<Leader>rl")
+
 -- Delete garbage window movement binds
 mdel("n", "<C-h>")
 mdel("n", "<C-j>")
@@ -182,8 +185,16 @@ map("n", "]t", function() require("todo-comments").jump_next() end, silent_opts(
 map("n", "[t", function() require("todo-comments").jump_next() end, silent_opts("Next [t]odo"))
 map("n", "<Leader>ft", ":lua Snacks.picker.todo_comments()<CR>", silent_opts("[F]ind [T]odo's"))
 map('n', "<Leader>ft", ":lua Snacks.picker.todo_comments({ keywords = { 'TODO', 'FIX', 'FIXME', 'NOTE', 'IMP' } })<CR>", silent_opts("[F]ind [T]odo's" ))
-
 -- stylua: ignore end
+
+-- local user_cmd = require("config.user_commands")
+-- user_cmd.sudo_save()
+
+local gen_utils = require("utils.generic")
+
+map("n", "<Leader>W", function()
+  gen_utils.sudo_write()
+end, silent_opts("[W]rite with sudo"))
 
 ------@see _ lua/plugins/marks.lua:35
 ---local docs = {}

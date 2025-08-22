@@ -13,7 +13,7 @@
 ---@field os_enum fun(): EOperatingSystemEnum
 ---@field os_class fun(): OperatingSystems
 ---@field shells_enum fun(): ShellsTypeEnum
----@field shells_class fun(): Shells
+---@field shells_class fun(): ShellsClass
 local M = {}
 
 --- A generic type for a table that can be used directly, or called to produce a new table.
@@ -45,7 +45,7 @@ local M = {}
 ---@field windows_nt "windows_nt"
 ---@field macos "macos"
 
----@enum EOperatingSystemEnumLower
+---@class EOperatingSystemEnumLower
 local OsEnumLower = {
   linux = "linux",
   windows_nt = "windows_nt",
@@ -57,7 +57,7 @@ M.os_enum_lower = function()
   return os_e_l
 end
 
----@enum EOperatingSystemEnum
+---@class EOperatingSystemEnum
 local OsEnum = {
   windows = "Windows_NT",
   linux = "Linux",
@@ -97,7 +97,7 @@ end
 ----@alias Pwsh "pwsh.exe"
 ----@alias Zsh "zsh"
 
----@enum ShellsTypeEnum
+---@class ShellsTypeEnum
 local ShellsEnum = {
   bash = "bash",
   fish = "fish",
@@ -120,7 +120,9 @@ end
 ---@field pwsh "pwsh.exe"
 ---@field zsh "zsh"
 
----@type Shells
+---@class ShellsClass: ShellsTypeEnum
+
+---@class ShellsClass
 local ShellsClass = {
   bash = "bash",
   fish = "fish",

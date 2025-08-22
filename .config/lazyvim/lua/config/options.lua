@@ -68,7 +68,7 @@ opt.shortmess:append({
   C = true,
   s = true,
   F = true,
-  S = true,
+  -- S = true, -- when noice/nui is on, handles the virtual text for searching ( [N/K] where N is current of, and K is total of search)
   w = true,
   a = true,
   l = true,

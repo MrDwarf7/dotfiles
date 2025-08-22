@@ -1,6 +1,8 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 -- require("config.lazy")
 
+local gen_utils = require("utils.generic")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -43,7 +45,8 @@ require("lazy").setup({
   },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
-    path = "~/Documents/nvim_dev",
+    path = gen_utils.get_dev_dir(),
+    -- path = "~/Documents/nvim_dev",
   },
   performance = {
     -- cache = {

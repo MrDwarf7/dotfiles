@@ -12,9 +12,15 @@ return {
       end,
     },
   },
-  -- How to 'show' the config for people using auto-complete?
+  ---@type lazyjui.Opts
   opts = {
     cmd = { "jjui", "-r", "all()" },
     winblend = 0,
   },
+  -- config = function(_, opts)
+  --   require("lazyjui").setup({
+  --     cmd = { "jjui", "-r", "all()" },
+  --     winblend = 20,
+  --   })
+  -- end,
 }
