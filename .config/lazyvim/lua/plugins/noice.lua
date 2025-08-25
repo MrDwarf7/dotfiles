@@ -30,8 +30,8 @@ return {
 	-- DOC BORDER
   opts = {
     presets = {
-			bottom_search = true, -- classic bottom style search
-			command_palette = false, -- cmdline and popup menu/puml together
+			bottom_search = false, -- classic bottom style search
+			command_palette = true, -- cmdline and popup menu/puml together
 			long_message_to_split = true, -- long messages go to a split instead of a popup
       lsp_doc_border = true,
     },

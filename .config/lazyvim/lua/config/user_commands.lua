@@ -146,8 +146,6 @@ function M.sudo_save()
 
   local secret_input = SecretInput(popup_options, opts)
 
-  dd(secret_input)
-
   secret_input:on("BufWinEnter", function()
     vim.notify("Secret input buffer entered")
     secret_input._mounted = true

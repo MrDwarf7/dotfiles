@@ -223,7 +223,7 @@ M.servers = {
   },
   -- marksman = {},
   -- markdown_oxide = {},
-
+  mesonlsp = {},
   neocmake = {},
 
   ols = {},

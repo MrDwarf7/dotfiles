@@ -108,6 +108,13 @@ return {
 					-- end,
 					-- Specify * to use this function as a fallback for any server
 					-- ["*"] = function(server, opts) end,
+					-- denols = function(_, _)
+					-- 	local nvim_lsp = require("lspconfig")
+					-- 	nvim_lsp.denols.setup({
+					-- 		on_attach = on_attach,
+					-- 		root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+					-- 	})
+					-- end,
 				},
 			}
 			return ret
