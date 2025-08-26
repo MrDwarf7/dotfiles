@@ -1,3 +1,11 @@
+_all_prev/
+_all_prev/*
+
 grammars/
+grammars/*
+
 queries/
+queries/*
+
 tutor
+

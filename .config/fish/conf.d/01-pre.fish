@@ -23,7 +23,7 @@
 05export_alias_if_pacman neovim vi rvim
 05export_alias_if_pacman neovim vim nvim
 
-05export_alias_if_pacman helix hx /usr/bin/helix
+# 05export_alias_if_pacman helix hx /usr/bin/helix
 
 # 05export_alias_if_pacman paru par paru
 # 05export_alias_if_pacman paru pars "paru -S"
