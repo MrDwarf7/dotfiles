@@ -196,6 +196,10 @@ map("n", "<Leader>W", function()
   gen_utils.sudo_write()
 end, silent_opts("[W]rite with sudo"))
 
+map("n", "<Leader>go", function()
+  vim.cmd([[ :Octo ]])
+end, silent_opts("[G]ithub [O]cto"))
+
 ------@see _ lua/plugins/marks.lua:35
 ---local docs = {}
 -- map("n", "[m", function()
