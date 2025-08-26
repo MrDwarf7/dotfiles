@@ -25,7 +25,7 @@ set -gx SHELL fish
 set -gx fish_greeting
 
 set -gx GITHUB_PROJECTS $HOME/Documents/GitHub_Projects
-set -gx GITHUB_WORK_PROJECTS $HOME/Documents/GitHub_WorkProjects
+set -gx GITHUB_WORK_PROJECTS $HOME/Documents/GitHub_Projects
 
 set -gx DATA_ON_DEMAND_BASE $GITHUB_WORK_PROJECTS/Web/Data-On-Demand
 set -gx DATA_ON_DEMAND_BACK $DATA_ON_DEMAND_BASE/Data-On-Demand-Backend
