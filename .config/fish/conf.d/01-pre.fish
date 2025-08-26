@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 #
+
 02export_if_pacman paru PKG_MANAGER yay
 02export_if_pacman eza LIST_CLIENT exa
 02export_if_pacman sccache RUSTC_WRAPPER ""
@@ -24,10 +25,10 @@
 
 05export_alias_if_pacman helix hx /usr/bin/helix
 
-05export_alias_if_pacman paru par paru
-05export_alias_if_pacman paru pars "paru -S"
-05export_alias_if_pacman paru parss "paru -Ss"
-05export_alias_if_pacman paru parsu "paru -Syu"
+# 05export_alias_if_pacman paru par paru
+# 05export_alias_if_pacman paru pars "paru -S"
+# 05export_alias_if_pacman paru parss "paru -Ss"
+# 05export_alias_if_pacman paru parsu "paru -Syu"
 
 # 06source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
 
