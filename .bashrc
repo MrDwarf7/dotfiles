@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 # shellcheck disable=SC1090,SC1091
 
 # If not running interactively, don't do anything
@@ -54,14 +54,45 @@ if [ -x /usr/bin/dircolors ]; then
   alias egrep='egrep --color=auto'
 fi
 
+# requires the `bash-completion`
+# sudo pacman -S bash-completion
+bash_completion="/usr/share/bash-completion/bash_completion"
+bash_completion_fallback="/etc/bash_completion.d/000_bash_completion_compat.bash"
+
+# if [ -f /usr/share/bash-completion/bash_completion ]; then
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [ -f "$bash_completion" ]; then
     # shellcheck source=/usr/share/bash-completion/bash_completion
     source "$bash_completion"
   elif [ -f /etc/bash_completion ]; then
     # shellcheck source=/etc/bash_completion
     source "$bash_completion_fallback"
   fi
+fi
+
+# Check if exa or eza exists,
+# if it does set LIST_CLIENT to it,
+# otherwise ls
+
+case "$(command -v eza || command -v exa)" in
+"")
+  export LIST_CLIENT="ls"
+  ;;
+*)
+  export LIST_CLIENT="eza"
+  ;;
+esac
+
+# set aliases if LIST_CLIENT is exa or eza
+
+if [[ $LIST_CLIENT == "eza" || $LIST_CLIENT == "exa" ]]; then
+  alias l='exa -lah --color=always --follow-symlinks --icons=always --git'
+  alias la='exa -lah --color=always --follow-symlinks --icons=always --git'
+  alias ls='exa -ah --color=automatic'
+else
+  alias l='ls -lah --color=auto'
+  alias la='ls -la - --color=auto'
+  alias ls='ls -ah --color=auto'
 fi
 
 # ----------------------------
@@ -88,7 +119,6 @@ alias cls='clear'
 alias ca='clear && l'
 alias neo='neofetch'
 alias pf='pfetch'
-alias l='exa -al'
 alias shutdown='systemctl poweroff'
 
 alias vi='/usr/bin/vim'
