@@ -15,21 +15,19 @@
 # 03export_path_if_pacman "pyenv" "PATH" "$PYENV_ROOT/bin $PATH"
 # 01eval_if_pacman "pyenv" "pyenv init -"
 
-# /usr/bin/nvim
-# 05export_alias_if_pacman nvim vi vi
-# 05export_alias_if_pacman nvim vim nvim
+## basically, vi = older 'vim', vim = 'neovim'
+## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
+05export_alias_if_pacman nvim vi rvim
+05export_alias_if_pacman nvim vim nvim
+# 05export_alias_if_pacman neovim vi rvim
+# 05export_alias_if_pacman neovim vim nvim
 
-# basically, vi = older 'vim', vim = 'neovim'
-05export_alias_if_pacman neovim vi rvim
-05export_alias_if_pacman neovim vim nvim
-
-# 05export_alias_if_pacman helix hx /usr/bin/helix
-
-# 05export_alias_if_pacman paru par paru
-# 05export_alias_if_pacman paru pars "paru -S"
-# 05export_alias_if_pacman paru parss "paru -Ss"
-# 05export_alias_if_pacman paru parsu "paru -Syu"
-
+### Can install the 'hook' via
+### I f you want the br shell function, you may either
+### • do broot --install
+### • install the various pieces yourself
+###  (see https://dystroy.org/broot/install-br/ for details).
+#
 # 06source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
 
 01eval_if_pacman zoxide "zoxide init fish | source"
@@ -39,5 +37,8 @@
 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 01eval_if_pacman mise "mise activate fish | source"
 
-# 01eval_if_pacman bob "source '~/.local/share/bob/env/env.fish'"
-06source_if_pacman bob "$HOME/.local/share/bob/env/env.fish"
+03export_path_if_pacman pnpm PNPM_HOME "$HOME/.xdg/data/pnpm"
+04export_onto_path_if_pacman pnpm "$PNPM_HOME" --prepend
+
+04export_onto_path_if_pacman jetbrains-toolbox "$HOME/.xdg/data/JetBrains/Toolbox/scripts" --prepend
+04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend

@@ -1,5 +1,6 @@
 #!/usr/bin/env fish
 #
+
 set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
 
 set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.xdg/bin
@@ -45,7 +46,7 @@ set -gx DOT_CONFIG $DOT_DIR/.config
 fish_add_path --append $XDG_CONFIG_HOME/.zvm/bin
 fish_add_path --append $ZVM_INSTALL
 # fish_add_path --prepend $HOME/.local/bin
-fish_add_path --prepend $HOME/.xdg/data/JetBrains/Toolbox/scripts
+# fish_add_path --prepend $HOME/.xdg/data/JetBrains/Toolbox/scripts
 fish_add_path --prepend $HOME/.xdg/bin
 
 # Haskell & Haskell devtools check - (pacman -Q | rg -i ghcup). It's installed but no toolchains rn (2025_08_21)
