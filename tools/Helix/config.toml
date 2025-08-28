@@ -18,12 +18,12 @@
 # theme = "focus_nova"
 # theme = "term16_dark"
 
-# theme = "material_palenight"
+theme = "material_palenight"
 
 # theme = "tokyonight"
 # theme = "tokyonight_moon"
 # theme = "tokyonight_storm"
-theme = "rose_pine_moon"
+# theme = "rose_pine_moon"
 
 
 [editor]

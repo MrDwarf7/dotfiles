@@ -135,14 +135,13 @@ local key_opts = {
 	{ key = "b", mods = "LEADER", action = act.ShowLauncherArgs(launch_menu) },
 
 	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "Y", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{
 		key = "w",
 		mods = "LEADER",
 		action = act.PaneSelect({ alphabet = "123456789", mode = "SwapWithActiveKeepFocus" }),
 	},
-
-	{ key = "Y", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{ key = "v", mods = "CTRL", action = act.PasteFrom("Clipboard") },
 	{ key = "c", mods = "CTRL|SHIFT", action = act.CopyTo("Clipboard") },
