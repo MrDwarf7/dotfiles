@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 
-set waypaper_fill_method 'fill' # fill | stretch | fit | center | tile
+set waypaper_fill_method fill # fill | stretch | fit | center | tile
 
 function cleanup
     if not test -z (set -s | grep -E '^output_buffer')
@@ -31,7 +31,7 @@ end
 function test_command
     set cmd $argv[1]
 
-    if not command -v $cmd > /dev/null
+    if not command -v $cmd >/dev/null
         printf "%s is not installed\n" $cmd
         return 1
     end
@@ -50,14 +50,13 @@ function set_wallust
         return 1
     end
 
-    command wallust run -s $path > $output_buffer 2>&1 || begin
+    command wallust run -s $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallust colors: %s\n" (cat $output_buffer)
         return 1
     end
 
     return $status
 end
-
 
 function set_waypaper
     set path $argv[1]
@@ -71,8 +70,7 @@ function set_waypaper
         return 1
     end
 
-    command waypaper --backend swww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path \
-    > $output_buffer 2>&1 || begin
+    command waypaper --backend swww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
         return 1
     end
@@ -100,8 +98,8 @@ function wa --description 'Call waypaper for wallust'
         set path_two $second_mon_wallpaper
     end
 
-    # First we will do a check, user may only want to update wallust's colors if 
-    # the supplied wallpaper is nothing/empty or the same as the current wallpaper 
+    # First we will do a check, user may only want to update wallust's colors if
+    # the supplied wallpaper is nothing/empty or the same as the current wallpaper
     if test -z "$path_one" -o "$path_one" = "$first_mon_wallpaper"
         set path_one $first_mon_wallpaper
     end
@@ -128,7 +126,7 @@ function wa --description 'Call waypaper for wallust'
         printf "Failed to set wallust colors for %s\n" $path_one
         return 1
     end
-    command hyprctl reload > /dev/null || return $status
+    command hyprctl reload >/dev/null || return $status
 
     printf "Wallpapers set and wallust colors updated successfully.\n"
     printf "You can view the output buffer at: %s\n" $output_buffer
