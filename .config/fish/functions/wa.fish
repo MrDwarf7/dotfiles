@@ -112,12 +112,12 @@ function wa --description 'Call waypaper for wallust'
         # set path_two $path_one # This would make it the same across both monitors
     end
 
-    if test "$path_one" != "$first_mon_wallpaper"
+    if not test (string match "$path_one" "$first_mon_wallpaper")
         set_waypaper $path_one $first_mon || return $status
     end
     # Similarly for second
 
-    if test "$path_two" != "$second_mon_wallpaper"
+    if not test (string match "$path_two" "$second_mon_wallpaper")
         set_waypaper $path_two $second_mon || return $status
     end
 
