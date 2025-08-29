@@ -21,6 +21,12 @@ return {
 			multiplexing = "WezTerm",
 			default_prog = { "fish", "-l" },
 		},
+		{
+			name = "manbook",
+			remote_address = "manbook",
+			multiplexing = "WezTerm",
+			default_prog = { "fish", "-l" },
+		},
 	},
 	-- ref: https://wezfurlong.org/wezterm/multiplexing.html#unix-domains
 	---@type UnixDomain
