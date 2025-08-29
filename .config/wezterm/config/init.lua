@@ -1,7 +1,7 @@
----@class mywez.Config: Config
+---@class mywez.Config
 ---@field config_dir string
 ---@field options Config
----@field init fun(self: mywez.Config): mywez.Config
+---@field init fun(): mywez.Config
 ---@field append fun(self: mywez.Config, new_options: mywez.Mod): mywez.Config
 local Config = {
 	config_dir = "config",
@@ -63,13 +63,15 @@ end
 
 
 --- Initializes the Config object, setting the metatable to itself (Module level)
-function Config:init()
-	setmetatable(self, {
-		__index = Config,
-	})
-	return self
+Config.init = function()
+---@class mywez.Config
+	local conf = {
+		config_dir = Config.config_dir or "config",
+		options = Config.options or {},
+	}
+	return setmetatable(conf, Config)
 end
 
 ---@return mywez.Config
-return Config:init()
+return Config.init()
 

@@ -5,8 +5,8 @@ local M = {}
 ---@alias mywez.Mod.options string
 ---@alias mywez.Mod mywez.Mod.table | mywez.Mod.options
 
----@type mywez.Config
-local Config = require("config")
+----@type mywez.Config
+--local Config = require("config")
 
 -- ---@type mywez.PluginManager
 -- local PluginManager = require("plugins")
@@ -29,7 +29,7 @@ local Config = require("config")
 -- 	},
 -- })
 
-Config --
+local Config = require("config") --
 	:append("appearance")
 	:append("bindings")
 	:append("domains")

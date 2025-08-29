@@ -3,17 +3,18 @@ local Utils = require("utils.utils_init")
 ---@type mywez.GpuAdapters
 local GpuAdapter = require("utils.gpu_adapter")
 
+-- require("utils.gpu_adapter").init()
+
+----@field options Wezterm?
 ---@class mywez.Appearance: Wezterm
----@field options Wezterm?
 ---@field computed mywez.Appearance.Computed
----@field init fun(self: mywez.Appearance): nil
-local Appearance = {
-	initialized = false,
-}
+---@field init fun(): mywez.Appearance
+local Appearance = {}
 
 ---@private
 Appearance.__index = Appearance
 
+----@field initialized boolean
 ---@class mywez.Appearance.Computed
 ---@field cursor_blink_ease_in string
 ---@field cursor_blink_ease_out string
@@ -22,9 +23,11 @@ Appearance.__index = Appearance
 ---@field front_end string?
 ---@field webgpu_power_preference string?
 ---@field webgpu_preferred_adapter GpuInfo
-local Computed = {
-	initialized = false,
-}
+---@field init fun(): mywez.Appearance.Computed
+local Computed = {}
+
+---@private
+Computed.__index = Computed
 
 ---@param to_check any
 ---@param type_of string
@@ -37,11 +40,8 @@ local check_valid = function(to_check, type_of, fallback)
 end
 
 function Computed.init()
-	local inst = setmetatable({}, { __index = Computed })
-
-	if inst.initialized then
-		return inst
-	end
+	---@class mywez.Appearance.Computed
+	local inst = {}
 
 	local cursor_blink_ease_in = Utils.set_blink_ease_in() -- These are stable, no nil
 	local cursor_blink_ease_out = Utils.set_blink_ease_out()
@@ -59,35 +59,37 @@ function Computed.init()
 	inst.front_end = check_valid(front_end, "string", "WebGL")
 	inst.webgpu_power_preference = check_valid(webgpu_power_preference, "string", "HighPerformance")
 
-	local pref = GpuAdapter:pick_best()
-	local manual = GpuAdapter:pick_manual("Vulkan", "DiscreteGpu")
+	local pref = GpuAdapter.pick_best()
 
 	if type(pref) ~= "nil" then
 		inst.webgpu_preferred_adapter = pref
 	else
+		local manual = GpuAdapter.pick_manual("Vulkan", "DiscreteGpu")
 		if type(manual) ~= "nil" then
 			inst.webgpu_preferred_adapter = manual
 		else
+			-- wezterm.log_info("No Preferred or Manual GPU Adapter found, using Default Adapter --------------- ")
 			-- Fallback to a default adapter if no preferred adapter is found.
 			-- This will let Wezterm decide the best adapter.
 			inst.webgpu_preferred_adapter = nil
 		end
 	end
 
-	inst.initialized = true
+	-- inst.initialized = true
+	setmetatable(inst, Computed)
 
 	return inst
 end
 
 function Appearance.init()
-	-- local comped = Computed:init()
-
+	---@type mywez.Appearance.Computed
 	local comped = Computed.init()
-	local inst = setmetatable({}, { __index = Appearance })
 
-	if inst.initialized then
-		return inst
-	end
+	---@class mywez.Appearance
+	local inst = {}
+
+	-- local wezterm = require("wezterm")
+	-- wezterm.log_info("Appearance Computed: ", comped)
 
 	inst.animation_fps = comped.animation_fps
 	inst.max_fps = comped.max_fps
@@ -124,10 +126,12 @@ function Appearance.init()
 	inst.default_cursor_style = "SteadyBlock"
 	inst.cursor_blink_rate = 960
 
+	setmetatable(inst, Appearance)
+
 	return inst
 end
 
-return Appearance:init()
+return Appearance.init()
 
 ------- original return code block -------
 -- return {

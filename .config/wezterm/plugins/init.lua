@@ -118,9 +118,9 @@ function PluginManager:discover_specs()
 		return PluginManager
 	end
 
-	for k, v in pairs(plugin_files) do
-		wezterm.log_info("222222 Found plugin file: " .. k .. " with spec: " .. (v.name or "nil"))
-	end
+	-- for k, v in pairs(plugin_files) do
+	-- wezterm.log_info("222222 Found plugin file: " .. k .. " with spec: " .. (v.name or "nil"))
+	-- end
 
 	for _, plugin_file in ipairs(plugin_files) do
 		wezterm.log_info("Loading plugin spec from " .. plugin_file)

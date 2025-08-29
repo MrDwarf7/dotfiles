@@ -7,7 +7,15 @@ local wezterm = require("wezterm")
 -- local font = 'Maple Mono SC NF'
 -- local font_family = "JetBrainsMono Nerd Font"
 local font_family = "FiraCode Nerd Font Mono"
+
+-- Check the pc name, if it contains 'book', we set font to 12.0, else 11.0
 local font_size = 10.5
+
+-- It's a laptop of somesort
+if wezterm.hostname():find("book") then
+	font_size = 13.0
+end
+
 -- platform.is_linux and 12.0 or 11.0
 
 ---@return FontFamilyExtendedAttributes

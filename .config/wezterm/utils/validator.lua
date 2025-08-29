@@ -20,8 +20,7 @@ function Validator.clean_prefix(prefix, module)
 
 	-- <prefix> -> <prefix>.<module>
 	if not module:find("^" .. prefix .. "%.") then
-		module = prefix .. "." .. module
-		return module
+		return prefix .. "." .. module
 	end
 
 	-- module isn't malformed, it's fine (we shouldn't get here though tbf)
@@ -114,9 +113,6 @@ end
 ---@param keep_trailing boolean? Whether to keep the trailing slash. Default is false.
 ---@return string[] A table of path segments.
 function Validator.path_segment(path, keep_leading, keep_trailing)
-	---@type Wezterm
-	local wezterm = require("wezterm")
-
 	if not path or type(path) ~= "string" then
 		return {}
 	end
