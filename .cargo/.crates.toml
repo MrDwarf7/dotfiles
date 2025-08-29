@@ -67,6 +67,7 @@
     "sea",
     "sea-orm-cli",
 ]
+"spider_cli 2.37.158 (registry+https://github.com/rust-lang/crates.io-index)" = ["spider"]
 "sqlx-cli 0.8.6 (registry+https://github.com/rust-lang/crates.io-index)" = [
     "cargo-sqlx.exe",
     "sqlx.exe",
