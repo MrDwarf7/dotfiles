@@ -73,7 +73,7 @@ format = "[$user]($style)"
 disabled = false
 ssh_only = true
 style = "#d3b987"
-format = "[@$hostname]($style)[ ](#767676)"
+format = "[ @$hostname]($style)[ ](#767676)"
 
 [os]
 disabled = false
@@ -164,12 +164,12 @@ detect_files = ["CMakeLists.txt", "CMakeCache.txt"]
 symbol = " "
 format = "([$symbol$context]($style))"
 detect_files = [
-    'docker-compose.yml',
-    'docker-compose.yaml',
-    'Dockerfile',
-    '.dockerignore',
-    'compose.yml',
-    'compose.yaml',
+  'docker-compose.yml',
+  'docker-compose.yaml',
+  'Dockerfile',
+  '.dockerignore',
+  'compose.yml',
+  'compose.yaml',
 ]
 
 [dotnet]
