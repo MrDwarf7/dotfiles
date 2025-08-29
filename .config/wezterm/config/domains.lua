@@ -25,6 +25,8 @@ return {
 			name = "manbook",
 			remote_address = "manbook",
 			multiplexing = "WezTerm",
+			local_echo_threshold_ms = 130,
+			-- overlay_lag_indicator = true,
 			default_prog = { "fish", "-l" },
 		},
 	},
