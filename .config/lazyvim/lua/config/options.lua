@@ -25,6 +25,8 @@ vim.g.rust_diagnostics = "rust-analyzer" -- Not realy needed, but nice if I want
 -- vim.opt.clipboard = "unnamedplus"
 opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus" -- Sync with system clipboard
 
+opt.swapfile = false
+
 opt.conceallevel = 0
 
 --- Originals
