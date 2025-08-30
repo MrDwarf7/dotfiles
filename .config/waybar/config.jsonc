@@ -27,7 +27,7 @@
     "battery",
     "idle_inhibitor"
   ],
-  // LEFT 
+  // LEFT
   // Left most -> right
   "custom/notification": {
     "tooltip": false,
