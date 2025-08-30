@@ -58,7 +58,6 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
         case '*'
             colorize red "Error: Color '$color_name' not found" >&2
             printf "\n"
-            # printf "Error: Color '%s' not found\n\n" $color_name >&2
             colorize_help
             return 1
     end
