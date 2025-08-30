@@ -19,11 +19,15 @@ window-padding-y = 6
 window-padding-balance = true
 
 background-blur = 35
+
 # Standard
 # background-opacity = 0.90
 
+# Translucent-lite
+background-opacity = 0.85
+
 # Translucent
-background-opacity = 0.30
+# background-opacity = 0.30
 
 theme = tokyonight-storm
 
