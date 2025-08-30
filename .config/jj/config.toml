@@ -207,7 +207,9 @@ jj l --no-graph -r @ -T 'if(empty, "", diff.summary())'
 l = ["log"]
 la = ["log"]
 lr = ["log", "-r"]
-ls = ["log", "-r", "stash()"]
+# ls = ["log", "-r", "stash()"]
+# log short
+ls = ["log", "-r", "trunk()::@"]
 lp = ["log", "-r", "private() & ~stash()"]
 lg = ["log", "-r", "all()"]
 
