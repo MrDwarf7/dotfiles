@@ -153,4 +153,4 @@ export PATH="$PATH:/home/dwarf/.local/bin"
 eval "$(starship init bash)"
 
 echo ""
-pfetch
+shellup
