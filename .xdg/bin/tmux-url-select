@@ -1,0 +1,182 @@
+#!/usr/bin/env bash
+
+# Constants
+name="select-url"
+# message_time_period=1500 ## for dbg
+message_time_period=850
+buffer_file_name="tmux-url-select-data"
+menu_max_items=5
+
+# Check if running in TMUX context
+if [ -z "$TMUX" ]; then
+  echo "This script must be ran with TMUX variable context."
+  exit 1
+fi
+
+# Function to capture the TMUX pane (full history or current)
+capture_pane() {
+  local is_full="$1"
+  if [[ "$is_full" == "full" ]]; then
+    tmux capture-pane -S "-"
+  else
+    tmux capture-pane
+  fi
+  tmux save-buffer "${TMPDIR:-/tmp}/${buffer_file_name}"
+  tmux delete-buffer
+}
+
+# Function to extract unique URLs from the buffer file
+# %s/\v((http[s]?[://]+)|www\.)[a-zA-Z0-9+./?=_%:-]+
+# original - grep -Eoi "(http|https)://[a-zA-Z0-9+./?=_%:-]+" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq
+extract_urls() {
+
+  local http_or_www_cap='((http[s]?[://]+)|www\.)'
+  local all_valid_chars='[a-zA-Z0-9+./?=_%:-]+'
+  grep -Eoi "$http_or_www_cap$all_valid_chars" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq
+}
+
+# origin  git@github.com:MrDwarf7/dotfiles.git (push)
+#
+# We want to turn the above into:
+#
+# [-git@] github.com:MrDwarf7/dotfiles.git
+# www.github.com[-:]MrDwarf7/dotfiles.git
+# www.github.com/MrDwarf7/dotfiles.git
+extract_git_ssh_as_url() {
+  if ! grep -q 'git@' "${TMPDIR:-/tmp}/${buffer_file_name}"; then
+    return 0
+  fi
+  # will pull out the 2 entries of
+  # origin  git@github.com:MrDwarf7/dotfiles.git (push)
+  # or more
+
+  local alpha_numeric='[a-zA-Z0-9_.-]+'
+
+  local base_extract="git@(${alpha_numeric})[:/](${alpha_numeric}[/]?${alpha_numeric})(\.git)?"
+  # transform it
+  local transform_using="s/$base_extract/https:\/\/\1\/\2\3/g"
+  grep -Eoi "$base_extract" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq | sed -E "$transform_using"
+}
+
+# Function to open a URL and display success message
+open_url() {
+  local url="$1"
+  if xdg-open "$url" >/dev/null 2>&1; then
+    tmux display-message -d "$message_time_period" "#[bold]$name: Opened $url#[bold]"
+  fi
+}
+
+# Function to handle selection with fzf in a new window
+handle_fzf_selection() {
+  local urls="$1"
+  # tmux neww -n "url-select" "printf '%s\n' '$urls' | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open \"$1\" >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened $1#[bold]\"' -- {}"
+
+  local urls_array=("$@") # Pass array of URLs
+  # echo "$urls"
+  # echo "${urls_array[@]}"
+
+  declare -a split_array
+  mapfile -t split_array < <(printf "%s\n" "${urls_array[@]}" | sort -u)
+
+  # will work with urls_array[*] without quoting
+  # tmux neww -n "url-select" "printf '%s\n' ${urls_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open \"$1\" >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened $1#[bold]\"' -- {}"
+
+  # WORKS, BUT NOT MSG OUTPUT - THIS IS OKAY.
+  # tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1'"
+
+  # WORKS, WITH MSG OUTPUT - GOOOOOOOOD.
+  # tmux neww -n "url-select" " printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened {}#[bold]\" ' "
+
+  # If the url is eg: "www.google.com" and not "http://www.google.com"
+  # We can 'see' it via fzf, but it won't pass to xdg-open correctly.
+  if ! grep -q -E '^(http|https)://' <<<"${split_array[*]}"; then
+    # If no URLs start with http or https, we prepend http:// to all
+    for i in "${!split_array[@]}"; do
+      split_array[i]="https//${split_array[$i]}"
+    done
+  else
+    # If some URLs start with http or https, we only prepend http:// to those that don't
+    for i in "${!split_array[@]}"; do
+      if [[ ! "${split_array[$i]}" =~ ^(http|https):// ]]; then
+        split_array[i]="https://${split_array[$i]}"
+      fi
+    done
+  fi
+
+  fzf_call="fzf --exit-0 --print-query"
+  xargs_capture="xargs -I {}"
+  xdg_fwd_cmd="xdg-open \'{}\' >/dev/null 2>&1"
+  tmx_msg_cmd="tmux display-message \"#[bold]$name: Opened {}#[bold]\""
+
+  tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | $fzf_call | $xargs_capture sh -c '$xdg_fwd_cmd && $tmx_msg_cmd'"
+
+  # The above is marginally easier to read, and reason about -
+  # Once we put it all together we get this:
+  # tmux neww -n "url-select" " printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1 && $tmx_msg_cmd' "
+}
+
+# Function to build and show TMUX menu for few URLs
+build_and_show_menu() {
+  local urls_array=("$@") # Pass array of URLs
+
+  local tmux_menu="tmux display-menu -t 1 -T 'url-select'"
+  local index=1
+
+  for url in "${urls_array[@]}"; do
+    local clean_url="${url#*//}"
+    # Use printf for safe string building with escaping
+    local menu_item
+    printf -v menu_item "'%s' %s 'run-shell \"xdg-open %s >/dev/null 2>&1; tmux display-message #[bold]%s: Opened %s#[bold] \"'" \
+      "$clean_url" "$index" "$url" "$name" "$url"
+    tmux_menu+=" $menu_item"
+
+    ((index++))
+  done
+
+  eval "$tmux_menu"
+}
+
+# --- Main logic ---
+
+# Capture pane based on optional "full" argument
+capture_pane "${1:-}"
+
+# Extract URLs as a multiline string
+urls=$(extract_urls)
+
+# Also extract git SSH URLs and convert them to HTTPS/(www.)? - format
+urls+=$(extract_git_ssh_as_url)
+
+# If no URLs, show message and exit
+if [[ -z "$urls" ]]; then
+  tmux display-message -d "$message_time_period" "#[fg=red,bold]$name: No URL found"
+  exit 0
+fi
+
+# Read URLs into an array for safer handling
+mapfile -t urls_array <<<"$urls"
+
+# Count URLs
+url_count="${#urls_array[@]}"
+
+if ((url_count == 1)); then
+  open_url "${urls_array[0]}"
+elif ((url_count > menu_max_items)); then
+  # handle_fzf_selection "$urls" # Pass original multiline string for fzf
+  handle_fzf_selection "${urls_array[@]}" # Pass original multiline string for fzf
+else
+  build_and_show_menu "${urls_array[@]}"
+fi
+
+# Cleanup main body vars
+unset urls
+unset urls_array
+unset url_count
+
+# Cleanup globals/constants
+unset menu_max_items
+unset buffer_file_name
+unset message_time_period
+unset name
+
+# vim: ts=2 sts=2 sw=2 et
