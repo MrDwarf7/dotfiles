@@ -144,6 +144,13 @@ function tm --description 'Tmux wrapper with argument parsing'
             tm_arg_handler list-sessions
 
         case a at attach
+            if not test (count $argv) -gt 1
+                # set -l most_recntly_connected_to (tmux list-sessions -F '#{session_last_attached}' | awk '{print $1}' | sort -gr | head -n1)
+                set -l most_recent (tmux list-sessions -F '#{session_name} #{session_last_attached}' | sort -k2 -gr | head -n1 | awk '{print $1}')
+                tm_arg_handler attach-session -t $most_recent
+                return $status || return 0
+            end
+
             if not test (count $argv) -gt 2
                 tm_arg_handler attach-session -t $argv[2]
                 return $status || return 0
