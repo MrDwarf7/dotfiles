@@ -22,7 +22,7 @@ function 00valid_pacman
     end
 
     # wayyyyyyyyy faster to check via command -<flags> call FIRST,
-    # if that fails, ony then do we query via pacman -Qi (as it takes time for resolution)
+    # if that fails, only then do we query via pacman -Qi (as it takes more time to resolve)
     if command -sq "$to_test_prog"; and command -q "$to_test_prog"; and command -vq "$to_test_prog"
         return 0
     else if command pacman -Qi "$to_test_prog" &>/dev/null

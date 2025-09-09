@@ -1,19 +1,18 @@
 #!/usr/bin/env fish
 #
 
+# NOTE:
+######################################################################
+# _DO_ _NOT_ put commands containing either `&&` or `||` in here.       #
+#  This is because tmux loads envs after plugin setup and it breaks  #
+#  tmux-resurrect and tmux-continuum loading...                      #
+######################################################################
+
 02export_if_pacman paru PKG_MANAGER yay
 02export_if_pacman eza LIST_CLIENT exa
 02export_if_pacman sccache RUSTC_WRAPPER ""
 
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
-
-# 03export_path_if_pacman "python-pipx" "PIPX_HOME" "$XDG_CACHE_HOME/pipx"
-# 03export_path_if_pacman "python-pipx" "PIPX_BIN_DIR" "$XDG_CACHE_HOME/pipx/bin"
-# 03export_path_if_pacman "python-pipx" "PIPX_HOME" "$XDG_CACHE_HOME/pipx/man"
-
-# 03export_path_if_pacman "pyenv" "PYENV_ROOT" "$XDG_CONFIG_HOME/.pyenv"
-# 03export_path_if_pacman "pyenv" "PATH" "$PYENV_ROOT/bin $PATH"
-# 01eval_if_pacman "pyenv" "pyenv init -"
 
 ## basically, vi = older 'vim', vim = 'neovim'
 ## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
@@ -21,14 +20,6 @@
 05export_alias_if_pacman nvim vim nvim
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
-
-### Can install the 'hook' via
-### I f you want the br shell function, you may either
-### • do broot --install
-### • install the various pieces yourself
-###  (see https://dystroy.org/broot/install-br/ for details).
-#
-# 06source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
 
 01eval_if_pacman zoxide "zoxide init fish | source"
 

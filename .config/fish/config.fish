@@ -10,32 +10,20 @@
 # /usr/lib/environment.d/*.conf
 # /etc/environment
 
+# Commands to run in interactive sessions can go in here
 if status is-interactive
-    # Commands to run in interactive sessions can go here
-
-    # Immediately call starship -- subsequent redraws are handled by the
-    # call under ./functions/fish_prompt.fish
-    # source (/usr/sbin/starship init fish --print-full-init | psub)
-    if test -e /usr/sbin/starship
-        # /usr/sbin/starship init fish | source
-        command starship init fish | source
-        commandline -f repaint
-    end
+    # Immediately call starship on term start (interactive)
+    01eval_if_pacman starship "starship init fish | source" && commandline -f repaint
+    # 01eval_if_pacman direnv "direnv hook fish | source"
 
     # source our secrets file if it exists
     if test -e "$HOME/.secret/secrets.fish"
         source "$HOME/.secret/secrets.fish"
     end
 
-    # if test -e /bin/direnv
-    #     direnv hook fish | source
-    # end
-
     fish_vi_key_bindings
 
-    # Handled by conf.d/01-pre.fish
-    # command fzf --fish | source
-    # mise activate fish | source   ## -- but being buggy
+    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
 
     # pnpm
     set -gx PNPM_HOME "/home/dwarf/.xdg/data/pnpm"
@@ -44,5 +32,4 @@ if status is-interactive
     end
     # pnpm end
 
-    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" >/dev/null 2>/dev/null; or true
 end

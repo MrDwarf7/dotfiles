@@ -17,7 +17,6 @@ function 01eval_if_pacman
     # printf "1.0: Checking for %s\n" "$program_one"
     # printf "1.0: Evaluating %s\n" "$expr"
 
-    # command pacman -Qi "$program_one" &> /dev/null
     if 00valid_pacman "$program_one"
         # printf "1.1: Evaluating %s\n" "$expr"
         source <(eval $expr | psub)

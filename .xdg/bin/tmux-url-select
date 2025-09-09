@@ -7,6 +7,9 @@ message_time_period=850
 buffer_file_name="tmux-url-select-data"
 menu_max_items=5
 
+# fuzz_finder_command="fzf"
+fuzz_finder_command="sk"
+
 # Check if running in TMUX context
 if [ -z "$TMUX" ]; then
   echo "This script must be ran with TMUX variable context."
@@ -67,7 +70,7 @@ open_url() {
 }
 
 # Function to handle selection with fzf in a new window
-handle_fzf_selection() {
+handle_fuzzy_selection() {
   local urls="$1"
   # tmux neww -n "url-select" "printf '%s\n' '$urls' | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open \"$1\" >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened $1#[bold]\"' -- {}"
 
@@ -103,12 +106,12 @@ handle_fzf_selection() {
     done
   fi
 
-  fzf_call="fzf --exit-0 --print-query"
+  fuzzy_call="$fuzz_finder_command --exit-0 --print-query"
   xargs_capture="xargs -I {}"
   xdg_fwd_cmd="xdg-open \'{}\' >/dev/null 2>&1"
   tmx_msg_cmd="tmux display-message \"#[bold]$name: Opened {}#[bold]\""
 
-  tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | $fzf_call | $xargs_capture sh -c '$xdg_fwd_cmd && $tmx_msg_cmd'"
+  tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | $fuzzy_call | $xargs_capture sh -c '$xdg_fwd_cmd && $tmx_msg_cmd'"
 
   # The above is marginally easier to read, and reason about -
   # Once we put it all together we get this:
@@ -163,7 +166,7 @@ if ((url_count == 1)); then
   open_url "${urls_array[0]}"
 elif ((url_count > menu_max_items)); then
   # handle_fzf_selection "$urls" # Pass original multiline string for fzf
-  handle_fzf_selection "${urls_array[@]}" # Pass original multiline string for fzf
+  handle_fuzzy_selection "${urls_array[@]}" # Pass original multiline string for fzf
 else
   build_and_show_menu "${urls_array[@]}"
 fi
