@@ -19,6 +19,7 @@ function sysup --description 'System update function'
     # Should skip 1 = true, 0 = false
     set -l skip_mirror false
     set -l skip_rustup false
+    set -l skip_packages false
 
     # Loop here allows for supporting additional items in the switch/case later if wanted
     if set -q _flag_skip
@@ -28,6 +29,8 @@ function sysup --description 'System update function'
                     set skip_mirror true
                 case r
                     set skip_rustup true
+                case p
+                    set skip_packages true
                 case '*'
                     echo "Invalid skip value: $_flag_skip" >&2
                     return 1
@@ -44,6 +47,8 @@ function sysup --description 'System update function'
 
     if test $skip_mirror = true
         099generic_update || return $status
+    else if test $skip_packages = true
+        mirror_update || return $status
     else
         mirror_update || return $status
         099generic_update || return $status
