@@ -65,6 +65,8 @@ set -gx WZT_MAX_FPS 144
 set -gx WZT_GPU_FRONTEND WebGpu
 set -gx WZT_GPU_POWER_PREF HighPerformance
 
+set -gx TMUX_DEFAULT_SESSION_NAME _main
+
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 set -Ux CARAPACE_BRIDGES all
 

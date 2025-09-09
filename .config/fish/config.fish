@@ -25,11 +25,6 @@ if status is-interactive
 
     test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
 
-    # pnpm
-    set -gx PNPM_HOME "/home/dwarf/.xdg/data/pnpm"
-    if not string match -q -- $PNPM_HOME $PATH
-        set -gx PATH "$PNPM_HOME" $PATH
-    end
-    # pnpm end
+    099autostart_tmux new
 
 end
