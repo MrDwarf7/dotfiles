@@ -14,6 +14,8 @@ function cleanup
     set -e -g recurses
     set -e -g max_recurses
     set -e -g checks_total
+    # problem - this would run all the time - not good, but it _will_ ensure it spawns the pfetch call _inside_ the tmux term
+    # command rm /tmp/fetch_run
     return 0
 end
 
