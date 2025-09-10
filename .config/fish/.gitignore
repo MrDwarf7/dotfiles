@@ -1,2 +1,4 @@
 completions/*
 prev_completions_dir
+.old*/
+.old*

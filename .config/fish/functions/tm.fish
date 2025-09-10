@@ -1,24 +1,11 @@
 #!/usr/bin/env fish
 #
 
-# Use this to generate random
-# $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n")
-set base_cmd tmux
+set -g ____global_base_cmd tmux
 
-# set bbase (string join ' ' $base_cmd)
-# function base_conv
-#     set -l to_or_from $argv[1]
-#     set -l data $argv[2..-1]
-#
-#     if test (string match "to" -- $to_or_from)
-#         set data (string join ' ' $data)
-#     end
-#
-#     if test (string match "from" -- $to_or_from)
-#         set data (string split ' ' $data)
-#     end
-#
-#     echo "data value after conv: $data"
+## call stack is laid out kinda weird, so can't really clear this :/
+# function cleanup
+#     set -e -g ____global_base_cmd
 #     return 0
 # end
 
@@ -52,59 +39,6 @@ function tm_println
     printf ": %s :\n\n" $argv
 end
 
-# Description:
-#
-# `$argv[1]`: The tmux subcommand (eg: list-sessions, list-panes, kill-session, attach, new-session)
-# `$argv[2]?`: The optional switch (eg: -t for target session/window/pane)
-# `$argv[3]`: The extended/passthrough argument (eg: [session name], [window name], [pane id])
-#
-# Example at call-site:
-#
-#                           $argv[1]     $argv[2]  $argv[3]
-# `command tm_arg_handler "list-panes"   "-t"      $argv[2]`
-#
-# Translates to: tmux list-panes -t [session-name](as $argv[2] locally)
-#
-function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
-    set -l subcommand $argv[1]
-    set -l tak_arg $argv[2]
-    set -l ext_arg $argv[3]
-
-    # tm_dbg HANDLER $argv[1..-1]
-    # Handles not printing anything if it's likely a simple command
-
-    if test (string length -- (string escape -- "$tag_arg")) -le 2
-        tm_println "$subcommand"
-    end
-
-    # create a "$base_cmd $subcommand"
-    set bbase (string join ' ' $base_cmd $subcommand)
-
-    switch (count $argv)
-        case 0
-            colorize red "We shouldn't be here, no args passed to tm_arg_handler\n"
-            command $base_cmd
-            return $status || return 0
-        case 1
-            # we have to undo the join op. so `command` reads them as separate args
-            set bbase (string split ' ' $bbase)
-            command $bbase
-            return $status || return 0
-        case 2
-            command $base_cmd $ext_arg
-            return $status || return 0
-        case 3
-            command $base_cmd $subcommand $tak_arg $ext_arg
-            return $status || return 0
-        case '*'
-            set bbase (string split ' ' $bbase)
-            set -l rest $argv[4..-1]
-            command $bbase $tak_arg $ext_arg $rest
-            return $status || return 0
-    end
-    return 0
-end
-
 function tm_help --description 'Display usage information for tm'
     printf "Usage: tm <command> [options]\n"
     printf "A wrapper for tmux with simplified commands.\n\n"
@@ -126,6 +60,66 @@ function tm_help --description 'Display usage information for tm'
     return 0
 end
 
+# Description:
+#
+# `$argv[1]`: The tmux subcommand (eg: list-sessions, list-panes, kill-session, attach, new-session)
+# `$argv[2]?`: The optional switch (eg: -t for target session/window/pane)
+# `$argv[3]`: The extended/passthrough argument (eg: [session name], [window name], [pane id])
+#
+# Example at call-site:
+#
+#                           $argv[1]     $argv[2]  $argv[3]
+# `command tm_arg_handler "list-panes"   "-t"      $argv[2]`
+#
+# Translates to: tmux list-panes -t [session-name](as $argv[2] locally)
+#
+function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
+    set -l subcommand $argv[1]
+    set -l tak_arg $argv[2]
+    set -l ext_arg $argv[3]
+
+    set -l base_cmd $____global_base_cmd
+    if test -z "$base_cmd"
+        printf "it was empty!\n"
+        set base_cmd tmux
+    end
+
+    # tm_dbg HANDLER $argv[1..-1]
+    # Handles not printing anything if it's likely a simple command
+
+    if test (string length -- (string escape -- "$tag_arg")) -le 2
+        tm_println "$subcommand"
+    end
+
+    if string match -q -r '^(new-session|ns|n)$' -- $subcommand
+        if not test (string match -q -r '^-A$' -- $tak_arg)
+            set tak_arg -A $tak_arg
+        end
+    end
+
+    switch (count $argv)
+        case 0
+            colorize red "We shouldn't be here, no args passed to tm_arg_handler\n"
+            command $base_cmd
+            # return $status || return 0
+        case 1
+            command $base_cmd $subcommand
+            # return $status || return 0
+        case 2
+            command $base_cmd $ext_arg
+            # return $status || return 0
+        case 3
+            command $base_cmd $subcommand $tak_arg $ext_arg
+            # return $status || return 0
+        case '*'
+            set -l rest $argv[4..-1]
+            command $base_cmd $subcommand $tak_arg $ext_arg $rest
+            # return $status || return 0
+    end
+
+    return $status || return 0
+end
+
 function tm --description 'Tmux wrapper with argument parsing'
     # set -l arg $argv[1]
 
@@ -139,14 +133,12 @@ function tm --description 'Tmux wrapper with argument parsing'
 
     switch $argv[1]
         case l ls lses list
-            # This also functions as `ls` (which is inbuilt short for list-sessions)
-            # command tmux list-sessions
             tm_arg_handler list-sessions
+            return $status || return 0
 
         case a at attach
             if not test (count $argv) -gt 1
-                # set -l most_recntly_connected_to (tmux list-sessions -F '#{session_last_attached}' | awk '{print $1}' | sort -gr | head -n1)
-                set -l most_recent (tmux list-sessions -F '#{session_name} #{session_last_attached}' | sort -k2 -gr | head -n1 | awk '{print $1}')
+                set -l most_recent (tmux list-sessions -F '#{session_name} #{session_last_attached}' | sort -k5 -gr | head -n1 | awk '{printf "%s\n", $1}') # awk '{print $1}'
                 tm_arg_handler attach-session -t $most_recent
                 return $status || return 0
             end
@@ -209,6 +201,11 @@ function tm --description 'Tmux wrapper with argument parsing'
             return $status || return 0
 
         case '*'
-            command tmux $argv
+            command tmux $argv[1..-1]
     end
+    if test $status -ne 0
+        colorize red "tm: An error occurred executing the tmux command.\n"
+        return $status
+    end
+    return 0
 end
