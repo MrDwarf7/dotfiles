@@ -18,18 +18,24 @@ window-padding-x = 4
 window-padding-y = 6
 window-padding-balance = true
 
-background-blur = 35
+# background-blur = 35
+
+background-blur = 20
 
 # Standard
 # background-opacity = 0.90
 
 # Translucent-lite
-background-opacity = 0.85
+# background-opacity = 0.85
 
 # Translucent
-# background-opacity = 0.30
+# Anything lower than about 0.5 causes text sharpness issues
+background-opacity = 0.65
+# background-opacity = 0.40
 
-theme = tokyonight-storm
+
+theme = TokyoNight Storm
+
 
 bold-is-bright = false
 cursor-style = bar
