@@ -18,7 +18,7 @@ window {
   all: unset;
   padding: 20px;
   border-radius: 0px;
-  background-color: #0E0E0E;
+  background-color: #070809;
 }
 
 #inner-box {
@@ -47,8 +47,8 @@ window {
   outline: none;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, .5);
   border-radius: 10px;
-  background-color: #0E0E0E;
-  color: #AAACB2;
+  background-color: #070809;
+  color: #AEAFB1;
 }
 
 /* magnifying class on input box */
@@ -73,7 +73,7 @@ window {
   margin: 4px;
   border: none;
   outline: none;
-  color: #AAACB2;
+  color: #AEAFB1;
 }
 
 /* List items being searched */
@@ -85,7 +85,7 @@ window {
 
 #entry arrow {
   border: none;
-  color: #7D8189;
+  color: #838586;
 }
 
 #entry:selected {
@@ -98,9 +98,9 @@ window {
 }
 
 #entry:selected #text {
-  color: #A28D65;
+  color: #849BA6;
 }
 
 #entry:drop(active) {
-  background-color: #575A60;
+  background-color: #5C5D5E;
 }
