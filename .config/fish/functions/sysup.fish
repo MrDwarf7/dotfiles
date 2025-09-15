@@ -38,33 +38,43 @@ function sysup --description 'System update function'
         end
     end
 
-    if test -z (command mise >/dev/null 2>&1)
+    set -l mise_exists (test (command -v mise); and echo 0; or echo 1)
+
+    if test $mise_exists -eq 0
         printf "Disabling mise...\n"
-        command mise deactivate >/dev/null
+        mise deactivate 2>&1 >/dev/null
     else
         printf "mise not found, skipping deactivation.\n"
     end
 
+    colorize blue "\n\nStarting system update...\n"
+
     if test $skip_mirror = true
+        colorize yellow "Skipping mirror update...\nRunning generic update only...\n"
         099generic_update || return $status
     else if test $skip_packages = true
+        colorize yellow "Skipping package update...\nRunning mirror update only...\n"
         mirror_update || return $status
     else
+        colorize yellow "Running full update...\n"
         mirror_update || return $status
         099generic_update || return $status
         099generic_cache_drop || return $status
     end
 
     if test $skip_rustup != true
+        colorize yellow "Updating rustup...\n"
         command rustup update || return $status
     end
 
-    if test -z (command mise >/dev/null 2>&1)
+    if test $mise_exists -eq 0
         printf "Re-enabling mise...\n"
-        command mise activate fish | source
+        mise activate fish | source
     else
         printf "mise not found, skipping re-activation.\n"
     end
+
+    colorize green "System update complete!\n"
 
     return $status
 end

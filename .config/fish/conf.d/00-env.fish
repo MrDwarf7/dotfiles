@@ -16,6 +16,10 @@ set fish_cursor_default block blink
 set fish_cursor_insert line blink
 set fish_cursor_visual block blink
 
+if not set -q WALLPAPER_BACKEND
+    set -gx WALLPAPER_BACKEND swww
+end
+
 # Set editor variables.
 set -gx PAGER less
 set -gx VISUAL nvim

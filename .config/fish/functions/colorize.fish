@@ -18,7 +18,7 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     # If the text already ends with a newline, don't add another
     # set text (printf "%s" $text | tr -d '\n')
 
-    set text (string unescape $text | tr -d '\n')
+    set text (string escape $text | tr -d '\n')
 
     # Color mapping (like your hashmap)
     set -l color_code
@@ -63,8 +63,8 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     end
 
     # Join text with spaces and wrap with color
-    # printf "%s%s\e[0m" $color_code (string join ' ' $text)
-    set -l full_text (string join ' ' $text)
+    # printf "%s%s\e[0m" $color_code (string join ' ' (string unescape -- $text))
+    set -l full_text (string join ' ' (string unescape -- $text))
 
     # printf "$color_code$full_text\033[0m"
     # printf "value of color_code: %s\n" $color_code
