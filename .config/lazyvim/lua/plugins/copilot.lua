@@ -1,6 +1,0 @@
-return {}
--- return {
---   "copilot.lua",
---
---
--- }

@@ -2,7 +2,7 @@ return {
   {
     "mistweaverco/kulala.nvim",
     -- lazy = false,
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     ft = { "http", "rest" },
     keys = {
       { "<Leader>ra", desc = "Send request" },

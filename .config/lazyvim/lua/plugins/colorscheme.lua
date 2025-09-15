@@ -8,14 +8,15 @@ return {
       -- style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
       -- TODO: change back to storm later after config
       style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-      transparent = false, -- Enable this to disable setting the background color
       terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
+      transparent = true, -- Enable this to disable setting the background color
       styles = {
         comments = { italic = true },
         keywords = { italic = true },
         functions = {},
         variables = {},
-        sidebars = "dark", -- style for sidebars, see below
+        -- sidebars = "dark", -- style for sidebars, see below
+        sidebars = "transparent", -- style for sidebars, see below
         floats = "transparent", -- style for floating windows
       },
       sidebars = { "qf", "help", "nvimtree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
