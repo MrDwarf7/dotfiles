@@ -91,6 +91,8 @@ function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
         tm_println "$subcommand"
     end
 
+    # If it's 'new-session' we add '-A' arg, which checks if the session exists
+    # and attaches to it if it does.
     if string match -q -r '^(new-session|ns|n)$' -- $subcommand
         if not test (string match -q -r '^-A$' -- $tak_arg)
             set tak_arg -A $tak_arg
@@ -131,26 +133,38 @@ function tm --description 'Tmux wrapper with argument parsing'
     # tm_dbg MAIN $argv[1..-1]
     # tm_dbg MAIN (count $argv)
 
+    set -l sessions (tmux list-sessions -F '#S' 2>/dev/null)
+
     switch $argv[1]
-        case l ls lses list
+        case l ls lses lsses list
             tm_arg_handler list-sessions
             return $status || return 0
 
-        case a at attach
+            # case (attach) a at attach + case(new) n ns new nses
+        case a at attach n ns new nses
+            set -e most_recent
+            set -l most_recent (tmux list-sessions -F "#{session_attached} #{session_last_attached} #{session_name}" | sort -k2 -gr | head -n1 | awk '{printf "%s", $3}')
+
+            # colorize yellow (printf "most_recent session: %s\n" $most_recent)
+
+            # No session name given, use recent session
             if not test (count $argv) -gt 1
-                set -l most_recent (tmux list-sessions -F '#{session_name} #{session_last_attached}' | sort -k5 -gr | head -n1 | awk '{printf "%s\n", $1}') # awk '{print $1}'
-                tm_arg_handler attach-session -t $most_recent
+                # colorize yellow (printf "attaching to most recently used session: %s\n" $most_recent)
+                tm_arg_handler new-session -t $most_recent
                 return $status || return 0
             end
-
-            if not test (count $argv) -gt 2
-                tm_arg_handler attach-session -t $argv[2]
-                return $status || return 0
-            end
-            tm_arg_handler attach-session $argv[2] $argv[3]
-
-        case n ns new nses
+            # colorize yellow (printf "attaching to session: %s\n" $argv[2])
             tm_arg_handler new-session -s $argv[2] $argv[3..-1]
+
+            # case n ns new nses
+            #     tm_arg_handler new-session -s $argv[2] $argv[3..-1]
+
+        case d dt de detach
+            if not test (count $argv) -gt 1
+                tm_arg_handler detach-client
+                return $status || return 0
+            end
+            tm_arg_handler detach-client -s $argv[2]
 
         case rs reses
             if not test (count $argv) -gt 2
@@ -173,6 +187,13 @@ function tm --description 'Tmux wrapper with argument parsing'
             end
             tm_arg_handler list-panes -t $argv[2]
 
+        case lc lcp list-clients
+            if test (count $argv) -eq 1
+                tm_arg_handler list-clients $argv[2..-1]
+            end
+            tm_arg_handler list-clients
+            return $status || return 0
+
         case lw lwin
             if test (count $argv) -eq 1
                 tm_arg_handler list-windows
@@ -185,7 +206,28 @@ function tm --description 'Tmux wrapper with argument parsing'
                 command tmux kill-session
                 return $status || return 0
             end
-            tm_arg_handler kill-session -t $argv[2]
+
+            set -l arr (printf "%s" $argv[2..-1] | sed -E 's/(\\s+)|(,+)/,/g' | sed -E 's/(^,+)//g' | sed -E 's/(,+)/,/g' | string split ',')
+            # set arr (string split -- ',' -- $arr)
+            # colorize yellow (printf "arr: %s\n" $arr)
+
+            # ge 2 means we just go through each arg after the first one
+            if test (count $argv) -ge 2
+                for ses in $arr
+                    # if not test (contains $sessions $ses)
+                    #     printf "cont\n"
+                    #     continue
+                    # end
+                    if test -z "$ses"
+                        colorize blue "tm: No session name provided to kill.\n"
+                        continue
+                    end
+                    # colorize purple (printf "Killing session: %s\n" $ses)
+                    tm_arg_handler kill-session -t $ses
+                end
+
+            end
+            # tm_arg_handler kill-session -t $argv[2]
 
         case kw killw
             tm_arg_handler kill-window -t $argv[2]
@@ -194,14 +236,18 @@ function tm --description 'Tmux wrapper with argument parsing'
             tm_arg_handler kill-pane -t $argv[2]
 
         case ka killa killall
-            set -l sessions (tmux list-sessions -F '#S')
+            # set -l sessions (tmux list-sessions -F '#S')
             for session in $sessions
                 tmux kill-session -t $session
+                if test $status -ne 0 # can't kill whatever sess
+                    colorize red "tm: An error occurred killing session %s\n" $session
+                    break
+                end
             end
             return $status || return 0
 
         case '*'
-            command tmux $argv[1..-1]
+            tm a $argv[1..-1]
     end
     if test $status -ne 0
         colorize red "tm: An error occurred executing the tmux command.\n"
