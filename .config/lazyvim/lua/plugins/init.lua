@@ -13,7 +13,7 @@ return {
   { "snacks.nvim", opts = { words = { enabled = false } } },
   { "vim-illuminate" }, -- Highlights hovered words (can also be done via autocmd(s))
 
-  { "tpope/vim-obsession", lazy = false },
+  { "tpope/vim-obsession", lazy = false }, -- Continuously updated session files
 
   { "HawkinsT/pathfinder.nvim" }, -- Enhances the gf, gF, and gx commands
   { "tridactyl/vim-tridactyl", ft = "tridactyl", opts = {} }, -- Syntax HL for tridactylrc files
