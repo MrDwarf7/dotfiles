@@ -30,7 +30,7 @@ background-blur = 20
 
 # Translucent
 # Anything lower than about 0.5 causes text sharpness issues
-background-opacity = 0.65
+background-opacity = 0.40
 # background-opacity = 0.40
 
 
