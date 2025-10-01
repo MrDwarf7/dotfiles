@@ -62,7 +62,7 @@
   "custom/terminal": {
     "tooltip": "Start your terminal",
     "format": "",
-    "on-click": "wezterm"
+    "on-click": "ghostty"
   },
   "tray": {
     "icon-size": 14,
