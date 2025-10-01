@@ -1,14 +1,16 @@
+-- return {}
+
 return {
   {
     "mason.nvim",
-    lazy = true,
-    version = "^1.0.0",
+    lazy = false,
+    -- version = "^1.0.0",
     keys = {
       { "<leader>cm", false },
     },
     opts = {
       ensure_installed = {
-        -- "bacon",
+        --         -- "bacon",
         "basedpyright",
         "beautysh",
         "black",
@@ -19,7 +21,7 @@ return {
         "cmakelint",
         "codelldb",
         "cpplint",
-        "csharpier",
+        -- -- "csharpier",
         "debugpy",
         "delve",
         "fixjson",
@@ -27,20 +29,22 @@ return {
         "isort",
         "jsonlint",
         "markdownlint-cli2",
-        -- "markdown-toc",
-        --"markdown_oxide",
-        -- "mdsf",
+        --         -- -- "markdown-toc",
+        --         -- --"markdown_oxide",
+        --         -- -- "mdsf",
         "mdslw",
         "mypy",
         "ocamlformat",
-        -- "powershell_es",
+        --         -- -- "powershell_es",
         "prettier",
         "ruff",
         "shfmt",
         "sqlfluff",
         "sql-formatter",
+        "svelte-language-server",
         "stylua",
         "ts-standard",
+        "vue-language-server",
         "vulture",
         "yamlfmt",
         "yamllint",
@@ -48,5 +52,9 @@ return {
       --
     },
   },
-  { "mason-lspconfig.nvim", version = "^1.0.0", lazy = false },
+  {
+    "mason-lspconfig.nvim",
+    -- version = "^1.0.0",
+    lazy = false,
+  },
 }

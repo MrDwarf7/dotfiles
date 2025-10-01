@@ -11,7 +11,6 @@ M.servers = {
   -- bacon_ls = {
   --   enabled = diagnostics == "bacon-ls",
   -- },
-  bashls = {},
   basedpyright = {
     cmd = { "basedpyright-langserver", "--stdio" },
     filetypes = { "python" },
@@ -40,7 +39,9 @@ M.servers = {
       },
     },
   }, -- ???
+  bashls = {},
   biome = {},
+  -- c3_lsp = {},
   clangd = {
     root_dir = function(fname)
       return require("lspconfig.util").root_pattern(
@@ -77,13 +78,10 @@ M.servers = {
     -- single_file_support = true,
     -- capabilities = self:capabilities(),
   },
-
   cssls = {},
-  cssmodules_ls = {},
   css_variables = {},
-
+  cssmodules_ls = {},
   -- deno = {}, -- commented due to conflict with tsserver
-
   -- deno = {
   -- 	root_dir = require("lspconfig.util").root_pattern("deno.json", "deno.jsonc"),
   -- 	settings = {
@@ -104,6 +102,7 @@ M.servers = {
   -- erlangls = {},
   -- eslint = {},
   -- gleam = {},
+  -- gopls = {},
   html = {},
   hyprls = {},
   jsonls = {},
@@ -225,8 +224,6 @@ M.servers = {
   -- markdown_oxide = {},
   mesonlsp = {},
   neocmake = {},
-
-  ols = {},
   ocamlls = {
     cmd = { "ocamllsp", "--stdio" },
     filetypes = { "ocaml", "reason" },
@@ -246,6 +243,7 @@ M.servers = {
     },
   },
   ocamllsp = {},
+  ols = {},
   omnisharp = {
     filetypes = { "cs", "vb" },
   },
@@ -319,6 +317,8 @@ M.servers = {
     -- }
   },
 
+  -- stylua = {},
+  -- svelte-language-server = {}
   rust_analyzer = { enabled = false }, -- NOTE: If using bacon_ls then this is FALSE OTHERWISE -> enabled = true;
 
   tailwindcss = {
@@ -336,7 +336,7 @@ M.servers = {
   },
   taplo = {},
   vimls = {},
-  volar = {},
+  -- volar = {},
   yamlls = {},
   zls = {
     settings = {

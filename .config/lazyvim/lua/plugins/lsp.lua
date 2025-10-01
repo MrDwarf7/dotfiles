@@ -42,7 +42,9 @@ return {
 
 			-- stylua: ignore end
 
-			local ret = {
+			-- local ret = {
+			return {
+				folds = {}, -- not sure, but it's needed otherise errors
 				-- options for vim.diagnostic.config()
 				---@type vim.diagnostic.Opts
 				diagnostics = {
@@ -117,7 +119,7 @@ return {
 					-- end,
 				},
 			}
-			return ret
+			-- return ret
 		end,
   },
   {
