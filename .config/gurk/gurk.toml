@@ -1,0 +1,43 @@
+first_name_only = false
+show_receipts = true
+notifications = true
+bell = true
+# passphrase = ""
+colored_messages = true
+default_keybindings = true
+
+[user]
+display_name = "BV"
+
+[keybindings]
+
+[keybindings.normal]
+ctrl-l = "end_of_line"
+ctrl-h = "beginning_of_line"
+
+Down = "select_message next entry"
+Up = "select_message previous entry"
+
+ctrl-n = "toggle_multiline"
+
+[keybindings.anywhere]
+ctrl-c = "kill_backward_line"
+# ctrl-c = "quit"
+ctrl-q = "quit"
+"`" = "help"
+
+
+[keybindings.help]
+j = "scroll help down entry"
+k = "scroll help up entry"
+
+
+[keybindings.channel_modal]
+
+
+[keybindings.multiline]
+
+
+[keybindings.message_selected]
+ctrl-y = "copy_message selected"
+
