@@ -1,3 +1,7 @@
+if not vim.g.vscode then
+  return {}
+end
+
 ---@type NuiInput|fun(popup_options: nui_popup_options, options: nui_input_options):NuiInput
 local Input = require("nui.input")
 

@@ -1,9 +1,11 @@
 -- Stand-in for cmp / cmp.lua / cmp-nvim-lsp
 return {
   "blink.cmp",
+  event = "InsertEnter",
+  lazy = true,
   dependencies = {
-    { "saghen/blink.compat" },
-    { "L3MON4D3/LuaSnip" },
+    { "saghen/blink.compat", event = "InsertEnter", lazy = true },
+    { "L3MON4D3/LuaSnip", event = "InsertEnter", lazy = true },
 
     -- { "zbirenbaum/copilot-cmp" }, -- event = "InsertEnter",
     -- { "hrsh7th/cmp-nvim-lsp", opts = {} },

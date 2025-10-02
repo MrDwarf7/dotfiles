@@ -1,8 +1,9 @@
 return {
-  { "nvim-neotest/neotest-plenary" },
-  { "rouge8/neotest-rust", dependencies = { "nvim-treesitter" } },
+  { "nvim-neotest/neotest-plenary", lazy = true },
+  { "rouge8/neotest-rust", dependencies = { "nvim-treesitter", lazy = true }, lazy = true },
   {
     "neotest",
+    lazy = true,
     opts = {
       adapters = {
         "neotest-plenary",

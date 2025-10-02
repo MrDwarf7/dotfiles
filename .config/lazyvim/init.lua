@@ -1,7 +1,7 @@
 -- bootstrap lazy.nvim, LazyVim and your plugins
 -- require("config.lazy")
 
-local gen_utils = require("utils.generic")
+-- local gen_utils = require("utils.generic")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -19,10 +19,11 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
+local lazy_opts = {
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    { "LazyVim/LazyVim", import = "lazyvim.plugins.extras" },
     -- import/override with your plugins
     { import = "plugins" },
   },
@@ -45,12 +46,12 @@ require("lazy").setup({
   },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
-    path = gen_utils.get_dev_dir(),
+    path = require("utils.generic").get_dev_dir(),
     -- path = "~/Documents/nvim_dev",
   },
   performance = {
     -- cache = {
-    --   -- enabled = true,
+    --   enabled = true,
     --   path = vim.fn.stdpath("cache") .. "/lazy",
     --   -- disable_events = { "VimEnter", "BufReadPre" },
     --   ttl = 3600 * 24 * 7,
@@ -89,4 +90,21 @@ require("lazy").setup({
       },
     },
   },
-})
+}
+
+if vim.g.vscode then
+  -- vim.g.lazyvim_check_order = false
+  local lz = lazy_opts
+  lz = {
+    spec = {
+      { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+      { "LazyVim/LazyVim", import = "lazyvim.plugins.extras" },
+      { "LazyVim/LazyVim", import = "lazyvim.plugins.extras.vscode" },
+      -- { "flash.nvim", enabled = false },
+      { import = "vscode_conf" },
+    },
+  }
+  require("lazy").setup(vim.tbl_deep_extend("keep", lz, lazy_opts))
+else
+  require("lazy").setup(lazy_opts)
+end

@@ -17,4 +17,6 @@ return {
 
   { "HawkinsT/pathfinder.nvim" }, -- Enhances the gf, gF, and gx commands
   { "tridactyl/vim-tridactyl", ft = "tridactyl", opts = {} }, -- Syntax HL for tridactylrc files
+
+  { "lualine.nvim", lazy = true, event = "CursorMoved" },
 }

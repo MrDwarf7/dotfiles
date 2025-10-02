@@ -2,6 +2,9 @@
 -- Keymaps are automatically loaded on the VeryLazy event
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
+if vim.g.vscode then
+  return require("vscode_conf.keymaps")
+end
 
 local map = vim.keymap.set
 local mdel = vim.keymap.del

@@ -1,5 +1,6 @@
 return {
   "trouble.nvim",
+  lazy = true,
   keys = {
 
     { "<leader>cs", false },

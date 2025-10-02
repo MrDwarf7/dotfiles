@@ -3,7 +3,7 @@
 return {
   {
     "mason.nvim",
-    lazy = false,
+    lazy = true,
     -- version = "^1.0.0",
     keys = {
       { "<leader>cm", false },
@@ -55,6 +55,6 @@ return {
   {
     "mason-lspconfig.nvim",
     -- version = "^1.0.0",
-    lazy = false,
+    lazy = true,
   },
 }

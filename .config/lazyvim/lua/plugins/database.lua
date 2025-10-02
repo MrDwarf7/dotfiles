@@ -16,12 +16,13 @@ return {
   -- trusted_connection=yes if using built in/winoows authentication
   {
     "kristijanhusak/vim-dadbod-ui",
+    lazy = true,
     dependencies = {
       { "tpope/vim-dadbod", lazy = true },
       {
         "kristijanhusak/vim-dadbod-completion",
-        ft = { "sql", "mysql", "plsql", "mssql" },
         lazy = true,
+        ft = { "sql", "mysql", "plsql", "mssql" },
       }, -- Optional
     },
     keys = {
