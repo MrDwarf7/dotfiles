@@ -5,13 +5,13 @@
 
 @import url('../.palette.css');
 
-@define-color mpris-album-art-overlay alpha(#070809, 0.55);
-@define-color mpris-button-hover alpha(#070809, 0.50);
+@define-color mpris-album-art-overlay alpha(#291F1A, 0.55);
+@define-color mpris-button-hover alpha(#291F1A, 0.50);
 /* @define-color text @color15; */
-@define-color text #AEAFB1;
-@define-color bg alpha(#070809, .7);
-@define-color bg-hover alpha(#838586, .8);
-@define-color accentcolor #4B8787;
+@define-color text #ADB1B2;
+@define-color bg alpha(#291F1A, .7);
+@define-color bg-hover alpha(#828788, .8);
+@define-color accentcolor #3E6F72;
 
 @define-color border-color alpha(@accentcolor, 0.15);
 
