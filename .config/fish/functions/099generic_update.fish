@@ -6,6 +6,6 @@ function 099generic_update --description 'Generic update function for package ma
         return 1
     end
 
-    $PKG_MANAGER -Syu --noconfirm
+    $PKG_MANAGER -Syu --devel --noconfirm
     return $status
 end

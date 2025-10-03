@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = hyprutils-git
+
+[Action]
+Description = Recreate libhyprutils.so.7 symlink after upgrading hyprutils-git
+When = PostTransaction
+# This is symlinked from /home/dwarf/dotfiles/usr/local/bin/libhyprutils-symlink.sh
+Exec = /usr/local/bin/libhyprutils-symlink.sh
+# Exec = /usr/bin/ln -sf /usr/lib/libhyprutils.so.0.9.0 /usr/lib/libhyprutils.so.7
