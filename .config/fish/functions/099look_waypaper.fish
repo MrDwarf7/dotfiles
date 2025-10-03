@@ -3,6 +3,9 @@
 set -g waypaper_fill_method fill # fill | stretch | fit | center | tile
 set -g DEBUG_MODE 0
 
+# set -g first_mon
+# set -g second_mon
+
 function cleanup
     if not test -z (set -s | grep -E '^output_buffer')
         printf "Cleaning up output buffer variable: %s" "$output_buffer"
@@ -41,23 +44,100 @@ function set_waypaper
     end
 end
 
+function waypaper_extractor
+    set index $argv[1]
+    set field $argv[2]
+    # set store_in $argv[3]
+
+    set -l fmt_field (printf '.[%d].%s' $index $field)
+    set -l result (waypaper --list | jq -r $fmt_field)
+
+    if test -z "$result"
+        printf "Failed to extract %s for index %d\n" $field $index
+        return 1
+    end
+
+    # set -g $store_in $result
+    printf "%s" $result
+
+    return 0
+
+end
+
+function jq_extract
+    set base_regex '[._A-Za-z0-9~/-]'
+    set field $argv[1]
+    set lhs $argv[2]
+    set rhs $argv[3]
+
+    set regex "\"(?<$lhs>$base_regex+),(?<$rhs>$base_regex+)\""
+    set jq_comp ".[].$field | capture($regex)"
+
+    set data (waypaper --list | jq -r $jq_comp)
+
+    if test -z "$data"
+        printf "Failed to extract [ $data ] via use of [ $field ] from waypaper list.\n"
+        return 1
+    end
+
+    printf "%s" $data
+
+    return 0
+
+end
+
 function 099look_waypaper --description 'Call waypaper for wallust'
     set path_one $argv[1]
     set path_two $argv[2]
 
     # Get the monitors from waypaper (DP-1, HDMI-A-2, etc.)
-    set first_mon (waypaper --list | jq -r '.[0].monitor')
-    set second_mon (waypaper --list | jq -r '.[1].monitor')
 
-    pprint "First monitor: %s\n" $first_mon || return $status
-    pprint "Second monitor: %s\n" $second_mon
+    # waypaper_extractor 0 monitor (string collect "first_mon")
+    # pprint "MAIN :: First monitor extracted: %s\n" $first_mon
+
+    # if test (string match -r '.*,.*' $first_mon)
+    #     waypaper_extractor 1 monitor (string collect "second_mon")
+    #     pprint "MAIN :: Second monitor extracted: %s\n" $second_mon
+    # end
+
+    # set first_mon (waypaper_extractor 0 monitor)
+    # set second_mon (waypaper_extractor 1 monitor)
+
+    # pprint "MAIN :: FIRST %s\n" $first_mon
+    # pprint "MAIN :: SECOND %s\n" $second_mon
+
+    set mons (jq_extract monitor a b)
+    pprint "MAIN :: MONS %s\n" $mons
+
+    set first_mon (printf "%s" $mons | jq -r '.a')
+    set second_mon (printf "%s" $mons | jq -r '.b')
+
+    pprint "MAIN :: FIRST JQ %s\n" $first_mon
+    pprint "MAIN :: SECOND JQ %s\n" $second_mon
+
+    ###########################################################################
 
     # Get the existing wallpapers for each monitor
-    set first_mon_wallpaper (waypaper --list | jq -r '.[0].wallpaper')
-    set second_mon_wallpaper (waypaper --list | jq -r '.[1].wallpaper')
 
-    pprint "Current wallpaper for %s: %s\n" $first_mon $first_mon_wallpaper
-    pprint "Current wallpaper for %s: %s\n" $second_mon $second_mon_wallpaper
+    # set first_mon_wallpaper (waypaper_extractor 0 wallpaper)
+    # set second_mon_wallpaper (waypaper_extractor 1 wallpaper)
+
+    set walls (jq_extract wallpaper a b)
+    pprint "MAIN :: WALLS %s\n" $walls
+
+    set first_mon_wallpaper (printf "%s" $walls | jq -r '.a')
+    set second_mon_wallpaper (printf "%s" $walls | jq -r '.b')
+
+    pprint "MAIN :: FIRST WALLPAPER %s\n" $first_mon_wallpaper
+    pprint "MAIN :: SECOND WALLPAPER %s\n" $second_mon_wallpaper
+
+    ###########################################################################
+
+    #
+    #
+    #
+    #
+    #
 
     set -g output_buffer (mktemp /tmp/wa.XXXXXXXXXX)
 

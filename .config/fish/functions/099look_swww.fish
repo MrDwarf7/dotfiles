@@ -7,6 +7,7 @@
 # --resize fit /home/dwarf/Pictures/wallpapers/wallhaven-mdjrqy.jpg
 
 set -g bezier ".1,.4,.97,.82"
+set -g fill_method fit # crop | fit | no | stretch
 set -g DEBUG_MODE 0
 
 function cleanup
@@ -43,7 +44,7 @@ function set_swww
 
     pprint "Setting wallpaper for %s to %s\n" $monitor $path
 
-    command swww img -o $monitor --transition-bezier "$bezier" --transition-fps 70 --resize fit $path >$output_buffer 2>&1 || begin
+    command swww img -o $monitor --transition-bezier "$bezier" --transition-fps 70 --resize $fill_method $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
         return 1
     end
@@ -88,6 +89,11 @@ function 099look_swww --description 'Call swww for wallust'
     if test -z "$path_one" -o "$path_one" = "$first_mon_wallpaper"
         printf "No new wallpaper for DP-1, keeping current: %s\n" $first_mon_wallpaper
         set path_one $first_mon_wallpaper
+    end
+
+    if test -z "$path_two" -o "$path_two" = "$second_mon_wallpaper"
+        printf "No new wallpaper for HDMI-A-2, keeping current: %s\n" $second_mon_wallpaper
+        set path_two $second_mon_wallpaper
     end
 
     if test -z "$path_two"

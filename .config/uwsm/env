@@ -59,8 +59,16 @@ export WEBKIT_DISABLE_DMABUF_RENDERER=1
 # firefox
 export MOZ_ENABLE_WAYLAND=1
 
+# Setting up wallpaper
+## waypaper
+# export WALLPAPER_BACKEND=waypaper
 
-# Older variables that were already/still are; commented out.
+## swww
+export WALLPAPER_BACKEND=swww
+
+
+
+## Older variables that were already/still are; commented out.
 #
 # export __NV_PRIME_RENDER_OFFLOAD,1 
 # export __VK_LAYER_NV_optimus,NVIDIA_only
