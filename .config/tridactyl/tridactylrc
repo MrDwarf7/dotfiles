@@ -267,3 +267,4 @@ blacklistadd (http[s]?)?(:\/\/)?web.getmatter.com.*
 blacklistadd (http[s]?)?(:\/\/)?excalidraw.com.*
 blacklistadd (http[s]?)?(:\/\/)?octobox.io.*
 blacklistadd (http[s]?)?(:\/\/)?neetcode.io.*
+blacklistadd (http[s]?)?(:\/\/)?nvim.store.*

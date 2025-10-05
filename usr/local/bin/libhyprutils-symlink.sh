@@ -5,7 +5,7 @@
 
 LIB_DIR="/usr/lib"
 TARGET_LIB=$(ls -v "$LIB_DIR"/libhyprutils.so.0.[0-9]* 2>/dev/null | tail -n 1) # Get highest versioned
-TARGET_CREATE="libhyprutils.so.7"
+TARGET_CREATE="libhyprutils.so.8"
 
 if [ -n "$TARGET_LIB" ] && [ ! -e "$LIB_DIR/$TARGET_CREATE" ]; then
   ln -sf "$TARGET_LIB" "$LIB_DIR/$TARGET_CREATE"
