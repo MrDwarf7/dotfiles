@@ -28,6 +28,7 @@ return {
       "markdown_inline",
       "meson",
       "ninja",
+      "nu",
       "python",
       "regex",
       "rst",

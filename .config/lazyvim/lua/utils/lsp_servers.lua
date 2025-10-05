@@ -224,6 +224,7 @@ M.servers = {
   -- markdown_oxide = {},
   mesonlsp = {},
   neocmake = {},
+  nushell = {},
   ocamlls = {
     cmd = { "ocamllsp", "--stdio" },
     filetypes = { "ocaml", "reason" },

@@ -19,4 +19,6 @@ return {
   { "tridactyl/vim-tridactyl", ft = "tridactyl", opts = {} }, -- Syntax HL for tridactylrc files
 
   { "lualine.nvim", lazy = true, event = "CursorMoved" },
+
+  -- { "LhKipp/nvim-nu", build = ":TSInstall nu", opts = {} },
 }
