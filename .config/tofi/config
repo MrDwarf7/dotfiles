@@ -22,7 +22,7 @@
 	#
 	# All text defaults to this color if not otherwise specified.
 	# text-color = #B2B2B4
-    text-color = #EFEFF0FF
+    text-color = #EEEEF0FF
 
 	# All pieces of text have the same theming attributes available:
 	#
@@ -40,19 +40,19 @@
 	#     Radius of background box corners in pixels
 
     ## Prompt text theme
-	prompt-background = #291F1A00
+	prompt-background = #0E0E0E00
 	prompt-background-padding = 0
 	prompt-background-corner-radius = 0
 
 	## Placeholder text theme
-    placeholder-color = #D39E6CFF
-    # #EFEFF0A8
-	placeholder-background = #21191500
+    placeholder-color = #A28D65FF
+    # #EEEEF0A8
+	placeholder-background = #0B0B0B00
 	placeholder-background-padding = 0
 	placeholder-background-corner-radius = 0
 
 	## Input text theme
-    input-background = #21191500 
+    input-background = #0B0B0B00 
 	input-background-padding = 0
 	input-background-corner-radius = 0
 
@@ -72,11 +72,11 @@
 	# alternate-result-background-corner-radius = 0
 
     ## Selection text
-	selection-color = #766D6AFF
+	selection-color = #777166FF
 	selection-background = #FFFFFF00
 	selection-background-padding = 0
 	selection-background-corner-radius = 0
-	selection-match-color = #658C8EE6
+	selection-match-color = #697281E6
 
 #
 ### Text cursor theme
@@ -129,7 +129,7 @@
 	height = 600
 
 	# Window background color
-    background-color = #251C17BF
+    background-color = #0D0D0DBF
     #0A0A0CCC
 
 	# Width of the border outlines in pixels.
@@ -142,7 +142,7 @@
 	border-width = 0
 
 	# Border color
-	border-color = #D39E6CFF
+	border-color = #A28D65FF
 
 	# Radius of window corners in pixels.
 	corner-radius = 0
