@@ -61,7 +61,7 @@ function env_prefix --description 'Prints all environment variables with a speci
     set -l found_vars
     for var_line in (set -x)
         set var_name (string split ' ' $var_line)[1]
-        if string match -q "$prefix*" $var_name
+        if string match -qi "$prefix*" $var_name
             set var_value $$var_name
             set -a found_vars "$var_name = $var_value"
             printf "%s = %s\n" $var_name $var_value >>$buf
