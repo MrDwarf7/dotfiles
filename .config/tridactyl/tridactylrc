@@ -160,7 +160,32 @@ bind s fillcmdline open search
 bind S fillcmdline tabopen search
 bind M gobble 1 quickmark
 bind ZZ qall
+
+" -t open in a new foreground tab
+" -b open in background
+" -y copy (yank) link's target to clipboard
+" -p copy an element's text to the clipboard
+" -h select an element (as if you click-n-dragged over it)
+" -P copy an element's title/alt text to the clipboard
+" -r read an element's text with text-to-speech
+" -i view an image
+" -I view an image in a new tab
+" -k irreversibly deletes an element from the page (until reload)
+" -K hides an element on the page; hidden elements can be restored using elementunhide.
+" -s save (download) the linked resource
+" -S save the linked image
+" -a save-as the linked resource
+" -A save-as the linked image
+" -; focus an element and set it as the element or the child of the element to scroll
+" -# yank an element's anchor URL to clipboard
+" -w open in new window
+" -wp open in new private window
+" -z scroll an element to the top of the viewport
+
 bind f hint
+
+bind i hint -i
+bind I hint -I
 
 bind F hint -b
 bind gF hint -qb
