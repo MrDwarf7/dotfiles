@@ -5,7 +5,7 @@ return {
 		{ "]t", function() return require("todo-comments").jump_next() end, desc = "Next todo comment", },
 		{ "[t", function() return require("todo-comments").jump_prev() end, desc = "Previous todo comment", },
 		{ "<Leader>lT", "<cmd>Trouble todo toggle<CR>", desc = "TODO (Trouble)" },
-		{ "<Leader>fT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
+		{ "<Leader>fT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME,BUG}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
 		-- { "<Leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo" },
 		-- { "<Leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
 		{ "<Leader>lt", ":TodoLocList<CR>", desc = "list [t]odo's", mode = "n" },

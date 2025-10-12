@@ -186,8 +186,8 @@ map("n", "<Leader>p<S-l>", function() LazyVim.news.changelog() end, { desc = "La
 
 map("n", "]t", function() require("todo-comments").jump_next() end, silent_opts("Next [t]odo"))
 map("n", "[t", function() require("todo-comments").jump_next() end, silent_opts("Next [t]odo"))
-map("n", "<Leader>ft", ":lua Snacks.picker.todo_comments()<CR>", silent_opts("[F]ind [T]odo's"))
-map('n', "<Leader>ft", ":lua Snacks.picker.todo_comments({ keywords = { 'TODO', 'FIX', 'FIXME', 'NOTE', 'IMP' } })<CR>", silent_opts("[F]ind [T]odo's" ))
+-- map("n", "<Leader>ft", ":lua Snacks.picker.todo_comments()<CR>", silent_opts("[F]ind [T]odo's"))
+map('n', "<Leader>ft", ":lua Snacks.picker.todo_comments({ keywords = { 'TODO', 'BUG', 'FIX', 'FIXME', 'NOTE', 'IMP' } })<CR>", silent_opts("[F]ind [T]odo's" ))
 -- stylua: ignore end
 
 -- local user_cmd = require("config.user_commands")
