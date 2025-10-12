@@ -9,22 +9,22 @@
 return {
   "snacks.nvim",
   keys = {
-    -- stylua: ignore start
+		-- stylua: ignore start
 		{ "<Leader>n", false },
 		{ "<Leader>un", false },
 
-			{ "<Leader>td", function() local dim = require("snacks").dim if dim.enabled ~= nil and dim.enabled == true then dim.disable() else dim.enable() end end, desc = "Toggle dimming" },
-			-- { "<Leader>go", function() local lg = require("snacks").lazygit Snacks.lazygit() end },
-			{ "<Leader>t.", function() Snacks.scratch() end, desc = "Toggle Scratch" },
-			{ "<Leader>.", function() Snacks.scratch.select() end, desc = "Select Scratch" },
-			{ "<Leader>`", function () Snacks.terminal() end, desc = "Open Terminal" },
-			{ "<Leader>tn", function ()
-				if Snacks.config.picker and Snacks.config.picker.enabled then
-					Snacks.picker.notifications()
-				else
-					Snacks.notifier.show_history()
-				end
-			end, desc = "Notifications History"},
+		{ "<Leader>td", function() local dim = require("snacks").dim if dim.enabled ~= nil and dim.enabled == true then dim.disable() else dim.enable() end end, desc = "Toggle dimming" },
+		-- { "<Leader>go", function() local lg = require("snacks").lazygit Snacks.lazygit() end },
+		{ "<Leader>t.", function() Snacks.scratch() end, desc = "Toggle Scratch" },
+		{ "<Leader>.", function() Snacks.scratch.select() end, desc = "Select Scratch" },
+		{ "<Leader>`", function () Snacks.terminal() end, desc = "Open Terminal" },
+		{ "<Leader>tn", function ()
+			if Snacks.config.picker and Snacks.config.picker.enabled then
+				Snacks.picker.notifications()
+			else
+				Snacks.notifier.show_history()
+			end
+		end, desc = "Notifications History"},
     -- stylua: ignore end
   },
   opts = function(_, opts)

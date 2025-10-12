@@ -6,13 +6,6 @@ return {
   keys = function()
     local keys = {
       {
-        "<Leader>i",
-        function()
-          require("harpoon"):list():add()
-        end,
-        desc = "harpoon [i]t",
-      },
-      {
         "<Leader>I",
         function()
           local harpoon = require("harpoon")
@@ -21,34 +14,13 @@ return {
         desc = "[h]arpoon menu",
       },
 
-      {
-        "<C-z>",
-        function()
-          return require("harpoon"):list():prev()
-        end,
-        desc = "harpoon [p]rev",
-      },
-      {
-        "<C-x>",
-        function()
-          return require("harpoon"):list():next()
-        end,
-        desc = "harpoon [n]ext",
-      },
-      {
-        "[i",
-        function()
-          return require("harpoon"):list():prev()
-        end,
-        desc = "harpoon [p]rev",
-      },
-      {
-        "]i",
-        function()
-          return require("harpoon"):list():next()
-        end,
-        desc = "harpoon [n]ext",
-      },
+			-- stylua: ignore start
+      { "<Leader>i", function() require("harpoon"):list():add() end, desc = "harpoon [i]t" },
+      { "<C-z>", function() return require("harpoon"):list():prev() end, desc = "harpoon [p]rev" },
+      { "<C-x>", function() return require("harpoon"):list():next() end, desc = "harpoon [n]ext" },
+      { "[i", function() return require("harpoon"):list():prev() end, desc = "harpoon [p]rev" },
+      { "]i", function() return require("harpoon"):list():next() end, desc = "harpoon [n]ext" },
+      -- stylua: ignore end
     }
 
     for i = 1, 5 do

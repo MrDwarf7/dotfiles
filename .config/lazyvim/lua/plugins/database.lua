@@ -25,44 +25,16 @@ return {
         ft = { "sql", "mysql", "plsql", "mssql" },
       }, -- Optional
     },
+    -- TODO: create a func. that makes a tab --/ if a tab already exists with the DBUI open, then switch to it
     keys = {
-
-      -- TODO: create a func. that makes a tab --/ if a tab already exists with the DBUI open, then switch to it
-      {
-        "<Leader>so",
-        "<cmd>DBUI<CR>",
-        desc = "DB UI",
-      },
-
-      {
-        "<Leader>sO",
-        "<cmd>DBUI<CR>",
-        desc = "DB UI",
-      },
-
-      {
-        "<Leader>st",
-        "<cmd>DBUIToggle<CR>",
-        desc = "DB Toggle",
-      },
-
-      {
-        "<Leader>sa",
-        "<cmd>DBUIAddConnection<CR>",
-        desc = "DB Add Con.",
-      },
-
-      {
-        "<Leader>sf",
-        "<cmd>DBUIFindBuffer<CR>",
-        desc = "DB Find Buff.",
-      },
-
-      {
-        "<Leader>sn",
-        "<cmd>DBUIHideNotifications<CR>",
-        desc = "DB Find Buff.",
-      },
+			-- stylua: ignore start
+      { "<Leader>so", "<cmd>DBUI<CR>", desc = "DB UI" },
+      { "<Leader>sO", "<cmd>DBUI<CR>", desc = "DB UI" },
+      { "<Leader>st", "<cmd>DBUIToggle<CR>", desc = "DB Toggle" },
+      { "<Leader>sa", "<cmd>DBUIAddConnection<CR>", desc = "DB Add Con." },
+      { "<Leader>sf", "<cmd>DBUIFindBuffer<CR>", desc = "DB Find Buff." },
+      { "<Leader>sn", "<cmd>DBUIHideNotifications<CR>", desc = "DB Find Buff." },
+      -- stylua: ignore end
     },
 
     cmd = {

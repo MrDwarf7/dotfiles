@@ -5,12 +5,9 @@ return {
   -- dev = true,
   dependencies = "nvim-lua/plenary.nvim",
   keys = {
-    {
-      "<Leader>aa",
-      function()
-        require("lazyjui").open()
-      end,
-    },
+		-- stylua: ignore start
+    { "<Leader>aa", function() require("lazyjui").open() end, desc = "LazyJui [a]ll" },
+    -- stylua: ignore end
   },
   ---@type lazyjui.Opts
   opts = {

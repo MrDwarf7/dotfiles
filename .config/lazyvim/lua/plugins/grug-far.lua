@@ -12,29 +12,10 @@ end
 return {
   "grug-far.nvim",
   keys = {
-    {
-      "<Leader>f/",
-      function()
-        invoke()
-      end,
-      mode = { "n", "v" },
-      desc = "Search & Replace",
-    },
-    {
-      "<Leader>lp",
-      function()
-        invoke()
-      end,
-      mode = { "n", "v" },
-      desc = "Search & Replace",
-    },
-    {
-      "<Leader>fs",
-      function()
-        invoke()
-      end,
-      mode = { "n", "v" },
-      desc = "Search & Replace",
-    },
+		-- stylua: ignore start
+    { "<Leader>f/", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    { "<Leader>lp", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    { "<Leader>fs", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    -- stylua: ignore end
   },
 }

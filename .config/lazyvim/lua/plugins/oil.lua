@@ -7,35 +7,7 @@ return {
   priority = 1000,
   keys = {
     { "<C-w>E", "<cmd>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
-
-    -- {
-    --   "<Leader>yc",
-    --   function()
-    --     local filepath = vim.fn.expand("%")
-    --     filepath = converter(filepath)
-    --     vim.fn.setreg("+", filepath) -- write to clippoard
-    --   end,
-    --   desc = "[c]urrent",
-    --   noremap = true,
-    --   silent = true,
-    -- },
-
-    -- {
-    --   "<leader>yC",
-    --   function()
-    --     local filepath = vim.fn.expand("%")
-    --     filepath = converter(filepath)
-    --     vim.fn.setreg("+", filepath) -- write to clippoard
-    --   end,
-    --   desc = "[c]urrent",
-    --   noremap = true,
-    --   silent = true,
-    -- },
-    {
-      "<Leader>fz",
-      ":Oil ",
-      desc = "<cmd>Oil",
-    },
+    { "<Leader>fz", ":Oil ", desc = "<cmd>Oil" },
   },
 
   opts = {

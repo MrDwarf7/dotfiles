@@ -1,6 +1,21 @@
 return {
   "folke/persistence.nvim",
   event = "BufReadPre",
+  keys = {
+		-- stylua: ignore start
+		{ "<leader>Ps", function() require("persistence").load() end, desc = "Restore Session (cwd)" },
+		{ "<leader>PS", function() require("persistence").select() end, desc = "Select Session" },
+		{ "<leader>Pl", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
+		{ "<leader>Pd", function() require("persistence").stop() end, desc = "Delete/Stop current Session" },
+
+		-- defaults as well
+		{ "<leader>qs", function() require("persistence").load() end, desc = "Restore Session (cwd)" },
+		{ "<leader>qS", function() require("persistence").select() end, desc = "Select Session" },
+		{ "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
+		{ "<leader>qd", function() require("persistence").stop() end, desc = "Delete/Stop current Session" },
+    -- stylua: ignore end
+  },
+
   config = function()
     local function get_tmux_info()
       if not vim.env.TMUX then
