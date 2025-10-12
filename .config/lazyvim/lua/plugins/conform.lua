@@ -57,9 +57,9 @@ return {
       },
       formatters_by_ft = {
         cpp = { "clang-format" },
-        cs = { "csharpier" },
+        -- cs = { "csharpier" },
         gleam = { "gleam" },
-        vb = { "csharpier" },
+        -- vb = { "csharpier" },
         javascript = { "biome" },
         javascriptreact = { "biome" },
         json = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
