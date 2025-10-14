@@ -12,7 +12,7 @@ return {
           or vim.b.autoformat == nil
           or vim.b.autoformat == false
         then
-          return
+          LazyVim.format({ force = true })
         else
           require("conform").format({ formatters = { "injected" }, timeout_ms = 3000 })
         end
@@ -89,9 +89,15 @@ return {
         surql = { "sql_formatter" },
         bash = { "shfmt" },
         zsh = { "beautysh" },
+        -- typstyle & typstfmt are included in tinymist
+        --
+        -- tinymist actually supports them DIRECTLY. So
+        -- really no need to tell conform to do it.
+        --
+        -- typst = { "typstyle" },
+        --
         typescript = { "biome" },
         typescriptreact = { "biome" },
-        typst = { "typstyle" },
         yaml = { "yamlfmt" },
         rust = { "rustfmt" },
       },

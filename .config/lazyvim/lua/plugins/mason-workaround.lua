@@ -1,5 +1,3 @@
--- return {}
-
 return {
   {
     "mason.nvim",
@@ -45,8 +43,9 @@ return {
         "sql-formatter",
         "svelte-language-server",
         "stylua",
-        "tinymist", -- typst
+        "tinymist", -- typst -- typstyle & typstfmt are included in tinymist
         "ts-standard",
+        -- "typstfmt", -- typst
         "typstyle", -- typst
         "vue-language-server",
         "vulture",

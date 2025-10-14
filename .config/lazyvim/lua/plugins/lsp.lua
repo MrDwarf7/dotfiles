@@ -13,7 +13,7 @@ return {
     },
 		-- event = "VeryLazy",
 		-- stylua: ignore start
-		opts = function(opts)
+		opts = function(fn_opts)
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()
 
 			local lsp_servers = require("utils.lsp_servers")
@@ -98,7 +98,7 @@ return {
 					timeout_ms = nil,
 				},
 				-- LSP Server Settings
-				servers = lsp_servers.servers,
+				servers = lsp_servers,
 					-- vim.tbl_deep_extend("force", lsp_servers.servers, opts.servers or {}),
 				-- you can do any additional lsp server setup here
 				-- return true if you don't want this server to be setup with lspconfig
@@ -117,6 +117,11 @@ return {
 					-- 		root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 					-- 	})
 					-- end,
+					["*"] = function(server, opts)
+						-- local as_str = server:gsub("%-", "_")
+						-- as_str = string.format("%s", as_str)
+						-- require(as_str).setup(opts)
+					end
 				},
 			}
 			-- return ret

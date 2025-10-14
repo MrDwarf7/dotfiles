@@ -7,7 +7,7 @@ local arch = require("utils.arch")
 -----@field servers table<string, table>
 local M = {}
 
-M.servers = {
+M = {
   -- bacon_ls = {
   --   enabled = diagnostics == "bacon-ls",
   -- },
@@ -336,7 +336,19 @@ M.servers = {
     root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
   },
   taplo = {},
-  tinymist = {},
+  tinymist = {
+    settings = {
+      -- formatterMode = "typstfmt",
+      formatterMode = "typstyle",
+      -- formatterPrintWidth = 160, -- default is 120
+      exportPdf = "onType",
+      semanticTokens = true,
+      lint = {
+        enabled = true,
+        when = "onType",
+      },
+    },
+  },
   vimls = {},
   -- volar = {},
   yamlls = {},
