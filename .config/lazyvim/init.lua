@@ -92,19 +92,19 @@ local lazy_opts = {
   },
 }
 
-if vim.g.vscode then
-  -- vim.g.lazyvim_check_order = false
-  local lz = lazy_opts
-  lz = {
-    spec = {
-      { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-      { "LazyVim/LazyVim", import = "lazyvim.plugins.extras" },
-      { "LazyVim/LazyVim", import = "lazyvim.plugins.extras.vscode" },
-      -- { "flash.nvim", enabled = false },
-      { import = "vscode_conf" },
-    },
-  }
-  require("lazy").setup(vim.tbl_deep_extend("keep", lz, lazy_opts))
-else
-  require("lazy").setup(lazy_opts)
-end
+-- if vim.g.vscode then
+--   -- vim.g.lazyvim_check_order = false
+--   local lz = lazy_opts
+--   lz = {
+--     spec = {
+--       { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+--       { "LazyVim/LazyVim", import = "lazyvim.plugins.extras" },
+--       { "LazyVim/LazyVim", import = "lazyvim.plugins.extras.vscode" },
+--       -- { "flash.nvim", enabled = false },
+--       { import = "vscode_conf" },
+--     },
+--   }
+--   require("lazy").setup(vim.tbl_deep_extend("keep", lz, lazy_opts))
+-- else
+require("lazy").setup(lazy_opts)
+-- end
