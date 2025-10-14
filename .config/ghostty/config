@@ -4,6 +4,8 @@
 
 # Most of these are off atm (exp. for `custom-shader-animation`)
 config-file = ?shaders.conf
+config-file = themes/tokyonight_storm.conf
+# config-file = themes/matteblack.conf
 
 ################
 ### Settings ###
@@ -36,8 +38,7 @@ background-blur = 20
 #### uncomment after fixing up Niri
 background-opacity = 0.40
 
-
-theme = TokyoNight Storm
+# theme = TokyoNight Storm
 
 window-decoration = none
 
