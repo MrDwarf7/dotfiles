@@ -50,12 +50,12 @@ local lazy_opts = {
     -- path = "~/Documents/nvim_dev",
   },
   performance = {
-    -- cache = {
-    --   enabled = true,
-    --   path = vim.fn.stdpath("cache") .. "/lazy",
-    --   -- disable_events = { "VimEnter", "BufReadPre" },
-    --   ttl = 3600 * 24 * 7,
-    -- },
+    cache = {
+      enabled = true,
+      path = vim.fn.stdpath("cache") .. "/lazy",
+      -- disable_events = { "VimEnter", "BufReadPre" },
+      ttl = 3600 * 24 * 7,
+    },
     rtp = {
       -- disable some rtp plugins
       reset = true,
