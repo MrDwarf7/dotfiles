@@ -1,31 +1,58 @@
-return {
-  "tokyonight.nvim",
-  lazy = false,
-  enabled = true,
-  priority = 999,
-  opts = function()
-    local opts = {
-      -- style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-      -- TODO: change back to storm later after config
-      style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-      terminal_colors = false, -- Configure the colors used when opening a `:terminal` in Neovim
-      transparent = true, -- Enable this to disable setting the background color
-      styles = {
-        comments = { italic = true },
-        keywords = { italic = true },
-        functions = {},
-        variables = {},
-        -- sidebars = "dark", -- style for sidebars, see below
-        sidebars = "transparent", -- style for sidebars, see below
-        floats = "transparent", -- style for floating windows
-      },
-      sidebars = { "qf", "help", "nvimtree" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
-      day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
-      hide_inactive_statusline = false, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
-      dim_inactive = false, -- dims inactive windows
-      lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
-    }
-    vim.cmd.colorscheme("tokyonight-" .. opts.style)
-    return opts
+local M = {}
+
+local colorschemes = vim.fn.stdpath("config") .. "/lua/plugins/colorschemes/"
+-- local current = "matteblack"
+local current = "tokyonight"
+
+--- This function loads a module given its path,
+--- standard sourcing path (eg: thing.folder.module)
+---
+--- It ensures that the path ends with a '.'
+--- and can be joined on via a module concatentation
+---
+---@param module_path string
+---@return table | table<nil>
+M.load_module = function(module_path)
+  -- check if the module path ends with a '.' or '.lua'
+  -- and:
+  -- add the '.' if missing
+  -- or
+  -- strip the 'lua' if present
+
+  -- doesn't already end with a dot, and isn't '.lua'
+  if not module_path:sub(-1) == "." and not module_path:sub(-4) == ".lua" then
+    module_path = module_path .. "."
+  end
+
+  -- if it does end with '.lua', strip it
+  if module_path:sub(-4) == ".lua" then
+    module_path = module_path:sub(1, -5)
+  end
+
+  local ok, module = pcall(require, module_path)
+  if not ok then
+    vim.notify("Error loading module: " .. module_path .. "\n\n" .. module, vim.log.levels.ERROR)
+    local ok, snacks = pcall(require, "snacks")
+    if not ok then
+      return {}
+    end
+    Snacks.debug.backtrace()
+    Snacks.debug.inspect(module)
+    return {}
+  end
+  return module
+end
+
+setmetatable(M, {
+  __index = function(_, key)
+    local module = M.load_module("plugins.colorschemes." .. current)
+    return module[key]
   end,
-}
+  __call = function(_, key)
+    local module = M.load_module("plugins.colorschemes." .. current)
+    return module[key]
+  end,
+  __metatable = "colorscheme",
+})
+
+return M.load_module("plugins.colorschemes." .. current)
