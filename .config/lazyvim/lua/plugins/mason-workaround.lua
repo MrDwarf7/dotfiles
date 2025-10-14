@@ -3,7 +3,8 @@
 return {
   {
     "mason.nvim",
-    lazy = true,
+    events = { "VeryLazy" },
+    -- lazy = true,
     -- version = "^1.0.0",
     keys = {
       { "<leader>cm", false },
@@ -29,6 +30,7 @@ return {
         "isort",
         "jsonlint",
         "markdownlint-cli2",
+
         --         -- -- "markdown-toc",
         --         -- --"markdown_oxide",
         --         -- -- "mdsf",
@@ -43,7 +45,9 @@ return {
         "sql-formatter",
         "svelte-language-server",
         "stylua",
+        "tinymist", -- typst
         "ts-standard",
+        "typstyle", -- typst
         "vue-language-server",
         "vulture",
         "yamlfmt",

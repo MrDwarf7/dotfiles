@@ -336,6 +336,7 @@ M.servers = {
     root_dir = require("lspconfig.util").root_pattern("tailwind.config.*"),
   },
   taplo = {},
+  tinymist = {},
   vimls = {},
   -- volar = {},
   yamlls = {},

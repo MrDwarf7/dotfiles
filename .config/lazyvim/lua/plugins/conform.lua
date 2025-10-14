@@ -91,6 +91,7 @@ return {
         zsh = { "beautysh" },
         typescript = { "biome" },
         typescriptreact = { "biome" },
+        typst = { "typstyle" },
         yaml = { "yamlfmt" },
         rust = { "rustfmt" },
       },
