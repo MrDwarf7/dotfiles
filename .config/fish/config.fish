@@ -25,6 +25,6 @@ if status is-interactive
 
     test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
 
-    099autostart_tmux new
+    # 099autostart_tmux new
 
 end
