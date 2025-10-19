@@ -175,16 +175,11 @@ M = {
             vim.api.nvim_get_runtime_file("", true),
             "$VIMRUNTIME",
             "$VIMRUNTIME/lua",
-            -- [vim.fn.expand("$VIMRUNTIME/lua")] = true,
             "${3rd}/luv/library",
             "${3rd]/busted/library",
             "${3rd]/luaassert/library",
             "lua",
-            -- unpack(vim.api.nvim_get_runtime_file("", true)),
-            -- [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
           },
-
-          -- library = vim.api.nvim_get_runtime_file("", true),
         },
         codeLens = {
           enable = true,

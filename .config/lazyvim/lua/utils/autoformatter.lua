@@ -3,8 +3,8 @@
 ---@alias void nil
 
 ---@class AutoFormat
----@field formatters_reset fun(): void
----@field toggle_autoformat fun(effect_global?: boolean, bufnr?: number): void
+---@field formatters_reset fun(): nil
+---@field toggle_autoformat fun(effect_global?: boolean, bufnr?: number): nil
 local M = {}
 
 -- setmetatable(M, {
@@ -54,7 +54,7 @@ end
 
 --- Turns off autoformatting for the current buffer
 ---Writes the current buffer only, and quits/closes the current buffer
----@return void
+---@return nil
 function M:fmt_quit_buf()
   self:formatters_reset() -- reset to ensure when we call next it's always correct
   self.toggle_autoformat(false) -- GLOBAL change = no     toggle them, ONLY changing the currently selected buffer formatter
