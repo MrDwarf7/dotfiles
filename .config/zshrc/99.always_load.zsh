@@ -30,6 +30,5 @@ bindkey -v
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
-bindkey -M viins 'jj' vi-cmd-mode
 bindkey -M viins 'jk' vi-cmd-mode
 bindkey -M viins 'kj' vi-cmd-mode

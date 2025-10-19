@@ -25,7 +25,8 @@ export ZSH_THEME="powerlevel10k/powerlevel10k"
 
 [[ ! -f $XDG_CONFIG_HOME/.p10k.zsh ]] || source $P10K
 
-source $ZSH/oh-my-zsh.sh
+# check it exists first
+[ -f $ZSH/oh-my-zsh.sh ] && source $ZSH/oh-my-zsh.sh
 
 DOTDIR="$HOME/dotfiles"
 ZSHRC_CONFIG="$DOTDIR/.config/zshrc"

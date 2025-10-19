@@ -22,27 +22,31 @@ export_if_pacman "eza" "LIST_CLIENT" "exa"
 
 export_if_pacman "sccache" "RUSTC_WRAPPER"
 
-export_path_if_pacman "python-pipx" "PIPX_HOME" "$HOME/.xdg/share/pipx"
-export_path_if_pacman "python-pipx" "PIPX_BIN_DIR" "$HOME/.xdg/local/bin"
-export_path_if_pacman "python-pipx" "PIPX_MAN_DIR" "$HOME/.xdg/local/man"
-
-export_path_if_pacman "pyenv" "PYENV_ROOT" "$XDG_CONFIG_HOME/.pyenv"
-export_path_if_pacman "pyenv" "PATH" "$PYENV_ROOT/bin:$PATH"
-eval_if_pacman "pyenv" "pyenv init -"
+# export_path_if_pacman "python-pipx" "PIPX_HOME" "$HOME/.xdg/share/pipx"
+# export_path_if_pacman "python-pipx" "PIPX_BIN_DIR" "$HOME/.xdg/local/bin"
+# export_path_if_pacman "python-pipx" "PIPX_MAN_DIR" "$HOME/.xdg/local/man"
+#
+# export_path_if_pacman "pyenv" "PYENV_ROOT" "$XDG_CONFIG_HOME/.pyenv"
+# export_path_if_pacman "pyenv" "PATH" "$PYENV_ROOT/bin:$PATH"
+# eval_if_pacman "pyenv" "pyenv init -"
 
 export_onto_path_if_pacman "rustup" "$HOME/.cargo/bin"
 
-alias_if_pacman "nvim" "vi" '/usr/sbin/vim'
-alias_if_pacman "nvim" "vim" '/usr/sbin/nvim'
-alias_if_pacman "nvim" "nvim" '/usr/sbin/nvim'
-
-alias_if_pacman "neovim" "vi" '/usr/sbin/vim'
-alias_if_pacman "neovim" "vim" '/usr/sbin/nvim'
-alias_if_pacman "neovim" "nvim" '/usr/sbin/nvim'
-
 alias_if_pacman "helix" "hx" '/usr/bin/helix'
 
-source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
+alias vi="$(command -v vim 2>/dev/null || command -v vi 2>/dev/null)"
+alias vim="$(command -v nvim 2>/dev/null || command -v vim 2>/dev/null)"
+
+
+# check if the 'refused' file is present in the /launcher directory
+
+if [ -f "$HOME/.config/broot/launcher/refused" ]; then
+else
+  source_if_pacman "broot" "$HOME/.config/broot/launcher/bash/br"
+  alias_if_pacman "broot" "br" "$HOME/.config/broot/launcher/bash/br"
+fi
+
+
 
 if which "dotnet" &> /dev/null; then
     export PATH="$PATH:/home/dwarf/.dotnet/tools"
@@ -63,6 +67,18 @@ case ":$PATH:" in
     *":$PNPM_HOME:"*) ;;
     *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
+
+eval_if_pacman "zoxide" "zoxide init zsh"
+
+# ${UserConfigDir}/zsh/.zshrc
+export CARAPACE_BRIDGES='all' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+# source <(carapace _carapace)
+source_if_pacman "carapace" "carapace _carapace"
+
+
+eval_if_pacman "fzf" "fzf --zsh"
+eval_if_pacman "starship" "starship init zsh"
 
 
 return 0

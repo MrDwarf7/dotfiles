@@ -1,12 +1,16 @@
 #!/sbin/zsh
 
 function valid_pacman {
-    local value=$1
-    if pacman -Qi "$value" &> /dev/null; then
-        return 0
-    else
-        return 1
-    fi
+  local value=$1
+
+  if command -sq "$value" &> /dev/null; then
+    return 0
+  fi
+
+  if pacman -Qi "$value" &> /dev/null; then
+    return 0
+  fi
+  return 1
 }
 
 function valid_which {
@@ -23,10 +27,24 @@ function eval_if_pacman {
     local expr=$2
     # echo "Value is: $1"
     # echo "Expr is: $2"
-    if pacman -Qi "$value" &> /dev/null; then
+
+    if (valid_pacman $value); then
         source <(eval $expr)
+        return 0
     fi
+
+    # if command -sq "$value" &> /dev/null; then
+    #     source <(eval $expr)
+    #     return 0
+    # fi
+    # if pacman -Qi "$value" &> /dev/null; then
+    #     source <(eval $expr)
+    #     return 0
+    # fi
+
+    return 1
 }
+
 
 ### Setting up the PATH
 ### This allows passing in multiple paths to add to the PATH
@@ -79,10 +97,15 @@ function alias_if_pacman {
     local alias_name=$2
     local alias_value=$3
 
-    local pacman_check=valid_pacman($program_one)
 
-    if [ -n "$pacman_check" ]; then
+
+    # local pacman_check=valid_pacman($program_one)
+
+    # use the fater valid_pacman function
+
+    if (valid_pacman $program_one); then
         alias $alias_name=$alias_value
+        return 0
     fi
 }
 
@@ -90,8 +113,9 @@ function source_if_pacman {
     local program_one=$1
     local file=$2
 
-    local pacman_check=valid_pacman($program_one)
-    if [ -n "$pacman_check" ]; then
-        source $file
+    if (valid_pacman $value); then
+      source $file
+      return 0
     fi
+    return 1
 }
