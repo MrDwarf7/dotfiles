@@ -1,8 +1,8 @@
 return {
   {
     "mason.nvim",
-    events = { "VeryLazy" },
-    -- lazy = true,
+    -- events = { "VeryLazy" },
+    lazy = false,
     -- version = "^1.0.0",
     keys = {
       { "<leader>cm", false },

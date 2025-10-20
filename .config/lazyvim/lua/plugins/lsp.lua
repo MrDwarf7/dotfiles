@@ -2,7 +2,7 @@
 return {
   {
     "nvim-lspconfig",
-    lazy = true,
+    lazy = false,
     dependencies = {
       -- {
       --   "folke/neoconf.nvim",
@@ -42,8 +42,7 @@ return {
 
 			-- stylua: ignore end
 
-			-- local ret = {
-			return {
+			local ret = {
 				folds = {}, -- not sure, but it's needed otherise errors
 				-- options for vim.diagnostic.config()
 				---@type vim.diagnostic.Opts
@@ -124,7 +123,15 @@ return {
 					end
 				},
 			}
-			-- return ret
+
+
+			for name, config in pairs(lsp_servers.configs or {}) do
+				vim.lsp.config(name, config)
+			end
+
+
+
+			return ret
 		end,
   },
   {
