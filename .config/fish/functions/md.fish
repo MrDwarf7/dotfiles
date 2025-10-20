@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 
-function md 
+function md --wraps=source --description 'Create a directory and any necessary parent directories'
     command mkdir -p $argv
 end

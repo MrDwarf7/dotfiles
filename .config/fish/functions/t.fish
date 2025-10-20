@@ -1,5 +1,5 @@
 #!/usr/bin/env fish
 
-function t --description "Run Television"
+function t --wraps=source --description "Run Television"
     command tv $argv
 end
