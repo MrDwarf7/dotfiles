@@ -192,6 +192,9 @@ jj log -n 20 --no-pager -r 'all()'
 ####################################################
 
 # --------------------------------------------------------------------------------------------------
+# easy_commit?
+# jj ( go )                           [ moves bookmark and pushes current trunk/branch to remote ]
+# --------------------------------------------------------------------------------------------------
 # commits? 
 # jj ( ci | cm | cim)                 [ commit interactive | commit with msg | <- both of those ]
 # --------------------------------------------------------------------------------------------------
@@ -451,9 +454,6 @@ gpbh = ['git', 'push', '--change', 'branch(@)']
 gpav = ['git', 'push', '--change', 'all:(visible_heads() & ~private())']
 gpa = ['git', 'push', '--all']
 gpd = ['git', 'push', '--deleted']
-###############################
-gpbuh = ['git', 'push', '-r', 'until_bookmark(@)']
-###############################
 
 gr = ["git", "remote"]
 grl = ["git", "remote", "list"]
@@ -464,7 +464,9 @@ grrm = ["git", "remote", "rename"]
 grs = ["git", "remote", "set-url"]
 
 ###############################
-go = ['util', 'exec', '--', 'bash', '-c', 'jj bmw && jj gpbuh']
+# gpbuh = ['git', 'push', '-r', 'until_bookmark(@)']
+# go = ['util', 'exec', '--', 'bash', '-c', 'jj bmw && jj gpbuh']
+go = ['util', 'exec', '--', 'bash', '-c', 'jj bmw && jj gp']
 ###############################
 
 # pr
