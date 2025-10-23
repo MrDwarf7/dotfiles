@@ -178,6 +178,7 @@ a = ["util", "exec", "--", "bash", "-c", """
 jj log -n 20 --no-pager -r 'all()'
 """, ""]
 
+
 # s = ["util", "exec", "--", "bash", "-c", """
 # jj show -s "$@"
 # """, ""]
@@ -316,6 +317,7 @@ dc = ['describe']
 dcm = ['describe', '-m']
 
 # commit
+c = ['commit']
 ci = ['commit', '-i']
 cm = ['commit', '-m']
 cim = ['commit', '-i', '-m']
@@ -439,6 +441,7 @@ gfw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fl']
 gfar = ['util', 'exec', '--', 'bash', '-c', 'jj gfa && jj rbta']
 gfaw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fa']
 
+
 # push
 gp = ['git', 'push']
 gpb = ['git', 'push', '--bookmark']
@@ -448,6 +451,9 @@ gpbh = ['git', 'push', '--change', 'branch(@)']
 gpav = ['git', 'push', '--change', 'all:(visible_heads() & ~private())']
 gpa = ['git', 'push', '--all']
 gpd = ['git', 'push', '--deleted']
+###############################
+gpbuh = ['git', 'push', '-r', 'until_bookmark(@)']
+###############################
 
 gr = ["git", "remote"]
 grl = ["git", "remote", "list"]
@@ -456,6 +462,10 @@ gra = ["git", "remote", "add"]
 grr = ["git", "remote", "remove"]
 grrm = ["git", "remote", "rename"]
 grs = ["git", "remote", "set-url"]
+
+###############################
+go = ['util', 'exec', '--', 'bash', '-c', 'jj bmw && jj gpbuh']
+###############################
 
 # pr
 ## pull request create
