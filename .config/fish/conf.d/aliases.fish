@@ -12,4 +12,6 @@ alias parss "paru -Ss"
 alias parsu "paru -Syu"
 
 alias shutdown 'systemctl poweroff'
+
+alias aa='jj'
 alias au just
