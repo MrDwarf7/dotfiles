@@ -1,6 +1,6 @@
 #!/usr/bin/env fish
 #
 
-function mgr 
+function mgr
     pushd $GITHUB_PROJECTS || return $status
 end

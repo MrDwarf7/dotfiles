@@ -9,8 +9,8 @@
 #
 # System Dependencies:
 #   sudo
-# 
-# Returns: 
+#
+# Returns:
 #   The status code of the command that was run by the sudo command
 #
 function usudo

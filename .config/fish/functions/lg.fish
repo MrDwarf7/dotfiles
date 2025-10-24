@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function lg 
+function lg
     if test -z $argv
         alias lg lazygit $argv
         command lazygit $argv

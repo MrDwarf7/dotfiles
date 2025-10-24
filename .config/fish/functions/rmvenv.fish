@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function rmvenv 
+function rmvenv
     if test -d "./.venv"
         rm -rf ./.venv || return 1
         printf "Removed virtual environment\n"

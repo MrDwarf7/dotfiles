@@ -4,7 +4,7 @@
 function ls
     if test -z $LIST_CLIENT
         printf "LIST_CLIENT is not set\n"
-        set -gx LIST_CLIENT "ls"
+        set -gx LIST_CLIENT ls
         return 1
     end
     command $LIST_CLIENT -ah --color=automatic $argv

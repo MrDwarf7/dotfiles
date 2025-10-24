@@ -2,5 +2,6 @@
 #
 
 function c --wraps=source --description 'alias c=cat'
-    command cat $argv;
+    command cat $argv
+
 end

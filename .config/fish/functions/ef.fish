@@ -2,5 +2,6 @@
 #
 
 function ef --wraps=source --description 'alias ef=exec fish'
-    exec fish $argv;
+    exec fish $argv
+
 end

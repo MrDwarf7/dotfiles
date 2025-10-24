@@ -13,7 +13,6 @@ function swap_conf --description "Swap a config file, using the first argument a
     set config_path $HOME/.config
     set backup_path $config_path/$target-bak
 
-
     if test -e "$DOT_CONFIG/"
         command cp -r "$config_path/$target/" "$DOT_CONFIG/"
     else
