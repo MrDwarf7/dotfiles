@@ -28,8 +28,9 @@
 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 01eval_if_pacman mise "mise activate fish | source"
 
-03export_path_if_pacman pnpm PNPM_HOME "$HOME/.xdg/data/pnpm"
+03export_path_if_pacman pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
 04export_onto_path_if_pacman pnpm "$PNPM_HOME" --prepend
 
-04export_onto_path_if_pacman jetbrains-toolbox "$HOME/.xdg/data/JetBrains/Toolbox/scripts" --prepend
+04export_onto_path_if_pacman jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
+# can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local  /  bob)
 04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
