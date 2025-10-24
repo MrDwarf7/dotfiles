@@ -20,7 +20,10 @@ write-change-id-header = true
 # default-command = ["log", "--limit", "10"] # disable the message banner
 default-command = "default"
 conflict-marker-style = "diff" #  "diff" | "snapshot" | "git"
-diff-editor = ":builtin"
+# diff-editor = ":builtin"
+
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+
 # diff-formatter = ":git"
 # diff-formatter = ":color-words"
 diff-formatter = [
