@@ -14,4 +14,9 @@ alias parsu "paru -Syu"
 alias shutdown 'systemctl poweroff'
 
 alias aa='jj'
-alias au just
+alias at just
+
+alias lzd lazydocker
+alias lzs lazyjournal
+# alias au jjui
+alias au lza
