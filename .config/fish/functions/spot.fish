@@ -1,7 +1,8 @@
 #!/usr/bin/env fish
+#
 
 function spot --description 'Ncspot spotify client TUI'
-    if command pacman -Qi "ncspot" &>/dev/null
+    if 00valid_pacman ncspot
         ncspot $argv || return $status
         return 0
     end
