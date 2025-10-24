@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function zel --description 'zellij start'
 

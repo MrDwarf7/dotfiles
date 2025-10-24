@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function ca --description 'Clear screen and run ls'
     command clear

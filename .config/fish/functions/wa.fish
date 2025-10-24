@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function wa --description 'Call waypaper for wallust'
     set path_one $argv[1]

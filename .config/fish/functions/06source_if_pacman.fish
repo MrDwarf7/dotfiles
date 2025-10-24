@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Sources a provided program by file path
 # if the program is found in pacman

@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function which --description 'better `which`'
     if abbr --query $argv

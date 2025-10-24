@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # This function is a wrapper for sudo that preserves the environment variables.
 # This is useful for when you need to run a command as root that requires environment variables.

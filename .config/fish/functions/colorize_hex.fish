@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function colorize_hex -d 'Add background to hex code colors in a command'
     set -l cmd (commandline)

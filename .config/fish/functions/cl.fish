@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function cl --description 'Copy current working directory to clipboard'
     if command uname -r | tr -d '\n' | grep -iE "arch|cachyos" >/dev/null

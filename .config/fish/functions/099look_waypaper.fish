@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 set -g waypaper_fill_method fill # fill | stretch | fit | center | tile
 set -g DEBUG_MODE 0

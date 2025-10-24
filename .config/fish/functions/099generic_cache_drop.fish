@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Drops the cache for the package manager and AUR
 # System Dependencies:

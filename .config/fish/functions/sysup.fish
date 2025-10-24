@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Runs a system update, optionally skipping certain parts
 #

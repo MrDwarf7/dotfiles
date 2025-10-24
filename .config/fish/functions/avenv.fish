@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function avenv
     source ./.venv/bin/activate

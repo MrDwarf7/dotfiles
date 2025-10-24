@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function fish_user_key_bindings
     set -x fish_sequence_key_delay_ms 160

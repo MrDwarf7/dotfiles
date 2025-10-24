@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function ls
     if test -z $LIST_CLIENT

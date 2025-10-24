@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Exports an environment variable if the program is found in pacman
 # Used to set an env var to a path specfically

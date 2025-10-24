@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 set utility playerctl
 set player spotify

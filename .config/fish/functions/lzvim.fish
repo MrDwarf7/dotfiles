@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function lzvim 
     ## set -gx ORIG $NVIM_APPNAME || set -gx ORIG 'nvim'

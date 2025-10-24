@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function rmvenv 
     if test -d "./.venv"

@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Validates if a package is installed
 #

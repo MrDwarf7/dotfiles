@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function l --description 'List all files including hidden files with details'
     if test -z $LIST_CLIENT

@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Exports a program if it is found in pacman, otherwise it exports a fallback
 #

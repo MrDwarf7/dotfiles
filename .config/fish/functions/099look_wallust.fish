@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function 099look_wallust
     set path $argv[1]

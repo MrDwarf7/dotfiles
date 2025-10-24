@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function y --description 'yazi'
     set tmp (mktemp -t "yazi-cwd.XXXXXX")

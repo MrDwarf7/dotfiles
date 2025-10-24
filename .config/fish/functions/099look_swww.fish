@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # swww \
 # img -o DP-1 \

@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function tldr_x --description "Picks a random tldr page and displays it"
     if ! test -z "$argv[1..-1]"

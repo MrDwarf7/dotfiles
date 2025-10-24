@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # cp -r ~/.config/$target/ ~/dotfiles/.config/$target &&
 # mv ~/.config/$target/ ~/.config/$target-bak &&

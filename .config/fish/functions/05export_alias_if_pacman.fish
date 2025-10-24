@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Exports an alias by checking pacman for the program
 #

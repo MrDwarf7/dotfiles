@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Checks to make sure a program is installed before evaluating an expression
 # Used for instances where the item must be called as source <(eval $expr)

@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Updates the mirrorlist via rate-mirrors
 # Output to a temp file, then copies the mirrorlist to a backup and replaces it with the new one

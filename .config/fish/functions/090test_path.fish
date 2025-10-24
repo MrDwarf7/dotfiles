@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 # Helper function to handled repeated code
 function 090test_path

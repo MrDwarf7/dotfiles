@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+#
 
 function bak --description 'backup a file'
     set -l now (date +"%Y%m%d-%H%M%S")
