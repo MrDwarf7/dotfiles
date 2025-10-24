@@ -79,10 +79,15 @@ end
 #
 # Translates to: tmux list-panes -t [session-name](as $argv[2] locally)
 #
+# Note:
+# All `subcommand`'s will always be 'real' tmux commands, as this function is just a wrapper
 function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
     set -l subcommand $argv[1]
     set -l tak_arg $argv[2]
     set -l ext_arg $argv[3]
+
+    # we won't print out the header for any of these subcommands
+    set -l exclude_println_regex '^(new-session|n|kill-session)$'
 
     set -l base_cmd $____global_base_cmd
     if test -z "$base_cmd"
@@ -91,10 +96,12 @@ function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
     end
 
     # tm_dbg HANDLER $argv[1..-1]
-    # Handles not printing anything if it's likely a simple command
-
+    # Handles not printing anything if it's a simple command
     if test (string length -- (string escape -- "$tag_arg")) -le 2
-        tm_println "$subcommand"
+        # exclude printing certain subcommands (specified by the exclude_println_regex / exclude_regex)
+        if not string match -q -r $exclude_println_regex -- $subcommand
+            tm_println "$subcommand"
+        end
     end
 
     # If it's 'new-session' we add '-A' arg, which checks if the session exists
@@ -141,6 +148,10 @@ function tm --description 'Tmux wrapper with argument parsing'
 
     set -l sessions (tmux list-sessions -F '#S' 2>/dev/null)
 
+    # Used in both attach (has it's own), and kill-session (default to most recent)
+    set -e most_recent
+    set -l most_recent (tmux list-sessions -F "#{session_attached} #{session_last_attached} #{session_name}" | sort -k2 -gr | head -n1 | awk '{printf "%s", $3}')
+
     switch $argv[1]
         case l ls lses lsses list
             tm_arg_handler list-sessions
@@ -148,8 +159,8 @@ function tm --description 'Tmux wrapper with argument parsing'
 
             # case (attach) a at attach + case(new) n ns new nses
         case a at attach n ns new nses
-            set -e most_recent
-            set -l most_recent (tmux list-sessions -F "#{session_attached} #{session_last_attached} #{session_name}" | sort -k2 -gr | head -n1 | awk '{printf "%s", $3}')
+            # set -e most_recent
+            # set -l most_recent (tmux list-sessions -F "#{session_attached} #{session_last_attached} #{session_name}" | sort -k2 -gr | head -n1 | awk '{printf "%s", $3}')
 
             # colorize yellow (printf "most_recent session: %s\n" $most_recent)
 
@@ -209,31 +220,36 @@ function tm --description 'Tmux wrapper with argument parsing'
 
         case k ks kses kills
             if test (count $argv) -eq 1
-                command tmux kill-session
+                # first try via most_recent, then ballback to using tmux directly, then if all fails just using raw tmux kill-session
+                tm_arg_handler kill-session -t $most_recent # || command tmux kill-session -t $most_recent || command tmux kill-session
+                tm ls || colorize yellow "tm: No sessions remain after killing session %s\n" $most_recent && return 0
                 return $status || return 0
             end
 
-            set -l arr (printf "%s" $argv[2..-1] | sed -E 's/(\\s+)|(,+)/,/g' | sed -E 's/(^,+)//g' | sed -E 's/(,+)/,/g' | string split ',')
-            # set arr (string split -- ',' -- $arr)
-            # colorize yellow (printf "arr: %s\n" $arr)
+            # Get all args after the first one, and parse them into an array
+            # split by commas or spaces (to be able to kill multiple sessions at once)
+            set -l arr (printf "%s\n" $argv[2..-1] | sed -E 's/(\\s+)|(,+)/,/g' | sed -E 's/(^,+)//g' | sed -E 's/(,+)/,/g' | string split ',')
+
+            # check if the first item of `arr` is '-q' if it is, cut it from the arr
+
+            set -l quiet_mode 0
+            if test $arr[1] = -q
+                set arr $arr[2..-1]
+                set quiet_mode 1
+            end
 
             # ge 2 means we just go through each arg after the first one
-            if test (count $argv) -ge 2
-                for ses in $arr
-                    # if not test (contains $sessions $ses)
-                    #     printf "cont\n"
-                    #     continue
-                    # end
-                    if test -z "$ses"
-                        colorize blue "tm: No session name provided to kill.\n"
-                        continue
-                    end
-                    # colorize purple (printf "Killing session: %s\n" $ses)
-                    tm_arg_handler kill-session -t $ses
+            for ses in $arr
+                if test -z "$ses"
+                    colorize blue "tm: No session name provided to kill.\n"
+                    continue
                 end
-
+                tm_arg_handler kill-session -t $ses
             end
-            # tm_arg_handler kill-session -t $argv[2]
+            # recurse call ourselves to list sessions after killing
+            if test $quiet_mode -eq 0
+                tm ls
+            end
 
         case kw killw
             tm_arg_handler kill-window -t $argv[2]
@@ -253,6 +269,8 @@ function tm --description 'Tmux wrapper with argument parsing'
             return $status || return 0
 
         case '*'
+            # recurse call the function with 'case a at attach n ns new nses',
+            # which without args will default to calling the 'most recent' session OR '_main'
             tm a $argv[1..-1]
     end
     if test $status -ne 0
