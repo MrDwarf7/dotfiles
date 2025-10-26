@@ -20,3 +20,4 @@ alias lzd lazydocker
 alias lzs lazyjournal
 # alias au jjui
 alias au lza
+alias zl zellij
