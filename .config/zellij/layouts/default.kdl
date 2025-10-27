@@ -10,7 +10,7 @@
 
 layout {
   pane split_direction="vertical" {
-    pane
+    // pane
   }
 
   // default_tab_template {
@@ -24,9 +24,6 @@ layout {
       format_right "{command_kubectx}#[fg=#424554,bg=#181825]::{command_kubens}{datetime}"
       format_space "#[bg=#181825]"
 
-      // mode_normal          "#[bg=#89B4FA] "
-      // mode_tmux            "#[bg=#ffc387] "
-
       mode_normal          "#[bg=#ffc387] "
       mode_tmux            "#[bg=#89B4FA] "
 
@@ -38,17 +35,22 @@ layout {
       tab_sync_indicator       "  "
       tab_floating_indicator   "󰉈 "
 
-      command_kubectx_command  "kubectx -c"
-      command_kubectx_format   "#[fg=#6C7086,bg=#181825,italic] {stdout}"
-      command_kubectx_interval "2"
-
-      command_kubens_command  "kubens -c"
-      command_kubens_format   "#[fg=#6C7086,bg=#181825]{stdout} "
-      command_kubens_interval "2"
-
       datetime          "#[fg=#9399B2,bg=#181825] {format} "
-      datetime_format   "%A, %d %b %Y %H:%M"
-      datetime_timezone "Europe/Berlin"
+      // datetime_format   "%A, %d %b %Y %H:%M" // default
+      // datetime_format   "| %H:%M | %A, %d %b %Y "
+      // datetime_format   "%A, %d %b %Y %H:%M"
+      // %I:%M
+      // datetime_format   "| %H:%M | %A, %I:%M %d %b %Y "
+      datetime_format   "| %I:%M | %A, %Y-%b(%m)-%d"
+      datetime_timezone "Australia/Victoria"
+
+      // command_kubectx_command  "kubectx -c"
+      // command_kubectx_format   "#[fg=#6C7086,bg=#181825,italic] {stdout}"
+      // command_kubectx_interval "2"
+      //
+      // command_kubens_command  "kubens -c"
+      // command_kubens_format   "#[fg=#6C7086,bg=#181825]{stdout} "
+      // command_kubens_interval "2"
 
       ///////// Slanted 
       // format_left  "{mode}#[fg=black,bg=blue,bold]{session}  #[fg=blue,bg=#181825]{tabs}"
@@ -65,8 +67,8 @@ layout {
       // tab_active_sync         "#[fg=#9399B2,bg=#181825,bold,italic] {index} {name} <> "
       //
       // datetime          "#[fg=#6C7086,bg=#b1bbfa,bold] {format} "
-      // datetime_format   "%A, %d %b %Y %H:%M"
-      // datetime_timezone "Europe/Berlin"
+      // datetime_format   "| %I:%M | %A, %Y-%b(%m)-%d"
+      // datetime_timezone "Australia/Victoria"
     }
   }
   // }

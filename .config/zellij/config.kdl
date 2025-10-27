@@ -55,6 +55,11 @@ keybinds clear-defaults=true {
 
     bind "Ctrl ," { MoveTab "left"; SwitchToMode "locked"; }
     bind "Ctrl ." { MoveTab "right"; SwitchToMode "locked"; }
+
+    bind "_" { BreakPaneLeft; SwitchToMode "locked"; }
+    bind "|" { BreakPaneRight; SwitchToMode "locked"; }
+
+    bind "/" { SwitchToMode "entersearch"; SearchInput 0; }
   }
 
   locked {
@@ -216,39 +221,58 @@ keybinds clear-defaults=true {
     bind "w" { SearchToggleOption "Wrap"; }
 
     // bind "esc" { SwitchToMode "normal"; }
-    bind "Esc" { SwitchToMode "scroll"; }
+    // bind "Esc" { SwitchToMode "scroll"; }
+    bind "Esc" { SwitchToMode "locked"; }
   }
   session {
     bind "a" {
       LaunchOrFocusPlugin "zellij:about" {
         floating true
         move_to_focused_tab true
-      }
-      SwitchToMode "locked"
+      }; SwitchToMode "locked";
     }
     bind "c" {
       LaunchOrFocusPlugin "configuration" {
         floating true
         move_to_focused_tab true
-      }
-      SwitchToMode "locked"
+      }; SwitchToMode "locked";
     }
+
+    bind "f" { 
+      LaunchOrFocusPlugin "https://github.com/laperlej/zellij-sessionizer/releases/latest/download/zellij-sessionizer.wasm" {
+        floating true
+        move_to_focused_tab true
+        cwd "/"
+        root_dirs "/home/dwarf;/home/dwarf/dotfiles;/home/dwarf/Documents/GitHub_Projects;/home/dwarf/Documents/GitHub_Projects/Rust;/home/dwarf/Documents/GitHub_Projects/Rust/OTHER"
+        session_layout "default"
+      }; SwitchToMode "locked";
+    }
+
     bind "d" { Detach; }
     bind "s" { SwitchToMode "normal"; }
     bind "p" {
       LaunchOrFocusPlugin "plugin-manager" {
         floating true
         move_to_focused_tab true
-      }
-      SwitchToMode "locked"
+      };
+      SwitchToMode "locked";
     }
+
     bind "o" {
-      LaunchOrFocusPlugin "session-manager" {
+      LaunchOrFocusPlugin "https://github.com/laperlej/zellij-choose-tree/releases/latest/download/zellij-choose-tree.wasm" {
         floating true
         move_to_focused_tab true
-      }
-      SwitchToMode "locked"
+        show_plugins false
+      }; SwitchToMode "locked";
     }
+
+    // bind "o" {
+    //   LaunchOrFocusPlugin "session-manager" {
+    //     floating true
+    //     move_to_focused_tab true
+    //   }
+    //   SwitchToMode "locked"
+    // }
 
     // bind "esc" { SwitchToMode "normal"; }
     bind "Esc" { SwitchToMode "locked"; }
@@ -352,8 +376,9 @@ plugins {
   filepicker location="zellij:strider" {
     cwd "/"
   }
+  sessionpicker location="https://github.com/laperlej/zellij-choose-tree/releases/latest/download/zellij-choose-tree.wasm"
   plugin-manager location="zellij:plugin-manager"
-  session-manager location="zellij:session-manager"
+  // session-manager location="zellij:session-manager"
   status-bar location="zellij:status-bar"
   strider location="zellij:strider"
   tab-bar location="zellij:tab-bar"
@@ -462,6 +487,7 @@ scroll_buffer_size 50000
 // copy_command "pbcopy"                     // osx
 // 
 // copy_command "pbcopy"
+copy_command "wl-copy"                    // wayland
 
 // Choose the destination for copied text
 // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
@@ -487,7 +513,7 @@ scroll_buffer_size 50000
 // Default: <RANDOM>
 // 
 // session_name "My singleton session"
-session_name "_main"
+// session_name "_main"
 
 // When `session_name` is provided, attaches to that session
 // if it is already running or creates it otherwise.
