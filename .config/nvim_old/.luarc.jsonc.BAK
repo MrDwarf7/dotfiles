@@ -1,0 +1,17 @@
+// this file BREAKS LAZYDEV!!!!
+{
+  "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+  "runtime.version": "LuaJIT",
+  "diagnostics.globals": [
+    "vim",
+    "LazyVim"
+  ],
+  "diagnostics.disable": [
+    "unused-local"
+  ],
+  "completion.autoRequire": false,
+    "workspace.library": [
+        "/home/dwarf/.local/share/bob/6718416/share/nvim/runtime",
+        "${3rd}/luv/library"
+    ]
+}
