@@ -1,0 +1,21 @@
+# Default settings for user directories
+#
+# The values are relative pathnames from the home directory and
+# will be translated on a per-path-element basis into the users locale
+DESKTOP=Desktop
+DOWNLOAD=Downloads
+DOCUMENTS=Documents
+MUSIC=Music
+PICTURES=Pictures
+VIDEOS=Videos
+CONFIG_HOME=.config
+BIN_HOME=.xdg/bin
+CACHE_HOME=.xdg/cache
+CACHE_LOCAL_HOME=.xdg/local
+DATA_HOME=.xdg/data
+STATE_HOME=.xdg/state
+
+# Another alternative is:
+#MUSIC=Documents/Music
+#PICTURES=Documents/Pictures
+#VIDEOS=Documents/Videos
