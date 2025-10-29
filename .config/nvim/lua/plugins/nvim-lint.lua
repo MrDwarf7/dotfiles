@@ -1,0 +1,33 @@
+return {}
+
+-- -- we test rest of things first, then uncomment this
+-- TODO: uncomment later
+
+-- return {
+-- 	"mfussenegger/nvim-lint",
+-- 	opts = {
+-- 		linters_by_ft = {
+-- 			fish = { "fish" },
+-- 			cpp = { "cpplint" },
+-- 			css = { "stylelint" },
+-- 			cmake = { "cmakelint " },
+-- 			-- cs = { "omnisharp" },
+-- 			docker = { "hadolint" },
+-- 			javascript = { "biomejs" },
+-- 			javascriptreact = { "biomejs" },
+-- 			json = { "jsonlint" },
+-- 			-- markdown = { "markdownlint-cli2" },
+-- 			-- lua = { "luacheck" },
+-- 			-- powershell = { "powershell_es" },
+-- 			-- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
+-- 			-- python = { "ruff", "mypy", "vulture" },
+-- 			python = { "ruff", "vulture" },
+-- 			sh = { "shellcheck" },
+-- 			sql = { "sqlfluff" },
+-- 			typescript = { "biomejs" },
+-- 			typescriptreact = { "biomejs" },
+-- 			vim = { "vint" },
+-- 			yaml = { "yamllint" },
+-- 		},
+-- 	},
+-- }
