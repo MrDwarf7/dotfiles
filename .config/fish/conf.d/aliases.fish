@@ -21,3 +21,5 @@ alias lzs lazyjournal
 # alias au jjui
 alias au lza
 # alias zl (command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n"))
+
+alias ccc c3c
