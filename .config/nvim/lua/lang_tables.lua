@@ -2,10 +2,10 @@
 -- local CategoryE = require("lang_tables.t").CategoryE
 -- local SubtypeE = require("lang_tables.t").SubtypeE
 
-local lt_enums = require("types").LangTablesEnums
-local WantsTypeE = lt_enums.WantsTypeE
-local CategoryE = lt_enums.CategoryE
-local SubtypeE = lt_enums.SubtypeE
+local lt_enums = require("types").LangTablesEnums or {}
+local WantsTypeE = lt_enums.WantsTypeE or {}
+local CategoryE = lt_enums.CategoryE or {}
+local SubtypeE = lt_enums.SubtypeE or {}
 
 ---@type LangTables
 local LangTables = {}
@@ -19,6 +19,7 @@ LangTables = {
   ---@type TreeSitterSubtypeE
   treesitter = {
     languages = {
+
       "awk",
       "bash",
       "c",
@@ -61,6 +62,7 @@ LangTables = {
       "zig",
     },
     data_formats = {
+
       "desktop",
       "embedded_template",
       "html",
@@ -86,6 +88,7 @@ LangTables = {
       "yaml",
     },
     system = {
+
       "diff",
       "gitattributes",
       "gitcommit",
@@ -104,6 +107,7 @@ LangTables = {
   ---@type MasonSubtypeE
   mason = {
     formatters = {
+
       "beautysh",
       "black",
       "cbfmt",
@@ -195,6 +199,7 @@ LangTables = {
     },
 
     lsps = {
+
       -- "bacon_ls",
       "basedpyright",
       "bashls",
@@ -209,6 +214,7 @@ LangTables = {
       -- "erlangls", -- requires rebar3 installed/available
       "eslint",
       "fish_lsp",
+      "gh_actions_ls",
       -- "gleam",
       "gopls",
       "html",
@@ -555,12 +561,24 @@ function LangTables.by_ft(typeof, ft, bufnr)
   local target = LangTables.mason[typeof .. "_by_ft"][ft] or {}
   if type(target) == "function" then
     if typeof == "formatters" then
-      return target(bufnr)
+      local t = target(bufnr)
+      if vim.istable(t) then
+        return t
+      else
+        return { t }
+      end
     else
-      return target()
+      local t = target()
+      if vim.istable(t) then
+        return t
+      else
+        return { t }
+      end
+      -- local t = target()
+      -- return { t }
     end -- ends for "formatters' type check
   else
-    return target
+    return { target }
   end -- ends for type(target) check
 end
 

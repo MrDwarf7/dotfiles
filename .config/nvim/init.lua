@@ -96,4 +96,5 @@ local lazy_opts = {
 }
 
 require("lazy").setup("plugins", lazy_opts)
-lsp.setup({ binds_type = "builtin" })
+-- lsp.setup({ binds_type = "builtin" })
+lsp.setup({ binds_type = "fzf" })

@@ -11,11 +11,18 @@
 ---@field toggle_qf fun(type: QfTypes): nil
 local List = {}
 
+---@class WinTable
+---@field winid number
+---@field bufnr number
+
 --- Pass "q" to find quickfix window
 --- Pass "l" to find all loclist windows
 ---@param type QfTypes
+---@return WinTable[]?
 function List.find_qf(type)
   local wininfo = vim.fn.getwininfo()
+
+  ---@type WinTable[]?
   local win_tbl = {}
 
   -- direct indexing into a variable makes life fun. Trust me bro

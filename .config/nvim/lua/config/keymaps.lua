@@ -177,7 +177,7 @@ map(
   "<CMD>nohlsearch<BAR>diffupdate<BAR>normal! <C-L><CR>",
   { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
-map("n", "<Leader>tn", "<CMD>messages<CR>", { desc = "Messages" })
+map("n", "<Leader>nm", "<CMD>messages<CR>", { desc = "Messages" })
 
 map("n", "<Leader>pu", "<CMD>lua vim.pack.update()<CR>", { desc = "Messages" })
 

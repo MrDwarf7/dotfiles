@@ -67,62 +67,67 @@ LSP.get_default_capabilities = function()
   return capabilities
 end
 
-function LSP.fzf_lua_binds()
-  local map = vim.keymap.set
+---@class config.LSP.handle_builtins.Opts
+---@field method? string
+---@field operation? fun(): nil
+
+function LSP.builtin()
+  local map = require("config.keymaps")
+  local tsutils = require("utils.tsutils")
+  local handle_builtins = tsutils.handle_builtins
 
 	-- stylua: ignore start
-	map("n", "gd", "<CMD>FzfLua lsp_definitions jump1=true ignore_current_line=true<CR>",
+	-- map("n", "gd", function() handle_builtins({ method = "textDocument/definition" }) end,
+	map("n", "gd", function() handle_builtins({ operation = vim.lsp.buf.definition }) end,
 		{ desc = "[G]oto [d]efinition" })
-	map("n", "gD", "<CMD>FzfLua lsp_declarations jump1=true ignore_current_line=true<CR>",
-		{ desc = "Goto T[y]pe Definition" })
-	map("n", "gr", "<CMD>FzfLua lsp_references jump1=true ignore_current_line=true<CR>",
+
+	-- map("n", "gD", function() handle_builtins({ method = "textDocument/declaration" }) end,
+	map("n", "gD", function() handle_builtins({ operation = vim.lsp.buf.declaration }) end,
+		{ desc = "[G]oto [D]eclaration" })
+
+	-- map("n", "gr", function() handle_builtins({ method = "textDocument/references" }) end,
+	map("n", "gr", function() handle_builtins({ operation = vim.lsp.buf.references }) end,
 		{ desc = "[G]oto [r]eferences" })
-	map("n", "gt", "<CMD>FzfLua lsp_typedefs jump1=true ignore_current_line=true<CR>",
-		{ desc = "Goto T[y]pe Definition" })
-	map("n", "gi", "<CMD>FzfLua lsp_implementations jump1=true ignore_current_line=true<CR>",
+
+	-- map("n", "gt", function() handle_builtins({ method = "textDocument/typeDefinition" }) end,
+	map("n", "gt", function()
+			handle_builtins({ operation = vim.lsp.buf.type_definition })
+		end,
+		{ desc = "[G]oto [t]ype Definition" })
+
+	map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation }) end,
 		{ desc = "[G]oto [I]mpl" })
+
+	map("n", "]]", function()
+		local cnext_op = function() vim.cmd("cnext") end
+		tsutils.handle_builtins({ operation = cnext_op })
+	end, { silent = true, desc = "qf next" })
+
+	map("n", "[[", function()
+		local cprev_op = function() vim.cmd("cprev") end
+		tsutils.handle_builtins({ operation = cprev_op })
+	end, { silent = true, desc = "qf prev" })
   -- stylua: ignore end
 end
 
--- local function go_to_definition_with_tags()
--- local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
--- vim.api.nvim_create_autocmd("BufEnter", {
---   group = group,
---   once = true,
---   callback = function(args)
---     vim.keymap.set("n", "<C-o>", "<C-t>", { silent = true, buffer = args.buf })
---     vim.keymap.set("n", "<C-i>", "<CMD>silent! tag<CR>", { silent = true, buffer = args.buf })
---   end,
--- })
+function LSP.fzf_lua_binds()
+  local map = vim.keymap.set
 
--- 	local curr_pos = vim.api.nvim_win_get_cursor(0)
---   vim.cmd("silent! tag " .. vim.fn.expand("<cword>"))
---
---   local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
---   vim.api.nvim_create_autocmd("BufEnter", {
---     group = group,
---     once = true,
---     callback = function(args)
---       local keymaps = require("config.keymaps")
---       keymaps.map("n", "<C-t>", vim.cmd("silent! pop"), { silent = true, buffer = args.buf })
---     end,
---   })
---
---   vim.lsp.buf.definition()
--- end
-
-function LSP.builtin()
-  -- local map = vim.keymap.set
-  local map = require("config.keymaps")
-
-	-- stylua: ignore start
-	map("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [d]efinition" })
-	-- map("n", "gd", go_to_definition_with_tags, { desc = "[G]oto [d]efinition" })
-	map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto T[y]pe Definition" })
-	map("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [r]eferences" })
-	map("n", "gt", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
-	map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]oto [I]mpl" })
-  -- stylua: ignore end
+  map("n", "gd", function()
+    require("fzf-lua").lsp_definitions({ jump1 = true, ignore_current_line = true })
+  end, { desc = "[G]oto [d]efinition" })
+  map("n", "gD", function()
+    require("fzf-lua").lsp_declarations({ jump1 = true, ignore_current_line = true })
+  end, { desc = "Goto T[y]pe Definition" })
+  map("n", "gr", function()
+    require("fzf-lua").lsp_references({ jump1 = true, ignore_current_line = true })
+  end, { desc = "[G]oto [r]eferences" })
+  map("n", "gt", function()
+    require("fzf-lua").lsp_typedefs({ jump1 = true, ignore_current_line = true })
+  end, { desc = "Goto T[y]pe Definition" })
+  map("n", "gi", function()
+    require("fzf-lua").lsp_implementations({ jump1 = true, ignore_current_line = true })
+  end, { desc = "[G]oto [I]mpl" })
 end
 
 function LSP.setup_lsp(binds_type)

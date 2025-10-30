@@ -58,7 +58,8 @@ local DEV_DIR = "$HOME/" .. string.format("%s/%s", doc() or "Documents", DEV_DIR
 ---@param msg MsgData|string The message to notify
 ---@param level number The log level (e.g., vim.log.levels.INFO)
 ---@param opts table? Additional options for the notification
-local function fast_event_aware_notify(msg, level, opts) --[[@cast msg string]] -- force cast to shut linter up
+local function fast_event_aware_notify(msg, level, opts) --[[@cast msg string]]
+  -- force cast to shut linter up
   if vim.in_fast_event() then
     vim.schedule(function()
       vim.notify(msg, level, opts)
@@ -165,23 +166,23 @@ end
 function Output.get_visual_selection(nl_literal)
 	-- Otherwise the function doubles in size lmao
 	-- stylua: ignore start
-  local _, csrow, cscol, cerow, cecol
+	local _, csrow, cscol, cerow, cecol
 
-  local mode = vim.fn.mode()
-  if mode == "v" or mode == "V" or mode == "" then
-    -- If we're in visual mode, use the live pos
-    _, csrow, cscol, _ = unpack(vim.fn.getpos("."))
-    _, cerow, cecol, _ = unpack(vim.fn.getpos("v"))
+	local mode = vim.fn.mode()
+	if mode == "v" or mode == "V" or mode == "" then
+		-- If we're in visual mode, use the live pos
+		_, csrow, cscol, _ = unpack(vim.fn.getpos("."))
+		_, cerow, cecol, _ = unpack(vim.fn.getpos("v"))
 
-    if mode == "V" then
-      -- visual line doesn't provide column(s)/info
-      cscol, cecol = 0, 999
-    end
-  else
-    -- otherwis, use the last known visual pos
-    _, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
-    _, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
-  end
+		if mode == "V" then
+			-- visual line doesn't provide column(s)/info
+			cscol, cecol = 0, 999
+		end
+	else
+		-- otherwis, use the last known visual pos
+		_, csrow, cscol, _ = unpack(vim.fn.getpos("'<"))
+		_, cerow, cecol, _ = unpack(vim.fn.getpos("'>"))
+	end
 
 	-- swap vars if needed
 	if cerow < csrow then csrow, cerow = cerow, csrow end
@@ -234,10 +235,11 @@ function Output.unload_modules(patterns)
 end
 
 Output.reload_config = function()
-  -- stylua: ignore start
+	-- stylua: ignore start
 	require("fzf-lua").deregister_ui_select()
 	Output.unload_modules({
-		{ "^config\\.options$",
+		{
+			"^config\\.options$",
 			fn = function()
 				-- ignore events or gitsigns croacks on "OptionSet"
 				-- OptionSet autocmds for "fileformat" : attempt to yield across C-call
@@ -247,9 +249,9 @@ Output.reload_config = function()
 				vim.o.eventignore = save_ei
 			end
 		},
-		{ "^config\\.autocmds$",								fn = function() require("config.autocmds") end },
-		{ "^config\\.keymaps$",									fn = function() require("config.keymaps") end },
-		{ "^config\\.user_commands$",						fn = function() require("config.user_commands") end },
+		{ "^config\\.autocmds$",         fn = function() require("config.autocmds") end },
+		{ "^config\\.keymaps$",          fn = function() require("config.keymaps") end },
+		{ "^config\\.user_commands$",    fn = function() require("config.user_commands") end },
 		{ "^utils\\.arch$" },
 		{ "^utils\\.autoformatter$" },
 		{ "^utils\\.filepath_converter$" },
@@ -317,14 +319,14 @@ function Output.lsp_get_clients(opts)
 	if Output.__HAS_NVIM_011 then
 		return vim.lsp.get_clients(opts)
 	end
-	local clients = opts.bufnr and vim.lsp.buf_get_clients(opts.bufnr) ---@diagnostic disable-line: deprecated
-		or opts.id and { vim.lsp.get_client_by_id(opts.id) }
-		or vim.lsp.get_clients(opts)
+	local clients = opts.bufnr and vim.lsp.get_clients(opts.bufnr) ---@diagnostic disable-line: deprecated
+			or opts.id and { vim.lsp.get_client_by_id(opts.id) }
+			or vim.lsp.get_clients(opts)
 	return vim.tbl_map(function(client)
 		return setmetatable({
-			supports_method =	function(_, ...)		return client.supports_method(...)	end,
-			request =					function(_, ...)		return client.request(...)					end,
-			request_sync =		function(_, ...)		return client.request_sync(...)			end,
+			supports_method = function(_, ...) return client.supports_method(...) end,
+			request = function(_, ...) return client.request(...) end,
+			request_sync = function(_, ...) return client.request_sync(...) end,
 		}, { __index = client })
 	end, clients)
   -- stylua: ignore end
