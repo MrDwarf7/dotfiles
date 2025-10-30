@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-# Helper function to handled repeated code
+# Helper function to handlerepeated code
 function 090test_cmd
     set cmd $argv[1]
 

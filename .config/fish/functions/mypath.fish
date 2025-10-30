@@ -1,6 +1,49 @@
 #!/usr/bin/env fish
 #
 
+set k_help h
+set k_pretty p
+set k_marker m
+
+function mypath_cmp
+    complete -c mypath -s $k_help -l help -d 'Show help message and exit'
+    complete -c mypath -s $k_pretty -l pretty -d 'Pretty print the PATH variable (default)'
+    complete -c mypath -s $k_marker -l marker= -d 'Use the specified marker character at the end of each PATH entry'
+    complete -c mypath -f -a '":" "," ";" "|" "#" "!"'
+    return 0
+end
+
+function mypath_help
+    if not 00valid_pacman qsv
+        return
+    end
+
+    090help "\
+Usage: mypath [OPTIONS]
+
+Pretty print your current \$PATH variable.
+
+-m/--marker requires a character argument to specify the marker character.
+It's also an exclusive flag, and cannot be used with -p/--pretty.
+" "
+,,,,
+,Short              ,Long               ,Description,
+,,,,
+,-$k_help           , --help            ,# Show this help message and exit,
+,-$k_marker         , --marker CHAR     ,# Use the specified marker character at the end of each PATH entry,
+,-$k_pretty         , --pretty          ,# Pretty print the PATH variable (default),
+" "
+,,,,
+,Command                                ,Description,,
+,,,,
+,mypath -$k_help | --help               ,# Show this help message,,
+,mypath -$k_marker ':'                  ,# Uses ':' as the marker character at the end of each PATH entry,,
+,mypath -$k_pretty | --pretty           ,# Pretty print the PATH variable,,
+"
+    return 0
+
+end
+
 function marker_out
     set -l marker_char $argv[1]
 
@@ -64,26 +107,6 @@ function sanity_two
     colorize red "opts_len: $opts_len" >&2
 end
 
-function mypath_help
-    printf "Usage: mypath [OPTIONS]\n"
-    printf "\n"
-    printf "Pretty print your current \$PATH variable.\n"
-    printf "\n"
-    printf "-m/--marker requires a character argument to specify the marker character.\n"
-    printf "It's also an exclusive flag, and cannot be used with -p/--pretty.\n"
-    printf "\n"
-    printf "Options:\n"
-    printf "  -h, --help               Show this help message and exit\n"
-    printf "  -m, --marker CHAR        Use the specified marker character at the end of each PATH entry\n"
-    printf "  -p, --pretty             Pretty print the PATH variable (default)\n"
-    printf "\n"
-    printf "Examples:\n"
-    printf "  mypath                   # Pretty print the PATH variable\n"
-    printf "  mypath -h | --help       # Show this help message\n"
-    printf "  mypath -m ':'            # Uses ':' as the marker character at the end of each PATH entry\n"
-    printf "  mypath -p | --pretty     # Pretty print the PATH variable\n"
-    return 1
-end
 
 # Weird caveat (need to learn why), but the $PATH var (I think?)
 # is streamed in, so has some odd behaviour.
@@ -96,6 +119,8 @@ end
 # 3. Function calls between printf vs. echo
 # also behave differently.
 function mypath --description 'Pretty print your current $path variable'
+    mypath_cmp
+
     argparse -x m,h -x m,p h/help p/pretty m/marker= -- $argv
     or return 1
 
@@ -132,3 +157,27 @@ function mypath --description 'Pretty print your current $path variable'
 
     return 0
 end
+#
+#     set -l h " "
+#     printf "\
+# Usage: mypath [OPTIONS]
+#
+# Pretty print your current \$PATH variable.
+#
+# -m/--marker requires a character argument to specify the marker character.
+# It's also an exclusive flag, and cannot be used with -p/--pretty.
+#
+# Options:
+#
+# $h -h, --help            # Show this help message and exit
+# $h -m, --marker CHAR     # Use the specified marker character at the end of each PATH entry
+# $h -p, --pretty          # Pretty print the PATH variable (default)
+#
+# Examples:
+#
+# $h mypath                # Pretty print the PATH variable
+# $h mypath -h | --help    # Show this help message
+# $h mypath -m ':'         # Uses ':' as the marker character at the end of each PATH entry
+# $h mypath -p | --pretty  # Pretty print the PATH variable
+# "
+#     return 0

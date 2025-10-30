@@ -1,30 +1,57 @@
 #!/usr/bin/env fish
 #
 
-function dot_help
-    printf "Usage: dot [options]\n"
-    printf "\n"
-    printf "Options:\n"
-    printf "  -h, --help        Show this help message and exit\n"
-    printf "  -f, --files       Show changed files summary\n"
-    printf "  -p, --pop         Pop back to the previous directory after execution\n"
-    printf "\n"
-    printf "Description:\n"
-    printf "  Displays the latest changes in the dotfiles repository.\n"
-    printf "  If 'jj' is installed and the repository is a 'jj' repo,\n"
-    printf "  it will use 'jj' for logs.\n"
-    printf "  Otherwise, it falls back to using 'git'.\n"
-    printf "\n"
-    printf "Examples:\n"
-    printf "  dot                Show the latest changes in the dotfiles repo\n"
-    printf "  dot -f             Show the latest changes along with a summary of changed files\n"
-    printf "  dot -p             Show changes and return to the previous directory after execution\n"
-    printf "  dot -f -p          Show changes, file summary, and return to previous directory\n"
+set k_help h
+set k_files f
+set k_pop p
+
+function dot_cmp
+    complete -c dot -s $k_help -l help -d 'Print help (see more with \'--help\')'
+    complete -c dot -s $k_files -l files -d 'Show changed files summary'
+    complete -c dot -s $k_pop -l pop -d 'Pop back to the previous directory after execution'
     return 0
 end
 
+function dot_help
+    if not 00valid_pacman qsv
+        colorize red "qsv is not installed. Please install qsv to use the help function.\n"
+        return
+    end
+
+    090help "\
+Usage: dot [OPTIONS]
+
+Displays the latest changes in the dotfiles
+repository.
+If 'jj' is installed and the repository is
+a 'jj' repo, it will use 'jj' for logs.
+
+Otherwise, it falls back to using 'git'.
+" "
+,                    ,                           ,           ,
+,Short               ,Long                       ,Description,
+,                    ,                           ,           ,
+,-h                  , --help                    ,# Show this help message and exit,
+,-f                  , --files                   ,# Show changed files summary,
+,-p                  , --pop                     ,# Pop back to the previous directory after execution,
+" "
+,                                       ,           ,,
+,Command                                ,Description,,
+,                                       ,           ,,
+,dot -h | --help                        ,# Show this help message and exit,,
+,dot                                    ,# Show the latest changes in the dotfiles repo,,
+,dot -f                                 ,# Show the latest changes along with a summary of changed files,,
+,dot -p                                 ,# Show changes and return to the previous directory after execution,,
+,dot -f -p                              ,# Show changes; file summary; and return to previous directory,,
+"
+    return 0
+
+end
+
 function dot --description 'Show latest changes in the dotfiles repo (uses jj if available, otherwise git)' --argument-names argv
-    argparse h/help f/files p/pop -- $argv
+    dot_cmp
+
+    argparse $k_help/help $k_files/files $k_pop/pop -- $argv
     or return
 
     if set -q _flag_help
@@ -76,7 +103,35 @@ function dot --description 'Show latest changes in the dotfiles repo (uses jj if
     end
 
     if test $pop_flag -eq 1
-        colorize yellow "popd\n"
+        colorize yellow "\n<< popd\n"
         popd || return $status
     end
+    return 0
 end
+
+#     set -l ht " "
+#     printf "\
+# Usage: dot [OPTIONS]
+#
+# Displays the latest changes in the dotfiles
+# repository.
+# If 'jj' is installed and the repository is
+# a 'jj' repo, it will use 'jj' for logs.
+#
+# Otherwise, it falls back to using 'git'.
+#
+# Options:
+#
+# $ht -h, --help       # Show this help message and exit
+# $ht -f, --files      # Show changed files summary
+# $ht -p, --pop        # Pop back to the previous directory after execution
+#
+# Examples:
+#
+# $ht dot -h | --help  # Show this help message and exit
+# $ht dot              # Show the latest changes in the dotfiles repo
+# $ht dot -f           # Show the latest changes along with a summary of changed files
+# $ht dot -p           # Show changes and return to the previous directory after execution
+# $ht dot -f -p        # Show changes, file summary, and return to previous directory
+# "
+#     return 0

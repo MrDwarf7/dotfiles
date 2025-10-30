@@ -1,19 +1,57 @@
 #!/usr/bin/env fish
 #
 
+set k_help h
+set k_depth d
+set k_level l
+set k_num n
+
+function lt_cmp
+    complete -c lt -s $k_help -l help -d 'Show help message and exit'
+    complete -c lt -s $k_depth -l depth= -d 'Set the depth of the tree view (default: 2)'
+    complete -c lt -s $k_level -l level= -d 'Alias for --depth'
+    complete -c lt -s $k_num -l num= -d 'Set the number of items to show per directory'
+    return 0
+end
+
+function lt_help
+    if not 00valid_pacman qsv
+        colorize red "qsv is not installed. Please install qsv to use the help function.\n"
+        return
+    end
+
+    090help "\
+Usage: lt [OPTIONS] [DIRECTORY]
+
+List files in a directory with tree view.
+" "
+,                    ,                           ,           ,
+,Short               ,Long                       ,Description,
+,                    ,                           ,           ,
+,-$k_help            , --help                    ,# Show this help message and exit,
+,-$k_depth           , --depth LEVEL             ,# Set the depth of the tree view (default: 2),
+,-$k_level           , --level LEVEL             ,# Alias for --depth,
+,-$k_num             , --num COUNT               ,# Set the number of items to show per directory,
+" "
+,                                       ,           ,,
+,Command                                ,Description,,
+,                                       ,           ,,
+,lt -$k_help | --help                   ,# Show this help message and exit,,
+,lt -$k_depth 3 ./my_directory          ,# List files in ./my_directory with tree view up to depth 3,,
+,lt -$k_num 5                           ,# List files in current directory with tree view; showing 5 items per directory,,
+"
+    return 0
+end
+
 function lt --description 'List files in a directory with tree view'
-    argparse h/help d/depth= l/level= n/num= -- $argv
+    lt_cmp
+
+    argparse $k_help/help $k_depth/depth= $k_level/level= $k_num/num= -- $argv
     or return
 
     # Show help if requested
     if set -q _flag_help
-        printf "Usage: lt [OPTIONS] [DIRECTORY]\n"
-        printf "List files in a directory with tree view.\n\n"
-        printf "Options:\n"
-        printf "  -h, --help         Show this help message and exit\n"
-        printf "  -d, --depth LEVEL  Set the depth of the tree view (default: 2)\n"
-        printf "  -l, --level LEVEL  Alias for --depth\n"
-        printf "  -n, --num COUNT    Set the number of items to show per directory\n"
+        lt_help
         return 0
     end
 
@@ -59,3 +97,22 @@ function lt --description 'List files in a directory with tree view'
     command $LIST_CLIENT $cmd_args
     return $status
 end
+
+#     set -l h " "
+#     printf "\
+# Usage: lt [OPTIONS] [DIRECTORY]
+#
+# List files in a directory with tree view.
+#
+# Options:
+# $h -h, --help         Show this help message and exit
+# $h -d, --depth LEVEL  Set the depth of the tree view (default: 2)
+# $h -l, --level LEVEL  Alias for --depth
+# $h -n, --num COUNT    Set the number of items to show per directory
+#
+# Examples:
+# $h lt -h | --help                   # Show this help message and exit
+# $h lt -d 3 ./my_directory          # List files in ./my_directory with tree view up to depth 3
+# $h lt -n 5                       # List files in current directory with tree view, showing 5 items per directory
+# "
+#     return 0

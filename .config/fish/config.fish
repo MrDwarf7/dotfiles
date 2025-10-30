@@ -13,7 +13,7 @@
 # Commands to run in interactive sessions can go in here
 if status is-interactive
     # Immediately call starship on term start (interactive)
-    01eval_if_pacman starship "starship init fish | source" && commandline -f repaint
+    01eval_if_pacman starship "starship init fish | source" ;  commandline -f repaint
     # 01eval_if_pacman direnv "direnv hook fish | source"
 
     # source our secrets file if it exists
@@ -22,8 +22,6 @@ if status is-interactive
     end
 
     fish_vi_key_bindings
-
-    test -r "$HOME/.opam/opam-init/init.fish" && source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
 
     # 099autostart_tmux new
 

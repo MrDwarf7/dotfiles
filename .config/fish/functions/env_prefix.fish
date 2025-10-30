@@ -1,27 +1,52 @@
 #!/usr/bin/env fish
 #
 
+set k_help h
+set k_sort s
+set k_prefix p
+
+function env_prefix_cmp
+    complete -c env_prefix -s $k_help -l help -d 'Show this help message and exit'
+    complete -c env_prefix -s $k_prefix -l prefix= -d 'Specify the prefix to search for (default: XDG_)'
+    complete -c env_prefix -s $k_sort -l sort -d 'Sort the output alphabetically'
+    return 0
+end
+
 function env_prefix_help
-    printf "Usage: env_prefix [OPTIONS] [PREFIX]\n"
-    printf "\n"
-    printf "Prints all environment variables with a specific prefix\n"
-    printf "defaults to XDG_ if none given.\n"
-    printf "\n"
-    printf "Options:\n"
-    printf "  -p, --prefix PREFIX   Specify the prefix to search for (default: XDG_)\n"
-    printf "  -s, --sort           Sort the output alphabetically\n"
-    printf "  -h, --help           Show this help message and exit\n"
-    printf "\n"
-    printf "Examples:\n"
-    printf "  env_prefix            # Lists all environment variables starting with 'XDG_'\n"
-    printf "  env_prefix -p HOME    # Lists all environment variables starting with 'HOME'\n"
-    printf "  env_prefix --sort     # Lists all environment variables starting with 'XDG_' sorted alphabetically\n"
-    printf "  env_prefix -p PATH --sort  # Lists all environment variables starting with 'PATH' sorted alphabetically\n"
+    if not 00valid_pacman qsv
+        colorize red "qsv is not installed. Please install qsv to use the help function.\n"
+        return
+    end
+
+    090help "\
+Usage: env_prefix [OPTIONS] [PREFIX]
+
+Prints all environment variables with a specific prefix
+defaults to XDG_ if none given.
+" "
+,                           ,                           ,           ,
+,Short                      ,Long                       ,Description,
+,                           ,                           ,           ,
+,-$k_help                   , --help                    ,# Show this help message and exit,
+,-$k_prefix                 , --prefix PREFIX           ,# Specify the prefix to search for (default: XDG_),
+,-$k_sort                   , --sort                    ,# Sort the output alphabetically,
+" "
+,                                       ,           ,,
+,Command                                ,Description,,
+,                                       ,           ,,
+,env_prefix                             ,# Lists all environment variables starting with 'XDG_',,
+,env_prefix -$k_prefix HOME             ,# Lists all environment variables starting with 'HOME',,
+,env_prefix -$k_sort                    ,# Lists all environment variables starting with 'XDG_' sorted alphabetically,,
+,env_prefix -$k_prefix PATH $k_sort     ,# Lists all environment variables starting with 'PATH' sorted alphabetically,,
+"
+
     return 0
 end
 
 function env_prefix --description 'Prints all environment variables with a specific prefix, defaults to XDG_ if none given'
-    argparse s/sort h/help p/prefix= -- $argv
+    env_prefix_cmp
+
+    argparse $k_help/help $k_sort/sort $k_prefix/prefix= -- $argv
     or return
 
     if set -q _flag_help
@@ -90,3 +115,25 @@ function env_prefix --description 'Prints all environment variables with a speci
     command rm $buf || return $status
     return 0
 end
+
+#     set -l ht " "
+#     printf "\
+# Usage: env_prefix [OPTIONS] [PREFIX]
+#
+# Prints all environment variables with a specific prefix
+# defaults to XDG_ if none given.
+#
+# Options:
+#
+# $ht -h | --help                # Show this help message and exit
+# $ht -p | --prefix PREFIX       # Specify the prefix to search for (default: XDG_)
+# $ht -s | --sort                # Sort the output alphabetically
+#
+# Examples:
+#
+# $ht env_prefix                 # Lists all environment variables starting with 'XDG_'
+# $ht env_prefix -p HOME         # Lists all environment variables starting with 'HOME'
+# $ht env_prefix --sort          # Lists all environment variables starting with 'XDG_' sorted alphabetically
+# $ht env_prefix -p PATH --sort  # Lists all environment variables starting with 'PATH' sorted alphabetically
+# "
+#     return 0

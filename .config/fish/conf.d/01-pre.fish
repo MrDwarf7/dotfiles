@@ -3,7 +3,7 @@
 
 # NOTE:
 ######################################################################
-# _DO_ _NOT_ put commands containing either `&&` or `||` in here.       #
+# _DO_ _NOT_ put commands containing either `&&` or `||` in here.    #
 #  This is because tmux loads envs after plugin setup and it breaks  #
 #  tmux-resurrect and tmux-continuum loading...                      #
 ######################################################################
@@ -26,6 +26,8 @@
 
 01eval_if_pacman fzf "fzf --fish | source"
 01eval_if_pacman jj "jj util completion fish | source"
+
+# This is an exception to the above, sadly...
 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 01eval_if_pacman mise "mise activate fish | source"
 
@@ -35,3 +37,14 @@
 04export_onto_path_if_pacman jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
 # can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local  /  bob)
 04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
+
+# opam's hook is weird, it will just dump to path on shell restart,
+# this prevents a LOT of duplicate entries
+
+if contains $PATH "$HOME/.opam/default/bin"                             # do nothing, path already contains opam bin
+else if 00valid_pacman opam -a -r "$HOME/.opam/opam-init/init.fish"     # Source it's initialization script
+    source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
+    return
+else
+    return
+end

@@ -40,29 +40,42 @@ function tm_println
 end
 
 function tm_help --description 'Display usage information for tm'
-    printf "Usage: tm <command> [options]\n"
-    printf "A wrapper for tmux with simplified commands.\n\n"
-    printf "Commands:\n"
-    printf "  l, ls, list               List all tmux sessions\n"
-    printf "  a, at <session>           Attach to the specified session\n"
-    printf "  d, dt, de [session]      Detach from the current session or specified session\n"
-    printf "  rs, reses <old> <new>     Rename a session from <old> to <new>\n"
-    printf "  s, sw, switch <session>   Switch to the specified session\n"
-    printf "  lp, lpane [session]       List panes in the specified session (or current if none specified)\n"
-    printf "  lc, lcp, list-clients     List clients connected to tmux server\n"
-    printf "  lw, lwin                  List windows in the current session\n"
-    printf "  ks, kills <session>       Kill the specified session\n"
-    printf "  kw, killw <window>        Kill the specified window\n"
-    printf "  kp, kill-pane <pane>      Kill the specified pane\n"
-    printf "  ka, killa, killall        Kill all tmux sessions\n"
+    if not 00valid_pacman qsv
+        colorize red "qsv is not installed. Please install qsv to use the help function.\n"
+        return
+    end
 
-    printf "  n, new <session>          Create a new session with the specified name\n"
-    printf "\nExamples:\n"
-    printf "  tm l                       # List all sessions\n"
-    printf "  tm lp                      # List panes in current session\n"
-    printf "  tm lp mysession           # List panes in 'mysession'\n"
-    printf "  tm a mysession            # Attach to 'mysession'\n"
-    printf "  tm n mynewsess            # Create and attach to 'mynewsess'\n"
+090help "\
+Usage: tm <COMMAND> [OPTIONS]
+
+A wrapper for tmux with simplified commands.
+" "
+,,,,
+,Short               ,Long                                          ,Description,
+,,,,
+,l                  , ls | list                                     ,# List all tmux sessions,
+,a                  , at <session>                                  ,# Attach to the specified session,
+,d                  , dt | de [session]                             ,# Detach from the current session or specified session,
+,rs                 , reses <old> <new>                             ,# Rename a session from <old> to <new>,
+,s                  , sw | switch <session>                         ,# Switch to the specified session,
+,lp                 , lpane [session]                               ,# List panes in the specified session (or current if none specified),
+,lc                 , lcp | list-clients                            ,# List clients connected to tmux server,
+,lw                 , lwin                                          ,# List windows in the current session,
+,ks                 , kills <session>                               ,# Kill the specified session,
+,kw                 , killw <window>                                ,# Kill the specified window,
+,kp                 , kill-pane <pane>                              ,# Kill the specified pane,
+,ka                 , killa | killall                               ,# Kill all tmux sessions,
+,n                  , new <session>                                 ,# Create a new session with the specified name,
+" "
+,,,,
+,Command                                ,Description,,
+,,,,
+,tm l                     ,# List all sessions,,
+,tm lp                    ,# List panes in current session,,
+,tm lp mysession          ,# List panes in 'mysession',,
+,tm a mysession           ,# Attach to 'mysession',,
+,tm n mynewsess           ,# Create and attach to 'mynewsess',,
+"
     return 0
 end
 
@@ -279,3 +292,34 @@ function tm --description 'Tmux wrapper with argument parsing'
     end
     return 0
 end
+
+#     set -l ht " "
+#     printf "\
+# Usage: tm <COMMAND> [OPTIONS]
+#
+# A wrapper for tmux with simplified commands.
+#
+# Options:
+#
+# $ht l, ls, list              # List all tmux sessions
+# $ht a, at <session>          # Attach to the specified session
+# $ht d, dt, de [session]      # Detach from the current session or specified session
+# $ht rs, reses <old> <new>    # Rename a session from <old> to <new>
+# $ht s, sw, switch <session>  # Switch to the specified session
+# $ht lp, lpane [session]      # List panes in the specified session (or current if none specified)
+# $ht lc, lcp, list-clients    # List clients connected to tmux server
+# $ht lw, lwin                 # List windows in the current session
+# $ht ks, kills <session>      # Kill the specified session
+# $ht kw, killw <window>       # Kill the specified window
+# $ht kp, kill-pane <pane>     # Kill the specified pane
+# $ht ka, killa, killall       # Kill all tmux sessions
+# $ht n, new <session>         # Create a new session with the specified name
+#
+# $ht Examples:
+# $ht tm l                     # List all sessions
+# $ht tm lp                    # List panes in current session
+# $ht tm lp mysession          # List panes in 'mysession'
+# $ht tm a mysession           # Attach to 'mysession'
+# $ht tm n mynewsess           # Create and attach to 'mynewsess'
+# "
+#     return 0

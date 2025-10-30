@@ -4,26 +4,40 @@
 # Renders help for the sysup function
 #
 # Parameters:
-# None 
+# None
 #
 # Returns:
 # Returns 0 on success. (infallible)
 function sysup_help --description 'Display help for sysup function'
-    set -l tc " "
-    printf "Usage: sysup [--skip|-s <options>]
+    set -l ht " "
+    printf "\
+Usage: sysup [OPTIONS]
+
+Updates the system, with options to skip certain parts.
+Passing -s | --skip with no arguments will run a full update.
+See the 'Sub' section for options to skip certain parts.
 
 Options:
-$tc --skip, -s <options>   Skip certain parts of the update.
-$tc --help, -h             Show this help message.
 
-Options:
-$tc m -                    Skip mirror update
-$tc r -                    Skip rustup update
-$tc p -                    Skip package update
+$ht --skip, -s <SUB>  # Skip certain parts of the update.
+$ht --help, -h        # Show this help message.
 
-Example:
-$tc sysup --skip m
-$tc sysup -s rp
+Sub options for --skip / -s:
+
+$ht m                 # Skip mirror update
+$ht p                 # Skip package update
+$ht r                 # Skip rustup update
+
+Examples:
+
+$ht m                 # Skip mirror update
+$ht p                 # Skip package update
+$ht r                 # Skip rustup update
+
+Examples:
+
+$ht sysup --skip m    # Skip mirror update
+$ht sysup -s rp       # Skip rustup and package update
 "
     return 0
 end
