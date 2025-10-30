@@ -21,8 +21,8 @@ Up = "select_message previous entry"
 ctrl-n = "toggle_multiline"
 
 [keybindings.anywhere]
-ctrl-c = "kill_backward_line"
-# ctrl-c = "quit"
+# ctrl-c = "kill_backward_line"
+ctrl-c = "quit"
 ctrl-q = "quit"
 "`" = "help"
 
@@ -40,4 +40,3 @@ k = "scroll help up entry"
 
 [keybindings.message_selected]
 ctrl-y = "copy_message selected"
-
