@@ -55,8 +55,8 @@ return {
     if client.workspace_folders then
       local path = client.workspace_folders[1].name
       if
-          path ~= vim.fn.stdpath("config")
-          and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+        path ~= vim.fn.stdpath("config")
+        and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
       then
         return
       end
@@ -66,6 +66,14 @@ return {
       runtime = {
         version = "LuaJIT",
         path = {
+          vim.env.VIMRUNTIME,
+          vim.api.nvim_get_runtime_file("", true),
+          "$VIMRUNTIME",
+          "$VIMRUNTIME/lua",
+          "${3rd}/luv/library",
+          "${3rd]/busted/library",
+          "${3rd]/luaassert/library",
+          "lua",
           "lua/?.lua",
           "lua/?/init.lua",
         },
