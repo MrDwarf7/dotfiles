@@ -294,3 +294,7 @@ blacklistadd (http[s]?)?(:\/\/)?octobox.io.*
 blacklistadd (http[s]?)?(:\/\/)?neetcode.io.*
 blacklistadd (http[s]?)?(:\/\/)?nvim.store.*
 blacklistadd (http[s]?)?(:\/\/)?typst.app\/project.*
+blacklistadd (http[s]?)?(:\/\/)?play.rust-lang.org.*
+
+" We only blacklist the actual problem pages
+blacklistadd (http[s]?)?(:\/\/)?leetcode.com\/problems\/.*
