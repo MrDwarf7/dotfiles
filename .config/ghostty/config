@@ -38,7 +38,8 @@ window-padding-balance = true
 #### uncomment after fixing up Niri
 background-opacity = 0.4
 
-# background-opacity = 0.95
+# Niri
+# background-opacity = 1.00
 
 window-decoration = none
 
@@ -56,11 +57,15 @@ cursor-style-blink = true
 
 # font-family = Zenbones Proto
 # font-family = Zenbones Mono
-font-family = Zenbones Brainy
+# font-family = Zenbones Brainy
 # Medium
 
+#### previous #### font-family = Mononoki Nerd Font Mono
+font-family = Mononoki Nerd Font Mono
+font-size = 11.0
+
 # font-size = 10.5
-font-size = 10.2
+# font-size = 10.2
 font-thicken = false
 
 # ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
