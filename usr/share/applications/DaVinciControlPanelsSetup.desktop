@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=DaVinci Control Panels Setup
+GenericName=DaVinci Control Panels Setup
+Path=/opt/resolve/
+Exec=fish -c 'davinci-control-panels-setup'
+# Exec=davinci-control-panels-setup
+Terminal=false
+Icon=davinci-resolve-panels-setup.png
+Name[en_US]=DaVinci Control Panels Setup
