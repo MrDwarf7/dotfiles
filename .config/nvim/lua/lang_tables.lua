@@ -112,6 +112,7 @@ LangTables = {
       "black",
       "cbfmt",
       "clang-format",
+      "cmakelang",
       -- "csharpier",
       "fixjson",
       "isort",
@@ -129,6 +130,8 @@ LangTables = {
 
       ["bash"] = { "shfmt", "beautysh" },
       ["cpp"] = { "clang-format" },
+      ["cmake"] = { "cmakelang", "neocmake" },
+
       ["fish"] = { "beautysh" },
       ["gleam"] = { "gleam" },
       ["javascript"] = { "biome" },
