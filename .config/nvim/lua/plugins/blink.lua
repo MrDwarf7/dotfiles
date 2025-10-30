@@ -8,6 +8,7 @@ return {
     { "rafamadriz/friendly-snippets" },
     { "folke/lazydev.nvim", lazy = true, opts = {} },
     { "fang2hou/blink-copilot", lazy = true },
+    -- { "mikavilpas/blink-ripgrep.nvim", version = "*" }, -- use the latest stable version
   },
   version = "*",
   build = "cargo build --profile release",
@@ -16,6 +17,8 @@ return {
     fuzzy = {
       implementation = "prefer_rust",
     },
+
+    -- {{{ completion
     completion = {
       -- DOC BORDER
       menu = {
@@ -37,7 +40,9 @@ return {
         show_with_menu = true,
       },
     },
-    -- DOC BORDER
+    -- completion }}}
+
+    -- {{{ signature
     signature = {
       -- signature.enabled = true will show a little 'mini' function signature above/next to completion as you enter (__) <- this space
       -- but this is a LOT when the docs flyout is there AS WELL
@@ -45,6 +50,7 @@ return {
       trigger = {
         enabled = true,
       },
+      -- DOC BORDER
       window = {
         -- min_width = 1,
         -- max_width = 100,
@@ -53,15 +59,41 @@ return {
         show_documentation = false, -- ############## This is the little one
       },
     },
+    -- signature }}}
 
-    -- cmdline = {
-    --   enabled = true,
-    -- },
+    --- {{{ cmdline
+    cmdline = {
+      keymap = {
+        -- preset = "default",
+        preset = "inherit",
+        -- keymap = {
+        --   ["<Tab>"] = { "show_and_insert_or_accept_single", "select_next" },
+        --   ["<S-Tab>"] = { "show_and_insert_or_accept_single", "select_prev" },
+        -- },
+      },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+        ghost_text = {
+          enabled = false,
+        },
+      },
+    },
+    --- cmdline }}}
 
+    --- {{{ keymaps
     keymap = {
       ["<C-j>"] = { "select_next", "fallback" },
       ["<C-k>"] = { "select_prev", "fallback" },
+
+      -- defaults
+      --
       -- ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+
+      -- Version to: show with a list of providers
+      -- functions are run in order, if one returns false | nil, the next is tried and so on.
+      --
       -- ["<C-Space>"] = {
       --   function(cmp)
       --     cmp.show({
@@ -71,6 +103,7 @@ return {
       --     })
       --   end,
       -- },
+
       ["<C-e>"] = { "hide", "fallback" },
       ["<Tab>"] = {
         function(cmp)
@@ -96,31 +129,68 @@ return {
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
       -- ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
     },
+    --- keymaps }}}
+
     snippets = {
       preset = "luasnip",
     },
 
     ----------------------
 
+    ---	{{{ sources
     sources = {
       -- add lazydev to your completion providers
-      default = { "copilot", "lazydev", "lsp", "buffer", "snippets", "path" },
+      default = {
+        --
+        "copilot",
+        "lazydev", -- conditional anyway
+        "lsp",
+        "buffer",
+        -- "ripgrep",
+        "snippets",
+        "path",
+        --
+      },
+
       per_filetype = {
         lua = { inherit_defaults = true, "lazydev" },
+        -- sql stuff
+        -- sql = { "dadbod" },
       },
+
+      --- {{{ providers
       providers = {
+        --
         copilot = {
           name = "copilot",
           module = "blink-copilot",
           score_offset = 100,
           async = true,
         },
+
+        -- sql stuff
+        -- dadbod = { module = "vim_dadbod_completion.blink" },
+
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 100,
+          score_offset = 99,
         },
+
+        lsp = {
+          fallbacks = {}, -- defaults out to the "buffer" source
+        },
+        -- buffer = {},
+
+        -- ripgrep = {
+        --   name = "Ripgrep",
+        --   module = "blink-ripgrep",
+        --   score_offset = 100,
+        --   opts = {},
+        -- },
+
+        -- snippets = {},
         path = {
           opts = {
             get_cwd = function(_)
@@ -128,30 +198,10 @@ return {
             end,
           },
         },
+        --
       },
+      --- providers }}}
     },
-
-    -- sources = {
-    -- 	-- default = { "lazydev", "lsp", "buffer", "snippets", "path" },
-    -- 	default = { "lsp", "buffer", "snippets", "path" },
-    -- 	per_filetype = {
-    -- 		-- sql = { "dadbod" },
-    -- 		lua = { inherit_defaults = true },
-    -- 		-- lua = { inherit_defaults = true, "lazydev" },
-    -- 	},
-    -- 	providers = {
-    -- 		-- dadbod = { module = "vim_dadbod_completion.blink" },
-    -- 		------			-- lazydev = {
-    -- 		------			-- 	name = "LazyDev",
-    -- 		------			-- 	module = "lazydev.intergrations.blink",
-    -- 		------			-- 	score_offset = 100,
-    -- 		------			-- },
-    -- 	},
-    -- },
-
-    ----------------------
-    -- providers = {
-    --   dadbod = { module = "vim_dadbod_completion.blink" },
-    -- },
+    ---	sources }}}
   },
 }

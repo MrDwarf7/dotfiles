@@ -330,5 +330,9 @@ function Output.lsp_get_clients(opts)
   -- stylua: ignore end
 end
 
+function Output.setup()
+  return Output
+end
+
 ---@return utils.Output
 return Output

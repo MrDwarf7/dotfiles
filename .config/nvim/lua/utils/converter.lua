@@ -55,8 +55,8 @@ local function fmt_fullpath(mapping_pair)
       filename = string.sub(filename, 2) -- remove leading `/`
     end
 
-		vim.print(directory_path)
-		vim.print(filename)
+    vim.print(directory_path)
+    vim.print(filename)
 
     return string.format("%s/%s", directory_path, filename)
   end)
@@ -157,6 +157,10 @@ function Converter.handle_filepath()
 
   return fmt_fullpath({ _ = { directory_path, filename } })
   -- string.format("%s/%s", directory_path, filename) -- safe to re-add the `/` here
+end
+
+function Converter.setup()
+  return Converter
 end
 
 ---@return utils.Converter

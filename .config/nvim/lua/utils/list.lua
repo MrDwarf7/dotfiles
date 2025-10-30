@@ -11,7 +11,6 @@
 ---@field toggle_qf fun(type: QfTypes): nil
 local List = {}
 
-
 --- Pass "q" to find quickfix window
 --- Pass "l" to find all loclist windows
 ---@param type QfTypes
@@ -93,6 +92,9 @@ function List.toggle_qf(type)
   end
 end
 
+function List.setup()
+  return List
+end
 
 ---@return utils.List
 return List

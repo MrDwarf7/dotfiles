@@ -1,21 +1,43 @@
-local map = vim.keymap.set
+---@class config.Keymaps.actions
+---@field snippet_forward fun(): boolean? Jumps forward in a snippet if active
+---@field snippet_stop fun(): nil Stops the active snippet if any
 
-local M = {}
+---@alias config.Keymaps.modes "n" | "i" | "v" | "x" | "s" | "o" | "t" | "c"
 
-M.actions = {
-	snippet_forward = function()
-		if vim.snippet.active({ directin = 1 }) then
-			vim.schedule(function()
-				vim.snippet.jump(1)
-			end)
-			return true
-		end
-	end,
-	snippet_stop = function()
-		if vim.snippet then
-			vim.snippet.stop()
-		end
-	end,
+---
+---@class config.Keymaps
+---@field actions config.Keymaps.actions A table of action functions for keybindings
+---@field mod? fun(opts?: vim.keymap.set.Opts): vim.keymap.set.Opts A function that returns keymap options with silent and noremap set to true by default
+---@field map fun(mode?: config.Keymaps.modes|config.Keymaps.modes[], lhs: string, rhs: string|fun(), opts?: vim.keymap.set.Opts): nil A function that maps keys and stores them in Keymaps.keys
+---@field get? fun(mode: config.Keymaps.modes, lhs: string): string|fun()? A function that retrieves a mapped keybinding from Keymaps.keys
+---@field load? fun(mappings: table<string, table<string, string|fun()>>): nil A function that loads multiple keybindings from a table
+---@field keys table<string, table<string, string|fun()>> A table that stores all mapped keybindings by mode and lhs
+---@field print? fun(mode: config.Keymaps.modes, lhs: string): nil A function that prints the mapped keybinding for a given mode and lhs
+
+---@type config.Keymaps
+local Keymaps = {
+  actions = {},
+  mod = nil,
+  get = nil,
+  load = nil,
+  keys = {},
+  print = nil,
+}
+
+Keymaps.actions = {
+  snippet_forward = function()
+    if vim.snippet.active({ directin = 1 }) then
+      vim.schedule(function()
+        vim.snippet.jump(1)
+      end)
+      return true
+    end
+  end,
+  snippet_stop = function()
+    if vim.snippet then
+      vim.snippet.stop()
+    end
+  end,
 }
 
 --- Default keymap options with silent and noremap settings already applied.
@@ -24,34 +46,136 @@ M.actions = {
 ---@generic R: PartiallyApplied<vim.keymap.set.Opts>|vim.keymap.set.Opts
 ---@param opts? T|vim.keymap.set.Opts
 ---@return R|PartiallyApplied<T>
-local mod = function(opts)
-	---@cast opts vim.keymap.set.Opts
-	opts = opts or { noremap = true, silent = true, desc = "" }
+function Keymaps.mod(opts)
+  ---@cast opts vim.keymap.set.Opts
+  opts = opts or { noremap = true, silent = true, desc = "" }
 
-	local mt = { --[[@as vim.keymap.set.Opts]]
-		__call = function(_, desc)
-			return { noremap = true, silent = true, desc = desc or "" }
-		end,
-	}
-	setmetatable(opts, mt)
-	return opts
+  local mt = { --[[@as vim.keymap.set.Opts]]
+    __call = function(_, desc)
+      return { noremap = true, silent = true, desc = desc or "" }
+    end,
+  }
+  setmetatable(opts, mt)
+  return opts
 end
 
+-- we want to wrap the call to 'map'
+-- in a Keymaps call that also adds the key
+-- to the Keymaps.keys table for reference later
+
+--- Maps a keybinding using vim.keymap.set
+--- and also stores it in Keymaps.keys for reference.
+---
+--- If no mode is provided, defaults to "n" (normal mode).
+--- Errors on missing lhs or rhs.
+--- If opts are not provided, uses Keymaps.mod() to create default options.
+function Keymaps.map(mode, lhs, rhs, opts)
+  -- In order to check if 'mode'
+  -- is "empty" and default to 'n',
+  -- we need to check the lhs and rhs
+  -- and ensure they're not either nil or one of
+  -- the valid modes (n, i, v, x, s, o, t, c)
+
+  -- NOTE: revise this later
+  if
+    mode == nil
+    or (type(mode) == "string" and mode:match("^[nivxosct]$") == nil)
+    or (
+      type(mode) == "table"
+      and #mode > 0
+      and not vim.tbl_contains(mode, "n")
+      and not vim.tbl_contains(mode, "i")
+      and not vim.tbl_contains(mode, "v")
+      and not vim.tbl_contains(mode, "x")
+      and not vim.tbl_contains(mode, "s")
+      and not vim.tbl_contains(mode, "o")
+      and not vim.tbl_contains(mode, "t")
+      and not vim.tbl_contains(mode, "c")
+    )
+  then
+    -- default to normal mode
+    mode = "n"
+  end
+
+  lhs = lhs or error("Keymaps.map: lhs is required")
+  rhs = rhs or error("Keymaps.map: rhs is required")
+  opts = opts or Keymaps.mod()
+
+  -- store the keymap in Keymaps.keys
+  if type(mode) == "string" then
+    mode = { mode }
+  elseif type(mode) ~= "table" then
+    error("Keymaps.map: mode must be a string or table of strings")
+  end
+  for _, m in ipairs(mode) do
+    Keymaps.keys[m] = Keymaps.keys[m] or {}
+    Keymaps.keys[m][lhs] = rhs
+  end
+
+  -- call the original map function
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+function Keymaps.get(mode, lhs)
+  if Keymaps.keys[mode] and Keymaps.keys[mode][lhs] then
+    return Keymaps.keys[mode][lhs]
+  end
+  return nil
+end
+
+function Keymaps.load(mappings)
+  for mode, binds in pairs(mappings) do
+    for lhs, rhs in pairs(binds) do
+      Keymaps.map(mode, lhs, rhs)
+    end
+  end
+end
+
+function Keymaps.print(mode, lhs)
+  -- handle case where only lhs is provided
+  if mode:match("^%<Leader%>") then
+    lhs = mode
+    mode = "n"
+  end
+
+  -- handle different mode inputs (or lack thereof)
+  if not mode:match("^[nivxosct]$") then
+    lhs = lhs or mode
+    mode = "n"
+  end
+
+  -- attempt to get the mapping via custom Keymaps builtin
+  local mapped = Keymaps.get(mode, lhs)
+  if mapped then
+    print(string.format("Keymaps[%s][%s] = %s", mode, lhs, vim.inspect(mapped)))
+  else
+    print(string.format("Keymaps[%s][%s] is not mapped", mode, lhs))
+  end
+
+  if vim.tbl_isempty(Keymaps.keys) then
+    print("Keymaps.keys is empty")
+  end
+end
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -- assign alias for partial fn application
-local silent_opts = mod()
+local silent_opts = Keymaps.mod()
+local map = Keymaps.map or vim.keymap.set
 
 -- clear highlighting
 map({ "i", "n", "s" }, "<ESC>", function()
-	vim.cmd("noh")
-	M.actions.snippet_stop()
-	return "<ESC>"
+  vim.cmd("noh")
+  Keymaps.actions.snippet_stop()
+  ---@diagnostic disable-next-line: redundant-return-value
+  return "<ESC>"
 end, { expr = true, desc = "Escape and clear hlsearch" })
 
 map(
-	"n",
-	"<Leader>tH",
-	"<CMD>nohlsearch<BAR>diffupdate<BAR>normal! <C-L><CR>",
-	{ desc = "Redraw / Clear hlsearch / Diff Update" }
+  "n",
+  "<Leader>tH",
+  "<CMD>nohlsearch<BAR>diffupdate<BAR>normal! <C-L><CR>",
+  { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
 map("n", "<Leader>tn", "<CMD>messages<CR>", { desc = "Messages" })
 
@@ -64,28 +188,30 @@ map("i", "kj", "<Esc>", silent_opts)
 
 -- -------------------- goofy ahh line/yank binds
 
-map("n", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
-map("n", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
+map("n", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
+map("n", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
 
-map("v", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
-map("v", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
+map("v", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
+map("v", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
 
-map("n", "y<S-h>", "y^", silent_opts)                   -- Same as above for yanking
-map("n", "y<S-l>", "y$", silent_opts)                   -- Same as above for yanking
+map("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
+map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 
-map("n", "d<S-h>", "d^", silent_opts)                   -- Same as above for yanking
-map("n", "d<S-l>", "d$", silent_opts)                   -- Same as above for yanking
+map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
+map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 map("n", "<C-w>e", "<C-w>=", silent_opts("[e]qualize")) -- ctrl + w + = : easier to hit to equalize the width of buffers
 
 map("v", "p", '"_dP', { noremap = true, silent = true })
 
 map("n", "dd", function() -- Empty/blank lines go into blackhole register
-	if #vim.api.nvim_get_current_line() == 0 then
-		return '"_dd'
-	else
-		return "dd"
-	end
+  if #vim.api.nvim_get_current_line() == 0 then
+    ---@diagnostic disable-next-line: redundant-return-value
+    return '"_dd'
+  else
+    ---@diagnostic disable-next-line: redundant-return-value
+    return "dd"
+  end
 end, { expr = true })
 
 -- -------------------- goofy ahh line/yank binds
@@ -117,20 +243,22 @@ map("v", ">", ">gv")
 
 -- location list
 map("n", "<Leader>L", function()
-	require("utils.list").toggle_qf("l")
-	-- local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
-	-- if not success and err then
-	-- 	vim.notify(err, vim.log.levels.ERROR)
-	-- end
+  -- require("utils.list").toggle_qf("l")
+
+  require("utils.list").toggle_qf("l")
+  -- local success, err = pcall(vim.fn.getloclist(0, { winid = 0 }).winid ~= 0 and vim.cmd.lclose or vim.cmd.lopen)
+  -- if not success and err then
+  -- 	vim.notify(err, vim.log.levels.ERROR)
+  -- end
 end, { desc = "Location List" })
 
 -- quickfix list
-map("n", "<Leader>Q", function()
-	require("utils.list").toggle_qf("q")
-	-- local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
-	-- if not success and err then
-	-- 	vim.notify(err, vim.log.levels.ERROR)
-	-- end
+map("n", "<Leader>q", function()
+  require("utils.list").toggle_qf("q")
+  -- local success, err = pcall(vim.fn.getqflist({ winid = 0 }).winid ~= 0 and vim.cmd.cclose or vim.cmd.copen)
+  -- if not success and err then
+  -- 	vim.notify(err, vim.log.levels.ERROR)
+  -- end
 end, { desc = "Quickfix List" })
 
 map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
@@ -138,13 +266,13 @@ map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- diagnostic
 local diagnostic_goto = function(next, severity)
-	return function()
-		vim.diagnostic.jump({
-			count = (next and 1 or -1) * vim.v.count1,
-			severity = severity and vim.diagnostic.severity[severity] or nil,
-			float = true,
-		})
-	end
+  return function()
+    vim.diagnostic.jump({
+      count = (next and 1 or -1) * vim.v.count1,
+      severity = severity and vim.diagnostic.severity[severity] or nil,
+      float = true,
+    })
+  end
 end
 -- map("n", "<Leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
@@ -155,11 +283,11 @@ map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
 local toggle_inlay_hints = function()
-	if type(vim.lsp.inlay_hint) ~= "nil" then
-		if type(vim.lsp.inlay_hint.is_enabled) == "function" then
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		end
-	end
+  if type(vim.lsp.inlay_hint) ~= "nil" then
+    if type(vim.lsp.inlay_hint.is_enabled) == "function" then
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end
+  end
 end
 map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
 
@@ -184,10 +312,10 @@ map("n", "[b", "<CMD>bprevious<cr>", { desc = "[p]revious" })
 
 -- TODO: @plugin -- replace with BufDel impl in utils.bufdel later
 map("n", "<Leader>bd", function()
-	vim.api.nvim_buf_delete(0, { unload = true })
+  vim.api.nvim_buf_delete(0, { unload = true })
 end, silent_opts("[b]uf [d]elete"))
 map("n", "<Leader>bD", function()
-	vim.api.nvim_buf_delete(0, { force = true })
+  vim.api.nvim_buf_delete(0, { force = true })
 end, silent_opts("[b]uf Wipe"))
 -- map("n", "<Leader>bD", vim., silent_opts("[p]revious"))
 
@@ -201,7 +329,7 @@ map("n", "<Down>", ":resize -2<CR>", silent_opts)
 map("n", "<Up>", ":resize +2<CR>", silent_opts)
 
 map("n", "<Leader>W", function()
-	require("utils.sudo").sudo_write()
+  require("utils.sudo").sudo_write()
 end, silent_opts("[W]rite with sudo"))
 
 -- TODO: @plugin -- turn this on _inside_ the plugin
@@ -211,3 +339,31 @@ end, silent_opts("[W]rite with sudo"))
 -- end, silent_opts("[G]ithub [O]cto"))
 
 map("n", "<Leader>pl", "<CMD>Lazy<CR>", silent_opts("Lazy"))
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+setmetatable(Keymaps, {
+  __index = function(table, key)
+    return rawget(table, key) or vim.keymap.set
+  end,
+
+  __call = function(_, ...)
+    return Keymaps.map(...)
+  end,
+
+  __tostring = function()
+    return "config.Keymaps: " .. vim.inspect(Keymaps.keys)
+  end,
+
+  __type = function()
+    return "config.Keymaps"
+  end,
+
+  ---@param ... vim.keymap.set.Opts
+  __add = function(...)
+    Keymaps.load(...)
+  end,
+})
+
+---@return config.Keymaps
+return Keymaps

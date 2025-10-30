@@ -6,6 +6,7 @@ require("config.keymaps")
 require("config.autocmds")
 
 local lsp = require("config.lsp")
+local utils = require("utils")
 
 -- Testing out the new vim.pack commands instead of lazy
 --
@@ -47,6 +48,7 @@ local lazy_opts = {
   },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
+
     -- path = require("utils.generic").get_dev_dir(),
     -- path = "~/Documents/nvim_dev",
   },
@@ -93,6 +95,5 @@ local lazy_opts = {
   },
 }
 
-lsp.setup({ binds_type = "builtin" })
-
 require("lazy").setup("plugins", lazy_opts)
+lsp.setup({ binds_type = "builtin" })

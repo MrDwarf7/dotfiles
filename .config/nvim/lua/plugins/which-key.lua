@@ -12,8 +12,9 @@ return {
       { "<Leader>f", group = "+[F]ind" },
       { "<Leader>t", group = "+[T]oggles" },
       { "<Leader>b", group = "+[B]uffers" },
-      { "<Leader>x", group = "+trouble" },
+      { "<Leader>x", group = "+[T]rouble" },
       { "<Leader>g", group = "+[G]it & GO" },
+      { "<Leader>r", group = "+[R]equests (http)" },
     },
   },
 }

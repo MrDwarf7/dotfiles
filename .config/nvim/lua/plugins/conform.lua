@@ -1,3 +1,4 @@
+local lang_tables = require("lang_tables")
 return {
   "stevearc/conform.nvim",
   event = "LspAttach",
@@ -48,35 +49,43 @@ return {
           end,
         },
       },
-      formatters_by_ft = {
-        cpp = { "clang-format" },
-        gleam = { "gleam" },
-        javascript = { "biome" },
-        javascriptreact = { "biome" },
-        json = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
-        lua = { "stylua" },
-        python = function(bufnr)
-          if require("conform").get_formatter_info("ruff_format", bufnr).available then
-            return { "ruff_format" }
-          else
-            return { "isort", "black" }
-          end
-        end,
-        ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-        ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-        -- markdown = { "prettier" },
-        ocaml = { "ocamlformat" },
-
-        sh = { "shfmt" },
-        sql = { "sql_formatter" },
-        surql = { "sql_formatter" },
-        bash = { "shfmt" },
-        zsh = { "beautysh" },
-        typescript = { "biome" },
-        typescriptreact = { "biome" },
-        yaml = { "yamlfmt" },
-        rust = { "rustfmt" },
-      },
+      formatters_by_ft = vim.tbl_deep_extend(
+        "force",
+        lang_tables.by_ft("formatters", vim.bo.filetype, vim.api.nvim_get_current_buf() or 0),
+        {
+          -- Default formatters can be set here
+        }
+      ),
+      -- },
+      -- formatters_by_ft = {
+      --   cpp = { "clang-format" },
+      --   gleam = { "gleam" },
+      --   javascript = { "biome" },
+      --   javascriptreact = { "biome" },
+      --   json = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
+      --   lua = { "stylua" },
+      --   python = function(bufnr)
+      --     if require("conform").get_formatter_info("ruff_format", bufnr).available then
+      --       return { "ruff_format" }
+      --     else
+      --       return { "isort", "black" }
+      --     end
+      --   end,
+      --   ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      --   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      --   -- markdown = { "prettier" },
+      --   ocaml = { "ocamlformat" },
+      --
+      --   sh = { "shfmt" },
+      --   sql = { "sql_formatter" },
+      --   surql = { "sql_formatter" },
+      --   bash = { "shfmt", "beautysh" },
+      --   zsh = { "beautysh" },
+      --   typescript = { "biome" },
+      --   typescriptreact = { "biome" },
+      --   yaml = { "yamlfmt" },
+      --   rust = { "rustfmt" },
+      -- },
 
       notify_on_error = false,
     })

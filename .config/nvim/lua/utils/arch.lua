@@ -18,6 +18,9 @@ function Arch.get_os_lower()
   return assert(string.lower(vim.g.os or vim.loop.os_uname().sysname), "Operating system not found in list") --[[@as EOperatingSystemEnumLower]]
 end
 
+function Arch.setup()
+  return Arch
+end
 
 ---@return utils.Arch
 return Arch

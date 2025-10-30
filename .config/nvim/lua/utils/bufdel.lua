@@ -2,15 +2,14 @@
 -- local BufDel = {}
 
 ---@class utils.BufDel
----@field delete: fun(opts?: utils.BufDel.Opts): nil
----@field all: fun(opts?: utils.BufDel.Opts): nil
----@field other: fun(opts?: utils.BufDel.Opts): nil
+---@field delete fun(opts?: utils.BufDel.Opts): nil
+---@field all fun(opts?: utils.BufDel.Opts): nil
+---@field other fun(opts?: utils.BufDel.Opts): nil
 local BufDel = setmetatable({}, {
   __call = function(t, ...)
     return t.delete(...)
   end,
 })
-
 
 ---@class utils.BufDel.Opts
 ---@field buf? number Buffer to delete. Defaults to the current buffer
@@ -18,7 +17,6 @@ local BufDel = setmetatable({}, {
 ---@field force? boolean Delete the buffer even if it is modified
 ---@field filter? fun(buf: number): boolean Filter buffers to delete
 ---@field wipe? boolean Wipe the buffer instead of deleting it (see `:h :bwipeout`)
-
 
 --- Delete a buffer:
 --- - either the current buffer if `buf` is not provided
@@ -111,6 +109,9 @@ function BufDel.other(opts)
   }))
 end
 
+function BufDel.setup()
+  return BufDel
+end
 
 ---@return utils.BufDel
 return BufDel

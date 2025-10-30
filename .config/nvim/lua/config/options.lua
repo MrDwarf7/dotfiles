@@ -4,17 +4,17 @@ opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
 
 -- Global
 opt.fillchars = {
-	fold = " ",
-	foldopen = "",
-	foldclose = "",
-	foldsep = " ",
-	diff = "╱",
-	eob = " ",
+  fold = " ",
+  foldopen = "",
+  foldclose = "",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
 }
 opt.listchars = {
-	tab = ">>>",
-	trail = "·",
-	nbsp = "␣",
+  tab = ">>>",
+  trail = "·",
+  nbsp = "␣",
 }
 
 opt.scrolloff = 6
@@ -29,21 +29,40 @@ opt.foldnestmax = 4
 
 opt.linebreak = true -- wrap at a character in 'breakat' rather than at the last character that fits on the screen.wrap at 'co
 
-opt.pumblend = 15    -- Popup blend
-opt.pumheight = 30   -- Maximum number of entries in a popup
+opt.pumblend = 15 -- Popup blend
+opt.pumheight = 30 -- Maximum number of entries in a popup
 
 -- opt.autowrite = true -- Enable auto write, so that modified buffers are written when switching buffers.
 opt.conceallevel = 0
-opt.formatoptions = "jcroqlnt"     -- tcqj
-opt.inccommand = "nosplit"         -- preview incremental substitute
-opt.jumpoptions = "view"           -- Define how the jumplist attempts to restore the cursor position
-opt.shiftround = true              -- Round indent
-opt.virtualedit = "block"          -- Allow cursor to move where there is no text in visual block mode
+opt.formatoptions = "jcroqlnt" -- tcqj
+opt.inccommand = "nosplit" -- preview incremental substitute
+-- opt.jumpoptions = "view" -- Define how the jumplist attempts to restore the cursor position
+opt.shiftround = true -- Round indent
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 6                -- Minimum window width
+opt.winminwidth = 6 -- Minimum window width
 vim.g.markdown_recommended_style = 0
-opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize", "help", "globals", "skiprtp", "folds" }
-
+opt.sessionoptions = {
+  --
+  -- "blank", -- not needed.
+  "buffers",
+  "curdir",
+  "folds",
+  "globals",
+  "help",
+  -- "localoptions", -- not needed.
+  -- "options", -- not needed.
+  "skiprtp", -- Not sure if needed, but I assume this will be loaded regardless due to Lazy pkg manager.
+  "resize", -- lines & columns restoration.
+  -- "sesdir", -- directory where sessions are saved becomes the CWD.
+  "tabpages", -- tabpages, without this only 'current' tab is restored.
+  -- "terminal", -- not needed.
+  -- "winpos", -- not needed.
+  "winsize",
+  --
+  -- "slash", -- deprecated
+  -- "unix", -- deprecated
+}
 
 -- opt.showtabline = 2
 opt.mouse = "a"
@@ -70,30 +89,28 @@ opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
 opt.completeopt = "menu,menuone,noselect"
 
-
 -- vim.cmd([[
 -- set cmdheight=0
 -- set shortmess+=csCFISWwal
 -- ]])
 
 opt.shortmess:append({
-	W = true,
-	I = true,
-	c = true,
-	C = true,
-	s = true,
-	F = true,
-	-- S = true, -- when noice/nui is on, handles the virtual text for searching ( [N/K] where N is current of, and K is total of search)
-	w = true,
-	a = true,
-	l = true,
+  W = true,
+  I = true,
+  c = true,
+  C = true,
+  s = true,
+  F = true,
+  -- S = true, -- when noice/nui is on, handles the virtual text for searching ( [N/K] where N is current of, and K is total of search)
+  w = true,
+  a = true,
+  l = true,
 })
-
 
 -- opt.laststatus = 3
 opt.timeoutlen = 350
 if vim.fn.has("nvim-0.9.0") == 1 then
-	opt.splitkeep = "topline"
+  opt.splitkeep = "topline"
 end
 
 -- tabs / shift / indent
@@ -132,7 +149,6 @@ vim.o.grepprg = "rg --vimgrep --no-heading --smartcase --hidden"
 vim.o.winborder = "single"
 vim.g.mapleader = " "
 --------------------------------
-
 
 -- New things I added from his config
 vim.o.breakindent = true

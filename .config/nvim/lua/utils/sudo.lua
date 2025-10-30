@@ -64,6 +64,9 @@ function Sudo.sudo_write(tmpfile, filepath)
   -- stylua: ignore end
 end
 
+function Sudo.setup()
+  return Sudo
+end
 
 ---@return utils.Sudo
 return Sudo

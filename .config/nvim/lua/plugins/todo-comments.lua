@@ -1,23 +1,26 @@
 return {
-	"folke/todo-comments.nvim",
-	lazy = true,
+  "folke/todo-comments.nvim",
+  lazy = false,
   event = "BufReadPost",
-	keys = {
+  dependencies = { "nvim-lua/plenary.nvim" },
+  keys = {
 		-- stylua: ignore start
-		{ "]t",         function() return require("todo-comments").jump_next() end,           desc = "Next todo comment", },
-		{ "[t",         function() return require("todo-comments").jump_prev() end,           desc = "Previous todo comment", },
+		-- { "q:", false },
+		{ "]t",         function() return require("todo-comments").jump_next() end,          desc = "Next todo comment", },
+		{ "[t",         function() return require("todo-comments").jump_prev() end,          desc = "Previous todo comment", },
 
-		{ "<Leader>ft", "<cmd>TodoFzfLua{tag = {TODO,FIX,FIXME,BUG}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
-		-- { "<Leader>lT", "<cmd>Trouble todo toggle<CR>",                                       desc = "TODO (Trouble)" },
-		-- { "<Leader>ft", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME,BUG}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
-		-- { "<Leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-		-- { "<Leader>fT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
-		{ "<Leader>lt", ":TodoLocList<CR>",                                                   desc = "list [t]odo's",            mode = "n" },
-		-- stylua: ignore end
-	},
+		-- { "<Leader>ft", "<cmd>TodoFzfLua{tag = {TODO,FIX,FIXME,BUG}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
+		{ "<Leader>ft", function()
+			local project_wide = string.format("rg --files --glob '.*' --glob '!%s'", vim.fn.escape(vim.fn.getcwd() .. "/.git/**", " "))
+			vim.cmd("TodoFzfLua keywords=TODO,FIX,FIXME cwd=" .. project_wide)
+		end, desc = "Todo/Fix/Fixme (FzfLua)" },
 
-	opts = {
-		keywords = {
+    -- { "<Leader>lt", "<CMD>TodoLocList<CR>",                                           desc = "list [t]odo's",            mode = "n" },
+    -- stylua: ignore end
+  },
+
+  opts = {
+    keywords = {
 		-- stylua: ignore start
 			FIX = { icon = " ", color = "error" },
 			HACK = { icon = ",", color = "warning" },
@@ -25,18 +28,18 @@ return {
 			PERF = { icon = " ", color = "warning" },
 			TODO = { icon = " ", color = "info" },
 			WARN = { icon = " ", color = "warning" },
-		-- stylua: ignore end
-		},
-		search = {
-			command = "rg",
-			args = {
-				"--color=never",
-				"--no-heading",
-				"--with-filename",
-				"--line-number",
-				"--column",
-			},
-			pattern = [[\b(KEYWORDS):]],
-		},
-	},
+      -- stylua: ignore end
+    },
+    search = {
+      command = "rg",
+      args = {
+        "--color=never",
+        "--no-heading",
+        "--with-filename",
+        "--line-number",
+        "--column",
+      },
+      pattern = [[\b(KEYWORDS):]],
+    },
+  },
 }

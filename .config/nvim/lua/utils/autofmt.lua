@@ -4,6 +4,10 @@
 ---@field toggle_autoformat fun(effect_global?: boolean, bufnr?: number): void
 local Autofmt = {}
 
+function Autofmt.setup()
+  require("utils.output").warn("Autofmt setup called. Implementation not complete.")
+  return Autofmt
+end
 
 -- return AutoFmt
-return vim.notify("You called 'utils.autofmt.lua' - This module isn't working right now!")
+return Autofmt

@@ -1,113 +1,79 @@
 local queries = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/queries"
 vim.opt.runtimepath:append(queries)
 
+-- TODO: eventually deprecate this file in favor of using a new
+-- LangHub module that consolidates 'suites'
+local lang_tables = require("lang_tables")
+
 return {
-	"nvim-treesitter/nvim-treesitter",
-	lazy = false,
+  "nvim-treesitter/nvim-treesitter",
+  lazy = false,
   -- event = "BufReadPost",
-	branch = "master",
-	build = ":TSUpdate",
-	opts = {
-		highlight = { enable = true },
-		ensure_installed = {
-			"bash",
-			"c",
-			"cmake",
-			"cpp",
-			"c_sharp",
-			"css",
-			"embedded_template",
-			"gitattributes",
-			"gitcommit",
-			"git_config",
-			"gitignore",
-			"git_rebase",
-			"go",
-			"html",
-			"javascript",
-			"json",
-			"just",
-			"kdl",
-			"lua",
-			"markdown",
-			"markdown_inline",
-			"meson",
-			"ninja",
-			"nu",
-			"python",
-			"regex",
-			"rst",
-			"rust",
-			"scss",
-			-- "surrealdb",
-			"toml",
-			"tsx",
-			"typescript",
-			"typst",
-			"vim",
-			"vimdoc",
-		},
-		incremental_selection = {
-			enable = false,
-		},
-		indent = {
-			disable = {
-				"html",
-				"javascript",
-				"typescript",
-				"css",
-				"rust",
-			},
-			-- disable = function(lang, buf)
-			--   local indent_disabled = {
-			--     "html",
-			--     "javascript",
-			--     "typescript",
-			--     "css",
-			--     "rust",
-			--   }
-			--   if lang == vim.tbl_keys(indent_disabled) then
-			--     return true
-			--   end
-			-- end,
-			enable = true,
-		},
+  branch = "master",
+  build = ":TSUpdate",
+  opts = {
+    highlight = { enable = true },
+    ensure_installed = lang_tables.ts_ensure_installed(),
+    incremental_selection = {
+      enable = false,
+    },
+    indent = {
+      disable = {
+        "html",
+        "javascript",
+        "typescript",
+        "css",
+        "rust",
+      },
+      -- disable = function(lang, buf)
+      --   local indent_disabled = {
+      --     "html",
+      --     "javascript",
+      --     "typescript",
+      --     "css",
+      --     "rust",
+      --   }
+      --   if lang == vim.tbl_keys(indent_disabled) then
+      --     return true
+      --   end
+      -- end,
+      enable = true,
+    },
 
-		textobjects = {
-			move = {
-				enable = false,
-				goto_next_start = {
-					["]f"] = "@function.outer",
-					["]o"] = "@class.outer",
-					["]a"] = "@parameter.inner",
-				},
-				goto_next_end = {
-					["]F"] = "@function.outer",
-					["]O"] = "@class.outer",
-					["]A"] = "@parameter.inner",
-				},
-				goto_previous_start = {
-					["[f"] = "@function.outer",
-					["[o"] = "@class.outer",
-					["[a"] = "@parameter.inner",
-				},
-				goto_previous_end = {
-					["[F"] = "@function.outer",
-					["[O"] = "@class.outer",
-					["[A"] = "@parameter.inner",
-				},
-			},
-		},
+    textobjects = {
+      move = {
+        enable = false,
+        goto_next_start = {
+          ["]f"] = "@function.outer",
+          ["]o"] = "@class.outer",
+          ["]a"] = "@parameter.inner",
+        },
+        goto_next_end = {
+          ["]F"] = "@function.outer",
+          ["]O"] = "@class.outer",
+          ["]A"] = "@parameter.inner",
+        },
+        goto_previous_start = {
+          ["[f"] = "@function.outer",
+          ["[o"] = "@class.outer",
+          ["[a"] = "@parameter.inner",
+        },
+        goto_previous_end = {
+          ["[F"] = "@function.outer",
+          ["[O"] = "@class.outer",
+          ["[A"] = "@parameter.inner",
+        },
+      },
+    },
 
-		autotag = {
-			enable = true,
-		},
-		-- sync_install = true,
-		auto_install = true,
-	},
-
-	config = function(_, opts)
-		opts = opts or {}
-		require'nvim-treesitter.configs'.setup(opts)
-	end
+    autotag = {
+      enable = true,
+    },
+    -- sync_install = true,
+    auto_install = true,
+  },
+  config = function(_, opts)
+    opts = opts or {}
+    require("nvim-treesitter.configs").setup(opts)
+  end,
 }

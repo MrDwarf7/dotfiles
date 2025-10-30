@@ -1,7 +1,59 @@
----@class LSP.Opts
----@field binds_type? BindsType
+---@alias BindsLiteral "fzf" | "builtin"
 
+---@enum BindsTypeE
+local BindsTypeE = {
+  fzf = "fzf",
+  builtin = "builtin",
+}
+
+---@alias BindsType BindsLiteral|BindsTypeE
+
+---@class config.LSP.Opts
+---@field binds_type? BindsType
+---@field get_capabilities? fun(): table<string, any>
+---
+--- This will cause the funcion given to run over the default keybindings,
+--- allowing you to define your own function that maps out the keys
+--- ( remember to include gd, gf etc. also)
+---@field setup_lsp? fun(binds_type?: BindsType)
+---
+---@class config.LSP
+--- fields
+---@field binds_type? BindsType -- Store it for later
+---
+--- assigned fields as func's
+---@field get_capabilities? fun(): table<string, any>
+---
+--- methods
+---@field handle_binds_type fun(binds_type?: BindsType): BindsLiteral
+---@field get_default_capabilities fun(): table<string, any>
+---@field fzf_lua_binds fun()
+---@field builtin_binds fun()
+---@field setup_lsp fun(binds_type?: BindsType)
+---@field setup fun(opts?: config.LSP.Opts): config.LSP
 local LSP = {}
+
+function LSP.handle_binds_type(binds_type)
+  if type(binds_type) == "nil" then
+    ---@cast binds_type BindsLiteral
+    return "builtin"
+  end
+
+  if type(binds_type) == "table" then
+    -- convert to string
+    if binds_type == BindsTypeE.fzf then
+      return "fzf"
+    elseif binds_type == BindsTypeE.builtin then
+      return "builtin"
+    end
+  elseif type(binds_type) == "string" then
+    ---@cast binds_type BindsLiteral
+    return binds_type
+  end
+
+  ---@cast binds_type BindsLiteral
+  return "builtin"
+end
 
 LSP.get_default_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -32,10 +84,40 @@ function LSP.fzf_lua_binds()
   -- stylua: ignore end
 end
 
+-- local function go_to_definition_with_tags()
+-- local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = group,
+--   once = true,
+--   callback = function(args)
+--     vim.keymap.set("n", "<C-o>", "<C-t>", { silent = true, buffer = args.buf })
+--     vim.keymap.set("n", "<C-i>", "<CMD>silent! tag<CR>", { silent = true, buffer = args.buf })
+--   end,
+-- })
+
+-- 	local curr_pos = vim.api.nvim_win_get_cursor(0)
+--   vim.cmd("silent! tag " .. vim.fn.expand("<cword>"))
+--
+--   local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
+--   vim.api.nvim_create_autocmd("BufEnter", {
+--     group = group,
+--     once = true,
+--     callback = function(args)
+--       local keymaps = require("config.keymaps")
+--       keymaps.map("n", "<C-t>", vim.cmd("silent! pop"), { silent = true, buffer = args.buf })
+--     end,
+--   })
+--
+--   vim.lsp.buf.definition()
+-- end
+
 function LSP.builtin()
-  local map = vim.keymap.set
+  -- local map = vim.keymap.set
+  local map = require("config.keymaps")
+
 	-- stylua: ignore start
 	map("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [d]efinition" })
+	-- map("n", "gd", go_to_definition_with_tags, { desc = "[G]oto [d]efinition" })
 	map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto T[y]pe Definition" })
 	map("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [r]eferences" })
 	map("n", "gt", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
@@ -43,9 +125,6 @@ function LSP.builtin()
   -- stylua: ignore end
 end
 
----@alias BindsType "fzf" | "builtin"
-
----@param binds_type? BindsType
 function LSP.setup_lsp(binds_type)
   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
   local lsp_servers = {}
@@ -59,16 +138,22 @@ function LSP.setup_lsp(binds_type)
     end
   end
 
-  -- handle nil case
-  if not binds_type then
-    binds_type = "builtin"
-  end
+  -- figure out if it's a
+  -- BindsLiteral, or BindsTypeE
+  -- it'll now always be a string here --
+  binds_type = LSP.handle_binds_type(binds_type)
 
-  if type(binds_type) == "string" and binds_type == "fzf" then
+  if binds_type == "fzf" then
     LSP.fzf_lua_binds()
-  elseif type(binds_type) == "string" and binds_type == "builtin" then
+  else
     LSP.builtin()
   end
+
+  -- if type(binds_type) == "string" and binds_type == "fzf" then
+  --   LSP.fzf_lua_binds()
+  -- elseif type(binds_type) == "string" and binds_type == "builtin" then
+  --   LSP.builtin()
+  -- end
 
   local map = vim.keymap.set
   map("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
@@ -90,17 +175,16 @@ function LSP.setup_lsp(binds_type)
   vim.lsp.enable(lsp_servers)
 end
 
----@param opts? LSP.Opts
 function LSP.setup(opts)
   opts = opts or {}
-  opts.binds_type = opts.binds_type or "builtin"
-  local binds_type = opts.binds_type
+  opts.binds_type = LSP.handle_binds_type(opts.binds_type)
+  -- local binds_type = opts.binds_type
 
   -- if type(binds_type) == "nil" then
   --   binds_type = "fzf"
   -- end
 
-  -- remove all the weird default binds
+  -- remove all default binds
   for _, bind in ipairs({ "grn", "gra", "gri", "grr", "grt" }) do
     pcall(vim.keymap.del, "n", bind)
   end
@@ -116,7 +200,21 @@ function LSP.setup(opts)
       ---@diagnostic disable-next-line need-check-nil
       client.server_capabilities.semanticTokensProvider = nil
 
-      LSP.setup_lsp(binds_type)
+      local lsp_fn = nil
+      if opts.setup_lsp and type(opts.setup_lsp) == "function" then
+        lsp_fn = opts.setup_lsp
+      else
+        lsp_fn = LSP.setup_lsp
+      end
+
+      if type(lsp_fn) ~= "nil" then
+        lsp_fn(opts.binds_type)
+      else
+        LSP.setup_lsp(opts.binds_type)
+      end
+
+      -- LSP.setup_lsp(binds_type)
+
       if client.name == "ruff" then
         client.server_capabilities.hoverProvider = false
       end
@@ -144,8 +242,12 @@ function LSP.setup(opts)
     desc = "Configure buffer keymap and behaviour based on LSP",
   })
 
-  local capabilities = LSP.get_default_capabilities()
-  -- require("lsp_utils").get_default_capabilities()
+  local capabilities = nil
+  if opts.get_capabilities and type(opts.get_capabilities) == "function" then
+    capabilities = opts.get_capabilities()
+  else
+    capabilities = LSP.get_default_capabilities()
+  end
 
   vim.lsp.config("*", {
     capabilities = capabilities,
@@ -153,6 +255,10 @@ function LSP.setup(opts)
       debounce_text_changes = 500,
     },
   })
+  LSP.binds_type = opts.binds_type
+  LSP.get_capabilities = opts.get_capabilities
+  return LSP
 end
 
+---@return config.LSP
 return LSP
