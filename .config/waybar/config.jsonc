@@ -32,8 +32,8 @@
   "custom/notification": {
     "tooltip": false,
     "format": "",
-    "on-click": "sleep 0.1 && swaync-client -t -sw",
-    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+    "on-click": "sleep 0.1; swaync-client -t -sw",
+    "on-click-right": "sleep 0.1; swaync-client -d -sw",
     "escape": true
   },
   "clock": {
@@ -46,8 +46,8 @@
       }
     },
     "actions": {
-      "on-click-right": "shift_down",
-      "on-click": "shift_up"
+      "on-click-right": "shift_up",
+      "on-click": "shift_down"
     }
   },
   "custom/pacman": {
@@ -55,7 +55,8 @@
     "interval": 30,
     "exec": "checkupdates | wc -l",
     "exec-if": "exit 0",
-    "on-click": "wezterm -e fish -c 'sysup; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+    "on-click": "ghostty -e fish -c 'sysup -s m; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
+    "on-click-right": "ghostty -e fish -c 'sysup; echo Done - Press enter to exit; read'; pkill -SIGRTMIN+8 waybar",
     "signal": 8,
     "tooltip": false
   },
@@ -128,7 +129,8 @@
       "wezterm",
       "Wezterm",
       "wezterm-gui",
-      "Wezterm-gui"
+      "Wezterm-gui",
+      "ghostty"
     ],
     "app_ids-mapping": {
       "firefoxdeveloperedition": "firefox-developer-edition"
@@ -160,9 +162,9 @@
       ]
     },
     "scroll-step": 1,
-    "on-click": "pavucontrol",
     "on-click-middle": "sleep 0.1 && pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-    "on-click-right": "sleep 0.1 && pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click": "sleep 0.1 && pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol",
     "ignored-sinks": [
       "Easy Effects Sink"
     ]
@@ -219,7 +221,7 @@
     "tooltip-format-disconnected": "Error",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} 🖧 ",
-    "on-click": "wezterm nmtui"
+    "on-click-right": "ghostty -e nmtui"
   },
   "battery": {
     "interval": 30,
