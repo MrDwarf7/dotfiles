@@ -205,7 +205,7 @@ jj log -n 20 --no-pager -r 'all()'
 # jj ( sp | spr )                     [ split | split at revision ]
 # --------------------------------------------------------------------------------------------------
 # pull?
-# jj ( gf | gfa )                     [ fetch | fetch all's ]
+# jj ( gf | gfa | gfaa )                     [ fetch | fetch all's, fetch all and rebase ONTO trunk ]
 # --------------------------------------------------------------------------------------------------
 # bookmarks?
 ## moving/once work is done
@@ -443,6 +443,7 @@ g = ["git"]
 # pull
 gf = ['git', 'fetch', '--all-remotes']
 gfa = ['util', 'exec', '--', 'bash', '-c', 'jj gf && jj rbt']
+gfaa = ['util', 'exec', '--', 'bash', '-c', 'jj gf && jj rbta']
 gfw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fl']
 gfar = ['util', 'exec', '--', 'bash', '-c', 'jj gfa && jj rbta']
 gfaw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fa']
