@@ -11,6 +11,7 @@ end
 
 return {
   "MagicDuck/grug-far.nvim",
+  lazy = true,
   keys = {
     -- stylua: ignore start
     { "<Leader>f/", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },

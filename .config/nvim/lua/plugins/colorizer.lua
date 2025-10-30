@@ -1,7 +1,7 @@
 return {
   "NvChad/nvim-colorizer.lua",
   lazy = true,
-  -- event = "LspAttach",
+  event = "LspAttach",
   ft = {
     "css",
     "html",

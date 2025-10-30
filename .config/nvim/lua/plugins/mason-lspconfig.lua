@@ -3,10 +3,9 @@ return {
   -- lazy = false,
   lazy = true,
   -- event = "VeryLazy",
-  event = "BufReadPost",
   dependencies = {
-    { "mason-org/mason.nvim", event = "BufReadPost" },
-    { "neovim/nvim-lspconfig", event = "BufReadPost" },
+    { "mason-org/mason.nvim", lazy = true },
+    { "neovim/nvim-lspconfig", lazy = true },
   },
   -- opts = {
   --

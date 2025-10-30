@@ -36,7 +36,5 @@ return {
 
   -- TODO: later --
 
-  { "nvim-lualine/lualine.nvim", lazy = true, event = "CursorMoved" },
-
-  { "j-hui/fidget.nvim", opts = {} },
+  { "j-hui/fidget.nvim", event = { "LspAttach" }, opts = {} },
 }

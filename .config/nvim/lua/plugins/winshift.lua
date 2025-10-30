@@ -1,6 +1,7 @@
 return {
   "sindrets/winshift.nvim",
-  event = "BufReadPost",
+  lazy = true,
+  -- event = "BufReadPost",
   keys = {
     { "<Leader>w", "+[w]inShift", desc = "+[w]inShift", mode = "n" },
     { "<Leader>ww", ":WinShift<CR>", silent = true, noremap = true },

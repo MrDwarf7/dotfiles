@@ -16,7 +16,6 @@
 
 return {
   "ibhagwan/fzf-lua",
-  lazy = false,
   lazy = true,
   event = "VimEnter",
   -- optional for icon support

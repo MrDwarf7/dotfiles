@@ -1,14 +1,19 @@
 return {
   "Saghen/blink.cmp",
   lazy = true,
-  event = { "InsertEnter", "CmdlineEnter" },
+  -- event = { "InsertEnter", "CmdlineEnter", "WinEnter" },
+  event = "VeryLazy",
   dependencies = {
-    { "Saghen/blink.compat", lazy = true },
-    { "L3MON4D3/LuaSnip", lazy = true },
-    { "rafamadriz/friendly-snippets" },
-    { "folke/lazydev.nvim", lazy = true, opts = {} },
-    { "fang2hou/blink-copilot", lazy = true },
+    -- stylua: ignore start
+    { "j-hui/fidget.nvim",            lazy = true, event = "VeryLazy" },
+    { "Saghen/blink.compat",          lazy = true },
+    { "L3MON4D3/LuaSnip",             lazy = true },
+    { "rafamadriz/friendly-snippets", lazy = true },
+    { "folke/lazydev.nvim",           lazy = true, opts = {} },
+    { "fang2hou/blink-copilot",       lazy = true },
+    { "zbirenbaum/copilot.lua",       lazy = true },
     -- { "mikavilpas/blink-ripgrep.nvim", version = "*" }, -- use the latest stable version
+    -- stylua: ignore end
   },
   version = "*",
   build = "cargo build --profile release",

@@ -3,7 +3,8 @@
 return {
   "folke/trouble.nvim",
   enabled = true,
-  lazy = false,
+  lazy = true,
+  event = "BufReadPre",
   cmd = "Trouble",
   keys = {
     {

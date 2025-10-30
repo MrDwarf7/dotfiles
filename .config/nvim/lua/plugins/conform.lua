@@ -1,8 +1,9 @@
 local lang_tables = require("lang_tables")
+
 return {
   "stevearc/conform.nvim",
   event = "LspAttach",
-  -- lazy = false,
+  lazy = true,
   keys = {
     {
       "<Leader>lf",

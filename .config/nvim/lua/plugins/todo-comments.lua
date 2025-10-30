@@ -1,7 +1,7 @@
 return {
   "folke/todo-comments.nvim",
-  lazy = false,
-  event = "BufReadPost",
+  lazy = true,
+  -- event = "BufReadPost",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {
     -- stylua: ignore start

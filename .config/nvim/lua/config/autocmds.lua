@@ -42,6 +42,9 @@ vim.api.nvim_create_autocmd("FileType", {
   },
   callback = function()
     -- keymaps.map("n", "q", "<CMD>close<CR>")
-    vim.keymap.set("n", "q", "<CMD>bd<CR>", { silent = true, buffer = true })
+    vim.keymap.set("n", "q", function()
+      vim.api.nvim_buf_delete(0, { force = true })
+    end, { silent = true, buffer = true })
+    -- "<CMD>bd<CR>", { silent = true, buffer = true })
   end,
 })

@@ -1,8 +1,9 @@
 return {
   "zbirenbaum/copilot.lua",
+  lazy = true,
   cmd = "Copilot",
   build = ":Copilot auth",
-  event = "BufReadPost",
+  event = "LspAttach",
   opts = {
     suggestion = {
       -- this is the 'ghost_text' component

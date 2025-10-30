@@ -2,13 +2,12 @@ local lang_tables = require("lang_tables")
 
 return {
   "WhoIsSethDaniel/mason-tool-installer.nvim",
-  lazy = false,
-  -- lazy = true,
-  -- event = "VeryLazy",
-  event = "BufReadPost",
+  -- enabled = false,
+  lazy = false, -- swap this once all your local stuff is installed/setup :)
+  event = "WinLeave",
   dependencies = {
-    { "mason-org/mason.nvim", event = "BufReadPost" },
-    { "mason-org/mason-lspconfig.nvim", event = "BufReadPost" },
+    { "mason-org/mason.nvim", lazy = true },
+    { "mason-org/mason-lspconfig.nvim", lazy = true },
   },
 
   -- I don't really udnerstand why this works, but it does and helps
