@@ -1,16 +1,105 @@
 ---@meta
 ---@module 'utils.t'
 ---
----
----
----@class MsgData: unknown|vim.SystemCompleted
----
 
----
----@alias QfTypes "q"|"l"
----
+-------------------------------------------------
+---@class utils.Arch: utils.Base
+--- `true` if the current OS is Windows, otherwise `false`
+--- Checks both `vim.fn.has("win32")` and `has("win64")` versions.
+---@field __IS_WIN boolean
+---@field get_os fun(): EOperatingSystemEnum
+---@field get_os_lower fun(): EOperatingSystemEnumLower
+-------------------------------------------------
 
----@class utils.Output
+-------------------------------------------------
+---@class utils.AutoFmt
+---@field formatters_reset fun(): void
+---@field toggle_autoformat fun(effect_global?: boolean, bufnr?: number): void
+---@field setup fun(): utils.AutoFmt
+-------------------------------------------------
+
+-------------------------------------------------
+---@class utils.BufDel: utils.Base
+--- Safely handle buffer deletion operations.
+--- Includes type checks and user prompts for unsaved changes.
+---
+--- Delete a buffer:
+--- - either the current buffer if `buf` is not provided
+--- - or the buffer `buf` if it is a number
+--- - or every buffer for which `buf` returns true if it is a function
+---@field delete fun(opts?: utils.BufDel.Opts): utils.BufDel|nil
+--- Delete all buffers
+---@field all fun(opts?: utils.BufDel.Opts): nil
+--- Delete all buffers except the current one
+---@field other fun(opts?: utils.BufDel.Opts): utils.BufDel|nil
+
+---@class utils.BufDel.Opts
+---@field buf? number Buffer to delete. Defaults to the current buffer
+---@field file? string Delete buffer by file name. If provided, `buf` is ignored
+---@field force? boolean Delete the buffer even if it is modified
+---@field filter? fun(buf: number): boolean Filter buffers to delete
+---@field wipe? boolean Wipe the buffer instead of deleting it (see `:h :bwipeout`)
+-------------------------------------------------
+
+-------------------------------------------------
+---@generic P: PathBuf
+---@generic W: WindowsPathBuf
+---@class utils.Converter: utils.Base
+---@field __tostring fun(): string
+---@field __call fun(filepath: PathBuf): PathBuf
+---
+--- Pure function.
+---
+--- Strips leading and trailing slashes from a given filepath.
+---@field strip fun(filepath: PathBuf): PathBuf
+---
+---
+--- Pure function.
+---
+--- Transforms a *nix style path to a Windows style path.
+--- Removes the leading `/` and replaces all `/` with `\`.
+--- additionally adds the semicolon (`:`) required for Windows paths,
+--- and removes the trailing `/` character.
+---
+--- Will take a string like:
+--- `/C/Users/NAME/dotfiles/.config/nvim/`
+--- and transform it to:
+--- `C:\Users\NAME\dotfiles\.config\nvim`
+---
+---@field windows_path fun(d: PathBuf): WindowsPathBuf
+---
+--- Internal function.
+--- Old logic, now deprecreated that both `fullpath` and `relative` exist.
+--- Is still used as a fallback for other functions.
+---
+---@deprecated Use `utils.Converter.fullpath()` or `utils.Converter.relative()` instead.
+---@field _filepath fun(): PathBuf
+---
+---@field fullpath fun(opts?: { filepath?: PathBuf }): PathBuf
+---@field relative fun(opts?: { filepath?: PathBuf }): PathBuf
+-------------------------------------------------
+
+-------------------------------------------------
+
+---@class utils.List
+---@field find_qf fun(type: QfTypes): { winid: number, bufnr: number }[]
+--- Open the quickfix window if it is not empty,
+--- otherwise prints a message.
+---@field open_qf fun(): nil
+--- Open all loclist windows if they are not empty, otherwise prints a message.
+--- Switches before calling `lopen` to ensure the correct window is opened.
+---@field open_loclist_all fun(): nil
+--- Toggle the quickfix or loclist window on or off, depending on the type passed.
+---@field toggle_qf fun(type: QfTypes): nil
+-------------------------------------------------
+
+-------------------------------------------------
+---@class WinTable
+---@field winid number
+---@field bufnr number
+-------------------------------------------------
+
+---@class utils.Output: utils.Base
 --- `true` if the current Neovim version is `nvim-0.11`, otherwise `false`
 ---@field __HAS_NVIM_011 boolean
 --
@@ -71,25 +160,10 @@
 --- Then setting the metatable for `supports_method`, `request`, and `request_sync`
 ---@field lsp_get_clients fun(opts: { bufnr?: number, id?: number }): vim.lsp.Client[]
 -- local M = {}
+-------------------------------------------------
 
--- TODO: @types
-
----@class utils.Arch
---- `true` if the current OS is Windows, otherwise `false`
---- Checks both `vim.fn.has("win32")` and `has("win64")` versions.
----@field __IS_WIN boolean
----@field get_os fun(): EOperatingSystemEnum
----@field get_os_lower fun(): EOperatingSystemEnumLower
-
----@class utils.Sudo.sudo_exec.Opts
----@field cmd string The command to execute with sudo
----@field print_output? boolean Whether to print the output of the command, defaults to false
-
----@class utils.Sudo.sudo_write.Opts
----@field tmpfile? string The temporary file to use for writing
----@field filepath? string The file path to write to with sudo
-
----@class utils.Sudo
+-------------------------------------------------
+---@class utils.Sudo: utils.Base
 --- Registeres several user commands related to sudo operations.
 ---
 --- Currently registers:
@@ -113,3 +187,31 @@
 ---@field sudo_write fun(opts?: utils.Sudo.sudo_write.Opts): nil
 --
 -- prev ---@field sudo_write fun(tmpfile?: string, filepath?: string): nil
+-------------------------------------------------
+
+-------------------------------------------------
+---@class utils.Sudo.sudo_exec.Opts
+---@field cmd string The command to execute with sudo
+---@field print_output? boolean Whether to print the output of the command, defaults to false
+-------------------------------------------------
+
+-------------------------------------------------
+---@class utils.Sudo.sudo_write.Opts
+---@field tmpfile? string The temporary file to use for writing
+---@field filepath? string The file path to write to with sudo
+-------------------------------------------------
+
+-------------------------------------------------
+---@class utils.Base
+---@field debugging boolean
+-------------------------------------------------
+
+-------------------------------------------------
+---@class MsgData: unknown|vim.SystemCompleted
+-------------------------------------------------
+
+-------------------------------------------------
+---@alias QfTypes "q"|"l"
+-------------------------------------------------
+
+-- TODO: @types
