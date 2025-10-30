@@ -1,6 +1,15 @@
 #!/usr/bin/env fish
 #
 
+function has_newline_suffix
+    set -l t $argv
+    if string match -qr '\n$' -- $t
+        return 0
+    else
+        return 1
+    end
+end
+
 # The actual colorize function that does the work
 # uses the associated helper function for usage info
 #
@@ -23,17 +32,17 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     # Color mapping (like your hashmap)
     set -l color_code
     switch $color_name
-        case red
+        case red error fail
             set color_code "\033[31m"
-        case green
-            set color_code "\033[32m"
-        case yellow
+        case yellow warn
             set color_code "\033[33m"
+        case green good ok info
+            set color_code "\033[32m"
         case blue
             set color_code "\033[34m"
         case magenta purple
             set color_code "\033[35m"
-        case cyan
+        case cyan teal
             set color_code "\033[36m"
         case white
             set color_code "\033[37m"
@@ -69,9 +78,16 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     # printf "$color_code$full_text\033[0m"
     # printf "value of color_code: %s\n" $color_code
     # printf "%s%s\033[0m" $color_code $full_text
-    echo -en "$color_code$full_text\033[0m"
 
-    printf "\n"
+    if not test (has_newline_suffix $full_text)
+        # not string match -qr '\n$' -- $full_text
+        echo -en "$color_code$full_text\033[0m"
+    else
+        echo -en "$color_code$full_text\033[0m\n"
+    end
+
+    # if the last char is NOT a newline literal '\n' then we append one, otherwise return 0
+    # printf "\n"
 
     return 0
 end

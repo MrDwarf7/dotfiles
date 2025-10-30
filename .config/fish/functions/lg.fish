@@ -2,7 +2,7 @@
 #
 
 function lg
-    if test -z $argv
+    if test -z "$argv"
         alias lg lazygit $argv
         command lazygit $argv
     else

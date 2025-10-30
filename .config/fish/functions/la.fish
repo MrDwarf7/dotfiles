@@ -2,7 +2,7 @@
 #
 
 function la --description 'List all files including hidden files with details'
-    if test -z $LIST_CLIENT
+    if test -z "$LIST_CLIENT"
         printf "LIST_CLIENT is not set\n"
         set -gx LIST_CLIENT ls
         return 1

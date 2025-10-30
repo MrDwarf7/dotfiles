@@ -20,6 +20,7 @@
 05export_alias_if_pacman nvim vim nvim
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
+04export_onto_path_if_pacman rustup "$HOME/.cargo/bin" --prepend
 
 01eval_if_pacman zoxide "zoxide init fish | source"
 
