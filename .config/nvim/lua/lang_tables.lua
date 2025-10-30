@@ -327,10 +327,10 @@ function LangTables.get(category, subtype, wants_type)
   --   or "all"
 
   local wants = wants_type == WantsTypeE.all and "all"
-    or wants_type == WantsTypeE.ensure_installed and "ensure_installed"
-    or wants_type == WantsTypeE.disabled and "disabled"
-    or wants_type
-    or "all"
+      or wants_type == WantsTypeE.ensure_installed and "ensure_installed"
+      or wants_type == WantsTypeE.disabled and "disabled"
+      or wants_type
+      or "all"
 
   if wants == "disabled" then
     -- Return disabled items that are in this category/subtype
@@ -538,11 +538,11 @@ function LangTables.by_ft(typeof, ft, bufnr)
   end
 
   assert(
-    --
+  --
     typeof == "linter"
-      or typeof == "linters"
-      or typeof == "formatters"
-      or typeof == "formatter",
+    or typeof == "linters"
+    or typeof == "formatters"
+    or typeof == "formatter",
     "typeof must be 'linters' or 'formatters'"
   )
 

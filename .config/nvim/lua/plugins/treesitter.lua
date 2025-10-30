@@ -7,8 +7,10 @@ local lang_tables = require("lang_tables")
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = false,
+  -- lazy = false,
+  -- lazy = true,
   -- event = "BufReadPost",
+  -- event = "WinLeave",
   branch = "master",
   build = ":TSUpdate",
   opts = {
@@ -72,6 +74,19 @@ return {
     -- sync_install = true,
     auto_install = true,
   },
+
+  -- init = function()
+  --   if package.loaded["nvim-treesitter.configs"] then
+  --     return
+  --   end
+  --
+  --   vim.defer_fn(function()
+  --     if not package.loaded["nvim-treesitter.configs"] then
+  --       require("nvim-treesitter.configs").setup(require("plugins.treesitter").opts)
+  --     end
+  --   end, 80)
+  -- end,
+
   config = function(_, opts)
     opts = opts or {}
     require("nvim-treesitter.configs").setup(opts)

@@ -10,20 +10,20 @@ return {
   "folke/persistence.nvim",
   event = "BufReadPre",
   keys = {
-		-- stylua: ignore start
-		{ "<Leader>ss", function() require("persistence").load() end, desc = "Restore Session (cwd)" },
-		{ "<Leader>sf", function() require("persistence").select() end, desc = "Select Session" },
-		{ "<Leader>sl", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
-		{ "<Leader>sd", function() require("persistence").stop() end, desc = "Delete/Stop current Session" },
+    -- stylua: ignore start
+    { "<Leader>ss", function() require("persistence").load() end,                desc = "Restore Session (cwd)" },
+    { "<Leader>sf", function() require("persistence").select() end,              desc = "Select Session" },
+    { "<Leader>sl", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
+    { "<Leader>sd", function() require("persistence").stop() end,                desc = "Delete/Stop current Session" },
 
-		-- There's also this binding in lua/plugins/fzf-lua.lua:25
-		-- { "<Leader>sf", function() require("persistence").select() end,                     desc = "Select Session" },
+    -- There's also this binding in lua/plugins/fzf-lua.lua:25
+    -- { "<Leader>sf", function() require("persistence").select() end,                     desc = "Select Session" },
 
-		-- defaults as well
-		{ "<Leader>Qs", function() require("persistence").load() end, desc = "Restore Session (cwd)" },
-		{ "<Leader>QS", function() require("persistence").select() end, desc = "Select Session" },
-		{ "<Leader>Ql", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
-		{ "<Leader>Qd", function() require("persistence").stop() end, desc = "Delete/Stop current Session" },
+    -- defaults as well
+    { "<Leader>Qs", function() require("persistence").load() end,                desc = "Restore Session (cwd)" },
+    { "<Leader>QS", function() require("persistence").select() end,              desc = "Select Session" },
+    { "<Leader>Ql", function() require("persistence").load({ last = true }) end, desc = "Restore last Session" },
+    { "<Leader>Qd", function() require("persistence").stop() end,                desc = "Delete/Stop current Session" },
     -- stylua: ignore end
   },
 

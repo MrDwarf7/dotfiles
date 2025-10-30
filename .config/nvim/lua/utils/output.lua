@@ -138,6 +138,7 @@ function Output.git_root(cwd, noerr)
   return res.stdout:gsub("\n$", "")
 end
 
+-- TODO: Can be used for eg: fzf-lua stuff
 function Output.set_cwd(pwd)
   if not pwd then
     local parent = vim.fn.expand("%:h")

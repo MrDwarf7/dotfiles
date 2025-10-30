@@ -31,7 +31,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 --- Use 'q' to close quickfix, jumplist, and other help buffers
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "qf", "help", "checkhealth", "jumplist", "lspinfo" },
+  pattern = {
+    "neotest",
+    "neotest-output",
+    "qf",
+    "help",
+    "checkhealth",
+    "jumplist",
+    "lspinfo",
+  },
   callback = function()
     -- keymaps.map("n", "q", "<CMD>close<CR>")
     vim.keymap.set("n", "q", "<CMD>bd<CR>", { silent = true, buffer = true })

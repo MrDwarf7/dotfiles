@@ -17,6 +17,8 @@
 return {
   "ibhagwan/fzf-lua",
   lazy = false,
+  lazy = true,
+  event = "VimEnter",
   -- optional for icon support
   dependencies = {
     { "nvim-tree/nvim-web-devicons" },
@@ -24,75 +26,75 @@ return {
   -- or if using mini.icons/mini.nvim
   -- dependencies = { "nvim-mini/mini.icons" },
   keys = {
-		-- { "<Leader>fw", "<CMD>FzfLua live_grep<CR>", desc = "Find Files (cwd)" },
-		-- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
-		-- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
+    -- { "<Leader>fw", "<CMD>FzfLua live_grep<CR>", desc = "Find Files (cwd)" },
+    -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
+    -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
 
-		-- stylua: ignore start
-		-- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                                       desc = "Find Files (root=cwd)" },
-		{ "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                         desc = "Find Files (root=cwd)" },
-		-- TODO: This is a little janky, oil expects the oil buffer to be open to get the current dir.
-		{ "<Leader>fF", function() require("fzf-lua").files({ cwd = require("oil").get_current_dir() }) end,     desc = "Find Files (oil)" },
+    -- stylua: ignore start
+    -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                                       desc = "Find Files (root=cwd)" },
+    { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                         desc = "Find Files (root=cwd)" },
+    -- TODO: This is a little janky, oil expects the oil buffer to be open to get the current dir.
+    { "<Leader>fF", function() require("fzf-lua").files({ cwd = require("oil").get_current_dir() }) end,     desc = "Find Files (oil)" },
 
-		{ "<Leader>fr", function() require("fzf-lua").oldfiles() end,                                            desc = "Recent" },
-		{ "<Leader>fR", function() require("fzf-lua").oldfiles({ cwd = vim.uv.cwd() }) end,                      desc = "Recent (cwd)" },
+    { "<Leader>fr", function() require("fzf-lua").oldfiles() end,                                            desc = "Recent" },
+    { "<Leader>fR", function() require("fzf-lua").oldfiles({ cwd = vim.uv.cwd() }) end,                      desc = "Recent (cwd)" },
 
-		{ "<Leader>fz", function() require("fzf-lua").zoxide() end,                                              desc = "Find via Zoxide" },
-		{ "<Leader>fb", function() require("fzf-lua").buffers() end,                                             desc = "Find Buffers" },
+    { "<Leader>fz", function() require("fzf-lua").zoxide() end,                                              desc = "Find via Zoxide" },
+    { "<Leader>fb", function() require("fzf-lua").buffers() end,                                             desc = "Find Buffers" },
 
-		{ "<Leader>fg", function() require("fzf-lua").git_files({ cwd = vim.uv.cwd() }) end,                     desc = "Find Git Files (root=cwd)" },
-		-- { "<Leader>fg", function() require("fzf-lua").git_files({ root = false, cwd = vim.uv.cwd() }) end,                     desc = "Find Git Files (root=cwd)" },
-		{ "<Leader>fG", function() require("fzf-lua").git_files({ cwd = require("oil").get_current_dir() }) end, desc = "Find Git Files (oil)" },
+    { "<Leader>fg", function() require("fzf-lua").git_files({ cwd = vim.uv.cwd() }) end,                     desc = "Find Git Files (root=cwd)" },
+    -- { "<Leader>fg", function() require("fzf-lua").git_files({ root = false, cwd = vim.uv.cwd() }) end,                     desc = "Find Git Files (root=cwd)" },
+    { "<Leader>fG", function() require("fzf-lua").git_files({ cwd = require("oil").get_current_dir() }) end, desc = "Find Git Files (oil)" },
 
-		{ "<Leader>fw", function() require("fzf-lua").live_grep({ cwd = vim.uv.cwd() }) end,                     desc = "Grep (cwd)" },
-		{ "<Leader>fW", function() require("fzf-lua").live_grep() end,                                           desc = "Grep (Root Dir)" },
+    { "<Leader>fw", function() require("fzf-lua").live_grep({ cwd = vim.uv.cwd() }) end,                     desc = "Grep (cwd)" },
+    { "<Leader>fW", function() require("fzf-lua").live_grep() end,                                           desc = "Grep (Root Dir)" },
 
-		{ "<Leader>fl", function() require("fzf-lua").resume() end,                                              desc = "Resume latest" },
+    { "<Leader>fl", function() require("fzf-lua").resume() end,                                              desc = "Resume latest" },
 
-		{ "<Leader>fP", function() require("fzf-lua").profiles() end,                                            desc = "Profiles picker" },
+    { "<Leader>fP", function() require("fzf-lua").profiles() end,                                            desc = "Profiles picker" },
 
-		-- persistence / persistence.nvim
-		{ "<Leader>sf", function() require("persistence").select() end,                                          desc = "Select Session" },
-		{ "<Leader>fS", function() require("persistence").select() end,                                          desc = "Select Session" },
+    -- persistence / persistence.nvim
+    { "<Leader>sf", function() require("persistence").select() end,                                          desc = "Select Session" },
+    { "<Leader>fS", function() require("persistence").select() end,                                          desc = "Select Session" },
 
-		{ "<Leader>gc", function() require("fzf-lua").git_commits() end,                                         desc = "Commits" },
-		{ "<Leader>gs", function() require("fzf-lua").git_status() end,                                          desc = "Status" },
+    { "<Leader>gc", function() require("fzf-lua").git_commits() end,                                         desc = "Commits" },
+    { "<Leader>gs", function() require("fzf-lua").git_status() end,                                          desc = "Status" },
 
-		{ '<Leader>f"', function() require("fzf-lua").registers() end,                                           desc = "Registers" },
-		{ "<Leader>fa", function() require("fzf-lua").autocmds() end,                                            desc = "Autocmds" },
+    { '<Leader>f"', function() require("fzf-lua").registers() end,                                           desc = "Registers" },
+    { "<Leader>fa", function() require("fzf-lua").autocmds() end,                                            desc = "Autocmds" },
 
-		{ "<Leader>/",  function() require("fzf-lua").grep_curbuf() end,                                         desc = "Grep Buffer" },
+    { "<Leader>/",  function() require("fzf-lua").grep_curbuf() end,                                         desc = "Grep Buffer" },
 
 
-		{ "<Leader>fq", function() require("fzf-lua").command_history() end,                                     desc = "Command History" },
-		{ "<Leader>fQ", function() require("fzf-lua").commands() end,                                            desc = "Command" },
+    { "<Leader>fq", function() require("fzf-lua").command_history() end,                                     desc = "Command History" },
+    { "<Leader>fQ", function() require("fzf-lua").commands() end,                                            desc = "Command" },
 
-		{ "<Leader>fd", function() require("fzf-lua").diagnostics_document() end,                                desc = "Diag - Document" },
-		{ "<Leader>fD", function() require("fzf-lua").diagnostics_workspace() end,                               desc = "Diag - Workspace" },
+    { "<Leader>fd", function() require("fzf-lua").diagnostics_document() end,                                desc = "Diag - Document" },
+    { "<Leader>fD", function() require("fzf-lua").diagnostics_workspace() end,                               desc = "Diag - Workspace" },
 
-		{ "<Leader>ld", function() require("fzf-lua").diagnostics_workspace() end,                               desc = "Diag - Workspace" },
-		{ "<Leader>lD", function() require("fzf-lua").diagnostics_document() end,                                desc = "Diag - Document" },
+    { "<Leader>ld", function() require("fzf-lua").diagnostics_workspace() end,                               desc = "Diag - Workspace" },
+    { "<Leader>lD", function() require("fzf-lua").diagnostics_document() end,                                desc = "Diag - Document" },
 
-		{ "<Leader>fM", function() require("fzf-lua").man_pages() end,                                           desc = "Man Pages" },
-		{ "<Leader>fh", function() require("fzf-lua").help_tags() end,                                           desc = "Help Pages" },
+    { "<Leader>fM", function() require("fzf-lua").man_pages() end,                                           desc = "Man Pages" },
+    { "<Leader>fh", function() require("fzf-lua").help_tags() end,                                           desc = "Help Pages" },
 
-		{ "<Leader>fH", function() require("fzf-lua").highlights() end,                                          desc = "Highlights" },
+    { "<Leader>fH", function() require("fzf-lua").highlights() end,                                          desc = "Highlights" },
 
-		{ "<Leader>fj", function() require("fzf-lua").jumps() end,                                               desc = "Jump List" },
-		-- TODO: this isn't indexing 'builtin' keymaps (like marks via `'` or `\`` for instance)
-		{ "<Leader>fk", function() require("fzf-lua").keymaps() end,                                             desc = "Keymaps" },
-		{ "<Leader>fL", function() require("fzf-lua").loclist() end,                                             desc = "Loc-List" },
+    { "<Leader>fj", function() require("fzf-lua").jumps() end,                                               desc = "Jump List" },
+    -- TODO: this isn't indexing 'builtin' keymaps (like marks via `'` or `\`` for instance)
+    { "<Leader>fk", function() require("fzf-lua").keymaps() end,                                             desc = "Keymaps" },
+    { "<Leader>fL", function() require("fzf-lua").loclist() end,                                             desc = "Loc-List" },
 
-		{ "<Leader>fm", function() require("fzf-lua").marks() end,                                               desc = "Marks" },
-		{ "<Leader>f'", function() require("fzf-lua").marks() end,                                               desc = "Marks" },
+    { "<Leader>fm", function() require("fzf-lua").marks() end,                                               desc = "Marks" },
+    { "<Leader>f'", function() require("fzf-lua").marks() end,                                               desc = "Marks" },
 
-		{ "<Leader>fc", function() require("fzf-lua").grep_cword({ root = false }) end,                          desc = "Word (cwd)" },
-		{ "<Leader>fC", function() require("fzf-lua").grep_cword() end,                                          desc = "Word (Root)" },
+    { "<Leader>fc", function() require("fzf-lua").grep_cword({ root = false }) end,                          desc = "Word (cwd)" },
+    { "<Leader>fC", function() require("fzf-lua").grep_cword() end,                                          desc = "Word (Root)" },
 
-		{ "<Leader>fc", function() require("fzf-lua").grep_visual({ root = false }) end,                         mode = "v",                        desc = "Selection (cwd)" },
-		{ "<Leader>fC", function() require("fzf-lua").grep_visual() end,                                         mode = "v",                        desc = "Selection (Root)" },
+    { "<Leader>fc", function() require("fzf-lua").grep_visual({ root = false }) end,                         mode = "v",                        desc = "Selection (cwd)" },
+    { "<Leader>fC", function() require("fzf-lua").grep_visual() end,                                         mode = "v",                        desc = "Selection (Root)" },
 
-		{ "<Leader>fu", function() require("fzf-lua").colorschemes() end,                                        desc = "Colorschemes" },
+    { "<Leader>fu", function() require("fzf-lua").colorschemes() end,                                        desc = "Colorschemes" },
     -- stylua: ignore end
   },
 
@@ -219,73 +221,7 @@ return {
           -- ["alt-q"] = actions.file_sel_to_qf,
         },
       },
-
-      -- buffers = {
-      -- keymap = {
-      --   builtin = {
-      --     ["<C-d>"] = false,
-      --   },
-      -- },
-      -- actions = {
-      --   ["ctrl-x"] = {
-      --     actions.buf_del,
-      --     reload = true,
-      --   },
-      --   ["ctrl-d"] = {
-      --     actions.buf_del,
-      --     reload = true,
-      --   },
-      -- },
-      -- },
     }
     return opts
   end,
 }
-
--- opts = {
---   fzf_bin = "fzf",
---   -- fzf_bin = "sk",  -- skim
---   -- fzf_bin = "other",  -- supports other fzf-compatible binaries
---
---   fzf_colors = true, -- will 'auto-generate' based on colorscheme
---   keymap = {
---     builtin = {
---       true,
---       ["ctrl-u"] = "preview-page-up",
---       ["ctrl-d"] = "preview-page-down",
---     },
---     fzf = {
---       true,
---       ["ctrl-u"] = "preview-page-up",
---       ["ctrl-d"] = "preview-page-down",
---     },
---   },
---   -- TODO: Docs site using `FzfLua` but it's not global until the
---   -- module itself is initialized tf...?
---   --
---   actions = {
---     files = {
---       ["ctrl-q"] = actions.file_sel_to_qf,
---       ["ctrl-l"] = actions.file_sel_to_ll,
---     },
---   },
---   buffers = {
---     keymap = {
---       builtin = {
---         ["<C-d>"] = false,
---       },
---       actions = {
---         ["<C-d>"] = { actions.buf_del, actions.resume },
---       },
---     },
---   },
---
---   -- fzf_opts = {
---   -- }
---
---   lsp = {
---     jump1 = true,
---     -- jump1_action = FzfLua.actions.file_edit,
---     -- includeDeclaration = false,
---   },
--- },
