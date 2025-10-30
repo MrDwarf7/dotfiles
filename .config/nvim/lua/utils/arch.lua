@@ -1,6 +1,8 @@
 --
 ---@class utils.Arch
-local Arch = {}
+local Arch = {
+  debugging = false,
+}
 
 Arch.__IS_WIN = vim.fn.has("win32") == 1 or vim.fn.has("win64") == 1
 

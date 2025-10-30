@@ -1,19 +1,6 @@
 --
 ---@class utils.List
----@field find_qf fun(type: QfTypes): { winid: number, bufnr: number }[]
---- Open the quickfix window if it is not empty,
---- otherwise prints a message.
----@field open_qf fun(): nil
---- Open all loclist windows if they are not empty, otherwise prints a message.
---- Switches before calling `lopen` to ensure the correct window is opened.
----@field open_loclist_all fun(): nil
---- Toggle the quickfix or loclist window on or off, depending on the type passed.
----@field toggle_qf fun(type: QfTypes): nil
 local List = {}
-
----@class WinTable
----@field winid number
----@field bufnr number
 
 --- Pass "q" to find quickfix window
 --- Pass "l" to find all loclist windows
@@ -22,7 +9,7 @@ local List = {}
 function List.find_qf(type)
   local wininfo = vim.fn.getwininfo()
 
-  ---@type WinTable[]?
+  ---@type WinTable[]
   local win_tbl = {}
 
   -- direct indexing into a variable makes life fun. Trust me bro
@@ -46,35 +33,35 @@ end
 
 --- Open quickfix if not empty
 function List.open_qf()
-	-- stylua: ignore start
-	local qf_name = "quickfix"
-	local qf_empty = function() return vim.tbl_isempty(vim.fn.getqflist()) end
+  -- stylua: ignore start
+  local qf_name = "quickfix"
+  local qf_empty = function() return vim.tbl_isempty(vim.fn.getqflist()) end
 
-	if not qf_empty() then
-		vim.cmd("copen")
-		vim.cmd("wincmd J")
-	else
-		print(string.format("%s is empty.", qf_name))
-	end
+  if not qf_empty() then
+    vim.cmd("copen")
+    vim.cmd("wincmd J")
+  else
+    print(string.format("%s is empty.", qf_name))
+  end
   -- stylua: ignore end
 end
 
 function List.open_loclist_all()
-	-- stylua: ignore start
-	local wininfo = vim.fn.getwininfo()
-	local qf_name = "loclist"
-	local qf_empty = function(winnr) return vim.tbl_isempty(vim.fn.getloclist(winnr)) end
-	for _, win in pairs(wininfo) do
-		if win["quickfix"] == 0 then
-			if not qf_empty(win["winnr"]) then
-				-- switch active window before ':lopen'
-				vim.api.nvim_set_current_win(win["winid"])
-				vim.cmd("lopen")
-			else
-				print(string.format("%s is empty.", qf_name))
-			end
-		end
-	end
+  -- stylua: ignore start
+  local wininfo = vim.fn.getwininfo()
+  local qf_name = "loclist"
+  local qf_empty = function(winnr) return vim.tbl_isempty(vim.fn.getloclist(winnr)) end
+  for _, win in pairs(wininfo) do
+    if win["quickfix"] == 0 then
+      if not qf_empty(win["winnr"]) then
+        -- switch active window before ':lopen'
+        vim.api.nvim_set_current_win(win["winid"])
+        vim.cmd("lopen")
+      else
+        print(string.format("%s is empty.", qf_name))
+      end
+    end
+  end
   -- stylua: ignore end
 end
 

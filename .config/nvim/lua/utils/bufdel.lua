@@ -1,33 +1,18 @@
--- ---@class utils.BufDel
--- local BufDel = {}
-
 ---@class utils.BufDel
----@field delete fun(opts?: utils.BufDel.Opts): nil
----@field all fun(opts?: utils.BufDel.Opts): nil
----@field other fun(opts?: utils.BufDel.Opts): nil
-local BufDel = setmetatable({}, {
-  __call = function(t, ...)
-    return t.delete(...)
-  end,
-})
+local BufDel = {
+  debugging = false,
+}
+-- local BufDel = setmetatable({}, {
+--   __call = function(t, ...)
+--     return t.delete(...)
+--   end,
+-- })
 
----@class utils.BufDel.Opts
----@field buf? number Buffer to delete. Defaults to the current buffer
----@field file? string Delete buffer by file name. If provided, `buf` is ignored
----@field force? boolean Delete the buffer even if it is modified
----@field filter? fun(buf: number): boolean Filter buffers to delete
----@field wipe? boolean Wipe the buffer instead of deleting it (see `:h :bwipeout`)
-
---- Delete a buffer:
---- - either the current buffer if `buf` is not provided
---- - or the buffer `buf` if it is a number
---- - or every buffer for which `buf` returns true if it is a function
----@param opts? number|utils.BufDel.Opts
 function BufDel.delete(opts)
+  ---@cast opts utils.BufDel.Opts|nil
   opts = opts or {}
   opts = type(opts) == "number" and { buf = opts } or opts
   opts = type(opts) == "function" and { filter = opts } or opts
-  ---@cast opts utils.BufDel.Opts
 
   if type(opts.filter) == "function" then
     for _, b in ipairs(vim.tbl_filter(opts.filter, vim.api.nvim_list_bufs())) do
@@ -53,10 +38,11 @@ function BufDel.delete(opts)
 
   -- Check if the buffer is modified
   if vim.bo[buf].modified and not opts.force then
-    local ok, choice = pcall(vim.fn.confirm, ("Save changes to %q?"):format(vim.fn.bufname(buf)), "&Yes\n&No\n&Cancel")
+    local ok, choice =
+        pcall(vim.fn.confirm, ("Save changes to %q?"):format(vim.fn.bufname(buf)), "&Yes\n&No\n&Cancel")
     if not ok or choice == 0 or choice == 3 then -- 0 for <Esc>/<C-c> and 3 for Cancel
       return
-    elseif choice == 1 then -- Yes
+    elseif choice == 1 then                    -- Yes
       vim.api.nvim_buf_call(buf, vim.cmd.write)
     end
   end
@@ -87,10 +73,10 @@ function BufDel.delete(opts)
   if vim.api.nvim_buf_is_valid(buf) then
     pcall(vim.cmd, (opts.wipe and "bwipeout! " or "bdelete! ") .. buf)
   end
+
+  return BufDel
 end
 
---- Delete all buffers
----@param opts? utils.BufDel.Opts
 function BufDel.all(opts)
   return BufDel.delete(vim.tbl_extend("force", {}, opts or {}, {
     filter = function()
@@ -99,8 +85,6 @@ function BufDel.all(opts)
   }))
 end
 
---- Delete all buffers except the current one
----@param opts? utils.BufDel.Opts
 function BufDel.other(opts)
   return BufDel.delete(vim.tbl_extend("force", {}, opts or {}, {
     filter = function(b)
@@ -110,8 +94,15 @@ function BufDel.other(opts)
 end
 
 function BufDel.setup()
-  return BufDel
+  return setmetatable(BufDel, {
+    -- __call = function(t, ...)
+    --   return t.delete(...)
+    -- end,
+    __call = BufDel.delete,
+    __index = BufDel,
+  })
+  -- return BufDel
 end
 
 ---@return utils.BufDel
-return BufDel
+return BufDel.setup()
