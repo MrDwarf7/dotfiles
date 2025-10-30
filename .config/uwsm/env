@@ -12,7 +12,9 @@ export GDK_BACKEND=wayland,x11
 #
 export QT_QPA_PLATFORM=wayland
 #;xcb
+# TODO: This mayyyyy be breaking some things? (Games - eg: Valve's "Deadlock" title)
 export SDL_VIDEODRIVER=wayland # Set to x11 if games that provider older version of SDL have compat. issues
+
 export CLUTTER_BACKEND=wayland
 
 # XDG Specifications
