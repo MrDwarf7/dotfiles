@@ -6,6 +6,7 @@ require("config.keymaps")
 require("config.autocmds")
 
 local lsp = require("config.lsp")
+---@diagnostic disable-next-line: unused-local
 local utils = require("utils")
 -- require("utils.output").info("Just call require utils in the MAIN init.lua!")
 

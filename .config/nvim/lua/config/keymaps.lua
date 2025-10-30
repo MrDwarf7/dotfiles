@@ -78,20 +78,20 @@ function Keymaps.map(mode, lhs, rhs, opts)
 
   -- NOTE: revise this later
   if
-    mode == nil
-    or (type(mode) == "string" and mode:match("^[nivxosct]$") == nil)
-    or (
-      type(mode) == "table"
-      and #mode > 0
-      and not vim.tbl_contains(mode, "n")
-      and not vim.tbl_contains(mode, "i")
-      and not vim.tbl_contains(mode, "v")
-      and not vim.tbl_contains(mode, "x")
-      and not vim.tbl_contains(mode, "s")
-      and not vim.tbl_contains(mode, "o")
-      and not vim.tbl_contains(mode, "t")
-      and not vim.tbl_contains(mode, "c")
-    )
+      mode == nil
+      or (type(mode) == "string" and mode:match("^[nivxosct]$") == nil)
+      or (
+        type(mode) == "table"
+        and #mode > 0
+        and not vim.tbl_contains(mode, "n")
+        and not vim.tbl_contains(mode, "i")
+        and not vim.tbl_contains(mode, "v")
+        and not vim.tbl_contains(mode, "x")
+        and not vim.tbl_contains(mode, "s")
+        and not vim.tbl_contains(mode, "o")
+        and not vim.tbl_contains(mode, "t")
+        and not vim.tbl_contains(mode, "c")
+      )
   then
     -- default to normal mode
     mode = "n"
@@ -188,17 +188,17 @@ map("i", "kj", "<Esc>", silent_opts)
 
 -- -------------------- goofy ahh line/yank binds
 
-map("n", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-map("n", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
+map("n", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
+map("n", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
 
-map("v", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
-map("v", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
+map("v", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
+map("v", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
 
-map("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
-map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
+map("n", "y<S-h>", "y^", silent_opts)                   -- Same as above for yanking
+map("n", "y<S-l>", "y$", silent_opts)                   -- Same as above for yanking
 
-map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
-map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
+map("n", "d<S-h>", "d^", silent_opts)                   -- Same as above for yanking
+map("n", "d<S-l>", "d$", silent_opts)                   -- Same as above for yanking
 
 map("n", "<C-w>e", "<C-w>=", silent_opts("[e]qualize")) -- ctrl + w + = : easier to hit to equalize the width of buffers
 
@@ -312,10 +312,13 @@ map("n", "[b", "<CMD>bprevious<cr>", { desc = "[p]revious" })
 
 -- TODO: @plugin -- replace with BufDel impl in utils.bufdel later
 map("n", "<Leader>bd", function()
-  vim.api.nvim_buf_delete(0, { unload = true })
+  require("utils.bufdel").delete()
+  -- vim.api.nvim_buf_delete(0, { unload = true })
 end, silent_opts("[b]uf [d]elete"))
+
 map("n", "<Leader>bD", function()
-  vim.api.nvim_buf_delete(0, { force = true })
+  require("utils.bufdel").other()
+  -- vim.api.nvim_buf_delete(0, { force = true })
 end, silent_opts("[b]uf Wipe"))
 -- map("n", "<Leader>bD", vim., silent_opts("[p]revious"))
 
