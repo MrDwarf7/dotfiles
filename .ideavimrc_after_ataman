@@ -119,7 +119,7 @@ map <A-a> :action copilot.applyInlays
 inoremap kj <ESC>
 inoremap jk <ESC>
 " inoremap jj <ESC>
-inoremap kk <ESC>
+"inoremap kk <ESC>
 inoremap <S-CR> <CR>
 
 nnoremap <ESC> :noh<CR><ESC>
@@ -178,11 +178,11 @@ nnoremap zf :action ExpandRegion<CR>
 vnoremap <A-j> :action :m'>+<CR>gv=gv
 vnoremap <A-k> :action :m-2<CR>gv=gv
 
-vnoremap <A-j> :action MoveLineDown<CR>
-nnoremap <A-j> :action MoveLineDown<CR>
-
-vnoremap <A-k> :action MoveLineUp<CR>
-nnoremap <A-k> :action MoveLineUp<CR>
+"vnoremap <A-j> :action MoveLineDown<CR>
+"nnoremap <A-j> :action MoveLineDown<CR>
+"
+"vnoremap <A-k> :action MoveLineUp<CR>
+"nnoremap <A-k> :action MoveLineUp<CR>
 
 
 " Navigation specific binds -------------------------
@@ -230,8 +230,12 @@ map <S-l> $
 
 nnoremap <C-w>q :action CloseContent<CR>
 
-nnoremap gR :action FindUsages<CR>
-vnoremap gR :action  FindUsages<CR>
+" JB has since fixed the inability to bind gr, so we don't need gR anymore
+"nnoremap gR :action FindUsages<CR>
+"vnoremap gR :action  FindUsages<CR>
+
+nnoremap gr :action FindUsages<CR>
+vnoremap gr :action FindUsages<CR>
 
 
 " Toggle reader/easy read whatever - Only for the current doc comment
