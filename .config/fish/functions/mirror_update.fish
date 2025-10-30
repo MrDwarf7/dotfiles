@@ -1,23 +1,23 @@
 #!/usr/bin/env fish
 #
 
-# Updates the mirrorlist via rate-mirrors
-# Output to a temp file, then copies the mirrorlist to a backup and replaces it with the new one
-#
-# Dependencies:
-#   rate-mirrors
-# System Dependencies:
-#   sudo, mktemp, mv, cp, pacman, yay/paru, chown, echo, paccache
-#
-# Globals Variables:
-#   PKG_MANAGER (yay/paru)
-#
-# Calls:
-#   ua_drop_caches
-#
-# Returns:
-#   $status ($status != 0, otherwise 0)
 function mirror_update --description 'Update the mirrorlist using rate-mirrors'
+    # Updates the mirrorlist via rate-mirrors
+    # Output to a temp file, then copies the mirrorlist to a backup and replaces it with the new one
+    #
+    # Dependencies:
+    #   rate-mirrors
+    # System Dependencies:
+    #   sudo, mktemp, mv, cp, pacman, yay/paru, chown, echo, paccache
+    #
+    # Globals Variables:
+    #   PKG_MANAGER (yay/paru)
+    #
+    # Calls:
+    #   ua_drop_caches
+    #
+    # Returns:
+    #   $status ($status != 0, otherwise 0)
     if test -z "$PKG_MANAGER"
         printf "NOTE: PKG_MANAGER not set, defaulting to paru if installed.\n"
         if test -z (command -v paru)
@@ -81,14 +81,14 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     return 0
 end
 
-# Runs the rate-mirrors command to write the mirrorlist to a file
-# System Dependencies:
-#
-# Arguments:
-#   $argv[1] - mirror_listfile - The file to write the mirrorlist to
-#   $argv[2] - country - The entry country to use for the mirrorlist (default: AUS)
-#   $argv[3] - distro - The distro that the mirrorlist is for (default: arch)
 function write_mirrorlist --description 'Write the current mirrorlist to a file'
+    # Runs the rate-mirrors command to write the mirrorlist to a file
+    # System Dependencies:
+    #
+    # Arguments:
+    #   $argv[1] - mirror_listfile - The file to write the mirrorlist to
+    #   $argv[2] - country - The entry country to use for the mirrorlist (default: AUS)
+    #   $argv[3] - distro - The distro that the mirrorlist is for (default: arch)
     set mirror_list_file $argv[1]
     if not test -n "$mirror_list_file" || test -z "$mirror_list_file"
         printf "No mirror list file specified, using default: /tmp/mirrorlist\n"

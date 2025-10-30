@@ -8,7 +8,7 @@ function zln --wraps=source --description 'zellij new/start'
     end
 
     # only `zln`
-    if test -z $argv
+    if test -z "$argv"
         command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n") || return $status
         return 0
     end
