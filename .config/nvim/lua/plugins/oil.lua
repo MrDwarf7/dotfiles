@@ -1,4 +1,4 @@
-local converter = require("utils.converter")
+local Converter = require("utils.converter")
 -- local map = vim.keymap.set
 
 return {
@@ -9,8 +9,8 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons", lazy = true, event = "VimEnter" },
   priority = 999,
   keys = {
-    { "<Leader>e", "<CMD>Oil<CR>", desc = "Oily" },
-    { "<C-w>E", "<CMD>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
+    { "<Leader>e", "<CMD>Oil<CR>",                              desc = "Oily" },
+    { "<C-w>E",    "<CMD>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
   },
 
   init = function()
@@ -85,20 +85,15 @@ return {
 
       -- directory path
       ["<Leader>yc"] = function()
-        vim.fn.setreg("+", converter.handle_filepath()) -- write to clippoard
+        -- vim.fn.setreg("+", Converter._filepath()) -- write to clippoard
+        vim.fn.setreg("+", Converter.fullpath())
       end,
-      -- { desc = "[c]urrent", noremap = true, silent = true },
 
       -- full_path (incl. filename + extension)
       ["<leader>yC"] = function()
-        -- local filepath = vim.fn.expand("%")
-        -- filepath = converter.handle_filepath(filepath)
-        -- vim.fn.setreg("+", filepath) -- write to clippoard
-        vim.fn.setreg("+", converter.handle_filepath()) -- write to clippoard
+        -- vim.fn.setreg("+", Converter._filepath())
+        vim.fn.setreg("+", Converter.relative())
       end,
-      -- desc = "[c]urrent",
-      -- noremap = true,
-      -- silent = true,
 
       ["<Leader>f/"] = "<CMD>Oil<Tab>",
     },
