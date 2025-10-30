@@ -22,6 +22,7 @@ return {
 				path = "E:/Obsidian/StoneVault",
 			},
 		},
+
 		notes_subdir = "1. Daily Notes",
 		log_level = vim.log.levels.INFO, -- This IS exposed!
 

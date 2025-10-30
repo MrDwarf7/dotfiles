@@ -1,3 +1,6 @@
 lsp/stock_nvim_configs/
 lsp/stock_nvim_configs/*
 lua/config/*_bak.lua
+
+./Second.vim
+./Session.vim
