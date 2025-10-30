@@ -1,0 +1,562 @@
+/*****************************************************************************/
+/*                                   THEMES                                  */
+/*****************************************************************************/
+
+/* vimium-zen-theme */
+
+
+
+
+:root {
+  --font-size: 16px;
+  --font-size-title: 18px;
+  --font-size-hints: 16px;
+  --font-size-url: 12px;
+
+  --font-weight: normal;
+  --font-weight-medium: medium;
+  --font-weight-bold: bold;
+
+  --font: "Fira Code", "JetBrains Mono", "Fira Sans", "Arial", sans-serif;
+  /* --font: "Cantarell", "Noto Serif", "Arial", sans-serif; */
+  /* --font: "Helvetica Neue", "Helvetica", "Arial", sans-serif; */
+
+  --padding: 2px;
+  --padding-vomnibar: 10px 0;
+  --shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
+  --blur: 40px;
+
+  /* Vomnibar & hud */
+  --fg: #fff;
+  --fg-dark: #c9c9c9;
+  --fg-match: #fff;
+  --fg-url: #aaaaaa;
+
+  /* --bg: #202020; */
+  /* #00b4ff; */
+  /* #005a80; */
+  /* #1a6b8d; */
+  /* #005173; */
+  /* #004773; */
+
+  --bg: #202020;
+  --hinted-out-color: #003366;
+
+
+  /* We do want this - but bg is also set for a BUNCH of other stuff */
+  /* --bg: #003366; */
+  --bg-selected: rgba(150, 150, 150, 0.3);
+
+  --border: #38373e;
+
+  /* Hints inner text color */
+  --fg-hints: #fff;
+
+  /* --fg-hints: #00b4ff; */
+
+}
+
+.vimium-reset,
+div.vimium-reset,
+span.vimium-reset,
+table.vimium-reset,
+a.vimium-reset,
+a:visited.vimium-reset,
+a:link.vimium-reset,
+a:hover.vimium-reset,
+td.vimium-reset,
+tr.vimium-reset {
+  font-family: var(--font);
+}
+
+/* CSS */
+
+/* Vomnibar */
+
+#vomnibar {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  /* ORIGINAL  */
+  /* border-radius: 15px; */
+  overflow: hidden;
+  left: 50%;
+  margin-left: -400px;
+  max-width: 800px;
+}
+
+/* Animate Slide in */
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* #vomnibar-frame #vimium-ui-component-visible { */
+/**/
+/**/
+/* } */
+
+
+#vomnibar #vomnibar-search-area,
+#vomnibar input {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar #vomnibar-search-area {
+  font-family: var(--font);
+  padding: 14px 50px;
+  border-radius: 6px;
+}
+
+#vomnibar input {
+  font-family: var(--font);
+  border: none;
+  padding: var(--padding);
+}
+
+#vomnibar #vomnibar-search-area::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z' stroke='%23dfdfdf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+}
+
+.no-insert-text {
+  /* font-family: var(--font); */
+  display: none;
+}
+
+#vomnibar ul {
+  font-family: var(--font);
+  /* ORIGINAL  */
+  /* background: transparent; */
+  border-top: 2px solid var(--border);
+  margin: 0 15px;
+  margin-bottom: 5px;
+  padding: var(--padding-vomnibar);
+}
+
+#vomnibar li {
+  font-family: var(--font);
+  border-bottom: none;
+  /* NEW */
+  border-radius: 8px;
+  padding: 15px;
+}
+
+#vomnibar li .top-half {
+  font-family: var(--font);
+  padding: var(--padding);
+}
+
+#vomnibar li .bottom-half {
+  font-family: var(--font);
+  padding: 0px 0px 0px 2px;
+  margin: 2px;
+}
+
+#vomnibar li .source {
+  color: var(--fg-dark);
+  font-family: var(--font);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
+}
+
+#vomnibar li em,
+#vomnibar li .title {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .url {
+  color: var(--fg-url);
+  font-family: var(--font);
+  font-size: var(--font-size-url);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .match {
+  font-family: var(--font);
+  color: var(--fg-match);
+}
+
+#vomnibar li .title .match {
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: bold;
+}
+
+#vomnibar li.selected {
+  font-family: var(--font);
+  background-color: var(--bg-selected);
+  backdrop-filter: blur(20px);
+  /* ORIGINAL  */
+  /* border-radius: 8px; */
+}
+
+#vomnibar li.selected .url {
+  font-family: var(--font);
+  color: var(--fg-url);
+}
+
+#vomnibar li.selected .match {
+  font-family: var(--font);
+  color: var(--fg);
+}
+
+/* Hints Marks*/
+
+#vimium-hint-marker-container div.internal-vimium-hint-marker,
+#vimium-hint-marker-container div.vimiumHintMarker {
+  /* ORIGINAL */
+  /* background: var(--bg); */
+  background: var(--hinted-out-color);
+  border: none;
+  box-shadow: var(--shadow);
+  padding: 3px 4px;
+}
+
+#vimium-hint-marker-container div span {
+  color: var(--fg-hints);
+  font-family: var(--font);
+  font-size: var(--font-size-hints);
+  font-weight: var(--font-weight-bold);
+  text-shadow: none;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter {
+  opacity: 0.3;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter~span {
+  color: var(--fg-hints);
+}
+
+/* Hud */
+
+#hud-container {
+  background: var(--border);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+#hud-container span#hud-find-input,
+#hud-container #hud {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 13;
+  font-weight: var(--font-weight-medium);
+}
+
+#hud-container .hud-find {
+  background-color: transparent;
+  border: none;
+}
+
+#hud-container #search-area {
+  background-color: transparent;
+  padding: 6px;
+}
+/*****************************************************************************/
+/*                                   THEMES                                  */
+/*****************************************************************************/
+
+/* vimium-zen-theme */
+
+
+
+
+:root {
+  --font-size: 16px;
+  --font-size-title: 18px;
+  --font-size-hints: 16px;
+  --font-size-url: 12px;
+
+  --font-weight: normal;
+  --font-weight-medium: medium;
+  --font-weight-bold: bold;
+
+  --font: "Fira Code", "JetBrains Mono", "Fira Sans", "Arial", sans-serif;
+  /* --font: "Cantarell", "Noto Serif", "Arial", sans-serif; */
+  /* --font: "Helvetica Neue", "Helvetica", "Arial", sans-serif; */
+
+  --padding: 2px;
+  --padding-vomnibar: 10px 0;
+  --shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
+  --blur: 40px;
+
+  /* Vomnibar & hud */
+  --fg: #fff;
+  --fg-dark: #c9c9c9;
+  --fg-match: #fff;
+  --fg-url: #aaaaaa;
+
+  /* --bg: #202020; */
+  /* #00b4ff; */
+  /* #005a80; */
+  /* #1a6b8d; */
+  /* #005173; */
+  /* #004773; */
+
+  --bg: #202020;
+  --hinted-out-color: #003366;
+
+
+  /* We do want this - but bg is also set for a BUNCH of other stuff */
+  /* --bg: #003366; */
+  --bg-selected: rgba(150, 150, 150, 0.3);
+
+  --border: #38373e;
+
+  /* Hints inner text color */
+  --fg-hints: #fff;
+
+  /* --fg-hints: #00b4ff; */
+
+}
+
+.vimium-reset,
+div.vimium-reset,
+span.vimium-reset,
+table.vimium-reset,
+a.vimium-reset,
+a:visited.vimium-reset,
+a:link.vimium-reset,
+a:hover.vimium-reset,
+td.vimium-reset,
+tr.vimium-reset {
+  font-family: var(--font);
+}
+
+/* CSS */
+
+/* Vomnibar */
+
+#vomnibar {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  /* ORIGINAL  */
+  /* border-radius: 15px; */
+  overflow: hidden;
+  left: 50%;
+  margin-left: -400px;
+  max-width: 800px;
+}
+
+/* Animate Slide in */
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* #vomnibar-frame #vimium-ui-component-visible { */
+/**/
+/**/
+/* } */
+
+
+#vomnibar #vomnibar-search-area,
+#vomnibar input {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar #vomnibar-search-area {
+  font-family: var(--font);
+  padding: 14px 50px;
+  border-radius: 6px;
+}
+
+#vomnibar input {
+  font-family: var(--font);
+  border: none;
+  padding: var(--padding);
+}
+
+#vomnibar #vomnibar-search-area::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z' stroke='%23dfdfdf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+}
+
+.no-insert-text {
+  /* font-family: var(--font); */
+  display: none;
+}
+
+#vomnibar ul {
+  font-family: var(--font);
+  /* ORIGINAL  */
+  /* background: transparent; */
+  border-top: 2px solid var(--border);
+  margin: 0 15px;
+  margin-bottom: 5px;
+  padding: var(--padding-vomnibar);
+}
+
+#vomnibar li {
+  font-family: var(--font);
+  border-bottom: none;
+  /* NEW */
+  border-radius: 8px;
+  padding: 15px;
+}
+
+#vomnibar li .top-half {
+  font-family: var(--font);
+  padding: var(--padding);
+}
+
+#vomnibar li .bottom-half {
+  font-family: var(--font);
+  padding: 0px 0px 0px 2px;
+  margin: 2px;
+}
+
+#vomnibar li .source {
+  color: var(--fg-dark);
+  font-family: var(--font);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
+}
+
+#vomnibar li em,
+#vomnibar li .title {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .url {
+  color: var(--fg-url);
+  font-family: var(--font);
+  font-size: var(--font-size-url);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .match {
+  font-family: var(--font);
+  color: var(--fg-match);
+}
+
+#vomnibar li .title .match {
+  color: var(--fg);
+  font-family: var(--font);
+  font-weight: bold;
+}
+
+#vomnibar li.selected {
+  font-family: var(--font);
+  background-color: var(--bg-selected);
+  backdrop-filter: blur(20px);
+  /* ORIGINAL  */
+  /* border-radius: 8px; */
+}
+
+#vomnibar li.selected .url {
+  font-family: var(--font);
+  color: var(--fg-url);
+}
+
+#vomnibar li.selected .match {
+  font-family: var(--font);
+  color: var(--fg);
+}
+
+/* Hints Marks*/
+
+#vimium-hint-marker-container div.internal-vimium-hint-marker,
+#vimium-hint-marker-container div.vimiumHintMarker {
+  /* ORIGINAL */
+  /* background: var(--bg); */
+  background: var(--hinted-out-color);
+  border: none;
+  box-shadow: var(--shadow);
+  padding: 3px 4px;
+}
+
+#vimium-hint-marker-container div span {
+  color: var(--fg-hints);
+  font-family: var(--font);
+  font-size: var(--font-size-hints);
+  font-weight: var(--font-weight-bold);
+  text-shadow: none;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter {
+  opacity: 0.3;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter~span {
+  color: var(--fg-hints);
+}
+
+/* Hud */
+
+#hud-container {
+  background: var(--border);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+#hud-container span#hud-find-input,
+#hud-container #hud {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 13;
+  font-weight: var(--font-weight-medium);
+}
+
+#hud-container .hud-find {
+  background-color: transparent;
+  border: none;
+}
+
+#hud-container #search-area {
+  background-color: transparent;
+  padding: 6px;
+}

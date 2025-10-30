@@ -1,0 +1,283 @@
+/*****************************************************************************/
+/*                                   THEMES                                  */
+/*****************************************************************************/
+
+/* vimium-glass-theme */
+
+:root {
+  --font-size: 14;
+  --font-size-hints: 24;
+  --font-size-url: 12;
+
+  --font-weight: normal;
+  --font-weight-medium: medium;
+  --font-weight-bold: bold;
+
+  --font: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  /* Font used in the UI */
+
+  --padding: 2px;
+  --padding-vomnibar: 15px;
+  --shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
+  --blur: 40px;
+
+  /* -------- VOMNIBAR & HUD -------- */
+  --fg: #ffffff;
+  --fg-dark: #c9c9c9;
+  --fg-url: #84bffa;
+  --fg-match: #2165d9;
+
+  --bg: rgba(30, 30, 30, 0.8);
+  --bg-selected: rgba(150, 150, 150, 0.3);
+
+  --border: #464646;
+
+  /* -------- HINTS -------- */
+  --fg-hints: #ffd752;
+  /* Text color of link hints, (don't forget to change `#vimiumHintMarkerContainer div > .matchingCharacter ~ span`) */
+}
+
+/* --------------------------------- CSS --------------------------------- */
+
+/* -------- HINTS -------- */
+#vimium-hint-marker-container div.internal-vimium-hint-marker,
+#vimium-hint-marker-container div.vimiumHintMarker {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  padding: 3px 4px;
+}
+
+#vimium-hint-marker-container div span {
+  color: var(--fg-hints);
+  font-family: var(--font);
+  font-size: var(--font-size-hints);
+  font-weight: var(--font-weight-bold);
+  text-shadow: none;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter {
+  opacity: 0.3;
+}
+
+#vimium-hint-marker-container div>.matchingCharacter~span {
+  color: var(--fg-hints);
+}
+
+/* -------- VOMNIBAR -------- */
+#vomnibar {
+  background: var(--bg);
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 15px;
+  overflow: hidden;
+  left: 50%;
+  margin-left: -400px;
+  max-width: 800px;
+}
+
+#vomnibar #vomnibar-search-area,
+#vomnibar input {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+}
+
+
+/* Original  */
+/* #vomnibar #vomnibar-search-area { */
+/*   padding: 8px 15px; */
+/*   border-radius: 6px; */
+/* } */
+
+
+#vomnibar #vomnibar-search-area {
+  padding: 14px 50px;
+  border-radius: 6px;
+}
+
+#vomnibar input {
+  border: none;
+  padding: var(--padding);
+}
+
+/* .vomnibarNoInsertText { */
+/*   display: none; */
+/* } */
+
+
+/* Wild guess here -  */
+
+#vomnibar-no-insert-text {
+  display: none;
+}
+
+
+#vomnibar ul {
+  background: transparent;
+  border-top: 1px solid var(--border);
+  margin: 0;
+  padding: var(--padding-vomnibar);
+}
+
+#vomnibar li {
+  border-bottom: none;
+  padding: 15px;
+}
+
+#vomnibar li .top-half {
+  padding: var(--padding);
+}
+
+#vomnibar li .bottom-half {
+  padding-top: 0px;
+  padding-bottom: 1px;
+}
+
+#vomnibar li .source {
+  color: var(--fg-dark);
+  font-family: var(--font);
+  font-size: 12;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  /* `.vomnibarSource` will be in all uppercase letters. Delete to revert to original */
+}
+
+#vomnibar li em,
+#vomnibar li .title {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: var(--font-size);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .url {
+  color: var(--fg-url);
+  font-family: var(--font);
+  font-size: var(--font-size-url);
+  font-weight: var(--font-weight-medium);
+}
+
+#vomnibar li .match {
+  color: var(--fg-match);
+  font-weight: normal;
+}
+
+#vomnibar li .title .match {
+  color: var(--fg);
+  font-weight: bold;
+}
+
+#vomnibar li.selected {
+  background-color: var(--bg-selected);
+  backdrop-filter: blur(20px);
+  border-radius: 8px;
+}
+
+#vomnibar li.selected .url {
+  /* Changes '.vomnibarURL' to '--fg-match' when selected */
+  color: var(--fg-url);
+}
+
+#vomnibar li.selected .match {
+  /* Changes '.vomnibarMatch' to '--fg' when selected */
+  color: var(--fg);
+}
+
+/* -------- HUD -------- */
+#hud-container {
+  background: var(--bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+#hud-container span#hud-find-input,
+#hud-container #hud {
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 13;
+  font-weight: var(--font-weight-medium);
+}
+
+#hud-container .hud-find {
+  background-color: transparent;
+  border: none;
+}
+
+#hud-container #search-area {
+  background-color: transparent;
+  padding: 6px;
+}
+
+/* -------- HELP DIALOG -------- */
+div#vimiumHelpDialogContainer {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+div#vimiumHelpDialog {
+  background: var(--bg);
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  font-family: var(--font);
+  font-size: var(--font-size);
+  padding: 15px 10px !important;
+}
+
+span .title {
+  color: var(--fg);
+}
+
+a:link.vimium-help-dialog-link,
+a:visited.vimium-help-dialog-link,
+a:hover.vimium-help-dialog-link,
+a:active.vimium-help-dialog-link,
+a#toggle-advanced {
+  color: var(--fg-url);
+  font-family: var(--font);
+  font-size: var(--font-size);
+}
+
+
+/* a:link.vimium-help-dialog-link, */
+/* a:visited.vimium-help-dialog-link, */
+/* a:hover.vimium-help-dialog-link, */
+/* a:active.vimium-help-dialog-link, */
+/* a#toggleAdvancedCommands { */
+/*   color: var(--fg-url); */
+/*   font-family: var(--font); */
+/*   font-size: var(--font-size); */
+/* } */
+
+
+span.vimium-help-dialog-key {
+  background-color: var(--bg-hints);
+  border: 1px solid var(--border-hints);
+  box-shadow: var(--shadow);
+  padding: 2px 3px;
+  color: var(--fg-hints);
+  font-family: var(--font);
+  font-size: var(--font-size-hints);
+  font-weight: var(--font-weight-bold);
+  text-shadow: none;
+}
+
+td.vimium-help-section-title,
+td.vimium-help-description {
+  color: var(--fg);
+  font-family: var(--font);
+}
+
+div.vimium-column {
+  color: var(--fg);
+  font-family: var(--font);
+}
