@@ -92,7 +92,7 @@ end
 M.keys = function()
   map("n", "<Leader>e", "<cmd>Oil<CR>", { desc = "Oily" })
   map("n", "<C-w>E", "<cmd>lua =require('oil').open_float()<CR>", { silent = true, desc = "oil" })
-  map("n", "<Leader>fz", ":Oil ", { desc = "<cmd>Oil" })
+  -- map("n", "<Leader>fz", ":Oil ", { desc = "<cmd>Oil" })
 
   return M
 end

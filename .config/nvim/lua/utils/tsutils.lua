@@ -143,7 +143,7 @@ function TsUtils.setup()
   return TsUtils
 end
 
-return TsUtils
+return TsUtils.setup()
 
 -- opts = opts or {}
 -- local list = require("utils.list")

@@ -6,11 +6,9 @@
 ---@class MsgData: unknown|vim.SystemCompleted
 ---
 
-
 ---
 ---@alias QfTypes "q"|"l"
 ---
-
 
 ---@class utils.Output
 --- `true` if the current Neovim version is `nvim-0.11`, otherwise `false`
@@ -74,8 +72,6 @@
 ---@field lsp_get_clients fun(opts: { bufnr?: number, id?: number }): vim.lsp.Client[]
 -- local M = {}
 
-
-
 -- TODO: @types
 
 ---@class utils.Arch
@@ -85,16 +81,35 @@
 ---@field get_os fun(): EOperatingSystemEnum
 ---@field get_os_lower fun(): EOperatingSystemEnumLower
 
+---@class utils.Sudo.sudo_exec.Opts
+---@field cmd string The command to execute with sudo
+---@field print_output? boolean Whether to print the output of the command, defaults to false
+
+---@class utils.Sudo.sudo_write.Opts
+---@field tmpfile? string The temporary file to use for writing
+---@field filepath? string The file path to write to with sudo
 
 ---@class utils.Sudo
+--- Registeres several user commands related to sudo operations.
+---
+--- Currently registers:
+--- * `SudoWrite`,`SudoWrite!`
+--- * `W`, `W!`
+---
+--- Allows users to write files with elevated permissions directly from Neovim
+--- via the use of the above commands.
+---@field register_user_commands fun(opts?: utils.Sudo.user_command.Opts): nil
+---
 --- Execute a command with `sudo`,
 --- prompting for the password if necessary.
----@field sudo_exec fun(cmd: string, print_output?: boolean): boolean
+---@field sudo_exec fun(opts: utils.Sudo.sudo_exec.Opts): boolean
+-- prev ---@field sudo_exec fun(cmd: string, print_output?: boolean): boolean
+--
 --- Execute a write command using `dd` and pre-set bytesize,
 --- using `sudo` to write to the file.
 ---
 --- Uses a temporary file to write the contents,
 --- and then writes it to the specified file path
----@field sudo_write fun(tmpfile?: string, filepath?: string): nil
-
-
+---@field sudo_write fun(opts?: utils.Sudo.sudo_write.Opts): nil
+--
+-- prev ---@field sudo_write fun(tmpfile?: string, filepath?: string): nil
