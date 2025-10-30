@@ -1,15 +1,15 @@
 #!/usr/bin/env fish
 #
 
-# Validates if a package is installed
-#
-# Parameters:
-# $argv[1]: The package to check for
-#
-# Returns:
-# 0 if the package is installed
-# 1 if the package is not installed
-function 00valid_pacman
+function 00valid_pacman --description "Validates if a package is installed. (First via command -v; then via pacman -Qi)"
+    # Validates if a package is installed
+    #
+    # Parameters:
+    # $argv[1]: The package to check for
+    #
+    # Returns:
+    # 0 if the package is installed
+    # 1 if the package is not installed
     set -l to_test_prog $argv[1]
 
     # Check for both types of quotes and remove them if present

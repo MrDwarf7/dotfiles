@@ -1,18 +1,18 @@
 #!/usr/bin/env fish
 #
 
-# Exports a program onto the path by checking pacman for the program
-# Uses fish_add_path to add the program to the path
-#
-# Parameters:
-# $argv[1]: The program to check for
-# $argv[2]: The environment variable to set
-# $argv[3]?: Optional flag to pass to fish_add_path (e.g. --prepend, --append)
-#
-# Returns:
-# 0 if the program is found
-# 1 if the program is not found
-function 04export_onto_path_if_pacman
+function 04export_onto_path_if_pacman --description "If a provided program is available via pacman, exports a program onto the system PATH via fish's add_path fn"
+    # Exports a program onto the path by checking pacman for the program
+    # Uses fish_add_path to add the program to the path
+    #
+    # Parameters:
+    # $argv[1]: The program to check for
+    # $argv[2]: The environment variable to set
+    # $argv[3]?: Optional flag to pass to fish_add_path (e.g. --prepend, --append)
+    #
+    # Returns:
+    # 0 if the program is found
+    # 1 if the program is not found
     # Check if the $env_Var is already on path, if it is, return 0 early
     if contains $argv[2] $PATH
         # printf "Return early.\n"
