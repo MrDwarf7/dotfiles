@@ -3,7 +3,7 @@ return {
 	"epwalsh/obsidian.nvim",
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
-	ft = "markdown",
+	-- ft = "markdown",
 	-- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
 	-- ---@type LazyEventSpec
 	-- event = {

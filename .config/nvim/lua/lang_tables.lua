@@ -140,7 +140,7 @@ LangTables = {
 			["lua"] = { "stylua" },
 			["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
 			-- markdown = { "prettier" },
-			["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+			["markdown"] = { "markdownlint-cli2", "prettier", "markdown-toc" },
 			["ocaml"] = { "ocamlformat" },
 			["python"] = function(bufnr)
 				if require("conform").get_formatter_info("ruff_format", bufnr).available then
@@ -537,7 +537,8 @@ end
 
 function LangTables.by_ft(typeof, ft, bufnr)
 	if type(typeof) == "nil" then
-		return require("utils.output").err("You must provide a typeof ('linters' or 'formatters')")
+		local util = require("utils").output
+		return util.err("You must provide a typeof ('linters' or 'formatters')")
 	end
 
 	assert(

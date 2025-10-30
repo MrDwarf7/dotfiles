@@ -3,10 +3,10 @@
 ---@return void
 local set_validator = function(env, rem)
 	local validation = require("utils.validation")
-	validation.expand_create_file("venv-selector", env, rem)
 	-- _G.dump({
-	-- 	validation = validation,
+	-- 	cache_path = v
 	-- })
+	return validation.expand_create_file("venv-selector", env, rem)
 end
 
 ---@type LazyPluginBase

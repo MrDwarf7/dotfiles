@@ -3,7 +3,7 @@ local lang_tables = require("lang_tables")
 ---@type LazyPluginBase
 return {
 	"stevearc/conform.nvim",
-	---@type LazyEventSpec
+	---@type LazyEventSpec|string
 	event = "LspAttach",
 	lazy = true,
 
