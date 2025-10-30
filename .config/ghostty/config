@@ -40,24 +40,11 @@ background-opacity = 0.4
 
 # background-opacity = 0.95
 
-# theme = TokyoNight Storm
-
 window-decoration = none
 
 bold-is-bright = false
 cursor-style = bar
 cursor-style-blink = true
-# font-size = 10.5
-font-size = 10.2
-font-thicken = false
-# ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
-# ss04 - use normal g ( with the gap on the left, like a lowercase Y )
-# ss08 - use squashed parentheses ()
-# ss11 - use squished `x` when identified for hexadecimal digits
-# ss12 - thin backslash
-# ss13 - dollar symbol without strike-through vertical line
-# font-feature = ["ss04" "ss08" ]
-font-feature = -calt, -liga, -dlig, -clig, -ss01, -ss08, +ss11, -ss12, -ss13
 
 # font-family = JetBrainsMono Nerd Font Mono
 #### previous #### font-family = Mononoki Nerd Font Mono
@@ -69,8 +56,25 @@ font-feature = -calt, -liga, -dlig, -clig, -ss01, -ss08, +ss11, -ss12, -ss13
 
 # font-family = Zenbones Proto
 # font-family = Zenbones Mono
-font-family = Zenbones Brainy 
+font-family = Zenbones Brainy
 # Medium
+
+# font-size = 10.5
+font-size = 10.2
+font-thicken = false
+
+# ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
+# ss04 - use normal g ( with the gap on the left, like a lowercase Y )
+# ss08 - use squashed parentheses ()
+# ss11 - use squished `x` when identified for hexadecimal digits
+# ss12 - thin backslash
+# ss13 - dollar symbol without strike-through vertical line
+# font-feature = ["ss04" "ss08" ]
+font-feature = -calt, -liga, -dlig, -ss12, -ss13
+
+## Zenbones Brainy with `+ss11` causes the `~` symbol to be too high up,
+## one of the options screws up the ~ symbol (too high up)
+# -clig, -ss01, -ss08, +ss11, -ss12, -ss13
 
 adjust-cursor-thickness = 1
 adjust-box-thickness = 1
