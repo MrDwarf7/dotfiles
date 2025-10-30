@@ -1,6 +1,8 @@
+---@type LazyPluginBase
 return {
 	"NvChad/nvim-colorizer.lua",
 	lazy = true,
+	---@type LazyEventSpec
 	event = "LspAttach",
 	ft = {
 		"css",

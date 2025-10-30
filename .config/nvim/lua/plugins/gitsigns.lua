@@ -1,10 +1,12 @@
 local feedkeys = vim.api.nvim_feedkeys
 
+---@type LazyPluginBase
 return {
-  "lewis6991/gitsigns.nvim",
-  lazy = false,
-  -- event = "BufReadPre",
-  keys = {
+	"lewis6991/gitsigns.nvim",
+	lazy = false,
+	-- event = "BufReadPre",
+	---@type LazyKeys
+	keys = {
 
     -- stylua: ignore start
     -- stylua: ignore end
@@ -22,87 +24,88 @@ return {
     { "<Leader>ht", function() return require("gitsigns").toggle_deleted() end,            desc = "[t]oggle blame" },
     { "<Leader>hd", function() return require("gitsigns").diffthis() end,                  desc = "[d]iff this" },
     { "<Leader>hD", function() return require("gitsigns").diffthis("main") end,            desc = "[D]iff main" },
-    -- stylua: ignore end
+		-- stylua: ignore end
 
-    {
-      "[c",
-      function()
-        require("gitsigns").prev_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
-      desc = "[p]revious hunk",
-      mode = { "n", "v" },
-    },
+		{
+			"[c",
+			function()
+				require("gitsigns").prev_hunk()
+				vim.schedule(function()
+					feedkeys("zz", "n", false)
+				end)
+			end,
+			desc = "[p]revious hunk",
+			mode = { "n", "v" },
+		},
 
-    {
-      "]c",
-      function()
-        require("gitsigns").next_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
-      desc = "[n]ext hunk",
-      mode = { "n", "v" },
-    },
+		{
+			"]c",
+			function()
+				require("gitsigns").next_hunk()
+				vim.schedule(function()
+					feedkeys("zz", "n", false)
+				end)
+			end,
+			desc = "[n]ext hunk",
+			mode = { "n", "v" },
+		},
 
-    {
-      "[h",
-      function()
-        require("gitsigns").prev_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
-      desc = "[p]revious hunk",
-      mode = { "n", "v" },
-    },
+		{
+			"[h",
+			function()
+				require("gitsigns").prev_hunk()
+				vim.schedule(function()
+					feedkeys("zz", "n", false)
+				end)
+			end,
+			desc = "[p]revious hunk",
+			mode = { "n", "v" },
+		},
 
-    {
-      "]h",
-      function()
-        require("gitsigns").next_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
-      desc = "[n]ext hunk",
-      mode = { "n", "v" },
-    },
-  },
+		{
+			"]h",
+			function()
+				require("gitsigns").next_hunk()
+				vim.schedule(function()
+					feedkeys("zz", "n", false)
+				end)
+			end,
+			desc = "[n]ext hunk",
+			mode = { "n", "v" },
+		},
+	},
 
-  opts = {
+	---@type Gitsigns.SchemaElem
+	opts = {
 
-    signs = {
-      add = { text = "│" },
-      changedelete = { text = "~" },
-      change = { text = "│" },
-      delete = { text = "󰍵" },
-      topdelete = { text = "‾" },
-      untracked = { text = "│" },
-    },
+		signs = {
+			add = { text = "│" },
+			changedelete = { text = "~" },
+			change = { text = "│" },
+			delete = { text = "󰍵" },
+			topdelete = { text = "‾" },
+			untracked = { text = "│" },
+		},
 
-    signs_staged = {
-      add = { text = "│" },
-      changedelete = { text = "~" },
-      change = { text = "│" },
-      delete = { text = "󰍵" },
-      topdelete = { text = "‾" },
-      untracked = { text = "│" },
-    },
+		signs_staged = {
+			add = { text = "│" },
+			changedelete = { text = "~" },
+			change = { text = "│" },
+			delete = { text = "󰍵" },
+			topdelete = { text = "‾" },
+			untracked = { text = "│" },
+		},
 
-    on_attach = function(buffer)
-      local gs = package.loaded.gitsigns
+		on_attach = function(buffer)
+			local gs = package.loaded.gitsigns
 
-      -- local function map(mode, lhs, rhs, desc)
-      --   vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
-      -- end
-      local map = vim.keymap.set
+			-- local function map(mode, lhs, rhs, desc)
+			--   vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
+			-- end
+			local map = vim.keymap.set
 
-      map("o", "ih", gs.select_hunk, { desc = "select hunk" })
-      map("x", "ih", gs.select_hunk, { desc = "select hunk" })
-    end,
-  },
+			map("o", "ih", gs.select_hunk, { desc = "select hunk" })
+			map("x", "ih", gs.select_hunk, { desc = "select hunk" })
+		end,
+	},
 }

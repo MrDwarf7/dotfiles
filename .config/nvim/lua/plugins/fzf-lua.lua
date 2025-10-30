@@ -25,7 +25,7 @@ local ignore_dirs = {
 	"target",
 	"vendor",
 	".venv",
-	"venv",
+	-- "venv",
 }
 
 -- local cwd = function()
@@ -55,9 +55,11 @@ local ignore_dirs = {
 -- 	return exclude
 -- end
 
+---@type LazyPluginBase
 return {
 	"ibhagwan/fzf-lua",
 	lazy = true,
+	---@type LazyEventSpec
 	event = "VimEnter",
 	-- optional for icon support
 	dependencies = {
@@ -65,6 +67,7 @@ return {
 	},
 	-- or if using mini.icons/mini.nvim
 	-- dependencies = { "nvim-mini/mini.icons" },
+	---@type LazyKeys
 	keys = {
     -- { "<Leader>fw", "<CMD>FzfLua live_grep<CR>", desc = "Find Files (cwd)" },
     -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
@@ -148,10 +151,12 @@ return {
 		-- stylua: ignore end
 	},
 
+	---@return fzf-lua.Config
 	opts = function()
 		local actions = require("fzf-lua").actions
 
-		local opts = {
+		---@type fzf-lua.Config
+		return {
 			{ "default-title", "default-prompt", "hide" },
 			fzf_bin = "fzf",
 			-- "fzf-tmux", -- very cool, it uses a tmux pop-up win, but blocks tmux leader key input
@@ -296,6 +301,5 @@ return {
 				},
 			},
 		}
-		return opts
 	end,
 }

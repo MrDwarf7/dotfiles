@@ -1,19 +1,42 @@
+---@type LazyPluginBase
 return {
-  "nvim-neotest/neotest",
-  lazy = true, -- doesn't need to run unless called via keymap or command
-  cmd = { "Neotest" },
-  dependencies = {
-    { "nvim-neotest/nvim-nio", lazy = true, event = "VeryLazy" },
-    { "nvim-lua/plenary.nvim", lazy = true, event = "VeryLazy" },
-    { "antoinemadec/FixCursorHold.nvim", lazy = true, event = "VeryLazy" },
-    { "nvim-treesitter/nvim-treesitter", lazy = true, event = "VeryLazy" },
-    -- languages --
-    { "alfaix/neotest-gtest", lazy = true }, -- C++/CPP (uses gtest)
+	"nvim-neotest/neotest",
+	lazy = true, -- doesn't need to run unless called via keymap or command
+	cmd = { "Neotest" },
 
-    { "rcasia/neotest-bash", lazy = true }, -- Bash
-    { "lawrence-laz/neotest-zig", lazy = true }, -- Zig
-  },
-  keys = {
+	dependencies = {
+		{
+			"nvim-neotest/nvim-nio",
+			lazy = true,
+			---@type LazyEventSpec
+			event = "VeryLazy",
+		},
+		{
+			"nvim-lua/plenary.nvim",
+			lazy = true,
+			---@type LazyEventSpec
+			event = "VeryLazy",
+		},
+		{
+			"antoinemadec/FixCursorHold.nvim",
+			lazy = true,
+			---@type LazyEventSpec
+			event = "VeryLazy",
+		},
+		{
+			"nvim-treesitter/nvim-treesitter",
+			lazy = true,
+			---@type LazyEventSpec
+			event = "VeryLazy",
+		},
+		-- languages --
+		{ "alfaix/neotest-gtest", lazy = true }, -- C++/CPP (uses gtest)
+
+		{ "rcasia/neotest-bash", lazy = true }, -- Bash
+		{ "lawrence-laz/neotest-zig", lazy = true }, -- Zig
+	},
+	---@type LazyKeys
+	keys = {
     -- stylua: ignore start
     { "<Leader>or", function() require("neotest").run.run() end,                                        desc = "NTest - Run Nearest" },
     { "<Leader>of", function() require("neotest").run.run(vim.fn.expand("%")) end,                      desc = "NTest - Run File" },
@@ -36,29 +59,29 @@ return {
     { "]o",         function() require("neotest").jump.next() end,                                      desc = "Next Test" },
     { "[o",         function() require("neotest").jump.prev() end,                                      desc = "Prev Test" },
 
-    -- TODO: not impl. requires DAP support
-    --
-    -- { "<Leader>Td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Run DAP for nearest test" },
+		-- TODO: not impl. requires DAP support
+		--
+		-- { "<Leader>Td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Run DAP for nearest test" },
 
-    -- stylua: ignore end
-  },
-  opts = function()
-    return {
-      adapters = {
-        -- Rust
-        require("rustaceanvim.neotest"), -- if using this, DO NOT add neotest-rust
+		-- stylua: ignore end
+	},
+	opts = function()
+		return {
+			adapters = {
+				-- Rust
+				require("rustaceanvim.neotest"), -- if using this, DO NOT add neotest-rust
 
-        -- Zig
-        require("neotest-zig")({
-          -- options here
-          dap = {
-            adapter = "lldb",
-          },
-        }),
-        require("neotest-gtest").setup({
-          --
-        }),
-      },
-    }
-  end,
+				-- Zig
+				require("neotest-zig")({
+					-- options here
+					dap = {
+						adapter = "lldb",
+					},
+				}),
+				require("neotest-gtest").setup({
+					--
+				}),
+			},
+		}
+	end,
 }

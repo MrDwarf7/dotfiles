@@ -8,11 +8,8 @@ require("config.autocmds")
 local lsp = require("config.lsp")
 ---@diagnostic disable-next-line: unused-local
 local utils = require("utils")
--- require("utils.output").info("Just call require utils in the MAIN init.lua!")
 
--- Testing out the new vim.pack commands instead of lazy
---
--- it's still really buggy lol. Cmp plugins are a massive pain
+--- nope, nvm
 -- require("vimpack")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -31,7 +28,9 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+---@type LazyConfig
 local lazy_opts = {
+	-- debug = true,
 	defaults = {
 		-- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
 		-- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
@@ -96,6 +95,7 @@ local lazy_opts = {
 	},
 }
 
+---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 -- lsp.setup({ binds_type = "builtin" })
 lsp.setup({ binds_type = "fzf" })

@@ -1,15 +1,18 @@
 -- Inspired by - "swaits/lazyjj.nvim" and the lazygit.nvim plugin
+---@type LazyPluginBase
 return {
-	-- -- from production branch --
-	-- "mrdwarf7/lazyjui.nvim",
-	-- dev = false,
+	-- -- from github pull -- --
+	"mrdwarf7/lazyjui.nvim",
+	branch = "dev",
+	dev = false,
 
 	-- -- from local FS / Dev --
-	"lazyjui.nvim",
-	dev = true,
+	-- "lazyjui.nvim",
+	-- dev = true,
 
 	lazy = true,
 	dependencies = "nvim-lua/plenary.nvim",
+	---@type LazyKeys
 	keys = {
     -- stylua: ignore start
     { "<Leader>aa", function() require("lazyjui").open() end, desc = "LazyJui [a]ll" },

@@ -1,9 +1,13 @@
 local output = require("utils.output")
+---@type LazyPluginBase[]
 return {
+	---@type LazyPluginBase
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^6",
+		---@type LazyFiletypeHandler
 		ft = { "rust" },
+		---@type rustaceanvim.Opts
 		opts = {
 			server = {
 				on_attach = function(_, bufnr)
@@ -101,6 +105,7 @@ return {
 					watcher = "client",
 				},
 			},
+			---@type rustaceanvim.dap.Opts
 			dap = {
 				adapter = {
 					command = "lldb-vscode",
@@ -130,6 +135,7 @@ return {
 			},
 		},
 
+		---@return rustaceanvim.Config
 		config = function(_, opts)
 			if package.preload["mason.nvim"] then
 				-- LazyVim.has("mason.nvim") then
@@ -146,8 +152,10 @@ return {
 			end
 		end,
 	},
+	---@type LazyPluginBase
 	{
 		"saecki/crates.nvim",
+		-- ---@type LazyEventSpec
 		-- event = { "BufRead Cargo.toml" },
 		ft = { "toml" },
 		opts = {

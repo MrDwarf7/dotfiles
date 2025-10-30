@@ -1,15 +1,20 @@
 local lang_tables = require("lang_tables")
 
+---@type LazyPluginBase
 return {
-  "mfussenegger/nvim-lint",
-  lazy = true,
-  event = "BufReadPost",
-  config = function()
-    require("lint").linters_by_ft =
-      vim.tbl_deep_extend("force", lang_tables.by_ft("linters", vim.bo.filetype, vim.api.nvim_get_current_buf() or 0), {
-        -- Linter overrides can be set here
-      })
-  end,
+	"mfussenegger/nvim-lint",
+	lazy = true,
+	---@type LazyEventSpec
+	event = "BufReadPost",
+	config = function()
+		require("lint").linters_by_ft = vim.tbl_deep_extend(
+			"force",
+			lang_tables.by_ft("linters", vim.bo.filetype, vim.api.nvim_get_current_buf() or 0),
+			{
+				-- Linter overrides can be set here
+			}
+		)
+	end,
 }
 
 -- -- we test rest of things first, then uncomment this

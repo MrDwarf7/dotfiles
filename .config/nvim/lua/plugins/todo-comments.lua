@@ -1,8 +1,11 @@
+---@type LazyPluginBase
 return {
 	"folke/todo-comments.nvim",
 	lazy = true,
+	---@type LazyEventSpec
 	event = "BufReadPost",
 	dependencies = { "nvim-lua/plenary.nvim" },
+	---@type LazyKeys
 	keys = {
     -- stylua: ignore start
     -- { "q:", false },
@@ -24,6 +27,7 @@ return {
 		-- stylua: ignore end
 	},
 
+	---@type TodoOptions
 	opts = {
 		keywords = {
       -- stylua: ignore start
