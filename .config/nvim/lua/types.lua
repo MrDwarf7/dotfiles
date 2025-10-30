@@ -59,23 +59,23 @@
 ---
 ---@field setup fun(): Types
 local Types = {
-	LangTablesEnums = nil,
-	OsEnums = nil,
+  LangTablesEnums = nil,
+  OsEnums = nil,
 }
 
 ---@class EOperatingSystemEnumLower
 local OsEnumLower = {
-	linux = "linux",
-	windows_nt = "windows_nt",
-	macos = "macos",
+  linux = "linux",
+  windows_nt = "windows_nt",
+  macos = "macos",
 }
 
 ---@class EOperatingSystemEnum
 local OsEnum = {
-	windows = "Windows_NT",
-	linux = "Linux",
-	unix = "unix",
-	macOS = "macos",
+  windows = "Windows_NT",
+  linux = "Linux",
+  unix = "unix",
+  macOS = "macos",
 }
 
 ---@class OsEnums
@@ -84,74 +84,74 @@ local OsEnum = {
 ---
 ---@field setup fun(): OsEnums
 local OsEnums = {
-	OsEnumLower = nil,
-	OsEnum = nil,
+  OsEnumLower = nil,
+  OsEnum = nil,
 }
 
 local has_init_os = false
 
 function OsEnums.setup()
-	if has_init_os then
-		return OsEnums
-	end
+  if has_init_os then
+    return OsEnums
+  end
 
-	local oe = OsEnums
-	oe.OsEnumLower = OsEnumLower
-	oe.OsEnum = OsEnum
+  local oe = OsEnums
+  oe.OsEnumLower = OsEnumLower
+  oe.OsEnum = OsEnum
 
-	has_init_os = true
+  has_init_os = true
 
-	return setmetatable(oe, {
-		__index = function(_, key)
-			error("Attempt to access undefined OsEnums key: " .. tostring(key), 2)
-		end,
-		__call = function(_, desc)
-			return OsEnums.setup()
-		end,
-	})
+  return setmetatable(oe, {
+    __index = function(_, key)
+      error("Attempt to access undefined OsEnums key: " .. tostring(key), 2)
+    end,
+    __call = function(_, desc)
+      return OsEnums.setup()
+    end,
+  })
 end
 
 ---@enum TypeOfE
 local TypeOfE = {
-	linters = "linters",
-	formatters = "formatters",
-	linter = "linter",
-	formatter = "formatter",
+  linters = "linters",
+  formatters = "formatters",
+  linter = "linter",
+  formatter = "formatter",
 }
 
 ---@enum CategoryE
 local CategoryE = {
-	treesitter = "treesitter",
-	mason = "mason",
+  treesitter = "treesitter",
+  mason = "mason",
 }
 
 ---@enum TreeSitterSubtypeE
 local TreeSitterSubtypeE = {
-	languages = "languages",
-	data_formats = "data_formats",
-	system = "system",
+  languages = "languages",
+  data_formats = "data_formats",
+  system = "system",
 }
 
 ---@enum MasonSubtypeE
 local MasonSubtypeE = {
-	formatters = "formatters",
-	linters = "linters",
-	lsps = "lsps",
-	daps = "daps",
+  formatters = "formatters",
+  linters = "linters",
+  lsps = "lsps",
+  daps = "daps",
 }
 
 ---@enum SubtypeE
 local SubtypeE = {
-	treesitter = TreeSitterSubtypeE,
-	mason = MasonSubtypeE,
-	all = "all",
+  treesitter = TreeSitterSubtypeE,
+  mason = MasonSubtypeE,
+  all = "all",
 }
 
 ---@enum WantsTypeE
 local WantsTypeE = {
-	all = "all",
-	ensure_installed = "ensure_installed",
-	disabled = "disabled",
+  all = "all",
+  ensure_installed = "ensure_installed",
+  disabled = "disabled",
 }
 
 ---@class LangTablesEnums
@@ -164,72 +164,72 @@ local WantsTypeE = {
 ---
 ---@field setup fun(): LangTablesEnums
 local LangTablesEnums = {
-	TypeOfE = nil,
-	CategoryE = nil,
-	TreeSitterSubtypeE = nil,
-	MasonSubtypeE = nil,
-	SubtypeE = nil,
-	WantsTypeE = nil,
+  TypeOfE = nil,
+  CategoryE = nil,
+  TreeSitterSubtypeE = nil,
+  MasonSubtypeE = nil,
+  SubtypeE = nil,
+  WantsTypeE = nil,
 }
 
 local has_init_lt = false
 
 function LangTablesEnums.setup()
-	if has_init_lt then
-		return LangTablesEnums
-	end
+  if has_init_lt then
+    return LangTablesEnums
+  end
 
-	local lt = LangTablesEnums
-	lt.TypeOfE = TypeOfE
-	lt.CategoryE = CategoryE
-	lt.TreeSitterSubtypeE = TreeSitterSubtypeE
-	lt.MasonSubtypeE = MasonSubtypeE
+  local lt = LangTablesEnums
+  lt.TypeOfE = TypeOfE
+  lt.CategoryE = CategoryE
+  lt.TreeSitterSubtypeE = TreeSitterSubtypeE
+  lt.MasonSubtypeE = MasonSubtypeE
 
-	lt.SubtypeE = SubtypeE
-	lt.WantsTypeE = WantsTypeE
+  lt.SubtypeE = SubtypeE
+  lt.WantsTypeE = WantsTypeE
 
-	has_init_lt = true
+  has_init_lt = true
 
-	return setmetatable(lt, {
-		__index = function(_, key)
-			error("Attempt to access undefined LangTablesEnums key: " .. tostring(key), 2)
-		end,
-		__call = function(_, desc)
-			return LangTablesEnums.setup()
-		end,
-	})
+  return setmetatable(lt, {
+    __index = function(_, key)
+      error("Attempt to access undefined LangTablesEnums key: " .. tostring(key), 2)
+    end,
+    __call = function(_, desc)
+      return LangTablesEnums.setup()
+    end,
+  })
 end
 
 local has_init_types = false
 
 function Types.setup()
-	if has_init_types then
-		return Types
-	end
-	local types = Types
+  if has_init_types then
+    return Types
+  end
+  local types = Types
 
-	if type(types.LangTablesEnums) ~= "table" then
-		types.LangTablesEnums = LangTablesEnums.setup()
-	end
+  if type(types.LangTablesEnums) ~= "table" then
+    types.LangTablesEnums = LangTablesEnums.setup()
+  end
 
-	if type(types.OsEnums) ~= "table" then
-		types.OsEnums = OsEnums.setup()
-	end
+  if type(types.OsEnums) ~= "table" then
+    types.OsEnums = OsEnums.setup()
+  end
 
-	has_init_types = true
+  has_init_types = true
 
-	return setmetatable(types, {
-		__index = function(_, key)
-			if type(types[key]) ~= "nil" then
-				error("Attempt to access undefined Types key: " .. tostring(key), 2)
-			else
-				return types[key]
-			end
-		end,
-		__call = function(_, desc)
-			return Types.setup()
-		end,
-	})
+  return setmetatable(types, {
+    __index = function(_, key)
+      if type(types[key]) ~= "nil" then
+        error("Attempt to access undefined Types key: " .. tostring(key), 2)
+      else
+        return types[key]
+      end
+    end,
+    __call = function(_, desc)
+      return Types.setup()
+    end,
+  })
 end
 
 ---@return Types

@@ -76,37 +76,37 @@ function LSP.builtin()
   local tsutils = require("utils.tsutils")
   local handle_builtins = tsutils.handle_builtins
 
-	-- stylua: ignore start
-	-- map("n", "gd", function() handle_builtins({ method = "textDocument/definition" }) end,
-	map("n", "gd", function() handle_builtins({ operation = vim.lsp.buf.definition }) end,
-		{ desc = "[G]oto [d]efinition" })
+  -- stylua: ignore start
+  -- map("n", "gd", function() handle_builtins({ method = "textDocument/definition" }) end,
+  map("n", "gd", function() handle_builtins({ operation = vim.lsp.buf.definition }) end,
+    { desc = "[G]oto [d]efinition" })
 
-	-- map("n", "gD", function() handle_builtins({ method = "textDocument/declaration" }) end,
-	map("n", "gD", function() handle_builtins({ operation = vim.lsp.buf.declaration }) end,
-		{ desc = "[G]oto [D]eclaration" })
+  -- map("n", "gD", function() handle_builtins({ method = "textDocument/declaration" }) end,
+  map("n", "gD", function() handle_builtins({ operation = vim.lsp.buf.declaration }) end,
+    { desc = "[G]oto [D]eclaration" })
 
-	-- map("n", "gr", function() handle_builtins({ method = "textDocument/references" }) end,
-	map("n", "gr", function() handle_builtins({ operation = vim.lsp.buf.references }) end,
-		{ desc = "[G]oto [r]eferences" })
+  -- map("n", "gr", function() handle_builtins({ method = "textDocument/references" }) end,
+  map("n", "gr", function() handle_builtins({ operation = vim.lsp.buf.references }) end,
+    { desc = "[G]oto [r]eferences" })
 
-	-- map("n", "gt", function() handle_builtins({ method = "textDocument/typeDefinition" }) end,
-	map("n", "gt", function()
-			handle_builtins({ operation = vim.lsp.buf.type_definition })
-		end,
-		{ desc = "[G]oto [t]ype Definition" })
+  -- map("n", "gt", function() handle_builtins({ method = "textDocument/typeDefinition" }) end,
+  map("n", "gt", function()
+      handle_builtins({ operation = vim.lsp.buf.type_definition })
+    end,
+    { desc = "[G]oto [t]ype Definition" })
 
-	map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation }) end,
-		{ desc = "[G]oto [I]mpl" })
+  map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation }) end,
+    { desc = "[G]oto [I]mpl" })
 
-	map("n", "]]", function()
-		local cnext_op = function() vim.cmd("cnext") end
-		tsutils.handle_builtins({ operation = cnext_op })
-	end, { silent = true, desc = "qf next" })
+  map("n", "]]", function()
+    local cnext_op = function() vim.cmd("cnext") end
+    tsutils.handle_builtins({ operation = cnext_op })
+  end, { silent = true, desc = "qf next" })
 
-	map("n", "[[", function()
-		local cprev_op = function() vim.cmd("cprev") end
-		tsutils.handle_builtins({ operation = cprev_op })
-	end, { silent = true, desc = "qf prev" })
+  map("n", "[[", function()
+    local cprev_op = function() vim.cmd("cprev") end
+    tsutils.handle_builtins({ operation = cprev_op })
+  end, { silent = true, desc = "qf prev" })
   -- stylua: ignore end
 end
 
@@ -169,13 +169,16 @@ function LSP.setup_lsp(binds_type)
   map("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
   map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "float" })
   map("n", "<Leader>lf", function()
+    -- return vim.lsp.buf.format({ async = false })
     if package.loaded["conform"] then
-      return require("conform").format()
+      local conform = require("conform")
+      conform.format({ timeout_ms = 3000 })
     elseif package.loaded["conform"] == nil then
-      pcall(require, "conform")
-      return vim.lsp.buf.format({ async = true })
+      return vim.lsp.buf.format({ async = false })
     end
   end, { desc = "format [lspconfig]" })
+
+  -- and then enable **_ALL_** the servers found
 
   vim.lsp.enable(lsp_servers)
 end
@@ -196,8 +199,10 @@ function LSP.setup(opts)
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ctx)
-      local client = assert(vim.lsp.get_client_by_id(ctx.data.client_id))
+      -- local client = assert(vim.lsp.get_client_by_id(ctx.data.client_id))
+      local client = vim.lsp.get_client_by_id(ctx.data.client_id)
       if not client then
+        require("utils").output.warn("LSP client not found for id: " .. tostring(ctx.data.client_id))
         return
       end
 

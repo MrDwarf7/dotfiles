@@ -1,7 +1,7 @@
 ---@type LazyPluginBase
 return {
-	"HawkinsT/pathfinder.nvim", -- Enhances the gf, gF, and gx commands
-	lazy = true,
+  "HawkinsT/pathfinder.nvim", -- Enhances the gf, gF, and gx commands
+  lazy = true,
   -- stylua: ignore start
   ---@type LazyKeys
   keys = {
@@ -18,6 +18,6 @@ return {
     { "<Leader>gF", function() return require("pathfinder").select_file_line() end, desc = "P. Visual file selection (line)" },
     { "<Leader>gx", function() return require("pathfinder").select_url() end,       desc = "P. Visual URL/Git repository selection" },
   },
-	-- stylua: ignore end
-	opts = {},
+  -- stylua: ignore end
+  opts = {},
 }

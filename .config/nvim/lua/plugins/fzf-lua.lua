@@ -16,16 +16,16 @@
 
 -- NOTE: Ignore dirs for rg/ripgrep and grep
 local ignore_dirs = {
-	"build",
-	"dist",
-	".git",
-	".idea",
-	"node_modules",
-	"__pycache__",
-	"target",
-	"vendor",
-	".venv",
-	-- "venv",
+  "build",
+  "dist",
+  ".git",
+  ".idea",
+  "node_modules",
+  "__pycache__",
+  "target",
+  "vendor",
+  ".venv",
+  -- "venv",
 }
 
 -- local cwd = function()
@@ -57,18 +57,18 @@ local ignore_dirs = {
 
 ---@type LazyPluginBase
 return {
-	"ibhagwan/fzf-lua",
-	lazy = true,
-	---@type LazyEventSpec
-	event = "VimEnter",
-	-- optional for icon support
-	dependencies = {
-		{ "nvim-tree/nvim-web-devicons" },
-	},
-	-- or if using mini.icons/mini.nvim
-	-- dependencies = { "nvim-mini/mini.icons" },
-	---@type LazyKeys
-	keys = {
+  "ibhagwan/fzf-lua",
+  lazy = true,
+  ---@type LazyEventSpec
+  event = "VimEnter",
+  -- optional for icon support
+  dependencies = {
+    { "nvim-tree/nvim-web-devicons" },
+  },
+  -- or if using mini.icons/mini.nvim
+  -- dependencies = { "nvim-mini/mini.icons" },
+  ---@type LazyKeys
+  keys = {
     -- { "<Leader>fw", "<CMD>FzfLua live_grep<CR>", desc = "Find Files (cwd)" },
     -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
     -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
@@ -148,158 +148,158 @@ return {
     { "<Leader>fC", function() require("fzf-lua").grep_visual() end,                                                     mode = "v",                        desc = "Selection (Root)" },
 
     { "<Leader>fu", function() require("fzf-lua").colorschemes() end,                                                    desc = "Colorschemes" },
-		-- stylua: ignore end
-	},
+    -- stylua: ignore end
+  },
 
-	---@return fzf-lua.Config
-	opts = function()
-		local actions = require("fzf-lua").actions
+  ---@return fzf-lua.Config
+  opts = function()
+    local actions = require("fzf-lua").actions
 
-		---@type fzf-lua.Config
-		return {
-			{ "default-title", "default-prompt", "hide" },
-			fzf_bin = "fzf",
-			-- "fzf-tmux", -- very cool, it uses a tmux pop-up win, but blocks tmux leader key input
-			-- fzf_bin = "sk",  -- skim
-			-- fzf_bin = "other",  -- supports other fzf-compatible binaries
+    ---@type fzf-lua.Config
+    return {
+      { "default-title", "default-prompt", "hide" },
+      fzf_bin = "fzf",
+      -- "fzf-tmux", -- very cool, it uses a tmux pop-up win, but blocks tmux leader key input
+      -- fzf_bin = "sk",  -- skim
+      -- fzf_bin = "other",  -- supports other fzf-compatible binaries
 
-			defaults = {
-				-- if `files.fzf_opts.["--ansi"] = true`, turn both of these to false
-				git_icons = true,
-				file_icons = true,
-				-- or if you're turning these off,
-				-- you can change the `grep.fzf_opts` to `["--ansi"]=true` instead,
-				-- which will speed up rg results
-			},
-			winopts = {
-				treesitter = {
-					enabled = true,
-				}, -- can turn it off for matching 'max-perf' profile
-				preview = {
+      defaults = {
+        -- if `files.fzf_opts.["--ansi"] = true`, turn both of these to false
+        git_icons = true,
+        file_icons = true,
+        -- or if you're turning these off,
+        -- you can change the `grep.fzf_opts` to `["--ansi"]=true` instead,
+        -- which will speed up rg results
+      },
+      winopts = {
+        treesitter = {
+          enabled = true,
+        }, -- can turn it off for matching 'max-perf' profile
+        preview = {
 
-					-- EITHER USE BUILTIN PREVIEWER OR BAT
-					-- (bat kinda looks odd cos it's different syntax highlight to nvim's)
-					default = "builtin",
-					-- default = "bat",
-				},
-			},
-			manpages = { previewer = "man_native" },
-			helptags = { previewer = "help_native" },
+          -- EITHER USE BUILTIN PREVIEWER OR BAT
+          -- (bat kinda looks odd cos it's different syntax highlight to nvim's)
+          default = "builtin",
+          -- default = "bat",
+        },
+      },
+      manpages = { previewer = "man_native" },
+      helptags = { previewer = "help_native" },
 
-			lsp = {
-				jump1 = true,
-				code_actions = {
-					previewer = "codeaction_native",
-				},
-			},
-			tags = { previewer = "bat" },
-			btags = { previewer = "bat" },
+      lsp = {
+        jump1 = true,
+        code_actions = {
+          previewer = "codeaction_native",
+        },
+      },
+      tags = { previewer = "bat" },
+      btags = { previewer = "bat" },
 
-			-- major per opts
-			files = {
-				fzf_opts = {
-					["--ansi"] = true, -- recommended not to turn this off if icons are used (get scrambled unicode ascii otherwise)
-				},
+      -- major per opts
+      files = {
+        fzf_opts = {
+          ["--ansi"] = true, -- recommended not to turn this off if icons are used (get scrambled unicode ascii otherwise)
+        },
 
-				---------------
-				-- these seem to have little-no effect, use the keys = {} require fn call opts
-				-- 'normal' options
-				-- grep_opts = require("fzf-lua.utils").is_darwin()
-				-- 		and grep_concat_exclude_dirs(ignore_dirs) .. "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
-				-- 	or grep_concat_exclude_dirs(ignore_dirs)
-				-- 		.. "--color=always --binary-files=without-match --line-number --recursive --perl-regexp -e",
-				-- rg_opts = rg_concat_iglob(ignore_dirs)
-				-- 	.. " --color=always --column --line-number --no-heading --smart-case --max-columns=4096 -e",
+        ---------------
+        -- these seem to have little-no effect, use the keys = {} require fn call opts
+        -- 'normal' options
+        -- grep_opts = require("fzf-lua.utils").is_darwin()
+        -- 		and grep_concat_exclude_dirs(ignore_dirs) .. "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
+        -- 	or grep_concat_exclude_dirs(ignore_dirs)
+        -- 		.. "--color=always --binary-files=without-match --line-number --recursive --perl-regexp -e",
+        -- rg_opts = rg_concat_iglob(ignore_dirs)
+        -- 	.. " --color=always --column --line-number --no-heading --smart-case --max-columns=4096 -e",
 
-				-- -- performance options (no color)
-				-- grep_opts = require("fzf-lua.utils").is_darwin()
-				-- 		and grep_concat_exclude_dirs(ignore_dirs) .. "--color=never --binary-files=without-match --line-number --recursive --extended-regexp -e"
-				-- 	or "--color=never --binary-files=without-match --line-number --recursive --perl-regexp -e",
-				-- rg_opts = rg_concat_iglob(ignore_dirs)
-				-- 	.. " --color=never --column --line-number --no-heading --smart-case --max-columns=4096 -e",
-			},
-			grep = {
-				-- prompt = "Rg❯ ",
-				multiprocess = true, -- run command in a sep. process
+        -- -- performance options (no color)
+        -- grep_opts = require("fzf-lua.utils").is_darwin()
+        -- 		and grep_concat_exclude_dirs(ignore_dirs) .. "--color=never --binary-files=without-match --line-number --recursive --extended-regexp -e"
+        -- 	or "--color=never --binary-files=without-match --line-number --recursive --perl-regexp -e",
+        -- rg_opts = rg_concat_iglob(ignore_dirs)
+        -- 	.. " --color=never --column --line-number --no-heading --smart-case --max-columns=4096 -e",
+      },
+      grep = {
+        -- prompt = "Rg❯ ",
+        multiprocess = true, -- run command in a sep. process
 
-				git_icons = false,
-				file_icons = true,
-				color_icons = true,
+        git_icons = false,
+        file_icons = true,
+        color_icons = true,
 
-				fzf_opts = {
-					["--ansi"] = true, -- recommended not to turn this off if icons are used (get scrambled unicode ascii otherwise)
-				},
-				-- rg_glob=true is also very fast now no matter mt/st (when disable fn_transform,fn_postprocess)
-				rg_glob = true,
+        fzf_opts = {
+          ["--ansi"] = true, -- recommended not to turn this off if icons are used (get scrambled unicode ascii otherwise)
+        },
+        -- rg_glob=true is also very fast now no matter mt/st (when disable fn_transform,fn_postprocess)
+        rg_glob = true,
 
-				---------------
-				-- these seem to have little-no effect, use the keys = {} require fn call opts
+        ---------------
+        -- these seem to have little-no effect, use the keys = {} require fn call opts
 
-				-- 'normal' options
-				grep_opts = require("fzf-lua.utils").is_darwin()
-						and "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
-					-- and grep_concat_exclude_dirs(ignore_dirs) .. "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
-					-- or grep_concat_exclude_dirs(ignore_dirs) ..
-					or "--color=always --binary-files=without-match --line-number --recursive --perl-regexp -e",
-				-- rg_opts = rg_concat_iglob(ignore_dirs)
-				rg_opts = " --color=always --column --line-number --no-heading --smart-case --max-columns=4096 -e",
+        -- 'normal' options
+        grep_opts = require("fzf-lua.utils").is_darwin()
+            and "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
+          -- and grep_concat_exclude_dirs(ignore_dirs) .. "--color=always --binary-files=without-match --line-number --recursive --extended-regexp -e"
+          -- or grep_concat_exclude_dirs(ignore_dirs) ..
+          or "--color=always --binary-files=without-match --line-number --recursive --perl-regexp -e",
+        -- rg_opts = rg_concat_iglob(ignore_dirs)
+        rg_opts = " --color=always --column --line-number --no-heading --smart-case --max-columns=4096 -e",
 
-				-- performance options (no color)
-				-- grep_opts = require("fzf-lua.utils").is_darwin()
-				--     and "--color=never --binary-files=without-match --line-number --recursive --extended-regexp -e"
-				--   or "--color=never --binary-files=without-match --line-number --recursive --perl-regexp -e",
-				-- rg_opts = " --color=never --column --line-number --no-heading --smart-case --max-columns=4096 -e",
-			},
-			--
+        -- performance options (no color)
+        -- grep_opts = require("fzf-lua.utils").is_darwin()
+        --     and "--color=never --binary-files=without-match --line-number --recursive --extended-regexp -e"
+        --   or "--color=never --binary-files=without-match --line-number --recursive --perl-regexp -e",
+        -- rg_opts = " --color=never --column --line-number --no-heading --smart-case --max-columns=4096 -e",
+      },
+      --
 
-			-- oldfiles = {
-			--
-			-- },
-			buffers = {
-				file_icons = true,
-				color_icons = true,
-				sort_lastused = true, -- sort by last used
-				show_unloaded = true, -- show unloaded buffers
-				cwd_only = false, -- buffers for the cwd only
-				cwd = nil, -- buffers list for a given dir
-				-- actions = {
-				-- 	-- these auto-inherit from actions.files anyway
-				-- }
-			},
-			-- tabs = {},
-			-- lines = {
-			-- 	file_icons = true,
-			-- },
+      -- oldfiles = {
+      --
+      -- },
+      buffers = {
+        file_icons = true,
+        color_icons = true,
+        sort_lastused = true, -- sort by last used
+        show_unloaded = true, -- show unloaded buffers
+        cwd_only = false, -- buffers for the cwd only
+        cwd = nil, -- buffers list for a given dir
+        -- actions = {
+        -- 	-- these auto-inherit from actions.files anyway
+        -- }
+      },
+      -- tabs = {},
+      -- lines = {
+      -- 	file_icons = true,
+      -- },
 
-			fzf_colors = true, -- will 'auto-generate' based on colorscheme
-			keymap = {
-				-- handles all 'general'/generic-ish fzf-lua invoked pickers
-				builtin = {
-					true,
-					["<C-d>"] = "preview-page-down",
-					["<C-u>"] = "preview-page-up",
-				},
-				-- THIS IS THE ONE that handles inside the actual pop-up itself!!!!!!!
-				fzf = {
-					true,
-					["ctrl-d"] = "preview-page-down",
-					["ctrl-u"] = "preview-page-up",
-					["ctrl-q"] = "select-all+accept",
-					["ctrl-t"] = "select-all+accept", -- idk how this is different to the actions.files mapping tbh
-				},
-			},
+      fzf_colors = true, -- will 'auto-generate' based on colorscheme
+      keymap = {
+        -- handles all 'general'/generic-ish fzf-lua invoked pickers
+        builtin = {
+          true,
+          ["<C-d>"] = "preview-page-down",
+          ["<C-u>"] = "preview-page-up",
+        },
+        -- THIS IS THE ONE that handles inside the actual pop-up itself!!!!!!!
+        fzf = {
+          true,
+          ["ctrl-d"] = "preview-page-down",
+          ["ctrl-u"] = "preview-page-up",
+          ["ctrl-q"] = "select-all+accept",
+          ["ctrl-t"] = "select-all+accept", -- idk how this is different to the actions.files mapping tbh
+        },
+      },
 
-			actions = {
-				files = {
-					["enter"] = actions.file_edit_or_qf,
-					["ctrl-s"] = actions.file_split,
-					["ctrl-v"] = actions.file_vsplit,
-					-- ["ctrl-t"] = actions.file_tabedit,
-					["ctrl-t"] = actions.file_sel_to_qf,
-					-- ["ctrl-t"] = actions.file_sel_to_qf,
-					-- ["alt-q"] = actions.file_sel_to_qf,
-				},
-			},
-		}
-	end,
+      actions = {
+        files = {
+          ["enter"] = actions.file_edit_or_qf,
+          ["ctrl-s"] = actions.file_split,
+          ["ctrl-v"] = actions.file_vsplit,
+          -- ["ctrl-t"] = actions.file_tabedit,
+          ["ctrl-t"] = actions.file_sel_to_qf,
+          -- ["ctrl-t"] = actions.file_sel_to_qf,
+          -- ["alt-q"] = actions.file_sel_to_qf,
+        },
+      },
+    }
+  end,
 }

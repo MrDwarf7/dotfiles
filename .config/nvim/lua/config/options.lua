@@ -29,18 +29,18 @@ opt.foldnestmax = 4
 
 opt.linebreak = true -- wrap at a character in 'breakat' rather than at the last character that fits on the screen.wrap at 'co
 
-opt.pumblend = 15    -- Popup blend
-opt.pumheight = 30   -- Maximum number of entries in a popup
+opt.pumblend = 15 -- Popup blend
+opt.pumheight = 30 -- Maximum number of entries in a popup
 
 -- opt.autowrite = true -- Enable auto write, so that modified buffers are written when switching buffers.
 opt.conceallevel = 0
-opt.formatoptions = "jcroqlnt"     -- tcqj
-opt.inccommand = "nosplit"         -- preview incremental substitute
+opt.formatoptions = "jcroqlnt" -- tcqj
+opt.inccommand = "nosplit" -- preview incremental substitute
 -- opt.jumpoptions = "view" -- Define how the jumplist attempts to restore the cursor position
-opt.shiftround = true              -- Round indent
-opt.virtualedit = "block"          -- Allow cursor to move where there is no text in visual block mode
+opt.shiftround = true -- Round indent
+opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
-opt.winminwidth = 6                -- Minimum window width
+opt.winminwidth = 6 -- Minimum window width
 vim.g.markdown_recommended_style = 0
 opt.sessionoptions = {
   --
@@ -52,8 +52,8 @@ opt.sessionoptions = {
   "help",
   -- "localoptions", -- not needed.
   -- "options", -- not needed.
-  "skiprtp",  -- Not sure if needed, but I assume this will be loaded regardless due to Lazy pkg manager.
-  "resize",   -- lines & columns restoration.
+  "skiprtp", -- Not sure if needed, but I assume this will be loaded regardless due to Lazy pkg manager.
+  "resize", -- lines & columns restoration.
   -- "sesdir", -- directory where sessions are saved becomes the CWD.
   "tabpages", -- tabpages, without this only 'current' tab is restored.
   -- "terminal", -- not needed.

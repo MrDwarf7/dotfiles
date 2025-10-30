@@ -1,4 +1,17 @@
+# `syntax`,
+# `column_width`,
+# `line_endings`,
+# `indent_type`,
+# `indent_width`,
+# `quote_style`,
+# `no_call_parentheses`,
+# `call_parentheses`,
+# `collapse_simple_statement`,
+# `block_newline_gaps`,
+# `sort_requires`,
+# `space_after_function_names`
+
 indent_type = "Spaces"
 indent_width = 2
 column_width = 120
-align_args = true
+no_call_parentheses = false

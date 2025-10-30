@@ -78,20 +78,20 @@ function Keymaps.map(mode, lhs, rhs, opts)
 
   -- NOTE: revise this later
   if
-      mode == nil
-      or (type(mode) == "string" and mode:match("^[nivxosct]$") == nil)
-      or (
-        type(mode) == "table"
-        and #mode > 0
-        and not vim.tbl_contains(mode, "n")
-        and not vim.tbl_contains(mode, "i")
-        and not vim.tbl_contains(mode, "v")
-        and not vim.tbl_contains(mode, "x")
-        and not vim.tbl_contains(mode, "s")
-        and not vim.tbl_contains(mode, "o")
-        and not vim.tbl_contains(mode, "t")
-        and not vim.tbl_contains(mode, "c")
-      )
+    mode == nil
+    or (type(mode) == "string" and mode:match("^[nivxosct]$") == nil)
+    or (
+      type(mode) == "table"
+      and #mode > 0
+      and not vim.tbl_contains(mode, "n")
+      and not vim.tbl_contains(mode, "i")
+      and not vim.tbl_contains(mode, "v")
+      and not vim.tbl_contains(mode, "x")
+      and not vim.tbl_contains(mode, "s")
+      and not vim.tbl_contains(mode, "o")
+      and not vim.tbl_contains(mode, "t")
+      and not vim.tbl_contains(mode, "c")
+    )
   then
     -- default to normal mode
     mode = "n"
@@ -188,17 +188,17 @@ map("i", "kj", "<Esc>", silent_opts)
 
 -- -------------------- goofy ahh line/yank binds
 
-map("n", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
-map("n", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
+map("n", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
+map("n", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
 
-map("v", "H", "^", silent_opts)                         -- Shift + h (Or just H) to jump to start of line
-map("v", "L", "$", silent_opts)                         -- Shift + l (Or just L) to jump to end of line
+map("v", "H", "^", silent_opts) -- Shift + h (Or just H) to jump to start of line
+map("v", "L", "$", silent_opts) -- Shift + l (Or just L) to jump to end of line
 
-map("n", "y<S-h>", "y^", silent_opts)                   -- Same as above for yanking
-map("n", "y<S-l>", "y$", silent_opts)                   -- Same as above for yanking
+map("n", "y<S-h>", "y^", silent_opts) -- Same as above for yanking
+map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 
-map("n", "d<S-h>", "d^", silent_opts)                   -- Same as above for yanking
-map("n", "d<S-l>", "d$", silent_opts)                   -- Same as above for yanking
+map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
+map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
 
 map("n", "<C-w>e", "<C-w>=", silent_opts("[e]qualize")) -- ctrl + w + = : easier to hit to equalize the width of buffers
 
@@ -294,14 +294,14 @@ map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
 -- TODO: @move -- likely want to move this later
 map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "LSP Hover" })
 
--- map("n", "<Leader>lf", function()
--- 	if package.loaded["conform"] then
--- 		return require("conform").format()
--- 	elseif package.loaded["conform"] == nil then
--- 		pcall(require, "conform")
--- 		return vim.lsp.buf.format({ async = true })
--- 	end
--- end, { desc = "format [lspconfig]" })
+map("n", "<Leader>lf", function()
+  if package.loaded["conform"] then
+    require("conform").format()
+  elseif package.loaded["conform"] == nil then
+    pcall(require, "conform")
+    vim.lsp.buf.format({ async = true })
+  end
+end, { desc = "format [lspconfig]" })
 
 -- buffer things
 map("n", "<Leader>bn", ":bnext<CR>", silent_opts("[n]ext"))

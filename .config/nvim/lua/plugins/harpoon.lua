@@ -1,22 +1,22 @@
 ---@type LazyPluginBase
 return {
-	"ThePrimeagen/harpoon",
-	lazy = true,
-	branch = "harpoon2",
-	dependencies = {
-		{ "nvim-lua/plenary.nvim", lazy = true },
-	},
-	keys = function()
-		---@type LazyKeys
-		local keys = {
-			{
-				"<Leader>I",
-				function()
-					local harpoon = require("harpoon")
-					harpoon.ui:toggle_quick_menu(harpoon:list())
-				end,
-				desc = "[h]arpoon menu",
-			},
+  "ThePrimeagen/harpoon",
+  lazy = true,
+  branch = "harpoon2",
+  dependencies = {
+    { "nvim-lua/plenary.nvim", lazy = true },
+  },
+  keys = function()
+    ---@type LazyKeys
+    local keys = {
+      {
+        "<Leader>I",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "[h]arpoon menu",
+      },
 
       -- stylua: ignore start
       { "<Leader>i", function() require("harpoon"):list():add() end,         desc = "harpoon [i]t" },
@@ -24,19 +24,19 @@ return {
       { "<Leader>]", function() return require("harpoon"):list():next() end, desc = "harpoon [n]ext" },
       { "[i",        function() return require("harpoon"):list():prev() end, desc = "harpoon [p]rev" },
       { "]i",        function() return require("harpoon"):list():next() end, desc = "harpoon [n]ext" },
-			-- stylua: ignore end
-		}
+      -- stylua: ignore end
+    }
 
-		for i = 1, 6 do
-			table.insert(keys, {
-				"<Leader>" .. i,
-				function()
-					require("harpoon"):list():select(i)
-				end,
-				desc = "Harpoon to " .. i,
-			})
-		end
+    for i = 1, 6 do
+      table.insert(keys, {
+        "<Leader>" .. i,
+        function()
+          require("harpoon"):list():select(i)
+        end,
+        desc = "Harpoon to " .. i,
+      })
+    end
 
-		return keys
-	end,
+    return keys
+  end,
 }

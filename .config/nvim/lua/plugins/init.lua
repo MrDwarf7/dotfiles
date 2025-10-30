@@ -1,53 +1,53 @@
 ---@type LazyPluginBase[]
 return {
-	-- { "stevearc/oil.nvim" },
-	--
-	-- { "neovim/nvim-lspconfig" },
-	--
-	-- { "mason-org/mason.nvim" },
-	-- { "mason-org/mason-lspconfig.nvim" },
-	-- { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-	--
-	-- { "folke/lazydev.nvim" },
-	--
-	-- { "Saghen/blink.compat" },
-	-- { "L3MON4D3/LuaSnip" },
-	-- { "rafamadriz/friendly-snippets" },
-	-- { "Saghen/blink.cmp" },
-	--
-	-- { "stevearc/conform.nvim" },
+  -- { "stevearc/oil.nvim" },
+  --
+  -- { "neovim/nvim-lspconfig" },
+  --
+  -- { "mason-org/mason.nvim" },
+  -- { "mason-org/mason-lspconfig.nvim" },
+  -- { "WhoIsSethDaniel/mason-tool-installer.nvim" },
+  --
+  -- { "folke/lazydev.nvim" },
+  --
+  -- { "Saghen/blink.compat" },
+  -- { "L3MON4D3/LuaSnip" },
+  -- { "rafamadriz/friendly-snippets" },
+  -- { "Saghen/blink.cmp" },
+  --
+  -- { "stevearc/conform.nvim" },
 
-	---@type LazyPluginBase
-	{ "wsdjeg/vim-fetch" }, -- Allows easily opening a file at a given line number when passing in file:line on command line
+  ---@type LazyPluginBase
+  { "wsdjeg/vim-fetch" }, -- Allows easily opening a file at a given line number when passing in file:line on command line
 
-	-- TODO: literally just make an autoccmd
-	-- {
-	-- 	"RRethy/vim-illuminate",
-	-- 	opts = {
-	-- 		delay = 200,
-	-- 		large_file_cutoff = 2000,
-	-- 		large_file_overrides = {
-	-- 			providers = { "lsp" },
-	-- 		},
-	-- 	},
-	-- },                                                          -- Highlights hovered words (can also be done via autocmd(s))
+  -- TODO: literally just make an autoccmd
+  -- {
+  -- 	"RRethy/vim-illuminate",
+  -- 	opts = {
+  -- 		delay = 200,
+  -- 		large_file_cutoff = 2000,
+  -- 		large_file_overrides = {
+  -- 			providers = { "lsp" },
+  -- 		},
+  -- 	},
+  -- },                                                          -- Highlights hovered words (can also be done via autocmd(s))
 
-	---@type LazyPluginBase
-	{ "HawkinsT/pathfinder.nvim" }, -- Enhances the gf, gF, and gx commands
+  ---@type LazyPluginBase
+  { "HawkinsT/pathfinder.nvim" }, -- Enhances the gf, gF, and gx commands
 
-	---@type LazyPluginBase:LazyPluginSpecHandlers
-	{
-		"tridactyl/vim-tridactyl",
-		ft = "tridactyl",
-	}, -- Syntax HL for tridactylrc files
+  ---@type LazyPluginBase:LazyPluginSpecHandlers
+  {
+    "tridactyl/vim-tridactyl",
+    ft = "tridactyl",
+  }, -- Syntax HL for tridactylrc files
 
-	-- TODO: later --
+  -- TODO: later --
 
-	---@type LazyPluginBase
-	{
-		"j-hui/fidget.nvim",
-		---@type LazyEventSpec
-		event = { "LspAttach" },
-		opts = {},
-	},
+  ---@type LazyPluginBase
+  {
+    "j-hui/fidget.nvim",
+    ---@type LazyEventSpec
+    event = { "LspAttach" },
+    opts = {},
+  },
 }

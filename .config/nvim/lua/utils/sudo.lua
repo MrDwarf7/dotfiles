@@ -1,5 +1,4 @@
 --
-
 ---@class utils.Sudo
 local Sudo = {
   debugging = false,
@@ -87,6 +86,7 @@ function Sudo.sudo_write(opts)
   -- stylua: ignore end
 end
 
+-- BUG: something is registering them, but not the underlying function??
 function Sudo.register_user_commands(opts)
   --- Inline function to create user commands
   ---
@@ -94,8 +94,6 @@ function Sudo.register_user_commands(opts)
   --- That is, if it has a trailing '!', then it's true, else false.
   --- @param args utils.Sudo.register_user_commands._inline_create.Opts
   local create = function(args)
-    --
-
     --- Inline function to check for trailing '!' in command name
     ---@param name string
     ---@param bang_field boolean|nil
@@ -161,6 +159,7 @@ function Sudo.register_user_commands(opts)
 
     --- Validations END
 
+    ---@param ctx utils.Sudo.register_user_commands._inline_create.Opts
     local user_cmd_fn = function(ctx)
       if type(ctx.register_fn) ~= "function" then
         return
@@ -253,12 +252,12 @@ end
 
 function Sudo.setup()
   Sudo.register_user_commands()
-  return setmetatable(Sudo, {
-    __tostring = function()
-      return "utils.Sudo"
-    end,
-  })
-  -- Sudo
+  -- return setmetatable(Sudo, {
+  --   __tostring = function()
+  --     return "utils.Sudo"
+  --   end,
+  -- })
+  return Sudo
 end
 
 ---@return utils.Sudo

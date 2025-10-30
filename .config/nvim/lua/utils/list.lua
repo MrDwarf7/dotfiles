@@ -7,28 +7,28 @@ local List = {}
 ---@param type QfTypes
 ---@return WinTable[]?
 function List.find_qf(type)
-	local wininfo = vim.fn.getwininfo()
+  local wininfo = vim.fn.getwininfo()
 
-	---@type WinTable[]
-	local win_tbl = {}
+  ---@type WinTable[]
+  local win_tbl = {}
 
-	-- direct indexing into a variable makes life fun. Trust me bro
+  -- direct indexing into a variable makes life fun. Trust me bro
 
-	for _, win in pairs(wininfo) do
-		local found = false
-		if type == "l" and win["loclist"] == 1 then
-			found = true
-		end
+  for _, win in pairs(wininfo) do
+    local found = false
+    if type == "l" and win["loclist"] == 1 then
+      found = true
+    end
 
-		-- loclist window has 'quickfix' set, eliminate those
-		if type == "q" and win["quickfix"] == 1 and win["loclist"] == 0 then
-			found = true
-		end
-		if found then
-			table.insert(win_tbl, { winid = win["winid"], bufnr = win["bufnr"] })
-		end
-	end
-	return win_tbl
+    -- loclist window has 'quickfix' set, eliminate those
+    if type == "q" and win["quickfix"] == 1 and win["loclist"] == 0 then
+      found = true
+    end
+    if found then
+      table.insert(win_tbl, { winid = win["winid"], bufnr = win["bufnr"] })
+    end
+  end
+  return win_tbl
 end
 
 --- Open quickfix if not empty
@@ -43,7 +43,7 @@ function List.open_qf()
   else
     print(string.format("%s is empty.", qf_name))
   end
-	-- stylua: ignore end
+  -- stylua: ignore end
 end
 
 function List.open_loclist_all()
@@ -62,7 +62,7 @@ function List.open_loclist_all()
       end
     end
   end
-	-- stylua: ignore end
+  -- stylua: ignore end
 end
 
 --- Toggle's quickfix/loclist on/off
@@ -70,24 +70,24 @@ end
 --- Pass "l" to find all loclist windows
 ---@param type QfTypes
 function List.toggle_qf(type)
-	local windows = List.find_qf(type)
-	if #windows > 0 then
-		-- hide all visible windows
-		for _, win in ipairs(windows) do
-			vim.api.nvim_win_hide(win.winid)
-		end
-	else
-		-- no windows are vis, attempt to open
-		if type == "l" then
-			List.open_loclist_all()
-		else
-			List.open_qf()
-		end
-	end
+  local windows = List.find_qf(type)
+  if #windows > 0 then
+    -- hide all visible windows
+    for _, win in ipairs(windows) do
+      vim.api.nvim_win_hide(win.winid)
+    end
+  else
+    -- no windows are vis, attempt to open
+    if type == "l" then
+      List.open_loclist_all()
+    else
+      List.open_qf()
+    end
+  end
 end
 
 function List.setup()
-	return List
+  return List
 end
 
 ---@return utils.List
