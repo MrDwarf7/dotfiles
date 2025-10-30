@@ -1,6 +1,33 @@
 #!/usr/bin/env fish
 #
 
+# Renders help for the sysup function
+#
+# Parameters:
+# None 
+#
+# Returns:
+# Returns 0 on success. (infallible)
+function sysup_help --description 'Display help for sysup function'
+    set -l tc " "
+    printf "Usage: sysup [--skip|-s <options>]
+
+Options:
+$tc --skip, -s <options>   Skip certain parts of the update.
+$tc --help, -h             Show this help message.
+
+Options:
+$tc m -                    Skip mirror update
+$tc r -                    Skip rustup update
+$tc p -                    Skip package update
+
+Example:
+$tc sysup --skip m
+$tc sysup -s rp
+"
+    return 0
+end
+
 # Runs a system update, optionally skipping certain parts
 #
 # Parameters:
@@ -14,8 +41,13 @@
 # Returns:
 # Returns 0 on success, 1 on failure.
 function sysup --description 'System update function'
-    argparse --name=sysup 's/skip=' -- $argv
+    argparse --name=sysup 's/skip=' h/help -- $argv
     or return
+
+    if set -q _flag_help
+        sysup_help
+        return 0
+    end
 
     # Should skip 1 = true, 0 = false
     set -l skip_mirror false
@@ -58,8 +90,8 @@ function sysup --description 'System update function'
         mirror_update || return $status
     else
         colorize yellow "Running full update...\n"
-        mirror_update || return $status
-        099generic_update || return $status
+        mirror_update
+        099generic_update
         099generic_cache_drop || return $status
     end
 
