@@ -86,7 +86,7 @@
 ---@field by_ft fun(typeof: TypeOfLiteral|TypeOfE, ft?: Ft, bufnr?: integer): ListElements|nil
 ---
 ---@deprecated Use LangTables.by_ft("linters", ft) instead.
----@field linters_by_ft fun(ft?: Ft, bufnr?: integer): ListElements|nil
+---@field linters_by_ft fun(ft?: Ft, bufnr?: integer): ListElements
 ---
 ---@deprecated Use LangTables.by_ft("formatters", ft) instead.
 ---@field formatters_by_ft fun(ft?: Ft, bufnr?: integer): ListElements

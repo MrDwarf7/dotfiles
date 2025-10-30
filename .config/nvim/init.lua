@@ -7,6 +7,7 @@ require("config.autocmds")
 
 local lsp = require("config.lsp")
 local utils = require("utils")
+-- require("utils.output").info("Just call require utils in the MAIN init.lua!")
 
 -- Testing out the new vim.pack commands instead of lazy
 --
@@ -48,8 +49,7 @@ local lazy_opts = {
   },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
-
-    -- path = require("utils.generic").get_dev_dir(),
+    path = require("utils.output").get_dev_dir(),
     -- path = "~/Documents/nvim_dev",
   },
   performance = {

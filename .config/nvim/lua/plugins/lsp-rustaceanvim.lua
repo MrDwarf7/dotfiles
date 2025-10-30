@@ -149,6 +149,7 @@ return {
   {
     "saecki/crates.nvim",
     event = { "BufRead Cargo.toml" },
+    ft = { "toml" },
     opts = {
       lsp = {
         enabled = true,

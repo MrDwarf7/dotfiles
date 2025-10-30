@@ -32,7 +32,7 @@ return {
 
   { "HawkinsT/pathfinder.nvim", lazy = true, event = "BufReadPost" }, -- Enhances the gf, gF, and gx commands
 
-  { "tridactyl/vim-tridactyl", ft = "tridactyl", opts = {} }, -- Syntax HL for tridactylrc files
+  { "tridactyl/vim-tridactyl", ft = "tridactyl" }, -- Syntax HL for tridactylrc files
 
   -- TODO: later --
 

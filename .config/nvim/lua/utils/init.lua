@@ -8,8 +8,8 @@
 ---@field output utils.Output
 ---@field sudo utils.Sudo
 ---@field tsutils utils.TsUtils
----
----@field setup fun(): utils.Utils|Error
+--- Setup function for utils.Utils module.
+---@field setup fun(): utils.Utils
 local Utils = {
   arch = require("utils.arch"),
   -- autofmt =  require("utils.autofmt")
@@ -36,16 +36,15 @@ function Utils.setup()
     return Utils
   end
 
-  local ut = Utils
-
-  if type(ut) ~= "table" then
+  if type(Utils) ~= "table" then
     -- loac the utils.Output module directly, and return an notify error
-    return require("utils.output").err("Something went wrong attempting to load the utils.Utils module!")
+    require("utils.output").err("Something went wrong attempting to load the utils.Utils module!")
+    has_init_utils = false
+    return {}
   end
 
   has_init_utils = true
-
-  return ut
+  return Utils
 end
 
 ---@return utils.Utils
