@@ -23,7 +23,7 @@ window-padding-balance = true
 # background-blur = 35
 
 #### uncomment after fixing up Niri
-# background-blur = 20
+# background-blur = 90
 
 # Standard
 # background-opacity = 0.90
@@ -36,9 +36,9 @@ window-padding-balance = true
 # background-opacity = 0.40
 
 #### uncomment after fixing up Niri
-# background-opacity = 0.40
+background-opacity = 0.4
 
-background-opacity = 0.95
+# background-opacity = 0.95
 
 # theme = TokyoNight Storm
 
@@ -47,11 +47,31 @@ window-decoration = none
 bold-is-bright = false
 cursor-style = bar
 cursor-style-blink = true
-font-size = 11.5
+# font-size = 10.5
+font-size = 10.2
 font-thicken = false
-font-feature = ["ss04" "ss01"]
+# ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
+# ss04 - use normal g ( with the gap on the left, like a lowercase Y )
+# ss08 - use squashed parentheses ()
+# ss11 - use squished `x` when identified for hexadecimal digits
+# ss12 - thin backslash
+# ss13 - dollar symbol without strike-through vertical line
+# font-feature = ["ss04" "ss08" ]
+font-feature = -calt, -liga, -dlig, -clig, -ss01, -ss08, +ss11, -ss12, -ss13
+
 # font-family = JetBrainsMono Nerd Font Mono
-font-family = Mononoki Nerd Font Mono
+#### previous #### font-family = Mononoki Nerd Font Mono
+# font-family = Zenbones Brainy Medium Regular
+
+# font-family = Zenbones Brainy Light
+# font-family = Zenbones Mono Thin
+# font-family = Zenbones Brainy Medium
+
+# font-family = Zenbones Proto
+# font-family = Zenbones Mono
+font-family = Zenbones Brainy 
+# Medium
+
 adjust-cursor-thickness = 1
 adjust-box-thickness = 1
 
