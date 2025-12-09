@@ -8,6 +8,7 @@ return {
 
   -- -- from local FS / Dev --
   -- "lazyjui.nvim",
+  -- branch = "dev",
   -- dev = true,
 
   lazy = true,
