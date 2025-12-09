@@ -25,9 +25,9 @@ function pc_help
     090help "\
 Usage: pc
 
-Calls the package manager using the environment
-variable PKG_MANAGER. if set
-or paru/yay as a fallback, to check for updates.
+Calls the package manager to check for updates
+using the environment variable PKG_MANAGER,
+if set or paru/yay as a fallback.
 " "
 ,,,,
 ,Short                  ,Long                           ,Description,

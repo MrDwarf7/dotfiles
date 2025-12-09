@@ -23,4 +23,6 @@ alias au lza
 alias lg lazygit
 # alias zl (command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n"))
 
+alias p $PKG_MANAGER
+
 alias ccc c3c
