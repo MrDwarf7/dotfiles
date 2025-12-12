@@ -1,21 +1,3 @@
-#
-#
-XDG_CONFIG_HOME="$HOME/.config"
-XDG_BIN_HOME="$HOME/.xdg/bin"
-XDG_CACHE_HOME="$HOME/.xdg/cache"
-XDG_CACHE_LOCAL_HOME="$HOME/.xdg/local"
-XDG_DATA_HOME="$HOME/.xdg/data"
-XDG_STATE_HOME="$HOME/.xdg/state"
-
-# XDG_DESKTOP_DIR="$HOME/Desktop"
-XDG_DOWNLOAD_DIR="$HOME/Downloads"
-XDG_DOCUMENTS_DIR="$HOME/Documents"
-# XDG_TEMPLATES_DIR="$HOME/Templates"
-# XDG_PUBLICSHARE_DIR="$HOME/Public"
-# XDG_MUSIC_DIR="$HOME/Music"
-XDG_PICTURES_DIR="$HOME/Pictures"
-# XDG_VIDEOS_DIR="$HOME/Videos"
-
 # This file is written by xdg-user-dirs-update
 # If you want to change or add directories, just edit the line you're
 # interested in. All local changes will be retained on the next run.
@@ -23,6 +5,35 @@ XDG_PICTURES_DIR="$HOME/Pictures"
 # homedir-relative path, or XDG_xxx_DIR="/yyy", where /yyy is an
 # absolute path. No other format is supported.
 #
+XDG_CONFIG_HOME_DIR="$HOME/.config"
+XDG_DESKTOP_DIR="$HOME/Desktop"
+XDG_DOCUMENTS_DIR="$HOME/Documents"
+XDG_DOWNLOAD_DIR="$HOME/Downloads"
+XDG_MUSIC_DIR="$HOME/Music"
+XDG_PICTURES_DIR="$HOME/Pictures"
+XDG_VIDEOS_DIR="$HOME/Videos"
+
+XDG_BIN_HOME_DIR="$HOME/.xdg/bin"
+XDG_CACHE_HOME_DIR="$HOME/.xdg/cache"
+XDG_CACHE_LOCAL_HOME_DIR="$HOME/.xdg/local"
+XDG_DATA_HOME_DIR="$HOME/.xdg/data"
+XDG_STATE_HOME_DIR="$HOME/.xdg/state"
+
+## it actually turns them into these :
+# either is fine as the outcome is the same anyway
+# XDG_CONFIG_HOME_DIR="$HOME/.config"
+# XDG_DESKTOP_DIR="$HOME/Desktop"
+# XDG_DOCUMENTS_DIR="$HOME/Documents"
+# XDG_DOWNLOAD_DIR="$HOME/Downloads"
+# XDG_MUSIC_DIR="$HOME/Music"
+# XDG_PICTURES_DIR="$HOME/Pictures"
+# XDG_VIDEOS_DIR="$HOME/Videos"
+# 
+# XDG_BIN_HOME_DIR="$HOME/.xdg/bin"
+# XDG_CACHE_HOME_DIR="$HOME/.xdg/cache"
+# XDG_CACHE_LOCAL_HOME_DIR="$HOME/.xdg/local"
+# XDG_DATA_HOME_DIR="$HOME/.xdg/data"
+# XDG_STATE_HOME_DIR="$HOME/.xdg/state"
 
 ########################################################################
 ### TURN THESE ON AS NEEDED AFTER _COPYING_ THEM TO $XDG_CONFIG_HOME ###
