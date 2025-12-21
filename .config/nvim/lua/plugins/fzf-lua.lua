@@ -75,7 +75,8 @@ return {
 
     -- stylua: ignore start
     -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                                       desc = "Find Files (root=cwd)" },
-    { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd(), file_ignore_patterns = ignore_dirs }) end, desc = "Find Files (root=cwd)" },
+-- T    -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd(), file_ignore_patterns = ignore_dirs }) end, desc = "Find Files (root=cwd)" },
+
     -- TODO: This is a little janky, oil expects the oil buffer to be open to get the current dir.
     {
       "<Leader>fF",
@@ -95,7 +96,7 @@ return {
     { "<Leader>fz", function() require("fzf-lua").zoxide() end,                                                          desc = "Find via Zoxide" },
     { "<Leader>fb", function() require("fzf-lua").buffers() end,                                                         desc = "Find Buffers" },
 
-    { "<Leader>fg", function() require("fzf-lua").git_files({ cwd = vim.uv.cwd() }) end,                                 desc = "Find Git Files (root=cwd)" },
+-- T --    { "<Leader>fg", function() require("fzf-lua").git_files({ cwd = vim.uv.cwd() }) end,                                 desc = "Find Git Files (root=cwd)" },
     -- { "<Leader>fg", function() require("fzf-lua").git_files({ root = false, cwd = vim.uv.cwd() }) end,                     desc = "Find Git Files (root=cwd)" },
     { "<Leader>fG", function() require("fzf-lua").git_files({ cwd = require("oil").get_current_dir() }) end,             desc = "Find Git Files (oil)" },
 
