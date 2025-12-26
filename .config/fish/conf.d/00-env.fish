@@ -72,6 +72,8 @@ set -gx WZT_GPU_POWER_PREF HighPerformance
 
 set -gx TMUX_DEFAULT_SESSION_NAME _main
 
+set -gx GOBIN $HOME/go/bin
+
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 set -Ux CARAPACE_BRIDGES all
 

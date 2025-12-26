@@ -65,6 +65,8 @@ LangTables = {
 
       "desktop",
       "embedded_template",
+      "gomod",
+      "gosum",
       "html",
       "htmldjango",
       "http",
@@ -115,9 +117,10 @@ LangTables = {
       "cmakelang",
       -- "csharpier",
       "fixjson",
+      "gofumpt",
       "isort",
-      "markdownlint-cli2",
       "markdown-toc",
+      "markdownlint-cli2",
       "mdslw",
       "prettier",
       "shfmt",
@@ -133,6 +136,7 @@ LangTables = {
       ["bash"] = { "shfmt", "beautysh" },
       ["cpp"] = { "clang-format" },
       ["cmake"] = { "cmakelang", "neocmake" },
+      ["go"] = { "gofumpt" },
 
       ["fish"] = { "beautysh" },
       ["gleam"] = { "gleam" },
