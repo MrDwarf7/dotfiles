@@ -20,7 +20,8 @@ function 01eval_if_pacman --description "If a provided program is available via 
 
     if 00valid_pacman "$program_one"
         # printf "1.1: Evaluating %s\n" "$expr"
-        source <(eval $expr | psub)
+        # source <(eval $expr | psub) ## previous way
+        eval $expr | source
         return 0
     end
     return 1

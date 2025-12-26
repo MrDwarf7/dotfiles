@@ -24,5 +24,4 @@ if status is-interactive
     fish_vi_key_bindings
 
     # 099autostart_tmux new
-
 end

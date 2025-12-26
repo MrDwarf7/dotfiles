@@ -22,14 +22,21 @@
 # 05export_alias_if_pacman neovim vim nvim
 04export_onto_path_if_pacman rustup "$HOME/.cargo/bin" --prepend
 
-01eval_if_pacman zoxide "zoxide init fish | source"
+01eval_if_pacman zoxide "zoxide init fish"
 
-01eval_if_pacman fzf "fzf --fish | source"
-01eval_if_pacman jj "jj util completion fish | source"
+01eval_if_pacman fzf "fzf --fish"
+01eval_if_pacman jj "jj util completion fish"
 
 # This is an exception to the above, sadly...
-01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
+# 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
+
+01eval_if_pacman carapace "carapace _carapace"
+01eval_if_pacman carapace "carapace fish"
+
 01eval_if_pacman mise "mise activate fish | source"
+
+01eval_if_pacman batman "batman --export-env"
+01eval_if_pacman batpipe "eval (batpipe)"
 
 03export_path_if_pacman pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
 04export_onto_path_if_pacman pnpm "$PNPM_HOME" --prepend

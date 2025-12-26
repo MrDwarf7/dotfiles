@@ -19,3 +19,4 @@ complete -c lzs -w lazyjournal
 # complete -c ma -w makers
 complete -c ma -w "cargo make"
 complete -c md -w mkdir
+complete -c batm -w batman

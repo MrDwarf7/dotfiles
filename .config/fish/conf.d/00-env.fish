@@ -21,10 +21,16 @@ if not set -q WALLPAPER_BACKEND
 end
 
 # Set editor variables.
+# set -gx PAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
+
 set -gx PAGER less
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 set -gx SHELL fish
+
+# set -gx MANPAGER 'less -R --use-color -Dd+r -Du+b'
+# set -gx MANPAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
+# set -gx MANPAGER
 
 # Removes the greeting text
 set -gx fish_greeting
@@ -82,3 +88,21 @@ set -Ux CARAPACE_BRIDGES all
 # set -gx TASKDATA $HOMEXDG_CONFIG_HOME/task/
 
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+#### bat (batcat) extras configuration via env variables
+## batdiff
+set -gx BATDIFF_USE_DELTA true
+## batgrep
+#
+## batman
+#
+## Note: This isn't actually a part of `batman` itself, we're using the naming
+# convention here in the alias function for fish/functions/batman.fish file
+# set -gx BATMAN_THEME "Solarized (dark)"
+set -gx BATMAN_THEME "Monokai Extended"
+## batpipe
+#
+## Terminal width, if `-`, relative to detected terminal width
+# set -gx BATPIPE_TERM_WIDTH "-"
+## batwatch
+## prettybat
