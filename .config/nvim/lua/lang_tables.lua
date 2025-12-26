@@ -144,6 +144,7 @@ LangTables = {
       ["javascriptreact"] = { "biome" },
       ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
       ["lua"] = { "stylua" },
+      ["luau"] = { "stylua" },
       ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
       -- markdown = { "prettier" },
       ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
@@ -175,6 +176,7 @@ LangTables = {
       "cpplint",
       "hadolint",
       "jsonlint",
+      "luacheck",
       "markdownlint-cli2",
       "mypy",
       "ruff",
@@ -195,7 +197,8 @@ LangTables = {
       ["javascript"] = { "biome" },
       ["javascriptreact"] = { "biome" },
       ["json"] = { "jsonlint" },
-      -- lua = { "luacheck" },
+
+      ["lua"] = { "luacheck" },
       -- markdown = { "markdownlint-cli2" },
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
@@ -232,6 +235,7 @@ LangTables = {
       "html",
       "hyprls",
       "jsonls",
+      "luau-lsp",
       "lua_ls",
       "markdown-oxide",
       "mesonlsp",

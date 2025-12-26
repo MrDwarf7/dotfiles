@@ -1,6 +1,25 @@
 local Converter = require("utils.converter")
 -- local map = vim.keymap.set
 
+---@enum ResizeDirection
+local ResizeDirection = {
+  INCREASE = 1,
+  DECREASE = -1,
+}
+
+---@param by_value number
+---@param pos_neg ResizeDirection
+---@return fun(): string
+local silent_vert_resize = function(by_value, pos_neg)
+  assert(pos_neg == ResizeDirection.INCREASE or pos_neg == ResizeDirection.DECREASE, "Invalid ResizeDirection")
+  return function() ---@return fun(): string
+    return vim.cmd.resize({ ---@return string
+      (pos_neg == ResizeDirection.INCREASE and "+" or "-") .. (by_value or 2),
+      mods = { vertical = true },
+    })
+  end
+end
+
 ---@type LazyPluginBase
 return {
   "stevearc/oil.nvim",
@@ -74,13 +93,21 @@ return {
 
       ["<CR>"] = "actions.select",
       ["<C-]>"] = "actions.select_vsplit",
-      ["<C-[>"] = "actions.select_split",
-      -- ["<C-h>"] = ":vertical resize +2<CR>",
+      -- ["<C-[>"] = "actions.select_split", -- this binding doesn't work
+
+      ["<C-v>"] = "actions.select_vsplit", -- NorthSouth (left | right)
+      ["<C-s>"] = "actions.select_split", -- EastWest (top _ bottom)
+
+      -- ["<C-h>"] = silent_vert_resize(2, ResizeDirection.INCREASE)(),
+      -- ["<C-l>"] = silent_vert_resize(2, ResizeDirection.DECREASE)(),
+
+      ["<C-h>"] = silent_vert_resize(2, ResizeDirection.INCREASE),
+      ["<C-l>"] = silent_vert_resize(2, ResizeDirection.DECREASE),
 
       ["<C-t>"] = "actions.select_tab",
       ["<C-p>"] = "actions.preview",
       ["<C-c>"] = "actions.close",
-      ["<C-l>"] = "actions.refresh",
+      ["<C-r>"] = "actions.refresh",
       ["-"] = "actions.parent",
 
       ["@"] = "actions.open_cwd",
@@ -93,13 +120,13 @@ return {
       ["g\\"] = "actions.toggle_trash",
 
       -- directory path
-      ["<Leader>yc"] = function()
+      ["<Leader>yC"] = function()
         -- vim.fn.setreg("+", Converter._filepath()) -- write to clippoard
         vim.fn.setreg("+", Converter.fullpath())
       end,
 
       -- full_path (incl. filename + extension)
-      ["<leader>yC"] = function()
+      ["<leader>yc"] = function()
         -- vim.fn.setreg("+", Converter._filepath())
         vim.fn.setreg("+", Converter.relative())
       end,

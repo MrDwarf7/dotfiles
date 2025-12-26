@@ -13,7 +13,7 @@ return {
     { "Saghen/blink.compat",          lazy = true },
     { "L3MON4D3/LuaSnip",             lazy = true },
     { "rafamadriz/friendly-snippets", lazy = true },
-    { "folke/lazydev.nvim",           lazy = true, opts = {} },
+    { "folke/lazydev.nvim",           lazy = true, ft = "lua" },
     { "fang2hou/blink-copilot",       lazy = true },
     { "zbirenbaum/copilot.lua",       lazy = true },
     -- { "mikavilpas/blink-ripgrep.nvim", version = "*" }, -- use the latest stable version
@@ -259,7 +259,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = 100,
+          score_offset = 99,
           async = true,
         },
 
@@ -270,7 +270,7 @@ return {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 99,
+          score_offset = 100,
         },
 
         lsp = {

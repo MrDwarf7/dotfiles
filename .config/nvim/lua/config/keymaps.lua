@@ -304,8 +304,8 @@ map("n", "<Leader>lf", function()
 end, { desc = "format [lspconfig]" })
 
 -- buffer things
-map("n", "<Leader>bn", ":bnext<CR>", silent_opts("[n]ext"))
-map("n", "<Leader>bp", ":bprev<CR>", silent_opts("[p]revious"))
+map("n", "<Leader>bn", "<CMD>bnext<CR>", silent_opts("[n]ext"))
+map("n", "<Leader>bp", "<CMD>bprev<CR>", silent_opts("[p]revious"))
 
 map("n", "]b", "<CMD>bnext<cr>", { desc = "[n]ext" })
 map("n", "[b", "<CMD>bprevious<cr>", { desc = "[p]revious" })
@@ -323,13 +323,13 @@ end, silent_opts("[b]uf Wipe"))
 -- map("n", "<Leader>bD", vim., silent_opts("[p]revious"))
 
 -- buffer resizing
-map("n", "<Left>", ":vertical resize +2<CR>", silent_opts)
-map("n", "<Right>", ":vertical resize -2<CR>", silent_opts)
+map("n", "<Left>", "<CMD>vertical resize +2<CR>", silent_opts)
+map("n", "<Right>", "<CMD>vertical resize -2<CR>", silent_opts)
 
-map("n", "<C-h>", ":vertical resize +2<CR>", silent_opts)
-map("n", "<C-l>", ":vertical resize -2<CR>", silent_opts)
-map("n", "<Down>", ":resize -2<CR>", silent_opts)
-map("n", "<Up>", ":resize +2<CR>", silent_opts)
+map("n", "<C-h>", "<CMD>vertical resize +2<CR>", silent_opts)
+map("n", "<C-l>", "<CMD>vertical resize -2<CR>", silent_opts)
+map("n", "<Down>", "<CMD>resize -2<CR>", silent_opts)
+map("n", "<Up>", "<CMD>resize +2<CR>", silent_opts)
 
 map("n", "<Leader>W", function()
   require("utils.sudo").sudo_write()

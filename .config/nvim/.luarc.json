@@ -1,3 +1,12 @@
 {
-  "workspace.checkThirdParty": "Enable"
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    "workspace.checkThirdParty": "Enable",
+    "diagnostics.globals": [
+        "vim",
+        "describe",
+        "it",
+        "before_each",
+        "after_each",
+        "packer_plugins"
+    ]
 }
