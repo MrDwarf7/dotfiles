@@ -1,6 +1,9 @@
 #!/usr/bin/env fish
 #
 
+# use vi binds
+set -g fish_key_bindings fish_vi_key_bindings
+
 set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
 
 set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.xdg/bin

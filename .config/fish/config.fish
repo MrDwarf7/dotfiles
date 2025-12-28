@@ -21,7 +21,7 @@ if status is-interactive
         source "$HOME/.secret/secrets.fish"
     end
 
-    fish_vi_key_bindings
+    # fish_vi_key_bindings ## derp. after version >= 4.3
 
     # 099autostart_tmux new
 end
