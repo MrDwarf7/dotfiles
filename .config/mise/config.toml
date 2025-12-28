@@ -6,5 +6,20 @@ python = "latest"
 deno = "latest"
 bun = "latest"
 
+biome = "latest"
+
+####################################################################################################
+
+[tools."npm:tailwindcss"]
+version = "latest"
+
+[tools."npm:@tailwindcss/cli"]
+version = "latest"
+
+[tools."npm:turbo"] # turbopack/turborepo
+version = "latest"
+
+####################################################################################################
+
 [settings]
 idiomatic_version_file_enable_tools = []
