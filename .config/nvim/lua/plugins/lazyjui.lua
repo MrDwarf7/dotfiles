@@ -21,9 +21,8 @@ return {
   ---@type lazyjui.Opts
   opts = {
     -- Optionally:
-    -- border_chars = {},
-    -- border_chars = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-    -- border_thickness = 2,
+    -- border = {},
+
     cmd = { "jjui", "-r", "all()" },
     height = 0.8, -- default is 0.8,
     width = 0.7, -- default is 0.9,
