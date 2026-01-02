@@ -27,12 +27,12 @@
 # }
 
 # The total lines to clip AFTER the searched term
-TOTAL_LINES_AFTER=37
-TOTAL_LINES_BEFORE=1
-SEARCHED_CONTEXT_LINES=1
-SEARCHED_TAG_PREFIX="REF S"
+SEARCHED_TAG_PREFIX="REF S" # Were we start searching for references
+TOTAL_LINES_AFTER=37        # Total lines we capture after the searched term
+TOTAL_LINES_BEFORE=1        # Total lines we capture before the searched term (This grabs the ### line above the search prefix)
+SEARCHED_CONTEXT_LINES=1    #  # When given a search term to look for, how many lines of context to show around the found term
 
-RG_PREF_FLAGS="--color=always"
+RG_PREF_FLAGS="--color=always" # Preference flags for rg, independent of program logic
 
 function help_refs {
   cat <<'EOF'
