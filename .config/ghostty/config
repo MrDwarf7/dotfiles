@@ -7,6 +7,19 @@ config-file = ?shaders.conf
 config-file = themes/tokyonight_storm.conf
 # config-file = themes/matteblack.conf
 
+# default? I think?
+# scrollback-limit = 10000
+
+# Trying to fix the crash/coredump issues
+#
+# #   Module /usr/bin/ghostty without build-id.
+# #   Stack trace of thread 200793:
+# #   #0  0x0000557a82afcd9f n/a (/usr/bin/ghostty + 0x13aed9f)
+# #   ELF object binary architecture: AMD x86-64
+#
+# 10k
+scrollback-limit = 1000
+
 ################
 ### Settings ###
 ################
