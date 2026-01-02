@@ -109,3 +109,5 @@ set -gx BATMAN_THEME "Monokai Extended"
 # set -gx BATPIPE_TERM_WIDTH "-"
 ## batwatch
 ## prettybat
+
+099ensure_gh_token &

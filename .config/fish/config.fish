@@ -18,10 +18,10 @@ if status is-interactive
 
     # source our secrets file if it exists
     if test -e "$HOME/.secret/secrets.fish"
-        source "$HOME/.secret/secrets.fish"
+        source "$HOME/.secret/secrets.fish" &
     end
 
-    # fish_vi_key_bindings ## derp. after version >= 4.3
+    # fish_vi_key_bindings ## deprecreated after version >= 4.3
 
     # 099autostart_tmux new
 end
