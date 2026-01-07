@@ -71,9 +71,15 @@ fish_add_path --prepend $HOME/.ghcup/bin
 # set -gx PATH $HOME/.local/bin $PATH
 
 # set -gx NODE_TLS_REJECT_UNAUTHORIZED 0
-set -gx YAZI_CONFIG_HOME $HOME/dotfiles/.config/yazi
+set -gx YAZI_CONFIG_HOME "$XDG_CONFIG_HOME/yazi"
+# $HOME/dotfiles/.config/yazi
 
-set -gx STARSHIP_CONFIG $HOME/dotfiles/.config/starship/starship.toml
+set -gx JQP_CONFIG_HOME "$XDG_CONFIG_HOME/jqp"
+set -gx JQP_CONFIG_HOME_FILE "$JQP_CONFIG_HOME/.jqp.yaml"
+
+set -gx STARSHIP_CONFIG "$XDG_CONFIG_HOME/starship/starship.toml"
+# $HOME/dotfiles/.config/starship/starship.toml
+
 set -gx WZT_ANIM_FPS 144
 set -gx WZT_MAX_FPS 144
 set -gx WZT_GPU_FRONTEND WebGpu
