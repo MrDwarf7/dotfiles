@@ -1,3 +1,16 @@
+[cargo-new]
+vcs = "none" # Do not auto create VCS '.git' directory on 'cargo new'
+
+[term]
+quiet = false   # Automatically pass `--quiet` to commands that support it
+verbose = false # Automatically pass `--verbose` to commands that support it
+
+[build]
+# WARN: these can break deployed builds sometimes
+rustflags = [
+  "-Ctarget-cpu=native", # Optimize for the CPU of the build machine
+]
+
 ## command aliases
 [alias]
 b = "build"

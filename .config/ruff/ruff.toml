@@ -1,0 +1,89 @@
+line-length = 80
+target-version = "py314"
+
+[format]
+line-ending = "lf"
+docstring-code-format = true
+quote-style = "double"
+
+[lint]
+select = ["ALL"]
+
+fixable = ["ALL"]
+
+
+ignore = [
+  # Documentation 
+  "D",
+
+  # Formatter rules: 
+  "COM812",
+  "ISC001",
+
+  # TODO notes: 
+  "FIX002", # Ignore TODO, and HACK, but lint FIXME
+  "FIX004", # ^
+  "TD001",  # ^
+  "TD002",  # Do not ask for TODO's author and issue link
+  "TD003",  # ^
+
+  # __init__.py files
+  "INP001",
+
+  # Controversional choices: 
+  # 
+
+  # "SIM118",  # `key in dict.keys()` is better than `key in dict`
+  "ANN101", # self doesn't need type annotation
+  # "T201",    # Yeah it's bad in finished products, but in most scripts and
+  #            # while debugging it's really annoying
+  # "RET504",  # Naming result before returning can improve readability
+
+  "F40",
+  "RUF200",
+  "T201",
+  "DTZ",
+  "ERA001",
+  "W293",
+  "ANN101",
+  "TRY003",
+  "EM101",
+  "I001",
+  "RET503",
+  "RET505",
+  "UP007",
+]
+
+
+[lint.isort]
+force-sort-within-sections = false
+
+[lint.flake8-bugbear]
+extend-immutable-calls = [
+  "fastapi.Depends",
+  "fastapi.Query",
+  "fastapi.params.Query",
+]
+
+[lint.flake8-builtins]
+builtins-ignorelist = ["id"]
+
+[lint.flake8-quotes]
+avoid-escape = false
+
+[lint.per-file-ignores]
+"tests/**/*.py" = [
+  "S101",    # Asserts are necessary in tests
+  "PLR2004", # Magic values are useful in tests
+]
+"tests/**/test_bench_*.py" = [
+  "ANN001", # Allows usage of benchmark fixture
+]
+
+"__init__.py" = [
+  "E402", # ________
+]
+
+"**/{tests,docs,tools}/*" = [
+  "E402", # ________
+]

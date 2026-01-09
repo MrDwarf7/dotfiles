@@ -1,0 +1,13 @@
+# Needs to be sym-linked to 
+# ~/.lesskey
+
+# command
+
+^h help
+H help
+
+a left-scroll
+d right-scroll
+
+h left-scroll
+l right-scroll

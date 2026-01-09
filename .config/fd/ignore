@@ -1,0 +1,13 @@
+# git
+.git
+
+# jj/Jujutsu
+.jj
+
+# Node
+node_modules
+.node_modules
+
+# Python
+venv
+.venv
