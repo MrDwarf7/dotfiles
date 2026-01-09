@@ -1,9 +1,4 @@
 [[plugin.deps]]
-use = "yazi-rs/plugins:git"
-rev = "68f7d48"
-hash = "eb301feb9e125adf5aa4f59f2aa54e44"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
 rev = "68f7d48"
 hash = "363bd15c7e32f36a814f13e22daaf5a"

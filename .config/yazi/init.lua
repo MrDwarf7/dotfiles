@@ -1,5 +1,5 @@
 ---@diagnostic disable: cast-local-type
-require("git"):setup()
+-- require("git"):setup()
 
 require("relative-motions"):setup({ only_motions = true })
 
