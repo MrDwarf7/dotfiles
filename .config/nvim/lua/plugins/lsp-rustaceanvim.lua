@@ -135,7 +135,7 @@ return {
       },
     },
 
-    ---@return rustaceanvim.Config
+    ---@return rustaceanvim.Config?
     config = function(_, opts)
       if package.preload["mason.nvim"] then
         -- LazyVim.has("mason.nvim") then
@@ -156,7 +156,7 @@ return {
   {
     "saecki/crates.nvim",
     -- ---@type LazyEventSpec
-    -- event = { "BufRead Cargo.toml" },
+    event = { "BufRead Cargo.toml" },
     ft = { "toml" },
     opts = {
       lsp = {
