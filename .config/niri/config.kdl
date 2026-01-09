@@ -22,19 +22,19 @@ environment {
     
     // Qt Variables
     QT_AUTO_SCREEN_SCALE_FACTOR "1"
-    
-    
-    
-    // it causes issues like Hyprland crashing so care                                                              
+
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+
+    // it causes issues like Hyprland crashing so care
     GBM_BACKEND "nvidia-drm"
     
     __GLX_VENDOR_LIBRARY_NAME "nvidia"
     LIBVA_DRIVER_NAME "nvidia"
-    
+
     //  Controls if G-Sync capable monitors should use Variable Refresh Rate (VRR)                                 
     // __GL_GSYNC_ALLOWED "1"
       
-    // Controls if Adaptive Sync should be used. Recommended to set as 0 to avoid having problems with some games 
+    // Controls if Adaptive Sync should be used. Recommended to set as 0 to avoid having problems with some games
     
     // __GL_VRR_ALLOWED "0"
 
@@ -47,7 +47,7 @@ environment {
     XCURSOR_SIZE "24"
 
     WLR_RENDERER_ALLOW_SOFTWARE "1"
-    WLR_NO_HARDWARE_CURSORS "1"// Uncommented; enable if needed for NVIDIA 
+    WLR_NO_HARDWARE_CURSORS "1"// Uncommented; enable if needed for NVIDIA
     NVD_BACKEND "direct"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
 
@@ -159,7 +159,7 @@ prefer-no-csd
 gestures {
     // hot-corners {
     //     on
-    //     top-left 
+    //     top-left
     //     top-right
     // }
 }
@@ -378,13 +378,13 @@ workspace "music" {
 // }
 
 window-rule {
-    // Zen Browser / Zen-Browser / zen 
+    // Zen Browser / Zen-Browser / zen
     match app-id=r#"^(zen)$"#
     open-on-output "DP-1"
     draw-border-with-background false
     // open-on-workspace "browser"
     open-floating false
-    open-focused false 
+    open-focused false
     default-column-width { proportion 0.5; }
     focus-ring {
         off
@@ -398,8 +398,8 @@ window-rule {
 
 ///////////////////////////////
 ///////////////////////////////
-// Ordering of window-rule will be the workspace you're 
-// LEFT ON 
+// Ordering of window-rule will be the workspace you're
+// LEFT ON
 // after apps have started up
 // With last one being the one that takes precedence
 ///////////////////////////////
@@ -427,7 +427,7 @@ window-rule {
     border {
         off
     }
-    // variable-refresh-rate false 
+    // variable-refresh-rate false
 
 }
 
@@ -494,7 +494,7 @@ window-rule {
     open-focused false
 }
 
-//// CANNOT USE anything to do with floating, as the application 
+//// CANNOT USE anything to do with floating, as the application
 // starts on system startup and is "always open" apparently
 window-rule {
     // Jetbrains Toolbox / jetbrains toolbox / jetbrains-toolbox / jb toolbox
@@ -582,7 +582,7 @@ animations {
     }
 
     window-close {
-        duration-ms 80 
+        duration-ms 80
         curve "ease-out-quad"
     }
 }
@@ -644,7 +644,7 @@ binds {
     // Down(Right) / Up(Left) - Moves workspaces as well
     // Mod+w - cycles between most recent and current endlessly (1, 6 - Mod+w -> 1 -> Mod+w -> 6 Mod+w -> 1 etc...)
 
-    // Note: hitting Up/Left with a window on the other monitor 
+    // Note: hitting Up/Left with a window on the other monitor
     // will move to focus it if it's the last available workspace (it will move focus to 2nd mon)
 
     // Window to workspace (attached)
@@ -655,7 +655,7 @@ binds {
 
     // Mod+f - float/un-float
     // Mod+c - center if/when floating
-    // Mod+Ctrl+f - fullscreen 
+    // Mod+Ctrl+f - fullscreen
 
 
     //// //// //// Shift = MOVE things
@@ -940,7 +940,7 @@ binds {
     // Down(Right) / Up(Left) - Moves workspaces as well
     // Mod+w - cycles between most recent and current endlessly (1, 6 - Mod+w -> 1 -> Mod+w -> 6 Mod+w -> 1 etc...)
 
-    // Note: hitting Up/Left with a window on the other monitor 
+    // Note: hitting Up/Left with a window on the other monitor
     // will move to focus it if it's the last available workspace (it will move focus to 2nd mon)
 
     // Window to workspace (attached)
@@ -951,7 +951,7 @@ binds {
 
     // Mod+f - float/un-float
     // Mod+c - center if/when floating
-    // Mod+Ctrl+f - fullscreen 
+    // Mod+Ctrl+f - fullscreen
 
     Mod+Left  { focus-column-left; }
     Mod+Right { focus-column-right; }
@@ -974,7 +974,7 @@ binds {
     // Mod+Shift+Left/Right - Moves the focused window between workspaces
 
     // for niri though - 
-    // Mod+Shfit+Left/Right - Move between columns 
+    // Mod+Shfit+Left/Right - Move between columns
     // Mod+Shift+Up/Down - Move between workspaces
 
 
