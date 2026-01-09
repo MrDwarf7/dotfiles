@@ -3,11 +3,12 @@
 # The values are relative pathnames from the home directory and
 # will be translated on a per-path-element basis into the users locale
 DESKTOP=Desktop
-DOWNLOAD=Downloads
 DOCUMENTS=Documents
+DOWNLOAD=Downloads
 MUSIC=Music
 PICTURES=Pictures
 VIDEOS=Videos
+
 CONFIG_HOME=.config
 BIN_HOME=.xdg/bin
 CACHE_HOME=.xdg/cache
