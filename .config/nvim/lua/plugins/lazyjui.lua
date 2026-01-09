@@ -2,13 +2,13 @@
 ---@type LazyPluginBase
 return {
   -- -- from github pull -- --
-  -- "mrdwarf7/lazyjui.nvim",
-  -- branch = "dev",
+  "mrdwarf7/lazyjui.nvim",
+  branch = "dev",
 
   -- -- from local FS / Dev --
-  "lazyjui.nvim",
-  branch = "dev",
-  dev = true,
+  -- "lazyjui.nvim",
+  -- branch = "dev",
+  -- dev = true,
 
   lazy = true,
   dependencies = "nvim-lua/plenary.nvim",
