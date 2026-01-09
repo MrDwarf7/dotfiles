@@ -1,0 +1,129 @@
+[user]
+  email = 129040985+MrDwarf7@users.noreply.github.com
+  name = MrDwarf7
+  signingkey = FC64448BB9335DC61650C1ECD616C6D6C6E3DACE
+[commit]
+  gpgsign = true
+  template = $HOME/.config/git/template
+  verbose = true
+[init]
+  defaultBranch = main
+[core]
+  # true would mean we auto convert, 'input' or false means no items are changed
+  autocrlf = input
+  # trade cpu for network perf
+  compression = 9
+  # enable the built-in file system monitor ( git-fsmonitor--daemon )
+  fsmonitor = true
+  eol = lf
+  fsync = none
+  whitespace = error
+  editor = nvim
+  excludesFile = "$XDG_CONFIG_HOME/git/ignore"
+  pager = delta
+[blame]
+  coloring = highlightRecent
+  date = relative
+[interactive]
+  singleKey = true
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  dark = true
+  ; light = true
+  line-numbers = true
+  ; side-by-side = true
+[merge]
+  conflictstyle = diff3
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+[diff]
+  colorMoved = default
+  # Default: 3
+  context = 3
+  # Merge near hunks into the same diff output
+  interHunkContext = 10
+  # Default: true - copies: manages renames to be treated as copies
+  renames = copies
+  mnemonicPrefix = true
+[log]
+  # short commits by default
+  abbrevCommit = true
+  graphColors = blue,yellow,cyan,magenta,green,red
+[status]
+  branch = true
+  short = false
+  showStash = true
+[push]
+  autoSetupRemote = true
+  # Default: simple
+  default = current
+  # also push tags on normal pushes
+  followTags = true
+[pull]
+
+[submodule]
+  # automatically use `--recurse-submodules` on `git submodule update`
+  recurse = true
+  # Default: 1 - Specifies how many submodules can be fetched in parallel
+  fetchJobs = 16
+[rebase]
+  # Show a diffstat against upstream since last rebase
+  stat = true
+  missingCommitsCheck = warn
+[pack]
+  # Default: 50, Max value: 4096 - the max depth use by git-pack-objects 
+  depth = 50
+  # Default: 0 - the max memory to use by _each thread_ in git-pack-objects, 0 is no limit
+  windowMemory = 0
+  # Default: { defaults to core.compression } - 
+  compression = 9
+  # 0 uses all available threads - the number of threads to use in git-pack-objects
+  threads = 0
+  packSizeLimit = 2g
+# Info on how these work - 
+# They basically allow aliassing of URL prefixes to shorten repo URLs
+# https://git-scm.com/docs/git-config/2.36.0#Documentation/git-config.txt-urlbaseinsteadOf
+[url "git@github.com:"]
+  insteadOf = "gh:"
+[url "git@github.com:mrdwarf7/"]
+  insteadOf = "md:"
+[alias]
+  last = log -1 HEAD
+  wt-bare = !sh $HOME/dotfiles/git-clone-worktrees.sh
+  wta = worktree add
+  wtl = worktree list
+  wtr = worktree remove
+  wtm = worktree move
+  s- = switch -
+  fa = fetch --all
+  pla = pull --all
+  pa = push --all
+  rs = restore --staged
+  cm = commit -m
+  rlast = reflog -5 HEAD
+  sut = branch --set-upstream-to
+  undo = reset --soft HEAD~1
+  undoh = reset --hard HEAD~1
+  unst = restore --staged
+  uncm = reset --soft HEAD~1
+[difftool "sourcetree"]
+  cmd = "'' "
+[mergetool "sourcetree"]
+  cmd = "'' "
+  trustExitCode = true
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+[credential]
+  helper = store
+  helper = /usr/bin/git-credential-manager
+[credential "https://github.com"]
+  helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+  helper = !/usr/bin/gh auth git-credential
+[credential "https://dev.azure.com"]
+  useHttpPath = true
