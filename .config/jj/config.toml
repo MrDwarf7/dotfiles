@@ -16,7 +16,7 @@ write-change-id-header = true
 auto-track-bookmarks = "glob:*"
 
 [remotes.upstream]
-auto-track-bookmarks = "glob:(main|master|trunk)"
+auto-track-bookmarks = "(main|master|trunk)"
 
 [colors]
 "diff added token" = { bg = "#002200", underline = false } # same color as "green"
@@ -94,14 +94,16 @@ merge-editor = ":builtin"
   coalesce(signature.name(), name_placeholder)  
 '''
 
+# commit.git_head() is deprecated; use .contained_in('first_parent(@)') instead
+
 'format_short_commit_header(commit)' = '''
 separate(" ",
-  format_short_change_id_with_hidden_and_divergent_info(commit),
+  format_short_change_id_with_change_offset(commit),
   format_short_commit_id(commit.commit_id()),
   commit.bookmarks(),
   commit.tags(),
   commit.working_copies(),
-  if(commit.git_head(), label("git_head", "git_head()")),
+  if(commit.contained_in("first_parent(@)"), label("git_head", "git_head()")),
   if(commit.conflict(), label("conflict", "conflict")),
   format_short_signature(commit.author()),
   format_timestamp(commit_timestamp(commit)),
@@ -111,16 +113,16 @@ separate(" ",
 '''
 
 #### Very cool extremely compact, but can be very info dense
-#
+
 ## "format_short_commit_header(commit)" = '''
 ## separate(' ',
-##   format_short_change_id_with_hidden_and_divergent_info(commit),
+##   format_short_change_id_with_change_offset(commit),
 ##   format_short_commit_id(commit.commit_id()),
 ##   format_detailed_signature(commit.author()),
 ##   commit.bookmarks(),
 ##   commit.tags(),
 ##   commit.working_copies(),
-##   if(commit.git_head(), label("git_head", "git_head()")),
+##  if(commit.contained_in("first_parent(@)"), label("git_head", "git_head()")),
 ##   if(commit.conflict(), label('conflict', 'conflict')),
 ##   if(config('ui.show-cryptographic-signatures').as_boolean(),
 ##     format_short_cryptographic_signature(commit.signature())
