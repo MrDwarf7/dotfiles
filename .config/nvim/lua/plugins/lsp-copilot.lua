@@ -47,6 +47,12 @@ return {
       ["."] = true,
       ["*"] = true,
     },
+    server_opts_overrides = {
+      telemetry = { ---@type github_settings_telemetry
+        -- telemetryLevel = "all", -- -- this is the default
+        telemetryLevel = "false",
+      },
+    },
 
     -- filetypes = {
     --   markdown = true,
