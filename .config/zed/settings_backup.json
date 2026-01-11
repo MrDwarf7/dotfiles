@@ -1,80 +1,86 @@
 {
-  "title_bar": {
-    "show_onboarding_banner": false,
-  },
-  "project_panel": {
-    "button": false,
-  },
-  "search": {
-    "center_on_match": true,
-    "regex": true,
-  },
-  "hover_popover_delay": 300,
-  "agent_buffer_font_size": 14.0,
   "context_servers": {
     "MCP_DOCKER": {
+      "source": "custom",
       "enabled": true,
       "command": "docker",
-      "args": ["mcp", "gateway", "run"],
-      "env": {},
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ],
+      "env": {}
     },
     "docker-mcp": {
+      "source": "custom",
       "enabled": true,
       "command": "docker",
-      "args": ["mcp", "gateway", "run"],
-      "env": {},
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ],
+      "env": {}
     },
     "container-use-mcp": {
+      "source": "extension",
       "enabled": true,
-      "settings": {},
+      "settings": {}
     },
     "mcp-server-context7": {
+      "source": "extension",
       "enabled": true,
       "settings": {
-        "default_minimum_tokens": "10000",
-      },
+        "default_minimum_tokens": "10000"
+      }
     },
     "Context7": {
+      "source": "custom",
       "enabled": false,
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "postgres-context-server": {
+      "source": "extension",
       "enabled": false,
-      "settings": {},
+      "settings": {}
     },
     "mcp-server-linear": {
+      "source": "custom",
       "enabled": true,
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
-      "env": {},
-    },
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ],
+      "env": {}
+    }
   },
   "agent": {
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o",
-    },
     "always_allow_tool_actions": true,
     "default_profile": "write",
     "default_model": {
       "provider": "zed.dev",
-      "model": "claude-sonnet-4-thinking",
+      "model": "claude-sonnet-4-thinking"
     },
     "default_width": 700,
     "editor_model": {
       "model": "claude-3-7-sonnet-thinking-latest",
-      "provider": "zed.dev",
-    },
+      "provider": "zed.dev"
+    }
   },
   "lsp_highlight_debounce": 50,
   "auto_update_extensions": {
-    "biome": false,
+    "biome": false
   },
   "file_finder": {
-    "file_icons": true,
+    "file_icons": true
   },
-  "auto_signature_help": false,
+  "auto_signature_help": null,
   "auto_update": true,
   "current_line_highlight": "all",
   "cursor_shape": "bar",
@@ -85,30 +91,32 @@
       "update_debounce_ms": 150,
       "padding": 4,
       "min_column": 0,
-      "max_severity": null,
-    },
+      "max_severity": null
+    }
   },
   "enable_language_server": true,
-  "file_scan_exclusions": ["**/target/**"],
+  "file_scan_exclusions": [
+    "**/target/**"
+  ],
   "git": {
     "git_gutter": "tracked_files",
     "gutter_debounce": null,
     "inline_blame": {
       "enabled": true,
-      "delay_ms": 0,
+      "delay_ms": 0
     },
-    "hunk_style": "unstaged_hollow",
+    "hunk_style": "unstaged_hollow"
   },
   "git_panel": {
-    "default_width": 320,
+    "default_width": 320
   },
   "hide_mouse": "on_typing_and_movement",
   "icon_theme": "Material Icon Theme",
   "jsx_tag_auto_close": {
-    "enabled": true,
+    "enabled": true
   },
   "message_editor": {
-    "auto_replace_emoji_shortcode": true,
+    "auto_replace_emoji_shortcode": true
   },
   "load_direnv": "shell_hook",
   "private_files": [
@@ -118,10 +126,10 @@
     "**/config/*.env*",
     "**/config/*.yml",
     "**/config/*.yaml",
-    "**/config/*.lock",
+    "**/config/*.lock"
   ],
   "preview_tabs": {
-    "enable_keep_preview_on_code_navigation": true,
+    "enable_preview_from_code_navigation": true
   },
   "scroll_beyond_last_line": "one_page",
   "seed_search_query_from_cursor": "selection",
@@ -133,31 +141,31 @@
       "host": "nixbook",
       "port": 22,
       "username": "dwarf",
-      "upload_binary_over_ssh": true,
-    },
+      "upload_binary_over_ssh": true
+    }
   ],
   "slash_commands": {
     "cargo_workspace": {
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
   "tab_bar": {
     "show_nav_history_buttons": false,
-    "show_tab_bar_buttons": false,
+    "show_tab_bar_buttons": false
   },
   "tabs": {
     "activate_on_close": "history",
     "file_icons": true,
     "git_status": true,
-    "show_diagnostics": "all",
+    "show_diagnostics": "all"
   },
   "task": {
-    "show_status_indicator": true,
+    "show_status_indicator": true
   },
   "toolbar": {
     "breadcrumbs": true,
     "quick_actions": false,
-    "selections_menu": true,
+    "selections_menu": true
   },
   "unnecessary_code_fade": null,
   "use_smartcase_search": true,
@@ -165,13 +173,16 @@
   "vim_mode": true,
   "preferred_line_length": 120,
   "show_wrap_guides": true,
-  "wrap_guides": [100, 120],
+  "wrap_guides": [
+    100,
+    120
+  ],
   "soft_wrap": null,
   "ui_font_size": 15,
   "ui_font_family": "Zed Plex Mono",
   "ui_font_weight": 400,
   "ui_font_features": {
-    "calt": false,
+    "calt": false
   },
   "buffer_line_height": "standard",
   "buffer_font_size": 14,
@@ -180,10 +191,10 @@
     "calt": false,
     "clig": false,
     "liga": false,
-    "zero": true,
+    "zero": true
   },
-  "cursor_blink": true,
-  "relative_line_numbers": "enabled",
+  "cursor_blink": false,
+  "relative_line_numbers": true,
   "terminal": {
     "default_height": 400,
     "line_height": "standard",
@@ -192,12 +203,19 @@
       "calt": false,
       "clig": false,
       "liga": false,
-      "zero": true,
+      "zero": true
     },
-    "shell": null,
+    "shell": {
+      "with_arguments": {
+        "program": "pwsh.exe",
+        "args": [
+          "-NoLogo"
+        ]
+      }
+    }
   },
   "scrollbar": {
-    "show": "never",
+    "show": "never"
   },
   "vertical_scroll_margin": 2,
   "show_call_status_icon": true,
@@ -207,117 +225,129 @@
     "folds": true,
     "runnables": true,
     "breakpoints": true,
-    "min_line_number_digits": 4,
+    "min_line_number_digits": 4
   },
-  "theme": "Tokyo Night Storm",
+  "theme": {
+    "mode": "system",
+    "light": "Tokyo Night Storm",
+    "dark": "Tokyo Night Storm"
+  },
   "indent_guides": {
     "enabled": true,
     "line_width": 1,
     "active_line_width": 1,
     "coloring": "indent_aware",
-    "background_coloring": "disabled",
+    "background_coloring": "disabled"
   },
   "show_edit_predictions": true,
   "features": {
-    "edit_prediction_provider": "copilot",
+    "edit_prediction_provider": "copilot"
   },
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
         "check": {
-          "command": "clippy",
+          "command": "clippy"
         },
         "completion": {
           "snippets": {
             "custom": {
               "Arc::new": {
                 "postfix": "arc",
-                "body": ["Arc::new(${receiver})"],
+                "body": [
+                  "Arc::new(${receiver})"
+                ],
                 "requires": "std::sync::Arc",
-                "scope": "expr",
+                "scope": "expr"
               },
               "Some": {
                 "postfix": "some",
-                "body": ["Some(${receiver})"],
-                "scope": "expr",
+                "body": [
+                  "Some(${receiver})"
+                ],
+                "scope": "expr"
               },
               "Ok": {
                 "postfix": "ok",
-                "body": ["Ok(${receiver})"],
-                "scope": "expr",
+                "body": [
+                  "Ok(${receiver})"
+                ],
+                "scope": "expr"
               },
               "Rc::new": {
                 "postfix": "rc",
-                "body": ["Rc::new(${receiver})"],
+                "body": [
+                  "Rc::new(${receiver})"
+                ],
                 "requires": "std::rc::Rc",
-                "scope": "expr",
+                "scope": "expr"
               },
               "Box::pin": {
                 "postfix": "boxpin",
-                "body": ["Box::pin(${receiver})"],
+                "body": [
+                  "Box::pin(${receiver})"
+                ],
                 "requires": "std::boxed::Box",
-                "scope": "expr",
+                "scope": "expr"
               },
               "vec!": {
                 "postfix": "vec",
-                "body": ["vec![${receiver}]"],
+                "body": [
+                  "vec![${receiver}]"
+                ],
                 "description": "vec![]",
-                "scope": "expr",
-              },
-            },
-          },
-        },
-      },
+                "scope": "expr"
+              }
+            }
+          }
+        }
+      }
     },
     "nix": {
       "initialization_options": {
         "experimental": {
           "nix": {
             "enableNix": true,
-            "enableNixFlake": true,
-          },
-        },
-      },
-    },
+            "enableNixFlake": true
+          }
+        }
+      }
+    }
   },
   "languages": {
-    "C": {
-      "colorize_brackets": false,
-      "format_on_save": "on",
-    },
     "TOML": {
       "inlay_hints": {
-        "enabled": true,
-      },
+        "enabled": true
+      }
     },
     "Nix": {
       "inlay_hints": {
         "enabled": true,
         "show_other_hints": true,
         "show_type_hints": true,
-        "show_parameter_hints": true,
+        "show_parameter_hints": true
       },
       "formatter": {
         "external": {
-          "command": "alejandra",
-        },
-      },
-    },
+          "command": "alejandra"
+        }
+      }
+    }
   },
   "inlay_hints": {
-    "enabled": false,
+    "enabled": true,
     "maxLength": null,
     "show_type_hints": true,
     "show_parameter_hints": true,
     "show_other_hints": true,
     "edit_debounce_ms": 700,
-    "scroll_debounce_ms": 50,
+    "scroll_debounce_ms": 50
   },
   "vim": {
     "use_system_clipboard": "always",
     "use_multiline_find": true,
     "use_smartcase_find": true,
     "highlight_on_yank_duration": 60,
-    "toggle_relative_line_numbers": false,
-  },
+    "toggle_relative_line_numbers": false
+  }
 }
