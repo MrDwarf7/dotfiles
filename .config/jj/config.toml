@@ -18,6 +18,10 @@ auto-track-bookmarks = "glob:*"
 [remotes.upstream]
 auto-track-bookmarks = "(main|master|trunk)"
 
+[working-copy]
+eol-conversion = "none"
+exec-bit-change = "respect"
+
 [colors]
 "diff added token" = { bg = "#002200", underline = false } # same color as "green"
 "diff removed token" = { bg = "#221111" }                  #, underline = false }

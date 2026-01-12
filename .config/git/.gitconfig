@@ -10,7 +10,7 @@
   defaultBranch = main
 [core]
   # true would mean we auto convert, 'input' or false means no items are changed
-  autocrlf = input
+  # autocrlf = input
   # trade cpu for network perf
   compression = 9
   # enable the built-in file system monitor ( git-fsmonitor--daemon )
