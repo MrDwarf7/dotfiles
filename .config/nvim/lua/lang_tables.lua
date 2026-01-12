@@ -215,7 +215,8 @@ LangTables = {
     lsps = {
 
       -- "bacon_ls",
-      "basedpyright",
+      -- "basedpyright",
+      "ty",
       "bashls",
       "c3-lsp",
       "clangd",
