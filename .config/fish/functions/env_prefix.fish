@@ -4,11 +4,13 @@
 set k_help h
 set k_sort s
 set k_prefix p
+set k_case_sense c
 
 function __env_prefix_cmp
     complete -c env_prefix -s $k_help -l help -d 'Show this help message and exit'
     complete -c env_prefix -s $k_prefix -l prefix= -d 'Specify the prefix to search for (default: XDG_)'
     complete -c env_prefix -s $k_sort -l sort -d 'Sort the output alphabetically'
+    complete -c env_prefix -s $k_case_sense -l case_sensitive -d 'Use case sensitive sorting (Default is case insensitive)'
     return 0
 end
 
@@ -30,6 +32,7 @@ defaults to XDG_ if none given.
 ,-$k_help                   , --help                    ,# Show this help message and exit,
 ,-$k_prefix                 , --prefix PREFIX           ,# Specify the prefix to search for (default: XDG_),
 ,-$k_sort                   , --sort                    ,# Sort the output alphabetically,
+,-$k_case_sense              , --case_sensitive          ,# Use case sensitive sorting (Default is case insensitive),
 " "
 ,                                       ,           ,,
 ,Command                                ,Description,,
@@ -46,7 +49,7 @@ end
 function env_prefix --description 'Prints all environment variables with a specific prefix, defaults to XDG_ if none given'
     __env_prefix_cmp
 
-    argparse $k_help/help $k_sort/sort $k_prefix/prefix= -- $argv
+    argparse $k_help/help $k_sort/sort $k_case_sense/case_sensitive $k_prefix/prefix= -- $argv
     or return
 
     if set -q _flag_help
@@ -55,6 +58,7 @@ function env_prefix --description 'Prints all environment variables with a speci
 
     set -l prefix
     set -l sorted 0
+    set -l flags -q
 
     # Check if flag was used (either -p or --prefix)
     if set -q _flag_prefix
@@ -73,8 +77,12 @@ function env_prefix --description 'Prints all environment variables with a speci
         set prefix XDG_
     end
 
+    if test (not set -q _flag_case_sensitive)
+        set flags $flags -i
+    end
+
     # Have to wait till after the -z (zero length) test to do this
-    if test (string match -q "$prefix" -- '^\*')
+    if test (string match $flags "$prefix" -- '^\*')
         set prefix ""
     end
 
@@ -86,7 +94,7 @@ function env_prefix --description 'Prints all environment variables with a speci
     set -l found_vars
     for var_line in (set -x)
         set var_name (string split ' ' $var_line)[1]
-        if string match -qi "$prefix*" $var_name
+        if string match {$flags} "$prefix*" $var_name
             set var_value $$var_name
             set -a found_vars "$var_name = $var_value"
             printf "%s = %s\n" $var_name $var_value >>$buf
@@ -107,13 +115,11 @@ function env_prefix --description 'Prints all environment variables with a speci
         end
         command rm $buf || return $status
         return 0
-    else
+    else # else handles fall-through case(s), which shouldn't really happen anyway
         printf "No environment variables with prefix '%s' could be found.\n" $prefix
         command rm $buf || return $status
         return 0
     end
-    command rm $buf || return $status
-    return 0
 end
 
 #     set -l ht " "

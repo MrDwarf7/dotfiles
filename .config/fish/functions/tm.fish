@@ -13,6 +13,7 @@ function __tm_dbg
     set -l func_name $argv[1]
     set -l stuff $argv[2..-1]
 
+
     # Create an array of elements that is basically
     # a hashmap as:
     # [name_of_argv[N]] : [value_of_argv[N]]

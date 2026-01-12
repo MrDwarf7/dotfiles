@@ -27,7 +27,7 @@ Usage: pkg_review
 ,Command                                                ,Description,,
 ,,,,
 ,pkg_review -$k_help | --help                           ,# Show this help message and exit.,,
-,pc                                                     ,# Run fzf for package review.,,
+,pkg_review                                             ,# Run fzf for package review.,,
 "
     return 0
 end
