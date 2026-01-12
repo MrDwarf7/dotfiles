@@ -8,5 +8,8 @@
         "before_each",
         "after_each",
         "packer_plugins"
+    ],
+    "diagnostics.disable": [
+        "missing-fields"
     ]
 }
