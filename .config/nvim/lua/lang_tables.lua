@@ -203,7 +203,7 @@ LangTables = {
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
       -- python = { "ruff", "mypy", "vulture" },
-      ["python"] = { "ruff", "vulture" },
+      ["python"] = { "ty", "ruff", "vulture" },
       ["sh"] = { "shellcheck" },
       ["sql"] = { "sqlfluff" },
       ["typescript"] = { "biomejs" },
@@ -646,4 +646,4 @@ function LangTables.formatters_by_ft(ft, bufnr)
 end
 
 ---@return LangTables
-return LangTables
+return setmetatable(LangTables, LangTables)
