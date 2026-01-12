@@ -1,7 +1,8 @@
 #!/usr/bin/env fish
+#
 
 # Check for required tools
-for tool in grim slurp wl-copy
+for tool in hyprshot wl-copy magick
     if not command -v $tool >/dev/null
         echo "Error: $tool is not installed." >&2
         exit 1
@@ -17,39 +18,64 @@ end
 
 # Ensure the directory exists
 mkdir -p $pics
+function hdr_to_sdr
+    set input_image $argv[1]
+    set output_image $argv[2]
+
+    set -l format_spec "zscale=transfer=bt709:primaries=bt709:matrix=bt709:range=full: \
+      rangein=full:transferin=smpte2084:primariesin=bt2020:matrixin=bt2020nc"
+
+    # set -l format_spec "format=gbrpf32le,zscale=transfer=linear:npl=1000,tonemap=tonemap=hable:desat=0,zscale=transfer=bt709:matrix=bt709:primaries=bt709:range=full,format=rgba"
+
+    ffmpeg -i $input_image \
+      -vf $format_spec \
+      -c:v png \
+      -strict -1 -frames:v 1 -update 1 "$output_image"
+
+    # ffmpeg -color_trc smpte2084 -color_primaries bt2020 -colorspace bt2020nc \
+    # -i $input_image \
+    # -vf "format=gbrpf32le,zscale=transfer=linear:npl=1000,tonemap=tonemap=hable:desat=0,zscale=transfer=bt709:matrix=bt709:primaries=bt709:range=full,format=rgba" \
+    # -c:v png -frames:v 1 $output_image
+
+end
 
 # Function to take a screenshot
 function take_screenshot
     set type $argv[1]
-    set output_path ""
     set now (date +%Y_%m_%d__%H:%M:%S)
+    set ext png
+
+    set output_path "$pics"
+    set filename "screenshot_$type.$now.$ext"
 
     switch $type
-        case region
-            # Generate a timestamped filename for region screenshots
-            set output_path "$pics/screenshot_region_$now.png"
-            if not grim -g (slurp) $output_path
-                echo "Error: Failed to take region screenshot." >&2
-                return 1
-            end
-        case full
-            # Use a fixed path for full-screen screenshots
-            # set output_path "$HOME/Pictures/screenshot.png"
-            set output_path "$pics/screenshot_fullscreen_$now.png"
+    case region
 
-            if not grim $output_path
-                echo "Error: Failed to take full-screen screenshot." >&2
-                return 1
-            end
-        case '*'
-            echo "Error: Invalid screenshot type. Use 'region' or 'full'." >&2
+        if not hyprshot -m $type -z -o $output_path -f $filename
+            echo "Error: Failed to take region screenshot." >&2
             return 1
+        end
+        hdr_to_sdr "$output_path/$filename" "$output_path/$filename"
+
+    case full
+        if not hyprshot -m output -z -o $output_path -f $filename
+            echo "Error: Failed to take region screenshot." >&2
+            return 1
+        end
+        hdr_to_sdr "$output_path/$filename" "$output_path/$filename"
+
+    case '*'
+        echo "Error: Invalid screenshot type. Use 'region' or 'full'." >&2
+        return 1
     end
 
+    printf "Value of path: %s\n" $output_path
+
     # Copy the screenshot to the clipboard
-    if test -e $output_path
-        cat $output_path | wl-copy
-        echo "Screenshot saved to $output_path and copied to clipboard."
+    if test -e "$output_path/$filename"
+        # cat "$output_path/$filename" | wl-copy
+        cat "$output_path/$filename" | wl-copy
+        echo "Screenshot saved to $output_path/$filename and copied to clipboard."
         return 0
     else
         echo "Error: Screenshot file not found." >&2
