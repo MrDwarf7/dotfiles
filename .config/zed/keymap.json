@@ -1,4 +1,3 @@
-
 [
   {
     "context": "VimControl && !menu",
@@ -183,9 +182,9 @@
       "ctrl-6": "pane::AlternateFile",
 
       // "ctrl-:": "editor::ToggleInlayHints"
-      "ctrl-:": "terminal_panel::ToggleFocus"
+      "ctrl-:": "terminal_panel::ToggleFocus",
       // "ctrl-shift-i": "agent::ToggleFocus"
-    }
+    },
   },
 
   {
@@ -228,6 +227,7 @@
       "space l p": "diagnostics::Deploy",
       "space h p": "editor::ToggleSelectedDiffHunks", // RECENT
       "space h shift-p": "editor::ExpandAllDiffHunks",
+      "space h shift-c": "editor::CollapseAllDiffHunks",
       "space t t": "workspace::NewTerminal",
 
       // GIT // git
@@ -339,8 +339,8 @@
       "ctrl-w shift-d": "editor::GoToTypeDefinitionSplit",
       "ctrl-w g shift-d": "editor::GoToTypeDefinitionSplit",
       "ctrl-w space": "editor::OpenExcerptsSplit",
-      "ctrl-w g space": "editor::OpenExcerptsSplit"
-    }
+      "ctrl-w g space": "editor::OpenExcerptsSplit",
+    },
   },
 
   {
@@ -407,16 +407,16 @@
       // "] h": ["editor::GoToHunk", "editor::ToggleHunkDiff"],
       // "[ h": ["editor::GoToPrevHunk", "editor::ToggleHunkDiff"],
 
-      "g c": "vim::PushToggleComments"
-    }
+      "g c": "vim::PushToggleComments",
+    },
   },
 
   {
     "context": "VimControl && VimCount",
     "bindings": {
       "0": ["vim::Number", 0],
-      ":": "vim::CountCommand"
-    }
+      ":": "vim::CountCommand",
+    },
   },
   {
     "context": "vim_mode == visual",
@@ -472,8 +472,8 @@
       "\"": "vim::PushRegister",
       // tree-sitter related commands
       "[ x": "editor::SelectLargerSyntaxNode",
-      "] x": "editor::SelectSmallerSyntaxNode"
-    }
+      "] x": "editor::SelectSmallerSyntaxNode",
+    },
   },
   {
     "context": "vim_mode == insert",
@@ -505,8 +505,8 @@
       "ctrl-e": "vim::LineDown",
       "ctrl-y": "vim::LineUp",
       // "ctrl-k": ["vim::PushOperator", { "Digraph": {} }],
-      "ctrl-r": "vim::PushRegister"
-    }
+      "ctrl-r": "vim::PushRegister",
+    },
   },
 
   {
@@ -514,10 +514,10 @@
     "bindings": {
       "ctrl-k": "menu::SelectPrevious",
       "ctrl-j": "menu::SelectNext",
-      "ctrl-w": "editor::DeleteToPreviousWordStart"
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
       // "ctrl-j": ["workspace::SendKeystrokes", "down"],
       // "ctrl-k": ["workspace::SendKeystrokes", "up"]
-    }
+    },
   },
 
   {
@@ -525,8 +525,8 @@
     "bindings": {
       "ctrl-w": "editor::DeleteToPreviousWordStart",
       "ctrl-j": ["workspace::SendKeystrokes", "down"],
-      "ctrl-k": ["workspace::SendKeystrokes", "up"]
-    }
+      "ctrl-k": ["workspace::SendKeystrokes", "up"],
+    },
   },
 
   {
@@ -543,8 +543,8 @@
       "ctrl-k": ["vim::PushDigraph", {}],
       "backspace": "vim::UndoReplace",
       "tab": "vim::Tab",
-      "enter": "vim::Enter"
-    }
+      "enter": "vim::Enter",
+    },
   },
   {
     "context": "vim_mode == waiting",
@@ -554,16 +554,16 @@
       "escape": "vim::ClearOperators",
       "ctrl-c": "vim::ClearOperators",
       "ctrl-[": "vim::ClearOperators",
-      "ctrl-k": ["vim::PushDigraph", {}]
-    }
+      "ctrl-k": ["vim::PushDigraph", {}],
+    },
   },
   {
     "context": "vim_mode == operator",
     "bindings": {
       "escape": "vim::ClearOperators",
       "ctrl-c": "vim::ClearOperators",
-      "ctrl-[": "vim::ClearOperators"
-    }
+      "ctrl-[": "vim::ClearOperators",
+    },
   },
   {
     "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
@@ -587,16 +587,16 @@
       "shift-b": "vim::CurlyBrackets",
       "<": "vim::AngleBrackets",
       ">": "vim::AngleBrackets",
-      "a": "vim::Argument"
-    }
+      "a": "vim::Argument",
+    },
   },
   {
     "context": "vim_operator == c",
     "bindings": {
       "c": "vim::CurrentLine",
       "d": "editor::Rename", // zed specific
-      "s": ["vim::PushChangeSurrounds", {}]
-    }
+      "s": ["vim::PushChangeSurrounds", {}],
+    },
   },
   {
     "context": "vim_operator == d",
@@ -604,29 +604,29 @@
       "d": "vim::CurrentLine",
       "s": "vim::PushDeleteSurrounds",
       // "o": "editor::ToggleHunkDiff", // "d o" // RECENT
-      "p": "git::Restore" // "d p"
-    }
+      "p": "git::Restore", // "d p"
+    },
   },
   {
     "context": "vim_operator == gu",
     "bindings": {
       "g u": "vim::CurrentLine",
-      "u": "vim::CurrentLine"
-    }
+      "u": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == gU",
     "bindings": {
       "g shift-u": "vim::CurrentLine",
-      "shift-u": "vim::CurrentLine"
-    }
+      "shift-u": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == g~",
     "bindings": {
       "g ~": "vim::CurrentLine",
-      "~": "vim::CurrentLine"
-    }
+      "~": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == gq",
@@ -634,61 +634,61 @@
       "g q": "vim::CurrentLine",
       "q": "vim::CurrentLine",
       "g w": "vim::CurrentLine",
-      "w": "vim::CurrentLine"
-    }
+      "w": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == y",
     "bindings": {
       "y": "vim::CurrentLine",
-      "s": ["vim::PushAddSurrounds", {}]
-    }
+      "s": ["vim::PushAddSurrounds", {}],
+    },
   },
   {
     "context": "vim_operator == ys",
     "bindings": {
-      "s": "vim::CurrentLine"
-    }
+      "s": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == >",
     "bindings": {
-      ">": "vim::CurrentLine"
-    }
+      ">": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == <",
     "bindings": {
-      "<": "vim::CurrentLine"
-    }
+      "<": "vim::CurrentLine",
+    },
   },
   {
     "context": "vim_operator == gc",
     "bindings": {
-      "c": "vim::CurrentLine"
-    }
+      "c": "vim::CurrentLine",
+    },
   },
   {
     "context": "BufferSearchBar && !in_replace",
     "bindings": {
       "enter": "vim::SearchSubmit",
       "escape": "buffer_search::Dismiss",
-      "ctrl-w": "editor::DeleteToPreviousWordStart"
-    }
+      "ctrl-w": "editor::DeleteToPreviousWordStart",
+    },
   },
   {
     "context": "in_replace",
     "bindings": {
       "ctrl-w": "buffer_search::Dismiss",
-      "escape": "buffer_search::Dismiss"
-    }
+      "escape": "buffer_search::Dismiss",
+    },
   },
   {
     "context": "EmptyPane || SharedScreen",
     "bindings": {
       ":": "command_palette::Toggle",
-      "g /": "pane::DeploySearch"
-    }
+      "g /": "pane::DeploySearch",
+    },
   },
 
   {
@@ -729,8 +729,8 @@
       "y y": "project_panel::Copy",
       "y c": "workspace::CopyPath",
       "y shift-c": "workspace::CopyRelativePath",
-      "ctrl-6": "pane::AlternateFile"
-    }
+      "ctrl-6": "pane::AlternateFile",
+    },
   },
   {
     "context": "OutlinePanel && not_editing",
@@ -738,8 +738,8 @@
       "j": "menu::SelectNext",
       "k": "menu::SelectPrevious",
       "shift-g": "menu::SelectLast",
-      "g g": "menu::SelectFirst"
-    }
+      "g g": "menu::SelectFirst",
+    },
   },
   {
     "context": "Workspace",
@@ -749,8 +749,8 @@
 
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem",
-      "ctrl-shift-;": "workspace::ToggleBottomDock"
-    }
+      "ctrl-shift-;": "workspace::ToggleBottomDock",
+    },
   },
   {
     "context": "Pane",
@@ -758,20 +758,20 @@
       // "space f L": "pane::ReopenClosedItem",
       // "space t p": "pane::TogglePinTab",
       // "ctrl-shift-\"": ["pane::CloseAllItems", { "close_pinned": true }]
-      "ctrl-shift-t": "pane::ReopenClosedItem"
-    }
+      "ctrl-shift-t": "pane::ReopenClosedItem",
+    },
   },
   {
     "context": "Terminal",
     "bindings": {
       "`": "terminal_panel::ToggleFocus",
-      "ctrl-:": "terminal_panel::ToggleFocus"
-    }
+      "ctrl-:": "terminal_panel::ToggleFocus",
+    },
   },
   {
     "context": "Workspace",
-    "bindings": {}
-  }
+    "bindings": {},
+  },
   // {
   //   "context": "AssistantPanel",
   //   "bindings": {
@@ -786,4 +786,85 @@
   //     "ctrl-n": "assistant::NewContext"
   //   }
   // }
+
+  {
+    "context": "vim_mode == visual",
+    "bindings": {
+      "ctrl-shift-i": "assistant::InlineAssist",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space f d": "diagnostics::Deploy",
+    },
+  },
+  {
+    "context": "vim_mode == normal",
+    "bindings": {
+      "space t z": "editor::ToggleTabBar",
+    },
+  },
+  {
+    "context": "((os != macos && Editor) && edit_prediction_conflict)",
+    "bindings": {
+      "alt-l": null,
+    },
+  },
+
+  {
+    "context": "(Editor && edit_prediction_conflict)",
+    "bindings": {
+      "alt-l": null,
+      "alt-tab": null,
+      "ctrl-right": "editor::AcceptNextWordEditPrediction", // note the diff
+      "ctrl-down": "editor::AcceptNextLineEditPrediction",
+    },
+  },
+
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "alt-l": null,
+      "alt-tab": null,
+      "ctrl-right": "editor::AcceptNextWordEditPrediction",
+      "ctrl-down": "editor::AcceptNextLineEditPrediction", // note the diff
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-up": null,
+    },
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "alt-down": null,
+    },
+  },
+  {
+    "context": "(Editor && edit_prediction_conflict)",
+    "bindings": {
+      "alt-down": null,
+    },
+  },
+  {
+    "context": "(Editor && edit_prediction_conflict)",
+    "bindings": {
+      "alt-right": null,
+    },
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "alt-down": null,
+    },
+  },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "alt-right": null,
+    },
+  },
 ]
