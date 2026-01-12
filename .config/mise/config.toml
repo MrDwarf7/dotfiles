@@ -1,14 +1,22 @@
 [tools]
-node = "latest"
-pnpm = "latest"
 python = "latest"
 
-deno = "latest"
+# JavaScript
+node = "latest"
+
+# Package Managers
+pnpm = "latest"
 bun = "latest"
 
+# Framework(?)/Package Runtimes
+deno = "latest"
+
+# Tools
 biome = "latest"
 
 ####################################################################################################
+
+## NPM / Node.js / JavaScript/TypeScript Tools
 
 [tools."npm:tailwindcss"]
 version = "latest"
@@ -16,10 +24,127 @@ version = "latest"
 [tools."npm:@tailwindcss/cli"]
 version = "latest"
 
-[tools."npm:turbo"] # turbopack/turborepo
+[tools."npm:@tailwindcss/language-server"]
+version = "latest"
+
+[tools."npm:@typescript/native-preview"]
+version = "latest"
+
+# vercel-cli
+[tools."npm:vercel"]
+version = "latest"
+
+# turbopack/turborepo
+[tools."npm:turbo"]
 version = "latest"
 
 ####################################################################################################
 
+## Cargo / Cargo install / Cargo binstall / Rust / Rustup Tools
+
+### Cargo / Rust package manager (pre-compiled binaries)
+[tools."cargo-binstall"]
+version = "latest"
+
+
+[tools."cargo:atac"]
+version = "latest"
+
+[tools."cargo:bacon"]
+version = "latest"
+
+[tools."cargo:cargo-audit"]
+version = "latest"
+
+[tools."cargo:cargo-bloat"]
+version = "latest"
+
+[tools."cargo:cargo-cache"]
+version = "latest"
+
+[tools."cargo:cargo-dist"]
+version = "latest"
+
+[tools."cargo:cargo-expand"]
+version = "latest"
+
+[tools."cargo:cargo-feature"]
+version = "latest"
+
+[tools."cargo:cargo-generate"]
+version = "latest"
+
+[tools."cargo:cargo-insta"]
+version = "latest"
+
+[tools."cargo:cargo-llvm-cov"]
+version = "latest"
+
+[tools."cargo:cargo-machete"]
+version = "latest"
+
+[tools."cargo:cargo-make"]
+version = "latest"
+
+[tools."cargo:cargo-nextest"]
+version = "latest"
+
+[tools."cargo:cargo-outdated"]
+version = "latest"
+
+[tools."cargo:cargo-udeps"]
+version = "latest"
+
+# stand in for cargo-install-update* (which is what native cargo --install or cargo binstall would use)
+[tools."cargo:cargo-update"]
+version = "latest"
+
+[tools."cargo:cargo-watch"]
+version = "latest"
+
+[tools."cargo:cargo-workspaces"]
+version = "latest"
+
+[tools."cargo:cargo-zigbuild"]
+version = "latest"
+
+[tools."cargo:create-tauri-app"]
+version = "latest"
+
+#####
+
+[tools."cargo:flamegraph"]
+version = "latest"
+
+[tools."cargo:gumbo"]
+version = "latest"
+
+[tools."cargo:knope"]
+version = "latest"
+
+[tools."cargo:loco"]
+version = "latest"
+
+#####
+
+[tools.just]
+version = "latest"
+
+# [tools."cargo:spider"]
+# version = "latest"
+
+####################################################################################################
+
 [settings]
+experimental = true
 idiomatic_version_file_enable_tools = []
+
+cargo.binstall = true # Prefer using binstall over cargo --install
+npm.bun = true        # Prefer using bun over npm
+
+# npm.package_manager = "bun"
+
+pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
+pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
+
+python.uv_venv_auto = true # Auto-source .venv's if a uv.lock is present

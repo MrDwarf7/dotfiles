@@ -36,6 +36,7 @@
 01eval_if_pacman carapace "carapace _carapace"
 01eval_if_pacman carapace "carapace fish"
 
+04export_onto_path_if_pacman mise "$HOME/.xdg/data/mise/shims" --prepend
 01eval_if_pacman mise "mise activate fish | source"
 
 01eval_if_pacman batman "batman --export-env"
