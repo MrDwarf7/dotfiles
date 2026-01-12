@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function ma_cmp
+function __ma_cmp
    complete -c ma -s h -l help                       -d 'Print help information'
    complete -c ma -s V -l version                    -d 'Print version information'
    complete -c ma -s t -l task                       -d 'The task name to execute (can omit the flag if the task name is the last argument) [default: default]'
@@ -35,6 +35,6 @@ function ma_cmp
 end
 
 function ma --wraps=source --description 'Alias for cargo make'
-    ma_cmp
+    __ma_cmp
     command cargo make $argv
 end

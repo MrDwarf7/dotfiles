@@ -5,14 +5,14 @@ set k_help h
 set k_sort s
 set k_prefix p
 
-function env_prefix_cmp
+function __env_prefix_cmp
     complete -c env_prefix -s $k_help -l help -d 'Show this help message and exit'
     complete -c env_prefix -s $k_prefix -l prefix= -d 'Specify the prefix to search for (default: XDG_)'
     complete -c env_prefix -s $k_sort -l sort -d 'Sort the output alphabetically'
     return 0
 end
 
-function env_prefix_help
+function __env_prefix_help
     if not 00valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
@@ -44,13 +44,13 @@ defaults to XDG_ if none given.
 end
 
 function env_prefix --description 'Prints all environment variables with a specific prefix, defaults to XDG_ if none given'
-    env_prefix_cmp
+    __env_prefix_cmp
 
     argparse $k_help/help $k_sort/sort $k_prefix/prefix= -- $argv
     or return
 
     if set -q _flag_help
-        env_prefix_help && return $status
+        __env_prefix_help && return $status
     end
 
     set -l prefix

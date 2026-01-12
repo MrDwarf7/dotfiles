@@ -10,7 +10,7 @@ function pprintf
 end
 
 # Registers completions
-function concatpro_cmp
+function __concatpro_cmp
     complete -c concatpro -s h -l help -d 'Print help (see more with \'--help\')'
     complete -c concatpro -s e -l extension -d 'The extension that \'fd\' will use to find the files'
     complete -c concatpro -s d -l directory -d 'The directory that \'fd\' will search for files inside of'
@@ -18,7 +18,7 @@ function concatpro_cmp
     complete -c concatpro -s c -l comment_char -d 'The comment character to use when applying the file name to the output file. Defaults to \'//\' if none are given'
 end
 
-function concatpro_help
+function __concatpro_help
     # set -l half_tab (printf "%s" (printf "\t"))
     set -l ht " " # single space char
     printf "\
@@ -46,14 +46,14 @@ $ht concatpro -e py -c '#'                  # Concatenate all .py files in curre
 end
 
 function concatpro --description 'Concatenates files of a given extension in the directory to an output file'
-    concatpro_cmp
+    __concatpro_cmp
 
     # Parse options; no min-args since positionals aren't required
     argparse h/help e/extension= d/directory= o/output= c/comment_char= -- $argv
     or return
 
     if set -q _flag_help
-        concatpro_help
+        __concatpro_help
         return 0
     end
 

@@ -6,7 +6,7 @@ set k_depth d
 set k_level l
 set k_num n
 
-function lt_cmp
+function __lt_cmp
     complete -c lt -s $k_help -l help -d 'Show help message and exit'
     complete -c lt -s $k_depth -l depth= -d 'Set the depth of the tree view (default: 2)'
     complete -c lt -s $k_level -l level= -d 'Alias for --depth'
@@ -14,7 +14,7 @@ function lt_cmp
     return 0
 end
 
-function lt_help
+function __lt_help
     if not 00valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
@@ -44,14 +44,14 @@ List files in a directory with tree view.
 end
 
 function lt --description 'List files in a directory with tree view'
-    lt_cmp
+    __lt_cmp
 
     argparse $k_help/help $k_depth/depth= $k_level/level= $k_num/num= -- $argv
     or return
 
     # Show help if requested
     if set -q _flag_help
-        lt_help
+        __lt_help
         return 0
     end
 

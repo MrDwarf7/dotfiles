@@ -4,25 +4,21 @@
 set k_help h
 set k_check c
 
-function pc_cmp
+function __pc_cmp
     complete -c pc -s $k_help -l help -d 'Print help message and exit.'
     complete -c pc -s $k_check -l check -d 'Show the current value of PKG_MANAGER and exit.'
     return 0
 end
 
-function run_check
-    set -l cmd $argv
-    printf "n\n" | eval $cmd
-    return 0
-end
-
-
-function pc_help
+function __pc_help
     if not 00valid_pacman qsv
         return 0
     end
 
     090help "\
+Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su or paru -Su if PKG_MANAGER is set.'
+Likely to check 'pacman' and 'paru' (or 'yay') for updates.
+
 Usage: pc
 
 Calls the package manager to check for updates
@@ -45,15 +41,21 @@ if set or paru/yay as a fallback.
     return 0
 end
 
+function run_check
+    set -l cmd $argv
+    printf "n\n" | eval $cmd
+    return 0
+end
+
 function pc --description "Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su or paru -Su if PKG_MANAGER is set.'"
-    pc_cmp
+    __pc_cmp
 
     argparse $k_help/help $k_check/check  -- $argv
     or return
 
     # If h/help - run help, return 0;
     if set -q _flag_help
-        pc_help
+        __pc_help
         return 0
     end
 
@@ -68,9 +70,9 @@ function pc --description "Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su o
     end
 
     if test -z "$PKG_MANAGER"
-      if 00valid_pacman paru
-
-        end
+      # if 00valid_pacman paru
+      #     set -q PKG_MANAGER
+      #   end
       colorize red "Error: PKG_MANAGER environment variable is not set.\n" >&2
       return 1
     end

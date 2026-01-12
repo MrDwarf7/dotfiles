@@ -1,6 +1,22 @@
 #!/usr/bin/env fish
 #
 
+
+set k_help h
+set k_skip s
+set k_mirror m
+set k_rustup r
+set k_packages p
+
+
+function __sysup_cmp
+    complete -c sysup -s $k_help -l help -d 'Show this help message and exit'
+    complete -c sysup -s $k_skip -l skip -a "m r p" -d 'Skip certain parts of the update. Use with m (mirror), r (rustup), p (packages)'
+    complete -c sysup -l skip -a "m r p" -d 'Skip certain parts of the update. Use with m (mirror), r (rustup), p (packages)'
+    return 0
+end
+
+
 # Renders help for the sysup function
 #
 # Parameters:
@@ -8,36 +24,33 @@
 #
 # Returns:
 # Returns 0 on success. (infallible)
-function sysup_help --description 'Display help for sysup function'
-    set -l ht " "
-    printf "\
-Usage: sysup [OPTIONS]
+function __sysup_help
+    090help "\
+Usage: sysup [FLAG] [SUB]
 
-Updates the system, with options to skip certain parts.
-Passing -s | --skip with no arguments will run a full update.
-See the 'Sub' section for options to skip certain parts.
+Runs a system update, with options to skip certain parts.
 
-Options:
+Includes:
 
-$ht --skip, -s <SUB>  # Skip certain parts of the update.
-$ht --help, -h        # Show this help message.
-
-Sub options for --skip / -s:
-
-$ht m                 # Skip mirror update
-$ht p                 # Skip package update
-$ht r                 # Skip rustup update
-
-Examples:
-
-$ht m                 # Skip mirror update
-$ht p                 # Skip package update
-$ht r                 # Skip rustup update
-
-Examples:
-
-$ht sysup --skip m    # Skip mirror update
-$ht sysup -s rp       # Skip rustup and package update
+- Mirror update
+- Pacman package update
+- AUR package update
+- Rustup update
+" "
+,                    ,                           ,           ,
+,Short               ,Long                       ,Description,
+,                    ,                           ,           ,
+,-$k_help            , --help                    ,# Show this help message and exit,
+,-$k_skip            , --skip                    ,# Skip certain parts of the update. Use with m (mirror) | r (rustup) | p (packages),
+" "
+,                                       ,           ,,
+,Command                                ,Description,,
+,                                       ,           ,,
+,sysup -$k_help                           ,# Show this help message and exit,,
+,sysup -$k_skip                           ,# Use with (m; r; p) to skip certain parts of the update. For example: -s -r to skip rustup and mirror update.,,
+,sysup -$k_skip -m                        ,# Use -m to skip mirror update,,
+,sysup -$k_skip -r                        ,# Use -r to skip rustup update,,
+,sysup -$k_skip -p                        ,# Use -p to skip package update,,
 "
     return 0
 end
@@ -55,11 +68,13 @@ end
 # Returns:
 # Returns 0 on success, 1 on failure.
 function sysup --description 'System update function'
+    __sysup_cmp
+
     argparse --name=sysup 's/skip=' h/help -- $argv
     or return
 
     if set -q _flag_help
-        sysup_help
+        __sysup_help
         return 0
     end
 

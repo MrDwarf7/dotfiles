@@ -19,7 +19,7 @@ set k_metadata i
 set k_info_generator g
 
 
-function psp_cmp
+function __psp_cmp
     complete -c psp -s "$k_help" -l help -d 'Show this help message and exit'
     complete -c psp -s "$k_next" -l next -d 'Next track'
     complete -c psp -s "$k_previous" -l previous -d 'Previous track'
@@ -39,7 +39,7 @@ function psp_cmp
     return 0
 end
 
-function psp_help
+function __psp_help
     if not 00valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
@@ -129,7 +129,7 @@ end
 
 
 function psp --description "[P]layerctl [S][P]otify"
-    psp_cmp
+    __psp_cmp
     # set base_command (playerctl -p spotify)
 
     argparse -x $k_help,$k_next,$k_previous,$k_stop,$k_play,$k_vol_up,$k_vol_down,$k_loop_track,$k_loop_playlist,$k_loop_none,$k_metadata,$k_info_generator $k_help/help $k_next/next $k_previous/previous $k_stop/stop $k_play/play $k_vol_up/vol_up $k_vol_down/vol_down $k_loop_track/loop_track $k_loop_playlist/loop-playlist $k_loop_none/loop-none $k_metadata/metadata $k_info_generator/info-generator -- $argv
@@ -137,7 +137,7 @@ function psp --description "[P]layerctl [S][P]otify"
 
     if set -q _flag_help
         set com $k_help
-        psp_help
+        __psp_help
         return 0
     end
 
@@ -183,14 +183,14 @@ function psp --description "[P]layerctl [S][P]otify"
     end
 
     if test -z "$com"
-        psp_help
+        __psp_help
         colorize "yellow" "No command provided!\n"
         return 2
     end
 
     switch $com
         case $k_help
-            psp_help
+            __psp_help
         case $k_next
             $base_command next
         case $k_previous
@@ -215,7 +215,7 @@ function psp --description "[P]layerctl [S][P]otify"
             info_generator
             return 0
         case '*'
-            psp_help
+            __psp_help
             colorize "yellow" "No argument recognized!\n"
             return 3
     end
@@ -226,7 +226,7 @@ function psp --description "[P]layerctl [S][P]otify"
     # end
 
     if test -z "$com"
-        psp_help
+        __psp_help
         colorize "yellow" "No command provided!\n"
         return 4
     end

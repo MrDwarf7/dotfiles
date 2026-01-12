@@ -9,7 +9,7 @@ set -g ____global_base_cmd tmux
 #     return 0
 # end
 
-function tm_dbg
+function __tm_dbg
     set -l func_name $argv[1]
     set -l stuff $argv[2..-1]
 
@@ -35,11 +35,11 @@ function tm_dbg
     return 0
 end
 
-function tm_println
+function __tm_println
     printf ": %s :\n\n" $argv
 end
 
-function tm_help --description 'Display usage information for tm'
+function __tm_help --description 'Display usage information for tm'
     if not 00valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
@@ -113,7 +113,7 @@ function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
     if test (string length -- (string escape -- "$tag_arg")) -le 2
         # exclude printing certain subcommands (specified by the exclude_println_regex / exclude_regex)
         if not string match -q -r $exclude_println_regex -- $subcommand
-            tm_println "$subcommand"
+            __tm_println "$subcommand"
         end
     end
 
@@ -152,7 +152,7 @@ function tm --description 'Tmux wrapper with argument parsing'
     # set -l arg $argv[1]
 
     if string match -q -r '^(h|help|--help|-h)$' -- $argv[1]
-        tm_help
+        __tm_help
         return 0
     end
 

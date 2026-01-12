@@ -27,6 +27,9 @@
 01eval_if_pacman fzf "fzf --fish"
 01eval_if_pacman jj "jj util completion fish"
 
+# 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
+01eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
+
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 

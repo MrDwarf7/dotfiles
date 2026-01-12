@@ -5,7 +5,7 @@ set k_help h
 set k_pretty p
 set k_marker m
 
-function mypath_cmp
+function __mypath_cmp
     complete -c mypath -s $k_help -l help -d 'Show help message and exit'
     complete -c mypath -s $k_pretty -l pretty -d 'Pretty print the PATH variable (default)'
     complete -c mypath -s $k_marker -l marker= -d 'Use the specified marker character at the end of each PATH entry'
@@ -13,7 +13,7 @@ function mypath_cmp
     return 0
 end
 
-function mypath_help
+function __mypath_help
     if not 00valid_pacman qsv
         return
     end
@@ -119,7 +119,7 @@ end
 # 3. Function calls between printf vs. echo
 # also behave differently.
 function mypath --description 'Pretty print your current $path variable'
-    mypath_cmp
+    __mypath_cmp
 
     argparse -x m,h -x m,p h/help p/pretty m/marker= -- $argv
     or return 1
@@ -131,7 +131,7 @@ function mypath --description 'Pretty print your current $path variable'
 
     # help => early return
     if set -q _flag_help
-        mypath_help
+        __mypath_help
         return 0
     end
 
