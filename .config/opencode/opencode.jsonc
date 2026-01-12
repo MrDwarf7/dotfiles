@@ -1,8 +1,125 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "theme": "tokyonight",
   // Start with default binds
+  //Instructions files to load on startup
+  "instructions": [
+    "~/.config/opencode/AGENTS.md", // Not sure if this works, but we'll see
+    "AGENTS.md",
+    "TODO.md",
+    "CONTRIBUTING.md",
+    "docs/TOOLS.md",
+    "docs/MODELS.md",
+    "docs/*",
+    ".opencode/*",
+  ],
+  "formatter": {
+    "prettier": {
+      "disabled": true,
+    },
+  },
+  // MCP servers and configuration
+  "mcp": {
+    "context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7-API-KEY": "${CONTEXT7_API_KEY}"
+      },
+    },
+    // // All of these are directly from Zed's config file
+    // "mcp-server-nextjs": {
+    //   "enabled": true,
+    //   "type": "local",
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "mcp-nextjs-server",
+    //     "dev"
+    //   ],
+    //   "settings": {},
+    // },
+    // "shadcn-mcp-server": {
+    //   "enabled": true,
+    //   "settings": {},
+    // },
+    // "bun-docs": {
+    //   "settings": {},
+    //   "url": "https://bun.com/docs/mcp",
+    //   "enabled": true,
+    //   "headers": {},
+    // },
+    // "MCP_DOCKER": {
+    //   "enabled": true,
+    //   "command": "docker",
+    //   "args": [
+    //     "mcp",
+    //     "gateway",
+    //     "run"
+    //   ],
+    //   "env": {},
+    // },
+    // "docker-mcp": {
+    //   "enabled": true,
+    //   "command": "docker",
+    //   "args": [
+    //     "mcp",
+    //     "gateway",
+    //     "run"
+    //   ],
+    //   "env": {},
+    // },
+    // "container-use-mcp": {
+    //   "enabled": true,
+    //   "settings": {},
+    // },
+    // "postgres-context-server": {
+    //   "enabled": true,
+    //   "settings": {},
+    // },
+    // "mcp-server-linear": {
+    //   "enabled": true,
+    //   "command": "npx",
+    //   "args": [
+    //     "-y",
+    //     "mcp-remote",
+    //     "https://mcp.linear.app/sse"
+    //   ],
+    //   "env": {},
+    // },
+  },
+  // This is a list of the allowed tools/permissions
+  // All are enabled by default
+  "permission": {
+    "bash": "allow",
+    "edit": "allow", // covers both edit and writing
+    "read": "allow",
+    "grep": "allow",
+    "glob": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "skill": "allow", // not in the lsp hover, but is in docs
+    "todowrite": "allow",
+    "todoread": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "question": "allow",
+    // "doom_loop": "allow", // This is *detection* of it (3 tool calls with identical input)
+  },
+  // Experimental features
+  "experimental": {
+    "chatMaxRetries": 3,
+    "batch_tool": true,
+    "disable_paste_summary": true,
+    "mcp_timeout": 60000,
+    "openTelemetry": false,
+    "continue_loop_on_deny": true,
+  },
   "keybinds": {
-    "leader": "ctrl+x",
+    //
+    "leader": "ctrl+g",
+    //
     "app_exit": "ctrl+c,ctrl+d,<leader>q",
     "editor_open": "<leader>e",
     "theme_list": "<leader>t",
@@ -28,10 +145,16 @@
     "messages_page_down": "pagedown",
     "messages_half_page_up": "ctrl+alt+u",
     "messages_half_page_down": "ctrl+alt+d",
-    "messages_first": "ctrl+g,home",
-    "messages_last": "ctrl+alt+g,end",
-    "messages_next": "none",
-    "messages_previous": "none",
+    // "messages_first": "ctrl+g,home",
+    // "messages_last": "ctrl+alt+g,end",
+    // "messages_first": "ctrl+g",
+    // "messages_last": "ctrl+alt+g",
+    "messages_first": "shift+home",
+    "messages_last": "shift+end",
+    // "messages_next": "ctrl+down",
+    // "messages_previous": "ctrl+up",
+    "messages_next": "ctrl+e",
+    "messages_previous": "ctrl+y",
     "messages_copy": "<leader>y",
     "messages_undo": "<leader>u",
     "messages_redo": "<leader>r",
@@ -59,25 +182,34 @@
     "input_select_right": "shift+right",
     "input_select_up": "shift+up",
     "input_select_down": "shift+down",
-    "input_line_home": "ctrl+a",
-    "input_line_end": "ctrl+e",
+    "input_line_home": "home",
+    "input_line_end": "end",
     "input_select_line_home": "ctrl+shift+a",
     "input_select_line_end": "ctrl+shift+e",
     "input_visual_line_home": "alt+a",
     "input_visual_line_end": "alt+e",
     "input_select_visual_line_home": "alt+shift+a",
     "input_select_visual_line_end": "alt+shift+e",
+    // "input_buffer_home": "ctrl+a",
+    // "input_buffer_end": "ctrl+e",
     "input_buffer_home": "home",
     "input_buffer_end": "end",
-    "input_select_buffer_home": "shift+home",
-    "input_select_buffer_end": "shift+end",
+    // "input_select_buffer_home": "shift+home",
+    // "input_select_buffer_end": "shift+end",
+    "input_select_buffer_home": "none",
+    "input_select_buffer_end": "none",
+    //
     "input_delete_line": "ctrl+shift+d",
-    "input_delete_to_line_end": "ctrl+k",
-    "input_delete_to_line_start": "ctrl+u",
     "input_backspace": "backspace,shift+backspace",
     "input_delete": "ctrl+d,delete,shift+delete",
-    "input_undo": "ctrl+-,super+z",
-    "input_redo": "ctrl+.,super+shift+z",
+    // "input_undo": "ctrl+-,super+z",
+    // "input_redo": "ctrl+.,super+shift+z",
+    "input_delete_to_line_end": "ctrl+shift+k",
+    "input_delete_to_line_start": "ctrl+shift+u",
+    //
+    "input_undo": "ctrl+u",
+    "input_redo": "ctrl+r",
+    //
     "input_word_forward": "alt+f,alt+right,ctrl+right",
     "input_word_backward": "alt+b,alt+left,ctrl+left",
     "input_select_word_forward": "alt+shift+f,alt+shift+right",
@@ -89,5 +221,5 @@
     "terminal_suspend": "ctrl+z",
     "terminal_title_toggle": "none",
     "tips_toggle": "<leader>h"
-  }
+  },
 }

@@ -1,0 +1,13 @@
+## Keep 
+#
+# !./.gitignore
+# !./opencode.json
+# !./opencode.jsonc
+
+# Ignored
+
+# Ignore everything else
+# *
+
+node_modules/
+bun.lock
