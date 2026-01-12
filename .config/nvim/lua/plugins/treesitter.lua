@@ -13,7 +13,8 @@ return {
   -- ---@type LazyEventSpec
   -- event = "BufReadPost",
   -- event = "WinLeave",
-  branch = "master",
+  -- branch = "master",
+  event = { "BufReadPost", "BufNewFile" },
   build = ":TSUpdate",
   opts = {
     highlight = { enable = true },

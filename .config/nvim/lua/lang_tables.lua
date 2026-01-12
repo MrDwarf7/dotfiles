@@ -179,11 +179,12 @@ LangTables = {
       -- "luacheck",
       "markdownlint-cli2",
       "mypy",
+      "ty",
       "ruff",
       "shellcheck",
       "sqlfluff",
       "ts-standard",
-      "vulture",
+      -- "vulture",
       "yamllint",
     },
 
@@ -203,7 +204,7 @@ LangTables = {
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
       -- python = { "ruff", "mypy", "vulture" },
-      ["python"] = { "ty", "ruff", "vulture" },
+      ["python"] = { "ruff" },
       ["sh"] = { "shellcheck" },
       ["sql"] = { "sqlfluff" },
       ["typescript"] = { "biomejs" },
@@ -646,4 +647,5 @@ function LangTables.formatters_by_ft(ft, bufnr)
 end
 
 ---@return LangTables
-return setmetatable(LangTables, LangTables)
+return LangTables
+-- (LangTables, LangTables)

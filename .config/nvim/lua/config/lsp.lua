@@ -1,9 +1,10 @@
----@alias BindsLiteral "fzf" | "builtin"
+---@alias BindsLiteral "fzf" | "builtin" | "snacks"
 
 ---@enum BindsTypeE
 local BindsTypeE = {
   fzf = "fzf",
   builtin = "builtin",
+  snacks = "snacks",
 }
 
 ---@alias BindsType BindsLiteral|BindsTypeE
@@ -43,7 +44,9 @@ function LSP.handle_binds_type(binds_type)
     -- convert to string
     if binds_type == BindsTypeE.fzf then
       return "fzf"
-    elseif binds_type == BindsTypeE.builtin then
+    elseif binds_type == BindsTypeE.snacks then
+      return "snacks"
+    else
       return "builtin"
     end
   elseif type(binds_type) == "string" then
@@ -130,6 +133,47 @@ function LSP.fzf_lua_binds()
   end, { desc = "[G]oto [I]mpl" })
 end
 
+function LSP.snacks_binds()
+  local Snacks = require("snacks")
+
+  ---@type snacks.picker.Config
+  local opts = {
+    jump = {
+      tagstack = true,
+      reuse_win = false,
+    },
+    debug = {
+      files = true,
+    },
+    -- on_show = function(picker)
+    --   if picker:count() == 1 then
+    --     local loc = picker.get()
+    --     local encoding = vim.lsp.get_clients()[1].offset_encoding
+    --     dd(loc)
+    --     dd(encoding)
+    --     vim.lsp.util.show_document(loc, encoding, { jump1 = true })
+    --   else
+    --     local i = picker:current()
+    --     dd(i)
+    --   end
+    -- end,
+  }
+
+  local map = vim.keymap.set
+  -- stylua: ignore start
+  map("n", "gd", function() Snacks.picker.lsp_definitions(opts) end, { desc = "Goto Definition" })
+  map("n", "gD", function() Snacks.picker.lsp_declarations(opts) end, { desc = "Goto Declaration" })
+  map("n", "gr", function() Snacks.picker.lsp_references(opts) end, { nowait = true, desc = "References" })
+  map("n", "gi", function() Snacks.picker.lsp_implementations(opts) end, { desc = "Goto Implementation" })
+  map("n", "gt", function() Snacks.picker.lsp_type_definitions(opts) end,{ desc = "Goto T[y]pe Definition" })
+  map("n", "gai", function() Snacks.picker.lsp_incoming_calls(opts) end, { desc = "C[a]lls Incoming" })
+  map("n", "gao", function() Snacks.picker.lsp_outgoing_calls(opts) end, { desc = "C[a]lls Outgoing" })
+  map("n", "<Leader>ls", function() Snacks.picker.lsp_symbols(opts) end, { desc = "LSP Symbols" })
+  map("n", "<Leader>lS", function() Snacks.picker.lsp_workspace_symbols(opts) end, { desc = "LSP Workspace Symbols" })
+  map("n", "<Leader>l`", function() Snacks.picker.lsp_config(opts) end, { desc = "Pulls up the capabilities of various LSP servers" })
+  -- stylua: ignore end
+end
+
 function LSP.setup_lsp(binds_type)
   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
   local lsp_servers = {}
@@ -138,10 +182,18 @@ function LSP.setup_lsp(binds_type)
     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
       if file:match("%.lua$") and file ~= "init.lua" and not file:match("^_.*%.lua$") then
         local server_name = file:gsub("%.lua$", "")
+
+        -- if not vim.tbl_contains(already_found, server_name) and not already_found[server_name] then -- skip auto-discovered servers
+        --   table.insert(lsp_servers, server_name)
+        -- end
         table.insert(lsp_servers, server_name)
       end
     end
   end
+
+  -- lsp_servers = vim.tbl_filter(function(server)
+  --   return not already_found[server]
+  -- end, lsp_servers)
 
   -- figure out if it's a
   -- BindsLiteral, or BindsTypeE
@@ -150,6 +202,8 @@ function LSP.setup_lsp(binds_type)
 
   if binds_type == "fzf" then
     LSP.fzf_lua_binds()
+  elseif binds_type == "snacks" then
+    LSP.snacks_binds()
   else
     LSP.builtin()
   end

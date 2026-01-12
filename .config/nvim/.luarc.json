@@ -7,7 +7,8 @@
         "it",
         "before_each",
         "after_each",
-        "packer_plugins"
+        "packer_plugins",
+        "Snacks"
     ],
     "diagnostics.disable": [
         "missing-fields"

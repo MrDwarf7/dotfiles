@@ -1,5 +1,4 @@
 return {
-
   "Saghen/blink.cmp",
   lazy = true,
   -- event = { "InsertEnter", "CmdlineEnter", "WinEnter" },
@@ -8,7 +7,7 @@ return {
   event = { "CursorMoved", "VeryLazy" },
   dependencies = {
     -- stylua: ignore start
-    { "j-hui/fidget.nvim",            lazy = true, event = "VeryLazy" },
+    -- { "j-hui/fidget.nvim", enabled = false,            lazy = true, event = "VeryLazy" },
     { "Saghen/blink.compat",          lazy = true },
     { "L3MON4D3/LuaSnip",             lazy = true },
     { "rafamadriz/friendly-snippets", lazy = true },
@@ -198,7 +197,7 @@ return {
       --   end,
       -- },
 
-      ["<C-e>"] = { "hide", "fallback" },
+      ["<C-c>"] = { "hide", "fallback" },
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -216,11 +215,11 @@ return {
       ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
       ["<C-n>"] = { "select_next", "fallback_to_mappings" },
 
-      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-e>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-y>"] = { "scroll_documentation_up", "fallback" },
 
-      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       ["<C-d>"] = { "scroll_documentation_down", "fallback" },
+      ["<C-u>"] = { "scroll_documentation_up", "fallback" },
       -- ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
     },
     --- keymaps }}}

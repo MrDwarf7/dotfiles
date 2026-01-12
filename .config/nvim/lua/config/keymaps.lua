@@ -173,7 +173,7 @@ end, { expr = true, desc = "Escape and clear hlsearch" })
 
 map(
   "n",
-  "<Leader>tH",
+  "<Leader>th",
   "<CMD>nohlsearch<BAR>diffupdate<BAR>normal! <C-L><CR>",
   { desc = "Redraw / Clear hlsearch / Diff Update" }
 )
@@ -342,6 +342,22 @@ end, silent_opts("[W]rite with sudo"))
 -- end, silent_opts("[G]ithub [O]cto"))
 
 map("n", "<Leader>pl", "<CMD>Lazy<CR>", silent_opts("Lazy"))
+
+-- vim.keymap.set({ "n", "i", "s" }, "<C-e>", function()
+--   if not require("noice.lsp").scroll(4) then
+--     return "<C-e>"
+--   else
+--     return vim.fn.feedkeys("<C-e>", "n")
+--   end
+-- end, silent_opts)
+--
+-- vim.keymap.set({ "n", "i", "s" }, "<C-y>", function()
+--   if not require("noice.lsp").scroll(-4) then
+--     return "<C-y>"
+--   else
+--     return vim.fn.feedkeys("<C-y>", "n")
+--   end
+-- end, silent_opts)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

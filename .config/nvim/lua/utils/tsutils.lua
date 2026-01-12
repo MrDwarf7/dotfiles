@@ -47,7 +47,11 @@ function TsUtils.handle_builtins(opts)
       if cur:type():match("^[cC]omment") then
         return true
       end
-      cur = cur:parent()
+      local cur_parent = cur:parent()
+      if type(cur_parent) ~= "nil" then
+        cur = cur_parent
+      end
+      -- cur = cur:parent()
     end
     return false
   end
@@ -113,7 +117,8 @@ function TsUtils.handle_builtins(opts)
       local title = opts.method:gsub("textDocument/", "")
       if #filtered == 1 then
         add_to_tagstack()
-        vim.lsp.util.jump_to_location(filtered[1], offset_encoding, true)
+        vim.lsp.util.show_document(filtered[1], offset_encoding, { focus = true, reuse_win = false })
+        -- vim.lsp.util.jump_to_location(filtered[1], offset_encoding, true) -- will need to actually test this!
       else
         table.insert(filtered, 1, orig_pos)
         setlist_fn(0, {}, " ", { title = title, items = filtered })

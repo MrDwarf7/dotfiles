@@ -58,12 +58,42 @@ local function symbol_info(bufnr, client)
   end, bufnr)
 end
 
+local function ftp()
+  -- local extension = vim.fn.expand("%:e") ==
+  -- "h" and "c" or "cpp"
+  local raw_extension = vim.fn.expand("%:e")
+
+  ---@param raw string
+  local formatted_type = function(raw)
+    -- if raw == "cpp" then
+    if raw == string.gsub("cpp", "^c++$", "cpp") then
+      return "c++"
+    end
+    return raw
+  end
+
+  return {
+    raw = raw_extension,
+    std = formatted_type(raw_extension), -- "cpp" -> "c++" | "c" | "h" | "hpp" etc.
+    extension = raw_extension,
+  }
+end
+
+local argument = function(arg)
+  -- local filetype = ftp()
+  -- return "--" .. filetype.std
+  return "--" .. arg
+end
+
 ---@class ClangdInitializeResult: lsp.InitializeResult
 ---@field offsetEncoding? string
 
 ---@type vim.lsp.Config
 return {
-  cmd = { "clangd" },
+  cmd = {
+    "clangd",
+    argument(ftp().std),
+  },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
   root_markers = {
     ".clangd",

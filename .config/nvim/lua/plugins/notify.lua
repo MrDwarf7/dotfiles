@@ -1,0 +1,12 @@
+return {}
+-- return {
+--   "rcarriga/nvim-notify",
+--   opts = function(opts)
+--     return vim.tbl_deep_extend("force", opts, {
+--       timeout = 2000,
+--       opacity = 25,
+--       background_color = "#00000000",
+--       render = "compact",
+--     })
+--   end,
+-- }

@@ -57,6 +57,7 @@ local ignore_dirs = {
 
 return {
   "ibhagwan/fzf-lua",
+  enabled = false, -- NOTE: temp. disabled while fiddling with the snacks picker
   lazy = true,
   ---@type LazyEventSpec
   event = "VimEnter",
@@ -73,7 +74,7 @@ return {
 
     -- stylua: ignore start
     -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd() }) end,                                       desc = "Find Files (root=cwd)" },
--- T    -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd(), file_ignore_patterns = ignore_dirs }) end, desc = "Find Files (root=cwd)" },
+    -- T    -- { "<Leader>ff", function() require("fzf-lua").files({ cwd = vim.uv.cwd(), file_ignore_patterns = ignore_dirs }) end, desc = "Find Files (root=cwd)" },
 
     -- TODO: This is a little janky, oil expects the oil buffer to be open to get the current dir.
     {
@@ -107,7 +108,7 @@ return {
 
     -- persistence / persistence.nvim
     { "<Leader>sf", function() require("persistence").select() end,                                                      desc = "Select Session" },
-    { "<Leader>fS", function() require("persistence").select() end,                                                      desc = "Select Session" },
+    -- { "<Leader>fS", function() require("persistence").select() end,                                                      desc = "Select Session" },
 
     { "<Leader>gc", function() require("fzf-lua").git_commits() end,                                                     desc = "Commits" },
     { "<Leader>gs", function() require("fzf-lua").git_status() end,                                                      desc = "Status" },

@@ -8,72 +8,17 @@ return {
   event = "BufReadPre",
   cmd = "Trouble",
   keys = {
-    {
-      "<leader>td",
-      function()
-        require("trouble").toggle("diagnostics")
-      end,
-      desc = "Diagnostics (Trouble)",
-    },
-
-    {
-      "<leader>tD",
-      function()
-        require("trouble").toggle({ mode = "diagnostics", buf = 0 })
-      end,
-      desc = "Buffer Diagnostics (Trouble)",
-    },
-
-    {
-      "<leader>ts",
-      function()
-        require("trouble").toggle("symbols")
-      end,
-      desc = "Symbols (Trouble)",
-    },
-
-    {
-      "<leader>tS",
-      function()
-        require("trouble").toggle({ mode = "symbols", focus = false, win = { position = "right" } })
-      end,
-      desc = "LSP references/definitions/... (Trouble)",
-    },
-
-    {
-      "<leader>tc",
-      function()
-        require("trouble").toggle("qflist")
-      end,
-      desc = "Quickfix List (Trouble)",
-    },
-
-    {
-      "<leader>tt",
-      function()
-        require("trouble").toggle({ mode = "todo", focus = true })
-      end,
-      desc = "Todo List focus (Trouble)",
-    },
-
-    {
-      "<leader>tT",
-      function()
-        require("trouble").toggle("todo")
-      end,
-      desc = "Todo List (Trouble)",
-    },
-
-    {
-      "<Leader>lt",
-      function()
-        vim.cmd("TodoTrouble")
-      end,
-      desc = "list [t]odo's",
-      mode = "n",
-    },
-
+    -- stylua: ignore start
+    { "<leader>td", function() require("trouble").toggle("diagnostics") end, desc = "Diagnostics (Trouble)" },
+    { "<leader>tD", function() require("trouble").toggle({ mode = "diagnostics", buf = 0 }) end, desc = "Buffer Diagnostics (Trouble)" },
+    { "<leader>ts", function() require("trouble").toggle("symbols") end, desc = "Symbols (Trouble)" },
+    { "<leader>tS", function() require("trouble").toggle({ mode = "symbols", focus = false, win = { position = "right" } }) end, desc = "LSP references/definitions/... (Trouble)" },
+    { "<leader>tc", function() require("trouble").toggle("qflist") end, desc = "Quickfix List (Trouble)" },
+    { "<leader>tt", function() require("trouble").toggle({ mode = "todo", focus = true }) end, desc = "Todo List focus (Trouble)" },
+    { "<leader>tT", function() require("trouble").toggle("todo") end, desc = "Todo List (Trouble)" },
+    { "<Leader>lt", function() vim.cmd("TodoTrouble") end, desc = "list [t]odo's", mode = "n" },
     { "<leader>tl", "<CMD>Trouble loclist toggle<CR>", desc = "Location List (Trouble)" },
+    -- stylua: ignore end
     {
       "<Leader>tq",
       function()
@@ -134,5 +79,21 @@ return {
       desc = "[p]robem PREV",
     },
   },
-  opts = {},
+  opts = function(_, opts)
+    return vim.tbl_deep_extend("force", opts or {}, {
+      picker = {
+        actions = require("trouble.sources.snacks").actions,
+        win = {
+          input = {
+            keys = {
+              ["<C-t>"] = {
+                "trouble_open",
+                mode = { "n", "i" },
+              },
+            },
+          },
+        },
+      },
+    })
+  end,
 }

@@ -130,7 +130,7 @@ return {
         vim.fn.setreg("+", Converter.relative())
       end,
 
-      ["<Leader>f/"] = "<CMD>Oil<Tab>",
+      -- ["<Leader>f/"] = "<CMD>Oil<Tab>",
     },
   },
 }

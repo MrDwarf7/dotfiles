@@ -3,31 +3,12 @@ return {
   lazy = true, -- doesn't need to run unless called via keymap or command
   cmd = { "Neotest" },
 
+  -- these _were_ all marked as: event = "VeryLazy",
   dependencies = {
-    {
-      "nvim-neotest/nvim-nio",
-      lazy = true,
-      ---@type LazyEventSpec
-      event = "VeryLazy",
-    },
-    {
-      "nvim-lua/plenary.nvim",
-      lazy = true,
-      ---@type LazyEventSpec
-      event = "VeryLazy",
-    },
-    {
-      "antoinemadec/FixCursorHold.nvim",
-      lazy = true,
-      ---@type LazyEventSpec
-      event = "VeryLazy",
-    },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      lazy = true,
-      ---@type LazyEventSpec
-      event = "VeryLazy",
-    },
+    { "nvim-neotest/nvim-nio", lazy = true },
+    { "nvim-lua/plenary.nvim", lazy = true },
+    { "antoinemadec/FixCursorHold.nvim", lazy = true },
+    { "nvim-treesitter/nvim-treesitter", lazy = true },
     -- languages --
     { "alfaix/neotest-gtest", lazy = true }, -- C++/CPP (uses gtest)
 

@@ -69,6 +69,7 @@ opt.mouse = "a"
 opt.backupcopy = "yes"
 opt.undolevels = 10000
 -- opt.shortmess = { c = true, s = true, C = true, F = true, I = true, S = true, W = true, w = true, a = true, l = true }
+-- opt.showmode = false
 opt.showmode = false
 opt.hidden = true
 opt.splitright = true
@@ -77,7 +78,8 @@ opt.wrapscan = true
 opt.wrap = false -- Added, test with other plugins etc
 opt.backup = false
 opt.writebackup = false
--- opt.showcmd = false
+opt.showcmd = true
+-- opt.showcmdloc = "statusline"
 opt.showmatch = true
 opt.ignorecase = true
 opt.hlsearch = true
@@ -93,6 +95,8 @@ opt.completeopt = "menu,menuone,noselect"
 -- set cmdheight=0
 -- set shortmess+=csCFISWwal
 -- ]])
+
+-- opt.cmdheight = 0
 
 opt.shortmess:append({
   W = true,

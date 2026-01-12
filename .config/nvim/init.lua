@@ -8,6 +8,20 @@ require("config.autocmds")
 ---@diagnostic disable-next-line: unused-local
 local utils = require("utils")
 
+_G.dd = function(...)
+  Snacks.debug.inspect(...)
+end
+_G.bt = function()
+  Snacks.debug.backtrace()
+end
+if vim.fn.has("nvim-0.11") == 1 then
+  vim._print = function(_, ...)
+    dd(...)
+  end
+else
+  vim.print = dd
+end
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -94,6 +108,8 @@ local lazy_opts = {
 
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
--- lsp.setup({ binds_type = "builtin" })
+
 local lsp = require("config.lsp")
-lsp.setup({ binds_type = "fzf" })
+-- lsp.setup({ binds_type = "builtin" })
+-- lsp.setup({ binds_type = "fzf" })
+lsp.setup({ binds_type = "snacks" })

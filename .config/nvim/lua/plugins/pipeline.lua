@@ -1,7 +1,7 @@
 return {
   "topaxi/pipeline.nvim",
   keys = {
-    { "<Leader>gp", "<CMD>Pipeline<CR>", desc = "Open pipeline.nvim" },
+    { "<Leader>pr", "<CMD>Pipeline<CR>", desc = "Open pipeline.nvim" },
   },
   -- optional, you can also install and use `yq` instead.
   build = "make",

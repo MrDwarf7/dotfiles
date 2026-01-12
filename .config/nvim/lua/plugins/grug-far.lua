@@ -14,9 +14,12 @@ return {
   lazy = true,
   keys = {
     -- stylua: ignore start
-    { "<Leader>f/", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    { "<Leader>f?", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    { "<Leader>fR", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+
     { "<Leader>lp", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
-    { "<Leader>fs", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    { "<Leader>lR", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
+    -- { "<Leader>fs", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },
     -- stylua: ignore end
   },
 }

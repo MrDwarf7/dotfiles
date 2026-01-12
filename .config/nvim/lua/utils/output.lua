@@ -1,15 +1,15 @@
 --
 -- local dbg_fn = function(...)
-if type(_G.dump) ~= "function" then
-  --- Dump the given objects to stdout, using vim.inspect
-  ---@param ... any
-  ---@return nil
-  ---@diagnostic disable-next-line: unused-function, duplicate-set-field
-  function _G.dump(...)
-    local objects = vim.tbl_map(vim.inspect, { ... })
-    print(unpack(objects))
-  end
-end
+-- if type(_G.dump) ~= "function" then
+--   --- Dump the given objects to stdout, using vim.inspect
+--   ---@param ... any
+--   ---@return nil
+--   ---@diagnostic disable-next-line: unused-function, duplicate-set-field
+--   function _G.dump(...)
+--     local objects = vim.tbl_map(vim.inspect, { ... })
+--     print(unpack(objects))
+--   end
+-- end
 -- end
 
 -- dbg_fn()
@@ -386,7 +386,7 @@ function Output.d(primary_section, section, msg, data)
       .. " :: : "
       .. vim.print(vim.inspect(data))
   )
-  _G.dump(print_data)
+  -- _G.dump(print_data)
 end
 
 function Output.setup()
