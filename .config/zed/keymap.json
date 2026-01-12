@@ -484,8 +484,8 @@
       // "k k": "vim::NormalBefore",
       "ctrl-shift-i": "assistant::InlineAssist",
 
-      "(": null,
-      ")": null,
+      // "(": null,
+      // ")": null,
 
       "escape": "vim::NormalBefore",
       "ctrl-c": "vim::NormalBefore",
@@ -566,7 +566,7 @@
     },
   },
   {
-    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs || vim_operator == helix_next || vim_operator == helix_previous",
     "bindings": {
       "w": "vim::Word",
       "shift-w": ["vim::Word", { "ignore_punctuation": true }],
@@ -577,7 +577,7 @@
       "`": "vim::BackQuotes",
       "\"": "vim::DoubleQuotes",
       "|": "vim::VerticalBars",
-      "(": "vim::Parentheses",
+      "(": ["vim::Parentheses", { "opening": true }],
       ")": "vim::Parentheses",
       "b": "vim::Parentheses",
       "[": "vim::SquareBrackets",
