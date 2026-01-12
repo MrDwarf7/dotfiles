@@ -63,21 +63,7 @@ end
 
 ---@type vim.lsp.Config
 return {
-
-  cmd = { "clangd" }, -- stock/original command
-
-  -- modified version to fix various weird behaviours
-  -- cmd = {
-  --    "clangd",
-  --    -- "--std=c++latest",
-  --    "--background-index",
-  --    -- "--clang-tidy",
-  --    "--header-insertion=iwyu",
-  --    "--completion-style=detailed",
-  --    "--function-arg-placeholders",
-  --    "--fallback-style=llvm",
-  --  },
-
+  cmd = { "clangd" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
   root_markers = {
     ".clangd",
@@ -96,7 +82,6 @@ return {
     },
     offsetEncoding = { "utf-8", "utf-16" },
   },
-
   ---@param init_result ClangdInitializeResult
   on_init = function(client, init_result)
     if init_result.offsetEncoding then

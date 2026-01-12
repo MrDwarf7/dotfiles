@@ -66,6 +66,13 @@ return {
     "svelte",
     "templ",
   },
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true,
+      },
+    },
+  },
   settings = {
     tailwindCSS = {
       validate = true,
@@ -132,7 +139,4 @@ return {
     root_files = util.root_markers_with_field(root_files, { "mix.lock", "Gemfile.lock" }, "tailwind", fname)
     on_dir(vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1]))
   end,
-
-  -- custom
-  flags = { debounce_text_changes = 300 },
 }
