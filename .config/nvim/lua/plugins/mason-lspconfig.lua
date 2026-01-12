@@ -6,7 +6,7 @@ return {
   -- event = "VeryLazy",
   dependencies = {
     { "mason-org/mason.nvim", lazy = true },
-    { "neovim/nvim-lspconfig", lazy = true },
+    { "neovim/nvim-lspconfig", lazy = false },
   },
   -- opts = {
   --

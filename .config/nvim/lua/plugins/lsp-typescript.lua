@@ -1,7 +1,7 @@
 --- TSServer capabilities
 ---@param opts? table
 ---@param capabilities? table
----@return table
+---@return table|lsp.ClientCapabilities?
 local function tsserv_cap(opts, capabilities)
   opts = opts or {}
   capabilities = capabilities or vim.lsp.protocol.make_client_capabilities()

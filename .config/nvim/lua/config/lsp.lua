@@ -10,14 +10,14 @@ local BindsTypeE = {
 ---@alias BindsType BindsLiteral|BindsTypeE
 
 ---@class config.LSP.Opts
----@field binds_type? BindsType
----@field get_capabilities? fun(): table<string, any>
+---@field binds_type? BindsType|nil
+---@field get_capabilities? fun(): table<string, any>|nil
 ---
 --- This will cause the funcion given to run over the default keybindings,
 --- allowing you to define your own function that maps out the keys
 --- ( remember to include gd, gf etc. also)
----@field setup_lsp? fun(binds_type?: BindsType)
----
+---@field setup_lsp? fun(binds_type?: BindsType)|nil
+
 ---@class config.LSP
 --- fields
 ---@field binds_type? BindsType -- Store it for later
@@ -26,39 +26,55 @@ local BindsTypeE = {
 ---@field get_capabilities? fun(): table<string, any>
 ---
 --- methods
----@field handle_binds_type fun(binds_type?: BindsType): BindsLiteral
----@field get_default_capabilities fun(): table<string, any>
+---@field handle_binds_type fun(self: config.LSP, binds_type?: BindsType): BindsLiteral
+---@field get_default_capabilities fun(self: config.LSP): table<string, any>
 ---@field fzf_lua_binds fun()
 ---@field builtin_binds fun()
----@field setup_lsp fun(binds_type?: BindsType)
+---@field setup_lsp fun(self: config.LSP, binds_type?: BindsType)
 ---@field setup fun(opts?: config.LSP.Opts): config.LSP
 local LSP = {}
 
-function LSP.handle_binds_type(binds_type)
+function LSP:handle_binds_type(binds_type)
+  local bt = nil
+
   if type(binds_type) == "nil" then
     ---@cast binds_type BindsLiteral
-    return "builtin"
+    bt = BindsTypeE.builtin
+    -- return "builtin"
   end
 
   if type(binds_type) == "table" then
     -- convert to string
     if binds_type == BindsTypeE.fzf then
-      return "fzf"
+      bt = BindsTypeE.fzf
+      -- return "fzf"
     elseif binds_type == BindsTypeE.snacks then
-      return "snacks"
+      bt = BindsTypeE.snacks
+      -- return "snacks"
     else
-      return "builtin"
+      bt = BindsTypeE.builtin
+      -- return "builtin"
     end
   elseif type(binds_type) == "string" then
     ---@cast binds_type BindsLiteral
-    return binds_type
+    bt = binds_type
+    -- return binds_type
   end
 
-  ---@cast binds_type BindsLiteral
-  return "builtin"
+  self.binds_type = bt
+
+  -- ---@cast binds_type BindsLiteral
+  -- return "builtin"
+
+  if bt ~= nil then
+    return bt
+  end
+
+  require("utils").output.warn("LSP:handle_binds_type: unknown binds_type, defaulting to 'builtin'")
+  return BindsTypeE.builtin
 end
 
-LSP.get_default_capabilities = function()
+function LSP:get_default_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
   -- required by nvim-ufo -- we don't use it atm tho
@@ -138,43 +154,32 @@ function LSP.snacks_binds()
 
   ---@type snacks.picker.Config
   local opts = {
+    --
+    auto_confirm = true,
+    show_delay = 0,
     jump = {
       tagstack = true,
       reuse_win = false,
     },
-    debug = {
-      files = true,
-    },
-    -- on_show = function(picker)
-    --   if picker:count() == 1 then
-    --     local loc = picker.get()
-    --     local encoding = vim.lsp.get_clients()[1].offset_encoding
-    --     dd(loc)
-    --     dd(encoding)
-    --     vim.lsp.util.show_document(loc, encoding, { jump1 = true })
-    --   else
-    --     local i = picker:current()
-    --     dd(i)
-    --   end
-    -- end,
+    jump1 = true,
   }
 
   local map = vim.keymap.set
   -- stylua: ignore start
-  map("n", "gd", function() Snacks.picker.lsp_definitions(opts) end, { desc = "Goto Definition" })
-  map("n", "gD", function() Snacks.picker.lsp_declarations(opts) end, { desc = "Goto Declaration" })
-  map("n", "gr", function() Snacks.picker.lsp_references(opts) end, { nowait = true, desc = "References" })
-  map("n", "gi", function() Snacks.picker.lsp_implementations(opts) end, { desc = "Goto Implementation" })
-  map("n", "gt", function() Snacks.picker.lsp_type_definitions(opts) end,{ desc = "Goto T[y]pe Definition" })
-  map("n", "gai", function() Snacks.picker.lsp_incoming_calls(opts) end, { desc = "C[a]lls Incoming" })
-  map("n", "gao", function() Snacks.picker.lsp_outgoing_calls(opts) end, { desc = "C[a]lls Outgoing" })
-  map("n", "<Leader>ls", function() Snacks.picker.lsp_symbols(opts) end, { desc = "LSP Symbols" })
-  map("n", "<Leader>lS", function() Snacks.picker.lsp_workspace_symbols(opts) end, { desc = "LSP Workspace Symbols" })
-  map("n", "<Leader>l`", function() Snacks.picker.lsp_config(opts) end, { desc = "Pulls up the capabilities of various LSP servers" })
+  map("n", "gd", function() Snacks.picker.lsp_definitions(opts) end, { desc = "Snacks Goto Definition" })
+  map("n", "gD", function() Snacks.picker.lsp_declarations(opts) end, { desc = "Snacks Goto Declaration" })
+  map("n", "gr", function() Snacks.picker.lsp_references(opts) end, { nowait = true, desc = "Snacks References" })
+  map("n", "gi", function() Snacks.picker.lsp_implementations(opts) end, { desc = "Snacks Goto Implementation" })
+  map("n", "gt", function() Snacks.picker.lsp_type_definitions(opts) end,{ desc = "Snacks Goto T[y]pe Definition" })
+  map("n", "gai", function() Snacks.picker.lsp_incoming_calls(opts) end, { desc = "Snacks C[a]lls Incoming" })
+  map("n", "gao", function() Snacks.picker.lsp_outgoing_calls(opts) end, { desc = "Snacks C[a]lls Outgoing" })
+  map("n", "<Leader>ls", function() Snacks.picker.lsp_symbols(opts) end, { desc = "Snacks LSP Symbols" })
+  map("n", "<Leader>lS", function() Snacks.picker.lsp_workspace_symbols(opts) end, { desc = "Snacks LSP Workspace Symbols" })
+  map("n", "<Leader>l`", function() Snacks.picker.lsp_config(opts) end, { desc = "Snacks Pulls up the capabilities of various LSP servers" })
   -- stylua: ignore end
 end
 
-function LSP.setup_lsp(binds_type)
+function LSP:setup_lsp()
   local lsp_dir = vim.fn.stdpath("config") .. "/lsp"
   local lsp_servers = {}
 
@@ -182,7 +187,6 @@ function LSP.setup_lsp(binds_type)
     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
       if file:match("%.lua$") and file ~= "init.lua" and not file:match("^_.*%.lua$") then
         local server_name = file:gsub("%.lua$", "")
-
         -- if not vim.tbl_contains(already_found, server_name) and not already_found[server_name] then -- skip auto-discovered servers
         --   table.insert(lsp_servers, server_name)
         -- end
@@ -198,13 +202,22 @@ function LSP.setup_lsp(binds_type)
   -- figure out if it's a
   -- BindsLiteral, or BindsTypeE
   -- it'll now always be a string here --
-  binds_type = LSP.handle_binds_type(binds_type)
+  -- binds_type = self.binds_type or self:handle_binds_type(binds_type)
+  -- binds_type or LSP:handle_binds_type(binds_type)
 
-  if binds_type == "fzf" then
+  -- Folke's impl. in snacks for adding (pushing) an item to the tag stack
+  -- https://github.com/folke/snacks.nvim/blob/fe7cfe9800a182274d0f868a74b7263b8c0c020b/lua/snacks/picker/actions.lua#L35-L102
+
+  -- Neovim's default LSP behaviour for adding to tag stack (on lsp jumps)
+  -- https://github.com/neovim/neovim/blob/ac3859a4410e50794a083f23796e4f8ae2a24b04/runtime/lua/vim/lsp/buf.lua#L179-L239
+
+  if self.binds_type == BindsTypeE.fzf then
     LSP.fzf_lua_binds()
-  elseif binds_type == "snacks" then
+  elseif self.binds_type == BindsTypeE.snacks then
     LSP.snacks_binds()
-  else
+  elseif self.binds_type == BindsTypeE.builtin then
+    LSP.builtin()
+  else -- default/fall-through case
     LSP.builtin()
   end
 
@@ -234,12 +247,12 @@ function LSP.setup_lsp(binds_type)
 
   -- and then enable **_ALL_** the servers found
 
-  vim.lsp.enable(lsp_servers)
+  vim.lsp.enable(lsp_servers, true)
 end
 
 function LSP.setup(opts)
   opts = opts or {}
-  opts.binds_type = LSP.handle_binds_type(opts.binds_type)
+  opts.binds_type = opts.binds_type or LSP:handle_binds_type(opts.binds_type)
   -- local binds_type = opts.binds_type
 
   -- if type(binds_type) == "nil" then
@@ -264,20 +277,14 @@ function LSP.setup(opts)
       ---@diagnostic disable-next-line need-check-nil
       client.server_capabilities.semanticTokensProvider = nil
 
-      local lsp_fn = nil
-      if opts.setup_lsp and type(opts.setup_lsp) == "function" then
-        lsp_fn = opts.setup_lsp
+      if not opts.setup_lsp or opts.setup_lsp == nil then
+        LSP:setup_lsp()
+      elseif opts.setup_lsp and type(opts.setup_lsp) == "function" then
+        opts.setup_lsp(opts.binds_type)
       else
-        lsp_fn = LSP.setup_lsp
+        require("utils").output.warn("opts.setup_lsp is not a function")
+        return nil
       end
-
-      if type(lsp_fn) ~= "nil" then
-        lsp_fn(opts.binds_type)
-      else
-        LSP.setup_lsp(opts.binds_type)
-      end
-
-      -- LSP.setup_lsp(binds_type)
 
       if client.name == "ruff" then
         client.server_capabilities.hoverProvider = false
@@ -310,17 +317,29 @@ function LSP.setup(opts)
   if opts.get_capabilities and type(opts.get_capabilities) == "function" then
     capabilities = opts.get_capabilities()
   else
-    capabilities = LSP.get_default_capabilities()
+    capabilities = LSP:get_default_capabilities()
   end
 
+  ---@type vim.lsp.config
   vim.lsp.config("*", {
     capabilities = capabilities,
     flags = {
       debounce_text_changes = 500,
     },
   })
-  LSP.binds_type = opts.binds_type
-  LSP.get_capabilities = opts.get_capabilities
+  -- LSP.binds_type = opts.binds_type
+  -- LSP.get_capabilities = opts.get_capabilities
+
+  ---@type config.LSP
+  setmetatable(LSP, {
+    __index = function(table, key)
+      return rawget(table, key)
+    end,
+    binds_type = opts.binds_type,
+    get_capabilities = opts.get_capabilities,
+    capabilities = capabilities,
+  })
+
   return LSP
 end
 

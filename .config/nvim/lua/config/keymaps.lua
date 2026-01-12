@@ -343,6 +343,36 @@ end, silent_opts("[W]rite with sudo"))
 
 map("n", "<Leader>pl", "<CMD>Lazy<CR>", silent_opts("Lazy"))
 
+--- Handles Lua's behaviour of 0+1 indexing, and makes it [Z]ero [B]ased [I]ndexing
+---@param num integer|nil
+---@return integer?
+local zbi = function(num)
+  if not num then
+    return num
+  end
+  if num == 0 then
+    return num
+  end
+  return num - 1
+end
+
+map({ "n", "v" }, "<Leader>id", function()
+  local mode = vim.api.nvim_get_mode().mode
+  local date = vim.fn.strftime("%Y_%m_%d")
+  print("Inserting date: " .. date)
+  vim.fn.setreg("_", date)
+  if mode == "v" or mode == "V" then
+    vim.api.nvim_feedkeys("c" .. date, "n", false) -- literally just paste it over the selection
+  elseif mode == "n" then
+    vim.api.nvim_put({ date }, "c", true, false)
+  else
+    require("utils.output").info("Unsupported mode for insert date: " .. mode)
+    return
+  end
+
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false) -- escape insert mode as we exit the fn
+end, silent_opts("[i]nsert [d]ate"))
+
 -- vim.keymap.set({ "n", "i", "s" }, "<C-e>", function()
 --   if not require("noice.lsp").scroll(4) then
 --     return "<C-e>"

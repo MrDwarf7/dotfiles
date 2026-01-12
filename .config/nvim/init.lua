@@ -5,6 +5,8 @@ require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 
+-- vim.loader.enable(true)
+
 ---@diagnostic disable-next-line: unused-local
 local utils = require("utils")
 
@@ -21,6 +23,8 @@ if vim.fn.has("nvim-0.11") == 1 then
 else
   vim.print = dd
 end
+
+local lsp = require("config.lsp")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -109,7 +113,6 @@ local lazy_opts = {
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 
-local lsp = require("config.lsp")
 -- lsp.setup({ binds_type = "builtin" })
 -- lsp.setup({ binds_type = "fzf" })
 lsp.setup({ binds_type = "snacks" })

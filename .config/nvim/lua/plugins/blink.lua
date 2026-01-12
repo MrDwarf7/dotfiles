@@ -1,10 +1,10 @@
 return {
   "Saghen/blink.cmp",
-  lazy = true,
-  -- event = { "InsertEnter", "CmdlineEnter", "WinEnter" },
+  -- lazy = true,
+  event = { "InsertEnter", "CmdlineEnter", "WinEnter" },
 
-  ---@type LazyEventSpec
-  event = { "CursorMoved", "VeryLazy" },
+  -- ---@type LazyEventSpec
+  -- event = { "CursorMoved", "VeryLazy" },
   dependencies = {
     -- stylua: ignore start
     -- { "j-hui/fidget.nvim", enabled = false,            lazy = true, event = "VeryLazy" },

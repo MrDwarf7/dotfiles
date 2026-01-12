@@ -13,14 +13,14 @@ return {
     { "<leader>tD", function() require("trouble").toggle({ mode = "diagnostics", buf = 0 }) end, desc = "Buffer Diagnostics (Trouble)" },
     { "<leader>ts", function() require("trouble").toggle("symbols") end, desc = "Symbols (Trouble)" },
     { "<leader>tS", function() require("trouble").toggle({ mode = "symbols", focus = false, win = { position = "right" } }) end, desc = "LSP references/definitions/... (Trouble)" },
-    { "<leader>tc", function() require("trouble").toggle("qflist") end, desc = "Quickfix List (Trouble)" },
     { "<leader>tt", function() require("trouble").toggle({ mode = "todo", focus = true }) end, desc = "Todo List focus (Trouble)" },
     { "<leader>tT", function() require("trouble").toggle("todo") end, desc = "Todo List (Trouble)" },
     { "<Leader>lt", function() vim.cmd("TodoTrouble") end, desc = "list [t]odo's", mode = "n" },
-    { "<leader>tl", "<CMD>Trouble loclist toggle<CR>", desc = "Location List (Trouble)" },
+    { "<leader>tL", "<CMD>Trouble loclist toggle<CR>", desc = "Location List (Trouble)" },
+    { "<leader>tq", function() require("trouble").toggle("qflist") end, desc = "Quickfix List (Trouble)" },
     -- stylua: ignore end
     {
-      "<Leader>tq",
+      "<Leader>tl",
       function()
         -- need to check if the todo list is open or not
 

@@ -1,3 +1,15 @@
+-- local notify_enabled = function()
+--   if package.loaded["snacks"] then
+--     if package.loaded["snacks.notify"] then
+--       return false
+--     else
+--       return true
+--     end
+--   end
+-- end
+--
+-- local should_enable = notify_enabled()
+
 return {
   "folke/noice.nvim",
   enabled = true,
@@ -22,6 +34,9 @@ return {
     -- stylua: ignore end
   },
   opts = {
+    notify = {
+      enabled = true,
+    },
     lsp = {
       override = {
         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
