@@ -1,11 +1,41 @@
 local feedkeys = vim.api.nvim_feedkeys
 
----@type LazyPluginBase
+local hunk_nav_settings = {
+  count = 1,
+  wrap = true,
+  target = "all",
+  preview = false,
+  foldopen = false,
+  greedy = false,
+  navigation_message = false,
+}
+
+local prev_hunk = function()
+  --
+  require("gitsigns").nav_hunk(
+    "prev",
+    hunk_nav_settings,
+    vim.schedule(function()
+      feedkeys("zz", "n", false)
+    end)
+  )
+end
+
+local next_hunk = function()
+  --
+  require("gitsigns").nav_hunk(
+    "next",
+    hunk_nav_settings,
+    vim.schedule(function()
+      feedkeys("zz", "n", false)
+    end)
+  )
+end
+
 return {
   "lewis6991/gitsigns.nvim",
   lazy = false,
   -- event = "BufReadPre",
-  ---@type LazyKeys
   keys = {
 
     -- stylua: ignore start
@@ -18,66 +48,45 @@ return {
     { "<Leader>hr", function() return require("gitsigns").reset_hunk() end,                desc = "[r]eset hunk" },
     { "<Leader>hR", function() return require("gitsigns").reset_buffer() end,              desc = "[R]eset buffer" },
     { "<Leader>hS", function() return require("gitsigns").stage_buffer() end,              desc = "[S]tage buffer" },
-    { "<Leader>hu", function() return require("gitsigns").undo_stage_hunk() end,           desc = "[u]ndo stage" },
+    -- { "<Leader>hu", function() return require("gitsigns").undo_stage_hunk() end,           desc = "[u]ndo stage" },
     { "<Leader>hb", function() return require("gitsigns").blame_line({ full = true }) end, desc = "[b]lame line" },
     { "<Leader>hT", function() return require("gitsigns").toggle_current_line_blame() end, desc = "[T]oggle deleted" },
-    { "<Leader>ht", function() return require("gitsigns").toggle_deleted() end,            desc = "[t]oggle blame" },
+    -- { "<Leader>ht", function() return require("gitsigns").toggle_deleted() end,            desc = "[t]oggle blame" },
+    { "<Leader>ht", function() return require("gitsigns").preview_hunk_inline() end,            desc = "[t]oggle blame" },
     { "<Leader>hd", function() return require("gitsigns").diffthis() end,                  desc = "[d]iff this" },
     { "<Leader>hD", function() return require("gitsigns").diffthis("main") end,            desc = "[D]iff main" },
     -- stylua: ignore end
 
     {
       "[c",
-      function()
-        require("gitsigns").prev_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
+      prev_hunk,
       desc = "[p]revious hunk",
       mode = { "n", "v" },
     },
 
     {
       "]c",
-      function()
-        require("gitsigns").next_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
+      next_hunk,
       desc = "[n]ext hunk",
       mode = { "n", "v" },
     },
 
     {
       "[h",
-      function()
-        require("gitsigns").prev_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
+      prev_hunk,
       desc = "[p]revious hunk",
       mode = { "n", "v" },
     },
 
     {
       "]h",
-      function()
-        require("gitsigns").next_hunk()
-        vim.schedule(function()
-          feedkeys("zz", "n", false)
-        end)
-      end,
+      next_hunk,
       desc = "[n]ext hunk",
       mode = { "n", "v" },
     },
   },
 
-  ---@type Gitsigns.SchemaElem
   opts = {
-
     signs = {
       add = { text = "│" },
       changedelete = { text = "~" },

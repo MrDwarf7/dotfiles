@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "folke/lazydev.nvim",
   -- lazy = true,

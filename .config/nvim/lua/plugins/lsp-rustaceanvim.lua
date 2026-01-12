@@ -1,11 +1,8 @@
 local output = require("utils.output")
----@type LazyPluginBase[]
 return {
-  ---@type LazyPluginBase
   {
     "mrcjkb/rustaceanvim",
     version = "^6",
-    ---@type LazyFiletypeHandler
     ft = { "rust" },
     ---@type rustaceanvim.Opts
     opts = {

@@ -5,7 +5,6 @@ return {
   },
   -- optional, you can also install and use `yq` instead.
   build = "make",
-  ---@type pipeline.Config
   opts = {
     -- Although not an actual field for `opts`, here are the binds:
     -- ["q"] : Close the pipeline window

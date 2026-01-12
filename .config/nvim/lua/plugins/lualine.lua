@@ -1,4 +1,3 @@
----@type LazyPluginBase[]
 return {
   -- { "AndreM222/copilot-lualine" },
   "nvim-lualine/lualine.nvim",

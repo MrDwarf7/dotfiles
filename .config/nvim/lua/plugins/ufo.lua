@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "kevinhwang91/nvim-ufo",
   dependencies = {

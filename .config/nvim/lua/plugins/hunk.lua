@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "julienvincent/hunk.nvim",
   lazy = true,

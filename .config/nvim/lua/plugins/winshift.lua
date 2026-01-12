@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "sindrets/winshift.nvim",
   lazy = true,

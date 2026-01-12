@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "ThePrimeagen/harpoon",
   lazy = true,
@@ -7,7 +6,6 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
   },
   keys = function()
-    ---@type LazyKeys
     local keys = {
       {
         "<Leader>I",

@@ -1,6 +1,5 @@
 -- TODO: properly configure it (binds etc.)
 
----@type LazyPluginBase
 return {
   "folke/trouble.nvim",
   enabled = true,
@@ -8,7 +7,6 @@ return {
   ---@type LazyEventSpec
   event = "BufReadPre",
   cmd = "Trouble",
-  ---@type LazyKeys
   keys = {
     {
       "<leader>td",

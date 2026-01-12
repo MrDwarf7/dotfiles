@@ -9,11 +9,9 @@ local invoke = function()
   })
 end
 
----@type LazyPluginBase
 return {
   "MagicDuck/grug-far.nvim",
   lazy = true,
-  ---@type LazyKeys
   keys = {
     -- stylua: ignore start
     { "<Leader>f/", function() invoke() end, mode = { "n", "v" }, desc = "Search & Replace" },

@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "zbirenbaum/copilot.lua",
   lazy = true,
@@ -47,9 +46,11 @@ return {
       ["."] = true,
       ["*"] = true,
     },
+
     server_opts_overrides = {
-      telemetry = { ---@type github_settings_telemetry
+      telemetry = {
         -- telemetryLevel = "all", -- -- this is the default
+        telemetry = false,
         telemetryLevel = "false",
       },
     },

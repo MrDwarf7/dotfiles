@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
 
   "Saghen/blink.cmp",

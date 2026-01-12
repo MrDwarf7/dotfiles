@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "folke/which-key.nvim",
   ---@type LazyEventSpec

@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "hat0uma/csvview.nvim",
   lazy = true,

@@ -55,7 +55,6 @@ local ignore_dirs = {
 -- 	return exclude
 -- end
 
----@type LazyPluginBase
 return {
   "ibhagwan/fzf-lua",
   lazy = true,
@@ -67,7 +66,6 @@ return {
   },
   -- or if using mini.icons/mini.nvim
   -- dependencies = { "nvim-mini/mini.icons" },
-  ---@type LazyKeys
   keys = {
     -- { "<Leader>fw", "<CMD>FzfLua live_grep<CR>", desc = "Find Files (cwd)" },
     -- { "<Leader>ff", "<CMD>FzfLua files<CR>", desc = "Find Files (cwd)" },
@@ -176,6 +174,7 @@ return {
         treesitter = {
           enabled = true,
         }, -- can turn it off for matching 'max-perf' profile
+        ---@diagnostic disable-next-line: missing-fields
         preview = {
 
           -- EITHER USE BUILTIN PREVIEWER OR BAT

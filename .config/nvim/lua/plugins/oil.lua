@@ -20,7 +20,6 @@ local silent_vert_resize = function(by_value, pos_neg)
   end
 end
 
----@type LazyPluginBase
 return {
   "stevearc/oil.nvim",
   lazy = false,
@@ -34,7 +33,6 @@ return {
     event = "VimEnter",
   },
   priority = 999,
-  ---@type LazyKeys
   keys = {
     { "<Leader>e", "<CMD>Oil<CR>", desc = "Oily" },
     { "<C-w>E", "<CMD>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
@@ -53,6 +51,7 @@ return {
   end,
 
   ---@type oil.Config
+  ---@diagnostic disable-next-line: missing-fields
   opts = {
     columns = {
       "icon", -- default

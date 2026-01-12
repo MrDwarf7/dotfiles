@@ -1,11 +1,9 @@
 local lang_tables = require("lang_tables")
 
----@type LazyPluginBase
 return {
   "WhoIsSethDaniel/mason-tool-installer.nvim",
   -- enabled = false,
   lazy = false, -- swap this once all your local stuff is installed/setup :)
-  ---@type LazyEventSpec
   event = "WinLeave",
   dependencies = {
     { "mason-org/mason.nvim", lazy = true },

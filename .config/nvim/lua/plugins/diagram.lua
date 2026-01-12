@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "3rd/diagram.nvim",
   dependencies = {

@@ -29,7 +29,6 @@ local function tsserv_cap(opts, capabilities)
   })
 end
 
----@type LazyPluginBase
 return {
   "pmizio/typescript-tools.nvim",
   -- lazy = true,

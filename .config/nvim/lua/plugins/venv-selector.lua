@@ -9,7 +9,6 @@ local set_validator = function(env, rem)
   return validation.expand_create_file("venv-selector", env, rem)
 end
 
----@type LazyPluginBase
 return {
   "linux-cultist/venv-selector.nvim",
   -- disabled = true,

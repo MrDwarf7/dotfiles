@@ -27,7 +27,6 @@ return {
     -- stylua: ignore end
   },
 
-  ---@type TodoOptions
   opts = {
     keywords = {
       -- stylua: ignore start

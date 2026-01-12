@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "Civitasv/cmake-tools.nvim",
   lazy = true,

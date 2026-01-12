@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   -- In-Editor preview rendering for Typst files
   "chomosuke/typst-preview.nvim",

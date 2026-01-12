@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "Airbus5717/c3.vim",
   lazy = true,

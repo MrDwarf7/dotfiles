@@ -1,8 +1,6 @@
----@type LazyPluginBase
 return {
   "folke/noice.nvim",
   event = "VeryLazy",
-  ---@type LazyKeys
   keys = {
     -- stylua: ignore start
     { "<Leader>na", function() vim.cmd("NoiceAll") end,     desc = "Noice [a]ll" },

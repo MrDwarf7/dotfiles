@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "stevearc/conform.nvim",
   ---@type LazyEventSpec|string
@@ -6,7 +5,6 @@ return {
   lazy = true,
   -- lazy = false,
 
-  ---@type LazyKeys
   keys = {
     {
       "<Leader>lf",

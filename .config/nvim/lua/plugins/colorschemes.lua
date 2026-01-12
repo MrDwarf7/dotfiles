@@ -1,4 +1,4 @@
----@type LazyPluginBase[]
+-- ---@type LazyPluginBase[]
 return {
   ---@type LazyPluginBase
   {

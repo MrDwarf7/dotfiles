@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "nvim-neotest/neotest",
   lazy = true, -- doesn't need to run unless called via keymap or command
@@ -35,7 +34,6 @@ return {
     { "rcasia/neotest-bash", lazy = true }, -- Bash
     { "lawrence-laz/neotest-zig", lazy = true }, -- Zig
   },
-  ---@type LazyKeys
   keys = {
     -- stylua: ignore start
     { "<Leader>or", function() require("neotest").run.run() end,                                        desc = "NTest - Run Nearest" },

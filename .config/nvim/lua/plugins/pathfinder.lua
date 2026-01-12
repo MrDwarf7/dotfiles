@@ -1,4 +1,3 @@
----@type LazyPluginBase
 return {
   "HawkinsT/pathfinder.nvim", -- Enhances the gf, gF, and gx commands
   lazy = true,
