@@ -326,7 +326,7 @@ function Output.lsp_get_clients(opts)
   if Output.__HAS_NVIM_011 then
     return vim.lsp.get_clients(opts)
   end
-  local clients = opts.bufnr and vim.lsp.get_clients(opts.bufnr) ---@diagnostic disable-line: deprecated
+  local clients = opts.bufnr and vim.lsp.get_clients(opts.bufnr) -- ---@diagnostic disable-line: deprecated
       or opts.id and { vim.lsp.get_client_by_id(opts.id) }
       or vim.lsp.get_clients(opts)
   return vim.tbl_map(function(client)

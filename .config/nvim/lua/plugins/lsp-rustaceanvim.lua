@@ -149,13 +149,19 @@ return {
       end
     end,
   },
-  ---@type LazyPluginBase
+  -- ---@type LazyPluginBase
   {
     "saecki/crates.nvim",
-    -- ---@type LazyEventSpec
-    event = { "BufRead Cargo.toml" },
+    -- lazy = true,
+    -- event = { "BufRead Cargo.toml" },
     ft = { "toml" },
+    ---@type crates.UserConfig
     opts = {
+      ---- new options after fixing the plugin
+      autoload = true,
+      smart_insert = true,
+      ----
+
       lsp = {
         enabled = true,
         actions = true,
@@ -170,5 +176,10 @@ return {
         },
       },
     },
+    ---@param _ LazyPluginBase
+    ---@param opts crates.UserConfig
+    config = function(_, opts)
+      require("crates").setup(opts)
+    end,
   },
 }

@@ -185,7 +185,12 @@ function LSP:setup_lsp()
 
   if vim.fn.isdirectory(lsp_dir) == 1 then
     for _, file in ipairs(vim.fn.readdir(lsp_dir)) do
-      if file:match("%.lua$") and file ~= "init.lua" and not file:match("^_.*%.lua$") then
+      if
+        file:match("%.lua$")
+        and file ~= "init.lua"
+        and not file:match("^_.*%.lua$") -- doesn't start with _
+        and not file:match("^%..*%.lua$") -- doesn't start with .
+      then
         local server_name = file:gsub("%.lua$", "")
         -- if not vim.tbl_contains(already_found, server_name) and not already_found[server_name] then -- skip auto-discovered servers
         --   table.insert(lsp_servers, server_name)
