@@ -12,7 +12,7 @@ return {
     { "]t", function() return require("todo-comments").jump_next() end, desc = "Next todo comment", },
     { "[t", function() return require("todo-comments").jump_prev() end, desc = "Previous todo comment", },
 
-    { "<leader>ft", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+    { "<leader>ft", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG", "PERF", "HACK", "TEST", "NOTE", "IMP" } }) end, desc = "Todo" },
     { "<leader>fT", function () Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME", "BUG" } }) end, desc = "Todo/Fix/Fixme" },
 
     -- { "<Leader>ft", "<CMD>TodoFzfLua{tag = {TODO,FIX,FIXME,BUG}}<cr>", desc = "Todo/Fix/Fixme (Trouble)", },
