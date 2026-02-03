@@ -1,0 +1,326 @@
+#Name = Description  Possible values  Default
+
+#Key to open command line  Single character  :
+command_key = ":"
+#Screen to show after startup  "library", "search", "queue", "cover"[1]  "library"
+initial_screen = "queue"
+#Turn nerdfont glyphs on/off  true, false  false
+use_nerdfont = true
+#Reverse play/pause icon meaning[2]  true, false  false
+flip_status_indicators = false
+#Audio backend to use  String[3]  
+### backend = 
+#Audio device to configure the backend  String  
+### backend_device = 
+#Enable caching of audio files  true, false  true
+audio_cache = true
+#Maximum size of audio cache in MiB  Number  
+### audio_cache_size = 
+#Enable volume normalization  true, false  false
+volnorm = true
+#Normalization pregain to apply in dB (if enabled)  Number  0.0
+volnorm_pregain = 0.0
+#Enable default keybindings  true, false  false
+### default_keybindings = false
+#Enable desktop notifications  true, false  false
+notify = false
+#Audio bitrate to use for streaming  96, 160, 320  320
+bitrate = 320
+#Enable gapless playback  true, false  true
+gapless = true
+#Set default shuffle state  true, false  false
+shuffle = true
+#Set default repeat mode  "off", "track", "playlist"  "off"
+repeat = "off"
+#Set default playback state  "Stopped", "Paused", "Playing", "Default"  "Paused"
+playback_state = "Paused"
+#Tabs to show in library screen  Array of "tracks", "albums", "artists", "playlists", "podcasts", "browse"  All tabs
+### library_tabs = 
+#Set maximum scaling ratio for cover art  Number  1.0
+cover_max_scale = 1.0
+#Hides spotify usernames in the library header and on playlists  true, false  false
+hide_display_names = false
+
+#Set ap-port for librespot (for restrictive firewalls)  80, 443, 4070  
+### ap_port =
+
+#Formatting for tracks in the statusbar  See track_formatting  %artists - %track
+# statusbar_format = "%artists - %track"
+statusbar_format = "[%saved] %title - %artists"
+
+# Set active fields shown in Library/Queue views  See track formatting  
+# Available options for tracks:
+# %artists, %artist, %title, %album, %saved, %duration. 
+#
+# %artists will show all contributing artists, while 
+# %artist only shows the first listed artist.
+
+## Default ::
+# left = "%artists - %title"
+# center = "%album"
+# right = "%saved %duration"
+[track_format]
+left = "%title - %artists"
+center = "Album: %album"
+right = "%saved %duration"
+
+# left = "|%saved| %duration | %title - %artists"
+# center = ""
+# right = "%album"
+
+
+# Set the text displayed in notifications[4]  See notification formatting  
+[notification_format]
+## Default :: 
+title = "%title"
+body = "%artists"
+
+#   Custom theme  See custom theme  
+[theme]
+## Attempt to match the official Spotify client
+# background = "dark black"
+# primary = "light white"
+# secondary = "light black"
+# title = "green"
+# playing = "green"
+# playing_selected = "light green"
+# playing_bg = "black"
+# highlight = "light white"
+# highlight_bg = "#484848"
+# error = "light white"
+# error_bg = "red"
+# statusbar = "black"
+# statusbar_progress = "green"
+# statusbar_bg = "green"
+# cmdline = "light white"
+# cmdline_bg = "black"
+# search_match = "light red"
+
+## Tokyo Night
+background = "#1a1b26"
+primary = "#9aa5ce"
+secondary = "#414868"
+title = "#00FFFF"
+playing = "#7aa2f7"
+playing_selected = "#bb9af7"
+playing_bg = "#24283b"
+highlight = "#c0caf5"
+highlight_bg = "#2E334B"
+# highlight_bg = "#24283b" ## more subtle
+# error = "#414868"
+error = "#000000"
+error_bg = "#f7768e"
+statusbar = "#ff9e64"
+statusbar_progress = "#7aa2f7"
+statusbar_bg = "#1a1b26"
+cmdline = "#c0caf5"
+cmdline_bg = "#24283b"
+search_match = "#f7768e"
+
+## Lazy attempt at TOkyo Night theme
+# [theme]
+# background = "#181818"
+# primary = "#F1F1F1"
+# secondary = "#DCDCDC"
+# title = "#82E1FD"
+# playing = "#F6C846"
+# playing_selected = "#AC83F3"
+# playing_bg = "#181818"
+# highlight = "#82E1FD"
+# highlight_bg = "#000000"
+# error = "#FFE4E4"
+# error_bg = "#A50000"
+# statusbar = "#000000"
+# statusbar_progress = "#FDC382"
+# statusbar_bg = "#866AFF"
+# cmdline = "#CBFFDE"
+# cmdline_bg = "#444444"
+
+# Custom keybindings  See custom keybindings  
+[keybindings]
+
+"?" = "help"
+"Backspace" = "back"
+"Esc" = "back"
+
+
+## Scrolling
+"Ctrl+d" = "move down 20"
+"Ctrl+u" = "move up 20"
+
+## Document wide jumps
+"Home" = "move top"
+"End" = "move bottom"
+"g" = "move top"
+"Shift+g" = "move bottom"
+
+## Tab jumping
+"F1" = "focus search"
+"F2" = "focus queue"
+"F3" = "focus library"
+"F8" = "focus cover"
+
+"Shift+q" = "quit"
+"q" = "focus queue"
+
+"e" = "focus library"
+
+## Sideways + Tab navigation(s)
+"Left" = "move left 1"
+"Down" = "move down 1"
+"Up" = "move up 1"
+"Right" = "move right 1"
+
+
+## Previous && Next track
+"<" = "previous"
+">" = "next"
+
+"Ctrl+p" = "previous"
+"Ctrl+n" = "next"
+
+## Track seeking
+"Ctrl+h" = "seek -1000"
+"Ctrl+l" = "seek +1000"
+"Shift+h" = "seek -10000"
+"Shift+l" = "seek +10000"
+
+
+### Opens a menu to ask yes/no clear the queue?
+"Shift+c" = "clear"
+"c" = "move playing"
+
+## Volume
+"+" = "volup 1"
+"-" = "voldown 1"
+"[" = "voldown 5"
+"]" = "volup 5"
+
+## Misc commands
+"Ctrl+r" = "redraw"
+
+##### Compound commands
+"." = "playnext; move down 1"
+"p" = "queue; move down 1"
+
+## 'browse' tab in library via lib -> tap 'L' multiple times to cycle through the different browse options
+"b" = "focus library; move right 5"
+
+##############
+##############
+
+"Shift+j" = "shift down 1"
+"Shift+k" = "shift up 1"
+
+##############
+##############
+
+
+"Shift+n" = "jumpprevious"
+"n" = "jumpnext"
+
+"Shift+o" = "similar current"
+"o" = "similar selected"
+
+"Shift+m" = "open current"
+"m" = "open selected"
+
+"Shift+a" = "goto album"
+"a" = "goto artist"
+
+"Shift+x" = "share current"
+"x" = "share selected"
+
+
+"Ctrl+y" = "save queue"
+"y" = "save"
+
+"Ctrl+v" = "insert"
+"Enter" = "play"
+"Shift+u" = "update"
+"d" = "delete"
+"h" = "move left 1"
+"j" = "move down 1"
+"k" = "move up 1"
+"l" = "move right 1"
+"Space" = "playpause"
+"r" = "repeat"
+"s" = "shuffle"
+"z" = "shuffle"
+
+"Shift+s" = "stop"
+
+##################
+
+# "a" = "noop"
+# "Ctrl+a" = "noop"
+"Ctrl+e" = "noop"
+# "Ctrl+n" = "noop"
+# "Ctrl+p" = "noop"
+"PageDown" = "noop"
+"PageUp" = "noop"
+"Ctrl+s" = "noop"
+
+# ## Default
+# "+" = "volup 1"
+# "-" = "voldown 1"
+# "." = "playnext; move down 1"
+# "<" = "previous"
+# ">" = "next"
+# "?" = "help"
+# "Backspace" = "back"
+# "Ctrl+a" = "move left 1"
+# "Ctrl+e" = "move right 1"
+# "Ctrl+l" = "redraw"
+# "Ctrl+n" = "move down 1"
+# "Ctrl+p" = "move up 1"
+# "Ctrl+s" = "save queue"
+# "Ctrl+v" = "insert"
+# "Down" = "move down 1"
+# "End" = "move bottom"
+# "Enter" = "play"
+# "F1" = "focus queue"
+# "F2" = "focus search"
+# "F3" = "focus library"
+# "F8" = "focus cover"
+# "Home" = "move top"
+# "Left" = "move left 1"
+# "PageDown" = "move down 5"
+# "PageUp" = "move up 5"
+# "Right" = "move right 1"
+# "Shift+Down" = "shift down 1"
+# "Shift+Up" = "shift up 1"
+# "Shift+a" = "goto artist"
+# "Shift+b" = "seek -10000"
+# "Shift+f" = "seek +10000"
+# "Shift+g" = "move bottom"
+# "Shift+m" = "similar current"
+# "Shift+n" = "jumpprevious"
+# "Shift+o" = "open current"
+# "Shift+p" = "playpause"
+# "Shift+s" = "stop"
+# "Shift+u" = "update"
+# "Shift+x" = "share current"
+# "Space" = "queue; move down 1"
+# "Up" = "move up 1"
+# "[" = "voldown 5"
+# "]" = "volup 5"
+# "a" = "goto album"
+# "b" = "seek -1000"
+# "c" = "clear"
+# "d" = "delete"
+# "f" = "seek +1000"
+# "g" = "move top"
+# "h" = "move left 1"
+# "j" = "move down 1"
+# "k" = "move up 1"
+# "l" = "move right 1"
+# "m" = "similar selected"
+# "n" = "jumpnext"
+# "o" = "open selected"
+# "p" = "move playing"
+# "q" = "quit"
+# "r" = "repeat"
+# "s" = "save"
+# "x" = "share selected"
+# "z" = "shuffle"
