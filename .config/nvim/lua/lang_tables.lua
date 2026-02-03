@@ -134,7 +134,7 @@ LangTables = {
     formatters_by_ft = {
 
       ["bash"] = { "shfmt", "beautysh" },
-      ["cpp"] = { "clang-format" },
+      ["cpp"] = { "clangformat" },
       ["cmake"] = { "cmakelang", "neocmake" },
       ["go"] = { "gofumpt" },
 

@@ -2,7 +2,7 @@ local output = require("utils.output")
 return {
   {
     "mrcjkb/rustaceanvim",
-    version = "^6",
+    -- version = "^6",
     ft = { "rust" },
     ---@type rustaceanvim.Opts
     opts = {
