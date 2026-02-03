@@ -1,0 +1,113 @@
+[table_header]
+fg = "#FFFFFF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[table_headers]]
+fg = "#FFFF00"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[table_headers]]
+fg = "#FF00FF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[table_headers]]
+fg = "#00FFFF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[rows]]
+fg = "#FFFFFF"
+bg = "#383838"
+add_modifier = ""
+sub_modifier = ""
+
+[[rows]]
+fg = "#FFFFFF"
+bg = "#101010"
+add_modifier = ""
+sub_modifier = ""
+
+[row_highlight]
+fg = "#000000"
+bg = "#FFFF00"
+add_modifier = ""
+sub_modifier = ""
+
+[[table_tags]]
+fg = "#000000"
+bg = "#FF0000"
+add_modifier = ""
+sub_modifier = ""
+
+[[table_tags]]
+fg = "#000000"
+bg = "#00FF00"
+add_modifier = ""
+sub_modifier = ""
+
+[block]
+fg = "#FFFF00"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[block_tag]
+fg = "#000000"
+bg = "#FFFF00"
+add_modifier = ""
+sub_modifier = ""
+
+[text]
+fg = "#FFFFFF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[text_highlighted]
+fg = "#FF00FF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[subtext]
+fg = "#ABABAB"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[error]
+fg = "#FFFFFF"
+bg = "#FF0000"
+add_modifier = ""
+sub_modifier = ""
+
+[gutter]
+fg = "#FF00FF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[chart]]
+fg = "#FFFF00"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[chart]]
+fg = "#FF00FF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
+
+[[chart]]
+fg = "#00FFFF"
+bg = "#000000"
+add_modifier = ""
+sub_modifier = ""
