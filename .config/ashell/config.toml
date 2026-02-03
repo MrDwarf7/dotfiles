@@ -1,6 +1,7 @@
-log_level = "debug"
-outputs   = "All"
-position  = "Top"
+log_level = "warn"
+# log_level = "debug"
+outputs  = "All"
+position = "Top"
 # enable_escape_key = true ## while menu open, retains exclusive control of it
 
 ## Very simple
@@ -10,15 +11,22 @@ position  = "Top"
 # right  = [ "Settings" ]
 
 [modules]
-left   = [ [ "CNotificaiton", "Clock" ], "Tray", "MediaPlayer" ]
+left   = [ [ "CNotificaiton", "Tempo" ], "Tray", "MediaPlayer" ]
 center = [ [ "Workspaces" ] ]
 right  = [ "WindowTitle", [ "Updates" ], [ "SystemInfo", "Privacy", "Settings" ] ]
 
 
-[clock]
+## Soft-Depr. use Tempo instead
+# [clock]
+# format = "| %b, %F | %r " # | %sort-month, year-month-day | 12-hour:min:sec AM/PM
+
+[tempo]
 ## Formatting done using chrono's strftime syntax
 ## https://docs.rs/chrono/latest/chrono/format/strftime/index.html
-format = "| %b, %F | %r" # | %sort-month, year-month-day | 12-hour:min:sec AM/PM
+clock_format = "| %b, %F | %r " # | %sort-month, year-month-day | 12-hour:min:sec AM/PM
+# weather_time_format = "%R"
+weather_location = "Current"
+
 
 # format = "%I:%M:%S %p %D"
 # format = "|%b| %d-%m-%Y"
@@ -34,14 +42,14 @@ format = "| %b, %F | %r" # | %sort-month, year-month-day | 12-hour:min:sec AM/PM
 
 [updates]
 check_cmd  = "checkupdates; paru -Qua"
-update_cmd = "ghostty -e fish -c 'sysup -s m; eco Done - Press enter to exit; read' &"
+update_cmd = "ghostty -e fish -c 'sysup -s m; echo Done - Press enter to exit; read' &"
 
 [media_player]
 max_title_length = 40
 
 [workspaces]
 # visibility_mode = "All"
-visibility_mode          = "MonitorSpecific"
+visibility_mode          = "MonitorSpecificExclusive"
 enable_workspace_filling = true
 max_workspaces           = 5
 
@@ -94,16 +102,20 @@ alert      = ".*notification"
 
 [appearance]
 # font_name = "Fira Sans"
-font_name    = "Mononoki Nerd Font"
-scale_factor = 1.065
+font_name = "Mononoki Nerd Font"
+# scale_factor = 1.065
+scale_factor = 1.100
+# scale_factor = 1.000
 ## bugged when using "Island" style
 # style        = ""  # "Island" | "Solid" | "Gradient"
+# style = "Solid" # | "Gradient"
 
 opacity = 0.8
+# backdrop = 0.3
 
 [appearance.menu]
 opacity = 0.65
-# backdrop = 0
+# backdrop = 0.3
 
 [appearance.background_color]
 base = "#291F1A"

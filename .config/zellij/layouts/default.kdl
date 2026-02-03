@@ -42,7 +42,7 @@ layout {
       // %I:%M
       // datetime_format   "| %H:%M | %A, %I:%M %d %b %Y "
       datetime_format   "| %I:%M | %A, %Y-%b(%m)-%d"
-      datetime_timezone "Australia/Victoria"
+      datetime_timezone ""
 
       // command_kubectx_command  "kubectx -c"
       // command_kubectx_format   "#[fg=#6C7086,bg=#181825,italic] {stdout}"
@@ -68,7 +68,6 @@ layout {
       //
       // datetime          "#[fg=#6C7086,bg=#b1bbfa,bold] {format} "
       // datetime_format   "| %I:%M | %A, %Y-%b(%m)-%d"
-      // datetime_timezone "Australia/Victoria"
     }
   }
   // }

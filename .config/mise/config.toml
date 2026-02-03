@@ -27,8 +27,8 @@ version = "latest"
 [tools."npm:@tailwindcss/language-server"]
 version = "latest"
 
-[tools."npm:@typescript/native-preview"]
-version = "latest"
+# [tools."npm:@typescript/native-preview"]
+# version = "latest"
 
 # vercel-cli
 [tools."npm:vercel"]
