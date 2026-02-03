@@ -462,6 +462,13 @@ bsr = ['bookmark', 'set', '--allow-backwards', '-r']
 bst = ['bookmark', 'set', '-r', 'trunk()']
 bsh = ['bookmark', 'set', '-r', '@']
 
+# tags
+t = ['tag']
+tls = ['tag', 'list']
+td = ['tag', 'delete']
+ts = ['tag', 'set']
+
+
 g = ["git"]
 
 # pull
