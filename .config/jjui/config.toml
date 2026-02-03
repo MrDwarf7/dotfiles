@@ -41,7 +41,7 @@ ace_jump = ["f"]
 quick_search = ["/"]
 quick_search_cycle = ["'"]
 custom_commands = ["x"]
-leader = ["\\"]
+leader = [";"]
 suspend = ["ctrl+z"]
 
 [keys.rebase]

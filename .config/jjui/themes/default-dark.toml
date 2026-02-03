@@ -1,10 +1,12 @@
 # dimmed = "bright black"
 "dimmed" = { fg = "#888888" }
 
+# This is the generic hover colors
+selected = { fg = "cyan", bg = "" }
+
 title = { fg = "magenta", bold = true }
 shortcut = "magenta"
 matched = "cyan"
-selected = { fg = "cyan", bg = "bright black" }
 target_marker = { fg = "black", bg = "red", bold = true }
 source_marker = { fg = "black", bg = "cyan" }
 success = "green"
