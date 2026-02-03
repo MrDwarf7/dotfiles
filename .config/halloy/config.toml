@@ -3,7 +3,282 @@
 # For a complete list of available options,
 # please visit https://halloy.chat/configuration.html
 
+theme = "Oxocarbon"
+
+
 [servers.liberachat]
 nickname = "mrdwarf7"
 server = "irc.libera.chat"
 channels = ["#halloy"]
+
+
+[font]
+# Type: string
+# Values: any string
+# Default: not set
+#
+# Note: Iosevka Term is provided by the application, and used by default.
+family = "Mononoki Nerd Font Mono"
+# Type: integer
+# Values: any positive integer
+# Default: 13
+size = 16
+# Type: string
+# Values: "thin", "extra-light", "light", "normal", "medium", "semibold", "bold", "extra-bold", and "black"
+# Default: "normal"
+weight = "normal"
+
+
+[buffer]
+# Default: 0
+line_spacing = 0
+# Values: "oldest-unread", "newest"
+scroll_position_on_open = "newest"
+
+
+[buffer.backlog_separator]
+# Default: false
+hide_when_all_read = true
+
+
+[buffer.channel.message]
+# Values: "solid", "unique"
+# Default: "unique"
+nickname_color = "solid"
+
+
+[buffer.channel.nicklist]
+# Values: "left", "right"
+# Default: "left"
+alignment = "left"
+# Values: "left", "right"
+# Default: "right"
+position = "right"
+color = "unique"
+
+# Values: true, false
+# Default: true
+# Access level, using: (@, +, ~, etc.)
+show_access_levels = true
+
+# Values: "open-query", "insert-nickname"
+# Default: "open-query"
+click = "insert-nickname"
+
+
+# Values: true, false
+# Default: false
+[buffer.channel.topic_banner]
+enabled = true
+# Default: 2
+max_lines = 2
+
+
+# Type: string
+# Values: any valid strftime string
+# Default: "%A, %B %-d"
+# eg: Monday, February 16
+[buffer.date_separators]
+format = "%A, %B %-d"
+
+
+[buffer.emojis]
+show_picker = true
+skin_tone = "default"
+auto_replace = true
+characters_to_trigger_picker = 1
+
+
+[buffer.text_input]
+# -- can be turned off for single msg via `/plain <msg>`
+auto_format = "markdown" # "disable" | "markdown" | "all"
+
+
+[notifications]
+# https://halloy.chat/configuration/notifications/index.html
+# Options for sounds (included by default):
+# bloop, bonk, dong,  drop, peck,  ring,  sing,  squeak, tweep, whistle, zone
+
+# Decent ones:
+# bloop, drop, zone
+
+
+[notifications.channel]
+
+[notifications.connected]
+
+[notifications.direct_message]
+sound = "bloop"
+show_toast = true
+
+[notifications.disconnected]
+
+[notifications.file_transfer_request]
+
+[notifications.highlight]
+sound = "zone"
+exclude = { users = ["halloy-bot"], channels = [ "#halloy"] }
+
+[notifications.monitored_online]
+
+[notifications.monitored_offline]
+
+[notifications.reconnected]
+
+
+[pane]
+# Default: false
+restore_on_launch = true
+
+# Type: string
+# Values: "horizontal", "largest-shorter", "shorter", "vertical"
+# Default: "shorter"
+# split_axis = "shorter"
+split_axis = "largest-shorter"
+
+
+[pane.scrollbar]
+width = 5
+scroller_width = 5
+
+
+[pane.gap]
+inner = 4
+outer = 8
+
+
+[preview]
+enabled = true
+
+
+[preview.card]
+# Default: true
+show_image = true
+# Default: true
+round_image_corners = false
+# Default: 400.0
+max_width = 400.0
+
+
+[preview.image]
+# Type: string
+# Values: "open-url", "preview"
+# Default: "preview"
+action = "preview"
+# Default: true
+round_corners = false
+
+
+[sidebar]
+# Type: integer or string
+# Values: any positive integer or "hidden"
+# Default: 12
+server_icon = 12
+# Type: string
+# Values: "left", "top", "right", "bottom"
+# Default: "left"
+position = "left"
+
+#### TODO: not currently recognized, needs to be implemented
+# show_menu_button = true
+
+# Type: string
+# Values: "alpha", "config"
+# Default: "alpha"
+order_by = "config"
+
+
+[sidebar.unread_indicator]
+# Default: false
+title = false
+# Type: string
+# Values: "dot", "circle-empty", "dot-circled", "certificate", "asterisk", "speaker", "lightbulb", "star", "none"
+# Default: "dot"
+icon = "dot"
+
+
+[sidebar.padding]
+# Type: array
+# Values: array
+# Default: [5, 5]
+buffer = [8, 6]
+
+
+[sidebar.spacing]
+# Default: 12
+server = 12
+
+
+[keyboard]
+## Original binds
+# move_up = "ctrl+alt+up"
+# move_down = "ctrl+alt+down"
+# move_left = "ctrl+alt+left"
+# move_right = "ctrl+alt+right"
+# close_buffer = "ctrl+w"
+# maximize_buffer = "ctrl+shift+up"
+# restore_buffer = "ctrl+shift+down"
+# cycle_next_buffer = "ctrl+tab"
+# cycle_previous_buffer = "ctrl+shift+tab"
+# cycle_next_unread_buffer = "ctrl+`"
+# cycle_previous_unread_buffer = "ctrl+shift+`"
+# scroll_up_page = "pageup"
+# scroll_down_page = "pagedown"
+# scroll_to_top = "ctrl+up"
+# scroll_to_bottom = "ctrl+down"
+# leave_buffer = "ctrl+shift+w"
+# mark_as_read = "ctrl+shift+m"
+# toggle_nick_list = "ctrl+alt+m"
+# toggle_topic = "ctrl+alt+t"
+# toggle_sidebar = "ctrl+alt+b"
+# toggle_fullscreen = "F11"
+# command_bar = "ctrl+k"
+# reload_configuration = "ctrl+r"
+# file_transfers = "ctrl+j"
+# logs = "ctrl+l"
+# theme_editor = "ctrl+t"
+# highlights = "ctrl+i"
+# quit_application = "noop"
+
+command_bar = "ctrl+shift+p"
+
+move_up = "ctrl+k"
+move_down = "ctrl+j"
+move_left = "ctrl+h"
+move_right = "ctrl+l"
+
+close_buffer = "ctrl+d"
+leave_buffer = "ctrl+shift+d"
+
+toggle_sidebar = "ctrl+b"
+maximize_buffer = "ctrl+shift+b"
+
+
+cycle_next_buffer = "ctrl+tab"
+cycle_previous_buffer = "ctrl+shift+tab"
+
+cycle_next_unread_buffer = "ctrl+`"
+cycle_previous_unread_buffer = "ctrl+shift+`"
+
+scroll_up_page = "ctrl+up"
+scroll_down_page = "ctrl+down"
+scroll_to_top = "ctrl+home"
+scroll_to_bottom = "ctrl+end"
+
+reload_configuration = "ctrl+r"
+file_transfers = "ctrl+s"
+
+toggle_topic = "ctrl+t"
+restore_buffer = "ctrl+shift+t"
+
+logs = "ctrl+shift+o"
+theme_editor = "ctrl+shift+y"
+
+highlights = "ctrl+shift+i"
+quit_application = "noop"
+
+toggle_nick_list = "ctrl+shift+n"
+
+mark_as_read = "ctrl+shift+m"
+
+toggle_fullscreen = "F11"
