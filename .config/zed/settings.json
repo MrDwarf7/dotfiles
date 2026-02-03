@@ -1,4 +1,10 @@
 {
+  "edit_predictions": {
+    "provider": "copilot",
+  },
+  "calls": {
+    "mute_on_join": true,
+  },
   "agent_servers": {
     "opencode": {
       "type": "extension",
@@ -249,6 +255,7 @@
   "vertical_scroll_margin": 2,
   "show_call_status_icon": true,
   "show_completion_documentation": true,
+  "show_completions_on_input": true,
   "gutter": {
     "line_numbers": true,
     "folds": true,
@@ -265,10 +272,7 @@
     "background_coloring": "disabled",
   },
   "show_edit_predictions": true,
-  "features": {
-    "edit_prediction_provider": "copilot",
-    "experimental_edit_prediction_context_retrieval": true,
-  },
+
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
@@ -349,6 +353,15 @@
     "C": {
       "colorize_brackets": false,
       "format_on_save": "on",
+    },
+    "Python": {
+      "format_on_save": "on",
+      "colorize_brackets": true,
+      "formatter": "language_server",
+      "completions": {
+        "lsp": true,
+        "words_min_length": 1,
+      },
     },
     "TOML": {
       "inlay_hints": {

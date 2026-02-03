@@ -867,4 +867,10 @@
       "alt-right": null,
     },
   },
+  {
+    "context": "(Editor && edit_prediction)",
+    "bindings": {
+      "tab": "editor::AcceptEditPrediction"
+    }
+  }
 ]
