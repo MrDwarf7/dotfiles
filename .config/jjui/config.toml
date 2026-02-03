@@ -24,7 +24,15 @@ force_edit = ["alt+e"]
 diffedit = ["E"]
 absorb = ["A"]
 split = ["s"]
+
+# Vim mapped - base
 undo = ["u"]
+redo = ["ctrl+r"]
+
+# Vim mapped - as movements
+# undo = ["ctrl+o"]
+# redo = ["ctrl+i"]
+
 revset = ["L"]
 exec_jj = [":"]
 exec_shell = ["$"]

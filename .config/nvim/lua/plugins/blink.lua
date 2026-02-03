@@ -1,6 +1,6 @@
 return {
   "Saghen/blink.cmp",
-  -- lazy = true,
+  lazy = false,
   event = { "InsertEnter", "CmdlineEnter", "WinEnter" },
 
   -- ---@type LazyEventSpec
@@ -11,7 +11,7 @@ return {
     { "Saghen/blink.compat",          lazy = true },
     { "L3MON4D3/LuaSnip",             lazy = true },
     { "rafamadriz/friendly-snippets", lazy = true },
-    { "folke/lazydev.nvim",           lazy = true, ft = "lua" },
+    { "folke/lazydev.nvim",           lazy = false, ft = "lua" },
     { "fang2hou/blink-copilot",       lazy = true },
     { "zbirenbaum/copilot.lua",       lazy = true },
     -- { "mikavilpas/blink-ripgrep.nvim", version = "*" }, -- use the latest stable version
