@@ -17,7 +17,7 @@
 ## basically, vi = older 'vim', vim = 'neovim'
 ## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
 05export_alias_if_pacman nvim vi rvim
-05export_alias_if_pacman nvim vim nvim
+05export_alias_if_pacman nvim vim /usr/bin/nvim
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
 04export_onto_path_if_pacman rustup "$HOME/.cargo/bin" --prepend
@@ -46,8 +46,8 @@
 04export_onto_path_if_pacman pnpm "$PNPM_HOME" --prepend
 
 04export_onto_path_if_pacman jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
-# can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local  /  bob)
-04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
+# can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local / bob )
+# 04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
 
 # opam's hook is weird, it will just dump to path on shell restart,
 # this prevents a LOT of duplicate entries

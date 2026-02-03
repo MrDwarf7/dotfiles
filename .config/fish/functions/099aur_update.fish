@@ -9,7 +9,7 @@ function 099aur_update --description 'Uses the PKG_MANAGER to update AUR package
     end
 
     sudo true
-    command $PKG_MANAGER -Syu --devel --noconfirm
+    command $PKG_MANAGER -Syu --devel --needed --noconfirm
     sudo true
 
     return $status
