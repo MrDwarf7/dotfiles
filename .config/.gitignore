@@ -8,4 +8,5 @@ jgit
 ./_ww_wezterm
 _ww_wezterm
 
-hypr_BAK/
+hypr_bak*
+hypr_bak_*
