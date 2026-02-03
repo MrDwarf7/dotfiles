@@ -87,6 +87,8 @@ return {
       client.config.settings.Lua = {}
     end
 
+    assert(type(client.config.settings.Lua) == "table", "Expected client.config.settings.Lua to be a table")
+
     client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
       runtime = {
         version = "LuaJIT",
