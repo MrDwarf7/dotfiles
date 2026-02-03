@@ -3,6 +3,8 @@
 ---
 --- Zig LSP implementation + Zig Language Server
 
+local zig_exe = vim.fn.exepath("zig")
+
 ---@type vim.lsp.Config
 return {
   cmd = { "zls" },
@@ -13,7 +15,8 @@ return {
   -- custom
   settings = {
     zls = {
-      -- zig_exe_path = zig_exe,
+      zig_exe = zig_exe,
+      zig_exe_path = zig_exe,
       enableAutofix = true,
       enable_snippets = true,
       enable_ast_check_diagnostics = true,
