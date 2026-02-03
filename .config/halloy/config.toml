@@ -117,7 +117,7 @@ show_toast = true
 
 [notifications.highlight]
 sound = "zone"
-exclude = { users = ["halloy-bot"], channels = [ "#halloy"] }
+exclude = { users = ["halloy-bot"], channels = ["#halloy"] }
 
 [notifications.monitored_online]
 
@@ -251,8 +251,10 @@ close_buffer = "ctrl+d"
 leave_buffer = "ctrl+shift+d"
 
 toggle_sidebar = "ctrl+b"
-maximize_buffer = "ctrl+shift+b"
+maximize_buffer = "ctrl+shift+m"
+restore_buffer = "ctrl+m"
 
+mark_as_read = "ctrl+shift+r"
 
 cycle_next_buffer = "ctrl+tab"
 cycle_previous_buffer = "ctrl+shift+tab"
@@ -269,7 +271,6 @@ reload_configuration = "ctrl+r"
 file_transfers = "ctrl+s"
 
 toggle_topic = "ctrl+t"
-restore_buffer = "ctrl+shift+t"
 
 logs = "ctrl+shift+o"
 theme_editor = "ctrl+shift+y"
@@ -279,6 +280,5 @@ quit_application = "noop"
 
 toggle_nick_list = "ctrl+shift+n"
 
-mark_as_read = "ctrl+shift+m"
 
 toggle_fullscreen = "F11"
