@@ -5,10 +5,10 @@ return {
   event = "BufReadPost",
   config = function()
     local lang_table_linters = require("lang_tables").by_ft("force", "linters", {})
-    if not lang_table_linters then
-      lang_table_linters = {}
-    end
-    require("lint").linters_by_ft = lang_table_linters
+    -- if not lang_table_linters then
+    --   lang_table_linters = {}
+    -- end
+    require("lint").linters_by_ft = lang_table_linters or {}
     -- vim.tbl_deep_extend("force",
     -- lang_tables.by_ft(
     --   "force",

@@ -47,7 +47,7 @@ LangTables = {
       "prisma",
       "python",
       "regex",
-      "robot",
+      -- "robot",
       "rust",
       "scss", --- not in given list but
       "sql",
@@ -76,7 +76,7 @@ LangTables = {
       "jq",
       "json",
       "json5",
-      "jsonc",
+      -- "jsonc",
       "kdl",
       "markdown",
       "markdown_inline",
@@ -101,7 +101,7 @@ LangTables = {
       "ninja",
       "passwd",
       "printf",
-      "robots",
+      -- "robots",
       "ssh_config",
       "tmux", --- WOULD BE moved to langs, but it's not really
     },
@@ -138,7 +138,7 @@ LangTables = {
       ["cmake"] = { "cmakelang", "neocmake" },
       ["go"] = { "gofumpt" },
 
-      ["fish"] = { "beautysh" },
+      -- ["fish"] = { "beautysh" },
       ["gleam"] = { "gleam" },
       ["javascript"] = { "biome" },
       ["javascriptreact"] = { "biome" },
@@ -156,7 +156,7 @@ LangTables = {
           return { "isort", "black" }
         end
       end,
-      ["rust"] = { "rustfmt" },
+      -- ["rust"] = { "rustfmt" },
       ["sh"] = { "shfmt" },
       ["sql"] = { "sql_formatter" },
       ["surql"] = { "sql_formatter" },
@@ -204,6 +204,7 @@ LangTables = {
       -- powershell = { "powershell_es" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
       -- python = { "ruff", "mypy", "vulture" },
+      -- ["rust"] = { "rust_analyzer" },
       ["python"] = { "ruff" },
       ["sh"] = { "shellcheck" },
       ["sql"] = { "sqlfluff" },
@@ -229,7 +230,7 @@ LangTables = {
       "docker-language-server",
       "dockerls",
       -- "erlangls", -- requires rebar3 installed/available
-      "eslint",
+      -- "eslint",
       "fish_lsp",
       "gh_actions_ls",
       -- "gleam",
@@ -260,7 +261,6 @@ LangTables = {
       "zls",
     },
     daps = {
-
       "codelldb",
       "debugpy",
       "delve",

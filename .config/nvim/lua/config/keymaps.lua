@@ -294,14 +294,14 @@ map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
 -- TODO: @move -- likely want to move this later
 map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "LSP Hover" })
 
-map("n", "<Leader>lf", function()
-  if package.loaded["conform"] then
-    require("conform").format()
-  elseif package.loaded["conform"] == nil then
-    pcall(require, "conform")
-    vim.lsp.buf.format({ async = true })
-  end
-end, { desc = "format [lspconfig]" })
+-- map("n", "<Leader>lf", function()
+--   if package.loaded["conform"] then
+--     require("conform").format()
+--   elseif package.loaded["conform"] == nil then
+--     pcall(require, "conform")
+--     vim.lsp.buf.format({ async = true })
+--   end
+-- end, { desc = "format [lspconfig]" })
 
 -- buffer things
 map("n", "<Leader>bn", "<CMD>bnext<CR>", silent_opts("[n]ext"))
@@ -309,6 +309,31 @@ map("n", "<Leader>bp", "<CMD>bprev<CR>", silent_opts("[p]revious"))
 
 map("n", "]b", "<CMD>bnext<cr>", { desc = "[n]ext" })
 map("n", "[b", "<CMD>bprevious<cr>", { desc = "[p]revious" })
+
+map("n", "[[", function()
+  -- if the qf list or location list is open, navigate that instead of buffers
+  local ql = require("utils").list.find_qf("q")
+  dd(ql)
+  if #ql > 0 then
+    return vim.cmd.cprev()
+  end
+  local ll = require("utils").list.find_qf("l")
+  if #ll > 0 then
+    return vim.cmd.lprev()
+  end
+end, { desc = "Prev item in LIST" })
+
+map("n", "]]", function()
+  -- if the qf list or location list is open, navigate that instead of buffers
+  local ql = require("utils").list.find_qf("q")
+  if #ql > 0 then
+    return vim.cmd.cnext()
+  end
+  local ll = require("utils").list.find_qf("l")
+  if #ll > 0 then
+    return vim.cmd.lnext()
+  end
+end, { desc = "Next item in LIST" })
 
 -- TODO: @plugin -- replace with BufDel impl in utils.bufdel later
 map("n", "<Leader>bd", function()

@@ -1,0 +1,158 @@
+-- local function go_to_definition_with_tags()
+-- local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   group = group,
+--   once = true,
+--   callback = function(args)
+--     vim.keymap.set("n", "<C-o>", "<C-t>", { silent = true, buffer = args.buf })
+--     vim.keymap.set("n", "<C-i>", "<CMD>silent! tag<CR>", { silent = true, buffer = args.buf })
+--   end,
+-- })
+
+-- 	local curr_pos = vim.api.nvim_win_get_cursor(0)
+--   vim.cmd("silent! tag " .. vim.fn.expand("<cword>"))
+--
+--   local group = vim.api.nvim_create_augroup("go-to-definition-jumplist", { clear = true })
+--   vim.api.nvim_create_autocmd("BufEnter", {
+--     group = group,
+--     once = true,
+--     callback = function(args)
+--       local keymaps = require("config.keymaps")
+--       keymaps.map("n", "<C-t>", vim.cmd("silent! pop"), { silent = true, buffer = args.buf })
+--     end,
+--   })
+--
+--   vim.lsp.buf.definition()
+-- end
+
+-- local function trouble_next()
+--   local trouble = require("trouble")
+--   local was_open = trouble.is_open()
+--   trouble.open({ mode = "qflist", focus = false })
+--   trouble.next({ jump = true })
+--   if not was_open then
+--     trouble.close()
+--   end
+-- end
+--
+-- local function trouble_prev()
+--   local trouble = require("trouble")
+--   local was_open = trouble.is_open()
+--   trouble.open({ mode = "qflist", focus = false })
+--   trouble.previous({ jump = true })
+--   if not was_open then
+--     trouble.close()
+--   end
+-- end
+
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+------------------------------------------------------
+
+-- ---@param opts config.LSP.handle_builtins.Opts
+local handle_builtins = function(opts)
+  opts = opts or {}
+
+  local lists = require("utils.list")
+  local maybe_qf = lists.find_qf("q") -- could be empty table
+  local maybe_loc = lists.find_qf("l") -- could be empty table
+
+  -- perform the operation
+  local ok, ret = pcall(opts.operation)
+  if not ok then
+    require("utils.output").warn(ret)
+    return
+  end
+
+  -- check if we need to jump
+  local qf_after = lists.find_qf("q")
+  local loc_after = lists.find_qf("l")
+
+  if #qf_after == 1 and #maybe_qf == 0 then
+    vim.cmd("cfirst")
+  elseif #loc_after == 1 and #maybe_loc == 0 then
+    vim.cmd("lfirst")
+  end
+end
+
+------------------------------------------------------
+
+function LSP.builtin()
+  -- local map = vim.keymap.set
+  local map = require("config.keymaps")
+	-- local trouble = require("trouble")
+
+
+	-- stylua: ignore start
+	map("n", "gd", function() handle_builtins({ operation = vim.lsp.buf.definition, }) end,
+		{ desc = "[G]oto [d]efinition" })
+
+	map("n", "gD", function() handle_builtins({ operation = vim.lsp.buf.declaration, }) end,
+		{ desc = "Goto T[y]pe Definition" })
+
+
+	map("n", "gr", function() handle_builtins({ operation = vim.lsp.buf.references, }) end,
+		{ desc = "[G]oto [r]eferences" })
+
+	-- map("n", "gr", function() vim.lsp.buf.references(nil, { loclist = true }) end, { desc = "[G]oto [r]eferences" })
+	map("n", "gt", function() handle_builtins({ operation = vim.lsp.buf.type_definition, }) end,
+		{ desc = "Goto T[y]pe Definition" })
+
+	map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation, }) end,
+		{ desc = "[G]oto [I]mpl" })
+
+	map("n", "]]", function()
+		local cnext_op = function() vim.cmd("cnext") end
+		handle_builtins({ operation = cnext_op })
+	end, { silent = true, desc = "qf next" })
+
+	map("n", "[[", function()
+		local cprev_op = function() vim.cmd("cprev") end
+		handle_builtins({ operation = cprev_op })
+	end, { silent = true, desc = "qf prev" })
+
+  -- stylua: ignore end
+end
+
+---------------
+--- Original version!!!!!!!!!!!!!!! ---
+---------------
+-- -- function LSP.builtin()
+-- --   -- local map = vim.keymap.set
+-- --   local map = require("config.keymaps")
+-- -- 	-- local trouble = require("trouble")
+-- --
+-- --
+-- -- 	-- stylua: ignore start
+-- -- 	map("n", "gd", vim.lsp.buf.definition, { desc = "[G]oto [d]efinition" })
+-- -- 	-- map("n", "gd", go_to_definition_with_tags, { desc = "[G]oto [d]efinition" })
+-- -- 	map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto T[y]pe Definition" })
+-- -- 	-- map("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [r]eferences" })
+-- -- 	map("n", "gr", vim.lsp.buf.references, { desc = "[G]oto [r]eferences" })
+-- -- 	-- map("n", "gr", trouble_references, { desc = "[G]oto [r]eferences" })
+-- --
+-- -- 	-- map("n", "gr", function() vim.lsp.buf.references(nil, { loclist = true }) end, { desc = "[G]oto [r]eferences" })
+-- -- 	map("n", "gt", vim.lsp.buf.type_definition, { desc = "Goto T[y]pe Definition" })
+-- -- 	map("n", "gi", vim.lsp.buf.implementation, { desc = "[G]oto [I]mpl" })
+-- --
+-- -- 	-- map("n", "]]", trouble_next, { silent = true, desc = "Trouble qf next" })
+-- -- 	-- map("n", "[[", trouble_prev, { silent = true, desc = "Trouble qf prev" })
+-- --
+-- -- 	map("n", "]]", function() vim.cmd("cnext") end, { silent = true, desc = "qf next" })
+-- -- 	map("n", "[[", function() vim.cmd("cprev") end, { silent = true, desc = "qf prev" })
+-- --   -- map("n", "[[", trouble_prev, { silent = true, desc = "Trouble qf prev" })
+-- --
+-- --   -- stylua: ignore end
+-- -- end

@@ -1,17 +1,38 @@
-local output = require("utils.output")
+-- local output = require("utils.output")
+
 return {
   {
     "mrcjkb/rustaceanvim",
-    -- version = "^6",
-    ft = { "rust" },
-    ---@type rustaceanvim.Opts
+    lazy = false,
+    -- version = "^8",
     opts = {
+      tools = {
+        enable_clippy = true,
+      },
+
       server = {
         on_attach = function(_, bufnr)
-          vim.keymap.set("n", "<Leader>la", function()
+          require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+
+          vim.keymap.set("n", "<Leader>lA", function()
             vim.cmd.RustLsp("codeAction")
-            -- vim.cmd("FzfLua lsp_code_actions")
-          end, { desc = "[a]ction", buffer = bufnr })
+          end, { desc = "Rust - [A]ction", buffer = bufnr })
+
+          vim.keymap.set("n", "<Leader>ln", function()
+            vim.cmd.RustLsp("renderDiagnostic")
+          end, { desc = "Rust - in-comp. diag", buffer = bufnr })
+
+          vim.keymap.set("n", "]n", function()
+            vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
+          end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
+
+          vim.keymap.set("n", "[n", function()
+            vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
+          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+
+          vim.keymap.set("n", "<leader>lx", function()
+            vim.cmd.RustLsp("relatedDiagnostics")
+          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
 
           -- vim.keymap.set("n", "<Leader>lA", function()
           --   -- vim.cmd.RustLsp("codeAction")
@@ -29,11 +50,54 @@ return {
           vim.keymap.set("n", "<Leader>dr", function()
             vim.cmd.RustLsp("runnables")
           end, { desc = "[r]un" })
+
+          --
+
+          -- BUG: These aren't working because no matter where I put them,
+          -- rust-analyzer overrides them with just simple function jumps (each functions opening bracket...)
+
+          -- vim.keymap.set("n", "[[", function()
+          --   -- if the qf list or location list is open, navigate that instead of buffers
+          --   local ql = require("utils").list.find_qf("q")
+          --   dd(ql)
+          --   if #ql > 0 then
+          --     return vim.cmd.cprev()
+          --   end
+          --   local ll = require("utils").list.find_qf("l")
+          --   if #ll > 0 then
+          --     return vim.cmd.lprev()
+          --   end
+          -- end, { desc = "Prev item in LIST" })
+          --
+          -- vim.keymap.set("n", "]]", function()
+          --   -- if the qf list or location list is open, navigate that instead of buffers
+          --   local ql = require("utils").list.find_qf("q")
+          --   if #ql > 0 then
+          --     return vim.cmd.cnext()
+          --   end
+          --   local ll = require("utils").list.find_qf("l")
+          --   if #ll > 0 then
+          --     return vim.cmd.lnext()
+          --   end
+          -- end, { desc = "Next item in LIST" })
+
+          --
         end,
       },
 
       default_settings = {
         ["rust-analyzer"] = {
+          check = {
+            command = "clippy",
+            extraArgs = {
+              "--no-deps",
+              "--",
+              "-W",
+              "clippy::pedantic",
+            },
+          },
+          -- Add clippy lints for Rust.
+          checkOnSave = true,
           cargo = {
             allFeatures = true,
             loadOutDirsFromCheck = true,
@@ -41,11 +105,10 @@ return {
               enable = true,
             },
           },
-          -- Add clippy lints for Rust.
-          checkOnSave = true,
           -- diagnostics == "rust-analyzer",
           diagnostics = {
             enable = true,
+
             -- diagnostics == "rust-analyzer",
           },
           procMacro = {
@@ -64,7 +127,7 @@ return {
               ".gitlab",
               "bin",
               "node_modules",
-              "target",
+              -- "target",
               "venv",
               ".venv",
             },
@@ -105,8 +168,10 @@ return {
       ---@type rustaceanvim.dap.Opts
       dap = {
         adapter = {
-          command = "lldb-vscode",
-          name = "lldb",
+          -- command = "lldb-vscode",
+          -- name = "lldb",
+          command = "codelldb",
+          name = "codelldb",
           type = "executable",
         },
         configuration = {
@@ -131,25 +196,13 @@ return {
         },
       },
     },
-
-    ---@return rustaceanvim.Config?
     config = function(_, opts)
-      if package.preload["mason.nvim"] then
-        -- LazyVim.has("mason.nvim") then
-        local codelldb = vim.fn.exepath("codelldb")
-        local codelldb_lib_ext = io.popen("uname"):read("*l") == "Linux" and ".so" or ".dylib"
-        local library_path = vim.fn.expand("$MASON/opt/lldb/lib/liblldb" .. codelldb_lib_ext)
-        opts.dap = {
-          adapter = require("rustaceanvim.config").get_codelldb_adapter(codelldb, library_path),
-        }
-      end
-      vim.g.rustaceanvim = vim.tbl_deep_extend("keep", vim.g.rustaceanvim or {}, opts or {})
-      if vim.fn.executable("rust-analyzer") == 0 then
-        output.err("**rust-analyzer** not found in PATH, please install it.\nhttps://rust-analyzer.github.io/")
-      end
+      require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+      vim.g.rustaceanvim = opts
     end,
   },
-  -- ---@type LazyPluginBase
+
+  ---@type LazyPluginBase
   {
     "saecki/crates.nvim",
     -- lazy = true,
