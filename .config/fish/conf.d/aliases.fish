@@ -11,6 +11,11 @@ alias pars "paru -S"
 alias parss "paru -Ss"
 alias parsu "paru -Syu"
 
+alias parq "paru -Q"
+
+alias parsi "paru -Si"
+alias parsiv "paru -Siv"
+
 alias shutdown 'systemctl poweroff'
 
 alias aa='jj'

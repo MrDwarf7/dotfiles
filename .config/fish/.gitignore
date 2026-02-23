@@ -2,3 +2,8 @@ completions/*
 prev_completions_dir
 .old*/
 .old*
+
+# Keep the normal file
+!fish_variables
+# Ignore anything with alphanum extension to the name.
+!fish_variables.*
