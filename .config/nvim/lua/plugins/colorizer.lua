@@ -22,6 +22,27 @@ return {
     "pandoc",
   },
   opts = {
+    options = {
+      parsers = {
+        css = true,
+        html = true,
+        javascript = true,
+        lua = true,
+        markdown = true,
+        scss = true,
+        txt = true,
+        vim = true,
+        yaml = true,
+        json = true,
+        typescript = true,
+        typescriptreact = true,
+        javascriptreact = true,
+        norg = true,
+        org = true,
+        pandoc = true,
+      },
+    },
+
     -- user_default_options = {
     -- 	tailwind = "both",
     -- 	css = true,

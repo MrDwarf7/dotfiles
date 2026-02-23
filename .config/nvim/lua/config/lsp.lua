@@ -208,13 +208,13 @@ local lsp_attach_autocmd = function(opts)
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ctx)
-      local client_supports_method = function(client, method, bufnr)
-        if vim.fn.has("nvim-0.11") == 1 then
-          return client:supports_method(method, bufnr)
-        else
-          return client.supports_method(method, { bufnr = bufnr })
-        end
-      end
+      -- local client_supports_method = function(client, method, bufnr)
+      --   if vim.fn.has("nvim-0.11") == 1 then
+      --     return client:supports_method(method, bufnr)
+      --   else
+      --     return client.supports_method(method, { bufnr = bufnr })
+      --   end
+      -- end
 
       pcall(vim.treesitter.start, ctx.buf, vim.bo.filetype)
 

@@ -41,6 +41,8 @@ return {
     ft = "tridactyl",
   }, -- Syntax HL for tridactylrc files
 
+  { "Bilal2453/luvit-meta", lazy = true }, -- apparently helps with LSP for `vim.uv` and, of course for luvit etc.
+
   -- TODO: later --
 
   ---@type LazyPluginBase

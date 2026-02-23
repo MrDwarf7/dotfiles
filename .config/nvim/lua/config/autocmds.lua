@@ -73,7 +73,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     local linters = require("lang_tables").by_ft("force", "linters", {}) -- or { "" }
 
     if type(linters) == "nil" then
-      vim.notify("No linters found for filetype " .. vim.bo.filetype, "warn")
+      require("utils").output.warn("No linters found for filetype " .. vim.bo.filetype)
       return
     end
 
@@ -91,11 +91,23 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 vim.api.nvim_create_autocmd("User", {
   pattern = "OilActionsPost",
   callback = function(event)
-    if event.data.actions[1].type == "move" then
-      Snacks.rename.on_rename_file(event.data.actions[1].src_url, event.data.actions[1].dest_url)
+    ---@param ev vim.api.keyset.create_autocmd.callback_args
+    local fn = function(ev)
+      if ev.data.actions[1].type == "move" then
+        Snacks.rename.on_rename_file(ev.data.actions[1].src_url, ev.data.actions[1].dest_url)
+      end
     end
+    pcall(fn, event)
   end,
 })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "bash", "rust" },
+--   callback = function(args)
+--     vim.treesitter.start()
+--     vim.bo[args.buf].syntax = "ON" -- only if additional legacy syntax is needed
+--   end,
+-- })
 
 ----------------------
 --- Very cool LSP spinner thing

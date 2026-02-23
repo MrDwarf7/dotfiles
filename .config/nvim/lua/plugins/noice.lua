@@ -34,6 +34,16 @@ return {
     -- stylua: ignore end
   },
   opts = {
+    -- Might be able to get away with _just_ the opts.notify.enabled = true and not have to set up the route?
+    routes = {
+      {
+        filter = { event = "notify" },
+        view = "notify",
+        opts = {
+          backend = "snacks",
+        },
+      },
+    },
     notify = {
       enabled = true,
     },

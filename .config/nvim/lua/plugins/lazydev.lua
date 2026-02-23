@@ -15,6 +15,7 @@ return {
 
       { path = "neotest", words = { "neotest" } },
       { path = "plenary", words = { "plenary" } },
+      { path = "nvim-dap-ui" },
 
       { path = "wezterm-types", words = { "wezterm" } },
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },

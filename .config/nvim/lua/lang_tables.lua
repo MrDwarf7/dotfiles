@@ -52,7 +52,7 @@ LangTables = {
       "scss", --- not in given list but
       "sql",
       -- "surrealdb",
-      "teal",
+      -- "teal",
       "terraform",
       "tmux", --- WOULD BE moved to langs, but it's not really
       "tsx",
@@ -255,6 +255,7 @@ LangTables = {
       -- "svelte",
       "tailwindcss",
       "tinymist",
+      "ts_ls",
       "vimls",
       "vue-language-server",
       "yamlls",
@@ -544,6 +545,29 @@ end
 ---@param removable? table<string, boolean> | boolean | ListElements
 ---@return ListElements
 function LangTables.mason_disabled_daps(removable)
+  return LangTables.get(CategoryE.mason, SubtypeE.mason.daps, removable or WantsTypeE.disabled)
+end
+
+-- dap enabled
+
+--- Convenience for dap all.
+---@param removable? table<string, boolean> | boolean | ListElements
+---@return ListElements
+function LangTables.daps_all(removable)
+  return LangTables.get(CategoryE.mason, SubtypeE.mason.daps, removable or WantsTypeE.all)
+end
+
+--- Convenience for mason ensure installed daps.
+---@param removable? table<string, boolean> | boolean | ListElements
+---@return ListElements
+function LangTables.daps_ensure_installed(removable)
+  return LangTables.get(CategoryE.mason, SubtypeE.mason.daps, removable or WantsTypeE.ensure_installed)
+end
+
+--- Convenience for mason disabled daps.
+---@param removable? table<string, boolean> | boolean | ListElements
+---@return ListElements
+function LangTables.daps_disabled(removable)
   return LangTables.get(CategoryE.mason, SubtypeE.mason.daps, removable or WantsTypeE.disabled)
 end
 

@@ -5,14 +5,27 @@ vim.opt.runtimepath:append(queries)
 -- LangHub module that consolidates 'suites'
 -- local lang_tables = require("lang_tables")
 
+---@type vim.treesitter
+local ts_native = vim.treesitter
+
 return {
   "nvim-treesitter/nvim-treesitter",
   lazy = false,
   build = ":TSUpdate",
-  config = function(opts)
+  ---@class vim.treesitter.Config
+  opts = {
+    --- Defaults to the `stdpath('data')/site` dir.
+    -- install_dir = queries,
+    languages = require("lang_tables").ts_ensure_installed(),
+  },
+  ---@param opts? any|nil
+  ---@param _? LazyMeta|nil
+  config = function(opts, _)
     local ts = require("nvim-treesitter")
-    ts.install(require("lang_tables").ts_all())
     ts.setup(opts)
+    -- ts.install(require("lang_tables").ts_all())
+    ts.install(opts.languages)
+    return ts
   end,
 }
 

@@ -83,6 +83,10 @@
 ---@field mason_disabled_lsps fun(removable?: table<string, boolean> | boolean | ListElements): ListElements
 ---@field mason_disabled_daps fun(removable?: table<string, boolean> | boolean | ListElements): ListElements
 ---
+---@field daps_ensure_installed fun(removable?: table<string, boolean> | boolean | ListElements): ListElements
+---@field daps_disabled fun(removable?: table<string, boolean> | boolean | ListElements): ListElements
+---@field  daps_all fun(removable?: table<string, boolean> | boolean | ListElements): ListElements
+---
 ---@field by_ft fun(behavior: 'error' | 'force' | 'keep' | fun(key: any, prev_value?: any, new_value?: any), typeof: TypeOfLiteral|TypeOfE, extra_fmtters: any): ListElements|nil
 ---
 ---@deprecated Use LangTables.by_ft("linters", ft) instead.
