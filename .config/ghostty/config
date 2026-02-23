@@ -26,12 +26,17 @@ scrollback-limit = 1000
 
 confirm-close-surface = false
 shell-integration = fish
+shell-integration-features = cursor,sudo,title,no-cursor
 clipboard-read = allow
 copy-on-select = false
 window-theme = dark
 window-padding-x = 4
 window-padding-y = 2
 window-padding-balance = true
+
+# Remove annoying popup thing at bottom
+app-notifications = no-clipboard-copy
+# ,no-config-reload
 
 # background-blur = 35
 
