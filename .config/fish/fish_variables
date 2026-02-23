@@ -1,8 +1,8 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export CARAPACE_BRIDGES:all
-SETUVAR --export SSH_AGENT_PID:1105
-SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2essh/agent/s\x2ePHaOxDfwuR\x2eagent\x2ehjM095VpEV
+SETUVAR --export SSH_AGENT_PID:1081
+SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2essh/agent/s\x2ePHaOxDfwuR\x2eagent\x2eGhnInSKfKN
 SETUVAR --export XDG_BIN_HOME:/home/dwarf/\x2exdg/bin
 SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/cache
 SETUVAR --export XDG_CACHE_LOCAL_HOME:/home/dwarf/\x2exdg/local

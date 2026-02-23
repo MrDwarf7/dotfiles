@@ -12,9 +12,9 @@ complete -c la -w $LIST_CLIENT
 complete -c ls -w $LIST_CLIENT
 
 complete -c lg -w lazygit
-complete -c lza -w lazyjui
 complete -c lzd -w lazydocker
 complete -c lzs -w lazyjournal
+# complete -c lza -w lazyjui
 # complete -c lzvim -w nvim   ## not active
 # complete -c ma -w makers
 complete -c ma -w "cargo make"
