@@ -13,8 +13,6 @@ cancel = ["esc"]
 toggle_select = [" "]
 new = ["n"]
 commit = ["c"]
-# refresh = ["ctrl+r"]
-refresh = ["'"]
 abandon = ["a"]
 diff = ["d"]
 quit = ["q"]
@@ -26,13 +24,17 @@ diffedit = ["E"]
 absorb = ["A"]
 split = ["s"]
 
+refresh = ["ctrl+r"]
+# refresh = ["'"]
+
 # Vim mapped - base
-undo = ["u"]
-redo = ["ctrl+r"]
+# undo = ["u"]
+# redo = ["ctrl+r"]
 
 # Vim mapped - as movements
-# undo = ["ctrl+o"]
-# redo = ["ctrl+i"]
+undo = ["u", "ctrl+o"]
+# cannot use ctrl+i for whatever reason
+redo = ["I"]
 
 revset = ["L"]
 exec_jj = [":"]

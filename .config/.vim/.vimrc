@@ -236,10 +236,10 @@ tmap <C-_> <cmd>close<cr>
 " Brackets
 " This technically opens a new line and brackets etc.
 " inoremap { {<CR>}<Esc>ko<Tab>
-inoremap { {}<Esc>i
-inoremap " ""<Esc>i
-inoremap ( ()<Esc>i
-inoremap [ []<Esc>i
+"inoremap { {}<Esc>i
+"inoremap " ""<Esc>i
+"inoremap ( ()<Esc>i
+"inoremap [ []<Esc>i
 
 
 " Easy Save
