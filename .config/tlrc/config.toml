@@ -26,7 +26,7 @@ show_hyphens = false
 # Use a custom string instead of a hyphen.
 example_prefix = "- "
 # Strip empty lines from output.
-compact = false
+compact = true
 # Print pages in raw markdown.
 raw_markdown = false
 
