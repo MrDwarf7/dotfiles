@@ -1,6 +1,8 @@
 -- local vimpack_path = vim.fn.stdpath("data") .. "/site/pack/core/opt"
 -- vim.opt.rtp:prepend(vimpack_path)
 
+vim.g.lsp_binds_type = "builtin"
+
 require("config.options")
 require("config.keymaps")
 require("config.autocmds")
@@ -23,8 +25,6 @@ if vim.fn.has("nvim-0.11") == 1 then
 else
   vim.print = dd
 end
-
-local lsp = require("config.lsp")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -113,6 +113,4 @@ local lazy_opts = {
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 
--- lsp.setup({ binds_type = "builtin" })
--- lsp.setup({ binds_type = "fzf" })
-lsp.setup({ binds_type = "snacks" })
+require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })

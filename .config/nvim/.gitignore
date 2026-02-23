@@ -5,3 +5,5 @@ lua/config/*_bak.lua
 ./*.vim
 ./Second.vim
 ./Session.vim
+.tmp_af
+.tmp_af/
