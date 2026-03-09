@@ -11,3 +11,18 @@
 
 # export AQ_NO_ATOMIC,1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.
 # export AQ_NO_ATOMIC=1                     # -  use legacy DRM interface instead of atomic mode setting. NOT recommended.
+
+
+# See: 
+# https://wiki.hypr.land/Configuring/Multi-GPU/#creating-consistent-device-paths-for-specific-cards
+# Regarding consistent device paths for specific cards,
+# the documentation suggests using udev rules to create symlinks for the DRM devices.
+# This way, you can have consistent paths like 
+# /dev/dri/card1 and /dev/dri/card0 
+# regardless of the order in which the GPUs are detected.
+
+# export AQ_DRM_DEVICES="/dev/dri/renderD128"
+# export AQ_DRM_DEVICES="/dev/dri/card1"
+
+# This is the one we'd use
+# export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"

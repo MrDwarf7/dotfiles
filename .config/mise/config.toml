@@ -47,6 +47,9 @@ version = "latest"
 version = "latest"
 
 
+[tools."cargo:abscissa"]
+version = "latest"
+
 [tools."cargo:atac"]
 version = "latest"
 
@@ -112,6 +115,8 @@ version = "latest"
 version = "latest"
 
 #####
+[tools."cargo:dealve-tui"]
+version = "latest"
 
 [tools."cargo:flamegraph"]
 version = "latest"
