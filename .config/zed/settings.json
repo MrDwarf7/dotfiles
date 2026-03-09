@@ -1,20 +1,122 @@
 {
+  "agent_ui_font_size": 16.0,
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "use_autoclose": false,
+  "use_auto_surround": false,
+  "completions": {
+    "words_min_length": 2,
+  },
+  "sticky_scroll": {
+    "enabled": true,
+  },
   "edit_predictions": {
     "provider": "copilot",
   },
   "calls": {
     "mute_on_join": true,
   },
+  "agent": {
+    "profiles": {
+      "write": {
+        "name": "Write",
+        "tools": {
+          "copy_path": true,
+          "create_directory": true,
+          "delete_path": true,
+          "diagnostics": true,
+          "edit_file": true,
+          "fetch": true,
+          "list_directory": true,
+          "project_notifications": false,
+          "move_path": true,
+          "now": true,
+          "find_path": true,
+          "read_file": true,
+          "restore_file_from_disk": true,
+          "save_file": true,
+          "open": true,
+          "grep": true,
+          "spawn_agent": true,
+          "terminal": true,
+          "thinking": true,
+          "web_search": true
+        },
+        "enable_all_context_servers": true,
+        "context_servers": {}
+      }
+    },
+    "tool_permissions": {
+      "default": "allow",
+    },
+    "favorite_models": [
+      {
+        "provider": "openrouter",
+        "model": "nvidia/nemotron-3-nano-30b-a3b",
+        "enable_thinking": false
+      },
+      {
+        "provider": "openrouter",
+        "model": "openrouter/hunter-alpha",
+        "enable_thinking": false
+      }
+    ],
+    "inline_assistant_model": {
+      // "provider": "copilot_chat",
+      // "model": "gpt-4o",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-nano-30b-a3b",
+    },
+    "default_profile": "write",
+    "default_model": {
+      "enable_thinking": true,
+      "provider": "openrouter",
+      "model": "openrouter/hunter-alpha",
+    },
+    "default_width": 700,
+  },
   "agent_servers": {
     "opencode": {
       "type": "extension",
-      "favorite_models": ["opencode/grok-code"],
+      "favorite_models": ["opencode/grok-code", "openrouter/hunter-alpha"],
       "default_config_options": {},
       "favorite_config_option_values": {},
     },
   },
   "language_models": {
     "openai_compatible": {
+      "nvidia": {
+        "api_url": "https://openrouter.ai/api/v1",
+        "available_models": [
+          {
+            "name": "nemotron-3-nano-30b-a3b:free",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          },
+          {
+            "name": "nemotron-3-super-120b-a12b:free",
+            "max_tokens": 200000,
+            "max_output_tokens": 32000,
+            "max_completion_tokens": 200000,
+            "capabilities": {
+              "tools": true,
+              "images": false,
+              "parallel_tool_calls": true,
+              "prompt_cache_key": false,
+              "chat_completions": true
+            }
+          }
+        ]
+      },
       "oppencode": {
         "api_url": "https://opencode.ai/zen/v1/chat/completions",
         "available_models": [
@@ -36,6 +138,7 @@
     },
   },
   "title_bar": {
+    "show_branch_icon": true,
     "show_onboarding_banner": false,
   },
   "project_panel": {
@@ -48,6 +151,11 @@
   "hover_popover_delay": 300,
   "agent_buffer_font_size": 14.0,
   "context_servers": {
+    "prisma-mcp": {
+      "enabled": false,
+      "remote": false,
+      "settings": {},
+    },
     "mcp-server-nextjs": {
       "enabled": true,
       "settings": {},
@@ -60,7 +168,7 @@
       "settings": {},
 
       "url": "https://bun.com/docs/mcp",
-      "enabled": true,
+      "enabled": false,
       "headers": {},
     },
 
@@ -96,30 +204,11 @@
       "settings": {},
     },
     "mcp-server-linear": {
-      "enabled": true,
+      "enabled": false,
       "command": "npx",
       "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
       "env": {},
     },
-  },
-  "agent": {
-    "favorite_models": [
-      {
-        "provider": "anthropic",
-        "model": "claude-sonnet-4-5-latest",
-      },
-    ],
-    "inline_assistant_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o",
-    },
-    "always_allow_tool_actions": true,
-    "default_profile": "write",
-    "default_model": {
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-thinking",
-    },
-    "default_width": 700,
   },
   "lsp_highlight_debounce": 50,
   "auto_update_extensions": {
@@ -353,6 +442,12 @@
     "C": {
       "colorize_brackets": false,
       "format_on_save": "on",
+      "formatter": "auto",
+      "completions": {
+        "lsp": true,
+        "lsp_fetch_timeout_ms": 0,
+        "words_min_length": 2,
+      },
     },
     "Python": {
       "format_on_save": "on",
@@ -404,7 +499,7 @@
   },
   "vim": {
     "default_mode": "normal",
-    "toggle_relative_line_numbers": false,
+    "toggle_relative_line_numbers": true,
     "use_system_clipboard": "always",
     "use_smartcase_find": true,
     "highlight_on_yank_duration": 65,

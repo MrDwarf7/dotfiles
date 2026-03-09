@@ -214,7 +214,11 @@
 
       "space b n": "pane::ActivateNextItem",
       "space b p": "pane::ActivatePreviousItem",
+      "space n": "pane::ActivateNextItem",
+      "space p": "pane::ActivatePreviousItem",
+
       "space f f": "file_finder::Toggle",
+      "space f b": "tab_switcher::ToggleAll",
       "space f w": "buffer_search::Deploy",
       "space f l": "pane::ReopenClosedItem",
       "space f shift-w": "pane::DeploySearch",
@@ -412,6 +416,49 @@
   },
 
   {
+    "context": "vim_mode == normal || vim_mode == visual || vim_mode == operator",
+    "bindings": {
+      "] ]": "vim::NextSectionStart",
+      "] [": "vim::NextSectionEnd",
+      "[ [": "vim::PreviousSectionStart",
+      "[ ]": "vim::PreviousSectionEnd",
+      "] m": "vim::NextMethodStart",
+      "] shift-m": "vim::NextMethodEnd",
+      "[ m": "vim::PreviousMethodStart",
+      "[ shift-m": "vim::PreviousMethodEnd",
+      "[ *": "vim::PreviousComment",
+      "[ /": "vim::PreviousComment",
+      "] *": "vim::NextComment",
+      "] /": "vim::NextComment",
+      "[ -": "vim::PreviousLesserIndent",
+      "[ +": "vim::PreviousGreaterIndent",
+      "[ =": "vim::PreviousSameIndent",
+      "] -": "vim::NextLesserIndent",
+      "] +": "vim::NextGreaterIndent",
+      "] =": "vim::NextSameIndent",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePreviousItem",
+      "] shift-b": "pane::ActivateLastItem",
+      "[ shift-b": ["pane::ActivateItem", 0],
+      "] space": "vim::InsertEmptyLineBelow",
+      "[ space": "vim::InsertEmptyLineAbove",
+      "[ e": null,
+      "] e": null,
+      "[ f": "workspace::FollowNextCollaborator",
+      "] f": "workspace::FollowNextCollaborator",
+      "] }": ["vim::UnmatchedForward", { "char": "}" }],
+      "[ {": ["vim::UnmatchedBackward", { "char": "{" }],
+      "] )": ["vim::UnmatchedForward", { "char": ")" }],
+      "[ (": ["vim::UnmatchedBackward", { "char": "(" }],
+      "[ r": "vim::GoToPreviousReference",
+      "] r": "vim::GoToNextReference",
+      // tree-sitter related commands
+      "[ x": "vim::SelectLargerSyntaxNode",
+      "] x": "vim::SelectSmallerSyntaxNode",
+    },
+  },
+
+  {
     "context": "VimControl && VimCount",
     "bindings": {
       "0": ["vim::Number", 0],
@@ -471,8 +518,8 @@
       "g q": "vim::Rewrap",
       "\"": "vim::PushRegister",
       // tree-sitter related commands
-      "[ x": "editor::SelectLargerSyntaxNode",
       "] x": "editor::SelectSmallerSyntaxNode",
+      "[ x": "editor::SelectLargerSyntaxNode",
     },
   },
   {
@@ -719,7 +766,7 @@
       "p": "project_panel::Paste",
       // "p": "project_panel::Open",
       "g x": "project_panel::RevealInFileManager",
-      "g s": "project_panel::OpenWithSystem",
+      "g s": "workspace::OpenWithSystem",
       "shift-g": "menu::SelectLast",
       "g g": "menu::SelectFirst",
       "-": "project_panel::SelectParent",
@@ -870,7 +917,7 @@
   {
     "context": "(Editor && edit_prediction)",
     "bindings": {
-      "tab": "editor::AcceptEditPrediction"
-    }
-  }
+      "tab": "editor::AcceptEditPrediction",
+    },
+  },
 ]
