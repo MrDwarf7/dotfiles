@@ -110,6 +110,8 @@ local lazy_opts = {
   },
 }
 
+require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 

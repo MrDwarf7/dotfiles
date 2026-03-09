@@ -28,6 +28,19 @@ function B.setup()
   map("n", "<Leader>ls", function() Snacks.picker.lsp_symbols(opts) end, { desc = "Snacks LSP Symbols" })
   map("n", "<Leader>lS", function() Snacks.picker.lsp_workspace_symbols(opts) end, { desc = "Snacks LSP Workspace Symbols" })
   map("n", "<Leader>l`", function() Snacks.picker.lsp_config(opts) end, { desc = "Snacks Pulls up the capabilities of various LSP servers" })
+
+  map("n", "]]", function()
+    local tsutils = require("utils.tsutils")
+    local cnext_op = function() vim.cmd("cnext") end
+    tsutils.handle_builtins({ operation = cnext_op })
+  end, { silent = true, desc = "qf next" })
+
+  map("n", "[[", function()
+    local tsutils = require("utils.tsutils")
+    local cprev_op = function() vim.cmd("cprev") end
+    tsutils.handle_builtins({ operation = cprev_op })
+  end, { silent = true, desc = "qf prev" })
+
   -- stylua: ignore end
 end
 

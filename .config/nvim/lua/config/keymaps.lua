@@ -368,6 +368,18 @@ end, silent_opts("[W]rite with sudo"))
 
 map("n", "<Leader>pl", "<CMD>Lazy<CR>", silent_opts("Lazy"))
 
+-- TODO: We could also write some small helper function
+-- for something like:
+-- yi
+-- and
+-- ya
+--
+-- And we search the current line/surroundings for each of the pairable items and yank the text in between them.
+-- mini.nvim / mini.ai (MiniQuotes and MiniSurround) has current line => search outwards way of doing this.
+
+map("n", "YY", "va{Vy", silent_opts("Yank Block {}"))
+map("n", "Yy", "vi{Vy", silent_opts("Yank Block {}"))
+
 --- Handles Lua's behaviour of 0+1 indexing, and makes it [Z]ero [B]ased [I]ndexing
 ---@param num integer|nil
 ---@return integer?

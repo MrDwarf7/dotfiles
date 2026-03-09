@@ -185,7 +185,7 @@ LangTables = {
       "sqlfluff",
       "ts-standard",
       -- "vulture",
-      "yamllint",
+      -- "yamllint",
     },
 
     linters_by_ft = {
@@ -211,7 +211,7 @@ LangTables = {
       ["typescript"] = { "biomejs" },
       ["typescriptreact"] = { "biomejs" },
       ["vim"] = { "vint" },
-      ["yaml"] = { "yamllint" },
+      -- ["yaml"] = { "yamllint" },
     },
 
     lsps = {

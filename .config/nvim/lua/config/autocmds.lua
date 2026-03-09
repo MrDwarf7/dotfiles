@@ -38,6 +38,14 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { ".obscidian.vimrc" },
+  callback = function()
+    vim.cmd([[ set ft=vim ]])
+    -- vim.bo.filetype = "gitignore"
+  end,
+})
+
 --- Use 'q' to close quickfix, jumplist, and other help buffers
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {
@@ -97,17 +105,74 @@ vim.api.nvim_create_autocmd("User", {
         Snacks.rename.on_rename_file(ev.data.actions[1].src_url, ev.data.actions[1].dest_url)
       end
     end
-    pcall(fn, event)
+    _, _ = pcall(fn, event)
   end,
 })
 
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = { "bash", "rust" },
---   callback = function(args)
---     vim.treesitter.start()
---     vim.bo[args.buf].syntax = "ON" -- only if additional legacy syntax is needed
---   end,
--- })
+-- Enable spell checking for certain file types
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.txt", "*.md", "*.tex" },
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = "en"
+  end,
+})
+
+-- go to last loc when opening a buffer
+-- this mean that when you open a file, you will be at the last position
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+      -- run 'zz' after setting the cursor to center the screen
+      vim.schedule(function()
+        vim.api.nvim_feedkeys("zz", "n", false)
+      end)
+    end
+  end,
+})
+
+augroup("document_highlight")
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = "document_highlight",
+  callback = function(ctx)
+    if not vim.lsp.get_client_by_id(ctx.data.client_id).server_capabilities.documentHighlightProvider then
+      return
+    end
+
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = "document_highlight",
+      buffer = ctx.buf,
+      callback = vim.lsp.buf.document_highlight,
+      nested = true,
+    })
+
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+      group = "document_highlight",
+      buffer = ctx.buf,
+      callback = vim.lsp.buf.clear_references,
+      nested = true,
+    })
+  end,
+  nested = true,
+})
+
+vim.api.nvim_create_autocmd("LspDetach", {
+  group = "document_highlight",
+  callback = function(ctx)
+    vim.lsp.buf.clear_references()
+    vim.api.nvim_clear_autocmds({
+      group = "document_highlight",
+      buffer = ctx.buf,
+      --
+    })
+  end,
+  nested = true,
+  desc = "Clear LSP document highlights and autocmds on detach",
+})
 
 ----------------------
 --- Very cool LSP spinner thing
@@ -158,25 +223,3 @@ vim.api.nvim_create_autocmd("User", {
 --   end,
 -- })
 --
-
--- Handles in `config.lsp`
--- vim.api.nvim_create_autocmd("LspAttach", {
---   callback = function(event)
---     local buf_name = vim.api.nvim_buf_get_name(0)
---     if string.find(buf_name, ".obsidian.vimrc") then
---       vim.api.nvim_buf_set_option(0, "filetype", "vim")
---       return
---     end
---     -- if client and client.server_capabilities.documentHighlightProvider then
---     --   vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
---     --     buffer = event.buf,
---     --     callback = vim.lsp.buf.document_highlight,
---     --   })
---     --
---     --   vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
---     --     buffer = event.buf,
---     --     callback = vim.lsp.buf.clear_references,
---     --   })
---     -- end
---   end,
--- })

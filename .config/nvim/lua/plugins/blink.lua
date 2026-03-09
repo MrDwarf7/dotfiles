@@ -226,6 +226,7 @@ return {
 
     snippets = {
       preset = "luasnip",
+      score_offset = 20,
     },
 
     ----------------------
@@ -257,7 +258,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = 99,
+          score_offset = -10,
           async = true,
         },
 
@@ -272,6 +273,7 @@ return {
         },
 
         lsp = {
+          score_offset = 50,
           fallbacks = {}, -- defaults out to the "buffer" source
         },
         -- buffer = {},

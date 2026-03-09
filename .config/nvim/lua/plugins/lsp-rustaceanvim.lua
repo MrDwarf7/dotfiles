@@ -34,6 +34,10 @@ return {
             vim.cmd.RustLsp("relatedDiagnostics")
           end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
 
+          vim.keymap.set("n", "<leader>lx", function()
+            vim.cmd.RustLsp("relatedDiagnostics")
+          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+
           -- vim.keymap.set("n", "<Leader>lA", function()
           --   -- vim.cmd.RustLsp("codeAction")
           --   -- vim.cmd("FzfLua lsp_code_actions")
@@ -50,6 +54,47 @@ return {
           vim.keymap.set("n", "<Leader>dr", function()
             vim.cmd.RustLsp("runnables")
           end, { desc = "[r]un" })
+
+          vim.keymap.set({ "n", "x", "o" }, "[[", function()
+            -- if the qf list or location list is open, navigate that instead of buffers
+            local ql = require("utils").list.find_qf("q")
+            dd(ql)
+            if #ql > 0 then
+              return vim.cmd.cprev()
+            end
+            local ll = require("utils").list.find_qf("l")
+            if #ll > 0 then
+              return vim.cmd.lprev()
+            end
+          end, { desc = "Prev item in LIST" })
+
+          vim.keymap.set({ "n", "x", "o" }, "]]", function()
+            -- if the qf list or location list is open, navigate that instead of buffers
+            local ql = require("utils").list.find_qf("q")
+            if #ql > 0 then
+              return vim.cmd.cnext()
+            end
+            local ll = require("utils").list.find_qf("l")
+            if #ll > 0 then
+              return vim.cmd.lnext()
+            end
+          end, { desc = "Next item in LIST" })
+
+          -- vim.keymap.set("n", "]]", function()
+          --   local tsutils = require("utils.tsutils")
+          --   local cnext_op = function()
+          --     vim.cmd("cnext")
+          --   end
+          --   tsutils.handle_builtins({ operation = cnext_op })
+          -- end, { silent = true, desc = "qf next" })
+          --
+          -- vim.keymap.set("n", "[[", function()
+          --   local tsutils = require("utils.tsutils")
+          --   local cprev_op = function()
+          --     vim.cmd("cprev")
+          --   end
+          --   tsutils.handle_builtins({ operation = cprev_op })
+          -- end, { silent = true, desc = "qf prev" })
 
           --
 
@@ -105,11 +150,41 @@ return {
               enable = true,
             },
           },
+          hover = {
+            memoryLayout = {
+              padding = true,
+              niches = true,
+            },
+          },
           -- diagnostics == "rust-analyzer",
           diagnostics = {
             enable = true,
-
+            previewRustcOutput = true,
             -- diagnostics == "rust-analyzer",
+
+            -- rust-analyzer.diagnostics.experimental.enable  default: false
+            -- rust-analyzer.diagnostics.remapPrefix  default: {}
+            -- rust-analyzer.diagnostics.styleLints.enable  default: false
+            -- rust-analyzer.diagnostics.warningsAsHint  default: []
+            -- rust-analyzer.diagnostics.warningsAsInfo  default: []
+            --
+            styleLints = {
+              enable = true,
+            },
+
+            -- does 'true' enable all? -- don't think so...
+            warningsAsHint = {
+              "dead_code",
+              "unused_variables",
+              "unused_mut",
+              "unused_imports",
+            },
+
+            warningsAsInfo = {
+              "missing_docs",
+            },
+
+            -- rust-analyzer.document.symbol.search.excludeLocals  default: true
           },
           procMacro = {
             enable = true,
@@ -163,6 +238,20 @@ return {
             typeHints = true,
           },
           watcher = "client",
+
+          lens = {
+            debug = { enable = true },
+            enable = true,
+            implementations = { enable = true },
+            references = {
+              adt = { enable = true },
+              enumVariant = { enable = true },
+              method = { enable = true },
+              trait = { enable = true },
+            },
+            run = { enable = true },
+            updateTest = { enable = true },
+          },
         },
       },
       ---@type rustaceanvim.dap.Opts

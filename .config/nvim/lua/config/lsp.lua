@@ -132,6 +132,31 @@ function LSP.setup_lsp_binds(binds_type)
 
   -- and then enable **_ALL_** the servers found
 
+  map("[[", function()
+    -- if the qf list or location list is open, navigate that instead of buffers
+    local ql = require("utils").list.find_qf("q")
+    dd(ql)
+    if #ql > 0 then
+      return vim.cmd.cprev()
+    end
+    local ll = require("utils").list.find_qf("l")
+    if #ll > 0 then
+      return vim.cmd.lprev()
+    end
+  end, { desc = "Prev item in LIST" })
+
+  map("]]", function()
+    -- if the qf list or location list is open, navigate that instead of buffers
+    local ql = require("utils").list.find_qf("q")
+    if #ql > 0 then
+      return vim.cmd.cnext()
+    end
+    local ll = require("utils").list.find_qf("l")
+    if #ll > 0 then
+      return vim.cmd.lnext()
+    end
+  end, { desc = "Next item in LIST" })
+
   -- local servers = require("lang_tables").get("mason", "lsps", "all")
   -- vim.lsp.enable(servers, true)
   --
@@ -160,46 +185,11 @@ local disable_capability = function(client, client_name, server_capabilities_ind
   end
 end
 
-local hover_highlighter = function(client, ctx)
-  local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-  if client.server_capabilities.documentHighlightProvider then
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      group = gid,
-      buffer = ctx.buf,
-      callback = vim.lsp.buf.document_highlight,
-      -- nested = true,
-    })
-
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-      group = gid,
-      buffer = ctx.buf,
-      callback = vim.lsp.buf.clear_references,
-      -- nested = true,
-    })
-  end
-  return gid
-end
-
-local hover_highliter_clear = function(gid)
-  -- Clear highlights and autocmds on detach
-  vim.api.nvim_create_autocmd("LspDetach", {
-    group = vim.api.nvim_create_augroup("lsp_detach", { clear = true }),
-    callback = function(event2)
-      vim.lsp.buf.clear_references()
-      vim.api.nvim_clear_autocmds({ group = gid, buffer = event2.buf })
-    end,
-    nested = true,
-    desc = "Clear LSP document highlights and autocmds on detach",
-  })
-end
-
 local lsp_attach_autocmd = function(opts)
   -- Do a couple of things on attach:
-  -- 1. register obsidian as a vimrc file
   -- 2. diable semantic tokens
   -- 3. setup lsp binds
   -- 4. disable hover provider for ruff
-  -- 5. enable the general hover highlighter if the server supports it
   --
   -- Secondly we also
   -- Setup an autocmd for detach, to clear highlights and autocmds on detach
@@ -208,33 +198,13 @@ local lsp_attach_autocmd = function(opts)
 
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(ctx)
-      -- local client_supports_method = function(client, method, bufnr)
-      --   if vim.fn.has("nvim-0.11") == 1 then
-      --     return client:supports_method(method, bufnr)
-      --   else
-      --     return client.supports_method(method, { bufnr = bufnr })
-      --   end
-      -- end
-
       pcall(vim.treesitter.start, ctx.buf, vim.bo.filetype)
-
-      local buf_name = vim.api.nvim_buf_get_name(0)
-      if string.find(buf_name, ".obsidian.vimrc") then
-        vim.api.nvim_buf_set_option(0, "filetype", "vim")
-        return
-      end
 
       local client = vim.lsp.get_client_by_id(ctx.data.client_id)
       if not client then
         require("utils").output.warn("LSP client not found for id: " .. tostring(ctx.data.client_id))
         return
       end
-
-      --- Disable semantic tokens
-      -- ---@diagnostic disable-next-line need-check-nil
-      -- disable_capability(client, nil, "semanticTokensProvider")
-
-      -- LSP.binds_type = LSP.binds_type or LSP:handle_binds_type(opts.binds_type)
 
       if not opts.setup_lsp or opts.setup_lsp == nil then
         LSP.setup_lsp_binds(opts.binds_type)
@@ -250,23 +220,12 @@ local lsp_attach_autocmd = function(opts)
       disable_capability(client, nil, "semanticTokensProvider", nil)
       disable_capability(client, "ruff", "hoverProvider", false)
 
-      -- if
-      --   client
-      --   and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, ctx.buf)
-      -- then
-      -- register both
-      local gid = hover_highlighter(client, ctx)
-      hover_highliter_clear(gid)
-      -- end
-
       vim.lsp.config[client.name] = {
         capabilities = LSP.capabilities,
         flags = {
           debounce_text_changes = 500,
         },
       }
-
-      -- vim.lsp.enable(client.name, true)
     end,
     nested = true,
     desc = "Configure buffer keymap and behaviour based on LSP",
