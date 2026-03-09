@@ -159,21 +159,21 @@ limit = 200
 [graph]
 batch_size = 50
 
-[custom_commands]
-"delta" = { args = [
-  "util",
-  "exec",
-  "--",
-  "bash",
-  "-c",
-  """jj show -r $change_id --summary --git --color=always | delta --pager 'less -R'""",
-], show = "interactive" }
-
-"ci" = { args = [
-  "util",
-  "exec",
-  "--",
-  "bash",
-  "-c",
-  "jj ci",
-], show = "interactive" }
+# [custom_commands]
+# "delta" = { args = [
+#   "util",
+#   "exec",
+#   "--",
+#   "bash",
+#   "-c",
+#   """jj show -r $change_id --summary --git --color=always | delta --pager 'less -R'""",
+# ], show = "interactive" }
+#
+# "ci" = { args = [
+#   "util",
+#   "exec",
+#   "--",
+#   "bash",
+#   "-c",
+#   "jj ci",
+# ], show = "interactive" }

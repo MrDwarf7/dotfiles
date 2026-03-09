@@ -52,10 +52,10 @@
 # opam's hook is weird, it will just dump to path on shell restart,
 # this prevents a LOT of duplicate entries
 
-if contains $PATH "$HOME/.opam/default/bin"                             # do nothing, path already contains opam bin
-else if 00valid_pacman opam -a -r "$HOME/.opam/opam-init/init.fish"     # Source it's initialization script
-    source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
-    return
-else
-    return
-end
+# if contains $PATH "$HOME/.opam/default/bin"                             # do nothing, path already contains opam bin
+# else if 00valid_pacman opam -a -r "$HOME/.opam/opam-init/init.fish"     # Source it's initialization script
+#     source "$HOME/.opam/opam-init/init.fish" 2>&1 >/dev/null; or true
+#     return
+# else
+#     return
+# end
