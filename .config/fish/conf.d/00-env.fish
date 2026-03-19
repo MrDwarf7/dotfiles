@@ -31,6 +31,8 @@ set -gx VISUAL nvim
 set -gx EDITOR nvim
 set -gx SHELL fish
 
+set -gx DISTCC_DIR /tmp/distcc
+
 # set -gx MANPAGER 'less -R --use-color -Dd+r -Du+b'
 # set -gx MANPAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
 # set -gx MANPAGER
