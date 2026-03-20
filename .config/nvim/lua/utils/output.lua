@@ -85,6 +85,8 @@ function Output.warn(msg)
   fast_event_aware_notify(msg, vim.log.levels.WARN, {})
 end
 
+Output.error = Output.err
+
 function Output.err(msg)
   -- fast_event_aware_notify(msg, vim.log.levels.ERROR, { title = "Error" })
   fast_event_aware_notify(msg, vim.log.levels.ERROR, {})

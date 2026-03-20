@@ -19,7 +19,7 @@ _G.bt = function()
   Snacks.debug.backtrace()
 end
 if vim.fn.has("nvim-0.11") == 1 then
-  vim._print = function(_, ...)
+  vim._print = function(_, ...) ---@diagnostic disable-line: duplicate-set-field
     dd(...)
   end
 else

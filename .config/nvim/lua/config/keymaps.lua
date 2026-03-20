@@ -393,21 +393,71 @@ local zbi = function(num)
   return num - 1
 end
 
-map({ "n", "v" }, "<Leader>id", function()
+---@class InsertContent
+---@field register string The register to use for insertion (e.g., "_")
+---@field silent boolean Whether to perform the insertion silently (default: true)
+---@field content any Additional content or parameters needed for insertion (e.g., custom text to insert)
+
+---@param insertable InsertContent
+---@return nil|Error
+local insert_item = function(insertable)
+  insertable = insertable or {
+    register = "_",
+    silent = true,
+    content = nil,
+  }
+
+  if not insertable.content then
+    return error("insert_item: content is required")
+  end
+
   local mode = vim.api.nvim_get_mode().mode
-  local date = vim.fn.strftime("%Y_%m_%d")
-  print("Inserting date: " .. date)
-  vim.fn.setreg("_", date)
+  local content = insertable.content
+
+  if type(content) ~= "string" then
+    -- if content is not a string, attempt to convert it to a string for insertion
+    if type(content) == "table" then
+      content = vim.inspect(content)
+    else
+      content = tostring(content)
+    end
+  end
+
+  if not insertable.silent then
+    require("utils.output").info("Inserting content: " .. content)
+  end
+
+  vim.fn.setreg(insertable.register, content)
   if mode == "v" or mode == "V" then
-    vim.api.nvim_feedkeys("c" .. date, "n", false) -- literally just paste it over the selection
+    vim.api.nvim_feedkeys("c" .. content, "n", false) -- literally just paste it over the selection
   elseif mode == "n" then
-    vim.api.nvim_put({ date }, "c", true, false)
+    vim.api.nvim_put({ content }, "c", true, false)
   else
     require("utils.output").info("Unsupported mode for insert date: " .. mode)
     return
   end
 
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false) -- escape insert mode as we exit the fn
+end
+
+map({ "n", "v" }, "<Leader>id", function()
+  local mabye_err = insert_item({
+    register = "_",
+    content = vim.fn.strftime("%Y_%m_%d"),
+  })
+  if mabye_err then
+    require("utils.output").error("Failed to insert date: " .. tostring(mabye_err))
+  end
+end, silent_opts("[i]nsert [d]ate"))
+
+map({ "n", "v" }, "<Leader>i-", function()
+  local maybe_err = insert_item({
+    register = "_",
+    content = tostring("--------------------------------------------------"),
+  })
+  if maybe_err then
+    require("utils.output").error("Failed to insert separator line: " .. tostring(maybe_err))
+  end
 end, silent_opts("[i]nsert [d]ate"))
 
 -- vim.keymap.set({ "n", "i", "s" }, "<C-e>", function()

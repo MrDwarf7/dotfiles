@@ -80,6 +80,10 @@ return {
             end
           end, { desc = "Next item in LIST" })
 
+          vim.keymap.set("n", "<Leader>loc", function()
+            require("rustaceanvim.commands.open_cargo_toml")()
+          end, { desc = "Open Cargo.toml", buffer = bufnr })
+
           -- vim.keymap.set("n", "]]", function()
           --   local tsutils = require("utils.tsutils")
           --   local cnext_op = function()

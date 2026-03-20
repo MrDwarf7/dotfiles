@@ -2,7 +2,7 @@ return {
 
   -- { "stevearc/oil.nvim" },
   --
-  -- { "neovim/nvim-lspconfig" }, -- Called by mason-lspconfig anyway
+  { "neovim/nvim-lspconfig" }, -- Called by mason-lspconfig anyway
   --
   -- { "mason-org/mason.nvim" },
   -- { "mason-org/mason-lspconfig.nvim" },

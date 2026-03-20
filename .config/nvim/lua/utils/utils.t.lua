@@ -115,6 +115,8 @@
 ---@field warn fun(msg: MsgData): nil
 --- An err function that notifies messages, aware of fast events
 ---@field err fun(msg: MsgData): nil
+--- Maps directly to Output.err. Is basically an alias
+---@field error fun(msg: MsgData): nil
 --- Check if the current user is root (uid 0) (and not self.___IS_WIN, because, well... Windows)
 ---@field is_root fun(): boolean
 --- Get the development directory, handles expanding the local variable
