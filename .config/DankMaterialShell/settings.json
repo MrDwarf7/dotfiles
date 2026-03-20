@@ -4,6 +4,7 @@
   "customThemeFile": "",
   "registryThemeVariants": {},
   "matugenScheme": "scheme-tonal-spot",
+  "matugenContrast": 0,
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "DP-1",
   "popupTransparency": 0.15,
@@ -251,7 +252,7 @@
   "notepadFontSize": 14,
   "notepadShowLineNumbers": true,
   "notepadTransparencyOverride": -1,
-  "notepadLastCustomTransparency": 0.5,
+  "notepadLastCustomTransparency": 0.01,
   "soundsEnabled": true,
   "useSystemSoundTheme": false,
   "soundNewNotification": true,
@@ -321,6 +322,7 @@
       "harmony": 0.5
     }
   },
+  "matugenTemplateNeovimSetBackground": true,
   "showDock": false,
   "dockAutoHide": true,
   "dockSmartAutoHide": false,
@@ -386,7 +388,7 @@
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
-  "notificationFocusedMonitor": false,
+  "notificationFocusedMonitor": true,
   "osdAlwaysShowValue": true,
   "osdPosition": 0,
   "osdVolumeEnabled": true,
@@ -463,9 +465,8 @@
       "showOnLastDisplay": true,
       "leftWidgets": [
         {
-          "id": "spacer",
-          "enabled": true,
-          "size": 10
+          "id": "systemUpdate",
+          "enabled": true
         },
         {
           "id": "launcherButton",
@@ -483,15 +484,6 @@
         {
           "id": "systemTray",
           "enabled": true
-        },
-        {
-          "id": "systemUpdate",
-          "enabled": true
-        },
-        {
-          "id": "spacer",
-          "enabled": true,
-          "size": 130
         },
         {
           "id": "music",
@@ -548,11 +540,6 @@
         {
           "id": "notificationButton",
           "enabled": true
-        },
-        {
-          "id": "spacer",
-          "enabled": true,
-          "size": 10
         }
       ],
       "spacing": 0,
@@ -609,11 +596,6 @@
       ],
       "showOnLastDisplay": false,
       "leftWidgets": [
-        {
-          "id": "spacer",
-          "enabled": true,
-          "size": 30
-        },
         {
           "id": "clock",
           "enabled": true,
@@ -803,11 +785,141 @@
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
-  "desktopWidgetInstances": [],
+  "desktopWidgetInstances": [
+    {
+      "id": "dw_1774670944078_y4khllc5f",
+      "widgetType": "cavaVisualizer",
+      "name": "Cava Visualizer - MAIN",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "DP-1",
+            "model": "LS49AG95"
+          }
+        ],
+        "showOnOverlay": false,
+        "vizMode": "bars",
+        "barCount": 128,
+        "curvePoints": 47,
+        "barSpacing": 4,
+        "barWidth": 1,
+        "orientation": "top",
+        "sensitivity": 100,
+        "channels": "mono",
+        "colorChoice": "primary",
+        "silenceTimeout": 5,
+        "bgOpacity": 0,
+        "opacity": 100,
+        "syncPositionAcrossScreens": false
+      },
+      "positions": {
+        "DP-1": {
+          "width": 500,
+          "height": 261,
+          "x": 4620,
+          "y": 0
+        },
+        "HDMI-A-2": {
+          "width": 200,
+          "height": 200,
+          "x": 860,
+          "y": 440
+        },
+        "_synced": {
+          "x": 0.8751953125,
+          "y": 0.8006944444444445,
+          "width": 639,
+          "height": 287
+        }
+      },
+      "group": "dwg_1774671629920_wka88lkf1"
+    },
+    {
+      "id": "dw_1774671449643_tjfhhka30",
+      "widgetType": "cavaVisualizer",
+      "name": "Cava Visualizer - SECONDARY",
+      "enabled": true,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "HDMI-A-2",
+            "model": "KA242Y"
+          }
+        ],
+        "showOnOverlay": false,
+        "vizMode": "bars",
+        "barCount": 128,
+        "curvePoints": 47,
+        "barSpacing": 4,
+        "barWidth": 1,
+        "orientation": "top",
+        "sensitivity": 100,
+        "channels": "mono",
+        "colorChoice": "primary",
+        "silenceTimeout": 5,
+        "bgOpacity": 0,
+        "opacity": 100,
+        "syncPositionAcrossScreens": false
+      },
+      "positions": {
+        "DP-1": {
+          "width": 200,
+          "height": 200,
+          "x": 2460,
+          "y": 620
+        },
+        "HDMI-A-2": {
+          "width": 619,
+          "height": 1078,
+          "x": 0,
+          "y": 0
+        }
+      },
+      "group": "dwg_1774671629920_wka88lkf1"
+    },
+    {
+      "id": "dw_1774671708641_ljajy67su",
+      "widgetType": "dankAudioVisualizer",
+      "name": "Dank Audio Visualizer",
+      "enabled": false,
+      "config": {
+        "displayPreferences": [
+          {
+            "name": "DP-1",
+            "model": "LS49AG95"
+          }
+        ],
+        "visualizationMode": "barsRings",
+        "rotationSpeed": 20,
+        "fadeWhenIdle": true
+      },
+      "positions": {
+        "DP-1": {
+          "width": 637,
+          "height": 531,
+          "x": 4336,
+          "y": 159
+        },
+        "HDMI-A-2": {
+          "width": 200,
+          "height": 200,
+          "x": 860,
+          "y": 440
+        }
+      },
+      "group": "dwg_1774671629920_wka88lkf1"
+    }
+  ],
   "desktopWidgetGroups": [
     {
       "id": "dwg_1772221872286_jf67oqgr8",
       "name": "System Info",
+      "collapsed": false
+    },
+    {
+      "id": "dwg_1774671629920_wka88lkf1",
+      "name": "Audio Visualizers",
       "collapsed": false
     }
   ],
