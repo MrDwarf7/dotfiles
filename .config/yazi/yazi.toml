@@ -67,9 +67,13 @@ play = [
 [open]
 prepend_rules = [
   { url = ".gitconfig", run = "nvim %*", use = ["open", "edit"], for = "windows" },
+  { url = ".gitconfig", run = "nvim $@", use = ["open", "edit"], for = "linux" },
   { url = ".gitconfig", run = "nvim $@", use = ["open", "edit"], for = "unix" },
+
 ]
 rules = [
+  # application/wine-extension-ini
+  { url = "application/wine-extension*", use = ["open", "edit", "reveal"] },
   # Folder
   { url = "*/", use = ["edit", "open", "reveal"] },
   # Text
@@ -131,9 +135,9 @@ prepend_previewers = [
   { url = "*.duckdb", run = "duckdb" },
 
   { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
+  # image/gif is handled by ~/.config/mimeapps.list
 
   { mime = "audio/*", run = "exifaudio" },
-
 
   ### mediainfo plugin
   # Replace magick, image, video with mediainfo
@@ -161,7 +165,6 @@ prepend_preloaders = [
   { url = "*.csv", run = "duckdb", multi = false },
   { url = "*.tsv", run = "duckdb", multi = false },
   { url = "*.json", run = "duckdb", multi = false },
-  { url = "*.jsonc", run = "duckdb", multi = false },
   { url = "*.parquet", run = "duckdb", multi = false },
   { url = "*.txt", run = "duckdb", multi = false },
   { url = "*.xlsx", run = "duckdb", multi = false },

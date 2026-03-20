@@ -18,7 +18,7 @@ config-file = themes/tokyonight_storm.conf
 # #   ELF object binary architecture: AMD x86-64
 #
 # 10k
-scrollback-limit = 1000
+scrollback-limit = 10000
 
 ################
 ### Settings ###
