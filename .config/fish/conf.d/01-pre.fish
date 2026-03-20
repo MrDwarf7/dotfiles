@@ -16,7 +16,9 @@
 
 ## basically, vi = older 'vim', vim = 'neovim'
 ## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
-05export_alias_if_pacman nvim vi rvim
+# 05export_alias_if_pacman nvim vi /usr/bin/vim
+
+05export_alias_if_pacman vim vi /usr/bin/vim
 05export_alias_if_pacman nvim vim /usr/bin/nvim
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim

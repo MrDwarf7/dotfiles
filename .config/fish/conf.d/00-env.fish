@@ -13,6 +13,8 @@ set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data
 set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state
 mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_CACHE_HOME $XDG_CACHE_LOCAL_HOME
 
+set -gx INCLUDE_SERVER_PORT 3632
+
 # Fix wezterm/starship rendering the cursor always as a block
 set -gx fish_vi_force_cursor 1
 set fish_cursor_default block blink
