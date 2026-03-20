@@ -39,6 +39,9 @@ return {
       PERF = { icon = " ", color = "warning" },
       TODO = { icon = " ", color = "info" },
       WARN = { icon = " ", color = "warning" },
+      -- custom additions
+      IMP = { icon = " ", color = "hint" }, -- nf-fa-exclamation
+      SEE = { icon = " ", color = "warning" },
       -- stylua: ignore end
     },
     search = {

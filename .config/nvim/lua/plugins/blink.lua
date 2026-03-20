@@ -258,7 +258,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = -10,
+          score_offset = 80,
           async = true,
         },
 
@@ -273,7 +273,7 @@ return {
         },
 
         lsp = {
-          score_offset = 50,
+          score_offset = 95,
           fallbacks = {}, -- defaults out to the "buffer" source
         },
         -- buffer = {},
