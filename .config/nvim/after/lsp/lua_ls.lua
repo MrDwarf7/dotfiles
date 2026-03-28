@@ -68,6 +68,59 @@
 --- * [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
 ---
 
+local root_markers1 = {
+  ".emmyrc.json",
+  ".luarc.json",
+  ".luarc.jsonc",
+}
+
+local root_markers2 = {
+  ".luacheckrc",
+  ".stylua.toml",
+  "stylua.toml",
+  "selene.toml",
+  "selene.yml",
+}
+
+local root_markers = vim.fn.has("nvim-0.11.3") == 1 and { root_markers1, root_markers2, { ".git" } }
+  or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { ".git" })
+
+local library_paths = {
+  vim.split(package.path, ";"),
+  vim.env.VIMRUNTIME,
+  vim.api.nvim_get_runtime_file("", true),
+  "$VIMRUNTIME",
+  "$VIMRUNTIME/lua",
+  "${3rd}/luv/library",
+  "${3rd}/busted/library",
+  "${3rd}/luaassert/library",
+  "lua",
+  "lua/?.lua",
+  "lua/?/init.lua",
+}
+
+library_paths = vim.list_extend(
+  library_paths,
+  vim.tbl_filter(function(d)
+    return not d:match(vim.fn.stdpath("config") .. "/?a?f?t?e?r?")
+  end, vim.api.nvim_get_runtime_file("", true))
+)
+
+local runtime_t = {
+  version = "LuaJIT",
+  path = library_paths,
+}
+
+local workspace_t = {
+  checkThirdParty = true,
+  library = library_paths,
+  ignoreDir = {
+    "node_modules",
+    "target",
+    "vendor",
+  },
+}
+
 ---@type vim.lsp.Config
 return {
   ---@param client vim.lsp.Client
@@ -90,65 +143,17 @@ return {
     assert(type(client.config.settings.Lua) == "table", "Expected client.config.settings.Lua to be a table")
 
     client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
-      runtime = {
-        version = "LuaJIT",
-        path = {
-          vim.env.VIMRUNTIME,
-          vim.api.nvim_get_runtime_file("", true),
-          "$VIMRUNTIME",
-          "$VIMRUNTIME/lua",
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          "${3rd}/luaassert/library",
-          "lua",
-          "lua/?.lua",
-          "lua/?/init.lua",
-        },
-      },
-      workspace = {
-        checkThirdParty = true,
-        library = {
-          vim.env.VIMRUNTIME,
-          vim.api.nvim_get_runtime_file("", true),
-          "$VIMRUNTIME",
-          "$VIMRUNTIME/lua",
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          "${3rd}/luaassert/library",
-          "lua",
-        },
-      },
+      runtime = runtime_t,
+      workspace = workspace_t,
     })
   end,
 
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
-  root_markers = {
-    ".emmyrc.json",
-    ".luarc.json",
-    ".luarc.jsonc",
-    ".luacheckrc",
-    ".stylua.toml",
-    "stylua.toml",
-    "selene.toml",
-    "selene.yml",
-    ".git",
-  },
-
-  -- ----- original settings
-  -- settings = {
-  --   Lua = {
-  --     codeLens = { enable = true },
-  --     hint = { enable = true, semicolon = "Disable" },
-  --   },
-  -- },
-
+  root_markers = root_markers,
   settings = {
     Lua = {
-      runtime = {
-        version = "luaJIT",
-        path = vim.split(package.path, ";"),
-      },
+      runtime = runtime_t,
       completion = {
         callSnippet = "Replace",
       },
@@ -156,20 +161,7 @@ return {
         disable = { "missing-fields" },
         globals = { "vim", "require" },
       },
-      workspace = {
-
-        checkThirdParty = true,
-        library = {
-          vim.env.VIMRUNTIME,
-          vim.api.nvim_get_runtime_file("", true),
-          "$VIMRUNTIME",
-          "$VIMRUNTIME/lua",
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          "${3rd}/luaassert/library",
-          "lua",
-        },
-      },
+      workspace = workspace_t,
       codeLens = {
         enable = true,
         completion = {
@@ -186,16 +178,17 @@ return {
           semicolon = "Disable",
           arrayIndex = "Disable",
         },
-        library = {
-          vim.env.VIMRUNTIME,
-          vim.api.nvim_get_runtime_file("", true),
-          "$VIMRUNTIME",
-          "$VIMRUNTIME/lua",
-          "${3rd}/luv/library",
-          "${3rd}/busted/library",
-          "${3rd}/luaassert/library",
-          "lua",
-        },
+        library = library_paths,
+        -- {
+        --   vim.env.VIMRUNTIME,
+        --   vim.api.nvim_get_runtime_file("", true),
+        --   "$VIMRUNTIME",
+        --   "$VIMRUNTIME/lua",
+        --   "${3rd}/luv/library",
+        --   "${3rd}/busted/library",
+        --   "${3rd}/luaassert/library",
+        --   "lua",
+        -- },
       },
       telemetry = {
         enable = false,

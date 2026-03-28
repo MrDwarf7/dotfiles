@@ -380,6 +380,16 @@ map("n", "<Leader>pl", "<CMD>Lazy<CR>", silent_opts("Lazy"))
 map("n", "YY", "va{Vy", silent_opts("Yank Block {}"))
 map("n", "Yy", "vi{Vy", silent_opts("Yank Block {}"))
 
+map("n", "<leader>tw", function()
+  if vim.wo.wrap then
+    vim.wo.wrap = false
+    require("utils.output").info("Wrap disabled")
+  else
+    vim.wo.wrap = true
+    require("utils.output").info("Wrap enabled")
+  end
+end, silent_opts("[t]oggle [w]rap on"))
+
 --- Handles Lua's behaviour of 0+1 indexing, and makes it [Z]ero [B]ased [I]ndexing
 ---@param num integer|nil
 ---@return integer?

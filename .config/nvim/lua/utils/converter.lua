@@ -1,5 +1,3 @@
--- TODO: @types
--- require("types")
 local arch = require("utils.arch")
 
 ---@class utils.Converter

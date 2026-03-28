@@ -10,23 +10,32 @@ return {
   dependencies = {
     -- stylua: ignore start
     -- { "j-hui/fidget.nvim", enabled = false,            lazy = true, event = "VeryLazy" },
-    { "Saghen/blink.compat",                      lazy = true },
+    { "Saghen/blink.compat",                          lazy = false },
+    { "L3MON4D3/LuaSnip",                             lazy = false, version = "2.*" ,
+      dependencies = { { "rafamadriz/friendly-snippets" } } },
+    { "rafamadriz/friendly-snippets",                 lazy = true },
+    { "folke/lazydev.nvim",                           lazy = false, ft = "lua" },
+    { "fang2hou/blink-copilot",                       lazy = true },
     {
-      "L3MON4D3/LuaSnip",                         lazy = true, version = "2.*" ,
-      dependencies = { { "rafamadriz/friendly-snippets" } }
-    },
-    { "rafamadriz/friendly-snippets",             lazy = true },
-    { "folke/lazydev.nvim",                       lazy = false, ft = "lua" },
-    { "fang2hou/blink-copilot",                   lazy = true },
-    { "zbirenbaum/copilot.lua",                   lazy = true },
-    { "xzbdmw/colorful-menu.nvim",                lazy = true },
-    -- { "barrettruth/blink-cmp-ghostty",            lazy = false },
-    { "disrupted/blink-cmp-conventional-commits", lazy = true },
-    { "bydlw98/blink-cmp-sshconfig",              lazy = true, build = "make" },
-    { "barrettruth/blink-cmp-tmux",               lazy = true },
-    { "junkblocker/blink-cmp-wezterm",            lazy = true },
+      "zbirenbaum/copilot.lua",                       lazy = true,
+      opts = {
+        max_completions = 4, -- These set 'global' defaults. We override in sources.lua
+        max_attempts = 2,
+      },
 
-    -- { "mikavilpas/blink-ripgrep.nvim", version = "*" }, -- use the latest stable version
+    },
+    { "xzbdmw/colorful-menu.nvim",                    lazy = false },
+    -- { "barrettruth/blink-cmp-ghostty",                lazy = false },
+    { "disrupted/blink-cmp-conventional-commits",     lazy = false },
+    { "bydlw98/blink-cmp-sshconfig",                  lazy = true, build = "make" },
+    { "barrettruth/blink-cmp-tmux",                   lazy = true },
+    { "junkblocker/blink-cmp-wezterm",                lazy = true },
+    -- { "Kaiser-Yang/blink-cmp-avante",                 lazy = true },
+    { "mikavilpas/blink-ripgrep.nvim",                lazy = true, version = "*" }, -- use the latest stable version
+    { "bydlw98/blink-cmp-env",                        lazy = true },
+    { "archie-judd/blink-cmp-words",                  lazy = true },
+    -- { "xieyonn/blink-cmp-dat-word",                   lazy = true },
+
     -- stylua: ignore end
   },
   -- version = "*",

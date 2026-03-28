@@ -51,6 +51,7 @@ return {
   --
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = true,
     dependencies = {
       { "mason-org/mason.nvim", lazy = true },
       { "mason-org/mason-lspconfig.nvim", lazy = true },
