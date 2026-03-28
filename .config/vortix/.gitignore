@@ -1,0 +1,12 @@
+profiles/
+./profiles/
+profiles/*
+./profiles/*
+
+logs/
+./logs/
+logs/*
+./logs/*
+
+killswitch.state
+killswitch.*

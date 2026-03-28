@@ -1,0 +1,60 @@
+# --- Timing ---
+
+# UI refresh rate in milliseconds (default: 1000)
+tick_rate = 1000
+
+# Telemetry polling interval in seconds (default: 30)
+telemetry_poll_rate = 30
+
+# HTTP API timeout in seconds (default: 5)
+api_timeout = 5
+
+# Ping timeout in seconds (default: 2)
+ping_timeout = 2
+
+# OpenVPN connection timeout in seconds (default: 20)
+connect_timeout = 20
+
+# Max seconds to wait for a VPN disconnect before force-killing (default: 30)
+disconnect_timeout = 30
+
+# --- Logging ---
+
+# Minimum log level shown in the TUI event log: "debug", "info", "warning", "error" (default: "info")
+log_level = "info"
+
+# Maximum log entries kept in the TUI event log (default: 1000)
+max_log_entries = 1000
+
+# Log file rotation size in bytes (default: 5242880 = 5 MB)
+log_rotation_size = 5242880
+
+# Days to retain old log files (default: 7)
+log_retention_days = 7
+
+# --- OpenVPN ---
+
+# OpenVPN daemon verbosity level, --verb flag, range 0-11 (default: "3")
+openvpn_verbosity = "3"
+
+# --- Telemetry endpoints ---
+
+# Ping targets for latency measurement (tried in order)
+ping_targets = ["1.1.1.1", "8.8.8.8", "9.9.9.9", "208.67.222.222"]
+
+# IPv6 leak detection endpoints
+ipv6_check_apis = [
+  "https://ipv6.icanhazip.com",
+  "https://v6.ident.me",
+  "https://api6.ipify.org",
+]
+
+# Primary IP/ISP API
+ip_api_primary = "https://ipinfo.io/json"
+
+# Fallback IP APIs
+ip_api_fallbacks = [
+  "https://api.ipify.org",
+  "https://icanhazip.com",
+  "https://ifconfig.me/ip",
+]
