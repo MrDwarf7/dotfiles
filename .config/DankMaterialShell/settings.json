@@ -7,7 +7,7 @@
   "matugenContrast": 0,
   "runUserMatugenTemplates": true,
   "matugenTargetMonitor": "DP-1",
-  "popupTransparency": 0.15,
+  "popupTransparency": 0.05,
   "dockTransparency": 0.6,
   "widgetBackgroundColor": "s",
   "widgetColorMode": "default",
@@ -31,10 +31,10 @@
   "useFahrenheit": false,
   "windSpeedUnit": "kmh",
   "nightModeEnabled": false,
-  "animationSpeed": 4,
+  "animationSpeed": 0,
   "customAnimationDuration": 175,
   "syncComponentAnimationSpeeds": true,
-  "popoutAnimationSpeed": 4,
+  "popoutAnimationSpeed": 0,
   "popoutCustomAnimationDuration": 150,
   "modalAnimationSpeed": 1,
   "modalCustomAnimationDuration": 150,
@@ -48,6 +48,10 @@
   "modalElevationEnabled": false,
   "popoutElevationEnabled": false,
   "barElevationEnabled": false,
+  "blurEnabled": false,
+  "blurBorderColor": "outline",
+  "blurBorderCustomColor": "#ffffff",
+  "blurBorderOpacity": 1,
   "wallpaperFillMode": "Fit",
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": false,
@@ -161,6 +165,7 @@
   "workspaceNameIcons": {},
   "waveProgressEnabled": true,
   "scrollTitleEnabled": true,
+  "mediaAdaptiveWidthEnabled": true,
   "audioVisualizerEnabled": true,
   "audioScrollMode": "volume",
   "audioWheelScrollAmount": 5,
@@ -205,7 +210,10 @@
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
-  "spotlightSectionViewModes": {},
+  "rememberLastQuery": false,
+  "spotlightSectionViewModes": {
+    "apps": "list"
+  },
   "appDrawerSectionViewModes": {
     "apps": "list"
   },
@@ -255,6 +263,7 @@
   "notepadLastCustomTransparency": 0.01,
   "soundsEnabled": true,
   "useSystemSoundTheme": false,
+  "soundLogin": false,
   "soundNewNotification": true,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
@@ -324,7 +333,7 @@
   },
   "matugenTemplateNeovimSetBackground": true,
   "showDock": false,
-  "dockAutoHide": true,
+  "dockAutoHide": false,
   "dockSmartAutoHide": false,
   "dockGroupByApp": false,
   "dockRestoreSpecialWorkspaceOnClick": false,
@@ -378,7 +387,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationCompactMode": false,
-  "notificationPopupPosition": 3,
+  "notificationPopupPosition": 0,
   "notificationAnimationSpeed": 4,
   "notificationCustomAnimationDuration": 159,
   "notificationHistoryEnabled": true,
@@ -388,7 +397,7 @@
   "notificationHistorySaveNormal": true,
   "notificationHistorySaveCritical": true,
   "notificationRules": [],
-  "notificationFocusedMonitor": true,
+  "notificationFocusedMonitor": false,
   "osdAlwaysShowValue": true,
   "osdPosition": 0,
   "osdVolumeEnabled": true,
@@ -432,10 +441,12 @@
         "name": "DP-1",
         "model": "LS49AG95"
       }
-    ]
+    ],
+    "dock": []
   },
   "showOnLastDisplay": {
-    "toast": true
+    "toast": true,
+    "dock": false
   },
   "niriOutputSettings": {},
   "hyprlandOutputSettings": {
@@ -524,6 +535,10 @@
           "diskUsageMode": 3
         },
         {
+          "id": "vpn",
+          "enabled": true
+        },
+        {
           "id": "controlCenterButton",
           "enabled": true,
           "showAudioIcon": true,
@@ -602,10 +617,6 @@
           "clockCompactMode": true
         },
         {
-          "id": "weather",
-          "enabled": true
-        },
-        {
           "id": "systemTray",
           "enabled": true
         },
@@ -623,30 +634,16 @@
       ],
       "rightWidgets": [
         {
-          "id": "runningApps",
-          "enabled": false,
-          "runningAppsCompactMode": false,
-          "runningAppsGroupByApp": false,
-          "runningAppsCurrentWorkspace": true,
-          "runningAppsCurrentMonitor": true
-        },
-        {
           "id": "cpuUsage",
-          "enabled": false,
+          "enabled": true,
           "minimumWidth": true
         },
         {
           "id": "memUsage",
-          "enabled": false,
+          "enabled": true,
           "minimumWidth": true,
           "showSwap": false,
           "showInGb": true
-        },
-        {
-          "id": "diskUsage",
-          "enabled": false,
-          "mountPath": "/",
-          "diskUsageMode": 3
         },
         {
           "id": "controlCenterButton",
@@ -665,11 +662,6 @@
         {
           "id": "notificationButton",
           "enabled": true
-        },
-        {
-          "id": "spacer",
-          "enabled": true,
-          "size": 10
         }
       ],
       "spacing": 0,
@@ -785,132 +777,7 @@
   "systemMonitorVariants": [],
   "desktopWidgetPositions": {},
   "desktopWidgetGridSettings": {},
-  "desktopWidgetInstances": [
-    {
-      "id": "dw_1774670944078_y4khllc5f",
-      "widgetType": "cavaVisualizer",
-      "name": "Cava Visualizer - MAIN",
-      "enabled": true,
-      "config": {
-        "displayPreferences": [
-          {
-            "name": "DP-1",
-            "model": "LS49AG95"
-          }
-        ],
-        "showOnOverlay": false,
-        "vizMode": "bars",
-        "barCount": 128,
-        "curvePoints": 47,
-        "barSpacing": 4,
-        "barWidth": 1,
-        "orientation": "top",
-        "sensitivity": 100,
-        "channels": "mono",
-        "colorChoice": "primary",
-        "silenceTimeout": 5,
-        "bgOpacity": 0,
-        "opacity": 100,
-        "syncPositionAcrossScreens": false
-      },
-      "positions": {
-        "DP-1": {
-          "width": 500,
-          "height": 261,
-          "x": 4620,
-          "y": 0
-        },
-        "HDMI-A-2": {
-          "width": 200,
-          "height": 200,
-          "x": 860,
-          "y": 440
-        },
-        "_synced": {
-          "x": 0.8751953125,
-          "y": 0.8006944444444445,
-          "width": 639,
-          "height": 287
-        }
-      },
-      "group": "dwg_1774671629920_wka88lkf1"
-    },
-    {
-      "id": "dw_1774671449643_tjfhhka30",
-      "widgetType": "cavaVisualizer",
-      "name": "Cava Visualizer - SECONDARY",
-      "enabled": true,
-      "config": {
-        "displayPreferences": [
-          {
-            "name": "HDMI-A-2",
-            "model": "KA242Y"
-          }
-        ],
-        "showOnOverlay": false,
-        "vizMode": "bars",
-        "barCount": 128,
-        "curvePoints": 47,
-        "barSpacing": 4,
-        "barWidth": 1,
-        "orientation": "top",
-        "sensitivity": 100,
-        "channels": "mono",
-        "colorChoice": "primary",
-        "silenceTimeout": 5,
-        "bgOpacity": 0,
-        "opacity": 100,
-        "syncPositionAcrossScreens": false
-      },
-      "positions": {
-        "DP-1": {
-          "width": 200,
-          "height": 200,
-          "x": 2460,
-          "y": 620
-        },
-        "HDMI-A-2": {
-          "width": 619,
-          "height": 1078,
-          "x": 0,
-          "y": 0
-        }
-      },
-      "group": "dwg_1774671629920_wka88lkf1"
-    },
-    {
-      "id": "dw_1774671708641_ljajy67su",
-      "widgetType": "dankAudioVisualizer",
-      "name": "Dank Audio Visualizer",
-      "enabled": false,
-      "config": {
-        "displayPreferences": [
-          {
-            "name": "DP-1",
-            "model": "LS49AG95"
-          }
-        ],
-        "visualizationMode": "barsRings",
-        "rotationSpeed": 20,
-        "fadeWhenIdle": true
-      },
-      "positions": {
-        "DP-1": {
-          "width": 637,
-          "height": 531,
-          "x": 4336,
-          "y": 159
-        },
-        "HDMI-A-2": {
-          "width": 200,
-          "height": 200,
-          "x": 860,
-          "y": 440
-        }
-      },
-      "group": "dwg_1774671629920_wka88lkf1"
-    }
-  ],
+  "desktopWidgetInstances": [],
   "desktopWidgetGroups": [
     {
       "id": "dwg_1772221872286_jf67oqgr8",
