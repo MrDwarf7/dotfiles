@@ -28,7 +28,7 @@ XDG_STATE_HOME_DIR="$HOME/.xdg/state"
 # XDG_MUSIC_DIR="$HOME/Music"
 # XDG_PICTURES_DIR="$HOME/Pictures"
 # XDG_VIDEOS_DIR="$HOME/Videos"
-# 
+#
 # XDG_BIN_HOME_DIR="$HOME/.xdg/bin"
 # XDG_CACHE_HOME_DIR="$HOME/.xdg/cache"
 # XDG_CACHE_LOCAL_HOME_DIR="$HOME/.xdg/local"

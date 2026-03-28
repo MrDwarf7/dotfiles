@@ -60,3 +60,11 @@ source "$ZSHRC_CONFIG/01.initial_setup.zsh"
 
 # source <(fzf --zsh)
 # source <(zoxide init zsh)
+
+# Hermes Agent — ensure ~/.local/bin is on PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/dwarf/.lmstudio/bin"
+# End of LM Studio CLI section
+

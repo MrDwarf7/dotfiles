@@ -54,7 +54,7 @@ app-notifications = no-clipboard-copy
 # background-opacity = 0.40
 
 #### uncomment after fixing up Niri
-background-opacity = 0.4
+background-opacity = 0.6
 
 
 # Niri

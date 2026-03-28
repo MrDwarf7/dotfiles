@@ -154,3 +154,8 @@ eval "$(starship init bash)"
 
 echo ""
 shellup
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/dwarf/.lmstudio/bin"
+# End of LM Studio CLI section
+

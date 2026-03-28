@@ -38,6 +38,17 @@ version = "latest"
 [tools."npm:turbo"]
 version = "latest"
 
+[tools."npm:fieldtheory"]
+version = "latest"
+# "npm:fieldtheory" = "1.2.1"
+
+[tools."npm:@aoagents/ao"]
+version = "latest"
+
+# fieldtheory - cli for pulling X bookmarks locally (ts doesn't support vivaldi, and it's buggy AF)
+# [tools."npm:fieldtheory"]
+# version = "latest"
+
 ####################################################################################################
 
 ## Cargo / Cargo install / Cargo binstall / Rust / Rustup Tools
@@ -50,8 +61,9 @@ version = "latest"
 [tools."cargo:abscissa"]
 version = "latest"
 
-[tools."cargo:atac"]
-version = "latest"
+## REST TUI client - superceded by postings, then by resterm (goated!)
+# [tools."cargo:atac"]
+# version = "latest"
 
 [tools."cargo:bacon"]
 version = "latest"
@@ -92,6 +104,9 @@ version = "latest"
 [tools."cargo:cargo-nextest"]
 version = "latest"
 
+[tools."cargo:nviwatch"]
+version = "latest"
+
 [tools."cargo:cargo-outdated"]
 version = "latest"
 
@@ -115,8 +130,8 @@ version = "latest"
 version = "latest"
 
 #####
-[tools."cargo:dealve-tui"]
-version = "latest"
+# [tools."cargo:dealve-tui"]
+# version = "latest"
 
 [tools."cargo:flamegraph"]
 version = "latest"
@@ -135,6 +150,11 @@ version = "latest"
 [tools.just]
 version = "latest"
 
+
+[tools."go:github.com/chronologos/lightjj/cmd/lightjj"]
+version = "latest"
+
+
 # [tools."cargo:spider"]
 # version = "latest"
 
@@ -150,6 +170,6 @@ npm.bun = true        # Prefer using bun over npm
 # npm.package_manager = "bun"
 
 pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
-pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
+# pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
 
 python.uv_venv_auto = true # Auto-source .venv's if a uv.lock is present
