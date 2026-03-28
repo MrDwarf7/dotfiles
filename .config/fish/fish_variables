@@ -1,8 +1,8 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
 SETUVAR --export CARAPACE_BRIDGES:all
-SETUVAR --export SSH_AGENT_PID:1178
-SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2essh/agent/s\x2ePHaOxDfwuR\x2eagent\x2eiuuDMAGpSt
+SETUVAR --export SSH_AGENT_PID:3592
+SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2essh/agent/s\x2ePHaOxDfwuR\x2eagent\x2eN3KB7LtA7B
 SETUVAR --export XDG_BIN_HOME:/home/dwarf/\x2exdg/bin
 SETUVAR --export XDG_CACHE_HOME:/home/dwarf/\x2exdg/cache
 SETUVAR --export XDG_CACHE_LOCAL_HOME:/home/dwarf/\x2exdg/local
@@ -11,4 +11,4 @@ SETUVAR --export XDG_DATA_HOME:/home/dwarf/\x2exdg/data
 SETUVAR --export XDG_STATE_HOME:/home/dwarf/\x2exdg/state
 SETUVAR __fish_initialized:4300
 SETUVAR fish_key_bindings:fish_default_key_bindings
-SETUVAR fish_user_paths:/home/dwarf/\x2exdg/data/mise/shims\x1e/home/dwarf/\x2ecargo/bin\x1e/home/dwarf/\x2exdg/data/pnpm\x1e/home/dwarf/\x2exdg/data/JetBrains/Toolbox/scripts\x1e/home/dwarf/\x2eghcup/bin\x1e/home/dwarf/\x2exdg/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self\x1e/usr/bin
+SETUVAR fish_user_paths:/home/dwarf/\x2elmstudio/bin\x1e/home/dwarf/\x2exdg/data/mise/shims\x1e/home/dwarf/\x2ecargo/bin\x1e/home/dwarf/\x2exdg/data/pnpm\x1e/home/dwarf/\x2exdg/data/JetBrains/Toolbox/scripts\x1e/home/dwarf/\x2eghcup/bin\x1e/home/dwarf/\x2exdg/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/bin\x1e/home/dwarf/\x2econfig/\x2ezvm/self\x1e/usr/bin

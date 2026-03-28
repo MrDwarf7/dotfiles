@@ -106,6 +106,8 @@ set -Ux CARAPACE_BRIDGES all
 
 set -gx CODEX_HOME $XDG_CONFIG_HOME/.codex
 
+set -gx HERMES_HOME "$HOME/.hermes"
+
 set -gx GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 #### bat (batcat) extras configuration via env variables

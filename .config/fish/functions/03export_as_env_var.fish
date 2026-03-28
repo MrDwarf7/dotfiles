@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 03export_path_if_pacman --description "If a provided program is available via pacman, exports an environment variable to a path"
+function 03export_as_env_var --description "If a provided program is available via pacman, exports an environment variable to a path"
     # Exports an environment variable if the program is found in pacman
     # Used to set an env var to a path specfically
     #

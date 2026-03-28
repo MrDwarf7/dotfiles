@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 04export_onto_path_if_pacman --description "If a provided program is available via pacman, exports a program onto the system PATH via fish's add_path fn"
+function 04var_to_syspath --description "If a provided program is available via pacman, exports a program onto the system PATH via fish's add_path fn"
     # Exports a program onto the path by checking pacman for the program
     # Uses fish_add_path to add the program to the path
     #
