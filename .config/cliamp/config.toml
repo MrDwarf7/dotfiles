@@ -1,0 +1,107 @@
+# CLIAMP configuration
+# Copy to ~/.config/cliamp/config.toml
+
+# Default volume in dB (range: -30 to 6)
+volume = 0
+
+# Repeat mode: "off", "all", or "one"
+repeat = "off"
+
+# Start with shuffle enabled
+shuffle = false
+
+# Start with mono output (L+R downmix)
+mono = false
+
+# Shift+Left/Right seek jump in seconds (6-600)
+seek_large_step_sec = 30
+
+# Advanced audio settings (most users don't need to change these)
+# sample_rate = 0          # 0=auto-detect, or 22050/44100/48000/96000/192000
+# buffer_ms = 100          # speaker buffer in ms (50-500)
+# resample_quality = 4     # 1-4, where 4 is best
+# bit_depth = 16           # 16 or 32 (for FFmpeg-decoded formats)
+
+# EQ preset: "Flat", "Rock", "Pop", "Jazz", "Classical",
+#             "Bass Boost", "Treble Boost", "Vocal", "Electronic", "Acoustic"
+# Leave empty or "Custom" to use manual eq values below
+eq_preset = "Custom"
+
+# 10-band EQ gains in dB (range: -12 to 12)
+# Bands: 70Hz, 180Hz, 320Hz, 600Hz, 1kHz, 3kHz, 6kHz, 12kHz, 14kHz, 16kHz
+# Only used when eq_preset is "Custom" or empty
+eq = [7, 6, 3, 1, -1, -1, 1, 3, 3, 3]
+
+# Default provider on startup: "radio", "navidrome", "spotify", "plex", "jellyfin", or a YouTube provider
+# provider = "radio"
+
+# Compact mode: cap UI width at 80 columns (default: fluid/full-width)
+# compact = true
+
+# UI theme name (check ~/.config/cliamp/themes/ for available themes)
+theme = "tokyo-night"
+
+# Visualizer mode: Bars
+# BarsDot
+# Rain
+# BarsOutline
+# Bricks
+# Columns
+# ClassicPeak
+# Wave
+# Scatter
+# Flame
+# Retro
+# Pulse
+# Matrix
+# Binary
+# Sakura
+# Firework
+# Logo
+# Terrain
+# Glitch
+# Scope
+# Heartbeat
+# Butterfly
+# Lightning
+# None
+visualizer = "Butterfly"
+
+# ---
+# Spotify (optional)
+# A Spotify Premium account and a registered app at
+# developer.spotify.com/dashboard are required.
+# Add redirect URI: http://127.0.0.1:19872/login
+# [spotify]
+# client_id = "your-spotify-app-client-id"
+
+# ---
+# Navidrome / Subsonic server (optional)
+# When configured, cliamp opens the playlist browser on startup and streams
+# tracks directly from your server.
+# These values take precedence over the NAVIDROME_URL / NAVIDROME_USER /
+# NAVIDROME_PASS environment variables when both are present.
+# [navidrome]
+# url      = "https://music.example.com"
+# user     = "alice"
+# password = "secret"
+#
+# Album browse sort order for the Navidrome browser (press N to open).
+# Valid values: alphabeticalByName, alphabeticalByArtist, newest, recent,
+#               frequent, starred, byYear, byGenre
+# This is updated automatically when you press [s] inside the browser.
+# browse_sort = alphabeticalByName
+
+# ---
+# Jellyfin server (optional)
+# Authenticate either with a long-lived API token or with your username/password.
+# user_id is optional and is discovered automatically when omitted.
+# [jellyfin]
+# url = "https://jellyfin.example.com"
+# user = "alice"
+# password = "secret"
+# token = "optional-api-token"
+# user_id = "optional-user-id"
+
+visualizer = "ClassicPeak"
+speed = 1.00
