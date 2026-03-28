@@ -76,7 +76,7 @@ return {
         integrations = {
           ["mason-lspconfig"] = true,
           ["mason-null-ls"] = true,
-          ["mason-nvim-dap"] = false,
+          ["mason-nvim-dap"] = true,
         },
       }
     end,
@@ -122,7 +122,10 @@ return {
 
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    dependencies = {
+      { "mfussenegger/nvim-dap", lazy = true },
+      { "nvim-neotest/nvim-nio", lazy = true },
+    },
     keys = {
       {
         "<leader>du",

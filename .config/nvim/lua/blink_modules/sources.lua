@@ -12,7 +12,7 @@ local function providers()
       name = "copilot",
       module = "blink-copilot",
       score_offset = 80,
-      async = true,
+      async = false,
     },
 
     -- sql stuff
