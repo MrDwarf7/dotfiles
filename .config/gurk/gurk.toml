@@ -1,10 +1,16 @@
 first_name_only = false
 show_receipts = true
-notifications = true
 bell = true
 # passphrase = ""
 colored_messages = true
 default_keybindings = true
+
+[notifications]
+enabled = true
+show_message_text = true
+show_message_chat = true
+show_reactions = true
+mute_reactions_bell = false
 
 [user]
 display_name = "BV"
