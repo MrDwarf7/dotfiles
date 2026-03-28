@@ -1,0 +1,83 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "~/.config/opencode/AGENTS.md",
+    "AGENTS.md",
+    "TODO.md",
+    "CONTRIBUTING.md",
+    "docs/TOOLS.md",
+    "docs/MODELS.md",
+    "docs/*",
+    ".opencode/*"
+  ],
+  "formatter": {
+    "prettier": {
+      "disabled": true
+    }
+  },
+  "mcp": {
+    "context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7-API-KEY": "${CONTEXT7_API_KEY}"
+      }
+    }
+  },
+  "permission": {
+    "bash": "allow",
+    "edit": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "question": "allow",
+    "read": "allow",
+    "skill": "allow",
+    "todoread": "allow",
+    "todowrite": "allow",
+    "webfetch": "allow",
+    "websearch": "allow"
+  },
+  "experimental": {
+    "batch_tool": true,
+    "chatMaxRetries": 3,
+    "continue_loop_on_deny": true,
+    "disable_paste_summary": true,
+    "mcp_timeout": 60000,
+    "openTelemetry": false
+  },
+  "model": "openrouter/moonshotai/kimi-k2:free",
+  "provider": {
+    "openrouter": {
+      "models": {},
+      "name": "OpenRouter",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://openrouter.ai/api/v1"
+      }
+    },
+    "ollama": {
+      "models": {
+        "gemma4": {
+          "_launch": true,
+          "name": "gemma4"
+        },
+        "qwen3.5": {
+          "_launch": true,
+          "name": "qwen3.5"
+        },
+        "qwen3.5:latest": {
+          "_launch": true,
+          "name": "qwen3.5:latest"
+        }
+      },
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      }
+    }
+  }
+}
