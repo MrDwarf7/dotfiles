@@ -1,0 +1,6 @@
+[[presets]]
+name = "StormyRain"
+
+[presets.sounds]
+Thunderstorm = 0.10000002
+Rain = 0.20000002
