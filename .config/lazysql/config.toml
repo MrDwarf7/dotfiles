@@ -1,0 +1,20 @@
+ConfigFile = '/home/dwarf/.config/lazysql/config.toml'
+
+[application]
+DefaultPageSize = 300
+DisableSidebar = false
+SidebarOverlay = false
+MaxQueryHistoryPerConnection = 100
+
+[[database]]
+Name = 'rpa_lite'
+URL = 'mssql://sa:Password123!@localhost:1433/RPA_API'
+Provider = 'sqlserver'
+Username = ''
+Password = ''
+Hostname = ''
+Port = ''
+DBName = 'RPA_API'
+URLParams = ''
+ReadOnly = false
+Commands = []
