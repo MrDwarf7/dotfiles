@@ -60,6 +60,8 @@
 ## We want to use the 'fast path', so use the callable command
 04var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
 
+# 01eval_if_pacman tirith "tirith init --shell fish | source"
+
 # can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local / bob )
 # 04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
 

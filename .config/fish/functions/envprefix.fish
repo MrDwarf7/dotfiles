@@ -22,6 +22,8 @@ function __envprefix_help
 
     # ,-$k_case_sense              , --case_sensitive          ,# Use case sensitive sorting (Default is case insensitive),
     # ,envprefix -$k_prefix PATH $k_sort     ,# Lists all environment variables starting with 'PATH' sorted alphabetically,,
+    # ,-$k_prefix                 , --prefix PREFIX           ,# Specify the prefix to search for (default: XDG_),
+    # ,envprefix -$k_prefix HOME             ,# Lists all environment variables starting with 'HOME',,
     090help "\
 Usage: envprefix [OPTIONS] [PREFIX]
 
@@ -32,14 +34,12 @@ defaults to XDG_ if none given.
 ,Short                      ,Long                       ,Description,
 ,                           ,                           ,           ,
 ,-$k_help                   , --help                    ,# Show this help message and exit,
-,-$k_prefix                 , --prefix PREFIX           ,# Specify the prefix to search for (default: XDG_),
 ,-$k_sort                   , --sort                    ,# Sort the output alphabetically,
 " "
 ,                                       ,           ,,
 ,Command                                ,Description,,
 ,                                       ,           ,,
 ,envprefix                             ,# Lists all environment variables starting with 'XDG_',,
-,envprefix -$k_prefix HOME             ,# Lists all environment variables starting with 'HOME',,
 ,envprefix -$k_sort                    ,# Lists all environment variables starting with 'XDG_' sorted alphabetically,,
 "
 
