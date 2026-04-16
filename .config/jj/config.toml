@@ -13,7 +13,7 @@ private-commits = "private()"
 write-change-id-header = true
 
 [remotes.origin]
-auto-track-bookmarks = "glob:*"
+auto-track-bookmarks = "(main|master|upstream|trunk)"
 
 [remotes.upstream]
 auto-track-bookmarks = "(main|master|trunk)"
