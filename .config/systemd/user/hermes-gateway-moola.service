@@ -6,11 +6,11 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStart=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/.venv/bin/python -m hermes_cli.main gateway run --replace
+ExecStart=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/.venv/bin/python -m hermes_cli.main --profile moola gateway run --replace
 WorkingDirectory=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent
 Environment="PATH=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/.venv/bin:/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/node_modules/.bin:/home/dwarf/.xdg/data/mise/installs/node/25.9.0/bin:/home/dwarf/.local/bin:/home/dwarf/.cargo/bin:/home/dwarf/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 Environment="VIRTUAL_ENV=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/.venv"
-Environment="HERMES_HOME=/home/dwarf/.hermes"
+Environment="HERMES_HOME=/home/dwarf/.hermes/profiles/moola"
 Restart=on-failure
 RestartSec=30
 RestartForceExitStatus=75
