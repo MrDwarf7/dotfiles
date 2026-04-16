@@ -124,15 +124,15 @@ prepend_previewers = [
   # password protected files benefit from ouch, but no way to specify
   # { mime = "application/7z-compressed", run = "ouch" },
 
-  { url = "*.csv", run = "duckdb" },
-  { url = "*.tsv", run = "duckdb" },
-  { url = "*.json", run = "duckdb" },
-  # { url = "*.jsonc", run = "duckdb" },
-  { url = "*.parquet", run = "duckdb" },
-  { url = "*.txt", run = "duckdb" },
-  { url = "*.xlsx", run = "duckdb" },
-  { url = "*.db", run = "duckdb" },
-  { url = "*.duckdb", run = "duckdb" },
+  ## { url = "*.csv", run = "duckdb" },
+  ## { url = "*.tsv", run = "duckdb" },
+  ## { url = "*.json", run = "duckdb" },
+  ## # { url = "*.jsonc", run = "duckdb" },
+  ## { url = "*.parquet", run = "duckdb" },
+  ## { url = "*.txt", run = "duckdb" },
+  ## { url = "*.xlsx", run = "duckdb" },
+  ## { url = "*.db", run = "duckdb" },
+  ## { url = "*.duckdb", run = "duckdb" },
 
   { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
   # image/gif is handled by ~/.config/mimeapps.list
@@ -162,12 +162,12 @@ prepend_previewers = [
 append_previewers = []
 
 prepend_preloaders = [
-  { url = "*.csv", run = "duckdb", multi = false },
-  { url = "*.tsv", run = "duckdb", multi = false },
-  { url = "*.json", run = "duckdb", multi = false },
-  { url = "*.parquet", run = "duckdb", multi = false },
-  { url = "*.txt", run = "duckdb", multi = false },
-  { url = "*.xlsx", run = "duckdb", multi = false },
+  ## { url = "*.csv", run = "duckdb", multi = false },
+  ## { url = "*.tsv", run = "duckdb", multi = false },
+  ## { url = "*.json", run = "duckdb", multi = false },
+  ## { url = "*.parquet", run = "duckdb", multi = false },
+  ## { url = "*.txt", run = "duckdb", multi = false },
+  ## { url = "*.xlsx", run = "duckdb", multi = false },
 
 
   ### mediainfo plugin

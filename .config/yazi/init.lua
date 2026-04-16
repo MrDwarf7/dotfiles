@@ -67,7 +67,7 @@ end, 500, Status.RIGHT)
 -- ---------- PLUGINS ----------
 
 require("relative-motions"):setup({ only_motions = true })
-require("duckdb"):setup()
+-- require("duckdb"):setup()
 require("sshfs"):setup({
 	-- Default:
 	-- mount_dir = os.getenv("HOME") .. "/mnt",
