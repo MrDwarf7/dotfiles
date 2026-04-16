@@ -1,10 +1,11 @@
 {
+  "grabBackFocus": true,
   "hideHud": true,
   "keyMappings": "# Insert your preferred key mappings here.\n# unmap ?\n# unmap /\n\nunmap u\nunmap `\n\nmap g? showHelp\n\nmap : Vomnibar.activate\n\nunmap T\nmap t Vomnibar.activateTabSelection\n# This is mostly habit honestly.\nmap b Vomnibar.activateTabSelection\n\nmap T Vomnibar.activateInNewTab\n\n# This is a lowercase L not an uppercase i.\nmap <c-l> Vomnibar.activateEditUrl\n\n# We remove this in favor of general tab switcher - Use o | O if wanting bookmarks\n# map b Vomnibar.activateBookmarks\nmap B Vomnibar.activateBookmarksInNewTab\n\n\nmap ` passNextKey\n\nmap u restoreTab\nmap gr restoreTab\n\nunmap d\nmap d removeTab\n\nunmap zi\nunmap zo\nunmap zz\nmap zi zoomIn\nmap zo zoomOut\nmap zz zoomReset\n\n\nunmap <a-m>\nmap <c-m> toggleMuteTab\nmap <c-M> toggleMuteTab all\n\n\n# unmap r\nmap R reload\n\n# Pinning\nunmap <a-p>\nmap gp togglePinTab\n\n\nunmap J\nmap J nextTab\n\nunmap K\nmap K previousTab\n\nunmap H\nmap H goBack\n\nunmap L\nmap L goForward\n\nmap ' Marks.activateGotoMode\n\nmap yi duplicateTab\nmap g^ firstTab\n\nmap <c-o> goBack\n# this is a capital i not a lowercase L\nmap <c-i> goForward\n\nmap <c-d> scrollPageDown\nmap <c-u> scrollPageUp\n\nmap <c-b> scrollFullPageDown\nmap <c-f> scrollFullPageUp",
+  "newTabDestination": "browserNewTabPage",
   "scrollStepSize": 80,
-  "grabBackFocus": true,
   "searchEngines": "w: https://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia\n\n# More examples.\n#\n# (Vimium supports search completion Wikipedia, as\n# above, and for these.)\n#\n# g: https://www.google.com/search?q=%s Google\n# l: https://www.google.com/search?q=%s&btnI I'm feeling lucky...\n# y: https://www.youtube.com/results?search_query=%s Youtube\n# gm: https://www.google.com/maps?q=%s Google maps\n# b: https://www.bing.com/search?q=%s Bing\n# d: https://duckduckgo.com/?q=%s DuckDuckGo\n# az: https://www.amazon.com/s/?field-keywords=%s\n# qw: https://www.qwant.com/?q=%s Qwant\n\n\nbr: https://search.brave.com/search?q=%s Brave\nyt: https://www.youtube.com/results?search_query=%s YouTube",
-  "settingsVersion": "2.3",
+  "settingsVersion": "2.4.2",
   "userDefinedLinkHintCss": "/*****************************************************************************/\n/*                                   THEMES                                  */\n/*****************************************************************************/\n\n/* vimium-zen-theme */\n\n\n\n\n:root {\n  --font-size: 16px;\n  --font-size-title: 18px;\n  --font-size-hints: 16px;\n  --font-size-url: 12px;\n\n  --font-weight: normal;\n  --font-weight-medium: medium;\n  --font-weight-bold: bold;\n\n  --font: \"Fira Code\", \"JetBrains Mono\", \"Fira Sans\", \"Arial\", sans-serif;\n  /* --font: \"Cantarell\", \"Noto Serif\", \"Arial\", sans-serif; */\n  /* --font: \"Helvetica Neue\", \"Helvetica\", \"Arial\", sans-serif; */\n\n  --padding: 2px;\n  --padding-vomnibar: 10px 0;\n  --shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.25);\n  --blur: 40px;\n\n  /* Vomnibar & hud */\n  --fg: #fff;\n  --fg-dark: #c9c9c9;\n  --fg-match: #fff;\n  --fg-url: #aaaaaa;\n\n  /* --bg: #202020; */\n  /* #00b4ff; */\n  /* #005a80; */\n  /* #1a6b8d; */\n  /* #005173; */\n  /* #004773; */\n\n  --bg: #202020;\n  --hinted-out-color: #003366;\n\n\n  /* We do want this - but bg is also set for a BUNCH of other stuff */\n  /* --bg: #003366; */\n  --bg-selected: rgba(150, 150, 150, 0.3);\n\n  --border: #38373e;\n\n  /* Hints inner text color */\n  --fg-hints: #fff;\n\n  /* --fg-hints: #00b4ff; */\n\n}\n\n.vimium-reset,\ndiv.vimium-reset,\nspan.vimium-reset,\ntable.vimium-reset,\na.vimium-reset,\na:visited.vimium-reset,\na:link.vimium-reset,\na:hover.vimium-reset,\ntd.vimium-reset,\ntr.vimium-reset {\n  font-family: var(--font);\n}\n\n/* CSS */\n\n/* Vomnibar */\n\n#vomnibar {\n  background: var(--bg);\n  border: 1px solid var(--border);\n  box-shadow: var(--shadow);\n  /* ORIGINAL  */\n  /* border-radius: 15px; */\n  overflow: hidden;\n  left: 50%;\n  margin-left: -400px;\n  max-width: 800px;\n}\n\n/* Animate Slide in */\n@keyframes show {\n  0% {\n    opacity: 0;\n    transform: translateY(50px);\n  }\n\n  100% {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* #vomnibar-frame #vimium-ui-component-visible { */\n/**/\n/**/\n/* } */\n\n\n#vomnibar #vomnibar-search-area,\n#vomnibar input {\n  background: transparent;\n  border: none;\n  box-shadow: none;\n  color: var(--fg);\n  font-family: var(--font);\n  font-size: var(--font-size);\n  font-weight: var(--font-weight-medium);\n}\n\n#vomnibar #vomnibar-search-area {\n  font-family: var(--font);\n  padding: 14px 50px;\n  border-radius: 6px;\n}\n\n#vomnibar input {\n  font-family: var(--font);\n  border: none;\n  padding: var(--padding);\n}\n\n#vomnibar #vomnibar-search-area::before {\n  content: \"\";\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  background-image: url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M14.9536 14.9458L21 21M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z' stroke='%23dfdfdf' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>\");\n  background-repeat: no-repeat;\n  background-size: contain;\n  width: 18px;\n  height: 18px;\n}\n\n.no-insert-text {\n  /* font-family: var(--font); */\n  display: none;\n}\n\n#vomnibar ul {\n  font-family: var(--font);\n  /* ORIGINAL  */\n  /* background: transparent; */\n  border-top: 2px solid var(--border);\n  margin: 0 15px;\n  margin-bottom: 5px;\n  padding: var(--padding-vomnibar);\n}\n\n#vomnibar li {\n  font-family: var(--font);\n  border-bottom: none;\n  /* NEW */\n  border-radius: 8px;\n  padding: 15px;\n}\n\n#vomnibar li .top-half {\n  font-family: var(--font);\n  padding: var(--padding);\n}\n\n#vomnibar li .bottom-half {\n  font-family: var(--font);\n  padding: 0px 0px 0px 2px;\n  margin: 2px;\n}\n\n#vomnibar li .source {\n  color: var(--fg-dark);\n  font-family: var(--font);\n  font-size: var(--font-size-title);\n  font-weight: var(--font-weight-bold);\n  text-transform: capitalize;\n}\n\n#vomnibar li em,\n#vomnibar li .title {\n  color: var(--fg);\n  font-family: var(--font);\n  font-size: var(--font-size-title);\n  font-weight: var(--font-weight-medium);\n}\n\n#vomnibar li .url {\n  color: var(--fg-url);\n  font-family: var(--font);\n  font-size: var(--font-size-url);\n  font-weight: var(--font-weight-medium);\n}\n\n#vomnibar li .match {\n  font-family: var(--font);\n  color: var(--fg-match);\n}\n\n#vomnibar li .title .match {\n  color: var(--fg);\n  font-family: var(--font);\n  font-weight: bold;\n}\n\n#vomnibar li.selected {\n  font-family: var(--font);\n  background-color: var(--bg-selected);\n  backdrop-filter: blur(20px);\n  /* ORIGINAL  */\n  /* border-radius: 8px; */\n}\n\n#vomnibar li.selected .url {\n  font-family: var(--font);\n  color: var(--fg-url);\n}\n\n#vomnibar li.selected .match {\n  font-family: var(--font);\n  color: var(--fg);\n}\n\n/* Hints Marks*/\n\n#vimium-hint-marker-container div.internal-vimium-hint-marker,\n#vimium-hint-marker-container div.vimiumHintMarker {\n  /* ORIGINAL */\n  /* background: var(--bg); */\n  background: var(--hinted-out-color);\n  border: none;\n  box-shadow: var(--shadow);\n  padding: 3px 4px;\n}\n\n#vimium-hint-marker-container div span {\n  color: var(--fg-hints);\n  font-family: var(--font);\n  font-size: var(--font-size-hints);\n  font-weight: var(--font-weight-bold);\n  text-shadow: none;\n}\n\n#vimium-hint-marker-container div>.matchingCharacter {\n  opacity: 0.3;\n}\n\n#vimium-hint-marker-container div>.matchingCharacter~span {\n  color: var(--fg-hints);\n}\n\n/* Hud */\n\n#hud-container {\n  background: var(--border);\n  border: 1px solid var(--border);\n  box-shadow: var(--shadow);\n  border-radius: 6px;\n}\n\n#hud-container span#hud-find-input,\n#hud-container #hud {\n  color: var(--fg);\n  font-family: var(--font);\n  font-size: 13;\n  font-weight: var(--font-weight-medium);\n}\n\n#hud-container .hud-find {\n  background-color: transparent;\n  border: none;\n}\n\n#hud-container #search-area {\n  background-color: transparent;\n  padding: 6px;\n}",
   "exclusionRules": [
     {
@@ -66,6 +67,86 @@
     {
       "passKeys": "",
       "pattern": "https?://leetcode.com/problems/.*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://1d454513b4c0427394f2e988d66100e9:1d454513b4c0427394f2e988d66100e9@ttyd-105-96.cod-ap-southeast-2.hbtn.io/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://5d69674a88e146d4b04ffea34c83dccf:5d69674a88e146d4b04ffea34c83dccf@ttyd-167-128.cod-ap-southeast-2.hbtn.io/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://*:*@ttyd-*-*.cod-ap-southeast-2.hbtn.io/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://82ee591179b1421997d48bb6a88eef7e:82ee591179b1421997d48bb6a88eef7e@ttyd-253-136.cod-ap-southeast-2.hbtn.io/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://fyrox.rs/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.chess.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://www.chess.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1:3000/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://vscode.dev/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://localhost:3000/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://elysiajs.com/tutorial*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://app.graphite.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://linear.app/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://*.expo.dev/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://app.columns.dev/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://play.aidungeon.com/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1:4200/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1:37001/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1:39351/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://127.0.0.1*"
     }
   ]
 }

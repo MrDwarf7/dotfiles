@@ -113,12 +113,12 @@ main() {
     echo "Update completed successfully."
   else
     echo "No file to copy: ${OLD_FILE} not found in ${DOWNLOADS_DIR}."
-    exit 1
+    return 1
   fi
 
   if ! create_css_file "${dest_file}"; then
     printf "Failed to create or update %s from %s\n" "${CSS_FILE}" "${dest_file}" >&2
-    exit 1
+    return 1
   fi
 
   printf "Done.\n"
