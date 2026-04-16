@@ -33,18 +33,18 @@ local function providers()
     --   module = "blink-cmp-ghostty",
     -- },
 
-    conventional_commits = {
-      name = "Conventional Commits",
-      module = "blink-cmp-conventional-commits",
-      enabled = function()
-        return vim.bo.filetype == "gitcommit" or "jjdescription"
-      end,
-      ---@module 'blink-cmp-conventional-commits'
-      ---@type blink-cmp-conventional-commits.Options
-      opts = {
-        -- See Configuration section below for available options
-      },
-    },
+    -- -- conventional_commits = {
+    -- --   name = "Conventional Commits",
+    -- --   module = "blink-cmp-conventional-commits",
+    -- --   enabled = function()
+    -- --     return vim.bo.filetype == "gitcommit" or "jjdescription"
+    -- --   end,
+    -- --   ---@module 'blink-cmp-conventional-commits'
+    -- --   ---@type blink-cmp-conventional-commits.Options
+    -- --   opts = {
+    -- --     -- See Configuration section below for available options
+    -- --   },
+    -- -- },
 
     sshconfig = {
       name = "SshConfig",
@@ -146,15 +146,15 @@ local function providers()
     --   },
     -- },
 
-    ripgrep = {
-      name = "Ripgrep",
-      module = "blink-ripgrep",
-      score_offset = 30,
-      opts = {
-        prefix_min_len = 2,
-        -- debug = false,
-      },
-    },
+    -- -- ripgrep = {
+    -- --   name = "Ripgrep",
+    -- --   module = "blink-ripgrep",
+    -- --   score_offset = 30,
+    -- --   opts = {
+    -- --     prefix_min_len = 2,
+    -- --     -- debug = false,
+    -- --   },
+    -- -- },
 
     env = {
       name = "Env",
@@ -195,13 +195,16 @@ end
 
 ---@return blink.cmp.SourceConfigPartial
 return {
+  -- Items with a double "-- --" I've disabled to test perf. related things,
+  -- not so much because I dont' want to use them
+
   -- add lazydev to your completion providers
   default = {
     --
     "copilot",
     "lazydev", -- conditional anyway
     -- "ghostty",
-    "conventional_commits", -- add it to the list
+    -- -- "conventional_commits", -- add it to the list
     "sshconfig",
     "tmux",
     "wezterm",
@@ -210,7 +213,7 @@ return {
 
     "lsp",
     "buffer",
-    "ripgrep",
+    -- "ripgrep",
     "snippets",
     "path",
     "env",

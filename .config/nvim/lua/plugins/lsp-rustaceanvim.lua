@@ -12,7 +12,11 @@ return {
 
       server = {
         on_attach = function(_, bufnr)
-          require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+          local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+          if not LSP then
+            require("utils").output.warn("LSP config not found")
+            return
+          end
 
           vim.keymap.set("n", "<Leader>lA", function()
             vim.cmd.RustLsp("codeAction")
@@ -290,7 +294,11 @@ return {
       },
     },
     config = function(_, opts)
-      require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+      local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+      if not LSP then
+        require("utils").output.warn("LSP config not found")
+      end
+
       vim.g.rustaceanvim = opts
     end,
   },

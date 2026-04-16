@@ -13,12 +13,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Nvim tree sitter impl. being turned on
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "<filetype>" },
-  callback = function(ctx)
-    vim.treesitter.start(ctx.buf, ctx.file)
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "<filetype>" },
+--   callback = function(ctx)
+--     vim.treesitter.start(ctx.buf, ctx.file)
+--   end,
+-- })
 
 -- Is bugging this out and breaking (veryyyyy badly)
 -- NVIM v0.12.0-dev-2717+ga940b77cb2

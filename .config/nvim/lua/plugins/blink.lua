@@ -26,14 +26,14 @@ return {
     },
     { "xzbdmw/colorful-menu.nvim",                    lazy = false },
     -- { "barrettruth/blink-cmp-ghostty",                lazy = false },
-    { "disrupted/blink-cmp-conventional-commits",     lazy = false },
-    { "bydlw98/blink-cmp-sshconfig",                  lazy = true, build = "make" },
+    -- -- { "disrupted/blink-cmp-conventional-commits",     lazy = false },
+    { "bydlw98/blink-cmp-sshconfig",                  lazy = true, enabled = true, build = "make" },
     { "barrettruth/blink-cmp-tmux",                   lazy = true },
-    { "junkblocker/blink-cmp-wezterm",                lazy = true },
+    { "junkblocker/blink-cmp-wezterm",                lazy = true, enabled = true },
     -- { "Kaiser-Yang/blink-cmp-avante",                 lazy = true },
-    { "mikavilpas/blink-ripgrep.nvim",                lazy = true, version = "*" }, -- use the latest stable version
-    { "bydlw98/blink-cmp-env",                        lazy = true },
-    { "archie-judd/blink-cmp-words",                  lazy = true },
+    -- { "mikavilpas/blink-ripgrep.nvim",                lazy = true, enabled = true, version = "*" }, -- use the latest stable version
+    { "bydlw98/blink-cmp-env",                        lazy = true, enabled = true },
+    { "archie-judd/blink-cmp-words",                  lazy = true, enabled = true },
     -- { "xieyonn/blink-cmp-dat-word",                   lazy = true },
 
     -- stylua: ignore end

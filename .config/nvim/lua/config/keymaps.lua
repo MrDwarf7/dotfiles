@@ -26,7 +26,7 @@ local Keymaps = {
 
 Keymaps.actions = {
   snippet_forward = function()
-    if vim.snippet.active({ directin = 1 }) then
+    if vim.snippet.active({ direction = 1 }) then
       vim.schedule(function()
         vim.snippet.jump(1)
       end)

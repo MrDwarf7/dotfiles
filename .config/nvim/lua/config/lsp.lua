@@ -6,6 +6,22 @@ local BindsTypeE = {
   builtin = "builtin",
   snacks = "snacks",
 }
+setmetatable(BindsTypeE, {
+  __call = function(_, value)
+    if type(value) == "string" then
+      for _, v in pairs(BindsTypeE) do
+        if v == value then
+          return v
+        end
+      end
+    elseif type(value) == "table" and value.__enum == "BindsTypeE" then
+      return value
+    end
+
+    error("Invalid BindsType: " .. tostring(value))
+  end,
+  __enum = "BindsTypeE",
+})
 
 ---@alias BindsType BindsLiteral|BindsTypeE
 
@@ -26,15 +42,17 @@ local BindsTypeE = {
 ---@field get_capabilities? fun(): table<string, any>
 ---
 --- methods
----@field handle_binds_type fun(binds_type?: BindsType): BindsLiteral
+-- ---@field handle_binds_type fun(binds_type?: BindsType): BindsLiteral
 ---@field get_default_capabilities fun(): table<string, any>
 -- ---@field fzf_lua_binds fun()
 -- ---@field builtin_binds fun()
----@field setup_lsp_binds fun(self: config.LSP, binds_type?: BindsType)
+-- ---@field setup_lsp_binds fun(self: config.LSP, binds_type?: BindsType)
 ---@field setup fun(opts?: config.LSP.Opts): config.LSP
 local LSP = {}
 
-function LSP.handle_binds_type(binds_type)
+---@param binds_type BindsType|nil
+---@return BindsLiteral
+local function handle_binds_type(binds_type)
   local bt = nil
 
   if type(binds_type) == "nil" then
@@ -45,10 +63,12 @@ function LSP.handle_binds_type(binds_type)
 
   if type(binds_type) == "table" then
     -- convert to string
-    if binds_type == BindsTypeE.fzf then
+    if type(binds_type) == "table" and binds_type.__enum == "BindsTypeE" then
+      -- if binds_type == BindsTypeE.fzf then
       bt = BindsTypeE.fzf
       -- return "fzf"
-    elseif binds_type == BindsTypeE.snacks then
+      -- elseif binds_type == BindsTypeE.snacks then
+    elseif type(binds_type) == "table" and binds_type.__enum == "BindsTypeE" and binds_type == BindsTypeE.snacks then
       bt = BindsTypeE.snacks
       -- return "snacks"
     else
@@ -61,7 +81,7 @@ function LSP.handle_binds_type(binds_type)
     -- return binds_type
   end
 
-  LSP.binds_type = bt
+  -- LSP.binds_type = bt
 
   -- ---@cast binds_type BindsLiteral
   -- return "builtin"
@@ -91,7 +111,7 @@ end
 ---@field method? string
 ---@field operation? fun(): nil
 
-function LSP.setup_lsp_binds(binds_type)
+local function setup_lsp_binds(binds_type)
   -- Folke's impl. in snacks for adding (pushing) an item to the tag stack
   -- https://github.com/folke/snacks.nvim/blob/fe7cfe9800a182274d0f868a74b7263b8c0c020b/lua/snacks/picker/actions.lua#L35-L102
 
@@ -196,7 +216,10 @@ local lsp_attach_autocmd = function(opts)
   -- artefacts (otherwise we get 'stuck' highlights when the server detaches but the buffer is still open)
   --
 
+  vim.api.nvim_create_augroup("ConfigLSP", { clear = true })
+
   vim.api.nvim_create_autocmd("LspAttach", {
+    group = "ConfigLSP",
     callback = function(ctx)
       pcall(vim.treesitter.start, ctx.buf, vim.bo.filetype)
 
@@ -207,7 +230,7 @@ local lsp_attach_autocmd = function(opts)
       end
 
       if not opts.setup_lsp or opts.setup_lsp == nil then
-        LSP.setup_lsp_binds(opts.binds_type)
+        setup_lsp_binds(opts.binds_type)
       elseif opts.setup_lsp and type(opts.setup_lsp) == "function" then
         opts.setup_lsp(opts.binds_type)
       else
@@ -234,7 +257,9 @@ end
 
 function LSP.setup(opts)
   opts = opts or {}
-  opts.binds_type = opts.binds_type or LSP.handle_binds_type(opts.binds_type)
+  opts.binds_type = opts.binds_type or handle_binds_type(opts.binds_type)
+
+  LSP.binds_type = opts.binds_type
 
   clear_defaults()
 
@@ -283,7 +308,7 @@ function LSP.setup(opts)
   })
 
   ---@type config.LSP
-  setmetatable(LSP, {
+  LSP = setmetatable(LSP, {
     __index = function(table, key)
       return rawget(table, key)
     end,

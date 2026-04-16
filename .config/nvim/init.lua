@@ -7,7 +7,7 @@ require("config.options")
 require("config.keymaps")
 require("config.autocmds")
 
--- vim.loader.enable(true)
+vim.loader.enable(true)
 
 ---@diagnostic disable-next-line: unused-local
 local utils = require("utils")
@@ -110,9 +110,12 @@ local lazy_opts = {
   },
 }
 
-require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+-- require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
 
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 
-require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+local LSP = require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+if not LSP then
+  require("utils").output.warn("Failed to set up LSP")
+end

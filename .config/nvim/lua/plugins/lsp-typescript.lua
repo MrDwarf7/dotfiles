@@ -38,8 +38,7 @@ return {
   },
   ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
   opts = function(_, opts)
-    opts = opts or {}
-    opts = vim.tbl_deep_extend("force", opts, {
+    return vim.tbl_deep_extend("force", opts or {}, {
       settings = {
         capabilities = tsserv_cap(opts),
         -- capabilities,
@@ -60,10 +59,16 @@ return {
         },
       },
     })
-    return opts
   end,
   config = function(_, opts)
     opts = opts or {}
+
+    -- if there's a deno.json or deno.jsonc in the root, we return nothing (aka don't set up the plugin)
+
+    if require("lspconfig.util").root_pattern("deno.json", "deno.jsonc")(vim.api.nvim_buf_get_name(0)) then
+      return
+    end
+
     require("typescript-tools").setup(opts)
   end,
 }

@@ -51,7 +51,7 @@ return {
   --
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    lazy = true,
+    lazy = false,
     dependencies = {
       { "mason-org/mason.nvim", lazy = true },
       { "mason-org/mason-lspconfig.nvim", lazy = true },
@@ -64,27 +64,26 @@ return {
     --   vim.defer_fn(function() end, 2)
     -- end,
 
-    ---@param _ any : cached deps/metatable etc.
-    opts = function(_)
-      return {
-        ensure_installed = require("lang_tables").mason_all(),
-        auto_update = true,
-        run_on_start = true,
-        start_delay = 3000,
-        de_bounce_hours = 10, -- timestamp in a file named stdpath('data')/mason-tool-installer-debounce. Used only if run_on_start is true.
+    opts = {
+      ensure_installed = require("lang_tables").mason_all(),
+      auto_update = true,
+      run_on_start = true,
+      start_delay = 3000,
+      de_bounce_hours = 10, -- timestamp in a file named stdpath('data')/mason-tool-installer-debounce. Used only if run_on_start is true.
 
-        -- interop for naming conventions between tools
-        integrations = {
-          ["mason-lspconfig"] = true,
-          ["mason-null-ls"] = true,
-          ["mason-nvim-dap"] = true,
-        },
-      }
-    end,
+      -- interop for naming conventions between tools
+      integrations = {
+        ["mason-lspconfig"] = true,
+        ["mason-null-ls"] = false,
+        ["mason-nvim-dap"] = true,
+      },
+    },
+    -- end,
   },
 
   {
     "mason-org/mason.nvim",
+    lazy = true,
     keys = {
       {
         "<Leader>pm",
@@ -99,9 +98,10 @@ return {
 
   {
     "mason-org/mason-lspconfig.nvim",
+    lazy = true,
     dependencies = {
       { "mason-org/mason.nvim", lazy = true },
-      { "neovim/nvim-lspconfig" },
+      { "neovim/nvim-lspconfig", lazy = true },
     },
     opts = {
       -- ensure_installed = lang_tables.mason_ensure_installed()
@@ -148,6 +148,7 @@ return {
 
   {
     "julianolf/nvim-dap-lldb",
+    lazy = true,
     dependencies = { "mfussenegger/nvim-dap" },
     keys = {
       -- stylua: ignore start
@@ -248,7 +249,7 @@ return {
   {
     "igorlfs/nvim-dap-view",
     -- let the plugin lazy load itself
-    lazy = false,
+    lazy = true,
     keys = {
       -- stylua: ignore start
       { "<leader>dv", function() require("dap-view").toggle() end, desc = "DAP View Toggle" },

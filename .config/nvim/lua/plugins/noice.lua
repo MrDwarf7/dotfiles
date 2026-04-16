@@ -45,7 +45,7 @@ return {
       },
     },
     notify = {
-      enabled = true,
+      enabled = false,
     },
     lsp = {
       override = {
