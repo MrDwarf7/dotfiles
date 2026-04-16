@@ -12,6 +12,13 @@ server = "irc.libera.chat"
 channels = ["#halloy"]
 
 
+[servers.ashell]
+nickname = "mrdwarf7"
+server = "matrix.org"
+channels = ["#ashell:matrix.org"]
+# https://matrix.to/#/#ashell:matrix.org
+
+
 [font]
 # Type: string
 # Values: any string

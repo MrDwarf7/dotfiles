@@ -30,20 +30,20 @@ version = "latest"
 # [tools."npm:@typescript/native-preview"]
 # version = "latest"
 
-# vercel-cli
-[tools."npm:vercel"]
-version = "latest"
+# # vercel-cli
+# [tools."npm:vercel"]
+# version = "latest"
 
 # turbopack/turborepo
-[tools."npm:turbo"]
-version = "latest"
+# [tools."npm:turbo"]
+# version = "latest"
 
 [tools."npm:fieldtheory"]
 version = "latest"
 # "npm:fieldtheory" = "1.2.1"
 
-[tools."npm:@aoagents/ao"]
-version = "latest"
+# [tools."npm:@aoagents/ao"]
+# version = "latest"
 
 # fieldtheory - cli for pulling X bookmarks locally (ts doesn't support vivaldi, and it's buggy AF)
 # [tools."npm:fieldtheory"]

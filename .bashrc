@@ -159,3 +159,6 @@ shellup
 export PATH="$PATH:/home/dwarf/.lmstudio/bin"
 # End of LM Studio CLI section
 
+# a command -q tirith -> then run command
+
+# eval "$(tirith init --shell bash)"

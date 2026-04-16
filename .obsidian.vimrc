@@ -76,6 +76,9 @@ exmap resetzoom obcommand window:reset-zoom
 
 nmap zi :zoomin<CR>
 nmap zo :zoomout<CR>
+
+nmap zz :resetzoom<CR>
+
 nmap ze :resetzoom<CR>
 nmap z= :resetzoom<CR>
 vmap z= :resetzoom<CR>
@@ -161,6 +164,15 @@ map s} :surround_curly_brackets<CR>
 " exmap link obcommand editor:open-link
 " nmap gx :link
 
+exmap followlink obcommand editor:follow-link
+nmap gd :followlink<CR>
+vmap gd :followlink<CR>
+
+nmap gx :followlink<CR>
+vmap gx :followlink<CR>
+
+nmap gf :followlink<CR>
+vmap gf :followlink<CR>
 
 exmap splith obcommand workspace:split-horizontal
 nmap <C-w>s :splith<CR>
@@ -223,13 +235,6 @@ exmap gotofirsttab obcommand workspace:goto-tab-1
 nmap <Space>bf :gotofirsttab<CR>
 nmap g^ :gotofirsttab<CR>
 
-exmap followlink obcommand editor:follow-link
-nmap gx :followlink<CR>
-nmap gf :followlink<CR>
-
-
-vmap gf :followlink<CR>
-vmap gx :followlink<CR>
 
 
 " Fix dropping the selection on indent
@@ -352,7 +357,6 @@ nmap <Space>fw :globalsearch<CR>
 
 exmap findfile obcommand darlal-switcher-plus:switcher-plus:open
 nmap <Space>ff :findfile<CR>
-
 
 exmap findcommands obcommand darlal-switcher-plus:switcher-plus:open-commands
 map <Space>fc :findcommands<CR>
