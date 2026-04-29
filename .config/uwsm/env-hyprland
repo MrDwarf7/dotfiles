@@ -24,5 +24,16 @@
 # export AQ_DRM_DEVICES="/dev/dri/renderD128"
 # export AQ_DRM_DEVICES="/dev/dri/card1"
 
-# This is the one we'd use
+## lspci -d ::03xx
+## 01:00.0 VGA compatible controller: NVIDIA Corporation AD103 [GeForce RTX 4080] (rev a1)
+## 16:00.0 VGA compatible controller: Advanced Micro Devices, Inc. [AMD/ATI] Raphael (rev c3)
+## This is the one we'd use
+##
+## ls -lah /dev/dri/by-path/
+## Permissions Size User Date Modified Name
+## lrwxrwxrwx     - root 10 May 14:02   pci-0000:01:00.0-card -> ../card1           ## <- NVIDIA 
+## lrwxrwxrwx     - root 10 May 14:02   pci-0000:01:00.0-render -> ../renderD128    ## <- NVIDIA 
+## lrwxrwxrwx     - root 10 May 14:02   pci-0000:16:00.0-card -> ../card0           ## <- AMD
+## lrwxrwxrwx     - root 10 May 14:02   pci-0000:16:00.0-render -> ../renderD129    ## <- AMD
+##
 # export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
