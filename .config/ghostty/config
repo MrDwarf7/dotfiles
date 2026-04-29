@@ -38,31 +38,15 @@ window-padding-balance = true
 app-notifications = no-clipboard-copy
 # ,no-config-reload
 
-# background-blur = 35
-
 #### uncomment after fixing up Niri
 # background-blur = 10
+# background-blur = 35
 
-# Standard
-# background-opacity = 0.90
-
-# Translucent-lite
-# background-opacity = 0.85
-
-# Translucent
-# Anything lower than about 0.5 causes text sharpness issues
-# background-opacity = 0.40
-
-#### uncomment after fixing up Niri
-background-opacity = 0.6
-
-
-# Niri
-# background-opacity = 1.00
+background-opacity = 0.50
 
 window-decoration = none
 
-bold-is-bright = false
+# bold-is-bright = false
 cursor-style = bar
 cursor-style-blink = true
 

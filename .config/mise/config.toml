@@ -5,7 +5,7 @@ python = "latest"
 node = "latest"
 
 # Package Managers
-pnpm = "latest"
+# pnpm = "latest" ############### something broken
 bun = "latest"
 
 # Framework(?)/Package Runtimes

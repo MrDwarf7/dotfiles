@@ -13,7 +13,6 @@ function __tm_dbg
     set -l func_name $argv[1]
     set -l stuff $argv[2..-1]
 
-
     # Create an array of elements that is basically
     # a hashmap as:
     # [name_of_argv[N]] : [value_of_argv[N]]
@@ -46,7 +45,7 @@ function __tm_help --description 'Display usage information for tm'
         return
     end
 
-090help "\
+    090help "\
 Usage: tm <COMMAND> [OPTIONS]
 
 A wrapper for tmux with simplified commands.
@@ -130,20 +129,15 @@ function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
         case 0
             colorize red "We shouldn't be here, no args passed to tm_arg_handler\n"
             command $base_cmd
-            # return $status || return 0
         case 1
             command $base_cmd $subcommand
-            # return $status || return 0
         case 2
             command $base_cmd $ext_arg
-            # return $status || return 0
         case 3
             command $base_cmd $subcommand $tak_arg $ext_arg
-            # return $status || return 0
         case '*'
             set -l rest $argv[4..-1]
             command $base_cmd $subcommand $tak_arg $ext_arg $rest
-            # return $status || return 0
     end
 
     return $status || return 0
