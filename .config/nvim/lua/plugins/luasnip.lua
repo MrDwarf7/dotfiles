@@ -1,6 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
-  lazy = true,
+  lazy = false,
   -- event = "VeryLazy",
   -- event = "BufEnter",
   ---@type LazyEventSpec

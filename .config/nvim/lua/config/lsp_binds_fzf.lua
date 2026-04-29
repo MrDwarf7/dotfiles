@@ -22,5 +22,11 @@ function B.setup()
   end, { desc = "[G]oto [I]mpl" })
 end
 
+setmetatable(B, {
+  __index = function(_, k)
+    error("Key " .. tostring(k) .. " not found in config.BIND.fzf")
+  end,
+})
+
 ---@return config.BIND.fzf
 return B

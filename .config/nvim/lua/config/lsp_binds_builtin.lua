@@ -41,5 +41,11 @@ function B.setup()
   -- stylua: ignore end
 end
 
+setmetatable(B, {
+  __index = function(_, k)
+    error("Key " .. tostring(k) .. " not found in config.BIND.builtin")
+  end,
+})
+
 ---@return config.BIND.builtin
 return B

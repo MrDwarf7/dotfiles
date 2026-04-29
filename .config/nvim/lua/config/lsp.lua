@@ -41,6 +41,10 @@ setmetatable(BindsTypeE, {
 --- assigned fields as func's
 ---@field get_capabilities? fun(): table<string, any>
 ---
+---
+---@field capabilities? table<string, any>
+---
+---
 --- methods
 -- ---@field handle_binds_type fun(binds_type?: BindsType): BindsLiteral
 ---@field get_default_capabilities fun(): table<string, any>
@@ -48,7 +52,10 @@ setmetatable(BindsTypeE, {
 -- ---@field builtin_binds fun()
 -- ---@field setup_lsp_binds fun(self: config.LSP, binds_type?: BindsType)
 ---@field setup fun(opts?: config.LSP.Opts): config.LSP
-local LSP = {}
+local LSP = {
+  capabilities = nil,
+  get_capabilities = nil,
+}
 
 ---@param binds_type BindsType|nil
 ---@return BindsLiteral
@@ -95,7 +102,24 @@ local function handle_binds_type(binds_type)
 end
 
 function LSP.get_default_capabilities()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  local capabilities = {}
+
+  local blink_cmp_ok, blink_cmp = pcall(require, "blink.cmp")
+  if blink_cmp_ok then
+    capabilities = vim.tbl_deep_extend(
+      "force",
+      capabilities,
+      blink_cmp.get_lsp_capabilities({
+        textDocument = {
+          completion = {
+            snippetSupport = true,
+          },
+        },
+      }, true)
+    )
+  else
+    capabilities = vim.lsp.protocol.make_client_capabilities()
+  end
 
   -- required by nvim-ufo -- we don't use it atm tho
   capabilities.textDocument.foldingRange = {
@@ -103,7 +127,7 @@ function LSP.get_default_capabilities()
     lineFoldingOnly = true,
   }
 
-  LSP.capabilities = capabilities
+  -- LSP.capabilities = capabilities
   return capabilities
 end
 
@@ -205,7 +229,12 @@ local disable_capability = function(client, client_name, server_capabilities_ind
   end
 end
 
-local lsp_attach_autocmd = function(opts)
+---@type integer
+local config_lsp_groud_id = vim.api.nvim_create_augroup("ConfigLSP", { clear = true })
+
+---@param opts config.LSP.Opts
+---@param lsp config.LSP
+local lsp_attach_autocmd = function(opts, lsp)
   -- Do a couple of things on attach:
   -- 2. diable semantic tokens
   -- 3. setup lsp binds
@@ -216,10 +245,34 @@ local lsp_attach_autocmd = function(opts)
   -- artefacts (otherwise we get 'stuck' highlights when the server detaches but the buffer is still open)
   --
 
-  vim.api.nvim_create_augroup("ConfigLSP", { clear = true })
+  -- local config_lsp_groud_id = vim.api.nvim_create_augroup("ConfigLSP", { clear = true })
+
+  local setup_binds = function()
+    if opts.setup_lsp and type(opts.setup_lsp) == "function" then
+      opts.setup_lsp(opts.binds_type)
+      return
+    end
+    if not opts.setup_lsp or opts.setup_lsp == nil then
+      setup_lsp_binds(opts.binds_type)
+      return
+    end
+    -- require("utils").output.warn("opts.setup_lsp is not a function")
+    -- return nil
+  end
+
+  ---@param client vim.lsp.Client
+  local conf_fn = function(client)
+    vim.lsp.config[client.name] = {
+      capabilities = lsp.capabilities or lsp.get_capabilities(),
+      flags = {
+        -- debounce_text_changes = 200, -- default is 150ms but it'll show things like buffer comp. for a split second
+        debounce_text_changes = 500,
+      },
+    }
+  end
 
   vim.api.nvim_create_autocmd("LspAttach", {
-    group = "ConfigLSP",
+    group = config_lsp_groud_id,
     callback = function(ctx)
       pcall(vim.treesitter.start, ctx.buf, vim.bo.filetype)
 
@@ -229,28 +282,32 @@ local lsp_attach_autocmd = function(opts)
         return
       end
 
-      if not opts.setup_lsp or opts.setup_lsp == nil then
-        setup_lsp_binds(opts.binds_type)
-      elseif opts.setup_lsp and type(opts.setup_lsp) == "function" then
-        opts.setup_lsp(opts.binds_type)
-      else
-        require("utils").output.warn("opts.setup_lsp is not a function")
-        return nil
-      end
+      conf_fn(client)
 
-      -- client.server_capabilities.semanticTokensProvider = nil
+      -- vim.lsp.config[client.name] = {
+      --   capabilities = lsp.capabilities or lsp.get_capabilities(),
+      --   flags = {
+      --     -- debounce_text_changes = 200, -- default is 150ms but it'll show things like buffer comp. for a split second
+      --     debounce_text_changes = 500,
+      --   },
+      -- }
 
       disable_capability(client, nil, "semanticTokensProvider", nil)
       disable_capability(client, "ruff", "hoverProvider", false)
+      -- client.server_capabilities.semanticTokensProvider = nil
 
-      vim.lsp.config[client.name] = {
-        capabilities = LSP.capabilities,
-        flags = {
-          debounce_text_changes = 500,
-        },
-      }
+      pcall(setup_binds)
+
+      -- if not opts.setup_lsp or opts.setup_lsp == nil then
+      --   setup_lsp_binds(opts.binds_type)
+      -- elseif opts.setup_lsp and type(opts.setup_lsp) == "function" then
+      --   opts.setup_lsp(opts.binds_type)
+      -- else
+      --   require("utils").output.warn("opts.setup_lsp is not a function")
+      --   return nil
+      -- end
     end,
-    nested = true,
+    -- nested = true,
     desc = "Configure buffer keymap and behaviour based on LSP",
   })
 end
@@ -264,24 +321,13 @@ function LSP.setup(opts)
   clear_defaults()
 
   if opts.get_capabilities and type(opts.get_capabilities) == "function" then
-    LSP.capabilities = opts.get_capabilities()
+    LSP.get_capabilities = opts.get_capabilities
   else
-    LSP.get_default_capabilities()
+    LSP.get_capabilities = LSP.get_default_capabilities
   end
+  LSP.capabilities = LSP.get_capabilities()
 
-  lsp_attach_autocmd(opts)
-
-  -- local servers = require("lang_tables").get("mason", "lsps", "all")
-  -- dd(servers)
-  -- vim.lsp.enable(servers, true)
-
-  -- ---@type vim.lsp.config
-  -- vim.lsp.config("*", {
-  --   capabilities = capabilities,
-  --   flags = {
-  --     debounce_text_changes = 500,
-  --   },
-  -- })
+  lsp_attach_autocmd(opts, LSP)
 
   vim.diagnostic.config({
     -- virtual_lines = true,

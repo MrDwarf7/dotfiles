@@ -2,17 +2,20 @@
 ---@alias BlinkModulesReturnable BlinkModules | BlinkModules.Sources | BlinkModules.Completion | BlinkModules.Signature | BlinkModules.Cmdline | BlinkModules.Keymap
 
 ---@class BlinkModules : blink.cmp.Config
+---@field setup? fun(mod?: BlinkModulesSubmodule): BlinkModulesReturnable
 ---@field sources BlinkModules.Sources
 ---@field completion BlinkModules.Completion
 ---@field signature BlinkModules.Signature
 ---@field cmdline BlinkModules.Cmdline
 ---@field keymap BlinkModules.Keymap
+local BLINK = {}
 
 -- ---@generic T:BlinkModulesReturnable
--- ---@field setup fun(mod?: BlinkModulesSubmodule): T|BlinkModulesReturnable
-local M = {}
+-- ---@class BlinkModules.Sources
+-- ---@field setup? fun(mod?: BlinkModulesSubmodule): T
 
 local submodules = {
+  fuzzy = "blink_modules.fuzzy",
   sources = "blink_modules.sources",
   completion = "blink_modules.completion",
   signature = "blink_modules.signature",
@@ -37,6 +40,8 @@ local function load_submodules(name)
   return cfg
 end
 
+-- ---@generic T:BlinkModulesReturnable|blink.cmp.Config
+
 --- Enables the usage of calling:
 --- local bm = require("blink_modules")
 ---
@@ -45,29 +50,33 @@ end
 --- bm["completion"]
 --- bm.setup("completion")
 ---
----@generic T:BlinkModulesReturnable
+---@generic T:blink.cmp.Config
 ---@param mod? BlinkModulesSubmodule
 ---@return T
-function M.setup(mod) ---@diagnostic disable-line: unused-local
+function BLINK.setup(mod) ---@diagnostic disable-line: unused-local
   if type(mod) == "string" then
-    print("Value of mod on modules call: ", vim.inspect(mod))
-    if not rawget(M, mod) then
-      rawset(M, mod, load_submodules(mod))
+    -- print("Value of mod on modules call: ", vim.inspect(mod))
+    if not rawget(BLINK, mod) then
+      rawset(BLINK, mod, load_submodules(mod))
     end
-    print("Value of M on modules call: ", vim.inspect(M))
-    return M[arg]
+    -- print("Value of M on modules call: ", vim.inspect(BLINK))
+    return BLINK[arg]
   end
 
   for name in pairs(submodules) do
-    if not rawget(M, name) then
-      rawset(M, name, load_submodules(name))
+    if not rawget(BLINK, name) then
+      rawset(BLINK, name, load_submodules(name))
     end
   end
 
-  print("Value of M on modules call: ", vim.inspect(M))
-  return M
+  -- print("Value of M on modules call: ", vim.inspect(BLINK))
+  BLINK.setup = nil
+  return BLINK
 end
 
 -- ---@return BlinkModules
+-- return BLINK
 
-return M
+---
+---@return BlinkModules
+return BLINK

@@ -11,10 +11,11 @@ local function providers()
     copilot = {
       name = "copilot",
       module = "blink-copilot",
-      score_offset = 80,
-      async = false,
+      score_offset = 800,
+      async = true,
       opts = {
         max_completions = 4, -- 'override' default (default is 4)
+        max_attempts = 4,
       },
     },
 
@@ -25,7 +26,7 @@ local function providers()
       name = "LazyDev",
       module = "lazydev.integrations.blink",
       -- make lazydev completions top priority (see `:h blink.cmp`)
-      score_offset = 100,
+      score_offset = 1000,
     },
 
     -- ghostty = {
@@ -73,15 +74,15 @@ local function providers()
     lsp = {
       name = "LSP",
       module = "blink.cmp.sources.lsp",
-      score_offset = 40,
-      -- async = true,
-      async = false,
+      score_offset = 900,
+      async = true,
       min_keyword_length = 0,
       -- fallbacks = {}, -- defaults out to the "buffer" source
     },
     buffer = {
-      score_offset = -15,
+      score_offset = 55,
       min_keyword_length = 2,
+      async = true,
       opts = {
         -- Ability to provide completions
         -- from ALL buffers (well, valid ones)
@@ -98,6 +99,7 @@ local function providers()
     dictionary = {
       name = "blink-cmp-words",
       module = "blink-cmp-words.dictionary",
+      async = true,
       -- All available options
       opts = {
         -- The number of characters required to trigger completion.
@@ -105,7 +107,7 @@ local function providers()
         dictionary_search_threshold = 3,
 
         -- See above
-        score_offset = 20,
+        -- score_offset = 20,
 
         -- See above
         definition_pointers = { "!", "&", "^" },
@@ -116,11 +118,12 @@ local function providers()
     thesaurus = {
       name = "blink-cmp-thesaurus",
       module = "blink-cmp-words.thesaurus",
+      async = true,
       -- All available options
       opts = {
         -- A score offset applied to returned items.
         -- By default the highest score is 0 (item 1 has a score of -1, item 2 of -2 etc..).
-        score_offset = 10,
+        -- score_offset = 10,
 
         -- Default pointers define the lexical relations listed under each definition,
         -- see Pointer Symbols below.
@@ -137,7 +140,6 @@ local function providers()
         similarity_depth = 2,
       },
     },
-
     -- avante = {
     --   name = "Avante",
     --   module = "blink-cmp-avante",
@@ -159,6 +161,7 @@ local function providers()
     env = {
       name = "Env",
       module = "blink-cmp-env",
+      async = true,
 
       --- @type blink-cmp-env.Options
       opts = {
@@ -169,17 +172,19 @@ local function providers()
     },
 
     snippets = {
-      score_offset = -10,
-      -- opts = {
-      --   friendly_snippets = true, -- default
-      --   -- extended_filetypes = {
-      --   -- }
-      -- },
+      enabled = false,
+      score_offset = -200,
+      opts = {
+        -- friendly_snippets = true, -- default
+        snippets = {
+          preset = "luasnip",
+        },
+      },
       fallbacks = {},
     },
 
     path = {
-      score_offset = -15,
+      -- score_offset = -15,
       opts = {
         -- provide directory completions from the cwd instead
         -- of the current buffer's path.
@@ -198,9 +203,11 @@ return {
   -- Items with a double "-- --" I've disabled to test perf. related things,
   -- not so much because I dont' want to use them
 
-  -- add lazydev to your completion providers
   default = {
     --
+    "lsp",
+    "buffer",
+
     "copilot",
     "lazydev", -- conditional anyway
     -- "ghostty",
@@ -211,8 +218,6 @@ return {
     -- "avante",
     -- "datword",
 
-    "lsp",
-    "buffer",
     -- "ripgrep",
     "snippets",
     "path",
@@ -223,14 +228,24 @@ return {
 
   per_filetype = {
     lua = {
-      "copilot",
-      "lazydev", -- conditional anyway
-      "wezterm",
       "lsp",
+      "lazydev", -- conditional anyway
+      "path",
+      "copilot",
+
+      "wezterm",
       "buffer",
       "snippets",
-      "path",
     },
+    rust = {
+      "lsp",
+      "buffer",
+      "path",
+      "copilot",
+      "env",
+      -- "snippets",
+    },
+
     text = {
       "copilot",
       "dictionary",
@@ -245,6 +260,13 @@ return {
     -- sql stuff
     -- sql = { "dadbod" },
   },
+
+  --- Disable ALL of snippets via filtering _OUT_ items that are a part of valid blink snippet types
+  -- transform_items = function(_, items)
+  --   return vim.tbl_filter(function(item)
+  --     return item.kind ~= require("blink.cmp.types").CompletionItemKind.Snippet
+  --   end, items)
+  -- end,
 
   providers = providers(),
 }

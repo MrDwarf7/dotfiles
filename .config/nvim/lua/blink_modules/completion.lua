@@ -41,9 +41,42 @@ local function ghost_text()
   }
 end
 
----@return BlinkModules.Completion
+---@private
+---@return blink.cmp.ModeCompletionTriggerConfig
+local function trigger()
+  ---@type blink.cmp.ModeCompletionTriggerConfig
+  return {
+    show_on_keyword = true,
+    show_on_trigger_character = true,
+    show_on_blocked_trigger_characters = { " ", "\n", "\t" }, -- These chars _WON'T_ trigger completion(s)
+    show_on_insert_on_trigger_character = true,
+    show_on_x_blocked_trigger_characters = {
+      "'",
+      '"',
+      "(",
+      "{",
+      "[",
+    }, -- These chars _WON'T_ trigger completion(s)
+    show_on_accept_on_trigger_character = true,
+  }
+end
 
+---@private
+---@return blink.cmp.ModeCompletionListSelectionConfig
+local function list()
+  ---@type blink.cmp.ModeCompletionListSelectionConfig
+  return {
+    selection = {
+      preselect = true,
+      auto_insert = true,
+    },
+  }
+end
+
+---@return BlinkModules.Completion
 return { ---@type blink.cmp.CompletionConfigPartial
+  -- trigger = trigger(),
+  -- list = list(),
   menu = menu(), -- menu_type
   documentation = documentation(),
   ghost_text = ghost_text(),

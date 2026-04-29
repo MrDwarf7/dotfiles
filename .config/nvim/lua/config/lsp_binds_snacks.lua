@@ -44,5 +44,11 @@ function B.setup()
   -- stylua: ignore end
 end
 
+setmetatable(B, {
+  __index = function(_, k)
+    error("Key " .. tostring(k) .. " not found in config.BIND.snacks")
+  end,
+})
+
 ---@return config.BIND.fzf
 return B
