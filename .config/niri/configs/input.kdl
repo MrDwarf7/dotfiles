@@ -1,0 +1,46 @@
+input {
+  keyboard {
+    repeat-delay  160
+    repeat-rate  60
+
+    xkb {}
+
+    // Enable numlock on startup, omitting this setting disables it.
+    numlock
+  }
+
+  // allows to swap back and forth between workspaces when hitting the same key
+  workspace-auto-back-and-forth
+
+  // Next sections include libinput settings.
+  // Omitting settings disables them, or leaves them at their default values.
+  // All commented-out settings here are examples, not defaults.
+  touchpad {
+    // off
+    tap
+    // dwt
+    // dwtp
+    // drag false
+    // drag-lock
+    natural-scroll
+    // accel-speed 0.2
+    // accel-profile "flat"
+    // scroll-method "two-finger"
+    // disabled-on-external-mouse
+  }
+
+  mouse {
+    accel-speed 0.0
+    accel-profile "flat"
+    scroll-factor 1.0
+  }
+
+  trackpoint {}
+
+  // Uncomment this to make the mouse warp to the center of newly focused windows.
+  // warp-mouse-to-focus
+
+  // Focus windows and outputs automatically when moving the mouse into them.
+  // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
+  // focus-follows-mouse max-scroll-amount="0%"
+}

@@ -1,0 +1,51 @@
+// workspace
+
+// Zen/Vivaldi/Brave/Chrome/etc.
+// workspace "browser" { }
+
+// Ghostty/WezTerm
+// workspace "term" { }
+
+// generic - main
+workspace "main" { 
+  open-on-output "DP-1"
+}
+
+// Genral random extra workspace to ensure signal opens on 6
+workspace "other" {
+  open-on-output "DP-1"
+}
+
+// JetBrains/Zed/Code
+workspace "code" {
+  open-on-output "DP-1"
+}
+
+// Steam/Lutris
+workspace "games" {
+  open-on-output "DP-1"
+}
+
+// Obsidian/Todoist/Linear/Notion/etc.
+workspace "notes" { 
+  open-on-output "DP-1"
+}
+
+// Signal/Telegram/Slack
+workspace "priv-chat" { 
+  open-on-output "DP-1"
+  // layout {
+  //     // Enabled globally.
+  //     always-center-single-column;
+  // }
+}
+
+// Discord/Mumble
+workspace "chat" { 
+  open-on-output "HDMI-A-2"
+}
+
+// Spotify/Youtube Music
+workspace "music" { 
+  open-on-output "HDMI-A-2"
+}

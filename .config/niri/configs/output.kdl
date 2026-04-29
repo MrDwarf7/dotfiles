@@ -1,0 +1,18 @@
+// output "DP-1" {
+output "Samsung Electric Company LS49AG95 HNTTB00033" {
+  mode "5120x1440"
+  scale 1
+  position x=0 y=0
+  focus-at-startup
+  // variable-refresh-rate //on-demand=true
+  variable-refresh-rate on-demand=true
+}
+
+// Output "Acer Technologies KA242Y 1201028BF3W01" (HDMI-A-2)
+
+// output "HDMI-A-2" {
+output "Acer Technologies KA242Y 1201028BF3W01" {
+  mode "1920x1080"
+  scale 1.0
+  position x=5120 y=400
+}

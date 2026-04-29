@@ -1,0 +1,47 @@
+binds {
+  Mod+R hotkey-overlay-title="Spotlight" {
+    spawn "dms" "ipc" "call" "spotlight" "toggle"
+  }
+
+  Mod+Ctrl+V hotkey-overlay-title="Clipboard" {
+    spawn "dms" "ipc" "call" "clipboard" "toggle"
+  }
+
+  Mod+Ctrl+M hotkey-overlay-title="Settings" {
+    spawn "dms" "ipc" "call" "settings" "focusOrToggle"
+  }
+
+
+  Mod+Ctrl+A hotkey-overlay-title="Notifications" {
+    spawn "dms" "ipc" "call" "notifications" "toggle"
+  }
+
+  Mod+Y hotkey-overlay-title="DankWallpaper" {
+    spawn "dms" "ipc" "call" "dankdash" "wallpaper"
+  }
+
+  Mod+M hotkey-overlay-title="PowerMenu" {
+    spawn "dms" "ipc" "call" "powermenu" "toggle"
+  }
+
+  Mod+Ctrl+N hotkey-overlay-title="Notepad" {
+    spawn "dms" "ipc" "call" "notepad" "toggle"
+  }
+
+  Mod+Z hotkey-overlay-title="Dash" {
+    spawn "dms" "ipc" "call" "dash" "toggle" "overview"
+  }
+
+  Mod+X hotkey-overlay-title="Control Center" {
+    spawn "dms" "ipc" "call" "control-center" "toggle"
+  }
+
+  Mod+U hotkey-overlay-title="Lock" {
+    spawn "dms" "ipc" "call" "lock" "lock"
+  }
+
+  Mod+Ctrl+S hotkey-overlay-title="Screenshot" {
+    spawn "dms" "screenshot"
+  }
+
+}

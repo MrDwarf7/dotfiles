@@ -1,0 +1,178 @@
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// window-rule {
+//      draw-border-with-background false
+//      open-floating false
+// }
+
+window-rule {
+  // Zen Browser / Zen-Browser / zen
+  match app-id=r#"^(zen)$"#
+  open-on-output "DP-1"
+  draw-border-with-background false
+  // open-on-workspace "browser"
+  open-floating false
+  open-focused false
+  default-column-width { proportion 0.5; }
+  focus-ring {
+    off
+  }
+  border {
+    off
+  }
+
+  geometry-corner-radius 0
+  tiled-state true
+}
+
+window-rule {
+  match app-id=r#"^com\.mitchellh\.ghostty$"#
+  background-effect {
+    blur true
+  }
+}
+
+
+///////////////////////////////
+///////////////////////////////
+// Ordering of window-rule will be the workspace you're
+// LEFT ON
+// after apps have started up
+// With last one being the one that takes precedence
+///////////////////////////////
+///////////////////////////////
+
+
+// ghostty starts -> (main)
+// signal starts -> (priv-chat)*
+// So we're 'left' on (priv-chat)
+// focused on 'signal'
+// move-column-to-workspace "main"
+// focsus-workspace "main"
+//
+//
+//
+//
+
+window-rule {
+  // Ghostty / ghostty
+  match app-id=r#"^com\.mitchellh\.ghostty$"#
+  match title=r#"^Ghostty$"#
+  // 0.0 -> fully transparent, 1.0 fully solid
+  opacity 1.0
+  draw-border-with-background false
+  border {
+    off
+  }
+  // variable-refresh-rate false
+
+}
+
+window-rule {
+  // Ghostty / ghostty
+  match at-startup=true
+  open-on-workspace "main"
+  match app-id=r#"^com\.mitchellh\.ghostty$"#
+  match title=r#"^Ghostty$"#
+}
+
+window-rule {
+  // Signal / signal
+  match app-id=r#"^signal$"#
+  match title=r#"^Signal$"#
+  // match at-startup=true
+
+  open-on-output "DP-1"
+  open-on-workspace "priv-chat"
+  open-floating false
+  open-focused false
+  // open-maximized true
+  block-out-from "screen-capture"
+  default-column-width { proportion 0.60; }
+  // default-window-height { proportion 1.0; }
+}
+
+window-rule {
+  match app-id=r#"^obsidian$"#
+  open-on-output "DP-1"
+  open-on-workspace "notes"
+  open-focused false
+}
+
+window-rule {
+  match app-id=r#"^(discord|armcord|webcord|vencord|vesktop)$"#
+  open-on-output "HDMI-A-2"
+  open-on-workspace "chat"
+  open-focused false
+}
+
+window-rule {
+  match app-id=r#"^(spotify|spotify-beta)$"#
+  open-on-output "HDMI-A-2"
+  open-on-workspace "music"
+  open-focused false
+}
+
+window-rule {
+  match app-id=r#"^(com\.github\.th_ch\.youtube.+)$"#
+  open-on-output "HDMI-A-2"
+  open-on-workspace "music"
+  open-focused false
+  open-floating false
+  default-column-width { proportion 0.75; }
+  default-window-height { proportion 1.00; }
+}
+
+window-rule {
+  // Jetbrains IDEs / jetbrains / jb
+  match app-id=r#"^jetbrains-.+$"#
+  open-on-workspace "code"
+  open-on-output "DP-1"
+  open-focused false
+}
+
+//// CANNOT USE anything to do with floating, as the application
+// starts on system startup and is "always open" apparently
+window-rule {
+  // Jetbrains Toolbox / jetbrains toolbox / jetbrains-toolbox / jb toolbox
+  match app-id=r#"^(jetbrains-toolbox)$"# 
+  match title=r#"^(Toolbox)$"#
+  // match is-floating=true
+  match is-focused=false
+  draw-border-with-background false
+  open-focused true
+  // open-floating true
+  open-fullscreen false
+  open-maximized false
+}
+
+// Work around WezTerm's initial configure bug
+// by setting an empty default-column-width.
+window-rule {
+  // This regular expression is intentionally made as specific as possible,
+  // since this is the default config, and we want no false positives.
+  // You can get away with just app-id="wezterm" if you want.
+  // WezTerm / Wezterm / wezterm / furlong / wez
+  match app-id=r#"^org\.wezfurlong\.wezterm$"#
+  default-column-width {}
+}
+
+// Open the Firefox picture-in-picture player as floating by default.
+window-rule {
+  // This app-id regular expression will work for both:
+  // - host Firefox (app-id is "firefox")
+  // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+  // FireFox / Firefox / firefox / PIP / PiP / pip / Picture-in-Picture / picture-in-picture
+  match app-id=r#"(firefox)$"# 
+  match title="^(Picture-in-Picture)$"
+  open-floating true
+}
+
+window-rule {
+  match app-id=r#"org.quickshell$"#
+  open-floating true
+}
+
+

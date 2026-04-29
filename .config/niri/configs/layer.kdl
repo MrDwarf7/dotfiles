@@ -1,0 +1,32 @@
+// layer-rule {
+//     match namespace="waybar"
+//     match at-startup=true
+// }
+
+layer-rule {
+  match namespace="notification(s)?"
+  block-out-from "screen-capture"
+}
+
+
+layer-rule {
+  match namespace="notification(s)?"
+  block-out-from "screencast"
+}
+
+// DMS Stuff
+
+layer-rule {
+  match namespace="^quickshell$"
+  place-within-backdrop true
+}
+
+layer-rule {
+  match namespace="dms:blurwallpaper"
+  place-within-backdrop true
+}
+
+layer-rule {
+  match namespace="^dms:clipboard$"
+  block-out-from "screencast"
+}
