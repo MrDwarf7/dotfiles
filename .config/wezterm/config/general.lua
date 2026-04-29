@@ -22,7 +22,7 @@ return {
 
 	status_update_interval = 10000,
 
-	scrollback_lines = 3000,
+	scrollback_lines = 10000,
 	enable_scroll_bar = true,
 
 	---@type HyperLinkRule[]

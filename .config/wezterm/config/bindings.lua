@@ -64,6 +64,13 @@ for i = 1, 8 do
 	})
 end
 
+-- TODO: Currently there is no (at least bound) key for my normal tmux workflow
+-- of using the leader key itself again to swap to the most recently used tab.
+-- This means <Leader>-<Leader> should swap between tabs and, if I have say 4 open:
+-- If we're already on eg: tab 3
+-- <Leader>-1 -- goes to tab 1 (first one)
+-- <Leader>-<Leader> -- should then swap me back to tab 3
+
 ---@type KeyList
 local key_opts = {
 	-- Tabs
@@ -104,8 +111,11 @@ local key_opts = {
 	--
 	--
 	-- Could potentially just remove this honestly - use CTRL + [1-9] or use the switcher via leader + ctrl P
-	{ key = "H", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(-1) }, -- Moving
-	{ key = "L", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(1) }, -- Moving
+	-- { key = "H", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(-1) }, -- Moving
+	-- { key = "L", mods = "LEADER|SHIFT", action = act.ActivateTabRelative(1) }, -- Moving
+
+	{ key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) }, -- Moving
+	{ key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) }, -- Moving
 
 	-- TODO: Perhaps we can use TAB // SHIFT+Tab for moving them?
 	{ key = ",", mods = "LEADER", action = act.MoveTabRelative(-1) },
@@ -125,17 +135,17 @@ local key_opts = {
 	{ key = "r", mods = "LEADER", action = act.ActivateKeyTable({ name = "resize_pane", one_shot = false }) },
 	{ key = "v", mods = "LEADER", action = act.ActivateKeyTable({ name = "scrolling", one_shot = false }) },
 
-	{ key = "g", mods = "LEADER", action = act.QuickSelect }, -- 'Grab'
-	{ key = "f", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
+	{ key = "Y", mods = "LEADER", action = act.QuickSelect }, -- 'Grab'
+	{ key = "/", mods = "LEADER", action = act.Search({ CaseSensitiveString = "" }) },
 	-- TODO: Bindings for opacity
 
-	{ key = "p", mods = "LEADER|CTRL", action = act.ShowLauncherArgs(launcher_flags) },
-	{ key = "p", mods = "LEADER", action = act.ShowLauncherArgs(launcher_flags) },
+	-- { key = "o", mods = "LEADER|CTRL", action = act.ShowLauncherArgs(launcher_flags) },
+	{ key = "o", mods = "LEADER", action = act.ShowLauncherArgs(launcher_flags) },
 
 	{ key = "b", mods = "LEADER", action = act.ShowLauncherArgs(launch_menu) },
 
-	{ key = "t", mods = "LEADER", action = act.ShowTabNavigator },
-	{ key = "Y", mods = "LEADER", action = act.ShowTabNavigator },
+	{ key = "s", mods = "LEADER", action = act.ShowTabNavigator },
+	-- { key = "Y", mods = "LEADER", action = act.ShowTabNavigator },
 
 	{
 		key = "w",
@@ -157,6 +167,13 @@ local key_opts = {
 
 Utils.merge_tables(keys, key_opts)
 
+-- TODO: Need to have 'ESCAPE' allow for returning to cursor mode itself (currently we go right back to the cmdline
+-- TODO: <S-e> and <S-w> don't work in visual mode.
+-- TODO: Hitting <S-a> should return me to the input (aka: out of visual mode)
+-- TODO: cannot use `n` and `<S-n>` | `N` to scroll between results
+-- TODO: Cannot search text while inside of copy mode (tf?? WHY??!??!!!)
+-- TODO: Searching for something, then going into copy_mode causes the already searched text to be pre-filled. Forcing an awkward moment of having to delete the old text.
+
 ---@type KeyList
 local key_table_opts = {
 	copy_mode = {
@@ -175,6 +192,7 @@ local key_table_opts = {
 		{ key = "k", action = act.AdjustPaneSize({ "Up", 1 }) },
 		{ key = "l", action = act.AdjustPaneSize({ "Right", 2 }) },
 	},
+	-- search_mode = {},
 
 	scrolling = {
 		{ key = "Escape", action = "PopKeyTable" },
@@ -194,7 +212,7 @@ local key_table_opts = {
 }
 
 --- Merge the default key tables with the custom ones we have
---- THis preserved the existing (default) binds
+--- THIS preserved the existing (default) binds
 for k, v in pairs(wezterm.gui.default_key_tables()) do
 	key_tables[k] = v
 end

@@ -7,7 +7,7 @@
 	"workspace.library": [
 		"./types"
 	],
-	"runtime.version": "Lua 5.1",
+	"runtime.version": "LuaJIT",
 	"hint.enable": true,
 	"completion.autoRequire": true,
 	"completion.callSnippet": "Replace",

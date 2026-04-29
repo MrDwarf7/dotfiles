@@ -101,8 +101,8 @@ function Appearance.init()
 
 	inst.color_scheme = "Tokyo Night Storm"
 
-	inst.tab_bar_at_bottom = true
-	inst.tab_max_width = 18
+	inst.tab_bar_at_bottom = false
+	-- inst.tab_max_width = 18
 	inst.use_fancy_tab_bar = false
 	inst.show_tab_index_in_tab_bar = true
 	inst.switch_to_last_active_tab_when_closing_tab = false
@@ -117,7 +117,7 @@ function Appearance.init()
 		bottom = 0,
 	}
 
-	inst.window_background_opacity = 1.0
+	inst.window_background_opacity = 0.80
 	inst.inactive_pane_hsb = {
 		saturation = 0.92,
 		brightness = 0.80,
