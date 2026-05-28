@@ -55,7 +55,7 @@
   "blurLayerOutlineOpacity": 0.12,
   "blurBorderColor": "primary",
   "blurBorderCustomColor": "#ffffff",
-  "blurBorderOpacity": 1,
+  "blurBorderOpacity": 0.7,
   "wallpaperFillMode": "Fit",
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": true,
@@ -178,6 +178,7 @@
   "audioWheelScrollAmount": 5,
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
+  "focusedWindowSize": 1,
   "runningAppsCompactMode": true,
   "barMaxVisibleApps": 0,
   "barMaxVisibleRunningApps": 0,
@@ -218,6 +219,7 @@
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
   "rememberLastQuery": false,
+  "rememberLastMode": true,
   "spotlightSectionViewModes": {
     "apps": "list"
   },
@@ -233,6 +235,9 @@
   "dankLauncherV2UnloadOnClose": true,
   "dankLauncherV2IncludeFilesInAll": false,
   "dankLauncherV2IncludeFoldersInAll": false,
+  "launcherUseOverlayLayer": false,
+  "launcherStyle": "full",
+  "spotlightBarShowModeChips": false,
   "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "wifi",
@@ -299,7 +304,11 @@
   "fadeToDpmsGracePeriod": 5,
   "launchPrefix": "",
   "brightnessDevicePins": {},
-  "wifiNetworkPins": {},
+  "wifiNetworkPins": {
+    "preferredWifi": [
+      "MiddleEarth5GHz"
+    ]
+  },
   "bluetoothDevicePins": {},
   "audioInputDevicePins": {},
   "audioOutputDevicePins": {},
@@ -328,7 +337,7 @@
   "matugenTemplateKitty": false,
   "matugenTemplateFoot": false,
   "matugenTemplateAlacritty": false,
-  "matugenTemplateNeovim": true,
+  "matugenTemplateNeovim": false,
   "matugenTemplateWezterm": false,
   "matugenTemplateDgop": true,
   "matugenTemplateKcolorscheme": true,
@@ -345,11 +354,11 @@
       "harmony": 0.5
     }
   },
-  "matugenTemplateNeovimSetBackground": true,
+  "matugenTemplateNeovimSetBackground": false,
   "showDock": false,
   "dockAutoHide": false,
   "dockSmartAutoHide": false,
-  "dockHideOnFullscreen": true,
+  "dockUseOverlayLayer": false,
   "dockGroupByApp": false,
   "dockRestoreSpecialWorkspaceOnClick": false,
   "dockOpenOnOverview": false,
@@ -405,6 +414,7 @@
   "notificationTimeoutNormal": 5000,
   "notificationTimeoutCritical": 0,
   "notificationCompactMode": false,
+  "notificationDedupeEnabled": true,
   "notificationPopupPosition": 0,
   "notificationAnimationSpeed": 4,
   "notificationCustomAnimationDuration": 159,
@@ -446,6 +456,7 @@
   "customPowerActionReboot": "",
   "customPowerActionPowerOff": "",
   "updaterHideWidget": true,
+  "updaterCheckOnStart": false,
   "updaterUseCustomCommand": true,
   "updaterCustomCommand": "",
   "updaterTerminalAdditionalParams": "",
