@@ -57,6 +57,7 @@ include "./configs/animations.kdl"
 include "./configs/binds.kdl"
 
 include "./dms/binds.kdl"
+include "./dms/windowrules.kdl"
 
 ///// only if ghostty is the 'thing' that's focused on the initial startup call stack
 spawn-sh-at-startup "niri msg action focus-workspace \"main\""
