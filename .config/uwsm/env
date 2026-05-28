@@ -69,8 +69,6 @@ export MOZ_ENABLE_WAYLAND=1
 ## swww
 export WALLPAPER_BACKEND=swww
 
-
-
 ## Older variables that were already/still are; commented out.
 #
 # export __NV_PRIME_RENDER_OFFLOAD,1 
@@ -78,7 +76,3 @@ export WALLPAPER_BACKEND=swww
 # export WLR_DRM_NO_ATOMIC,1
 # vulkan
 # export WLR_RENDERER,vulkan
-
-
-export DMS_DISABLE_MATUGEN=1
-

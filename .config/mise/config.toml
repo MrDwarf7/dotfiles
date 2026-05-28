@@ -104,6 +104,9 @@ version = "latest"
 [tools."cargo:cargo-nextest"]
 version = "latest"
 
+[tools."cargo:mdv"]
+version = "latest"
+
 [tools."cargo:nviwatch"]
 version = "latest"
 

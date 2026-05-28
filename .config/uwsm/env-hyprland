@@ -1,3 +1,5 @@
+##### export DMS_DISABLE_MATUGEN=1
+
 # export HYPRLAND_TRACE = 1               # - Enables more verbose logging.
 # export HYPRLAND_NO_RT = 1               # - Disables realtime priority setting by Hyprland.
 # export HYPRLAND_NO_SD_NOTIFY = 1        # - If systemd, disables the sd_notify calls.
