@@ -83,5 +83,10 @@ use = "boydaihungst/mediainfo"
 rev = "49f5ab7"
 hash = "e9a32b121fac586ee0b5f62e18b89c79"
 
+[[plugin.deps]]
+use = "WhoSowSee/mdv-previewer"
+rev = "04aa2bd"
+hash = "64de0b69e2b4829bd7ad4c500a3f7a61"
+
 [flavor]
 deps = []

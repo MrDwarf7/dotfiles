@@ -68,6 +68,10 @@ end, 500, Status.RIGHT)
 
 require("relative-motions"):setup({ only_motions = true })
 -- require("duckdb"):setup()
+require("mdv-previewer"):setup({
+	theme = "monokai", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
+	code_theme = "tokyonight", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
+})
 require("sshfs"):setup({
 	-- Default:
 	-- mount_dir = os.getenv("HOME") .. "/mnt",

@@ -1,6 +1,6 @@
 # A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+# "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 # YAZI_CONFIG_HOME :: This needs to be on path and pointed to this DIR
 # YAZI_FILE_ONE :: This needs to be pointed DIRECTLY at Git's file.exe binary (Yes. THE BINARY ITSELF)
@@ -110,10 +110,14 @@ suppress_preload = false
 prepend_previewers = [
   # Text / structured data preview plugins
   # { mime = "text/csv", run = "miller" },
-  { url = "*.md", run = "rich-preview" },
+  # { url = "*.md", run = "rich-preview" },
   { url = "*.ipynb", run = "rich-preview" },
   { url = "*.json", run = "rich-preview" },
   { url = "*.jsonc", run = "rich-preview" },
+
+
+  { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+  { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
 
   # ONLY add ( compression related ) items as needed.
   # The built-in previewer is generally much better these days
@@ -174,6 +178,8 @@ prepend_preloaders = [
   # Replace magick, image, video with mediainfo
   { mime = "{audio,video,image}/*", run = "mediainfo" },
   { mime = "application/subrip", run = "mediainfo" },
+
+  { mime = "*.{md,markdown,txt}", run = "mdv-previewer" },
 
   # Adobe Photoshop is image/adobe.photoshop, already handled above
   # Adobe Illustrator
