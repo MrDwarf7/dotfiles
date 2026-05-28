@@ -1,0 +1,14 @@
+
+line_ending: lf
+
+formatter:
+  type: basic
+  include_document_start: false
+  line_ending: lf
+  # comment
+  retain_line_breaks: true
+
+  # note: This takes precedence over `retain_line_breaks` for single line breaks
+  retain_line_breaks_single: true
+  # is the default
+  pad_line_comments: 1
