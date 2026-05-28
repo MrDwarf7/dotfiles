@@ -37,6 +37,7 @@ return {
       lsp_format = "fallback",
     },
 
+    ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer):conform.FormatterConfigOverride|nil>
     formatters = {
       injected = { options = { ignore_errors = true } },
       ["markdown-toc"] = {
@@ -46,7 +47,22 @@ return {
               return true
             end
           end
+          return false
         end,
+      },
+      yamlfmt = {
+        inherit = true,
+        options = {
+          line_ending = "lf",
+          formatter = {
+            type = "basic",
+            include_document_start = false,
+            line_ending = "lf",
+            retain_line_breaks = true,
+            retain_line_breaks_single = true,
+            pad_line_comments = 1,
+          },
+        },
       },
     },
     formatters_by_ft = require("lang_tables").by_ft("force", "formatters", {}),

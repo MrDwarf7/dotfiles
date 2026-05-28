@@ -17,7 +17,7 @@ return {
     --- as that turns ALL snippets off that are associated with blink.cmp.types.
     --- Will need to comment it, or filter by specific's
 
-    { "L3MON4D3/LuaSnip",                             lazy = true, version = "2.*" ,
+    { "L3MON4D3/LuaSnip",                             lazy = false, version = "2.*" ,
       -- dependencies = { "rafamadriz/friendly-snippets" }
     },
 
