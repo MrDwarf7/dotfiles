@@ -5,7 +5,7 @@ return {
     match = {
       class = "^(code)$",
     },
-    opacity = 1.00,
+    opacity = "1.0 override 1.0 override",
   },
 }
 

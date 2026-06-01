@@ -20,64 +20,36 @@ local setup = function()
     border_size = 0,
   })
 
-  -- List of rule modules to load
+  -- Rule modules to load, grouped by concern:
+  --   ag_float       — float + size/pin rules (no tags, no workspace)
+  --   ag_tag         — tag assignments + tag effects (incl. tag-based workspaces)
+  --   ag_workspace   — direct workspace assignments (no tags)
+  --   a_generic      — global rules (suppress_event, etc.)
+  --   ag_pip         — Picture-in-Picture
+  --   ag_popups      — file dialogs, portals, polkit/pinentry focus
+  --   code           — VS Code opacity
+  --   alecaframe     — Overwolf/Aleaframe (multi-tag)
+  --   steam          — Steam multi-window (complex)
+  --   vivaldi        — Vivaldi browser (complex)
+  --
+  -- Not loaded (prepped, pending review):
+  --   ag_yoinked_prep — generic floats, PiP, screen share, tearing, launchers
+
   local modules = {
     "a_generic",
-    "affine",
-    "ag_blueman",
-    "ag_mpv",
+    "ag_float",
+    "ag_tag",
+    "ag_workspace",
     "ag_pip",
     "ag_popups",
-    "ag_pulse_pavu",
-    "ag_qalculate",
-    "ag_qt5ct",
-    "alecaframe",
-    "appimagelauncher",
-    "calendly",
-    "chromium",
     "code",
-    "davinici-panels",
-    "discord",
-    "docker",
-    "feh",
-    "ghostty",
-    "jetbrains",
-    "keepassxc",
-    "keymap",
-    "kt",
-    "limo",
-    "obsidian",
-    "polychromatic",
-    "qBittorrent",
-    "rimworld",
-    "showmethekey",
-    "signal",
-    "solarar",
-    "spotify",
+    "alecaframe",
     "steam",
-    "swappy",
-    "telegram",
-    "thunar",
-    "thunderbird",
-    "ueberzugpp",
-    "viewnoir",
     "vivaldi",
-    "waypaper",
-    "webapp-grok",
-    "webapp-manager",
-    "wezterm",
-    "xdg-portal",
-    "youtube-music_ytm_yt_music",
-    "ytm__pear",
-    "zathura",
-    "zed-editor",
-    "zen",
-    "zmk-studio",
   }
 
   for _, mod in ipairs(modules) do
     local rules = require("shared.rules." .. mod)
-    -- local rules = require(module)
     if type(rules) == "table" then
       for _, rule in ipairs(rules) do
         hl.window_rule(rule)
