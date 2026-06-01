@@ -39,8 +39,8 @@ return {
 
     -- stylua: ignore end
   },
-  -- version = "*",
-  branch = "v1",
+  version = "*",
+  -- branch = "v1",
   build = "cargo build --profile release",
   opts = require("blink_modules").setup(),
   -- {

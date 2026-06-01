@@ -68,6 +68,9 @@ local function providers()
         -- used
         triggered_only = false,
         trigger_chars = { "." },
+
+        max_completions = 4, -- 'override' default (default is 4)
+        max_attempts = 4,
       },
     },
 

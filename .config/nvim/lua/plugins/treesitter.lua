@@ -1,12 +1,21 @@
-local queries = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/queries"
-vim.opt.runtimepath:append(queries)
+---@param base 'cache'|'config'|'config_dirs'|'data'|'data_dirs'|'log'|'run'|'state'
+---@param p string|string[]
+local append_rtp = function(base, p)
+  vim.opt.runtimepath:append(vim.fn.stdpath(base) .. p)
+end
+
+local queries = append_rtp("data", "/lazy/nvim-treesitter/runtime/queries")
+append_rtp("data", "/lazy/nvim-treesitter/queries")
+
+-- local queries = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/queries"
+-- vim.opt.runtimepath:append(queries)
 
 -- TODO: eventually deprecate this file in favor of using a new
 -- LangHub module that consolidates 'suites'
 -- local lang_tables = require("lang_tables")
 
----@type vim.treesitter
-local ts_native = vim.treesitter
+-- ---@type vim.treesitter
+-- local ts_native = vim.treesitter
 
 return {
   "nvim-treesitter/nvim-treesitter",
@@ -15,12 +24,13 @@ return {
   ---@class vim.treesitter.Config
   opts = {
     --- Defaults to the `stdpath('data')/site` dir.
-    -- install_dir = queries,
+    install_dir = queries,
     languages = require("lang_tables").ts_ensure_installed(),
   },
   ---@param opts? any|nil
   ---@param _? LazyMeta|nil
-  config = function(opts, _)
+  -- config = function(opts, _)
+  config = function(_, opts)
     local ts = require("nvim-treesitter")
     ts.setup(opts)
     -- ts.install(require("lang_tables").ts_all())

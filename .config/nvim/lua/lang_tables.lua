@@ -119,6 +119,7 @@ LangTables = {
       "fixjson",
       "gofumpt",
       "isort",
+      "ols", -- Odin
       "markdown-toc",
       "markdownlint-cli2",
       "mdslw",
@@ -156,6 +157,7 @@ LangTables = {
           return { "isort", "black" }
         end
       end,
+      ["odin"] = { "odinfmt" },
       -- ["rust"] = { "rustfmt" },
       ["sh"] = { "shfmt" },
       ["sql"] = { "sql_formatter" },
@@ -199,6 +201,7 @@ LangTables = {
       ["javascript"] = { "biomejs" },
       ["javascriptreact"] = { "biomejs" },
       ["json"] = { "jsonlint" },
+      ["odin"] = { "ols" },
 
       -- ["lua"] = { "luacheck" },
       -- markdown = { "markdownlint-cli2" },

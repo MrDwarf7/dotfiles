@@ -470,6 +470,11 @@ map({ "n", "v" }, "<Leader>i-", function()
   end
 end, silent_opts("[i]nsert [d]ate"))
 
+map({ "v" }, "<Leader>=", function()
+  -- TODO: it's... kinda wonky
+  require("utils.align_by").align_selection_by_char()
+end, silent_opts("Align by char"))
+
 -- vim.keymap.set({ "n", "i", "s" }, "<C-e>", function()
 --   if not require("noice.lsp").scroll(4) then
 --     return "<C-e>"

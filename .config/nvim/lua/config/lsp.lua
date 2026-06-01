@@ -104,6 +104,8 @@ end
 function LSP.get_default_capabilities()
   local capabilities = {}
 
+  -- TODO: streamline - `blink_cmp.get_lsp_capabilities` already gives us back a tbl
+
   local blink_cmp_ok, blink_cmp = pcall(require, "blink.cmp")
   if blink_cmp_ok then
     capabilities = vim.tbl_deep_extend(

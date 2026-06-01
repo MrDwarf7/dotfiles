@@ -64,6 +64,12 @@ return {
           },
         },
       },
+      odinfmt = {
+        command = "odinfmt",
+        args = { "-stdin" },
+        stdin = true,
+        inherit = true,
+      },
     },
     formatters_by_ft = require("lang_tables").by_ft("force", "formatters", {}),
     notify_on_error = false,

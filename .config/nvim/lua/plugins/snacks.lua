@@ -5,8 +5,8 @@ return {
   keys = {
       --stylua: ignore start
       -- Top Pickers & Explorer
-      { "<Leader>ff", function() Snacks.picker.smart() end, desc = "Smart Find Files" }, -- can be set up to use { multi = { "buffers", "files", "recent" } } etc.
-      { "<Leader>fF", function() Snacks.picker.files({ hidden = true }) end, desc = "Find Files" },
+      { "<Leader>ff", function() Snacks.picker.files({ hidden = true }) end, desc = "Find Files" },
+      { "<Leader>fF", function() Snacks.picker.smart() end, desc = "Smart Find Files" }, -- can be set up to use { multi = { "buffers", "files", "recent" } } etc.
       { "<Leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<Leader>fw", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<Leader>fc", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
