@@ -50,11 +50,6 @@ local setup = function()
   require("shared.keymaps.init")
 
   -----------------------------------------------------------
-  -- 6. Window rules (self-contained loader)
-  -----------------------------------------------------------
-  require("shared.rules.init")
-
-  -----------------------------------------------------------
   -- 8. Standard hl.config sections — each returns a table
   -----------------------------------------------------------
   -- local config = {}
@@ -93,6 +88,11 @@ local setup = function()
   -- for _, modpath in ipairs(modules) do
   --   require("shared." .. modpath)
   -- end
+
+  -----------------------------------------------------------
+  -- 6. Window rules (self-contained loader)
+  -----------------------------------------------------------
+  require("shared.rules.init")
 
   -----------------------------------------------------------
   -- Execs (hl.on / hl.exec_cmd for autostart)

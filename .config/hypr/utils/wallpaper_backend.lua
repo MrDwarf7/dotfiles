@@ -20,6 +20,12 @@ local backend_cmds = {
   [backends.WALLPAPERENGINE:upper()] = "wallpaperengine-gui -m",
 }
 
+--- Get the command to launch the specified wallpaper backend
+--- Defaults to AWWW if the key is not found or invalid
+function backend_cmds.get(backend_key)
+  return backend_cmds[backend_key:upper()] or backend_cmds[backends.AWWW:upper()]
+end
+
 -- TODO: Eventually we'd actually want to move these over to be
 -- something like `WallpaperBackend.active` and we just do an initial lookup
 -- _against_ the backends/cmds and set it.
@@ -31,31 +37,58 @@ local WallpaperBackend = {
   WALLPAPERENGINE = backends.WALLPAPERENGINE,
 }
 
+--- Checks `str` for:
+--- - `true` & `type(_) == "string" & `str` != ""
+--- returns `str` if valid, otherwise nil.
+---
+---@param str any Any input to be checked.
+---@return string? Returns `str` if it's a non-empty string, otherwise nil.
+local ftc_string = function(str)
+  if str and type(str) == "string" and str ~= "" then
+    return str
+  else
+    return nil
+  end
+end
+
 ---@class DetectedWallpaperBackend
 ---@field key DWBKey The corresponding key in HyprConfig.WallpaperBackendE (e.g. "SWWW", "AWWW", "WALLPAPERENGINE")
 ---@field name DWBName The detected wallpaper backend name (e.g. "swww", "awww", "wallpaperengine")
 
+--- Best effort attempt to detect a configured wallpaper backend, with the following precedence:
+--- 1. Optional override value (e.g. from env var or command line arg)
+--- 2. `WALLPAPER_BACKEND` env var
+--- 3. Fallback detection logic (e.g. check for running processes)
+--- 4. Default fallback (e.g. "swww")
+---
 ---@param override? string Optional override value (e.g. from env var or command line arg)
 ---@return DetectedWallpaperBackend|bool Mapping K: HyprConfig.WallpaperBackendE[K] :: V: HyprConfig.WallpaperBackendE[v]
 WallpaperBackend.detect = function(override)
   local env_backend = os.getenv("WALLPAPER_BACKEND")
-  if override and type(override) == "string" and override ~= "" then
-    local detected = backends[override:upper()]
+  local override_str = ftc_string(override)
+  if override_str then
+    local detected = backends[override_str:upper()]
     if detected then
-      return { key = override:upper(), name = detected }
+      return { key = override_str:upper(), name = detected }
     end
   end
 
-  if env_backend and type(env_backend) == "string" and env_backend ~= "" then
-    local detected = backends[env_backend:upper()]
+  local env_str = ftc_string(env_backend)
+  -- if env_backend and type(env_backend) == "string" and env_backend ~= "" then
+  if env_str then
+    local detected = backends[env_str:upper()]
     if detected then
-      return { key = env_backend:upper(), name = detected }
+      return { key = env_str:upper(), name = detected }
     end
   end
 
   -- Fallback detection logic (e.g. check for running processes)
   local function is_process_running(name)
-    local handle = io.popen("pgrep -x " .. name)
+    local handle, err = io.popen("pgrep -x " .. name, "r")
+    if err then
+      print("[hyprland] Error checking for process '" .. name .. "': " .. tostring(err))
+      return false
+    end
     if not handle then
       return false
     end
@@ -78,7 +111,11 @@ end
 
 ---@param backend DWBKey The key of the detected wallpaper backend (e.g. "SWWW", "AWWW", "WALLPAPERENGINE")
 WallpaperBackend.launch_cmd = function(backend)
-  return backend_cmds[backend:lower()] or backend_cmds[backends.SWWW:upper()]
+  if not backend or type(backend) ~= "string" then
+    print("[hyprland] Invalid wallpaper backend key: " .. tostring(backend))
+    -- we would handle default ret. type here, but is okay because `.get` handles it
+  end
+  return backend_cmds.get(backend)
 end
 
 ---@return HyprConfig.WallpaperBackend

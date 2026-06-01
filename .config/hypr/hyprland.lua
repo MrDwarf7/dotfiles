@@ -10,9 +10,11 @@
 
 require("shared.env") -- literally the first thing we do.
 
-DISABLE_MY_LOGGER = true
+LOGGER_ENABLED = false
 
-local logger = require("utils.logger").new()
+local logger = require("utils.logger").new({
+  enabled = LOGGER_ENABLED,
+})
 
 logger:log("Hyprland configuration started")
 

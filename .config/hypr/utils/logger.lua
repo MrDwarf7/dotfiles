@@ -7,10 +7,24 @@
 local Logger = {
   --- os.getenv("HOME") .. "/MY_hyprland_debug.log",
   log_file = nil,
+  enabled = true,
   prefix = "[hyprland_lua] ",
 }
 
 local log_filename = "MY_hyprland_debug"
+
+local blank = function()
+  -- stylua: ignore start
+  return setmetatable({}, {
+    __index = function() return function() end end, -- noop for all methods
+    __tostring = function() return "Logger(DISABLED)" end,
+    __len = function() return 0 end,
+    __call = function(cls, ...)
+      return cls.new(...)
+    end,
+  })
+  -- stylua: ignore end
+end
 
 --- Optionally takes a handful of settings to configure the Logger.
 --- `opts` are checked individually and defaults are set for missing sections/values.
@@ -19,21 +33,15 @@ local log_filename = "MY_hyprland_debug"
 function Logger.new(opts)
   opts = opts or {}
 
-  if DISABLE_MY_LOGGER then
-    -- stylua: ignore start
-    return setmetatable({}, {
-      __index = function() return function() end end, -- noop for all methods
-      __tostring = function() return "Logger(DISABLED)" end,
-      __len = function() return 0 end,
-      __call = function(cls, ...)
-        return cls.new(...)
-      end,
-    })
-    -- stylua: ignore end
+  if opts.enabled == false then
+    return blank()
   end
 
   local obj = {}
-  obj = setmetatable({}, {
+
+  obj = blank() -- start with a blank logger, then override the noop methods with real ones as needed
+  obj.enabled = opts.enabled ~= false -- default to true if not explicitly set to false
+  obj = setmetatable(obj, {
     __index = Logger,
     __tostring = function()
       return string.format("Logger(log_file=%s, prefix=%s)", obj.log_file or "nil", obj.prefix or "nil")
@@ -81,7 +89,7 @@ function Logger.new(opts)
 end
 
 function Logger:log(message)
-  if DISABLE_MY_LOGGER then
+  if (not self.enabled or self.enabled == false) or Logger.enabled == false then
     return
   end
 

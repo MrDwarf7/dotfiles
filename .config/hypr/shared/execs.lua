@@ -57,10 +57,22 @@ local start_cbs = function(extra_cbs)
       -- every env var on every boot for zero benefit.
       -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
 
+      -- FIX: [the_fk] : start
+      local l = require("utils.logger").new({
+        enabled = false,
+      })
+      local inspect = require("libs.inspect")
+
       local wallpaper_backend = require("utils.wallpaper_backend")
       local detected_backend = wallpaper_backend.detect()
       local cmd = detected_backend.key or wallpaper_backend[detected_backend.name]
+
+      l:log("Detected wallpaper backend: " .. inspect(detected_backend) .. " | Launching with command: " .. cmd)
+      l:log("Full backend command: " .. wallpaper_backend.launch_cmd(cmd))
+      l:log("Environment variables: " .. inspect(os.getenv))
+
       hl.exec_cmd(wallpaper_backend.launch_cmd(cmd))
+      -- FIX: [the_fk] : end
 
       -- Start Hermes gateway services (delayed to avoid blocking boot)
       hl.exec_cmd("sleep 3 && systemctl --user start hermes.target")

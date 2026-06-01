@@ -22,6 +22,8 @@ hl.bind(mods.mod_combos.main_mod_ctrl .. " + n", hl.dsp.exec_cmd("dms ipc call n
 hl.bind(mods.main_mod .. " + z", hl.dsp.exec_cmd("dms ipc call dash toggle overview"))
 hl.bind(mods.main_mod .. " + x", hl.dsp.exec_cmd("dms ipc call control-center toggle"))
 
+hl.bind(mods.mod_combos.main_mod_ctrl .. " + p", hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
+
 -- === Security ===
 hl.bind(mods.main_mod .. " + u", hl.dsp.exec_cmd("dms ipc call lock lock"))
 
