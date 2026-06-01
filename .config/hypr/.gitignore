@@ -6,3 +6,6 @@ og_*
 OG_*
 
 *-colors.*
+
+.old_as_ref/
+.old_as_ref/*

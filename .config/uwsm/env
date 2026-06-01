@@ -66,8 +66,10 @@ export MOZ_ENABLE_WAYLAND=1
 ## waypaper
 # export WALLPAPER_BACKEND=waypaper
 
-## swww
-export WALLPAPER_BACKEND=swww
+## swww,awww,wallpaperengine
+# export WALLPAPER_BACKEND=swww
+# export WALLPAPER_BACKEND=awww
+export WALLPAPER_BACKEND=wallpaperengine
 
 ## Older variables that were already/still are; commented out.
 #
@@ -76,3 +78,5 @@ export WALLPAPER_BACKEND=swww
 # export WLR_DRM_NO_ATOMIC,1
 # vulkan
 # export WLR_RENDERER,vulkan
+
+export HYPRLAND_SHELL="dms"

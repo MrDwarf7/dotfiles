@@ -1,0 +1,55 @@
+--############
+--## GROUP ###
+--############
+
+hl.config({
+  group = {
+    auto_group = true,
+    insert_after_current = true,
+    focus_removed_window = true,
+    drag_into_group = 1, -- 0 (disabled), 1 (enabled), 2 (only when dragging into the groupbar)
+    merge_groups_on_drag = true,
+    merge_groups_on_groupbar = true,
+    merge_floated_into_tiled_on_groupbar = false,
+    group_on_movetoworkspace = false,
+    col = {
+      border_active = "rgba(66ffff00)",
+      border_inactive = "rgba(66777700)",
+      border_locked_active = "rgba(66ff5500)",
+      border_locked_inactive = "rgba(66775500)",
+    },
+    groupbar = {
+      enabled = true,
+      font_family = "",
+      font_size = 12,
+      font_weight_active = "normal",
+      font_weight_inactive = "normal",
+      gradients = false,
+      height = 14,
+      indicator_gap = 8,
+      indicator_height = 4,
+      stacked = false,
+      priority = 3,
+      render_titles = true,
+      text_offset = 0,
+      scrolling = true,
+      rounding = 1,
+      gradient_rounding = 2,
+      round_only_edges = true,
+      gradient_round_only_edges = true,
+      text_color = "rgba(ffffffff)",
+      -- text_color_inactive =
+      -- text_color_locked_active =
+      -- text_color_locked_inactive =
+      col = {
+        active = "rgba(66ffff00)",
+        inactive = "rgba(66777700)",
+        locked_active = "rgba(66ff5500)",
+        locked_inactive = "rgba(66775500)",
+      },
+      gaps_in = 2,
+      gaps_out = 2,
+      keep_upper_gap = true,
+    },
+  },
+})
