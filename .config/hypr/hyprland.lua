@@ -10,41 +10,46 @@
 
 require("shared.env") -- literally the first thing we do.
 
-local logger = require("utils.logger"):new()
+DISABLE_MY_LOGGER = true
 
----@enum ShellVariant
-local ShellVariant = {
-  VANILLA = "vanilla",
-  DMS = "dms",
-}
+local logger = require("utils.logger").new()
 
--- hl.env("WALLPAPER_BACKEND", "swww")
--- hl.env("WALLPAPER_BACKEND", "awww")
-hl.env("WALLPAPER_BACKEND", "wallpaperengine")
+logger:log("Hyprland configuration started")
+
+local WallpaperBackend = require("utils.wallpaper_backend")
+local ShellBackend = require("utils.hyprland_shell")
+
+hl.env("WALLPAPER_BACKEND", WallpaperBackend.detect().name)
 -- IGNORE: This is instead; exported by UWSM in ~/.config/uwsm/env
-hl.env("HYPRLAND_SHELL", "dms")
+hl.env("HYPRLAND_SHELL", ShellBackend.detect())
 
----@param override? ShellVariant Optional override for shell selection (for testing or dynamic switching)
----@return string
-local function active_shell(override)
-  if override then
-    print("[hyprland] Overriding shell with: " .. override)
-    return override
-  end
-  return os.getenv("HYPRLAND_SHELL") or ShellVariant.VANILLA
-end
+---@deprecated Not really used, kinda just here for lolz rn?
+---@class HyprConfig.RootShared
+RootShared = {
+  envs = {
+    wallpaper_backend = WallpaperBackend.detect().name,
+    hyprland_shell = ShellBackend.detect(),
+  },
+}
 
 local shared = require("shared")
 if type(shared) == "table" and type(shared.setup) == "function" then
   print("[hyprland] Running shared configuration")
   shared:setup()
-else
-  print("[hyprland] ERROR: shared module missing or has no :setup()")
-  logger:log("[hyprland] ERROR: shared module missing or has no :setup()")
+elseif type(shared) == "table" then
+  print("[hyprland] Assumed setup function called WITHIN 'shared.init' module!")
+  logger:log("Assumed setup function called WITHIN 'shared.init' module!")
 end
 
-local shell_name = active_shell()
-local shell = require(shell_name)
+local shell_name = ShellBackend.get()
+local ok, shell = pcall(require, shell_name)
+if not ok then
+  print("[hyprland] ERROR: Failed to load shell module '" .. shell_name .. "': " .. tostring(shell))
+  print("[hyprland] Falling back to vanilla")
+  logger:log("ERROR: Failed to load shell module '" .. shell_name .. "': " .. tostring(shell))
+  require("vanilla"):setup()
+  return
+end
 
 if type(shell) == "table" and type(shell.setup) == "function" then
   print("[hyprland] Configuring for " .. shell_name .. " shell")
@@ -53,7 +58,7 @@ if type(shell) == "table" and type(shell.setup) == "function" then
 else
   print("[hyprland] ERROR: shell module '" .. shell_name .. "' missing or has no :setup()")
   print("[hyprland] Falling back to vanilla")
-  logger:log("[hyprland] ERROR: shell module '" .. shell_name .. "' missing or has no :setup()")
-  require("vanilla"):setup(shell_name)
+  logger:log("ERROR: shell module '" .. shell_name .. "' missing or has no :setup()")
+  require("vanilla"):setup()
   return
 end

@@ -1,60 +1,32 @@
---- Aggregate workspace assignment rules.
---- Rules that send windows to specific workspaces.
---- Excludes: tag-based workspace assignments (those live in ag_tag.lua).
+-- stylua: ignore start
+--- Workspace rule generator.
+--- Reads _registry.lua and produces workspace assignment rules.
 
-return {
-  -- ════════════════════════════════════════════
-  -- Docker Desktop
-  -- workspace: 7
-  -- ════════════════════════════════════════════
-  {
-    name = "workspace-docker-desktop",
-    match = { class = "^(Docker Desktop)$" },
-    workspace = "7 silent",
-    no_initial_focus = true,
-  },
+local reg = require("shared.rules._registry")
 
-  -- ════════════════════════════════════════════
-  -- Obsidian
-  -- workspace: 5
-  -- ════════════════════════════════════════════
-  {
-    name = "workspace-obsidian",
-    match = { class = "^([oO]bsidian)$" },
-    float = false,
-    workspace = "5 silent",
-    persistent_size = true,
-  },
+local expand_attrs = function(attrs)
+  if not attrs then return {} end
+  local t = {}
+  if attrs.no_initial_focus then t.no_initial_focus = true end
+  if attrs.maximize then t.maximize = true end
+  if attrs.float then t.float = true end
+  if attrs.center then t.center = true end
+  if attrs.opacity == true then t.opacity = "1.0 override 1.0 override"
+  elseif type(attrs.opacity) == "string" then t.opacity = attrs.opacity end
+  if attrs.persist then t.persistent_size = true end
+  return t
+end
 
-  -- ════════════════════════════════════════════
-  -- Signal + Telegram / QQ (common behaviours)
-  -- workspace: 6, float, center, persistent_size, opacity
-  -- ════════════════════════════════════════════
-  {
-    name = "workspace-messaging-common",
-    match = { class = "^([sS]ignal|QQ|Telegram|org.telegram.desktop)$" },
-    workspace = "6 silent",
-    float = true,
-    center = true,
-    persistent_size = true,
-    opacity = "1.0 override 1.0 override",
-  },
+local rules = {}
 
-  -- Signal-specific: larger size
-  {
-    name = "size-signal",
-    match = { class = "^([sS]ignal)$" },
-    size = "1600 1250",
-  },
+for _, entry in ipairs(reg.workspace) do
+  local rule = expand_attrs(entry.attrs)
+  rule.name = "workspace-" .. entry.class:gsub("[^%w]+", "-"):gsub("^-", ""):gsub("-$", "")
+  rule.match = { class = "^(" .. entry.class .. ")$" }
+  rule.workspace = entry.workspace
+  if entry.size then rule.size = entry.size end
+  rules[#rules + 1] = rule
+end
 
-  -- ════════════════════════════════════════════
-  -- Spotify
-  -- workspace: 8
-  -- ════════════════════════════════════════════
-  {
-    name = "workspace-spotify",
-    match = { class = "^([sS]potify)$" },
-    workspace = "8 silent",
-    maximize = true,
-  },
-}
+return rules
+-- stylua: ignore end

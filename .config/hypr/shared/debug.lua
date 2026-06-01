@@ -5,6 +5,7 @@
 hl.config({
   debug = {
     -- full_cm_proto = true
+
     disable_logs = false,
     -- vfr = false                                           # If we make this true, I seem to get blips/flickering
     -- PR - #13860

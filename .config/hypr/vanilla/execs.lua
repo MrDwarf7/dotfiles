@@ -3,24 +3,13 @@
 --- DMS handles all of this internally via quickshell.
 
 local utils = require("utils")
-local logger = require("utils.logger")
 local programs = require("shared.programs")
 
-local VanillaExecs = {}
+-- TODO: at a later stage, we can move the
+-- fancy stuff in shared/execs.lua into a helper fn/framework
+-- and then just make use of it in both the existing shared one + per shell (vanilla here, and dms if we add dms specific execs later).
 
-function VanillaExecs:setup(shell_name)
-  if shell_name ~= "vanilla" then
-    print(
-      "[hyprland] WARNING: Attempting to set up VanillaExecs for shell '"
-        .. shell_name
-        .. "'. This may indicate a misconfiguration. Proceeding with setup."
-    )
-    logger:log(
-      "[hyprland] WARNING: Attempting to set up VanillaExecs for shell '"
-        .. shell_name
-        .. "'. This may indicate a misconfiguration. Proceeding with setup."
-    )
-  end
+local setup = function()
   hl.on("hyprland.start", function()
     -- Status bar
     utils.uwsm_launcher(programs.bar, false)
@@ -38,7 +27,6 @@ function VanillaExecs:setup(shell_name)
     -- Hyprsunset (night light)
     -- If using uwsm: systemctl --user enable --now hyprsunset.service
   end)
-  return self
 end
 
-return VanillaExecs
+return setup()

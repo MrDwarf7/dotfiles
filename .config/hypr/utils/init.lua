@@ -95,4 +95,23 @@ end
 --   local tables_to_remove = { ... }
 -- end
 
+---@param tbl table The table to convert to a string representation.
+---@param indent? number The current indentation level (used for nested tables).
+Utils.table_to_string = function(tbl, indent)
+  indent = indent or 0
+  local result = "{\n"
+  local indent_str = string.rep("  ", indent + 1)
+  for k, v in pairs(tbl) do
+    local key_str = type(k) == "string" and string.format("%q", k) or tostring(k)
+    if type(v) == "table" then
+      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, Utils.table_to_string(v, indent + 1))
+    else
+      local value_str = type(v) == "string" and string.format("%q", v) or tostring(v)
+      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, value_str)
+    end
+  end
+  result = result .. string.rep("  ", indent) .. "}"
+  return result
+end
+
 return Utils

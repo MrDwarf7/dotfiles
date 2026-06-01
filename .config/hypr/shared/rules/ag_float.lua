@@ -1,137 +1,102 @@
---- Aggregate float rules.
----
---- Architecture:
----   1. Tag assignment: big piped class match → tag = "+floatCenter"
----   2. Tag effect: match tag "floatCenter" → float = true, center = true
----   3. Size override groups apply per dimension (grouped where sizes match).
----   4. Special one-offs that don't fit the class-pipe pattern.
----
---- To add float+Center to a new app, just add its class to the pipe in
---- "float-center-tag" below. To change what float+Center means, edit the
---- "float-center-effect" rule.
+-- stylua: ignore start
+--- Float rule generator.
+--- Reads _registry.lua and produces float + center rules.
+--- All logic is contained in generate_rules(); no free-floating functions.
 
-return {
-  -- ════════════════════════════════════════════
-  -- Float + Center tag assignment
-  -- All these classes get tagged +floatCenter.
-  -- ════════════════════════════════════════════
-  {
+local reg = require("shared.rules._registry")
+
+local generate_rules = function()
+  local float_center_classes = {}
+  local size_groups = {}
+  local sub_rules = {}
+  local float_center_tags = {}
+
+  for _, app in ipairs(reg.float_center) do
+    float_center_classes[#float_center_classes + 1] = app.class
+
+    if app.size then
+      size_groups[app.size] = size_groups[app.size] or {}
+      size_groups[app.size][#size_groups[app.size] + 1] = app.class
+    end
+
+    if app.tag then
+      float_center_tags[#float_center_tags + 1] = {
+        class = app.class,
+        tag = app.tag,
+        attrs = app.attrs,
+      }
+    end
+
+    if app.subs then
+      for _, sub in ipairs(app.subs) do
+        sub_rules[#sub_rules + 1] = {
+          name = "sub-" .. app.class .. "-" .. sub.title,
+          match = { class = "^(" .. app.class .. ")$", title = "^(" .. sub.title .. ")$" },
+          size = sub.size,
+        }
+      end
+    end
+  end
+
+  local rules = {}
+
+  -- 1. Float+Center tag assignment (big pipe)
+  rules[#rules + 1] = {
     name = "float-center-tag",
-    match = {
-      class = "^(blueman-manager|org.pulseaudio.pavucontrol|io.github.Qalculate.qalculate-qt|qt5ct|AppImageLauncherSettings|swappy|[vV]iewnior|waypaper|keymapp|org\\.keepassxc\\.KeePassXC|webapp-manager.py|solaar|WebApp-.*|DaVinci Control Panels Setup|org\\.kde\\.freedownloadmanager|polychromatic|limo|[fF]eh|org\\.pwmt\\.zathura|xdg-desktop-portal-gtk|[tT]hunar|nemo|dolphin|zmk-studio)$",
-    },
+    match = { class = "^(" .. table.concat(float_center_classes, "|") .. ")$" },
     tag = "+floatCenter",
-  },
+  }
 
-  -- ════════════════════════════════════════════
-  -- Float + Center effect (applied via tag)
-  -- ════════════════════════════════════════════
-  {
+  -- 2. Float+Center effect
+  rules[#rules + 1] = {
     name = "float-center-effect",
     match = { tag = "floatCenter" },
     float = true,
     center = true,
-  },
+  }
 
-  -- ════════════════════════════════════════════
-  -- Size overrides (grouped by identical dimensions)
-  -- ════════════════════════════════════════════
+  -- 3. Additional tag assignments for float_center apps
+  for _, entry in ipairs(float_center_tags) do
+    local tag_rule = {
+      name = "tag-" .. entry.tag,
+      match = { class = "^(" .. entry.class .. ")$" },
+      tag = "+" .. entry.tag,
+    }
+    -- If the app has attrs like opacity, apply them as a tag effect
+    if entry.attrs then
+      local effect = {}
+      if entry.attrs.opacity == true then effect.opacity = "1.0 override 1.0 override" end
+      if entry.attrs.persist then effect.persistent_size = true end
+      rules[#rules + 1] = tag_rule
+      effect.name = "effect-" .. entry.tag
+      effect.match = { tag = entry.tag }
+      rules[#rules + 1] = effect
+    else
+      rules[#rules + 1] = tag_rule
+    end
+  end
 
-  -- 600x900
-  {
-    name = "size-600x900",
-    match = { class = "^(io.github.Qalculate.qalculate-qt|limo)$" },
-    size = "600 900",
-  },
+  -- 4. Size override groups
+  for size, classes in pairs(size_groups) do
+    rules[#rules + 1] = {
+      name = "size-" .. size,
+      match = { class = "^(" .. table.concat(classes, "|") .. ")$" },
+      size = size,
+    }
+  end
 
-  -- 960x540
-  {
-    name = "size-960x540",
-    match = { class = "^(qt5ct)$" },
-    size = "960 540",
-  },
+  -- 5. Sub-rules
+  for _, rule in ipairs(sub_rules) do
+    rules[#rules + 1] = rule
+  end
 
-  -- 1000x650
-  {
-    name = "size-1000x650",
-    match = {
-      class = "^(blueman-manager|org.pulseaudio.pavucontrol|webapp-manager.py|solaar)$",
-    },
-    size = "1000 650",
-  },
+  -- 6. Special float rules (passthrough)
+  for _, rule in ipairs(reg.special_float) do
+    rules[#rules + 1] = rule
+  end
 
-  -- 1050x950 (polychromatic)
-  {
-    name = "size-1050x950",
-    match = { class = "^(polychromatic)$" },
-    size = "1050 950",
-  },
+  return rules
+end
 
-  -- 1100x1300 (zathura)
-  {
-    name = "size-1100x1300",
-    match = { class = "^(org.pwmt.zathura)$" },
-    size = "1100 1300",
-  },
-
-  -- 1280x720 (kt, davinici panels)
-  {
-    name = "size-1280x720",
-    match = {
-      class = "^(org\\.kde\\.freedownloadmanager|DaVinci Control Panels Setup)$",
-    },
-    size = "1280 720",
-  },
-
-  -- 1450x1000
-  {
-    name = "size-1450x1000",
-    match = {
-      class = "^([tT]hunar|nemo|dolphin|AppImageLauncherSettings|waypaper|keymapp|zmk-studio|org\\.keepassxc\\.KeePassXC|WebApp-.*)$",
-    },
-    size = "1450 1000",
-  },
-
-  -- 1680x1080 (xdg-portal)
-  {
-    name = "size-1680x1080",
-    match = { class = "^(xdg-desktop-portal-gtk)$" },
-    size = "1680 1080",
-  },
-
-  -- 2560x1200 (swappy, viewnior)
-  {
-    name = "size-2560x1200",
-    match = { class = "^(swappy|[vV]iewnior)$" },
-    size = "2560 1200",
-  },
-
-  -- ════════════════════════════════════════════
-  -- Special float rules (don't fit the class-pipe pattern)
-  -- ════════════════════════════════════════════
-
-  -- Show Me The Key: float + pin (no fixed size)
-  {
-    name = "float-showmethekey",
-    match = { class = "^(one.alynx.showmethekey|showmethekey-gtk)$" },
-    float = true,
-    pin = true,
-  },
-
-  -- Media players (title-based match)
-  {
-    name = "float-media-players",
-    match = { title = "^(imv|mpv|danmufloat|termfloat|nemo|ncmpcpp)$" },
-    float = true,
-    size = "960 540",
-    move = { "monitor_w 25% - window_w / 2", "monitor_h 25% - window_h / 2" },
-  },
-
-  -- WezTerm: centered but NOT floating
-  {
-    name = "center-wezterm",
-    match = { class = "^(org\\.wezfurlong\\.wezterm)$" },
-    center = true,
-    size = "2280 1000",
-  },
-}
+return generate_rules()
+-- stylua: ignore end

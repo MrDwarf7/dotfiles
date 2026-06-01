@@ -23,7 +23,7 @@
 -- ---   8. keymaps (self-contained in keymaps/)
 
 -- ---@class HyprConfig.Shared
--- local Shared = {}
+local Shared = {}
 
 ---@class HyprConfig.Shared
 local setup = function()
@@ -101,5 +101,8 @@ local setup = function()
   require("shared.execs")
 end
 
+Shared.setup = setup
+
 ---@return HyprConfig.Shared
-return setup()
+return Shared
+-- setup()
