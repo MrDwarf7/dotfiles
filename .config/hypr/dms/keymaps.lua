@@ -7,13 +7,13 @@ local progs = require("shared.programs")
 -- Tofi is sooooo much faster
 hl.bind(mods.main_mod .. " + r", hl.dsp.exec_cmd(progs.menu))
 
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + r", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + v", hl.dsp.exec_cmd("dms ipc call clipboard toggle"))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + m", hl.dsp.exec_cmd("dms ipc call settings focusOrToggle"))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + a", hl.dsp.exec_cmd("dms ipc call notifications toggle"))
+hl.bind(mods.main_mod_ctrl .. " + r", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
+hl.bind(mods.main_mod_ctrl .. " + v", hl.dsp.exec_cmd("dms ipc call clipboard toggle"))
+hl.bind(mods.main_mod_ctrl .. " + m", hl.dsp.exec_cmd("dms ipc call settings focusOrToggle"))
+hl.bind(mods.main_mod_ctrl .. " + a", hl.dsp.exec_cmd("dms ipc call notifications toggle"))
 
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + w", hl.dsp.exec_cmd("dms ipc call hypr toggleOverview"))
-hl.bind(mods.mod_combos.main_mod_alt .. " + d", hl.dsp.exec_cmd("dms ipc call night toggle"))
+hl.bind(mods.main_mod_ctrl .. " + w", hl.dsp.exec_cmd("dms ipc call hypr toggleOverview"))
+hl.bind(mods.main_mod_alt .. " + d", hl.dsp.exec_cmd("dms ipc call night toggle"))
 
 hl.bind(mods.main_mod .. " + y", hl.dsp.exec_cmd("dms ipc call dankdash wallpaper"))
 hl.bind(mods.main_mod .. " + m", hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
@@ -22,52 +22,39 @@ hl.bind(mods.mod_combos.main_mod_ctrl .. " + n", hl.dsp.exec_cmd("dms ipc call n
 hl.bind(mods.main_mod .. " + z", hl.dsp.exec_cmd("dms ipc call dash toggle overview"))
 hl.bind(mods.main_mod .. " + x", hl.dsp.exec_cmd("dms ipc call control-center toggle"))
 
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + p", hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
+hl.bind(mods.main_mod_ctrl .. " + p", hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
 
 -- === Security ===
 hl.bind(mods.main_mod .. " + u", hl.dsp.exec_cmd("dms ipc call lock lock"))
 
 -- === Screenshots ===
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + s", hl.dsp.exec_cmd("dms screenshot"))
+hl.bind(mods.main_mod_ctrl .. " + s", hl.dsp.exec_cmd("dms screenshot"))
 
 -- === System Controls ===
 --# Toggles the display, basically a 'sleep' for all screens.
 -- bind = $mainModShift, p, dpms, toggle
 
--- === Audio Controls ===
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("dms ipc call audio increment 3"), { locked = true, repeating = true })
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("dms ipc call audio decrement 3"), { locked = true, repeating = true })
+-- === Audio Controls SYSTEM (wpctl etc.) ===
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("dms ipc call audio increment 5"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("dms ipc call audio decrement 5"), { locked = true, repeating = true })
+
+-- stylua: ignore start
+-- === Audio Controls MEDIA (mpris) ===
+hl.bind( "CTRL + XF86AudioRaiseVolume", hl.dsp.exec_cmd("dms ipc call mpris increment 5"), { locked = true, repeating = true })
+hl.bind( "CTRL + XF86AudioLowerVolume", hl.dsp.exec_cmd("dms ipc call mpris decrement 5"), { locked = true, repeating = true })
 
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("dms ipc call audio mute"), { locked = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("dms ipc call audio micmute"), { locked = true })
 
-hl.bind(
-  "XF86MonBrightnessUp",
-  hl.dsp.exec_cmd('dms ipc call brightness increment 5 ""'),
-  { locked = true, repeating = true }
-)
-hl.bind(
-  "XF86MonBrightnessDown",
-  hl.dsp.exec_cmd('dms ipc call brightness decrement 5 ""'),
-  { locked = true, repeating = true }
-)
+hl.bind( "XF86MonBrightnessUp", hl.dsp.exec_cmd('dms ipc call brightness increment 5 ""'), { locked = true, repeating = true })
+hl.bind( "XF86MonBrightnessDown", hl.dsp.exec_cmd('dms ipc call brightness decrement 5 ""'), { locked = true, repeating = true })
+-- stylua: ignore end
 
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("dms ipc call mpris next"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("dms ipc call mpris previous"), { locked = true })
 
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("dms ipc call mpris playPause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("dms ipc call mpris playPause"), { locked = true })
-
-hl.bind(
-  "CTRL + XF86AudioRaiseVolume",
-  hl.dsp.exec_cmd("dms ipc call mpris increment 3"),
-  { locked = true, repeating = true }
-)
-hl.bind(
-  "CTRL + XF86AudioLowerVolume",
-  hl.dsp.exec_cmd("dms ipc call mpris decrement 3"),
-  { locked = true, repeating = true }
-)
 
 --# Source the shared keymap files that vanilla also uses
 local modules = {
