@@ -3,7 +3,7 @@
 --- Reads _registry.lua and produces tag assignment + effect rules.
 --- All logic is contained in generate_rules(); no free-floating functions.
 
-local reg = require("shared.rules._registry")
+local reg = require("shared.rules.registry")
 
 local generate_rules = function()
   local expand_attrs = function(attrs)

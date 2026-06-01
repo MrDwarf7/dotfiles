@@ -2,7 +2,7 @@
 --- Popup and dialog float rules.
 --- Reads _registry.lua popups section and generates float + stay_focused rules.
 
-local reg = require("shared.rules._registry")
+local reg = require("shared.rules.registry")
 
 local rules = {}
 

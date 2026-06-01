@@ -3,7 +3,7 @@
 --- Reads _registry.lua and produces float + center rules.
 --- All logic is contained in generate_rules(); no free-floating functions.
 
-local reg = require("shared.rules._registry")
+local reg = require("shared.rules.registry")
 
 local generate_rules = function()
   local float_center_classes = {}

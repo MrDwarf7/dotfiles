@@ -71,7 +71,8 @@ local start_cbs = function(extra_cbs)
       l:log("Full backend command: " .. wallpaper_backend.launch_cmd(cmd))
       l:log("Environment variables: " .. inspect(os.getenv))
 
-      hl.exec_cmd(wallpaper_backend.launch_cmd(cmd))
+      local cmd_output = wallpaper_backend.launch_cmd(cmd)
+      hl.exec_cmd(cmd_output or "")
       -- FIX: [the_fk] : end
 
       -- Start Hermes gateway services (delayed to avoid blocking boot)

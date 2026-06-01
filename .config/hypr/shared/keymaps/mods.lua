@@ -30,9 +30,11 @@ setmetatable(ret, {
   __index = function(table, key)
     if key == "main_mod" then -- handling the explicit case because, well... It's most of them lol
       return base.main_mod
-    elseif base[key] then
+    end
+    if base[key] then
       return base[key]
-    elseif mod_combos[key] then
+    end
+    if mod_combos[key] then
       return mod_combos[key]
     -- elseif combine(key) then
     --   return combine(key)

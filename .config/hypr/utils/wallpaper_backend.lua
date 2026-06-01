@@ -17,11 +17,12 @@ local backends = {
 local backend_cmds = {
   [backends.SWWW:upper()] = "swww --no-daemon",
   [backends.AWWW:upper()] = "awww --no-daemon",
-  [backends.WALLPAPERENGINE:upper()] = "wallpaperengine-gui -m",
+  [backends.WALLPAPERENGINE:upper()] = "wallpaperengine-gui",
 }
 
 --- Get the command to launch the specified wallpaper backend
 --- Defaults to AWWW if the key is not found or invalid
+---@param backend_key DWBKey The key of the wallpaper backend (e.g. "SWWW", "AWWW", "WALLPAPERENGINE")
 function backend_cmds.get(backend_key)
   return backend_cmds[backend_key:upper()] or backend_cmds[backends.AWWW:upper()]
 end
@@ -110,12 +111,26 @@ WallpaperBackend.detect = function(override)
 end
 
 ---@param backend DWBKey The key of the detected wallpaper backend (e.g. "SWWW", "AWWW", "WALLPAPERENGINE")
+---@return string? The command to launch the specified wallpaper backend, or nil if an error occurs
 WallpaperBackend.launch_cmd = function(backend)
   if not backend or type(backend) ~= "string" then
     print("[hyprland] Invalid wallpaper backend key: " .. tostring(backend))
     -- we would handle default ret. type here, but is okay because `.get` handles it
   end
-  return backend_cmds.get(backend)
+  local cmd = backend_cmds.get(backend)
+  local handle, err = io.popen(cmd, "r")
+  if err then
+    print("[hyprland] Error launching wallpaper backend '" .. backend .. "': " .. tostring(err))
+    return nil
+  end
+  if not handle then
+    print("[hyprland] Failed to launch wallpaper backend '" .. backend .. "': no handle returned")
+    return nil
+  end
+  local result = handle:read("*a")
+  WallpaperBackend.last_launch_output = result
+  handle:close()
+  return cmd
 end
 
 ---@return HyprConfig.WallpaperBackend

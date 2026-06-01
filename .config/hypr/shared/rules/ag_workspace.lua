@@ -2,7 +2,7 @@
 --- Workspace rule generator.
 --- Reads _registry.lua and produces workspace assignment rules.
 
-local reg = require("shared.rules._registry")
+local reg = require("shared.rules.registry")
 
 local expand_attrs = function(attrs)
   if not attrs then return {} end

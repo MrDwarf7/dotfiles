@@ -24,3 +24,28 @@ hl.bind(mods.mod_combos.main_mod_shift .. " + s", hl.dsp.exec_cmd(progs.screensh
 hl.bind(mods.mod_combos.main_mod_ctrl .. " + s", hl.dsp.exec_cmd(progs.screenshot .. " 'region'"))
 
 hl.bind(mods.mod_combos.main_mod_ctrl .. " + v", hl.dsp.exec_cmd(progs.clipboard_history))
+
+--# Mute's
+-- stylua: ignore start
+hl.bind( "XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
+hl.bind( "XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
+
+-- Laptop multimedia keys for volume and LCD brightness
+
+--# Vol
+hl.bind( "XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
+hl.bind( "XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
+
+-- stylua: ignore end
+
+--# Brightness
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { locked = true, repeating = true })
+
+-- Requires playerctl
+--# Direction
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
+
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
