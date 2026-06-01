@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-# swww \
+# awww \
 # img -o DP-1 \
 # --transition-bezier ".1,.4,.97,.82" \
 # --transition-fps 70 \
@@ -31,7 +31,7 @@ function pprint
     end
 end
 
-function set_swww
+function set_awww
     set path $argv[1]
     set monitor $argv[2]
 
@@ -39,20 +39,20 @@ function set_swww
         return 1
     end
 
-    if not 090test_cmd swww
+    if not 090test_cmd awww
         return 1
     end
 
     pprint "Setting wallpaper for %s to %s\n" $monitor $path
 
-    command swww img -o $monitor --transition-bezier "$bezier" --transition-fps 70 --resize $fill_method $path >$output_buffer 2>&1 || begin
+    command awww img -o $monitor --transition-bezier "$bezier" --transition-fps 70 --resize $fill_method $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
         return 1
     end
 
 end
 
-function 099look_swww --description 'Call swww for wallust'
+function 099look_awww --description 'Call awww for wallust'
     set path_one $argv[1]
     set path_two $argv[2]
 
@@ -64,12 +64,12 @@ function 099look_swww --description 'Call swww for wallust'
 
     # we need the DP-1 part, and the HDMI-A-2 part
     # %s/\v^:\s([.-:]*\w+[-_]+)(\d+)?/\1\2/g
-    set data (swww query | sed -n 's/^: \([^:]*\):.*/\1/p' | string join ' ')
+    set data (awww query | sed -n 's/^: \([^:]*\):.*/\1/p' | string join ' ')
     set first_mon (echo $data | awk '{print $1}')
     set second_mon (echo $data | awk '{print $2}')
 
     # we need the path part after image:
-    set img_data (swww query | sed -n 's/.*image: \(.*\)/\1/p' | string join ' ')
+    set img_data (awww query | sed -n 's/.*image: \(.*\)/\1/p' | string join ' ')
     set first_mon_wallpaper (echo $img_data | awk '{print $1}')
     set second_mon_wallpaper (echo $img_data | awk '{print $2}')
 
@@ -103,12 +103,12 @@ function 099look_swww --description 'Call swww for wallust'
 
     if not test (string match "$path_one" "$first_mon_wallpaper")
         pprint "Setting wallpaper for %s to %s\n" $first_mon $path_one
-        set_swww $path_one $first_mon || return $status
+        set_awww $path_one $first_mon || return $status
     end
 
     if not test (string match "$path_two" "$second_mon_wallpaper")
         pprint "Setting wallpaper for %s to %s\n" $second_mon $path_two
-        set_swww $path_two $second_mon || return $status
+        set_awww $path_two $second_mon || return $status
     end
 
     if not 099look_wallust $path_one
@@ -119,7 +119,7 @@ function 099look_swww --description 'Call swww for wallust'
 
     cleanup || return $status
 
-    # but swww does not. So we have to hardcode them here.
+    # but awww does not. So we have to hardcode them here.
 
     # we need the DP-1 part, and the HDMI-A-2 part
 

@@ -39,7 +39,7 @@ function set_waypaper
         return 1
     end
 
-    command waypaper --backend swww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path >$output_buffer 2>&1 || begin
+    command waypaper --backend awww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
         return 1
     end
