@@ -22,10 +22,13 @@
 -- ---   7. window rules (self-contained in rules/)
 -- ---   8. keymaps (self-contained in keymaps/)
 
--- ---@class HyprConfig.Shared
-local Shared = {}
-
 ---@class HyprConfig.Shared
+---@field setup? fun():nil
+local Shared = {
+  setup = nil,
+}
+
+---@return nil
 local setup = function()
   -----------------------------------------------------------
   -- 1. Environment variables (must be first)
@@ -105,4 +108,3 @@ Shared.setup = setup
 
 ---@return HyprConfig.Shared
 return Shared
--- setup()

@@ -11,7 +11,7 @@ local shells = {
 -- something like `ShellBackend.active` and we just do an initial lookup
 -- _against_ the backends/cmds and set it.
 
----@class HyprConfig.ShellBackend
+---@class HyprConfig.Utils.ShellBackend
 local ShellBackend = {
   VANILLA = shells.VANILLA,
   DMS = shells.DMS,
@@ -63,5 +63,5 @@ ShellBackend.get = function(override)
   end
 end
 
----@return HyprConfig.ShellBackend
+---@return HyprConfig.Utils.ShellBackend
 return ShellBackend

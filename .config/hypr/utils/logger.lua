@@ -1,6 +1,7 @@
 ---@class HyprConfig.Logger
 ---@field log_file? string Optional path to the log file. If not provided, defaults to "$HOME/MY_hyprland_debug.log" if HOME env var is set, otherwise logs will not be written to a file.
 ---@field prefix string Optional prefix for log messages. Defaults to "[hyprland_lua] ".
+---@field _inspect? any Optional field to hold the inspect module if loaded, used for pretty-printing tables in logs.
 ---@field new fun(opts?: HyprConfig.Logger): HyprConfig.Logger Constructor for the Logger class. Takes an optional table of settings to configure the logger (log_file and prefix).
 ---@field log fun(self: HyprConfig.Logger, message: string): void Logs a message to the configured log file with a timestamp and prefix. If the log file cannot be opened, prints an error to the console.
 ---@field override_global_print fun(self: HyprConfig.Logger): void Overrides the global print function
@@ -87,6 +88,39 @@ function Logger.new(opts)
 
   return obj
 end
+
+--- Loads the 'inspect' module from utils.inspect and stores it in Logger._inspect for later use.
+--- If loading fails, logs an error and sets _inspect to nil.
+---@return bool A boolean indicating whether the inspect module was successfully loaded.
+function Logger:load_inspect()
+  local err, inspect = pcall(require, "utils.inspect")
+  if err then
+    self:log("Logger:inspect() failed to load inspect module: " .. tostring(inspect))
+    return false
+  end
+
+  Logger._inspect = inspect
+
+  return true
+end
+
+function Logger:inspect(value)
+  if not Logger._inspect or self._inspect == nil then
+    local loaded = self:load_inspect()
+    if not loaded then
+      return tostring(value)
+    end
+  end
+
+  return Logger._inspect(value)
+end
+
+-- TODO: Need to probably move the `log` function itself to a sub-table
+-- same as the `:override_global_print` fn, and have them be look'ed up via a metatable function.
+-- means we can then override the entire logging system for those 2 functions with either the built-in one (like current)
+-- OR
+-- _if_ we can load the utils.inspect module, then we can use that to log tables in a more readable way.
+--
 
 function Logger:log(message)
   if (not self.enabled or self.enabled == false) or Logger.enabled == false then

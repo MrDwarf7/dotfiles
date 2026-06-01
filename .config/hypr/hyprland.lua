@@ -10,6 +10,10 @@
 
 require("shared.env") -- literally the first thing we do.
 
+-- TODO: Needs to be setup properly AND decide where it gets loaded lol...
+-- local machines = require("utils.machines")
+-- machines.setup()
+
 LOGGER_ENABLED = false
 
 local logger = require("utils.logger").new({

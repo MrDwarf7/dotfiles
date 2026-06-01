@@ -7,7 +7,7 @@
 
 ---@alias cbs_fn_t table[function(...): nil]
 
----@class HyprConfig.Events : HL.EventName
+---@class HyprConfig.Events
 local HyprlandEvents = {
   START = "hyprland.start",
   SHUTDOWN = "hyprland.shutdown",
