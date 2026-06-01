@@ -31,6 +31,36 @@ local push_cb = function(cbs_tbl, extra_cbs)
   return cbs_tbl
 end
 
+local start_wallpaperengine = function()
+  -- utils.uwsm_launcher("wallpaperengine-gui -m", true)
+  -- hl.exec_cmd("wallpaperengine-gui -m")
+
+  -- Propagate Wayland/XDG vars to dbus
+  -- NOTE: Commented out — redundant with dbus-broker + uwsm.
+  -- dbus-broker reuses systemd's activation environment directly,
+  -- so there's nothing to sync. The --all flag was also copying
+  -- every env var on every boot for zero benefit.
+  -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
+
+  -- FIX: [the_fk] : start
+  local l = require("utils.logger").new({
+    enabled = false,
+  })
+  local inspect = require("libs.inspect")
+
+  local wallpaper_backend = require("utils.wallpaper_backend")
+  local detected_backend = wallpaper_backend.detect()
+  local cmd = detected_backend.key or wallpaper_backend[detected_backend.name]
+
+  l:log("Detected wallpaper backend: " .. inspect(detected_backend) .. " | Launching with command: " .. cmd)
+  l:log("Full backend command: " .. wallpaper_backend.launch_cmd(cmd))
+  l:log("Environment variables: " .. inspect(os.getenv))
+
+  local cmd_output = wallpaper_backend.launch_cmd(cmd)
+  hl.exec_cmd(cmd_output or "")
+  -- FIX: [the_fk] : end
+end
+
 --- Default callbacks for the START event, with optional merging of extra callbacks provided by shell-specific modules.
 ---@param extra_cbs cbs_fn_t? Optional additional callbacks to merge with the defaults (e.g. from shell-specific modules)
 ---@return CallbackList Returns a list of callback functions to be registered for the START event, optionally merged with any extra callbacks provided.
@@ -47,34 +77,6 @@ local start_cbs = function(extra_cbs)
       -- Telegram on workspace 6 (silent = don't switch to it)
       hl.exec_cmd("Telegram", { workspace = "6 silent" })
 
-      -- utils.uwsm_launcher("wallpaperengine-gui -m", true)
-      -- hl.exec_cmd("wallpaperengine-gui -m")
-
-      -- Propagate Wayland/XDG vars to dbus
-      -- NOTE: Commented out — redundant with dbus-broker + uwsm.
-      -- dbus-broker reuses systemd's activation environment directly,
-      -- so there's nothing to sync. The --all flag was also copying
-      -- every env var on every boot for zero benefit.
-      -- hl.exec_cmd("dbus-update-activation-environment --systemd --all")
-
-      -- FIX: [the_fk] : start
-      local l = require("utils.logger").new({
-        enabled = false,
-      })
-      local inspect = require("libs.inspect")
-
-      local wallpaper_backend = require("utils.wallpaper_backend")
-      local detected_backend = wallpaper_backend.detect()
-      local cmd = detected_backend.key or wallpaper_backend[detected_backend.name]
-
-      l:log("Detected wallpaper backend: " .. inspect(detected_backend) .. " | Launching with command: " .. cmd)
-      l:log("Full backend command: " .. wallpaper_backend.launch_cmd(cmd))
-      l:log("Environment variables: " .. inspect(os.getenv))
-
-      local cmd_output = wallpaper_backend.launch_cmd(cmd)
-      hl.exec_cmd(cmd_output or "")
-      -- FIX: [the_fk] : end
-
       -- Start Hermes gateway services (delayed to avoid blocking boot)
       hl.exec_cmd("sleep 3 && systemctl --user start hermes.target")
     end,
@@ -85,6 +87,8 @@ local start_cbs = function(extra_cbs)
     --   hl.exec_cmd(wallpaper_backend.launch_cmd(cmd))
     -- end,
   }
+
+  -- start_wallpaperengine() -- TODO:
 
   ret = push_cb(ret, extra_cbs)
 
