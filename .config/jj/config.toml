@@ -1,10 +1,17 @@
 [user]
 name = "MrDwarf7"
 email = "129040985+MrDwarf7@users.noreply.github.com"
+signcommitter = false
+gpgsign = false
+signingkey = ""
+
+[user.gpg]
+program = "cat"
 
 [signing]
 behavior = "own"
 backend = "gpg"
+sign-all = true
 
 [git]
 # auto-local-bookmark = true
@@ -565,18 +572,40 @@ fu = ['file', 'untrack']
 
 # workspace
 wl = ['workspace', 'list']
-wa = ['workspace', 'add']
-wa1 = ['workspace', 'add', '--name', 'one', '.jj/workspace-one']
-wa2 = ['workspace', 'add', '--name', 'two', '.jj/workspace-two']
-wa3 = ['workspace', 'add', '--name', 'three', '.jj/workspace-three']
-wo1 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-one']
-wo2 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-two']
-wo3 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-three']
+# wa = ['workspace', 'add']
+
+wa = [
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'jj workspace add --name $0 $(jj workspace root --name default).$0',
+]
 wf = ['workspace', 'forget']
-wf1 = ['workspace', 'forget', 'one']
-wf2 = ['workspace', 'forget', 'two']
-wf3 = ['workspace', 'forget', 'three']
 wr = ['workspace', 'rename']
+
+wo = [
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'jj workspace root --name $(jj workspace list | fzf | cut -d":" -f1)',
+]
+
+# wa1 = ['workspace', 'add', '--name', 'one', '.jj/workspace-one']
+# wa2 = ['workspace', 'add', '--name', 'two', '.jj/workspace-two']
+# wa3 = ['workspace', 'add', '--name', 'three', '.jj/workspace-three']
+#
+# wo1 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-one']
+# wo2 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-two']
+# wo3 = ['util', 'exec', '--', 'bash', '-c', 'cd .jj/workspace-three']
+#
+# wf1 = ['workspace', 'forget', 'one']
+# wf2 = ['workspace', 'forget', 'two']
+# wf3 = ['workspace', 'forget', 'three']
+
 
 # [NOTE] muscle memory of jj + space
 # [NOTE] show all revisions, same as my `jj`
@@ -608,3 +637,6 @@ o = ["one"]
 as_commits = ["util", "exec", "--", "bash", "-c", """
 jj log --no-pager --no-graph -T 'commit_id ++ " " ++ "\\n"'
 """, ""]
+
+[gpg]
+program = "/bin/true"

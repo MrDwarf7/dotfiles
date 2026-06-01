@@ -9,7 +9,7 @@ node = "latest"
 bun = "latest"
 
 # Framework(?)/Package Runtimes
-deno = "latest"
+# deno = "latest"
 
 # Tools
 biome = "latest"
@@ -18,14 +18,14 @@ biome = "latest"
 
 ## NPM / Node.js / JavaScript/TypeScript Tools
 
-[tools."npm:tailwindcss"]
-version = "latest"
-
-[tools."npm:@tailwindcss/cli"]
-version = "latest"
-
-[tools."npm:@tailwindcss/language-server"]
-version = "latest"
+# [tools."npm:tailwindcss"]
+# version = "latest"
+#
+# [tools."npm:@tailwindcss/cli"]
+# version = "latest"
+#
+# [tools."npm:@tailwindcss/language-server"]
+# version = "latest"
 
 # [tools."npm:@typescript/native-preview"]
 # version = "latest"
@@ -38,9 +38,12 @@ version = "latest"
 # [tools."npm:turbo"]
 # version = "latest"
 
-[tools."npm:fieldtheory"]
+# [tools."npm:fieldtheory"]
+# version = "latest"
+# # "npm:fieldtheory" = "1.2.1"
+
+[tools."npm:@mem0/cli"]
 version = "latest"
-# "npm:fieldtheory" = "1.2.1"
 
 # [tools."npm:@aoagents/ao"]
 # version = "latest"
@@ -58,8 +61,8 @@ version = "latest"
 version = "latest"
 
 
-[tools."cargo:abscissa"]
-version = "latest"
+# [tools."cargo:abscissa"]
+# version = "latest"
 
 ## REST TUI client - superceded by postings, then by resterm (goated!)
 # [tools."cargo:atac"]
@@ -68,20 +71,20 @@ version = "latest"
 [tools."cargo:bacon"]
 version = "latest"
 
-[tools."cargo:cargo-audit"]
-version = "latest"
+# [tools."cargo:cargo-audit"]
+# version = "latest"
 
-[tools."cargo:cargo-bloat"]
-version = "latest"
+# [tools."cargo:cargo-bloat"]
+# version = "latest"
 
 [tools."cargo:cargo-cache"]
 version = "latest"
 
-[tools."cargo:cargo-dist"]
-version = "latest"
+# [tools."cargo:cargo-dist"]
+# version = "latest"
 
-[tools."cargo:cargo-expand"]
-version = "latest"
+# [tools."cargo:cargo-expand"]
+# version = "latest"
 
 [tools."cargo:cargo-feature"]
 version = "latest"
@@ -89,14 +92,14 @@ version = "latest"
 [tools."cargo:cargo-generate"]
 version = "latest"
 
-[tools."cargo:cargo-insta"]
-version = "latest"
+# [tools."cargo:cargo-insta"]
+# version = "latest"
 
 [tools."cargo:cargo-llvm-cov"]
 version = "latest"
 
-[tools."cargo:cargo-machete"]
-version = "latest"
+# [tools."cargo:cargo-machete"]
+# version = "latest"
 
 [tools."cargo:cargo-make"]
 version = "latest"
@@ -126,8 +129,8 @@ version = "latest"
 [tools."cargo:cargo-workspaces"]
 version = "latest"
 
-[tools."cargo:cargo-zigbuild"]
-version = "latest"
+# [tools."cargo:cargo-zigbuild"]
+# version = "latest"
 
 [tools."cargo:create-tauri-app"]
 version = "latest"
@@ -139,13 +142,19 @@ version = "latest"
 [tools."cargo:flamegraph"]
 version = "latest"
 
-[tools."cargo:gumbo"]
-version = "latest"
+# [tools."cargo:gumbo"]
+# version = "latest"
 
-[tools."cargo:knope"]
-version = "latest"
+# [tools."cargo:knope"]
+# version = "latest"
 
-[tools."cargo:loco"]
+# [tools."cargo:loco"]
+# version = "latest"
+
+# [tools."cargo:jj-ryu"]
+# version = "latest"
+
+[tools."cargo:jj-navi"]
 version = "latest"
 
 #####

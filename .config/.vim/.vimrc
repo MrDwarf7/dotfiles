@@ -320,11 +320,6 @@ vnoremap > >gv
 " nmap <silent> <Del> :noh<CR>
 nmap <silent> <Esc> :nohl<CR>
 
-" Smart way to move between windows
-" map <C-j> <C-W>j
-" map <C-k> <C-W>k
-" map <C-h> <C-W>h
-" map <C-l> <C-W>l
 
 " Close the current buffer
 map <silent> <Leader>x :Bclose<CR>

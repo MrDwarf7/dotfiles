@@ -15,8 +15,8 @@ hypr_zbak*
 hypr_zbak_*
 
 
-hypr_lua_update/
-hypr_lua_update/*
+# hypr_lua_update/
+# hypr_lua_update/*
 
 *_BAK
 *_bak

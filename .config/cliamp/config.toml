@@ -2,7 +2,7 @@
 # Copy to ~/.config/cliamp/config.toml
 
 # Default volume in dB (range: -30 to 6)
-volume = 0
+volume = -25
 
 # Repeat mode: "off", "all", or "one"
 repeat = "off"
@@ -65,7 +65,7 @@ theme = "tokyo-night"
 # Butterfly
 # Lightning
 # None
-visualizer = "Butterfly"
+# visualizer = "Butterfly"
 
 # ---
 # Spotify (optional)

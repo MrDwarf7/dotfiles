@@ -231,7 +231,7 @@ keybinding:
     pasteCommits: 'V'
     tagCommit: 'T'
     checkoutCommit: '<space>'
-    resetCherryPick: '<c-R>'
+    resetCherryPick: '<c-r>'
     copyCommitAttributeToClipboard: y
     # copyCommitMessageToClipboard: '<c-y>'
 

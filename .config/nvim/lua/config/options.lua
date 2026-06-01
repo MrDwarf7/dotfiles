@@ -1,6 +1,7 @@
 local opt = vim.opt
 
-opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+-- opt.clipboard = vim.env.SSH_TTY and "" or "unnamedplus"
+opt.clipboard = "unnamedplus"
 
 -- Global
 opt.fillchars = {
