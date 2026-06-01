@@ -4,9 +4,15 @@ local wezterm = require("wezterm")
 ---@type mywez.Platform
 -- local Platform = require("utils.platform")
 
--- local font = 'Maple Mono SC NF'
--- local font_family = "JetBrainsMono Nerd Font"
-local font_family = "FiraCode Nerd Font Mono"
+--- Lookup table to support multiple fonts
+local fonts = {
+	maple = "Maple Mono SC NF",
+	jetbrainsmono = "JetBrainsMono Nerd Font",
+	jetbrainsmono_mono = "JetBrainsMono Nerd Font Mono",
+	firacode = "FiraCode Nerd Font Mono",
+	mononoki = "Mononoki Nerd Font",
+	mononoki_mono = "Mononoki Nerd Font Mono",
+}
 
 -- Check the pc name, if it contains 'book', we set font to 12.0, else 11.0
 local font_size = 10.5
@@ -20,10 +26,14 @@ end
 
 ---@return FontFamilyExtendedAttributes
 return {
-	font = wezterm.font(font_family, { weight = "Regular", italic = false }),
+	font = wezterm.font(
+		--
+		fonts.mononoki_mono,
+		{ weight = "Regular", italic = false }
+	),
 	font_size = font_size,
 	---@type FontFamilyExtendedAttributes
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero" },
+	harfbuzz_features = { "calt=0", "clig=0", "liga=0", "zero", "ss12=0", "ss13=0" },
 	-- There's a setting here for something along the lines of missing_unicode_fonts or similar we can set
 	warn_about_missing_glyphs = false,
 
