@@ -11,15 +11,21 @@
 -- require("shared.keymaps.map_programs")
 -- require("shared.keymaps.map_windows_workspaces")
 
-local modules = {
-  "mods",
+---@class HyprConfig.Keymaps
+local setup = function()
+  local modules = {
+    "mods",
 
-  "map_general",
-  "map_misc",
-  "map_programs",
-  "map_windows_workspaces",
-}
+    "map_general",
+    "map_misc",
+    "map_programs",
+    "map_windows_workspaces",
+  }
 
-for _, mod in ipairs(modules) do
-  require("shared.keymaps." .. mod)
+  for _, mod in ipairs(modules) do
+    require("shared.keymaps." .. mod)
+  end
 end
+
+---@return HyprConfig.Keymaps
+return setup()

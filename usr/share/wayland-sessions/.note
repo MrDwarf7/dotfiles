@@ -1,0 +1,8 @@
+Additional param has been added to the hyprland-uwsm.desktop entry
+to force uwsm to 'skip' the timeout period when the Ly-dm -> uwsm -> hyprland 
+chain occurs (default.target -> graphical.target -> start-hyprland)
+This is because Ly-dm doesn't actually register itself as a 'graphical' the same way GDM/SDDM does.
+
+Instead it's a Terminal Login Manager, and it doesn't trigger the same 'graphical.target' that GDM/SDDM does.
+By adding the `-g -1` flag, we tell uwsm there is _NO_ (negative) timeout. Skipping directly to the shell call.
+Which itself hands through to Hyprland (and launches quickshell/DMS etc. in the process also).

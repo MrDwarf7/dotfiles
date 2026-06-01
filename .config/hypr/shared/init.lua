@@ -22,11 +22,11 @@
 -- ---   7. window rules (self-contained in rules/)
 -- ---   8. keymaps (self-contained in keymaps/)
 
----@class HyprConfig.Shared
-local Shared = {}
+-- ---@class HyprConfig.Shared
+-- local Shared = {}
 
----@return HyprConfig.Shared
-function Shared:setup()
+---@class HyprConfig.Shared
+local setup = function()
   -----------------------------------------------------------
   -- 1. Environment variables (must be first)
   -----------------------------------------------------------
@@ -99,7 +99,7 @@ function Shared:setup()
   --    Side-effect only, self-contained
   -----------------------------------------------------------
   require("shared.execs")
-  return self
 end
 
-return Shared
+---@return HyprConfig.Shared
+return setup()

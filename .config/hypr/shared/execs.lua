@@ -16,7 +16,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("Telegram", { workspace = "6 silent" })
 
   -- utils.uwsm_launcher("wallpaperengine-gui -m", true)
-  -- hl.exec_cmd("wallpaperengine-gui -m")
+  hl.exec_cmd("wallpaperengine-gui -m")
 
   -- Propagate Wayland/XDG vars to dbus
   -- NOTE: Commented out — redundant with dbus-broker + uwsm.
@@ -28,8 +28,3 @@ hl.on("hyprland.start", function()
   -- Start Hermes gateway services (delayed to avoid blocking boot)
   hl.exec_cmd("sleep 3 && systemctl --user start hermes.target")
 end)
-
--- hl.on("hyprland.start", function()
--- hl.exec_cmd("sleep 0.5 && uwsm app -t service -- quickshell")
--- hl.exec_cmd("sleep 0.5 && ____________dms stuff here____________")
--- end)

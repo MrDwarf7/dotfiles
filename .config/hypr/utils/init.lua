@@ -75,6 +75,9 @@ end
 ---@param program string The program command to launch.
 ---@param as_service? boolean If true, wraps in `uwsm app -t service -- <program>`.
 Utils.uwsm_launcher = function(program, as_service)
+  -- TODO: We will; at some stage, need to gate this fn call behind a check for the
+  -- cases where we decide to move away from `uwsm` as a tool.
+
   local base_cmd = "uwsm app"
   as_service = as_service or false
   if as_service then

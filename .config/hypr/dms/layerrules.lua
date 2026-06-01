@@ -85,7 +85,7 @@ local rules = {
   {
     name = '"dms-blur-for-modals-and-misc"',
     match = {
-      namespace = "dms:(polkit|notification-center-modal|notification-popup|color-picker|clipboard|clipboard-popout|spotlight|settings|tray-menu-window|slideout|system-update|system-update:background|filebrowser|osd)",
+      namespace = "dms:(polkit|notification-center-modal|notification-popup|color-picker|clipboard|clipboard-popout|spotlight|settings|tray-menu-window|tray-overflow-menu|slideout|system-update|system-update:background|filebrowser|osd)",
     },
     blur = true,
     ignore_alpha = 0,
