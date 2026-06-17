@@ -164,7 +164,17 @@ do
     },
   }
   ---@type HL.WorkspaceRuleSpec[]
-  c.workspace_rules = {}
+  c.workspace_rules = {
+    hl.workspace_rule({ workspace = "1", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "2", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "3", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "4", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "5", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "6", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "7", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "8", monitor = "eDP-1" }),
+    hl.workspace_rule({ workspace = "9", monitor = "eDP-1" }),
+  }
 end
 
 -- Hostname detection
@@ -251,6 +261,8 @@ setmetatable(Machines, {
   __call = function(_, key)
     local cfg = _config[key]
     if cfg then
+      Machines.current = key
+      RootShared.machine = key
       return cfg
     end
     print("Warning: No configuration found for machine '" .. tostring(key) .. "'. Returning empty config.")

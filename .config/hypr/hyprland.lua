@@ -29,7 +29,7 @@ hl.env("WALLPAPER_BACKEND", WallpaperBackend.detect().name)
 -- IGNORE: This is instead; exported by UWSM in ~/.config/uwsm/env
 hl.env("HYPRLAND_SHELL", ShellBackend.detect())
 
----@deprecated Not really used, kinda just here for lolz rn?
+-- ---@deprecated Not really used, kinda just here for lolz rn?
 ---@class HyprConfig.RootShared
 RootShared = {
   envs = {
