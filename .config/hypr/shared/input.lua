@@ -20,7 +20,8 @@ hl.config({
     repeat_rate = 60,
     sensitivity = 0.00,
     accel_profile = "flat",
-    force_no_accel = true,
+    -- force_no_accel = true,
+    force_no_accel = require("utils.machines").is_desktop(), -- true for desktop, false for laptop (since it has a touchpad)
     left_handed = false,
     scroll_points = "",
     scroll_method = "",
@@ -77,8 +78,9 @@ hl.config({
   },
 })
 
-hl.config({
+require("shared.devices.manbook_keyboard")
 
+hl.config({
   -- https://wiki.hyprland.org/Configuring/Variables/#gestures
   gestures = {
     -- workspace_swipe = true
@@ -103,21 +105,3 @@ hl.gesture({
   direction = "horizontal",
   action = "workspace",
 })
-
--- TODO: idk these are kinda janky tbh
---
--- hl.gesture({
---   fingers = 3,
---   direction = "up",
---   action = function()
---     hl.dsp.focus({ direction = "right" })
---   end,
--- })
---
--- hl.gesture({
---   fingers = 3,
---   direction = "down",
---   action = function()
---     hl.dsp.focus({ direction = "left" })
---   end,
--- })

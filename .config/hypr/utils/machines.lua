@@ -285,6 +285,18 @@ function Machines.get(key)
   return _config[key]
 end
 
+-- TODO: We will have to have a tag for these in the table itself, not manually checking against a str
+
+function Machines.is_laptop()
+  local cn = current_canon()
+  return cn == "manbook"
+end
+
+function Machines.is_desktop()
+  local cn = current_canon()
+  return cn == "fortress"
+end
+
 -- Backward compat: Machines("fortress") returns config
 
 setmetatable(Machines, {
