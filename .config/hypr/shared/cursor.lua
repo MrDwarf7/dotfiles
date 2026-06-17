@@ -14,7 +14,7 @@ hl.config({
     persistent_warps = true,
     warp_on_change_workspace = 1,
     warp_on_toggle_special = 0,
-    default_monitor = "DP-1",
+    default_monitor = "DP-1", -- TODO: we need to be able to check the env for stuff as well so we can do `require("utils.machines").desktop and "DP-1" or "eDP-1"` etc.
     zoom_factor = 1.0,
     zoom_rigid = false,
     enable_hyprcursor = true,

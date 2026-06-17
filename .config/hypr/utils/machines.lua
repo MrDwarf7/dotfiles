@@ -227,6 +227,7 @@ function Machines.workspace_rules()
   if not cn then
     return {}
   end
+  Machines.current = cn
   local cfg = _config[cn]
   return cfg and cfg.workspace_rules or {}
 end
@@ -235,6 +236,12 @@ end
 ---@param key string
 ---@return table|nil
 function Machines.get(key)
+  if not Machines.current then
+    local cn = current_canon()
+    if cn then
+      Machines.current = cn
+    end
+  end
   return _config[key]
 end
 

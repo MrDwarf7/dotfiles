@@ -47,10 +47,10 @@ hl.config({
     touchpad = {
       disable_while_typing = true,
       natural_scroll = true,
-      scroll_factor = 1.0,
+      scroll_factor = 0.2,
       middle_button_emulation = false,
       tap_button_map = "",
-      clickfinger_behavior = false,
+      clickfinger_behavior = true,
       tap_to_click = true, -- Enable tap to click -- May want to remove this though
       drag_lock = 2,
       tap_and_drag = true,
@@ -97,3 +97,27 @@ hl.config({
     workspace_swipe_use_r = false,
   },
 })
+
+hl.gesture({
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace",
+})
+
+-- TODO: idk these are kinda janky tbh
+--
+-- hl.gesture({
+--   fingers = 3,
+--   direction = "up",
+--   action = function()
+--     hl.dsp.focus({ direction = "right" })
+--   end,
+-- })
+--
+-- hl.gesture({
+--   fingers = 3,
+--   direction = "down",
+--   action = function()
+--     hl.dsp.focus({ direction = "left" })
+--   end,
+-- })
