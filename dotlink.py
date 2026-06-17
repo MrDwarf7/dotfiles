@@ -18,9 +18,12 @@ if not dotfiles.exists():
     print(f"nah {dotfiles} doesn't exist")
     sys.exit(1)
 
-for item in dotfiles.iterdir():
+items = list(dotfiles.iterdir())
+width = max(len(i.name) for i in items) if items else 0
+
+for item in items:
     if item.name in IGNORE:
-        print(f"  - {item.name} (ignored)")
+        print(f"  - {item.name:{width}}  ignored")
         continue
 
     src = item.resolve()
@@ -28,17 +31,17 @@ for item in dotfiles.iterdir():
 
     if dst.is_symlink():
         if dst.resolve() == src:
-            print(f"  ✓ {item.name}")
+            print(f"  ✓ {item.name:{width}}")
             continue
-        print(f"  ↻ {item.name} — symlink points elsewhere, skipping")
+        print(f"  ↻ {item.name:{width}}  symlink points elsewhere, skipping")
         continue
 
     if dst.exists():
-        print(f"  ✗ {item.name} — real file/dir exists, skipping")
+        print(f"  ✗ {item.name:{width}}  real file/dir exists, skipping")
         continue
 
     dst.parent.mkdir(parents=True, exist_ok=True)
     dst.symlink_to(src)
-    print(f"  → {item.name}")
+    print(f"  → {item.name:{width}}")
 
 print("done")
