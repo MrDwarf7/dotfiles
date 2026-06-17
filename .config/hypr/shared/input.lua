@@ -9,7 +9,8 @@ hl.config({
     kb_model = "",
     kb_layout = "us",
     kb_variant = "",
-    kb_options = "grp:alt_shift_toggle",
+    -- kb_options = "grp:alt_shift_toggle",
+    kb_options = "caps:escape",
     -- kb_options = fkeys:basic_13-24
     kb_rules = "",
     kb_file = "",
