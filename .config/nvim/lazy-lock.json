@@ -1,6 +1,6 @@
 {
   "FixCursorHold.nvim": { "branch": "master", "commit": "1900f89dc17c603eec29960f57c00bd9ae696495" },
-  "LuaSnip": { "branch": "master", "commit": "642b0c595e11608b4c18219e93b88d7637af27bc" },
+  "LuaSnip": { "branch": "master", "commit": "0abc8f390b278c3b4aabc4c004ac8a088b65cf24" },
   "c3.vim": { "branch": "master", "commit": "ecf1c04d9ca5e8ffefe8f9c22724528e49f627e2" },
   "cloak.nvim": { "branch": "main", "commit": "648aca6d33ec011dc3166e7af3b38820d01a71e4" },
   "cmake-tools.nvim": { "branch": "master", "commit": "98cdc162572a7b77733030425d8d045d68f2a1fd" },
@@ -39,7 +39,7 @@
   "nvim-dap-python": { "branch": "master", "commit": "1808458eba2b18f178f990e01376941a42c7f93b" },
   "nvim-dap-ui": { "branch": "master", "commit": "1a66cabaa4a4da0be107d5eda6d57242f0fe7e49" },
   "nvim-dap-view": { "branch": "main", "commit": "91a2b0eab74cc889499587166cc6e3d53a7e1e45" },
-  "nvim-lint": { "branch": "master", "commit": "5259819fe849c978935281d1cab4bd26b375ab0f" },
+  "nvim-lint": { "branch": "master", "commit": "1ba49820a3c29ba6ab1b2dd441a63b3822c4e39b" },
   "nvim-lspconfig": { "branch": "master", "commit": "a683e0ddf0cf64c6cd689e18ffb480ade3c162b7" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
   "nvim-notify": { "branch": "master", "commit": "8701bece920b38ea289b457f902e2ad184131a5d" },

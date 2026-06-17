@@ -9,3 +9,6 @@ OG_*
 
 .old_as_ref/
 .old_as_ref/*
+
+./dms/colors
+dms/colors
