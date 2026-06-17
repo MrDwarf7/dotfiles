@@ -31,17 +31,22 @@ M.float_center = {
   { class = "qt5ct",                            size = "960 540"   },
   { class = "AppImageLauncherSettings",         size = "1450 1000" },
   { class = "swappy",                           size = "2560 1200" },
-  { class = "viewnior",                         size = "2560 1200" },
+  -- { class = "viewnior",                         size = "2560 1200" },
+  { class = "viewnior",                         size = "(monitor_w * 0.55) (monitor_h * 0.40)" },
   { class = "keymapp",                          size = "1450 1000" },
-  { class = "org\\.keepassxc\\.KeePassXC",      size = "1450 1000" },
+  -- { class = "org\\.keepassxc\\.KeePassXC",      size = "1450 1000" },
+  { class = "org\\.keepassxc\\.KeePassXC",      size = "(monitor_w * 0.55) (monitor_h * 0.40)" },
   { class = "webapp-manager.py",                size = "1000 650"  },
-  { class = "[tT]hunar|nemo|dolphin",           size = "1450 1000" },  -- Thunar, Nemo, Dolphin
+  -- { class = "[tT]hunar|nemo|dolphin",           size = "1450 1000" },  -- Thunar, Nemo, Dolphin
+  -- { class = "[tT]hunar|nemo|dolphin",           size = { "(monitor_w * 1.20)", "(monitor_h * 0.80)" } },  -- Thunar, Nemo, Dolphin
+  -- { class = "[tT]hunar|nemo|dolphin",           size = "(monitor_w * 1.20)", "(monitor_h * 0.80)" },  -- Thunar, Nemo, Dolphin
   { class = "zmk-studio",                       size = "1450 1000" },
   { class = "WebApp-.*",                        size = "1450 1000" },
 
   { class = "org\\.kde\\.freedownloadmanager",  size = "1280 720",   tag = "kt" },
   { class = "xdg-desktop-portal-gtk",           size = "1680 1080",  tag = "portal_xdg" },
-  { class = "com\\.danklinux\\.dms",            size = "1200 1250",  tag = "dms" },
+  -- { class = "com\\.danklinux\\.dms",            size = "1200 1250",  tag = "dms" },
+  { class = "com\\.danklinux\\.dms",            size = { "(monitor_w * 0.50)", "(monitor_h * 0.55)" },  tag = "dms" },
   { class = "[fF]eh",                                                tag = "feh" },  -- feh
 
   {
@@ -104,6 +109,15 @@ M.special_float = {
     float = true,
     size = "1000 650",
   },
+
+  {
+    name = "float-file-managers",
+    match = {
+      class = "[tT]hunar|nemo|dolphin",
+    },
+    float = true,
+    size = "(monitor_w*0.40) (monitor_h*0.65)",
+  }, -- Thunar, Nemo, Dolphin
 }
 
 --------------------------------------------------------------------------------

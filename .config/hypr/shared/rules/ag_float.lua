@@ -14,9 +14,14 @@ local generate_rules = function()
   for _, app in ipairs(reg.float_center) do
     float_center_classes[#float_center_classes + 1] = app.class
 
-    if app.size then
+    -- if app.size and type(app.size) == "string" then
+    if app.size and type(app.size) == "string" then
       size_groups[app.size] = size_groups[app.size] or {}
       size_groups[app.size][#size_groups[app.size] + 1] = app.class
+    elseif app.size and type(app.size) == "table" then
+      -- if size is a table, we go from "1000 500" as a string => { "(monitor_w * 1.20)", "(monitor_h * 0.80)" }
+      local size_key = table.concat(app.size, " ")
+      size_groups[size_key] = size_groups[size_key] or {}
     end
 
     if app.tag then
