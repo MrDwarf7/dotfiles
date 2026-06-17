@@ -26,11 +26,15 @@ for item in dotfiles.iterdir():
     src = item.resolve()
     dst = target / item.name
 
-    if dst.exists() or dst.is_symlink():
+    if dst.is_symlink():
         if dst.resolve() == src:
             print(f"  ✓ {item.name}")
             continue
-        print(f"  ✗ {item.name} — already exists, skipping")
+        print(f"  ↻ {item.name} — symlink points elsewhere, skipping")
+        continue
+
+    if dst.exists():
+        print(f"  ✗ {item.name} — real file/dir exists, skipping")
         continue
 
     dst.parent.mkdir(parents=True, exist_ok=True)
