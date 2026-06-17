@@ -144,6 +144,9 @@ do
     hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-2" }),
   }
   -- stylua: ignore end
+  c.layout = {
+    single_window_aspect_ratio = { 21, 9 },
+  }
 end
 
 -- Fill manbook config (currently empty — add specs from laptop)
@@ -174,6 +177,12 @@ do
     hl.workspace_rule({ workspace = "7", monitor = "eDP-1" }),
     hl.workspace_rule({ workspace = "8", monitor = "eDP-1" }),
     hl.workspace_rule({ workspace = "9", monitor = "eDP-1" }),
+  }
+  c.layout = {
+    single_window_aspect_ratio = { 16, 10 },
+  }
+  c.scrolling = {
+    fullscreen_on_one_column = true,
   }
 end
 
@@ -240,6 +249,27 @@ function Machines.workspace_rules()
   Machines.current = cn
   local cfg = _config[cn]
   return cfg and cfg.workspace_rules or {}
+end
+
+---@return HL.ConfigOpt.Layout
+function Machines.layout()
+  local cn = current_canon()
+  if not cn then
+    return {}
+  end
+  Machines.current = cn
+  local cfg = _config[cn]
+  return cfg and cfg.layout or {}
+end
+
+function Machines.scrolling()
+  local cn = current_canon()
+  if not cn then
+    return {}
+  end
+  Machines.current = cn
+  local cfg = _config[cn]
+  return cfg and cfg.scrolling or {}
 end
 
 --- Resolve any key (alias or canonical) to its config table.

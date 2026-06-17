@@ -47,7 +47,7 @@ hl.config({
     touchpad = {
       disable_while_typing = true,
       natural_scroll = true,
-      scroll_factor = 0.2,
+      scroll_factor = 0.4,
       middle_button_emulation = false,
       tap_button_map = "",
       clickfinger_behavior = true,
