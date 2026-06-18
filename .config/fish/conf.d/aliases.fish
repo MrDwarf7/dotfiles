@@ -48,7 +48,7 @@ alias rebootf 'sudo reboot --force'
 
 alias aa jj
 # interactions with the alias inside of the jj config.toml -> wraps an fzf output to cd
-alias aao 'cd $(jj wo)'
+alias aag 'cd $(jj wo)'
 
 # alias au jjui
 # alias au lza ## no longer needed -> au is now default

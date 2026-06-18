@@ -585,6 +585,7 @@ wa = [
 wf = ['workspace', 'forget']
 wr = ['workspace', 'rename']
 
+# NOTE: !! This is called by `fish` in `~/.config/fish/conf.d/aliases.fish` using `'cd $(jj wo)'` !!
 wo = [
   'util',
   'exec',
@@ -593,6 +594,16 @@ wo = [
   '-c',
   'jj workspace root --name $(jj workspace list | fzf | cut -d":" -f1)',
 ]
+
+
+# wg = [
+#   'util',
+#   'exec',
+#   '--',
+#   'bash',
+#   '-c',
+#   'cd $(jj workspace root --name $(jj workspace list | fzf | cut -d":" -f1)) && exec $SHELL',
+# ]
 
 # wa1 = ['workspace', 'add', '--name', 'one', '.jj/workspace-one']
 # wa2 = ['workspace', 'add', '--name', 'two', '.jj/workspace-two']
