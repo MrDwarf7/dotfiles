@@ -14,6 +14,7 @@ local Machines = {}
 ---@class HyprConfig.Utils.Machines.Known : table<HostKeys, HostNames[]>
 local known = {
   fortress = {
+    "Fortress",
     "fortress",
     "daggertooth.morray",
   },
@@ -68,7 +69,7 @@ local _config = setmetatable({}, {
   end,
   __pairs = function(t)
     -- Only yield canonical (known) entries, not cached alias pointers
-    local function iter(tbl, k)
+    local iter = function(tbl, k)
       local nk, nv = next(tbl, k)
       while nk and canon[nk] ~= nil and canon[nk] ~= nk do
         -- skip alias-only entries that leaked in? shouldn't happen but belt-and-suspenders
@@ -188,32 +189,109 @@ end
 
 -- Hostname detection
 
-local function detect_hostname()
-  local h = os.getenv("HOSTNAME")
-  if h and h ~= "" then
-    return h:lower()
-  end
-  local hostname_file = "/proc/sys/kernel/hostname"
-  local f = io.open(hostname_file, "r")
+local detect_hostname = function()
+  ---@alias TryForTable { envs: HostKeys[], locs: string[] }
+  local try_for = {
+    envs = {
+      "HOSTNAME",
+      "HOST",
+      "COMPUTERNAME",
+    },
+    locs = {
+      "/proc/sys/kernel/hostname",
+      "/etc/hostname",
+    },
+  }
 
-  if not f then
-    hostname_file = "/etc/hostname"
-    f = io.open(hostname_file, "r")
+  ---@param local_h string|number|nil
+  ---@return string|nil
+  local h_type_handler = function(local_h)
+    if type(local_h) == "nil" then
+      local_h = ""
+    elseif type(local_h) == "number" then
+      local_h = string.format("%d", local_h)
+      -- can handle other types here if need be
+    end
+
+    if local_h and local_h ~= "" then
+      local_h = local_h:lower()
+      return local_h
+    end
+    return nil
   end
 
-  if f then
-    h = f:read("*l")
-    f:close()
+  local h = nil
+  local f = nil
+
+  ---@param local_try_for TryForTable
+  ---@return string|nil
+  local envs_fn = function(local_try_for)
+    for _, env in ipairs(local_try_for.envs) do
+      h = os.getenv(env)
+      h = h_type_handler(h)
+      if h then
+        return h:lower()
+      end
+    end
+    return nil
   end
-  return h and h:lower() or ""
+
+  ---@param local_try_for TryForTable
+  ---@return string|nil
+  local locs_fn = function(local_try_for)
+    for _, loc in ipairs(local_try_for.locs) do
+      f = io.open(loc, "r")
+      if f then
+        h = f:read("*l")
+        f:close()
+        h = h_type_handler(h)
+        if h then
+          return h:lower()
+        end
+      end
+    end
+    return nil
+  end
+
+  for _, fn in ipairs({ envs_fn, locs_fn }) do
+    local result = fn(try_for)
+    if result then
+      return result
+    end
+  end
+  -- handle the case where no hostname could be detected gracefully by returning an empty string
+  return ""
 end
 
-local function current_canon()
+---@param default_fallback string|nil A potential default to return if we cannot detect the hostname. If nil, we return nil instead of a default.
+---@return string|nil The canonical machine name, or the default_fallback if hostname detection fails and a default is provided, or nil if detection fails and no default is provided.
+local current_canon = function(default_fallback)
   local hostname = detect_hostname()
   if hostname == "" then
+    if default_fallback and type(default_fallback) == "string" and default_fallback ~= "" then
+      return default_fallback
+    end
     return nil
   end
   return canon[hostname]
+end
+
+--- Internal lookup function that resolves any key (alias or canonical) to its config table,
+--- without caching the current machine.
+--- Used by public API functions to avoid redundant lookups.
+---@param key any
+---@return table
+local lookup = function(key)
+  if not key or type(key) ~= "string" then
+    return {}
+  end
+  local cn = current_canon()
+  if not cn then
+    return {}
+  end
+  Machines.current = cn
+  local cfg = _config[cn]
+  return cfg and cfg[key] or {}
 end
 
 -- Public API — no machine names leaked
@@ -242,58 +320,55 @@ end
 
 ---@return HL.WorkspaceRuleSpec[]
 function Machines.workspace_rules()
-  local cn = current_canon()
-  if not cn then
-    return {}
-  end
-  Machines.current = cn
-  local cfg = _config[cn]
-  return cfg and cfg.workspace_rules or {}
+  return lookup("workspace_rules")
+  -- local cn = current_canon()
+  -- if not cn then
+  --   return {}
+  -- end
+  -- Machines.current = cn
+  -- local cfg = _config[cn]
+  -- return cfg and cfg.workspace_rules or {}
 end
 
 ---@return HL.ConfigOpt.Layout
 function Machines.layout()
-  local cn = current_canon()
-  if not cn then
-    return {}
-  end
-  Machines.current = cn
-  local cfg = _config[cn]
-  return cfg and cfg.layout or {}
+  return lookup("layout")
+  -- local cn = current_canon()
+  -- if not cn then
+  --   return {}
+  -- end
+  -- Machines.current = cn
+  -- local cfg = _config[cn]
+  -- return cfg and cfg.layout or {}
 end
 
 function Machines.scrolling()
-  local cn = current_canon()
-  if not cn then
-    return {}
-  end
-  Machines.current = cn
-  local cfg = _config[cn]
-  return cfg and cfg.scrolling or {}
+  return lookup("scrolling")
 end
 
 --- Resolve any key (alias or canonical) to its config table.
 ---@param key string
 ---@return table|nil
 function Machines.get(key)
-  if not Machines.current then
-    local cn = current_canon()
-    if cn then
-      Machines.current = cn
-    end
-  end
-  return _config[key]
+  return lookup(key)
+  -- if not Machines.current then
+  --   local cn = current_canon()
+  --   if cn then
+  --     Machines.current = cn
+  --   end
+  -- end
+  -- return _config[key]
 end
 
 -- TODO: We will have to have a tag for these in the table itself, not manually checking against a str
 
 function Machines.is_laptop()
-  local cn = current_canon()
+  local cn = current_canon("manbook")
   return cn == "manbook"
 end
 
 function Machines.is_desktop()
-  local cn = current_canon()
+  local cn = current_canon("fortress")
   return cn == "fortress"
 end
 
