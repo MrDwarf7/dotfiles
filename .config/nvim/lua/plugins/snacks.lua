@@ -9,6 +9,7 @@ return {
       { "<Leader>fF", function() Snacks.picker.smart() end, desc = "Smart Find Files" }, -- can be set up to use { multi = { "buffers", "files", "recent" } } etc.
       { "<Leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<Leader>fw", function() Snacks.picker.grep() end, desc = "Grep" },
+      { "<Leader>fW", function() Snacks.picker.grep_word() end, desc = "Grep Word", mode = { "n", "x" } },
       { "<Leader>fc", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
 
       { "<Leader>fC", function() Snacks.picker.commands() end, desc = "Commands" },
