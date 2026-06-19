@@ -134,15 +134,15 @@ do
   -- stylua: ignore start
   ---@type HL.WorkspaceRuleSpec[]
   c.workspace_rules = {
-    hl.workspace_rule({ workspace = "1", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "2", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "3", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "4", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "5", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "6", monitor = "DP-1" }),
-    hl.workspace_rule({ workspace = "7", monitor = "HDMI-A-2" }),
-    hl.workspace_rule({ workspace = "8", monitor = "HDMI-A-2" }),
-    hl.workspace_rule({ workspace = "9", monitor = "HDMI-A-2" }),
+    { workspace = "1", monitor = "DP-1" },
+    { workspace = "2", monitor = "DP-1" },
+    { workspace = "3", monitor = "DP-1" },
+    { workspace = "4", monitor = "DP-1" },
+    { workspace = "5", monitor = "DP-1" },
+    { workspace = "6", monitor = "DP-1" },
+    { workspace = "7", monitor = "HDMI-A-2" },
+    { workspace = "8", monitor = "HDMI-A-2" },
+    { workspace = "9", monitor = "HDMI-A-2" },
   }
   -- stylua: ignore end
   c.layout = {
@@ -169,15 +169,15 @@ do
   }
   ---@type HL.WorkspaceRuleSpec[]
   c.workspace_rules = {
-    hl.workspace_rule({ workspace = "1", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "2", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "3", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "4", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "5", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "6", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "7", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "8", monitor = "eDP-1" }),
-    hl.workspace_rule({ workspace = "9", monitor = "eDP-1" }),
+    { workspace = "1", monitor = "eDP-1" },
+    { workspace = "2", monitor = "eDP-1" },
+    { workspace = "3", monitor = "eDP-1" },
+    { workspace = "4", monitor = "eDP-1" },
+    { workspace = "5", monitor = "eDP-1" },
+    { workspace = "6", monitor = "eDP-1" },
+    { workspace = "7", monitor = "eDP-1" },
+    { workspace = "8", monitor = "eDP-1" },
+    { workspace = "9", monitor = "eDP-1" },
   }
   c.layout = {
     single_window_aspect_ratio = { 16, 10 },
@@ -285,12 +285,14 @@ local lookup = function(key)
   if not key or type(key) ~= "string" then
     return {}
   end
+
   local cn = current_canon()
   if not cn then
     return {}
   end
-  Machines.current = cn
+
   local cfg = _config[cn]
+  Machines.current = cn
   return cfg and cfg[key] or {}
 end
 
@@ -299,6 +301,11 @@ end
 ---@param output_name? string If provided, only the spec for that output.
 ---@return HL.MonitorSpec[]
 function Machines.monitors(output_name)
+  -- -- i've no idea why... but urr, this 'nil's and the below code
+  -- ( which is identical) doesn't....
+  --
+  -- local cfg = lookup("monitors")
+
   local cn = current_canon()
   if not cn then
     return {}
@@ -307,13 +314,14 @@ function Machines.monitors(output_name)
   if not cfg then
     return {}
   end
+  Machines.current = cn
+
   if output_name then
     for _, m in ipairs(cfg.monitors) do
       if m.output == output_name then
         return { m }
       end
     end
-    return {}
   end
   return cfg.monitors
 end
