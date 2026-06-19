@@ -5,30 +5,30 @@ local progs = require("shared.programs")
 
 -- === Application Launchers ===
 -- Tofi is sooooo much faster
-hl.bind(mods.main_mod .. " + r", hl.dsp.exec_cmd(progs.menu))
+hl.bind(mods:with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
 
-hl.bind(mods.main_mod_ctrl .. " + r", hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
-hl.bind(mods.main_mod_ctrl .. " + v", hl.dsp.exec_cmd("dms ipc call clipboard toggle"))
-hl.bind(mods.main_mod_ctrl .. " + m", hl.dsp.exec_cmd("dms ipc call settings focusOrToggle"))
-hl.bind(mods.main_mod_ctrl .. " + a", hl.dsp.exec_cmd("dms ipc call notifications toggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "r"), hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "v"), hl.dsp.exec_cmd("dms ipc call clipboard toggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "m"), hl.dsp.exec_cmd("dms ipc call settings focusOrToggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "a"), hl.dsp.exec_cmd("dms ipc call notifications toggle"))
 
-hl.bind(mods.main_mod_ctrl .. " + w", hl.dsp.exec_cmd("dms ipc call hypr toggleOverview"))
-hl.bind(mods.main_mod_alt .. " + d", hl.dsp.exec_cmd("dms ipc call night toggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "w"), hl.dsp.exec_cmd("dms ipc call hypr toggleOverview"))
+hl.bind(mods:with(mods.main_mod_alt, "d"), hl.dsp.exec_cmd("dms ipc call night toggle"))
 
-hl.bind(mods.main_mod .. " + y", hl.dsp.exec_cmd("dms ipc call dankdash wallpaper"))
-hl.bind(mods.main_mod .. " + m", hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + n", hl.dsp.exec_cmd("dms ipc call notepad toggle"))
+hl.bind(mods:with(mods.main_mod, "y"), hl.dsp.exec_cmd("dms ipc call dankdash wallpaper"))
+hl.bind(mods:with(mods.main_mod, "m"), hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "n"), hl.dsp.exec_cmd("dms ipc call notepad toggle"))
 
-hl.bind(mods.main_mod .. " + z", hl.dsp.exec_cmd("dms ipc call dash toggle overview"))
-hl.bind(mods.main_mod .. " + x", hl.dsp.exec_cmd("dms ipc call control-center toggle"))
+hl.bind(mods:with(mods.main_mod, "z"), hl.dsp.exec_cmd("dms ipc call dash toggle overview"))
+hl.bind(mods:with(mods.main_mod, "x"), hl.dsp.exec_cmd("dms ipc call control-center toggle"))
 
-hl.bind(mods.main_mod_ctrl .. " + p", hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
+hl.bind(mods:with(mods.main_mod_ctrl, "p"), hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
 
 -- === Security ===
-hl.bind(mods.main_mod .. " + u", hl.dsp.exec_cmd("dms ipc call lock lock"))
+hl.bind(mods:with(mods.main_mod, "u"), hl.dsp.exec_cmd("dms ipc call lock lock"))
 
 -- === Screenshots ===
-hl.bind(mods.main_mod_ctrl .. " + s", hl.dsp.exec_cmd("dms screenshot"))
+hl.bind(mods:with(mods.main_mod_ctrl, "s"), hl.dsp.exec_cmd("dms screenshot"))
 
 -- === System Controls ===
 --# Toggles the display, basically a 'sleep' for all screens.

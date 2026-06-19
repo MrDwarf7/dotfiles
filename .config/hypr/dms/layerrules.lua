@@ -1,6 +1,6 @@
 local rules = {
   {
-    name = '"dms-no-anim"',
+    name = "dms-no-anim",
     match = {
       namespace = "dms",
     },
@@ -8,14 +8,15 @@ local rules = {
   },
   -- Left
   {
-    name = '"dms-app-launcher-animation"',
+    name = "dms-app-launcher-animation",
     match = {
       namespace = "dms:(app-launcher)",
     },
     animation = "slide left",
   },
+
   {
-    name = '"dms-dash-animation"',
+    name = "dms-dash-animation",
     match = {
       namespace = "dms:dash",
     },
@@ -24,7 +25,7 @@ local rules = {
 
   -- Center
   {
-    name = '"dms-workspace-overview-animation"',
+    name = "dms-workspace-overview-animation",
     match = {
       namespace = "dms:workspace-overview",
     },
@@ -32,7 +33,7 @@ local rules = {
   },
 
   {
-    name = '"dms-spotlight-animation"',
+    name = "dms-spotlight-animation",
     match = {
       namespace = "dms:(spotlight)",
     },
@@ -41,7 +42,7 @@ local rules = {
 
   -- Right
   {
-    name = '"dms-process-list-animation"',
+    name = "dms-process-list-animation",
     match = {
       namespace = "dms:(process-list-popout)",
     },
@@ -49,7 +50,7 @@ local rules = {
   },
 
   {
-    name = '"dms-control-center-animation"',
+    name = "dms-control-center-animation",
     match = {
       namespace = "dms:control-center",
     },
@@ -57,24 +58,33 @@ local rules = {
   },
 
   {
-    name = '"dms-clipboard-popout-animation"',
+    name = "dms-clipboard-popout-animation",
     match = {
       namespace = "dms:(clipboard-popout)",
     },
     animation = "slide right",
   },
 
+  -- {
+  --   name = "dms-notepad-popout-animation",
+  --   match = {
+  --     namespace = "dms:(slideout)",
+  --   },
+  --   -- animation = "slide right 1 0.2",
+  --   animation = "snappy",
+  -- },
+
   {
-    name = '"dms-notepad-popout-animation"',
+    name = "dms-power-menu-animation",
     match = {
-      namespace = "dms:(slideout)",
+      namespace = "dms:(power-menu)",
     },
-    animation = "slide right 1 0.2",
+    animation = "slide bottom",
   },
 
   -------------------------
   {
-    name = '"dms-blur-for-popouts-and-misc"',
+    name = "dms-blur-for-popouts-and-misc",
     match = {
       namespace = "dms:(bar|tooltip|toast|dock-context-menu|control-center|notification-center-popout|dash|battery|popout|app-launcher)",
     },
@@ -83,7 +93,7 @@ local rules = {
   },
 
   {
-    name = '"dms-blur-for-modals-and-misc"',
+    name = "dms-blur-for-modals-and-misc",
     match = {
       namespace = "dms:(polkit|notification-center-modal|notification-popup|color-picker|clipboard|clipboard-popout|spotlight|settings|tray-menu-window|tray-overflow-menu|slideout|system-update|system-update:background|filebrowser|osd)",
     },
@@ -92,12 +102,23 @@ local rules = {
   },
 
   {
-    name = '"dms-blur-for-process-list"',
+    name = "dms-blur-for-process-list",
     match = {
       namespace = "dms:(process-list-modal|process-list-popout)",
     },
     blur = true,
     -- ignore_alpha = 0.275,
+    ignore_alpha = 0,
+  },
+
+  {
+    name = "dms-no-blur",
+    match = {
+      namespace = "dms:(frame-exclusion|frame)",
+      -- namespace = "dms:(frame-exclusion|frame|power-menu)",
+      -- namespace = "dms:(frame.*)",
+    },
+    blur = false,
     ignore_alpha = 0,
   },
 

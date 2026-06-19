@@ -13,34 +13,39 @@ hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop"))
 
 -- Or can 'chain' shortcuts.
 
+-- TODO: Mmove the quit logic stuff to a function so it's
+-- idempotent of the ordering in the file.
+
 --### IMPORTANT START ####
+--
+-- HACK: file ordering/dual binding
 --
 -- If doing this - they MUST remain in the same order.
 -- Hyprland will execute them (filewise) top to bottom.
-hl.bind(mods.main_mod .. " + q", hl.dsp.window.close())
-hl.bind(mods.main_mod .. " + q", hl.dsp.focus({ monitor = 0 }))
+hl.bind(mods:with(mods.main_mod, "q"), hl.dsp.window.close())
+hl.bind(mods:with(mods.main_mod, "q"), hl.dsp.focus({ monitor = 0 }))
 
 --### IMPORTANT END ####
 
-hl.bind(mods.main_mod .. " + f", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mods.main_mod .. " + c", hl.dsp.window.center())
+hl.bind(mods:with(mods.main_mod, "f"), hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mods:with(mods.main_mod, "c"), hl.dsp.window.center())
 
-hl.bind(mods.main_mod .. " + p", hl.dsp.window.pin())
+hl.bind(mods:with(mods.main_mod, "p"), hl.dsp.window.pin())
 
 -- groups
-hl.bind(mods.mod_combos.main_mod_shift .. " + g", hl.dsp.group.lock({ action = "toggle" }))
-hl.bind(mods.main_mod .. " + g", hl.dsp.group.toggle())
+hl.bind(mods:with(mods.main_mod_shift, "g"), hl.dsp.group.lock({ action = "toggle" }))
+hl.bind(mods:with(mods.main_mod, "g"), hl.dsp.group.toggle())
 
-hl.bind(mods.main_mod .. " + Home", hl.dsp.group.prev())
-hl.bind(mods.main_mod .. " + End", hl.dsp.group.next())
-hl.bind(mods.main_mod .. " + s", hl.dsp.window.pseudo())
+hl.bind(mods:with(mods.main_mod, "Home"), hl.dsp.group.prev())
+hl.bind(mods:with(mods.main_mod, "End"), hl.dsp.group.next())
+hl.bind(mods:with(mods.main_mod, "s"), hl.dsp.window.pseudo())
 
 -- ## TODO: Error'ing
 -- bind = $mainMod, Space, togglesplit # dwindle
 
-hl.bind(mods.mod_combos.main_mod_shift .. " + f", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + f", hl.dsp.layout("swapwithmaster master"))
+hl.bind(mods:with(mods.main_mod_shift, "f"), hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(mods:with(mods.main_mod_ctrl, "f"), hl.dsp.layout("swapwithmaster master"))
 --# ^ Allow swapping when using 'master' layout method
 
-hl.bind(mods.mod_combos.alt_tab, hl.dsp.window.cycle_next({ next = true }))
-hl.bind(mods.mod_combos.alt_tab, hl.dsp.window.bring_to_top())
+hl.bind(mods.alt_tab, hl.dsp.window.cycle_next({ next = true }))
+hl.bind(mods.alt_tab, hl.dsp.window.bring_to_top())

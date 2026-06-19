@@ -4,5 +4,5 @@
 local mods = require("shared.keymaps.mods")
 
 -- Move/resize windows with mainMod + LMB/RMB and dragging
-hl.bind(mods.main_mod .. " + mouse:272", hl.dsp.window.drag())
-hl.bind(mods.main_mod .. " + mouse:273", hl.dsp.window.resize())
+hl.bind(mods:with(mods.main_mod, "mouse:272"), hl.dsp.window.drag())
+hl.bind(mods:with(mods.main_mod, "mouse:273"), hl.dsp.window.resize())

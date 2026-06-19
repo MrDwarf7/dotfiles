@@ -16,12 +16,20 @@ hl.curve("snappy", {
 
 -- https://wiki.hyprland.org/Configuring/Variables/#animations
 
+-- NOTE: This _ALSO_ controls the speed
+-- not just of _SPAWNING_ winodws.... but also
+-- the speed of changing windows when using the `scrolling` layout option :L
+--
 hl.animation({
   leaf = "windows",
   enabled = true,
-  speed = 3,
-  bezier = "fluid",
-  style = "popin 5%",
+  -- speed = 3,
+  speed = 2,
+  -- bezier = "fluid",
+  bezier = "snappy",
+  -- style = "popin 5%",
+  style = "popin 15%",
+  -- style = "popin 0%",
 })
 hl.animation({
   leaf = "windowsOut",
@@ -38,10 +46,13 @@ hl.animation({
 hl.animation({
   leaf = "workspaces",
   enabled = true,
-  speed = 1.7,
+  -- speed = 1.7,
+  -- speed = 2.25,
+  speed = 1.25,
   bezier = "snappy",
   style = "slide",
 })
+
 hl.animation({
   leaf = "specialWorkspace",
   enabled = true,
@@ -52,6 +63,7 @@ hl.animation({
 hl.animation({
   leaf = "layers",
   enabled = true,
+  -- speed = 1,
   speed = 2,
   bezier = "snappy",
   style = "popin 70%",
@@ -80,7 +92,6 @@ hl.animation({
 hl.config({
   animations = {
     enabled = true,
-    -- first_launch_animation = false
     workspace_wraparound = true,
 
     -- Default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more

@@ -11,32 +11,28 @@ local progs = require("shared.programs")
 -- We do this so we can source the other
 -- 'map_programs.conf' file without conflicts in binds.
 
-hl.bind(mods.mod_combos.main_mod_shift .. " + r", hl.dsp.exec_cmd(progs.menu_other))
-hl.bind(mods.main_mod .. " + r", hl.dsp.exec_cmd(progs.menu))
-hl.bind(mods.main_mod .. " + u", hl.dsp.exec_cmd(progs.locking))
-hl.bind(mods.main_mod .. " + m", hl.dsp.exec_cmd(progs.logout_prog))
+hl.bind(mods:with(mods.main_mod_shift, "r"), hl.dsp.exec_cmd(progs.menu_other))
+hl.bind(mods:with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
+hl.bind(mods:with(mods.main_mod, "u"), hl.dsp.exec_cmd(progs.locking))
+hl.bind(mods:with(mods.main_mod, "m"), hl.dsp.exec_cmd(progs.logout_prog))
 
-hl.bind(
-  mods.mod_combos.main_mod_ctrl .. " + a",
-  hl.dsp.exec_cmd(progs.notifications .. " -t -sw || swaync-client -t -sw")
-)
-hl.bind(mods.mod_combos.main_mod_shift .. " + s", hl.dsp.exec_cmd(progs.screenshot .. " 'full'"))
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + s", hl.dsp.exec_cmd(progs.screenshot .. " 'region'"))
+hl.bind(mods:with(mods.main_mod_ctrl, "a"), hl.dsp.exec_cmd(progs.notifications .. " -t -sw || swaync-client -t -sw"))
+hl.bind(mods:with(mods.main_mod_shift, "s"), hl.dsp.exec_cmd(progs.screenshot .. " 'full'"))
+hl.bind(mods:with(mods.main_mod_ctrl, "s"), hl.dsp.exec_cmd(progs.screenshot .. " 'region'"))
 
-hl.bind(mods.mod_combos.main_mod_ctrl .. " + v", hl.dsp.exec_cmd(progs.clipboard_history))
-
---# Mute's
--- stylua: ignore start
-hl.bind( "XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
-hl.bind( "XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
+hl.bind(mods:with(mods.main_mod_ctrl, "v"), hl.dsp.exec_cmd(progs.clipboard_history))
 
 -- Laptop multimedia keys for volume and LCD brightness
+
+-- stylua: ignore start
 
 --# Vol
 hl.bind( "XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true, repeating = true })
 hl.bind( "XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true, repeating = true })
 
--- stylua: ignore end
+--# Mute's
+hl.bind( "XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true, repeating = true })
+hl.bind( "XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { locked = true, repeating = true })
 
 --# Brightness
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl s 10%+"), { locked = true, repeating = true })
@@ -49,3 +45,5 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+
+-- stylua: ignore end

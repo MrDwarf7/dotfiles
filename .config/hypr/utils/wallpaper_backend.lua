@@ -1,10 +1,16 @@
----@alias DWBKey "SWWW" | "AWWW" | "WALLPAPERENGINE"
----@alias DWBName "swww" | "awww" | "wallpaperengine"
+---@alias DWBKey "NATIVE" | "SWWW" | "AWWW" | "WALLPAPERENGINE"
+---@alias DWBName "native" | "swww" | "awww" | "wallpaperengine"
 
 -- TODO: we can likely slim this down; pretty sure am doing a sort of 'double' lookup here we can fix
 
+-- TODO: Need to implement handling for the new 'NATIVE' set of types here
+-- also the shared.execs needs to handle it as well (we should treat nil returns from something like .get as native I think?
+-- we can still fetch the backend_cmd for it - which itself is empty anyway
+-- (or we can return nil and have the caller say 'if it's nil, do nothing')
+
 ---@enum HyprConfig.WallpaperBackendE
 local backends = {
+  NATIVE = "native",
   SWWW = "swww",
   AWWW = "awww",
   WALLPAPERENGINE = "wallpaperengine",
@@ -15,6 +21,7 @@ local backends = {
 --- Mapping for HyprConfig.WallpaperBackendE -> hl.exec_cmd string
 ---@class HyprConfig.WallpaperBackendCmds
 local backend_cmds = {
+  [backends.NATIVE:upper()] = "", -- No command needed for native wallpaper management
   [backends.SWWW:upper()] = "swww --no-daemon",
   [backends.AWWW:upper()] = "awww --no-daemon",
   [backends.WALLPAPERENGINE:upper()] = "wallpaperengine-gui",
@@ -33,6 +40,7 @@ end
 
 ---@class HyprConfig.WallpaperBackend
 local WallpaperBackend = {
+  NATIVE = backends.NATIVE,
   SWWW = backends.SWWW,
   AWWW = backends.AWWW,
   WALLPAPERENGINE = backends.WALLPAPERENGINE,

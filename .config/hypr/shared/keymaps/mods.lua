@@ -10,6 +10,26 @@ local combine = function(...)
   return table.concat({ ... }, " + ")
 end
 
+-- Exmaple: We have stuff  like this:
+-- hl.bind(mods.main_mod .. " + Tab", hl.dsp.focus({ workspace = "e+1" }), { repeating = true })
+-- hl.bind(mods.mod_combos.main_mod_shift .. " + Tab", hl.dsp.focus({ workspace = "e-1" }), { repeating = true })
+
+-- We want to be able to clean this up so it's easier to find bindings and such. Eg:
+-- hl.bind(mods.with("super", "Tab"), ... rest of stuff here ),
+-- or
+-- hl.bind(mods.with(main_mod, "Tab"), , ... rest of stuff here )
+-- or
+-- hl.bind(mods.with(mods.main_mod, "Tab"), ... rest of stuff here )
+-- or
+-- the above's but via mods:with(........, .....) etc. so we use the attached combine fn
+--
+-- So maybe we just have a lookup table or something, and use teh underlying combine fn call
+
+local with = function(...)
+  -- gives an error via invalid value (table) at index 1 in table for concat
+  return combine(table.unpack({ ... }))
+end
+
 local mod_combos = {
   main_mod_shift = combine(base.main_mod, base.shift),
   main_mod_ctrl = combine(base.main_mod, base.ctrl),
@@ -44,11 +64,10 @@ setmetatable(ret, {
   end,
 })
 
-return ret
+ret.with = with
 
--- return {
---   base = base,
---   main_mod = base.main_mod,
---   combine = combine,
---   mod_combos = mod_combos,
--- }
+function ret:with(...) -- silent 'self' here btw
+  return combine(table.unpack({ ... }))
+end
+
+return ret
