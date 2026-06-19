@@ -19,13 +19,14 @@ dot_marker = false
 rate = "0.300s"
 
 # Whether to put the CPU legend to the left.
-cpu_left_legend = false
+# cpu_left_legend = false
+cpu.left_legend = false
 
 # Whether to set CPU% on a process to be based on the total CPU or just current usage.
 #current_usage = false
 
 # Whether to set CPU% on a process to be based on the total CPU or per-core CPU% (not divided by the number of cpus).
-unnormalized_cpu = false
+processes.unnormalized_cpu = false
 
 # Whether to group processes with the same name together by default. Doesn't do anything
 # if tree is set to true or --tree is set.
@@ -92,7 +93,7 @@ use_old_network_legend = false
 show_table_scroll_position = true
 
 # Show processes as their commands by default in the process widget.
-process_command = true
+process.process_command = true
 
 # Displays the network widget with binary prefixes.
 #network_use_binary_prefix = false
@@ -110,13 +111,13 @@ process_command = true
 #read_only = false
 
 # Hides the kernel threads
-hide_k_threads = true
+processes.hide_k_threads = true
 
 # Hide GPU(s) information
 #disable_gpu = false
 
 # Shows cache and buffer memory
-enable_cache_memory = true
+memory.enable_cache_memory = true
 
 # Subtract freeable ARC from memory usage
 #free_arc = false
@@ -126,11 +127,11 @@ enable_cache_memory = true
 
 # Where to place the legend for the memory widget. One of "none", "top-left", "top", "top-right", "left", "right", "bottom-left", "bottom", "bottom-right".
 #memory_legend = "top-right"
-memory_legend = "top-left"
+memory.memory_legend = "top-left"
 
 # Where to place the legend for the network widget. One of "none", "top-left", "top", "top-right", "left", "right", "bottom-left", "bottom", "bottom-right".
 #network_legend = "top-right"
-network_legend = "top-left"
+network.network_legend = "top-left"
 
 
 # Processes widget configuration
