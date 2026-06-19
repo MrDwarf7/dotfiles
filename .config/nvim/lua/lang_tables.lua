@@ -195,6 +195,9 @@ LangTables = {
       ["bash"] = { "shellcheck" },
       ["cmake"] = { "cmakelint" },
       ["cpp"] = { "cpplint" },
+      ["hpp"] = { "cpplint" },
+      -- ["c"] = { "clang-tidy" },
+      -- ["h"] = { "clang-tidy" },
       -- cs = { "omnisharp" },
       ["css"] = { "stylelint" },
       ["docker"] = { "hadolint" },
@@ -638,6 +641,18 @@ function LangTables.by_ft(behavior, typeof, extra_fmtters)
   return target_set
 end
 
+local enforce_c_headers = function(ft)
+  if ft == "h" then
+    local filename = vim.api.nvim_buf_get_name(0)
+    if filename:match("%.h$") then
+      return "c"
+    elseif filename:match("%.hpp$") then
+      return "cpp"
+    end
+  end
+  return ft
+end
+
 ---@deprecated Use LangTables.by_ft("linters", ft) instead.
 --- Returns the LangTables.mason.linter(s) by filetype association.
 ---@param ft? Ft
@@ -646,6 +661,14 @@ function LangTables.linters_by_ft(ft)
     ft = ft or vim.bo.filetype or ""
   end
   ft = string.format("%s", ft)
+
+  -- currently all <foo>.h files auto map to CPP, which... isn't correct.
+  -- <foo>.hpp == CPP,
+  -- <foo>.h == C
+
+  -- if ft == "h" then
+  --   ft = enforce_c_headers(ft)
+  -- end
 
   local target = LangTables.mason.linters_by_ft[ft] or {}
   if type(target) == "function" then
@@ -666,6 +689,10 @@ function LangTables.formatters_by_ft(ft, bufnr)
   ft = string.format("%s", ft)
 
   bufnr = bufnr or vim.api.nvim_get_current_buf()
+
+  -- if ft == "h" then
+  --   ft = enforce_c_headers(ft)
+  -- end
 
   local target = LangTables.mason.formatters_by_ft[ft] or {}
   if type(target) == "function" then

@@ -1,7 +1,7 @@
 return {
   "Civitasv/cmake-tools.nvim",
   lazy = true,
-  ft = { "cmake", "cpp", "h", "hpp" },
+  ft = { "cmake", "cpp", "hpp" },
   -- previously
   -- init = function()
   config = function(_)
