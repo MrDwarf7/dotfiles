@@ -83,5 +83,8 @@ alias twt "command taskwarrior-tui"
 alias z.. "command zoxide add $PWD"
 alias ze "command zoxide edit"
 
+#### DMS (Dank Linux) specific aliases - for direct terminal use only! Do not bind these as keymaps lol
+alias dmslock 'dms ipc call lock lock'
+
 # alias usudo="env SHELL(which fish) sudo -E $argv" ### not sure if this works, leave as fn for now
 # alias zl (command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n"))
