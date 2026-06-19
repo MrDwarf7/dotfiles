@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Hermes Desktop
+Exec=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/apps/desktop/release/linux-unpacked/Hermes
+TryExec=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/apps/desktop/release/linux-unpacked/Hermes
+# /home/dwarf/.xdg/bin/hermes-desktop
+Icon=/home/dwarf/Documents/GitHub_Projects/Python/OTHER/hermes-agent/apps/desktop/release/linux-unpacked/resources/icon.ico
+Categories=Utility;
+Terminal=false
+
