@@ -10,6 +10,8 @@
   "popupTransparency": 0.1,
   "dockTransparency": 0.6,
   "widgetBackgroundColor": "s",
+  "widgetBackgroundCustomColor": "#6750A4",
+  "widgetBackgroundCustomStrength": 0.5,
   "widgetColorMode": "default",
   "controlCenterTileColorMode": "primary",
   "buttonColorMode": "primary",
@@ -27,6 +29,7 @@
   "mangoTrackpadNaturalScrolling": true,
   "firstDayOfWeek": -1,
   "showWeekNumber": false,
+  "calendarBackend": "auto",
   "use24HourClock": false,
   "showSeconds": true,
   "padHours12Hour": true,
@@ -61,6 +64,8 @@
   "wallpaperFillMode": "Fit",
   "blurredWallpaperLayer": false,
   "blurWallpaperOnOverview": true,
+  "wallpaperBackgroundColorMode": "black",
+  "wallpaperBackgroundCustomColor": "#000000",
   "showLauncherButton": true,
   "showWorkspaceSwitcher": true,
   "showFocusedWindow": true,
@@ -80,6 +85,10 @@
   "showClock": true,
   "showNotificationButton": true,
   "showBattery": true,
+  "showBatteryPercent": true,
+  "showBatteryPercentOnlyOnBattery": false,
+  "showBatteryTime": false,
+  "showBatteryTimeOnlyOnBattery": false,
   "showControlCenterButton": true,
   "showCapsLockIndicator": true,
   "controlCenterShowNetworkIcon": true,
@@ -109,7 +118,8 @@
     {
       "id": "brightnessSlider",
       "enabled": true,
-      "width": 50
+      "width": 50,
+      "deviceName": "ddc:i2c-4"
     },
     {
       "id": "wifi",
@@ -132,14 +142,14 @@
       "width": 50
     },
     {
-      "id": "idleInhibitor",
+      "id": "doNotDisturb",
       "enabled": true,
-      "width": 75
+      "width": 50
     },
     {
-      "id": "builtin_vpn",
+      "id": "idleInhibitor",
       "enabled": true,
-      "width": 25
+      "width": 50
     },
     {
       "id": "nightMode",
@@ -148,6 +158,16 @@
     },
     {
       "id": "darkMode",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "builtin_tailscale",
+      "enabled": true,
+      "width": 50
+    },
+    {
+      "id": "builtin_vpn",
       "enabled": true,
       "width": 50
     }
@@ -168,12 +188,30 @@
   "dwlShowAllTags": false,
   "workspaceActiveAppHighlightEnabled": false,
   "workspaceColorMode": "default",
+  "workspaceFocusedCustomColor": "#6750A4",
   "workspaceOccupiedColorMode": "none",
+  "workspaceOccupiedCustomColor": "#625B71",
   "workspaceUnfocusedColorMode": "default",
+  "workspaceUnfocusedCustomColor": "#49454E",
   "workspaceUrgentColorMode": "default",
+  "workspaceUrgentCustomColor": "#B3261E",
   "workspaceFocusedBorderEnabled": true,
   "workspaceFocusedBorderColor": "surfaceText",
+  "workspaceFocusedBorderCustomColor": "#6750A4",
   "workspaceFocusedBorderThickness": 2,
+  "workspaceUnfocusedMonitorSeparateAppearance": false,
+  "workspaceUnfocusedMonitorColorMode": "default",
+  "workspaceUnfocusedMonitorFocusedCustomColor": "#6750A4",
+  "workspaceUnfocusedMonitorOccupiedColorMode": "none",
+  "workspaceUnfocusedMonitorOccupiedCustomColor": "#625B71",
+  "workspaceUnfocusedMonitorUnfocusedColorMode": "default",
+  "workspaceUnfocusedMonitorUnfocusedCustomColor": "#49454E",
+  "workspaceUnfocusedMonitorUrgentColorMode": "default",
+  "workspaceUnfocusedMonitorUrgentCustomColor": "#B3261E",
+  "workspaceUnfocusedMonitorBorderEnabled": false,
+  "workspaceUnfocusedMonitorBorderColor": "primary",
+  "workspaceUnfocusedMonitorBorderCustomColor": "#6750A4",
+  "workspaceUnfocusedMonitorBorderThickness": 2,
   "workspaceNameIcons": {},
   "waveProgressEnabled": false,
   "scrollTitleEnabled": true,
@@ -182,6 +220,7 @@
   "audioScrollMode": "volume",
   "audioWheelScrollAmount": 5,
   "audioDeviceScrollVolumeEnabled": false,
+  "mediaExcludePlayers": [],
   "clockCompactMode": false,
   "focusedWindowCompactMode": false,
   "focusedWindowSize": 1,
@@ -225,7 +264,13 @@
   "browserPickerViewMode": "grid",
   "browserUsageHistory": {},
   "appPickerViewMode": "grid",
-  "filePickerUsageHistory": {},
+  "filePickerUsageHistory": {
+    "neovide": {
+      "count": 1,
+      "lastUsed": 1782183656752,
+      "name": "Neovide"
+    }
+  },
   "sortAppsAlphabetically": false,
   "appLauncherGridColumns": 4,
   "spotlightCloseNiriOverview": true,
@@ -239,6 +284,7 @@
   },
   "niriOverviewOverlayEnabled": true,
   "dankLauncherV2Size": "compact",
+  "dankLauncherV2ShowSourceBadges": true,
   "dankLauncherV2BorderEnabled": false,
   "dankLauncherV2BorderThickness": 2,
   "dankLauncherV2BorderColor": "primary",
@@ -249,10 +295,36 @@
   "launcherUseOverlayLayer": false,
   "launcherStyle": "full",
   "spotlightBarShowModeChips": false,
+  "keybindsFloatingWindow": false,
   "useAutoLocation": true,
   "weatherEnabled": true,
+  "dashTabs": [
+    {
+      "id": "overview",
+      "enabled": true
+    },
+    {
+      "id": "media",
+      "enabled": true
+    },
+    {
+      "id": "wallpaper",
+      "enabled": true
+    },
+    {
+      "id": "weather",
+      "enabled": true
+    },
+    {
+      "id": "settings",
+      "enabled": true
+    }
+  ],
   "networkPreference": "wifi",
-  "iconTheme": "System Default",
+  "iconThemeDark": "System Default",
+  "iconThemeLight": "System Default",
+  "iconThemePerMode": false,
+  "lastAppliedIconTheme": "",
   "cursorSettings": {
     "theme": "System Default",
     "size": 24,
@@ -301,6 +373,7 @@
   "soundNewNotification": true,
   "soundVolumeChanged": true,
   "soundPluggedIn": true,
+  "muteSoundsWhenMediaPlaying": true,
   "acMonitorTimeout": 5400,
   "acLockTimeout": 3600,
   "acSuspendTimeout": 0,
@@ -314,6 +387,13 @@
   "batteryProfileName": "",
   "batteryPostLockMonitorTimeout": 0,
   "batteryChargeLimit": 100,
+  "batteryNotifyChargeLimit": false,
+  "batteryCriticalThreshold": 10,
+  "batteryNotifyCritical": true,
+  "batteryLowThreshold": 20,
+  "batteryNotifyLow": false,
+  "batteryNotificationType": 0,
+  "batteryAutoPowerSaver": false,
   "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
   "fadeToLockEnabled": true,
@@ -328,8 +408,16 @@
     ]
   },
   "bluetoothDevicePins": {},
-  "audioInputDevicePins": {},
-  "audioOutputDevicePins": {},
+  "audioInputDevicePins": {
+    "preferredInput": [
+      "alsa_input.usb-Logitech_PRO_X_000000000000-00.mono-fallback"
+    ]
+  },
+  "audioOutputDevicePins": {
+    "preferredOutput": [
+      "alsa_output.usb-Logitech_PRO_X_000000000000-00.analog-stereo"
+    ]
+  },
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
@@ -429,14 +517,14 @@
   "lockScreenVideoCycling": false,
   "hideBrightnessSlider": false,
   "notificationTimeoutLow": 5000,
-  "notificationTimeoutNormal": 5000,
+  "notificationTimeoutNormal": 10000,
   "notificationTimeoutCritical": 0,
   "notificationCompactMode": false,
   "notificationShowTimeoutBar": false,
-  "notificationDedupeEnabled": true,
+  "notificationDedupeEnabled": false,
   "notificationPopupPosition": 0,
   "notificationAnimationSpeed": 4,
-  "notificationCustomAnimationDuration": 159,
+  "notificationCustomAnimationDuration": 169,
   "notificationHistoryEnabled": true,
   "notificationHistoryMaxCount": 50,
   "notificationHistoryMaxAgeDays": 7,
@@ -847,7 +935,10 @@
       "trigger": "?"
     }
   },
+  "clipboardClickToPaste": false,
   "clipboardEnterToPaste": false,
+  "clipboardRememberTypeFilter": false,
+  "clipboardTypeFilter": "all",
   "clipboardVisibleEntryActions": [
     "pin",
     "edit",
@@ -856,8 +947,8 @@
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "frameEnabled": false,
-  "frameThickness": 16,
-  "frameRounding": 23,
+  "frameThickness": 24,
+  "frameRounding": 20,
   "frameColor": "",
   "frameOpacity": 1,
   "frameScreenPreferences": [
@@ -869,6 +960,10 @@
   "frameCloseGaps": true,
   "frameLauncherEmergeSide": "bottom",
   "frameLauncherArcExtender": false,
+  "frameLauncherEdgeHover": false,
   "frameMode": "separate",
+  "barInsetPaddingShared": -1,
+  "barInsetPaddingSyncAll": false,
+  "frameBarInsetPadding": -1,
   "configVersion": 11
 }
