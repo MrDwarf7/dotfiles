@@ -28,7 +28,7 @@ end
 # Set editor variables.
 # set -gx PAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
 
-set -gx PAGER less
+set -gx PAGER less -FRX
 set -gx VISUAL nvim
 set -gx EDITOR nvim
 set -gx SHELL fish
@@ -107,6 +107,9 @@ set -Ux CARAPACE_BRIDGES all
 set -gx CODEX_HOME $XDG_CONFIG_HOME/.codex
 
 set -gx HERMES_HOME "$HOME/.hermes"
+
+# HACK: We specify the env var for this to prevent the CLI itself from manually rebuilding the dbs (via esbuild) every invoc (cos dev...)
+set -gx HERMES_TUI_DIR "$HERMES_HOME/hermes-agent/ui-tui"
 
 ## Enfores `inline mode` for how the TUI renders.
 ## Allows proper tmux scrolling by modify how 'raw' mode is rendered.
