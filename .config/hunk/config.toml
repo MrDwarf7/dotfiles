@@ -9,3 +9,11 @@ line_numbers = true
 wrap_lines = false
 agent_notes = false
 transparent_background = false
+
+
+# NOTE: Without keybindings we have no wait to 
+# split the key usage for `line_numbers` which is currently `l` to toggle them.
+# and
+# `scroll right` which is curretnly only bound to riht arrow...
+# I want to bind line numbers to like, 
+# idk - L or <S-l> and leave scrolling as vim-like lol

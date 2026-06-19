@@ -62,6 +62,7 @@ conflict-marker-style = "diff" #  "diff" | "snapshot" | "git"
 ######### DELTA :: PAGER & DIFF FMTTER #########
 ########## ######### ######### ######### ######### 
 pager = ["delta", "--pager", "less -FRX"]
+# diff-formatter = ":git"
 diff-formatter = [
   "delta",
   "--color-only",
@@ -322,9 +323,12 @@ jj log -n 10 --no-pager -r "stack(@) | present(trunk())"
 """, ""]
 
 # init
-init = ['git', 'init', '--colocate']
+i = ['git', 'init']
+init = ['git', 'init']
+initc = ['git', 'init', '--colocate']
 
-gi = ["git", "init", "--colocate"]
+gi = ["git", "init"]
+gic = ["git", "init", "--colocate"]
 
 # clone
 cl = ['git', 'clone', '--colocate']
@@ -343,8 +347,11 @@ clsu = [
 ]
 
 
-gc = ['git', 'clone', '--colocate']
+gc = ['git', 'clone']
 gcl = ['git', 'clone', '--colocate']
+
+gcd = ['git', 'clone', '--depth']
+
 # clone github
 gclg = ['util', 'exec', '--', 'bash', '-c', 'jj cl https://github.com/$0']
 # clone ssh 
@@ -360,8 +367,58 @@ gclsu = [
 ]
 
 # diff
+## diff vanilla 
+dv = ['util', 'exec', '--', 'bash', '-c', 'jj diff --git']
+
 d = ['diff']
 dr = ['diff', '-r']
+
+
+## Hunk
+### jj <d>iff <h>unk
+dh = [
+  #
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'hunk diff',
+]
+
+hd = [
+  #
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'hunk diff',
+]
+
+
+## Diffnav
+### jj <diff> diff<n>av
+dn = [
+  #
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'jj dv | diffnav',
+]
+
+hdn = [
+  #
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  'jj dv | diffnav',
+]
+
 
 # new
 n = ['new']

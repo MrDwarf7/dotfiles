@@ -73,6 +73,8 @@ return {
       { "<Leader>lq", function() Snacks.picker.qflist() end, desc = "Quickfix List" },
 
       -- gh
+      -- { "<Leader>ga", function() Snacks.picker.gh_actions() end, desc = "GitHub Action" },
+      -- { "<Leader>gA", function() Snacks.picker.gh_actions() end, desc = "GitHub Issues (open)" },
       { "<Leader>gi", function() Snacks.picker.gh_issue() end, desc = "GitHub Issues (open)" },
       { "<Leader>gI", function() Snacks.picker.gh_issue({ state = "all" }) end, desc = "GitHub Issues (all)" },
       { "<Leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
@@ -80,8 +82,8 @@ return {
 
 
       { "<Leader>t;", function() Snacks.terminal() end, desc = "Toggle terminal" },
-      { "<Leader>zz", function() Snacks.zen() end, desc = "Toggle Zen mode" },
-      { "<Leader>zi", function() Snacks.zen.zoom() end, desc = "Toggle Zen Zoom" },
+      { "<Leader>tz", function() Snacks.zen() end, desc = "Toggle Zen mode" },
+      { "<Leader>tZ", function() Snacks.zen.zoom() end, desc = "Toggle Zen Zoom/Local Spotlight" },
 
     -- { "gd", function() Snacks.picker.lsp_definitions() end, desc = "Goto Definition" },
     -- { "gD", function() Snacks.picker.lsp_declarations() end, desc = "Goto Declaration" },

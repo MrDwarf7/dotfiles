@@ -142,6 +142,10 @@ version = "latest"
 [tools."cargo:flamegraph"]
 version = "latest"
 
+### I think is abandoned?
+# [tools."cargo:https://github.com/sondr3/git-ignore"]
+# version = "branch:main"
+
 # [tools."cargo:gumbo"]
 # version = "latest"
 
@@ -155,6 +159,9 @@ version = "latest"
 # version = "latest"
 
 [tools."cargo:jj-navi"]
+version = "latest"
+
+[tools."cargo:rmkit"]
 version = "latest"
 
 #####
@@ -185,3 +192,9 @@ pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
 # pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
 
 python.uv_venv_auto = true # Auto-source .venv's if a uv.lock is present
+
+# Experimental 'dotfiles' manager stuff
+dotfiles.root = "~/dotfiles"
+dotfiles.default_mode = "symlink" # "symlink" | "symlink-each" | "copy" | "template"
+
+[dotfiles]
