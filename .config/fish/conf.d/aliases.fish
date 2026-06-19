@@ -38,7 +38,10 @@ alias parsu "paru -Syu"
 alias parq "paru -Q"
 
 alias parsi "paru -Si"
-alias parsiv "paru -Siv"
+alias piv "paru -Siv"
+
+# See also `pqiv` function that uses the output (if singular) from the above `pqi` function
+# to then call `paru -Siv <output>`
 
 alias shutdown 'systemctl poweroff'
 # alias reboot reboot ## doesn't need an alias lmao
