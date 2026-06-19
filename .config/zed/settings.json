@@ -1,4 +1,10 @@
 {
+  "outline_panel": {
+    "dock": "left"
+  },
+  "collaboration_panel": {
+    "dock": "left"
+  },
   "agent_ui_font_size": 16.0,
   "session": {
     "trust_all_worktrees": true,
@@ -18,6 +24,7 @@
     "mute_on_join": true,
   },
   "agent": {
+    "dock": "right",
     "profiles": {
       "write": {
         "name": "Write",
@@ -142,6 +149,7 @@
     "show_onboarding_banner": false,
   },
   "project_panel": {
+    "dock": "left",
     "button": false,
   },
   "search": {
@@ -243,6 +251,7 @@
     "hunk_style": "unstaged_hollow",
   },
   "git_panel": {
+    "dock": "left",
     "default_width": 320,
   },
   "hide_mouse": "on_typing_and_movement",
