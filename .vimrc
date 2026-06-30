@@ -1,1 +1,1 @@
-/home/dwarf/dotfiles/.config/.vim/.vimrc
+./.config/.vim/.vimrc
