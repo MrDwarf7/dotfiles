@@ -1,3 +1,4 @@
+#:schema ./schema.json
 [user]
 name = "MrDwarf7"
 email = "129040985+MrDwarf7@users.noreply.github.com"
