@@ -1,0 +1,12 @@
+# tuxedo config
+theme = "TokyoNight Night"
+density = "comfortable"
+sort = "priority"
+show_left = true
+show_right = true
+show_line_num = true
+show_status_bar = true
+show_done = true
+show_future = false
+share_token = "fd550b06a7bad1ee9c7922de832ad1a4e41a7eae6e3193bd76e9400d645aecea"
+share_port = 43455
