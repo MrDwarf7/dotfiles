@@ -15,6 +15,37 @@ local Dms = {}
 --- The only other option is simply returning `<shell>:setup()`
 --- here, and the caller only needs `require(<shell>)`, but... eh
 
+--- Returns a functon that represents a DMS command invocation.
+---
+---@param cmd string The DMS IPC command to invoke.
+---@return HL.Dispatcher
+function Dms.invoke(cmd)
+  local full_cmd = string.format("dms %s", cmd)
+  return hl.dsp.exec_cmd(full_cmd)
+end
+
+--- Returns a functon that represents a DMS IPC command invocation.
+---
+---@param cmd string The DMS IPC command to invoke.
+---@return HL.Dispatcher
+function Dms.invoke_ipc(cmd)
+  return Dms.invoke(string.format("ipc %s", cmd))
+end
+
+--- Returns a functon that represents a DMS IPC call command invocation.
+---
+---@param cmd any The DMS IPC call command to invoke.
+---@param now? boolean If true, the command is executed immediately; otherwise, it returns a dispatcher for later execution.
+---@return HL.Dispatcher|any
+function Dms.invoke_ipc_call(cmd, now)
+  if now then
+    return Dms.invoke(string.format("ipc call %s", cmd))()
+  end
+  return Dms.invoke(string.format("ipc call %s", cmd))
+end
+
+--- Initializes DMS-specific configuration: keymaps, layer rules, window rules, colors, etc.
+---
 ---@return HyprConfig.Dms
 function Dms:setup()
   -- Load DMS-specific modules (each self-contained, calls hl.* directly)
@@ -32,11 +63,13 @@ function Dms:setup()
   -- Required because it doesn't auto-fetch the secrets key by default
   hl.on(types.HyprlandEvents.START, function()
     -- pcall(function()
-    hl.exec_cmd('dms ipc call plugins reload "githubInbox" >/dev/null 2>&1')
+    -- hl.exec_cmd('dms ipc call plugins reload "githubInbox" >/dev/null 2>&1')
+    hl.exec_cmd(self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1', true))
     -- end)
   end)
 
   return self
 end
 
+---@return HyprConfig.Dms
 return Dms

@@ -7,11 +7,7 @@
 
 ---@alias cbs_fn_t table[function(...): nil]
 
----@class HyprConfig.Events
-local HyprlandEvents = {
-  START = "hyprland.start",
-  SHUTDOWN = "hyprland.shutdown",
-}
+local types = require("types")
 
 local utils = require("utils")
 -- local programs = require("shared.programs")
@@ -115,11 +111,11 @@ end
 ---@return nil
 local setup = function()
   for _, cb in ipairs(start_cbs()) do
-    hl.on(HyprlandEvents.START, cb)
+    hl.on(types.HyprlandEvents.START, cb)
   end
 
   for _, cb in ipairs(shutdown_cbs()) do
-    hl.on(HyprlandEvents.SHUTDOWN, cb)
+    hl.on(types.HyprlandEvents.SHUTDOWN, cb)
   end
 end
 

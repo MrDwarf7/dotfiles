@@ -29,8 +29,9 @@ setmetatable(ShellBackend, {
 })
 
 --- Best effort shell detection based on HYPRLAND_SHELL env var.
+---
 ---@param override? string Optional override value (e.g. from env var or command line arg)
---- @return HyprConfig.ShellBackendT Detected shell backend (e.g. "vanilla", "dms", "noctalia")
+---@return HyprConfig.ShellBackendT Detected shell backend (e.g. "vanilla", "dms", "noctalia")
 ShellBackend.detect = function(override)
   local shell_env = os.getenv("HYPRLAND_SHELL")
   if override and type(override) == "string" and override ~= "" then

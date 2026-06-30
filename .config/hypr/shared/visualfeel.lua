@@ -3,9 +3,26 @@
 --####################
 
 -- https://wiki.hyprland.org/Configuring/Variables/#general
+---@class HL.ConfigOptPartial : HL.ConfigOpt
+local m = {
+  ---@type HL.ConfigOpt.General
+  general = {},
+  -- https://wiki.hyprland.org/Configuring/Variables/#decoration
 
-local general = {
+  ---@type HL.ConfigOpt.Decoration
+  decoration = {
+    ---@type HL.ConfigOpt.Decoration.Blur
+    blur = {},
+    ---@type HL.ConfigOpt.Decoration.Shadow
+    shadow = {},
+    ---@type HL.ConfigOpt.Decoration.Glow
+    glow = {},
+  },
+}
+
+m.general = {
   border_size = 1,
+  -- locale =
   -- border_size = 0
   -- no_border_on_floating = true
   gaps_in = 6,
@@ -36,14 +53,7 @@ local general = {
   },
 }
 
--- https://wiki.hyprland.org/Configuring/Variables/#decoration
-local decoration = {
-  blur = {},
-  shadow = {},
-  glow = {},
-}
-
-decoration = {
+m.decoration = {
   rounding = 0,
   rounding_power = 2.0,
   -- Change transparency of focused and unfocused windows
@@ -64,13 +74,13 @@ decoration = {
   border_part_of_window = true,
 }
 
-decoration.blur = {
+m.decoration.blur = {
 
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
-  size = 4, -- default 8
+  size = 2, -- default 8
   -- Gaussian blur
-  passes = 2, -- default 1, previous was 5
+  passes = 6, -- default 1, previous was 5
   ignore_opacity = true,
 
   new_optimizations = true,
@@ -103,7 +113,7 @@ decoration.blur = {
   -- vibrancy_darkness = 0.3
 }
 
-decoration.shadow = {
+m.decoration.shadow = {
   enabled = true,
   -- range = 4
   range = 25,
@@ -123,7 +133,7 @@ decoration.shadow = {
   -- scale = 1.5
 }
 
-decoration.glow = {
+m.decoration.glow = {
   enabled = true,
   range = 2,
   render_power = 3,
@@ -131,7 +141,8 @@ decoration.glow = {
   -- color_inactive = 0
 }
 
-hl.config({
-  general = general,
-  decoration = decoration,
-})
+hl.config(m)
+--   {
+--   general = general,
+--   decoration = decoration,
+-- })

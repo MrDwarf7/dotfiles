@@ -16,10 +16,13 @@ local known = {
   fortress = {
     "Fortress",
     "fortress",
+    "fortress.daggertooth.morray",
     "daggertooth.morray",
   },
   manbook = {
     "manbook",
+    "manbook.daggertooth.morray",
+    "daggertooth.morray",
   },
 }
 Machines.known = known
@@ -293,13 +296,18 @@ local lookup = function(key)
 
   local cfg = _config[cn]
   Machines.current = cn
+  if type(cfg[key]) == "function" then
+    return cfg[key]()
+  end
   return cfg and cfg[key] or {}
 end
 
 -- Public API — no machine names leaked
 
+--- Returns the monitor specs for the current machine
+--- or for a specific output if provided.
 ---@param output_name? string If provided, only the spec for that output.
----@return HL.MonitorSpec[]
+---@return HL.MonitorSpec[] | HL.MonitorSpec
 function Machines.monitors(output_name)
   -- -- i've no idea why... but urr, this 'nil's and the below code
   -- ( which is identical) doesn't....
@@ -316,13 +324,28 @@ function Machines.monitors(output_name)
   end
   Machines.current = cn
 
+  ---@type HL.MonitorSpec|nil
+  local monitor
   if output_name then
     for _, m in ipairs(cfg.monitors) do
       if m.output == output_name then
-        return { m }
+        monitor = m
       end
     end
+    if monitor then
+      return monitor
+    else
+      print(
+        "Warning: No monitor spec found for output '"
+          .. tostring(output_name)
+          .. "' on machine '"
+          .. tostring(cn)
+          .. "'. Returning empty table."
+      )
+      return {}
+    end
   end
+
   return cfg.monitors
 end
 

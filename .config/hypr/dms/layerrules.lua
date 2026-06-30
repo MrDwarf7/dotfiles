@@ -86,7 +86,7 @@ local rules = {
   {
     name = "dms-blur-for-popouts-and-misc",
     match = {
-      namespace = "dms:(bar|tooltip|toast|dock-context-menu|control-center|notification-center-popout|dash|battery|popout|app-launcher)",
+      namespace = "dms:(bar|tooltip|toast|dock-context-menu|control-center|notification-center-popout|dash|dash:background|battery|popout|app-launcher)",
     },
     blur = true,
     ignore_alpha = 0,
