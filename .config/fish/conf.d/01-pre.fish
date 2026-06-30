@@ -12,6 +12,12 @@
 02export_if_pacman eza LIST_CLIENT exa
 02export_if_pacman sccache RUSTC_WRAPPER ""
 
+# We literally don't need the actual value as it has a side-effect of writing to `$LIST_CLIENT_BASE_CMD` to store the cmd
+# 099listing_cmd_base >/dev/null 2>&1; or true
+
+# This is probably the better way to do this tbh
+set -gx LIST_CLIENT_BASE_CMD (099listing_cmd_base) >/dev/null 2>&1; or true
+
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
 
 ## basically, vi = older 'vim', vim = 'neovim'
@@ -22,14 +28,16 @@
 05export_alias_if_pacman nvim v /usr/bin/nvim
 05export_alias_if_pacman nvim vim /usr/bin/nvim
 
+05export_alias_if_pacman tuxedo tux /usr/bin/tuxedo
+
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
 04var_to_syspath rustup "$HOME/.cargo/bin" --prepend
 
 01eval_if_pacman zoxide "zoxide init fish"
-
 01eval_if_pacman fzf "fzf --fish"
-01eval_if_pacman jj "jj util completion fish"
+04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend
+01eval_if_pacman mise "mise activate fish | source"
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
 01eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
@@ -37,11 +45,9 @@
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 
+## note: pretty sure we can comment 1 of the 2 below out and it's fine??
 01eval_if_pacman carapace "carapace _carapace"
-01eval_if_pacman carapace "carapace fish"
-
-04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend
-01eval_if_pacman mise "mise activate fish | source"
+# 01eval_if_pacman carapace "carapace fish"
 
 01eval_if_pacman batman "batman --export-env"
 01eval_if_pacman batpipe "eval (batpipe)"

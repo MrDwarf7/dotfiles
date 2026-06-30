@@ -11,13 +11,13 @@
 alias ef "exec fish"
 
 #### <cd><fish>
-alias cf "cd ~/dotfiles/.config/fish"
+alias cf "cd ~/dotfiles/.config/fish || printf 'Failed to cd into ~/dotfiles/.config/fish\n'"
 #### <nvim><fish>
-alias vf "nvim ~/dotfiles/.config/fish"
+alias vf "nvim ~/dotfiles/.config/fish || printf 'Failed to open ~/dotfiles/.config/fish in nvim\n'"
 
 #### <cd><hermes>
-alias ch "cd ~/.hermes/"
-alias vh "nvim ~/.hermes/config.yaml"
+alias ch "cd ~/.hermes/ || printf 'Failed to cd into ~/.hermes/\n'"
+alias vh "nvim ~/.hermes/config.yaml || printf 'Failed to open ~/.hermes/config.yaml in nvim\n'"
 
 ##################################################
 
@@ -39,6 +39,13 @@ alias parq "paru -Q"
 
 alias parsi "paru -Si"
 alias piv "paru -Siv"
+
+# alias pq "command paru -Q | rg"
+alias pq pqi
+alias pqe pqi
+alias pqie pqi
+
+alias p $PKG_MANAGER
 
 # See also `pqiv` function that uses the output (if singular) from the above `pqi` function
 # to then call `paru -Siv <output>`
@@ -64,6 +71,10 @@ alias c cat
 alias c- "cd -"
 alias ccc c3c
 alias cd- "cd -"
+
+# Previously was an actual funciton but we literally just call "l.fish"
+alias la l
+
 alias cls "command clear ; command printf '\e[3J' "
 alias lg lazygit
 alias lzd lazydocker
@@ -71,16 +82,13 @@ alias lzs lazyjournal
 alias lzvim "set -x NVIM_APPNAME lazyvim ; nvim"
 alias ma "command cargo make"
 alias md "command mkdir -p"
-alias p $PKG_MANAGER
-alias pq "command paru -Q | rg"
-alias pqi "command paru -Q | rg -i"
-alias pqe "command paru -Q | rg -e"
-alias pqie "command paru -Q | rg -i -e"
-alias rgi "rg -i"
+alias rgi "rg --ignore-case --heading --line-number"
+alias rgie "rg --ignore-case --heading --regexp"
+# alias rgif "rg --ignore-case --heading --"
 alias t "command tv"
 alias tenkip "command tenki --mode rain -f 200 -t 90 -l 50 --show-fps"
 alias twt "command taskwarrior-tui"
-alias z.. "command zoxide add $PWD"
+alias z. "command zoxide add $PWD"
 alias ze "command zoxide edit"
 
 #### DMS (Dank Linux) specific aliases - for direct terminal use only! Do not bind these as keymaps lol
