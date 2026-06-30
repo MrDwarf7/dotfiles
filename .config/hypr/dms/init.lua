@@ -25,6 +25,17 @@ function Dms:setup()
   -- require("dms.layout")
   require("dms.windowrules")
 
+  local types = require("types")
+  -- probs move this to a proper execs.lua in here
+
+  -- This reloads the githubInbox plugin on Hyprland start
+  -- Required because it doesn't auto-fetch the secrets key by default
+  hl.on(types.HyprlandEvents.START, function()
+    -- pcall(function()
+    hl.exec_cmd('dms ipc call plugins reload "githubInbox" >/dev/null 2>&1')
+    -- end)
+  end)
+
   return self
 end
 

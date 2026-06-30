@@ -6,7 +6,8 @@
   },
   "diagnostics": {
     "globals": [
-      "hl"
+      "hl",
+      "HL.EventName"
     ]
   }
 }
