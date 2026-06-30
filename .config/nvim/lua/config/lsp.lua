@@ -181,7 +181,7 @@ local function setup_lsp_binds(binds_type)
   map("[[", function()
     -- if the qf list or location list is open, navigate that instead of buffers
     local ql = require("utils").list.find_qf("q")
-    dd(ql)
+    -- dd(ql)
     if #ql > 0 then
       return vim.cmd.cprev()
     end

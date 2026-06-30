@@ -91,6 +91,11 @@ opt.title = true
 opt.backspace = "indent,eol,start" -- Added
 opt.encoding = "UTF-8"
 opt.completeopt = "menu,menuone,noselect"
+-- opt.lazyredraw = true -- cannot use with `Noice` plugin installed
+
+vim.cmd([[
+set tags+=~/.config/ctags/ctags
+]])
 
 -- vim.cmd([[
 -- set cmdheight=0

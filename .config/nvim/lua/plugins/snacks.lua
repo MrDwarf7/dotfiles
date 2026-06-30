@@ -7,6 +7,14 @@ return {
       -- Top Pickers & Explorer
       { "<Leader>ff", function() Snacks.picker.files({ hidden = true }) end, desc = "Find Files" },
       { "<Leader>fF", function() Snacks.picker.smart() end, desc = "Smart Find Files" }, -- can be set up to use { multi = { "buffers", "files", "recent" } } etc.
+      { "<Leader>f<C-f>", function() Snacks.picker.files({
+        args = { "--max-depth", "1", "--type", "f" },
+        follow = true,
+        hidden = true,
+        ignored = true,
+        supports_live = true,
+      }) end, desc = "Find Files CWD" }, -- can be set up to use { multi = { "buffers", "files", "recent" } } etc.
+
       { "<Leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       { "<Leader>fw", function() Snacks.picker.grep() end, desc = "Grep" },
       { "<Leader>fW", function() Snacks.picker.grep_word() end, desc = "Grep Word", mode = { "n", "x" } },
@@ -27,10 +35,10 @@ return {
       -- find
       -- { "<Leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
       -- { "<Leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-      { "<Leader>fgf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
       { "<Leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       { "<Leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
       -- git
+      { "<Leader>fgf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
       { "<Leader>fgb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
       { "<Leader>fgl", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<Leader>fgL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
@@ -39,6 +47,7 @@ return {
       { "<Leader>fgd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
       { "<Leader>fgf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
       -- Grep
+      { "<Leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<Leader>fs", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<Leader>fS", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
       -- { "<Leader>sg", function() Snacks.picker.grep() end, desc = "Grep" },
@@ -80,7 +89,6 @@ return {
       { "<Leader>gp", function() Snacks.picker.gh_pr() end, desc = "GitHub Pull Requests (open)" },
       { "<Leader>gP", function() Snacks.picker.gh_pr({ state = "all" }) end, desc = "GitHub Pull Requests (all)" },
 
-
       { "<Leader>t;", function() Snacks.terminal() end, desc = "Toggle terminal" },
       { "<Leader>tz", function() Snacks.zen() end, desc = "Toggle Zen mode" },
       { "<Leader>tZ", function() Snacks.zen.zoom() end, desc = "Toggle Zen Zoom/Local Spotlight" },
@@ -108,6 +116,30 @@ return {
     -- { "<Leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
   },
   --stylua: ignore end
+
+  init = function()
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "VeryLazy",
+      callback = function()
+        -- Setup some globals for debugging (lazy-loaded)
+        _G.dd = function(...)
+          Snacks.debug.inspect(...)
+        end
+        _G.bt = function()
+          Snacks.debug.backtrace()
+        end
+
+        -- Override print to use snacks for `:=` command
+        if vim.fn.has("nvim-0.11") == 1 then
+          vim._print = function(_, ...)
+            dd(...)
+          end
+        else
+          vim.print = _G.dd
+        end
+      end,
+    })
+  end,
 
   ---@type snacks.Config
   opts = {
@@ -326,7 +358,9 @@ return {
       }, -- WIN END
 
       files = {
+        follow = true,
         hidden = true,
+        supports_live = true,
       },
       smart = {
         multi = { "buffers", "recent", "files", "hidden" },

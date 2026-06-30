@@ -89,16 +89,16 @@ setmetatable(fn_names, {
   end,
 })
 
---- Returns from the 'draw' table and deeper
----@param fn_name MenuTypes|string
-local function get_menu(fn_name)
-  if not fn_name then
-    fn_name = tostring(fn_names) -- This will call the __tostring metamethod, which returns a string of the format "MenuTypes: minimal, basic, clean, colorful"
-    -- fn_name = fn_names.basic or "basic"
-    -- fn_name = "basic" or fn_names.basic
-  end
-  return fn_names[fn_name]()
-end
+-- --- Returns from the 'draw' table and deeper
+-- ---@param fn_name MenuTypes|string
+-- local function get_menu(fn_name)
+--   if not fn_name then
+--     fn_name = tostring(fn_names) -- This will call the __tostring metamethod, which returns a string of the format "MenuTypes: minimal, basic, clean, colorful"
+--     -- fn_name = fn_names.basic or "basic"
+--     -- fn_name = "basic" or fn_names.basic
+--   end
+--   return fn_names[fn_name]()
+-- end
 
 --- Allows calling either
 --- <module>("<mod_type">)
@@ -107,15 +107,23 @@ end
 --- or:
 --- require("<module>").<mod_type>
 ---@return table<string, fun(): blink.cmp.Draw> | fun(fn_name: MenuTypes): blink.cmp.Draw
-return setmetatable({}, {
+return setmetatable(fn_names, {
   __index = function(_, key)
     if fn_names[key] then
-      return get_menu(key)
+      -- return get_menu(key)
+      fn_names[key]()
     else
       error("Invalid menu type: " .. tostring(key))
     end
   end,
-  __call = function(_, fn_name)
-    return get_menu(fn_name)
+  -- __newindex = function(table, key, value)
+  -- end,
+  __call = function(_, key)
+    if fn_names[key] then
+      return fn_names[key]()
+    else
+      return rawget(fn_names, key)()
+    end
+    -- return get_menu(fn_name)
   end,
 })

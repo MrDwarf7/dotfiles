@@ -54,7 +54,7 @@ LangTables = {
       -- "surrealdb",
       -- "teal",
       "terraform",
-      "tmux", --- WOULD BE moved to langs, but it's not really
+      -- "tmux", --- WOULD BE moved to langs, but it's not really
       "tsx",
       "typescript",
       "typst", -- not in given list but
@@ -103,7 +103,7 @@ LangTables = {
       "printf",
       -- "robots",
       "ssh_config",
-      "tmux", --- WOULD BE moved to langs, but it's not really
+      -- "tmux", --- WOULD BE moved to langs, but it's not really
     },
   },
   ---@type MasonSubtypeE
