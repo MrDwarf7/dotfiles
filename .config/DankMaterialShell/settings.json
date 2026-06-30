@@ -19,10 +19,14 @@
   "niriLayoutGapsOverride": -1,
   "niriLayoutRadiusOverride": -1,
   "niriLayoutBorderSize": -1,
+  "niriLayoutXrayEnabled": false,
+  "niriLayoutBarXrayEnabled": true,
   "hyprlandLayoutGapsOverride": 4,
   "hyprlandLayoutRadiusOverride": 0,
   "hyprlandLayoutBorderSize": 1,
   "hyprlandResizeOnBorder": false,
+  "hyprlandLayoutXrayEnabled": false,
+  "hyprlandLayoutBarXrayEnabled": true,
   "mangoLayoutGapsOverride": -1,
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
@@ -296,7 +300,7 @@
   "launcherStyle": "full",
   "spotlightBarShowModeChips": false,
   "keybindsFloatingWindow": false,
-  "useAutoLocation": true,
+  "useAutoLocation": false,
   "weatherEnabled": true,
   "dashTabs": [
     {
