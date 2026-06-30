@@ -6,4 +6,5 @@ prev_completions_dir
 # Keep the normal file
 !fish_variables
 # Ignore anything with alphanum extension to the name.
-!fish_variables.*
+fish_variables.*
+# !fish_variables.*
