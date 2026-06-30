@@ -7,7 +7,6 @@ set k_check c
 function __pc_cmp
     complete -c pc -s $k_help -l help -d 'Print help message and exit.'
     complete -c pc -s $k_check -l check -d 'Show the current value of PKG_MANAGER and exit.'
-    return 0
 end
 
 function __pc_help
@@ -50,7 +49,7 @@ end
 function pc --description "Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su or paru -Su if PKG_MANAGER is set.'"
     __pc_cmp
 
-    argparse $k_help/help $k_check/check  -- $argv
+    argparse $k_help/help $k_check/check -- $argv
     or return
 
     # If h/help - run help, return 0;
@@ -70,11 +69,11 @@ function pc --description "Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su o
     end
 
     if test -z "$PKG_MANAGER"
-      # if 00valid_pacman paru
-      #     set -q PKG_MANAGER
-      #   end
-      colorize red "Error: PKG_MANAGER environment variable is not set.\n" >&2
-      return 1
+        # if 00valid_pacman paru
+        #     set -q PKG_MANAGER
+        #   end
+        colorize red "Error: PKG_MANAGER environment variable is not set.\n" >&2
+        return 1
     end
 
     # If the PKG_MANAGER command fails, try paru as a fallback

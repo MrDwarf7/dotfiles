@@ -9,7 +9,6 @@ function dot_cmp
     complete -c dot -s $k_help -l help -d 'Print help (see more with \'--help\')'
     complete -c dot -s $k_files -l files -d 'Show changed files summary'
     complete -c dot -s $k_pop -l pop -d 'Pop back to the previous directory after execution'
-    return 0
 end
 
 function dot_help

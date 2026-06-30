@@ -11,7 +11,6 @@ function __env_prefix_cmp
     complete -c env_prefix -s $k_prefix -l prefix= -d 'Specify the prefix to search for (default: XDG_)'
     complete -c env_prefix -s $k_sort -l sort -d 'Sort the output alphabetically'
     complete -c env_prefix -s $k_case_sense -l case_sensitive -d 'Use case sensitive sorting (Default is case insensitive)'
-    return 0
 end
 
 function __env_prefix_help

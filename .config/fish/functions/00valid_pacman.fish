@@ -22,9 +22,11 @@ function 00valid_pacman --description "Validates if a package is installed. (Fir
         set to_test_prog (string replace -r "^'|'" -- $to_test_prog)
     end
 
+    # TEST: I belive we also tried 
+
     # wayyyyyyyyy faster to check via command -<flags> call FIRST,
     # if that fails, only then do we query via pacman -Qi (as it takes more time to resolve)
-    if command -sq "$to_test_prog"; and command -q "$to_test_prog"; and command -vq "$to_test_prog"
+    if command -q "$to_test_prog"; and command -sq "$to_test_prog"; and command -vq "$to_test_prog"
         return 0
     else if command pacman -Qi "$to_test_prog" &>/dev/null
         return 0

@@ -18,7 +18,6 @@ set k_loop_none o
 set k_metadata i
 set k_info_generator g
 
-
 function __psp_cmp
     complete -c psp -s "$k_help" -l help -d 'Show this help message and exit'
     complete -c psp -s "$k_next" -l next -d 'Next track'
@@ -36,7 +35,6 @@ function __psp_cmp
 
     complete -c psp -s "$k_metadata" -l metadata -d 'Show track metadata'
     complete -c psp -s "$k_info_generator" -l info-generator -d 'Show track info with album art'
-    return 0
 end
 
 function __psp_help
@@ -127,7 +125,6 @@ end
 # printf "\n"
 # printf "$payload\n"
 
-
 function psp --description "[P]layerctl [S][P]otify"
     __psp_cmp
     # set base_command (playerctl -p spotify)
@@ -184,7 +181,7 @@ function psp --description "[P]layerctl [S][P]otify"
 
     if test -z "$com"
         __psp_help
-        colorize "yellow" "No command provided!\n"
+        colorize yellow "No command provided!\n"
         return 2
     end
 
@@ -216,7 +213,7 @@ function psp --description "[P]layerctl [S][P]otify"
             return 0
         case '*'
             __psp_help
-            colorize "yellow" "No argument recognized!\n"
+            colorize yellow "No argument recognized!\n"
             return 3
     end
 
@@ -227,7 +224,7 @@ function psp --description "[P]layerctl [S][P]otify"
 
     if test -z "$com"
         __psp_help
-        colorize "yellow" "No command provided!\n"
+        colorize yellow "No command provided!\n"
         return 4
     end
 

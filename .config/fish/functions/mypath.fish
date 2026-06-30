@@ -10,7 +10,6 @@ function __mypath_cmp
     complete -c mypath -s $k_pretty -l pretty -d 'Pretty print the PATH variable (default)'
     complete -c mypath -s $k_marker -l marker= -d 'Use the specified marker character at the end of each PATH entry'
     complete -c mypath -f -a '":" "," ";" "|" "#" "!"'
-    return 0
 end
 
 function __mypath_help
@@ -106,7 +105,6 @@ function sanity_two
     colorize red "local_len: $local_len" >&2
     colorize red "opts_len: $opts_len" >&2
 end
-
 
 # Weird caveat (need to learn why), but the $PATH var (I think?)
 # is streamed in, so has some odd behaviour.

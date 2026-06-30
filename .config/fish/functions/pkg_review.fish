@@ -5,7 +5,6 @@ set k_help h
 
 function __pkg_review_cmp
     complete -c pkg_review -s $k_help -l help -d 'Print help message and exit.'
-    return 0
 end
 
 function __pkg_review_help
@@ -32,11 +31,10 @@ Usage: pkg_review
     return 0
 end
 
-
 function pkg_review --description 'Review installed packages with fzf'
     __pkg_review_cmp
 
-    argparse $k_help/help  -- $argv
+    argparse $k_help/help -- $argv
     or return
 
     if set -q _flag_help

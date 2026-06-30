@@ -1,6 +1,8 @@
 #!/usr/bin/env fish
 #
 
+# TODO: [common_list_client] : Move the 'base' cmd to either an env var, or a func call or something
+
 set k_help h
 set k_depth d
 set k_level l
@@ -11,7 +13,6 @@ function __lt_cmp
     complete -c lt -s $k_depth -l depth= -d 'Set the depth of the tree view (default: 2)'
     complete -c lt -s $k_level -l level= -d 'Alias for --depth'
     complete -c lt -s $k_num -l num= -d 'Set the number of items to show per directory'
-    return 0
 end
 
 function __lt_help
@@ -75,7 +76,7 @@ function lt --description 'List files in a directory with tree view'
     # Check if we're using exa/eza (which support tree view) or fallback ls
     if string match -q "*eza*" $LIST_CLIENT; or string match -q "*exa*" $LIST_CLIENT
         # exa/eza supports tree view and advanced options
-        set cmd_args -a --tree --level=$depth --icons=always
+        set cmd_args -a --tree --level=$depth --icons=always --group-directories-first
 
         # Add num limit if specified (eza uses --limit, exa might use different syntax)
         if set -q _flag_num

@@ -13,7 +13,6 @@ function __sysup_cmp
     complete -c sysup -s $k_skip -l skip -a "m r p" -d 'Skip certain parts of the update. Use with m (mirror), r (rustup), p (packages)'
     complete -c sysup -l skip -a "m r p" -d 'Skip certain parts of the update. Use with m (mirror), r (rustup), p (packages)'
     complete -c sysup -s $k_shutdown -l shutdown -d 'Shutdown the system after update completes. Only works if the update completes successfully.'
-    return 0
 end
 
 # Renders help for the sysup function
