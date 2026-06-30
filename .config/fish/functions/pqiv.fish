@@ -19,7 +19,7 @@ function pqiv --description "Queries paru for a pkg, then pipes it into `paru -S
     set pkg $argv[1]
 
     # alias pqi "command paru -Q | rg -i"
-    set query_output (paru -Q | rg -i $pkg | awk '{print $1}')
+    set query_output (paru -Q | rg --ignore-case $pkg | awk '{print $1}')
     # pprint "Value of pkg: %s\nValue of query_output: %s\n" "$pkg" "$query_output"
     set -l buf (command mktemp)
     # pprint "Created temporary buffer at: %s\n" "$buf"

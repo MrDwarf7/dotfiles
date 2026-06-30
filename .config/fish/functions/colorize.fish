@@ -3,7 +3,41 @@
 
 set -g COLORS red green yellow blue magenta purple cyan white black gray grey bright_red bright_green bright_yellow bright_blue bright_magenta bright_purple bright_cyan bright_white
 
-function has_newline_suffix --description "Ext. simple 'parser' - Handles newline's in user provided text"
+## TODO: [completions] : Move to completions dir & Properly wire this up
+function __colorize_cmp --description 'Complete colorize command'
+    # Complete the colorize command with available colors
+    complete -c colorize -a "$COLORS" -d "Available colors"
+end
+
+function __colorize_help --description 'Display usage information for colorize'
+    set -l ht " "
+    set -l colors_buf $(__gen_colors)
+
+    set -l red_example (colorize red "This is red text")
+    set -l green_example (colorize green "This is green text")
+    set -l blue_example (colorize blue "This is blue text")
+
+    printf "\
+Usage: colorize <COLOR> <TEXT>
+
+Wraps the given text with ANSI color codes.
+
+Options:
+
+Available colors:
+
+$colors_buf
+
+Examples:
+
+$ht colorize red \"$red_example\"
+$ht colorize green \"$green_example\"
+$ht colorize blue \"$blue_example\"
+"
+    return 0
+end
+
+function __has_newline_suffix --description "Ext. simple 'parser' - Handles newline's in user provided text"
     # Small implementtion of a parser to handle newlines on user provided text
     set -l t $argv
     if string match -qr '\n$' -- $t
@@ -13,7 +47,7 @@ function has_newline_suffix --description "Ext. simple 'parser' - Handles newlin
     end
 end
 
-function colorize_handler --description 'Wrap text with ANSI color codes'
+function __colorize_handler --description 'Wrap text with ANSI color codes'
     # The actual colorize function that does the work
     # uses the associated helper function for usage info
     #
@@ -70,7 +104,7 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
         case '*'
             colorize red "Error: Color '$color_name' not found" >&2
             printf "\n"
-            colorize_help
+            __colorize_help
             return 1
     end
 
@@ -82,7 +116,7 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     # printf "value of color_code: %s\n" $color_code
     # printf "%s%s\033[0m" $color_code $full_text
 
-    if not test (has_newline_suffix $full_text)
+    if not test (__has_newline_suffix $full_text)
         # not string match -qr '\n$' -- $full_text
         echo -en "$color_code$full_text\033[0m"
     else
@@ -95,7 +129,7 @@ function colorize_handler --description 'Wrap text with ANSI color codes'
     return 0
 end
 
-function gen_colors --description "Generates a buffer of 'colors' (based on \$COLORS) then writes it out via 'printf'"
+function __gen_colors --description "Generates a buffer of 'colors' (based on \$COLORS) then writes it out via 'printf'"
     # Handles printing out a bunch of text.
     set -l ht " "
     set -l colors_len (count $COLORS)
@@ -106,7 +140,7 @@ function gen_colors --description "Generates a buffer of 'colors' (based on \$CO
     # printf "total count: %s\ncurrent idx: %s\n\n" $colors_len $idx
 
     for color in $COLORS
-        if test $idx -eq $(math 0)           # We don't want a newline sep on the first print
+        if test $idx -eq $(math 0) # We don't want a newline sep on the first print
             set colors_buf "$colors_buf$ht - %s" $(colorize $color $color)
         end
 
@@ -116,34 +150,6 @@ function gen_colors --description "Generates a buffer of 'colors' (based on \$CO
         set idx (math $idx + 1)
     end
     printf "%s" $colors_buf
-end
-
-function colorize_help --description 'Display usage information for colorize'
-    set -l ht " "
-    set -l colors_buf $(gen_colors)
-
-    set -l red_example (colorize red "This is red text")
-    set -l green_example (colorize green "This is green text")
-    set -l blue_example (colorize blue "This is blue text")
-
-    printf "\
-Usage: colorize <COLOR> <TEXT>
-
-Wraps the given text with ANSI color codes.
-
-Options:
-
-Available colors:
-
-$colors_buf
-
-Examples:
-
-$ht colorize red \"$red_example\"
-$ht colorize green \"$green_example\"
-$ht colorize blue \"$blue_example\"
-"
-    return 0
 end
 
 function colorize --description 'Alias for colorize'
@@ -165,8 +171,8 @@ function colorize --description 'Alias for colorize'
     argparse h/help -- $argv
     or return
     if set -q _flag_help
-        colorize_help
+        __colorize_help
         return 0
     end
-    colorize_handler $argv
+    __colorize_handler $argv
 end

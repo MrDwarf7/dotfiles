@@ -1,8 +1,6 @@
 #!/usr/bin/env fish
 #
 
-# TODO: [common_list_client] : Move the 'base' cmd to either an env var, or a func call or something
-
 function la --description 'List all files including hidden files with details'
     # We literally just call the l.fish file directly
     l

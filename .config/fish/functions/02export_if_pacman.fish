@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+# @fish-lsp-disable 3003
 #
 
 function 02export_if_pacman --description "If a provided program is available via pacman, exports an environment variable, otherwise uses a provided fallback"

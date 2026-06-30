@@ -8,6 +8,7 @@ set k_rustup r
 set k_packages p
 set k_shutdown d
 
+## TODO: [completions] : Move to completions dir
 function __sysup_cmp
     complete -c sysup -s $k_help -l help -d 'Show this help message and exit'
     complete -c sysup -s $k_skip -l skip -a "m r p" -d 'Skip certain parts of the update. Use with m (mirror), r (rustup), p (packages)'
@@ -50,6 +51,7 @@ Includes:
 ,sysup -$k_skip -m                        ,# Use -m to skip mirror update,,
 ,sysup -$k_skip -r                        ,# Use -r to skip rustup update,,
 ,sysup -$k_skip -p                        ,# Use -p to skip package update,,
+,sysup -$k_skip -y                        ,# Use -p to skip yazi/ya update,,
 ,sysup -$k_shutdown                       ,# Shutdown the system after successful update,,
 "
     return 0
@@ -82,6 +84,7 @@ function sysup --description 'System update function'
     set -l skip_mirror false
     set -l skip_rustup false
     set -l skip_packages false
+    set -l skip_yazi false
 
     set -l shutdown_waittime_mins 1
     set -l shutdown_waittime_secs (math "60 * $shutdown_waittime_mins")
@@ -96,6 +99,8 @@ function sysup --description 'System update function'
                     set skip_rustup true
                 case p
                     set skip_packages true
+                case y
+                    set skip_yazi true
                 case '*'
                     echo "Invalid skip value: $_flag_skip" >&2
                     return 1
@@ -119,16 +124,24 @@ function sysup --description 'System update function'
         colorize yellow "[SYSUP] Running generic update only...\n"
         099pacman_update || return $status
         099aur_update || return $status
+        099yazi_update || return $status
     else if test $skip_packages = true
         colorize yellow "[SYSUP] Skipping package update...\n"
-        colorize yelloe "[SYSUP] Running mirror update only...\n"
+        colorize yellow "[SYSUP] Running mirror update only...\n"
         mirror_update || return $status
+    else if test $skip_yazi = true
+        colorize yellow "[SYSUP] Skipping yazi update...\n"
+        colorize yellow "[SYSUP] Running mirror and package update only...\n"
+        mirror_update || return $status
+        099pacman_update || return $status
+        099aur_update || return $status
     else
         colorize yellow "[SYSUP] Running full update...\n"
         mirror_update
         099pacman_update || return $status
         099aur_update || return $status
         099generic_cache_drop || return $status
+        099yazi_update || return $status
     end
 
     if test $skip_rustup != true

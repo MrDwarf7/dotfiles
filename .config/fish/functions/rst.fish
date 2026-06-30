@@ -2,6 +2,6 @@
 #
 
 function rst --description 'Move to Rust projects folder'
-    pushd "$GITHUB_PROJECTS/Rust/" || return $status
-    la
+    pushd "$GITHUB_PROJECTS_RUST/" || return $status
+    l
 end

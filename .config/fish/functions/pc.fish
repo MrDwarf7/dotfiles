@@ -15,8 +15,7 @@ function __pc_help
     end
 
     090help "\
-Stands for '[p]ackage [c]heck. Runs PKG_MANAGER -Su or paru -Su if PKG_MANAGER is set.'
-Likely to check 'pacman' and 'paru' (or 'yay') for updates.
+Stands for '[p]ackage [c]heck. Runs \$PKG_MANAGER -Su or paru -Su if \$PKG_MANAGER is set.'
 
 Usage: pc
 

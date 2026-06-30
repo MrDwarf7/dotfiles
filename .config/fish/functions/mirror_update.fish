@@ -1,87 +1,11 @@
 #!/usr/bin/env fish
 #
 
-function mirror_update --description 'Update the mirrorlist using rate-mirrors'
-    # Updates the mirrorlist via rate-mirrors
-    # Output to a temp file, then copies the mirrorlist to a backup and replaces it with the new one
-    #
-    # Dependencies:
-    #   rate-mirrors
-    # System Dependencies:
-    #   sudo, mktemp, mv, cp, pacman, yay/paru, chown, echo, paccache
-    #
-    # Globals Variables:
-    #   PKG_MANAGER (yay/paru)
-    #
-    # Calls:
-    #   ua_drop_caches
-    #
-    # Returns:
-    #   $status ($status != 0, otherwise 0)
-    if test -z "$PKG_MANAGER"
-        printf "NOTE: PKG_MANAGER not set, defaulting to paru if installed.\n"
-        if test -z (command -v paru)
-            set -gx PKG_MANAGER yay
-        end
-        set -gx PKG_MANAGER paru
-        printf "Using PKG_MANAGER: %s\n" $PKG_MANAGER
-    end
-
-    sudo true
-    # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
-
-    printf "Creating temporary file\n"
-    set -g TMPFILE (mktemp)
-    set -g COUNTRY AUS
-    set -g DISTRO arch
-
-    if test $status -ne 0
-        if test -z "$TMPFILE"
-            printf "Failed to create temporary file\n"
-            printf "mktemp failed with status %d\n" $status
-            return 1
-        end
-        printf "mktemp failed with status %d\n" $status
-        return $status
-    end
-
-    printf "Temporary file created: %s\n" $TMPFILE
-
-    printf "Updating mirrors\n"
-    # rate-mirrors --save=$TMPFILE arch --max-delay=21600
-    write_mirrorlist $TMPFILE $COUNTRY $DISTRO || return $status
-
-    if test $status -ne 0
-        printf "rate-mirrors failed with status %d\n" $status
-        return $status
-    end
-
-    printf "Moving mirrorlist from %s to /etc/pacman.d/mirrorlist\n" $TMPFILE
-    sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup || return 1
-    sudo mv $TMPFILE /etc/pacman.d/mirrorlist || return 2
-    sudo chown root:root /etc/pacman.d/mirrorlist || return 3 # Re-secure the mirrorlist file before leaving sudo
-    # Make it readable by everyone
-    sudo chmod 644 /etc/pacman.d/mirrorlist || return 4
-
-    # _generic_update || return $status
-    # $PKG_MANAGER -Syyu --noconfirm || return $status
-
-    # rate-mirrors --save=$TMPFILE arch --max-delay=21600
-    # sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
-    # sudo mv $TMPFILE /etc/pacman.d/mirrorlist
-    # ua_drop_caches
-    # $PKG_MANAGER -Syyu --noconfirm
-
-    set -l func_status $status
-
-    if test $status -ne 0
-        printf "Mirrorlist update failed\n"
-        return $func_status
-    end
-    return 0
+function __mirror_update_cmp
+    complete -c mirror_update -s h -l help -d 'Print help message and exit.'
 end
 
-function write_mirrorlist --description 'Write the current mirrorlist to a file'
+function __write_mirrorlist --description 'Write the current mirrorlist to a file'
     # Runs the rate-mirrors command to write the mirrorlist to a file
     # System Dependencies:
     #
@@ -168,4 +92,86 @@ function write_mirrorlist --description 'Write the current mirrorlist to a file'
         || return $status
 
     return $status
+end
+
+function mirror_update --description 'Update the mirrorlist using rate-mirrors'
+    # Updates the mirrorlist via rate-mirrors
+    # Output to a temp file, then copies the mirrorlist to a backup and replaces it with the new one
+    #
+    # Dependencies:
+    #   rate-mirrors
+    # System Dependencies:
+    #   sudo, mktemp, mv, cp, pacman, yay/paru, chown, echo, paccache
+    #
+    # Globals Variables:
+    #   PKG_MANAGER (yay/paru)
+    #
+    # Calls:
+    #   ua_drop_caches
+    #
+    # Returns:
+    #   $status ($status != 0, otherwise 0)
+    if test -z "$PKG_MANAGER"
+        colorize yellow "NOTE: PKG_MANAGER not set, defaulting to paru if installed.\n"
+        if 00valid_pacman paru
+            colorize yellow "PKG_MANAGER not set, defaulting to paru."
+            set -gx PKG_MANAGER paru
+        end
+        colorize yellow "PKG_MANAGER not set, defaulting to yay."
+        set -gx PKG_MANAGER yay
+        printf "Using PKG_MANAGER: %s\n" $PKG_MANAGER
+    end
+
+    sudo true
+    # cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
+
+    colorize blue "Creating temporary file\n"
+    set -g TMPFILE (mktemp)
+
+    if test $status -ne 0
+        if test -z "$TMPFILE"
+            printf "Failed to create temporary file\n"
+            printf "mktemp failed with status %d\n" $status
+            return 1
+        end
+        printf "mktemp failed with status %d\n" $status
+        return $status
+    end
+
+    set -g COUNTRY AUS
+    set -g DISTRO arch
+    printf "Temporary file created: %s\n" $TMPFILE
+
+    printf "Updating mirrors\n"
+    # rate-mirrors --save=$TMPFILE arch --max-delay=21600
+    __write_mirrorlist $TMPFILE $COUNTRY $DISTRO || return $status
+
+    if test $status -ne 0
+        printf "rate-mirrors failed with status %d\n" $status
+        return $status
+    end
+
+    printf "Moving mirrorlist from %s to /etc/pacman.d/mirrorlist\n" $TMPFILE
+    sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup || return 1
+    sudo mv $TMPFILE /etc/pacman.d/mirrorlist || return 2
+    sudo chown root:root /etc/pacman.d/mirrorlist || return 3 # Re-secure the mirrorlist file before leaving sudo
+    # Make it readable by everyone
+    sudo chmod 644 /etc/pacman.d/mirrorlist || return 4
+
+    # _generic_update || return $status
+    # $PKG_MANAGER -Syyu --noconfirm || return $status
+
+    # rate-mirrors --save=$TMPFILE arch --max-delay=21600
+    # sudo mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist-backup
+    # sudo mv $TMPFILE /etc/pacman.d/mirrorlist
+    # ua_drop_caches
+    # $PKG_MANAGER -Syyu --noconfirm
+
+    set -l func_status $status
+
+    if test $status -ne 0
+        printf "Mirrorlist update failed\n"
+        return $func_status
+    end
+    return 0
 end

@@ -42,5 +42,5 @@ function pkg_review --description 'Review installed packages with fzf'
         return 0
     end
 
-    pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
+    $PKG_MANAGER -Qq | fzf --preview '$PKG_MANAGER -Qil {}' --layout=reverse --bind 'enter:execute($PKG_MANAGER -Qil {} | less)'
 end
