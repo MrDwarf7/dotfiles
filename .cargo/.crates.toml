@@ -1,3 +1,31 @@
 [v1]
+"cargo-binutils 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-cov",
+    "cargo-nm",
+    "cargo-objcopy",
+    "cargo-objdump",
+    "cargo-profdata",
+    "cargo-readobj",
+    "cargo-size",
+    "cargo-strip",
+    "rust-ar",
+    "rust-as",
+    "rust-cov",
+    "rust-ld",
+    "rust-lld",
+    "rust-nm",
+    "rust-objcopy",
+    "rust-objdump",
+    "rust-profdata",
+    "rust-readobj",
+    "rust-size",
+    "rust-strip",
+]
+"cargo-hex-to-uf2 0.1.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-hex-to-uf2"]
+"cargo-make 0.37.24 (registry+https://github.com/rust-lang/crates.io-index)" = [
+    "cargo-make",
+    "makers",
+]
+"flip-link 0.1.12 (registry+https://github.com/rust-lang/crates.io-index)" = ["flip-link"]
 "spider_cli 2.40.2 (registry+https://github.com/rust-lang/crates.io-index)" = ["spider"]
 "tauri-cli 2.9.6 (registry+https://github.com/rust-lang/crates.io-index)" = ["cargo-tauri"]
