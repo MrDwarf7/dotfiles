@@ -227,6 +227,9 @@ vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 " nnoremap <Leader>d "_d
 
 
+function! CmdLine(str)
+    call feedkeys(":" . a:str)
+endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -352,6 +355,97 @@ vnoremap > >gv
 " map <silent> <Leader><CR> :noh<CR>
 " nmap <silent> <Del> :noh<CR>
 nmap <silent> <Esc> :nohlsearch<CR>
+
+nnoremap <silent> [[ :cprev<CR>
+nnoremap <silent> ]] :cnext<CR>
+
+
+" Prepend the line number to each line (note the `\=` for expr eval)
+au BufReadPost quickfix  setlocal modifiable
+            \ | silent exe 'g/^/s//\=line(".") .. " "/'
+            \ | setlocal nomodifiable
+
+
+" Could be cool - 
+" Note: Making changes in the quickfix window has no effect on the list of
+" errors.  'modifiable' is off to avoid making changes.  If you delete or insert
+" lines anyway, the relation between the text and the error number is messed up.
+" If you really want to do this, you could write the contents of the quickfix
+" window to a file and use ":cfile" to have it parsed and used as the new error
+" list.
+
+
+" :cope[n] [height]	Open a window to show the current list of errors.
+"             If there already is a quickfix window, it will be made
+"             the current window.  It is not possible to open a
+"             second quickfix window.  If [height] is given the
+"             existing window will be resized to it.
+
+" :ccl[ose]		Close the quickfix window.
+
+" :cw[indow] [height]	Open the quickfix window when there are recognized
+"             errors.  If the window is already open and there are
+"             no recognized errors, close the window.
+
+" function! ToggleQfList()
+"     " let save_cursor = getcurpos()
+"     let save_cursor = getpos('.')
+"
+"     let l:qflist_info = getqflist({'all' : 0})
+"
+"     " 'if cursor is _ALREADY_ in the qflist and we re-run this bind/func ->
+"     "   run :cclose
+"     "   (and pop to the save_cursor pos - might not need this actually)
+"
+"     " !!! placeholder !!!
+"     let qflist_opened = true
+"
+"     " :cw - won't close a window that STILL has items in it (only an empty one!)
+"     " :copen - will always jump you to the window (but to the first line!)
+"     "
+"
+"     " if we're already in it, close it
+"     if qflist_opened && qflist_active
+"         call CmdLine("cclose")
+"         return
+"     endif
+"
+"     " if not in it - jump to it (potentially we save last known loc in the list via:
+"     "
+"     " The BufWinEnter event is also triggered, again using "quickfix" for the buffer
+"     " name.
+"     "
+"     " So we could use either WinEnter or WinLeave
+"     " to populate a variable for cursor pos for THAT buffer (aka the qflist)
+"     "
+"     if qflist_opened && qflist_not_active
+"         call CmdLine("copen")
+"         return
+"     endif
+"
+"     " Is a no-op if there are 0 items in the list
+"     " otherwise - toggles it
+"     call CmdLine("cw")
+"
+"     " Have we populated it?
+"     "    if qflist_info.size > 0
+"     "        let qflist_bufnr = win_getid(qflist_info.winid)
+"     "        " Could also do via 'buftype' -> "quickfix"  (This is hard-set, kindaaa)
+"     "
+"     "
+"     "        " let l:nav_success = win_gotoid(qflist_info.winid)
+"     "        " if !nav_success
+"     "        "     call setpos('.', save_cursor)
+"     "        " endif
+"     "    elseif qflist_info.size <= 0
+"     "        let title = "qflist"
+"     "        call setqflist([], 'a', { 'title':title })
+"     "        execute 'copen'
+"     "    endif
+" endfunction
+
+" nnoremap <Leader>q :call ToggleQfList()<CR>
+" nnoremap <expr> <Leader>q CmdLine("cw")
 
 
 " Close the current buffer
@@ -509,9 +603,6 @@ function! <SID>BufcloseCloseIt()
     endif
 endfunction
 
-function! CmdLine(str)
-    call feedkeys(":" . a:str)
-endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
