@@ -1,0 +1,10 @@
+cliamp.log      
+cliamp.sock     
+cliamp.sock.pid 
+
+./cliamp.log      
+./cliamp.sock     
+./cliamp.sock.pid 
+
+resume.json
+./resume.json
