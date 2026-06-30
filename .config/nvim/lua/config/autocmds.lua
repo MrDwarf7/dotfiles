@@ -69,6 +69,15 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "config.ghostty" },
+  callback = function()
+    vim.bo.filetype = "ghostty"
+    vim.bo.syntax = "conf"
+    -- vim.bo.commentstring = "# %s"
+  end,
+})
+
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function(_)
     -- try_lint without arguments runs the linters defined in `linters_by_ft`
