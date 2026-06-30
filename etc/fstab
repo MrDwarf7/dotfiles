@@ -1,0 +1,43 @@
+#            Static            information            about            the            filesystems.
+#            See            fstab(5)            for            details.
+
+# <options> can be found via 
+# man 8 mount 
+# searching to header: 
+# `FILESYSTEM`
+# -
+# FILESYSTEM-INDEPENDENT
+# & -
+# FILESYSTEM-SPECIFIC
+
+#            <file system>                            <dir>                         <type>         <options>                                                                                                          <dump>   <pass>
+# /dev/sda2
+UUID=70225579-c7c5-4e34-9446-f49eadfa4f5d               /                             btrfs          rw,relatime,ssd,discard=async,space_cache=v2,subvolid=256,subvol=/@                                                0         0
+
+# /dev/sda2
+UUID=70225579-c7c5-4e34-9446-f49eadfa4f5d               /home                         btrfs          rw,relatime,ssd,discard=async,space_cache=v2,subvolid=257,subvol=/@home                                            0         0
+
+# /dev/sda2
+UUID=70225579-c7c5-4e34-9446-f49eadfa4f5d               /var/log                      btrfs          rw,relatime,ssd,discard=async,space_cache=v2,subvolid=258,subvol=/@log                                             0         0
+
+# /dev/sda2
+UUID=70225579-c7c5-4e34-9446-f49eadfa4f5d               /var/cache/pacman/pkg         btrfs          rw,relatime,ssd,discard=async,space_cache=v2,subvolid=259,subvol=/@pkg                                             0         0
+
+# /dev/sda2
+UUID=70225579-c7c5-4e34-9446-f49eadfa4f5d               /.snapshots                   btrfs          rw,relatime,ssd,discard=async,space_cache=v2,subvolid=260,subvol=/@.snapshots                                      0         0
+
+# /dev/sda1
+UUID=6897-178D                                          /boot                         vfat           rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro              0         0
+
+# /home/$USER/.cache
+tmpfs                                                   /home/dwarf/.cache            tmpfs          rw,nodev,nosuid,size=2G,uid=dwarf,gid=users,mode=0700                                                              0         0
+
+# /dev/sdd1 # extra parition for linux                                                               #
+UUID=c0c47a5a-b75c-4e7b-96af-5a1189e96256               /mnt/linux_data               ext4           rw,relatime,discard,nodev,nosuid,user,exec,auto,async                                                              0         0
+
+# E:\ - on windows /- by-label/DATA_DRIVE 
+UUID=58FACFC2FACF9B20                                   /mnt/data_drive               ntfs3          rw,relatime,uid=dwarf,gid=1000,user,exec,auto,nofail,windows_names,prealloc,force,x-systemd.mount.timeout=3s       0         0
+# # E:\ - on windows
+# /dev/disk/by-label/DATA_DRIVE                         /mnt/data_drive               ntfs3          rw,relatime,uid=dwarf,gid=1000,user,exec,nofail                                                                    0         0
+
+# /dev/disk/by-label/DATA_DRIVE                         /mnt/data_drive               ntfs3          defaults                                                                                                           0         0
