@@ -13,7 +13,7 @@ local progs = require("shared.programs")
 
 hl.bind(mods:with(mods.main_mod_shift, "r"), hl.dsp.exec_cmd(progs.menu_other))
 hl.bind(mods:with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
-hl.bind(mods:with(mods.main_mod, "u"), hl.dsp.exec_cmd(progs.locking))
+hl.bind(mods:with(mods.main_mod_ctrl, "u"), hl.dsp.exec_cmd(progs.locking))
 hl.bind(mods:with(mods.main_mod, "m"), hl.dsp.exec_cmd(progs.logout_prog))
 
 hl.bind(mods:with(mods.main_mod_ctrl, "a"), hl.dsp.exec_cmd(progs.notifications .. " -t -sw || swaync-client -t -sw"))

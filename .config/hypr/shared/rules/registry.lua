@@ -23,6 +23,8 @@ local M = {}
 --------------------------------------------------------------------------------
 -- stylua: ignore start
 
+-- TODO: [eventual] : Transition all or as many as possible from a fixed size to a monitor-relative size, e.g. "(monitor_w * 0.50) (monitor_h * 0.50)".
+
 ---@type HL.WindowRuleSpec
 M.float_center = {
   { class = "blueman-manager",                  size = "1000 650"  },
@@ -34,8 +36,8 @@ M.float_center = {
   -- { class = "viewnior",                         size = "2560 1200" },
   { class = "viewnior",                         size = "(monitor_w * 0.55) (monitor_h * 0.40)" },
   { class = "keymapp",                          size = "1450 1000" },
-  -- { class = "org\\.keepassxc\\.KeePassXC",      size = "1450 1000" },
-  { class = "org\\.keepassxc\\.KeePassXC",      size = "(monitor_w * 0.55) (monitor_h * 0.40)" },
+  { class = "org\\.keepassxc\\.KeePassXC",      size = "1450 850" },
+  -- { class = "org\\.keepassxc\\.KeePassXC",      size = "(monitor_w*0.35) (monitor_h*0.40)" },
   { class = "webapp-manager.py",                size = "1000 650"  },
   -- { class = "[tT]hunar|nemo|dolphin",           size = "1450 1000" },  -- Thunar, Nemo, Dolphin
   -- { class = "[tT]hunar|nemo|dolphin",           size = { "(monitor_w * 1.20)", "(monitor_h * 0.80)" } },  -- Thunar, Nemo, Dolphin

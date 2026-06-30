@@ -17,8 +17,8 @@ local general = {
     active_border = "rgba(ffffffff)",
     nogroup_border = "rgba(ffff00ff)",
   },
-  -- layout = dwindle
-  -- layout = master
+  -- layout = "dwindle",
+  -- layout = "master",
   layout = "scrolling",
   no_focus_fallback = false,
   resize_on_border = true,
@@ -38,6 +38,12 @@ local general = {
 
 -- https://wiki.hyprland.org/Configuring/Variables/#decoration
 local decoration = {
+  blur = {},
+  shadow = {},
+  glow = {},
+}
+
+decoration = {
   rounding = 0,
   rounding_power = 2.0,
   -- Change transparency of focused and unfocused windows
@@ -56,21 +62,17 @@ local decoration = {
   dim_around = 0.4,
   -- screen_shader = ""
   border_part_of_window = true,
-
-  ------------------------
-
-  blur = {},
-  shadow = {},
-  glow = {},
 }
 
 decoration.blur = {
+
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
   size = 4, -- default 8
   -- Gaussian blur
   passes = 2, -- default 1, previous was 5
   ignore_opacity = true,
+
   new_optimizations = true,
   xray = false,
   -- noise = 0.0117

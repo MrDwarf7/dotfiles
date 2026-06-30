@@ -25,7 +25,7 @@ hl.bind(mods:with(mods.main_mod, "x"), hl.dsp.exec_cmd("dms ipc call control-cen
 hl.bind(mods:with(mods.main_mod_ctrl, "p"), hl.dsp.exec_cmd("dms ipc call processlist focusOrToggle"))
 
 -- === Security ===
-hl.bind(mods:with(mods.main_mod, "u"), hl.dsp.exec_cmd("dms ipc call lock lock"))
+hl.bind(mods:with(mods.main_mod_ctrl, "u"), hl.dsp.exec_cmd("dms ipc call lock lock"))
 
 -- === Screenshots ===
 hl.bind(mods:with(mods.main_mod_ctrl, "s"), hl.dsp.exec_cmd("dms screenshot"))

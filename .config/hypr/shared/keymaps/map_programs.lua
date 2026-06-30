@@ -14,7 +14,7 @@ hl.bind(mods:with(mods.main_mod_ctrl, "t"), hl.dsp.exec_cmd(progs.second_term))
 hl.bind(mods:with(mods.main_mod_alt, "t"), hl.dsp.exec_cmd("kitty"))
 
 hl.bind(mods:with(mods.main_mod, "b"), hl.dsp.exec_cmd(progs.browser))
-hl.bind(mods:with(mods.main_mod, "e"), hl.dsp.exec_cmd(progs.file_manager))
+hl.bind(mods:with(mods.main_mod_shift, "e"), hl.dsp.exec_cmd(progs.file_manager))
 hl.bind(mods:with(mods.main_mod_shift, "c"), hl.dsp.exec_cmd(progs.color_picker))
 
 hl.bind(mods:with(mods.main_mod, "v"), hl.dsp.exec_cmd("hyprvoice toggle"))
