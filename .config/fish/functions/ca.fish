@@ -9,5 +9,5 @@ function ca --description 'Clear screen and run ls'
         return 1
     end
     commandline -f repaint
-    command $LIST_CLIENT -lah --color=always --follow-symlinks --icons=always --git
+    command $LIST_CLIENT -laho --color=always --follow-symlinks --icons=always --group-directories-first --git
 end
