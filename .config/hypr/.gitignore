@@ -6,17 +6,17 @@ og_*
 OG_*
 
 *-colors.*
+**/*/*-colors.*
 
 .old_as_ref/
 .old_as_ref/*
 
-./dms/colors
-dms/colors
+./dms/colors.*
+dms/colors.*
 
+./shared/.colors.*
+shared/.colors.*
 
-./shared/.colors
 ./shared/rules/CONSOLIDATION_NOTES.md
-
-shared/.colors
 shared/rules/CONSOLIDATION_NOTES.md
 

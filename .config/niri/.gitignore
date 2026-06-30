@@ -1,1 +1,12 @@
 .prev*
+
+
+*-colors.*
+**/*/*-colors.*
+
+./dms/colors.*
+dms/colors.*
+
+
+./shared/.colors.*
+shared/.colors.*

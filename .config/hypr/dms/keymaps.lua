@@ -16,6 +16,10 @@ hl.bind(mods:with(mods.main_mod_ctrl, "w"), hl.dsp.exec_cmd("dms ipc call hypr t
 hl.bind(mods:with(mods.main_mod_alt, "d"), hl.dsp.exec_cmd("dms ipc call night toggle"))
 
 hl.bind(mods:with(mods.main_mod, "y"), hl.dsp.exec_cmd("dms ipc call dankdash wallpaper"))
+hl.bind(mods:with(mods.main_mod_ctrl, "y"), hl.dsp.exec_cmd("dms ipc wallpaperCarousel toggle"))
+
+hl.bind(mods:with(mods.main_mod, "z"), hl.dsp.exec_cmd("dms ipc usbManager toggle"))
+
 hl.bind(mods:with(mods.main_mod, "m"), hl.dsp.exec_cmd("dms ipc call powermenu toggle"))
 hl.bind(mods:with(mods.main_mod_ctrl, "n"), hl.dsp.exec_cmd("dms ipc call notepad toggle"))
 

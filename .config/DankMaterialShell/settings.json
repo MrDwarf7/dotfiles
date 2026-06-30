@@ -19,15 +19,13 @@
   "niriLayoutGapsOverride": -1,
   "niriLayoutRadiusOverride": -1,
   "niriLayoutBorderSize": -1,
-  "niriLayoutXrayEnabled": false,
-  "niriLayoutBarXrayEnabled": true,
   "hyprlandLayoutGapsOverride": 4,
+  "hyprlandLayoutGapsOutOverride": -1,
   "hyprlandLayoutRadiusOverride": 0,
   "hyprlandLayoutBorderSize": 1,
   "hyprlandResizeOnBorder": false,
-  "hyprlandLayoutXrayEnabled": false,
-  "hyprlandLayoutBarXrayEnabled": true,
   "mangoLayoutGapsOverride": -1,
+  "mangoLayoutGapsOutOverride": -1,
   "mangoLayoutRadiusOverride": -1,
   "mangoLayoutBorderSize": -1,
   "mangoTrackpadNaturalScrolling": true,
@@ -262,6 +260,8 @@
   "greeterLockDateFormat": "",
   "greeterFontFamily": "",
   "greeterWallpaperFillMode": "",
+  "greeterSyncPending": false,
+  "greeterSyncBaseline": {},
   "mediaSize": 1,
   "appLauncherViewMode": "list",
   "spotlightModalViewMode": "list",
@@ -308,11 +308,11 @@
       "enabled": true
     },
     {
-      "id": "media",
+      "id": "wallpaper",
       "enabled": true
     },
     {
-      "id": "wallpaper",
+      "id": "media",
       "enabled": true
     },
     {
@@ -396,7 +396,9 @@
   "batteryNotifyCritical": true,
   "batteryLowThreshold": 20,
   "batteryNotifyLow": false,
-  "batteryNotificationType": 0,
+  "batteryChargeLimitNotificationType": 0,
+  "batteryLowNotificationType": 0,
+  "batteryCriticalNotificationType": 0,
   "batteryAutoPowerSaver": false,
   "lockBeforeSuspend": true,
   "loginctlLockIntegration": true,
@@ -513,12 +515,14 @@
   "maxFprintTries": 15,
   "enableU2f": false,
   "u2fMode": "or",
-  "lockScreenActiveMonitor": "DP-1",
   "lockScreenInactiveColor": "#000000",
   "lockScreenNotificationMode": 2,
   "lockScreenVideoEnabled": false,
   "lockScreenVideoPath": "",
   "lockScreenVideoCycling": false,
+  "lockScreenWallpaperPath": "",
+  "lockScreenWallpaperFillMode": "",
+  "lockScreenFontFamily": "",
   "hideBrightnessSlider": false,
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 10000,
@@ -585,7 +589,14 @@
         "model": "LS49AG95"
       }
     ],
-    "dock": []
+    "dock": [],
+    "lockScreen": [
+      "DP-1",
+      {
+        "name": "DP-1",
+        "model": "LS49AG95"
+      }
+    ]
   },
   "showOnLastDisplay": {
     "toast": true,
@@ -637,6 +648,10 @@
           "enabled": true
         },
         {
+          "id": "usbManager",
+          "enabled": true
+        },
+        {
           "id": "systemTray",
           "enabled": true
         },
@@ -660,6 +675,14 @@
           "runningAppsGroupByApp": false,
           "runningAppsCurrentWorkspace": true,
           "runningAppsCurrentMonitor": true
+        },
+        {
+          "id": "githubInbox",
+          "enabled": true
+        },
+        {
+          "id": "wallpaperDiscovery",
+          "enabled": true
         },
         {
           "id": "cpuUsage",
@@ -740,7 +763,9 @@
       "shadowOpacity": 60,
       "shadowColorMode": "text",
       "shadowCustomColor": "#000000",
-      "clickThrough": false
+      "clickThrough": false,
+      "hoverPopouts": false,
+      "hoverPopoutDelay": 279
     },
     {
       "id": "bar1772849107368",
@@ -937,6 +962,9 @@
   "builtInPluginSettings": {
     "dms_settings_search": {
       "trigger": "?"
+    },
+    "dms_clipboard_search": {
+      "trigger": "cb"
     }
   },
   "clipboardClickToPaste": false,
@@ -951,10 +979,10 @@
   "launcherPluginVisibility": {},
   "launcherPluginOrder": [],
   "frameEnabled": false,
-  "frameThickness": 24,
-  "frameRounding": 20,
+  "frameThickness": 16,
+  "frameRounding": 23,
   "frameColor": "",
-  "frameOpacity": 1,
+  "frameOpacity": 0.2,
   "frameScreenPreferences": [
     "all"
   ],
@@ -968,6 +996,6 @@
   "frameMode": "separate",
   "barInsetPaddingShared": -1,
   "barInsetPaddingSyncAll": false,
-  "frameBarInsetPadding": -1,
-  "configVersion": 11
+  "frameBarInsetPadding": 16,
+  "configVersion": 12
 }
