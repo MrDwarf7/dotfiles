@@ -29,9 +29,9 @@ end
 # set -gx PAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
 
 set -gx PAGER less -FRX
-set -gx VISUAL nvim
-set -gx EDITOR nvim
-set -gx SHELL fish
+set -gx VISUAL /usr/bin/nvim
+set -gx EDITOR /usr/bin/nvim
+set -gx SHELL /usr/bin/fish
 
 set -gx DISTCC_DIR /tmp/distcc
 
