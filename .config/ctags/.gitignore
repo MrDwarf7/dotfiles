@@ -1,0 +1,9 @@
+# We intentinally are ignore this.
+# We do this because we mostly care about
+# the directory itself when symlinking stuff,
+# more than the actual content.
+#
+# This is because the content is per-machine.
+
+ctags
+./ctags
