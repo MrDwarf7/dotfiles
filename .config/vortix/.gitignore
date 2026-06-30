@@ -10,3 +10,6 @@ logs/*
 
 killswitch.state
 killswitch.*
+real-ip.cache
+tmp/
+real-ipv6.cache
