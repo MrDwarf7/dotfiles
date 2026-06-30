@@ -1,0 +1,155 @@
+{
+  "data": [
+    {
+      "id": "https://security.archlinux.org/ASA-202505-7",
+      "date": "2025-05-18",
+      "title": "[ASA-202505-7] nodejs-lts-jod: denial of service",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-7",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-8",
+      "date": "2025-05-18",
+      "title": "[ASA-202505-8] nodejs-lts-iron: multiple issues",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-8",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-9",
+      "date": "2025-05-19",
+      "title": "[ASA-202505-9] dropbear: arbitrary command execution",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-9",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-10",
+      "date": "2025-05-19",
+      "title": "[ASA-202505-10] python-django: denial of service",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-10",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-11",
+      "date": "2025-05-19",
+      "title": "[ASA-202505-11] freetype2: arbitrary code execution",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-11",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-12",
+      "date": "2025-05-19",
+      "title": "[ASA-202505-12] go: directory traversal",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-12",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-13",
+      "date": "2025-05-20",
+      "title": "[ASA-202505-13] varnish: content spoofing",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-13",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-14",
+      "date": "2025-05-21",
+      "title": "[ASA-202505-14] bind: denial of service",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-14",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202505-15",
+      "date": "2025-05-24",
+      "title": "[ASA-202505-15] ghostscript: information disclosure",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202505-15",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-1",
+      "date": "2025-06-04",
+      "title": "[ASA-202506-1] roundcubemail: arbitrary code execution",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-1",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-2",
+      "date": "2025-06-05",
+      "title": "[ASA-202506-2] curl: denial of service",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-2",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-3",
+      "date": "2025-06-06",
+      "title": "[ASA-202506-3] samba: access restriction bypass",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-3",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-4",
+      "date": "2025-06-07",
+      "title": "[ASA-202506-4] go: multiple issues",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-4",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-5",
+      "date": "2025-06-11",
+      "title": "[ASA-202506-5] konsole: arbitrary code execution",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-5",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    },
+    {
+      "id": "https://security.archlinux.org/ASA-202506-6",
+      "date": "2025-06-12",
+      "title": "[ASA-202506-6] python-django: content spoofing",
+      "summary": null,
+      "url": "https://security.archlinux.org/ASA-202506-6",
+      "source": "SecurityAdvisory",
+      "severity": "Unknown",
+      "packages": []
+    }
+  ],
+  "saved_at": 1780885612
+}

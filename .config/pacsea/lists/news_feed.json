@@ -1,0 +1,1452 @@
+[
+  {
+    "id": "pkg-update:aur:ampcode:0.0.1781143784_g47b692-1",
+    "date": "2026-06-17",
+    "title": "ampcode updated to 0.0.1781143784_g47b692-1",
+    "summary": "0.0.1781128120_g7d7ed5-1 → 0.0.1781143784_g47b692-1",
+    "url": "https://aur.archlinux.org/packages/ampcode",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "ampcode"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bfs:4.1-1",
+    "date": "2026-06-16",
+    "title": "bfs",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bfs/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bfs"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:affine-canary-bin:2026.6.15_canary.1103-1",
+    "date": "2026-06-16",
+    "title": "affine-canary-bin updated to 2026.6.15_canary.1103-1",
+    "summary": "2026.4.10_canary.928-1 → 2026.6.15_canary.1103-1",
+    "url": "https://aur.archlinux.org/packages/affine-canary-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "affine-canary-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:claude-code:2.1.179-1",
+    "date": "2026-06-16",
+    "title": "claude-code updated to 2.1.179-1",
+    "summary": "2.1.113-1 → 2.1.179-1",
+    "url": "https://aur.archlinux.org/packages/claude-code",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "claude-code"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:cliamp:1.57.1-1",
+    "date": "2026-06-14",
+    "title": "cliamp updated to 1.57.1-1",
+    "summary": "1.37.0-1 → 1.57.1-1",
+    "url": "https://aur.archlinux.org/packages/cliamp",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cliamp"
+    ]
+  },
+  {
+    "id": "pkg-update:official:c3c:0.7.11-1",
+    "date": "2026-06-10",
+    "title": "c3c",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/c3c/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "c3c"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:ashell:0.9.0-1",
+    "date": "2026-06-08",
+    "title": "ashell updated to 0.9.0-1",
+    "summary": "0.8.0-1 → 0.9.0-1",
+    "url": "https://aur.archlinux.org/packages/ashell",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "pkg-update:official:ast-grep:0.42.0-1",
+    "date": "2026-06-05",
+    "title": "ast-grep",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/ast-grep/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "ast-grep"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/arch-linux-2026-leader-election-results/",
+    "date": "2026-06-04",
+    "title": "Arch Linux 2026 Leader Election Results",
+    "summary": null,
+    "url": "https://archlinux.org/news/arch-linux-2026-leader-election-results/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "pkg-update:official:broot:1.56.2-2",
+    "date": "2026-06-01",
+    "title": "broot",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/broot/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "broot"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:act-bin:0.2.89-0",
+    "date": "2026-06-01",
+    "title": "act-bin updated to 0.2.89-0",
+    "summary": "0.2.89-0",
+    "url": "https://aur.archlinux.org/packages/act-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "act-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bugstalker:0.4.5-1",
+    "date": "2026-05-31",
+    "title": "bugstalker",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bugstalker/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bugstalker"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:carapace-bin:1.7.0-1",
+    "date": "2026-05-29",
+    "title": "carapace-bin updated to 1.7.0-1",
+    "summary": "1.6.4-1 → 1.7.0-1",
+    "url": "https://aur.archlinux.org/packages/carapace-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "carapace-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:official:awww:0.12.0-1",
+    "date": "2026-05-28",
+    "title": "awww",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/awww/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "awww"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/breaking-changes-for-all-users-of-varnish-which-is-renamed-to-vinyl-cache/",
+    "date": "2026-05-25",
+    "title": "Breaking changes for all users of `varnish`, which is renamed to `vinyl-cache`",
+    "summary": null,
+    "url": "https://archlinux.org/news/breaking-changes-for-all-users-of-varnish-which-is-renamed-to-vinyl-cache/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "pkg-update:aur:aquamarine-git:0.11.0.r10.gab2b0af-1",
+    "date": "2026-05-24",
+    "title": "aquamarine-git updated to 0.11.0.r10.gab2b0af-1",
+    "summary": "0.8.0.r3.gc8282f4-1 → 0.11.0.r10.gab2b0af-1",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:amd-ucode:20260309-1",
+    "date": "2026-05-23",
+    "title": "amd-ucode",
+    "summary": null,
+    "url": "https://archlinux.org/packages/core/any/amd-ucode/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "amd-ucode"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bind:9.20.22-1",
+    "date": "2026-05-20",
+    "title": "bind",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bind/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bind"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-1071214",
+    "date": "2026-05-14",
+    "title": "New AUR comment on aria2-git",
+    "summary": "Of course. Thanks for the heads-up tee.",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-1071214",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:ccache:4.13.2-1",
+    "date": "2026-05-13",
+    "title": "ccache",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/ccache/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "ccache"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:aria2-git:1.37.0.r38.gdc89cd3d-1",
+    "date": "2026-05-13",
+    "title": "aria2-git updated to 1.37.0.r38.gdc89cd3d-1",
+    "summary": "1.37.0.r32.gd372b788-1 → 1.37.0.r38.gdc89cd3d-1",
+    "url": "https://aur.archlinux.org/packages/aria2-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-1071130",
+    "date": "2026-05-13",
+    "title": "New AUR comment on aria2-git",
+    "summary": "This now requires a patch to build, can you add [https://gitlab.archlinux.org/archlinux/packaging/packages/aria2/-/raw/main/nettle-4.patch?ref_type=heads](https://gitlab.archlinux.…",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-1071130",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bluez:5.86-5",
+    "date": "2026-05-12",
+    "title": "bluez",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bluez/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bluez"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bluez-deprecated-tools:5.86-5",
+    "date": "2026-05-12",
+    "title": "bluez-deprecated-tools",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bluez-deprecated-tools/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bluez-deprecated-tools"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bluez-hid2hci:5.86-5",
+    "date": "2026-05-12",
+    "title": "bluez-hid2hci",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bluez-hid2hci/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bluez-hid2hci"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bluez-utils:5.86-5",
+    "date": "2026-05-12",
+    "title": "bluez-utils",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bluez-utils/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bluez-utils"
+    ]
+  },
+  {
+    "id": "pkg-update:official:btrfs-progs:6.19.1-1",
+    "date": "2026-05-11",
+    "title": "btrfs-progs",
+    "summary": null,
+    "url": "https://archlinux.org/packages/core/x86_64/btrfs-progs/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "btrfs-progs"
+    ]
+  },
+  {
+    "id": "pkg-update:official:cargo-tauri:2.10.1-2",
+    "date": "2026-05-09",
+    "title": "cargo-tauri",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/cargo-tauri/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cargo-tauri"
+    ]
+  },
+  {
+    "id": "aur-comment:ampcode:comment-1070378",
+    "date": "2026-05-08",
+    "title": "New AUR comment on ampcode",
+    "summary": "No longer works:",
+    "url": "https://aur.archlinux.org/packages/ampcode#comment-1070378",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ampcode"
+    ]
+  },
+  {
+    "id": "pkg-update:official:brush:0.3.0-2",
+    "date": "2026-05-03",
+    "title": "brush",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/brush/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "brush"
+    ]
+  },
+  {
+    "id": "pkg-update:official:btop:1.4.6-2",
+    "date": "2026-05-01",
+    "title": "btop",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/btop/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "btop"
+    ]
+  },
+  {
+    "id": "pkg-update:official:7zip:26.01-1",
+    "date": "2026-04-27",
+    "title": "7zip",
+    "summary": "26.00-1 → 26.01-1",
+    "url": "https://archlinux.org/packages/extra/x86_64/7zip/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "7zip"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bob:4.1.6-2",
+    "date": "2026-04-27",
+    "title": "bob",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bob/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bob"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:camofox-browser-git:r213.c9ea6f8-1",
+    "date": "2026-04-27",
+    "title": "camofox-browser-git updated to r213.c9ea6f8-1",
+    "summary": "r213.c9ea6f8-1",
+    "url": "https://aur.archlinux.org/packages/camofox-browser-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "camofox-browser-git"
+    ]
+  },
+  {
+    "id": "aur-comment:alt-sendme-bin:comment-1068567",
+    "date": "2026-04-25",
+    "title": "New AUR comment on alt-sendme-bin",
+    "summary": "error\nthread 'main' (120642) panicked at /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libappindicator-sys-0.9.0/src/lib.rs:41:5:\nFailed to load ayatana-appindi…",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin#comment-1068567",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:alt-sendme-bin:0.3.5-1",
+    "date": "2026-04-16",
+    "title": "alt-sendme-bin updated to 0.3.5-1",
+    "summary": "0.3.5-1 → 0.3.5-1",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:official:cage:0.3.0-1",
+    "date": "2026-04-11",
+    "title": "cage",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/cage/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cage"
+    ]
+  },
+  {
+    "id": "pkg-update:official:arp-scan:1.10.0-5",
+    "date": "2026-04-09",
+    "title": "arp-scan",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/arp-scan/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "arp-scan"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/kea-1303-6-update-requires-manual-intervention/",
+    "date": "2026-04-07",
+    "title": "kea &gt;= 1:3.0.3-6 update requires manual intervention",
+    "summary": null,
+    "url": "https://archlinux.org/news/kea-1303-6-update-requires-manual-intervention/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "https://archlinux.org/news/iptables-now-defaults-to-the-nft-backend/",
+    "date": "2026-04-05",
+    "title": "iptables now defaults to the nft backend",
+    "summary": null,
+    "url": "https://archlinux.org/news/iptables-now-defaults-to-the-nft-backend/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "pkg-update:official:asar:4.2.0-1",
+    "date": "2026-04-01",
+    "title": "asar",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/asar/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "asar"
+    ]
+  },
+  {
+    "id": "pkg-update:official:archiso:88-1",
+    "date": "2026-03-27",
+    "title": "archiso",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/archiso/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "archiso"
+    ]
+  },
+  {
+    "id": "pkg-update:official:appmenu-gtk-module:25.04-3",
+    "date": "2026-03-26",
+    "title": "appmenu-gtk-module",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/appmenu-gtk-module/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "appmenu-gtk-module"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bluetui:0.8.1-2",
+    "date": "2026-03-26",
+    "title": "bluetui",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bluetui/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bluetui"
+    ]
+  },
+  {
+    "id": "pkg-update:official:aichat:0.30.0-3",
+    "date": "2026-03-18",
+    "title": "aichat",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/aichat/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "aichat"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bcc-libbpf-tools:0.36.1-3",
+    "date": "2026-03-18",
+    "title": "bcc-libbpf-tools",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bcc-libbpf-tools/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bcc-libbpf-tools"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:amber-search-git:0.6.1-1",
+    "date": "2026-02-24",
+    "title": "amber-search-git updated to 0.6.1-1",
+    "summary": "0.6.1-1 → 0.6.1-1",
+    "url": "https://aur.archlinux.org/packages/amber-search-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "amber-search-git"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:carapace-bridge-bin:1.5.3-1",
+    "date": "2026-02-18",
+    "title": "carapace-bridge-bin updated to 1.5.3-1",
+    "summary": "1.5.3-1 → 1.5.3-1",
+    "url": "https://aur.archlinux.org/packages/carapace-bridge-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "carapace-bridge-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bat:0.26.1-2",
+    "date": "2026-02-16",
+    "title": "bat",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bat/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bat"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bottom:0.12.3-2",
+    "date": "2026-02-14",
+    "title": "bottom",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bottom/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bottom"
+    ]
+  },
+  {
+    "id": "pkg-update:official:base:3-3",
+    "date": "2026-02-07",
+    "title": "base",
+    "summary": null,
+    "url": "https://archlinux.org/packages/core/any/base/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "base"
+    ]
+  },
+  {
+    "id": "pkg-update:official:cava:0.10.7-1",
+    "date": "2026-01-31",
+    "title": "cava",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/cava/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cava"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bash-completion:2.17.0-3",
+    "date": "2026-01-21",
+    "title": "bash-completion",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bash-completion/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bash-completion"
+    ]
+  },
+  {
+    "id": "aur-comment:ashell:comment-1054977",
+    "date": "2026-01-13",
+    "title": "New AUR comment on ashell",
+    "summary": "egoist: Ok, thanks!",
+    "url": "https://aur.archlinux.org/packages/ashell#comment-1054977",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "pkg-update:official:aubio:0.4.9-24",
+    "date": "2026-01-10",
+    "title": "aubio",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/aubio/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "aubio"
+    ]
+  },
+  {
+    "id": "pkg-update:official:blueman:2.4.6-2",
+    "date": "2026-01-10",
+    "title": "blueman",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/blueman/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "blueman"
+    ]
+  },
+  {
+    "id": "aur-comment:ashell:comment-1054527",
+    "date": "2026-01-10",
+    "title": "New AUR comment on ashell",
+    "summary": "If you want, I can provide you with a diff to add the systemd unit (I maintain the referenced ashell guru port).",
+    "url": "https://aur.archlinux.org/packages/ashell#comment-1054527",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:bdui-bin:0.2.0-1",
+    "date": "2026-01-09",
+    "title": "bdui-bin updated to 0.2.0-1",
+    "summary": "0.2.0-1 → 0.2.0-1",
+    "url": "https://aur.archlinux.org/packages/bdui-bin",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bdui-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:ashell:comment-1054345",
+    "date": "2026-01-08",
+    "title": "New AUR comment on ashell",
+    "summary": "zefr0x: You're right, right now I'm the only one who has access to the development repo, but I had to fix this issue\negoist: I will try when I have enough time",
+    "url": "https://aur.archlinux.org/packages/ashell#comment-1054345",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "aur-comment:ashell:comment-1054336",
+    "date": "2026-01-08",
+    "title": "New AUR comment on ashell",
+    "summary": "This is not a `-git` package, it shouldn't pull from a git source without any integrity checks. It is very easy to just move the version tag in git to point at any arbitrary commit…",
+    "url": "https://aur.archlinux.org/packages/ashell#comment-1054336",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/",
+    "date": "2025-12-20",
+    "title": "NVIDIA 590 driver drops Pascal and lower support; main packages switch to Open Kernel Modules",
+    "summary": null,
+    "url": "https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "pkg-update:official:catimg:2.8.0-1",
+    "date": "2025-12-12",
+    "title": "catimg",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/catimg/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "catimg"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/net-packages-may-require-manual-intervention/",
+    "date": "2025-12-11",
+    "title": ".NET packages may require manual intervention",
+    "summary": null,
+    "url": "https://archlinux.org/news/net-packages-may-require-manual-intervention/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "aur-comment:ashell:comment-1050502",
+    "date": "2025-12-05",
+    "title": "New AUR comment on ashell",
+    "summary": "Can you add a systemd unit like the one from the gentoo guru port?\n[https://github.com/gentoo/guru/blob/master/gui-apps/ashell/files/ashell.service](https://github.com/gentoo/guru/…",
+    "url": "https://aur.archlinux.org/packages/ashell#comment-1050502",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ashell"
+    ]
+  },
+  {
+    "id": "aur-comment:alt-sendme-bin:comment-1049883",
+    "date": "2025-12-01",
+    "title": "New AUR comment on alt-sendme-bin",
+    "summary": "@roughE: The developer must have deleted the 2 latest releases, maybe because of some bug. I downgraded the package here to fix this issue! Thanks.",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin#comment-1049883",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:alt-sendme-bin:comment-1049882",
+    "date": "2025-12-01",
+    "title": "New AUR comment on alt-sendme-bin",
+    "summary": "Where did you find version 0.2.6? The github release page only lists releases up to version 0.2.4. That's why it's failing on package download.",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin#comment-1049882",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:alt-sendme-bin:comment-1047860",
+    "date": "2025-11-16",
+    "title": "New AUR comment on alt-sendme-bin",
+    "summary": "@Bugg4: Thanks. Fixed now!",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin#comment-1047860",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:alt-sendme-bin:comment-1047857",
+    "date": "2025-11-16",
+    "title": "New AUR comment on alt-sendme-bin",
+    "summary": "deb package has been renamed",
+    "url": "https://aur.archlinux.org/packages/alt-sendme-bin#comment-1047857",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "alt-sendme-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1047179",
+    "date": "2025-11-11",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "please add libaquamarine.so to provides\n[https://gitlab.archlinux.org/archlinux/packaging/packages/aquamarine/-/blob/main/PKGBUILD?ref_type=heads#L27](https://gitlab.archlinux.org/…",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1047179",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/waydroid-154-3-update-may-require-manual-intervention/",
+    "date": "2025-11-06",
+    "title": "waydroid &gt;= 1.5.4-3 update may require manual intervention",
+    "summary": null,
+    "url": "https://archlinux.org/news/waydroid-154-3-update-may-require-manual-intervention/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "https://archlinux.org/news/dovecot-24-requires-manual-intervention/",
+    "date": "2025-10-31",
+    "title": "dovecot &gt;= 2.4 requires manual intervention",
+    "summary": null,
+    "url": "https://archlinux.org/news/dovecot-24-requires-manual-intervention/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "aur-comment:ampcode:comment-1043740",
+    "date": "2025-10-17",
+    "title": "New AUR comment on ampcode",
+    "summary": "<Error>\n`NoSuchKey`\n<Message>The specified key does not exist.</Message>\n</Error>",
+    "url": "https://aur.archlinux.org/packages/ampcode#comment-1043740",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "ampcode"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1041059",
+    "date": "2025-09-26",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "@luthis Git version is automatically updated when you do   \nmakepkg -sicC     \nI get     \npkgver=0.9.4.r1.g11406cc \nIt builds fine then",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1041059",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1041006",
+    "date": "2025-09-25",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "When building hyprland-git, this error:\nThe following required packages were not found:\nv0.9.4 was released in August. This package needs to be updated. It's still at 0.8.0",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1041006",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1040916",
+    "date": "2025-09-24",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "It builds fine for me",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1040916",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1040856",
+    "date": "2025-09-24",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "This package is currently broken for me. There are compile time errors for zero-size arrays. Anybody else?",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1040856",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1039529",
+    "date": "2025-09-13",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "There is a version mismatch between this package and the original one. I cannot update hyprland-git because of this.",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1039529",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:bash_unit:2.3.3-1",
+    "date": "2025-08-28",
+    "title": "bash_unit updated to 2.3.3-1",
+    "summary": "2.3.3-1 → 2.3.3-1",
+    "url": "https://aur.archlinux.org/packages/bash_unit",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bash_unit"
+    ]
+  },
+  {
+    "id": "https://archlinux.org/news/recent-services-outages/",
+    "date": "2025-08-21",
+    "title": "Recent service outages",
+    "summary": null,
+    "url": "https://archlinux.org/news/recent-services-outages/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "https://archlinux.org/news/zabbix-741-2-may-requires-manual-intervention/",
+    "date": "2025-08-04",
+    "title": "zabbix &gt;= 7.4.1-2 may require manual intervention",
+    "summary": null,
+    "url": "https://archlinux.org/news/zabbix-741-2-may-requires-manual-intervention/",
+    "source": "ArchNews",
+    "severity": null,
+    "packages": []
+  },
+  {
+    "id": "pkg-update:aur:bibata-cursor-theme:2.0.7-1",
+    "date": "2025-08-02",
+    "title": "bibata-cursor-theme updated to 2.0.7-1",
+    "summary": "2.0.7-1 → 2.0.7-1",
+    "url": "https://aur.archlinux.org/packages/bibata-cursor-theme",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bibata-cursor-theme"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:blanket-git:0.7.0.r106.g2dfa3d3-1",
+    "date": "2025-08-02",
+    "title": "blanket-git updated to 0.7.0.r106.g2dfa3d3-1",
+    "summary": "0.7.0.r106.g2dfa3d3-1 → 0.7.0.r106.g2dfa3d3-1",
+    "url": "https://aur.archlinux.org/packages/blanket-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "blanket-git"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:app2unit-git:1.0.2.r0.g6a2fe29-1",
+    "date": "2025-07-07",
+    "title": "app2unit-git updated to 1.0.2.r0.g6a2fe29-1",
+    "summary": "1.0.2.r0.g6a2fe29-1 → 1.0.2.r0.g6a2fe29-1",
+    "url": "https://aur.archlinux.org/packages/app2unit-git",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "app2unit-git"
+    ]
+  },
+  {
+    "id": "pkg-update:aur:cbonsai:1.4.2-1",
+    "date": "2025-06-21",
+    "title": "cbonsai updated to 1.4.2-1",
+    "summary": "1.4.2-1 → 1.4.2-1",
+    "url": "https://aur.archlinux.org/packages/cbonsai",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cbonsai"
+    ]
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-6",
+    "date": "2025-06-12",
+    "title": "[ASA-202506-6] python-django: content spoofing",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-6",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-5",
+    "date": "2025-06-11",
+    "title": "[ASA-202506-5] konsole: arbitrary code execution",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-5",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-4",
+    "date": "2025-06-07",
+    "title": "[ASA-202506-4] go: multiple issues",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-4",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-3",
+    "date": "2025-06-06",
+    "title": "[ASA-202506-3] samba: access restriction bypass",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-3",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-2",
+    "date": "2025-06-05",
+    "title": "[ASA-202506-2] curl: denial of service",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-2",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202506-1",
+    "date": "2025-06-04",
+    "title": "[ASA-202506-1] roundcubemail: arbitrary code execution",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202506-1",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "pkg-update:aur:ack:3.9.0-1",
+    "date": "2025-05-27",
+    "title": "ack updated to 3.9.0-1",
+    "summary": "3.9.0-1 → 3.9.0-1",
+    "url": "https://aur.archlinux.org/packages/ack",
+    "source": "AurPackageUpdate",
+    "severity": null,
+    "packages": [
+      "ack"
+    ]
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-15",
+    "date": "2025-05-24",
+    "title": "[ASA-202505-15] ghostscript: information disclosure",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-15",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-14",
+    "date": "2025-05-21",
+    "title": "[ASA-202505-14] bind: denial of service",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-14",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-13",
+    "date": "2025-05-20",
+    "title": "[ASA-202505-13] varnish: content spoofing",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-13",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-9",
+    "date": "2025-05-19",
+    "title": "[ASA-202505-9] dropbear: arbitrary command execution",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-9",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-10",
+    "date": "2025-05-19",
+    "title": "[ASA-202505-10] python-django: denial of service",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-10",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-11",
+    "date": "2025-05-19",
+    "title": "[ASA-202505-11] freetype2: arbitrary code execution",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-11",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-12",
+    "date": "2025-05-19",
+    "title": "[ASA-202505-12] go: directory traversal",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-12",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-7",
+    "date": "2025-05-18",
+    "title": "[ASA-202505-7] nodejs-lts-jod: denial of service",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-7",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "https://security.archlinux.org/ASA-202505-8",
+    "date": "2025-05-18",
+    "title": "[ASA-202505-8] nodejs-lts-iron: multiple issues",
+    "summary": null,
+    "url": "https://security.archlinux.org/ASA-202505-8",
+    "source": "SecurityAdvisory",
+    "severity": "Unknown",
+    "packages": []
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-1020419",
+    "date": "2025-04-20",
+    "title": "New AUR comment on aria2-git",
+    "summary": "@tee: Dunno why this issue now appears. And sadly not sure how to fix this.\nBut it seems to be a general issue: [https://github.com/aria2/aria2/issues/2289](https://github.com/aria…",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-1020419",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1019232",
+    "date": "2025-04-10",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "@alba4k yeah sure it's possible",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1019232",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1019134",
+    "date": "2025-04-10",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "hey, I was wondering if you'd mind adding me as co, mainly so I could add this package to [https://github.com/alba4k/hyprwm-pkgbuilds](https://github.com/alba4k/hyprwm-pkgbuilds) (…",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1019134",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1009409",
+    "date": "2025-01-31",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "seatd isn't required for aquamarine and Hyprland to be built and work.  See [https://github.com/hyprwm/hyprland-wiki/pull/960](https://github.com/hyprwm/hyprland-wiki/pull/960)",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1009409",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-1006215",
+    "date": "2025-01-11",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "Please stop making the package out of date, it's a git version i don't have to update the SRCINFO and pkgbuild. The package build fine for now, if it don't work it's because you do…",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-1006215",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "aur-comment:affine-canary-bin:comment-1000173",
+    "date": "2024-11-28",
+    "title": "New AUR comment on affine-canary-bin",
+    "summary": "@Floris What do you mean by that ? Use `electron13` instead of `electron33` ?",
+    "url": "https://aur.archlinux.org/packages/affine-canary-bin#comment-1000173",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "affine-canary-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:affine-canary-bin:comment-1000123",
+    "date": "2024-11-28",
+    "title": "New AUR comment on affine-canary-bin",
+    "summary": "wget [https://github.com/electron/electron/releases/download/v13.6.9/electron-v13.6.9-linux-x64.zip](https://github.com/electron/electron/releases/download/v13.6.9/electron-v13.6.9…",
+    "url": "https://aur.archlinux.org/packages/affine-canary-bin#comment-1000123",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "affine-canary-bin"
+    ]
+  },
+  {
+    "id": "pkg-update:official:base-devel:1-2",
+    "date": "2024-09-07",
+    "title": "base-devel",
+    "summary": null,
+    "url": "https://archlinux.org/packages/core/any/base-devel/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "base-devel"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-989772",
+    "date": "2024-09-07",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "If anyone else is having trouble launching hyprland and getting `libaquamarine.so.2 No such file or directory or similar`, just launch a TTY and rebuild first aquamarine-git, then …",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-989772",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:bat-extras:2024.08.24-1",
+    "date": "2024-08-26",
+    "title": "bat-extras",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/bat-extras/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "bat-extras"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-987861",
+    "date": "2024-08-25",
+    "title": "New AUR comment on aria2-git",
+    "summary": "Fair question. I thought I synced it with the regular aria2 package when I took ownership, but apparantly not.\nAlthough I didn't check if it auto-enables if `libssh2` is detected.\n…",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-987861",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-987642",
+    "date": "2024-08-23",
+    "title": "New AUR comment on aria2-git",
+    "summary": "why does the PKGBUILD grab the dependency libssh2 without compiling with it? --with-libssh2 enables sftp and ssh with aria2",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-987642",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:cdrtools:3.02a09-6",
+    "date": "2024-07-27",
+    "title": "cdrtools",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/cdrtools/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "cdrtools"
+    ]
+  },
+  {
+    "id": "aur-comment:aquamarine-git:comment-983362",
+    "date": "2024-07-22",
+    "title": "New AUR comment on aquamarine-git",
+    "summary": "This improved patch has now been merged\nIf DisplayLink/Evdi isn't working out of the box for multi-monitors, and you are using a single integrated GPU (e.g. intel), see this issue …",
+    "url": "https://aur.archlinux.org/packages/aquamarine-git#comment-983362",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aquamarine-git"
+    ]
+  },
+  {
+    "id": "pkg-update:official:brightnessctl:0.5.1-3",
+    "date": "2024-07-12",
+    "title": "brightnessctl",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/brightnessctl/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "brightnessctl"
+    ]
+  },
+  {
+    "id": "pkg-update:official:asciiquarium:1.1-7",
+    "date": "2024-07-11",
+    "title": "asciiquarium",
+    "summary": null,
+    "url": "https://archlinux.org/packages/extra/x86_64/asciiquarium/",
+    "source": "InstalledPackageUpdate",
+    "severity": null,
+    "packages": [
+      "asciiquarium"
+    ]
+  },
+  {
+    "id": "aur-comment:amber-search-git:comment-976567",
+    "date": "2024-06-04",
+    "title": "New AUR comment on amber-search-git",
+    "summary": "Should be fixed now",
+    "url": "https://aur.archlinux.org/packages/amber-search-git#comment-976567",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "amber-search-git"
+    ]
+  },
+  {
+    "id": "aur-comment:amber-search-git:comment-976507",
+    "date": "2024-06-04",
+    "title": "New AUR comment on amber-search-git",
+    "summary": "I fail to update the package with this error:\n    Updating crates.io index\nerror: failed to get `directories` as a dependency of package `amber v0.6.0 (/home/michi/.cache/yay/amber…",
+    "url": "https://aur.archlinux.org/packages/amber-search-git#comment-976507",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "amber-search-git"
+    ]
+  },
+  {
+    "id": "aur-comment:act-bin:comment-918470",
+    "date": "2023-06-09",
+    "title": "New AUR comment on act-bin",
+    "summary": "Maybe add `docker` as dep?",
+    "url": "https://aur.archlinux.org/packages/act-bin#comment-918470",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "act-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:act-bin:comment-819225",
+    "date": "2021-07-28",
+    "title": "New AUR comment on act-bin",
+    "summary": "When you update the package, please remember to update the `.SRCINFO` file. You can do this by running `makepkg --printsrcinfo > .SRCINFO` after you update the `.PKGINFO` file.",
+    "url": "https://aur.archlinux.org/packages/act-bin#comment-819225",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "act-bin"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-616190",
+    "date": "2017-10-13",
+    "title": "New AUR comment on aria2-git",
+    "summary": "Any update?",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-616190",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-612881",
+    "date": "2017-09-21",
+    "title": "New AUR comment on aria2-git",
+    "summary": "What happens to this? No updates?\n\nWhat about updating and applying the fast patch?\n\nhttps://aur.archlinux.org/packages/aria2-fast/",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-612881",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-543828",
+    "date": "2016-04-26",
+    "title": "New AUR comment on aria2-git",
+    "summary": "https://ptpb.pw/H-Gk",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-543828",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-543826",
+    "date": "2016-04-26",
+    "title": "New AUR comment on aria2-git",
+    "summary": "Easiest is to drop the python-sphinx makedepends, which the repo version doesn't have either.",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-543826",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  },
+  {
+    "id": "aur-comment:aria2-git:comment-542878",
+    "date": "2016-04-19",
+    "title": "New AUR comment on aria2-git",
+    "summary": "Fails on translations:\n\nBuild finished. The manual pages are in _build/man.\nmake[5]: Leaving directory '/home/aur/aria2-git/src/aria2/doc/manual-src/en'\nmake[4]: Leaving directory …",
+    "url": "https://aur.archlinux.org/packages/aria2-git#comment-542878",
+    "source": "AurComment",
+    "severity": null,
+    "packages": [
+      "aria2-git"
+    ]
+  }
+]

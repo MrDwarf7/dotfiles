@@ -1,0 +1,11 @@
+logs/
+logs/*
+
+./logs/
+./logs/*
+
+lists/official_json_cache/*
+lists/aur_json_cache/
+
+./lists/official_json_cache/
+./lists/aur_json_cache/

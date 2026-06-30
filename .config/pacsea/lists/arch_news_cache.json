@@ -1,0 +1,105 @@
+{
+  "data": [
+    {
+      "id": "https://archlinux.org/news/arch-linux-2026-leader-election-results/",
+      "date": "2026-06-04",
+      "title": "Arch Linux 2026 Leader Election Results",
+      "summary": null,
+      "url": "https://archlinux.org/news/arch-linux-2026-leader-election-results/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/breaking-changes-for-all-users-of-varnish-which-is-renamed-to-vinyl-cache/",
+      "date": "2026-05-25",
+      "title": "Breaking changes for all users of `varnish`, which is renamed to `vinyl-cache`",
+      "summary": null,
+      "url": "https://archlinux.org/news/breaking-changes-for-all-users-of-varnish-which-is-renamed-to-vinyl-cache/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/kea-1303-6-update-requires-manual-intervention/",
+      "date": "2026-04-07",
+      "title": "kea &gt;= 1:3.0.3-6 update requires manual intervention",
+      "summary": null,
+      "url": "https://archlinux.org/news/kea-1303-6-update-requires-manual-intervention/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/iptables-now-defaults-to-the-nft-backend/",
+      "date": "2026-04-05",
+      "title": "iptables now defaults to the nft backend",
+      "summary": null,
+      "url": "https://archlinux.org/news/iptables-now-defaults-to-the-nft-backend/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/",
+      "date": "2025-12-20",
+      "title": "NVIDIA 590 driver drops Pascal and lower support; main packages switch to Open Kernel Modules",
+      "summary": null,
+      "url": "https://archlinux.org/news/nvidia-590-driver-drops-pascal-support-main-packages-switch-to-open-kernel-modules/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/net-packages-may-require-manual-intervention/",
+      "date": "2025-12-11",
+      "title": ".NET packages may require manual intervention",
+      "summary": null,
+      "url": "https://archlinux.org/news/net-packages-may-require-manual-intervention/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/waydroid-154-3-update-may-require-manual-intervention/",
+      "date": "2025-11-06",
+      "title": "waydroid &gt;= 1.5.4-3 update may require manual intervention",
+      "summary": null,
+      "url": "https://archlinux.org/news/waydroid-154-3-update-may-require-manual-intervention/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/dovecot-24-requires-manual-intervention/",
+      "date": "2025-10-31",
+      "title": "dovecot &gt;= 2.4 requires manual intervention",
+      "summary": null,
+      "url": "https://archlinux.org/news/dovecot-24-requires-manual-intervention/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/recent-services-outages/",
+      "date": "2025-08-21",
+      "title": "Recent service outages",
+      "summary": null,
+      "url": "https://archlinux.org/news/recent-services-outages/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    },
+    {
+      "id": "https://archlinux.org/news/zabbix-741-2-may-requires-manual-intervention/",
+      "date": "2025-08-04",
+      "title": "zabbix &gt;= 7.4.1-2 may require manual intervention",
+      "summary": null,
+      "url": "https://archlinux.org/news/zabbix-741-2-may-requires-manual-intervention/",
+      "source": "ArchNews",
+      "severity": null,
+      "packages": []
+    }
+  ],
+  "saved_at": 1780885609
+}
