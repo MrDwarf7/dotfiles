@@ -1,14 +1,12 @@
 #!/usr/bin/env fish
 #
 
-
 set k_help h
 set k_skip s
 set k_mirror m
 set k_rustup r
 set k_packages p
 set k_shutdown d
-
 
 function __sysup_cmp
     complete -c sysup -s $k_help -l help -d 'Show this help message and exit'
@@ -17,7 +15,6 @@ function __sysup_cmp
     complete -c sysup -s $k_shutdown -l shutdown -d 'Shutdown the system after update completes. Only works if the update completes successfully.'
     return 0
 end
-
 
 # Renders help for the sysup function
 #
@@ -150,7 +147,6 @@ function sysup --description 'System update function'
     end
 
     colorize green "[SYSUP] System update complete!\n"
-
 
     if set -q _flag_shutdown
         colorize yellow "[SYSUP] Shutting down system in $shutdown_waittime_mins minute(s). Press Ctrl-C to cancel.\n"
