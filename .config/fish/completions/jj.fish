@@ -1,6 +1,6 @@
 # Print an optspec for argparse to handle cmd's options that are independent of any subcommand.
 function __fish_jj_global_optspecs
-	string join \n R/repository= ignore-working-copy ignore-immutable at-operation= debug color= quiet no-pager config= config-file= h/help V/version
+	string join \n R/repository= ignore-working-copy no-integrate-operation ignore-immutable at-operation= debug color= quiet no-pager config= config-file= h/help V/version
 end
 
 function __fish_jj_needs_command
@@ -33,6 +33,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_needs_command" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_needs_command" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_needs_command" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_needs_command" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_needs_command" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_needs_command" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_needs_command" -l quiet -d 'Silence non-primary command output'
@@ -75,8 +76,8 @@ complete -c jj -n "__fish_jj_needs_command" -f -a "resolve" -d 'Resolve conflict
 complete -c jj -n "__fish_jj_needs_command" -f -a "restore" -d 'Restore paths from another revision'
 complete -c jj -n "__fish_jj_needs_command" -f -a "revert" -d 'Apply the reverse of the given revision(s)'
 complete -c jj -n "__fish_jj_needs_command" -f -a "root" -d 'Show the current workspace root directory (shortcut for `jj workspace root`)'
-complete -c jj -n "__fish_jj_needs_command" -f -a "run" -d '(**Stub**, does not work yet) Run a command across a set of revisions.'
-complete -c jj -n "__fish_jj_needs_command" -f -a "show" -d 'Show commit description and changes in a revision'
+complete -c jj -n "__fish_jj_needs_command" -f -a "run" -d 'Run a command across a set of revisions.'
+complete -c jj -n "__fish_jj_needs_command" -f -a "show" -d 'Show revision metadata and diff'
 complete -c jj -n "__fish_jj_needs_command" -f -a "sign" -d 'Cryptographically sign a revision'
 complete -c jj -n "__fish_jj_needs_command" -f -a "simplify-parents" -d 'Simplify parent edges for the specified revision(s)'
 complete -c jj -n "__fish_jj_needs_command" -f -a "sparse" -d 'Manage which paths from the working-copy commit are present in the working copy'
@@ -101,6 +102,7 @@ complete -c jj -n "__fish_jj_using_subcommand abandon" -l config-file -d 'Additi
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l retain-bookmarks -d 'Do not delete bookmarks pointing to the revisions to abandon'
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l restore-descendants -d 'Do not modify the content of the children of the abandoned commits'
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand abandon" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand abandon" -l quiet -d 'Silence non-primary command output'
@@ -117,6 +119,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand absorb" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand absorb" -l quiet -d 'Silence non-primary command output'
@@ -132,6 +135,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand arrange" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand arrange" -l quiet -d 'Silence non-primary command output'
@@ -146,6 +150,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bench; and not __fish_seen_subcommand_from common-ancestors is-ancestor resolve-prefix revset" -l quiet -d 'Silence non-primary command output'
@@ -167,6 +172,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from common-ancestors" -l quiet -d 'Silence non-primary command output'
@@ -184,6 +190,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from is-ancestor" -l quiet -d 'Silence non-primary command output'
@@ -201,6 +208,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from resolve-prefix" -l quiet -d 'Silence non-primary command output'
@@ -219,6 +227,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bench; and __fish_seen_subcommand_from revset" -l quiet -d 'Silence non-primary command output'
@@ -233,13 +242,14 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and not __fish_seen_subcommand_from run" -f -a "run" -d 'Run a given command to find the first bad revision'
-complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -s r -l range -d 'Range of revisions to bisect' -r
+complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -s r -l range -d 'Range of revisions to bisect (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l command -d 'Deprecated. Use positional arguments instead' -r
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l at-operation -l at-op -d 'Operation to load the repo at' -r
@@ -249,8 +259,9 @@ debug\t''
 auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
-complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l find-good -d 'Whether to find the first good revision instead'
+complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l find-good -d 'Find the first good revision instead'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bisect; and __fish_seen_subcommand_from run" -l quiet -d 'Silence non-primary command output'
@@ -265,6 +276,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and not __fish_seen_subcommand_from advance a create c delete d forget f list l move m rename r set s track t untrack" -l quiet -d 'Silence non-primary command output'
@@ -299,6 +311,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from advance" -l quiet -d 'Silence non-primary command output'
@@ -314,6 +327,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from a" -l quiet -d 'Silence non-primary command output'
@@ -329,6 +343,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from create" -l quiet -d 'Silence non-primary command output'
@@ -344,6 +359,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from c" -l quiet -d 'Silence non-primary command output'
@@ -358,6 +374,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from delete" -l quiet -d 'Silence non-primary command output'
@@ -372,6 +389,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from d" -l quiet -d 'Silence non-primary command output'
@@ -387,6 +405,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l include-remotes -d 'When forgetting a local bookmark, also forget any corresponding remote bookmarks'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from forget" -l quiet -d 'Silence non-primary command output'
@@ -402,6 +421,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l include-remotes -d 'When forgetting a local bookmark, also forget any corresponding remote bookmarks'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from f" -l quiet -d 'Silence non-primary command output'
@@ -436,6 +456,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -s t -l tracked -d 'Show tracked remote bookmarks only'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -s c -l conflicted -d 'Show conflicted bookmarks only'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
@@ -470,6 +491,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -s t -l tracked -d 'Show tracked remote bookmarks only'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -s c -l conflicted -d 'Show conflicted bookmarks only'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from l" -l quiet -d 'Silence non-primary command output'
@@ -487,6 +509,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -s B -l allow-backwards -d 'Allow moving bookmarks backwards or sideways'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from move" -l quiet -d 'Silence non-primary command output'
@@ -504,6 +527,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -s B -l allow-backwards -d 'Allow moving bookmarks backwards or sideways'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from m" -l quiet -d 'Silence non-primary command output'
@@ -519,6 +543,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l overwrite-existing -d 'Allow renaming even if the new bookmark name already exists'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from rename" -l quiet -d 'Silence non-primary command output'
@@ -534,6 +559,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l overwrite-existing -d 'Allow renaming even if the new bookmark name already exists'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from r" -l quiet -d 'Silence non-primary command output'
@@ -550,6 +576,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -s B -l allow-backwards -d 'Allow moving the bookmark backwards or sideways'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from set" -l quiet -d 'Silence non-primary command output'
@@ -566,6 +593,7 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -s B -l allow-backwards -d 'Allow moving the bookmark backwards or sideways'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from s" -l quiet -d 'Silence non-primary command output'
@@ -581,6 +609,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from track" -l quiet -d 'Silence non-primary command output'
@@ -596,6 +625,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from t" -l quiet -d 'Silence non-primary command output'
@@ -611,6 +641,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -l quiet -d 'Silence non-primary command output'
@@ -618,7 +649,6 @@ complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcomma
 complete -c jj -n "__fish_jj_using_subcommand bookmark; and __fish_seen_subcommand_from untrack" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l tool -d 'Specify diff editor to be used (implies --interactive)' -r
 complete -c jj -n "__fish_jj_using_subcommand commit" -s m -l message -d 'The change description to use (don\'t open editor)' -r
-complete -c jj -n "__fish_jj_using_subcommand commit" -l author -d 'Set author to the provided string' -r
 complete -c jj -n "__fish_jj_using_subcommand commit" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand commit" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand commit" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -629,39 +659,41 @@ complete -c jj -n "__fish_jj_using_subcommand commit" -l config -d 'Additional c
 complete -c jj -n "__fish_jj_using_subcommand commit" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand commit" -s i -l interactive -d 'Interactively choose which changes to include in the current commit'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l editor -d 'Open an editor to edit the change description'
-complete -c jj -n "__fish_jj_using_subcommand commit" -l reset-author -d 'Reset the author to the configured user'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand commit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand commit" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand commit" -s h -l help -d 'Print help (see more with \'--help\')'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l at-operation -l at-op -d 'Operation to load the repo at' -r
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l color -d 'When to colorize output' -r -f -a "always\t''
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l at-operation -l at-op -d 'Operation to load the repo at' -r
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l color -d 'When to colorize output' -r -f -a "always\t''
 never\t''
 debug\t''
 auto\t''"
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l config -d 'Additional configuration options (can be repeated)' -r
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l ignore-immutable -d 'Allow rewriting immutable commits'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l debug -d 'Enable debug logging'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l quiet -d 'Silence non-primary command output'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -l no-pager -d 'Disable the pager'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -s h -l help -d 'Print help (see more with \'--help\')'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "edit" -d 'Start an editor on a jj config file'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "e" -d 'Start an editor on a jj config file'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "get" -d 'Get the value of a given config option.'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "g" -d 'Get the value of a given config option.'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "list" -d 'List variables set in config files, along with their values'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "l" -d 'List variables set in config files, along with their values'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "path" -d 'Print the paths to the config files'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "p" -d 'Print the paths to the config files'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "set" -d 'Update a config file to set the given option to a given value'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "s" -d 'Update a config file to set the given option to a given value'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "unset" -d 'Update a config file to unset the given option'
-complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e get g list l path p set s unset u" -f -a "u" -d 'Update a config file to unset the given option'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l config -d 'Additional configuration options (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l ignore-immutable -d 'Allow rewriting immutable commits'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l debug -d 'Enable debug logging'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l quiet -d 'Silence non-primary command output'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -l no-pager -d 'Disable the pager'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -s h -l help -d 'Print help (see more with \'--help\')'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "edit" -d 'Start an editor on a jj config file'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "e" -d 'Start an editor on a jj config file'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "gc" -d 'Find and optionally delete repo-level config directories whose repo path no longer exists'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "get" -d 'Get the value of a given config option.'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "g" -d 'Get the value of a given config option.'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "list" -d 'List variables set in config files, along with their values'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "l" -d 'List variables set in config files, along with their values'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "path" -d 'Print the paths to the config files'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "p" -d 'Print the paths to the config files'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "set" -d 'Update a config file to set the given option to a given value'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "s" -d 'Update a config file to set the given option to a given value'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "unset" -d 'Update a config file to unset the given option'
+complete -c jj -n "__fish_jj_using_subcommand config; and not __fish_seen_subcommand_from edit e gc get g list l path p set s unset u" -f -a "u" -d 'Update a config file to unset the given option'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -674,6 +706,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from edit" -l quiet -d 'Silence non-primary command output'
@@ -691,11 +724,27 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from e" -s h -l help -d 'Print help (see more with \'--help\')'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l at-operation -l at-op -d 'Operation to load the repo at' -r
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l color -d 'When to colorize output' -r -f -a "always\t''
+never\t''
+debug\t''
+auto\t''"
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l config -d 'Additional configuration options (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l ignore-immutable -d 'Allow rewriting immutable commits'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l debug -d 'Enable debug logging'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l quiet -d 'Silence non-primary command output'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -l no-pager -d 'Disable the pager'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from gc" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -705,6 +754,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from get" -l quiet -d 'Silence non-primary command output'
@@ -719,6 +769,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from g" -l quiet -d 'Silence non-primary command output'
@@ -739,6 +790,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
@@ -759,6 +811,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from l" -l quiet -d 'Silence non-primary command output'
@@ -776,6 +829,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from path" -l quiet -d 'Silence non-primary command output'
@@ -793,6 +847,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from p" -l quiet -d 'Silence non-primary command output'
@@ -810,6 +865,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from set" -l quiet -d 'Silence non-primary command output'
@@ -827,6 +883,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from s" -l quiet -d 'Silence non-primary command output'
@@ -844,6 +901,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from unset" -l quiet -d 'Silence non-primary command output'
@@ -861,6 +919,7 @@ complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l repo -d 'Target the repo-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l workspace -d 'Target the workspace-level config'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand config; and __fish_seen_subcommand_from u" -l quiet -d 'Silence non-primary command output'
@@ -875,6 +934,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and not __fish_seen_subcommand_from copy-detection fileset index index-changed-paths init-simple local-working-copy object reindex revset snapshot stacked-table template tree watchman working-copy" -l quiet -d 'Silence non-primary command output'
@@ -904,6 +964,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from copy-detection" -l quiet -d 'Silence non-primary command output'
@@ -918,6 +979,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from fileset" -l quiet -d 'Silence non-primary command output'
@@ -932,6 +994,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index" -l quiet -d 'Silence non-primary command output'
@@ -947,6 +1010,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from index-changed-paths" -l quiet -d 'Silence non-primary command output'
@@ -961,6 +1025,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from init-simple" -l quiet -d 'Silence non-primary command output'
@@ -975,6 +1040,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from local-working-copy" -l quiet -d 'Silence non-primary command output'
@@ -989,6 +1055,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from object" -l quiet -d 'Silence non-primary command output'
@@ -1009,6 +1076,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from reindex" -l quiet -d 'Silence non-primary command output'
@@ -1025,6 +1093,7 @@ complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l no-resolve -d 'Do not resolve and evaluate expression'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l no-optimize -d 'Do not rewrite expression to optimized form'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from revset" -l quiet -d 'Silence non-primary command output'
@@ -1039,6 +1108,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from snapshot" -l quiet -d 'Silence non-primary command output'
@@ -1054,6 +1124,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from stacked-table" -l quiet -d 'Silence non-primary command output'
@@ -1068,6 +1139,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from template" -l quiet -d 'Silence non-primary command output'
@@ -1085,6 +1157,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from tree" -l quiet -d 'Silence non-primary command output'
@@ -1099,6 +1172,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from watchman" -l quiet -d 'Silence non-primary command output'
@@ -1117,6 +1191,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -l quiet -d 'Silence non-primary command output'
@@ -1124,7 +1199,6 @@ complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_
 complete -c jj -n "__fish_jj_using_subcommand debug; and __fish_seen_subcommand_from working-copy" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand describe" -s r -r
 complete -c jj -n "__fish_jj_using_subcommand describe" -s m -l message -d 'The change description to use (don\'t open editor)' -r
-complete -c jj -n "__fish_jj_using_subcommand describe" -l author -d 'Set author to the provided string' -r
 complete -c jj -n "__fish_jj_using_subcommand describe" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand describe" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand describe" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -1134,11 +1208,9 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand describe" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand describe" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand describe" -l stdin -d 'Read the change description from stdin'
-complete -c jj -n "__fish_jj_using_subcommand describe" -l no-edit -d 'Don\'t open an editor'
 complete -c jj -n "__fish_jj_using_subcommand describe" -l editor -d 'Open an editor to edit the change description'
-complete -c jj -n "__fish_jj_using_subcommand describe" -l edit -d 'Open an editor to edit the change description'
-complete -c jj -n "__fish_jj_using_subcommand describe" -l reset-author -d 'Reset the author name, email, and timestamp'
 complete -c jj -n "__fish_jj_using_subcommand describe" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand describe" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand describe" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand describe" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand describe" -l quiet -d 'Silence non-primary command output'
@@ -1167,6 +1239,7 @@ complete -c jj -n "__fish_jj_using_subcommand diff" -l color-words -d 'Show a wo
 complete -c jj -n "__fish_jj_using_subcommand diff" -s w -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand diff" -s b -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand diff" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand diff" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand diff" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand diff" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand diff" -l quiet -d 'Silence non-primary command output'
@@ -1186,6 +1259,7 @@ complete -c jj -n "__fish_jj_using_subcommand diffedit" -l config -d 'Additional
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l restore-descendants -d 'Preserve the content (not the diff) when rebasing descendants'
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand diffedit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand diffedit" -l quiet -d 'Silence non-primary command output'
@@ -1204,6 +1278,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand duplicate" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand duplicate" -l quiet -d 'Silence non-primary command output'
@@ -1219,6 +1294,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand edit" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand edit" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand edit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand edit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand edit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand edit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand edit" -l quiet -d 'Silence non-primary command output'
@@ -1249,6 +1325,7 @@ complete -c jj -n "__fish_jj_using_subcommand evolog" -l color-words -d 'Show a 
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand evolog" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand evolog" -l quiet -d 'Silence non-primary command output'
@@ -1279,6 +1356,7 @@ complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l color-words -d '
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand evolution-log" -l quiet -d 'Silence non-primary command output'
@@ -1293,6 +1371,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and not __fish_seen_subcommand_from annotate chmod list search show track untrack" -l quiet -d 'Silence non-primary command output'
@@ -1316,6 +1395,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from annotate" -l quiet -d 'Silence non-primary command output'
@@ -1331,6 +1411,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from chmod" -l quiet -d 'Silence non-primary command output'
@@ -1347,13 +1428,14 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from list" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -s r -l revision -d 'The revision to search files in' -r
-complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -s p -l pattern -d 'The glob pattern to search for' -r
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -s p -l pattern -d 'The pattern to search for in a single line' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -1363,6 +1445,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from search" -l quiet -d 'Silence non-primary command output'
@@ -1379,6 +1462,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from show" -l quiet -d 'Silence non-primary command output'
@@ -1394,6 +1478,7 @@ complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_f
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l include-ignored -d 'Track paths even if they\'re ignored or too large'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from track" -l quiet -d 'Silence non-primary command output'
@@ -1408,6 +1493,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand file; and __fish_seen_subcommand_from untrack" -l quiet -d 'Silence non-primary command output'
@@ -1423,7 +1509,9 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand fix" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand fix" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand fix" -l include-unchanged-files -d 'Fix unchanged files in addition to changed ones. If no paths are specified, all files in the repo will be fixed'
+complete -c jj -n "__fish_jj_using_subcommand fix" -s a -l all-lines -d 'Format all lines instead of only modified lines'
 complete -c jj -n "__fish_jj_using_subcommand fix" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand fix" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand fix" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand fix" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand fix" -l quiet -d 'Silence non-primary command output'
@@ -1438,6 +1526,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and not __fish_seen_subcommand_from upload" -l quiet -d 'Silence non-primary command output'
@@ -1451,13 +1540,15 @@ complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l cc -d 'CC these emails on the change (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -s l -l label -d 'Add the following labels configured by Gerrit (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l topic -d 'Applies a topic to the change' -r
-complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l hashtag -d 'Applies a hashtag to the change' -r
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l hashtag -d 'Applies a hashtag to the change (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -s m -l message -d 'A patch set description for the new patch set' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l notify -d 'Who to email notifications to (defaults to all)' -r -f -a "none\t'No emails'
 owner\t'Only the change owner is notified'
 owner-reviewers\t'Only the change owner and reviewers will be notified'
 all\t'All relevant users, including owner, reviewers, cc\'d, users that have starred the change, and users who have configured a watch on files in the change'"
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l deadline -d 'The deadline after which the push should be aborted' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l custom -d 'Send the following custom keyed values to Gerrit (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -s o -l option -d 'Send a `git push -o` option (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l trace -d 'For debugging Gerrit' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l at-operation -l at-op -d 'Operation to load the repo at' -r
@@ -1468,6 +1559,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -s n -l dry-run -d 'Do not actually push the changes to Gerrit'
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l edit -d 'Push the change as a change edit'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l wip -d 'Marks the change as WIP (work in progress)'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l ready -d 'Unmarks the change as WIP (work in progress)'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l private -d 'Marks the change as private'
@@ -1476,8 +1568,10 @@ complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l no-publish-comments -d 'Disables publishing of any draft comments for the given change'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l submit -d 'Directly submit the changes, bypassing code review'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l skip-validation -d 'When --submit is provided, skip performing validations'
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l merged -d 'Create a new change, even if the change has already been merged'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l ignore-attention-set -d 'Do not modify the attention set upon uploading'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand gerrit; and __fish_seen_subcommand_from upload" -l quiet -d 'Silence non-primary command output'
@@ -1492,6 +1586,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and not __fish_seen_subcommand_from clone colocation export fetch import init push remote root" -l quiet -d 'Silence non-primary command output'
@@ -1512,6 +1607,7 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 included\t'Only fetch tags that point to objects that are already being transmitted'
 none\t'Do not fetch any tags'"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -s b -l branch -d 'Name of the branch to fetch and use as the parent of the working-copy change (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -s t -l tag -d 'Fetch only some of the tags (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -1523,6 +1619,7 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l colocate -d 'Colocate the Jujutsu repo with the git repo'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l no-colocate -d 'Disable colocation of the Jujutsu repo with the git repo'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from clone" -l quiet -d 'Silence non-primary command output'
@@ -1537,6 +1634,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from colocation" -l quiet -d 'Silence non-primary command output'
@@ -1554,6 +1652,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from export" -l quiet -d 'Silence non-primary command output'
@@ -1573,6 +1672,7 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l tracked -d 'Fetch only tracked bookmarks'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l all-remotes -d 'Fetch from all remotes'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from fetch" -l quiet -d 'Silence non-primary command output'
@@ -1587,6 +1687,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from import" -l quiet -d 'Silence non-primary command output'
@@ -1604,6 +1705,7 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l colocate -d 'Colocate the Jujutsu repo with the git repo'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l no-colocate -d 'Disable colocation of the Jujutsu repo with the git repo'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -l quiet -d 'Silence non-primary command output'
@@ -1611,6 +1713,7 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from init" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l remote -d 'The remote to push to (only named remotes are supported)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -s b -l bookmark -d 'Push only this bookmark, or bookmarks matching a pattern (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -s t -l tag -d 'Push only this tag, or tags matching a pattern (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -s r -l revision -d 'Push bookmarks pointing to these commits (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -s c -l change -d 'Push this commit by creating a bookmark (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l named -d 'Specify a new bookmark name and a revision to push under that name, e.g. \'--named myfeature=@\'' -r
@@ -1626,11 +1729,11 @@ complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l all -d 'Push all bookmarks (including new bookmarks)'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l tracked -d 'Push all tracked bookmarks'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l deleted -d 'Push all deleted bookmarks'
-complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -s N -l allow-new -d 'Allow pushing new bookmarks'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l allow-empty-description -d 'Allow pushing commits with empty descriptions'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l allow-private -d 'Allow pushing commits that are private'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l dry-run -d 'Only display what will change on the remote'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from push" -l quiet -d 'Silence non-primary command output'
@@ -1645,6 +1748,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from remote" -l quiet -d 'Silence non-primary command output'
@@ -1664,6 +1768,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand git; and __fish_seen_subcommand_from root" -l quiet -d 'Silence non-primary command output'
@@ -1685,6 +1790,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand help" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand help" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand help" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand help" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand help" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand help" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand help" -l quiet -d 'Silence non-primary command output'
@@ -1711,6 +1817,7 @@ complete -c jj -n "__fish_jj_using_subcommand interdiff" -l color-words -d 'Show
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -s w -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -s b -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand interdiff" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand interdiff" -l quiet -d 'Silence non-primary command output'
@@ -1742,6 +1849,7 @@ complete -c jj -n "__fish_jj_using_subcommand log" -l color-words -d 'Show a wor
 complete -c jj -n "__fish_jj_using_subcommand log" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand log" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand log" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand log" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand log" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand log" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand log" -l quiet -d 'Silence non-primary command output'
@@ -1763,8 +1871,8 @@ complete -c jj -n "__fish_jj_using_subcommand metaedit" -l update-change-id -d '
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l update-author-timestamp -d 'Update the author timestamp'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l update-author -d 'Update the author to the configured user'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l force-rewrite -d 'Rewrite the commit, even if no other metadata changed'
-complete -c jj -n "__fish_jj_using_subcommand metaedit" -l update-committer-timestamp -d 'Deprecated. Use `--force-rewrite` instead'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand metaedit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand metaedit" -l quiet -d 'Silence non-primary command output'
@@ -1785,6 +1893,7 @@ complete -c jj -n "__fish_jj_using_subcommand new" -l config-file -d 'Additional
 complete -c jj -n "__fish_jj_using_subcommand new" -l no-edit -d 'Do not edit the newly created change'
 complete -c jj -n "__fish_jj_using_subcommand new" -l edit -d 'No-op flag to pair with --no-edit'
 complete -c jj -n "__fish_jj_using_subcommand new" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand new" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand new" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand new" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand new" -l quiet -d 'Silence non-primary command output'
@@ -1802,6 +1911,7 @@ complete -c jj -n "__fish_jj_using_subcommand next" -s e -l edit -d 'Instead of 
 complete -c jj -n "__fish_jj_using_subcommand next" -s n -l no-edit -d 'The inverse of `--edit`'
 complete -c jj -n "__fish_jj_using_subcommand next" -l conflict -d 'Jump to the next conflicted descendant'
 complete -c jj -n "__fish_jj_using_subcommand next" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand next" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand next" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand next" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand next" -l quiet -d 'Silence non-primary command output'
@@ -1816,6 +1926,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l quiet -d 'Silence non-primary command output'
@@ -1837,6 +1948,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from abandon" -l quiet -d 'Silence non-primary command output'
@@ -1867,6 +1979,7 @@ complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcomm
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from diff" -l quiet -d 'Silence non-primary command output'
@@ -1881,6 +1994,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from integrate" -l quiet -d 'Silence non-primary command output'
@@ -1912,6 +2026,7 @@ complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcomm
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from log" -l quiet -d 'Silence non-primary command output'
@@ -1928,6 +2043,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from restore" -l quiet -d 'Silence non-primary command output'
@@ -1944,6 +2060,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from revert" -l quiet -d 'Silence non-primary command output'
@@ -1973,6 +2090,7 @@ complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcomm
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand operation; and __fish_seen_subcommand_from show" -l quiet -d 'Silence non-primary command output'
@@ -1987,6 +2105,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and not __fish_seen_subcommand_from abandon diff integrate log restore revert show" -l quiet -d 'Silence non-primary command output'
@@ -2008,6 +2127,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from abandon" -l quiet -d 'Silence non-primary command output'
@@ -2038,6 +2158,7 @@ complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_fro
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from diff" -l quiet -d 'Silence non-primary command output'
@@ -2052,6 +2173,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from integrate" -l quiet -d 'Silence non-primary command output'
@@ -2083,6 +2205,7 @@ complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_fro
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from log" -l quiet -d 'Silence non-primary command output'
@@ -2099,6 +2222,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from restore" -l quiet -d 'Silence non-primary command output'
@@ -2115,6 +2239,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from revert" -l quiet -d 'Silence non-primary command output'
@@ -2144,6 +2269,7 @@ complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_fro
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand op; and __fish_seen_subcommand_from show" -l quiet -d 'Silence non-primary command output'
@@ -2159,6 +2285,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand parallelize" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand parallelize" -l quiet -d 'Silence non-primary command output'
@@ -2176,6 +2303,7 @@ complete -c jj -n "__fish_jj_using_subcommand prev" -s e -l edit -d 'Edit the pa
 complete -c jj -n "__fish_jj_using_subcommand prev" -s n -l no-edit -d 'The inverse of `--edit`'
 complete -c jj -n "__fish_jj_using_subcommand prev" -l conflict -d 'Jump to the previous conflicted ancestor'
 complete -c jj -n "__fish_jj_using_subcommand prev" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand prev" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand prev" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand prev" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand prev" -l quiet -d 'Silence non-primary command output'
@@ -2184,7 +2312,7 @@ complete -c jj -n "__fish_jj_using_subcommand prev" -s h -l help -d 'Print help 
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s b -l branch -d 'Rebase the whole branch relative to destination\'s ancestors (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s s -l source -d 'Rebase specified revision(s) together with their trees of descendants (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s r -l revision -d 'Rebase the given revisions, rebasing descendants onto this revision\'s parent(s)' -r
-complete -c jj -n "__fish_jj_using_subcommand rebase" -s o -s d -l onto -d 'The revision(s) to rebase onto (can be repeated to create a merge commit)' -r
+complete -c jj -n "__fish_jj_using_subcommand rebase" -s o -s d -l onto -l destination -d 'The revision(s) to rebase onto (can be repeated to create a merge commit)' -r
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s A -l insert-after -l after -d 'The revision(s) to insert after (can be repeated to create a merge commit)' -r
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s B -l insert-before -l before -d 'The revision(s) to insert before (can be repeated to create a merge commit)' -r
 complete -c jj -n "__fish_jj_using_subcommand rebase" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
@@ -2199,6 +2327,7 @@ complete -c jj -n "__fish_jj_using_subcommand rebase" -l skip-emptied -d 'If tru
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l keep-divergent -d 'Keep divergent commits while rebasing'
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l simplify-parents -d 'Simplify parents of rebased commits, like `jj simplify-parents`, while rebasing them. Any parents that are ancestors of other parents will be removed'
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand rebase" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand rebase" -l quiet -d 'Silence non-primary command output'
@@ -2213,6 +2342,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand redo" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand redo" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand redo" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand redo" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand redo" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand redo" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand redo" -l quiet -d 'Silence non-primary command output'
@@ -2230,6 +2360,7 @@ complete -c jj -n "__fish_jj_using_subcommand resolve" -l config -d 'Additional 
 complete -c jj -n "__fish_jj_using_subcommand resolve" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand resolve" -s l -l list -d 'Instead of resolving conflicts, list all the conflicts'
 complete -c jj -n "__fish_jj_using_subcommand resolve" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand resolve" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand resolve" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand resolve" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand resolve" -l quiet -d 'Silence non-primary command output'
@@ -2251,6 +2382,7 @@ complete -c jj -n "__fish_jj_using_subcommand restore" -l config-file -d 'Additi
 complete -c jj -n "__fish_jj_using_subcommand restore" -s i -l interactive -d 'Interactively choose which parts to restore'
 complete -c jj -n "__fish_jj_using_subcommand restore" -l restore-descendants -d 'Preserve the content (not the diff) when rebasing descendants'
 complete -c jj -n "__fish_jj_using_subcommand restore" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand restore" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand restore" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand restore" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand restore" -l quiet -d 'Silence non-primary command output'
@@ -2269,6 +2401,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand revert" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand revert" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand revert" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand revert" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand revert" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand revert" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand revert" -l quiet -d 'Silence non-primary command output'
@@ -2283,13 +2416,14 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand root" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand root" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand root" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand root" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand root" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand root" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand root" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand root" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand root" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand run" -s r -l revision -d 'The revisions to change' -r
-complete -c jj -n "__fish_jj_using_subcommand run" -s j -l jobs -d 'How many processes should run in parallel, uses by default all cores' -r
+complete -c jj -n "__fish_jj_using_subcommand run" -s j -l jobs -d 'How many processes should run in parallel' -r
 complete -c jj -n "__fish_jj_using_subcommand run" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand run" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand run" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -2299,14 +2433,18 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand run" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand run" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand run" -s x -d 'A no-op option to match the interface of `git rebase -x`'
+complete -c jj -n "__fish_jj_using_subcommand run" -l root -d 'Run the command from the working-copy root in each commit instead of from the subdirectory `jj run` was invoked from'
+complete -c jj -n "__fish_jj_using_subcommand run" -l clean -d 'Delete each working copy before running the command'
+complete -c jj -n "__fish_jj_using_subcommand run" -l restore-descendants -d 'Preserve the content (not the diff) when rebasing descendants'
 complete -c jj -n "__fish_jj_using_subcommand run" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand run" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand run" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand run" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand run" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand run" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand run" -s h -l help -d 'Print help (see more with \'--help\')'
 complete -c jj -n "__fish_jj_using_subcommand show" -s r -r
-complete -c jj -n "__fish_jj_using_subcommand show" -s T -l template -d 'Render a revision using the given template' -r
+complete -c jj -n "__fish_jj_using_subcommand show" -s T -l template -d 'Render each revision using the given template' -r
 complete -c jj -n "__fish_jj_using_subcommand show" -l tool -d 'Generate diff by external command' -r
 complete -c jj -n "__fish_jj_using_subcommand show" -l context -d 'Number of lines of context to show' -r
 complete -c jj -n "__fish_jj_using_subcommand show" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
@@ -2317,6 +2455,7 @@ debug\t''
 auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand show" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand show" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
+complete -c jj -n "__fish_jj_using_subcommand show" -l reversed -d 'Show revisions in the opposite order (older revisions first)'
 complete -c jj -n "__fish_jj_using_subcommand show" -s s -l summary -d 'For each path, show only whether it was modified, added, or deleted'
 complete -c jj -n "__fish_jj_using_subcommand show" -l stat -d 'Show a histogram of the changes'
 complete -c jj -n "__fish_jj_using_subcommand show" -l types -d 'For each path, show only its type before and after'
@@ -2327,6 +2466,7 @@ complete -c jj -n "__fish_jj_using_subcommand show" -l no-patch -d 'Do not show 
 complete -c jj -n "__fish_jj_using_subcommand show" -s w -l ignore-all-space -d 'Ignore whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand show" -s b -l ignore-space-change -d 'Ignore changes in amount of whitespace when comparing lines'
 complete -c jj -n "__fish_jj_using_subcommand show" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand show" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand show" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand show" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand show" -l quiet -d 'Silence non-primary command output'
@@ -2343,6 +2483,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand sign" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand sign" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sign" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sign" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sign" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sign" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sign" -l quiet -d 'Silence non-primary command output'
@@ -2359,6 +2500,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand simplify-parents" -l quiet -d 'Silence non-primary command output'
@@ -2373,6 +2515,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and not __fish_seen_subcommand_from edit list reset set" -l quiet -d 'Silence non-primary command output'
@@ -2391,6 +2534,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from edit" -l quiet -d 'Silence non-primary command output'
@@ -2405,6 +2549,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
@@ -2419,6 +2564,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from reset" -l quiet -d 'Silence non-primary command output'
@@ -2436,6 +2582,7 @@ complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l clear -d 'Include no files in the working copy (combine with --add)'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand sparse; and __fish_seen_subcommand_from set" -l quiet -d 'Silence non-primary command output'
@@ -2446,7 +2593,7 @@ complete -c jj -n "__fish_jj_using_subcommand split" -s r -l revision -d 'The re
 complete -c jj -n "__fish_jj_using_subcommand split" -s o -s d -l onto -l destination -d 'The revision(s) to rebase the selected changes onto (can be repeated to create a merge commit)' -r
 complete -c jj -n "__fish_jj_using_subcommand split" -s A -l insert-after -l after -d 'The revision(s) to insert after (can be repeated to create a merge commit)' -r
 complete -c jj -n "__fish_jj_using_subcommand split" -s B -l insert-before -l before -d 'The revision(s) to insert before (can be repeated to create a merge commit)' -r
-complete -c jj -n "__fish_jj_using_subcommand split" -s m -l message -d 'The change description to use (don\'t open editor)' -r
+complete -c jj -n "__fish_jj_using_subcommand split" -s m -l message -d 'The change description to use for the selected changes (don\'t open editor)' -r
 complete -c jj -n "__fish_jj_using_subcommand split" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand split" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand split" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -2456,9 +2603,10 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand split" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand split" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand split" -s i -l interactive -d 'Interactively choose which parts to split'
-complete -c jj -n "__fish_jj_using_subcommand split" -l editor -d 'Open an editor to edit the change description'
+complete -c jj -n "__fish_jj_using_subcommand split" -l editor -d 'Open an editor to edit the change description(s)'
 complete -c jj -n "__fish_jj_using_subcommand split" -s p -l parallel -d 'Split the revision into two parallel revisions instead of a parent and child'
 complete -c jj -n "__fish_jj_using_subcommand split" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand split" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand split" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand split" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand split" -l quiet -d 'Silence non-primary command output'
@@ -2485,6 +2633,7 @@ complete -c jj -n "__fish_jj_using_subcommand squash" -l editor -d 'Open an edit
 complete -c jj -n "__fish_jj_using_subcommand squash" -s i -l interactive -d 'Interactively choose which parts to squash'
 complete -c jj -n "__fish_jj_using_subcommand squash" -s k -l keep-emptied -d 'The source revision will not be abandoned'
 complete -c jj -n "__fish_jj_using_subcommand squash" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand squash" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand squash" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand squash" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand squash" -l quiet -d 'Silence non-primary command output'
@@ -2499,6 +2648,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand status" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand status" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand status" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand status" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand status" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand status" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand status" -l quiet -d 'Silence non-primary command output'
@@ -2513,6 +2663,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and not __fish_seen_subcommand_from delete d list l set s" -l quiet -d 'Silence non-primary command output'
@@ -2533,6 +2684,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from delete" -l quiet -d 'Silence non-primary command output'
@@ -2547,6 +2699,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from d" -l quiet -d 'Silence non-primary command output'
@@ -2581,6 +2734,7 @@ complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -s t -l tracked -d 'Show tracked remote tags only'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -s c -l conflicted -d 'Show conflicted tags only'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
@@ -2615,6 +2769,7 @@ complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -s t -l tracked -d 'Show tracked remote tags only'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -s c -l conflicted -d 'Show conflicted tags only'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from l" -l quiet -d 'Silence non-primary command output'
@@ -2631,6 +2786,7 @@ complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l allow-move -d 'Allow moving existing tags'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from set" -l quiet -d 'Silence non-primary command output'
@@ -2647,6 +2803,7 @@ complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_fr
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l allow-move -d 'Allow moving existing tags'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand tag; and __fish_seen_subcommand_from s" -l quiet -d 'Silence non-primary command output'
@@ -2661,6 +2818,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand undo" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand undo" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand undo" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand undo" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand undo" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand undo" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand undo" -l quiet -d 'Silence non-primary command output'
@@ -2676,32 +2834,51 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand unsign" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l quiet -d 'Silence non-primary command output'
 complete -c jj -n "__fish_jj_using_subcommand unsign" -l no-pager -d 'Disable the pager'
 complete -c jj -n "__fish_jj_using_subcommand unsign" -s h -l help -d 'Print help (see more with \'--help\')'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l at-operation -l at-op -d 'Operation to load the repo at' -r
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l color -d 'When to colorize output' -r -f -a "always\t''
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l at-operation -l at-op -d 'Operation to load the repo at' -r
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l color -d 'When to colorize output' -r -f -a "always\t''
 never\t''
 debug\t''
 auto\t''"
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l config -d 'Additional configuration options (can be repeated)' -r
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l ignore-immutable -d 'Allow rewriting immutable commits'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l debug -d 'Enable debug logging'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l quiet -d 'Silence non-primary command output'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -l no-pager -d 'Disable the pager'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -s h -l help -d 'Print help (see more with \'--help\')'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "completion" -d 'Print a command-line-completion script'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "config-schema" -d 'Print the JSON schema for the jj TOML config format'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "exec" -d 'Execute an external command via jj'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "gc" -d 'Run backend-dependent garbage collection'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "install-man-pages" -d 'Install Jujutsu\'s manpages to the provided path'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "markdown-help" -d 'Print the CLI help for all subcommands in Markdown'
-complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "snapshot" -d 'Snapshot the working copy if needed'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l config -d 'Additional configuration options (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l ignore-immutable -d 'Allow rewriting immutable commits'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l debug -d 'Enable debug logging'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l quiet -d 'Silence non-primary command output'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -l no-pager -d 'Disable the pager'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -s h -l help -d 'Print help (see more with \'--help\')'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "backend" -d 'Commands relating to the backend used in the current repo'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "completion" -d 'Print a command-line-completion script'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "config-schema" -d 'Print the JSON schema for the jj TOML config format'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "exec" -d 'Execute an external command via jj'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "gc" -d 'Run backend-dependent garbage collection'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "install-man-pages" -d 'Install Jujutsu\'s manpages to the provided path'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "markdown-help" -d 'Print the CLI help for all subcommands in Markdown'
+complete -c jj -n "__fish_jj_using_subcommand util; and not __fish_seen_subcommand_from backend completion config-schema exec gc install-man-pages markdown-help snapshot" -f -a "snapshot" -d 'Snapshot the working copy if needed'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l at-operation -l at-op -d 'Operation to load the repo at' -r
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l color -d 'When to colorize output' -r -f -a "always\t''
+never\t''
+debug\t''
+auto\t''"
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l config -d 'Additional configuration options (can be repeated)' -r
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l ignore-immutable -d 'Allow rewriting immutable commits'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l debug -d 'Enable debug logging'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l quiet -d 'Silence non-primary command output'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -l no-pager -d 'Disable the pager'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -s h -l help -d 'Print help (see more with \'--help\')'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from backend" -f -a "name" -d 'Print the name of the backend used in the current repo'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -s R -l repository -d 'Path to repository to operate on' -r -f -a "(__fish_complete_directories)"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l at-operation -l at-op -d 'Operation to load the repo at' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l color -d 'When to colorize output' -r -f -a "always\t''
@@ -2711,6 +2888,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from completion" -l quiet -d 'Silence non-primary command output'
@@ -2725,6 +2903,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from config-schema" -l quiet -d 'Silence non-primary command output'
@@ -2739,6 +2918,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from exec" -l quiet -d 'Silence non-primary command output'
@@ -2754,6 +2934,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from gc" -l quiet -d 'Silence non-primary command output'
@@ -2768,6 +2949,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from install-man-pages" -l quiet -d 'Silence non-primary command output'
@@ -2782,6 +2964,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from markdown-help" -l quiet -d 'Silence non-primary command output'
@@ -2796,6 +2979,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand util; and __fish_seen_subcommand_from snapshot" -l quiet -d 'Silence non-primary command output'
@@ -2810,6 +2994,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand version" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand version" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand version" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand version" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand version" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand version" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand version" -l quiet -d 'Silence non-primary command output'
@@ -2824,6 +3009,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and not __fish_seen_subcommand_from add forget list rename root update-stale" -l quiet -d 'Silence non-primary command output'
@@ -2850,6 +3036,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from add" -l quiet -d 'Silence non-primary command output'
@@ -2864,6 +3051,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from forget" -l quiet -d 'Silence non-primary command output'
@@ -2879,6 +3067,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from list" -l quiet -d 'Silence non-primary command output'
@@ -2893,6 +3082,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from rename" -l quiet -d 'Silence non-primary command output'
@@ -2908,6 +3098,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from root" -l quiet -d 'Silence non-primary command output'
@@ -2922,6 +3113,7 @@ auto\t''"
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l config -d 'Additional configuration options (can be repeated)' -r
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l config-file -d 'Additional configuration files (can be repeated)' -r -F
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l ignore-working-copy -d 'Don\'t snapshot the working copy, and don\'t update it'
+complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l no-integrate-operation -d 'Run the command as usual but don\'t integrate any operations'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l ignore-immutable -d 'Allow rewriting immutable commits'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l debug -d 'Enable debug logging'
 complete -c jj -n "__fish_jj_using_subcommand workspace; and __fish_seen_subcommand_from update-stale" -l quiet -d 'Silence non-primary command output'
