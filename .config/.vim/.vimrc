@@ -6,7 +6,23 @@ set history=500
 
 " Enable filetype plugins
 filetype plugin on
-filetype indent on
+
+
+" These are disabled when using plug because it handles it automatically
+""" in-build plugin
+"filetype indent on
+""" Enable syntax highlighting
+"syntax enable
+
+" vim-plug stuff
+call plug#begin()
+
+" List your plugins here
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'preservim/nerdcommenter'
+
+call plug#end()
+
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -48,6 +64,24 @@ set showmode
 set clipboard=unnamedplus
 " set clipboard+=unnamedplus
 
+set tags+=~/.config/ctags/ctags
+
+set autocomplete
+
+" default:
+" set complete=.,w,b,u,t,i
+
+" set completeopt=menu,menuone,noselect,preview,popup
+set completeopt=menu,menuone,fuzzy,popup,preinsert
+set completepopup=border:single,height:10,width:10,opacity:80,shadow:on
+
+" default:
+" set pumwidth=15
+" set pumheight=0
+
+"set pumwidth=15
+"set pumheight=50
+
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -87,10 +121,11 @@ set showmatch
 set mat=2
 
 " No annoying sound on errors
+set belloff=all
 set noerrorbells
 set novisualbell
 set t_vb=
-set tm=500
+set tm=300
 
 " Properly disable sound on errors on MacVim
 if has("gui_macvim")
@@ -104,8 +139,6 @@ set foldcolumn=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax enable
 
 " Set regular expression engine automatically
 set regexpengine=0
@@ -285,8 +318,8 @@ nnoremap <C-l> :vertical resize -2<CR>
 nnoremap <C-w>, :vertical resize -10<CR>
 nnoremap <C-w>. :vertical resize +10<CR>
 
-nnoremap <Up> :resize -2<CR>
-nnoremap <Down> :resize +2<CR>
+nnoremap <Up> :resize +2<CR>
+nnoremap <Down> :resize -2<CR>
 
 
 nnoremap <C-w>e <C-w>=
@@ -318,7 +351,7 @@ vnoremap > >gv
 " Disable highlight when <Leader><CR> is pressed
 " map <silent> <Leader><CR> :noh<CR>
 " nmap <silent> <Del> :noh<CR>
-nmap <silent> <Esc> :nohl<CR>
+nmap <silent> <Esc> :nohlsearch<CR>
 
 
 " Close the current buffer
@@ -497,3 +530,51 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
+"inoremap <C-n> <C-r>=pumvisible() ? "\<C-n>" : "\<C-x>\<C-n>"<CR>
+"inoremap <C-p> <C-r>=pumvisible() ? "\<C-p>" : "\<C-x>\<C-p>"<CR>
+
+inoremap <Tab> <C-r>=pumvisible() ? "\<C-y>" : "\<Tab>"<CR>
+
+
+" PLUGIN MAPS & SETTINGS
+
+" vim-plug
+
+nmap <Leader>pi :PlugInstall<CR>
+nmap <Leader>pu :PlugUpdate<CR>
+nmap <Leader>po :PlugUpgrade<CR>
+
+nmap <Leader>pc :PlugClean<CR>
+nmap <Leader>ps :PlugStatus<CR>
+nmap <Leader>pd :PlugDiff<CR>
+
+" ctrlp
+
+let g:ctrlp_map = '<Leader>ff'
+
+" let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+let g:ctrlp_user_command = "fd -d 8 --full-path --type f --hidden --exclude .git %s"  " MacOSX/Linux
+" let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d'  " Windows
+
+" nerdcommenter
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+"let g:NERDAltDelims_<language> = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+nnoremap gcc <Plug>NERDCommenterToggle
+vnoremap gc <Plug>NERDCommenterToggle

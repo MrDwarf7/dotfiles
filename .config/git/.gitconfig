@@ -22,7 +22,7 @@
   # trade cpu for network perf
   compression = 9
   # enable the built-in file system monitor ( git-fsmonitor--daemon )
-  fsmonitor = true
+  fsmonitor = false
   eol = lf
   fsync = none
   whitespace = error
