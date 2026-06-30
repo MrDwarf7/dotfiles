@@ -20,13 +20,16 @@ mouse_events   = ["click", "scroll"]
 title_format   = "Yazi: {cwd}"
 
 [preview]
-wrap          = "no"
-tab_size      = 2
-max_width     = 600
-max_height    = 900
-cache_dir     = ""
-image_delay   = 30
-image_filter  = "triangle"
+wrap        = "no"
+tab_size    = 2
+max_width   = 1200
+max_height  = 1000
+cache_dir   = ""
+image_delay = 30   # miliseconds
+# image_filter  = "nearest"
+# image_filter  = "triangle"
+# image_filter  = "catmull-rom"
+image_filter  = "lanczos3"
 image_quality = 75
 # sixel_fraction  = 15
 ueberzug_scale  = 1
@@ -34,41 +37,66 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
-  { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
-  { run = "code %*", orphan = true, desc = "VsCode", for = "windows" },
+  # { run = '${EDITOR:-nvim} "$@"', block = true, for = "unix", desc = "$EDITOR" },
+  { run = '${EDITOR:-/usr/bin/env nvim} "%s"', block = true, for = "unix", desc = "$EDITOR" },
 
-  { run = '${EDITOR:-nvim} "$@"', block = true, for = "unix", desc = "$EDITOR" },
+  # { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
+  # { run = "code %*", orphan = true, desc = "VsCode", for = "windows" },
+
+  { run = "nvim %s", block = true, desc = "nvim (block)", for = "windows" },
+  { run = "code %s", orphan = true, desc = "VsCode", for = "windows" },
 ]
 open = [
-  { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
-  { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
-  { run = 'open "$@"', desc = "Open", for = "macos" },
+  # { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
+  # { run = 'xdg-open "%s1"', desc = "Open", for = "linux" },
+  { run = 'xdg-open "%s"', desc = "Open", for = "linux" },
+
+  # { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
+  { run = "nvim %s", block = true, desc = "nvim (block)", for = "windows" },
+
+  # { run = 'open "$@"', desc = "Open", for = "macos" },
+  { run = 'open "%s"', desc = "Open", for = "macos" },
 
   { run = 'termux-open "$1"', desc = "Open", for = "android" },
 ]
 reveal = [
-  { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+  # { run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
+  # { run = 'xdg-open "$(dirname "%s")"', desc = "Reveal", for = "linux" },
+  { run = 'xdg-open "$(dirname "%s1")"', desc = "Reveal", for = "linux" },
+
   { run = 'open -R "$1"', desc = "Reveal", for = "macos" },
   { run = 'explorer /select,"%1"', orphan = true, desc = "Reveal", for = "windows" },
   { run = 'termux-open "$(dirname "$1")"', desc = "Reveal", for = "android" },
   # { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
 ]
 extract = [
-  { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+  # { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+  # { run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" },
+  { run = 'ouch d -y -c $(nproc) "%s"', desc = "Ouch Extract here", for = "unix" },
+
   { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
 play = [
-  { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+  ## BUG: Yazi _SHOOULD_ be handing through an array of items when using '%s' - 
+  # howver it appears that only a single item is being passed through for many things (include mpv/vlc/xdg-open stuff like below).
+
+  # { run = 'mpv --force-window "$@"', orphan = true, for = "unix" },
+  # { run = 'mpv --force-window %s', orphan = true, for = "unix" },
+  # { run = "vlc '%s'", orphan = true, for = "unix" },
+  # { run = "vlc %s", orphan = true, for = "linux" },
+  { run = "xdg-open %s", orphan = true, for = "linux" },
+
   { run = 'vlc %*', orphan = true, for = "windows" },
-  { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+  { run = '''mediainfo "%s"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
 
 [open]
 prepend_rules = [
+  { url = ".gitconfig", run = '${EDITOR:-/usr/bin/env nvim} "%s"', use = ["open", "edit"], for = "linux" },
+  { url = ".gitconfig", run = '${EDITOR:-/usr/bin/env nvim} "%s"', use = ["open", "edit"], for = "unix" },
+
   { url = ".gitconfig", run = "nvim %*", use = ["open", "edit"], for = "windows" },
-  { url = ".gitconfig", run = "nvim $@", use = ["open", "edit"], for = "linux" },
-  { url = ".gitconfig", run = "nvim $@", use = ["open", "edit"], for = "unix" },
 
 ]
 rules = [
@@ -85,7 +113,7 @@ rules = [
   # Archive
   { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", use = ["extract", "reveal"] },
   # JSON
-  { mime = "application/{json,ndjson}", use = ["edit", "reveal"] },
+  { mime = "application/{json,jsonc,ndjson}", use = ["edit", "reveal"] },
   { mime = "*/javascript", use = ["edit", "reveal"] },
   # Empty file
   { mime = "inode/empty", use = ["edit", "reveal"] },
@@ -94,13 +122,21 @@ rules = [
 ]
 
 [tasks]
-micro_workers = 10
-macro_workers = 10
-bizarre_retry = 3
-image_alloc   = 536870912 # 512MB
-# image_alloc      = 1073741824        # = 1024*1024*1024 = 1024MB
-image_bound      = [0, 0]
+micro_workers = 15
+macro_workers = 15
+
+file_workers     = 15    # Default: 3
+plugin_workers   = 5     # Default: 5
+fetch_workers    = 20    # Default: 5
+preload_workers  = 5     # Default: 2
+process_workers  = 10    # Default: 5
+bizarre_retry    = 3     # Default: 3
 suppress_preload = false
+
+
+# image_alloc = 536870912 # 512MB
+image_alloc = 1073741824 # = 1024*1024*1024 = 1024MB
+image_bound = [0, 0]
 
 [plugin]
 ### fetchers are currently in early alpha as of `Yazi 26.2.2 (cc24147 2026-03-18)`
@@ -111,12 +147,11 @@ prepend_previewers = [
   # Text / structured data preview plugins
   # { mime = "text/csv", run = "miller" },
   # { url = "*.md", run = "rich-preview" },
-  { url = "*.ipynb", run = "rich-preview" },
-  { url = "*.json", run = "rich-preview" },
-  { url = "*.jsonc", run = "rich-preview" },
+  # { url = "*.ipynb", run = "rich-preview" },
+  # { url = "*.json", run = "rich-preview" },
+  # { url = "*.jsonc", run = "rich-preview" },
 
-
-  { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+  { url = "*.{ipynb,json,jsonc}", run = "rich-preview" },
   { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
 
   # ONLY add ( compression related ) items as needed.
@@ -127,6 +162,8 @@ prepend_previewers = [
 
   # password protected files benefit from ouch, but no way to specify
   # { mime = "application/7z-compressed", run = "ouch" },
+  # { mime = "application/{zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "ouch" },
+  # { mime = "application/{*zip,rar,7z*,tar,gzip,xz,zstd,bzip*,lzma,compress,archive,cpio,arj,xar,ms-cab*}", run = "ouch" },
 
   ## { url = "*.csv", run = "duckdb" },
   ## { url = "*.tsv", run = "duckdb" },
@@ -141,7 +178,7 @@ prepend_previewers = [
   { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
   # image/gif is handled by ~/.config/mimeapps.list
 
-  { mime = "audio/*", run = "exifaudio" },
+  # { mime = "audio/*", run = "exifaudio" },
 
   ### mediainfo plugin
   # Replace magick, image, video with mediainfo
