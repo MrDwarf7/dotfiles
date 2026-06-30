@@ -1,0 +1,17 @@
+**/*/*.log
+**/*/*.sock
+
+herdr-client.log
+herdr-server.log
+
+herdr-client.sock
+herdr.sock
+
+session.json
+
+sessions
+sessions/
+sessions/*
+sessions/**
+sessions/**/*
+sessions/**/**/*

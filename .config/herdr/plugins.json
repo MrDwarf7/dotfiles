@@ -1,0 +1,240 @@
+[
+  {
+    "plugin_id": "nathanflurry.jj-workspace",
+    "name": "jj workspaces",
+    "version": "0.1.0",
+    "min_herdr_version": "0.7.0",
+    "description": "Create and remove Jujutsu (jj) workspaces as Herdr workspaces or tabs.",
+    "manifest_path": "/home/dwarf/.config/herdr/plugins/github/nathanflurry.jj-workspace-19f0b858b2b4/herdr-plugin.toml",
+    "plugin_root": "/home/dwarf/.config/herdr/plugins/github/nathanflurry.jj-workspace-19f0b858b2b4",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "build": [
+      {
+        "command": [
+          "cargo",
+          "build",
+          "--release"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "new",
+        "title": "New jj workspace",
+        "contexts": [
+          "workspace",
+          "global"
+        ],
+        "command": [
+          "./target/release/jj-workspace",
+          "open",
+          "workspace"
+        ]
+      },
+      {
+        "id": "new-tab",
+        "title": "New jj workspace (in tab)",
+        "contexts": [
+          "workspace",
+          "global"
+        ],
+        "command": [
+          "./target/release/jj-workspace",
+          "open",
+          "tab"
+        ]
+      },
+      {
+        "id": "remove",
+        "title": "Remove jj workspace",
+        "contexts": [
+          "workspace"
+        ],
+        "command": [
+          "./target/release/jj-workspace",
+          "remove"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "wizard",
+        "title": "New jj workspace",
+        "placement": "overlay",
+        "command": [
+          "./target/release/jj-workspace",
+          "wizard"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "NathanFlurry",
+      "repo": "herdr-plugin-jj-workspace",
+      "resolved_commit": "29650eaea69795dd4414be26b434e0fd43a59463",
+      "managed_path": "/home/dwarf/.config/herdr/plugins/github/nathanflurry.jj-workspace-19f0b858b2b4",
+      "installed_unix_ms": 1782825284696
+    }
+  },
+  {
+    "plugin_id": "third774.last-workspace",
+    "name": "Last Workspace",
+    "version": "0.1.0",
+    "min_herdr_version": "0.7.0",
+    "description": "Toggle between the current and previously focused Herdr workspace.",
+    "manifest_path": "/home/dwarf/.config/herdr/plugins/github/third774.last-workspace-5de7aeab3665/herdr-plugin.toml",
+    "plugin_root": "/home/dwarf/.config/herdr/plugins/github/third774.last-workspace-5de7aeab3665",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "build": [
+      {
+        "platforms": [
+          "linux",
+          "macos"
+        ],
+        "command": [
+          "cargo",
+          "build",
+          "--release"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "toggle",
+        "title": "Last workspace",
+        "contexts": [
+          "global",
+          "workspace"
+        ],
+        "command": [
+          "./target/release/herdr-last-workspace",
+          "toggle"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "workspace.closed",
+        "command": [
+          "./target/release/herdr-last-workspace",
+          "closed"
+        ]
+      },
+      {
+        "on": "workspace.focused",
+        "command": [
+          "./target/release/herdr-last-workspace",
+          "focused"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "third774",
+      "repo": "herdr-last-workspace",
+      "resolved_commit": "8b55ebf15deaa52b49ff1c2500aab0c19c729420",
+      "managed_path": "/home/dwarf/.config/herdr/plugins/github/third774.last-workspace-5de7aeab3665",
+      "installed_unix_ms": 1782750085697
+    }
+  },
+  {
+    "plugin_id": "cloudmanic.herdr-plus",
+    "name": "Herdr Plus",
+    "version": "0.1.10",
+    "min_herdr_version": "0.7.0",
+    "description": "An extension for herdr — a collection of tools that make it better. Projects: fuzzy-pick a declarative template to spin up a whole workspace — every tab, pane, and startup command. Quick Actions: a fuzzy launcher for one-off scripts, run in the directory you launched from.",
+    "manifest_path": "/home/dwarf/.config/herdr/plugins/github/cloudmanic.herdr-plus-0cce37b56fb9/herdr-plugin.toml",
+    "plugin_root": "/home/dwarf/.config/herdr/plugins/github/cloudmanic.herdr-plus-0cce37b56fb9",
+    "enabled": true,
+    "platforms": [
+      "linux",
+      "macos"
+    ],
+    "build": [
+      {
+        "command": [
+          "sh",
+          "scripts/build.sh"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "ping",
+        "title": "Herdr Plus: ping",
+        "command": [
+          "./bin/herdr-plus",
+          "ping"
+        ]
+      },
+      {
+        "id": "projects",
+        "title": "Herdr Plus: Projects",
+        "command": [
+          "./bin/herdr-plus",
+          "projects"
+        ]
+      },
+      {
+        "id": "quick-actions",
+        "title": "Herdr Plus: Quick Actions",
+        "command": [
+          "./bin/herdr-plus",
+          "quick-actions"
+        ]
+      }
+    ],
+    "events": [
+      {
+        "on": "worktree.created",
+        "command": [
+          "./bin/herdr-plus",
+          "on-worktree"
+        ]
+      },
+      {
+        "on": "worktree.opened",
+        "command": [
+          "./bin/herdr-plus",
+          "on-worktree"
+        ]
+      }
+    ],
+    "panes": [
+      {
+        "id": "picker",
+        "title": "Herdr Plus: Projects",
+        "placement": "zoomed",
+        "command": [
+          "./bin/herdr-plus",
+          "projects-ui"
+        ]
+      },
+      {
+        "id": "quick-actions-picker",
+        "title": "Quick Actions",
+        "placement": "overlay",
+        "command": [
+          "./bin/herdr-plus",
+          "quick-actions-ui"
+        ]
+      }
+    ],
+    "source": {
+      "kind": "github",
+      "owner": "cloudmanic",
+      "repo": "herdr-plus",
+      "resolved_commit": "013fe1667a638487004164955a01707584ab7b9e",
+      "managed_path": "/home/dwarf/.config/herdr/plugins/github/cloudmanic.herdr-plus-0cce37b56fb9",
+      "installed_unix_ms": 1782824520913
+    }
+  }
+]
