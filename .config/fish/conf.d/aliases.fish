@@ -91,6 +91,9 @@ alias twt "command taskwarrior-tui"
 alias z. "command zoxide add $PWD"
 alias ze "command zoxide edit"
 
+alias rup recent_updated_pkgs
+alias rip recent_installed_pkgs
+
 #### DMS (Dank Linux) specific aliases - for direct terminal use only! Do not bind these as keymaps lol
 alias dmslock 'dms ipc call lock lock'
 
