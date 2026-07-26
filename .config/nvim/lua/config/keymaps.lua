@@ -491,6 +491,31 @@ end, silent_opts("Align by char"))
 --   end
 -- end, silent_opts)
 
+local cs = require("utils.comment_swap")
+map({ "n", "v" }, "<Leader>tk", function()
+  cs.handle_comment_swap({
+    direction = "above",
+    move_cursor = true,
+  })
+end, { desc = "Swap comment state of current line and ABOVE" })
+
+map({ "n", "v" }, "<Leader>tj", function()
+  cs.handle_comment_swap({
+    direction = "below",
+    move_cursor = true,
+  })
+end, { desc = "Swap comment state of current line and BELOW" })
+
+-- Example: yank-detection + cursor move, handy for toggling between two
+-- near-identical config values (eg `brightness = 0.7172,` vs `-- brightness = 0.8172,`):
+-- map({ "n", "v" }, "<Leader>ty", function()
+--   handle_comment_swap({
+--     direction = CommentSwapDirectionEnum.below,
+--     yank_line_detection = true,
+--     move_cursor = true,
+--   })
+-- end, { desc = "Swap/clone current line into the one BELOW" })
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 setmetatable(Keymaps, {
