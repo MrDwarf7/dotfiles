@@ -39,7 +39,7 @@ processes.unnormalized_cpu = false
 #whole_word = false
 
 # Whether to make process searching use regex by default.
-regex = true
+processes.regex = true
 
 # The temperature unit. One of the following, defaults to "c" for Celsius:
 #temperature_type = "c"
