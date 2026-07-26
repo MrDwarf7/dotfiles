@@ -114,6 +114,12 @@ set -gx GOBIN $HOME/go/bin
 # set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense'
 set -Ux CARAPACE_BRIDGES all
 
+# Used by ssh-picker.fish to filter out hosts from the picker menu (wildcards supported, e.g. *.example.com)
+# set -gx SSH_PICKER_IGNORE "*.local" "ssh.gitlab.*"
+set -gx SSH_PICKER_IGNORE_RE "(aur.archlinux|codeberg|ssh.gitlab|gitlab|github.com)"
+# Used by ssh-picker.fish to delay the exit on connection failure (seconds)
+set -gx SSH_PICKER_FAIL_DELAY 5
+
 # TaskWarrior -- note these tend to bug out the cli
 # set -gx TASK $XDG_CONFIG_HOME/task/.taskrc
 # set -gx TASKDATA $HOMEXDG_CONFIG_HOME/task/

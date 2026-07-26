@@ -50,10 +50,19 @@ alias p $PKG_MANAGER
 # See also `pqiv` function that uses the output (if singular) from the above `pqi` function
 # to then call `paru -Siv <output>`
 
-alias shutdown 'systemctl poweroff'
-# alias reboot reboot ## doesn't need an alias lmao
+alias ttt 'ya pkg add $argv 2>/dev/null || echo "nah"'
 
-alias shutdownf 'sudo systemctl poweroff --force'
+function __shutdown_base_cmd
+    set -l flags (string match -q -r -- '(^-f$|^--force$|^1)' $argv[1]; and printf "--force"; or printf "")
+    eval "shutdown -P $flags now 2>&1 || poweroff $flags -p 2>&1 || systemctl poweroff -p $flags 2>&1 || echo 'Failed to shutdown'"
+    or return 1
+    return 0
+end
+
+# alias shutdown 'shutdown -h now 2>&1 || poweroff 2>&1 || systemctl poweroff 2>&1 || echo "Failed to shutdown"'
+alias shutdown '__shutdown_base_cmd $argv[1]'
+# alias reboot reboot ## doesn't need an alias lmao
+alias shutdownf '__shutdown_base_cmd --force'
 alias rebootf 'sudo reboot --force'
 
 alias aa jj
@@ -73,7 +82,7 @@ alias ccc c3c
 alias cd- "cd -"
 
 # Previously was an actual funciton but we literally just call "l.fish"
-alias la l
+# alias la l
 
 alias cls "command clear ; command printf '\e[3J' "
 alias lg lazygit

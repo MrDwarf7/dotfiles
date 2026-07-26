@@ -2,8 +2,9 @@
 #
 
 function la --description 'List all files including hidden files with details'
-    # We literally just call the l.fish file directly
-    l
+    set __base "$LIST_CLIENT_BASE_CMD"
+    set --append __base "-lah $argv"
+    eval $__base
 
     # if test -z "$LIST_CLIENT"
     #     printf "LIST_CLIENT is not set\n"

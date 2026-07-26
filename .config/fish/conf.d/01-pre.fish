@@ -36,7 +36,7 @@ set -gx LIST_CLIENT_BASE_CMD (099listing_cmd_base) >/dev/null 2>&1; or true
 
 01eval_if_pacman zoxide "zoxide init fish"
 01eval_if_pacman fzf "fzf --fish"
-04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend
+##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
 01eval_if_pacman mise "mise activate fish | source"
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification

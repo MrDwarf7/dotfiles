@@ -34,12 +34,6 @@ function sudo_last_command
 end
 abbr -a !! --position anywhere --function sudo_last_command
 
-##
-##
-## Messy - see below TODO item.
-##
-##
-
 function file_resolver_for_cmd
     echo "file (command -v !)"
 end
@@ -55,67 +49,7 @@ function bat_resolver_for_cmd
 end
 abbr -a be --position anywhere --set-cursor=! --function bat_resolver_for_cmd
 
-# TODO: We want to be able to do something like:
-# We can do a couple things:
-# We can see what's already on the cli at invok time,
-# and we can also 'set a cursor' (to a position via the use of --set-cursor and usin the assign symbol ('%' in this case) to set the cursor position in the expansion of the abbreviation.
-#
-# This _SHOULD_ allow us to do:
-# `re <prog> $(command -v <cursor>)`
-# We MAY have to compromise and aim for something like:
-# `<prog> re` => `<prog> $(command -v <cursor>)`
-# and do so via the `--regex` flag on the abbreviation to match the `<prog>` and then use the `--set-cursor` to set the cursor position after the expansion of the abbreviation.
-#
-# We care about _what we'll use_ and can add the _on what_ after the expansion has happened.
-#
-
-# Generic entry point (the `--function` flag for abbr DOES NOT allow parsing arguments in so we have to do it based on a secondary arg
-# found inside of the cli itself.
-# function resolver_for_cmd
-#     # close.
-#     # we're getting:
-#     # `nvim re` => `nvim nvim (command -v nvim)` - which is close, but not exactly what we want.
-#     # set -l cmd (commandline -pc)
-#     # set -l template "{prog} (command -v {cur})"
-#     # string match -r '^\S+' $cmd | read -l prog
-#     # echo (string replace -r '^\S+' $prog (string replace '{prog}' $prog (string replace '{cur}' '%' $template)))
-#     # set -l cursor_pos (commandline --cursor)
-#     # this gives us back for:
-#     # `nvim re[space]` - the SPACE causes the expansion,
-#     # and the 'cursor_pos' here is 8 (which IS the space itself).
-#     # we basically want to cut the first word out,
-#     # remove everything before we start expansions and such
-#     # then insert that first word + expansions and what not.
-#
-#     # set -l cmd (commandline -c -B)
-#     # set cmd (string trim $cmd)
-#
-#     set -l cmd (commandline -pc)
-#     # set -l template "{prog} (command -v {cur})"
-#     set -l template "(command -v {cur})"
-#     string match -r '^\S+' $cmd | read -l prog
-#     # This gets us:
-#     # `nvim re` => `nvim re (command -v %)` so.... we don't actually need the 're' part in it, everythin else is perfect.
-#     # set -l expansion (string replace '{prog}' $argv[1] (string replace '{cur}' '%' $template))
-#
-#     set -l expansion (string match -r '^\S+' $cmd) (string replace '{cur}' '%' $template)
-#     # set extension (string replace 're' '' $expansion)
-#
-#     # This get us:
-#     # `nvim re` => `nvim nvim (command -v %)` gettin further away from what we waant....
-#     # set -l expansion (string replace '{prog}' $prog (string replace '{cur}' '%' $template))
-#
-#     # echo $expansion
-#     printf "%s\n" "(command -v %)"
-# end
-
 function resolver_for_cmd
-    # If we just.... don't clear the commandline then
-    # we naturally ALREADY have whatever the leading program was before the expansion.
-    # Potential issues though if trying to do something specific (or maybe also with the `%` and so on
-    # if the '--set-cursor=<some other char>' is used,
-    # but we can just use the default of `%` for now and see how it goes).
-
     printf "%s\n" "(command -v !)"
 end
 

@@ -15,8 +15,6 @@ if status is-interactive
     # 01eval_if_pacman zoxide "zoxide init fish" # zoxide init fish | source
     # 01eval_if_pacman fzf "fzf --fish" # fzf --fish | source
     # #
-    # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend
-    # 01eval_if_pacman mise "mise activate fish | source"
 
     # Immediately call starship on term start (interactive)
     01eval_if_pacman starship "starship init fish --print-full-init"
