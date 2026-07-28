@@ -30,10 +30,12 @@ function 99-listing_cmd_base --description 'Base listing cmd to remove duplicati
     set __base_cmd ""
 
     # ~'caching'~
-    if set -q LIST_CLIENT_BASE_CMD
-        printf "%s\n" "$LIST_CLIENT_BASE_CMD"
-        return 0
-    end
+    set -q LIST_CLIENT_BASE_CMD; and printf "%s\n" "$LIST_CLIENT_BASE_CMD"; and return 0
+
+    # if set -q LIST_CLIENT_BASE_CMD
+    #     printf "%s\n" "$LIST_CLIENT_BASE_CMD"
+    #     return 0
+    # end
 
     if test -z "$LIST_CLIENT"
         printf "LIST_CLIENT is not set\n"

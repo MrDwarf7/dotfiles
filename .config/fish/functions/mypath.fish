@@ -139,7 +139,7 @@ function mypath --description 'Pretty print your current $path variable'
         # if `$argv_opts[2]` is empty, user didn't give a char
         set char $argv_opts[2]
 
-        if test -z $char
+        if test -z "$char"
             colorize yellow "Marker character must be at least 1 character long.\nUsing a default of ':'.\n" >&2
             set char ":"
         end

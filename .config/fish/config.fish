@@ -10,6 +10,9 @@
 # /usr/lib/environment.d/*.conf
 # /etc/environment
 
+# Reset sudo password prompt lockout timer if playin around with sudo and getting locked out
+# faillock --user $USER --reset
+
 # Commands to run in interactive sessions can go in here
 if status is-interactive
     # 01eval_if_pacman zoxide "zoxide init fish" # zoxide init fish | source

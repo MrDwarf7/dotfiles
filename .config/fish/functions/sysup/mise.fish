@@ -13,15 +13,16 @@
 # once around the step loop rather than as a step in the middle.
 
 function __sysup_mise_begin --description 'Deactivate mise before updating'
-    if not 00-valid_pacman mise
-        return 0
-    end
+    not 00-valid_pacman mise; and return 0
+    # if not 00-valid_pacman mise
+    #     return 0
+    # end
     colorize yellow "[SYSUP] Disabling mise during update...\n"
     mise deactivate 2>&1 >/dev/null
 end
 
-function __sysup_mise_end --description 'Reactivate mise and update tools' --argument-names from_crash --description 'Whether the update crashed'
-    argparse 'c/from-crash=' -- $argv
+function __sysup_mise_end --argument-names from_crash --description 'Whether the update crashed' --description 'Reactivate mise and update tools'
+    argparse 'c/from-crash=' -- $from_crash
     or return
 
     if test -z "$_flag_from_crash"
@@ -30,9 +31,10 @@ function __sysup_mise_end --description 'Reactivate mise and update tools' --arg
         set from_crash $_flag_from_crash
     end
 
-    if not 00-valid_pacman mise
-        return 0
-    end
+    not 00-valid_pacman mise; and return 0
+    # if not 00-valid_pacman mise
+    #     return 0
+    # end
     colorize yellow "[SYSUP] Re-enabling mise and updating tools...\n"
     mise activate fish | source
     if test $from_crash = true

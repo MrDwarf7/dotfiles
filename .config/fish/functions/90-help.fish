@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 90-help --description 'Display help messages formatted as tables'
+function 90-help --argument-names usage options example --description 'Display help messages formatted as tables'
     # Prints help messages
     #
     # Parameters:
@@ -14,9 +14,9 @@ function 90-help --description 'Display help messages formatted as tables'
     # 0 on success
     # 1 on failure
 
-    set -l usage $argv[1]
-    set -l options $argv[2]
-    set -l example $argv[3]
+    # set -l usage $argv[1]
+    # set -l options $argv[2]
+    # set -l example $argv[3]
 
     set -l table_opts 1 ',' false
 

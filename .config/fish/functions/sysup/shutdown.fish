@@ -10,9 +10,11 @@ function __sysup_shutdown --description 'Countdown then shut down'
     or return
 
     set -l mins 1
-    if set -q _flag_wait_mins; and test -n "$_flag_wait_mins"
-        set mins $_flag_wait_mins
-    end
+    set -q _flag_wait_mins; and test -n "$_flag_wait_mins"; and set mins $_flag_wait_mins
+
+    # if set -q _flag_wait_mins; and test -n "$_flag_wait_mins"
+    #     set mins $_flag_wait_mins
+    # end
 
     set -l secs (math "60 * $mins")
     colorize yellow "[SYSUP] Shutdown in $mins min(s). Ctrl-C to cancel.\n"

@@ -41,88 +41,84 @@ Otherwise, it falls back to using 'git'.
 
 end
 
-function dot --description 'Show latest changes in the dotfiles repo (uses jj if available, otherwise git)' --argument-names argv
-    argparse $k_help/help $k_files/files $k_pop/pop -- $argv
+function __dot_vcs --argument-names vcs
+    # Set only locally
+    set -l cmd_str
+    switch $vcs
+        case jj
+            set cmd_str "jj log -n 10 --no-pager -r \"stack(@) | present(trunk())\""
+
+        case git
+            set cmd_str "git fetch ; printf \"\n\" ; git status ; printf \"\n\""
+
+        case (test -z "$vcs")
+            colorize red "Error: No valid version control system found. Please install 'jj' or 'git'.\n"
+            return 1
+    end
+    printf "%s" $cmd_str
+end
+
+function __dot_vcs_files --argument-names vcs
+    # Set only locally
+    set -l cmd_str
+    switch $vcs
+        case jj
+            set cmd_str "; printf \"\nFiles:\n\" ; jj log --no-graph -r @ -T 'if(empty, \"\", diff.summary())' ; printf \"\n\""
+
+        case git
+            set cmd_str "; git log -n 10 --oneline --graph --decorate --all ; printf \"\n\""
+
+        case (test -z "$vcs")
+            colorize red "Error: No valid version control system found. Please install 'jj' or 'git'.\n"
+            return 1
+    end
+    printf "%s" $cmd_str
+end
+
+function dot --argument-names cmd --description 'Show latest changes in the dotfiles repo (uses jj if available, otherwise git)'
+    argparse $k_help/help $k_files/files $k_pop/pop -- $cmd
     or return
 
     if set -q _flag_help
         dot_help && return $status
     end
 
-    set -l file_flag 0
-    set -l pop_flag 0
+    set -l vcs
+    set --path previous_dir (pwd) # Save the current directory for return
 
-    if set -q _flag_files
-        set file_flag 1
+    # If we're not in the dotfiles dir, move there
+    99-pushd_var $DOT_DIR || cd $DOT_DIR || begin
+        colorize red "Error: Failed to move to dotfiles directory '$DOT_DIR'!\n"
+        return 1
+    end
+
+    if 00-valid_pacman jj || jj git root 2>&1
+        set vcs jj
+    else if 00-valid_pacman git
+        set vcs git
+    else
+        colorize red "Error: Neither 'jj' nor 'git' is installed. Please install one of them to use this function.\n"
+        return 1
+    end
+
+    set cmd_string (__dot_vcs $vcs) # Set vcs command
+    set -q _flag_files; and set --append cmd_string (__dot_vcs_files $vcs) # if `-f` passed, append files command
+
+    # finally; run the command
+    eval $cmd_string || begin
+        set -l stt (test -z "$status"; and echo 1; or echo $status)
+        colorize red "Error: Failed to execute command '$cmd_string'!\nStatus: $stt\n"
+        return 1
     end
 
     if set -q _flag_pop
-        set pop_flag 1
-    end
-
-    if test "$(pwd)" != "$DOT_DIR"
-        # If we're not in the dotfiles dir, move there
-        # printf "Moving to: %s\n" "$DOT_DIR"
-        pushd $DOT_DIR || return $status
-    end
-
-    # Make an assumption - if we can run this, clearly jj is installed
-    if test (command jj git root)
-        # We have a valid 'jj' repo, use jj for output(s)
-        jj log -n 10 --no-pager -r "stack(@) | present(trunk())" # Get's the log output/ledger
-
-        if test $file_flag -eq 1
-            printf "\nFiles:\n"
-            jj log --no-graph -r @ -T 'if(empty, "", diff.summary())' # Prints a file summary of changes (by file/filepath)
-            printf "\n"
-        end
-    else
-        printf "Using 'git' for fetching and log display...\n"
-        command git fetch
-        printf "\n"
-        if test $file_flag -eq 1
-            command git log -n 10 --oneline --graph --decorate --all
-            printf "\n"
-        end
-        command git status
-        printf "\n"
-    end
-
-    # no args, we're done, ret 0
-    if not test $pop_flag -eq 1
-        return 0
-    end
-
-    if test $pop_flag -eq 1
         colorize yellow "\n<< popd\n"
-        popd || return $status
+        99-popd_var $previous_dir || pushd || begin
+            set -l stt (test -z "$status"; and echo 1; or echo $status)
+            colorize red "Error: Failed to return to previous directory '$previous_dir'!xx\nStatus: $stt\n"
+            return 1
+        end
     end
+
     return 0
 end
-
-#     set -l ht " "
-#     printf "\
-# Usage: dot [OPTIONS]
-#
-# Displays the latest changes in the dotfiles
-# repository.
-# If 'jj' is installed and the repository is
-# a 'jj' repo, it will use 'jj' for logs.
-#
-# Otherwise, it falls back to using 'git'.
-#
-# Options:
-#
-# $ht -h, --help       # Show this help message and exit
-# $ht -f, --files      # Show changed files summary
-# $ht -p, --pop        # Pop back to the previous directory after execution
-#
-# Examples:
-#
-# $ht dot -h | --help  # Show this help message and exit
-# $ht dot              # Show the latest changes in the dotfiles repo
-# $ht dot -f           # Show the latest changes along with a summary of changed files
-# $ht dot -p           # Show changes and return to the previous directory after execution
-# $ht dot -f -p        # Show changes, file summary, and return to previous directory
-# "
-#     return 0

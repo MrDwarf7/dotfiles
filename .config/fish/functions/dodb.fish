@@ -2,5 +2,5 @@
 #
 
 function dodb
-    pushd $DATA_ON_DEMAND_BACK || return $status
+    99-pushd_var $DATA_ON_DEMAND_BACK
 end

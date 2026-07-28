@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 60-source_if_pacman --description "If a provided program is available via pacman, source a provided file"
+function 60-source_if_pacman --argument-names program_one file --description "If a provided program is available via pacman, source a provided file"
     # Sources a provided program by file path
     # if the program is found in pacman
     #
@@ -12,16 +12,19 @@ function 60-source_if_pacman --description "If a provided program is available v
     # Returns:
     # 0 if the program is found
     # 1 if the program is not found
-    set -l program_one $argv[1]
-    set -l file $argv[2]
+    # set -l program_one $argv[1]
+    # set -l file $argv[2]
 
     # printf "6.0: Checking for %s\n" "$program_one"
     # printf "6.0: Sourcing %s\n" "$file"
 
-    if 00-valid_pacman "$program_one"
-        # printf "6.1: Sourcing %s\n" "$file"
-        source $file
-        return 0
-    end
-    return 1
+    00-valid_pacman "$program_one"; and source $file; and return 0
+    or return 1
+
+    # if 00-valid_pacman "$program_one"
+    #     # printf "6.1: Sourcing %s\n" "$file"
+    #     source $file
+    #     return 0
+    # end
+    # return 1
 end

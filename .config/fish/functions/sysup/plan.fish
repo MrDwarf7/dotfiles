@@ -6,13 +6,16 @@
 # No hardcoded step names here -- fully derived from sysup_steps.
 
 function __sysup_plan --description 'Build the update step plan'
-    argparse 's/skip=' -- $argv
-    or return 1
+    argparse s/skip=+ -- $argv
+    or begin
+        colorize red "[SYSUP] Invalid arguments: $argv\n"
+        return 2
+    end
 
     # default order = registry order
     set -l order
     for entry in $sysup_steps
-        set -l parts (string split '|' $entry)
+        set -l parts (string split '|' $entry | string trim)
         set -a order $parts[1]
     end
 
@@ -20,7 +23,7 @@ function __sysup_plan --description 'Build the update step plan'
         for c in (string split '' $_flag_skip)
             set -l matched false
             for entry in $sysup_steps
-                set -l parts (string split '|' $entry)
+                set -l parts (string split '|' $entry | string trim)
                 if test "$parts[2]" = "$c"
                     # drop this step name from the order list.
                     # plain `set`, not `set -l`: `order` is already local to
@@ -32,7 +35,7 @@ function __sysup_plan --description 'Build the update step plan'
             end
             if not $matched
                 colorize red "Invalid skip token: $c\n"
-                return 1
+                return 3
             end
         end
     end

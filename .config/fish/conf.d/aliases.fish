@@ -9,6 +9,7 @@
 
 ### Shell specific aliases
 alias ef "exec fish"
+alias f fg
 
 #### <cd><fish>
 alias cf "cd ~/dotfiles/.config/fish || printf 'Failed to cd into ~/dotfiles/.config/fish\n'"
@@ -110,3 +111,12 @@ alias dmslock 'dms ipc call lock lock'
 
 # alias usudo="env SHELL(which fish) sudo -E $argv" ### not sure if this works, leave as fn for now
 # alias zl (command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n"))
+
+alias gst "git status $args"
+alias grv "git remote -v $args"
+alias gb "git branch $args"
+alias gba "git branch -a $args"
+alias gf "git fetch $args"
+alias gfa "git fetch --all --prune $args"
+alias gp "git push $args"
+alias gfp "git fetch --all && git pull --all"

@@ -1,0 +1,29 @@
+#!/usr/bin/env fish
+#
+
+## Not used cos default bind does 99.9% of this anyway
+
+function hrd_wc --description 'Herdr - [w]orkspace [c]urrent - generated a new workspace from the PWD name'
+    if not 00valid_pacman herdr
+        colorize red "Error: herdr is not installed or not in PATH."
+        while true
+            read -P "Do you want to pull/install it using $PKG_MANAGER? (y/N): " yn
+            switch $yn
+                case y Y
+                    $PKG_MANAER
+                    break
+                case n N
+                    colorize red "Aborting."
+                    return 1
+                case '*'
+                    colorize yellow "Default is 'N', cancelling."
+                    return 1
+            end
+        end
+    end
+
+    set -l local_pwd $(command pwd | string split "/" )[-1]; or set local_pwd _new_workspace
+    set local_pwd $(echo $local_pwd | sed 's/\./_/g')
+
+    herdr workspace create --cwd "." --label "$h" --no-focus 2>&1 >/dev/null
+end

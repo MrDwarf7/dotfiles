@@ -2,6 +2,6 @@
 #
 
 function rstt --description 'Move to Rust template project folder'
-    pushd "$GITHUB_PROJECTS_RUST/rust_template" || return $status
+    99-pushd_var "$GITHUB_PROJECTS_RUST/rust_template"
     l
 end

@@ -2,5 +2,5 @@
 #
 
 function wgr
-    pushd $GITHUB_WORK_PROJECTS || return $status
+    99-pushd_var $GITHUB_WORK_PROJECTS
 end

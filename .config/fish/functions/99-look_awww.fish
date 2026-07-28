@@ -11,13 +11,13 @@ set -g bezier ".1,.4,.97,.82"
 set -g fill_method fit # crop | fit | no | stretch
 set -g DEBUG_MODE 0
 
-function cleanup
-    if not test -z (set -s | grep -E '^output_buffer')
+function __look_awww_cleanup
+    if not test -z "$(set -s | grep -E '^output_buffer')"
         printf "Cleaning up output buffer variable: %s" "$output_buffer"
         set -e output_buffer
     end
 
-    if not test -z (set -s | grep -E '^bezier')
+    if not test -z "$(set -s | grep -E '^bezier')"
         printf "Cleaning up bezier variable: %s" "$bezier"
         set -e bezier
     end
@@ -35,13 +35,14 @@ function set_awww
     set path $argv[1]
     set monitor $argv[2]
 
-    if not 90-test_path $path
+    if not test -f $path
         return 1
     end
 
-    if not 90-test_cmd awww
-        return 1
-    end
+    00-valid_pacman awww; or return 1
+    # if not 00-valid_pacman awww
+    #     return 1
+    # end
 
     pprint "Setting wallpaper for %s to %s\n" $monitor $path
 
@@ -52,10 +53,7 @@ function set_awww
 
 end
 
-function 99-look_awww --description 'Call awww for wallust'
-    set path_one $argv[1]
-    set path_two $argv[2]
-
+function 99-look_awww --argument-names path_one path_two --description 'Call awww for wallust'
     pprint "Value of path_one: %s\n" $path_one
     pprint "Value of path_two: %s\n" $path_two
 
@@ -97,9 +95,10 @@ function 99-look_awww --description 'Call awww for wallust'
         set path_two $second_mon_wallpaper
     end
 
-    if test -z "$path_two"
-        set path_two $second_mon_wallpaper
-    end
+    test -z "$path_two"; and set path_two $second_mon_wallpaper
+    # if test -z "$path_two"
+    #     set path_two $second_mon_wallpaper
+    # end
 
     if not test (string match "$path_one" "$first_mon_wallpaper")
         pprint "Setting wallpaper for %s to %s\n" $first_mon $path_one
@@ -117,7 +116,7 @@ function 99-look_awww --description 'Call awww for wallust'
     end
     command hyprctl reload >/dev/null || return $status
 
-    cleanup || return $status
+    __look_awww_cleanup || return $status
 
     # but awww does not. So we have to hardcode them here.
 

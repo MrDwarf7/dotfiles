@@ -44,18 +44,18 @@ function sysup --description 'System update orchestrator'
     end
 
     __sysup_cmp
-    argparse --name=sysup h/help s/skip= d/shutdown -- $argv
+    argparse --name=sysup h/help s/skip=+ d/shutdown -- $argv
     or begin
         colorize red "[SYSUP] Invalid arguments: $argv\n"
-        return
+        return 2
     end
 
     if set -q _flag_help
         __sysup_help
         return 0
     end
-    set -l order (__sysup_plan --skip=$_flag_skip)
-    or return 1
+    set -l order (__sysup_plan --skip=(string join '' $_flag_skip))
+    or return $status
 
     colorize blue "[SYSUP] Starting system update...\n"
     colorize blue "[SYSUP] Step order: $order\n"
@@ -116,8 +116,8 @@ function sysup --description 'System update orchestrator'
         or begin
             kill $__sysup_keepalive_pid 2>/dev/null
             colorize red "[SYSUP] Step '$name' failed -- aborting.\n"
-            __sysup_mise_end --from-crash=true
-            return 1
+            __sysup_mise_end true
+            return 5
         end
     end
 

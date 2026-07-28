@@ -46,10 +46,22 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 10-eval_if_pacman zoxide "zoxide init fish"
 10-eval_if_pacman fzf "fzf --fish"
 ##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
-10-eval_if_pacman mise "mise activate fish | source"
+10-eval_if_pacman mise "mise activate fish"
+
+# TODO: put behind a check or smth
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
-10-eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
+
+# 10-eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
+# 10-eval_if_pacman keychain "keychain --eval id_ed25519 --quiet" # silences the notification
+# 10-eval_if_pacman keychain "keychain env --shell fish 2>/dev/null"
+# 10-eval_if_pacman keychain "keychain add id_ed25519 --quick --immediate 2>/dev/null"
+# 10-eval_if_pacman keychain "keychain add id_ed25519 --quick --immediate --quiet"
+# 10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet"
+
+if status is-interactive
+    10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"
+end
 
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
@@ -59,12 +71,12 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # 01eval_if_pacman carapace "carapace fish"
 
 10-eval_if_pacman batman "batman --export-env"
-10-eval_if_pacman batpipe "eval (batpipe)"
+10-eval_if_pacman batpipe batpipe
 
 30-export_as_env_var pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
 40-var_to_syspath pnpm "$PNPM_HOME" --prepend
 
-40-var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
+# 40-var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
 
 # set -gx PATH $PATH /home/dwarf/.lmstudio/bin
 
@@ -90,3 +102,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # else
 #     return
 # end
+
+# TODO: Set this up in the child funciton helpers for early ret's and set these here
+
+# set -Ux _cached_pre_fish_done

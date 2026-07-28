@@ -2,5 +2,5 @@
 #
 
 function dodf
-    pushd $DATA_ON_DEMAND_NEXT || return $status
+    99-pushd_var $DATA_ON_DEMAND_NEXT
 end

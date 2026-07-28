@@ -1,10 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function wa --description 'Call waypaper for wallust'
-    set path_one $argv[1]
-    set path_two $argv[2]
-
+function wa --argument-names path_one path_two --description 'Call waypaper for wallust'
     colorize yellow "Using wallpaper backend: $WALLPAPER_BACKEND\n"
 
     switch $WALLPAPER_BACKEND

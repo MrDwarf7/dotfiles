@@ -14,7 +14,5 @@ function cm --description 'Cd to a binary commands housing directory'
         echo "Command not found: $argv[1]"
         return 1
     end
-
-    set dir (dirname "$cmd")
-    pushd "$dir"
+    99-pushd_var (dirname "$cmd")
 end

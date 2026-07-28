@@ -2,5 +2,5 @@
 #
 
 function mgr
-    pushd $GITHUB_PROJECTS || return $status
+    99-pushd_var $GITHUB_PROJECTS
 end

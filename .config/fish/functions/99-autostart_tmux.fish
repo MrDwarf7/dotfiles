@@ -9,7 +9,7 @@ set -g max_recurses (math "5")
 # (normal one is at the bottom~~)
 set -g checks_total (math "$(not set -q "WEZTERM_PANE"; and printf "0"; or printf "1") + $(not set -q "TMUX"; and printf "0"; or printf "1") + $(00-valid_pacman tmux; and printf "0"; or printf "1") ")
 
-function cleanup
+function __autostart_tmux_cleanup
     set -e -g session_name
     set -e -g recurses
     set -e -g max_recurses
@@ -21,7 +21,7 @@ end
 
 function ensure_name
     # Early return as we have the Env Var we need anyway
-    if not test -z $TMUX_DEFAULT_SESSION_NAME # strLen IS NOT 0
+    if not test -z "$TMUX_DEFAULT_SESSION_NAME" # strLen IS NOT 0
         # printf "quick return\n"
         set session_name $TMUX_DEFAULT_SESSION_NAME
         return 0
@@ -39,7 +39,7 @@ function ensure_name
     end
 
     # If we don't have the env var set, source env's and recurse (should exit at early ret)
-    if test -z $TMUX_DEFAULT_SESSION_NAME # strLen IS 0
+    if test -z "$TMUX_DEFAULT_SESSION_NAME" # strLen IS 0
         source "$XDG_CONFIG_HOME/fish/conf.d/00-env.fish"
         ensure_name
         return 0
@@ -48,14 +48,14 @@ function ensure_name
     return 1
 end
 
-function 99-autostart_tmux --description 'Autostart or attach to a tmux session'
+function 99-autostart_tmux --argument-names typeof maybe_session_name --description 'Autostart or attach to a tmux session'
     if test (math "$checks_total") -ne (math "0")
         # printf "no auto-spawn required\n"
         return 0
     end
 
-    set typeof $argv[1]
-    set maybe_session_name $argv[2]
+    # set typeof $argv[1]
+    # set maybe_session_name $argv[2]
 
     if test -z "$maybe_session_name" # strLen IS 0
         while test (math $recurses) -le (math $max_recurses)
@@ -74,22 +74,22 @@ function 99-autostart_tmux --description 'Autostart or attach to a tmux session'
         set maybe_session_name $session_name # Set the actual local variable
     end
 
-    cleanup || return $status
+    __autostart_tmux_cleanup || return $status
+
+    set -l ret 0
 
     switch $typeof
         case n new
             tm n $maybe_session_name
-            return 0
         case a attach
             tm a
-            return 0
         case '*'
             printf "autostart_tmux: Unknown type %s\n" "$typeof"
             printf "autostart_tmux: Valid types are 'new' or 'attach'\n"
             colorize red "You called 'autostart_tmux' without any arguments at all!\n"
-            return 1
+            set ret 1
     end
-    return 0
+    return $ret
 end
 
 # set -l wzt_panel (not set -q "WEZTERM_PANE"; and printf "0"; or printf "1")

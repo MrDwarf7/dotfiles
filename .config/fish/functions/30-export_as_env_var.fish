@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 30-export_as_env_var --description "If a provided program is available via pacman, exports an environment variable to a path"
+function 30-export_as_env_var --argument-names program_one env_var path_value --description "If a provided program is available via pacman, exports an environment variable to a path"
     # Exports an environment variable if the program is found in pacman
     # Used to set an env var to a path specfically
     #
@@ -13,25 +13,35 @@ function 30-export_as_env_var --description "If a provided program is available 
     # Returns:
     # 0 if the program is found
     # 1 if the program is not found
-    set -l program_one $argv[1]
-    set -l env_var $argv[2]
-    set -l path_value $argv[3]
+    # set -l program_one $argv[1]
+    # set -l env_var $argv[2]
+    # set -l path_value $argv[3]
 
     # printf "3.0: Checking for %s\n" "$program_one"
     # printf "3.0: Setting %s\n" "$env_var"
     # printf "3.0: Falling back to %s\n" "$fallback"
 
-    if test -z "$env_var"
-        # printf "3.X: No env var provided, cannot set.\n"
-        # printf "\n"
-        return 1
-    end
+    # we _may_ need to set this directly due to how `set -q` reads vars?
+    # set env_var $env_var
 
-    if 00-valid_pacman "$program_one"
-        # printf "3.1: Setting $env_var to %s\n" "$path_value"
-        set -gx $env_var $path_value
-        return 0
-    end
-    printf "[ERROR] :: 03export_as_env_var: %s not found via pacman, cannot set %s to %s\n" "$program_one" "$env_var" "$path_value"
-    return 1
+    set -q $env_var; and return 1
+    test -z "$env_var"; and return 2
+
+    00-valid_pacman "$program_one"; and set -gx $env_var $path_value; and return 0
+    or printf "[ERROR] :: 03export_as_env_var: %s not found via pacman, cannot set %s to %s\n" "$program_one" "$env_var" "$path_value"
+    and return 1
+
+    # if test -z "$env_var"
+    # printf "3.X: No env var provided, cannot set.\n"
+    # printf "\n"
+    #     return 1
+    # end
+
+    # if 00-valid_pacman "$program_one"
+    #     # printf "3.1: Setting $env_var to %s\n" "$path_value"
+    #     set -gx $env_var $path_value
+    #     return 0
+    # end
+    # printf "[ERROR] :: 03export_as_env_var: %s not found via pacman, cannot set %s to %s\n" "$program_one" "$env_var" "$path_value"
+    # return 1
 end

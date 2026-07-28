@@ -7,13 +7,13 @@ set -g DEBUG_MODE 0
 # set -g first_mon
 # set -g second_mon
 
-function cleanup
-    if not test -z (set -s | grep -E '^output_buffer')
+function __look_waypaper_cleanup
+    if not test -z "$(set -s | grep -E '^output_buffer')"
         printf "Cleaning up output buffer variable: %s" "$output_buffer"
         set -e output_buffer
     end
 
-    if not test -z (set -s | grep -E '^waypaper_fill_method')
+    if not test -z "$(set -s | grep -E '^waypaper_fill_method')"
         printf "Cleaning up waypaper_fill_method variable: %s" "$waypaper_fill_method"
         set -e waypaper_fill_method
     end
@@ -22,22 +22,23 @@ function cleanup
 end
 
 function pprint
-    if test $DEBUG_MODE -eq 1
-        printf $argv
-    end
+    test $DEBUG_MODE -eq 1; and printf "%s\n" $argv
+
+    # if test $DEBUG_MODE -eq 1
+    #     printf $argv
+    # end
 end
 
-function set_waypaper
-    set path $argv[1]
-    set monitor $argv[2]
+function set_waypaper --argument-names path monitor
+    # set path $argv[1]
+    # set monitor $argv[2]
 
-    if not 90-test_path $path
-        return 1
-    end
+    not test -f $path; and return 1
+    # if not test -f $path
+    #     return 1
+    # end
 
-    if not 90-test_cmd waypaper
-        return 1
-    end
+    not 00-valid_pacman waypaper; and return 1
 
     command waypaper --backend awww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
@@ -45,9 +46,9 @@ function set_waypaper
     end
 end
 
-function waypaper_extractor
-    set index $argv[1]
-    set field $argv[2]
+function waypaper_extractor --argument-names index field
+    # set index $argv[1]
+    # set field $argv[2]
     # set store_in $argv[3]
 
     set -l fmt_field (printf '.[%d].%s' $index $field)
@@ -65,11 +66,11 @@ function waypaper_extractor
 
 end
 
-function jq_extract
+function jq_extract --argument-names field lhs rhs
     set base_regex '[._A-Za-z0-9~/-]'
-    set field $argv[1]
-    set lhs $argv[2]
-    set rhs $argv[3]
+    # set field $argv[1]
+    # set lhs $argv[2]
+    # set rhs $argv[3]
 
     set regex "\"(?<$lhs>$base_regex+),(?<$rhs>$base_regex+)\""
     set jq_comp ".[].$field | capture($regex)"
@@ -87,9 +88,38 @@ function jq_extract
 
 end
 
-function 99-look_waypaper --description 'Call waypaper for wallust'
-    set path_one $argv[1]
-    set path_two $argv[2]
+function 99-look_waypaper --argument-names path_one path_two --description 'Call waypaper for wallust'
+    if test (count $argv) -gt 2 -o (count $argv) -eq 0
+        printf "Usage: %s [wallpaper1] [wallpaper2]\n" (status filename | sed 's/.*\/\(.*\)\.fish/\1/') >&2
+        return 1
+    end
+
+    # set path_one $argv[1]
+    # set path_two $argv[2]
+    test -z "$path_one" -a -z "$path_two"; and printf "No wallpapers provided, using existing wallpapers.\n"; and return 1
+
+    # if test -z "$path_one" -a -z "$path_two"
+    #     printf "No wallpapers provided, using existing wallpapers.\n"
+    #     return 1
+    # end
+
+    function t
+        # set -l p1 (90-test_path $path_one)
+        # set -l p2 (90-test_path $path_two)
+        set -l p1 (test -f $path_one; and echo 0; or echo 1)
+        set -l p2 (test -f $path_two; and echo 0; or echo 1)
+        test $p1 -a $p2; or begin
+            printf "One or both of the provided wallpapers are invalid.\n"
+            return 1
+        end
+    end
+
+    not t; and printf "One or both of the provided wallpapers are invalid.\n"; and return 1
+
+    # if not t
+    #     printf "One or both of the provided wallpapers are invalid.\n"
+    #     return 1
+    # end
 
     # Get the monitors from waypaper (DP-1, HDMI-A-2, etc.)
 
@@ -106,6 +136,14 @@ function 99-look_waypaper --description 'Call waypaper for wallust'
 
     # pprint "MAIN :: FIRST %s\n" $first_mon
     # pprint "MAIN :: SECOND %s\n" $second_mon
+
+    00-valid_pacman jq || begin
+        printf "Error: jq is not installed. Please install jq to use this function.\n"
+        return 1
+    end; and 00-valid_pacman waypaper || begin
+        printf "Error: waypaper is not installed. Please install waypaper to use this function.\n"
+        return 1
+    end
 
     set mons (jq_extract monitor a b)
     pprint "MAIN :: MONS %s\n" $mons
@@ -165,11 +203,13 @@ function 99-look_waypaper --description 'Call waypaper for wallust'
 
     # If the second wallpaper is not set, we will use the first wallpaper
     # Shift vs. Same
-    if test -z "$path_two"
-        set path_two $second_mon_wallpaper # Keep all the same
-        # set path_two $first_mon_wallpaper # This will effectively 'shift' the first wallpaper to the second monitor
-        # set path_two $path_one # This would make it the same across both monitors
-    end
+    test -z "$path_two"; and set path_two $second_mon_wallpaper # Keep all the same
+
+    # if test -z "$path_two"
+    #     set path_two $second_mon_wallpaper # Keep all the same
+    #     # set path_two $first_mon_wallpaper # This will effectively 'shift' the first wallpaper to the second monitor
+    #     # set path_two $path_one # This would make it the same across both monitors
+    # end
     pprint "Path two after check: %s\n" $path_two
 
     if not test (string match "$path_one" "$first_mon_wallpaper")
@@ -193,7 +233,7 @@ function 99-look_waypaper --description 'Call waypaper for wallust'
     # print "Wallpapers set and wallust colors updated successfully.\n"
     # print "You can view the output buffer at: %s\n" $output_buffer
 
-    cleanup || return $status
+    __look_waypaper_cleanup || return $status
 
     return $status
 end

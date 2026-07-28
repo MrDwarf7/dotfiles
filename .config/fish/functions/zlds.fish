@@ -19,17 +19,15 @@ function zlds --wraps=source --description 'zellij delete-session'
         set force_delete 1
     end
 
+    set -l ret 0
     if zellij ls -s | grep -qE "^$argv[1]\s?"
         if test $force_delete -eq 1
             command zellij delete-session --force $argv[1] || return $status
-            return 0
         end
         command zellij delete-session $argv[1] || return $status
-        return 0
     else
         printf "Error: Session '%s' does not exist.\n" "$argv[1]" >&2
-        return 1
+        set ret 1
     end
-
-    return $status
+    return $ret
 end

@@ -2,5 +2,5 @@
 #
 
 function dod
-    pushd $DATA_ON_DEMAND_BASE || return $status
+    99-pushd_var $DATA_ON_DEMAND_BASE
 end
