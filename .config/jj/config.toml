@@ -223,6 +223,7 @@ duplicate_description = '''
 'branch_bookmark(to)' = 'heads((::to | to::) & bookmarks())'
 'stack(to)' = 'ancestors(reachable(to, mutable() & ~blacklist()), 2)'
 'user(x)' = 'author(x) | committer(x)'
+'default_set(num_back)' = '(present(@) | ancestors(immutable_heads().., num_back) | present(trunk())) & ~blacklist()'
 
 [revsets]
 logr = '(present(@) | ancestors(immutable_heads().., 4) | present(trunk())) & ~blacklist()'
