@@ -9,6 +9,6 @@ function hd --wraps=source --description 'Wrapper around `hunk diff` for jj'
         colorize red "Error: hunk is not installed or not in PATH."
     end
 
-    hunk diff $argv
+    hunk diff --watch $argv
     return $status
 end
