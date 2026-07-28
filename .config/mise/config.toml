@@ -158,6 +158,9 @@ version = "latest"
 # [tools."cargo:jj-ryu"]
 # version = "latest"
 
+# [tools."cargo:gh-stars"]
+# version = "latest"
+
 [tools."cargo:jj-navi"]
 version = "latest"
 
