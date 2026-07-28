@@ -1,0 +1,3 @@
+# INCLUDE - keeps that would otherwise be ignored by full dir. in entry above!
+/home/*/.config/.zvm/settings.json
+

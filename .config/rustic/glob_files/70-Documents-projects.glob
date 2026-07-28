@@ -1,0 +1,5 @@
+!/home/*/Documents/GitHub_Projects/**/.venv
+!/home/*/Documents/GitHub_Projects/**/qmk_firmware/keyboards/*
+!/home/*/Documents/GitHub_Projects/Rust/*/target/
+!/home/*/Documents/GitHub_Projects/Web/**/node_modules
+!/home/*/Documents/GitHub_Projects/cpp/**/cmake-build-debug

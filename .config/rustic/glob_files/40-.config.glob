@@ -1,0 +1,49 @@
+!/home/*/.config/.codex/.tmp/*
+!/home/*/.config/.codex/cache/*
+!/home/*/.config/.grok/bundled/*
+!/home/*/.config/.grok/marketplace-cache/*
+!/home/*/.config/.pnpm/*
+# !/home/*/.config/.zvm/
+!/home/*/.config/.zvm/*/lib/*
+!/home/*/.config/BetterDiscord/*
+!/home/*/.config/Claude/Code Cache/*
+!/home/*/.config/Code/*
+!/home/*/.config/Docker*/*
+!/home/*/.config/Todoist/Cache/*
+!/home/*/.config/Youtube Music*/Cache/*
+!/home/*/.config/Youtube Music*/Code Cache/*
+!/home/*/.config/bitburner/*
+!/home/*/.config/bitburner/Cache/*
+!/home/*/.config/chromium/Crash Reports/*
+!/home/*/.config/chromium/Default/*
+!/home/*/.config/chromium/GrShaderCache/*
+!/home/*/.config/chromium/component_crx_cache/*
+!/home/*/.config/discord/Code Cache/*
+!/home/*/.config/ft-pipeline/output/bookmarks/*
+!/home/*/.config/obsidian/Cache/*
+!/home/*/.config/yazi/plugins/*
+
+!/**/.config/yazi/plugins/*
+!/**/.config/.codex/.tmp/*
+!/**/.config/.codex/cache/*
+!/**/.config/.grok/bundled/*
+!/**/.config/.grok/marketplace-cache/*
+!/**/.config/.pnpm/*
+!/**/.config/.zvm/*
+!/**/.config/.zvm/*/lib/*
+!/**/.config/BetterDiscord/*
+!/**/.config/Claude/Code Cache/*
+!/**/.config/Code/*
+!/**/.config/Docker*/*
+!/**/.config/Todoist/Cache/*
+!/**/.config/Youtube Music*/Cache/*
+!/**/.config/Youtube Music*/Code Cache/*
+!/**/.config/bitburner/*
+!/**/.config/bitburner/Cache/*
+!/**/.config/chromium/Crash Reports/*
+!/**/.config/chromium/Default/*
+!/**/.config/chromium/GrShaderCache/*
+!/**/.config/chromium/component_crx_cache/*
+!/**/.config/discord/Code Cache/*
+!/**/.config/ft-pipeline/output/bookmarks/*
+!/**/.config/obsidian/Cache/*

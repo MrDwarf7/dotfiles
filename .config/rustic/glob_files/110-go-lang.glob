@@ -1,0 +1,5 @@
+!/home/*/go/pkg/mod/golang.org
+!/home/*/go/pkg/mod/**/staticcheck/*
+
+!/**/*/go/pkg/mod/golang.org
+!/**/*/go/pkg/mod/**/staticcheck/*

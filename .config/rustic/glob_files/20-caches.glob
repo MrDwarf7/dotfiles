@@ -1,0 +1,6 @@
+!/home/*/.cache/*
+!/home/*/.cache/*
+!/home/**/.cache/*
+
+!/**/*/.cache/*
+!/**/**/.cache/*

@@ -1,0 +1,13 @@
+!/home/*/.lmstudio/extensions/*
+!/home/*/.unsloth/llama.cpp
+!/home/*/.unsloth/studio/*venv*
+!/home/*/.unsloth/studio/unsloth_studio/lib/*
+!/home/*/.unsloth/studio/unsloth_studio/
+!/home/*/.unsloth/.cache*/*
+
+!/**/.lmstudio/extensions/*
+!/**/.unsloth/llama.cpp
+!/**/.unsloth/studio/(*venv*)
+!/**/.unsloth/studio/unsloth_studio/lib/*
+!/**/.unsloth/studio/unsloth_studio/
+!/**/.unsloth/.cache*/*

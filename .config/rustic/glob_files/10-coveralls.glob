@@ -1,0 +1,16 @@
+!/home/*/**/(*venv*)
+!/home/*/**/cmake-build-debug
+!/home/*/**/cmake-build-release
+!/home/*/**/node_modules
+!/home/*/**/target
+
+!/home/*/.npm/*
+!/home/*/**/Trash/*
+
+!/**/**/(*venv*)
+!/**/**/cmake-build-debug
+!/**/**/cmake-build-release
+!/**/**/node_modules
+!/**/**/target
+!/**/*/.npm/
+!/**/*/**/Trash/

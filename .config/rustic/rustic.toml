@@ -2,13 +2,34 @@
 # `-P <profile>` below can be filled if if using a file that is not the rustic.toml default.
 # `--name <name>` can be used to specify a specific item in the backup. snapshots array to backup. If not specified, all items will be backed up.
 #
-# backup usage: "rustic backup
-# cleanup:      "rustic forget --prune
+# backup usage:    "rustic backup"
+# check:           "rustic check --read-data"
+# cleanup:         "rustic forget --prune"
+# cleanup verbose: "rustic forget --prune --repack-all"
+#
+# RUST_BACKTRACE="1" \
+#   LABEL="<label here>" \
+#   TAG="<tag here>" \
+#   DESC="<desc here>" \
+#   sudo rustic backup --label $LABEL --tag $TAG --description "$TAG - $DESC" --delete-never --with-created && \
+#   rustic check --read-data && \
+#   rustic forget --prune --repack-all
 #
 # global options: These options are used for all commands.
 [global]
 log-level = "debug"
 # log-file = "/var/log/rustic/2025_07_08__2.log"
+
+# TODO: There's "pre-commands"/hooks we can have run -
+# We can set that up run hermes backup (to a single zip/tar), then exclude the full dir itself.
+
+# TODO: Split ignore files by area
+# OR
+# Use a config global ignorefiles array (repository doesn't use 'iglob-files' apparently?)
+
+# Valid tags (2026_07_30)
+# - FULL
+#
 
 ## Allows to recursively include other configuration files.
 # use-profiles = [
@@ -18,24 +39,56 @@ log-level = "debug"
 #   # etc.
 # ]
 
+# keep-tags = [ ]
+#
+#
+
 
 [repository]
 repository = "/mnt/linux_data/rustic/"
 # password-file = "/root/.secret/rustic_secret"
 password-file = "/home/dwarf/.secret/rustic_secret"
 
-no-cache = true # no cache needed for local repository
+no-cache = true                      # no cache needed for local repository
+glob-ignore = ["!/home/*/.hermes/*"]
 
 [forget]
+# prune = true
 keep-hourly = 6
 keep-daily = 8
 keep-weekly = 4
 keep-monthly = 6
-keep-yearly = 1
+keep-yearly = 2
+keep-tags = [ #
+  "FULL",
+]
 
 [backup]
-exclude-if-present = [".nobackup", "CACHEDIR.TAG"]
+exclude-if-present = [ #
+  ".nobackup",
+  "CACHEDIR.TAG",
+]
 one-file-system = true
+git-ignore = false
+
+iglob-files = [
+  "/home/dwarf/.config/rustic/glob_files/00-all.glob-excludes.glob",
+  "/home/dwarf/.config/rustic/glob_files/01-include.glob",
+  "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
+  "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
+  "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+
+  "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
+  "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
+  "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",
+  "/home/dwarf/.config/rustic/glob_files/100-Pictures.glob",
+  "/home/dwarf/.config/rustic/glob_files/110-go-lang.glob",
+  "/home/dwarf/.config/rustic/glob_files/120-root-specific.glob",
+]
+
 
 [[backup.snapshots]]
 name = "home"
@@ -46,7 +99,23 @@ git-ignore = false
 ## Glob is naturally case sensitive
 # glob-files = ["/home/dwarf/.config/rustic/all.glob-excludes.glob"]
 ## Case insensitive glob matching
-iglob-files = ["/home/dwarf/.config/rustic/all.glob-excludes.glob"]
+iglob-files = [
+  "/home/dwarf/.config/rustic/glob_files/00-all.glob-excludes.glob",
+  "/home/dwarf/.config/rustic/glob_files/01-include.glob",
+  "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
+  "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
+  "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+
+  "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
+  "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
+  "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",
+  "/home/dwarf/.config/rustic/glob_files/100-Pictures.glob",
+  "/home/dwarf/.config/rustic/glob_files/110-go-lang.glob",
+  "/home/dwarf/.config/rustic/glob_files/120-root-specific.glob",
+]
 
 [[backup.snapshots]]
 name = "etc"
@@ -55,3 +124,21 @@ sources = ["/etc"]
 [[backup.snapshots]]
 name = "root"
 sources = ["/root"]
+
+iglob-files = [
+  "/home/dwarf/.config/rustic/glob_files/00-all.glob-excludes.glob",
+  "/home/dwarf/.config/rustic/glob_files/01-include.glob",
+  "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
+  "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
+  "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+
+  "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
+  "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
+  "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",
+  "/home/dwarf/.config/rustic/glob_files/100-Pictures.glob",
+  "/home/dwarf/.config/rustic/glob_files/110-go-lang.glob",
+  "/home/dwarf/.config/rustic/glob_files/120-root-specific.glob",
+]
