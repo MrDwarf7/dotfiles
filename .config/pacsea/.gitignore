@@ -9,3 +9,4 @@ lists/aur_json_cache/
 
 ./lists/official_json_cache/
 ./lists/aur_json_cache/
+./lists/last_startup.txt

@@ -49,6 +49,7 @@ application/x-extension-shtml=zen.desktop;
 application/x-extension-xht=zen.desktop;
 application/x-extension-xhtml=zen.desktop;
 application/x-zerosize=org.neovim.nvim.desktop;
+application/x-lua=org.neovim.nvim.desktop;
 application/xhtml+xml=zen.desktop;
 image/gif=viewnior.desktop;
 image/jpeg=viewnior.desktop;swappy.desktop;
