@@ -19,7 +19,7 @@ cycle_priority = "p"
 begin_prompt_context = "c"
 copy_line = "yy"
 copy_body = "yb"
-undo = "u"
+undo = "U"
 # begin_prompt_project defaults to "+", which can't be written here (the
 # parser reads "+" as a modifier separator). Pick another key to move it, e.g.
 # begin_prompt_project = "P"
@@ -50,7 +50,8 @@ toggle_line_num = "L"
 # cycle_theme = "Ctrl-t"
 
 # System
-open_command_palette = [":", "Ctrl-P"]
+# open_command_palette = [":", "Ctrl-P"]
+open_command_palette = ":"
 open_share = "s"
 open_help = "?"
 open_settings = ","
