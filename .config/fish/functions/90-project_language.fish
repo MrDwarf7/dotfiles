@@ -7,7 +7,7 @@ set -g LANGS {
     "rust": "rs"
 }
 
-function 090project_language
+function 90-project_language
     # echo "$LANGS"
 
     # set -l langs

@@ -35,11 +35,11 @@ function set_awww
     set path $argv[1]
     set monitor $argv[2]
 
-    if not 090test_path $path
+    if not 90-test_path $path
         return 1
     end
 
-    if not 090test_cmd awww
+    if not 90-test_cmd awww
         return 1
     end
 
@@ -52,7 +52,7 @@ function set_awww
 
 end
 
-function 099look_awww --description 'Call awww for wallust'
+function 99-look_awww --description 'Call awww for wallust'
     set path_one $argv[1]
     set path_two $argv[2]
 
@@ -111,7 +111,7 @@ function 099look_awww --description 'Call awww for wallust'
         set_awww $path_two $second_mon || return $status
     end
 
-    if not 099look_wallust $path_one
+    if not 99-look_wallust $path_one
         printf "Failed to set wallust colors for %s\n" $path_one
         return 1
     end

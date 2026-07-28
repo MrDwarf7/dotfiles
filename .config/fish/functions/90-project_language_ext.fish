@@ -7,10 +7,10 @@ set -g LANGS {
     "typescript": "ts",
 }
 
-function 090project_language_ext
+function 90-project_language_ext
     set -l checked_for_ext ""
 
-    switch (090project_language $LANGS)
+    switch (90-project_language $LANGS)
         case typescript
             set checked_for_ext ts
         case rust

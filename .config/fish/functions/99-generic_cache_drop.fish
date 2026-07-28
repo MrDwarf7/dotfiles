@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 099generic_cache_drop --description 'Drop package manager and AUR caches'
+function 99-generic_cache_drop --description 'Drop package manager and AUR caches'
     # Drops the cache for the package manager and AUR
     # System Dependencies:
     #   sudo, paccache, yes, yay/paru
@@ -11,7 +11,7 @@ function 099generic_cache_drop --description 'Drop package manager and AUR cache
     #
     printf "Dropping caches\n"
     sudo true
-    if 00valid_pacman paccache
+    if 00-valid_pacman paccache
         colorize blue "Dropping pacman cache (keeping 2 versions)..."
         sudo paccache --remove --keep 2
     else
@@ -25,9 +25,9 @@ function 099generic_cache_drop --description 'Drop package manager and AUR cache
 
     if not test $PKG_MANAGER
         colorize yellow "PKG_MANAGER not set, defaulting to paru if installed."
-        if 00valid_pacman paru
+        if 00-valid_pacman paru
             set -gx PKG_MANAGER paru
-        else if 00valid_pacman yay
+        else if 00-valid_pacman yay
             set -gx PKG_MANAGER yay
         else
             colorize red "No AUR helper found, skipping AUR cache drop."

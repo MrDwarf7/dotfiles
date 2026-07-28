@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 090help --description 'Display help messages formatted as tables'
+function 90-help --description 'Display help messages formatted as tables'
     # Prints help messages
     #
     # Parameters:
@@ -20,18 +20,15 @@ function 090help --description 'Display help messages formatted as tables'
 
     set -l table_opts 1 ',' false
 
-
     printf "%s
 Options:
 %s
 
 Examples:
 %s
-" "$usage" "$( 090table $options $table_opts )" "$( 090table $example $table_opts )"
+" "$usage" "$( 90-table $options $table_opts )" "$( 90-table $example $table_opts )"
     return $status
 end
-
-
 
 #     set -l buf_usage "\
 # Usage: psp [OPTION]

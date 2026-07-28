@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 03export_as_env_var --description "If a provided program is available via pacman, exports an environment variable to a path"
+function 30-export_as_env_var --description "If a provided program is available via pacman, exports an environment variable to a path"
     # Exports an environment variable if the program is found in pacman
     # Used to set an env var to a path specfically
     #
@@ -19,7 +19,7 @@ function 03export_as_env_var --description "If a provided program is available v
 
     # printf "3.0: Checking for %s\n" "$program_one"
     # printf "3.0: Setting %s\n" "$env_var"
-    # printf "3.0: Falling back to %s\n" "$fallback_prog"
+    # printf "3.0: Falling back to %s\n" "$fallback"
 
     if test -z "$env_var"
         # printf "3.X: No env var provided, cannot set.\n"
@@ -27,10 +27,11 @@ function 03export_as_env_var --description "If a provided program is available v
         return 1
     end
 
-    if 00valid_pacman "$program_one"
+    if 00-valid_pacman "$program_one"
         # printf "3.1: Setting $env_var to %s\n" "$path_value"
         set -gx $env_var $path_value
         return 0
     end
+    printf "[ERROR] :: 03export_as_env_var: %s not found via pacman, cannot set %s to %s\n" "$program_one" "$env_var" "$path_value"
     return 1
 end

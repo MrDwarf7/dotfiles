@@ -3,7 +3,7 @@
 
 set -g GH_TOKEN_CACHE_FILE "$HOME/.secret/.gh_token_cache"
 
-function 099ensure_gh_token
+function 99-ensure_gh_token
     # Priority 1: Use GH_TOKEN from environment if set and non-empty
     # If cache file missing, create it (env takes temporary precedence, but doesn't overwrite existing cache)
     if set -q GH_TOKEN && test -n "$GH_TOKEN"

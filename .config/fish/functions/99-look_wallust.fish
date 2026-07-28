@@ -1,14 +1,14 @@
 #!/usr/bin/env fish
 #
 
-function 099look_wallust
+function 99-look_wallust
     set path $argv[1]
 
-    if not 090test_path $path
+    if not 90-test_path $path
         return 1
     end
 
-    if not 090test_cmd wallust
+    if not 90-test_cmd wallust
         return 1
     end
 

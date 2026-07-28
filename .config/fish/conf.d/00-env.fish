@@ -160,4 +160,4 @@ set -gx BATMAN_THEME "Monokai Extended"
 ## batwatch
 ## prettybat
 
-099ensure_gh_token &
+99-ensure_gh_token &

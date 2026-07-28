@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 00valid_pacman --description "Validates if a package is installed. (First via command -v; then via pacman -Qi)"
+function 00-valid_pacman --description "Validates if a package is installed. (First via command -v; then via pacman -Qi)"
     # Validates if a package is installed
     #
     # Parameters:

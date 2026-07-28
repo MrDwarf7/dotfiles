@@ -2,7 +2,7 @@
 #
 
 # Helper function to handlerepeated code
-function 090test_cmd
+function 90-test_cmd
     set cmd $argv[1]
 
     if not command -v $cmd >/dev/null

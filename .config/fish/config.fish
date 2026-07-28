@@ -17,7 +17,7 @@ if status is-interactive
     # #
 
     # Immediately call starship on term start (interactive)
-    01eval_if_pacman starship "starship init fish --print-full-init"
+    10-eval_if_pacman starship "starship init fish --print-full-init"
     commandline -f repaint
     # 01eval_if_pacman direnv "direnv hook fish | source"
 

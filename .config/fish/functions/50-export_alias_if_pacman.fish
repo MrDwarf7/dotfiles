@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 05export_alias_if_pacman --description "If a provided program is available via pacman, exports an alias"
+function 50-export_alias_if_pacman --description "If a provided program is available via pacman, exports an alias"
     # Exports an alias by checking pacman for the program
     #
     # Parameters:
@@ -20,7 +20,7 @@ function 05export_alias_if_pacman --description "If a provided program is availa
     # printf "5.0: Setting %s\n" "$alias_name"
     # printf "5.0: Falling back to %s\n" "$alias_value"
 
-    if 00valid_pacman "$program_one"
+    if 00-valid_pacman "$program_one"
         # printf "5.1: Setting %s to %s\n" "$alias_name" "$alias_value"
         alias $alias_name $alias_value
         return 0

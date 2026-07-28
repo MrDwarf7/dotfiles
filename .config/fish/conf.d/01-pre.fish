@@ -8,15 +8,15 @@
 #  tmux-resurrect and tmux-continuum loading...                      #
 ######################################################################
 
-02export_if_pacman paru PKG_MANAGER yay
-02export_if_pacman eza LIST_CLIENT exa
-02export_if_pacman sccache RUSTC_WRAPPER ""
+20-export_if_pacman paru PKG_MANAGER yay
+20-export_if_pacman eza LIST_CLIENT exa
+# 20-export_if_pacman sccache RUSTC_WRAPPER sccache
 
 # We literally don't need the actual value as it has a side-effect of writing to `$LIST_CLIENT_BASE_CMD` to store the cmd
 # 099listing_cmd_base >/dev/null 2>&1; or true
 
 # This is probably the better way to do this tbh
-set -gx LIST_CLIENT_BASE_CMD (099listing_cmd_base) >/dev/null 2>&1; or true
+set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
 
@@ -24,38 +24,38 @@ set -gx LIST_CLIENT_BASE_CMD (099listing_cmd_base) >/dev/null 2>&1; or true
 ## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
 # 05export_alias_if_pacman nvim vi /usr/bin/vim
 
-05export_alias_if_pacman vim vi /usr/bin/vim
-05export_alias_if_pacman nvim v /usr/bin/nvim
-05export_alias_if_pacman nvim vim /usr/bin/nvim
+50-export_alias_if_pacman vim vi /usr/bin/vim
+50-export_alias_if_pacman nvim v /usr/bin/nvim
+50-export_alias_if_pacman nvim vim /usr/bin/nvim
 
-05export_alias_if_pacman tuxedo tux /usr/bin/tuxedo
+50-export_alias_if_pacman tuxedo tux /usr/bin/tuxedo
 
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
-04var_to_syspath rustup "$HOME/.cargo/bin" --prepend
+40-var_to_syspath rustup "$HOME/.cargo/bin" --prepend
 
-01eval_if_pacman zoxide "zoxide init fish"
-01eval_if_pacman fzf "fzf --fish"
+10-eval_if_pacman zoxide "zoxide init fish"
+10-eval_if_pacman fzf "fzf --fish"
 ##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
-01eval_if_pacman mise "mise activate fish | source"
+10-eval_if_pacman mise "mise activate fish | source"
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
-01eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
+10-eval_if_pacman keychain "keychain --eval id_ed25519 2>/dev/null" # silences the notification
 
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 
 ## note: pretty sure we can comment 1 of the 2 below out and it's fine??
-01eval_if_pacman carapace "carapace _carapace"
+10-eval_if_pacman carapace "carapace _carapace"
 # 01eval_if_pacman carapace "carapace fish"
 
-01eval_if_pacman batman "batman --export-env"
-01eval_if_pacman batpipe "eval (batpipe)"
+10-eval_if_pacman batman "batman --export-env"
+10-eval_if_pacman batpipe "eval (batpipe)"
 
-03export_as_env_var pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
-04var_to_syspath pnpm "$PNPM_HOME" --prepend
+30-export_as_env_var pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
+40-var_to_syspath pnpm "$PNPM_HOME" --prepend
 
-04var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
+40-var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
 
 # set -gx PATH $PATH /home/dwarf/.lmstudio/bin
 
@@ -64,7 +64,7 @@ set -gx LIST_CLIENT_BASE_CMD (099listing_cmd_base) >/dev/null 2>&1; or true
 ## is lms/lm-studio.
 ## 00valid_pacmam checks for callable commands FIRST (then checks pacman -Qi)
 ## We want to use the 'fast path', so use the callable command
-04var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
+40-var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
 
 # 01eval_if_pacman tirith "tirith init --shell fish | source"
 

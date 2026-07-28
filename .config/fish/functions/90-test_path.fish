@@ -2,7 +2,7 @@
 #
 
 # Helper function to handled repeated code
-function 090test_path
+function 90-test_path
     set path $argv[1]
 
     if not test -f $path

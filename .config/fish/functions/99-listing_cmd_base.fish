@@ -26,7 +26,7 @@
 ##
 ##
 
-function 099listing_cmd_base --description 'Base listing cmd to remove duplications in other funcitons or aliases'
+function 99-listing_cmd_base --description 'Base listing cmd to remove duplications in other funcitons or aliases'
     set __base_cmd ""
 
     # ~'caching'~

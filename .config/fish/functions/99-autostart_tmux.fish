@@ -7,7 +7,7 @@ set -g max_recurses (math "5")
 
 # Yes, I know - it's an abomination, it's slightly faster on average though
 # (normal one is at the bottom~~)
-set -g checks_total (math "$(not set -q "WEZTERM_PANE"; and printf "0"; or printf "1") + $(not set -q "TMUX"; and printf "0"; or printf "1") + $(00valid_pacman tmux; and printf "0"; or printf "1") ")
+set -g checks_total (math "$(not set -q "WEZTERM_PANE"; and printf "0"; or printf "1") + $(not set -q "TMUX"; and printf "0"; or printf "1") + $(00-valid_pacman tmux; and printf "0"; or printf "1") ")
 
 function cleanup
     set -e -g session_name
@@ -48,7 +48,7 @@ function ensure_name
     return 1
 end
 
-function 099autostart_tmux --description 'Autostart or attach to a tmux session'
+function 99-autostart_tmux --description 'Autostart or attach to a tmux session'
     if test (math "$checks_total") -ne (math "0")
         # printf "no auto-spawn required\n"
         return 0
