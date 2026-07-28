@@ -17,10 +17,25 @@ function sysup_cache --description 'Step: drop package caches (full clean)'
     colorize blue "[SYSUP] Dropping all package caches...\n"
 
     set -l flags -Scccddd
-    yes | tr '[:lower:]' '[:upper:]' | sudo pacman "$flags"
+    sudo true
+    yes | tr '[:lower:]' '[:upper:]' | sudo pacman $flags
+
+    ## Otherwise the yes | tr stream can sometimes fail when during the PKG_MANAGER one (nvm - see bug below!)
+    # colorize blue "[SYSUP] micro-sleep..."
+    # sleep 1.5s
+
+    # BUG: This doesn't actually work _ENTIRELY_
+    # We seem to handle the first 2, then:
+    # ---------------
+    # Clone Directory: /home/dwarf/.xdg/cache/paru/clone
+    # :: Do you want to clean ALL AUR packages from cache? [y/N]:
+    # Diff Directory: /home/dwarf/.xdg/cache/paru/diff
+    # :: Do you want to remove all saved diffs? [Y/n]: ⏎
+    # -------------
+    # Which get nothing??
 
     if test -n "$PKG_MANAGER"
-        yes | tr '[:lower:]' '[:upper:]' | $PKG_MANAGER "$flags"
+        yes | tr '[:lower:]' '[:upper:]' | $PKG_MANAGER $flags
     else
         colorize yellow "PKG_MANAGER not set; skipping AUR cache drop.\n"
     end
