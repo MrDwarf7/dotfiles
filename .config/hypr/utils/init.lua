@@ -114,4 +114,8 @@ Utils.table_to_string = function(tbl, indent)
   return result
 end
 
+Utils.tbl = require("utils.tbl")
+Utils.list = require("utils.list")
+Utils.misc = require("utils.misc")
+
 return Utils
