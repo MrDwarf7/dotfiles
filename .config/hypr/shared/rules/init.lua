@@ -1,38 +1,29 @@
--- stylua: ignore start
 --- Window rules loader.
---- Loads rule generators from shared/rules/. Each generator reads
---- _registry.lua and returns a table of rule tables.
+--- Each module calls hl.window_rule() directly at require time.
+--- No registry, no generators, no DSL. Just Lua calling the API.
 
+---@class HyprConfig.Shared.Rules
+---@field setup fun():Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
 local setup = function()
-  -- Global floating window rule
-  hl.window_rule({
-    name = "no-floating-border",
-    match = { float = true },
-    border_size = 0,
-  })
+  return RootShared.load_modules("shared.rules", {
+    "globals",
 
-  local modules = {
-    "a_generic",
-    "ag_float",
-    "ag_tag",
-    "ag_workspace",
-    "ag_pip",
-    "ag_popups",
-    "code",
-    "alecaframe",
+    "float_center",
+    "title_dialogs",
+    "tag_effects",
+    "popups",
+    "pip",
+    "misc_rules",
     "steam",
     "vivaldi",
-  }
-
-  for _, mod in ipairs(modules) do
-    local rules = require("shared.rules." .. mod)
-    if type(rules) == "table" then
-      for _, rule in ipairs(rules) do
-        hl.window_rule(rule)
-      end
-    end
-  end
+    "jetbrains",
+    "alecaframe",
+    "chromium",
+    "obsidian",
+    "zed",
+    "ghostty",
+    "code",
+  })
 end
 
 return setup()
--- stylua: ignore end

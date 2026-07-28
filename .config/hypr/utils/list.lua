@@ -1,12 +1,20 @@
 local List = {}
 
 --- Checks if a list (array-like table) contains a specific value.
----@param tbl table The list to search in.
----@param value any The value to search for.
-List.list_contains = function(tbl, value)
-  for _, v in ipairs(tbl) do
-    if v == value then
+---@param needle any The value to search for.
+---@param haystack table The list (array-like table) to search in.
+List.contains = function(needle, haystack)
+  for i, v in ipairs(haystack) do
+    if type(v) == "nil" then
+      goto continue
+    end
+    if v == needle then
       return true
+    end
+    ::continue::
+    local next = i + 1
+    if next > #haystack then
+      break
     end
   end
   return false
@@ -16,7 +24,7 @@ end
 --- @param tbl T[]
 --- @param key? string|fun(x: T): any Optional field name or hash function to determine uniqueness of values
 --- @return T[] : The deduplicated list
-List.list_unique = function(tbl, key)
+List.unique = function(tbl, key)
   --
   local misc = require("utils.misc")
   local key_fn = misc.make_key_fn(key)

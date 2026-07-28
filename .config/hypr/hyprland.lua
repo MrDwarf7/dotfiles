@@ -36,6 +36,37 @@ RootShared = {
     wallpaper_backend = WallpaperBackend.detect().name,
     hyprland_shell = ShellBackend.detect(),
   },
+
+  --- Loads child modules from a given base path and a list of module names.
+  ---@param here string The base path to the modules (e.g., "shared.keymaps.")
+  ---@param modules_tbl table<string> A table of module names (e.g., {"mods", "map_general"})
+  ---@return boolean
+  load_modules = function(here, modules_tbl)
+    if not here or not modules_tbl then
+      logger:log("ERROR: load_modules called with nil here or modules_tbl")
+      return false
+    end
+
+    if type(here) ~= "string" then
+      logger:log("ERROR: load_modules called with non-string here: " .. tostring(here))
+      return false
+    end
+
+    if type(modules_tbl) ~= "table" then
+      logger:log("ERROR: load_modules called with non-table modules_tbl: " .. tostring(modules_tbl))
+      return false
+    end
+
+    -- if there's no trailing dot, add one
+    if here:sub(-1) ~= "." then
+      here = here .. "."
+    end
+
+    for _, mod in ipairs(modules_tbl) do
+      require(here .. mod)
+    end
+    return true
+  end,
 }
 
 local shared = require("shared")

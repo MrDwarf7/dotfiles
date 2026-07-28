@@ -14,51 +14,42 @@
 ---@alias Associated AssociatedFunction|AssociatedMethod
 
 ---@class HyprConfig.Shared
----@field setup Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
+---@field setup fun():Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
 local Shared = {
   setup = function()
-    require("shared.env")
-    require("shared.monitor")
-    require("shared.programs")
-
-    require("shared.keymaps") -- .init
-
-    require("shared.animation")
-    require("shared.binds")
-    require("shared.cursor")
-    require("shared.debug")
-    require("shared.ecosystem")
-    require("shared.group")
-
-    require("shared.gestures")
-
-    require("shared.input")
-    require("shared.layouts")
-    require("shared.misc")
-    require("shared.opengl")
-    require("shared.quirks")
-    require("shared.render")
-    require("shared.visualfeel")
-    require("shared.xwayland")
-
-    require("shared.rules.init")
-
-    require("shared.execs")
-    return true
+    return RootShared.load_modules("shared", {
+      "env",
+      "monitor",
+      "programs",
+      "keymaps",
+      "animation",
+      "binds",
+      "cursor",
+      "debug",
+      "ecosystem",
+      "group",
+      "gestures",
+      "input",
+      "layouts",
+      "misc",
+      "opengl",
+      "quirks",
+      "render",
+      "visualfeel",
+      "xwayland",
+      "rules",
+      "execs",
+    })
   end,
 }
 
--- ---@class HyprConfig.Shared
--- ---@field setup? AssociatedMethod|AssociatedFunction
--- local Shared = {
---   setup = setup, -- we could define sep. ig?
--- }
-
 --- Setting up a metatable so that both:
---- ```
+--- ```lua
 --- local shared = require("shared")
 --- shared.setup()
+--- ```
 --- -- AND
+--- ```lua
 --- shared:setup()
 --- function identically.
 --- ```

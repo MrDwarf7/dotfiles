@@ -5,7 +5,7 @@ local Tbl = {}
 ---@generic T
 ---@param tbl table<T, any> (table) Table
 ---@return T[] : List of keys
-Tbl.tbl_keys = function(tbl)
+Tbl.keys = function(tbl)
   local keys = {}
   for k in pairs(tbl) do
     table.insert(keys, k)
@@ -18,7 +18,7 @@ end
 ---@generic T
 ---@param tbl table<any, T> (table) Table
 ---@return T[] : List of keys
-Tbl.tbl_values = function(tbl)
+Tbl.values = function(tbl)
   local keys = {}
   for k in pairs(tbl) do
     table.insert(keys, k)
@@ -34,7 +34,7 @@ end
 ---@param fn fun(value: T): any Function
 ---@param tbl table<any, T> Table
 ---@return table : Table of transformed values
-Tbl.tbl_map = function(fn, tbl)
+Tbl.map = function(fn, tbl)
   local ret = {} ---@type table<any, any>
   for k, v in pairs(tbl) do
     ret[k] = fn(v)
@@ -46,7 +46,7 @@ end
 ---@param fn fun(value: T): boolean (function) Function
 ---@param tbl table<any, T> (table) Table
 ---@return T[] : Table of filtered values
-Tbl.tbl_filter = function(fn, tbl)
+Tbl.filter = function(fn, tbl)
   local ret = {} ---@type table<any, any>
   for _, entry in pairs(tbl) do
     if fn(entry) then
@@ -61,7 +61,7 @@ end
 ---@param value any The value to search for.
 ---@param opts table? Optional settings for the search (e.g., case sensitivity, deep search).
 ---@return boolean Returns true if the value is found, false otherwise.
-Tbl.tbl_contains = function(tbl, value, opts)
+Tbl.contains = function(tbl, value, opts)
   local pred --- @type fun(v: any): boolean?
   if opts and opts.predicate and type(opts.predicate) == "function" then
     pred = value
@@ -81,7 +81,7 @@ end
 --- Checks if a table is empty (has no key-value pairs).
 ---@param tbl table The table to check.
 ---@return boolean Returns true if the table is empty, false otherwise.
-Tbl.tbl_is_empty = function(tbl)
+Tbl.is_empty = function(tbl)
   return next(tbl) == nil
 end
 
