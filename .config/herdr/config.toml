@@ -331,7 +331,7 @@ description = "jump back to previous workspace"
 # Capture mouse input for Herdr's mouse UI.
 # Set false to let the terminal handle normal clicks, such as Cmd-clicking URLs.
 # Pane apps like lazygit and btop can still receive mouse when they request it.
-# mouse_capture = true
+mouse_capture = true
 
 # Optional modifier that forwards right-click hold/drag gestures to pane apps instead of opening Herdr's pane menu.
 # Empty/off disables this. Shift is intentionally unsupported because terminals commonly reserve Shift+mouse.
@@ -365,7 +365,7 @@ pane_gaps = false
 # Agent panel ordering: "spaces" (grouped by space) or "priority" (attention queue).
 # "workspaces" is accepted as an alias for "spaces".
 # agent_panel_sort = "spaces"
-agent_panel_sort = "priority"
+agent_panel_sort = "spaces"
 
 # Accent color for highlights, borders, and navigation UI.
 # Accepts: hex (#89b4fa), named colors (cyan, blue, magenta), or rgb(r,g,b)
@@ -426,7 +426,7 @@ resume_agents_on_restore = false
 # allow_nested = false
 # Experimental local Kitty graphics rendering for attached clients.
 # Requires a Kitty graphics-compatible outer terminal.
-# kitty_graphics = false
+kitty_graphics = true
 # Save recent pane screen history across full server restarts.
 pane_history = false
 # While prefix mode is active, temporarily switch the macOS host input
