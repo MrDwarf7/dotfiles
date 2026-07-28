@@ -3,7 +3,9 @@
 
 function la --description 'List all files including hidden files with details'
     set __base "$LIST_CLIENT_BASE_CMD"
-    set --append __base "-lah $argv"
+    # set --append __base "-l --no-user --no-time $argv"
+    # set --append __base "-l --no-user --no-permissions $argv"
+    set --append __base "-l --no-user --no-permissions --no-time $argv"
     eval $__base
 
     # if test -z "$LIST_CLIENT"

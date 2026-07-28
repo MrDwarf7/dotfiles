@@ -7,8 +7,5 @@
 
 function h --wraps=herdr --description "Shorthand alias for 'herdr'"
     not 00-valid_pacman herdr; and return 0
-    # if not 00-valid_pacman herdr
-    #     return 0
-    # end
     command herdr $argv
 end

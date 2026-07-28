@@ -44,7 +44,7 @@ function sysup --description 'System update orchestrator'
     end
 
     __sysup_cmp
-    argparse --name=sysup h/help s/skip=+ d/shutdown -- $argv
+    argparse --name=sysup h/help s/skip=+ d/shutdown c/cache -- $argv
     or begin
         colorize red "[SYSUP] Invalid arguments: $argv\n"
         return 2
@@ -56,6 +56,11 @@ function sysup --description 'System update orchestrator'
     end
     set -l order (__sysup_plan --skip=(string join '' $_flag_skip))
     or return $status
+
+    if set -q _flag_cache
+        sysup_cache
+        return $status
+    end
 
     colorize blue "[SYSUP] Starting system update...\n"
     colorize blue "[SYSUP] Step order: $order\n"
@@ -143,10 +148,11 @@ function __sysup_help
     printf "Usage: sysup [FLAGS]\n\n"
     printf "Flags:\n"
     printf "  -h, --help     Show this help\n"
+    printf "  -c, --cache    Only drop package caches (no updates)\n"
     printf "  -s, --skip     Skip steps by letter: %s\n" (__sysup_step_letters)
     printf "  -d, --shutdown Shut down after a successful update\n\n"
     printf "Steps (in registry order; '-' = cannot be skipped):\n"
-    for entry in $sysup_steps
+    for entry in $fn_prefix_steps
         set -l parts (string split '|' $entry)
         if test "$parts[2]" = -
             printf "  %-10s (always)  %s\n" $parts[1] $parts[3]
