@@ -430,23 +430,6 @@
   "fadeToDpmsEnabled": true,
   "fadeToDpmsGracePeriod": 5,
   "launchPrefix": "",
-  "brightnessDevicePins": {},
-  "wifiNetworkPins": {
-    "preferredWifi": [
-      "MiddleEarth5GHz"
-    ]
-  },
-  "bluetoothDevicePins": {},
-  "audioInputDevicePins": {
-    "preferredInput": [
-      "alsa_input.usb-Logitech_PRO_X_000000000000-00.mono-fallback"
-    ]
-  },
-  "audioOutputDevicePins": {
-    "preferredOutput": [
-      "alsa_output.usb-Logitech_PRO_X_000000000000-00.analog-stereo"
-    ]
-  },
   "gtkThemingEnabled": false,
   "qtThemingEnabled": false,
   "syncModeWithPortal": true,
@@ -556,6 +539,7 @@
   "notificationTimeoutLow": 5000,
   "notificationTimeoutNormal": 10000,
   "notificationTimeoutCritical": 0,
+  "notificationIgnoreAppTimeout": false,
   "notificationCompactMode": false,
   "notificationShowTimeoutBar": false,
   "notificationDedupeEnabled": false,
@@ -1029,5 +1013,5 @@
   "barInsetPaddingShared": -1,
   "barInsetPaddingSyncAll": false,
   "frameBarInsetPadding": 16,
-  "configVersion": 12
+  "configVersion": 13
 }
