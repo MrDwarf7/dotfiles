@@ -4,6 +4,7 @@
 !/home/*/.unsloth/studio/unsloth_studio/lib/*
 !/home/*/.unsloth/studio/unsloth_studio/
 !/home/*/.unsloth/.cache*/*
+!/home/*/.config/unity3d/Game
 
 !/**/.lmstudio/extensions/*
 !/**/.unsloth/llama.cpp
@@ -11,3 +12,4 @@
 !/**/.unsloth/studio/unsloth_studio/lib/*
 !/**/.unsloth/studio/unsloth_studio/
 !/**/.unsloth/.cache*/*
+!/**/*/.config/unity3d/Game

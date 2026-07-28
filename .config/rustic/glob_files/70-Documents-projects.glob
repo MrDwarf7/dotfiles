@@ -3,3 +3,12 @@
 !/home/*/Documents/GitHub_Projects/Rust/*/target/
 !/home/*/Documents/GitHub_Projects/Web/**/node_modules
 !/home/*/Documents/GitHub_Projects/cpp/**/cmake-build-debug
+
+!/home/*/Documents/GitHub_Projects/**/data-on-demand-next-*/.git/*
+!/home/*/Documents/GitHub_Projects/**/data-on-demand-next-*/.jj/*
+
+!/home/*/Documents/GitHub_Projects/JavaEww/Mindustry/core/*
+!/home/*/Documents/GitHub_Projects/JavaEww/Mindustry/desktop/*
+!/home/*/Documents/GitHub_Projects/JavaEww/Mindustry/gradle/*
+
+!/home/*/Documents/GitHub_Projects/**/field-theory-*/*

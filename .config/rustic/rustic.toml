@@ -7,13 +7,15 @@
 # cleanup:         "rustic forget --prune"
 # cleanup verbose: "rustic forget --prune --repack-all"
 #
+# Optionally, you may wish to add '--skip-if-unchanged' to the below cmd (esp. if re-running!)
+#
 # RUST_BACKTRACE="1" \
 #   LABEL="<label here>" \
 #   TAG="<tag here>" \
 #   DESC="<desc here>" \
-#   sudo rustic backup --label $LABEL --tag $TAG --description "$TAG - $DESC" --delete-never --with-created && \
-#   rustic check --read-data && \
-#   rustic forget --prune --repack-all
+#   sudo rustic backup --label $LABEL --tag $TAG --description "$TAG - $DESC" --delete-never --with-created --force && \
+#   sudo rustic check --read-data || sudo rustic repair index && \
+#   sudo rustic forget --prune --repack-all
 #
 # global options: These options are used for all commands.
 [global]
@@ -77,10 +79,10 @@ iglob-files = [
   "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
   "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
   "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
-  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-config.glob",
 
   "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
-  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-xdg.glob",
   "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
   "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
   "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",
@@ -92,7 +94,9 @@ iglob-files = [
 
 [[backup.snapshots]]
 name = "home"
-sources = ["/home"]
+sources = [ #
+  "/home",
+]
 git-ignore = false
 # glob-files = ["/home/dwarf/.config/rustic/rustic.glob-excludes.glob"]
 
@@ -105,10 +109,10 @@ iglob-files = [
   "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
   "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
   "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
-  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-config.glob",
 
   "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
-  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-xdg.glob",
   "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
   "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
   "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",
@@ -119,11 +123,15 @@ iglob-files = [
 
 [[backup.snapshots]]
 name = "etc"
-sources = ["/etc"]
+sources = [ #
+  "/etc",
+]
 
 [[backup.snapshots]]
 name = "root"
-sources = ["/root"]
+sources = [ #
+  "/root",
+]
 
 iglob-files = [
   "/home/dwarf/.config/rustic/glob_files/00-all.glob-excludes.glob",
@@ -131,10 +139,10 @@ iglob-files = [
   "/home/dwarf/.config/rustic/glob_files/10-coveralls.glob",
   "/home/dwarf/.config/rustic/glob_files/20-caches.glob",
   "/home/dwarf/.config/rustic/glob_files/30-large-apps.glob",
-  "/home/dwarf/.config/rustic/glob_files/40-.config.glob",
+  "/home/dwarf/.config/rustic/glob_files/40-config.glob",
 
   "/home/dwarf/.config/rustic/glob_files/50-home-reproducible.glob",
-  "/home/dwarf/.config/rustic/glob_files/60-.xdg.glob",
+  "/home/dwarf/.config/rustic/glob_files/60-xdg.glob",
   "/home/dwarf/.config/rustic/glob_files/70-Documents-projects.glob",
   "/home/dwarf/.config/rustic/glob_files/80-Documents-projects-win.glob",
   "/home/dwarf/.config/rustic/glob_files/90-Documents.glob",

@@ -3,6 +3,8 @@
 !/home/*/.ghcup/*
 !/home/*/.hermes/.baks/*
 !/home/*/.hermes/skills/.archive/*
+!/home/*/.hermes/skills/packed/*
+
 !/home/*/.java/*
 !/home/*/.local/*/pnpm/*
 !/home/*/.local/NuGet/*
@@ -18,12 +20,14 @@
 !/home/*/.stack/*
 !/home/*/.steam/*
 !/home/*/.vscode/*
+!/home/*/.zoom/data/*
 
 !/**/*/.docker/*
 !/**/*/.dotnet/*
 !/**/*/.ghcup/*
 !/**/*/.hermes/.baks/*
 !/**/*/.hermes/skills/.archive/*
+!/**/*/.hermes/skills/packed/*
 !/**/*/.java/*
 !/**/*/.local/*/pnpm/*
 !/**/*/.local/NuGet/*
@@ -39,3 +43,4 @@
 !/**/*/.stack/*
 !/**/*/.steam/*
 !/**/*/.vscode/*
+!/**/*/.zoom/data/*

@@ -1,6 +1,24 @@
 !/home/*/.cache/*
 !/home/*/.cache/*
 !/home/**/.cache/*
+!/home/**/*/cachestorage/*
+!/home/**/**/cachestorage/*
+!/home/**/*/Code Caches/*
+!/home/**/*/Code Cache/*
+!/home/**/*/DawnGraphiteCache/*
+!/home/**/*/Cache/Cache_Data/*
+!/home/**/**/Cache/Cache_Data/*
+
+!/home/**/.config/vivaldi/Default/GPUCache/f_000007
 
 !/**/*/.cache/*
 !/**/**/.cache/*
+
+!/**/**/*/cachestorage/*
+!/**/**/**/cachestorage/*
+
+!/**/**/*/Code Caches/*
+!/**/**/*/Code Cache/*
+!/**/**/*/DawnGraphiteCache/*
+!/**/**/*/Cache/Cache_Data/*
+!/**/**/**/Cache/Cache_Data/*

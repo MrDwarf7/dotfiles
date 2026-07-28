@@ -1,3 +1,4 @@
+!/home/**/.xdg/*/opencode/storage/*
 !/home/*/.xdg/*/pnpm/*
 !/home/*/.xdg/cache/*
 !/home/*/.xdg/data/JetBrains/*
@@ -18,6 +19,9 @@
 !/home/*/.xdg/data/mise/*
 !/home/*/.xdg/data/nvim/lazy/*
 !/home/*/.xdg/data/nvim/mason/*
+!/home/*/.xdg/data/twintaillauncher/compatibility/*
+!/home/*/.xdg/data/umu/steamrt4/*
+!/home/*/.xdg/data/uv/python/*
 !/home/*/.xdg/data/zed/extensions/installed/*
 !/home/*/.xdg/data/zed/extensions/work/*
 !/home/*/.xdg/data/zed/node/*
@@ -37,7 +41,9 @@
 !/home/*/.xdg/local/zed/*
 !/home/*/.xdg/local/zen/*
 !/home/*/.xdg/local/zig/*
+!/home/*/.xdg/state/spicetify/*
 
+!/**/**/.xdg/*/opencode/storage/*
 !/**/**/.xdg/*/pnpm/*
 !/**/**/.xdg/cache/*
 !/**/**/.xdg/data/JetBrains/*
@@ -58,6 +64,9 @@
 !/**/**/.xdg/data/mise/*
 !/**/**/.xdg/data/nvim/lazy/*
 !/**/**/.xdg/data/nvim/mason/*
+!/**/**/.xdg/data/twintaillauncher/compatibility/*
+!/**/**/.xdg/data/umu/steamrt4/*
+!/**/**/.xdg/data/uv/python/*
 !/**/**/.xdg/data/zed/extensions/installed/*
 !/**/**/.xdg/data/zed/extensions/work/*
 !/**/**/.xdg/data/zed/node/*
@@ -77,3 +86,4 @@
 !/**/**/.xdg/local/zed/*
 !/**/**/.xdg/local/zen/*
 !/**/**/.xdg/local/zig/*
+!/**/*/.xdg/state/spicetify/*

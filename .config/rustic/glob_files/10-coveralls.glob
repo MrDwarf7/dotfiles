@@ -1,16 +1,28 @@
-!/home/*/**/(*venv*)
+!/home/*/**/(*venv)*
+!/home/*/**/(*venv*)*
+!/home/*/**/cmake-build-*
 !/home/*/**/cmake-build-debug
 !/home/*/**/cmake-build-release
+!/home/*/**/godot/app_userdata/*
 !/home/*/**/node_modules
 !/home/*/**/target
+!/home/*/.wine/*
+!/home/*/pipx/shared/*
+!/home/*/pipx/venvs/*
+!/home/*/**/gradle/*
 
 !/home/*/.npm/*
 !/home/*/**/Trash/*
 
-!/**/**/(*venv*)
+!/**/**/(*venv)*
+!/**/**/(*venv*)*
 !/**/**/cmake-build-debug
 !/**/**/cmake-build-release
 !/**/**/node_modules
 !/**/**/target
-!/**/*/.npm/
 !/**/*/**/Trash/
+!/**/*/**/cmake-build-*
+!/**/*/**/godot/app_userdata/*
+!/**/*/.npm/
+!/**/*/.wine/*
+!/**/*/pipx/shared/*

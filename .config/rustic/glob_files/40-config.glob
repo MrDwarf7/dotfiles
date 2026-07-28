@@ -1,9 +1,10 @@
+!/home/*/**/**/Default/GPUCache/*
+!/home/*/.config/.claude/plugins/cace/*
 !/home/*/.config/.codex/.tmp/*
 !/home/*/.config/.codex/cache/*
 !/home/*/.config/.grok/bundled/*
 !/home/*/.config/.grok/marketplace-cache/*
 !/home/*/.config/.pnpm/*
-# !/home/*/.config/.zvm/
 !/home/*/.config/.zvm/*/lib/*
 !/home/*/.config/BetterDiscord/*
 !/home/*/.config/Claude/Code Cache/*
@@ -14,16 +15,18 @@
 !/home/*/.config/Youtube Music*/Code Cache/*
 !/home/*/.config/bitburner/*
 !/home/*/.config/bitburner/Cache/*
-!/home/*/.config/chromium/Crash Reports/*
+!/home/*/.config/**/Crash Reports/*
 !/home/*/.config/chromium/Default/*
-!/home/*/.config/chromium/GrShaderCache/*
-!/home/*/.config/chromium/component_crx_cache/*
+!/home/*/.config/**/GrShaderCache/*
+!/home/*/.config/**/component_crx_cache/*
 !/home/*/.config/discord/Code Cache/*
 !/home/*/.config/ft-pipeline/output/bookmarks/*
 !/home/*/.config/obsidian/Cache/*
 !/home/*/.config/yazi/plugins/*
+# !/home/*/.config/.zvm/
 
-!/**/.config/yazi/plugins/*
+
+!/**/*/**/**/Default/GPUCache/*
 !/**/.config/.codex/.tmp/*
 !/**/.config/.codex/cache/*
 !/**/.config/.grok/bundled/*
@@ -40,10 +43,10 @@
 !/**/.config/Youtube Music*/Code Cache/*
 !/**/.config/bitburner/*
 !/**/.config/bitburner/Cache/*
-!/**/.config/chromium/Crash Reports/*
-!/**/.config/chromium/Default/*
-!/**/.config/chromium/GrShaderCache/*
-!/**/.config/chromium/component_crx_cache/*
+!/**/.config/**/Crash Reports/*
+!/**/.config/**/GrShaderCache/*
+!/**/.config/**/component_crx_cache/*
 !/**/.config/discord/Code Cache/*
 !/**/.config/ft-pipeline/output/bookmarks/*
 !/**/.config/obsidian/Cache/*
+!/**/.config/yazi/plugins/*

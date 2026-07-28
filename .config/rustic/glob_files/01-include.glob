@@ -1,3 +1,4 @@
 # INCLUDE - keeps that would otherwise be ignored by full dir. in entry above!
-/home/*/.config/.zvm/settings.json
+## This just..... excludes everything cos it's broken or smth
+# /home/*/.config/.zvm/settings.json
 
