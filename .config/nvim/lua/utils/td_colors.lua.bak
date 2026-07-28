@@ -1,0 +1,93 @@
+---@class utils.TdColors
+local TdColors = {
+  ---@type TodoConfig|nil
+  td_ptr = nil,
+  td_default_hexes = {},
+  ---@type TodoOptions|nil
+  td_opts = {},
+}
+
+-- TODO: probably a better way to write this via vim.tbl_map or vim.tbl_filter
+function TdColors.fill_defaults_by_hex(td_colors, fill_tbl)
+  for color_name, color_values_tbl in pairs(td_colors) do
+    if type(color_values_tbl) == "table" and vim.tbl_count(color_values_tbl) > 0 then
+      -- find the first entry that is both: a string AND _that_ string begins with a "#" (indicating a hex color code)
+      for _, color_value in ipairs(color_values_tbl) do
+        if type(color_value) == "string" and color_value:sub(1, 1) == "#" then
+          fill_tbl[color_name] = color_value
+          break
+        end
+      end
+    end
+  end
+  TdColors.td_default_hexes = fill_tbl
+  return TdColors
+end
+
+function TdColors:print_td_default_hexes()
+  dd("TdColors.td_default_hexes:", self.td_default_hexes)
+end
+
+---@return TodoConfig|nil
+local defer_load = function()
+  -- return function()
+  local defer_ok, defer_td_load = pcall(require, "todo-comments")
+  if defer_ok then
+    TdColors.td_ptr = defer_td_load
+
+    return TdColors.td_ptr
+  else
+    dd("Error: todo-comments module did not load correctly.")
+    return nil
+  end
+  -- end
+end
+
+--- Internally; assigns the td_ptr field to the loaded todo-comments module,
+--- or defers loading if not available.
+function TdColors.load_td()
+  local ok, td_load = pcall(require, "todo-comments")
+  if not ok then
+    vim.schedule(defer_load)
+  end
+
+  -- if not package.loaded["todo-comments"] then
+  --   require("lazy.core.loader").load("todo-comments")
+  -- end
+
+  TdColors.td_ptr = td_load
+  if not TdColors.td_ptr then
+    dd("Error: todo-comments module did not load correctly.")
+    return nil
+  end
+end
+
+function TdColors.setup()
+  TdColors.load_td()
+  local td_ptr = TdColors.td_ptr
+  if not td_ptr then
+    dd("Error: todo-comments module did not load correctly.")
+    return nil
+  end
+
+  local td_opts = td_ptr._options
+  if not td_opts then
+    dd("Error: todo-comments options table is nil.")
+    return nil
+  end
+
+  local td_colors = td_opts.colors
+  if not td_colors then
+    dd("Error: todo-comments colors table is nil.")
+    return nil
+  end
+
+  local s = TdColors.fill_defaults_by_hex(td_opts.colors, {})
+  TdColors.td_default_hexes = s.td_default_hexes
+
+  TdColors:print_td_default_hexes()
+
+  return TdColors
+end
+
+return TdColors:setup()

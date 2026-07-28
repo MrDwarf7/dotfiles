@@ -273,7 +273,7 @@ local lsp_attach_autocmd = function(opts, lsp)
     }
   end
 
-  vim.api.nvim_create_autocmd("LspAttach", {
+  vim.api.nvim_create_autocmd({ "LspAttach", "LspDetach" }, {
     group = config_lsp_groud_id,
     callback = function(ctx)
       pcall(vim.treesitter.start, ctx.buf, vim.bo.filetype)
