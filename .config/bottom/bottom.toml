@@ -2,6 +2,13 @@
 # out by default; if you wish to change them uncomment and modify as you see
 # fit.
 
+[processes]
+regex = true
+default_tree = false
+unnormalized_cpu = false
+process_command = true
+hide_k_threads = true
+
 # This group of options represents a command-line option. Flags explicitly
 # added when running (ie: btm -a) will override this config file if an option
 # is also set here.
@@ -26,11 +33,13 @@ cpu.left_legend = false
 #current_usage = false
 
 # Whether to set CPU% on a process to be based on the total CPU or per-core CPU% (not divided by the number of cpus).
-processes.unnormalized_cpu = false
+# Depr
+# unnormalized_cpu = false
+# processes.unnormalized_cpu = false
 
 # Whether to group processes with the same name together by default. Doesn't do anything
 # if tree is set to true or --tree is set.
-#group_processes = false
+# group_processes = true
 
 # Whether to make process searching case sensitive by default.
 #case_sensitive = false
@@ -39,7 +48,9 @@ processes.unnormalized_cpu = false
 #whole_word = false
 
 # Whether to make process searching use regex by default.
-processes.regex = true
+# Depr
+# regex = true
+# processes.regex = true
 
 # The temperature unit. One of the following, defaults to "c" for Celsius:
 #temperature_type = "c"
@@ -87,13 +98,16 @@ use_old_network_legend = false
 #process_memory_as_value = false
 
 # Show tree mode by default in the processes widget.
-# tree = false
+# tree = true
+# processes.tree = true
+
 
 # Shows an indicator in table widgets tracking where in the list you are.
 show_table_scroll_position = true
 
 # Show processes as their commands by default in the process widget.
-process.process_command = true
+# Depr
+# process_command = true
 
 # Displays the network widget with binary prefixes.
 #network_use_binary_prefix = false
@@ -111,7 +125,7 @@ process.process_command = true
 #read_only = false
 
 # Hides the kernel threads
-processes.hide_k_threads = true
+# processes.hide_k_threads = true
 
 # Hide GPU(s) information
 #disable_gpu = false
