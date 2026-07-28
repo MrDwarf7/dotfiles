@@ -461,8 +461,8 @@ nmap [b :bprevious<CR>
 " Close all the buffers
 map <Leader>bw :bufdo bd<CR>
 
-map <Leader>l :bnext<CR>
-map <Leader>h :bprevious<CR>
+"map <Leader>l :bnext<CR>
+"map <Leader>h :bprevious<CR>
 
 map <Leader>bn :bnext<CR>
 map <Leader>bp :bprevious<CR>
