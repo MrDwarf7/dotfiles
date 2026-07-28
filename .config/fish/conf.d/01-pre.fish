@@ -9,8 +9,17 @@
 ######################################################################
 
 20-export_if_pacman paru PKG_MANAGER yay
+30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_FLAGS "-S --noconfirm"
+30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_CALLABLE "$PKG_MANAGER $PKG_MANAGER_INSTALL_FLAGS"
+
+## Hard to track/understand without looking at internal functionality when done like this
+# 01eval_if_pacman $PKG_MANAGER "set -gx PKG_MANAGER_INSTALL_FLAGS '-S --noconfirm'"
+# 01eval_if_pacman $PKG_MANAGER "set -gx PKG_MANAGER_INSTALL_CALLABLE '$PKG_MANAGER $PKG_MANAGER_INSTALL_FLAGS'"
+
 20-export_if_pacman eza LIST_CLIENT exa
+# Because the actual thing requires path; fallback to just te name for invoke
 # 20-export_if_pacman sccache RUSTC_WRAPPER sccache
+30-export_as_env_var sccache RUSTC_WRAPPER (command -v sccache)
 
 # We literally don't need the actual value as it has a side-effect of writing to `$LIST_CLIENT_BASE_CMD` to store the cmd
 # 099listing_cmd_base >/dev/null 2>&1; or true

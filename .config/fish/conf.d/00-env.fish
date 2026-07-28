@@ -47,6 +47,29 @@ set -gx EDITOR /usr/bin/nvim
 set -gx SHELL /usr/bin/fish
 
 set -q DISTCC_DIR; or set -gx DISTCC_DIR /tmp/distcc; and test -d $DISTCC_DIR; or mkdir -p $DISTCC_DIR
+# distcc related args are (generally) handled in the: `/etc/conf.d/distccd`.
+# further changes may also be made (-need to-) in `/etc/makepkg.conf`
+#   1. The BUILDENV array must have it's `distcc` entry _UN-BANGED_ (i.e. `distcc` instead of `!distcc`) to enable distcc support in makepkg.
+#   2. Uncomment the DISTCC_HOSTS line and add hostnames or IP's of the volunteers (aka. distcc servers) to the list.
+#       Optionally follow the ip with a forward slash ( `/` ) and the max. number of threads it is volunteering to contribute.
+#       List should be "least -> most" ordered.
+#   3. Adjust the `MAKEFLAGS` "-j" flag to be ~ _2X_ the amount of threads available in the cluster. [ which can be done with this syntax: "-j$(($(nproc) * 2))" if only localhost
+#
+#   `-march=native` CANNOT be used while under distcc for either CFLAGS or CXXFLAGS.
+#
+# You may also add the same DISTCC_HOSTS env to the shell as well for non MAKEPKG disticc usage.
+# Then use it (You may so this, or let pump handle startup/teardown by passing the prog direclty!)
+#   1. `eval $(pump --startup)`
+#   This will start the server.
+#   2. `pump --shutdown`
+#   Will shutdown the server afterwards.
+#
+# Then call your relevant build command with distcc as the cc/cxx.
+# `pump make -j$(($(nproc) * 2)) CC=distcc`
+# or
+# `pump cargo build -j$(($(nproc) * 2)) CC=distcc`
+#
+set -q DISTCC_HOSTS; or set -gx DISTCC_HOSTS "--randomize localhost,cpp,lzo"; and test -n "$DISTCC_HOSTS"; or set -gx DISTCC_HOSTS localhost/8
 
 # set -gx MANPAGER 'less -R --use-color -Dd+r -Du+b'
 # set -gx MANPAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
