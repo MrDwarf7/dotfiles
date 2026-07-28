@@ -9,12 +9,12 @@ function davinci-control-panels-setup --wraps=source --description 'Launch DaVin
     set -l davinci_control_panels $(command -v davinci-control-panels-setup)
 
     # Handle the fact that DR uses python
-    if 00valid_pacman mise
+    if 00-valid_pacman mise
         mise deactivate
     end
 
     eval "$qt_key_name=$qt_key_value $davinci_control_panels $argv &>/dev/null &; disown"
     commandline -f repaint
-    01eval_if_pacman mise "mise activate fish | source"
+    10-eval_if_pacman mise "mise activate fish | source"
     return 0
 end

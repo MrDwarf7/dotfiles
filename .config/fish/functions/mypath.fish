@@ -13,11 +13,11 @@ set k_marker m
 # end
 
 function __mypath_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         return
     end
 
-    090help "\
+    90-help "\
 Usage: mypath [OPTIONS]
 
 Pretty print your current \$PATH variable.

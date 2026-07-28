@@ -113,7 +113,7 @@ function mirror_update --description 'Update the mirrorlist using rate-mirrors'
     #   $status ($status != 0, otherwise 0)
     if test -z "$PKG_MANAGER"
         colorize yellow "NOTE: PKG_MANAGER not set, defaulting to paru if installed.\n"
-        if 00valid_pacman paru
+        if 00-valid_pacman paru
             colorize yellow "PKG_MANAGER not set, defaulting to paru."
             set -gx PKG_MANAGER paru
         end

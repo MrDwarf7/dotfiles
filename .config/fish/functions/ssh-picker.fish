@@ -93,12 +93,12 @@ function ssh-picker --description "fzf SSH host picker (port of Cleboost's ssh-m
     if test -n "$selected_host"; and test "$selected_host" != "[Enter address manually]"
         # Drop floating state if the current window is floating (so the SSH
         # session doesn't inherit a tiny float)
-        if 00valid_pacman hyprctl; and hyprctl activewindow | string match -q "*floating: 1*"
+        if 00-valid_pacman hyprctl; and hyprctl activewindow | string match -q "*floating: 1*"
             hyprctl dispatch 'hl.dsp.window.float({ action = "toggle" })'
         end
 
         # Copy Kitty terminfo to the remote if it's missing
-        if test "$TERM" = xterm-kitty; and 00valid_pacman kitty
+        if test "$TERM" = xterm-kitty; and 00-valid_pacman kitty
             printf "Checking remote terminal compatibility...\n"
             if not ssh -o ConnectTimeout=3 -o BatchMode=yes "$selected_host" "infocmp xterm-kitty >/dev/null 2>&1"
                 printf "Copying Kitty terminfo to remote server...\n"

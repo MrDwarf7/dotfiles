@@ -14,7 +14,7 @@ function __envprefix_cmp
 end
 
 function __envprefix_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
@@ -23,7 +23,7 @@ function __envprefix_help
     # ,envprefix -$k_prefix PATH $k_sort     ,# Lists all environment variables starting with 'PATH' sorted alphabetically,,
     # ,-$k_prefix                 , --prefix PREFIX           ,# Specify the prefix to search for (default: XDG_),
     # ,envprefix -$k_prefix HOME             ,# Lists all environment variables starting with 'HOME',,
-    090help "\
+    90-help "\
 Usage: envprefix [OPTIONS] [PREFIX]
 
 Prints all environment variables with a specific prefix

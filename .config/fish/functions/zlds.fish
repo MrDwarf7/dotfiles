@@ -2,7 +2,7 @@
 #
 
 function zlds --wraps=source --description 'zellij delete-session'
-    if not 00valid_pacman zellij
+    if not 00-valid_pacman zellij
         printf "Error: zellij is not installed.\n" >&2
         return 1
     end

@@ -38,12 +38,12 @@ function __psp_cmp
 end
 
 function __psp_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
 
-    090help "\
+    90-help "\
 Usage: psp [OPTION]
 
 Handles calling 'playerctl' for Spotify
@@ -91,7 +91,7 @@ end
 function curl_track_img
     # wezterm imgcat
 
-    if 00valid_pacman xh
+    if 00-valid_pacman xh
         xh (base_command metadata mpris:artUrl) | chafa -w 9
     else
         curl -s (base_command metadata mpris:artUrl) | chafa -w 9
@@ -100,7 +100,7 @@ end
 
 function info_generator
     set -l prog ""
-    if 00valid_pacman xh
+    if 00-valid_pacman xh
         set prog xh
     else
         set prog curl

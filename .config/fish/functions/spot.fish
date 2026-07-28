@@ -2,7 +2,7 @@
 #
 
 function spot --description 'Ncspot spotify client TUI'
-    if 00valid_pacman ncspot
+    if 00-valid_pacman ncspot
         ncspot $argv || return $status
         return 0
     end

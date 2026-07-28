@@ -120,7 +120,7 @@ function concatpro --description 'Concatenates files of a given extension in the
         colorize yellow "No extension provided via -e and none found in -o. Will try to find by language.\n"
 
         # TODO:
-        set file_ext (090project_language_ext)
+        set file_ext (90-project_language_ext)
         set output "all.$file_ext"
 
         pprintf "$(colorize blue "Using '$output'.\n")"

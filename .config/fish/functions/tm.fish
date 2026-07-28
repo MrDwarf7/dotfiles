@@ -40,12 +40,12 @@ function __tm_println
 end
 
 function __tm_help --description 'Display usage information for tm'
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
 
-    090help "\
+    90-help "\
 Usage: tm <COMMAND> [OPTIONS]
 
 A wrapper for tmux with simplified commands.

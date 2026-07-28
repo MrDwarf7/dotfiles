@@ -24,7 +24,7 @@ end
 # Returns:
 # Returns 0 on success. (infallible)
 function __sysup_help
-    090help "\
+    90-help "\
 Usage: sysup [FLAG] [SUB]
 
 Runs a system update, with options to skip certain parts.
@@ -122,9 +122,9 @@ function sysup --description 'System update function'
     if test $skip_mirror = true
         colorize yellow "[SYSUP] Skipping mirror update...\n"
         colorize yellow "[SYSUP] Running generic update only...\n"
-        099pacman_update || return $status
-        099aur_update || return $status
-        099yazi_update || return $status
+        99-pacman_update || return $status
+        99-aur_update || return $status
+        99-yazi_update || return $status
     else if test $skip_packages = true
         colorize yellow "[SYSUP] Skipping package update...\n"
         colorize yellow "[SYSUP] Running mirror update only...\n"
@@ -133,15 +133,15 @@ function sysup --description 'System update function'
         colorize yellow "[SYSUP] Skipping yazi update...\n"
         colorize yellow "[SYSUP] Running mirror and package update only...\n"
         mirror_update || return $status
-        099pacman_update || return $status
-        099aur_update || return $status
+        99-pacman_update || return $status
+        99-aur_update || return $status
     else
         colorize yellow "[SYSUP] Running full update...\n"
         mirror_update
-        099pacman_update || return $status
-        099aur_update || return $status
-        099generic_cache_drop || return $status
-        099yazi_update || return $status
+        99-pacman_update || return $status
+        99-aur_update || return $status
+        99-generic_cache_drop || return $status
+        99-yazi_update || return $status
     end
 
     if test $skip_rustup != true

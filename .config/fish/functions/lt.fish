@@ -9,12 +9,12 @@ set k_level l
 set k_num n
 
 function __lt_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
 
-    090help "\
+    90-help "\
 Usage: lt [OPTIONS] [DIRECTORY]
 
 List files in a directory with tree view.
@@ -63,7 +63,7 @@ function lt --description 'List files in a directory with tree view'
 
     if string match -q ls $LIST_CLIENT; or string match -q /usr/bin/ls $LIST_CLIENT
         colorize yellow "Warning: Tree view not available with '$LIST_CLIENT', using tree instead"
-        if 00valid_pacman tree
+        if 00-valid_pacman tree
             set -l args "-L $depth -a -C --dirsfirst -l"
             command tree $args $argv
             return $status
@@ -72,7 +72,7 @@ function lt --description 'List files in a directory with tree view'
         return 1
     end
 
-    set __base $(099listing_cmd_base)
+    set __base $(99-listing_cmd_base)
 
     # Check if we're using exa/eza (which support tree view) or fallback ls
     set --append __base "--tree --level=$depth -a"

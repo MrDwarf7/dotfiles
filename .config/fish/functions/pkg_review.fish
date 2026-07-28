@@ -8,11 +8,11 @@ function __pkg_review_cmp
 end
 
 function __pkg_review_help
-    if not 00valid_pacman fzf
+    if not 00-valid_pacman fzf
         return 0
     end
 
-    090help "\
+    90-help "\
 Review installed packages with fzf
 Usage: pkg_review
 

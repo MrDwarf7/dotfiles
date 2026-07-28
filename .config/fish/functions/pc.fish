@@ -10,11 +10,11 @@ function __pc_cmp
 end
 
 function __pc_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         return 0
     end
 
-    090help "\
+    90-help "\
 Stands for '[p]ackage [c]heck. Runs \$PKG_MANAGER -Su or paru -Su if \$PKG_MANAGER is set.'
 
 Usage: pc

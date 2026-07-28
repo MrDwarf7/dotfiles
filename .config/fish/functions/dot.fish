@@ -5,19 +5,13 @@ set k_help h
 set k_files f
 set k_pop p
 
-function dot_cmp
-    complete -c dot -s $k_help -l help -d 'Print help (see more with \'--help\')'
-    complete -c dot -s $k_files -l files -d 'Show changed files summary'
-    complete -c dot -s $k_pop -l pop -d 'Pop back to the previous directory after execution'
-end
-
 function dot_help
-    if not 00valid_pacman qsv
+    if not 00-valid_pacman qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
 
-    090help "\
+    90-help "\
 Usage: dot [OPTIONS]
 
 Displays the latest changes in the dotfiles
@@ -48,8 +42,6 @@ Otherwise, it falls back to using 'git'.
 end
 
 function dot --description 'Show latest changes in the dotfiles repo (uses jj if available, otherwise git)' --argument-names argv
-    dot_cmp
-
     argparse $k_help/help $k_files/files $k_pop/pop -- $argv
     or return
 

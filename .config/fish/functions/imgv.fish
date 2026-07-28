@@ -2,7 +2,7 @@
 #
 
 function imgv --description 'Run chafa with a set of options'
-    if not 00valid_pacman chafa
+    if not 00-valid_pacman chafa
         colorize red "chafa is not installed. Please install it to use imgcat."
         return 1
     end

@@ -9,7 +9,7 @@ function check_deps
     set -l deps bat curl wireguard-tools openresolv
 
     for dep in $deps
-        if not 00valid_pacman $dep
+        if not 00-valid_pacman $dep
             colorize red "Error: %s is not installed. Please install %s and try again.\n" "$dep" "$dep"
             return 1
         end
