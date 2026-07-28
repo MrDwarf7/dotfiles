@@ -66,12 +66,35 @@ end, 500, Status.RIGHT)
 
 -- ---------- PLUGINS ----------
 
-require("relative-motions"):setup({ only_motions = true })
+require("mime-ext.local"):setup({
+	-- Expand the existing filename database (lowercase), for example:
+	with_files = {
+		lua = "text/x-lua",
+		makefile = "text/makefile",
+	},
+
+	-- Expand the existing extension database (lowercase), for example:
+	with_exts = {
+		lua = "text/x-lua",
+	},
+
+	-- If the MIME type is not in both filename and extension databases,
+	-- then fallback to Yazi's preset `mime.local` plugin, which uses `file(1)`
+	fallback_file1 = false,
+})
+
+require("relative-motions"):setup({
+	show_numbers = "relative",
+	show_motion = true,
+	only_motions = false,
+})
+
 -- require("duckdb"):setup()
 require("mdv-previewer"):setup({
 	theme = "monokai", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
 	code_theme = "tokyonight", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
 })
+
 require("sshfs"):setup({
 	-- Default:
 	-- mount_dir = os.getenv("HOME") .. "/mnt",

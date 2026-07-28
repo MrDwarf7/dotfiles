@@ -20,7 +20,8 @@ prepend_keymap = [
   # { on = [ "c", "f" ], run = "copy filename", desc = "Copy the filename" },
   # { on = [ "c", "n" ], run = "copy name_without_ext", desc = "Copy the filename without extension" },
   { on = ["y", "n"], run = "copy filename", desc = "Copy the filename" },
-  { on = ["y", "c"], run = "copy path", desc = "Copy the file path" },
+  # { on = ["y", "c"], run = "copy path", desc = "Copy the file path" },
+  { on = ["y", "f"], run = "copy path", desc = "Copy the file path" },
   { on = ["y", "d"], run = "copy dirpath", desc = "Copy the directory path" },                      # `copy dirname` is deprecated, use `copy dirpath` instead
   { on = ["y", "N"], run = "copy name_without_ext", desc = "Copy the filename without extension" },
   { on = ["y", "y"], run = "yank", desc = "Yank selected files (copy)" },
@@ -32,9 +33,15 @@ prepend_keymap = [
   { on = ["g", "i"], run = "plugin lazygit", desc = "run lazygit" },
   { on = "l", run = "plugin smart-enter", desc = "Enter the child directory or open the file" },
   # { on = "/", run = "plugin jump-to-char", desc = "Jump to char" },
+  # { on = ["m", "m"], run = "linemode mtime_better", desc = "Linemode: mtime_better" },
+  ### Swapped & we add the add our own
+  { on = ["m", "M"], run = "linemode mtime", desc = "Linemode: mtime" },
   { on = ["m", "m"], run = "linemode mtime_better", desc = "Linemode: mtime_better" },
-  # { on = [ ",", "m" ], run = [ "sort mtime --reverse=no", "linemode mtime_better" ], desc = "Sort by modified time" },
-  # { on = [ ",", "M" ], run = [ "sort mtime --reverse", "linemode mtime_better" ], desc = "Sort by modified time (reverse)" },
+
+  { on = [",", "m"], run = ["sort mtime --reverse=no", "linemode mtime_better"], desc = "Sort by modified time" },
+  { on = [",", "M"], run = ["sort mtime --reverse", "linemode mtime_better"], desc = "Sort by modified time (reverse)" },
+
+  ### Plugin: relative-motions
   { on = ["1"], run = "plugin relative-motions 1", desc = "Move in relative steps" },
   { on = ["2"], run = "plugin relative-motions 2", desc = "Move in relative steps" },
   { on = ["3"], run = "plugin relative-motions 3", desc = "Move in relative steps" },

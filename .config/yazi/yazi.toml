@@ -10,7 +10,7 @@ show_hidden    = true
 show_symlink   = true
 linemode       = "mtime_better"
 sort_by        = "natural"
-ratio          = [1, 4, 3]
+ratio          = [1, 4, 4]
 sort_sensitive = false
 sort_reverse   = false
 sort_dir_first = true
@@ -19,28 +19,31 @@ scrolloff      = 2
 mouse_events   = ["click", "scroll"]
 title_format   = "Yazi: {cwd}"
 
+# ratio          = [1, 4, 3]
+
 [preview]
-wrap        = "no"
-tab_size    = 2
-max_width   = 2200
-max_height  = 1000
-cache_dir   = ""
-image_delay = 30   # miliseconds
+wrap       = "no"
+tab_size   = 2
+max_width  = 2200
+max_height = 1000
+# cache_dir   = "/home/dwarf/.cache/yazi-cache/"
+# image_delay = 30 # miliseconds
+image_delay = 0 # miliseconds
 # image_filter  = "nearest"
 # image_filter  = "triangle"
 # image_filter  = "catmull-rom"
 image_filter  = "lanczos3"
 image_quality = 75
 # sixel_fraction  = 15
-ueberzug_scale  = 1
-ueberzug_offset = [0, 0, 0, 0]
+# ueberzug_scale  = 1
+# ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 edit = [
   # { run = '${EDITOR:-nvim} "$@"', block = true, for = "unix", desc = "$EDITOR" },
   # { run = '${EDITOR:-/usr/bin/env nvim} "%s"', block = true, for = "unix", desc = "$EDITOR" },
   # { run = 'xdg-open "$(basename %s)" || ${EDITOR:-nvim} "$(basename %s)"', block = true, for = "unix", desc = "$EDITOR" },
-  { run = '${EDITOR:-/usr/bin/env nvim} "$(basename %s)" || ${EDITOR:-nvim} "$(basename %s)"', block = true, for = "unix", desc = "$EDITOR" },
+  { run = '${EDITOR:-/usr/bin/env nvim} "$(basename %s)" || ${EDITOR:-nvim} "$(basename %s)"', block = true, for = "unix", desc = '$EDITOR' },
 
   # { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
   # { run = "code %*", orphan = true, desc = "VsCode", for = "windows" },
@@ -74,7 +77,7 @@ reveal = [
 extract = [
   # { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
   # { run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" },
-  { run = 'ouch d -y -c $(nproc) "%s"', desc = "Ouch Extract here", for = "unix" },
+  { run = 'ouch d -y -c $(nproc) "$(dirname %s)"', desc = "Ouch Extract here", for = "unix" },
 
   { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
@@ -89,7 +92,7 @@ play = [
   { run = 'xdg-open "$(basename %s)"', orphan = true, for = "linux" },
 
   { run = 'vlc %*', orphan = true, for = "windows" },
-  { run = '''mediainfo "%s"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+  { run = '''mediainfo "$(dirname %s)"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
 ]
 
 
@@ -155,6 +158,8 @@ prepend_previewers = [
 
   { url = "*.{ipynb,json,jsonc}", run = "rich-preview" },
   { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+
+  # { url = "*.{lua}", run = "rich-preview" },
 
   # ONLY add ( compression related ) items as needed.
   # The built-in previewer is generally much better these days
