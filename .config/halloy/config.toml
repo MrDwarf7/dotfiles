@@ -11,12 +11,22 @@ nickname = "mrdwarf7"
 server = "irc.libera.chat"
 channels = ["#halloy"]
 
-
 [servers.ashell]
 nickname = "mrdwarf7"
 server = "matrix.org"
 channels = ["#ashell:matrix.org"]
 # https://matrix.to/#/#ashell:matrix.org
+
+[servers.dsa]
+nickname = "MrDwarf7"
+server = "matrix.org"
+channels = ["#dsa:matrix.org"]
+
+
+[servers.PC_Gaming]
+nickname = "MrDwarf7"
+server = "waywardinn.com"
+channels = ["#vgpc:waywardinn.com"]
 
 
 [font]
@@ -275,7 +285,8 @@ scroll_to_top = "ctrl+home"
 scroll_to_bottom = "ctrl+end"
 
 reload_configuration = "ctrl+r"
-file_transfers = "ctrl+s"
+file_transfers = "ctrl+shift+s"
+config_editor_save = "ctrl+s"
 
 toggle_topic = "ctrl+t"
 
