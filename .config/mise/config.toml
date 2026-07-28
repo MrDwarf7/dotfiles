@@ -27,8 +27,12 @@ biome = "latest"
 # [tools."npm:@tailwindcss/language-server"]
 # version = "latest"
 
+#### This no longer works anyway - prefer simply: `typescript`
 # [tools."npm:@typescript/native-preview"]
 # version = "latest"
+
+[tools."npm:typescript"]
+version = "latest"
 
 # # vercel-cli
 # [tools."npm:vercel"]
@@ -194,7 +198,7 @@ npm.bun = true        # Prefer using bun over npm
 pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
 # pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
 
-python.uv_venv_auto = "create|source" # Auto-source (create if missing) .venv when a uv.lock is present
+# python.uv_venv_auto = "create|source" # Auto-source (create if missing) .venv when a uv.lock is present
 
 # Experimental 'dotfiles' manager stuff
 dotfiles.root = "~/dotfiles"
