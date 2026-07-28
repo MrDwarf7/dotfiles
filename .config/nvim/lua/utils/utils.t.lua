@@ -42,43 +42,93 @@
 -------------------------------------------------
 
 -------------------------------------------------
+---@class utils.Converter.Opts
+--- Holds options for the converter functions.
+---@field filepath PathBuf|nil
+---@field trailing_slash? boolean|nil
+---@field strip_extension? boolean|nil
+-------------------------------------------------
+
+-------------------------------------------------
 ---@generic P: PathBuf
 ---@generic W: WindowsPathBuf
 ---@class utils.Converter: utils.Base
+--- Handles file path conversions and manipulations.
+--- This is primarily for converting between *nix and Windows style paths,
+--- as well as extracting components of file paths.
+---
 ---@field __tostring fun(): string
 ---@field __call fun(filepath: PathBuf): PathBuf
 ---
+--- Strategy: via_oil -- get path from oil.nvim API when in an oil buffer
+---@private
+---@field via_oil fun(): PathBuf|nil
+---
+--- Strategy: via_expand -- get path from vim.expand when in a normal buffer
+---@private
+---@field via_expand fun(): PathBuf|nil
+---
+--- Strategy: via_cwd -- get path from cwd + <cfile>
+---@private
+---@field via_cwd fun(): PathBuf|nil
+---
+--- Decide which strategy to use and call the appropriate one.
+--- Priority: oil > expand > cwd
+---@private
+---@field via_method fun(): PathBuf|nil
+---
 --- Pure function.
----
---- Strips leading and trailing slashes from a given filepath.
----@field strip fun(filepath: PathBuf): PathBuf
----
----
---- Pure function.
----
 --- Transforms a *nix style path to a Windows style path.
 --- Removes the leading `/` and replaces all `/` with `\`.
 --- additionally adds the semicolon (`:`) required for Windows paths,
+--- and removes the trailing `/` character.
+---
+--- eg's:
+---
+--- Linux ---
+--- From inside normal buffer:
+--- %:p == "/home/dwarf/dotfiles/.config/nvim/lua/plugins/oil.lua"
+--- `<cfile>` = "desc" (whatever the cursor is over to the end of W )
+---
+--- From inside oil buffer:
+--- %:p = "oil:///home/dwarf/dotfiles/.config/nvim/lua/plugins/"
+--- <cfile> = "oil.lua"
+---
+--- Transforms a *nix style path to a Windows style path.
+--- Removes the leading `/` and replaces all `/` with `\\`.
+--- Additionally adds the colon (`:`) required for Windows paths,
 --- and removes the trailing `/` character.
 ---
 --- Will take a string like:
 --- `/C/Users/NAME/dotfiles/.config/nvim/`
 --- and transform it to:
 --- `C:\Users\NAME\dotfiles\.config\nvim`
+---@field windows_path fun(d: WindowsPathBuf|PathBuf): WindowsPathBuf
 ---
----@field windows_path fun(d: PathBuf): WindowsPathBuf
+--- Get the full file path (directory + filename).
+--- Works in both oil buffers and normal buffers.
+---@field fullpath fun(opts?: utils.Converter.Opts): PathBuf|nil
 ---
---- Internal function.
---- Old logic, now deprecreated that both `fullpath` and `relative` exist.
---- Is still used as a fallback for other functions.
+--- Get just the directory path (full path with filename removed).-
+---@field dirpath fun(opts?: utils.Converter.Opts): PathBuf|nil
 ---
----@deprecated Use `utils.Converter.fullpath()` or `utils.Converter.relative()` instead.
----@field _filepath fun(): PathBuf
+--- Get just the filename (no directory path).
+---@field filename fun(opts?: utils.Converter.Opts): FileName|nil
 ---
----@field fullpath fun(opts?: { filepath?: PathBuf }): PathBuf
----@field relative fun(opts?: { filepath?: PathBuf }): PathBuf
+--- Get just the directory name (last path component of the directory).
+---@field dirname fun(opts?: utils.Converter.Opts): string|nil
+---
+--- Get the full file path relative to the current working directory.
+---@field relative fun(opts?: utils.Converter.Opts): PathBuf|nil
+---
+--- Alias for relative()
+---@field filepath_relative fun(opts?: utils.Converter.Opts): PathBuf|nil
+---
+--- Setup function that returns the Converter table with metatable.
+--- Allowing `Converter(filepath)` to call `Converter.fullpath()`.
+---@field setup fun(opts?: utils.Converter.Opts): utils.Converter
+---
 -------------------------------------------------
-
 -------------------------------------------------
 
 ---@class utils.List
@@ -213,7 +263,7 @@
 -------------------------------------------------
 
 -------------------------------------------------
----@alias QfTypes "q"|"l"
+---@alias QfTypes "q"|"l"|"t"
 -------------------------------------------------
 
 -- TODO: @types

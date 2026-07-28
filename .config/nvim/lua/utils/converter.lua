@@ -1,254 +1,278 @@
 local arch = require("utils.arch")
 
 ---@class utils.Converter
+---@field debugging boolean
 local Converter = {
   debugging = false,
 }
 
---- Convert filepath
-
----@generic T: table<any, any>
----@generic F: fun(t: any): any
----@param t T
----@param f F
----@return table<T, F>
-local function fold(t, f)
-  local res = {}
-  for k, v in pairs(t) do
-    res[k] = f(v)
-  end
-  return res
+--- Strip the `oil://` prefix from a filepath.
+---@param filepath PathBuf
+---@return PathBuf
+local function strip(filepath)
+  return string.gsub(filepath or "", "oil://", "")[1]
 end
 
--- string.format("%s/%s", directory_path, filename)
-
----@generic I: number
----@param mapping_pair table<I, [PathBuf, FileName]>
----@return FullPathMap
-local function fmt_fullpath(mapping_pair)
-  ---@type table<_, [PathBuf]>
-  local folded = fold(mapping_pair, function(pair)
-    local directory_path = pair[1] -- PathBuf
-    local filename = pair[2] -- FileName
-
-    if string.sub(directory_path, -1) == "/" then
-      directory_path = string.sub(directory_path, 1, -2) -- remove trailing `/`
-    end
-
-    if string.sub(filename, 1, 1) == "/" then
-      filename = string.sub(filename, 2) -- remove leading `/`
-    end
-
-    vim.print(directory_path)
-    vim.print(filename)
-
-    return string.format("%s/%s", directory_path, filename)
-  end)
-
-  ---@return FullPathMap
-
-  local full_path_map = {}
-  for _, v in pairs(folded) do
-    table.insert(full_path_map, v)
+--- Strategy: via_oil -- get path from oil.nvim API when in an oil buffer
+---@return PathBuf|nil
+---@private
+local function via_oil()
+  if not package.loaded["oil"] then
+    return nil
   end
 
-  return full_path_map
+  local ok, oil = pcall(require, "oil")
+  if not ok then
+    return nil
+  end
+
+  local cur_buf = vim.api.nvim_get_current_buf()
+  if vim.bo[cur_buf].filetype ~= "oil" then
+    return nil
+  end
+
+  local dir = oil.get_current_dir(cur_buf)
+  if not dir or dir == "" then
+    return nil
+  end
+
+  -- oil.get_current_dir() already returns a proper OS path (no oil:// prefix)
+  -- so we just need to strip any trailing slash and append the entry name
+  if string.sub(dir, -1) == "/" then
+    dir = string.sub(dir, 1, -2)
+  end
+
+  local cursor_pos = vim.api.nvim_win_get_cursor(0)
+  ---@type oil.Entry|nil
+  local entry = oil.get_entry_on_line(cur_buf, cursor_pos[1])
+
+  if not entry or entry.type == "parent" then
+    return dir
+  end
+
+  local name = entry.parsed_name or entry.name or ""
+  if name == "" then
+    return dir
+  end
+
+  -- Strip leading slash from name to avoid double-slash
+  if string.sub(name, 1, 1) == "/" then
+    name = string.sub(name, 2)
+  end
+
+  return string.format("%s/%s", dir, name)
 end
 
-function Converter.strip(filepath)
-  return string.gsub(filepath or vim.fn.expand("%:p") or "", "oil://", "")[1]
-end
-
---- eg's:
----
---- Linux ---
---- From inside normal buffer:
---- %:p == "/home/dwarf/dotfiles/.config/lazyvim/lua/plugins/oil.lua"
---- `<cfile>` = "desc" (whatever the cursor is over to the end of W )
----
---- From inside oil buffer:
---- %:p = "oil:///home/dwarf/dotfiles/.config/lazyvim/lua/plugins/"
---- <cfile> = "oil.lua"
----
-
----@generic W: WindowsPathBuf
----@param d W
-function Converter.windows_path(d)
-  return string
-    .sub(d, 2) -- removes the first `/` char
-    .gsub(d, "/", "\\") -- converts all `/` to `\`
-    .sub(d, 1, 1) .. ":" .. string
-    .sub(d, 2) -- Adds the `:` after the initial drive letter
-    .sub(d, 1, -2) -- removes the last `\\` char(s)            (Later, we make the `-2` a parameter)
-end
-
----@generic P: PathBuf
----@return P
----@deprecated Use `utils.Converter.fullpath()` or `utils.Converter.relative()` instead.
-function Converter._filepath()
-  ---@type PathBuf
-  local directory_path = Converter.strip(vim.fn.expand("%:p")) -- strip the oil:// prefix
+--- Strategy: via_expand -- get path from vim.expand when in a normal buffer
+---@return PathBuf|nil
+---@private
+local function via_expand()
+  local directory_path = strip(vim.fn.expand("%:p"))
 
   if arch.get_os_lower() == "windows_nt" then
-    -- Windows isn't posix compliant, Oil uses a posix path
-    ---@return WindowsPathBuf
     directory_path = Converter.windows_path(directory_path)
   end
 
-  -- Need to now do checks to see if we're hovering a file
-  local filename = vim.fn.expand("<cfile>") -- Get fullname (inc. extension) of the file under the cursor
-  local extension = string.match(filename, "%.[^.]+$") -- Get the file extension (if any)
-
-  -- if empty, it's an empty slot in oil (TODO: We could look for cloest?)
+  -- Get the filename under the cursor
+  local filename = vim.fn.expand("<cfile>")
   if string.len(filename) == 0 then
+    -- Empty slot in oil or no file under cursor
     return directory_path
   end
 
-  -- create a pairings structure of table<PathBuf, [FileName]>
-  -- and store directory_path as the key,
-  -- and the list of filenames as the value
-
-  -- if it ends with a `/`, it's a directory
+  -- If it ends with /, it's a directory
   if string.sub(filename, -1) == "/" then
-    -- table.insert(mapping_pair, { directory_path, filename })
-    -- return string.format("%s/%s", directory_path, filename)
-    return fmt_fullpath({ _ = { directory_path, filename } })
+    return string.format("%s/%s", directory_path, filename)
   end
 
-  -- remove the trailing `/` if it exists
-  filename = string.gsub(filename, "/$", "") -- remove trailing `/` if it exists
+  -- Remove trailing slash if present
+  filename = string.gsub(filename, "/$", "")
 
-  -- if it has a file extension, it's a file
-  if extension then
-    -- if it has an extension, it's a file
-    return fmt_fullpath({ _ = { directory_path, filename } })
-    -- return string.format("%s/%s", directory_path, filename)
-  end
-
-  return fmt_fullpath({ _ = { directory_path, filename } })
-  -- string.format("%s/%s", directory_path, filename) -- safe to re-add the `/` here
+  return string.format("%s/%s", directory_path, filename)
 end
 
-function Converter.fullpath(opts)
-  opts = opts or {}
-  local path = ""
-
-  local oil_available = function()
-    if package.loaded["oil"] then
-      return true
-    end
-
-    local ok, _ = pcall(require, "oil")
-    if not ok then
-      return false
-    end
+--- Strategy: via_cwd -- get path from cwd + <cfile>
+---@return PathBuf|nil
+---@private
+local function via_cwd()
+  local filename = vim.fn.expand("<cfile>")
+  if string.len(filename) == 0 then
+    return nil
   end
 
-  -- no oil.nvim available
-  if not oil_available() then
-    return Converter._filepath() ---@diagnostic disable-line: invisible
-  end
-
-  -- using oil.nvim
-
-  local oil = require("oil")
-
-  if opts.filepath then
-    path = opts.filepath
-  else
-    local cur_buf = vim.api.nvim_get_current_buf()
-
-    ---@alias Row number
-    ---@alias Col number
-
-    ---@class CursorPos
-    ---@field row Row
-    ---@field col Col
-
-    ---@type CursorPos
-    local cursor_pos = vim.api.nvim_win_get_cursor(0)
-
-    local entry = oil.get_entry_on_line(cur_buf, cursor_pos[1])
-    local dir = oil.get_current_dir(cur_buf)
-    if not dir then
-      return Converter._filepath() ---@diagnostic disable-line: invisible
-    end
-
-    dir = string.gsub(dir, "oil://", "")
-    if string.sub(dir, -1) == "/" then
-      dir = string.sub(dir, 1, -2) -- remove trailing `/`
-    end
-
-    if not entry or entry.type == "parent" then
-      path = dir
-      return path
-    end
-    local parsed_name = entry.parsed_name or entry.name or ""
-    if string.sub(parsed_name, 1, 1) == "/" then
-      parsed_name = string.sub(parsed_name, 2) -- remove leading `/`
-    end
-
-    if entry == nil then
-      path = dir
-    else
-      path = string.format("%s/%s", dir, parsed_name)
-    end
-  end
-
-  if not path or #path == 0 then
-    path = Converter._filepath() ---@diagnostic disable-line: invisible
-  end
-
-  local cleaned_path = ""
-  if arch.get_os_lower() == "windows_nt" then
-    -- Windows isn't posix compliant, Oil uses a posix path
-    ---@return WindowsPathBuf
-    cleaned_path = Converter.windows_path(path)
-  else
-    cleaned_path = path
-  end
-
-  if not cleaned_path or #cleaned_path == 0 then
-    cleaned_path = Converter._filepath() ---@diagnostic disable-line: invisible
-  end
-
-  return cleaned_path
-end
-
-function Converter.relative(opts)
-  opts = opts or {}
-  opts.filepath = opts.filepath or nil
-  local path = Converter.fullpath(opts)
-  local cwd = require("oil").get_current_dir() or vim.uv.cwd()
-
-  if not cwd or #cwd == 0 then
-    return path
-  end
-
-  local stripped = ""
-
-  -- strip the trailing `/` from cwd if it exists
+  local cwd = vim.uv.cwd() or ""
   if string.sub(cwd, -1) == "/" then
     cwd = string.sub(cwd, 1, -2)
   end
 
-  stripped = string.gsub(path, "^" .. cwd .. "/", "")
+  return string.format("%s/%s", cwd, filename)
+end
 
-  return stripped
+--- Decide which strategy to use and call the appropriate one.
+--- Priority: oil > expand > cwd
+---@return PathBuf|nil
+---@private
+local function via_method()
+  local path = via_oil()
+  if path and path ~= "" then
+    return path
+  end
+
+  path = via_expand()
+  if path and path ~= "" then
+    return path
+  end
+
+  return via_cwd()
+end
+
+function Converter.windows_path(d)
+  return string
+    .sub(d, 2) -- removes the first `/` char
+    .gsub(d, "/", "\\") -- converts all `/` to `\\`
+    .sub(d, 1, 1) .. ":" .. string
+    .sub(d, 2) -- Adds the `:` after the initial drive letter
+    -- removes the last `\\` char(s)
+    .sub(d, 1, -2)
+end
+
+--- Get the full file path (directory + filename).
+--- Works in both oil buffers and normal buffers.
+---@param opts? utils.Converter.Opts
+---@return PathBuf|nil
+function Converter.fullpath(opts)
+  opts = opts or {}
+
+  local path
+  if opts.filepath then
+    path = opts.filepath
+  else
+    path = via_method()
+  end
+
+  if not path or path == "" then
+    return nil
+  end
+
+  if arch.get_os_lower() == "windows_nt" then
+    return Converter.windows_path(path)
+  end
+  return path
+end
+
+--- Get just the directory path (full path with filename removed).
+---@param opts? utils.Converter.Opts
+--- @return PathBuf|nil
+function Converter.dirpath(opts)
+  opts = opts or {}
+  local path = Converter.fullpath(opts)
+
+  if not path or path == "" then
+    return nil
+  end
+
+  -- Strip trailing slash
+  if string.sub(path, -1) == "/" then
+    path = string.sub(path, 1, -2)
+  end
+
+  -- Extract directory portion
+  local dirpath = string.match(path, "(.*/)")
+  if not dirpath or dirpath == "" then
+    return path
+  end
+
+  -- Strip trailing slash from dirpath
+  if string.sub(dirpath, -1) == "/" then
+    dirpath = string.sub(dirpath, 1, -2)
+  end
+
+  return dirpath
+end
+
+--- Get just the filename (no directory path).
+---@param opts? utils.Converter.Opts
+--- @return FileName|nil
+function Converter.filename(opts)
+  opts = opts or {}
+  local path = Converter.fullpath(opts)
+
+  if not path or path == "" then
+    return nil
+  end
+
+  -- Handle directory paths: if it ends with / or has no filename component
+  if string.sub(path, -1) == "/" then
+    return nil
+  end
+
+  -- Extract the filename portion
+  local filename = string.match(path, "([^/]+)$")
+  opts.strip_extension = opts.strip_extension or false
+  if opts.strip_extension and filename then
+    filename = string.match(filename, "(.+)%..+$") or filename
+  end
+
+  return filename
+end
+
+--- Get just the directory name (last path component of the directory).
+---@param opts? utils.Converter.Opts
+--- @return string|nil
+function Converter.dirname(opts)
+  opts = opts or {}
+  local dirpath = Converter.dirpath(opts)
+
+  if not dirpath or dirpath == "" then
+    return nil
+  end
+
+  -- Get the last component of the directory path
+  local dirname = string.match(dirpath, "([^/]+)$")
+
+  if opts.trailing_slash and dirname then
+    dirname = dirname .. "/"
+  end
+
+  return dirname
+end
+
+function Converter.relative(opts)
+  opts = opts or {}
+  local path = Converter.fullpath(opts)
+
+  if not path or path == "" then
+    return nil
+  end
+
+  local cwd = vim.uv.cwd() or ""
+  -- Strip trailing slash from cwd
+  if string.sub(cwd, -1) == "/" then
+    cwd = string.sub(cwd, 1, -2)
+  end
+
+  local prefix = cwd .. "/"
+  if string.sub(path, 1, #prefix) == prefix then
+    return string.sub(path, #prefix + 1)
+  end
+
+  return path
+end
+
+function Converter.filepath_relative(opts)
+  return Converter.relative(opts)
 end
 
 function Converter.setup()
   return setmetatable(Converter, {
     __index = Converter,
     __tostring = function()
-      return string.format("filepath_converter")
+      return "filepath_converter"
     end,
     __call = function(opts)
       return Converter.fullpath(opts)
     end,
-    -- __metatable = "filepath_converter",
   })
-  -- return Converter
 end
 
 ---@return utils.Converter

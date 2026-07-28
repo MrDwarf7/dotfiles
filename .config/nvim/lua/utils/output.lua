@@ -263,7 +263,7 @@ Output.reload_config = function()
     -- { "^config\\.user_commands$",    fn = function() require("config.user_commands") end },
     { "^utils\\.arch$" },
     { "^utils\\.autoformatter$" },
-    { "^utils\\.filepath_converter$" },
+    { "^utils\\.converter$" },
     { "^utils\\.folding$" },
     { "^utils\\.lsp_servers$" },
     { "^utils\\.types$" },

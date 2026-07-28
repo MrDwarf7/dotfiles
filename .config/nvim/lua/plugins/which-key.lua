@@ -22,8 +22,6 @@ return {
       { "<Leader>t", group = "+[T]oggles" },
       { "<Leader>x", group = "+[T]rouble" },
       { "<Leader>y", group = "+[Y]ank paths" },
-      { "<Leader>yc", group = "Copy [Y]ank [C]wd" },
-      { "<Leader>yC", group = "Copy [Y]ank [C]wd (full path)" },
       { "<Leader>z", group = "[Z]en mode" },
     },
   },
