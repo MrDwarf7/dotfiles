@@ -6,6 +6,7 @@
 
 # Commands may be slower in restricted environments, e.g. containers
 command_timeout = 10000
+scan_timeout = 1000
 
 format = """$username\
 $hostname\
