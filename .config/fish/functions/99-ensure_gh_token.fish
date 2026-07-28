@@ -3,8 +3,17 @@
 
 set -g GH_TOKEN_CACHE_FILE "$HOME/.secret/.gh_token_cache"
 
-function 99-ensure_gh_token --argument-names __cached_gh_token_done
-    set -q __cached_gh_token_done; and return 0 # If already done, return early
+function 99-ensure_gh_token
+    # `not count` == true when there's no items in the list
+    # not count $CACHED_ENVS_LIST 2>&1 >/dev/null; and return 0 # If no cached envs, return early
+    # count $CACHED_ENVS_LIST 2>&1 >/dev/null; and return 0 # If no cached envs, return early
+
+    # set -l has_count $(count $CACHED_ENVS_LIST 2>&1 >/dev/null; echo $status)
+    # test $has_count -ne 0; and return 0 # If no cached envs, return early
+
+    # TODO: double check reliability lol
+    # set -q $(__env_cached_get __cached_gh_token_done); and return 0 # If already done, return early
+    # __env_cached_exists __cached_gh_token_done; and return 0 # If already done, return early
 
     # Priority 1: Use GH_TOKEN from environment if set and non-empty
     # If cache file missing, create it (env takes temporary precedence, but doesn't overwrite existing cache)

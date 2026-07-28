@@ -37,10 +37,10 @@ $ht colorize blue \"$blue_example\"
     return 0
 end
 
-function __has_newline_suffix --description "Ext. simple 'parser' - Handles newline's in user provided text"
+function __has_newline_suffix --argument-names str --description "Ext. simple 'parser' - Handles newline's in user provided text"
     # Small implementtion of a parser to handle newlines on user provided text
-    set -l t $argv
-    if string match -qr '\n$' -- $t
+    # set -l t $argv
+    if string match -qr '\n$' -- $str
         return 0
     else
         return 1
@@ -60,6 +60,8 @@ function __colorize_handler --description 'Wrap text with ANSI color codes'
     # `0`: If successful
     set -l color_name $argv[1]
     set -l text $argv[2..-1] # Allow multiple words
+
+    # set -l text $rest[2..-1] # Allow multiple words
 
     # If the text already ends with a newline, don't add another
     # set text (printf "%s" $text | tr -d '\n')
@@ -125,7 +127,6 @@ function __colorize_handler --description 'Wrap text with ANSI color codes'
 
     # if the last char is NOT a newline literal '\n' then we append one, otherwise return 0
     # printf "\n"
-
     return 0
 end
 
