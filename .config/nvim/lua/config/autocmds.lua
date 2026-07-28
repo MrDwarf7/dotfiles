@@ -4,11 +4,24 @@ local function augroup(name)
   return vim.api.nvim_create_augroup(name, { clear = true })
 end
 
+---@class vim.hl.hl_opOpts
+---@field event vim.v.event (default: vim.v.event) Event structure.
+---@field higroup string    (default: "IncSearch") Highlight group for the text region.
+---@field on_macro boolean  (default: false) Highlight during |macro| execution.
+---@field on_visual boolean (default: true) Highlight during |Visual| mode.
+---@field priority number   (default: |vim.hl.priorities|`.user`) Integer priority.
+---@field timeout number    (default: 150) Time in ms before highlight is cleared.
+
 vim.api.nvim_create_autocmd("TextYankPost", {
   group = augroup("highlight_yank"),
   callback = function()
-    -- vim.highlight.on_yank({ timeout = 55 })
-    vim.hl.on_yank({ timeout = 55 })
+    -- vim.highlight.on_yank({ timeout = 55 }) -- depr.
+    -- vim.hl.on_yank({ timeout = 55 })        -- depr.
+    ---@type vim.hl.hl_opOpts
+    local hl_opts = {
+      timeout = 55,
+    }
+    vim.hl.hl_op(hl_opts)
   end,
 })
 
