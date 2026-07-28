@@ -11,16 +11,16 @@
 ---@alias Category CategoryLiteral | CategoryE
 
 ---@alias TreeSitterSubtypeLiteral "languages" | "data_formats" | "system"
----@alias TreeSitterSubtype TreeSitterSubtypeLiteral | TreeSitterSubtypeE
+---@alias TreeSitterSubtypeAssoc TreeSitterSubtypeLiteral | TreeSitterSubtypeE
 
 ------------------------------------------------------------------------------------
 
 ---@alias MasonSubtypeLiteral "formatters" | "linters" | "lsps" | "daps"
----@alias MasonSubtype MasonSubtypeLiteral | MasonSubtypeE
+---@alias MasonSubtypeAssoc MasonSubtypeLiteral | MasonSubtypeE
 
 --- We 'overwrite' the definition because we want to reference
 --- the previous documentation classes fields
----@class MasonSubtypeE
+---@class MasonSubtype
 ---@field formatters MasonSubtypeE.formatters
 ---@field formatters_by_ft table<string, ListElements|function>
 ---@field linters MasonSubtypeE.linters
@@ -30,7 +30,7 @@
 
 --- We 'overwrite' the definition because we want to reference
 --- the previous documentation classes fields
----@class TreeSitterSubtypeE
+---@class TreeSitterSubtype
 ---@field languages TreeSitterSubtypeE.languages
 ---@field data_formats TreeSitterSubtypeE.data_formats
 ---@field system TreeSitterSubtypeE.system
@@ -53,11 +53,9 @@
 
 ------------------------------------------------------------------------------------
 
----@alias void nil
-
 ---@class LangTables
 ---@field treesitter TreeSitterSubtypeE ---table<string, ListElements>
----@field mason MasonSubtypeE
+---@field mason MasonSubtype
 ---@field disabled table<string, boolean>
 ---@field merged table<string, table<string, ListElements>>
 ---@field get fun(category: Category, subtype?: Subtype, wants_type?: WantsType | table<string, boolean> | boolean | ListElements): ListElements

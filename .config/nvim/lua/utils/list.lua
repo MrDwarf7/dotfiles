@@ -24,6 +24,11 @@ function List.find_qf(type)
     if type == "q" and win["quickfix"] == 1 and win["loclist"] == 0 then
       found = true
     end
+
+    if type == "t" and win["trouble"] == 1 and win["quickfix"] == 0 and win["loclist"] == 0 then
+      found = true
+    end
+
     if found then
       table.insert(win_tbl, { winid = win["winid"], bufnr = win["bufnr"] })
     end
@@ -65,6 +70,14 @@ function List.open_loclist_all()
   -- stylua: ignore end
 end
 
+function List.open_trouble()
+  local trouble = pcall(require, "trouble")
+  if not trouble then
+    print("Trouble is not installed.")
+    return
+  end
+end
+
 --- Toggle's quickfix/loclist on/off
 --- Pass "q" to find quickfix window
 --- Pass "l" to find all loclist windows
@@ -80,6 +93,8 @@ function List.toggle_qf(type)
     -- no windows are vis, attempt to open
     if type == "l" then
       List.open_loclist_all()
+    elseif type == "t" then
+      List.open_trouble()
     else
       List.open_qf()
     end

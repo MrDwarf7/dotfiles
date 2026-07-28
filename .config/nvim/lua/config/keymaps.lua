@@ -506,6 +506,15 @@ map({ "n", "v" }, "<Leader>tj", function()
   })
 end, { desc = "Swap comment state of current line and BELOW" })
 
+-- map("n", "<Leader>pt", function()
+--   local td_util = require("utils.td_colors")
+--   if not td_util then
+--     require("utils.output").error("Failed to load td_colors module")
+--     return
+--   end
+--   td_util:print_td_default_hexes()
+-- end, { desc = "show the default td colors" })
+
 -- Example: yank-detection + cursor move, handy for toggling between two
 -- near-identical config values (eg `brightness = 0.7172,` vs `-- brightness = 0.8172,`):
 -- map({ "n", "v" }, "<Leader>ty", function()

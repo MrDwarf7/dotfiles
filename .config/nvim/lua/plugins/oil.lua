@@ -167,18 +167,6 @@ return {
     { "<C-w>E", "<CMD>lua =require('oil').open_float()<CR>", silent = true, desc = "oil" },
   },
 
-  -- init = function()
-  --   if package.loaded["oil"] then
-  --     return
-  --   end
-  --
-  --   vim.defer_fn(function()
-  --     if not package.loaded["oil"] then
-  --       require("oil").setup(require("plugins.oil").opts)
-  --     end
-  --   end, 30)
-  -- end,
-
   ---@type oil.Config
   ---@diagnostic disable-next-line: missing-fields
   opts = {

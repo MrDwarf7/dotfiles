@@ -16,7 +16,7 @@ local LangTables = {}
 
 ---@type LangTables
 LangTables = {
-  ---@type TreeSitterSubtypeE
+  ---@type TreeSitterSubtype
   treesitter = {
     languages = {
 
@@ -106,7 +106,7 @@ LangTables = {
       -- "tmux", --- WOULD BE moved to langs, but it's not really
     },
   },
-  ---@type MasonSubtypeE
+  ---@type MasonSubtype
   mason = {
     formatters = {
 
@@ -641,17 +641,17 @@ function LangTables.by_ft(behavior, typeof, extra_fmtters)
   return target_set
 end
 
-local enforce_c_headers = function(ft)
-  if ft == "h" then
-    local filename = vim.api.nvim_buf_get_name(0)
-    if filename:match("%.h$") then
-      return "c"
-    elseif filename:match("%.hpp$") then
-      return "cpp"
-    end
-  end
-  return ft
-end
+-- local enforce_c_headers = function(ft)
+--   if ft == "h" then
+--     local filename = vim.api.nvim_buf_get_name(0)
+--     if filename:match("%.h$") then
+--       return "c"
+--     elseif filename:match("%.hpp$") then
+--       return "cpp"
+--     end
+--   end
+--   return ft
+-- end
 
 ---@deprecated Use LangTables.by_ft("linters", ft) instead.
 --- Returns the LangTables.mason.linter(s) by filetype association.
