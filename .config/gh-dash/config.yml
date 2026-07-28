@@ -1,26 +1,30 @@
 # yaml-language-server: $schema=https://gh-dash.dev/schema.json
 prSections:
-  - title: My Pull Requests
+  - title: "Repo PR's"
+    filters: is:open
+    type: null
+    #
+  - title: "My PR's"
     filters: is:open author:@me
     type: null
-  - title: Needs My Review
-    # filters: is:open review-requested:@me
-    filters: is:open
+  - title: "Needs My Review"
+    filters: is:open review-requested:@me
     type: null
-  - title: Involved
-    # filters: is:open involves:@me -author:@me
-    filters: is:open involves:@me
+  - title: "Involved"
+    filters: is:open involves:@me -author:@me
+    # filters: is:open involves:@me
     type: null
 issuesSections:
-  - title: My Issues
-    # filters: is:open author:@me
+  - title: "Repo Issues"
     filters: is:open
-  - title: Assigned
-    # filters: is:open assignee:@me
-    filters: is:open
-  - title: Involved
-    # filters: is:open involves:@me -author:@me
-    filters: is:open
+    #
+  - title: "My Issues"
+    filters: is:open author:@me
+  - title: "Assigned"
+    filters: is:open assignee:@me
+    # filters: is:open
+  - title: "Involved"
+    filters: is:open involves:@me -author:@me
 repo:
   branchesRefetchIntervalSeconds: 30
   prsRefetchIntervalSeconds: 60
@@ -28,10 +32,11 @@ defaults:
   preview:
     open: true
     width: 80
+    position: "bottom" # "auto" | "right" | "bottom"
   prsLimit: 20
   prApproveComment: LGTM
   issuesLimit: 20
-  view: prs
+  view: issues
   layout:
     prs:
       updatedAt:
@@ -68,9 +73,22 @@ defaults:
         hidden: true
   refetchIntervalMinutes: 30
 keybindings:
-  universal: []
+  universal:
+    - key: "ctrl+e"
+      builtin: pageDown
+    - key: "ctrl+y"
+      builtin: pageUp
   issues: []
-  prs: []
+  # - key: "t"
+  #   builtin: "viewPrs"
+  prs:
+    # - key: "t"
+    #   builtin: "viewIssues"
+    # - key: "T"
+    #   command: "gh-enhance -R {{ .RepoName }} {{ .PrNumber }}"
+    - key: "T"
+      command: >-
+        tmux new-window 'gh-enhance -R {{.RepoName}} {{.PrNumber}}'
   branches: []
 repoPaths: {}
 theme:
