@@ -10,101 +10,69 @@
 ---
 --- Load order:
 ---   1. env (hl.env calls — must be first)
----
----
 
---- TODO: need to review/fix some stuff here
--- ---   2. programs (hl.env + table of program names)
--- ---   3. visualfeel (hl.animation/hl.curve + table)
--- ---   4. All table-returning config modules → merged into config table
--- ---   5. monitor setup (hl.monitor / hl.workspace_rule)
--- ---   6. execs (hl.on / hl.exec_cmd for autostart)
--- ---   7. window rules (self-contained in rules/)
--- ---   8. keymaps (self-contained in keymaps/)
+---@alias Associated AssociatedFunction|AssociatedMethod
 
 ---@class HyprConfig.Shared
----@field setup? fun():nil
+---@field setup Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
 local Shared = {
-  setup = nil,
+  setup = function()
+    require("shared.env")
+    require("shared.monitor")
+    require("shared.programs")
+
+    require("shared.keymaps.init")
+
+    require("shared.animation")
+    require("shared.binds")
+    require("shared.cursor")
+    require("shared.debug")
+    require("shared.ecosystem")
+    require("shared.group")
+    require("shared.input")
+    require("shared.layouts")
+    require("shared.misc")
+    require("shared.opengl")
+    require("shared.quirks")
+    require("shared.render")
+    require("shared.visualfeel")
+    require("shared.xwayland")
+
+    require("shared.rules.init")
+
+    require("shared.execs")
+    return true
+  end,
 }
 
----@return nil
-local setup = function()
-  -----------------------------------------------------------
-  -- 1. Environment variables (must be first)
-  -----------------------------------------------------------
-  require("shared.env")
+-- ---@class HyprConfig.Shared
+-- ---@field setup? AssociatedMethod|AssociatedFunction
+-- local Shared = {
+--   setup = setup, -- we could define sep. ig?
+-- }
 
-  -----------------------------------------------------------
-  -- 4. Monitor setup (hl.monitor / hl.workspace_rule)
-  --    Side-effect only, self-contained
-  -----------------------------------------------------------
-  require("shared.monitor")
-
-  -----------------------------------------------------------
-  -- 2. Programs (hl.env + returns table for $var resolution)
-  --    Self-contained: keymaps/ pulls this in when needed
-  -----------------------------------------------------------
-  require("shared.programs")
-
-  -----------------------------------------------------------
-  -- 7. Keymaps (self-contained: loads mods internally)
-  -----------------------------------------------------------
-  require("shared.keymaps.init")
-
-  -----------------------------------------------------------
-  -- 8. Standard hl.config sections — each returns a table
-  -----------------------------------------------------------
-  -- local config = {}
-
-  require("shared.animation")
-  require("shared.binds")
-  require("shared.cursor")
-  require("shared.debug")
-  require("shared.ecosystem")
-  require("shared.group")
-  require("shared.input")
-  require("shared.layouts")
-  require("shared.misc")
-  require("shared.opengl")
-  require("shared.quirks")
-  require("shared.render")
-  require("shared.visualfeel")
-  require("shared.xwayland")
-
-  -- local modules = {
-  --   "animation",
-  --   "binds",
-  --   "cursor",
-  --   "debug",
-  --   "ecosystem",
-  --   "group",
-  --   "input",
-  --   "layouts",
-  --   "misc",
-  --   "opengl",
-  --   "quirks",
-  --   "render",
-  --   "visualfeel",
-  --   "xwayland",
-  -- }
-  -- for _, modpath in ipairs(modules) do
-  --   require("shared." .. modpath)
-  -- end
-
-  -----------------------------------------------------------
-  -- 6. Window rules (self-contained loader)
-  -----------------------------------------------------------
-  require("shared.rules.init")
-
-  -----------------------------------------------------------
-  -- Execs (hl.on / hl.exec_cmd for autostart)
-  --    Side-effect only, self-contained
-  -----------------------------------------------------------
-  require("shared.execs")
-end
-
-Shared.setup = setup
+--- Setting up a metatable so that both:
+--- ```
+--- local shared = require("shared")
+--- shared.setup()
+--- -- AND
+--- shared:setup()
+--- function identically.
+--- ```
+setmetatable(Shared, {
+  __call = function(self, ...)
+    -- This gross thing just avoids an elseif set of chains via `or`
+    if
+      self.setup
+      or type(self) == "table" and self.setup
+      or type(self) == "table" and type(self.setup) == "function"
+    then
+      return self.setup(...)
+    else
+      error("Shared.setup is not defined")
+    end
+  end,
+})
 
 ---@return HyprConfig.Shared
 return Shared

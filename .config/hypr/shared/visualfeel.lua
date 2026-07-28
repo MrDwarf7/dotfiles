@@ -78,7 +78,7 @@ m.decoration.blur = {
 
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
-  size = 2, -- default 8
+  size = 4, -- default 8
   -- Gaussian blur
   passes = 6, -- default 1, previous was 5
   ignore_opacity = true,
@@ -96,7 +96,8 @@ m.decoration.blur = {
   -- note that the higher this goes, the more the colors will bleed through (good and bad)
   -- brightness = 0.65
   -- brightness = 0.30
-  brightness = 0.8172,
+  -- brightness = 0.8172,
+  brightness = 0.7172,
   -- vibrancy = 1.0
   -- vibrancy = 1.0
   -- vibrancy = 0.1696

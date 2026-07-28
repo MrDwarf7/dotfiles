@@ -34,7 +34,7 @@ M.float_center = {
   { class = "AppImageLauncherSettings",         size = "1450 1000" },
   { class = "swappy",                           size = "2560 1200" },
   -- { class = "viewnior",                         size = "2560 1200" },
-  { class = "viewnior",                         size = "(monitor_w * 0.55) (monitor_h * 0.40)" },
+  { class = "viewnior",                         size = "(monitor_w*0.40) (monitor_h*0.60)" },
   { class = "keymapp",                          size = "1450 1000" },
   { class = "org\\.keepassxc\\.KeePassXC",      size = "1450 850" },
   -- { class = "org\\.keepassxc\\.KeePassXC",      size = "(monitor_w*0.35) (monitor_h*0.40)" },
