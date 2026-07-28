@@ -15,3 +15,8 @@ sessions/*
 sessions/**
 sessions/**/*
 sessions/**/**/*
+
+
+# .plugins.lock
+# /.plugins.lock
+# ./.plugins.lock
