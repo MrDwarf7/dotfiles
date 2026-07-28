@@ -22,6 +22,8 @@ alias vh "nvim ~/.hermes/config.yaml || printf 'Failed to open ~/.hermes/config.
 ##################################################
 
 alias vortix 'printf "Aliased :: Using sudo\n"; sudo vortix'
+# Always use the `-v on` for vim mode binds!
+alias timr "timr -v on"
 
 ##################################################
 
