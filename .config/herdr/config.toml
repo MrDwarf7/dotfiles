@@ -69,37 +69,54 @@ prefix = "ctrl+a"
 settings = "prefix+o"
 # detach = "prefix+q"
 detach = "prefix+shift+d"
-# reload_config = "prefix+shift+r"
-# open_notification_target = "prefix+o"
+reload_config = [ #
+  "prefix+ctrl+r",
+  "prefix+r",      # probs remove this one later but for now is w/e
+]
+open_notification_target = "prefix+g"
 # workspace_picker = "prefix+w"
 # goto = "prefix+g"
 goto = "prefix+s"
-# new_workspace = "prefix+shift+n"
+
+new_workspace = [ #
+  "prefix+shift+n", # may outright remove this one later tbh
+  "prefix+ctrl+w",
+]
 # new_worktree = "prefix+shift+g"
 # open_worktree = ""    # optional, unset by default
 # remove_worktree = ""  # optional, unset by default; opens confirmation
 rename_workspace = "prefix+shift+w"
 # close_workspace = "prefix+shift+d"
 close_workspace = "prefix+shift+x"
-previous_workspace = "prefix+["    # optional, unset by default
-next_workspace = "prefix+]"        # optional, unset by default
+previous_workspace = [ # optional, unset by default
+  "prefix+(",
+  "prefix+ctrl+p",
+]
+next_workspace = [ # optional, unset by default
+  "prefix+)",
+  "prefix+ctrl+n",
+]
 
-previous_agent = "prefix+(" # optional, unset by default
-next_agent = "prefix+)"     # optional, unset by default
+previous_agent = "prefix+[" # optional, unset by default
+next_agent = "prefix+]"     # optional, unset by default
 
 # focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # remote_image_paste = "ctrl+v" # only active in herdr --remote; empty disables raw-key image paste
 # new_tab = "prefix+c"
 # rename_tab = "prefix+shift+t"
-# previous_tab = "prefix+p"
-# next_tab = "prefix+n"
+
+# previous_tab = "prefix+p" ## Default
+# next_tab = "prefix+n" ## Default
+
+# previous_tab = ["prefix+p", "prefix+ctrl+p"]
+# next_tab = ["prefix+n", "prefix+ctrl+n"]
 # switch_tab = "prefix+1..9"
 # switch_workspace = ""   # optional indexed binding, e.g. "prefix+shift+1..9"
 # close_tab = "prefix+shift+x"
 close_tab = "prefix+x"
 # rename_pane = "prefix+shift+p"
 rename_pane = "prefix+shift+p"
-rename_tab = "prefix+r"
+rename_tab = "prefix+shift+r"
 
 # edit_scrollback = "prefix+e"
 focus_pane_left = "prefix+h"
@@ -115,14 +132,13 @@ focus_pane_right = "prefix+l"
 # focus_pane_right = "prefix+ctrl+l"
 
 cycle_pane_next = "prefix+;"
-cycle_pane_previous = "prefix+shift+;"
+cycle_pane_previous = "prefix+ctrl+;"
 
 ### TODO: Literally isn't possible to dual-bind things...
 # using the same as I do in tmux > 
 # prefix == Ctrl + a
-# bind a last-window
+# bind a last-window 
 #   in tmux double-tapping the prefix key (Ctrl + a) {x2} will switch to the last pane and bounce back and forth betwen them
-#
 #
 # last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
 # last_pane = "ctrl+a" # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
@@ -132,6 +148,7 @@ cycle_pane_previous = "prefix+shift+;"
 
 last_pane = [
   "prefix+a",
+  # "ctrl+a",
   # "prefix+prefix", # Gives warning: "config warning: invalid keybinding: keys.last_pane = "prefix+prefix"; disabling binding
   # "prefix+ctrl+a", # Gives warning: "config warning: reserved keybinding:P keys.last_pane = "prefix+ctrl+a" uses keys.prefix as the prefix-mode key; pressing the prefix twice sends a literal prefix key, so this binding is disabled"
 ] # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
@@ -151,6 +168,13 @@ close_pane = "prefix+d"
 # zoom = "prefix+z"       # legacy alias: fullscreen
 # resize_mode = "prefix+r"
 resize_mode = "prefix+m"
+
+## Maybe we get these keys at a later date...
+# resize_mode_left = "C-Left"
+# resize_mode_down = "C-Down"
+# resize_mode_up = "C-Up"
+# resize_mode_right = "C-Right"
+
 # toggle_sidebar = "prefix+b"
 
 copy_mode = "prefix+y"
@@ -175,7 +199,7 @@ navigate_workspace_down = "j"
 # command = "lazygit"
 
 [[keys.command]]
-key = "prefix+alt+w"
+key = "prefix+="
 type = "plugin_action"
 command = "third774.last-workspace.toggle"
 description = "last workspace"
