@@ -70,13 +70,13 @@ settings = "prefix+o"
 # detach = "prefix+q"
 detach = "prefix+shift+d"
 reload_config = [ #
-  "prefix+ctrl+r",
-  "prefix+r",      # probs remove this one later but for now is w/e
+  "prefix+r", # We match tmux for this. Because of [continuum, resurrect] enforced keys, we can't use ctrl+r (that's restore!)
+  # "prefix+ctrl+r",
 ]
 open_notification_target = "prefix+g"
 # workspace_picker = "prefix+w"
 # goto = "prefix+g"
-goto = "prefix+s"
+goto = "prefix+shift+s"
 
 new_workspace = [ #
   "prefix+shift+n", # may outright remove this one later tbh
@@ -119,10 +119,22 @@ rename_pane = "prefix+shift+p"
 rename_tab = "prefix+shift+r"
 
 # edit_scrollback = "prefix+e"
-focus_pane_left = "prefix+h"
-focus_pane_down = "prefix+j"
-focus_pane_up = "prefix+k"
-focus_pane_right = "prefix+l"
+focus_pane_left = [ # 
+  "prefix+h",
+  "prefix+ctrl+h",
+]
+focus_pane_down = [ #
+  "prefix+j",
+  "prefix+ctrl+j",
+]
+focus_pane_up = [ #
+  "prefix+k",
+  "prefix+ctrl+k",
+]
+focus_pane_right = [ #
+  "prefix+l",
+  "prefix+ctrl+l",
+]
 
 ### TODO: Double bind for hjkl and ctrl variants ALSO
 #
@@ -131,8 +143,13 @@ focus_pane_right = "prefix+l"
 # focus_pane_up = "prefix+ctrl+k"
 # focus_pane_right = "prefix+ctrl+l"
 
-cycle_pane_next = "prefix+;"
-cycle_pane_previous = "prefix+ctrl+;"
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+# cycle_pane_next = "prefix+L"
+# cycle_pane_previous = "prefix+H"
 
 ### TODO: Literally isn't possible to dual-bind things...
 # using the same as I do in tmux > 
@@ -147,7 +164,8 @@ cycle_pane_previous = "prefix+ctrl+;"
 # last_pane = "prefix+a" # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
 
 last_pane = [
-  "prefix+a",
+  # "prefix+;",
+  "prefix+ctrl+;",
   # "ctrl+a",
   # "prefix+prefix", # Gives warning: "config warning: invalid keybinding: keys.last_pane = "prefix+prefix"; disabling binding
   # "prefix+ctrl+a", # Gives warning: "config warning: reserved keybinding:P keys.last_pane = "prefix+ctrl+a" uses keys.prefix as the prefix-mode key; pressing the prefix twice sends a literal prefix key, so this binding is disabled"
@@ -204,17 +222,80 @@ type = "plugin_action"
 command = "third774.last-workspace.toggle"
 description = "last workspace"
 
+##################################################
+##################################################
+
 [[keys.command]]
 key = "prefix+i"
 type = "plugin_action"
 command = "nathanflurry.jj-workspace.new"
 description = "new jj workspace"
 
+# [[keys.command]]
+# key = "prefix+shift+i"
+# type = "plugin_action"
+# command = "nathanflurry.jj-workspace.new-tab"
+# description = "new jj workspace (in tab)"
+
 [[keys.command]]
 key = "prefix+shift+i"
 type = "plugin_action"
 command = "nathanflurry.jj-workspace.remove"
 description = "remove jj workspace"
+
+##################################################
+##################################################
+
+[[keys.command]]
+key = "prefix+u"
+type = "plugin_action"
+command = "rmarganti.herdr-pluck.open-url"
+description = "open visible URL"
+
+[[keys.command]]
+key = ["prefix+ctrl+y", "prefix+ctrl+u"]
+type = "plugin_action"
+command = "rmarganti.herdr-pluck.pluck"
+description = "pluck visible token"
+
+##################################################
+
+# [[keys.command]]
+# key = "prefix+u"
+# type = "plugin_action"
+# command = "rmarganti.herdr-pluck-DEV.open-url"
+# description = "open visible URL"
+#
+# [[keys.command]]
+# key = ["prefix+ctrl+y", "prefix+ctrl+u"]
+# type = "plugin_action"
+# command = "rmarganti.herdr-pluck-DEV.pluck"
+# description = "pluck visible token"
+
+##################################################
+##################################################
+
+[[keys.command]]
+key = [ #
+  "prefix+s",
+  "prefix+ctrl+s",
+
+  "prefix+f",
+  "prefix+ctrl+f",
+]
+type = "plugin_action"
+command = "herdr-navigator.open"
+description = "jump to anything"
+
+[[keys.command]]
+# key = "prefix+ctrl+s"
+key = "prefix+;"
+type = "plugin_action"
+command = "herdr-navigator.jump-back"
+description = "jump back to previous workspace"
+
+##################################################
+##################################################
 
 # [[keys.command]]
 # key = "prefix+shift+i"
@@ -303,7 +384,7 @@ show_agent_labels_on_pane_borders = true
 # delivery = "off"
 # delay_seconds = 1
 
-delivery = "herdr"
+delivery = "system"
 [ui.toast.herdr]
 # position = "bottom-right"
 

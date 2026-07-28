@@ -1,5 +1,5 @@
 {
-  "version": "0.7.5-preview.2026-07-21-0f10e1453a7f",
-  "body": "Preview build 2026-07-21-0f10e1453a7f\n\nBuilt from `0f10e1453a7f` on `master`.\nBase stable: v0.7.5\nCompare: https://github.com/ogulcancelik/herdr/compare/v0.7.5...0f10e1453a7f9fda357352bb65ce17fa26fda447\n\n### Fixed\n- Add agent automation to docs sidebar",
+  "version": "0.8.0-preview.2026-08-04-d78e3d3b5126",
+  "body": "Preview build 2026-08-04-d78e3d3b5126\n\nBuilt from `d78e3d3b5126` on `master`.\nBase stable: v0.8.0\nCompare: https://github.com/herdrdev/herdr/compare/v0.8.0...d78e3d3b51266a1ff80ae6858b894e782aac3e9f\n\n### Fixed\n- Keep collapsed workspace status visible (#2239)\n\n### Maintenance\n- Refine cpu optimization blog post",
   "show_on_startup": true
 }
