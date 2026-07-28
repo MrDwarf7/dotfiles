@@ -12,10 +12,10 @@ local mods = require("shared.keymaps.mods")
 
 --# General (works with all layouts)
 -- Move current focus (include monitor jumps)
-hl.bind(mods:with(mods.main_mod, "h"), hl.dsp.focus({ direction = "left" }))
-hl.bind(mods:with(mods.main_mod, "j"), hl.dsp.focus({ direction = "down" }))
-hl.bind(mods:with(mods.main_mod, "k"), hl.dsp.focus({ direction = "up" }))
-hl.bind(mods:with(mods.main_mod, "l"), hl.dsp.focus({ direction = "right" }))
+hl.bind(mods.with(mods.main_mod, "h"), hl.dsp.focus({ direction = "left" }))
+hl.bind(mods.with(mods.main_mod, "j"), hl.dsp.focus({ direction = "down" }))
+hl.bind(mods.with(mods.main_mod, "k"), hl.dsp.focus({ direction = "up" }))
+hl.bind(mods.with(mods.main_mod, "l"), hl.dsp.focus({ direction = "right" }))
 
 --# Master layout
 -- Little weird - cos it's based on spawn order
@@ -44,10 +44,10 @@ hl.bind(mods:with(mods.main_mod, "l"), hl.dsp.focus({ direction = "right" }))
 --######################
 
 -- Move it around on the current screen
-hl.bind(mods:with(mods.main_mod_shift, "h"), hl.dsp.window.move({ direction = "l" }))
-hl.bind(mods:with(mods.main_mod_shift, "j"), hl.dsp.window.move({ direction = "d" }))
-hl.bind(mods:with(mods.main_mod_shift, "k"), hl.dsp.window.move({ direction = "u" }))
-hl.bind(mods:with(mods.main_mod_shift, "l"), hl.dsp.window.move({ direction = "r" }))
+hl.bind(mods.with(mods.main_mod_shift, "h"), hl.dsp.window.move({ direction = "l" }))
+hl.bind(mods.with(mods.main_mod_shift, "j"), hl.dsp.window.move({ direction = "d" }))
+hl.bind(mods.with(mods.main_mod_shift, "k"), hl.dsp.window.move({ direction = "u" }))
+hl.bind(mods.with(mods.main_mod_shift, "l"), hl.dsp.window.move({ direction = "r" }))
 
 
 --##########################
@@ -59,15 +59,15 @@ hl.bind(mods:with(mods.main_mod_shift, "l"), hl.dsp.window.move({ direction = "r
 --#######################
 
 -- stylua: ignore start
-hl.bind(mods:with(mods.main_mod_ctrl, "h"), hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "j"), hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "k"), hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "l"), hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "h"), hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "j"), hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "k"), hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "l"), hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
 
-hl.bind(mods:with(mods.main_mod_ctrl, "left"), hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "down"), hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "up"), hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_ctrl, "right"), hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "left"), hl.dsp.window.resize({ x = -50, y = 0, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "down"), hl.dsp.window.resize({ x = 0, y = 50, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "up"), hl.dsp.window.resize({ x = 0, y = -50, relative = true }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_ctrl, "right"), hl.dsp.window.resize({ x = 50, y = 0, relative = true }), { repeating = true })
 -- stylua: ignore start
 
 --###########################
@@ -80,24 +80,24 @@ hl.bind(mods:with(mods.main_mod_ctrl, "right"), hl.dsp.window.resize({ x = 50, y
 
 --# Move view to a workspace
 -- inners are swapped technically - each forms a pair
-hl.bind(mods:with(mods.main_mod, "left"), hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mods:with(mods.main_mod, "down"), hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mods.with(mods.main_mod, "left"), hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mods.with(mods.main_mod, "down"), hl.dsp.focus({ workspace = "e+1" }))
 
-hl.bind(mods:with(mods.main_mod, "up"), hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mods:with(mods.main_mod, "right"), hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mods.with(mods.main_mod, "up"), hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mods.with(mods.main_mod, "right"), hl.dsp.focus({ workspace = "e+1" }))
 
 -- Absolute
 --# Move view to a workspace - number keys
-hl.bind(mods:with(mods.main_mod, "1"), hl.dsp.focus({ workspace = 1 }))
-hl.bind(mods:with(mods.main_mod, "2"), hl.dsp.focus({ workspace = 2 }))
-hl.bind(mods:with(mods.main_mod, "3"), hl.dsp.focus({ workspace = 3 }))
-hl.bind(mods:with(mods.main_mod, "4"), hl.dsp.focus({ workspace = 4 }))
-hl.bind(mods:with(mods.main_mod, "5"), hl.dsp.focus({ workspace = 5 }))
-hl.bind(mods:with(mods.main_mod, "6"), hl.dsp.focus({ workspace = 6 }))
-hl.bind(mods:with(mods.main_mod, "7"), hl.dsp.focus({ workspace = 7 }))
-hl.bind(mods:with(mods.main_mod, "8"), hl.dsp.focus({ workspace = 8 }))
-hl.bind(mods:with(mods.main_mod, "9"), hl.dsp.focus({ workspace = 9 }))
-hl.bind(mods:with(mods.main_mod, "0"), hl.dsp.focus({ workspace = 10 }))
+hl.bind(mods.with(mods.main_mod, "1"), hl.dsp.focus({ workspace = 1 }))
+hl.bind(mods.with(mods.main_mod, "2"), hl.dsp.focus({ workspace = 2 }))
+hl.bind(mods.with(mods.main_mod, "3"), hl.dsp.focus({ workspace = 3 }))
+hl.bind(mods.with(mods.main_mod, "4"), hl.dsp.focus({ workspace = 4 }))
+hl.bind(mods.with(mods.main_mod, "5"), hl.dsp.focus({ workspace = 5 }))
+hl.bind(mods.with(mods.main_mod, "6"), hl.dsp.focus({ workspace = 6 }))
+hl.bind(mods.with(mods.main_mod, "7"), hl.dsp.focus({ workspace = 7 }))
+hl.bind(mods.with(mods.main_mod, "8"), hl.dsp.focus({ workspace = 8 }))
+hl.bind(mods.with(mods.main_mod, "9"), hl.dsp.focus({ workspace = 9 }))
+hl.bind(mods.with(mods.main_mod, "0"), hl.dsp.focus({ workspace = 10 }))
 
 --##########################
 --## workspace_binds END ###
@@ -109,25 +109,25 @@ hl.bind(mods:with(mods.main_mod, "0"), hl.dsp.focus({ workspace = 10 }))
 
 -- Relative
 --# Move window to workspace
-hl.bind(mods:with(mods.main_mod_shift, "left"), hl.dsp.window.move({ workspace = "e-1" }))
-hl.bind(mods:with(mods.main_mod_shift, "down"), hl.dsp.window.move({ workspace = "e-1" }))
-hl.bind(mods:with(mods.main_mod_shift, "up"), hl.dsp.window.move({ workspace = "e+1" }))
-hl.bind(mods:with(mods.main_mod_shift, "right"), hl.dsp.window.move({ workspace = "e+1" }))
+hl.bind(mods.with(mods.main_mod_shift, "left"), hl.dsp.window.move({ workspace = "e-1" }))
+hl.bind(mods.with(mods.main_mod_shift, "down"), hl.dsp.window.move({ workspace = "e-1" }))
+hl.bind(mods.with(mods.main_mod_shift, "up"), hl.dsp.window.move({ workspace = "e+1" }))
+hl.bind(mods.with(mods.main_mod_shift, "right"), hl.dsp.window.move({ workspace = "e+1" }))
 
-hl.bind(mods:with(mods.main_mod, "mouse_down"), hl.dsp.focus({ workspace = "e-1" }))
-hl.bind(mods:with(mods.main_mod, "mouse_up"), hl.dsp.focus({ workspace = "e+1" }))
+hl.bind(mods.with(mods.main_mod, "mouse_down"), hl.dsp.focus({ workspace = "e-1" }))
+hl.bind(mods.with(mods.main_mod, "mouse_up"), hl.dsp.focus({ workspace = "e+1" }))
 
 -- Absolute - number keys
-hl.bind(mods:with(mods.main_mod_shift, "1"), hl.dsp.window.move({ workspace = 1 }))
-hl.bind(mods:with(mods.main_mod_shift, "2"), hl.dsp.window.move({ workspace = 2 }))
-hl.bind(mods:with(mods.main_mod_shift, "3"), hl.dsp.window.move({ workspace = 3 }))
-hl.bind(mods:with(mods.main_mod_shift, "4"), hl.dsp.window.move({ workspace = 4 }))
-hl.bind(mods:with(mods.main_mod_shift, "5"), hl.dsp.window.move({ workspace = 5 }))
-hl.bind(mods:with(mods.main_mod_shift, "6"), hl.dsp.window.move({ workspace = 6 }))
-hl.bind(mods:with(mods.main_mod_shift, "7"), hl.dsp.window.move({ workspace = 7 }))
-hl.bind(mods:with(mods.main_mod_shift, "8"), hl.dsp.window.move({ workspace = 8 }))
-hl.bind(mods:with(mods.main_mod_shift, "9"), hl.dsp.window.move({ workspace = 9 }))
-hl.bind(mods:with(mods.main_mod_shift, "0"), hl.dsp.window.move({ workspace = 10 }))
+hl.bind(mods.with(mods.main_mod_shift, "1"), hl.dsp.window.move({ workspace = 1 }))
+hl.bind(mods.with(mods.main_mod_shift, "2"), hl.dsp.window.move({ workspace = 2 }))
+hl.bind(mods.with(mods.main_mod_shift, "3"), hl.dsp.window.move({ workspace = 3 }))
+hl.bind(mods.with(mods.main_mod_shift, "4"), hl.dsp.window.move({ workspace = 4 }))
+hl.bind(mods.with(mods.main_mod_shift, "5"), hl.dsp.window.move({ workspace = 5 }))
+hl.bind(mods.with(mods.main_mod_shift, "6"), hl.dsp.window.move({ workspace = 6 }))
+hl.bind(mods.with(mods.main_mod_shift, "7"), hl.dsp.window.move({ workspace = 7 }))
+hl.bind(mods.with(mods.main_mod_shift, "8"), hl.dsp.window.move({ workspace = 8 }))
+hl.bind(mods.with(mods.main_mod_shift, "9"), hl.dsp.window.move({ workspace = 9 }))
+hl.bind(mods.with(mods.main_mod_shift, "0"), hl.dsp.window.move({ workspace = 10 }))
 
 
 -- TODO: I honestly rarerly use super + tab, almost always super + w for WS swapping (or number directly)
@@ -138,11 +138,11 @@ hl.bind(mods:with(mods.main_mod_shift, "0"), hl.dsp.window.move({ workspace = 10
 -- hl.bind(mods.main_mod .. " + Tab", hl.dsp.focus({ workspace = "next" }))
 -- bind = $mainModShift, Tab, workspace, previous ### idk wtf this is doing lmao
 
-hl.bind(mods:with(mods.main_mod, "w"), hl.dsp.focus({ workspace = "previous" }), { repeating = true })
+hl.bind(mods.with(mods.main_mod, "w"), hl.dsp.focus({ workspace = "previous" }), { repeating = true })
 
 -- hl.bind(mods.main_mod .. " + Tab", hl.dsp.focus({ workspace = "e+1" }), { repeating = true })
-hl.bind(mods:with(mods.main_mod, "Tab"), hl.dsp.focus({ workspace = "e+1" }), { repeating = true })
-hl.bind(mods:with(mods.main_mod_shift, "Tab"), hl.dsp.focus({ workspace = "e-1" }), { repeating = true })
+hl.bind(mods.with(mods.main_mod, "Tab"), hl.dsp.focus({ workspace = "e+1" }), { repeating = true })
+hl.bind(mods.with(mods.main_mod_shift, "Tab"), hl.dsp.focus({ workspace = "e-1" }), { repeating = true })
 
 
 
@@ -154,15 +154,15 @@ hl.bind(mods:with(mods.main_mod_shift, "Tab"), hl.dsp.focus({ workspace = "e-1" 
 --## Scrolling layout specific START ###
 --######################################
 
-hl.bind(mods:with(mods.main_mod, "o"), hl.dsp.layout("promote"))
-hl.bind(mods:with(mods.main_mod, "p"), hl.dsp.layout("swapcol l"))
-hl.bind(mods:with(mods.main_mod, "n"), hl.dsp.layout("swapcol r"))
+hl.bind(mods.with(mods.main_mod, "o"), hl.dsp.layout("promote"))
+hl.bind(mods.with(mods.main_mod, "p"), hl.dsp.layout("swapcol l"))
+hl.bind(mods.with(mods.main_mod, "n"), hl.dsp.layout("swapcol r"))
 
 -- bind = $mainModShift, p, layoutmsg, move -col
 -- bind = $mainModShift, n, layoutmsg, move +col
 
-hl.bind(mods:with(mods.main_mod, "Space"), hl.dsp.layout("colresize +conf"))
-hl.bind(mods:with(mods.main_mod_shift, "Space"), hl.dsp.layout("colresize -conf"))
+hl.bind(mods.with(mods.main_mod, "Space"), hl.dsp.layout("colresize +conf"))
+hl.bind(mods.with(mods.main_mod_shift, "Space"), hl.dsp.layout("colresize -conf"))
 
 -- bind = $mainMod, home, layoutmsg, focus l
 -- bind = $mainMod, end, layoutmsg, focus r

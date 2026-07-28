@@ -14,38 +14,38 @@ local mon = machines.is_desktop() and machines.monitors("DP-1").output
 
 -- === Application Launchers ===
 -- Tofi is sooooo much faster
-hl.bind(mods:with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
+hl.bind(mods.with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
 
--- hl.bind(mods:with(mods.main_mod_ctrl, "r"), hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
-hl.bind(mods:with(mods.main_mod_ctrl, "r"), dms.invoke_ipc_call("spotlight toggle"))
+-- hl.bind(mods.with(mods.main_mod_ctrl, "r"), hl.dsp.exec_cmd("dms ipc call spotlight toggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "r"), dms.invoke_ipc_call("spotlight toggle"))
 
-hl.bind(mods:with(mods.main_mod_ctrl, "v"), dms.invoke_ipc_call("clipboard toggle"))
-hl.bind(mods:with(mods.main_mod_ctrl, "m"), dms.invoke_ipc_call("settings focusOrToggle"))
-hl.bind(mods:with(mods.main_mod_ctrl, "a"), dms.invoke_ipc_call("notifications toggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "v"), dms.invoke_ipc_call("clipboard toggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "m"), dms.invoke_ipc_call("settings focusOrToggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "a"), dms.invoke_ipc_call("notifications toggle"))
 
-hl.bind(mods:with(mods.main_mod_alt, "w"), dms.invoke_ipc_call("hypr toggleOverview"))
-hl.bind(mods:with(mods.main_mod_alt, "d"), dms.invoke_ipc_call("night toggle"))
+hl.bind(mods.with(mods.main_mod_alt, "w"), dms.invoke_ipc_call("hypr toggleOverview"))
+hl.bind(mods.with(mods.main_mod_alt, "d"), dms.invoke_ipc_call("night toggle"))
 
-hl.bind(mods:with(mods.main_mod, "y"), dms.invoke_ipc_call("dankdash wallpaper"))
-hl.bind(mods:with(mods.main_mod_shift, "y"), dms.invoke_ipc("wallpaperCarousel toggle"))
-hl.bind(mods:with(mods.main_mod_shift, "w"), dms.invoke_ipc_call("wallpaper nextFor " .. mon))
-hl.bind(mods:with(mods.main_mod_ctrl, "w"), dms.invoke_ipc_call("wallpaper prevFor " .. mon))
+hl.bind(mods.with(mods.main_mod, "y"), dms.invoke_ipc_call("dankdash wallpaper"))
+hl.bind(mods.with(mods.main_mod_shift, "y"), dms.invoke_ipc("wallpaperCarousel toggle"))
+hl.bind(mods.with(mods.main_mod_shift, "w"), dms.invoke_ipc_call("wallpaper nextFor " .. mon))
+hl.bind(mods.with(mods.main_mod_ctrl, "w"), dms.invoke_ipc_call("wallpaper prevFor " .. mon))
 
-hl.bind(mods:with(mods.main_mod, "z"), dms.invoke_ipc_call("usbManager toggle"))
+hl.bind(mods.with(mods.main_mod, "z"), dms.invoke_ipc_call("usbManager toggle"))
 
-hl.bind(mods:with(mods.main_mod, "m"), dms.invoke_ipc_call("powermenu toggle"))
-hl.bind(mods:with(mods.main_mod_ctrl, "n"), dms.invoke_ipc_call("notepad toggle"))
+hl.bind(mods.with(mods.main_mod, "m"), dms.invoke_ipc_call("powermenu toggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "n"), dms.invoke_ipc_call("notepad toggle"))
 
-hl.bind(mods:with(mods.main_mod, "z"), dms.invoke_ipc_call("dash toggle overview"))
-hl.bind(mods:with(mods.main_mod, "x"), dms.invoke_ipc_call("control-center toggle"))
+hl.bind(mods.with(mods.main_mod, "z"), dms.invoke_ipc_call("dash toggle overview"))
+hl.bind(mods.with(mods.main_mod, "x"), dms.invoke_ipc_call("control-center toggle"))
 
-hl.bind(mods:with(mods.main_mod_ctrl, "p"), dms.invoke_ipc_call("processlist focusOrToggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "p"), dms.invoke_ipc_call("processlist focusOrToggle"))
 
 -- === Security ===
-hl.bind(mods:with(mods.main_mod_ctrl, "u"), dms.invoke_ipc_call("lock lock"))
+hl.bind(mods.with(mods.main_mod_ctrl, "u"), dms.invoke_ipc_call("lock lock"))
 
 -- === Screenshots ===
-hl.bind(mods:with(mods.main_mod_ctrl, "s"), dms.invoke("screenshot"))
+hl.bind(mods.with(mods.main_mod_ctrl, "s"), dms.invoke("screenshot"))
 
 -- === System Controls ===
 --# Toggles the display, basically a 'sleep' for all screens.

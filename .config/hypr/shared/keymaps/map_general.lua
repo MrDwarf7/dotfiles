@@ -5,8 +5,8 @@ local mods = require("shared.keymaps.mods")
 
 --########################
 
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop"))
--- exit
+hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop")) -- exit
+-- hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("hyprshutdown --vt 2")) -- exit
 
 -- Can define via exec/IPC call (Though this has some performance overhead compared to chaining commands)
 -- bind = $mainMod, q, exec, hyprctl dispatch killactive && hyprctl dispatch focusmonitor 0
@@ -22,29 +22,29 @@ hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop"))
 --
 -- If doing this - they MUST remain in the same order.
 -- Hyprland will execute them (filewise) top to bottom.
-hl.bind(mods:with(mods.main_mod, "q"), hl.dsp.window.close())
-hl.bind(mods:with(mods.main_mod, "q"), hl.dsp.focus({ monitor = 0 }))
+hl.bind(mods.with(mods.main_mod, "q"), hl.dsp.window.close())
+hl.bind(mods.with(mods.main_mod, "q"), hl.dsp.focus({ monitor = 0 }))
 
 --### IMPORTANT END ####
 
-hl.bind(mods:with(mods.main_mod, "f"), hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mods:with(mods.main_mod, "c"), hl.dsp.window.center())
+hl.bind(mods.with(mods.main_mod, "f"), hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mods.with(mods.main_mod, "c"), hl.dsp.window.center())
 
-hl.bind(mods:with(mods.main_mod, "p"), hl.dsp.window.pin())
+hl.bind(mods.with(mods.main_mod, "p"), hl.dsp.window.pin())
 
 -- groups
-hl.bind(mods:with(mods.main_mod_shift, "g"), hl.dsp.group.lock({ action = "toggle" }))
-hl.bind(mods:with(mods.main_mod, "g"), hl.dsp.group.toggle())
+hl.bind(mods.with(mods.main_mod_shift, "g"), hl.dsp.group.lock({ action = "toggle" }))
+hl.bind(mods.with(mods.main_mod, "g"), hl.dsp.group.toggle())
 
-hl.bind(mods:with(mods.main_mod, "Home"), hl.dsp.group.prev())
-hl.bind(mods:with(mods.main_mod, "End"), hl.dsp.group.next())
-hl.bind(mods:with(mods.main_mod, "s"), hl.dsp.window.pseudo())
+hl.bind(mods.with(mods.main_mod, "Home"), hl.dsp.group.prev())
+hl.bind(mods.with(mods.main_mod, "End"), hl.dsp.group.next())
+hl.bind(mods.with(mods.main_mod, "s"), hl.dsp.window.pseudo())
 
 -- ## TODO: Error'ing
 -- bind = $mainMod, Space, togglesplit # dwindle
 
-hl.bind(mods:with(mods.main_mod_shift, "f"), hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
-hl.bind(mods:with(mods.main_mod_ctrl, "f"), hl.dsp.layout("swapwithmaster master"))
+hl.bind(mods.with(mods.main_mod_shift, "f"), hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
+hl.bind(mods.with(mods.main_mod_ctrl, "f"), hl.dsp.layout("swapwithmaster master"))
 --# ^ Allow swapping when using 'master' layout method
 
 hl.bind(mods.alt_tab, hl.dsp.window.cycle_next({ next = true }))

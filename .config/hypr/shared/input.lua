@@ -4,7 +4,9 @@
 
 -- https://wiki.hyprland.org/Configuring/Variables/#input
 
-hl.config({
+---@type HL.ConfigOpt
+local config = {
+  ---@type HL.ConfigOpt.Input
   input = {
     kb_model = "",
     kb_layout = "us",
@@ -24,7 +26,8 @@ hl.config({
     force_no_accel = require("utils.machines").is_desktop(), -- true for desktop, false for laptop (since it has a touchpad)
     left_handed = false,
     scroll_points = "",
-    scroll_method = "",
+    -- scroll_method = nil,
+    scroll_method = "2fg",
     scroll_button = 0,
     scroll_button_lock = false,
     scroll_factor = 1.0,
@@ -45,12 +48,14 @@ hl.config({
     special_fallthrough = false,
     off_window_axis_events = 1,
     emulate_discrete_scroll = 1,
+    ---@type HL.ConfigOpt.Input.Touchpad
     touchpad = {
       disable_while_typing = true,
       natural_scroll = true,
       scroll_factor = 0.4,
       middle_button_emulation = false,
-      tap_button_map = "",
+      -- tap_button_map = "",
+      tap_button_map = "lmr",
       clickfinger_behavior = true,
       tap_to_click = true, -- Enable tap to click -- May want to remove this though
       drag_lock = 2,
@@ -59,13 +64,17 @@ hl.config({
       flip_y = false,
       drag_3fg = 0,
     },
+    ---@type HL.ConfigOpt.Input.Touchdevice
     touchdevice = {
       enabled = false,
-      transform = -1,
+      -- transform = -1,
+      transform = 0,
       output = "",
     },
+    ---@type HL.ConfigOpt.Input.Tablet
     tablet = {
-      transform = -1,
+      -- transform = -1,
+      transform = 0,
       output = "",
       -- region_position = [0, 0]
       absolute_region_position = false,
@@ -76,12 +85,9 @@ hl.config({
       -- active_area_position = [0, 0]
     },
   },
-})
 
-require("shared.devices.manbook_keyboard")
-
-hl.config({
   -- https://wiki.hyprland.org/Configuring/Variables/#gestures
+  ---@type HL.ConfigOpt.Gestures
   gestures = {
     -- workspace_swipe = true
     -- workspace_swipe_fingers = 3
@@ -98,10 +104,8 @@ hl.config({
     workspace_swipe_forever = false,
     workspace_swipe_use_r = false,
   },
-})
+}
 
-hl.gesture({
-  fingers = 3,
-  direction = "horizontal",
-  action = "workspace",
-})
+hl.config(config)
+
+require("shared.devices.manbook_keyboard")

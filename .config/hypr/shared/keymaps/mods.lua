@@ -25,6 +25,9 @@ end
 --
 -- So maybe we just have a lookup table or something, and use teh underlying combine fn call
 
+--- Combines multiple modifier keys and a key into a single string suitable for binding.
+--- @param ... unknown
+--- @return string
 local with = function(...)
   -- gives an error via invalid value (table) at index 1 in table for concat
   return combine(table.unpack({ ... }))
@@ -65,9 +68,5 @@ setmetatable(ret, {
 })
 
 ret.with = with
-
-function ret:with(...) -- silent 'self' here btw
-  return combine(table.unpack({ ... }))
-end
 
 return ret

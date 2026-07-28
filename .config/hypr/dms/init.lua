@@ -38,7 +38,7 @@ end
 ---@param now? boolean If true, the command is executed immediately; otherwise, it returns a dispatcher for later execution.
 ---@return HL.Dispatcher|any
 function Dms.invoke_ipc_call(cmd, now)
-  if now then
+  if now and type(now) ~= nil then
     return Dms.invoke(string.format("ipc call %s", cmd))()
   end
   return Dms.invoke(string.format("ipc call %s", cmd))
@@ -64,7 +64,9 @@ function Dms:setup()
   hl.on(types.HyprlandEvents.START, function()
     -- pcall(function()
     -- hl.exec_cmd('dms ipc call plugins reload "githubInbox" >/dev/null 2>&1')
-    hl.exec_cmd(self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1', true))
+    -- hl.exec_cmd(self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1', true))
+    -- hl.dispatch(self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1', true))
+    self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1')
     -- end)
   end)
 

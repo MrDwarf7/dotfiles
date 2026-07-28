@@ -21,7 +21,7 @@ local Shared = {
     require("shared.monitor")
     require("shared.programs")
 
-    require("shared.keymaps.init")
+    require("shared.keymaps") -- .init
 
     require("shared.animation")
     require("shared.binds")
@@ -29,6 +29,9 @@ local Shared = {
     require("shared.debug")
     require("shared.ecosystem")
     require("shared.group")
+
+    require("shared.gestures")
+
     require("shared.input")
     require("shared.layouts")
     require("shared.misc")

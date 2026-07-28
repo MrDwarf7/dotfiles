@@ -3,7 +3,9 @@
 --- Shell-specific execs belong in vanilla/ or dms/.
 
 ---@alias CallbackFnPtr function(...): nil
----@alias CallbackList table[CallbackFnPtr]
+
+---@generic F : CallbackFnPtr
+---@alias CallbackList table<number, F>
 
 ---@alias cbs_fn_t table[function(...): nil]
 
@@ -63,7 +65,7 @@ end
 local start_cbs = function(extra_cbs)
   ---@type CallbackList
   local ret = {
-    function()
+    [1] = function()
       -- PulseAudio: unmute default sink on startup
       hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
 
@@ -114,9 +116,9 @@ local setup = function()
     hl.on(types.HyprlandEvents.START, cb)
   end
 
-  for _, cb in ipairs(shutdown_cbs()) do
-    hl.on(types.HyprlandEvents.SHUTDOWN, cb)
-  end
+  -- for _, cb in ipairs(shutdown_cbs()) do
+  --   hl.on(types.HyprlandEvents.SHUTDOWN, cb)
+  -- end
 end
 
 ---@return nil
