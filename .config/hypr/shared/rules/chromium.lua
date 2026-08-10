@@ -1,43 +1,25 @@
---- Chromium browser window rules.
---- Tag + subs pattern for devtools.
+--- Chromium browser window rules. browsers bucket + devtools sub-window.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : browsers
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("browsers")
 
-  {
-    name = "tag-chromium",
-    match = { class = "[cC]hromium" },
-    tag = "+chromium",
-  },
+local rgx = "[cC]hromium"
 
-  {
-    name = "effect-chromium",
-    match = { tag = "chromium" },
-    workspace = "1 silent",
-    size = "2660 1300",
-    persistent_size = true,
-  },
+bkt.assign_bucket({ class = rgx }, v.bucket)
 
-  --- Devtools sub-window.
-  {
-    name = "tag-chromium-devtools",
-    match = {
-      class = "[cC]hromium",
-      title = "Devtools",
-    },
-    tag = "+chromiumDevtools",
-  },
+--- Main window size (not covered by bucket).
+hl.window_rule({ name = "size-chromium-main", match = { class = rgx }, size = "2660 1300" })
 
-  {
-    name = "effect-chromium-devtools",
-    match = { tag = "chromiumDevtools" },
-    persistent_size = true,
-    float = true,
-    center = true,
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Devtools sub-window.
+hl.window_rule({
+  name = "tag-chromium-devtools",
+  match = { class = rgx, title = "Devtools" },
+  tag = "+chromiumDevtools",
+})
+hl.window_rule({
+  name = "effect-chromium-devtools",
+  match = { tag = "chromiumDevtools" },
+  center = true,
+  float = true,
+  persistent_size = true,
+})

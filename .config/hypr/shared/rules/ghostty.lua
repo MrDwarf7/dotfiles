@@ -1,27 +1,8 @@
 --- Ghostty terminal window rules.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : terminals
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("terminals")
 
-  {
-    name = "tag-ghostty",
-    match = { class = "com\\.mitchellh\\.ghostty" },
-    tag = "+ghostty",
-  },
-
-  {
-    name = "effect-ghostty",
-    match = { tag = "ghostty" },
-    -- size = "2560 1330",
-    persistent_size = true,
-    -- opacity = "1.00 override 1.00 override",
-    float = false,
-    center = true,
-    border_size = 0,
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Terminals bucket covers borderless + persistent size.
+--- (Old effect had contradictory center=true/float=false on a tiled window; omitted.)
+bkt.assign_bucket({ class = "com.mitchellh.ghostty" }, v.bucket)

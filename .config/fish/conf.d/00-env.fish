@@ -221,7 +221,7 @@ function __setup_envs
     ## Defined as well in:
     # $HOME/.config/uwsm/env
     # the __env_set_cached does an early ret. if the env is already defined!
-    __env_cached_set -Ux WALLPAPER_BACKEND awww
+    # __env_cached_set -Ux WALLPAPER_BACKEND awww
 
     # if status is-interactive
     #     function __run_99-ensure_gh_token --wraps=99-ensure_gh_token --description 'Run 99-ensure_gh_token in the background if not already done'

@@ -1,15 +1,21 @@
 --- AlecaFrame / Overwolf window rules.
 --- Three distinct window types: quick launcher, spawn window, AlecaFrame.
 
+local v = {
+  class_rgx = "^(overwolf.exe)$",
+  ws = "8 silent",
+  opacity = "1.0 override 1.0 override",
+}
+
 ---@type HyprConfig.HL.WindowRuleSpec[]
 local rules = {
   --- Overwolf Quick Launcher.
   {
     name = "tag-overwolf-quick-launcher",
     match = {
-      class = "^(overwolf.exe)$",
+      class = v.class_rgx,
       title = "^(Overwolf Quick Launcher)$",
-      initial_class = "^(overwolf.exe)$",
+      initial_class = v.class_rgx,
       initial_title = "^(Overwolf Quick Launcher)$",
     },
     tag = "+overwolf-overwolf-quick-launcher",
@@ -18,8 +24,8 @@ local rules = {
   {
     name = "effect-overwolf-quick-launcher",
     match = { tag = "overwolf-overwolf-quick-launcher" },
-    workspace = "8 silent",
-    opacity = "1.0 override 1.0 override",
+    workspace = v.ws,
+    opacity = v.opacity,
   },
 
   {
@@ -36,17 +42,17 @@ local rules = {
   {
     name = "effect-overwolf-spawn-window",
     match = { tag = "overwolf-spawn-window" },
-    workspace = "8 silent",
-    opacity = "1.0 override 1.0 override",
+    workspace = v.ws,
+    opacity = v.opacity,
   },
 
   --- AlecaFrame.
   {
     name = "tag-alecaframe",
     match = {
-      class = "^(overwolf.exe)$",
+      class = v.class_rgx,
       title = "^(AlecaFrame)$",
-      initial_class = "^(overwolf.exe)$",
+      initial_class = v.class_rgx,
       initial_title = "^(AlecaFrame)$",
     },
     tag = "+overwolf-alecaframe",
@@ -55,8 +61,8 @@ local rules = {
   {
     name = "effect-alecaframe",
     match = { tag = "overwolf-alecaframe" },
-    workspace = "8 silent",
-    opacity = "1.0 override 1.0 override",
+    workspace = v.ws,
+    opacity = v.opacity,
     maximize = true,
   },
 }

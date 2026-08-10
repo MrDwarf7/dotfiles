@@ -1,67 +1,24 @@
---   {
---     name = "tag-thunderbird-write",
---     match = {
---       class = "^(org.mozilla.Thunderbird)$",
---       title = "^(Write:\\s.*)$",
---     },
---     -- match:initial_class = ^(STUFF)$
---     -- match:initial_title = ^(MORE_STUFF)$
---     tag = "+thunderbird-write",
---   },
---
---   -- Tagging - Client windows
---   {
---     name = "tag-workspace-thunderbird",
---     match = {
---       class = "^(org.mozilla.Thunderbird)$",
---       initial_title = "^(Mozilla\\sThunderbird)$",
---     },
---     -- match:initial_class = ^(STUFF)$
---     -- match:initial_title = ^(MORE_STUFF)$
---     tag = "+thunderbird-workspace",
---   },
---
---   -- Effects
---
---   --# Generic opacity for tagged things
---   {
---     name = "tagged-thunderbird-write",
---     match = {
---       tag = "thunderbird-write",
---     },
---     opacity = "1.0 override 1.0 override",
---     persistent_size = true,
---   },
---
---   {
---     name = "workspace-thunderbird",
---     match = {
---       tag = "thunderbird-workspace",
---     },
---     workspace = "3 silent",
---   },
---
---   --# Float things
---   {
---     name = "float-tagged-thunderbird-write",
---     match = {
---       tag = "thunderbird-write",
---     },
---     -- workspace = N silent
---     float = true,
---     center = true,
---     size = "1600 900",
---   },
--- }
---
+--- Thunderbird window rules. Email bucket + compose-window sub-rule.
 
--- TODO: [tags] : private_comms | email
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("email")
 
--- TODO: [add] : set these + add to init
+local rgx = "^(org.mozilla.[tT]hunderbird)$"
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {}
+bkt.assign_bucket({ class = rgx }, v.bucket)
 
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Compose/write windows: float + center + size + opacity.
+hl.window_rule({
+  name = "tag-thunderbird-write",
+  match = { class = rgx, title = "^(Write:\\s.*)$" },
+  tag = "+thunderbird-write",
+})
+hl.window_rule({
+  name = "effect-thunderbird-write",
+  match = { tag = "thunderbird-write" },
+  center = true,
+  float = true,
+  opacity = "1.0 override 1.0 override",
+  persistent_size = true,
+  size = "1600 900",
+})

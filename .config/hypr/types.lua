@@ -7,6 +7,9 @@
 ---@alias float number
 ---@alias str string
 
+---@alias error error
+---@class Error : error
+
 ---@class fun : function|function(...)
 
 ---@class OfAny : any

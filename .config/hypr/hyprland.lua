@@ -65,6 +65,7 @@ RootShared = {
     for _, mod in ipairs(modules_tbl) do
       require(here .. mod)
     end
+    -- package.loaded[here] = nil -- allow reloading of the module if needed
     return true
   end,
 }

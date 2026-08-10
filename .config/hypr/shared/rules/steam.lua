@@ -1,105 +1,80 @@
 --- Steam window rules.
---- Tag-then-effect pattern for different Steam window types.
+--- Main window -> gaming bucket (WS4). Child windows kept as separate tags.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : gaming
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("gaming")
 
-  --- Self-updater popup.
-  {
-    name = "tag-steam-updater",
-    match = { title = "^(Steam - Self Updater)$" },
-    tag = "+steamUpdater",
-  },
+local rgx = "^([sS]team)$"
 
-  {
-    name = "effect-steam-updater",
-    match = { tag = "steamUpdater" },
-    workspace = "4 silent",
-    float = true,
-    no_initial_focus = true,
-    no_blur = true,
-  },
+bkt.assign_bucket({ class = rgx, title = rgx }, v.bucket)
 
-  --- Sign-in window.
-  {
-    name = "tag-steam-signin",
-    match = {
-      class = "^([sS]team)$",
-      title = "^(Sign in to [sS]team)$",
-    },
-    tag = "+steamSignIn",
-  },
+--- Main window extras (not covered by bucket): opacity, borderless, no blur.
+-- hl.window_rule({
+--   name = "extra-steam-main",
+--   match = { class = rgx, title = rgx },
+--   opacity = "1.0 override 1.0 override",
+--   border_size = 0,
+--   no_blur = true,
+-- })
 
-  {
-    name = "effect-steam-signin",
-    match = { tag = "steamSignIn" },
-    workspace = "4 silent",
-    no_initial_focus = true,
-    float = true,
-    center = true,
-    no_blur = true,
-    size = "850 720",
-  },
+--- Self-updater popup.
+hl.window_rule({
+  name = "tag-steam-updater",
+  match = { title = "^(Steam - Self Updater)$" },
+  tag = "+steamUpdater",
+})
+hl.window_rule({
+  name = "effect-steam-updater",
+  match = { tag = "steamUpdater" },
+  workspace = v.workspace,
+  float = true,
+  no_blur = true,
+  no_initial_focus = true,
+})
 
-  --- Main Steam window.
-  {
-    name = "tag-steam-main",
-    match = {
-      class = "^([sS]team)$",
-      title = "^([sS]team)$",
-    },
-    tag = "+steamMain",
-  },
+--- Sign-in window.
+hl.window_rule({
+  name = "tag-steam-signin",
+  match = { class = rgx, title = "^(Sign in to [sS]team)$" },
+  tag = "+steamSignIn",
+})
+hl.window_rule({
+  name = "effect-steam-signin",
+  match = { tag = "steamSignIn" },
+  workspace = v.workspace,
+  center = true,
+  float = true,
+  no_blur = true,
+  no_initial_focus = true,
+  size = "850 720",
+})
 
-  {
-    name = "effect-steam-main",
-    match = { tag = "steamMain" },
-    workspace = "4 silent",
-    opacity = "1.0 override 1.0 override",
-    no_blur = true,
-    border_size = 0,
-  },
+--- Settings window.
+hl.window_rule({
+  name = "tag-steam-settings",
+  match = { class = rgx, title = "^([sS]team [sS]ettings)$" },
+  tag = "+steamSettings",
+})
+hl.window_rule({
+  name = "effect-steam-settings",
+  match = { tag = "steamSettings" },
+  workspace = v.workspace,
+  float = true,
+  no_blur = true,
+  opacity = "1.0 override 1.0 override",
+  size = "850 720",
+})
 
-  --- Settings window.
-  {
-    name = "tag-steam-settings",
-    match = {
-      class = "^([sS]team)$",
-      title = "^([sS]team [sS]ettings)$",
-    },
-    tag = "+steamSettings",
-  },
-
-  {
-    name = "effect-steam-settings",
-    match = { tag = "steamSettings" },
-    workspace = "4 silent",
-    opacity = "1.0 override 1.0 override",
-    float = true,
-    no_blur = true,
-    size = "850 720",
-  },
-
-  --- Special offers window.
-  {
-    name = "tag-steam-special-offers",
-    match = {
-      class = "^([sS]team)$",
-      title = "^(Special Offers)$",
-    },
-    tag = "+steamSpecialOffers",
-  },
-
-  {
-    name = "effect-steam-special-offers",
-    match = { tag = "steamSpecialOffers" },
-    workspace = "4 silent",
-    float = true,
-    no_blur = true,
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Special offers window.
+hl.window_rule({
+  name = "tag-steam-special-offers",
+  match = { class = rgx, title = "^(Special Offers)$" },
+  tag = "+steamSpecialOffers",
+})
+hl.window_rule({
+  name = "effect-steam-special-offers",
+  match = { tag = "steamSpecialOffers" },
+  workspace = v.workspace,
+  float = true,
+  no_blur = true,
+})

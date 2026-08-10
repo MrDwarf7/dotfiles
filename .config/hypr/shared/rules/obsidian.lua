@@ -1,42 +1,21 @@
---- Obsidian window rules.
---- Tag + subs pattern for mini window.
+--- Obsidian window rules. Notes bucket + mini-window sub-tag.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : notes
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("notes")
 
-  {
-    name = "tag-obsidian",
-    match = { class = "[oO]bsidian" },
-    tag = "+obsidian",
-  },
+local rgx = "[oO]bsidian"
 
-  {
-    name = "effect-obsidian",
-    match = { tag = "obsidian" },
-    workspace = "5 silent",
-    persistent_size = true,
-    float = false,
-  },
+bkt.assign_bucket({ class = rgx }, v.bucket)
 
-  --- Mini window (title matches Obsidian itself).
-  {
-    name = "tag-obsidian-mini",
-    match = {
-      class = "[oO]bsidian",
-      title = "[oO]bsidian",
-    },
-    tag = "+obsidianMini",
-  },
-
-  {
-    name = "effect-obsidian-mini",
-    match = { tag = "obsidianMini" },
-    persistent_size = true,
-    float = true,
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Mini window (title matches Obsidian itself): float + persistent size.
+hl.window_rule({
+  name = "tag-obsidian-mini",
+  match = { class = rgx, title = rgx },
+  tag = "+obsidianMini",
+})
+hl.window_rule({
+  name = "effect-obsidian-mini",
+  match = { tag = "obsidianMini" },
+  float = true,
+  persistent_size = true,
+})

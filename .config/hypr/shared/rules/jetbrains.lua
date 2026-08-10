@@ -1,61 +1,33 @@
 --- JetBrains IDE window rules (IntelliJ, PyCharm, WebStorm, GoLand, etc).
---- Includes workaround rules for toolbox menus and tab dragging.
+--- gui_editors bucket for the main window + workaround rules for child windows.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : gui_editors
+-- TODO: If I ever use jb stuff again - will have to double check these lol
 
-  --- Tag all JetBrains windows.
-  {
-    name = "tag-jb",
-    match = { class = "^(jetbrains-.+)$" },
-    tag = "+jb",
-  },
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("gui_editors")
 
-  --- Workspace for tagged windows.
-  {
-    name = "effect-jb-workspace",
-    match = { tag = "jb" },
-    workspace = "3 silent",
-  },
+bkt.assign_bucket({ class = "^(jetbrains-.+)$" }, v.bucket)
 
-  --- Workaround: toolbox menus are unclickable without this.
-  --- Matches windows with class containing "jetbrains" and title starting with "win".
-  {
-    name = "jb-toolbox-menus-fix",
-    match = {
-      class = "^(.*jetbrains.*)$",
-      title = "^(win.*)$",
-    },
-    no_initial_focus = true,
-    no_focus = true,
-  },
+--- Workaround: toolbox menus are unclickable without this.
+hl.window_rule({
+  name = "jb-toolbox-menus-fix",
+  match = { class = "^(.*jetbrains.*)$", title = "^(win.*)$" },
+  no_focus = true,
+  no_initial_focus = true,
+})
 
-  --- Workaround: tab dragging loses focus.
-  --- Tab drag windows have a single space character as their title.
-  {
-    name = "jb-tab-dragging-fix",
-    match = {
-      class = "^(.*jetbrains.*)$",
-      title = "^\\\\s$",
-    },
-    no_initial_focus = true,
-    no_focus = true,
-  },
+--- Workaround: tab dragging loses focus.
+hl.window_rule({
+  name = "jb-tab-dragging-fix",
+  match = { class = "^(.*jetbrains.*)$", title = "^s$" }, -- title = "^\\\\s$",
+  no_focus = true,
+  no_initial_focus = true,
+})
 
-  --- Workaround: floating JetBrains dialogs need stay_focused.
-  {
-    name = "jb-tab-dragging-fix-2",
-    match = {
-      class = "^(jetbrains-.+)$",
-      tag = "jb",
-      float = 1,
-    },
-    stay_focused = true,
-    no_initial_focus = true,
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Workaround: floating JetBrains dialogs need stay_focused.
+hl.window_rule({
+  name = "jb-floating-dialog-fix",
+  match = { class = "^(jetbrains-.+)$", float = 1 },
+  no_initial_focus = true,
+  stay_focused = true,
+})

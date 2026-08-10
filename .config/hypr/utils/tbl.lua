@@ -59,7 +59,7 @@ end
 --- Checks if a table contains a specific value.
 ---@param tbl table The table to search in.
 ---@param value any The value to search for.
----@param opts table? Optional settings for the search (e.g., case sensitivity, deep search).
+---@param opts? { predicate: function } Optional settings for the search (e.g., case sensitivity, deep search).
 ---@return boolean Returns true if the value is found, false otherwise.
 Tbl.contains = function(tbl, value, opts)
   local pred --- @type fun(v: any): boolean?
@@ -84,5 +84,22 @@ end
 Tbl.is_empty = function(tbl)
   return next(tbl) == nil
 end
+
+Tbl.concat = function(a, b)
+  local ret = {}
+  for k, v in pairs(a) do
+    ret[k] = v
+  end
+  for k, v in pairs(b) do
+    ret[k] = v
+  end
+  return ret
+end
+
+setmetatable(Tbl, {
+  __concat = function(a, b)
+    return Tbl.concat(a, b)
+  end,
+})
 
 return Tbl

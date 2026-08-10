@@ -8,6 +8,7 @@ local dialogs = {
   "^(Choose wallpaper)(.*)$",
   "^(Open Folder)(.*)$",
   "^(Save As)(.*)$",
+  "^(Save File)(.*)$",
   "^(Library)(.*)$",
   "^(File Upload)(.*)$",
   "^(.*)(wants to save)$",
@@ -21,8 +22,8 @@ local make_float = function(title)
   return {
     name = "float-dialog-" .. title,
     match = { title = title },
-    float = true,
     center = true,
+    float = true,
   }
 end
 

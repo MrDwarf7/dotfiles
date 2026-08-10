@@ -1,46 +1,30 @@
---- Zed editor window rules.
---- Tag + subs pattern for settings.
+--- Zed editor window rules. gui_editors bucket + settings sub-window.
 
----@type HyprConfig.HL.WindowRuleSpec[]
-local rules = {
-  -- TODO: [tags] : gui_editors
+local bkt = require("shared.rules.buckets")
+local v = bkt:get("gui_editors")
 
-  {
-    name = "tag-zed-editor",
-    match = { class = "dev\\\\.[zZ]ed\\\\.?[zZ]ed" },
-    tag = "+zedEditor",
-  },
+local rgx = "dev.[zZ]ed.?[zZ]ed"
 
-  {
-    name = "effect-zed-editor",
-    match = { tag = "zedEditor" },
-    workspace = "3 silent",
-    size = "2950 1350",
-    persistent_size = true,
-    opacity = "1.00 override 0.85 override",
-    no_initial_focus = true,
-  },
+bkt.assign_bucket({ class = rgx }, v.bucket)
 
-  --- Settings sub-window.
-  {
-    name = "tag-zed-editor-settings",
-    match = {
-      class = "dev\\\\.[zZ]ed\\\\.?[zZ]ed",
-      title = "Zed.*Settings",
-    },
-    tag = "+zedEditorSettings",
-  },
+--- Main window size (not covered by bucket).
+hl.window_rule({
+  name = "size-zed-main",
+  match = { class = rgx },
+  size = "2950 1350",
+})
 
-  {
-    name = "effect-zed-editor-settings",
-    match = { tag = "zedEditorSettings" },
-    persistent_size = true,
-    float = true,
-    opacity = "1.00 override 1.00 override",
-    size = " 1050 1050",
-  },
-}
-
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+--- Settings sub-window.
+hl.window_rule({
+  name = "tag-zed-settings",
+  match = { class = rgx, title = "Zed.*Settings" },
+  tag = "+zedEditorSettings",
+})
+hl.window_rule({
+  name = "effect-zed-settings",
+  match = { tag = "zedEditorSettings" },
+  float = true,
+  opacity = "1.00 override 1.00 override",
+  persistent_size = true,
+  size = "1050 1050",
+})
