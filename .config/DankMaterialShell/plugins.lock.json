@@ -4,19 +4,15 @@
     "dankDesktopWeather": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankDesktopWeather",
-      "commit": "e8c36175a1a8ee4718df5d8ef60d105add94f33e"
+      "commit": "cb66135b0af01eacb25f3a656dc86fb727fa02cf"
     },
     "githubInbox": {
       "repo": "https://github.com/TMS-Namespace/DMS-GitHub-Inbox-Plugin",
-      "commit": "7e1b8a1ff42d929a7ff49d8bd1e3db49ca7737b3"
-    },
-    "usbManager": {
-      "repo": "https://github.com/NordicsSys/dms-usb-manager",
-      "commit": "4dd61c1aa277a280fc05131342bc1cf3936a2a86"
+      "commit": "27b339fe6a1b3192e7b4c0c0e3bc7449fa62e0b8"
     },
     "wallpaperCarousel": {
       "repo": "https://github.com/motor-dev/wallpaperCarousel",
-      "commit": "c08fbb92c39d4d778bb08e520cfd96e395594440"
+      "commit": "761ecd1b7f347beee9f17909f8334d987c935a1a"
     }
   }
 }

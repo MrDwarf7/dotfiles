@@ -4,10 +4,13 @@
   "matugenTargetMonitor": "DP-1",
   "popupTransparency": 0.1,
   "dockTransparency": 0.6,
+  "floatingWindowTransparency": 0.1,
+  "floatingWindowForegroundLayers": false,
+  "floatingWindowForegroundTransparency": 0.08,
   "widgetBackgroundColor": "s",
   "cornerRadius": 12,
   "hyprlandLayoutGapsOverride": 4,
-  "hyprlandLayoutRadiusOverride": 0,
+  "hyprlandLayoutRadiusOverride": 12,
   "hyprlandLayoutBorderSize": 1,
   "clockFormat": "12h",
   "showSeconds": true,
@@ -22,8 +25,10 @@
   "popoutElevationEnabled": false,
   "barElevationEnabled": false,
   "blurEnabled": true,
+  "blurForegroundLayers": false,
+  "foregroundLayerTransparency": 0.08,
+  "blurLayerOutlineOpacity": 0.08,
   "blurBorderColor": "primary",
-  "blurBorderOpacity": 0.7,
   "wallpaperFillMode": "Fit",
   "blurWallpaperOnOverview": true,
   "controlCenterShowMicPercent": true,
@@ -278,14 +283,6 @@
       ],
       "rightWidgets": [
         {
-          "id": "runningApps",
-          "enabled": false,
-          "runningAppsCompactMode": false,
-          "runningAppsGroupByApp": false,
-          "runningAppsCurrentWorkspace": true,
-          "runningAppsCurrentMonitor": true
-        },
-        {
           "id": "githubInbox",
           "enabled": true
         },
@@ -358,7 +355,8 @@
       "shadowCustomColor": "#000000",
       "clickThrough": false,
       "hoverPopouts": false,
-      "hoverPopoutDelay": 279
+      "hoverPopoutDelay": 279,
+      "useOverlayLayer": false
     },
     {
       "id": "bar1772849107368",
