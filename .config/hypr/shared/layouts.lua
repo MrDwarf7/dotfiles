@@ -24,7 +24,7 @@ hl.config({
     preserve_split = true, -- You probably want this
     smart_split = false,
     smart_resizing = true,
-    special_scale_factor = 0.8,
+    -- special_scale_factor = 0.8,
     use_active_for_splits = true,
     split_bias = 0,
   },

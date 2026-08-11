@@ -5,8 +5,8 @@ local mods = require("shared.keymaps.mods")
 
 --########################
 
-hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop")) -- exit
--- hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("hyprshutdown --vt 2")) -- exit
+-- hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("uwsm stop")) -- exit
+hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("hyprshutdown --vt 2")) -- exit
 
 -- Can define via exec/IPC call (Though this has some performance overhead compared to chaining commands)
 -- bind = $mainMod, q, exec, hyprctl dispatch killactive && hyprctl dispatch focusmonitor 0

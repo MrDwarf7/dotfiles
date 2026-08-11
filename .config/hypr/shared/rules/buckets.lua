@@ -229,6 +229,7 @@ end
 ---@field assign_bucket fun(match: table, bkt_name: Bucket): void Assigns a window to a bucket based on the provided match and bucket name.
 ---@field get fun(self: BucketModule, bkt_name: Bucket): { bucket: Bucket, workspace: string } Gets the bucket and workspace for the provided bucket name (case-insensitive).
 local M = {
+  ---@type table<Bucket>
   types = bkt_types,
 
   -- TODO: [types] : Re the 'match' param below -

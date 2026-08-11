@@ -27,6 +27,7 @@ local setup = function()
     "linear",             -- tickets bucket
     "lutris",             -- gaming bucket
     "obsidian",           -- notes bucket + mini window
+    "openrgb",            -- standalone (RGB controller)
     "pip",                -- picture-in-picture floats
     "popups",             -- portal/polkit float + stay_focused
     "signal",             -- private_comms bucket

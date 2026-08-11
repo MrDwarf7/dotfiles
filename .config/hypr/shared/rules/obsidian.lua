@@ -1,5 +1,7 @@
 --- Obsidian window rules. Notes bucket + mini-window sub-tag.
 
+-- TODO: Ensure regex! -- cannot check hyprctl currently!
+
 local bkt = require("shared.rules.buckets")
 local v = bkt:get("notes")
 
