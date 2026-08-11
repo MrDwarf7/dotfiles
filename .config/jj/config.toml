@@ -351,6 +351,16 @@ clsu = [
 
 gc = ['git', 'clone']
 gcl = ['git', 'clone', '--colocate']
+# Clone, then cd into the repo
+### Doesn't work because sub-shell'ing
+# gclc = [
+#   'util',
+#   'exec',
+#   '--',
+#   'bash',
+#   '-c',
+#   'jj gcl $0 && export N=$(cd "./$(basename $0 .git)/") && cd "$N"',
+# ]
 
 gcd = ['git', 'clone', '--depth']
 
