@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function vs --description "Wraps a ripgrep query inside fzf (with preview) and sends to neovim" --argument-names query
+function vs --description "[v]im[s]earch - Search text (rg), Select (fzf), Vim (neovim)" --argument-names query
     # set OPENER "if test -n '$FZF_SELECT_COUNT'; nvim {1} +{2}; else; nvim -c +cw -q {+f}; end;"
 
     set -l OPENER "test -n '$FZF_SELECT_COUNT'; and nvim {1} +{2}; or nvim -c +cw -q {+f};"

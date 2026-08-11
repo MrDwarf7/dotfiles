@@ -39,10 +39,10 @@ function file_resolver_for_cmd
 end
 abbr -a fe --position anywhere --set-cursor=! --function file_resolver_for_cmd
 
-function nvim_resolver_for_cmd
+function nvim_resolver_for_cmd --description "Resolve a command to its path and open it in nvim"
     echo "nvim (command -v !)"
 end
-abbr -a ve --position anywhere --set-cursor=! --function nvim_resolver_for_cmd
+abbr -a vc --position anywhere --set-cursor=! --function nvim_resolver_for_cmd
 
 function bat_resolver_for_cmd
     printf "bat (command -v !)"

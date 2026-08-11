@@ -20,6 +20,40 @@
 #   2. Create sysup/ya.fish with `function sysup_ya ...`
 #   That's the ONLY two edits. Help, plan, and dispatch update automatically.
 
+function __sysup_cmp
+    complete -c sysup -s h -l help -d 'Show help'
+    complete -c sysup -s s -l skip -a (__sysup_step_letters) \
+        -d 'Skip steps by letter (m p a c r y)'
+    complete -c sysup -s d -l shutdown -d 'Shutdown after success'
+end
+
+function __sysup_help_make_steps
+    for entry in $sysup_steps
+        set -l parts (string split '|' $entry)
+        if test "$parts[2]" = -
+            printf "$__cfg_TAB%-10s (always)$__cfg_TAB%s\n" $parts[1] $parts[3]
+        else
+            printf "$__cfg_TAB%-10s %s$__cfg_TAB_EXT%s\n" $parts[1] $parts[2] $parts[3]
+        end
+    end
+end
+
+function __sysup_help
+    set -l fname (status basename)
+    printf "Updates system packages and other components in a registry-driven order. Steps can be skipped with the -s flag.
+Usage: $fname [FLAGS]
+
+
+Flags:
+$__cfg_TAB-h, --help     %-10s Show this help
+$__cfg_TAB-c, --cache    %-10s Only drop package caches (no updates)
+$__cfg_TAB-s, --skip     %-10s Skip steps by letter: $(__sysup_step_letters)
+$__cfg_TAB-d, --shutdown %-10s Shut down after a successful update
+
+Steps (in registry order; '-' = cannot be skipped):\n$(__sysup_help_make_steps)\n"
+    return 0
+end
+
 function sysup --description 'System update orchestrator'
     # Fish does NOT auto-load nested function files, so we glob-source the
     # helper dirs. This also keeps these helpers out of the global function
@@ -135,37 +169,4 @@ function sysup --description 'System update orchestrator'
 
     # Stop the sudo keepalive now that we're done.
     kill $__sysup_keepalive_pid 2>/dev/null
-end
-
-function __sysup_cmp
-    complete -c sysup -s h -l help -d 'Show help'
-    complete -c sysup -s s -l skip -a (__sysup_step_letters) \
-        -d 'Skip steps by letter (m p a c r y)'
-    complete -c sysup -s d -l shutdown -d 'Shutdown after success'
-end
-
-function __sysup_help_make_steps
-    for entry in $sysup_steps
-        set -l parts (string split '|' $entry)
-        if test "$parts[2]" = -
-            printf "$__cfg_TAB%-10s (always)$__cfg_TAB%s\n" $parts[1] $parts[3]
-        else
-            printf "$__cfg_TAB%-10s %s$__cfg_TAB_EXT%s\n" $parts[1] $parts[2] $parts[3]
-        end
-    end
-end
-
-function __sysup_help
-    printf "Updates system packages and other components in a registry-driven order. Steps can be skipped with the -s flag.
-Usage: $(status basename) [FLAGS]
-
-
-Flags:
-$__cfg_TAB-h, --help     %-10s Show this help
-$__cfg_TAB-c, --cache    %-10s Only drop package caches (no updates)
-$__cfg_TAB-s, --skip     %-10s Skip steps by letter: $(__sysup_step_letters)
-$__cfg_TAB-d, --shutdown %-10s Shut down after a successful update
-
-Steps (in registry order; '-' = cannot be skipped):\n$(__sysup_help_make_steps)"
-    return 0
 end

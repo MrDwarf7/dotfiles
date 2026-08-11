@@ -13,7 +13,12 @@ SETUVAR --export DISTCC_HOSTS:\x2d\x2drandomize\x20localhost\x2ccpp\x2clzo
 SETUVAR --export DOT_CONFIG:/home/dwarf/dotfiles/\x2econfig
 SETUVAR --export DOT_DIR:/home/dwarf/dotfiles
 SETUVAR --export EDITOR:/usr/bin/nvim
-SETUVAR --export FZF_DEFAULT_COMMAND:bfs\x20\x2dtype\x20f\x2cd\x20\x2ds\x20\x2dprint\x20\x2dmaxdepth\x208\x20\x2dd\x20\x2d\x2d
+SETUVAR --export FZF_CTRL_R_OPTS:\x2d\x2dwith\x2dnth\x201\x2c3\x2e\x2e\x20\x2d\x2dbind\x20\x27ctrl\x2dt\x3achange\x2dwith\x2dnth\x282\x2e\x2e\x7c3\x2e\x2e\x7c1\x2c3\x2e\x2e\x29\x27
+SETUVAR --export FZF_CTRL_T_COMMAND:bfs\x20\x2dtype\x20f\x2cd\x2cl\x2cp\x20\x2ds\x20\x2dprint\x20\x2dmaxdepth\x208\x20\x2dd\x20\x2dignore_readdir_race\x20\x2dO4\x20\x2d\x2d
+SETUVAR --export FZF_CTRL_T_OPTS:\x2d\x2dselect\x2d1\x20\x2d\x2dpreview\x20\x27bat\x20\x2d\x2dstyle\x3dauto\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x202\x3e\x20/dev/null\x20\x7c\x7c\x20fish\x20\x2dc\x20\x22lt\x20\x2dd\x202\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x22\x202\x3e\x20/dev/null\x20\x7c\x20head\x20\x2d200\x27
+SETUVAR --export FZF_DEFAULT_COMMAND:bfs\x20\x2dtype\x20f\x2cd\x2cl\x2cp\x20\x2ds\x20\x2dprint\x20\x2dmaxdepth\x208\x20\x2dd\x20\x2dignore_readdir_race\x20\x2dO4\x20\x2d\x2d
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dheight\x2080\x25\x20\x2d\x2dstyle\x3dminimal\x20\x2d\x2dansi\x20\x2d\x2dborder\x3dsharp\x20\x2d\x2dcolor\x3d16\x20\x2d\x2dcycle\x1e\x2d\x2dbind\x20\x27ctrl\x2de\x3apreview\x2ddown\x2cctrl\x2dy\x3apreview\x2dup\x2cctrl\x2dd\x3apreview\x2dhalf\x2dpage\x2ddown\x2cctrl\x2du\x3apreview\x2dhalf\x2dpage\x2dup\x2cctrl\x2df\x3apreview\x2dpage\x2ddown\x2cctrl\x2db\x3apreview\x2dpage\x2dup\x2cctrl\x2dj\x3aoffset\x2ddown\x2cctrl\x2dk\x3aoffset\x2dup\x2cctrl\x2dg\x3ajump\x2cjump\x3aaccept\x2cjump\x2dcancel\x3a\x27
+SETUVAR --export FZF_RELOAD_COMMAND:reload\x3arg\x20\x2d\x2dcolumn\x20\x2d\x2dcolor\x3dalways\x20\x2d\x2dsmart\x2dcase\x20\x7bq\x7d\x20\x7c\x7c\x20\x3a
 SETUVAR --export GCC_COLOR:eror\x3d01\x3b31\x3awarning\x3d01\x3b35\x3anote\x3d01\x3b36\x3acaret\x3d01\x3b32\x3alocus\x3d01\x3aquote\x3d01
 SETUVAR --export GITHUB_PROJECTS:/home/dwarf/Documents/GitHub_Projects
 SETUVAR --export GITHUB_PROJECTS_RUST:/home/dwarf/Documents/GitHub_Projects/Rust
@@ -52,6 +57,10 @@ SETUVAR --export __cached_envs_done:1
 SETUVAR --export __cached_fzf_done:1
 SETUVAR --export __cached_gh_done:1
 SETUVAR --export __cached_xdg_done:1
+SETUVAR --export __cfg_TAB:\x20\x20
+SETUVAR --export __cfg_TAB_EXT:\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20
+SETUVAR --export __cfg_TAB_EXT_SIZE:6
+SETUVAR --export __cfg_TAB_SIZE:2
 SETUVAR --export fish_cursor_default:block\x1eblink
 SETUVAR --export fish_cursor_insert:line\x1eblink
 SETUVAR --export fish_cursor_visual:block\x1eblink

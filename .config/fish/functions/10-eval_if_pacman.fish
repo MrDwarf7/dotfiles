@@ -3,7 +3,13 @@
 
 function 10-eval_if_pacman --argument-names program_one expr --description "If a provided program is available via pacman, evaluates a provided expression"
     # Checks to make sure a program is installed before evaluating an expression
-    # Used for instances where the item must be called as source <(eval $expr)
+    # Used for instances where the item must be called as:
+    #
+    # `source <(eval $expr)`
+    # OR
+    # `$expr | source`
+    # OR
+    # `eval $expr | source`
     #
     # Parameters:
     # $argv[1]: The program to check for

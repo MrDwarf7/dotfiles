@@ -18,7 +18,7 @@ alias vf "nvim ~/dotfiles/.config/fish || printf 'Failed to open ~/dotfiles/.con
 
 #### <cd><hermes>
 alias ch "cd ~/.hermes/ || printf 'Failed to cd into ~/.hermes/\n'"
-alias vh "nvim ~/.hermes/config.yaml || printf 'Failed to open ~/.hermes/config.yaml in nvim\n'"
+alias vherm "$EDITOR ~/.hermes/config.yaml || printf 'Failed to open ~/.hermes/config.yaml in nvim\n'"
 
 ##################################################
 

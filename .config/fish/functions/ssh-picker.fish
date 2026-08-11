@@ -7,7 +7,23 @@
 #   checked; set if not already -- set -gx SSH_PICKER_FAIL_DELAY 5                          # seconds to linger on connection failure
 #   checked; set if not already -- set -gx SSH_PICKER_IGNORE_RE "(aur.archlinux|codeberg|ssh.gitlab|gitlab|github.com)"
 
+function __ssh_picker_help
+    set -l fname (status basename)
+    printf "Runs an interactive SSH host picker using fzf. Hosts are pulled from ~/.ssh/config, and can be filtered with the SSH_PICKER_IGNORE_RE variable.
+Usage: $fname [FLAGS]
+
+Flags:
+$__cfg_TAB-h, --help %-10s Show this help message and exit\n"
+    return 0
+end
+
 function ssh-picker --description "fzf SSH host picker (port of Cleboost's ssh-menu.sh)"
+    argparse h/help -- $argv
+    or begin
+        colorize red "Error: Invalid arguments. Use 'vpncheck -h' for help.\n"; and __vpncheck_help; and return 1
+    end
+    set -q _flag_help; and __ssh_picker_help && return 0
+
     # Fail-delay is pulled from a global so it can be tuned without editing this file.
     if not set -q SSH_PICKER_FAIL_DELAY
         set -gx SSH_PICKER_FAIL_DELAY 5
@@ -36,20 +52,22 @@ function ssh-picker --description "fzf SSH host picker (port of Cleboost's ssh-m
         end
     )
 
-    # Drop any hosts matching the ignore globs
+    # Drop any hosts matchingthe ignore globs
     set -l filtered_hosts
     for h in $hosts
         set -l skip 0
         for pat in $SSH_PICKER_IGNORE_RE
             # If string length of zero, just skip through
-            if test -z "$pat"
-                continue
-            end
+            # if test -z "$pat"
+            #     continue
+            # end
+            test -z "$pat"; and continue
 
-            if string match -qr -- $pat $h
-                set skip 1
-                break
-            end
+            string match -qr -- $pat $h; and set skip 1; and break
+            # if string match -qr -- $pat $h
+            #     set skip 1
+            #     break
+            # end
         end
 
         if test $skip -eq 0

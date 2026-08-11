@@ -1,14 +1,11 @@
 #!/usr/bin/env fish
 #
 
-function ff
-    set -l example $argv[1]
+# If wanting to test out `usage` (mise dev made it!), can use this function cos its simple
+## #!/usr/bin/env -S usage fish
 
-    if test -z $example
-        command clear
-        command fastfetch --config examples/13 # prev on load
-    else
-        command clear
-        command fastfetch --config examples/$example
-    end
+function ff --description "Run fastfetch with a specific example config" --argument-names example
+    # set -l example $argv[1]
+    command clear &&
+        test -z "$example"; and command fastfetch --config examples/13; or command fastfetch --config examples/$example
 end

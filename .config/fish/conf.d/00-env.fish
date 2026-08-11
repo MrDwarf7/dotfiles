@@ -1,6 +1,11 @@
 #!/usr/bin/env fish
 #
 
+## Note on the various `__setup_*` functions -
+# They appear to have to be in this file, because splitting them
+# tends to cause some rather annoying issues with a pseudo-race cond
+#
+
 # Removes the greeting text
 set -Ux fish_greeting
 
@@ -15,22 +20,33 @@ set -U fish_cursor_visual block blink
 ## Allows 'segmenting' for parts of envs - caching yes;
 ## but also need to delete (the below) guard if you want to outright refresh the section.
 ## -- Using `-U` here prop's to ALL shells!
+#### INTERNALLY to wherever it's updated - we use `-gx`.
+# This is because of 'scope precedence' - the LOWEST privledge scope is what is used.
+# This allows us to set these to 0 IF they don't exist at all - OTHERWISE; each handler
+# sets them for the work in ta instance.
 set -q __cached_xdg_done; or set -Ux __cached_xdg_done 0
 set -q __cached_envs_done; or set -Ux __cached_envs_done 0
 set -q __cached_gh_done; or set -Ux __cached_gh_done 0
 set -q __cached_fzf_done; or set -Ux __cached_fzf_done 0
 
-function __env_cached_set --wraps=set --argument-names flag_args key --description 'Cache env vars to avoid re-running this script on every shell invocation'
-    test -z "$flag_args"; and test -z "$key"; and return 0 # If no flag args and key already exists, return early
+function __env_cached_set --argument-names flag_args key --description 'Cache env vars to avoid re-running this script on every shell invocation'
     set -l rest $argv[3..-1]
-    set -q $key; and return 0 # If key already exists, return early ## IMP: we _may_ not want this, or put it behind a flag or smth maybe?
+    printf "Setting env var '%s' to '%s' with flags '%s'\n" $key "$rest" "$flag_args"
 
-    # We already did our zero sized check above,
-    # so we can safely assume that if we have no flag args the variable will be empty anyway.
-    #
+    # 'flag_args' _MUST_ start with a `-` so that `-<flags>` is valid.
+
+    test -z "$flag_args"; and colorize red "Error: No flag args provided to __env_cached_set for key '$key'" && return 1 # Zero length flag args is invalid
+    string match -q -r '^-\w+' -- "$flag_args"; or colorize red "Error: Invalid flag args '$flag_args' provided to __env_cached_set for key '$key'" && return 2 # Invalid flag args
+
+    # set -q $key; and set -qx $key; and begin
+    #     set -l current_value (eval echo \$$key)
+    #     test "$current_value" = "$rest"
+    #     return 0 # Already set to the desired value
+    # end
+
     # @fish-lsp-disable-next-line 3003
     set $flag_args $key $rest
-    return $status
+    return 0
 end
 
 # Append to a local variable, then create them all in one go if required.
@@ -49,7 +65,7 @@ function __setup_xdg_dirs
     set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state; and set --append __xdg_set $XDG_STATE_HOME
     mkdir -p $__xdg_set
 
-    set __cached_xdg_done 1
+    set -gx __cached_xdg_done 1
     return 0
 end
 __setup_xdg_dirs &
@@ -70,10 +86,10 @@ function __setup_envs
 
     __env_cached_set -Ux GCC_COLOR 'eror=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-    __env_cached_set -gx __cfg_TAB_SIZE 2
-    __env_cached_set -gx __cfg_TAB_EXT_SIZE (math "$__cfg_TAB_SIZE*3") # generally lines up, roughly
-    __env_cached_set -gx __cfg_TAB (string repeat -n $__cfg_TAB_SIZE ' ')
-    __env_cached_set -gx __cfg_TAB_EXT (string repeat -n $__cfg_TAB_EXT_SIZE $__cfg_TAB)
+    __env_cached_set -Ux __cfg_TAB_SIZE 2
+    __env_cached_set -Ux __cfg_TAB_EXT_SIZE (math "$__cfg_TAB_SIZE*3") # generally lines up, roughly
+    __env_cached_set -Ux __cfg_TAB (string repeat -n $__cfg_TAB_SIZE ' ')
+    __env_cached_set -Ux __cfg_TAB_EXT (string repeat -n $__cfg_TAB_EXT_SIZE $__cfg_TAB)
 
     __env_cached_set -Ux DOT_DIR $HOME/dotfiles
     __env_cached_set -Ux DOT_CONFIG $DOT_DIR/.config
@@ -136,16 +152,69 @@ function __setup_envs
     __env_cached_set -Ux HERMES_HOME "$HOME/.hermes"
     __env_cached_set -Ux HERMES_TUI_DIR "$HERMES_HOME/hermes-agent/ui-tui"
 
-    set __cached_envs_done 1
+    set -gx __cached_envs_done 1
     return 0
 end
 __setup_envs &
 
-test -n "$GH_TOKEN" -a $__cached_gh_done -eq 0; and set __cached_gh_done 1; or begin
-    99-ensure_gh_token &
-    set __cached_gh_done 1
+# mostly just playing around with how fish does job/job groups stuff tbh
+function __setup_gh_token
+    set -l job (jobs -l -p)
+    or begin
+        return 1
+    end
+    printf "Setting up GitHub token in background job %s\n" $job
+
+    function _fire --on-job-exit $job --inherit-variable job
+        99-ensure_gh_token &
+        functions --erase _fire
+        set -gx __cached_gh_done 1
+    end
     return 0
 end
+__setup_gh_token &
+
+# test -n "$GH_TOKEN" -a $__cached_gh_done -eq 0; and set __cached_gh_done 1; or begin
+#     99-ensure_gh_token &
+#     set -gx __cached_gh_done 1; and return 0; or return 1
+# end
+
+function __setup_fzf_vars
+    test $__cached_fzf_done -eq 1; and return 0
+
+    set -f FZF_DEFAULT_COMMAND ""
+    if 00-valid_pacman bfs
+        set FZF_DEFAULT_COMMAND "bfs -type f,d,l,p -s -print -maxdepth 8 -d -ignore_readdir_race -O4 --"
+    else if 00-valid_pacman fd
+        # __env_cached_set -Ux FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix --"
+        set FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix --"
+    else
+        # __env_cached_set -Ux FZF_DEFAULT_COMMAND "find . -type f -o -type d"
+        set FZF_DEFAULT_COMMAND "find . -type f -o -type d"
+    end
+
+    set -l FZF_DEFAULT_OPTS "--height 80% --style=minimal --ansi --border=sharp --color=16 --cycle"
+    set --append FZF_DEFAULT_OPTS "--bind 'ctrl-e:preview-down,ctrl-y:preview-up,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:offset-down,ctrl-k:offset-up,ctrl-g:jump,jump:accept,jump-cancel:'"
+
+    # We'd _love_ to be able to actually use 'become' here but it outright just doesn't work sadly
+    set -l FZF_YAZI_DIR_NVIM_FILE "test -d {}; and y {} && return $status; or v {} && return $status;"
+
+    set -l FZF_CTRL_T_OPTS "--select-1 --preview 'bat --style=auto --color=always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
+    set FZF_CTRL_T_O FZF_CTRL_T_OPTS "--bind 'enter:execute($FZF_YAZI_DIR_NVIM_FILE)+abort,up:up'"
+
+    __env_cached_set -Ux FZF_DEFAULT_COMMAND $FZF_DEFAULT_COMMAND
+    __env_cached_set -Ux FZF_DEFAULT_OPTS $FZF_DEFAULT_OPTS
+    __env_cached_set -Ux FZF_CTRL_R_OPTS "--with-nth 1,3.. --bind 'ctrl-t:change-with-nth(2..|3..|1,3..)'"
+    __env_cached_set -Ux FZF_CTRL_T_COMMAND $FZF_DEFAULT_COMMAND
+    __env_cached_set -Ux FZF_CTRL_T_OPTS $FZF_CTRL_T_OPTS
+
+    # Non-official env var, used by personal files!
+    __env_cached_set -Ux FZF_RELOAD_COMMAND "reload:rg --column --color=always --smart-case {q} || :"
+
+    set -gx __cached_fzf_done 1
+    return 0
+end
+__setup_fzf_vars &
 
 # Set editor variables.
 # set -gx PAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'

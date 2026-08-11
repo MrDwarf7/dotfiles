@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function fc --description 'Edit the command history list in EDITOR'
+function vh --description "[v]im [h]istory - Edit command history in vim/neovim"
     set -l options l/list r/reverse
     argparse -n fc --max-args=2 -i $options -- $argv
     or return

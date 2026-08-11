@@ -48,6 +48,10 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 ##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
 10-eval_if_pacman mise "mise activate fish"
 
+# PERF: The performance on this is _horrible_ man...
+#
+# 10-eval_if_pacman usage "usage g completion-init fish"
+
 # TODO: put behind a check or smth
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
