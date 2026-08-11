@@ -5,9 +5,9 @@ local bkt = require("shared.rules.buckets")
 local v = bkt:get("gaming")
 
 local rgx = "^([sS]team)$"
+local miniSize = "850 720"
 
 bkt.assign_bucket({ class = rgx, title = rgx }, v.bucket)
-
 --- Main window extras (not covered by bucket): opacity, borderless, no blur.
 -- hl.window_rule({
 --   name = "extra-steam-main",
@@ -49,7 +49,7 @@ local rules = {
     float = true,
     no_blur = true,
     no_initial_focus = true,
-    size = "850 720",
+    size = miniSize,
   },
 
   --- Settings window.
@@ -65,7 +65,7 @@ local rules = {
     float = true,
     no_blur = true,
     opacity = "1.0 override 1.0 override",
-    size = "850 720",
+    size = miniSize,
   },
 
   --- Special offers window.

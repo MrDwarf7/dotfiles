@@ -11,7 +11,6 @@ local rules = {
   {
     name = "tag-openrgb",
     match = { class = rgx },
-    -- title = "^(OpenRGB)$",
     tag = "+openrgb",
   },
   {

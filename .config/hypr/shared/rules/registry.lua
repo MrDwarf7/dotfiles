@@ -79,13 +79,6 @@ local registry = {
     size = "1000 650",
   },
   {
-    name = "registry-cf-qalculate",
-    match = { class = "^(io.github.Qalculate.qalculate-qt)$" },
-    center = true,
-    float = true,
-    size = "600 900",
-  },
-  {
     name = "registry-cf-qt5ct",
     match = { class = "^(qt5ct)$" },
     center = true,

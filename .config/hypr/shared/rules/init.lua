@@ -40,6 +40,7 @@ local setup = function()
     "title_dialogs",      -- loop+helper: file dialog float+center
     "todoist",            -- notes bucket (pending class confirm)
     "vivaldi",            -- browsers bucket + settings/webapp
+    "qalculate",          -- standalone (calculator)
     "wezterm",            -- terminals bucket
     "yt_music",           -- music bucket
     "zed",                -- gui_editors bucket + settings
