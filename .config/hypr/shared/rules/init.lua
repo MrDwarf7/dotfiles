@@ -3,11 +3,13 @@
 --- No registry, no generators, no DSL. Just Lua calling the API.
 ---@module 'types'
 
+local root_shrd = require("utils.root_shared")
+
 ---@class HyprConfig.Shared.Rules
 ---@field setup fun():Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
 local setup = function()
   -- stylua: ignore start
-  return RootShared.load_modules("shared.rules", {
+  return root_shrd.load_modules("shared.rules", {
     "globals",
     "buckets",            -- bucket behavior stanzas + bucket() helper (load BEFORE members)
     "registry",           -- standalone apps: exact HL API, looped (no bucket)

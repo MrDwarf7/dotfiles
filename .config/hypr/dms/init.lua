@@ -5,7 +5,7 @@
 --- so no autostart execs are needed here (shared execs cover the common ones).
 
 ---@class HyprConfig.Dms
-local Dms = {}
+local dms = {}
 
 --- The use of a class table and a setup function
 --- may seem redunant/overhead here, and it _sort of_ is.
@@ -19,7 +19,7 @@ local Dms = {}
 ---
 ---@param cmd string The DMS IPC command to invoke.
 ---@return HL.Dispatcher
-function Dms.invoke(cmd)
+function dms.invoke(cmd)
   local full_cmd = string.format("dms %s", cmd)
   return hl.dsp.exec_cmd(full_cmd)
 end
@@ -28,8 +28,8 @@ end
 ---
 ---@param cmd string The DMS IPC command to invoke.
 ---@return HL.Dispatcher
-function Dms.invoke_ipc(cmd)
-  return Dms.invoke(string.format("ipc %s", cmd))
+function dms.invoke_ipc(cmd)
+  return dms.invoke(string.format("ipc %s", cmd))
 end
 
 --- Returns a functon that represents a DMS IPC call command invocation.
@@ -37,17 +37,17 @@ end
 ---@param cmd any The DMS IPC call command to invoke.
 ---@param now? boolean If true, the command is executed immediately; otherwise, it returns a dispatcher for later execution.
 ---@return HL.Dispatcher|any
-function Dms.invoke_ipc_call(cmd, now)
+function dms.invoke_ipc_call(cmd, now)
   if now and type(now) ~= nil then
-    return Dms.invoke(string.format("ipc call %s", cmd))()
+    return dms.invoke(string.format("ipc call %s", cmd))()
   end
-  return Dms.invoke(string.format("ipc call %s", cmd))
+  return dms.invoke(string.format("ipc call %s", cmd))
 end
 
 --- Initializes DMS-specific configuration: keymaps, layer rules, window rules, colors, etc.
 ---
 ---@return HyprConfig.Dms
-function Dms:setup()
+function dms:setup()
   -- Load DMS-specific modules (each self-contained, calls hl.* directly)
   require("dms.colors")
   -- require("dms.cursor")
@@ -74,4 +74,4 @@ function Dms:setup()
 end
 
 ---@return HyprConfig.Dms
-return Dms
+return dms

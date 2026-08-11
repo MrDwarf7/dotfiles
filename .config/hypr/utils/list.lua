@@ -1,9 +1,9 @@
-local List = {}
+local list = {}
 
 --- Checks if a list (array-like table) contains a specific value.
 ---@param needle any The value to search for.
 ---@param haystack table The list (array-like table) to search in.
-List.contains = function(needle, haystack)
+list.contains = function(needle, haystack)
   for i, v in ipairs(haystack) do
     if type(v) == "nil" then
       goto continue
@@ -24,7 +24,7 @@ end
 --- @param tbl T[]
 --- @param key? string|fun(x: T): any Optional field name or hash function to determine uniqueness of values
 --- @return T[] : The deduplicated list
-List.unique = function(tbl, key)
+list.unique = function(tbl, key)
   --
   local misc = require("utils.misc")
   local key_fn = misc.make_key_fn(key)
@@ -56,7 +56,7 @@ end
 ---@param val T The value to search.
 ---@param opts table? Optional settings for the search (e.g., case sensitivity, deep search).
 ---@return integer index serves as either the lower bound or the upper bound position.
-List.bisect = function(tbl, val, opts)
+list.bisect = function(tbl, val, opts)
   opts = opts or {}
   local misc = require("utils.misc")
 
@@ -74,4 +74,4 @@ List.bisect = function(tbl, val, opts)
   return f(tbl, val, lo, hi, key_fn)
 end
 
-return List
+return list

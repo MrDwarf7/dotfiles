@@ -36,41 +36,6 @@ Utils.reflection = function(mut_tbl)
   return mut_tbl
 end
 
---- Modifies the provided table (or module/class) by
---- setting up the .__fields attr/func and
---- then calling it for each field that has a .setup function
----@param mut_tbl table The table to set up with reflection and call setup on its fields.
-Utils.reflection_setup = function(mut_tbl)
-  -- Handle the case where there's no T.__fields attr - by calling the reflection function to build it.
-  if getmetatable(mut_tbl) == nil or getmetatable(mut_tbl).__fields == nil then
-    mut_tbl = Utils.reflection(mut_tbl)
-  end
-
-  local fields = getmetatable(mut_tbl).__fields()
-  if not fields or type(fields) ~= "table" then
-    print("Error: __fields is not a table for the given input.")
-    return
-  end
-
-  for name, module in pairs(fields) do
-    if type(module) == "table" and type(module.setup) == "function" then
-      local ok, err = pcall(module.setup)
-      if not ok then
-        print("Error setting up module '" .. name .. "':", err)
-      end
-    end
-  end
-end
-
-Utils.as_required = function(base, from, module)
-  local pre = base .. "." .. from .. "." .. module
-  local ok, res = pcall(require, pre)
-  if not ok then
-    print("Error loading module: " .. pre .. "\n" .. res)
-  end
-  return res
-end
-
 --- Launches a program via uwsm with optional service targeting.
 ---@param program string The program command to launch.
 ---@param as_service? boolean If true, wraps in `uwsm app -t service -- <program>`.
@@ -86,14 +51,6 @@ Utils.uwsm_launcher = function(program, as_service)
   base_cmd = base_cmd .. " -- " .. program
   hl.exec_cmd(base_cmd)
 end
-
--- --- Removed / manually deleted and garbage collected tables
--- --- will still be present in the __fields table of the parent module/class,
--- --- which can lead to stale references and potential memory leaks if not handled properly.
--- ---@param ... table The tables to remove from the __fields of their parent modules/classes.
--- Utils.remove = function(...)
---   local tables_to_remove = { ... }
--- end
 
 ---@param tbl table The table to convert to a string representation.
 ---@param indent? number The current indentation level (used for nested tables).
@@ -113,9 +70,5 @@ Utils.table_to_string = function(tbl, indent)
   result = result .. string.rep("  ", indent) .. "}"
   return result
 end
-
-Utils.tbl = require("utils.tbl")
-Utils.list = require("utils.list")
-Utils.misc = require("utils.misc")
 
 return Utils

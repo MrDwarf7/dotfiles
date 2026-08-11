@@ -13,7 +13,7 @@ TYPES = require("types")
 
 hl = TYPES.hl
 
-require("shared.env") -- literally the first thing we do.
+local envs = require("shared.env") -- first: seed holes, keep the returned table alive
 
 -- TODO: Needs to be setup properly AND decide where it gets loaded lol...
 -- local machines = require("utils.machines")
@@ -27,53 +27,11 @@ local logger = require("utils.logger").new({
 
 logger:log("Hyprland configuration started")
 
-local WallpaperBackend = require("utils.wallpaper_backend")
-local ShellBackend = require("utils.hyprland_shell")
+local shell_bkend = require("utils.shell")
 
-hl.env("WALLPAPER_BACKEND", WallpaperBackend.detect().name)
--- IGNORE: This is instead; exported by UWSM in ~/.config/uwsm/env
-hl.env("HYPRLAND_SHELL", ShellBackend.detect())
-
--- ---@deprecated Not really used, kinda just here for lolz rn?
----@class HyprConfig.RootShared
-RootShared = {
-  envs = {
-    wallpaper_backend = WallpaperBackend.detect().name,
-    hyprland_shell = ShellBackend.detect(),
-  },
-
-  --- Loads child modules from a given base path and a list of module names.
-  ---@param here string The base path to the modules (e.g., "shared.keymaps.")
-  ---@param modules_tbl table<string> A table of module names (e.g., {"mods", "map_general"})
-  ---@return boolean
-  load_modules = function(here, modules_tbl)
-    if not here or not modules_tbl then
-      logger:log("ERROR: load_modules called with nil here or modules_tbl")
-      return false
-    end
-
-    if type(here) ~= "string" then
-      logger:log("ERROR: load_modules called with non-string here: " .. tostring(here))
-      return false
-    end
-
-    if type(modules_tbl) ~= "table" then
-      logger:log("ERROR: load_modules called with non-table modules_tbl: " .. tostring(modules_tbl))
-      return false
-    end
-
-    -- if there's no trailing dot, add one
-    if here:sub(-1) ~= "." then
-      here = here .. "."
-    end
-
-    for _, mod in ipairs(modules_tbl) do
-      require(here .. mod)
-    end
-    -- package.loaded[here] = nil -- allow reloading of the module if needed
-    return true
-  end,
-}
+---@type HyprConfig.RootShared
+---@diagnostic disable-next-line: unused-local
+local root_shrd = require("utils.root_shared")
 
 local shared = require("shared")
 if type(shared) == "table" and type(shared.setup) == "function" then
@@ -84,7 +42,7 @@ elseif type(shared) == "table" then
   logger:log("Assumed setup function called WITHIN 'shared.init' module!")
 end
 
-local shell_name = ShellBackend.get()
+local shell_name = shell_bkend.get(envs.HYPRLAND_SHELL)
 local ok, shell = pcall(require, shell_name)
 if not ok then
   print("[hyprland] ERROR: Failed to load shell module '" .. shell_name .. "': " .. tostring(shell))

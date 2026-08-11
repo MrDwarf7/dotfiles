@@ -31,7 +31,7 @@ hl.bind(mods.with(mods.main_mod_shift, "y"), dms.invoke_ipc("wallpaperCarousel t
 hl.bind(mods.with(mods.main_mod_shift, "w"), dms.invoke_ipc_call("wallpaper nextFor " .. mon))
 hl.bind(mods.with(mods.main_mod_ctrl, "w"), dms.invoke_ipc_call("wallpaper prevFor " .. mon))
 
-hl.bind(mods.with(mods.main_mod, "z"), dms.invoke_ipc_call("usbManager toggle"))
+hl.bind(mods.with(mods.main_mod_shift, "z"), dms.invoke_ipc_call("usbManager toggle"))
 
 hl.bind(mods.with(mods.main_mod, "m"), dms.invoke_ipc_call("powermenu toggle"))
 hl.bind(mods.with(mods.main_mod_ctrl, "n"), dms.invoke_ipc_call("notepad toggle"))

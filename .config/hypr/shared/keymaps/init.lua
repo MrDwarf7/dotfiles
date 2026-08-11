@@ -11,9 +11,11 @@
 -- require("shared.keymaps.map_programs")
 -- require("shared.keymaps.map_windows_workspaces")
 
+local root_shrd = require("utils.root_shared")
+
 ---@class HyprConfig.Keymaps
 local setup = function()
-  return RootShared.load_modules("shared.keymaps.", {
+  return root_shrd.load_modules("shared.keymaps.", {
     "mods",
 
     "map_general",

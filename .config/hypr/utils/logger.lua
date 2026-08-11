@@ -5,7 +5,7 @@
 ---@field new fun(opts?: HyprConfig.Logger): HyprConfig.Logger Constructor for the Logger class. Takes an optional table of settings to configure the logger (log_file and prefix).
 ---@field log fun(self: HyprConfig.Logger, message: string): void Logs a message to the configured log file with a timestamp and prefix. If the log file cannot be opened, prints an error to the console.
 ---@field override_global_print fun(self: HyprConfig.Logger): void Overrides the global print function
-local Logger = {
+local logger = {
   --- os.getenv("HOME") .. "/MY_hyprland_debug.log",
   log_file = nil,
   enabled = true,
@@ -31,11 +31,13 @@ end
 --- `opts` are checked individually and defaults are set for missing sections/values.
 ---
 ---@param opts? HyprConfig.Logger
-function Logger.new(opts)
+function logger.new(opts)
   opts = opts or {}
 
   if opts.enabled == false then
-    return blank()
+    local b = blank()
+    ---@cast b HyprConfig.Logger
+    return b
   end
 
   local obj = {}
@@ -43,7 +45,7 @@ function Logger.new(opts)
   obj = blank() -- start with a blank logger, then override the noop methods with real ones as needed
   obj.enabled = opts.enabled ~= false -- default to true if not explicitly set to false
   obj = setmetatable(obj, {
-    __index = Logger,
+    __index = logger,
     __tostring = function()
       return string.format("Logger(log_file=%s, prefix=%s)", obj.log_file or "nil", obj.prefix or "nil")
     end,
@@ -86,33 +88,34 @@ function Logger.new(opts)
     obj.prefix = "[hyprland_lua] "
   end
 
+  ---@cast obj HyprConfig.Logger
   return obj
 end
 
 --- Loads the 'inspect' module from utils.inspect and stores it in Logger._inspect for later use.
 --- If loading fails, logs an error and sets _inspect to nil.
 ---@return bool A boolean indicating whether the inspect module was successfully loaded.
-function Logger:load_inspect()
+function logger:load_inspect()
   local err, inspect = pcall(require, "utils.inspect")
   if err then
     self:log("Logger:inspect() failed to load inspect module: " .. tostring(inspect))
     return false
   end
 
-  Logger._inspect = inspect
+  logger._inspect = inspect
 
   return true
 end
 
-function Logger:inspect(value)
-  if not Logger._inspect or self._inspect == nil then
+function logger:inspect(value)
+  if not logger._inspect or self._inspect == nil then
     local loaded = self:load_inspect()
     if not loaded then
       return tostring(value)
     end
   end
 
-  return Logger._inspect(value)
+  return logger._inspect(value)
 end
 
 -- TODO: Need to probably move the `log` function itself to a sub-table
@@ -122,8 +125,8 @@ end
 -- _if_ we can load the utils.inspect module, then we can use that to log tables in a more readable way.
 --
 
-function Logger:log(message)
-  if (not self.enabled or self.enabled == false) or Logger.enabled == false then
+function logger:log(message)
+  if (not self.enabled or self.enabled == false) or logger.enabled == false then
     return
   end
 
@@ -156,7 +159,7 @@ function Logger:log(message)
   end
 end
 
-function Logger:override_global_print()
+function logger:override_global_print()
   print = function(...)
     local args = { ... }
     local message_parts = {}
@@ -179,4 +182,10 @@ function Logger:override_global_print()
   end
 end
 
-return Logger
+if not _G.logger then
+  _G.logger = logger:new()
+end
+
+---@type HyprConfig.Logger
+---@return HyprConfig.Logger
+return logger

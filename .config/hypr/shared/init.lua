@@ -13,11 +13,13 @@
 
 ---@alias Associated AssociatedFunction|AssociatedMethod
 
+local root_shrd = require("utils.root_shared")
+
 ---@class HyprConfig.Shared
 ---@field setup fun():Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
-local Shared = {
+local shared = {
   setup = function()
-    return RootShared.load_modules("shared", {
+    return root_shrd.load_modules("shared", {
       "env",
       "monitor",
       "programs",
@@ -53,7 +55,7 @@ local Shared = {
 --- shared:setup()
 --- function identically.
 --- ```
-setmetatable(Shared, {
+setmetatable(shared, {
   __call = function(self, ...)
     -- This gross thing just avoids an elseif set of chains via `or`
     if
@@ -68,5 +70,6 @@ setmetatable(Shared, {
   end,
 })
 
+---@type HyprConfig.Shared
 ---@return HyprConfig.Shared
-return Shared
+return shared

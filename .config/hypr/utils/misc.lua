@@ -1,9 +1,9 @@
-local Misc = {}
+local misc = {}
 
 ---@generic T
 ---@param key? string|fun(val: T): any
 ---@return fun(v: T): any
-Misc.make_key_fn = function(key)
+misc.make_key_fn = function(key)
   if not key then
     return function(v)
       return v
@@ -34,7 +34,7 @@ end
 ---@return integer i in range such that `t[j]` < {val} for all j < i,
 ---                and `t[j]` >= {val} for all j >= i,
 ---                or return {hi} if no such index is found.
-Misc.lower_bound = function(t, val, lo, hi, key_fn)
+misc.lower_bound = function(t, val, lo, hi, key_fn)
   local bit = require("bit") -- Load bitop on demand
   local val_key = key_fn(val)
   while lo < hi do
@@ -59,7 +59,7 @@ end
 ---@return integer i in range such that `t[j]` <= {val} for all j < i,
 ---                and `t[j]` > {val} for all j >= i,
 ---                or return {hi} if no such index is found.
-Misc.upper_bound = function(t, val, lo, hi, key_fn)
+misc.upper_bound = function(t, val, lo, hi, key_fn)
   local bit = require("bit") -- Load bitop on demand
   local val_key = key_fn(val)
   while lo < hi do
@@ -73,4 +73,4 @@ Misc.upper_bound = function(t, val, lo, hi, key_fn)
   return lo
 end
 
-return Misc
+return misc

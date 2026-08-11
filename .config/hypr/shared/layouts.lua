@@ -3,6 +3,7 @@
 --################
 
 hl.config({
+  ---@type HL.ConfigOpt.Layout
   layout = {
     -- Whenever only a single window is shown on a screen,
     -- add padding so that it conforms to the specified aspect ratio.
@@ -19,6 +20,7 @@ hl.config({
     single_window_aspect_ratio_tolerance = 0.2,
   },
   -- See https://wiki.hyprland.org/Configuring/Dwindle-Layout/ for more
+  ---@type HL.ConfigOpt.Dwindle
   dwindle = {
     force_split = 2, -- default - 0 |  0 -> split follows mouse, 1 -> always split to the left (new = left or top) 2 -> always split to the right (new = right or bottom)
     preserve_split = true, -- You probably want this
@@ -29,6 +31,7 @@ hl.config({
     split_bias = 0,
   },
   -- See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
+  ---@type HL.ConfigOpt.Master
   master = {
     orientation = "center",
     slave_count_for_center_master = false,
@@ -39,6 +42,7 @@ hl.config({
     -- allow_small_split = true
     -- new_status = slave
   },
+  ---@type HL.ConfigOpt.Scrolling
   scrolling = {
     -- Default: true
     fullscreen_on_one_column = require("utils.machines").scrolling().fullscreen_on_one_column or false,

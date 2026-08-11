@@ -65,112 +65,112 @@ local registry = {
   --- Inlined float_center items (float + center + size). Duplicated on purpose.
   ------------------------------------------------------------
   {
-    name = "registry-fc-blueman-manager",
+    name = "registry-cf-blueman-manager",
     match = { class = "^(blueman-manager)$" },
     center = true,
     float = true,
     size = "1000 650",
   },
   {
-    name = "registry-fc-pavucontrol",
+    name = "registry-cf-pavucontrol",
     match = { class = "^(org.pulseaudio.pavucontrol)$" },
     center = true,
     float = true,
     size = "1000 650",
   },
   {
-    name = "registry-fc-qalculate",
+    name = "registry-cf-qalculate",
     match = { class = "^(io.github.Qalculate.qalculate-qt)$" },
     center = true,
     float = true,
     size = "600 900",
   },
   {
-    name = "registry-fc-qt5ct",
+    name = "registry-cf-qt5ct",
     match = { class = "^(qt5ct)$" },
     center = true,
     float = true,
     size = "960 540",
   },
   {
-    name = "registry-fc-appimagelauncher",
+    name = "registry-cf-appimagelauncher",
     match = { class = "^(AppImageLauncherSettings)$" },
     center = true,
     float = true,
     size = "1450 1000",
   },
   {
-    name = "registry-fc-swappy",
+    name = "registry-cf-swappy",
     match = { class = "^(swappy)$" },
     center = true,
     float = true,
     size = "2560 1200",
   },
   {
-    name = "registry-fc-keymapp",
+    name = "registry-cf-keymapp",
     match = { class = "^(keymapp)$" },
     center = true,
     float = true,
     size = "1450 1000",
   },
   {
-    name = "registry-fc-webapp-manager",
+    name = "registry-cf-webapp-manager",
     match = { class = "^(webapp-manager.py)$" },
     center = true,
     float = true,
     size = "1000 650",
   },
   {
-    name = "registry-fc-webapp",
+    name = "registry-cf-webapp",
     match = { class = "^(WebApp-.*)$" },
     center = true,
     float = true,
     size = "1450 1000",
   },
   {
-    name = "registry-fc-zmk-studio",
+    name = "registry-cf-zmk-studio",
     match = { class = "^(zmk-studio)$" },
     center = true,
     float = true,
     size = "1450 1000",
   },
   {
-    name = "registry-fc-feh",
+    name = "registry-cf-feh",
     match = { class = "^([fF]eh)$" },
     center = true,
     float = true,
     size = "1680 1080",
   },
   {
-    name = "registry-fc-freedownloadmanager",
+    name = "registry-cf-freedownloadmanager",
     match = { class = "^(org.kde.freedownloadmanager)$" },
     center = true,
     float = true,
     size = "1280 720",
   },
   {
-    name = "registry-fc-viewnior",
+    name = "registry-cf-viewnior",
     match = { class = "^(viewnior)$" },
     center = true,
     float = true,
     size = "(monitor_w*0.40) (monitor_h*0.60)",
   },
   {
-    name = "registry-fc-dms",
+    name = "registry-cf-dms",
     match = { class = "^(com.danklinux.dms)$" },
     center = true,
     float = true,
-    size = "(monitor_w*0.20) (monitor_h*0.70)",
+    size = "(monitor_w*0.20) (monitor_h*0.80)",
   },
   {
-    name = "registry-fc-keepassxc",
+    name = "registry-cf-keepassxc",
     match = { class = "^(org.keepassxc.[kK]ee[pP]ass[xX][cC])$" },
     center = true,
     float = true,
     size = "(monitor_w*0.30) (monitor_h*0.60)",
   },
   {
-    name = "registry-fc-xdg-portal-gtk",
+    name = "registry-cf-xdg-portal-gtk",
     match = { class = "^(xdg-desktop-portal-gtk)$" },
     center = true,
     float = true,
@@ -180,14 +180,14 @@ local registry = {
   -- TODO: Move to own file (more than 1 rule)
   --- Solaar (mouse/keyboard manager).
   {
-    name = "registry-fc-solaar",
+    name = "registry-cf-solaar",
     match = { class = "^(solaar)$", title = "^([sS]olaar)$" },
     center = true,
     float = true,
     size = "1000 650",
   },
   {
-    name = "registry-fc-solaar-rule-editor",
+    name = "registry-cf-solaar-rule-editor",
     match = { class = "^(solaar)$", title = "^([sS]olaar [rR]ule [eE]ditor)$" },
     center = true,
     float = true,
@@ -196,7 +196,7 @@ local registry = {
 
   -- Polychromatic (RGB controller).
   {
-    name = "registry-fc-polychromatic",
+    name = "registry-cf-polychromatic",
     match = { class = "^(polychromatic)$" },
     center = true,
     float = true,
@@ -204,7 +204,7 @@ local registry = {
   },
 
   {
-    name = "registry-fc-waypaper",
+    name = "registry-cf-waypaper",
     match = { class = "^(waypaper)$" },
     center = true,
     float = true,
@@ -214,7 +214,7 @@ local registry = {
 
   -- Blueberry (bluetooth manager).
   {
-    name = "registry-fc-blueberry",
+    name = "registry-cf-blueberry",
     match = { class = "^(blueberry.py)$" },
     center = true,
     float = true,

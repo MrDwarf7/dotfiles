@@ -3,10 +3,10 @@
 --- Handles vanilla-specific setup: waybar, swww, swaync, etc.
 
 ---@class HyprConfig.Vanilla
-local Vanilla = {}
+local vanilla = {}
 
 ---@return HyprConfig.Vanilla
-function Vanilla:setup()
+function vanilla:setup()
   -- Load vanilla-specific autostart execs
 
   require("vanilla.execs")
@@ -15,4 +15,4 @@ function Vanilla:setup()
   return self
 end
 
-return Vanilla
+return vanilla

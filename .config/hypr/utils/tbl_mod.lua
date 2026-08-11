@@ -1,11 +1,11 @@
-local Tbl = {}
+local tbl_mod = {}
 
 --- Returns a list of all keys in the provided table.
 ---
 ---@generic T
 ---@param tbl table<T, any> (table) Table
 ---@return T[] : List of keys
-Tbl.keys = function(tbl)
+tbl_mod.keys = function(tbl)
   local keys = {}
   for k in pairs(tbl) do
     table.insert(keys, k)
@@ -18,7 +18,7 @@ end
 ---@generic T
 ---@param tbl table<any, T> (table) Table
 ---@return T[] : List of keys
-Tbl.values = function(tbl)
+tbl_mod.values = function(tbl)
   local keys = {}
   for k in pairs(tbl) do
     table.insert(keys, k)
@@ -34,7 +34,7 @@ end
 ---@param fn fun(value: T): any Function
 ---@param tbl table<any, T> Table
 ---@return table : Table of transformed values
-Tbl.map = function(fn, tbl)
+tbl_mod.map = function(fn, tbl)
   local ret = {} ---@type table<any, any>
   for k, v in pairs(tbl) do
     ret[k] = fn(v)
@@ -46,7 +46,7 @@ end
 ---@param fn fun(value: T): boolean (function) Function
 ---@param tbl table<any, T> (table) Table
 ---@return T[] : Table of filtered values
-Tbl.filter = function(fn, tbl)
+tbl_mod.filter = function(fn, tbl)
   local ret = {} ---@type table<any, any>
   for _, entry in pairs(tbl) do
     if fn(entry) then
@@ -61,7 +61,7 @@ end
 ---@param value any The value to search for.
 ---@param opts? { predicate: function } Optional settings for the search (e.g., case sensitivity, deep search).
 ---@return boolean Returns true if the value is found, false otherwise.
-Tbl.contains = function(tbl, value, opts)
+tbl_mod.contains = function(tbl, value, opts)
   local pred --- @type fun(v: any): boolean?
   if opts and opts.predicate and type(opts.predicate) == "function" then
     pred = value
@@ -81,11 +81,11 @@ end
 --- Checks if a table is empty (has no key-value pairs).
 ---@param tbl table The table to check.
 ---@return boolean Returns true if the table is empty, false otherwise.
-Tbl.is_empty = function(tbl)
+tbl_mod.is_empty = function(tbl)
   return next(tbl) == nil
 end
 
-Tbl.concat = function(a, b)
+tbl_mod.concat = function(a, b)
   local ret = {}
   for k, v in pairs(a) do
     ret[k] = v
@@ -96,10 +96,10 @@ Tbl.concat = function(a, b)
   return ret
 end
 
-setmetatable(Tbl, {
+setmetatable(tbl_mod, {
   __concat = function(a, b)
-    return Tbl.concat(a, b)
+    return tbl_mod.concat(a, b)
   end,
 })
 
-return Tbl
+return tbl_mod

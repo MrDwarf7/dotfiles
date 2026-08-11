@@ -66,14 +66,14 @@ end
 
 --- Best effort attempt to detect a configured wallpaper backend, with the following precedence:
 --- 1. Optional override value (e.g. from env var or command line arg)
---- 2. `WALLPAPER_BACKEND` env var
+--- 2. `WALLPAPER_BACKEND` via `shared.env` (UWSM / hole-fill)
 --- 3. Fallback detection logic (e.g. check for running processes)
 --- 4. Default fallback (e.g. "swww")
 ---
 ---@param override? string Optional override value (e.g. from env var or command line arg)
 ---@return DetectedWallpaperBackend|bool Mapping K: HyprConfig.WallpaperBackendE[K] :: V: HyprConfig.WallpaperBackendE[v]
 WallpaperBackend.detect = function(override)
-  local env_backend = os.getenv("WALLPAPER_BACKEND")
+  local env_backend = require("shared.env").WALLPAPER_BACKEND
   local override_str = ftc_string(override)
   if override_str then
     local detected = backends[override_str:upper()]

@@ -28,29 +28,28 @@ setmetatable(ShellBackend, {
   end,
 })
 
---- Best effort shell detection based on HYPRLAND_SHELL env var.
+--- Best effort shell detection from `shared.env` (UWSM / hole-fill / override).
 ---
 ---@param override? string Optional override value (e.g. from env var or command line arg)
 ---@return HyprConfig.ShellBackendT Detected shell backend (e.g. "vanilla", "dms", "noctalia")
 ShellBackend.detect = function(override)
-  local shell_env = os.getenv("HYPRLAND_SHELL")
-  if override and type(override) == "string" and override ~= "" then
-    local detected = shells[override:upper()] or override
-    print("[hyprland] Detected shell from override: " .. detected)
+  local candidate = override
+  if type(candidate) ~= "string" or candidate == "" then
+    candidate = require("shared.env").HYPRLAND_SHELL
+  end
+
+  if type(candidate) == "string" and candidate ~= "" then
+    local detected = shells[candidate:upper()] or candidate
+    print("[hyprland] Detected shell: " .. detected)
     return detected
   end
 
-  if shell_env and type(shell_env) == "string" and shell_env ~= "" then
-    local detected = shells[shell_env:upper()] or shell_env
-    print("[hyprland] Detected shell from HYPRLAND_SHELL env: " .. detected)
-    return detected
-  end
-  print("[hyprland] No HYPRLAND_SHELL env var set, defaulting to vanilla")
+  print("[hyprland] No HYPRLAND_SHELL set, defaulting to vanilla")
   return shells.VANILLA
 end
 
 --- Get the shell backend to use, optionally with an override value (e.g. from env var or command line arg).
----@param override? string Optional override value (e.g. from env var or command line arg)
+---@param override? string|EnvVarValue Optional override value (e.g. from env var or command line arg)
 ---@return HyprConfig.ShellBackendT Detected shell backend (e.g. "vanilla", "dms", "noctalia")
 ShellBackend.get = function(override)
   local v = ShellBackend.detect(override)

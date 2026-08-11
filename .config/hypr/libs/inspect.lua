@@ -1,5 +1,11 @@
 -- stylua: ignore start
-local _tl_compat; if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end; local math = _tl_compat and _tl_compat.math or math; local pcall = _tl_compat and _tl_compat.pcall or pcall; local string = _tl_compat and _tl_compat.string or string; local table = _tl_compat and _tl_compat.table or table; local type = type
+local _tl_compat
+if (tonumber((_VERSION or ''):match('[%d.]*$')) or 0) < 5.3 then local p, m = pcall(require, 'compat53.module'); if p then _tl_compat = m end end
+local math = _tl_compat and _tl_compat.math or math
+local pcall = _tl_compat and _tl_compat.pcall or pcall
+local string = _tl_compat and _tl_compat.string or string
+local table = _tl_compat and _tl_compat.table or table
+local type = type
 local inspect = { Options = {} }
 
 
@@ -242,6 +248,7 @@ end
 
 
 local Inspector = {}
+
 
 
 

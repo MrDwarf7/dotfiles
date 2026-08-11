@@ -3,7 +3,9 @@
 -- ( also means we can move the types to eg: HyprConfig.Utils.Machines => HyprConfig.Machines.<stuff> )
 
 ---@class HyprConfig.Utils.Machines
-local Machines = {}
+local machines = {}
+
+local root_shrd = require("utils.root_shared")
 
 ---@alias HostKeys string
 ---@alias HostNames string
@@ -25,7 +27,7 @@ local known = {
     "daggertooth.morray",
   },
 }
-Machines.known = known
+machines.known = known
 
 -- Flat alias resolver
 -- Canonical key (from `known`) → itself
@@ -83,7 +85,7 @@ local _config = setmetatable({}, {
     return iter, t, nil
   end,
 })
-Machines.configs = _config
+machines.configs = _config
 
 -- Populate from known
 -- Machine strings appear ONLY in the comparison branches below.
@@ -182,9 +184,11 @@ do
     { workspace = "8", monitor = "eDP-1" },
     { workspace = "9", monitor = "eDP-1" },
   }
+  ---@type HL.ConfigOpt.Layout
   c.layout = {
     single_window_aspect_ratio = { 16, 10 },
   }
+  ---@type HL.ConfigOpt.Scrolling
   c.scrolling = {
     fullscreen_on_one_column = true,
   }
@@ -295,7 +299,7 @@ local lookup = function(key)
   end
 
   local cfg = _config[cn]
-  Machines.current = cn
+  machines.current = cn
   if type(cfg[key]) == "function" then
     return cfg[key]()
   end
@@ -308,7 +312,7 @@ end
 --- or for a specific output if provided.
 ---@param output_name? string If provided, only the spec for that output.
 ---@return HL.MonitorSpec[] | HL.MonitorSpec
-function Machines.monitors(output_name)
+function machines.monitors(output_name)
   -- -- i've no idea why... but urr, this 'nil's and the below code
   -- ( which is identical) doesn't....
   --
@@ -322,7 +326,7 @@ function Machines.monitors(output_name)
   if not cfg then
     return {}
   end
-  Machines.current = cn
+  machines.current = cn
 
   ---@type HL.MonitorSpec|nil
   local monitor
@@ -350,7 +354,7 @@ function Machines.monitors(output_name)
 end
 
 ---@return HL.WorkspaceRuleSpec[]
-function Machines.workspace_rules()
+function machines.workspace_rules()
   return lookup("workspace_rules")
   -- local cn = current_canon()
   -- if not cn then
@@ -362,7 +366,7 @@ function Machines.workspace_rules()
 end
 
 ---@return HL.ConfigOpt.Layout
-function Machines.layout()
+function machines.layout()
   return lookup("layout")
   -- local cn = current_canon()
   -- if not cn then
@@ -373,14 +377,14 @@ function Machines.layout()
   -- return cfg and cfg.layout or {}
 end
 
-function Machines.scrolling()
+function machines.scrolling()
   return lookup("scrolling")
 end
 
 --- Resolve any key (alias or canonical) to its config table.
 ---@param key string
 ---@return table|nil
-function Machines.get(key)
+function machines.get(key)
   return lookup(key)
   -- if not Machines.current then
   --   local cn = current_canon()
@@ -393,24 +397,24 @@ end
 
 -- TODO: We will have to have a tag for these in the table itself, not manually checking against a str
 
-function Machines.is_laptop()
+function machines.is_laptop()
   local cn = current_canon("manbook")
   return cn == "manbook"
 end
 
-function Machines.is_desktop()
+function machines.is_desktop()
   local cn = current_canon("fortress")
   return cn == "fortress"
 end
 
 -- Backward compat: Machines("fortress") returns config
 
-setmetatable(Machines, {
+setmetatable(machines, {
   __call = function(_, key)
     local cfg = _config[key]
     if cfg then
-      Machines.current = key
-      RootShared.machine = key
+      machines.current = key
+      root_shrd.machine = key
       return cfg
     end
     print("Warning: No configuration found for machine '" .. tostring(key) .. "'. Returning empty config.")
@@ -418,4 +422,4 @@ setmetatable(Machines, {
   end,
 })
 
-return Machines
+return machines
