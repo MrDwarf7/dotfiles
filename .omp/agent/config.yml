@@ -1,67 +1,69 @@
-modelRoles: 
+modelRoles:
   default: opencode-zen/muse-spark-1.2-contributor-free:high
+  advisor: opencode-zen/nemotron-3.5-lightning-free
+  smol: opencode-zen/laguna-s-2.1-free
 symbolPreset: nerd
-theme: 
+theme:
   dark: titanium
 setupVersion: 2
-statusLine: 
+statusLine:
   preset: default
   separator: powerline-thin
   sessionAccent: true
   transparent: false
-terminal: 
+terminal:
   showProgress: true
-tui: 
+tui:
   textSizing: false
   codexResetFireworks: true
   tight: true
-display: 
+display:
   shimmer: kitt
   showTokenUsage: false
   cacheMissMarker: false
 personality: pragmatic
-advisor: 
+advisor:
   enabled: true
 steeringMode: one-at-a-time
 followUpMode: one-at-a-time
 interruptMode: immediate
-loop: 
+loop:
   mode: prompt
 doubleEscapeAction: tree
 treeFilterMode: default
 autocompleteMaxVisible: 15
-stt: 
+stt:
   modelName: parakeet
-startup: 
+startup:
   quiet: true
-features: 
-  unexpectedStopDetection: true
-memory: 
+features:
+  unexpectedStopDetection: smart
+memory:
   backend: mnemopi
-edit: 
+edit:
   mode: hashline
 readLineNumbers: true
-bash: 
+bash:
   enabled: true
-bashInterceptor: 
+bashInterceptor:
   enabled: false
-eval: 
+eval:
   py: true
-astGrep: 
+astGrep:
   enabled: true
-computer: 
+computer:
   enabled: false
-vault: 
+vault:
   enabled: false
-github: 
+github:
   enabled: true
-todo: 
+todo:
   eager: default
-task: 
+task:
   eager: preferred
   enableLsp: true
 emojiAutocomplete: false
-skills: 
+skills:
   enableAgentsUser: false
   enableClaudeUser: false
   enableCodexUser: false
@@ -69,5 +71,6 @@ skills:
   enableAgentsProject: true
   enableClaudeProject: true
   enablePiProject: true
-composer: 
+composer:
   shape: box
+defaultThinkingLevel: auto

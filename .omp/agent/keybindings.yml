@@ -24,7 +24,6 @@
 # Ctrl+R left as history search. There is no redo to bind it to.
 # Ctrl+H needs Kitty keyboard protocol (Ghostty has it). Without that
 # the terminal sends Backspace and word-left will not fire.
-
 # --- prompt editor ---
 tui.editor.cursorUp:
   - Up
@@ -78,7 +77,6 @@ tui.editor.undo:
   - Ctrl+U
   - Ctrl+-
   - Ctrl+_
-
 # --- input ---
 tui.input.newLine:
   - Shift+Enter
@@ -86,7 +84,6 @@ tui.input.newLine:
 tui.input.submit: Enter
 tui.input.tab: Tab
 tui.input.copy: Ctrl+C
-
 # --- select lists ---
 tui.select.up:
   - Up
@@ -100,7 +97,6 @@ tui.select.confirm: Enter
 tui.select.cancel:
   - Escape
   - Ctrl+C
-
 # --- app ---
 app.interrupt: Escape
 app.clear: Ctrl+C
@@ -134,14 +130,12 @@ app.session.observe: Ctrl+S
 app.plan.toggle: Alt+Shift+P
 app.history.search: Ctrl+R
 app.live.toggle: []
-
 # unbound by default — assign chords or leave []
 app.session.new: []
 app.session.tree: []
 app.session.fork: []
 app.session.resume: []
 app.stt.toggle: []
-
 # --- session picker / tree overlay ---
 app.session.togglePath: []
 app.session.toggleSort: Ctrl+S
