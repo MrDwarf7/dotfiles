@@ -9,7 +9,7 @@ return {
     {
       output = "eDP-1",
       mode = "2560x1600",
-      scale = "1.5",
+      scale = "1.60",
       position = "0x0",
       transform = false,
     },
