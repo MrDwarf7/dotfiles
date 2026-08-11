@@ -54,7 +54,8 @@ edit = [
 open = [
   # { run = 'xdg-open "$1"', desc = "Open", for = "linux" },
   # { run = 'xdg-open "%s1"', desc = "Open", for = "linux" },
-  { run = 'xdg-open "$(basename %s)"', desc = "Open", for = "linux" },
+  # { run = 'xdg-open "$(basename %s)"', desc = "Open", for = "linux" },
+  { run = 'xdg-open %s', desc = "Open", for = "linux" },
 
   # { run = "nvim %*", block = true, desc = "nvim (block)", for = "windows" },
   { run = "nvim %s", block = true, desc = "nvim (block)", for = "windows" },
@@ -76,8 +77,8 @@ reveal = [
 ]
 extract = [
   # { run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-  # { run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" },
-  { run = 'ouch d -y -c $(nproc) "$(dirname %s)"', desc = "Ouch Extract here", for = "unix" },
+  { run = 'ya pub extract --list "%s"', desc = "Extract here", for = "unix" },
+  # { run = 'ouch d -y -c $(nproc) "$(dirname %s)"', desc = "Ouch Extract here", for = "unix" },
 
   { run = 'ya pub extract --list %*', desc = "Extract here", for = "windows" },
 ]
@@ -102,10 +103,11 @@ prepend_rules = [
   { url = ".gitconfig", run = '${EDITOR:-/usr/bin/env nvim} "%s"', use = ["open", "edit"], for = "unix" },
 
   { url = ".gitconfig", run = "nvim %*", use = ["open", "edit"], for = "windows" },
+  { url = "application/wine-extension-ini", run = '${EDITOR:-/usr/bin/env nvim} "%s"', use = ["open", "edit"], for = "linux" },
 
 ]
 rules = [
-  # application/wine-extension-ini
+  { url = "application/wine-extension-ini", use = ["open", "edit"] },
   { url = "application/wine-extension*", use = ["open", "edit", "reveal"] },
   # Folder
   { url = "*/", use = ["edit", "open", "reveal"] },

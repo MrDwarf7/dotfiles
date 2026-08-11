@@ -248,11 +248,8 @@
       "leftWidgets": [
         {
           "id": "systemUpdate",
-          "enabled": true
-        },
-        {
-          "id": "launcherButton",
-          "enabled": true
+          "enabled": true,
+          "hideWhenIdle": false
         },
         {
           "id": "clock",
@@ -261,10 +258,6 @@
         },
         {
           "id": "weather",
-          "enabled": true
-        },
-        {
-          "id": "usbManager",
           "enabled": true
         },
         {
@@ -297,10 +290,6 @@
           "enabled": true
         },
         {
-          "id": "wallpaperDiscovery",
-          "enabled": true
-        },
-        {
           "id": "cpuUsage",
           "enabled": true,
           "minimumWidth": true
@@ -318,22 +307,10 @@
           "diskUsageMode": 3
         },
         {
-          "id": "vpn",
-          "enabled": true
-        },
-        {
           "id": "controlCenterButton",
           "enabled": true,
           "showAudioIcon": true,
           "showAudioPercent": false
-        },
-        {
-          "id": "idleInhibitor",
-          "enabled": true
-        },
-        {
-          "id": "clipboard",
-          "enabled": true
         },
         {
           "id": "notificationButton",
@@ -402,10 +379,6 @@
           "clockCompactMode": true
         },
         {
-          "id": "systemTray",
-          "enabled": true
-        },
-        {
           "id": "music",
           "enabled": true,
           "mediaSize": 3
@@ -439,10 +412,6 @@
           "showBrightnessPercent": false,
           "showMicIcon": false,
           "showBatteryIcon": false
-        },
-        {
-          "id": "idleInhibitor",
-          "enabled": true
         },
         {
           "id": "notificationButton",

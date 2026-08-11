@@ -2,7 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export BATDIFF_USE_DELTA:true
 SETUVAR --export BATMAN_THEME:Monokai\x20Extended
-SETUVAR --export CACHED_ENVS_LIST:__cached_xdg_done\x20__cached_env_done\x20__cached_gh_token_done\x1e__cached_env_done
+SETUVAR --export CACHED_ENVS_LIST:__cached_xdg_done\x20__cached_env_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x1e__cached_env_done
 SETUVAR --export CARAPACE_BRIDGES:all
 SETUVAR --export CODEX_HOME:/home/dwarf/\x2econfig/\x2ecodex
 SETUVAR --export DATA_ON_DEMAND_BACK:/home/dwarf/Documents/GitHub_Projects/Web/Data\x2dOn\x2dDemand/Data\x2dOn\x2dDemand\x2dBackend
