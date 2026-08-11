@@ -1,0 +1,72 @@
+modelRoles:
+  default: lm-studio/qwen38
+symbolPreset: nerd
+theme:
+  dark: titanium
+setupVersion: 1
+statusLine:
+  preset: default
+  separator: powerline-thin
+  sessionAccent: true
+  transparent: false
+terminal:
+  showProgress: true
+tui:
+  textSizing: false
+  codexResetFireworks: true
+  tight: true
+display:
+  shimmer: kitt
+  showTokenUsage: false
+  cacheMissMarker: false
+personality: pragmatic
+advisor:
+  enabled: true
+steeringMode: one-at-a-time
+followUpMode: one-at-a-time
+interruptMode: immediate
+loop:
+  mode: prompt
+doubleEscapeAction: tree
+treeFilterMode: default
+autocompleteMaxVisible: 15
+stt:
+  modelName: parakeet
+startup:
+  quiet: true
+features:
+  unexpectedStopDetection: true
+memory:
+  backend: mnemopi
+edit:
+  mode: hashline
+readLineNumbers: true
+bash:
+  enabled: true
+bashInterceptor:
+  enabled: false
+eval:
+  py: true
+astGrep:
+  enabled: true
+computer:
+  enabled: false
+vault:
+  enabled: false
+github:
+  enabled: true
+todo:
+  eager: default
+task:
+  eager: preferred
+  enableLsp: true
+emojiAutocomplete: false
+skills:
+  enableAgentsUser: false # ~/.agents/skills
+  enableClaudeUser: false # ~/.claude/skills
+  enableCodexUser: false
+  enablePiUser: false
+  enableAgentsProject: true # per-repo .agents/skills
+  enableClaudeProject: true
+  enablePiProject: true
+

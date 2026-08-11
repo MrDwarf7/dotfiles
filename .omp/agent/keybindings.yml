@@ -1,0 +1,156 @@
+# OMP keybindings — v17.3.7 + prompt remaps (2026-08-18)
+#
+# File: ~/.omp/agent/keybindings.yml  (NOT config.yml)
+# Reload: restart omp, then /hotkeys
+# Disable an action: []
+#
+# Remaps in this file:
+#   Ctrl+P / Ctrl+N  cursor + list up/down
+#   Ctrl+H / Ctrl+L  word left/right
+#   Ctrl+U           undo
+#   Ctrl+J           newline (already default)
+#
+# Not remapped (no such action):
+#   redo             does not exist (only undo stack)
+#   Ctrl+E / Ctrl+Y  no line-scroll; editor only has PageUp/PageDown
+#
+# Dropped so the remaps actually fire (app keys win over editor):
+#   app.model.cycleForward   was Ctrl+P   — still have Alt+M / Alt+P
+#   app.session.togglePath   was Ctrl+P   — session picker overlay
+#   app.live.toggle          was Ctrl+L   — still have /live
+#   tui.editor.deleteToLineStart  was Ctrl+U
+#   tui.editor.cursorLineEnd chord Ctrl+E — End key kept
+#
+# Ctrl+R left as history search. There is no redo to bind it to.
+# Ctrl+H needs Kitty keyboard protocol (Ghostty has it). Without that
+# the terminal sends Backspace and word-left will not fire.
+
+# --- prompt editor ---
+tui.editor.cursorUp:
+  - Up
+  - Ctrl+P
+tui.editor.cursorDown:
+  - Down
+  - Ctrl+N
+tui.editor.cursorLeft:
+  - Left
+  - Ctrl+B
+tui.editor.cursorRight:
+  - Right
+  - Ctrl+F
+tui.editor.cursorWordLeft:
+  - Alt+Left
+  - Ctrl+Left
+  - Alt+B
+  - Ctrl+H
+tui.editor.cursorWordRight:
+  - Alt+Right
+  - Ctrl+Right
+  - Alt+F
+  - Ctrl+L
+tui.editor.cursorLineStart:
+  - Home
+  - Ctrl+A
+tui.editor.cursorLineEnd: End
+tui.editor.jumpForward: Ctrl+]
+tui.editor.jumpBackward: Ctrl+Alt+]
+tui.editor.pageUp: PageUp
+tui.editor.pageDown: PageDown
+tui.editor.deleteCharBackward: Backspace
+tui.editor.deleteCharForward:
+  - Delete
+  - Ctrl+D
+tui.editor.deleteWordBackward:
+  - Ctrl+W
+  - Alt+Backspace
+  - Ctrl+Backspace
+  - Super+Alt+Backspace
+tui.editor.deleteWordForward:
+  - Alt+Delete
+  - Alt+D
+  - Super+Alt+Delete
+  - Super+Alt+D
+tui.editor.deleteToLineStart: []
+tui.editor.deleteToLineEnd: Ctrl+K
+tui.editor.yank: Ctrl+Y
+tui.editor.yankPop: Alt+Y
+tui.editor.undo:
+  - Ctrl+U
+  - Ctrl+-
+  - Ctrl+_
+
+# --- input ---
+tui.input.newLine:
+  - Shift+Enter
+  - Ctrl+J
+tui.input.submit: Enter
+tui.input.tab: Tab
+tui.input.copy: Ctrl+C
+
+# --- select lists ---
+tui.select.up:
+  - Up
+  - Ctrl+P
+tui.select.down:
+  - Down
+  - Ctrl+N
+tui.select.pageUp: PageUp
+tui.select.pageDown: PageDown
+tui.select.confirm: Enter
+tui.select.cancel:
+  - Escape
+  - Ctrl+C
+
+# --- app ---
+app.interrupt: Escape
+app.clear: Ctrl+C
+app.exit: Ctrl+D
+app.suspend: Ctrl+Z
+app.display.reset: Alt+L
+app.thinking.cycle: Shift+Tab
+app.thinking.toggle: Ctrl+T
+app.model.cycleForward: []
+app.model.cycleBackward: Shift+Ctrl+P
+app.model.select: Alt+M
+app.model.selectTemporary: Alt+P
+app.tools.expand: Ctrl+O
+app.tools.toggleVisibility: Ctrl+Shift+O
+app.editor.external: Ctrl+G
+app.message.followUp:
+  - Ctrl+Q
+  - Ctrl+Enter
+app.retry: Alt+R
+app.message.dequeue:
+  - Alt+Up
+  - Shift+Up
+app.clipboard.pasteImage: Ctrl+V
+app.clipboard.pasteTextRaw:
+  - Ctrl+Shift+V
+  - Alt+Shift+V
+app.clipboard.copyLine: Alt+Shift+L
+app.clipboard.copyPrompt: Alt+Shift+C
+app.agents.hub: Alt+A
+app.session.observe: Ctrl+S
+app.plan.toggle: Alt+Shift+P
+app.history.search: Ctrl+R
+app.live.toggle: []
+
+# unbound by default — assign chords or leave []
+app.session.new: []
+app.session.tree: []
+app.session.fork: []
+app.session.resume: []
+app.stt.toggle: []
+
+# --- session picker / tree overlay ---
+app.session.togglePath: []
+app.session.toggleSort: Ctrl+S
+app.session.rename: Ctrl+R
+app.session.delete: Ctrl+D
+app.session.deleteNoninvasive: Ctrl+Backspace
+app.tree.foldOrUp:
+  - Ctrl+Left
+  - Alt+Left
+app.tree.unfoldOrDown:
+  - Ctrl+Right
+  - Alt+Right
