@@ -1,12 +1,12 @@
-theme = "github-dark-default" # any built-in theme id, auto, or custom
+theme = "github-dark-default"
 # theme = "tokyo-night" # any built-in theme id, auto, or custom
 # theme = "github-dark-high-contrast" # any built-in theme id, auto, or custom
-mode = "auto"                  # auto, split, stack
+mode = "split"
 vcs = "jj"                     # git, jj, sl
 watch = true
 exclude_untracked = false
 line_numbers = true
-wrap_lines = false
+wrap_lines = true
 agent_notes = true
 transparent_background = false
 
@@ -17,3 +17,7 @@ transparent_background = false
 # `scroll right` which is curretnly only bound to riht arrow...
 # I want to bind line numbers to like, 
 # idk - L or <S-l> and leave scrolling as vim-like lol
+hunk_headers = false
+menu_bar = true
+copy_decorations = false
+cursor_line = "row"
