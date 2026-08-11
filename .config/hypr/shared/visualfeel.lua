@@ -12,11 +12,27 @@ local m = {
   ---@type HL.ConfigOpt.Decoration
   decoration = {
     ---@type HL.ConfigOpt.Decoration.Blur
-    blur = {},
+    blur = {
+      -- kawase,  -- default
+      acrylic = {}, -- similar to liquid glass
+      aurora = {}, -- aurora-like light streaks
+      drops = {}, -- rain on a window pane
+      fluid_jar = {}, -- 2D fluid simulation
+      frost = {}, -- cracked ice
+      haze = {}, -- a different diffused effect
+      heat_shimmer = {}, -- a small shimmer with aberration
+      prism = {}, -- triangular refraction mask
+      ripple = {}, -- ripple on click
+      water = {}, -- ripple done with a heightmap
+    },
     ---@type HL.ConfigOpt.Decoration.Shadow
     shadow = {},
     ---@type HL.ConfigOpt.Decoration.Glow
     glow = {},
+    ---@type HL.ConfigOpt.Decoration.MotionBlur
+    motion_blur = {},
+    ---@type HL.ConfigOpt.Decoration.Wobble
+    wobble = {},
   },
 }
 
@@ -75,12 +91,11 @@ m.decoration = {
 }
 
 m.decoration.blur = {
-
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
-  size = 4, -- default 8
+  size = 10, -- default 8
   -- Gaussian blur
-  passes = 6, -- default 1, previous was 5
+  passes = 4, -- default 1, previous was 5
   ignore_opacity = true,
 
   new_optimizations = true,
@@ -140,6 +155,22 @@ m.decoration.glow = {
   render_power = 3,
   -- color = 0xee1a1a1a
   -- color_inactive = 0
+}
+
+m.decoration.motion_blur = {
+  enabled = false,
+  samples = 24, -- default: 7
+}
+
+m.decoration.wobble = {
+  enabled = false,
+  mesh = 32, -- default: 12 :: [2 - 32]
+  stiffness = 200, -- default: 200 :: [0.0001 - 1000]
+  damping = 10, -- default: 12 :: [0 - 1000]
+  mass = 1.000, -- default: 1 :: [0.0001 - 1000]
+  intensity = 0.2, -- default: 0.2 :: [0 - 3]
+  value_epsilon = 0.25, -- default: 0.25 :: [0 - 100
+  velocity_epsilon = 2, -- default: 2 :: [0 - 1000]
 }
 
 hl.config(m)

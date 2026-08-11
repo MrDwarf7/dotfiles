@@ -184,9 +184,12 @@ local __AssociatedFunction = {}
 ---@class AssociatedMethod<T, R> : fun(self: T, ...): R
 local __AssociatedMethod = {}
 
----@class HyprConfig.Events : HL.EventName
+---@generic T : Str
+---@class HyprConfig.Events<T> : HL.EventName<T>
 local HyprlandEvents = {
+  ---@type HL.EventName<"hyprland.start">
   START = "hyprland.start",
+  ---@type HL.EventName<"hyprland.shutdown">
   SHUTDOWN = "hyprland.shutdown",
 }
 

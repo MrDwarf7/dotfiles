@@ -1,5 +1,3 @@
-local list = require("utils.lst")
-
 ---@type HL.LayerRuleSpec[]
 local rules = {
   {
@@ -89,7 +87,7 @@ local rules = {
   {
     name = "dms-blur-for-popouts-and-misc",
     match = {
-      namespace = "dms:(bar|tooltip|toast|dock-context-menu|control-center|notification-center-popout|dash|dash:background|battery|popout|app-launcher)",
+      namespace = "dms:(bar|tooltip|toast|dock-context-menu|control-center|notification-center-popout|dash|dash:background|battery|popout|app-launcher|launcher-context-menu)",
     },
     blur = true,
     ignore_alpha = 0,
@@ -111,20 +109,29 @@ local rules = {
       namespace = "dms:(process-list-modal|process-list-popout)",
     },
     blur = true,
-    -- ignore_alpha = 0.275,
     ignore_alpha = 0,
   },
 
   {
     name = "dms-no-blur",
     match = {
-      namespace = "dms:(frame-exclusion|frame)",
+      namespace = "dms:(frame-exclusion|frame|dankisland)",
       -- namespace = "dms:(frame-exclusion|frame|power-menu)",
       -- namespace = "dms:(frame.*)",
     },
     blur = false,
     ignore_alpha = 0,
   },
+
+  -- {
+  --   name = "dms-fix-blur-artifacts",
+  --   match = {
+  --     namespace = "dms:bar",
+  --   },
+  --   blur = false,
+  --   ignore_alpha = 0,
+  --   xray = true,
+  -- },
 
   -- {
   --     name = "quickshell-bg"
@@ -146,4 +153,4 @@ local rules = {
   -- },
 }
 
-list.map(rules, hl.layer_rule)
+require("utils.lst").map(rules, hl.layer_rule)

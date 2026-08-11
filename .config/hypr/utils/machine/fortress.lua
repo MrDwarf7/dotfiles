@@ -10,6 +10,7 @@ return {
   monitors = {
     {
       output = "DP-1",
+      disabled = false,
       mode = "5120x1440@239.74",
       position = "0x0",
       scale = "1.0",

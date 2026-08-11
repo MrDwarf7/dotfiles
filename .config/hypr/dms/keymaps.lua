@@ -1,5 +1,4 @@
 --########################
-local root_shrd = require("utils.root_shared")
 
 local mods = require("shared.keymaps.mods")
 local progs = require("shared.programs")
@@ -26,6 +25,7 @@ hl.bind(mods.with(mods.main_mod_alt, "d"), dms.invoke_ipc_call("night toggle"))
 
 hl.bind(mods.with(mods.main_mod, "y"), dms.invoke_ipc_call("dankdash wallpaper"))
 hl.bind(mods.with(mods.main_mod_shift, "y"), dms.invoke_ipc("wallpaperCarousel toggle"))
+-- FEAT: check which monitor is actually selected (ie: cursor is over) and use that, with fallback as monitor etc.
 hl.bind(mods.with(mods.main_mod_shift, "w"), dms.invoke_ipc_call("wallpaper nextFor " .. mon))
 hl.bind(mods.with(mods.main_mod_ctrl, "w"), dms.invoke_ipc_call("wallpaper prevFor " .. mon))
 
@@ -71,7 +71,7 @@ hl.bind("XF86AudioPrev", dms.invoke_ipc_call("mpris previous"), { locked = true 
 hl.bind("XF86AudioPause", dms.invoke_ipc_call("mpris playPause"), { locked = true })
 hl.bind("XF86AudioPlay", dms.invoke_ipc_call("mpris playPause"), { locked = true })
 
-root_shrd.load_modules("shared.keymaps", {
+require("utils.root_shared").load_modules("shared.keymaps", {
   "map_general",
   "map_programs",
   "map_windows_workspaces",

@@ -21,6 +21,9 @@ local dms = {}
 ---@return HL.Dispatcher
 dms.invoke = function(cmd)
   local full_cmd = string.format("dms %s", cmd)
+  -- TODO: so we'd _want_ to find somewhere to wrap this in an actual dispatch - HOWEVER
+  -- Currently there's a lot of other application that actually use this.
+  -- !! DO NOT fire it here lmfao... It will fire all of the indiv. calls on a loop hahaa !!
   return hl.dsp.exec_cmd(full_cmd)
 end
 
@@ -39,7 +42,7 @@ end
 ---@return HL.Dispatcher|any
 dms.invoke_ipc_call = function(cmd, now)
   if now and type(now) ~= nil then
-    return dms.invoke(string.format("ipc call %s", cmd))()
+    return hl.dispatch(dms.invoke(string.format("ipc call %s", cmd)))
   end
   return dms.invoke(string.format("ipc call %s", cmd))
 end
@@ -70,6 +73,23 @@ dms.setup = function(self)
     self.invoke_ipc_call('plugins reload "githubInbox" >/dev/null 2>&1')
     -- end)
   end)
+
+  -- If I understand this correctly -
+  -- this _should_ (on start):
+  -- 1. Workspace 2
+  -- 2. open term (ghostty)
+  -- 3. swap back to ws one
+  --
+  --We can probably achieve a similar thing by outright
+  -- exec with props or something tho
+
+  -- hl.on(types.HyprlandEvents.START, function()
+  --   hl.dispatch(hl.dsp.focus(2))
+  --   hl.timer(function()
+  --     hl.dispatch(hl.exec_cmd(require("shared.programs").term))
+  --   end, { timeout = 1000, type = "oneshot" })
+  --   hl.dispatch(hl.dsp.focus(1))
+  -- end)
 
   return self
 end

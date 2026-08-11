@@ -209,7 +209,7 @@ local __base_rules = {
     float = true,
     opacity = OPACITY_OVERRIDE,
     persistent_size = true,
-    -- size = "(monitor_w*0.40) (monitor_h*0.65)",
+    size = "(monitor_w*0.30) (monitor_h*0.65)",
   },
 
   --- Float indicators (screen share overlays). Float + pin.

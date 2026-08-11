@@ -30,13 +30,16 @@ local shell_bkend = require("utils.shell")
 local root_shrd = require("utils.root_shared")
 
 local shared = require("shared")
-if type(shared) == "table" and type(shared.setup) == "function" then
-  print("[hyprland] Running shared configuration")
-  shared:setup()
-elseif type(shared) == "table" then
-  print("[hyprland] Assumed setup function called WITHIN 'shared.init' module!")
-  logger:log("Assumed setup function called WITHIN 'shared.init' module!")
+if not shared then
+  error("[hyprland] ERROR: Failed to load shared configuration module 'shared.init'")
 end
+-- if type(shared) == "table" and type(shared.setup) == "function" then
+--   print("[hyprland] Running shared configuration")
+--   shared:setup()
+-- elseif type(shared) == "table" then
+--   print("[hyprland] Assumed setup function called WITHIN 'shared.init' module!")
+--   logger:log("Assumed setup function called WITHIN 'shared.init' module!")
+-- end
 
 local shell_name = shell_bkend.get(envs.HYPRLAND_SHELL)
 local ok, shell = pcall(require, shell_name)

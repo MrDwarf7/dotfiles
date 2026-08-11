@@ -21,11 +21,14 @@ local lst = require("utils.lst")
 ---@return CallbackList Returns the modified cbs_tbl for convenience (same table that was passed in, but with extra_cbs merged in if provided)
 local push_cb = function(cbs_tbl, extra_cbs)
   if extra_cbs and type(extra_cbs) == "table" then
-    lst.map(lst.filter(extra_cbs, function(cb)
-      return type(cb) == "function"
-    end), function(cb)
-      cbs_tbl[#cbs_tbl + 1] = cb
-    end)
+    lst.map(
+      lst.filter(extra_cbs, function(cb)
+        return type(cb) == "function"
+      end),
+      function(cb)
+        cbs_tbl[#cbs_tbl + 1] = cb
+      end
+    )
   end
   return cbs_tbl
 end
@@ -45,6 +48,8 @@ local start_cbs = function(extra_cbs)
     [1] = function()
       -- PulseAudio: unmute default sink on startup
       hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
+
+      hl.exec_cmd("/usr/bin/openrgb --startminimized", { workspace = "6 silent" })
 
       -- USB auto-mounting via udiskie (as uwsm service)
       utils.uwsm_launcher("udiskie -n -t -m flat", true)
@@ -83,8 +88,22 @@ end
 --- Registers the callbacks for the START and SHUTDOWN events. This should be called once during initialization to set up the shared execs for all shell variants.
 ---@return nil
 local setup = function()
+  -- TODO: We can _dramatically_ simplify this
+  -- file now that Hyprland has proper lua runtime lodgement for tasks
+  -- via `hl.dispatch()` as the consumer.
+  -- We just needed to be _able_ to generate `HL.Dispatcher` types.
+  --
+  -- (hl.dsp.exec_cmd() | hl.dsp.global()) :: HL.Dispatcher -> map/accumulate -> hl.dispatch(T: HL.Dispatcher) -> { lodged }
+  -- We only really need to have a list of calls that we _need to eventually_ make to generate dispatchers,
+  -- then just run-through and lodge them.
+  -- See: `https://wiki.hypr.land/configuring/core/dispatchers` for further info
+  --
+  -- hl.dsp.exec_cmd()
+  -- hl.dsp.global()
+  -- hl.dispatch()
+
   lst.map(start_cbs(), function(cb)
-    hl.on(types.HyprlandEvents.START, cb)
+    return hl.on(types.HyprlandEvents.START, cb)
   end)
 
   -- for _, cb in ipairs(shutdown_cbs()) do

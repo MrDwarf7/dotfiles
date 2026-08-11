@@ -25,6 +25,7 @@ local fallbacks = {
   QT_AUTO_SCREEN_SCALE_FACTOR = 1,
   QT_WAYLAND_DISABLE_WINDOWDECORATION = 1,
   QT_QPA_PLATFORMTHEME = "hyprqt6engine,qt6ct",
+  QT_QPA_PLATFORMTHEME_QT6 = "hyprqt6engine,qt6ct",
 
   -- NVIDIA
   GBM_BACKEND = "nvidia-drm",

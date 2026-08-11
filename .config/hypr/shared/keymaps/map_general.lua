@@ -16,14 +16,10 @@ hl.bind("CTRL + ALT + Delete", hl.dsp.exec_cmd("hyprshutdown --vt 2")) -- exit
 -- TODO: Mmove the quit logic stuff to a function so it's
 -- idempotent of the ordering in the file.
 
---### IMPORTANT START ####
---
--- HACK: file ordering/dual binding
---
--- If doing this - they MUST remain in the same order.
--- Hyprland will execute them (filewise) top to bottom.
-hl.bind(mods.with(mods.main_mod, "q"), hl.dsp.window.close())
-hl.bind(mods.with(mods.main_mod, "q"), hl.dsp.focus({ monitor = 0 }))
+hl.bind(mods.with(mods.main_mod, "q"), function()
+  hl.dispatch(hl.dsp.window.close())
+  hl.dispatch(hl.dsp.focus({ monitor = 0 }))
+end)
 
 --### IMPORTANT END ####
 
@@ -47,5 +43,21 @@ hl.bind(mods.with(mods.main_mod_shift, "f"), hl.dsp.window.fullscreen({ mode = "
 hl.bind(mods.with(mods.main_mod_ctrl, "f"), hl.dsp.layout("swapwithmaster master"))
 --# ^ Allow swapping when using 'master' layout method
 
-hl.bind(mods.alt_tab, hl.dsp.window.cycle_next({ next = true }))
-hl.bind(mods.alt_tab, hl.dsp.window.bring_to_top())
+-- this handles for _all_ types of windows:
+-- hl.bind(mods.alt_tab, function()
+--   hl.dispatch(hl.dsp.window.cycle_next({ next = true }))
+--   hl.dispatch(hl.dsp.window.bring_to_top())
+-- end)
+
+-- TODO: we need to find a way to mark the original window
+-- and ensure we jump back to that specific instance.
+-- Currently (for eg: scrolling) - we always
+-- return to the first item on the strip, not the original window that was focused.
+hl.bind(mods.alt_tab, function()
+  -- local cur_window = hl.get_active_window()
+
+  hl.dispatch(hl.dsp.window.cycle_next({
+    floating = not hl.get_active_window().floating,
+  }))
+  -- hl.dispatch(hl.dsp.focus({ window = cur_window, }))
+end)

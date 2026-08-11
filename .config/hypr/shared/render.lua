@@ -3,6 +3,7 @@
 --#############
 
 hl.config({
+  ---@type HL.ConfigOpt.Render
   render = {
     -- 0 - off, 1 - on, 2 - auto (on with content type ‘game’)
     direct_scanout = 2,

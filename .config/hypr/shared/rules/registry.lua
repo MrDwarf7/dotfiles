@@ -9,10 +9,19 @@
 
 ---@type HyprConfig.HL.WindowRuleSpec[]
 local registry = {
+
   -- The following 2 are the only ones
   -- that have a workspaces assignment in them
   -- but still sit here in the registry.
   -- Important for nvim-macro sorting etc.
+
+  -- ALL attributes, except for;
+  -- * center: bool
+  -- * float: bool
+  -- Are run through 'sort' (nvim native)
+  -- all other attributes follow the same ordering of
+  -- name, match, { center, float }, { ... [ sorted via nvim hl+`sort` ] ... }
+  --
 
   --- Discord forks (public_comms was dropped as a bucket: single group, no sub-windows).
   {
@@ -239,10 +248,11 @@ local registry = {
   {
     name = "registry-zathura",
     match = { class = "^(org.pwmt.zathura)$" },
-    -- size = "1100 1300",
     float = true,
+    -- center = true,
     opacity = "1.00 override 1.00 override",
     persistent_size = true,
+    size = "1380 1390",
   },
 
   -- TODO: consider splitting into file+bucket (via 'file_managers')
