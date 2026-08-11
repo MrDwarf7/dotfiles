@@ -1,16 +1,16 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:jump-to-char"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "7a4b4237223aaa94e589d1c01a23542a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:diff"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "14558d2829c0aa05e99c57de8f74d199"
 
 [[plugin.deps]]
@@ -35,13 +35,13 @@ hash = "eff5702573b6cfba61e4ac8b1969629a"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:toggle-pane"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "5b2fbef7d1513ce38ff72623a071a5e"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:types"
-rev = "c591a36"
-hash = "ff056b5acd05d915dc3a3936cb0cfd3e"
+rev = "4dc7f1b"
+hash = "d368d5a6a72657e1c0e7ee7340dcea8c"
 
 [[plugin.deps]]
 use = "wylie102/duckdb"
@@ -50,7 +50,7 @@ hash = "87b9233a74325e95011670ed20bbd0d4"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:chmod"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "87472b05a8c420100f6a2b9cde1e7746"
 
 [[plugin.deps]]
@@ -60,13 +60,13 @@ hash = "8c1b36103121a66b37308afaf7124575"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mount"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "b95f898e6dc60b52edbc415952e14395"
 
 [[plugin.deps]]
 use = "boydaihungst/mediainfo"
-rev = "73a3658"
-hash = "30f279f3b4eed10938bfdb4b4a5a1e7c"
+rev = "d2dd310"
+hash = "565d2abf5c125be930ac342099bffd4c"
 
 [[plugin.deps]]
 use = "WhoSowSee/mdv-previewer"
@@ -85,7 +85,7 @@ hash = "e0017cae4c0772dd41b7e7c259a6e683"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:mime-ext"
-rev = "c591a36"
+rev = "4dc7f1b"
 hash = "3bcc00df11efc3ae5d15f2dba860be7"
 
 [flavor]
