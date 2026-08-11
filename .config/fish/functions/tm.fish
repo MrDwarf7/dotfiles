@@ -104,7 +104,8 @@ function tm_arg_handler --description 'Handles 0 - N arguments for tmux wrapper'
 
     set -l base_cmd $____global_base_cmd
     if test -z "$base_cmd"
-        printf "it was empty!\n"
+        # printf "it was empty!\n"
+        colorize yellow "tm: Warning: base_cmd was empty, defaulting to 'tmux'\n"
         set base_cmd tmux
     end
 
@@ -230,7 +231,8 @@ function tm --description 'Tmux wrapper with argument parsing'
             if test (count $argv) -eq 1
                 # first try via most_recent, then ballback to using tmux directly, then if all fails just using raw tmux kill-session
                 tm_arg_handler kill-session -t $most_recent # || command tmux kill-session -t $most_recent || command tmux kill-session
-                tm ls || colorize yellow "tm: No sessions remain after killing session %s\n" $most_recent && return 0
+                # tm ls || colorize yellow "tm: No sessions remain after killing session %s\n" $most_recent && return 0
+                tm ls || colorize yellow "tm: No sessions remain after killing session %s\n" $most_recent; and return 0
                 return $status || return 0
             end
 
@@ -281,9 +283,9 @@ function tm --description 'Tmux wrapper with argument parsing'
             # which without args will default to calling the 'most recent' session OR '_main'
             tm a $argv[1..-1]
     end
-    if test $status -ne 0
-        colorize red "tm: An error occurred executing the tmux command.\n"
-        return $status
+    test $status -ne 0; and begin
+        set -l ec $status
+        colorize red "tm: An error occurred executing the tmux command.\n"; and return $ec
     end
     return 0
 end

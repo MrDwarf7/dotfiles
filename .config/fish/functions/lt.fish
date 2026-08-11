@@ -7,6 +7,7 @@ set k_help h
 set k_depth d
 set k_level l
 set k_num n
+set k_color c
 
 function __lt_help
     if not 00-valid_pacman qsv
@@ -26,6 +27,7 @@ List files in a directory with tree view.
 ,-$k_depth           , --depth LEVEL             ,# Set the depth of the tree view (default: 2),
 ,-$k_level           , --level LEVEL             ,# Alias for --depth,
 ,-$k_num             , --num COUNT               ,# Set the number of items to show per directory,
+,-$k_color           , --color                   ,# Set the color scheme for the output,
 " "
 ,                                       ,           ,,
 ,Command                                ,Description,,
@@ -39,7 +41,7 @@ end
 
 function lt --description 'List files in a directory with tree view'
 
-    argparse $k_help/help $k_depth/depth= $k_level/level= $k_num/num= -- $argv
+    argparse $k_help/help $k_depth/depth= $k_level/level= $k_num/num= $k_color/color= -- $argv
     or return
 
     # Show help if requested
@@ -61,6 +63,10 @@ function lt --description 'List files in a directory with tree view'
         set depth $_flag_level
     end
 
+    if set -q _flag_color
+        set -gx override_color $_flag_color
+    end
+
     if string match -q ls $LIST_CLIENT; or string match -q /usr/bin/ls $LIST_CLIENT
         colorize yellow "Warning: Tree view not available with '$LIST_CLIENT', using tree instead"
         if 00-valid_pacman tree
@@ -76,6 +82,9 @@ function lt --description 'List files in a directory with tree view'
 
     # Check if we're using exa/eza (which support tree view) or fallback ls
     set --append __base "--tree --level=$depth -a"
+    if set -q _flag_color
+        set --append __base "--color=$_flag_color"
+    end
 
     if set -q _flag_num
         set --append __base --limit=$_flag_num

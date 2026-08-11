@@ -1,6 +1,24 @@
 #!/usr/bin/env fish
 #
 
+# REFACTOR: Move this entire.... thing.... to a standard - passing in eg:
+# (things prefixed below don't have an actual header in the output!)
+#
+# printf "<_description: <What it does and stuff>>
+#Usage: $(status basename) [?FLAGS] [?OPTIONS] [?ARGS]
+#
+#
+#Flags:
+#$__cfg_TAB-h, --help           %-10s Show this help
+#$__cfg_TAB<-short>, <--long>   %-10s <What it does>
+#<....>
+#
+#[?Options]:
+#
+#
+#[?ARGS]:
+#
+
 function 90-help --argument-names usage options example --description 'Display help messages formatted as tables'
     # Prints help messages
     #

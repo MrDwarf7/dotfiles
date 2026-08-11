@@ -26,7 +26,7 @@ function sysup --description 'System update orchestrator'
     # namespace until `sysup` actually runs (they're "hidden" in the dir).
     set -l --path derived (dirname (status filename))
 
-    set -l --path base (realpath -s -e (echo $__fish_config_dir/functions/))
+    set -l --path base (realpath --strip --canonicalize-existing (echo $__fish_config_dir/functions/))
     if not test (string match -r "$derived" "$base")
         colorize red "[SYSUP] ERROR: sysup.fish must be in $base/sysup\n"
         colorize red "[SYSUP] Derived path: $derived\n"
@@ -144,20 +144,28 @@ function __sysup_cmp
     complete -c sysup -s d -l shutdown -d 'Shutdown after success'
 end
 
-function __sysup_help
-    printf "Usage: sysup [FLAGS]\n\n"
-    printf "Flags:\n"
-    printf "  -h, --help     Show this help\n"
-    printf "  -c, --cache    Only drop package caches (no updates)\n"
-    printf "  -s, --skip     Skip steps by letter: %s\n" (__sysup_step_letters)
-    printf "  -d, --shutdown Shut down after a successful update\n\n"
-    printf "Steps (in registry order; '-' = cannot be skipped):\n"
-    for entry in $fn_prefix_steps
+function __sysup_help_make_steps
+    for entry in $sysup_steps
         set -l parts (string split '|' $entry)
         if test "$parts[2]" = -
-            printf "  %-10s (always)  %s\n" $parts[1] $parts[3]
+            printf "$__cfg_TAB%-10s (always)$__cfg_TAB%s\n" $parts[1] $parts[3]
         else
-            printf "  %-10s %s        %s\n" $parts[1] $parts[2] $parts[3]
+            printf "$__cfg_TAB%-10s %s$__cfg_TAB_EXT%s\n" $parts[1] $parts[2] $parts[3]
         end
     end
+end
+
+function __sysup_help
+    printf "Updates system packages and other components in a registry-driven order. Steps can be skipped with the -s flag.
+Usage: $(status basename) [FLAGS]
+
+
+Flags:
+$__cfg_TAB-h, --help     %-10s Show this help
+$__cfg_TAB-c, --cache    %-10s Only drop package caches (no updates)
+$__cfg_TAB-s, --skip     %-10s Skip steps by letter: $(__sysup_step_letters)
+$__cfg_TAB-d, --shutdown %-10s Shut down after a successful update
+
+Steps (in registry order; '-' = cannot be skipped):\n$(__sysup_help_make_steps)"
+    return 0
 end

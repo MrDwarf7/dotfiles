@@ -1,4 +1,16 @@
 #!/usr/bin/env fish
+#
+
+function __vpncheck_help
+    printf "vpncheck: Check if the VPN is working and show the current IP address and DNS servers
+
+    Usage:
+    vpncheck
+
+    Options:
+    -h, --help  Show this help message and exit\n"
+    return 0
+end
 
 function check_deps
     # This function checks if the required dependencies are installed.
@@ -17,6 +29,12 @@ function check_deps
 end
 
 function vpncheck --description "Check if the VPN is working and show the current IP address and DNS servers"
+    argparse h/help -- $argv
+    or begin
+        colorize red "Error: Invalid arguments. Use 'vpncheck -h' for help.\n"; and __vpncheck_help; and return 1
+    end
+    set -q _flag_help; and __vpncheck_help && return 0
+
     check_deps || return $status
 
     sudo true

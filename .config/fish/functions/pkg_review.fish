@@ -42,5 +42,5 @@ function pkg_review --description 'Review installed packages with fzf'
         return 0
     end
 
-    $PKG_MANAGER -Qq | fzf --preview '$PKG_MANAGER -Qil {}' --layout=reverse --bind 'enter:execute($PKG_MANAGER -Qil {} | less)'
+    $PKG_MANAGER -Qq | fzf --color=16 --preview '$PKG_MANAGER -Qil {}' --layout=reverse --bind 'enter:execute($PKG_MANAGER -Qil {} | less)'
 end

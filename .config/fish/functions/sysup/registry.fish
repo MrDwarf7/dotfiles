@@ -11,9 +11,9 @@
 # Nothing else needs editing. The orchestrator reads this list for the
 # step order, the skip parser, the help text, and the dispatch call.
 
-##################################################
-### !!! THESE ARE ORDERED! DON'T SORT THEM !!! ###
-##################################################
+###################################################
+### !!! THESE ARE ORDERED! DO NOT SORT THEM !!! ###
+###################################################
 set -g sysup_steps \
     'mirror |m  |Update pacman mirrorlist via rate-mirrors' \
     'pacman |p  |Update official repository packages' \

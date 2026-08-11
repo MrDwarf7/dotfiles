@@ -10,6 +10,12 @@ set -U fish_key_bindings fish_vi_key_bindings
 
 set -q CACHED_ENVS_LIST; or set -Ux CACHED_ENVS_LIST
 
+set -gx __cfg_TAB_SIZE 2
+set -gx __cfg_TAB_EXT_SIZE (math "$__cfg_TAB_SIZE*3") # generally lines up, roughly
+
+set -gx __cfg_TAB (string repeat -n $__cfg_TAB_SIZE ' ')
+set -gx __cfg_TAB_EXT (string repeat -n $__cfg_TAB_EXT_SIZE $__cfg_TAB)
+
 # TODO: the below is _kinda_ messy.
 # We're ideally want to clean up:
 #   1) the actual names so they're closer to what they do (we have mixed defs between exists/get and a _sort of_ overlap of push/set
@@ -86,6 +92,14 @@ function __setup_xdg_dirs
     __env_cached_push __cached_xdg_done
 end
 set -q $(__env_cached_get __cached_xdg_done); or __setup_xdg_dirs &
+
+set -gx FZF_DEFAULT_OPTS "--style=minimal --ansi --border=sharp --color=16 --cycle"
+# Binding specific stuff - it's long lol
+set --append FZF_DEFAULT_OPTS "--bind 'ctrl-e:preview-down,ctrl-y:preview-up,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:offset-down,ctrl-k:offset-up,ctrl-g:jump,jump:accept,jump-cancel:'"
+
+set -gx FZF_CTRL_R_OPTS "--with-nth 1,3.. --bind 'ctrl-t:change-with-nth(2..|3..|1,3..)'"
+# set -gx FZF_CTRL_T_OPTS "--preview 'echo {} | bat --style auto --color always {} 2> /dev/null || tree -C -L 2 {} 2> /dev/null | head -200'"
+set -gx FZF_CTRL_T_OPTS "--preview 'echo {} | bat --style auto --color always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
 
 function __setup_envs
     __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
