@@ -90,10 +90,16 @@ require("relative-motions"):setup({
 })
 
 -- require("duckdb"):setup()
-require("mdv-previewer"):setup({
-	theme = "monokai", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
-	code_theme = "tokyonight", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
-})
+
+-- TODO: [broken] : mdv-previewer is currently broken (peek method's 'self:show' call is failing).
+-- It's disabled here AS WELL as the item(s) in the ./yazi.toml file:
+-- ./yazi.toml:201 ( prepend_previewers )
+-- --./yazi.toml:267 --- this is actually fine to leave (prepend_preloaders) one
+
+-- require("mdv-previewer"):setup({
+-- 	theme = "monokai", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
+-- 	code_theme = "tokyonight", -- Option: "terminal" | "solarized-dark" | "nord" | "tokyonight" | "kanagawa" | "gruvbox" | "monokai" | "tokyonight" | " material-ocean" | "catppuccin"
+-- })
 
 require("sshfs"):setup({
 	-- Default:

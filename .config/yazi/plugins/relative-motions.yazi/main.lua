@@ -35,15 +35,6 @@ local ENTER_MODE_FIRST = 0
 local ENTER_MODE_CACHE = 1
 local ENTER_MODE_CACHE_OR_FIRST = 2
 
--- ---@alias Rm.Opts.ShowNumbers "absolute"|"relative"|"relative_absolute"
--- ---@alias Rm.Opts.EnterMode "first"|"cache"|"cache_or_first"
-
----@class Rm.Opts
----@field show_numbers "absolute"|"relative"|"relative_absolute"
----@field show_motion boolean
----@field only_motions boolean
----@field enter_mode "first"|"cache"|"cache_or_first"
-
 -----------------------------------------------
 ----------------- R E N D E R -----------------
 -----------------------------------------------
@@ -55,9 +46,7 @@ local render_motion_setup = ya.sync(function(_)
 		ya.render()
 	end
 
-	Status.motion = function()
-		return ui.Span("")
-	end
+	Status.motion = function() return ui.Span("") end
 
 	Status.children_redraw = function(self, side)
 		local lines = {}
@@ -107,12 +96,12 @@ local render_motion = ya.sync(function(_, motion_num, motion_cmd)
 			bg_style = style.main.bg
 		end
 
-		return ui.Line({
+		return ui.Line {
 			ui.Span(separator_open):fg(bg_style),
 			motion_span:style(style.main),
 			ui.Span(separator_close):fg(bg_style),
 			ui.Span(" "),
-		})
+		}
 	end
 end)
 
@@ -166,9 +155,8 @@ local render_numbers = ya.sync(function(_, mode)
 			linemodes[#linemodes + 1] = Linemode:new(f):redraw()
 
 			local entity = Entity:new(f)
-			entities[#entities + 1] =
-				ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() })
-					:style(entity:style())
+			entities[#entities + 1] = ui.Line({ Entity:number(i, #self._folder.files, f, hovered_index), entity:redraw() })
+				:style(entity:style())
 		end
 
 		return {
@@ -178,17 +166,13 @@ local render_numbers = ya.sync(function(_, mode)
 	end
 end)
 
-local function render_clear()
-	render_motion()
-end
+local function render_clear() render_motion() end
 
 -----------------------------------------------
 --------- C O M M A N D   P A R S E R ---------
 -----------------------------------------------
 
-local get_keys = ya.sync(function(state)
-	return state._only_motions and MOTION_KEYS or MOTIONS_AND_OP_KEYS
-end)
+local get_keys = ya.sync(function(state) return state._only_motions and MOTION_KEYS or MOTIONS_AND_OP_KEYS end)
 
 local function normal_direction(dir)
 	if dir == "<Down>" then
@@ -209,7 +193,7 @@ local function get_cmd(first_char, keys)
 
 	while true do
 		render_motion(tonumber(lines))
-		local key = ya.which({ cands = keys, silent = true })
+		local key = ya.which { cands = keys, silent = true }
 		if not key then
 			return nil, nil, nil
 		end
@@ -231,7 +215,7 @@ local function get_cmd(first_char, keys)
 		DIRECTION_KEYS[#DIRECTION_KEYS + 1] = {
 			on = last_key,
 		}
-		local direction_key = ya.which({ cands = DIRECTION_KEYS, silent = true })
+		local direction_key = ya.which { cands = DIRECTION_KEYS, silent = true }
 		if not direction_key then
 			return nil, nil, nil
 		end
@@ -253,9 +237,7 @@ local function is_tab_command(command)
 	return false
 end
 
-local get_active_tab = ya.sync(function(_)
-	return cx.tabs.idx
-end)
+local get_active_tab = ya.sync(function(_) return cx.tabs.idx end)
 
 local get_cache_or_first_dir = ya.sync(function(state)
 	if state._enter_mode == ENTER_MODE_CACHE then
@@ -391,9 +373,6 @@ return {
 
 		render_clear()
 	end,
-
-	---@param state table
-	---@param args Rm.Opts
 	setup = function(state, args)
 		if not args then
 			return

@@ -157,7 +157,10 @@ prepend_previewers = [
   # { url = "*.jsonc", run = "rich-preview" },
 
   { url = "*.{ipynb,json,jsonc}", run = "rich-preview" },
-  { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+  #
+  # { url = "*.{md,markdown,txt}", run = "mdv-previewer" },
+  # { mime = "text/markdown", run = "mdv-previewer" },
+  # { mime = "message/rfc822", run = "mdv-previewer" },
 
   # { url = "*.{lua}", run = "rich-preview" },
 
