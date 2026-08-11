@@ -38,13 +38,7 @@ $ht colorize blue \"$blue_example\"
 end
 
 function __has_newline_suffix --argument-names str --description "Ext. simple 'parser' - Handles newline's in user provided text"
-    # Small implementtion of a parser to handle newlines on user provided text
-    # set -l t $argv
-    if string match -qr '\n$' -- $str
-        return 0
-    else
-        return 1
-    end
+    string match -qr '([\n|\r]|\r\n)$' -- $str; and echo 0; or echo 1
 end
 
 function __colorize_handler --description 'Wrap text with ANSI color codes'
@@ -61,12 +55,15 @@ function __colorize_handler --description 'Wrap text with ANSI color codes'
     set -l color_name $argv[1]
     set -l text $argv[2..-1] # Allow multiple words
 
+    set -l close_color "\033[0m" # ANSI reset code
+
     # set -l text $rest[2..-1] # Allow multiple words
+
+    set -l had_nl (__has_newline_suffix $text)
 
     # If the text already ends with a newline, don't add another
     # set text (printf "%s" $text | tr -d '\n')
-
-    set text (string escape $text | tr -d '\n')
+    set text (string escape -- $text | tr -d '\n')
 
     # Color mapping (like your hashmap)
     set -l color_code
@@ -110,23 +107,12 @@ function __colorize_handler --description 'Wrap text with ANSI color codes'
             return 1
     end
 
-    # Join text with spaces and wrap with color
-    # printf "%s%s\e[0m" $color_code (string join ' ' (string unescape -- $text))
-    set -l full_text (string join ' ' (string unescape -- $text))
+    set text (string trim -- $text | string replace --regex '(\n|\\n|\r|\\r)' '')
 
-    # printf "$color_code$full_text\033[0m"
-    # printf "value of color_code: %s\n" $color_code
-    # printf "%s%s\033[0m" $color_code $full_text
+    set -l full_text (string join ' ' -- "$color_code$text$close_color" | string unescape --)
+    set -l res (math bitor $had_nl, (__has_newline_suffix $full_text)) # if either value is 1, we set as 1 (bitor)
 
-    if not test (__has_newline_suffix $full_text)
-        # not string match -qr '\n$' -- $full_text
-        echo -en "$color_code$full_text\033[0m"
-    else
-        echo -en "$color_code$full_text\033[0m\n"
-    end
-
-    # if the last char is NOT a newline literal '\n' then we append one, otherwise return 0
-    # printf "\n"
+    printf "%b" $full_text
     return 0
 end
 
@@ -137,8 +123,6 @@ function __gen_colors --description "Generates a buffer of 'colors' (based on \$
 
     set -l idx 0
     set -l colors_buf ""
-
-    # printf "total count: %s\ncurrent idx: %s\n\n" $colors_len $idx
 
     for color in $COLORS
         if test $idx -eq $(math 0) # We don't want a newline sep on the first print
