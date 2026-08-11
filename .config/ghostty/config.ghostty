@@ -36,6 +36,7 @@ window-padding-x = 4
 window-padding-y = 2
 window-padding-balance = true
 
+
 # Remove annoying popup thing at bottom
 app-notifications = no-clipboard-copy
 # ,no-config-reload
