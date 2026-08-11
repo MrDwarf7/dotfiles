@@ -5,6 +5,8 @@
 --- Each stanza below emits one effect rule matched on the bucket tag.
 --- App membership lives in per-app files (they call bucket()).
 
+---@module 'types'
+
 --- Takes a table and a key, and returns the value associated with that key in the table.
 --- Is used as the `__index` metamethod for the given table, allowing for case insensitive lookup of keys.
 ---

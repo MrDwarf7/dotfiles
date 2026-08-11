@@ -9,8 +9,14 @@ local share_title = ".*is sharing (a window|your screen).*"
 
 bkt.assign_bucket({ title = share_title }, v.bucket)
 
-hl.window_rule({
-  name = "position-screen-share",
-  match = { title = share_title },
-  move = { "(monitor_w*.5-window_w*.5)", "(monitor_h-window_h-12)" },
-})
+---@type HyprConfig.HL.WindowRuleSpec[]
+local rules = {
+  {
+    name = "position-screen-share",
+    match = { title = share_title },
+    move = { "(monitor_w*.5-window_w*.5)", "(monitor_h-window_h-12)" },
+  },
+}
+for _, rule in ipairs(rules) do
+  hl.window_rule(rule)
+end

@@ -7,18 +7,25 @@ local rgx = "^(org.mozilla.[tT]hunderbird)$"
 
 bkt.assign_bucket({ class = rgx }, v.bucket)
 
---- Compose/write windows: float + center + size + opacity.
-hl.window_rule({
-  name = "tag-thunderbird-write",
-  match = { class = rgx, title = "^(Write:\\s.*)$" },
-  tag = "+thunderbird-write",
-})
-hl.window_rule({
-  name = "effect-thunderbird-write",
-  match = { tag = "thunderbird-write" },
-  center = true,
-  float = true,
-  opacity = "1.0 override 1.0 override",
-  persistent_size = true,
-  size = "1600 900",
-})
+---@type HyprConfig.HL.WindowRuleSpec[]
+local rules = {
+  --- Compose/write windows: float + center + size + opacity.
+  {
+    name = "tag-thunderbird-write",
+    match = { class = rgx, title = "^(Write:\\s.*)$" },
+    tag = "+thunderbird-write",
+  },
+  {
+    name = "effect-thunderbird-write",
+    match = { tag = "thunderbird-write" },
+    center = true,
+    float = true,
+    opacity = "1.0 override 1.0 override",
+    persistent_size = true,
+    size = "1600 900",
+  },
+}
+
+for _, rule in ipairs(rules) do
+  hl.window_rule(rule)
+end

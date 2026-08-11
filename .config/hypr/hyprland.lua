@@ -7,6 +7,11 @@
 ---
 --- The env var value maps directly to a folder name (vanilla/, dms/, noctalia/),
 --- each containing an init.lua that returns a table with a :setup() method.
+---@module 'types'
+---@type HyprTypes
+TYPES = require("types")
+
+hl = TYPES.hl
 
 require("shared.env") -- literally the first thing we do.
 

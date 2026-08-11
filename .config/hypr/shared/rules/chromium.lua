@@ -7,19 +7,27 @@ local rgx = "[cC]hromium"
 
 bkt.assign_bucket({ class = rgx }, v.bucket)
 
---- Main window size (not covered by bucket).
-hl.window_rule({ name = "size-chromium-main", match = { class = rgx }, size = "2660 1300" })
+---@type HyprConfig.HL.WindowRuleSpec[]
+local rules = {
 
---- Devtools sub-window.
-hl.window_rule({
-  name = "tag-chromium-devtools",
-  match = { class = rgx, title = "Devtools" },
-  tag = "+chromiumDevtools",
-})
-hl.window_rule({
-  name = "effect-chromium-devtools",
-  match = { tag = "chromiumDevtools" },
-  center = true,
-  float = true,
-  persistent_size = true,
-})
+  --- Main window size (not covered by bucket).
+  { name = "size-chromium-main", match = { class = rgx }, size = "2660 1300" },
+
+  --- Devtools sub-window.
+  {
+    name = "tag-chromium-devtools",
+    match = { class = rgx, title = "Devtools" },
+    tag = "+chromiumDevtools",
+  },
+  {
+    name = "effect-chromium-devtools",
+    match = { tag = "chromiumDevtools" },
+    center = true,
+    float = true,
+    persistent_size = true,
+  },
+}
+
+for _, rule in ipairs(rules) do
+  hl.window_rule(rule)
+end

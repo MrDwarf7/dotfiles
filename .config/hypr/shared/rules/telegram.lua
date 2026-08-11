@@ -7,9 +7,15 @@ local rgx = "QQ|Telegram|org.telegram.desktop"
 
 bkt.assign_bucket({ class = rgx }, v.bucket)
 
---- Persistent size (not covered by bucket).
-hl.window_rule({
-  name = "extra-telegram-persist",
-  match = { class = rgx },
-  persistent_size = true,
-})
+---@type HyprConfig.HL.WindowRuleSpec[]
+local rules = {
+  {
+    name = "extra-telegram-persist",
+    match = { class = rgx },
+    persistent_size = true,
+  },
+}
+
+for _, rule in ipairs(rules) do
+  hl.window_rule(rule)
+end

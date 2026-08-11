@@ -1,6 +1,7 @@
 --- Window rules loader.
 --- Each module calls hl.window_rule() directly at require time.
 --- No registry, no generators, no DSL. Just Lua calling the API.
+---@module 'types'
 
 ---@class HyprConfig.Shared.Rules
 ---@field setup fun():Associated|bool|nil Returns true if setup completed successfully, false or nil otherwise.
