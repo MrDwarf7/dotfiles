@@ -42,6 +42,7 @@ return {
   }, -- Syntax HL for tridactylrc files
 
   { "Bilal2453/luvit-meta", lazy = true }, -- apparently helps with LSP for `vim.uv` and, of course for luvit etc.
+  { "DrKJeff16/wezterm-types", lazy = true, ft = "lua" }, -- wezterm type support
 
   -- TODO: later --
 

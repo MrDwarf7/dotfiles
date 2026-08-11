@@ -125,6 +125,56 @@ setmetatable(ccl, {
   end,
 })
 
+---@type TodoOptions
+local opts = {
+  highlight = {
+    -- pattern or table of patterns, used for highlighting (vim regex)
+    -- THIS IS VIMGREP-esq
+    pattern = {
+      -- default
+      -- TODO: asd
+      [[.*<(KEYWORDS)\s*:]],
+
+      -- below will match either:
+      -- TODO(@refactor):
+
+      -- TODO(#1):
+
+      [[.*<(KEYWORDS)\([\@\#].*\)\s*:]],
+    },
+  },
+  signs = true, -- Show icons in the signs column
+  merge_keywords = true,
+  keywords = {
+      -- stylua: ignore start
+      FIX = { icon = " ", color = "error" },
+      HACK = { icon = ",", color = "warning" },
+      NOTE = { icon = " ", color = "hint" },
+      PERF = { icon = " ", color = "warning" },
+      TODO = { icon = " ", color = "info" },
+      WARN = { icon = " ", color = "warning" },
+      -- custom additions
+      IMP = { icon = " ", color = "hint" }, -- nf-fa-exclamation
+      SEE = { icon = " ", color = "warning" },
+      FEAT = { icon = "", color = ccl("feat") }, -- nf-fa-lightbulb_o
+    -- FEAT = { icon = "", color = ccl["feat"] },
+
+    -- stylua: ignore end
+  },
+  search = {
+    command = "rg",
+    args = {
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+    },
+    -- THIS USES RG SYNTAX! not vimgrep!!
+    pattern = [[\b(KEYWORDS)(\([\@\#].*\))?:]],
+  },
+}
+
 ---@type LazyPluginBase
 return {
   "folke/todo-comments.nvim",
@@ -158,35 +208,5 @@ return {
   },
 
   ---@type TodoOptions
-  opts = {
-    signs = true, -- Show icons in the signs column
-    merge_keywords = true,
-    keywords = {
-      -- stylua: ignore start
-      FIX = { icon = " ", color = "error" },
-      HACK = { icon = ",", color = "warning" },
-      NOTE = { icon = " ", color = "hint" },
-      PERF = { icon = " ", color = "warning" },
-      TODO = { icon = " ", color = "info" },
-      WARN = { icon = " ", color = "warning" },
-      -- custom additions
-      IMP = { icon = " ", color = "hint" }, -- nf-fa-exclamation
-      SEE = { icon = " ", color = "warning" },
-      FEAT = { icon = "", color = ccl("feat") }, -- nf-fa-lightbulb_o
-      -- FEAT = { icon = "", color = ccl["feat"] },
-
-      -- stylua: ignore end
-    },
-    search = {
-      command = "rg",
-      args = {
-        "--color=never",
-        "--no-heading",
-        "--with-filename",
-        "--line-number",
-        "--column",
-      },
-      pattern = [[\b(KEYWORDS):]],
-    },
-  },
+  opts = opts,
 }

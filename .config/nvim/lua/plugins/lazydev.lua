@@ -3,7 +3,9 @@ return {
   -- lazy = true,
   lazy = false,
   ft = "lua",
+  ---@type lazydev.Config
   opts = {
+    ---@type lazydev.Library.spec[]
     library = {
       { path = "LazyVim", words = { "LazyVim" } },
       { path = "lazy.nvim", words = { "Lazy*" } },
@@ -17,7 +19,9 @@ return {
       { path = "plenary", words = { "plenary" } },
       { path = "nvim-dap-ui" },
 
+      -- { path = "wezterm-types", mods = { "wezterm" } },
       { path = "wezterm-types", words = { "wezterm" } },
+      -- vim.fn.stdpath("data") .. "/lazy/wezterm-types/lua/wezterm/types/wezterm.lua",
       { path = "${3rd}/luv/library", words = { "vim%.uv" } },
       { path = "${3rd}/busted/library", words = { "describe", "it", "before_each", "after_each" } },
       { path = "${3rd}/luaassert/library", words = { "assert" } },

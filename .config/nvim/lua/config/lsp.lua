@@ -114,7 +114,7 @@ function LSP.get_default_capabilities()
       blink_cmp.get_lsp_capabilities({
         textDocument = {
           completion = {
-            snippetSupport = true,
+            snippetSupport = false,
           },
         },
       }, true)

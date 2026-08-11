@@ -39,7 +39,7 @@ local my_binds = {
   my_keys = {
     { "<leader>yn", function() vim.fn.setreg("+", Converter.filename()) end, desc = "Copy [Y]ank [n]ame" },
     -- { "<Leader>yc", function() vim.fn.setreg("+", Converter.fullpath()) end, desc = "Copy [Y]ank [c]urrent" },
-    { "<Leader>yf", function() vim.fn.setreg("+", Converter.fullpath()) end, desc = "Copy [Y]ank [c]urrent" },
+    { "<Leader>yf", function() vim.fn.setreg("+", Converter.fullpath()) end, desc = "Copy [Y]ank [f]ullpath" },
     { "<leader>yd", function() vim.fn.setreg("+", Converter.dirpath()) end, desc = "Copy [Y]ank [d]irectory" },
     { "<leader>yN", function() vim.fn.setreg("+", Converter.filename({ strip_extension = true })) end, desc = "Copy [Y]ank [d]irectory" },
   -- stylua: ignore end

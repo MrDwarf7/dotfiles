@@ -1,6 +1,7 @@
 require("plugins.colorful-menu")
 
 ---@private
+---@return blink.cmp.Draw
 local function minimal()
   return {
     gap = 1,
@@ -13,6 +14,7 @@ local function minimal()
 end
 
 ---@private
+---@return blink.cmp.Draw
 local function basic()
   return {
     gap = 1,
@@ -27,6 +29,7 @@ local function basic()
 end
 
 ---@private
+---@return blink.cmp.Draw
 local function clean()
   return {
     gap = 1,
@@ -40,6 +43,7 @@ local function clean()
 end
 
 ---@private
+---@return blink.cmp.Draw
 local function colorful()
   return {
     -- We don't need label_description now because label and label_description are already
@@ -67,9 +71,13 @@ end
 ---@type table<MenuTypes|MenuTypesE, fun(): blink.cmp.Draw>
 ---@enum MenuTypes
 local fn_names = {
+  ---@type fun(): blink.cmp.Draw
   basic = basic,
+  ---@type fun(): blink.cmp.Draw
   clean = clean,
+  ---@type fun(): blink.cmp.Draw
   colorful = colorful,
+  ---@type fun(): blink.cmp.Draw
   minimal = minimal,
 }
 setmetatable(fn_names, {

@@ -1,7 +1,7 @@
 ---@class utils.Utils
 ---@field arch utils.Arch
 -- ---@field autofmt: utils.AutoFmt
----@field bufdel utils.BufDel
+---@field buf utils.Buf
 ---@field converter utils.Converter
 ---@field list utils.List
 ---@field output utils.Output
@@ -14,7 +14,7 @@
 local Utils = {
   arch = {},
   -- autofmt =  nil,
-  bufdel = {},
+  buf = {},
   converter = {},
   list = {},
   output = {},
@@ -26,7 +26,7 @@ local Utils = {
 -- local Utils = {
 -- 	arch = require("utils.arch"),
 -- 	-- autofmt =  require("utils.autofmt")
--- 	bufdel = require("utils.bufdel"),
+-- 	buf = require("utils.buf"),
 -- 	converter = require("utils.converter"),
 -- 	list = require("utils.list"),
 -- 	output = require("utils.output"),
@@ -42,7 +42,7 @@ local fields_table = {
   ["__fields"] = true,
   ["__tostring"] = true,
   ["__arch"] = false,
-  ["__bufdel"] = false,
+  ["__buf"] = false,
   ["__converter"] = false,
   ["__list"] = false,
   ["__output"] = false,
@@ -191,11 +191,11 @@ function Utils.setup()
       end
     end,
 
-    __bufdel = function()
-      if type(Utils.bufdel) ~= "nil" then
-        return Utils.bufdel
+    __buf = function()
+      if type(Utils.buf) ~= "nil" then
+        return Utils.buf
       else
-        Utils.bufdel = require("utils.bufdel")
+        Utils.buf = require("utils.buf")
       end
     end,
 

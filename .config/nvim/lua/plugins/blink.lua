@@ -1,73 +1,87 @@
+---@type blink.cmp.Config
 local opts = {}
+
+-- local CMDLINE_MIN_KW_LEN = 2
 
 opts.fuzzy = {
   implementation = "prefer_rust",
+  --- previously*
+  -- sorts = {
+  --   "exact",
+  --   "sort_text",
+  --   "score",
+  --   "label",
+  --   "kind",
+  -- },
+
   sorts = {
-    "exact",
-    "sort_text",
     "score",
+    "sort_text",
     "label",
     "kind",
+    "exact",
   },
 }
+
+local filetype_types_text = { "markdown", "text", "txt" }
+local sources_types_text = {
+  "copilot",
+  "dictionary",
+  "thesaurus",
+}
+
+---@param additional string[]|nil
+local set_text_types_sources = function(additional)
+  if additional then
+    return vim.list_extend(vim.deepcopy(sources_types_text), additional)
+  else
+    return vim.deepcopy(sources_types_text)
+  end
+end
 
 opts.sources = {
   -- Items with a double "-- --" I've disabled to test perf. related things,
   -- not so much because I dont' want to use them
 
   default = {
-    --
     "lsp",
     "buffer",
-
-    "copilot",
-    "lazydev", -- conditional anyway
-    -- "ghostty",
-    -- -- "conventional_commits", -- add it to the list
-    "sshconfig",
-    -- "tmux",
-    -- "wezterm",
-    -- "avante",
-    -- "datword",
-
-    -- "ripgrep",
-    "snippets",
     "path",
-    -- "env",
-
-    --
+    "copilot",
   },
 
   per_filetype = {
     lua = {
-      "lsp",
-      "lazydev", -- conditional anyway
-      "path",
-      "copilot",
-
+      inherit_defaults = true,
+      "lazydev",
       -- "wezterm",
-      "buffer",
       "snippets",
     },
     rust = {
-      "lsp",
-      "buffer",
-      "path",
-      "copilot",
+      inherit_defaults = true,
       -- "env",
       -- "snippets",
     },
 
-    text = {
-      "copilot",
-      "dictionary",
-      "thesaurus",
+    sshconfig = {
+      inherit_defaults = true,
+      "sshconfig",
     },
-    markdown = {
-      "copilot",
-      "dictionary",
-      "thesaurus",
+    sshconfig_hosts = {
+      inherit_defaults = true,
+      "sshconfig",
     },
+    ghostty = {
+      inherit_defaults = true,
+      "ghostty",
+    },
+    tmux = {
+      inherit_defaults = true,
+      "tmux",
+    },
+
+    text = set_text_types_sources(),
+    markdown = set_text_types_sources(),
 
     -- sql stuff
     -- sql = { "dadbod" },
@@ -85,12 +99,21 @@ opts.sources = {
     copilot = {
       name = "copilot",
       module = "blink-copilot",
-      score_offset = 800,
+      score_offset = 900,
       async = true,
       opts = {
         max_completions = 4, -- 'override' default (default is 4)
         max_attempts = 4,
       },
+      -- TODO: [blink_fixes] : Copilot suggestion fixes
+
+      --- copilot items don't correct 'fuzzy'ed completion entries.
+      --- Eg: writing a lazily entered fn name without underscores etc.
+      --- then hitting 'tab'/'enter' to take a copilot suggestion
+      --- will not correct the fn name itself (to the already discovered LSP name that is correct).
+      --- This mean you can end up with stuff like:
+      --- foo.reallylngfnname() -- instead of foo.really_long_fn_name()
+      -- transform_items = function(ctx, items) end,
     },
 
     -- sql stuff
@@ -103,10 +126,10 @@ opts.sources = {
       score_offset = 1000,
     },
 
-    -- ghostty = {
-    --   name = "Ghostty",
-    --   module = "blink-cmp-ghostty",
-    -- },
+    ghostty = {
+      name = "Ghostty",
+      module = "blink-cmp-ghostty",
+    },
 
     -- -- conventional_commits = {
     -- --   name = "Conventional Commits",
@@ -122,18 +145,32 @@ opts.sources = {
     -- -- },
 
     sshconfig = {
+      enabled = true,
+      -- enabled = function()
+      --   return vim.bo.filetype == "sshconfig" or vim.bo.filetype == "sshconfig_hosts"
+      -- end,
       name = "SshConfig",
       module = "blink-cmp-sshconfig",
+      --- @module 'blink-cmp-sshconfig'
+      --- @type blink-cmp-sshconfig.Options
+      opts = {
+        prefer_pre_generated = true, -- default
+      },
     },
 
-    -- tmux = {
-    --   name = "Tmux",
-    --   module = "blink-cmp-tmux",
-    -- },
+    tmux = {
+      name = "Tmux",
+      module = "blink-cmp-tmux",
+    },
 
     -- wezterm = {
     --   name = "wezterm",
     --   module = "blink-cmp-wezterm",
+    --   -- enabled = function()
+    --   --   local full_path = vim.api.nvim_buf_get_name(0)
+    --   --   local contains_wezterm = string.find(full_path, "wezterm.lua") ~= nil
+    --   --   return vim.bo.filetype == "lua" and contains_wezterm
+    --   -- end,
     --   -- default options
     --   opts = {
     --     all_panes = false,
@@ -151,8 +188,9 @@ opts.sources = {
     lsp = {
       name = "LSP",
       module = "blink.cmp.sources.lsp",
-      score_offset = 900,
+      score_offset = 910,
       async = true,
+      -- min_keyword_length = 0,
       min_keyword_length = 0,
       -- fallbacks = {}, -- defaults out to the "buffer" source
     },
@@ -171,8 +209,39 @@ opts.sources = {
           end, vim.api.nvim_list_bufs())
         end,
       },
-    },
+      -- keep case of first char
+      transform_items = function(a, items)
+        local kw = a.get_keyword()
+        local correct
+        local case
+        if kw:match("%l") then
+          correct = "^%u%l+$"
+          case = string.lower
+        elseif kw:match("^%u") then
+          correct = "^%l+$"
+          case = string.upper
+        else
+          return items
+        end
 
+        -- avoid duplicates from the correction itself
+        local seen = {}
+        local out = {}
+        for _, item in ipairs(items) do
+          local raw = item.insertText
+          if raw:match(correct) then
+            local text = case(raw:sub(1, 1)) .. raw:sub(2)
+            item.insertText = text
+            item.label = text
+          end
+          if not seen[item.insertText] then
+            seen[item.insertText] = true
+            table.insert(out, item)
+          end
+        end
+        return out
+      end,
+    },
     dictionary = {
       name = "blink-cmp-words",
       module = "blink-cmp-words.dictionary",
@@ -217,6 +286,7 @@ opts.sources = {
         similarity_depth = 2,
       },
     },
+
     -- avante = {
     --   name = "Avante",
     --   module = "blink-cmp-avante",
@@ -248,16 +318,26 @@ opts.sources = {
     --   },
     -- },
 
+    -- snippets = {
+    --   enabled = false,
+    --   score_offset = -200,
+    --   opts = {
+    --     friendly_snippets = true, -- default
+    --     -- snippets = {
+    --     --   preset = "luasnip",
+    --     -- },
+    --   },
+    --   fallbacks = {},
+    -- },
+
     snippets = {
-      enabled = false,
-      score_offset = -200,
+      preset = "luasnip",
       opts = {
         friendly_snippets = true, -- default
-        -- snippets = {
-        --   preset = "luasnip",
-        -- },
       },
-      fallbacks = {},
+      should_show_items = function(ctx)
+        return ctx.trigger.initial_kind ~= "trigger_character"
+      end,
     },
 
     path = {
@@ -270,13 +350,40 @@ opts.sources = {
         end,
       },
     },
-    --
+
+    omni = {
+      module = "blink.cmp.sources.complete_func",
+      enabled = function()
+        return vim.bo.omnifunc ~= "v:lua.vim.lsp.omnifunc"
+      end,
+      ---@type blink.cmp.CompleteFuncOpts
+      opts = {
+        ---@type fun():string|nil|function
+        complete_func = function()
+          return vim.bo.omnifunc
+        end,
+      },
+    },
+
+    -- idk, is broken or smth
+    -- cmdline = {
+    --   min_keyword_length = function(ctx)
+    --     if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
+    --       return CMDLINE_MIN_KW_LEN
+    --     end
+    --   end,
+    -- },
   },
 }
 
 opts.completion = {
   -- trigger = {},
-  -- list = {},
+  list = {
+    selection = {
+      preselect = false,
+      auto_insert = true,
+    },
+  },
 
   menu = {
     auto_show = true,
@@ -285,6 +392,7 @@ opts.completion = {
     max_height = 80, -- default is 20, (or does it use LazyVim's options.pumheight setting? -- changing it here overrides it anyway)
     border = "single",
     -- draw = require("blink_modules.comp_menu_types").colorful,
+
     draw = require("blink_modules.comp_menu_types").colorful(), -- menu_type
   },
 
@@ -321,7 +429,6 @@ opts.signature = {
   },
 }
 
--- ---@type blink.cmp.CmdlineConfigPartial
 opts.cmdline = {
   enabled = true,
 
@@ -342,11 +449,11 @@ opts.cmdline = {
       },
     },
     menu = {
-      auto_show = false,
+      auto_show = true,
     },
     -- trigger = {},
     ghost_text = {
-      enabled = true,
+      enabled = false,
     },
   },
 
@@ -413,9 +520,7 @@ opts.cmdline = {
       -- end,
       "select_next",
     },
-
     ["<S-Tab>"] = { "snippet_backward", "fallback" },
-
     -- preset = "inherit",
     -- keymap = {
     --   ["<Tab>"] = { "show_and_insert_or_accept_single", "select_next" },
@@ -466,12 +571,16 @@ opts.keymap = {
   ["<C-p>"] = { "select_prev", "fallback_to_mappings" },
   ["<C-n>"] = { "select_next", "fallback_to_mappings" },
 
-  ["<C-e>"] = { "scroll_documentation_down", "fallback" },
-  ["<C-y>"] = { "scroll_documentation_up", "fallback" },
+  --- Scroll amount is 4 by default.
 
   ["<C-d>"] = { "scroll_documentation_down", "fallback" },
   ["<C-u>"] = { "scroll_documentation_up", "fallback" },
   -- ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+
+    -- stylua: ignore start
+  ["<C-e>"] = { function(cmp) return cmp.scroll_documentation_down(1) end, "fallback" },
+  ["<C-y>"] = { function(cmp) return cmp.scroll_documentation_up(1)   end, "fallback" },
+  -- stylua: ignore end
 }
 
 return {
@@ -486,38 +595,28 @@ return {
     { "saghen/blink.lib",                             lazy = false }, -- required unless pinning to 'v1'
     -- { "j-hui/fidget.nvim", enabled = false,            lazy = true, event = "VeryLazy" },
     { "Saghen/blink.compat",                          lazy = false },
+    { "fang2hou/blink-copilot",                       lazy = true },
+    -- { "zbirenbaum/copilot.lua",                       lazy = true },
+    { "rafamadriz/friendly-snippets",                 lazy = false },
+    { "L3MON4D3/LuaSnip",                             lazy = false },
 
     { "xzbdmw/colorful-menu.nvim",                    lazy = false },
 
-    ---NOTE: remember that if you're wondering why snippets aren't working/turned on:
-    --- check the 'transform_items function in blink_modules.sources,
-    --- as that turns ALL snippets off that are associated with blink.cmp.types.
-    --- Will need to comment it, or filter by specific's
+    { "archie-judd/blink-cmp-words",                  lazy = true, enabled = true, ft = filetype_types_text },
 
-    -- { "L3MON4D3/LuaSnip",                             lazy = false, version = "2.*" ,
-    --   -- dependencies = { "rafamadriz/friendly-snippets" }
-    -- },
+    ----- Specific languages/sources
+    { "folke/lazydev.nvim",                           lazy = true,                 ft = "lua" },
+    { "bydlw98/blink-cmp-sshconfig",                  lazy = true, enabled = true, ft = { "sshconfig", "sshconfig_hosts" },  build = "make" },
+    { "barrettruth/blink-cmp-ghostty",                lazy = true, enabled = true, ft = "ghostty" },
+    { "barrettruth/blink-cmp-tmux",                   lazy = true, enabled = true, ft = "tmux" },
 
-    -- { "L3MON4D3/LuaSnip",                             lazy = false,
-      -- dependencies = { "rafamadriz/friendly-snippets" }
-    -- },
-
-    { "rafamadriz/friendly-snippets",                 lazy = false },
-    { "folke/lazydev.nvim",                           lazy = false,                ft = "lua" },
-    { "fang2hou/blink-copilot",                       lazy = true },
-    { "zbirenbaum/copilot.lua",                       lazy = true },
-    { "bydlw98/blink-cmp-sshconfig",                  lazy = true, enabled = true, ft = "sshconfig", build = "make" },
-    -- { "barrettruth/blink-cmp-tmux",                   lazy = true,                 ft = "tmux" },
     -- { "junkblocker/blink-cmp-wezterm",                lazy = true, enabled = true, ft = "lua" },
-    -- { "bydlw98/blink-cmp-env",                        lazy = true, enabled = true, ft = "env" },
-    { "archie-judd/blink-cmp-words",                  lazy = true, enabled = true, ft = { "markdown", "text", "txt" } },
 
-    -- { "barrettruth/blink-cmp-ghostty",                lazy = true, enabled = true, ft = "ghostty" },
     -- -- { "disrupted/blink-cmp-conventional-commits",     lazy = false },
+    -- { "bydlw98/blink-cmp-env",                        lazy = true, enabled = true, ft = "env" },
     -- { "Kaiser-Yang/blink-cmp-avante",                 lazy = true },
     -- { "mikavilpas/blink-ripgrep.nvim",                lazy = true, enabled = true, version = "*" }, -- use the latest stable version
     -- { "xieyonn/blink-cmp-dat-word",                   lazy = true },
-
     -- stylua: ignore end
   },
 

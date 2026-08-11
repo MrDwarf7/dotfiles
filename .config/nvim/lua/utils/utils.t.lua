@@ -19,7 +19,20 @@
 -------------------------------------------------
 
 -------------------------------------------------
----@class utils.BufDel: utils.Base
+--- General buffer deletion options.
+---@class utils.Buf.delete.Opts
+---@field buf? number Buffer to delete. Defaults to the current buffer
+---@field file? string Delete buffer by file name. If provided, `buf` is ignored
+---@field force? boolean Delete the buffer even if it is modified
+---@field filter? fun(buf: number): boolean Filter buffers to delete
+---@field wipe? boolean Wipe the buffer instead of deleting it (see `:h :bwipeout`)
+
+--- Options for checking if a buffer is valid.
+---@class utils.Buf.is_valid.Opts
+---@field bufnr? integer The buffer number to check. Defaults to 0 (current buffer).
+---@field buf? integer Alias for bufnr. The buffer number to check. Defaults to 0 (current buffer).
+
+---@class utils.Buf: utils.Base
 --- Safely handle buffer deletion operations.
 --- Includes type checks and user prompts for unsaved changes.
 ---
@@ -27,18 +40,17 @@
 --- - either the current buffer if `buf` is not provided
 --- - or the buffer `buf` if it is a number
 --- - or every buffer for which `buf` returns true if it is a function
----@field delete fun(opts?: utils.BufDel.Opts): utils.BufDel|nil
+---@field delete fun(opts?: utils.Buf.delete.Opts): utils.Buf|nil
 --- Delete all buffers
----@field all fun(opts?: utils.BufDel.Opts): nil
+---@field all fun(opts?: utils.Buf.delete.Opts): nil
 --- Delete all buffers except the current one
----@field other fun(opts?: utils.BufDel.Opts): utils.BufDel|nil
-
----@class utils.BufDel.Opts
----@field buf? number Buffer to delete. Defaults to the current buffer
----@field file? string Delete buffer by file name. If provided, `buf` is ignored
----@field force? boolean Delete the buffer even if it is modified
----@field filter? fun(buf: number): boolean Filter buffers to delete
----@field wipe? boolean Wipe the buffer instead of deleting it (see `:h :bwipeout`)
+---@field other fun(opts?: utils.Buf.delete.Opts): utils.Buf|nil
+---
+--- Check if the current buffer is valid via:
+--- * exists,
+--- * has a line count > 1,
+--- * or has a non-empty name.
+---@field is_valid fun(opts?: utils.Buf.is_valid.Opts): boolean
 -------------------------------------------------
 
 -------------------------------------------------

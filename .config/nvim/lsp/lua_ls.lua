@@ -97,6 +97,7 @@ local library_paths = {
   "lua",
   "lua/?.lua",
   "lua/?/init.lua",
+  -- vim.fn.stdpath("data") .. "/lazy/wezterm-types/lua/wezterm/types/wezterm.lua",
 }
 
 library_paths = vim.list_extend(

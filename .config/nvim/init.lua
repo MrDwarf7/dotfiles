@@ -96,13 +96,13 @@ local lazy_opts = {
   },
 }
 
--- require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
-
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 
-local LSP = require("config.lsp").setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+local LSP = require("config.lsp")
 
 if not LSP then
   require("utils").output.warn("Failed to set up LSP")
+else
+  LSP.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
 end

@@ -96,16 +96,17 @@ function Keymaps.map(mode, lhs, rhs, opts)
     -- default to normal mode
     mode = "n"
   end
+  local output = require("utils.output")
 
-  lhs = lhs or error("Keymaps.map: lhs is required")
-  rhs = rhs or error("Keymaps.map: rhs is required")
+  lhs = lhs or output.error("Keymaps.map: lhs is required")
+  rhs = rhs or output.error("Keymaps.map: rhs is required")
   opts = opts or Keymaps.mod()
 
   -- store the keymap in Keymaps.keys
   if type(mode) == "string" then
     mode = { mode }
   elseif type(mode) ~= "table" then
-    error("Keymaps.map: mode must be a string or table of strings")
+    output.error("Keymaps.map: mode must be a string or table of strings")
   end
   for _, m in ipairs(mode) do
     Keymaps.keys[m] = Keymaps.keys[m] or {}
@@ -199,6 +200,27 @@ map("n", "y<S-l>", "y$", silent_opts) -- Same as above for yanking
 
 map("n", "d<S-h>", "d^", silent_opts) -- Same as above for yanking
 map("n", "d<S-l>", "d$", silent_opts) -- Same as above for yanking
+
+-- map({ "n", "v" }, "yf", "ggVGy", silent_opts("[y]ank [f]ile")) -- Yank entire file
+map("n", "ygf", "<CMD>normal! gg<S-v><S-g>y<CR>", silent_opts("[y]ank [f]ile")) -- Yank entire file
+map("n", "ygF", "<CMD>normal! gg<S-v><S-g>y<CR><CMD>normal! G<CR>", silent_opts("[y]ank [F]ile (bottom)")) -- Yank entire file and end at the bottom of file
+
+-- FIX: [feedkeys] : This isn't properly set up lol...
+-- We _want_ to be able to set a temp. mark and do our usual ggVy
+-- then return to the initial pos.
+-- --
+-- Yank entire file, setting a temp-mark to return to original pos
+-- map("n", "y'", function()
+--   local initial_pos = vim.api.nvim_win_get_cursor(0) -- get initial cursor position
+--   local mark_name = "z" -- use a temporary mark (z) to return to original position
+--   local mark_pos = vim.api.nvim_buf_get_mark(0, mark_name) -- get current position of mark z
+--   vim.api.nvim_feedkeys("m" .. mark_name, "n", false) -- set mark z at current position
+--   -- do the yank stuff
+--   vim.schedule(function()
+--     vim.cmd("normal! gg<S-v><S-g>y") -- yank entire file
+--   end)
+--   vim.api.nvim_win_set_cursor(0, initial_pos) -- return to initial position
+-- end, { silent = false, expr = true, desc = "[y]ank [g]lobal [g]lobal" }) -- Yank entire file and return to original position
 
 map("n", "<C-w>e", "<C-w>=", silent_opts("[e]qualize")) -- ctrl + w + = : easier to hit to equalize the width of buffers
 
@@ -304,6 +326,22 @@ map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "LSP Hover" })
 -- end, { desc = "format [lspconfig]" })
 
 -- buffer things
+map("n", "<Leader>be", function()
+  local bufisvalid = require("utils.buf").is_valid({ bufnr = 0 })
+  if bufisvalid then -- all conditions must be true for the buffer to be considered 'valid'
+    local uor = (vim.api.nvim_get_option_value("splitright") == true and "right" or "left")
+    vim.api.nvim_open_win(0, true, { split = uor, win = 0 })
+    local id_or_err = vim.api.nvim_create_buf(true, false) -- integer: Buffer id, or 0 on error :: _Create_ the new buffer
+    if id_or_err == 0 then
+      require("utils.output").error("Failed to create new buffer")
+      return
+    end
+    vim.api.nvim_win_set_buf(0, id_or_err) -- actually set the buffer in the current window
+    return
+  end
+  return require("utils.output").error("Current buffer is not valid for splitting")
+end, silent_opts("[e]new"))
+
 map("n", "<Leader>bn", "<CMD>bnext<CR>", silent_opts("[n]ext"))
 map("n", "<Leader>bp", "<CMD>bprev<CR>", silent_opts("[p]revious"))
 
@@ -335,17 +373,13 @@ map("n", "]]", function()
   end
 end, { desc = "Next item in LIST" })
 
--- TODO: @plugin -- replace with BufDel impl in utils.bufdel later
 map("n", "<Leader>bd", function()
-  require("utils.bufdel").delete()
-  -- vim.api.nvim_buf_delete(0, { unload = true })
+  require("utils.buf").delete()
 end, silent_opts("[b]uf [d]elete"))
 
 map("n", "<Leader>bD", function()
-  require("utils.bufdel").other()
-  -- vim.api.nvim_buf_delete(0, { force = true })
+  require("utils.buf").other()
 end, silent_opts("[b]uf Wipe"))
--- map("n", "<Leader>bD", vim., silent_opts("[p]revious"))
 
 -- buffer resizing
 map("n", "<Left>", "<CMD>vertical resize +2<CR>", silent_opts)
@@ -390,106 +424,10 @@ map("n", "<leader>tw", function()
   end
 end, silent_opts("[t]oggle [w]rap on"))
 
---- Handles Lua's behaviour of 0+1 indexing, and makes it [Z]ero [B]ased [I]ndexing
----@param num integer|nil
----@return integer?
-local zbi = function(num)
-  if not num then
-    return num
-  end
-  if num == 0 then
-    return num
-  end
-  return num - 1
-end
-
----@class InsertContent
----@field register string The register to use for insertion (e.g., "_")
----@field silent boolean Whether to perform the insertion silently (default: true)
----@field content any Additional content or parameters needed for insertion (e.g., custom text to insert)
-
----@param insertable InsertContent
----@return nil|Error
-local insert_item = function(insertable)
-  insertable = insertable or {
-    register = "_",
-    silent = true,
-    content = nil,
-  }
-
-  if not insertable.content then
-    return error("insert_item: content is required")
-  end
-
-  local mode = vim.api.nvim_get_mode().mode
-  local content = insertable.content
-
-  if type(content) ~= "string" then
-    -- if content is not a string, attempt to convert it to a string for insertion
-    if type(content) == "table" then
-      content = vim.inspect(content)
-    else
-      content = tostring(content)
-    end
-  end
-
-  if not insertable.silent then
-    require("utils.output").info("Inserting content: " .. content)
-  end
-
-  vim.fn.setreg(insertable.register, content)
-  if mode == "v" or mode == "V" then
-    vim.api.nvim_feedkeys("c" .. content, "n", false) -- literally just paste it over the selection
-  elseif mode == "n" then
-    vim.api.nvim_put({ content }, "c", true, false)
-  else
-    require("utils.output").info("Unsupported mode for insert date: " .. mode)
-    return
-  end
-
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false) -- escape insert mode as we exit the fn
-end
-
-map({ "n", "v" }, "<Leader>id", function()
-  local mabye_err = insert_item({
-    register = "_",
-    content = vim.fn.strftime("%Y_%m_%d"),
-  })
-  if mabye_err then
-    require("utils.output").error("Failed to insert date: " .. tostring(mabye_err))
-  end
-end, silent_opts("[i]nsert [d]ate"))
-
-map({ "n", "v" }, "<Leader>i-", function()
-  local maybe_err = insert_item({
-    register = "_",
-    content = tostring("--------------------------------------------------"),
-  })
-  if maybe_err then
-    require("utils.output").error("Failed to insert separator line: " .. tostring(maybe_err))
-  end
-end, silent_opts("[i]nsert [d]ate"))
-
 map({ "v" }, "<Leader>=", function()
   -- TODO: it's... kinda wonky
   require("utils.align_by").align_selection_by_char()
 end, silent_opts("Align by char"))
-
--- vim.keymap.set({ "n", "i", "s" }, "<C-e>", function()
---   if not require("noice.lsp").scroll(4) then
---     return "<C-e>"
---   else
---     return vim.fn.feedkeys("<C-e>", "n")
---   end
--- end, silent_opts)
---
--- vim.keymap.set({ "n", "i", "s" }, "<C-y>", function()
---   if not require("noice.lsp").scroll(-4) then
---     return "<C-y>"
---   else
---     return vim.fn.feedkeys("<C-y>", "n")
---   end
--- end, silent_opts)
 
 local cs = require("utils.comment_swap")
 map({ "n", "v" }, "<Leader>tk", function()
@@ -506,24 +444,9 @@ map({ "n", "v" }, "<Leader>tj", function()
   })
 end, { desc = "Swap comment state of current line and BELOW" })
 
--- map("n", "<Leader>pt", function()
---   local td_util = require("utils.td_colors")
---   if not td_util then
---     require("utils.output").error("Failed to load td_colors module")
---     return
---   end
---   td_util:print_td_default_hexes()
--- end, { desc = "show the default td colors" })
-
--- Example: yank-detection + cursor move, handy for toggling between two
--- near-identical config values (eg `brightness = 0.7172,` vs `-- brightness = 0.8172,`):
--- map({ "n", "v" }, "<Leader>ty", function()
---   handle_comment_swap({
---     direction = CommentSwapDirectionEnum.below,
---     yank_line_detection = true,
---     move_cursor = true,
---   })
--- end, { desc = "Swap/clone current line into the one BELOW" })
+-- local insert = require("utils.insert")
+-- insert.setup(Keymaps)
+require("utils.insert").setup(Keymaps)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 

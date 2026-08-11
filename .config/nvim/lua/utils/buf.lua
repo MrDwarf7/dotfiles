@@ -1,15 +1,10 @@
----@class utils.BufDel
-local BufDel = {
+---@class utils.Buf
+local Buf = {
   debugging = false,
 }
--- local BufDel = setmetatable({}, {
---   __call = function(t, ...)
---     return t.delete(...)
---   end,
--- })
 
-function BufDel.delete(opts)
-  ---@cast opts utils.BufDel.Opts|nil
+function Buf.delete(opts)
+  ---@cast opts utils.Buf.delete.Opts|nil
   opts = opts or {}
   opts = type(opts) == "number" and { buf = opts } or opts
   opts = type(opts) == "function" and { filter = opts } or opts
@@ -17,7 +12,7 @@ function BufDel.delete(opts)
   if type(opts.filter) == "function" then
     for _, b in ipairs(vim.tbl_filter(opts.filter, vim.api.nvim_list_bufs())) do
       if vim.bo[b].buflisted then
-        BufDel.delete(vim.tbl_extend("force", {}, opts, { buf = b, filter = false }))
+        Buf.delete(vim.tbl_extend("force", {}, opts, { buf = b, filter = false }))
       end
     end
     return
@@ -70,38 +65,54 @@ function BufDel.delete(opts)
   end
 
   if vim.api.nvim_buf_is_valid(buf) then
+    ---@diagnostic disable-next-line: param-type-mismatch
     pcall(vim.cmd, (opts.wipe and "bwipeout! " or "bdelete! ") .. buf)
   end
 
-  return BufDel
+  return Buf
 end
 
-function BufDel.all(opts)
-  return BufDel.delete(vim.tbl_extend("force", {}, opts or {}, {
+function Buf.all(opts)
+  return Buf.delete(vim.tbl_extend("force", {}, opts or {}, {
     filter = function()
       return true
     end,
   }))
 end
 
-function BufDel.other(opts)
-  return BufDel.delete(vim.tbl_extend("force", {}, opts or {}, {
+function Buf.other(opts)
+  return Buf.delete(vim.tbl_extend("force", {}, opts or {}, {
     filter = function(b)
       return b ~= vim.api.nvim_get_current_buf()
     end,
   }))
 end
 
-function BufDel.setup()
-  return setmetatable(BufDel, {
-    -- __call = function(t, ...)
-    --   return t.delete(...)
-    -- end,
-    __call = BufDel.delete,
-    __index = BufDel,
-  })
-  -- return BufDel
+function Buf.is_valid(opts)
+  opts = opts or {}
+  local bufnr = opts.bufnr or opts.buf or vim.api.nvim_get_current_buf() or 0
+
+  -- stylua: ignore start
+  local bufisvalid = vim.api.nvim_buf_is_valid(bufnr)             -- bool: true if the buffer is valid (exists and is loaded)
+  local lc_gt_one = vim.api.nvim_buf_line_count(bufnr) > 1        -- bool: true if the buffer has more than 1 line
+
+  local bufname = vim.api.nvim_buf_get_name(bufnr)                -- string: returns whatever the buffer name is (empty string if no name)
+  local bufname_len = string.len(bufname) or #bufname             -- integer: length of the buffer name string
+  local bufname_not_empty = bufname_len > 0 and bufname ~= ""     -- bool: true if the buffer has a name (not empty string)
+  -- stylua: ignore end
+
+  return bufisvalid and (lc_gt_one or bufname_not_empty)
+  -- all conditions must be true for the buffer to be considered 'valid'
 end
 
----@return utils.BufDel
-return BufDel.setup()
+function Buf.setup()
+  return setmetatable(Buf, {
+    __call = function(t, ...)
+      return t.delete(...)
+    end,
+    __index = Buf,
+  })
+end
+
+---@return utils.Buf
+return Buf.setup()
