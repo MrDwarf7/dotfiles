@@ -53,22 +53,24 @@ alias p $PKG_MANAGER
 # See also `pqiv` function that uses the output (if singular) from the above `pqi` function
 # to then call `paru -Siv <output>`
 
-alias ttt 'ya pkg add $argv 2>/dev/null || echo "nah"'
-
-function __shutdown_base_cmd
-    set -l flags (string match -q -r -- '(^-f$|^--force$|^1)' $argv[1]; and printf "--force"; or printf "")
-    eval "shutdown -P $flags now 2>&1; or poweroff $flags -p 2>&1; or systemctl poweroff -p $flags 2>&1; or echo 'Failed to shutdown'; and return 1" || begin
-        echo "Shutdown command failed. Please check your system logs for more information."
-        return 1
-    end
-    return 0
-end
+# function __shutdown_base_cmd
+#     set -l flags (string match -q -r -- '(^-f$|^--force$|^1)' $argv[1]; and printf "--force"; or printf "")
+#     eval "shutdown -P $flags now 2>&1; or poweroff $flags -p 2>&1; or systemctl poweroff -p $flags 2>&1; or echo 'Failed to shutdown'; and return 1" || begin
+#         echo "Shutdown command failed. Please check your system logs for more information."
+#         return 1
+#     end
+#     return 0
+# end
 
 # alias shutdown 'shutdown -h now 2>&1 || poweroff 2>&1 || systemctl poweroff 2>&1 || echo "Failed to shutdown"'
-alias shutdown '__shutdown_base_cmd $argv[1]'
+# alias shutdown '__shutdown_base_cmd $argv[1]'
 # alias reboot reboot ## doesn't need an alias lmao
-alias shutdownf '__shutdown_base_cmd --force'
-alias rebootf 'sudo reboot --force'
+# alias shutdownf '__shutdown_base_cmd --force'
+
+alias shutdown 'shutdown -h now'
+alias shutdownf 'shutdown -h --force now'
+alias reboot 'command reboot'
+alias rebootf 'reboot --force'
 
 alias aa jj
 # interactions with the alias inside of the jj config.toml -> wraps an fzf output to cd
