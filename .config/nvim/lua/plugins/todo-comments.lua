@@ -5,10 +5,34 @@
 -- hint       = "#10B981"
 -- default    = "#7C3AED"
 -- test       = "#FF00FF"
+--
+-- feat       = "#BEE1D4" -- "#a4f7bb"
+-- refactor   = "#ffd86a"
 
+--- Custom Colors Lookup (ccl) table for todo-comments.nvim plugin.
+---@class CustomColorsLookup : table
 local ccl = {
-  ["FEAT"] = "#BEE1D4",
+  ["FEAT"] = "#a4f7bb",
+  ["REF"] = "#ffd86a",
 }
+-- Aliases for different (existing) types
+local ccl_aliases = {
+  ["REFACTOR"] = "REF",
+}
+
+-- stylua: ignore start
+local apply_aliasing = function(alias)
+  if type(alias) ~= "string" then return end
+  alias = string.upper(alias) or ""
+
+  local alias_value = ccl_aliases[alias]
+  if not alias_value then return end                        -- ccl_aliases doesn't have the alias we're mapping over - this almost imp
+  if not ccl[alias] then rawset(ccl, alias, ccl[alias_value]) end  -- set the alias in ccl to the value of the original key
+  return ccl[alias]
+end
+-- stylua: ignore end
+
+require("vim_ext").lst.map(vim.tbl_keys(ccl_aliases), apply_aliasing)
 
 --- Get the color for a given key from the ccl table.
 ---@param key any
@@ -24,55 +48,6 @@ ccl.get = function(key)
   end
   return val
 end
-
--- So.... This version of verify outright CRASHES/LOCKS UP
--- the entire system.
--- Not crash - no kernel reset, no nothing like that.
--- Just...
--- -> Crashes compositor (Hyprland)
--- -> crash to Ly (tui login manager)
--- -> Crashes Ly after about 40s or so
--- -> back to raw tty where can type for about
---    30s then _NOTHING_, full lockup
---
--- This.. Doesn't seem like intended behavior lol....
---
---
---
--- ---@param key string|string[]|table
--- ccl.verify = function(key)
---   local ret
---   vim.validate("key", key, { "string", "table" })
---
---   if type(key) == "string" then
---     key = { key }
---     return ccl.verify(key) -- maybe this? lol.... ooops
---   end
---   if type(key) ~= "table" then
---     require("utils.output").err("ccl.verify: key must be a string or a table of strings.")
---     ret = false
---   end
---   if type(key) == "table" and vim.tbl_isempty(key) then
---     require("utils.output").err("ccl.verify: key table must not be empty.")
---     ret = false
---   end
---
---   local _, err = vim.schedule(function()
---     vim.tbl_map(function(k)
---       vim.validate("key element", k, { "string" })
---       vim.validate("ccl key", ccl[k:upper()], { "string" }, "Color for key '" .. k .. "' not found in ccl table.")
---       ret = true
---     end, key)
---   end)
---
---   if err then
---     require("utils.output").err("ccl.verify: " .. err)
---     ret = false
---   else
---     ret = true
---   end
---   return ret
--- end
 
 --- Verify that the given key is valid and exists in the ccl table.
 --- Uses rawget to avoid triggering the metatable __index method.
@@ -145,22 +120,25 @@ local opts = {
   },
   signs = true, -- Show icons in the signs column
   merge_keywords = true,
-  keywords = {
       -- stylua: ignore start
-      FIX = { icon = " ", color = "error" },
-      HACK = { icon = ",", color = "warning" },
-      NOTE = { icon = " ", color = "hint" },
-      PERF = { icon = " ", color = "warning" },
-      TODO = { icon = " ", color = "info" },
-      WARN = { icon = " ", color = "warning" },
-      -- custom additions
-      IMP = { icon = " ", color = "hint" }, -- nf-fa-exclamation
-      SEE = { icon = " ", color = "warning" },
-      FEAT = { icon = "", color = ccl("feat") }, -- nf-fa-lightbulb_o
-    -- FEAT = { icon = "", color = ccl["feat"] },
+  keywords = {
+      FIX = { icon = " ",      color = "error" },
+      HACK = { icon = " ",     color = "warning" },
+      NOTE = { icon = " ",     color = "hint" }, -- Original icon: icon = " ",
+      PERF = { icon = " ",     color = "warning" },
+      TODO = { icon = " ",     color = "info" },
+      WARN = { icon = " ",     color = "warning" },
 
-    -- stylua: ignore end
+      -- custom additions
+      IMP = { icon = " ",      color = "hint" },          -- nf-fa-exclamation
+      HINT = { icon = " ",     color = "hint" },         -- nf-fa-diaspora
+      SEE = { icon = " ",      color = "warning" },       -- nf-fa-eye
+      FEAT = { icon = " " ,    color = ccl("feat") },   -- nf-fa-rocket
+      REF = { icon = " ",      color = ccl("ref") },      -- nf-fa-code_merge
+      REFACTOR = { icon = " ", color = ccl("ref") }, -- nf-fa-code_merge
+
   },
+  -- stylua: ignore end
   search = {
     command = "rg",
     args = {
