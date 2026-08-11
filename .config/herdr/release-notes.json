@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0-preview.2026-08-04-d78e3d3b5126",
-  "body": "Preview build 2026-08-04-d78e3d3b5126\n\nBuilt from `d78e3d3b5126` on `master`.\nBase stable: v0.8.0\nCompare: https://github.com/herdrdev/herdr/compare/v0.8.0...d78e3d3b51266a1ff80ae6858b894e782aac3e9f\n\n### Fixed\n- Keep collapsed workspace status visible (#2239)\n\n### Maintenance\n- Refine cpu optimization blog post",
+  "version": "0.8.0-preview.2026-08-18-9fac51722653",
+  "body": "Preview build 2026-08-18-9fac51722653\n\nBuilt from `9fac51722653` on `master`.\nBase stable: v0.8.0\nCompare: https://github.com/herdrdev/herdr/compare/1147e60bc0a43c727563bee457394af0ca0a5e8b...9fac51722653fa0b0b6a5786166fb18c763424e0\n\n### Added\n- Make Windows generally available\n- Plugin marketplace discovery shelves — trending and new arrivals\n\n### Fixed\n- Preserve macOS IME commits in report-all mode (#2947)\n- Isolate hidden pane render cadence (#2892)\n- Retry Windows installer activation after transient locks (#2921)\n- Raise timeout on docs release integration test for slow builders\n- Link agents to config reference data\n- Reap ctrl-click url openers (#2906)\n- Sync powershell process working directory (#2879)\n- Match Windows Ctrl+digit keybindings (#2913)\n\n### Maintenance\n- Publish preview documentation",
   "show_on_startup": true
 }
