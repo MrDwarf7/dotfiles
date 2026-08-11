@@ -46,3 +46,9 @@ OG_*
 
 
 install_lists
+.config/DankMaterialShell/plugins/githubInbox/
+.config/DankMaterialShell/plugins/usbManager/
+
+.config/DankMaterialShell/plugins/wallpaperCarousel/
+
+.config/herdr/plugins/github/

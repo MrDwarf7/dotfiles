@@ -2,6 +2,7 @@
 # VERSION: 3.0
 SETUVAR --export BATDIFF_USE_DELTA:true
 SETUVAR --export BATMAN_THEME:Monokai\x20Extended
+SETUVAR --export CACHED_ENVS_LIST:__cached_xdg_done\x20__cached_env_done\x20__cached_gh_token_done\x1e__cached_env_done
 SETUVAR --export CARAPACE_BRIDGES:all
 SETUVAR --export CODEX_HOME:/home/dwarf/\x2econfig/\x2ecodex
 SETUVAR --export DATA_ON_DEMAND_BACK:/home/dwarf/Documents/GitHub_Projects/Web/Data\x2dOn\x2dDemand/Data\x2dOn\x2dDemand\x2dBackend
@@ -46,9 +47,6 @@ SETUVAR --export YAZI_CONFIG_HOME:/home/dwarf/\x2econfig/yazi
 SETUVAR --export ZVM_INSTALL:/home/dwarf/\x2econfig/\x2ezvm/self
 SETUVAR --export --path ZVM_PATH:/home/dwarf/\x2econfig/\x2ezvm
 SETUVAR --export _ZO_EXCLUDE_DIRS:\x24HOME/go\x3a\x24HOME/go/\x2a
-SETUVAR --export __cached_env_done:\x1d
-SETUVAR --export __cached_gh_token_done:\x1d
-SETUVAR --export __cached_xdg_done:\x1d
 SETUVAR --export fish_cursor_default:block\x1eblink
 SETUVAR --export fish_cursor_insert:line\x1eblink
 SETUVAR --export fish_cursor_visual:block\x1eblink

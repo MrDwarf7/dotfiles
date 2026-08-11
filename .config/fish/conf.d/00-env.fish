@@ -8,7 +8,7 @@ set -Ux fish_greeting
 set -g fish_key_bindings fish_vi_key_bindings
 set -U fish_key_bindings fish_vi_key_bindings
 
-set -Ux CACHED_ENVS_LIST
+set -q CACHED_ENVS_LIST; or set -Ux CACHED_ENVS_LIST
 
 # TODO: the below is _kinda_ messy.
 # We're ideally want to clean up:
@@ -231,17 +231,18 @@ function __setup_envs
     #     end
     #     set -Ux GH_TOKEN (__run_99-ensure_gh_token)
     # end
+    # function __setup_gh_token
+    #     99-ensure_gh_token && __env_cached_push __cached_gh_token_done
+    # end
+    set -q $(__env_cached_get __cached_gh_token_done); or begin
+        99-ensure_gh_token && __env_cached_push __cached_gh_token_done
+    end
+    # __setup_gh_token
 
     # set -Ux __cached_env_done
     __env_cached_push __cached_env_done
 end
 set -q $(__env_cached_get __cached_env_done); or __setup_envs &
-
-function __setup_gh_token
-    99-ensure_gh_token
-    __env_cached_push __cached_gh_token_done
-end
-set -q $(__env_cached_get __cached_gh_token_done); or __setup_gh_token &
 
 set fish_cursor_default block blink
 set fish_cursor_insert line blink
