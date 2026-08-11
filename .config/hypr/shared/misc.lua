@@ -5,6 +5,7 @@
 -- https://wiki.hyprland.org/Configuring/Variables/#misc
 
 hl.config({
+  ---@type HL.ConfigOpt.Misc
   misc = {
     -- If true disables the random hyprland logo / anime girl background. :(
     disable_hyprland_logo = true,
@@ -32,6 +33,7 @@ hl.config({
     -- render_ahead_of_time = true                           #apparently quite buggy
     -- render_ahead_safezone = 1
     allow_session_lock_restore = true,
+    session_lock_blur = true,
     session_lock_xray = true,
     background_color = "rgba(00000000)",
     close_special_on_empty = true,
@@ -54,5 +56,6 @@ hl.config({
     -- 0 - ignore focus request (keep focus on fullscreen window), 1 - takes over, 2 - unfullscreen/unmaximize [0/1/2]
     -- Default is 2
     on_focus_under_fullscreen = 1,
+    disable_watchdog_warning = true,
   },
 })

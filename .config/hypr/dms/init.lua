@@ -19,7 +19,7 @@ local dms = {}
 ---
 ---@param cmd string The DMS IPC command to invoke.
 ---@return HL.Dispatcher
-function dms.invoke(cmd)
+dms.invoke = function(cmd)
   local full_cmd = string.format("dms %s", cmd)
   return hl.dsp.exec_cmd(full_cmd)
 end
@@ -28,7 +28,7 @@ end
 ---
 ---@param cmd string The DMS IPC command to invoke.
 ---@return HL.Dispatcher
-function dms.invoke_ipc(cmd)
+dms.invoke_ipc = function(cmd)
   return dms.invoke(string.format("ipc %s", cmd))
 end
 
@@ -37,7 +37,7 @@ end
 ---@param cmd any The DMS IPC call command to invoke.
 ---@param now? boolean If true, the command is executed immediately; otherwise, it returns a dispatcher for later execution.
 ---@return HL.Dispatcher|any
-function dms.invoke_ipc_call(cmd, now)
+dms.invoke_ipc_call = function(cmd, now)
   if now and type(now) ~= nil then
     return dms.invoke(string.format("ipc call %s", cmd))()
   end
@@ -46,8 +46,9 @@ end
 
 --- Initializes DMS-specific configuration: keymaps, layer rules, window rules, colors, etc.
 ---
+---@param self HyprConfig.Dms The DMS configuration table.
 ---@return HyprConfig.Dms
-function dms:setup()
+dms.setup = function(self)
   -- Load DMS-specific modules (each self-contained, calls hl.* directly)
   require("dms.colors")
   -- require("dms.cursor")

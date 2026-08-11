@@ -3,6 +3,7 @@
 --############
 
 hl.config({
+  ---@type HL.ConfigOpt.Debug
   debug = {
     -- full_cm_proto = true
 

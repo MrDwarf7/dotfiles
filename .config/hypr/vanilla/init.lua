@@ -5,8 +5,9 @@
 ---@class HyprConfig.Vanilla
 local vanilla = {}
 
+---@param self HyprConfig.Vanilla
 ---@return HyprConfig.Vanilla
-function vanilla:setup()
+vanilla.setup = function(self)
   -- Load vanilla-specific autostart execs
 
   require("vanilla.execs")

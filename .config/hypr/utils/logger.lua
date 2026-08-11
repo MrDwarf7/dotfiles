@@ -31,7 +31,8 @@ end
 --- `opts` are checked individually and defaults are set for missing sections/values.
 ---
 ---@param opts? HyprConfig.Logger
-function logger.new(opts)
+---@return HyprConfig.Logger
+logger.new = function(opts)
   opts = opts or {}
 
   if opts.enabled == false then
@@ -94,8 +95,9 @@ end
 
 --- Loads the 'inspect' module from utils.inspect and stores it in Logger._inspect for later use.
 --- If loading fails, logs an error and sets _inspect to nil.
+---@param self HyprConfig.Logger The logger instance.
 ---@return bool A boolean indicating whether the inspect module was successfully loaded.
-function logger:load_inspect()
+logger.load_inspect = function(self)
   local err, inspect = pcall(require, "utils.inspect")
   if err then
     self:log("Logger:inspect() failed to load inspect module: " .. tostring(inspect))
@@ -107,7 +109,8 @@ function logger:load_inspect()
   return true
 end
 
-function logger:inspect(value)
+---@param self HyprConfig.Logger The logger instance.
+logger.inspect = function(self, value)
   if not logger._inspect or self._inspect == nil then
     local loaded = self:load_inspect()
     if not loaded then
@@ -125,7 +128,10 @@ end
 -- _if_ we can load the utils.inspect module, then we can use that to log tables in a more readable way.
 --
 
-function logger:log(message)
+---@param self HyprConfig.Logger The logger instance.
+---@param message string The message to log. Can be any type; if not a string, it will be converted to a string.
+---@return void
+logger.log = function(self, message)
   if (not self.enabled or self.enabled == false) or logger.enabled == false then
     return
   end
@@ -159,7 +165,9 @@ function logger:log(message)
   end
 end
 
-function logger:override_global_print()
+---@param self HyprConfig.Logger The logger instance.
+---@return void
+logger.override_global_print = function(self)
   print = function(...)
     local args = { ... }
     local message_parts = {}

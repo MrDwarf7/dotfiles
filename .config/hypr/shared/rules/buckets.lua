@@ -92,9 +92,10 @@ local bkt_to_ws = {
 }
 
 --- Attempts to get the workspace associated with a given bucket name (case-insensitive).
+---@param self BucketToWorkspaceMapping The mapping of bucket types to workspaces.
 ---@param bkt_name any
 ---@return string|nil
-function bkt_to_ws:try_get(bkt_name)
+bkt_to_ws.try_get = function(self, bkt_name)
   local bkt_key = case_insensitive_index(bkt_types, bkt_name) or error("Invalid bucket name: " .. tostring(bkt_name))
   return self[bkt_key] or self[bkt_name] or nil
 end
@@ -103,112 +104,148 @@ setmetatable(bkt_to_ws, { __index = index_fn })
 
 local OPACITY_OVERRIDE = "1.00 override 1.00 override"
 
---- Email clients (thunderbird, etc). WS3.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.EMAIL,
-  match = { tag = bkt_types.EMAIL },
-  workspace = bkt_to_ws.EMAIL,
-  opacity = OPACITY_OVERRIDE,
+-- TODO: [types] : We can deffs use better types here...
+
+--- Is effectively a `HyprConfig.HL.WindowRuleSpec`
+--- But omits many fields and strictly only sets the bare min. required fields for a bucket rule.
+---@class BucketRule : HyprConfig.HL.WindowRuleSpec
+
+---@generic T : Bucket
+---@class BucketRuleIndex : string
+
+---@generic T
+---@class BucketRuleTable : table<BucketRuleIndex<T>, BucketRule>
+
+---@type BucketRuleTable
+local __base_rules = {
+  --- Email clients (thunderbird, etc). WS3.
+  [bkt_types.EMAIL .. "_T"] = {
+    name = "bucket-" .. bkt_types.EMAIL,
+    match = { tag = bkt_types.EMAIL },
+    workspace = bkt_to_ws.EMAIL,
+    opacity = OPACITY_OVERRIDE,
+  },
+
+  --- Private comms (telegram, signal). WS6.
+  [bkt_types.PRIVATE_COMMS .. "_T"] = {
+    name = "bucket-" .. bkt_types.PRIVATE_COMMS,
+    match = { tag = bkt_types.PRIVATE_COMMS },
+    workspace = bkt_to_ws.PRIVATE_COMMS,
+    no_initial_focus = true,
+    -- size = "(monitor_w*0.40) (monitor_h*0.65)",
+  },
+
+  --- Music apps (spotify, youtube-music). WS8 + maximize.
+  [bkt_types.MUSIC .. "_T"] = {
+    name = "bucket-" .. bkt_types.MUSIC,
+    match = { tag = bkt_types.MUSIC },
+    workspace = bkt_to_ws.MUSIC,
+    maximize = true,
+    -- opacity = OPACITY_OVERRIDE,
+  },
+
+  --- GUI editors (code, zed, jetbrains). WS3 + opacity + no initial focus + persistent size.
+  [bkt_types.GUI_EDITORS .. "_T"] = {
+    name = "bucket-" .. bkt_types.GUI_EDITORS,
+    match = { tag = bkt_types.GUI_EDITORS },
+    workspace = bkt_to_ws.GUI_EDITORS,
+    no_initial_focus = true,
+    opacity = OPACITY_OVERRIDE,
+    persistent_size = true,
+  },
+
+  --- Browsers (vivaldi, zen, chromium). WS1 + opacity + persistent size.
+  [bkt_types.BROWSERS .. "_T"] = {
+    name = "bucket-" .. bkt_types.BROWSERS,
+    match = { tag = bkt_types.BROWSERS },
+    workspace = bkt_to_ws.BROWSERS,
+    opacity = OPACITY_OVERRIDE,
+    persistent_size = true,
+  },
+
+  --- Notes (obsidian, todoist). WS5 + opacity + no initial focus + persistent size.
+  [bkt_types.NOTES .. "_T"] = {
+    name = "bucket-" .. bkt_types.NOTES,
+    match = { tag = bkt_types.NOTES },
+    workspace = bkt_to_ws.NOTES,
+    no_initial_focus = true,
+    opacity = OPACITY_OVERRIDE,
+    persistent_size = true,
+  },
+
+  --- Tickets / work tracking (affine, linear). WS5.
+  [bkt_types.TICKETS .. "_T"] = {
+    name = "bucket-" .. bkt_types.TICKETS,
+    match = { tag = bkt_types.TICKETS },
+    workspace = bkt_to_ws.TICKETS,
+    -- center = true,
+    -- opacity = OPACITY_OVERRIDE,
+  },
+
+  --- Gaming (steam, lutris, faugus, heroic). WS4.
+  [bkt_types.GAMING .. "_T"] = {
+    name = "bucket-" .. bkt_types.GAMING,
+    match = { tag = bkt_types.GAMING },
+    workspace = bkt_to_ws.GAMING,
+    border_size = 0,
+    no_blur = true,
+    opacity = OPACITY_OVERRIDE,
+  },
+
+  --- Terminals (ghostty, wezterm, kitty). No workspace; borderless + persistent size.
+  [bkt_types.TERMINALS .. "_T"] = {
+    name = "bucket-" .. bkt_types.TERMINALS,
+    match = { tag = bkt_types.TERMINALS },
+    border_size = 0,
+    persistent_size = true,
+    -- size = "(monitor_w*0.40) (monitor_h*0.65)",
+  },
+
+  --- File managers (thunar, nemo, dolphin). Float + monitor-relative size + opacity.
+  [bkt_types.FILE_MANAGERS .. "_T"] = {
+    name = "bucket-" .. bkt_types.FILE_MANAGERS,
+    match = { tag = bkt_types.FILE_MANAGERS },
+    center = true,
+    float = true,
+    opacity = OPACITY_OVERRIDE,
+    persistent_size = true,
+    -- size = "(monitor_w*0.40) (monitor_h*0.65)",
+  },
+
+  --- Float indicators (screen share overlays). Float + pin.
+  [bkt_types.FLOAT_INDICATORS .. "_T"] = {
+    name = "bucket-" .. bkt_types.FLOAT_INDICATORS,
+    match = { tag = bkt_types.FLOAT_INDICATORS },
+    float = true,
+    pin = true,
+  },
+}
+
+setmetatable(__base_rules, {
+  __index = function(tbl, key)
+    local bkt_key = case_insensitive_index(bkt_types, key) or error("__index :: Invalid bucket name: " .. tostring(key))
+    return rawget(tbl, bkt_key .. "_T")
+  end,
+  __call = function(tbl, key)
+    local bkt_key = case_insensitive_index(bkt_types, key) or error("__call :: Invalid bucket name: " .. tostring(key))
+    return rawget(tbl, bkt_key .. "_T")
+  end,
+  __newindex = function(tbl, key, value)
+    local bkt_key = case_insensitive_index(bkt_types, key)
+      or error("__newindex :: Invalid bucket name: " .. tostring(key))
+    rawset(tbl, bkt_key .. "_T", value)
+  end,
 })
 
---- Private comms (telegram, signal). WS6.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.PRIVATE_COMMS,
-  match = { tag = bkt_types.PRIVATE_COMMS },
-  workspace = bkt_to_ws.PRIVATE_COMMS,
-  no_initial_focus = true,
-  -- size = "(monitor_w*0.40) (monitor_h*0.65)",
-})
-
---- Music apps (spotify, youtube-music). WS8 + maximize.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.MUSIC,
-  match = { tag = bkt_types.MUSIC },
-  workspace = bkt_to_ws.MUSIC,
-  maximize = true,
-  -- opacity = OPACITY_OVERRIDE,
-})
-
---- GUI editors (code, zed, jetbrains). WS3 + opacity + no initial focus + persistent size.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.GUI_EDITORS,
-  match = { tag = bkt_types.GUI_EDITORS },
-  workspace = bkt_to_ws.GUI_EDITORS,
-  no_initial_focus = true,
-  opacity = OPACITY_OVERRIDE,
-  persistent_size = true,
-})
-
---- Browsers (vivaldi, zen, chromium). WS1 + opacity + persistent size.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.BROWSERS,
-  match = { tag = bkt_types.BROWSERS },
-  workspace = bkt_to_ws.BROWSERS,
-  opacity = OPACITY_OVERRIDE,
-  persistent_size = true,
-})
-
---- Notes (obsidian, todoist). WS5 + opacity + no initial focus + persistent size.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.NOTES,
-  match = { tag = bkt_types.NOTES },
-  workspace = bkt_to_ws.NOTES,
-  no_initial_focus = true,
-  opacity = OPACITY_OVERRIDE,
-  persistent_size = true,
-})
-
---- Tickets / work tracking (affine, linear). WS5.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.TICKETS,
-  match = { tag = bkt_types.TICKETS },
-  workspace = bkt_to_ws.TICKETS,
-  -- center = true,
-  -- opacity = OPACITY_OVERRIDE,
-})
-
---- Gaming (steam, lutris, faugus, heroic). WS4.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.GAMING,
-  match = { tag = bkt_types.GAMING },
-  workspace = bkt_to_ws.GAMING,
-  border_size = 0,
-  no_blur = true,
-  opacity = OPACITY_OVERRIDE,
-})
-
---- Terminals (ghostty, wezterm, kitty). No workspace; borderless + persistent size.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.TERMINALS,
-  match = { tag = bkt_types.TERMINALS },
-  border_size = 0,
-  persistent_size = true,
-  -- size = "(monitor_w*0.40) (monitor_h*0.65)",
-})
-
---- File managers (thunar, nemo, dolphin). Float + monitor-relative size + opacity.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.FILE_MANAGERS,
-  match = { tag = bkt_types.FILE_MANAGERS },
-  center = true,
-  float = true,
-  opacity = OPACITY_OVERRIDE,
-  persistent_size = true,
-  -- size = "(monitor_w*0.40) (monitor_h*0.65)",
-})
-
---- Float indicators (screen share overlays). Float + pin.
-hl.window_rule({
-  name = "bucket-" .. bkt_types.FLOAT_INDICATORS,
-  match = { tag = bkt_types.FLOAT_INDICATORS },
-  float = true,
-  pin = true,
-})
+---@diagnostic disable-next-line: unused-local
+for bkt_name, rule in pairs(__base_rules) do
+  hl.window_rule(rule)
+end
 
 --- Put a window into a bucket. Caller supplies the match (class/title/etc).
 ---@param match table
 ---@param bkt_name Bucket The bucket name (case-insensitive). Must match one of the defined buckets above.
----@return void
+---@return void?
 local assign_bucket = function(match, bkt_name)
   hl.window_rule({
     -- IMP: We CANNOT name these! This is because of (hyprlands static vs. dynamic) VS. how orderings are done!
@@ -252,9 +289,10 @@ local M = {
 --- that contains:
 --- `bucket` - which is the primary key,
 --- `workspace` - which is the workspace that bucket is assigned to (if any).
+---@param self BucketModule The bucket module instance.
 ---@param bkt_name Bucket The bucket name (case-insensitive lookup, returned as upper). Must match one of the defined buckets above.
 ---@return BucketModule.get
-function M:get(bkt_name)
+M.get = function(self, bkt_name)
   bkt_name = self.types[bkt_name] or case_insensitive_index(self.types, bkt_name)
   local ws_value = self.bkt_to_ws:try_get(bkt_name) or self.bkt_to_ws[bkt_name] or nil
 

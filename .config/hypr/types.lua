@@ -1,32 +1,150 @@
 ---@meta
 ---
 ---@diagnostic disable: undefined-doc-class
+---@diagnostic disable: unused-local
+
+-- Unique case for 'void' :: 'nil'
+-- because nil is treated differently in Lua
+-- and we want to be explicit about it in our type system.
+-- But we are forced to alias instead of creating a new type
+-- because Lua.
 
 ---@alias void nil
----@alias bool boolean
----@alias int integer
----@alias float number
----@alias str string
+local __void = {}
+
+---@class bool : boolean
+local __bool = {}
+---@class int : integer
+local __int = {}
+---@class float : number
+local __float = {}
+---@class str : string
+local __str = {}
+
+--- Represents a type used for indexing tables.
+--- It can be a number, string, or any type that can be used as a key in a table.
+---@class Index : AnyNum|Str|OfAnyOrNil
+local __Index = {}
+
+--- Represents a table that can be indexed by an Index type and returns a value of any type or nil.
+---@class Indexable : table<Index, OfAnyOrNil>
+local __Indexable = {}
+
+--- Represents a filesystem path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
+--- This is a REFERENCE type (not owned). Use PathBuf for an owned path.
+---@class Path : string
+local __Path = {}
+
+--- Represents a filesystem path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
+--- This is an OWNED type (not a reference). Use Path for a reference path.
+---@class PathBuf : Path
+local __PathBuf = {}
+
+--- Represents a Lua module path, e.g. "foo.bar.baz" or "foo.bar.baz.qux".
+--- This is a REFERENCE type (not owned). Use LuaPathBuf for an owned Lua module path.
+---@class LuaPath : Path|PathBuf
+local __LuaPath = {}
+
+--- Represents a Lua module path, e.g. "foo.bar.baz" or "foo.bar.baz.qux".
+--- This is an OWNED type (not a reference). Use LuaPath for a reference Lua module path.
+---@class LuaPathBuf : PathBuf|LuaPath
+local __LuaPathBuf = {}
+
+--- Represents an aggregate of Path-like types (Path, PathBuf, LuaPath, LuaPathBuf).
+---@generic P : Path|PathBuf|LuaPath|LuaPathBuf
+---@class PathLike<P> : P
+
+--- Represents a filesystem directory path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
+--- This must NEVER have a trailing slash.
+--- This is a REFERENCE type (not owned). Use DirPath for an owned directory path.
+---@class DirPath : Path
+local __DirPath = {}
+
+--- Represents a filesystem directory path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
+--- This must NEVER have a trailing slash.
+--- Ths is an OWNED type (not a reference). Use Dir for a reference directory path.
+---@class DirPathBuf : PathBuf
+local __DirPathBuf = {}
+
+--- Represents an aggregate of directory path-like types (DirPath, DirPathBuf).
+---@generic D : DirPath|DirPathBuf
+---@class DirLike<D> : D
+
+--- Represents the older generation of configuration files, e.g. "/home/user/.config/hypr/programs.conf".
+--- This is mostly deprecated in favor of Lua modules, but is still supported for legacy configs.
+---@deprecated This used to be a PathBuf, but is now a LuaPathBuf.
+--- Use LuaPathBuf for new configs.
+---@class ConfFile : PathBuf
+local __ConfFile = {}
+
+---@generic S : str
+--- Represents a string type that contains a known set of values.
+--- This is useful for documenting intent and providing type safety in Lua code.
+---@class Str<S> : S
+
+---@generic N : float|integer|number|any
+---@class AnyNum<N> : N
+local __AnyNum = {}
+
+---@generic I : AnyNum<I>
+---@generic N : OfAnyOrNil
+---@class Vec<I, N>
+local __Vec = {}
+
+---@generic N : AnyNum<N>
+---@class Vec2<N> : { [1]: N, [2]: N }
+local __Vec2 = {}
+
+---@generic N : AnyNum<N>
+---@class Vec3<N> : { [1]: N, [2]: N, [3]: N }
+local __Vec3 = {}
+
+---@generic N : AnyNum<N>
+---@class Vec4<N> : { [1]: N, [2]: N, [3]: N, [4]: N }
+local __Vec4 = {}
+
+---@alias Vec2f Vec2<float>
+---@alias Vec2i Vec2<int>
+
+---@alias Vec3f Vec3<float>
+---@alias Vec3i Vec3<int>
+
+---@alias Vec4f Vec4<float>
+---@alias Vec4i Vec4<int>
+
+---@generic N : AnyNum<N>
+---@class Box<N> : { [1]: Vec2<N>, [2]: Vec2<N> }
+local __Box = {}
 
 ---@alias error error
 ---@class Error : error
+local __Error = {}
 
 ---@class fun : function|function(...)
+local __fun = {}
+
+---@class func : fun
+local __func = {}
 
 ---@class OfAny : any
 ---@class OfAnyOrNil : OfAny|nil
+local __OfAnyOrNil = {}
 
 ---@generic I : OfAnyOrNil
 ---@generic B : OfAnyOrNil
----@alias BoundeObject table|fun(I, ...): B
+---@class BoundeObject<I, B> : table|fun(I, ...): B
+local __BoundeObject = {}
+
+-- ---@generic T : OfAnyOrNil
+
+---@generic R : OfAnyOrNil
+---@class AssociatedFunction<T, R> : fun(...): R
+local __AssociatedFunction = {}
 
 ---@generic T : OfAnyOrNil
 ---@generic R : OfAnyOrNil
----@alias AssociatedFunction fun(...): R
-
----@generic T : OfAnyOrNil
----@generic R : OfAnyOrNil
----@class AssociatedMethod : fun(self: T, ...): R
+---@class AssociatedMethod<T, R> : fun(self: T, ...): R
+local __AssociatedMethod = {}
 
 ---@class HyprConfig.Events : HL.EventName
 local HyprlandEvents = {
@@ -34,10 +152,56 @@ local HyprlandEvents = {
   SHUTDOWN = "hyprland.shutdown",
 }
 
--- Extended Hyprland window-rule types for this config.
+-- Extended Hyprland types for this config.
 
----@alias RegexStr string             -- nominal alias: a PCRE-ish pattern. RegexStr == string (safe), used to document intent.
----@alias WorkSpaceStr string|integer -- "1 silent" | "4" | 4
+---@generic N : AnyNum<N>
+---@class HyprConfig.CurvePoint<N> : Vec2<N>
+local __HyprConfig_CurvePoint = {}
+
+---@class HyprConfig.Curve
+---@field name string
+---@field type "bezier" | "linear" | "step" | "steps" | "cubic-bezier"
+---@field points HyprConfig.CurvePoint[]
+local __HyprConfig_Curve = {}
+
+---@alias Styles "popin" | "popout" | "slidein" | "slideout" | "fadein" | "fadeout" | "none"
+
+---@generic P
+---@class Percentage<P> : AnyNum<P> -- nominal alias: a number between 0 and 100. Percentage == number (safe), used to document intent.
+
+-- style = "popin 15%",
+
+---@generic S : Styles
+---@generic P : Percentage
+---@class StyleStr : Str<S, P>
+local __StyleStr = {}
+
+---@generic P : PathLike
+---@class HyprConfig.Locations<P> : table<AnyNum, DirPathBuf|ConfFile|LuaPathBuf>
+---@field HOME? P
+---@field hyprdir P
+---@field hypr_scripts P
+---@field rules_dir P
+---@field keymaps_dir P
+---@field programs? ConfFile
+local __HyprConfig_Locations = {}
+
+-- TODO: [bound] : there are a _known_ set of 'leaf' types, buuuut...
+
+---@generic N : AnyNum
+---@generic S : StyleStr
+---@class HyprConfig.Animation
+---@field leaf "windows" | "windowsIn" | "windowsOut" | "fade" | "fadeIn" | "fadeOut" | "workspaces" | "workspacesIn" | "workspacesOut" | "specialWorkspace" | "layers" | "layersIn" | "layersOut" | "fadePopups"
+---@field enabled boolean
+---@field speed AnyNum<N>
+---@field bezier string
+---@field style StyleStr<S, Percentage>
+local __HyprConfig_Animation = {}
+
+---@class RegexStr : string             -- nominal alias: a PCRE-ish pattern. RegexStr == string (safe), used to document intent.
+local __RegexStr = {}
+---@class WorkSpaceStr : string|integer -- "1 silent" | "4" | 4
+local __WorkSpaceStr = {}
 
 ---@class HyprConfig.HL.WindowMatch
 --- Match selectors (full set per Hyprland docs). All optional; a window matches
@@ -61,7 +225,7 @@ local HyprlandEvents = {
 ---@field monitor? string|integer
 ---@field namespace? string
 ---@field xdg_tag? string
-local ___HyprConfig_HL_WindowMatch = {}
+local __HyprConfig_HL_WindowMatch = {}
 
 ---@class HyprConfig.HL.WindowRuleSpec : HL.WindowRuleSpec
 --- Inherits `enabled?` and `name?` from the official stub (do NOT redeclare).

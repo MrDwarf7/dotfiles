@@ -26,7 +26,7 @@ local cmds = {
 --- `hit` is the cmd string (may be ""); we return the key, not the cmd.
 ---@param override? EnvVarValue|HyprConfig.WallBeKey
 ---@return HyprConfig.WallBeKey
-local function get(override)
+local get = function(override)
   local v = override
   if type(v) ~= "string" or v == "" then
     v = require("shared.env").WALLPAPER_BACKEND

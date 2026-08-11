@@ -4,12 +4,15 @@
 -- `_G.root_shrd` is set for early load; consumers may also require this file.
 
 --- Prefix -> (module name -> full require path) for modules this loader has started.
----@alias HyprConfig.RootShared.Seen table<string, table<string, string>>
+---@generic P : table<string, PathLike>
+---@class HyprConfig.RootShared.Seen<P> : table<string, PathLike>
 
 --- Shared child-module loader. Also a small bag for extra keys
 --- (e.g. machines.lua writes `.machine`).
+---@generic R : table<table<string, PathLike>>
+---@generic P : table<string, PathLike>
 ---@class HyprConfig.RootShared
----@field seen HyprConfig.RootShared.Seen
+---@field seen HyprConfig.RootShared.Seen<P|R>
 ---@field load_modules fun(here: string, modules_tbl: string[]): boolean
 ---@field machine? string last machine key written by utils.machines
 local root_shrd = {
@@ -28,7 +31,7 @@ local function load_modules(here, modules_tbl)
   end
 
   if here:sub(-1) ~= "." then
-    here = string.format("%s.", here)
+    here = string.format("%s.", here) ---@cast here LuaPath
   end
 
   local bucket = root_shrd.seen[here]

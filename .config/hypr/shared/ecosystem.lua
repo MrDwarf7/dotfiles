@@ -3,6 +3,7 @@
 --################
 
 hl.config({
+  ---@type HL.ConfigOpt.Ecosystem
   ecosystem = {
     no_update_news = false,
     no_donation_nag = true,

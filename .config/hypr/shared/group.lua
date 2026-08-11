@@ -3,6 +3,7 @@
 --############
 
 hl.config({
+  ---@type HL.ConfigOpt.Group
   group = {
     auto_group = true,
     insert_after_current = true,
@@ -12,12 +13,14 @@ hl.config({
     merge_groups_on_groupbar = true,
     merge_floated_into_tiled_on_groupbar = false,
     group_on_movetoworkspace = false,
+    ---@type HL.ConfigOpt.Group.Col
     col = {
       border_active = "rgba(66ffff00)",
       border_inactive = "rgba(66777700)",
       border_locked_active = "rgba(66ff5500)",
       border_locked_inactive = "rgba(66775500)",
     },
+    ---@type HL.ConfigOpt.Group.Groupbar
     groupbar = {
       enabled = true,
       font_family = "",
@@ -41,6 +44,7 @@ hl.config({
       -- text_color_inactive =
       -- text_color_locked_active =
       -- text_color_locked_inactive =
+      ---@type HL.ConfigOpt.Group.Groupbar.Col
       col = {
         active = "rgba(66ffff00)",
         inactive = "rgba(66777700)",

@@ -22,7 +22,7 @@ local catalog = {
 --- Input is lowercased so "DMS" still hits catalog.dms; keys stay lowercase.
 ---@param override? EnvVarValue|HyprConfig.ShellKey
 ---@return HyprConfig.ShellKey
-local function get(override)
+local get = function(override)
   local v = override
   if type(v) ~= "string" or v == "" then
     v = require("shared.env").HYPRLAND_SHELL
