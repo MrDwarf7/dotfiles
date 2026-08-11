@@ -43,7 +43,7 @@ local rules = {
   {
     name = "effect-vivaldi-webapp-float",
     match = { tag = "vwebapp-general" },
-    float = true,
+    -- float = true,
     opaque = true,
     persistent_size = true,
   },
