@@ -21,6 +21,42 @@ local __float = {}
 ---@class str : string
 local __str = {}
 
+-- TODO: [types] : Actually figure out a way to implement this a little better than just a
+-- table with a metatable.
+-- The problem is that Lua's type system is not expressive enough to represent union types directly,
+-- so we have to use a workaround.
+-- The current implementation is a placeholder and does not enforce the union type constraint at runtime.
+
+-- --- Represents a union type of two types K and V.
+-- --- A table-like object that may have EITHER a key of type K OR type V, but not both simultaneously.
+-- --- You may use this as a list-like object (array) or a map-like object (dictionary),
+-- --- but not both at the same time.
+-- --- Example:
+-- --- ```lua
+-- --- ---@type union<int, str>
+-- --- local my_union = { env = "HOST", fd = 1 } -- valid, but not both at the same time
+-- -- for k, v in pairs(my_union) do
+-- --   if type(k) == "number" then
+-- --     print("Key is a number: " .. k)
+-- --   elseif type(k) == "string" then
+-- --     print("Key is a string: " .. k)
+-- --   else
+-- --     print("Key is of unknown type: " .. type(k))
+-- --   end
+-- -- end
+-- -- ```
+-- --- The above example demonstrates how to use the `union` type to create a table that can have
+-- --- EITHER an integer key or a string key, but not both at the same time. The type system will enforce this constraint, ensuring that you cannot have both types of keys in the same table.
+-- ---
+-- ---
+-- ---@generic K : Index
+-- ---@generic A : OfAnyOrNil
+-- ---@class union<K, A> : table<union<K, A>, table<Index, A>>
+-- local __union = {}
+--
+-- ---@generic T : OfAnyOrNil
+-- ---@class Unique<T> : [T]
+
 --- Represents a type used for indexing tables.
 --- It can be a number, string, or any type that can be used as a key in a table.
 ---@class Index : AnyNum|Str|OfAnyOrNil
@@ -37,22 +73,22 @@ local __Path = {}
 
 --- Represents a filesystem path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
 --- This is an OWNED type (not a reference). Use Path for a reference path.
----@class PathBuf : Path
+---@class PathBuf : Path|string
 local __PathBuf = {}
 
 --- Represents a Lua module path, e.g. "foo.bar.baz" or "foo.bar.baz.qux".
 --- This is a REFERENCE type (not owned). Use LuaPathBuf for an owned Lua module path.
----@class LuaPath : Path|PathBuf
+---@class LuaPath : Path|PathBuf|string
 local __LuaPath = {}
 
 --- Represents a Lua module path, e.g. "foo.bar.baz" or "foo.bar.baz.qux".
 --- This is an OWNED type (not a reference). Use LuaPath for a reference Lua module path.
----@class LuaPathBuf : PathBuf|LuaPath
+---@class LuaPathBuf : PathBuf|LuaPath|string
 local __LuaPathBuf = {}
 
 --- Represents an aggregate of Path-like types (Path, PathBuf, LuaPath, LuaPathBuf).
----@generic P : Path|PathBuf|LuaPath|LuaPathBuf
----@class PathLike<P> : P
+---@generic P : Path|PathBuf|LuaPath|LuaPathBuf|string
+---@class PathLike : P
 
 --- Represents a filesystem directory path, e.g. "/home/user/.config/hypr" or "/usr/bin/hl".
 --- This must NEVER have a trailing slash.
@@ -127,6 +163,8 @@ local __fun = {}
 local __func = {}
 
 ---@class OfAny : any
+local __OfAny = {}
+
 ---@class OfAnyOrNil : OfAny|nil
 local __OfAnyOrNil = {}
 

@@ -31,10 +31,10 @@ end
 --- No garuntee is made about the order of the returned table due to how `pairs()` works.
 ---
 ---@generic T
----@param fn fun(value: T): any Function
 ---@param tbl table<any, T> Table
+---@param fn fun(value: T): any Function
 ---@return table : Table of transformed values
-tbl_mod.map = function(fn, tbl)
+tbl_mod.map = function(tbl, fn)
   local ret = {} ---@type table<any, any>
   for k, v in pairs(tbl) do
     ret[k] = fn(v)
@@ -43,10 +43,10 @@ tbl_mod.map = function(fn, tbl)
 end
 
 ---@generic T
----@param fn fun(value: T): boolean (function) Function
 ---@param tbl table<any, T> (table) Table
+---@param fn fun(value: T): boolean (function) Function
 ---@return T[] : Table of filtered values
-tbl_mod.filter = function(fn, tbl)
+tbl_mod.filter = function(tbl, fn)
   local ret = {} ---@type table<any, any>
   for _, entry in pairs(tbl) do
     if fn(entry) then
@@ -96,9 +96,36 @@ tbl_mod.concat = function(a, b)
   return ret
 end
 
+--- Nested table -> Lua-ish string. Recursive.
+---@param tbl Indexable
+---@param indent? int
+---@return str
+tbl_mod.to_string = function(tbl, indent)
+  indent = indent or 0
+  local result = "{\n"
+  local indent_str = string.rep("  ", indent + 1)
+  for k, v in pairs(tbl) do
+    local key_str = type(k) == "string" and string.format("%q", k) or tostring(k)
+    if type(v) == "table" then
+      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, tbl_mod.to_string(v, indent + 1))
+    else
+      local value_str = type(v) == "string" and string.format("%q", v) or tostring(v)
+      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, value_str)
+    end
+  end
+  result = result .. string.rep("  ", indent) .. "}"
+  return result
+end
+
 setmetatable(tbl_mod, {
   __concat = function(a, b)
     return tbl_mod.concat(a, b)
+  end,
+  __call = function(_, tbl, indent)
+    return tbl_mod.to_string(tbl, indent)
+  end,
+  __tostring = function(tbl)
+    return tbl_mod.to_string(tbl)
   end,
 })
 

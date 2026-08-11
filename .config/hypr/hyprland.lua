@@ -15,10 +15,6 @@ hl = TYPES.hl
 
 local envs = require("shared.env") -- first: seed holes, keep the returned table alive
 
--- TODO: Needs to be setup properly AND decide where it gets loaded lol...
--- local machines = require("utils.machines")
--- machines.setup()
-
 LOGGER_ENABLED = false
 
 local logger = require("utils.logger").new({

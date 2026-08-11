@@ -1,23 +1,53 @@
 local list = {}
 
 --- Checks if a list (array-like table) contains a specific value.
----@param needle any The value to search for.
----@param haystack table The list (array-like table) to search in.
-list.contains = function(needle, haystack)
-  for i, v in ipairs(haystack) do
+---@param tbl table The list (array-like table) to search in.
+---@param item any The value to search for.
+list.contains = function(tbl, item)
+  for i, v in ipairs(tbl) do
     if type(v) == "nil" then
       goto continue
     end
-    if v == needle then
+    if v == item then
       return true
     end
     ::continue::
     local next = i + 1
-    if next > #haystack then
+    if next > #tbl then
       break
     end
   end
   return false
+end
+
+--- Apply `fn` to each array element in order. Same shape as tbl_mod.map (tbl, fn)
+--- but ipairs, not pairs. Return values of `fn` are collected; discard if unused.
+---@generic T
+---@generic R
+---@param tbl T[]
+---@param fn fun(value: T): R
+---@return R[]
+list.map = function(tbl, fn)
+  local ret = {}
+  for i, v in ipairs(tbl) do
+    ret[i] = fn(v)
+  end
+  return ret
+end
+
+--- Keep array elements for which `fn` is true. ipairs; does not mutate `tbl`.
+---@generic T
+---@param tbl T[]
+---@param fn fun(value: T): boolean
+---@return T[]
+list.filter = function(tbl, fn)
+  local ret = {}
+  for _, v in ipairs(tbl) do
+    if fn(v) then
+      ret[#ret + 1] = v
+    end
+  end
+  return ret
 end
 
 --- @generic T

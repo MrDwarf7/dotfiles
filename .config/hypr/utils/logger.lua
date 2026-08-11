@@ -174,7 +174,7 @@ logger.override_global_print = function(self)
     for _, arg in ipairs(args) do
       if type(arg) == "table" then
         local success, result = pcall(function()
-          return require("utils").table_to_string(arg)
+          return require("utils.tbl_mod").to_string(arg)
         end)
         if success then
           table.insert(message_parts, result)

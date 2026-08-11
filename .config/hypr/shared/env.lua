@@ -5,6 +5,7 @@
 -- Returns the resolved table so a caller (hyprland.lua) can keep it alive.
 
 ---@class EnvVarKey : string
+
 ---@class EnvVarValue : string|number|integer|boolean
 
 ---@class EnvVarFallbacks : table<EnvVarKey, EnvVarValue>

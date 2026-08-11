@@ -1,50 +1,16 @@
+--- General utility functions for Hyprland config.
+--- May also be called as a func to automatically route to the
+--- 'uwsm_launcher' function.
+---
 ---@class HyprConfig.Utils
-local Utils = {}
+---@field uwsm_launcher fun(program: str, as_service?: bool): void
+local utils = {}
 
---- Given a table (or module/class) - we build a T.__fields table onto it that contains its own fields for reflection purposes later.
---- We do NOT want to hold the table itself in the meta, to avoid circular references and potential memory leaks, so we use rawget to access the fields directly from the table.
----@param mut_tbl table The table to set up with reflection.
-Utils.reflection = function(mut_tbl)
-  --
-  setmetatable(mut_tbl, {
-    __fields = function()
-      -- here we can either:
-      -- A). remove the fields FUNCTION via setting to nil
-      -- B). SET the __fields attr in the metatabel TO the fields itself ( ie: T.__fields = fields instead of T.__fields = funciton( .... ) ... end )
-      -- C). leave it as is, and just call the function each time we want to access the fields - which is what we do for now, since it allows us to avoid potential issues with stale data if the table is modified after the initial reflection.
-      -- Q: Do we ever encounter problems or potential collisions with reflection when doing this though?
-      --
-      -- Currently we assemble a sep. table...
-      local fields = {}
-      for k, v in pairs(mut_tbl) do
-        fields[k] = v
-      end
-      return fields
-
-      -- If we wanted to set the __fields attr to the fields itself, we could do something like this:
-      -- This would, however, make call ordering important - since we'd go fun() -> table
-      -- Which becomes messy af later to trace bugs and whatnot.
-      -- (Though... The type tells us if it's been set up yet or not?)
-      --
-      -- tbl.__fields = {}
-      -- for k, v in pairs(tbl) do
-      --   tbl.__fields[k] = v
-      -- end
-      -- return tbl.__fields
-    end,
-  })
-  return mut_tbl
-end
-
---- Launches a program via uwsm with optional service targeting.
----@param program string The program command to launch.
----@param as_service? boolean If true, wraps in `uwsm app -t service -- <program>`.
-Utils.uwsm_launcher = function(program, as_service)
-  -- TODO: We will; at some stage, need to gate this fn call behind a check for the
-  -- cases where we decide to move away from `uwsm` as a tool.
-
+--- Launch a program via uwsm. `as_service` adds `-t service`.
+---@param program str
+---@param as_service? bool
+utils.uwsm_launcher = function(program, as_service)
   local base_cmd = "uwsm app"
-  as_service = as_service or false
   if as_service then
     base_cmd = base_cmd .. " -t service"
   end
@@ -52,23 +18,12 @@ Utils.uwsm_launcher = function(program, as_service)
   hl.exec_cmd(base_cmd)
 end
 
----@param tbl table The table to convert to a string representation.
----@param indent? number The current indentation level (used for nested tables).
-Utils.table_to_string = function(tbl, indent)
-  indent = indent or 0
-  local result = "{\n"
-  local indent_str = string.rep("  ", indent + 1)
-  for k, v in pairs(tbl) do
-    local key_str = type(k) == "string" and string.format("%q", k) or tostring(k)
-    if type(v) == "table" then
-      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, Utils.table_to_string(v, indent + 1))
-    else
-      local value_str = type(v) == "string" and string.format("%q", v) or tostring(v)
-      result = result .. string.format("%s[%s] = %s,\n", indent_str, key_str, value_str)
-    end
-  end
-  result = result .. string.rep("  ", indent) .. "}"
-  return result
-end
+setmetatable(utils, {
+  __call = function(_, ...)
+    return utils.uwsm_launcher(...)
+  end,
+})
 
-return Utils
+---@type HyprConfig.Utils
+---@return HyprConfig.Utils
+return utils

@@ -23,7 +23,7 @@ local config = {
     sensitivity = 0.00,
     accel_profile = "flat",
     -- force_no_accel = true,
-    force_no_accel = require("utils.machines").is_desktop(), -- true for desktop, false for laptop (since it has a touchpad)
+    force_no_accel = require("utils.machine").kind == "desktop", -- true for desktop, false for laptop (since it has a touchpad)
     left_handed = false,
     scroll_points = "",
     -- scroll_method = nil,

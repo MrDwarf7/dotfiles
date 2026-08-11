@@ -11,7 +11,7 @@ hl.config({
     -- A value like 4 3 on a 16:9 screen will make it a 4:3 window in the middle with padding to the sides.
     -- Type: Vec2D
     -- Default: 0 0
-    single_window_aspect_ratio = require("utils.machines").layout().single_window_aspect_ratio or { 21, 9 },
+    single_window_aspect_ratio = require("utils.machine").layout.single_window_aspect_ratio or { 21, 9 },
     -- Sets a tolerance for single_window_aspect_ratio,
     -- so that if the padding that would have been added is smaller than the specified fraction of the height or width of the screen,
     -- it will not attempt to adjust the window size [0 - 1]
@@ -45,7 +45,7 @@ hl.config({
   ---@type HL.ConfigOpt.Scrolling
   scrolling = {
     -- Default: true
-    fullscreen_on_one_column = require("utils.machines").scrolling().fullscreen_on_one_column or false,
+    fullscreen_on_one_column = (require("utils.machine").scrolling or {}).fullscreen_on_one_column or false,
     -- Default: 0.5
     -- column_width = 0.333
     column_width = 0.433,
