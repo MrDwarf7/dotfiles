@@ -1,5 +1,5 @@
 {
-  "version": "0.8.0-preview.2026-08-18-9fac51722653",
-  "body": "Preview build 2026-08-18-9fac51722653\n\nBuilt from `9fac51722653` on `master`.\nBase stable: v0.8.0\nCompare: https://github.com/herdrdev/herdr/compare/1147e60bc0a43c727563bee457394af0ca0a5e8b...9fac51722653fa0b0b6a5786166fb18c763424e0\n\n### Added\n- Make Windows generally available\n- Plugin marketplace discovery shelves — trending and new arrivals\n\n### Fixed\n- Preserve macOS IME commits in report-all mode (#2947)\n- Isolate hidden pane render cadence (#2892)\n- Retry Windows installer activation after transient locks (#2921)\n- Raise timeout on docs release integration test for slow builders\n- Link agents to config reference data\n- Reap ctrl-click url openers (#2906)\n- Sync powershell process working directory (#2879)\n- Match Windows Ctrl+digit keybindings (#2913)\n\n### Maintenance\n- Publish preview documentation",
+  "version": "0.8.2-preview.2026-08-19-b5c4a0176e91",
+  "body": "Preview build 2026-08-19-b5c4a0176e91\n\nBuilt from `b5c4a0176e91` on `master`.\nBase stable: v0.8.2\nCompare: https://github.com/herdrdev/herdr/compare/v0.8.2...b5c4a0176e9183924df552eb8aecb94ed5f9e732\n\n### Changed\n- Rebuilt preview from the current master branch.",
   "show_on_startup": true
 }

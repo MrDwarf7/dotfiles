@@ -1,72 +1,73 @@
-modelRoles:
-  default: lm-studio/qwen38
+modelRoles: 
+  default: opencode-zen/muse-spark-1.2-contributor-free:high
 symbolPreset: nerd
-theme:
+theme: 
   dark: titanium
-setupVersion: 1
-statusLine:
+setupVersion: 2
+statusLine: 
   preset: default
   separator: powerline-thin
   sessionAccent: true
   transparent: false
-terminal:
+terminal: 
   showProgress: true
-tui:
+tui: 
   textSizing: false
   codexResetFireworks: true
   tight: true
-display:
+display: 
   shimmer: kitt
   showTokenUsage: false
   cacheMissMarker: false
 personality: pragmatic
-advisor:
+advisor: 
   enabled: true
 steeringMode: one-at-a-time
 followUpMode: one-at-a-time
 interruptMode: immediate
-loop:
+loop: 
   mode: prompt
 doubleEscapeAction: tree
 treeFilterMode: default
 autocompleteMaxVisible: 15
-stt:
+stt: 
   modelName: parakeet
-startup:
+startup: 
   quiet: true
-features:
+features: 
   unexpectedStopDetection: true
-memory:
+memory: 
   backend: mnemopi
-edit:
+edit: 
   mode: hashline
 readLineNumbers: true
-bash:
+bash: 
   enabled: true
-bashInterceptor:
+bashInterceptor: 
   enabled: false
-eval:
+eval: 
   py: true
-astGrep:
+astGrep: 
   enabled: true
-computer:
+computer: 
   enabled: false
-vault:
+vault: 
   enabled: false
-github:
+github: 
   enabled: true
-todo:
+todo: 
   eager: default
-task:
+task: 
   eager: preferred
   enableLsp: true
 emojiAutocomplete: false
-skills:
-  enableAgentsUser: false # ~/.agents/skills
-  enableClaudeUser: false # ~/.claude/skills
+skills: 
+  enableAgentsUser: false
+  enableClaudeUser: false
   enableCodexUser: false
   enablePiUser: false
-  enableAgentsProject: true # per-repo .agents/skills
+  enableAgentsProject: true
   enableClaudeProject: true
   enablePiProject: true
-
+composer: 
+  shape: box
