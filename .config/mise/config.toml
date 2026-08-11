@@ -67,7 +67,6 @@ version = "latest"
 [tools."cargo-binstall"]
 version = "latest"
 
-
 # [tools."cargo:abscissa"]
 # version = "latest"
 
@@ -75,6 +74,7 @@ version = "latest"
 # [tools."cargo:atac"]
 # version = "latest"
 
+### A Rust `check` or `clippy' runner companion that automatically re-runs linting commands in a TUI.
 [tools."cargo:bacon"]
 version = "latest"
 
@@ -108,12 +108,15 @@ version = "latest"
 # [tools."cargo:cargo-machete"]
 # version = "latest"
 
+### An extensive task runner and build tool for Rust projects. It allows you to define and run complex workflows, automate repetitive tasks, and manage dependencies. Installs as 'cargo-make' or 'cargo make'.
+#### TODO: This is now available via the official repo's as: `extra/cargo-make`
 [tools."cargo:cargo-make"]
 version = "latest"
 
 [tools."cargo:cargo-nextest"]
 version = "latest"
 
+### A markdown viewer key'd specifically to how GitHub renders markdown. Installs as 'mdv'.
 [tools."cargo:mdv"]
 version = "latest"
 
@@ -130,6 +133,7 @@ version = "latest"
 [tools."cargo:cargo-update"]
 version = "latest"
 
+### Allows running cargo watch to automatically recompile and rerun your Rust code when changes are detected. Installs as 'cargo-watch'.
 [tools."cargo:cargo-watch"]
 version = "latest"
 
@@ -139,6 +143,7 @@ version = "latest"
 # [tools."cargo:cargo-zigbuild"]
 # version = "latest"
 
+### The Tauri CLI is a command line interface for building and bundling Tauri apps. It is used to create new Tauri projects, build and bundle existing projects, and run Tauri apps in development mode. Installs as 'tauri'.
 [tools."cargo:create-tauri-app"]
 version = "latest"
 
@@ -146,6 +151,7 @@ version = "latest"
 # [tools."cargo:dealve-tui"]
 # version = "latest"
 
+### Performance profiling and flamegraph generation for Rust programs. Installs as 'flamegraph'.
 [tools."cargo:flamegraph"]
 version = "latest"
 
@@ -168,14 +174,21 @@ version = "latest"
 # [tools."cargo:gh-stars"]
 # version = "latest"
 
+### JJ / Jujutsu workspace (worktree) manageer and helper tool.
 [tools."cargo:jj-navi"]
 version = "latest"
 
+### A reverse engineer's binary Swiss-army knife in Rust: triage, disassembly, function/CFG recovery, crypto-constant + YARA scanning for PE/ELF/Mach-O. Installs as 'knife'.
+[tools."cargo:reknife"]
+version = "latest"
+
+### Replacement / Alternative for ZMK/QMK. Used with custom split kbd (Corne)
 [tools."cargo:rmkit"]
 version = "latest"
 
 #####
 
+### A simple, fast, and flexible command-line tool for managing and running tasks (written in Rust). Installs as 'just'.
 [tools.just]
 version = "latest"
 
@@ -193,8 +206,10 @@ version = "latest"
 experimental = true
 idiomatic_version_file_enable_tools = []
 
-cargo.binstall = true # Prefer using binstall over cargo --install
-npm.bun = true        # Prefer using bun over npm
+cargo.binstall = true              # Prefer using binstall over cargo --install
+cargo.binstall_quickinstall = true # Allows cargo binstall to fallback to cargo-quickinstall before trying normal `cargo install` cmds ( docs: https://mise.jdx.dev/dev-tools/backends/cargo.html#cargo.binstall_quickinstall | repo: https://github.com/cargo-bins/cargo-quickinstall )
+
+npm.bun = true # Prefer using bun over npm
 
 # npm.package_manager = "bun"
 

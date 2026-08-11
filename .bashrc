@@ -91,7 +91,7 @@ if [[ $LIST_CLIENT == "eza" || $LIST_CLIENT == "exa" ]]; then
   alias l='$EXA_BASE_CMD -lah'
   alias la='$EXA_BASE_CMD -lah'
   alias ls='$EXA_BASE_CMD -ah'
-  alias lt='$EXA_BASE_CMD --tree -a'
+  alias lt='$EXA_BASE_CMD --all --tree --level=2'
 else
   alias l='ls -lah --color=auto'
   alias la='ls -la - --color=auto'
