@@ -41,3 +41,6 @@
 ## lrwxrwxrwx     - root 10 May 14:02   pci-0000:16:00.0-render -> ../renderD129    ## <- AMD
 ##
 # export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
+
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_DESKTOP=Hyprland

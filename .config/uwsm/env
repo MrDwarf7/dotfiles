@@ -18,9 +18,9 @@ export SDL_VIDEODRIVER=wayland # Set to x11 if games that provider older version
 export CLUTTER_BACKEND=wayland
 
 # XDG Specifications
-export XDG_CURRENT_DESKTOP=Hyprland
+# export XDG_CURRENT_DESKTOP=Hyprland
 export XDG_SESSION_TYPE=wayland
-export XDG_SESSION_DESKTOP=Hyprland
+# export XDG_SESSION_DESKTOP=Hyprland
 
 # Qt Variables
 export QT_AUTO_SCREEN_SCALE_FACTOR=1  # Removed duplicate
