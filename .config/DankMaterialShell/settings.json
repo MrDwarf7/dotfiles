@@ -537,10 +537,13 @@
     },
     "dms_clipboard_search": {
       "trigger": "cb"
+    },
+    "dms_qr_generator": {
+      "trigger": "qrg"
     }
   },
   "frameOpacity": 0.2,
   "frameMode": "separate",
   "frameBarInsetPadding": 16,
-  "configVersion": 15
+  "configVersion": 16
 }

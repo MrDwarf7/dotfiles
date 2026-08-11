@@ -1,0 +1,22 @@
+{
+  "lockfileVersion": 1,
+  "plugins": {
+    "dankDesktopWeather": {
+      "repo": "https://github.com/AvengeMedia/dms-plugins",
+      "path": "DankDesktopWeather",
+      "commit": "e8c36175a1a8ee4718df5d8ef60d105add94f33e"
+    },
+    "githubInbox": {
+      "repo": "https://github.com/TMS-Namespace/DMS-GitHub-Inbox-Plugin",
+      "commit": "7e1b8a1ff42d929a7ff49d8bd1e3db49ca7737b3"
+    },
+    "usbManager": {
+      "repo": "https://github.com/NordicsSys/dms-usb-manager",
+      "commit": "4dd61c1aa277a280fc05131342bc1cf3936a2a86"
+    },
+    "wallpaperCarousel": {
+      "repo": "https://github.com/motor-dev/wallpaperCarousel",
+      "commit": "c08fbb92c39d4d778bb08e520cfd96e395594440"
+    }
+  }
+}
