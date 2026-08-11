@@ -3,20 +3,13 @@
 
 function __base_fzf --argument-names popup
     # Offset is DIFFERENT - it won't wrap!
-    set -l bind "ctrl-e:preview-down,ctrl-y:preview-up,ctrl-j:offset-down,ctrl-k:offset-up,ctrl-g:jump,jump:accept,jump-cancel:"
 
     fzf \
         --prompt 'Select a workspace: ' \
         --height 80% \
         --reverse \
         $popup \
-        --style=minimal \
-        --ansi \
-        --border=sharp \
-        --color=16 \
-        --cycle \
         --preview-window=right:wrap \
-        --bind $bind \
         --preview 'echo {} | awk -F ":" "{print \$2}" | awk "{print \$1}" | xargs -I _ jj show --color=always --stat --git --repository _'
 end
 

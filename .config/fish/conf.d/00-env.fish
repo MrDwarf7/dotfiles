@@ -93,13 +93,35 @@ function __setup_xdg_dirs
 end
 set -q $(__env_cached_get __cached_xdg_done); or __setup_xdg_dirs &
 
-set -gx FZF_DEFAULT_OPTS "--style=minimal --ansi --border=sharp --color=16 --cycle"
-# Binding specific stuff - it's long lol
+# set -gx FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix"
+# set -gx FZF_DEFAULT_COMMAND "bfs -type f,d -s --"
+
+# SEE: https://junegunn.github.io/fzf/tips/ripgrep-integration/
+#   For some other nifty (albeit bash) commands for rg->fzf->vim
+
+# BFS -> fd -> find !-> (builtin)
+if 00-valid_pacman bfs
+    set -gx FZF_DEFAULT_COMMAND "bfs -type f,d -s -print -maxdepth 8 -d --"
+else if 00-valid_pacman fd
+    set -gx FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix --"
+else
+    set -gx FZF_DEFAULT_COMMAND "find . -type f -o -type d"
+end
+
+set -gx FZF_RELOAD_COMMAND "reload:rg --column --color=always --smart-case {q} || :"
+
+set -gx FZF_DEFAULT_OPTS "--height 80% --style=minimal --ansi --border=sharp --color=16 --cycle"
 set --append FZF_DEFAULT_OPTS "--bind 'ctrl-e:preview-down,ctrl-y:preview-up,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:offset-down,ctrl-k:offset-up,ctrl-g:jump,jump:accept,jump-cancel:'"
 
 set -gx FZF_CTRL_R_OPTS "--with-nth 1,3.. --bind 'ctrl-t:change-with-nth(2..|3..|1,3..)'"
 # set -gx FZF_CTRL_T_OPTS "--preview 'echo {} | bat --style auto --color always {} 2> /dev/null || tree -C -L 2 {} 2> /dev/null | head -200'"
-set -gx FZF_CTRL_T_OPTS "--preview 'echo {} | bat --style auto --color always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
+set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+set -gx FZF_CTRL_T_OPTS "--select-1 --preview 'bat --style=auto --color=always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
+# set -gx FZF_CTRL_T_OPTS "$FZF_CTRL_T_OPTS --bind 'enter:execute(test -d {} && y {} || nvim -- {}; return 0;)+abort,up:up'"
+
+# We'd _love_ to be able to actually use 'become' here but it outright just doesn't work sadly
+set FZF_YAZI_DIR_NVIM_FILE "test -d {}; and y {} && return $status; or v {} && return $status;"
+set -gx --append FZF_CTRL_T_OPTS "--bind 'enter:execute($FZF_YAZI_DIR_NVIM_FILE)+abort,up:up'"
 
 function __setup_envs
     __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
