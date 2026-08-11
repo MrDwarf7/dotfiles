@@ -1,0 +1,122 @@
+# vim:set ft=tmux: sw=2 ts=2 sts=2 et:
+
+### PULL UP KEYS VIA: 
+# Ctrl+a + ? or `tmux customize-mode`
+
+###############
+## Variables ##
+###############
+
+set -g @plugin 'tmux-plugins/tpm'
+
+source-file -q "$XDG_CONFIG_HOME/tmux/vars.conf"
+
+
+#############
+## Plugins ##
+#############
+
+
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+
+# set -g @plugin 'ThePrimeagen/tmux-sessionizer'
+# set -g @plugin 'omerxx/tmux-sessionx'
+
+set -g @resurrect-capture-pane-contents 'on'
+set -g @sessionx-filter-current 'false'
+set -g @continuum-restore 'on'
+# set -g @resurrect-strategy-nvim 'session'
+
+# hmmmm
+# tmux show-option -gqv @continuum-save-interval
+# tmux show-option -gqv @continuum-save-last-timestamp
+# tmux show-option -gqv @continuum-save-interval
+
+# Default is 15
+set -g @continuum-save-interval '240'
+
+## !! These 2 options are broken !!
+# set -g @continuum-boot-options 'ghostty'
+# set -g @continuum-boot 'on' # Automatically start the 'tmux server' on system boot
+
+
+############
+## Basics ##
+############
+
+# Time stuff
+set -g escape-time 0              # We don't use escape inside of key sequences lol... It's for clearing things eh?
+set -g display-time 1500          # Increase tmux messages display duration from 750ms
+set -g display-panes-time 3000
+# set -g prefix-timeout
+# set -g repeat-time 500 # Allows multiple inputs without having press the prefix key again. Default is 500ms
+
+
+set -g mouse on                   # Mouse is useable
+set -s set-clipboard on
+set -s copy-command "#{@copy-program}"
+set -g history-limit 1000000      # increase history size (from 2,000)
+setw -g mode-keys vi
+setw -g aggressive-resize on      # Normally windows are contained to smallest size of panes, this makes them resize to fill the entire window
+setw -g monitor-activity off
+set -g renumber-windows on        # Allow renumbering of windows when one is closed
+set -g base-index 1               # Start numbering at 1
+# set -g detach-on-destroy off    # don't exit from tmux when closing a session
+# set -g status-interval 5
+
+set -g status-interval 2
+
+set -g allow-rename on     # automatic window renaming
+set -g automatic-rename on     # automatic window renaming
+# set -g automatic-rename-format '#{b:pane_current_command}'
+#{b:pane_current_path}" # show current command and path in window name
+
+set -g pane-border-indicators "both" # [ "off" | "colour" | "arrows" | "both" ]
+set -g pane-border-lines "heavy" # [ "single" | "double" | "heavy" | "simple" | "number" | "spaces" ]
+
+# set -g tree-mode-preview-format
+# set -g tree-mode-preview-style
+
+set -gq allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
+# set -g default-terminal "screen-256color"
+# set -g default-terminal "${TERM}"
+set -g default-terminal "tmux-256color"
+set -g focus-events on            # Allow focus events
+set -a terminal-features "tmux-256color:RGB"
+# set-option -g default-terminal "${TERM}-256olor"
+## don't do anything when a 'bell' rings
+set -g visual-activity off
+set -g visual-bell off
+set -g visual-silence off
+set -g bell-action none
+setw -g clock-mode-colour blue    # clock mode font color
+set -g clock-mode-style 12        # whether you want a 12 or 24 hour clock
+
+
+# Pi-mono / Pi-Agent having a complain for these... ugh
+set -g extended-keys on
+set -g extended-keys-format csi-u
+
+###########
+## Binds ##
+###########
+
+source-file -q "$XDG_CONFIG_HOME/tmux/binds.conf"
+
+
+################
+## Appearance ##
+################
+
+source-file -q "$XDG_CONFIG_HOME/tmux/appearance.conf"
+
+
+################
+## Source TPM ##
+################
+
+run "$XDG_CONFIG_HOME/tmux/plugins/tpm/tpm"
