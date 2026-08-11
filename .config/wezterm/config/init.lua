@@ -18,8 +18,7 @@ Config.__index = Config
 
 --- Appends new options to the configuration, logging a warning if a duplicate key is found
 function Config:append(config_mod)
-	---@type Wezterm
-	local wezterm = require('wezterm')
+	local wezterm = require("wezterm") ---@type Wezterm
 	local validator = require('utils.validator')
 
 	wezterm.log_info('Appending config module: ', config_mod)

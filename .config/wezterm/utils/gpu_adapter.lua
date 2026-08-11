@@ -70,8 +70,7 @@ GpuAdapters.pick_best = function()
 	end
 
 	if not adapters_options then
-		---@type Wezterm
-		local wezterm = require("wezterm")
+		local wezterm = require("wezterm") ---@type Wezterm
 		wezterm.log_error("No GPU adapters found. Using Default Adapter.")
 		return nil
 	end
@@ -81,8 +80,7 @@ GpuAdapters.pick_best = function()
 	-- wezterm.log_info("Adapter Choice: ", adapter_choice)
 
 	if not adapter_choice then
-		---@type Wezterm
-		local wezterm = require("wezterm")
+		local wezterm = require("wezterm") ---@type Wezterm
 		wezterm.log_error("Preferred backend not available. Using Default Adapter.")
 		return nil
 	end
@@ -98,8 +96,7 @@ GpuAdapters.pick_manual = function(backend, device_type)
 	local adapters_options = gpu[device_type]
 
 	if not adapters_options then
-		---@type Wezterm
-		local wezterm = require("wezterm")
+		local wezterm = require("wezterm") ---@type Wezterm
 		wezterm.log_error("No GPU adapters found. Using Default Adapter.")
 		return nil
 	end
@@ -107,8 +104,7 @@ GpuAdapters.pick_manual = function(backend, device_type)
 	local adapter_choice = adapters_options[backend]
 
 	if not adapter_choice then
-		---@type Wezterm
-		local wezterm = require("wezterm")
+		local wezterm = require("wezterm") ---@type Wezterm
 		wezterm.log_error("Preferred backend not available. Using Default Adapter.")
 		return nil
 	end

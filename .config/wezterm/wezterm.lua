@@ -37,8 +37,8 @@ local Config = require("config") --
 	:append("general")
 	:append("launch")
 
----@type Wezterm
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
+
 ---@type mywez.PluginManager
 local PluginManager = require("plugins")
 

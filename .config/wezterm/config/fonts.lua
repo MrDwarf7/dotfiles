@@ -1,5 +1,4 @@
----@type Wezterm
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
 
 ---@type mywez.Platform
 -- local Platform = require("utils.platform")

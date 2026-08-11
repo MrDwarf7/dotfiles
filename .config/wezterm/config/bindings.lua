@@ -1,5 +1,4 @@
----@type Wezterm
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
 local act = wezterm.action
 
 ---@type mywez.Utils
@@ -26,7 +25,7 @@ local key_tables = {}
 -- 	-- -- then change mods = "LEADER" to mods = keys.leader
 -- end
 ---@type LeaderKey
-local leader = { key = "a", mods = "CTRL" }
+local leader = { key = "b", mods = "CTRL" }
 
 ---@alias Flags "FUZZY|DOMAINS|LAUNCH_MENU_ITEMS"
 ---@alias FlagKey "flags"

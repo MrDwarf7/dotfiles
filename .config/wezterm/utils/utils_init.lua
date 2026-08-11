@@ -125,9 +125,7 @@ function Utils.tbl_deep_extend(behavior, ...)
 end
 
 function Utils.url_matcher()
-	---@type Wezterm
-	local wezterm = require("wezterm")
-	require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 	return wezterm.action.QuickSelectArgs({
 		label = "open url",
 		patterns = {

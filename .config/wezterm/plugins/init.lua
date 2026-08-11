@@ -31,8 +31,7 @@ local dbg = require("utils.debug")
 ---@return table<string, mywez.PluginSpec>
 local function module_list(spec_dir, skip_init)
 	local found_sepcs = {}
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 
 	---@type mywez.Validator
 	local Validator = require("utils.validator")
@@ -103,8 +102,7 @@ function PluginManager:discover_specs()
 
 	---@type mywez.Validator
 	local validator = require("utils.validator")
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 
 	local modules = module_list(self.plugin_dir)
 
@@ -139,6 +137,10 @@ function PluginManager:discover_specs()
 	return self
 end
 
+--- Applies the loaded plugin specs to the given configuration.
+---@param wezterm Wezterm The wezterm module.
+---@param config Config|mywez.Config The configuration to apply the plugins to.
+---@return mywez.PluginManager
 function PluginManager:apply_to_config(wezterm, config)
 	self:discover_specs()
 
@@ -166,8 +168,7 @@ function PluginManager:apply_to_config(wezterm, config)
 end
 
 function PluginManager:init()
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 	-- Set the plugin directory to the default plugins directory
 
 	setmetatable(self, {

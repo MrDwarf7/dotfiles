@@ -9,8 +9,7 @@ Debug.__index = Debug
 --- Recursive function to print data, will continue calling itself recursively until all
 --- data and fields are printed.
 function Debug.recursive_print(data, indent_level, visited, max_depth)
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 
 	-- Set up default parameters for the recursive calls
 	indent_level = indent_level or 0 -- Track how deep we are for indentation
@@ -115,8 +114,7 @@ function Debug:init()
 end
 
 function Debug:info(data)
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 	local prefix = "Debug Info: "
 
 	if type(data) == "nil" then
@@ -128,8 +126,7 @@ function Debug:info(data)
 end
 
 function Debug:warn(data)
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 	local prefix = "Debug Warn: "
 
 	if type(data) == "nil" then
@@ -141,8 +138,7 @@ function Debug:warn(data)
 end
 
 function Debug:error(data)
-	---@type Wezterm
-	local wezterm = require("wezterm")
+	local wezterm = require("wezterm") ---@type Wezterm
 	local prefix = "Debug Error: "
 
 	if type(data) == "nil" then
