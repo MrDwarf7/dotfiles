@@ -86,9 +86,12 @@ esac
 # set aliases if LIST_CLIENT is exa or eza
 
 if [[ $LIST_CLIENT == "eza" || $LIST_CLIENT == "exa" ]]; then
-  alias l='exa -lah --color=always --follow-symlinks --icons=always --git'
-  alias la='exa -lah --color=always --follow-symlinks --icons=always --git'
-  alias ls='exa -ah --color=automatic'
+  export EXA_BASE_CMD="eza --color=auto --follow-symlinks --icons=auto --group-directories-first --git"
+
+  alias l='$EXA_BASE_CMD -lah'
+  alias la='$EXA_BASE_CMD -lah'
+  alias ls='$EXA_BASE_CMD -ah'
+  alias lt='$EXA_BASE_CMD --tree -a'
 else
   alias l='ls -lah --color=auto'
   alias la='ls -la - --color=auto'
@@ -112,8 +115,8 @@ alias gl="git pull"
 alias gstash="git stash"
 alias gco="git checkout"
 
-alias .b="source $bashrc"
-alias basc="vim $bashrc"
+alias .b='source $bashrc'
+alias basc='vim $bashrc'
 
 alias cls='clear'
 alias ca='clear && l'
@@ -138,6 +141,8 @@ function dot {
 # ------------------
 # Path stuff
 # -----------------
+
+go_bin="$HOME/go/bin"
 
 if [[ -d "$go_bin" ]]; then
   export GOBIN="$go_bin"
