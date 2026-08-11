@@ -15,14 +15,20 @@ function __mirror_build_args --description 'Build the rate-mirrors argument list
     set -l per_mirror_timeout 90000
     set -l top_retest 15
     set -l fetch_timeout 90000
-    set -l max_delay 21600
+    # set -l max_delay 21600 # Deprecated!
 
-    echo -- --save $dest
-    echo -- --per-mirror-timeout $per_mirror_timeout
-    echo -- --entry-country $country
-    echo -- --top-mirrors-number-to-retest $top_retest
-    echo -- --disable-comments-in-file
-    echo -- --max-delay $max_delay
-    echo -- --fetch-mirrors-timeout $fetch_timeout
-    echo -- $distro
+    set -l str_buf
+    set --append str_buf \
+        --save $dest \
+        --max-per-mirror $per_mirror_timeout \
+        --entry-country $country \
+        --top-mirrors-number-to-retest $top_retest \
+        --disable-comments-in-file \
+        $distro
+
+    # Depr. options
+    # --fetch-mirrors-timeout $fetch_timeout \
+    # --max-delay $max_delay
+
+    printf '%s\n' $str_buf
 end

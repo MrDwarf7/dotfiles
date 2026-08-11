@@ -18,6 +18,7 @@ function __mirror_write --description 'Generate and install the mirrorlist'
     end
 
     set -l args (__mirror_build_args $tmp)
+    # printf '%s\n' $args | xargs
     rate-mirrors $args
     or begin
         colorize red "rate-mirrors failed.\n"
