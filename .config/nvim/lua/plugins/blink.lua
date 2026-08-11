@@ -22,18 +22,18 @@ opts.sources = {
 
     "copilot",
     "lazydev", -- conditional anyway
-    "ghostty",
+    -- "ghostty",
     -- -- "conventional_commits", -- add it to the list
     "sshconfig",
-    "tmux",
-    "wezterm",
+    -- "tmux",
+    -- "wezterm",
     -- "avante",
     -- "datword",
 
     -- "ripgrep",
     "snippets",
     "path",
-    "env",
+    -- "env",
 
     --
   },
@@ -45,7 +45,7 @@ opts.sources = {
       "path",
       "copilot",
 
-      "wezterm",
+      -- "wezterm",
       "buffer",
       "snippets",
     },
@@ -54,7 +54,7 @@ opts.sources = {
       "buffer",
       "path",
       "copilot",
-      "env",
+      -- "env",
       -- "snippets",
     },
 
@@ -103,10 +103,10 @@ opts.sources = {
       score_offset = 1000,
     },
 
-    ghostty = {
-      name = "Ghostty",
-      module = "blink-cmp-ghostty",
-    },
+    -- ghostty = {
+    --   name = "Ghostty",
+    --   module = "blink-cmp-ghostty",
+    -- },
 
     -- -- conventional_commits = {
     -- --   name = "Conventional Commits",
@@ -126,27 +126,27 @@ opts.sources = {
       module = "blink-cmp-sshconfig",
     },
 
-    tmux = {
-      name = "Tmux",
-      module = "blink-cmp-tmux",
-    },
+    -- tmux = {
+    --   name = "Tmux",
+    --   module = "blink-cmp-tmux",
+    -- },
 
-    wezterm = {
-      name = "wezterm",
-      module = "blink-cmp-wezterm",
-      -- default options
-      opts = {
-        all_panes = false,
-        capture_history = false,
-        -- only suggest completions from `wezterm` if the `trigger_chars` are
-        -- used
-        triggered_only = false,
-        trigger_chars = { "." },
-
-        max_completions = 4, -- 'override' default (default is 4)
-        max_attempts = 4,
-      },
-    },
+    -- wezterm = {
+    --   name = "wezterm",
+    --   module = "blink-cmp-wezterm",
+    --   -- default options
+    --   opts = {
+    --     all_panes = false,
+    --     capture_history = false,
+    --     -- only suggest completions from `wezterm` if the `trigger_chars` are
+    --     -- used
+    --     triggered_only = false,
+    --     trigger_chars = { "." },
+    --
+    --     max_completions = 4, -- 'override' default (default is 4)
+    --     max_attempts = 4,
+    --   },
+    -- },
 
     lsp = {
       name = "LSP",
@@ -235,18 +235,18 @@ opts.sources = {
     -- --   },
     -- -- },
 
-    env = {
-      name = "Env",
-      module = "blink-cmp-env",
-      async = true,
-
-      --- @type blink-cmp-env.Options
-      opts = {
-        -- item_kind = require("blink.cmp.types").CompletionItemKind.Variable,
-        show_braces = false,
-        show_documentation_window = true,
-      },
-    },
+    -- env = {
+    --   name = "Env",
+    --   module = "blink-cmp-env",
+    --   async = true,
+    --
+    --   --- @type blink-cmp-env.Options
+    --   opts = {
+    --     -- item_kind = require("blink.cmp.types").CompletionItemKind.Variable,
+    --     show_braces = false,
+    --     show_documentation_window = true,
+    --   },
+    -- },
 
     snippets = {
       enabled = false,
@@ -290,7 +290,7 @@ opts.completion = {
 
   documentation = {
     auto_show = true,
-    auto_show_delay_ms = 100,
+    auto_show_delay_ms = 50,
     -- DOC BORDER
     window = {
       border = "single",
@@ -498,21 +498,21 @@ return {
     --   -- dependencies = { "rafamadriz/friendly-snippets" }
     -- },
 
-    { "L3MON4D3/LuaSnip",                             lazy = false,
+    -- { "L3MON4D3/LuaSnip",                             lazy = false,
       -- dependencies = { "rafamadriz/friendly-snippets" }
-    },
+    -- },
 
     { "rafamadriz/friendly-snippets",                 lazy = false },
     { "folke/lazydev.nvim",                           lazy = false,                ft = "lua" },
     { "fang2hou/blink-copilot",                       lazy = true },
     { "zbirenbaum/copilot.lua",                       lazy = true },
     { "bydlw98/blink-cmp-sshconfig",                  lazy = true, enabled = true, ft = "sshconfig", build = "make" },
-    { "barrettruth/blink-cmp-tmux",                   lazy = true,                 ft = "tmux" },
-    { "junkblocker/blink-cmp-wezterm",                lazy = true, enabled = true, ft = "lua" },
-    { "bydlw98/blink-cmp-env",                        lazy = true, enabled = true, ft = "env" },
+    -- { "barrettruth/blink-cmp-tmux",                   lazy = true,                 ft = "tmux" },
+    -- { "junkblocker/blink-cmp-wezterm",                lazy = true, enabled = true, ft = "lua" },
+    -- { "bydlw98/blink-cmp-env",                        lazy = true, enabled = true, ft = "env" },
     { "archie-judd/blink-cmp-words",                  lazy = true, enabled = true, ft = { "markdown", "text", "txt" } },
 
-    { "barrettruth/blink-cmp-ghostty",                lazy = true, enabled = true, ft = "ghostty" },
+    -- { "barrettruth/blink-cmp-ghostty",                lazy = true, enabled = true, ft = "ghostty" },
     -- -- { "disrupted/blink-cmp-conventional-commits",     lazy = false },
     -- { "Kaiser-Yang/blink-cmp-avante",                 lazy = true },
     -- { "mikavilpas/blink-ripgrep.nvim",                lazy = true, enabled = true, version = "*" }, -- use the latest stable version
