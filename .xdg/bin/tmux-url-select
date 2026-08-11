@@ -1,185 +1,152 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2016,SC2218
 
-# Constants
-name="select-url"
-# message_time_period=1500 ## for dbg
+OPEN_CMD="xdg-open"
+COPY_CMD="wl-copy"
+_rg_base=(--no-config --color never -N --no-heading -I --pcre2)
+rg_base=("${_rg_base[@]}" -o)
+rg_strip=("${_rg_base[@]}" --passthru --replace '' --)
+
+LEN_ROW_PADDING=5
+
+fuzz_cmd=$(command -v fzf || command -v sk)
+# On error, use this timeout period
 message_time_period=850
-buffer_file_name="tmux-url-select-data"
-menu_max_items=5
+# menu_max_items=5 # if adding native, we need a max to switch on
 
-# fuzz_finder_command="fzf"
-fuzz_finder_command="sk"
+# tmux display-popup -xP -yP -w25% -h20% -T 'Selection' -E -k
 
-# Check if running in TMUX context
-if [ -z "$TMUX" ]; then
-  echo "This script must be ran with TMUX variable context."
-  exit 1
-fi
+declare FZF_DEFAULT_OPTS
+FZF_DEFAULT_OPTS=$(fish -c 'echo $FZF_DEFAULT_OPTS') # grab defaults opts from fish (already configured defaults)
+export FZF_DEFAULT_OPTS
 
-# Function to capture the TMUX pane (full history or current)
-capture_pane() {
-  local is_full="$1"
-  if [[ "$is_full" == "full" ]]; then
-    tmux capture-pane -S "-"
-  else
-    tmux capture-pane
-  fi
-  tmux save-buffer "${TMPDIR:-/tmp}/${buffer_file_name}"
-  tmux delete-buffer
-}
+declare -g LEN_COLS
+declare -g LEN_ROWS
+declare -g FZF_TMUX_OPTS
 
-# Function to extract unique URLs from the buffer file
-# %s/\v((http[s]?[://]+)|www\.)[a-zA-Z0-9+./?=_%:-]+
-# original - grep -Eoi "(http|https)://[a-zA-Z0-9+./?=_%:-]+" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq
-extract_urls() {
+# Standard URLs
+#   https://example.com/path?q=1
+#   ftp://files.example.com/file.tar.gz
+read -r PAT_URL <<'PATTERN'
+(?:https?|ftp|file):/?//[-\w+&@#/%?=~|!:,.;]*[-\w+&@#/%=~|]
+PATTERN
 
-  local http_or_www_cap='((http[s]?[://]+)|www\.)'
-  local all_valid_chars='[a-zA-Z0-9+./?=_%:-]+'
-  grep -Eoi "$http_or_www_cap$all_valid_chars" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq
-}
+# Git SSH URLs
+#   git@github.com:user/repo.git -> https://github.com/user/repo.git
+#   ssh://git@github.com/user/repo.git -> https://github.com/user/repo.git
+read -r PAT_GIT <<'PATTERN'
+(?:ssh://)?git@([^\s'"`:]+)[:/]([^\s'"`]+)
+PATTERN
+SUB_GIT='https://$1/$2'
 
-# origin  git@github.com:MrDwarf7/dotfiles.git (push)
-#
-# We want to turn the above into:
-#
-# [-git@] github.com:MrDwarf7/dotfiles.git
-# www.github.com[-:]MrDwarf7/dotfiles.git
-# www.github.com/MrDwarf7/dotfiles.git
-extract_git_ssh_as_url() {
-  if ! grep -q 'git@' "${TMPDIR:-/tmp}/${buffer_file_name}"; then
-    return 0
-  fi
-  # will pull out the 2 entries of
-  # origin  git@github.com:MrDwarf7/dotfiles.git (push)
-  # or more
+# Bare www domains
+#   www.example.com -> http://www.example.com
+#   www.example.com/path -> http://www.example.com/path
+read -r PAT_WWW <<'PATTERN'
+(?<!://)www\.[a-zA-Z](?:-?[a-zA-Z0-9])+\.[a-zA-Z]{2,}(?:/[^\s'"`]+)*
+PATTERN
+SUB_WWW='http://$0'
 
-  local alpha_numeric='[a-zA-Z0-9_.-]+'
+# IP addresses
+#   192.168.1.1 -> http://192.168.1.1
+#   10.0.0.1:8080/api -> http://10.0.0.1:8080/api
+read -r PAT_IP <<'PATTERN'
+\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d{1,5})?(?:/[^\s'"`]+)*
+PATTERN
+SUB_IP='http://$0'
 
-  local base_extract="git@(${alpha_numeric})[:/](${alpha_numeric}[/]?${alpha_numeric})(\.git)?"
-  # transform it
-  local transform_using="s/$base_extract/https:\/\/\1\/\2\3/g"
-  grep -Eoi "$base_extract" "${TMPDIR:-/tmp}/${buffer_file_name}" | uniq | sed -E "$transform_using"
-}
+# GitHub shorthand
+#   'user/repo' -> https://github.com/user/repo
+#   "my-org/my-repo" -> https://github.com/my-org/my-repo
+read -r PAT_GH <<'PATTERN'
+['"]([\w-]+/[\w.-]+)['"]
+PATTERN
+SUB_GH='https://github.com/$1'
 
-# Function to open a URL and display success message
+# Helper, but we use it here to wrap the call via
+# `nohup` and also the handoff via `... &`
 open_url() {
-  local url="$1"
-  if xdg-open "$url" >/dev/null 2>&1; then
-    tmux display-message -d "$message_time_period" "#[bold]$name: Opened $url#[bold]"
-  fi
+  nohup "$OPEN_CMD" "$1" >/dev/null 2>&1 &
 }
 
-# Function to handle selection with fzf in a new window
-handle_fuzzy_selection() {
-  local urls="$1"
-  # tmux neww -n "url-select" "printf '%s\n' '$urls' | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open \"$1\" >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened $1#[bold]\"' -- {}"
-
-  local urls_array=("$@") # Pass array of URLs
-  # echo "$urls"
-  # echo "${urls_array[@]}"
-
-  declare -a split_array
-  mapfile -t split_array < <(printf "%s\n" "${urls_array[@]}" | sort -u)
-
-  # will work with urls_array[*] without quoting
-  # tmux neww -n "url-select" "printf '%s\n' ${urls_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open \"$1\" >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened $1#[bold]\"' -- {}"
-
-  # WORKS, BUT NOT MSG OUTPUT - THIS IS OKAY.
-  # tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1'"
-
-  # WORKS, WITH MSG OUTPUT - GOOOOOOOOD.
-  # tmux neww -n "url-select" " printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1 && tmux display-message \"#[bold]$name: Opened {}#[bold]\" ' "
-
-  # If the url is eg: "www.google.com" and not "http://www.google.com"
-  # We can 'see' it via fzf, but it won't pass to xdg-open correctly.
-  if ! grep -q -E '^(http|https)://' <<<"${split_array[*]}"; then
-    # If no URLs start with http or https, we prepend http:// to all
-    for i in "${!split_array[@]}"; do
-      split_array[i]="https//${split_array[$i]}"
-    done
+fzf_filter() {
+  local copy_bind="ctrl-y:execute-silent(printf '%s\n' {+} | awk '{print \$2}' | $COPY_CMD)"
+  if [[ "$fuzz_cmd" == *fzf* ]]; then
+    # shellcheck disable=SC2086
+    "$fuzz_cmd" $FZF_TMUX_OPTS --multi --exit-0 --no-preview --bind "$copy_bind"
   else
-    # If some URLs start with http or https, we only prepend http:// to those that don't
-    for i in "${!split_array[@]}"; do
-      if [[ ! "${split_array[$i]}" =~ ^(http|https):// ]]; then
-        split_array[i]="https://${split_array[$i]}"
-      fi
-    done
+    "$fuzz_cmd" --multi --exit-0 --bind "$copy_bind"
   fi
-
-  fuzzy_call="$fuzz_finder_command --exit-0 --print-query"
-  xargs_capture="xargs -I {}"
-  xdg_fwd_cmd="xdg-open \'{}\' >/dev/null 2>&1"
-  tmx_msg_cmd="tmux display-message \"#[bold]$name: Opened {}#[bold]\""
-
-  tmux neww -n "url-select" "printf '%s\n' ${split_array[*]} | $fuzzy_call | $xargs_capture sh -c '$xdg_fwd_cmd && $tmx_msg_cmd'"
-
-  # The above is marginally easier to read, and reason about -
-  # Once we put it all together we get this:
-  # tmux neww -n "url-select" " printf '%s\n' ${split_array[*]} | fzf --exit-0 --print-query | xargs -I {} sh -c 'xdg-open {} >/dev/null 2>&1 && $tmx_msg_cmd' "
 }
 
-# Function to build and show TMUX menu for few URLs
-build_and_show_menu() {
-  local urls_array=("$@") # Pass array of URLs
+rg_extract() {
+  declare data
+  data=$(rg "${rg_strip[@]}" $'\x1B\[[0-9;]*[a-zA-Z]' 2>/dev/null)
+  {
+    printf '%s\n' "$data" | rg "${rg_base[@]}" -- "$PAT_URL" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_GIT" -- "$PAT_GIT" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_WWW" -- "$PAT_WWW" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_IP" -- "$PAT_IP" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_GH" -- "$PAT_GH" 2>/dev/null || true
+  }
+}
 
-  local tmux_menu="tmux display-menu -t 1 -T 'url-select'"
-  local index=1
+pane_content() {
+  declare -I limit
+  case "$limit" in
+  full) tmux capture-pane -J -p -e -S - ;;
+  screen) tmux capture-pane -J -p -e ;;
+  *) tmux capture-pane -J -p -e -S -"$limit" ;;
+  esac
+}
 
-  for url in "${urls_array[@]}"; do
-    local clean_url="${url#*//}"
-    # Use printf for safe string building with escaping
-    local menu_item
-    printf -v menu_item "'%s' %s 'run-shell \"xdg-open %s >/dev/null 2>&1; tmux display-message #[bold]%s: Opened %s#[bold] \"'" \
-      "$clean_url" "$index" "$url" "$name" "$url"
-    tmux_menu+=" $menu_item"
+declare limit
+limit=${
+  1:-
+  case "$limit" in
+  full | screen | !^[0-9]+$) echo "$limit" ;;
+  *) echo "full" ;;
+  esac
+}
 
-    ((index++))
+# We want unique values, but want to AVOID sorting them, so we use `nl` to number them and then extract the second column after filtering.
+items=$(pane_content "$limit" | rg_extract | awk '!seen[tolower($0)]++' | nl -w1 -s '  ')
+
+[ -z "$items" ] && tmux display -d "$message_time_period" "#[fg=red,bold]No URL found" && exit 0
+
+LEN_COLS=$(awk 'NR==1{max=length($2)} length($2)>max{max=length($2)} END{print max+10}' <<<"$items")
+LEN_ROWS=$(wc -l <<<"$items")
+count=$LEN_ROWS                 # must be assigned before padding or we have to to extra work
+((LEN_ROWS += LEN_ROW_PADDING)) # bot border | input | no. items | 1-line-pad | top border
+
+FZF_TMUX_OPTS="--tmux bottom,${LEN_COLS},${LEN_ROWS}"
+
+if ((count == 1)); then
+  item=$(awk '{print $2}' <<<"$items")
+  open_url "$item" &
+  tmux display -d "$message_time_period" "#[fg=green,bold]Opening URL :: $item"
+  exit
+fi
+
+# We have more than a single item
+fzf_filter <<<"$items" | awk '{print $2}' |
+  while read -r chosen; do
+    # nohup "$OPEN_CMD" "$chosen" >/dev/null 2>&1 &
+    open_url "$chosen"
   done
+exit
 
-  eval "$tmux_menu"
-}
+# url_count=$(mapfile -t urls_array <<<"$items"; echo "${#urls_array[@]}")
+# url_count="${#items[@]}"
 
-# --- Main logic ---
+# if ((url_count == 1)); then
+#   open_url "$(awk '{print $2}' <<<"$items")"
+# elif ((url_count > menu_max_items)); then
 
-# Capture pane based on optional "full" argument
-capture_pane "${1:-}"
+# Early/Quick return (also stops fzf from blipping)
 
-# Extract URLs as a multiline string
-urls=$(extract_urls)
-
-# Also extract git SSH URLs and convert them to HTTPS/(www.)? - format
-urls+=$(extract_git_ssh_as_url)
-
-# If no URLs, show message and exit
-if [[ -z "$urls" ]]; then
-  tmux display-message -d "$message_time_period" "#[fg=red,bold]$name: No URL found"
-  exit 0
-fi
-
-# Read URLs into an array for safer handling
-mapfile -t urls_array <<<"$urls"
-
-# Count URLs
-url_count="${#urls_array[@]}"
-
-if ((url_count == 1)); then
-  open_url "${urls_array[0]}"
-elif ((url_count > menu_max_items)); then
-  # handle_fzf_selection "$urls" # Pass original multiline string for fzf
-  handle_fuzzy_selection "${urls_array[@]}" # Pass original multiline string for fzf
-else
-  build_and_show_menu "${urls_array[@]}"
-fi
-
-# Cleanup main body vars
-unset urls
-unset urls_array
-unset url_count
-
-# Cleanup globals/constants
-unset menu_max_items
-unset buffer_file_name
-unset message_time_period
-unset name
-
-# vim: ts=2 sts=2 sw=2 et
+## Later if we want to
+#   native_menu <<<"$items" | awk '{print $2}' |
+#     while read -r chosen; do
+#       open_url "$chosen"
+#     done
