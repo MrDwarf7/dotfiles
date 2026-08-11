@@ -46,6 +46,9 @@ version = "latest"
 # version = "latest"
 # # "npm:fieldtheory" = "1.2.1"
 
+[tools."npm:@magnitudedev/cli"]
+version = "latest"
+
 [tools."npm:@mem0/cli"]
 version = "latest"
 
