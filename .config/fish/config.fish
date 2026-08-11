@@ -29,5 +29,7 @@ if status is-interactive
         source "$HOME/.secret/secrets.fish" &
     end
 
+    00-valid_pacman shellup; and shellup &
+
     # 099autostart_tmux new
 end

@@ -2,7 +2,6 @@
 # VERSION: 3.0
 SETUVAR --export BATDIFF_USE_DELTA:true
 SETUVAR --export BATMAN_THEME:Monokai\x20Extended
-SETUVAR --export CACHED_ENVS_LIST:__cached_xdg_done\x20__cached_env_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x20__cached_env_done\x20__cached_xdg_done\x20__cached_gh_token_done\x1e__cached_env_done
 SETUVAR --export CARAPACE_BRIDGES:all
 SETUVAR --export CODEX_HOME:/home/dwarf/\x2econfig/\x2ecodex
 SETUVAR --export DATA_ON_DEMAND_BACK:/home/dwarf/Documents/GitHub_Projects/Web/Data\x2dOn\x2dDemand/Data\x2dOn\x2dDemand\x2dBackend
@@ -14,6 +13,7 @@ SETUVAR --export DISTCC_HOSTS:\x2d\x2drandomize\x20localhost\x2ccpp\x2clzo
 SETUVAR --export DOT_CONFIG:/home/dwarf/dotfiles/\x2econfig
 SETUVAR --export DOT_DIR:/home/dwarf/dotfiles
 SETUVAR --export EDITOR:/usr/bin/nvim
+SETUVAR --export FZF_DEFAULT_COMMAND:bfs\x20\x2dtype\x20f\x2cd\x20\x2ds\x20\x2dprint\x20\x2dmaxdepth\x208\x20\x2dd\x20\x2d\x2d
 SETUVAR --export GCC_COLOR:eror\x3d01\x3b31\x3awarning\x3d01\x3b35\x3anote\x3d01\x3b36\x3acaret\x3d01\x3b32\x3alocus\x3d01\x3aquote\x3d01
 SETUVAR --export GITHUB_PROJECTS:/home/dwarf/Documents/GitHub_Projects
 SETUVAR --export GITHUB_PROJECTS_RUST:/home/dwarf/Documents/GitHub_Projects/Rust
@@ -26,6 +26,7 @@ SETUVAR --export JQP_CONFIG_HOME:/home/dwarf/\x2econfig/jqp
 SETUVAR --export JQP_CONFIG_HOME_FILE:/home/dwarf/\x2econfig/jqp/\x2ejqp\x2eyaml
 SETUVAR --export PAGER:less\x1e\x2dFRX
 SETUVAR --export RUST_TEMPLATE:/home/dwarf/Documents/GitHub_Projects/Rust/rust_template
+SETUVAR --export SHELL:/usr/bin/fish
 SETUVAR --export SSH_AGENT_PID:14712
 SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2ekeychain/_qT492_B\x2es
 SETUVAR --export SSH_PICKER_FAIL_DELAY:5
@@ -47,6 +48,10 @@ SETUVAR --export YAZI_CONFIG_HOME:/home/dwarf/\x2econfig/yazi
 SETUVAR --export ZVM_INSTALL:/home/dwarf/\x2econfig/\x2ezvm/self
 SETUVAR --export --path ZVM_PATH:/home/dwarf/\x2econfig/\x2ezvm
 SETUVAR --export _ZO_EXCLUDE_DIRS:\x24HOME/go\x3a\x24HOME/go/\x2a
+SETUVAR --export __cached_envs_done:1
+SETUVAR --export __cached_fzf_done:1
+SETUVAR --export __cached_gh_done:1
+SETUVAR --export __cached_xdg_done:1
 SETUVAR --export fish_cursor_default:block\x1eblink
 SETUVAR --export fish_cursor_insert:line\x1eblink
 SETUVAR --export fish_cursor_visual:block\x1eblink

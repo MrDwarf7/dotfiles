@@ -33,39 +33,27 @@ alias yayup 'yay -Syu'
 alias yays 'yay -S'
 alias yayss 'yay -Ss'
 
-alias par paru
-alias pars "paru -S"
-alias parss "paru -Ss"
-alias parsu "paru -Syu"
+## 'p' => 'pkgmanager' (paru)
+alias p $PKG_MANAGER
+### search - external(s)
+alias pss "$PKG_MANAGER -Ss"
+alias psi "$PKG_MANAGER -Si"
+alias psiv "$PKG_MANAGER -Siv"
+### Query
+alias pq "$PKG_MANAGER -Q"
+### Sync (install etc.)
+alias pS "$PKG_MANAGER -S --noconfirm"
 
-alias parq "paru -Q"
-
-alias parsi "paru -Si"
-alias piv "paru -Siv"
+## Update/Upgrade
+alias psy "$PKG_MANAGER -Syu"
+alias pSy "$PKG_MANAGER -Syyu --noconfirm"
 
 # alias pq "command paru -Q | rg"
-alias pq pqi
 alias pqe pqi
 alias pqie pqi
 
-alias p $PKG_MANAGER
-
 # See also `pqiv` function that uses the output (if singular) from the above `pqi` function
 # to then call `paru -Siv <output>`
-
-# function __shutdown_base_cmd
-#     set -l flags (string match -q -r -- '(^-f$|^--force$|^1)' $argv[1]; and printf "--force"; or printf "")
-#     eval "shutdown -P $flags now 2>&1; or poweroff $flags -p 2>&1; or systemctl poweroff -p $flags 2>&1; or echo 'Failed to shutdown'; and return 1" || begin
-#         echo "Shutdown command failed. Please check your system logs for more information."
-#         return 1
-#     end
-#     return 0
-# end
-
-# alias shutdown 'shutdown -h now 2>&1 || poweroff 2>&1 || systemctl poweroff 2>&1 || echo "Failed to shutdown"'
-# alias shutdown '__shutdown_base_cmd $argv[1]'
-# alias reboot reboot ## doesn't need an alias lmao
-# alias shutdownf '__shutdown_base_cmd --force'
 
 alias shutdown 'shutdown -h now'
 alias shutdownf 'shutdown -h --force now'
