@@ -444,6 +444,10 @@ map({ "n", "v" }, "<Leader>tj", function()
   })
 end, { desc = "Swap comment state of current line and BELOW" })
 
+map({ "n", "v" }, "z<BS>", function()
+  vim.cmd("normal! zb")
+end, { desc = "Performs 'zb' via backspace" })
+
 -- local insert = require("utils.insert")
 -- insert.setup(Keymaps)
 require("utils.insert").setup(Keymaps)

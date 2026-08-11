@@ -1,4 +1,48 @@
--- local output = require("utils.output")
+local fmt_desc = function(desc)
+  desc = type(desc) == "table" and desc[1] or desc
+  ---@cast desc string
+
+  local parts = {}
+  -- split camelCase word boundaries: "codeAction" -> "code Action", "OpenCargo" -> "Open Cargo"
+  -- parens around gsub so gmatch only sees the string, not its match-count return
+  for word in (desc:gsub("(%l)(%u)", "%1 %2")):gmatch("%a+") do
+    -- wrap the first letter of each word in brackets: "code" -> "[c]ode"
+    parts[#parts + 1] = ("[%s]%s"):format(word:sub(1, 1), word:sub(2))
+  end
+
+  return table.concat(parts, " ")
+end
+
+local map_rustaceanvim = function(modes, lhs, opts, rust_lsp_cmd)
+  ---@cast modes string[]
+  modes = type(modes) == "string" and { modes } or modes
+  ---@cast lhs string[]
+  lhs = type(lhs) == "string" and { lhs } or lhs
+
+  vim.keymap.set(modes, lhs, function()
+    vim.cmd.RustLsp(rust_lsp_cmd)
+  end, opts)
+end
+
+---@param direction "next" | "prev"
+local map_list = function(direction)
+  --
+  local ql = require("utils").list.find_qf("q")
+  local ll = require("utils").list.find_qf("l")
+  local ql_len = #ql
+  local ll_len = #ll
+  direction = direction == "next" and "next" or "prev"
+
+  if ql_len > 0 then
+    vim.cmd("c" .. direction)
+  else
+    if ll_len > 0 then
+      vim.cmd("l" .. direction)
+    else
+      print("No quickfix or loclist found")
+    end
+  end
+end
 
 return {
   {
@@ -18,48 +62,71 @@ return {
             return
           end
 
-          vim.keymap.set("n", "<Leader>lA", function()
-            vim.cmd.RustLsp("codeAction")
-          end, { desc = "Rust - [A]ction", buffer = bufnr })
+          local key_to_action = {
+            ["<Leader>lA"] = "codeAction",
+            ["<Leader>ln"] = "renderDiagnostic",
+            ["]n"] = { "renderDiagnostic", "cycle" },
+            ["[n"] = { "renderDiagnostic", "cycle_prev" },
+            ["<leader>lx"] = "relatedDiagnostics",
+            ["<Leader>dd"] = "debuggables",
+            ["<Leader>dr"] = "runnables",
+            ["<Leader>loc"] = "OpenCargo",
+          }
 
-          vim.keymap.set("n", "<Leader>ln", function()
-            vim.cmd.RustLsp("renderDiagnostic")
-          end, { desc = "Rust - in-comp. diag", buffer = bufnr })
+          for lhs, rust_lsp_cmd in pairs(key_to_action) do
+            local desc = type(rust_lsp_cmd) == "table" and rust_lsp_cmd[1] or rust_lsp_cmd
+            desc = fmt_desc(desc)
+            map_rustaceanvim("n", lhs, { desc = "[RUST] - " .. desc, buffer = bufnr }, rust_lsp_cmd)
+          end
 
-          vim.keymap.set("n", "]n", function()
-            vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
-          end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
+          --           vim.keymap.set("n", "<Leader>lA", function()
+          --             vim.cmd.RustLsp("codeAction")
+          --           end, { desc = "Rust - [A]ction", buffer = bufnr })
+          --
+          --           vim.keymap.set("n", "<Leader>ln", function()
+          --             vim.cmd.RustLsp("renderDiagnostic")
+          --           end, { desc = "Rust - in-comp. diag", buffer = bufnr })
+          --
+          --           vim.keymap.set("n", "]n", function()
+          --             vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
+          --           end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
+          --
+          --           vim.keymap.set("n", "[n", function()
+          --             vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
+          --           end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          --
+          --           vim.keymap.set("n", "<leader>lx", function()
+          --             vim.cmd.RustLsp("relatedDiagnostics")
+          --           end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          --
+          --           -- vim.keymap.set("n", "<Leader>lA", function()
+          --           --   -- vim.cmd.RustLsp("codeAction")
+          --           --   -- vim.cmd("FzfLua lsp_code_actions")
+          --           -- end, { desc = "[a]ction", buffer = bufnr })
+          --
+          --           -- vim.keymap.set("n", "<Leader>lc", function()
+          --           --   vim.cmd.RustLsp("flyCheck")
+          --           -- end, { desc = "[c]heck" })
+          --
+          --           vim.keymap.set("n", "<Leader>dd", function()
+          --             vim.cmd.RustLsp("debuggables")
+          --           end, { desc = "[d]ebuggables", buffer = bufnr })
+          --
+          --           vim.keymap.set("n", "<Leader>dr", function()
+          --             vim.cmd.RustLsp("runnables")
+          --           end, { desc = "[r]un" })
 
-          vim.keymap.set("n", "[n", function()
-            vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
-          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          local mds = { "n", "x", "o" }
 
-          vim.keymap.set("n", "<leader>lx", function()
-            vim.cmd.RustLsp("relatedDiagnostics")
-          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          vim.keymap.set(mds, "[[", function()
+            map_list("prev")
+          end, { desc = "Prev item in LIST" })
 
-          vim.keymap.set("n", "<leader>lx", function()
-            vim.cmd.RustLsp("relatedDiagnostics")
-          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          vim.keymap.set(mds, "]]", function()
+            map_list("next")
+          end, { desc = "Prev item in LIST" })
 
-          -- vim.keymap.set("n", "<Leader>lA", function()
-          --   -- vim.cmd.RustLsp("codeAction")
-          --   -- vim.cmd("FzfLua lsp_code_actions")
-          -- end, { desc = "[a]ction", buffer = bufnr })
-
-          -- vim.keymap.set("n", "<Leader>lc", function()
-          --   vim.cmd.RustLsp("flyCheck")
-          -- end, { desc = "[c]heck" })
-
-          vim.keymap.set("n", "<Leader>dd", function()
-            vim.cmd.RustLsp("debuggables")
-          end, { desc = "[d]ebuggables", buffer = bufnr })
-
-          vim.keymap.set("n", "<Leader>dr", function()
-            vim.cmd.RustLsp("runnables")
-          end, { desc = "[r]un" })
-
-          vim.keymap.set({ "n", "x", "o" }, "[[", function()
+          vim.keymap.set(mds, "[[", function()
             -- if the qf list or location list is open, navigate that instead of buffers
             local ql = require("utils").list.find_qf("q")
             dd(ql)
@@ -72,21 +139,23 @@ return {
             end
           end, { desc = "Prev item in LIST" })
 
-          vim.keymap.set({ "n", "x", "o" }, "]]", function()
-            -- if the qf list or location list is open, navigate that instead of buffers
-            local ql = require("utils").list.find_qf("q")
-            if #ql > 0 then
-              return vim.cmd.cnext()
-            end
-            local ll = require("utils").list.find_qf("l")
-            if #ll > 0 then
-              return vim.cmd.lnext()
-            end
-          end, { desc = "Next item in LIST" })
+          -- vim.keymap.set(mds, "]]", function()
+          --   -- if the qf list or location list is open, navigate that instead of buffers
+          --   local ql = require("utils").list.find_qf("q")
+          --   if #ql > 0 then
+          --     return vim.cmd.cnext()
+          --   end
+          --   local ll = require("utils").list.find_qf("l")
+          --   if #ll > 0 then
+          --     return vim.cmd.lnext()
+          --   end
+          -- end, { desc = "Next item in LIST" })
 
-          vim.keymap.set("n", "<Leader>loc", function()
-            require("rustaceanvim.commands.open_cargo_toml")()
-          end, { desc = "Open Cargo.toml", buffer = bufnr })
+          --------------------------------------------------
+          -- vim.keymap.set("n", "<Leader>loc", function()
+          --   require("rustaceanvim.commands.open_cargo_toml")()
+          -- end, { desc = "Open Cargo.toml", buffer = bufnr })
+          --------------------------------------------------
 
           -- vim.keymap.set("n", "]]", function()
           --   local tsutils = require("utils.tsutils")
@@ -103,38 +172,6 @@ return {
           --   end
           --   tsutils.handle_builtins({ operation = cprev_op })
           -- end, { silent = true, desc = "qf prev" })
-
-          --
-
-          -- BUG: These aren't working because no matter where I put them,
-          -- rust-analyzer overrides them with just simple function jumps (each functions opening bracket...)
-
-          -- vim.keymap.set("n", "[[", function()
-          --   -- if the qf list or location list is open, navigate that instead of buffers
-          --   local ql = require("utils").list.find_qf("q")
-          --   dd(ql)
-          --   if #ql > 0 then
-          --     return vim.cmd.cprev()
-          --   end
-          --   local ll = require("utils").list.find_qf("l")
-          --   if #ll > 0 then
-          --     return vim.cmd.lprev()
-          --   end
-          -- end, { desc = "Prev item in LIST" })
-          --
-          -- vim.keymap.set("n", "]]", function()
-          --   -- if the qf list or location list is open, navigate that instead of buffers
-          --   local ql = require("utils").list.find_qf("q")
-          --   if #ql > 0 then
-          --     return vim.cmd.cnext()
-          --   end
-          --   local ll = require("utils").list.find_qf("l")
-          --   if #ll > 0 then
-          --     return vim.cmd.lnext()
-          --   end
-          -- end, { desc = "Next item in LIST" })
-
-          --
         end,
       },
 
