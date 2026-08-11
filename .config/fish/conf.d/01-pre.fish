@@ -59,8 +59,10 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # 10-eval_if_pacman keychain "keychain add id_ed25519 --quick --immediate --quiet"
 # 10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet"
 
+# FIX: [versions] : cmd is only valid after 3.0+ - (version checks???)
+
 if status is-interactive
-    10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"
+    10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"; or colorize red "keychain failed to load, please check your keychain setup"; and return 1
 end
 
 # This is an exception to the above, sadly...
