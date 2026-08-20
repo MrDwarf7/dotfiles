@@ -1,6 +1,7 @@
 -- Detected host proxy. `.monitors` / `.layout` / `.kind` are THIS machine.
 
 local root_shrd = require("utils.root_shared")
+local lst = require("utils.lst")
 
 root_shrd.load_modules("utils.machine", {
   "fortress",
@@ -78,7 +79,9 @@ local function detect_hostname()
     { file = "/etc/hostname" },
   }
 
-  for _, src in ipairs(sources) do
+  -- find_map, not map: map always walks the whole list and later nils would
+  -- overwrite an earlier hit. return from find_map is the function-level exit.
+  return lst.find_map(sources, function(src)
     local raw
     if src.env then
       raw = os.getenv(src.env)
@@ -89,33 +92,31 @@ local function detect_hostname()
         f:close()
       end
     end
-    local hit = as_host_str(raw)
-    if hit then
-      return hit
-    end
-  end
-  return nil
+    return as_host_str(raw)
+  end)
 end
 
 ---@param want str
 ---@return str|nil, HyprConfig.Machine|nil
-local function match_host(want)
+local match_host = function(want)
   local direct = loaded[want]
   if type(direct) == "table" then
     return want, direct
   end
 
-  ---@cast loaded table<str, HyprConfig.Machine>
-  for name, mod in pairs(loaded) do
-    if type(mod) == "table" then
-      for _, alias in ipairs(mod.aliases or {}) do
-        if as_host_str(alias) == want then
-          return name, mod
-        end
-      end
+  -- We _intentionally_ capture r and return r here
+  -- despite not _actually_ needing to because LuaLS has a fit otherwise.
+
+  ---@cast loaded table<str, HyprConfig.Machine|true>
+  local r = require("utils.tbl").find(loaded, function(_, mod)
+    if type(mod) ~= "table" then
+      return false
     end
-  end
-  return nil, nil
+    return lst.find(mod.aliases or {}, function(alias)
+      return as_host_str(alias) == want
+    end) ~= nil
+  end)
+  return r
 end
 
 local hostname = detect_hostname()
@@ -144,12 +145,9 @@ machine.get = function(name)
 end
 
 machine.monitor = function(output)
-  for _, m in ipairs(host.monitors or {}) do
-    if m.output == output then
-      return m
-    end
-  end
-  return nil
+  return lst.find(host.monitors or {}, function(m)
+    return m.output == output
+  end)
 end
 
 setmetatable(machine, {

@@ -1,23 +1,12 @@
-local list = {}
+local lst = {}
 
 --- Checks if a list (array-like table) contains a specific value.
 ---@param tbl table The list (array-like table) to search in.
 ---@param item any The value to search for.
-list.contains = function(tbl, item)
-  for i, v in ipairs(tbl) do
-    if type(v) == "nil" then
-      goto continue
-    end
-    if v == item then
-      return true
-    end
-    ::continue::
-    local next = i + 1
-    if next > #tbl then
-      break
-    end
-  end
-  return false
+lst.contains = function(tbl, item)
+  return lst.find(tbl, function(v)
+    return v == item
+  end) ~= nil
 end
 
 --- Apply `fn` to each array element in order. Same shape as tbl_mod.map (tbl, fn)
@@ -27,7 +16,7 @@ end
 ---@param tbl T[]
 ---@param fn fun(value: T): R
 ---@return R[]
-list.map = function(tbl, fn)
+lst.map = function(tbl, fn)
   local ret = {}
   for i, v in ipairs(tbl) do
     ret[i] = fn(v)
@@ -35,12 +24,17 @@ list.map = function(tbl, fn)
   return ret
 end
 
+-- --- Applies `list.map` and takes a variable amount of
+-- list.map_mut = function(tbl, fn, sentinel)
+--   -- local args = { ... }
+-- end
+
 --- Keep array elements for which `fn` is true. ipairs; does not mutate `tbl`.
 ---@generic T
 ---@param tbl T[]
 ---@param fn fun(value: T): boolean
 ---@return T[]
-list.filter = function(tbl, fn)
+lst.filter = function(tbl, fn)
   local ret = {}
   for _, v in ipairs(tbl) do
     if fn(v) then
@@ -50,11 +44,41 @@ list.filter = function(tbl, fn)
   return ret
 end
 
+--- First element for which `fn` is true, in ipairs order. Stops early.
+---@generic T
+---@param tbl T[]
+---@param fn fun(value: T): boolean
+---@return T|nil
+lst.find = function(tbl, fn)
+  for _, v in ipairs(tbl) do
+    if fn(v) then
+      return v
+    end
+  end
+  return nil
+end
+
+--- First non-nil `fn(item)`, in ipairs order. Stops early.
+---@generic T
+---@generic R
+---@param tbl T[]
+---@param fn fun(value: T): R|nil
+---@return R|nil
+lst.find_map = function(tbl, fn)
+  for _, v in ipairs(tbl) do
+    local r = fn(v)
+    if r ~= nil then
+      return r
+    end
+  end
+  return nil
+end
+
 --- @generic T
 --- @param tbl T[]
 --- @param key? string|fun(x: T): any Optional field name or hash function to determine uniqueness of values
 --- @return T[] : The deduplicated list
-list.unique = function(tbl, key)
+lst.unique = function(tbl, key)
   --
   local misc = require("utils.misc")
   local key_fn = misc.make_key_fn(key)
@@ -86,7 +110,7 @@ end
 ---@param val T The value to search.
 ---@param opts table? Optional settings for the search (e.g., case sensitivity, deep search).
 ---@return integer index serves as either the lower bound or the upper bound position.
-list.bisect = function(tbl, val, opts)
+lst.bisect = function(tbl, val, opts)
   opts = opts or {}
   local misc = require("utils.misc")
 
@@ -104,4 +128,4 @@ list.bisect = function(tbl, val, opts)
   return f(tbl, val, lo, hi, key_fn)
 end
 
-return list
+return lst

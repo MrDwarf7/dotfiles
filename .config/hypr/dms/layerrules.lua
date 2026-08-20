@@ -1,3 +1,5 @@
+local list = require("utils.lst")
+
 ---@type HL.LayerRuleSpec[]
 local rules = {
   {
@@ -144,6 +146,4 @@ local rules = {
   -- },
 }
 
-for _, rule in ipairs(rules) do
-  hl.layer_rule(rule)
-end
+list.map(rules, hl.layer_rule)

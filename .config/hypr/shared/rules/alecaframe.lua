@@ -67,6 +67,4 @@ local rules = {
   },
 }
 
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+require("utils.lst").map(rules, hl.window_rule)

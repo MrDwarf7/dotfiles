@@ -1,3 +1,5 @@
+local list = require("utils.lst")
+
 ---@type HL.GestureSpec[]
 local gestures = {
   {
@@ -7,6 +9,4 @@ local gestures = {
   },
 }
 
-for _, gesture in ipairs(gestures) do
-  hl.gesture(gesture)
-end
+list.map(gestures, hl.gesture)

@@ -17,6 +17,5 @@ local rules = {
     move = { "(monitor_w*.5-window_w*.5)", "(monitor_h-window_h-12)" },
   },
 }
-for _, rule in ipairs(rules) do
-  hl.window_rule(rule)
-end
+
+require("utils.lst").map(rules, hl.window_rule)

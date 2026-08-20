@@ -196,8 +196,9 @@ local HyprlandEvents = {
 ---@class HyprConfig.CurvePoint<N> : Vec2<N>
 local __HyprConfig_CurvePoint = {}
 
----@class HyprConfig.Curve
----@field name string
+---@generic K : Index
+---@class HyprConfig.Curve : { [K]: HyprConfig.Curve }
+---@field name? string This field is largely ignored when handled via hl.curve fn as it expects the initial key to whatever table contains these to be the name
 ---@field type "bezier" | "linear" | "step" | "steps" | "cubic-bezier"
 ---@field points HyprConfig.CurvePoint[]
 local __HyprConfig_Curve = {}

@@ -1,6 +1,8 @@
+local list = require("utils.lst")
+
 ---@type HyprConfig.Curve[]
 local curves = {
-  {
+  ["fluid"] = {
     name = "fluid",
     type = "bezier",
     points = {
@@ -9,7 +11,7 @@ local curves = {
     },
   },
 
-  {
+  ["snappy"] = {
     name = "snappy",
     type = "bezier",
     points = {
@@ -19,28 +21,10 @@ local curves = {
   },
 }
 
-for _, curve in ipairs(curves) do
-  hl.curve(curve.name, {
-    type = curve.type,
-    points = curve.points,
-  })
+local curve_apply = function(c)
+  hl.curve(c.name, { type = c.type, points = c.points })
 end
-
--- hl.curve("fluid", {
---   type = "bezier",
---   points = {
---     { 0.15, 0.85 },
---     { 0.25, 1 },
---   },
--- })
-
--- hl.curve("snappy", {
---   type = "bezier",
---   points = {
---     { 0.3, 1 },
---     { 0.4, 1 },
---   },
--- })
+require("utils.tbl").map(curves, curve_apply)
 
 ---@type HyprConfig.Animation[]
 local animations = {
@@ -121,9 +105,7 @@ local animations = {
 -- the speed of changing windows when using the `scrolling` layout option :L
 --
 
-for _, anim in ipairs(animations) do
-  hl.animation(anim)
-end
+list.map(animations, hl.animation)
 
 ---@type HL.ConfigOpt
 local animation_config = {

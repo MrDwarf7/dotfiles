@@ -34,7 +34,7 @@ end
 
 --- Existing bucket, or nil. Does not create.
 ---@param here str|LuaPath
----@return table<str, OfAny|true>|nil
+---@return table<str, HyprConfig.RootShared.Seen|true>|nil
 local function get(here)
   local p = prefix(here)
   if not p then
@@ -78,15 +78,17 @@ local function load_modules(here, modules_tbl)
     return false
   end
 
-  for _, mod in ipairs(modules_tbl) do
+  local resps = require("utils.lst").map(modules_tbl, function(mod)
     if bucket[mod] == nil then
       local fullpath = string.format("%s%s", p, mod)
       local loaded = require(fullpath)
       -- nil-returning (side-effect) modules must not look unloaded on the next call
       bucket[mod] = loaded == nil and true or loaded
     end
-  end
-  return true
+    return true
+  end)
+  ---@return bool
+  return resps[1] == true and #resps == #modules_tbl and #modules_tbl > 0
 end
 
 root_shrd.get = get

@@ -1,3 +1,5 @@
+local tbl = require("utils.tbl")
+
 local HOME = os.getenv("HOME") ---@cast HOME DirPathBuf
 local hyprdir = HOME .. "/.config/hypr" ---@cast hyprdir DirPathBuf
 
@@ -18,19 +20,16 @@ local paths_to_lua = function(paths)
   local lua_paths = {} ---@cast lua_paths HyprConfig.Locations<LuaPathBuf>
 
   paths = paths or {}
-  if #paths == 0 then
+  if tbl.is_empty(paths) then
     return lua_paths
   end
 
-  for key, path in pairs(paths) do
-    ---@cast key Index
-
-    -- Convert to Lua require path format
-    local lua_path = path:gsub("/", "."):gsub("%.conf", "") ---@cast lua_path LuaPathBuf
-
-    lua_paths[key] = lua_path
-  end
-  return lua_paths
+  return tbl.map(paths, function(path)
+    ---@cast path str
+    local lua_path = path:gsub("/", "."):gsub("%.conf", "")
+    ---@cast lua_path LuaPathBuf
+    return lua_path
+  end)
 end
 
 local lua_paths = paths_to_lua(base_paths)

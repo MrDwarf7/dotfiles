@@ -160,7 +160,7 @@ local registry = {
     match = { class = "^(com.danklinux.dms)$" },
     center = true,
     float = true,
-    size = "(monitor_w*0.20) (monitor_h*0.80)",
+    size = "(monitor_w*0.30) (monitor_h*0.80)",
   },
   {
     name = "registry-cf-keepassxc",
@@ -264,6 +264,4 @@ local registry = {
   -- TODO: Additional items for wine/MS specific items (such as explorer.exe etc. that are spawned within wine/proton envs)
 }
 
-for _, rule in ipairs(registry) do
-  hl.window_rule(rule)
-end
+require("utils.lst").map(registry, hl.window_rule)

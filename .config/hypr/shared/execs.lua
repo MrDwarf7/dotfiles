@@ -12,6 +12,7 @@
 local types = require("types")
 
 local utils = require("utils")
+local lst = require("utils.lst")
 -- local programs = require("shared.programs")
 
 --- Directly modify the provided cbs_tbl by pushing any valid functions from extra_cbs, then return the modified cbs_tbl.
@@ -20,11 +21,11 @@ local utils = require("utils")
 ---@return CallbackList Returns the modified cbs_tbl for convenience (same table that was passed in, but with extra_cbs merged in if provided)
 local push_cb = function(cbs_tbl, extra_cbs)
   if extra_cbs and type(extra_cbs) == "table" then
-    for _, cb in ipairs(extra_cbs) do
-      if type(cb) == "function" then
-        table.insert(cbs_tbl, cb)
-      end
-    end
+    lst.map(lst.filter(extra_cbs, function(cb)
+      return type(cb) == "function"
+    end), function(cb)
+      cbs_tbl[#cbs_tbl + 1] = cb
+    end)
   end
   return cbs_tbl
 end
@@ -82,9 +83,9 @@ end
 --- Registers the callbacks for the START and SHUTDOWN events. This should be called once during initialization to set up the shared execs for all shell variants.
 ---@return nil
 local setup = function()
-  for _, cb in ipairs(start_cbs()) do
+  lst.map(start_cbs(), function(cb)
     hl.on(types.HyprlandEvents.START, cb)
-  end
+  end)
 
   -- for _, cb in ipairs(shutdown_cbs()) do
   --   hl.on(types.HyprlandEvents.SHUTDOWN, cb)

@@ -237,10 +237,7 @@ setmetatable(__base_rules, {
   end,
 })
 
----@diagnostic disable-next-line: unused-local
-for bkt_name, rule in pairs(__base_rules) do
-  hl.window_rule(rule)
-end
+require("utils.tbl").map(__base_rules, hl.window_rule)
 
 --- Put a window into a bucket. Caller supplies the match (class/title/etc).
 ---@param match table

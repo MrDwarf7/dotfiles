@@ -1,6 +1,8 @@
 --- Title-based dialog float rules.
 --- All follow the same pattern: match title regex, float, center.
 
+local list = require("utils.lst")
+
 ---@type RegexStr[]
 local dialogs = {
   "^(Open File)(.*)$",
@@ -27,7 +29,10 @@ local make_float = function(title)
   }
 end
 
----@type string
-for _, title in ipairs(dialogs) do
+--- 'Dummy' helper to clean up the list.map call
+---@param title RegexStr
+local window_rule_float = function(title)
   hl.window_rule(make_float(title))
 end
+
+list.map(dialogs, window_rule_float)
