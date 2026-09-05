@@ -221,7 +221,7 @@ end
 ---@param client_name? string Will default to client.name if not provided
 ---@param server_capabilities_index string
 ---@param value_as? any|nil
-local disable_capability = function(client, client_name, server_capabilities_index, value_as)
+local modify_capability = function(client, client_name, server_capabilities_index, value_as)
   if not client_name or type(client_name) ~= "string" then
     client_name = client.name
   end
@@ -294,8 +294,9 @@ local lsp_attach_autocmd = function(opts, lsp)
       --   },
       -- }
 
-      disable_capability(client, nil, "semanticTokensProvider", nil)
-      disable_capability(client, "ruff", "hoverProvider", false)
+      modify_capability(client, nil, "semanticTokensProvider", nil)
+      modify_capability(client, "ruff", "hoverProvider", false)
+
       -- client.server_capabilities.semanticTokensProvider = nil
 
       pcall(setup_binds)
