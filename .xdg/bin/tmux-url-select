@@ -1,24 +1,44 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2016,SC2218
 
+DEBUG=${DEBUG:-0}
+DEBUG_LOG=${DEBUG_LOG:-/tmp/tmux-url-select.log}
+DEBUG_TIMEOUT=${DEBUG_TIMEOUT:-60000}
+
+# dbg() {
+#   if [[ $DEBUG -eq 0 ]]; then
+#     return
+#   fi
+#   local msg="$1"
+#   tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=yellow,bold]|DEBUG:| $msg"
+# }
+
 OPEN_CMD="xdg-open"
 COPY_CMD="wl-copy"
 _rg_base=(--no-config --color never -N --no-heading -I --pcre2)
-rg_base=("${_rg_base[@]}" -o)
-rg_strip=("${_rg_base[@]}" --passthru --replace '' --)
+RG_BASE=("${_rg_base[@]}" -o)
+RG_STRIP=("${_rg_base[@]}" --passthrough --replace '' --)
 
 LEN_ROW_PADDING=5
 
-fuzz_cmd=$(command -v fzf || command -v sk)
+FUZZ_CMD=$(command -v fzf || command -v sk)
 # On error, use this timeout period
-message_time_period=850
+MESSAGE_TIME_PERIOD=850
 # menu_max_items=5 # if adding native, we need a max to switch on
 
 # tmux display-popup -xP -yP -w25% -h20% -T 'Selection' -E -k
 
-declare FZF_DEFAULT_OPTS
-FZF_DEFAULT_OPTS=$(fish -c 'echo $FZF_DEFAULT_OPTS') # grab defaults opts from fish (already configured defaults)
-export FZF_DEFAULT_OPTS
+export_fish_fzf_env_opts() {
+  # early return if this bash instance already has FZF_DEFAULT_OPTS set
+  [[ -n "$FZF_DEFAULT_OPTS" ]] && export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS" && return
+
+  # Grab the FZF_DEFAULT_OPTS from fish and export them to bash
+  if command -v fish >/dev/null 2>&1; then
+    local fish_fzf_opts
+    fish_fzf_opts=$(fish -c 'printf "%s\n" "$FZF_DEFAULT_OPTS"')
+    export FZF_DEFAULT_OPTS="$fish_fzf_opts"
+  fi
+}
 
 declare -g LEN_COLS
 declare -g LEN_ROWS
@@ -71,48 +91,59 @@ open_url() {
 
 fzf_filter() {
   local copy_bind="ctrl-y:execute-silent(printf '%s\n' {+} | awk '{print \$2}' | $COPY_CMD)"
-  if [[ "$fuzz_cmd" == *fzf* ]]; then
+  if [[ "$FUZZ_CMD" == *fzf* ]]; then
     # shellcheck disable=SC2086
-    "$fuzz_cmd" $FZF_TMUX_OPTS --multi --exit-0 --no-preview --bind "$copy_bind"
+    "$FUZZ_CMD" $FZF_TMUX_OPTS --multi --exit-0 --no-preview --bind "$copy_bind"
   else
-    "$fuzz_cmd" --multi --exit-0 --bind "$copy_bind"
+    "$FUZZ_CMD" --multi --exit-0 --bind "$copy_bind"
   fi
 }
 
 rg_extract() {
   declare data
-  data=$(rg "${rg_strip[@]}" $'\x1B\[[0-9;]*[a-zA-Z]' 2>/dev/null)
+  data=$(rg "${RG_STRIP[@]}" $'\x1B\[[0-9;]*[a-zA-Z]' 2>/dev/null)
   {
-    printf '%s\n' "$data" | rg "${rg_base[@]}" -- "$PAT_URL" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_GIT" -- "$PAT_GIT" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_WWW" -- "$PAT_WWW" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_IP" -- "$PAT_IP" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${rg_base[@]}" --replace "$SUB_GH" -- "$PAT_GH" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${RG_BASE[@]}" -- "$PAT_URL" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_GIT" -- "$PAT_GIT" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_WWW" -- "$PAT_WWW" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_IP" -- "$PAT_IP" 2>/dev/null || true
+    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_GH" -- "$PAT_GH" 2>/dev/null || true
   }
 }
 
+# If we want to simply 'inherit' limit just -I otherwise be explicit
+# declare -I limit
 pane_content() {
-  declare -I limit
-  case "$limit" in
+  case "$1" in
   full) tmux capture-pane -J -p -e -S - ;;
   screen) tmux capture-pane -J -p -e ;;
   *) tmux capture-pane -J -p -e -S -"$limit" ;;
   esac
 }
 
-declare limit
-limit=${
-  1:-
+# If we want to simply 'inherit' limit just -I otherwise be explicit
+# declare -I limit
+parse_limit() {
+  declare limit="$1"
+  [[ $limit =~ ^[0-9]+$ ]] && echo "$limit" && return
   case "$limit" in
-  full | screen | !^[0-9]+$) echo "$limit" ;;
-  *) echo "full" ;;
+  full | screen) echo "$limit" ;;
+  *) echo "screen" ;;
   esac
 }
 
+export_fish_fzf_env_opts
+
+declare limit=${1:-}
+# dbg "[1st] :: Limit before parse: $limit"
+limit=$(parse_limit "$limit")
+# dbg "[2nd] :: Limit after parse: $limit"
+
 # We want unique values, but want to AVOID sorting them, so we use `nl` to number them and then extract the second column after filtering.
 items=$(pane_content "$limit" | rg_extract | awk '!seen[tolower($0)]++' | nl -w1 -s '  ')
+# dbg "[3rd] :: Extracted items: $items"
 
-[ -z "$items" ] && tmux display -d "$message_time_period" "#[fg=red,bold]No URL found" && exit 0
+[ -z "$items" ] && tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=red,bold]No URL found" && exit 0
 
 LEN_COLS=$(awk 'NR==1{max=length($2)} length($2)>max{max=length($2)} END{print max+10}' <<<"$items")
 LEN_ROWS=$(wc -l <<<"$items")
@@ -124,7 +155,7 @@ FZF_TMUX_OPTS="--tmux bottom,${LEN_COLS},${LEN_ROWS}"
 if ((count == 1)); then
   item=$(awk '{print $2}' <<<"$items")
   open_url "$item" &
-  tmux display -d "$message_time_period" "#[fg=green,bold]Opening URL :: $item"
+  tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=green,bold]Opening URL :: $item"
   exit
 fi
 
