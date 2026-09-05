@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Discord
+StartupWMClass=discord
+Comment=All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone.
+GenericName=Internet Messenger
+Exec=/usr/bin/discord --url --force-webrtc-ip-handling-policy=default_public_and_private_interfaces -- %u
+Icon=discord
+Type=Application
+Categories=Network;InstantMessaging;
+MimeType=x-scheme-handler/discord;
+Path=/usr/bin
