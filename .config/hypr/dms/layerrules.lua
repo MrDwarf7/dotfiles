@@ -91,7 +91,7 @@ local rules = {
     },
     blur = true,
     ignore_alpha = 0,
-    -- xray = true,
+    xray = true,
   },
 
   {

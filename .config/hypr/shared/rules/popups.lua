@@ -11,6 +11,18 @@ local rules = {
     float = true,
   },
 
+  --- xdph's Qt share picker. Vesktop is maximize on ws9; without this the
+  --- picker tiles behind it and later clicks queue until a screenshot restacks.
+  {
+    name = "float-share-picker",
+    match = { class = "^(hyprland-share-picker)$" },
+    float = true,
+    center = true,
+    pin = true,
+    stay_focused = true,
+    focus_on_activate = true,
+  },
+
   --- Float polkit agents.
   {
     name = "float-polkit",

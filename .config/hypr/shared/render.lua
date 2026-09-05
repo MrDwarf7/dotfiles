@@ -18,7 +18,7 @@ hl.config({
     send_content_type = true,
     -- Auto-switch to HDR in fullscreen when needed. 0 - off, 1 - switch to cm, hdr, 2 - switch to cm, hdredid
     cm_auto_hdr = 2,
-    new_render_scheduling = false,
+    new_render_scheduling = true,
     non_shader_cm = 1,
     cm_sdr_eotf = "gamma22force",
     -- Enable commit timing proto. Requires restart
