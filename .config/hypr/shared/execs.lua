@@ -2,114 +2,114 @@
 --- These run for ALL shell variants (vanilla and DMS).
 --- Shell-specific execs belong in vanilla/ or dms/.
 
----@alias CallbackFnPtr function(...): nil
-
----@generic F : CallbackFnPtr
----@alias CallbackList table<number, F>
-
----@alias cbs_fn_t table[function(...): nil]
-
 local types = require("types")
 
-local utils = require("utils")
-local lst = require("utils.lst")
--- local programs = require("shared.programs")
+--- A table of exec callbacks for the START and SHUTDOWN events.
+--- Each field is a list of HL.Dispatcher instances that will be executed
+--- when the corresponding event occurs.
+---
+---@generic D : HL.Dispatcher
+---@class HyprConfig.ExecCallbacks
+---@field on_start D[] To be paired with HyprConfig.Events<HL.EventName.START> for registration.
+---@field on_shutdown D[] To be paired with HyprConfig.Events<HL.EventName.SHUTDOWN> for registration.
+---@field __event_subscriptions HL.EventSubscription[] Internal use: stores the event subscription handles for cleanup if needed.
+---@field push_event_subs fun(self: HyprConfig.ExecCallbacks, subs: HL.EventSubscription[]): Success Pushes a list of event subscriptions to the internal `__event_subscriptions` table for cleanup if needed.
 
---- Directly modify the provided cbs_tbl by pushing any valid functions from extra_cbs, then return the modified cbs_tbl.
----@param cbs_tbl CallbackList Mutable - will be updated
----@param extra_cbs cbs_fn_t? Optional additional callbacks to merge with the defaults (e.g. from shell-specific modules)
----@return CallbackList Returns the modified cbs_tbl for convenience (same table that was passed in, but with extra_cbs merged in if provided)
-local push_cb = function(cbs_tbl, extra_cbs)
-  if extra_cbs and type(extra_cbs) == "table" then
-    lst.map(
-      lst.filter(extra_cbs, function(cb)
-        return type(cb) == "function"
-      end),
-      function(cb)
-        cbs_tbl[#cbs_tbl + 1] = cb
-      end
-    )
+---@type HyprConfig.ExecCallbacks
+local all_callbacks = {
+  on_start = {
+    -- PulseAudio: unmute default sink on startup
+    hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0"),
+
+    -- OpenRGB: start minimized (case lights)
+    hl.dsp.exec_cmd("openrgb --startminimized", { workspace = "6 silent" }),
+
+    -- USB auto-mounting via udiskie (as uwsm service)
+    require("utils").uwsm_launcher("udiskie -n -t -m flat", true),
+
+    -- Telegram on workspace 6 (silent = don't switch to it)
+    hl.dsp.exec_cmd("Telegram"),
+
+    -- Start Hermes gateway services (delayed to avoid blocking boot)
+    hl.dsp.exec_cmd("sleep 3 && systemctl --user start hermes.target"),
+  },
+
+  -- Add any shutdown-related dispatchers here
+  on_shutdown = {},
+
+  -- Add additional event types as HL adds them or they're needed; e.g., on_suspend, on_resume, etc.
+
+  __event_subscriptions = {}, -- Internal use: stores the event subscription handles for cleanup if needed
+}
+
+-- stylua: ignore start
+all_callbacks.push_event_subs = function(self, subs)
+  if type(subs) ~= "table" then error("Event subscriptions must be provided as a table.") end
+  if #subs == 0 then error("Event subscriptions table is empty.") end
+  if not self.__event_subscriptions then
+    self.__event_subscriptions = {}
   end
-  return cbs_tbl
+  table.insert(self.__event_subscriptions, subs)
+  return true
+end
+-- stylua: ignore end
+
+--- Registers the provided callbacks for keys -
+--- Defined in `all_callbacks` - with the corresponding Hyprland events.
+--- `on_<T>` where:
+---   `T`: `HyprConfig.Events<HL.EventName>` | `HL.EventName`
+---
+---@param callbacks HyprConfig.ExecCallbacks
+---@return Success Returns true if setup completed successfully, or an error message if not.
+local setup = function(callbacks)
+  if type(callbacks) ~= "table" then
+    error("Callbacks must be provided as a table.")
+  end
+  local cbs = callbacks or {}
+
+  if not cbs.on_start and not cbs.on_shutdown then
+    error("No callbacks defined for execs setup.")
+  end
+
+  --- Registers a callback for a specific Hyprland event type.
+  ---@param ev_type HyprConfig.Events<HL.EventName>
+  ---@param cb CallbackFnPtr
+  ---@return HL.EventSubscription?
+  -- stylua: ignore start
+  local on_event = function(ev_type, cb)
+    return hl.on(ev_type, function() return hl.dispatch(cb) end)
+  end
+  -- stylua: ignore end
+
+  --- Walks the provided `callbacks` table and registers each callback for the corresponding event type.
+  ---@param cbs_list CallbackFnPtrList
+  ---@param ev_type HyprConfig.Events<HL.EventName>
+  ---@return HL.EventSubscription?[]
+  ---@return Success
+  -- stylua: ignore start
+  local walk_cbs = function(cbs_list, ev_type)
+    ---@type (HL.EventSubscription)?[]
+    local subs = {}
+    if #cbs_list ~= 0 then
+      ---@param cb CallbackFnPtr
+      table.insert(subs, require("utils.lst").map(cbs_list, function(cb) return on_event(ev_type, cb) end))
+    end
+    return subs, true
+  end
+  -- stylua: ignore end
+
+  ---@diagnostic disable-next-line: unused-local
+  local start_subs, start_ok = walk_cbs(cbs.on_start or {}, types.HyprlandEvents.START)
+  ---@diagnostic disable-next-line: unused-local
+  local shutdown_subs, shutdown_ok = walk_cbs(cbs.on_shutdown or {}, types.HyprlandEvents.SHUTDOWN)
+
+  -- all_callbacks.push_event_subs(all_callbacks, { start = start_subs, shutdown = shutdown_subs })
+
+  if not start_ok or not shutdown_ok then
+    error("Failed to register one or more exec callbacks.")
+  end
+  return start_ok and shutdown_ok
 end
 
--- Not registered. WE-via-Hyprland is still buggy; call from hyprland.start if wanted.
-local start_wallpaperengine = function()
-  local wall_be = require("utils.wall_be")
-  hl.exec_cmd(wall_be.cmd() or "")
-end
-
---- Default callbacks for the START event, with optional merging of extra callbacks provided by shell-specific modules.
----@param extra_cbs cbs_fn_t? Optional additional callbacks to merge with the defaults (e.g. from shell-specific modules)
----@return CallbackList Returns a list of callback functions to be registered for the START event, optionally merged with any extra callbacks provided.
-local start_cbs = function(extra_cbs)
-  ---@type CallbackList
-  local ret = {
-    [1] = function()
-      -- PulseAudio: unmute default sink on startup
-      hl.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0")
-
-      hl.exec_cmd("/usr/bin/openrgb --startminimized", { workspace = "6 silent" })
-
-      -- USB auto-mounting via udiskie (as uwsm service)
-      utils.uwsm_launcher("udiskie -n -t -m flat", true)
-
-      -- Telegram on workspace 6 (silent = don't switch to it)
-      hl.exec_cmd("Telegram", { workspace = "6 silent" })
-
-      -- Start Hermes gateway services (delayed to avoid blocking boot)
-      hl.exec_cmd("sleep 3 && systemctl --user start hermes.target")
-    end,
-  }
-
-  -- start_wallpaperengine()
-
-  ret = push_cb(ret, extra_cbs)
-
-  return ret
-end
-
---- Default callbacks for the SHUTDOWN event, with optional merging of extra callbacks provided by shell-specific modules.
----@param extra_cbs cbs_fn_t? Optional additional callbacks to merge with the defaults (e.g. from shell-specific modules)
----@return CallbackList
-local shutdown_cbs = function(extra_cbs)
-  --
-  local ret = {
-    function()
-      --
-    end,
-  }
-
-  ret = push_cb(ret, extra_cbs)
-
-  return ret
-end
-
---- Registers the callbacks for the START and SHUTDOWN events. This should be called once during initialization to set up the shared execs for all shell variants.
----@return nil
-local setup = function()
-  -- TODO: We can _dramatically_ simplify this
-  -- file now that Hyprland has proper lua runtime lodgement for tasks
-  -- via `hl.dispatch()` as the consumer.
-  -- We just needed to be _able_ to generate `HL.Dispatcher` types.
-  --
-  -- (hl.dsp.exec_cmd() | hl.dsp.global()) :: HL.Dispatcher -> map/accumulate -> hl.dispatch(T: HL.Dispatcher) -> { lodged }
-  -- We only really need to have a list of calls that we _need to eventually_ make to generate dispatchers,
-  -- then just run-through and lodge them.
-  -- See: `https://wiki.hypr.land/configuring/core/dispatchers` for further info
-  --
-  -- hl.dsp.exec_cmd()
-  -- hl.dsp.global()
-  -- hl.dispatch()
-
-  lst.map(start_cbs(), function(cb)
-    return hl.on(types.HyprlandEvents.START, cb)
-  end)
-
-  -- for _, cb in ipairs(shutdown_cbs()) do
-  --   hl.on(types.HyprlandEvents.SHUTDOWN, cb)
-  -- end
-end
-
----@return nil
-return setup()
+---@return Success
+return setup(all_callbacks)

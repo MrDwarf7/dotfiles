@@ -60,7 +60,10 @@ local function launch(override)
   if not c then
     return
   end
-  require("utils").uwsm_launcher(c, true)
+  -- TEST: [exec_refactor 2026_09_06] : Because uwsm_launcher NOW returns a dispatcher,
+  -- we have to actually run it (it's lazy), so additional req. of hl.dispatch to
+  -- action is required
+  hl.dispatch(require("utils").uwsm_launcher(c, true))
 end
 
 --- Cmd catalog plus get/cmd/launch. Dot-index for cmds (`wall_be.swww`).

@@ -156,6 +156,9 @@ local __Box = {}
 ---@class Error : error
 local __Error = {}
 
+---@class Success : bool?|Error?
+local __Success = {}
+
 ---@class fun : function|function(...)
 local __fun = {}
 
@@ -192,6 +195,20 @@ local HyprlandEvents = {
   ---@type HL.EventName<"hyprland.shutdown">
   SHUTDOWN = "hyprland.shutdown",
 }
+
+---@class CallbackFnPtr : function(...): nil Represents a callback function pointer that takes any number of arguments and returns nil.
+local __CallbackFnPtr = function() end
+
+---@generic C : CallbackFnPtr Generic type for a callback function pointer.
+---
+---@alias CallbackFnPtrList C[] A list-like table of callback functions, keyed by number (array-like).
+---@alias CallbackFnPtrTable table<number, C> A generic table of callback functions, keyed by number (array-like).
+---@alias CallbackFnPtrMap table<string, C> A named map of callback functions, keyed by string.
+
+---@generic K : Indexable
+---@generic V : CallbackFnPtr
+---@class CallbackList : table<K, V> Represents a list of callback functions, where K is the key type (number or string) and V is the callback function type.
+local __CallbackList = {}
 
 -- Extended Hyprland types for this config.
 
