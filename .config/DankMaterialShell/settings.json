@@ -12,6 +12,7 @@
   "hyprlandLayoutGapsOverride": 4,
   "hyprlandLayoutRadiusOverride": 12,
   "hyprlandLayoutBorderSize": 1,
+  "audioShowStreamDevices": true,
   "clockFormat": "12h",
   "showSeconds": true,
   "padHours12Hour": true,
@@ -507,10 +508,13 @@
     },
     "dms_qr_generator": {
       "trigger": "qrg"
+    },
+    "dms_power": {
+      "trigger": "pw"
     }
   },
   "frameOpacity": 0.2,
   "frameMode": "separate",
   "frameBarInsetPadding": 16,
-  "configVersion": 16
+  "configVersion": 18
 }
