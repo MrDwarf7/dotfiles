@@ -1,5 +1,5 @@
 modelRoles:
-  default: opencode-zen/muse-spark-1.2-contributor-free:high
+  default: opencode-zen/mimo-v2.5-free:high
   advisor: opencode-zen/nemotron-3.5-lightning-free
   smol: opencode-zen/laguna-s-2.1-free
 symbolPreset: nerd
