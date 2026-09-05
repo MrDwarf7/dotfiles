@@ -155,7 +155,7 @@ function __setup_envs
     set -gx __cached_envs_done 1
     return 0
 end
-__setup_envs &
+__setup_envs
 
 # mostly just playing around with how fish does job/job groups stuff tbh
 function __setup_gh_token
@@ -230,6 +230,9 @@ fish_add_path --append $ZVM_INSTALL
 # fish_add_path --prepend $HOME/.local/bin
 # fish_add_path --prepend $HOME/.xdg/data/JetBrains/Toolbox/scripts
 fish_add_path --prepend $XDG_BIN_HOME
+
+# Variety of `go install <foo>` installs.
+fish_add_path --prepend $GOBIN
 
 # Haskell & Haskell devtools check - (pacman -Q | rg -i ghcup). It's installed but no toolchains rn (2025_08_21)
 # fish_add_path --prepend $HOME/.ghcup/bin
