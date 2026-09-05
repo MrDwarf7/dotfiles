@@ -54,7 +54,7 @@ Steps (in registry order; '-' = cannot be skipped):\n$(__sysup_help_make_steps)\
     return 0
 end
 
-function sysup --description 'System update orchestrator'
+function sysup_fish --description 'System update orchestrator'
     # Fish does NOT auto-load nested function files, so we glob-source the
     # helper dirs. This also keeps these helpers out of the global function
     # namespace until `sysup` actually runs (they're "hidden" in the dir).

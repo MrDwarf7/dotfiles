@@ -73,7 +73,7 @@ __setup_xdg_dirs &
 function __setup_envs
     test $__cached_envs_done -eq 1; and return 0
     # We need XDG_* related envs to call this function. Check; run if haven't
-    __setup_xdg_dirs
+    __setup_xdg_dirs # does its own localized check for its own cached state
 
     __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
     # Fix wezterm/starship rendering the cursor always as a block
@@ -148,9 +148,11 @@ function __setup_envs
     # Used by ssh-picker.fish to delay the exit on connection failure (seconds)
     __env_cached_set -Ux SSH_PICKER_FAIL_DELAY 5
 
-    __env_cached_set -Ux CODEX_HOME $XDG_CONFIG_HOME/.codex
+    __env_cached_set -Ux CODEX_HOME "$XDG_CONFIG_HOME/.codex"
     __env_cached_set -Ux HERMES_HOME "$HOME/.hermes"
     __env_cached_set -Ux HERMES_TUI_DIR "$HERMES_HOME/hermes-agent/ui-tui"
+
+    __env_cached_set -Ux GROK_BIN "$HOME/.grok/bin"
 
     set -gx __cached_envs_done 1
     return 0
@@ -200,7 +202,7 @@ function __setup_fzf_vars
     set -l FZF_YAZI_DIR_NVIM_FILE "test -d {}; and y {} && return $status; or v {} && return $status;"
 
     set -l FZF_CTRL_T_OPTS "--select-1 --preview 'bat --style=auto --color=always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
-    set FZF_CTRL_T_O FZF_CTRL_T_OPTS "--bind 'enter:execute($FZF_YAZI_DIR_NVIM_FILE)+abort,up:up'"
+    set --append FZF_CTRL_T_OPTS "--bind 'enter:execute($FZF_YAZI_DIR_NVIM_FILE)+abort,up:up'"
 
     __env_cached_set -Ux FZF_DEFAULT_COMMAND $FZF_DEFAULT_COMMAND
     __env_cached_set -Ux FZF_DEFAULT_OPTS $FZF_DEFAULT_OPTS
@@ -233,6 +235,7 @@ fish_add_path --prepend $XDG_BIN_HOME
 
 # Variety of `go install <foo>` installs.
 fish_add_path --prepend $GOBIN
+fish_add_path --prepend $GROK_BIN
 
 # Haskell & Haskell devtools check - (pacman -Q | rg -i ghcup). It's installed but no toolchains rn (2025_08_21)
 # fish_add_path --prepend $HOME/.ghcup/bin
