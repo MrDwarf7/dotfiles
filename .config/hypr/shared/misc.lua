@@ -33,8 +33,8 @@ hl.config({
     -- render_ahead_of_time = true                           #apparently quite buggy
     -- render_ahead_safezone = 1
     allow_session_lock_restore = true,
-    session_lock_blur = true,
-    session_lock_xray = true,
+    session_lock_blur = false,
+    session_lock_xray = false,
     background_color = "rgba(00000000)",
     close_special_on_empty = true,
     -- new_window_takes_over_fullscreen = 2                   # 0 - behind, 1 - takes over, 2 - unfullscreen/unmaxize [0/1/2]
