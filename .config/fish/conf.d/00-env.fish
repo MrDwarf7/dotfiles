@@ -24,10 +24,10 @@ set -U fish_cursor_visual block blink
 # This is because of 'scope precedence' - the LOWEST privledge scope is what is used.
 # This allows us to set these to 0 IF they don't exist at all - OTHERWISE; each handler
 # sets them for the work in ta instance.
-set -q __cached_xdg_done; or set -Ux __cached_xdg_done 0
-set -q __cached_envs_done; or set -Ux __cached_envs_done 0
-set -q __cached_gh_done; or set -Ux __cached_gh_done 0
-set -q __cached_fzf_done; or set -Ux __cached_fzf_done 0
+set -qg __cached_xdg_done; or set -gx __cached_xdg_done 0
+set -qg __cached_envs_done; or set -gx __cached_envs_done 0
+set -qg __cached_gh_done; or set -gx __cached_gh_done 0
+set -qg __cached_fzf_done; or set -gx __cached_fzf_done 0
 
 function __env_cached_set --argument-names flag_args key --description 'Cache env vars to avoid re-running this script on every shell invocation'
     set -l rest $argv[3..-1]
@@ -51,7 +51,7 @@ end
 
 # Append to a local variable, then create them all in one go if required.
 function __setup_xdg_dirs
-    test $__cached_xdg_done -eq 1; and return 0
+    set -qg __cached_xdg_done; and return 0
 
     set -l __xdg_set
 
@@ -71,7 +71,7 @@ end
 __setup_xdg_dirs &
 
 function __setup_envs
-    test $__cached_envs_done -eq 1; and return 0
+    set -qg __cached_envs_done; and return 0
     # We need XDG_* related envs to call this function. Check; run if haven't
     __setup_xdg_dirs # does its own localized check for its own cached state
 
@@ -182,7 +182,7 @@ __setup_gh_token &
 # end
 
 function __setup_fzf_vars
-    test $__cached_fzf_done -eq 1; and return 0
+    set -qg __cached_fzf_done; and return 0
 
     set -f FZF_DEFAULT_COMMAND ""
     if 00-valid_pacman bfs
