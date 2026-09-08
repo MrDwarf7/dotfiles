@@ -53,7 +53,7 @@ function resolver_for_cmd
     printf "%s\n" "(command -v !)"
 end
 
-abbr -a re --position anywhere --set-cursor=! --function resolver_for_cmd
+abbr -a ie --position anywhere --set-cursor=! --function resolver_for_cmd
 
 # This would be ideal cos then we don't have the overhead, but is kinda odd to do via string join shenanigans
 # abbr -a re --position anywhere --set-cursor=! "$(string join ' ' -- "printf' '"%s\n"' '"(command -v !)"")"
