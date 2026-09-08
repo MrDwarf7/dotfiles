@@ -246,6 +246,7 @@ LangTables = {
       "html",
       "hyprls",
       "jsonls",
+      "just",
       -- "luau-lsp",
       "lua_ls",
       "markdown-oxide",
