@@ -13,8 +13,8 @@ DEBUG_TIMEOUT=${DEBUG_TIMEOUT:-60000}
 #   tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=yellow,bold]|DEBUG:| $msg"
 # }
 
-OPEN_CMD="xdg-open"
-COPY_CMD="wl-copy"
+OPEN_CMD="open"
+COPY_CMD="pbcopy"
 _rg_base=(--no-config --color never -N --no-heading -I --pcre2)
 RG_BASE=("${_rg_base[@]}" -o)
 RG_STRIP=("${_rg_base[@]}" --passthrough --replace '' --)
@@ -40,9 +40,9 @@ export_fish_fzf_env_opts() {
   fi
 }
 
-declare -g LEN_COLS
-declare -g LEN_ROWS
-declare -g FZF_TMUX_OPTS
+declare LEN_COLS
+declare LEN_ROWS
+declare FZF_TMUX_OPTS
 
 # Standard URLs
 #   https://example.com/path?q=1

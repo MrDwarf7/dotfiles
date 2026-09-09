@@ -10,18 +10,19 @@ filetype plugin on
 
 " These are disabled when using plug because it handles it automatically
 """ in-build plugin
-"filetype indent on
+filetype indent on
 """ Enable syntax highlighting
-"syntax enable
+syntax enable
 
 " vim-plug stuff
-call plug#begin()
 
-" List your plugins here
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'preservim/nerdcommenter'
-
-call plug#end()
+" call plug#begin()
+" 
+" " List your plugins here
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'preservim/nerdcommenter'
+" 
+" call plug#end()
 
 
 " Set to auto read when a file is changed from the outside
@@ -73,7 +74,7 @@ set autocomplete
 
 " set completeopt=menu,menuone,noselect,preview,popup
 set completeopt=menu,menuone,fuzzy,popup,preinsert
-set completepopup=border:single,height:10,width:10,opacity:80,shadow:on
+" set completepopup=border:single,height:10,width:10,opacity:80,shadow:on
 
 " default:
 " set pumwidth=15
@@ -631,13 +632,13 @@ inoremap <Tab> <C-r>=pumvisible() ? "\<C-y>" : "\<Tab>"<CR>
 
 " vim-plug
 
-nmap <Leader>pi :PlugInstall<CR>
-nmap <Leader>pu :PlugUpdate<CR>
-nmap <Leader>po :PlugUpgrade<CR>
-
-nmap <Leader>pc :PlugClean<CR>
-nmap <Leader>ps :PlugStatus<CR>
-nmap <Leader>pd :PlugDiff<CR>
+" nmap <Leader>pi :PlugInstall<CR>
+" nmap <Leader>pu :PlugUpdate<CR>
+" nmap <Leader>po :PlugUpgrade<CR>
+" 
+" nmap <Leader>pc :PlugClean<CR>
+" nmap <Leader>ps :PlugStatus<CR>
+" nmap <Leader>pd :PlugDiff<CR>
 
 " ctrlp
 

@@ -45,9 +45,10 @@ app-notifications = no-clipboard-copy
 # background-blur = 10
 # background-blur = 35
 
-background-opacity = 0.50
+# background-opacity = 0.50
+background-opacity = 0.95
 
-window-decoration = none
+# window-decoration = none
 
 # bold-is-bright = false
 cursor-style = bar
@@ -68,7 +69,7 @@ cursor-style-blink = true
 
 #### previous #### font-family = Mononoki Nerd Font Mono
 font-family = Mononoki Nerd Font Mono
-font-size = 11.0
+font-size = 14.0
 
 # font-size = 10.5
 # font-size = 10.2

@@ -103,5 +103,9 @@ theme = "tokyo-night"
 # token = "optional-api-token"
 # user_id = "optional-user-id"
 
-visualizer = "ClassicPeak"
+visualizer = "BarsDot"
 speed = 1.00
+
+show_metadata = true
+[radio]
+country = "none"

@@ -35,8 +35,14 @@ function 00-valid_pacman --argument-names to_test_prog --description "Validates 
     # if that fails, only then do we query via pacman -Qi (as it takes more time to resolve)
     # command -q "$to_test_prog"; and command -sq "$to_test_prog"; and command -vq "$to_test_prog"; and return 0
     command -q "$to_test_prog"; and command -sq "$to_test_prog"; and return 0
-    command pacman -Qi "$to_test_prog" &>/dev/null; and return 0
-    or return 1
+    if set -q IS_MACOS 1
+        test -d "$HOMEBREW_PREFIX/opt/$to_test_prog"; and return 0
+    else
+        printf "PROG: $to_test_prog :: \n"
+        command pacman -Qi "$to_test_prog" &>/dev/null; and return 0
+    end
+
+    return 1
 
     # if command -q "$to_test_prog"; and command -sq "$to_test_prog"; and command -vq "$to_test_prog"
     #     return 0

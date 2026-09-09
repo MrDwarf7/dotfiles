@@ -29,6 +29,12 @@ set -qg __cached_envs_done; or set -gx __cached_envs_done 0
 set -qg __cached_gh_done; or set -gx __cached_gh_done 0
 set -qg __cached_fzf_done; or set -gx __cached_fzf_done 0
 
+test (uname) = Darwin; and set -g IS_MACOS 1
+
+if set -q IS_MACOS 1
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+end
+
 function __env_cached_set --argument-names flag_args key --description 'Cache env vars to avoid re-running this script on every shell invocation'
     set -l rest $argv[3..-1]
     printf "Setting env var '%s' to '%s' with flags '%s'\n" $key "$rest" "$flag_args"
@@ -59,10 +65,10 @@ function __setup_xdg_dirs
     set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
 
     set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.xdg/bin; and set --append __xdg_set $XDG_BIN_HOME
-    set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/cache; and set --append __xdg_set $XDG_CACHE_HOME
-    set -q XDG_CACHE_LOCAL_HOME; or set -Ux XDG_CACHE_LOCAL_HOME $HOME/.xdg/local; and set --append __xdg_set $XDG_CACHE_LOCAL_HOME
-    set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data; and set --append __xdg_set $XDG_DATA_HOME
-    set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state; and set --append __xdg_set $XDG_STATE_HOME
+    # set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/cache; and set --append __xdg_set $XDG_CACHE_HOME
+    # set -q XDG_CACHE_LOCAL_HOME; or set -Ux XDG_CACHE_LOCAL_HOME $HOME/.xdg/local; and set --append __xdg_set $XDG_CACHE_LOCAL_HOME
+    # set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data; and set --append __xdg_set $XDG_DATA_HOME
+    # set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state; and set --append __xdg_set $XDG_STATE_HOME
     mkdir -p $__xdg_set
 
     set -gx __cached_xdg_done 1

@@ -1,5 +1,5 @@
 modelRoles:
-  default: opencode-zen/mimo-v2.5-free:high
+  default: xai-oauth/grok-4.5:high
   advisor: opencode-zen/nemotron-3.5-lightning-free
   smol: opencode-zen/laguna-s-2.1-free
 symbolPreset: nerd
@@ -17,10 +17,13 @@ tui:
   textSizing: false
   codexResetFireworks: true
   tight: true
+  vimMode: true
+  imeSafeCursor: true
 display:
   shimmer: kitt
-  showTokenUsage: false
+  showTokenUsage: true
   cacheMissMarker: false
+  showTurnTime: true
 personality: pragmatic
 advisor:
   enabled: true
@@ -62,15 +65,23 @@ todo:
 task:
   eager: preferred
   enableLsp: true
+  maxRecursionDepth: 3
 emojiAutocomplete: false
 skills:
-  enableAgentsUser: false
+  enableAgentsUser: true
   enableClaudeUser: false
   enableCodexUser: false
   enablePiUser: false
   enableAgentsProject: true
   enableClaudeProject: true
   enablePiProject: true
+enabledProviders:
+  - claude
+  - claude-plugins
 composer:
   shape: box
 defaultThinkingLevel: auto
+autolearn:
+  enabled: true
+secrets:
+  enabled: true

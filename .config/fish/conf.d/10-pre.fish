@@ -8,9 +8,9 @@
 #  tmux-resurrect and tmux-continuum loading...                      #
 ######################################################################
 
-20-export_if_pacman paru PKG_MANAGER yay
-30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_FLAGS "-S --noconfirm"
-30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_CALLABLE "$PKG_MANAGER $PKG_MANAGER_INSTALL_FLAGS"
+## 20-export_if_pacman paru PKG_MANAGER yay
+## 30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_FLAGS "-S --noconfirm"
+## 30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_CALLABLE "$PKG_MANAGER $PKG_MANAGER_INSTALL_FLAGS"
 
 ## Hard to track/understand without looking at internal functionality when done like this
 # 01eval_if_pacman $PKG_MANAGER "set -gx PKG_MANAGER_INSTALL_FLAGS '-S --noconfirm'"
@@ -46,7 +46,9 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 10-eval_if_pacman zoxide "zoxide init fish"
 10-eval_if_pacman fzf "fzf --fish"
 ##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
-10-eval_if_pacman mise "mise activate fish"
+
+# TODO: [darwin] : get working
+##### 10-eval_if_pacman mise "mise activate fish"
 
 # PERF: The performance on this is _horrible_ man...
 #
@@ -65,9 +67,11 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # FIX: [versions] : cmd is only valid after 3.0+ - (version checks???)
 
-if status is-interactive
-    10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"; or colorize red "keychain failed to load, please check your keychain setup"; and return 1
-end
+# if not set -q IS_MACOS 1
+#     if status is-interactive
+#         10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"; or colorize red "keychain failed to load, please check your keychain setup"; and return 1
+#     end
+# end
 
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
