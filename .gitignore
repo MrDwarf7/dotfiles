@@ -3,6 +3,32 @@ LazyVim/lazy-lock.json
 .idea/
 .idea/*
 
+*DS_Store
+.DS_STORE
+
+**/*/*DS_Store
+**/*/.DS_STORE
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Common IDE/Editor folders (Optional)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
 z.old
 z.old/
 z.old/*

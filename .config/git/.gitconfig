@@ -27,7 +27,7 @@
   fsync = none
   whitespace = error
   editor = nvim
-  excludesFile = "$XDG_CONFIG_HOME/git/ignore"
+  excludesFile = "~/.config/git/ignore"
   pager = delta
 [blame]
   coloring = highlightRecent

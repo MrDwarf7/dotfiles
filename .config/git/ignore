@@ -5,6 +5,37 @@
 **/*/.zshrc_history
 **/*/.zcompdump*
 
+*DS_Store
+.DS_STORE
+
+**/*/*DS_Store
+**/*/.DS_STORE
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Common IDE/Editor folders (Optional)
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+.codebase-context
+.codebase-context/
+**/.codebase-context
+**/**/.codebase-context
+
 # Common files
 **/*/target/**/*
 **/*/target/*/*/exe
@@ -47,3 +78,5 @@ env*
 **/*/.claude/
 **/*/.claude/**/*
 **/.claude/settings.local.json
+
+
