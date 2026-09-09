@@ -1,0 +1,82 @@
+[[entry]]
+favorited_at = "2026-09-10T13:35:06Z"
+path = "http://79.120.39.202:9137/"
+title = "Radio Caprice - Dark Jazz [320k] · Russian Federation"
+genre = "ambient jazz,dark,doom,funeral,noir"
+realtime = true
+provider_meta.radio.codec = "AAC+"
+provider_meta.radio.bitrate = "320"
+provider_meta.radio.country = "The Russian Federation"
+
+[[entry]]
+favorited_at = "2026-09-10T13:34:17Z"
+path = "http://ilm.stream27.radiohost.de/ilm_iloveusonlyrapradio_mp3-192?upd-meta&upd-scheme=http&_art=dD0xNzg4NjY4MTQyJmQ9YjEzZDhjZDhhOTllNDNmYjM5ZmU"
+title = "i love radio - hip hop turnup [192k] · Germany"
+genre = "hiphop,rap,trap"
+realtime = true
+provider_meta.radio.country = "Germany"
+provider_meta.radio.codec = "MP3"
+provider_meta.radio.bitrate = "192"
+
+[[entry]]
+favorited_at = "2026-09-10T13:34:10Z"
+path = "http://bigrradio.cdnstream1.com/5105_128"
+title = "2000 FM - RnB & Hip-Hop [128k] · United States Of America"
+genre = "hiphop,rnb"
+realtime = true
+provider_meta.radio.bitrate = "128"
+provider_meta.radio.state = "Washington"
+provider_meta.radio.country = "The United States Of America"
+provider_meta.radio.codec = "MP3"
+
+[[entry]]
+favorited_at = "2026-09-10T13:34:06Z"
+path = "https://listen.181fm.com/181-beat_128k.mp3"
+title = "181.FM - The Beat (HipHop/R&B) [128k] · United States Of America"
+genre = "hiphop,rnb,urban,waynesboro"
+realtime = true
+provider_meta.radio.country = "The United States Of America"
+provider_meta.radio.codec = "MP3"
+provider_meta.radio.bitrate = "128"
+provider_meta.radio.state = "Virginia"
+
+[[entry]]
+favorited_at = "2026-09-10T13:34:04Z"
+path = "http://listen.181fm.com/181-oldschool_128k.mp3"
+title = "181.FM - Old School HipHop/RnB [128k] · United States Of America"
+genre = "hiphop,oldschool,rnb,waynesboro"
+realtime = true
+provider_meta.radio.state = "Virginia"
+provider_meta.radio.country = "The United States Of America"
+provider_meta.radio.codec = "MP3"
+provider_meta.radio.bitrate = "128"
+
+[[entry]]
+favorited_at = "2026-09-10T13:32:02Z"
+path = "https://radio.cliamp.stream/lofi/stream"
+title = "CLIAMP Lofi Hip Hop Radio [128k] · Norway"
+genre = "lofi,lofi hip hop"
+realtime = true
+provider_meta.radio.codec = "MP3"
+provider_meta.radio.bitrate = "128"
+provider_meta.radio.country = "Norway"
+
+[[entry]]
+favorited_at = "2026-09-10T13:31:50Z"
+path = "http://radio.plaza.one/opus"
+title = "Nightwave Plaza OPUS 96 [64k] · Japan"
+genre = "aesthetic,chillwave,futurefunk,lofi,vaporwave"
+realtime = true
+provider_meta.radio.country = "Japan"
+provider_meta.radio.codec = "OGG"
+provider_meta.radio.bitrate = "64"
+
+[[entry]]
+favorited_at = "2026-09-10T13:31:47Z"
+path = "http://usa9.fastcast4u.com/proxy/jamz?mp=/1"
+title = "Lofi 24/7 [128k] · United States Of America"
+genre = "chillout,lofi"
+realtime = true
+provider_meta.radio.country = "The United States Of America"
+provider_meta.radio.codec = "MP3"
+provider_meta.radio.bitrate = "128"
