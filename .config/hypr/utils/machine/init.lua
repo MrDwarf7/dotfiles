@@ -131,6 +131,7 @@ end
 ---@field current str|nil canonical host key
 ---@field get fun(name?: str): HyprConfig.Machine
 ---@field monitor fun(output: str): HL.MonitorSpec|nil
+---@field monitor_main fun(): string|integer|nil
 local machine = {
   current = key,
 }
@@ -148,6 +149,14 @@ machine.monitor = function(output)
   return lst.find(host.monitors or {}, function(m)
     return m.output == output
   end)
+end
+
+machine.monitor_main = function()
+  local mons = host.monitors or {}
+  if #mons == 0 then
+    return nil
+  end
+  return mons[1].output
 end
 
 setmetatable(machine, {

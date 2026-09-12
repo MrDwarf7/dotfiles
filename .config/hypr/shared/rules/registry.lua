@@ -165,11 +165,12 @@ local registry = {
     size = "(monitor_w*0.30) (monitor_h*0.80)",
   },
   {
-    name = "registry-cf-keepassxc",
+    name = "registry-cf-keepassxc", -- keepass / keypass
     match = { class = "^(org.keepassxc.[kK]ee[pP]ass[xX][cC])$" },
     center = true,
     float = true,
     size = "(monitor_w*0.30) (monitor_h*0.60)",
+    monitor = require("utils.machine").monitor_main(),
   },
   {
     name = "registry-cf-xdg-portal-gtk",
