@@ -8,23 +8,4 @@ function 99-pushd_var --wraps=pushd --argument-names env_var_value --description
 
     pushd $env_var_value
     or return 3
-    # or begin
-    #     colorize red "Error: Failed to pushd to '$env_var_value'!"
-    #     return 3
-    # end
-
-    # if test -z "$env_var_value"
-    #     colorize red "Error: No environment variable data!"
-    #     return 1
-    # end
-
-    # if not test -d $env_var_value
-    #     colorize red "Error: Environment variable '$env_var_value' is not a valid directory!"
-    #     return 1
-    # end
-
-    # pushd $env_var_value; or begin
-    #     colorize red "Error: Failed to pushd to '$env_var_value'!"
-    #     return 1
-    # end
 end

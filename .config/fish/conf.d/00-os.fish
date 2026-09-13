@@ -54,6 +54,8 @@ end
 # LATER: ghostty os.conf symlink is not a fish concern. One-shot python/dotlink.
 set -l _gt (path resolve -- (status dirname)/../../ghostty)
 set -l _gt_os os-$DOT_OS.conf
-if test -f $_gt/$_gt_os
-    command ln -sfn $_gt_os $_gt/os.conf
+if not test -e $_gt/os.conf
+    if test -f $_gt/$_gt_os
+        command ln -sfn $_gt_os $_gt/os.conf
+    end
 end
