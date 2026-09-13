@@ -34,7 +34,8 @@ set -g @continuum-restore 'on'
 # tmux show-option -gqv @continuum-save-interval
 
 # Default is 15
-set -g @continuum-save-interval '240'
+# set -g @continuum-save-interval '240'
+set -g @continuum-save-interval '15'
 
 ## !! These 2 options are broken !!
 # set -g @continuum-boot-options 'ghostty'
