@@ -19,7 +19,7 @@
 20-export_if_pacman eza LIST_CLIENT exa
 # Because the actual thing requires path; fallback to just te name for invoke
 # 20-export_if_pacman sccache RUSTC_WRAPPER sccache
-30-export_as_env_var sccache RUSTC_WRAPPER (command -v sccache)
+# 30-export_as_env_var sccache RUSTC_WRAPPER (command -v sccache)
 
 # We literally don't need the actual value as it has a side-effect of writing to `$LIST_CLIENT_BASE_CMD` to store the cmd
 # 099listing_cmd_base >/dev/null 2>&1; or true
@@ -29,15 +29,11 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
 
-## basically, vi = older 'vim', vim = 'neovim'
-## I assume this has the potential to cause some weird bugs with how alias vs. call arg works, but it's faster so...
-# 05export_alias_if_pacman nvim vi /usr/bin/vim
+## v = nvim; vim stays vim (looked up on PATH, no absolute paths)
+50-export_alias_if_pacman nvim v nvim
+50-export_alias_if_pacman vim vi vim
 
-50-export_alias_if_pacman vim vi /usr/bin/vim
-50-export_alias_if_pacman nvim v /usr/bin/nvim
-50-export_alias_if_pacman nvim vim /usr/bin/nvim
-
-50-export_alias_if_pacman tuxedo tux /usr/bin/tuxedo
+50-export_alias_if_pacman tuxedo tux tuxedo
 
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
