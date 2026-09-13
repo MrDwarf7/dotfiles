@@ -16,9 +16,15 @@ if test "$DOT_OS" = darwin
     # Homebrew / brew stuff
     if test -x /opt/homebrew/bin/brew
         /opt/homebrew/bin/brew shellenv fish | source
+        set -gx HOMEBREW_HOME /opt/homebrew
     else if test -x /usr/local/bin/brew
         /usr/local/bin/brew shellenv fish | source
+        set -gx HOMEBREW_HOME /usr/local
     end
+
+    set -gx HOMEBREW_BIN $HOMEBREW_HOME/bin
+    set -gx HOMEBREW_OPT $HOMEBREW_HOME/opt
+    fish_add_path --append $HOMEBREW_BIN
 
     # XDG Stuff
     set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
@@ -27,6 +33,10 @@ if test "$DOT_OS" = darwin
     set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.local/state
     set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.local/bin
     mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_BIN_HOME
+
+    # quirk
+    set -gx TLRC_CONFIG $XDG_CONFIG_HOME/tlrc/config.toml
+
 end
 
 # Linux-only:
