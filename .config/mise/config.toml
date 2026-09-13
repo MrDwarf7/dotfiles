@@ -15,9 +15,6 @@ node = "latest"
 # pnpm = "latest" ############### something broken
 bun = "latest"
 
-# Framework(?)/Package Runtimes
-# deno = "latest"
-
 go = "latest"
 
 # Tools
@@ -30,51 +27,12 @@ mr-boxington = "latest"
 
 golangci-lint = "latest"
 air = "latest"           # Go live reload
-
 prettier = "latest"
 direnv = "latest"
-
-
-# [tools."npm:tailwindcss"]
-# version = "latest"
-#
-# [tools."npm:@tailwindcss/cli"]
-# version = "latest"
-#
-# [tools."npm:@tailwindcss/language-server"]
-# version = "latest"
-
-#### This no longer works anyway - prefer simply: `typescript`
-# [tools."npm:@typescript/native-preview"]
-# version = "latest"
 
 [tools."npm:typescript"]
 version = "latest"
 
-# # vercel-cli
-# [tools."npm:vercel"]
-# version = "latest"
-
-# turbopack/turborepo
-# [tools."npm:turbo"]
-# version = "latest"
-
-# [tools."npm:fieldtheory"]
-# version = "latest"
-# # "npm:fieldtheory" = "1.2.1"
-
-[tools."npm:@magnitudedev/cli"]
-version = "latest"
-
-[tools."npm:@mem0/cli"]
-version = "latest"
-
-# [tools."npm:@aoagents/ao"]
-# version = "latest"
-
-# fieldtheory - cli for pulling X bookmarks locally (ts doesn't support vivaldi, and it's buggy AF)
-# [tools."npm:fieldtheory"]
-# version = "latest"
 
 ####################################################################################################
 
@@ -84,31 +42,13 @@ version = "latest"
 [tools."cargo-binstall"]
 version = "latest"
 
-# [tools."cargo:abscissa"]
-# version = "latest"
-
-## REST TUI client - superceded by postings, then by resterm (goated!)
-# [tools."cargo:atac"]
-# version = "latest"
 
 ### A Rust `check` or `clippy' runner companion that automatically re-runs linting commands in a TUI.
 [tools."cargo:bacon"]
 version = "latest"
 
-# [tools."cargo:cargo-audit"]
-# version = "latest"
-
-# [tools."cargo:cargo-bloat"]
-# version = "latest"
-
 [tools."cargo:cargo-cache"]
 version = "latest"
-
-# [tools."cargo:cargo-dist"]
-# version = "latest"
-
-# [tools."cargo:cargo-expand"]
-# version = "latest"
 
 [tools."cargo:cargo-feature"]
 version = "latest"
@@ -116,14 +56,9 @@ version = "latest"
 [tools."cargo:cargo-generate"]
 version = "latest"
 
-# [tools."cargo:cargo-insta"]
-# version = "latest"
-
 [tools."cargo:cargo-llvm-cov"]
 version = "latest"
 
-# [tools."cargo:cargo-machete"]
-# version = "latest"
 
 ### An extensive task runner and build tool for Rust projects. It allows you to define and run complex workflows, automate repetitive tasks, and manage dependencies. Installs as 'cargo-make' or 'cargo make'.
 #### TODO: This is now available via the official repo's as: `extra/cargo-make`
@@ -135,9 +70,6 @@ version = "latest"
 
 ### A markdown viewer key'd specifically to how GitHub renders markdown. Installs as 'mdv'.
 [tools."cargo:mdv"]
-version = "latest"
-
-[tools."cargo:nviwatch"]
 version = "latest"
 
 [tools."cargo:cargo-outdated"]
@@ -164,43 +96,14 @@ version = "latest"
 [tools."cargo:create-tauri-app"]
 version = "latest"
 
-#####
-# [tools."cargo:dealve-tui"]
-# version = "latest"
 
 ### Performance profiling and flamegraph generation for Rust programs. Installs as 'flamegraph'.
 [tools."cargo:flamegraph"]
 version = "latest"
 
-### I think is abandoned?
-# [tools."cargo:https://github.com/sondr3/git-ignore"]
-# version = "branch:main"
-
-# [tools."cargo:gumbo"]
-# version = "latest"
-
-# [tools."cargo:knope"]
-# version = "latest"
-
-# [tools."cargo:loco"]
-# version = "latest"
-
-# [tools."cargo:jj-ryu"]
-# version = "latest"
-
-# [tools."cargo:gh-stars"]
-# version = "latest"
 
 ### JJ / Jujutsu workspace (worktree) manageer and helper tool.
 [tools."cargo:jj-navi"]
-version = "latest"
-
-### A reverse engineer's binary Swiss-army knife in Rust: triage, disassembly, function/CFG recovery, crypto-constant + YARA scanning for PE/ELF/Mach-O. Installs as 'knife'.
-[tools."cargo:reknife"]
-version = "latest"
-
-### Replacement / Alternative for ZMK/QMK. Used with custom split kbd (Corne)
-[tools."cargo:rmkit"]
 version = "latest"
 
 #####
@@ -209,13 +112,6 @@ version = "latest"
 [tools.just]
 version = "latest"
 
-
-[tools."go:github.com/chronologos/lightjj/cmd/lightjj"]
-version = "latest"
-
-
-# [tools."cargo:spider"]
-# version = "latest"
 
 ####################################################################################################
 
@@ -228,12 +124,7 @@ cargo.binstall_quickinstall = true # Allows cargo binstall to fallback to cargo-
 
 npm.bun = true # Prefer using bun over npm
 
-# npm.package_manager = "bun"
-
 pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
-# pipx_uvx = true # Prefer to use ux(x) mode instead of pipx
-
-# python.uv_venv_auto = "create|source" # Auto-source (create if missing) .venv when a uv.lock is present
 
 # Experimental 'dotfiles' manager stuff
 dotfiles.root = "~/dotfiles"
