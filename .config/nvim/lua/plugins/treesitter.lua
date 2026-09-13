@@ -33,7 +33,6 @@ return {
   config = function(_, opts)
     local ts = require("nvim-treesitter")
     ts.setup(opts)
-    -- ts.install(require("lang_tables").ts_all())
     ts.install(opts.languages)
     return ts
   end,
