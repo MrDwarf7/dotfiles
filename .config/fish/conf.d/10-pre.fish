@@ -21,9 +21,8 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
 
-## v = nvim; vim stays vim (looked up on PATH, no absolute paths)
+## v = nvim. vim is vim (no vi alias).
 50-export_alias_if_pacman nvim v nvim
-50-export_alias_if_pacman vim vi vim
 50-export_alias_if_pacman tuxedo tux tuxedo
 
 # 05export_alias_if_pacman neovim vi rvim
