@@ -79,7 +79,8 @@ alias cd- "cd -"
 # Previously was an actual funciton but we literally just call "l.fish"
 # alias la l
 
-alias cls "command clear ; command printf '\e[3J' "
+# alias cls "command clear ; command printf '\e[3J' "
+alias cls "command clear"
 alias lg lazygit
 alias lzd lazydocker
 alias lzs lazyjournal
