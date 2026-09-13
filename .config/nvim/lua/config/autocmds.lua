@@ -18,20 +18,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     -- vim.highlight.on_yank({ timeout = 55 }) -- depr.
     -- vim.hl.on_yank({ timeout = 55 })        -- depr.
     ---@type vim.hl.hl_opOpts
-    local hl_opts = {
-      timeout = 55,
-    }
-    vim.hl.hl_op(hl_opts)
+    local hl_opts = { timeout = 55 }
+    if vim.fn.has("nvim-0.13.0") == 1 then
+      vim.hl.hl_op(hl_opts)
+    else
+      vim.hl.on_yank(hl_opts)
+    end
   end,
 })
 
--- Nvim tree sitter impl. being turned on
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = { "<filetype>" },
---   callback = function(ctx)
---     vim.treesitter.start(ctx.buf, ctx.file)
---   end,
--- })
+-- txtar is not in nvim-treesitter's parser registry (manual parser.so + queries).
+-- Install/update story is a later pass; start highlighting if the parser is present.
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "txtar" },
+  callback = function(ctx)
+    pcall(vim.treesitter.start, ctx.buf, "txtar")
+  end,
+})
 
 -- Is bugging this out and breaking (veryyyyy badly)
 -- NVIM v0.12.0-dev-2717+ga940b77cb2
