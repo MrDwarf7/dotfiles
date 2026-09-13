@@ -5,7 +5,7 @@
 # fill from the various places like command and pacman etc.
 # (Ironically, the completion function itself will probably need to call this functin lol...)
 
-function 00-valid_pacman --argument-names to_test_prog --description "Validates if a package is installed. (First via command -v; then via pacman -Qi)"
+function 00-valid_pacman --argument-names to_test_prog --description "Validates if a package is installed. (command -q first; then 00-pkg-db-query if the OS file registered one)"
     # Validates if a package is installed
     #
     # Parameters:
@@ -35,8 +35,8 @@ function 00-valid_pacman --argument-names to_test_prog --description "Validates 
     # if that fails, only then do we query via pacman -Qi (as it takes more time to resolve)
     # command -q "$to_test_prog"; and command -sq "$to_test_prog"; and command -vq "$to_test_prog"; and return 0
     command -q "$to_test_prog"; and command -sq "$to_test_prog"; and return 0
-    command pacman -Qi "$to_test_prog" &>/dev/null; and return 0
-    or return 1
+    functions -q 00-pkg-db-query; and 00-pkg-db-query "$to_test_prog"; and return 0
+    return 1
 
     # if command -q "$to_test_prog"; and command -sq "$to_test_prog"; and command -vq "$to_test_prog"
     #     return 0

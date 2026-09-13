@@ -1,4 +1,2 @@
-ghostty-colors.conf
-./ghostty-colors.conf
-
-*-colors.*
+# Machine-local overlay; 00-os.fish points this at os-$DOT_OS.conf
+os.conf

@@ -12,7 +12,7 @@ SETUVAR --export DISTCC_DIR:/tmp/distcc
 SETUVAR --export DISTCC_HOSTS:\x2d\x2drandomize\x20localhost\x2ccpp\x2clzo
 SETUVAR --export DOT_CONFIG:/home/dwarf/dotfiles/\x2econfig
 SETUVAR --export DOT_DIR:/home/dwarf/dotfiles
-SETUVAR --export EDITOR:/usr/bin/nvim
+SETUVAR --export EDITOR:nvim
 SETUVAR --export FZF_CTRL_R_OPTS:\x2d\x2dwith\x2dnth\x201\x2c3\x2e\x2e\x20\x2d\x2dbind\x20\x27ctrl\x2dt\x3achange\x2dwith\x2dnth\x282\x2e\x2e\x7c3\x2e\x2e\x7c1\x2c3\x2e\x2e\x29\x27
 SETUVAR --export FZF_CTRL_T_COMMAND:bfs\x20\x2dtype\x20f\x2cd\x2cl\x2cp\x20\x2ds\x20\x2dprint\x20\x2dmaxdepth\x208\x20\x2dd\x20\x2dignore_readdir_race\x20\x2dO4\x20\x2d\x2d
 SETUVAR --export FZF_CTRL_T_OPTS:\x2d\x2dselect\x2d1\x20\x2d\x2dpreview\x20\x27bat\x20\x2d\x2dstyle\x3dauto\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x202\x3e\x20/dev/null\x20\x7c\x7c\x20fish\x20\x2dc\x20\x22lt\x20\x2dd\x202\x20\x2d\x2dcolor\x3dalways\x20\x7b\x7d\x22\x202\x3e\x20/dev/null\x20\x7c\x20head\x20\x2d200\x27\x1e\x2d\x2dbind\x20\x27enter\x3aexecute\x28test\x20\x2dd\x20\x7b\x7d\x3b\x20and\x20y\x20\x7b\x7d\x20\x26\x26\x20return\x200\x3b\x20or\x20v\x20\x7b\x7d\x20\x26\x26\x20return\x200\x3b\x29\x2babort\x2cup\x3aup\x27
@@ -32,14 +32,14 @@ SETUVAR --export JQP_CONFIG_HOME:/home/dwarf/\x2econfig/jqp
 SETUVAR --export JQP_CONFIG_HOME_FILE:/home/dwarf/\x2econfig/jqp/\x2ejqp\x2eyaml
 SETUVAR --export PAGER:less\x1e\x2dFRX
 SETUVAR --export RUST_TEMPLATE:/home/dwarf/Documents/GitHub_Projects/Rust/rust_template
-SETUVAR --export SHELL:/usr/bin/fish
+SETUVAR --export SHELL:fish
 SETUVAR --export SSH_AGENT_PID:14712
 SETUVAR --export SSH_AUTH_SOCK:/home/dwarf/\x2ekeychain/_qT492_B\x2es
 SETUVAR --export SSH_PICKER_FAIL_DELAY:5
 SETUVAR --export SSH_PICKER_IGNORE_RE:\x28aur\x2earchlinux\x7ccodeberg\x7cssh\x2egitlab\x7cgitlab\x7cgithub\x2ecom\x29
 SETUVAR --export STARSHIP_CONFIG:/home/dwarf/\x2econfig/starship/starship\x2etoml
 SETUVAR --export TMUX_DEFAULT_SESSION_NAME:_main
-SETUVAR --export VISUAL:/usr/bin/nvim
+SETUVAR --export VISUAL:nvim
 SETUVAR --export WZT_ANIM_FPS:144
 SETUVAR --export WZT_GPU_FRONTEND:WebGpu
 SETUVAR --export WZT_GPU_POWER_PREF:HighPerformance
