@@ -3,9 +3,7 @@
 # Group 00 step 1 (after 00-os). See 00-os.fish for numbering rules.
 #
 
-## Note on the various `__setup_*` functions -
-# They appear to have to be in this file, because splitting them
-# tends to cause some rather annoying issues with a pseudo-race cond
+# Split `__setup_*` functions across files causes a pseudo-race condition
 #
 
 # Removes the greeting text
@@ -19,10 +17,10 @@ set -U fish_cursor_default block blink
 set -U fish_cursor_insert line blink
 set -U fish_cursor_visual block blink
 
-## Segment cache: UNIVERSAL ONLY. A -g with the same name shadows -U (global wins),
-## which is why `set -qg; or set -gx 0` made every new tmux/ghostty tab re-run
-## even after a universal 1 existed. Never -g these names.
-## Refresh: `set -eU __cached_<name>_done` then open a new shell (or set -U 0).
+# Segment cache: UNIVERSAL ONLY. A `-g` with the same name shadows `-U` (global wins),
+# which is why `set -qg; or set -gx 0` made every new tmux/ghostty tab re-run
+# even after a universal 1 existed. Never `-g` these names.
+# Refresh: `set -eU __cached_<name>_done` then open a new shell (or set -U 0).
 set -eg __cached_envs_done
 set -eg __cached_gh_done
 set -eg __cached_fzf_done
@@ -51,7 +49,7 @@ function __env_cached_set --argument-names flag_args key --description 'Cache en
         end
     end
 
-    # basically a warning if something _should_ have been set but wasn't, but we don't want to error out and break the shell
+    # A warning if something _should_ have been set but wasn't; don't error out and break the shell
     printf "Setting env var '%s' to '%s' with flags '%s'\n" $key "$rest" "$flag_args"
 
     # @fish-lsp-disable-next-line 3003
@@ -90,7 +88,7 @@ function __setup_envs
     set -q DISTCC_HOSTS; or __env_cached_set -Ux DISTCC_HOSTS "--randomize localhost,cpp,lzo"; and test -n "$DISTCC_HOSTS"; or __env_cached_set -Ux DISTCC_HOSTS localhost/8
 
     __env_cached_set -Ux GITHUB_PROJECTS $HOME/Documents/GitHub_Projects
-    # On other systems this is sometimes different - hence the need for a separate env var for projects vs. work projects
+    # On other systems this is sometimes different -- separate var for work projects
     __env_cached_set -Ux GITHUB_WORK_PROJECTS $HOME/Documents/GitHub_Projects
 
     __env_cached_set -Ux GITHUB_PROJECTS_RUST $GITHUB_PROJECTS/Rust
@@ -102,8 +100,7 @@ function __setup_envs
 
     __env_cached_set -Ux RUST_TEMPLATE $GITHUB_PROJECTS_RUST/rust_template
 
-    # This is technically a bug - Fish parses the env variables a little weird because of how it handles string
-    # interactions with set. We have to escape the asterisk so it's passed through to zoxide and not the shell.
+    # Fish parses env interactions with `set` a little weird; escape the asterisk so it reaches zoxide
     __env_cached_set -Ux _ZO_EXCLUDE_DIRS '$HOME/go:$HOME/go/*'
 
     __env_cached_set -Ux ZVM_PATH $XDG_CONFIG_HOME/.zvm
@@ -147,7 +144,7 @@ function __setup_envs
 end
 __setup_envs
 
-# mostly just playing around with how fish does job/job groups stuff tbh
+# Mostly just playing around with how fish does job/job groups
 function __setup_gh_token
     ## Very buggy attempt at callback-style async job comp.
 
@@ -196,7 +193,7 @@ function __setup_fzf_vars
     set -l FZF_DEFAULT_OPTS "--height 80% --style=minimal --ansi --border=sharp --color=16 --cycle"
     set --append FZF_DEFAULT_OPTS "--bind 'ctrl-e:preview-down,ctrl-y:preview-up,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-f:preview-page-down,ctrl-b:preview-page-up,ctrl-j:offset-down,ctrl-k:offset-up,ctrl-g:jump,jump:accept,jump-cancel:'"
 
-    # We'd _love_ to be able to actually use 'become' here but it outright just doesn't work sadly
+    # We'd _love_ to use 'become' here but it doesn't work
     set -l FZF_YAZI_DIR_NVIM_FILE "test -d {}; and y {} && return $status; or v {} && return $status;"
 
     set -l FZF_CTRL_T_OPTS "--select-1 --preview 'bat --style=auto --color=always {} 2> /dev/null || fish -c \"lt -d 2 --color=always {}\" 2> /dev/null | head -200'"
@@ -220,8 +217,7 @@ __setup_fzf_vars &
 # set -gx PAGER 'bat --pager="less --RAW-CONTROL-CHARS --mouse" -l Manpage -p --color=always'
 
 ########
-# NOTE: See the internal workings of `fish_add_path` for
-# caching; and duplicate protection!
+# See the internal workings of `fish_add_path` for caching and duplicate protection
 # Potentially useful for our own env var cache
 ########
 

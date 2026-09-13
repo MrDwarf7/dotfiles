@@ -11,7 +11,7 @@
 alias ef "exec fish"
 alias f fg
 
-#### <cd><fish>
+## Shell-specific aliases
 alias cf "cd ~/dotfiles/.config/fish || printf 'Failed to cd into ~/dotfiles/.config/fish\n'"
 #### <nvim><fish>
 alias vf "nvim ~/dotfiles/.config/fish || printf 'Failed to open ~/dotfiles/.config/fish in nvim\n'"
@@ -52,7 +52,7 @@ alias pSy "$PKG_MANAGER -Syyu --noconfirm"
 alias pqe pqi
 alias pqie pqi
 
-# See also `pqiv` function that uses the output (if singular) from the above `pqi` function
+# See also `pqiv` function that uses the output (if singular) from the above `pqi`
 # to then call `paru -Siv <output>`
 
 alias shutdown 'shutdown -h now'
@@ -76,7 +76,7 @@ alias c- "cd -"
 alias ccc c3c
 alias cd- "cd -"
 
-# Previously was an actual funciton but we literally just call "l.fish"
+# Previously was an actual function but we literally just call "l.fish"
 # alias la l
 
 # alias cls "command clear ; command printf '\e[3J' "
@@ -99,7 +99,7 @@ alias ze "command zoxide edit"
 alias rup recent_updated_pkgs
 alias rip recent_installed_pkgs
 
-#### DMS (Dank Linux) specific aliases - for direct terminal use only! Do not bind these as keymaps lol
+#### Dank Linux (DMS) specific aliases - direct terminal use only
 alias dmslock 'dms ipc call lock lock'
 
 # alias usudo="env SHELL(which fish) sudo -E $argv" ### not sure if this works, leave as fn for now

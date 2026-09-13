@@ -13,10 +13,10 @@
 # 20-export_if_pacman sccache RUSTC_WRAPPER sccache
 # 30-export_as_env_var sccache RUSTC_WRAPPER (command -v sccache)
 
-# We literally don't need the actual value as it has a side-effect of writing to `$LIST_CLIENT_BASE_CMD` to store the cmd
+# We don't need the actual value; the side-effect writes to `$LIST_CLIENT_BASE_CMD`
 # 099listing_cmd_base >/dev/null 2>&1; or true
 
-# This is probably the better way to do this tbh
+# This is probably the better way to do this
 set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # 04export_onto_path_if_pacman ghcup-hs-bin "/home/dwarf/.ghcup/bin"
@@ -38,7 +38,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 #
 # 10-eval_if_pacman usage "usage g completion-init fish"
 
-# TODO: put behind a check or smth
+# TODO: guard this behind a check
 
 # 01eval_if_pacman keychain "keychain --eval id_ed25519" # supplies a cli notification
 
@@ -55,7 +55,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # This is an exception to the above, sadly...
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 
-## note: pretty sure we can comment 1 of the 2 below out and it's fine??
+# tested: works fine with one of the two below commented out
 10-eval_if_pacman carapace "carapace _carapace"
 # 01eval_if_pacman carapace "carapace fish"
 
@@ -69,9 +69,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # set -gx PATH $PATH /home/dwarf/.lmstudio/bin
 
-#### IMPORTANT NOTE ####
-## the install is "lmstudio", the application that you call however,
-## is lms/lm-studio.
+## the install is "lmstudio", the application you call is lms/lm-studio
 ## 00valid_pacmam checks for callable commands FIRST (then checks pacman -Qi)
 ## We want to use the 'fast path', so use the callable command
 40-var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
@@ -81,8 +79,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local / bob )
 # 04export_onto_path_if_pacman bob "$HOME/.local/share/bob/nvim-bin" --prepend
 
-# opam's hook is weird, it will just dump to path on shell restart,
-# this prevents a LOT of duplicate entries
+# opam's hook dumps to PATH on shell restart; the check prevents duplicate entries
 
 # if contains $PATH "$HOME/.opam/default/bin"                             # do nothing, path already contains opam bin
 # else if 00valid_pacman opam -a -r "$HOME/.opam/opam-init/init.fish"     # Source it's initialization script
