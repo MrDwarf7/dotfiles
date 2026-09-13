@@ -19,31 +19,40 @@ set -U fish_cursor_default block blink
 set -U fish_cursor_insert line blink
 set -U fish_cursor_visual block blink
 
-## Allows 'segmenting' for parts of envs - caching yes;
-## but also need to delete (the below) guard if you want to outright refresh the section.
-## -- Using `-U` here prop's to ALL shells!
-#### INTERNALLY to wherever it's updated - we use `-gx`.
-# This is because of 'scope precedence' - the LOWEST privledge scope is what is used.
-# This allows us to set these to 0 IF they don't exist at all - OTHERWISE; each handler
-# sets them for the work in ta instance.
-set -qg __cached_envs_done; or set -gx __cached_envs_done 0
-set -qg __cached_gh_done; or set -gx __cached_gh_done 0
-set -qg __cached_fzf_done; or set -gx __cached_fzf_done 0
+## Segment cache: UNIVERSAL ONLY. A -g with the same name shadows -U (global wins),
+## which is why `set -qg; or set -gx 0` made every new tmux/ghostty tab re-run
+## even after a universal 1 existed. Never -g these names.
+## Refresh: `set -eU __cached_<name>_done` then open a new shell (or set -U 0).
+set -eg __cached_envs_done
+set -eg __cached_gh_done
+set -eg __cached_fzf_done
+
+# These are no longer used anyway; need to run a cycle on each device to clear them
+set -eg __cached_xdg_done
+set -eU __cached_xdg_done
+
+set -qU __cached_envs_done; or set -U __cached_envs_done 0
+set -qU __cached_gh_done; or set -U __cached_gh_done 0
+set -qU __cached_fzf_done; or set -U __cached_fzf_done 0
 
 function __env_cached_set --argument-names flag_args key --description 'Cache env vars to avoid re-running this script on every shell invocation'
     set -l rest $argv[3..-1]
-    printf "Setting env var '%s' to '%s' with flags '%s'\n" $key "$rest" "$flag_args"
 
     # 'flag_args' _MUST_ start with a `-` so that `-<flags>` is valid.
 
     test -z "$flag_args"; and colorize red "Error: No flag args provided to __env_cached_set for key '$key'" && return 1 # Zero length flag args is invalid
     string match -q -r '^-\w+' -- "$flag_args"; or colorize red "Error: Invalid flag args '$flag_args' provided to __env_cached_set for key '$key'" && return 2 # Invalid flag args
 
-    # set -q $key; and set -qx $key; and begin
-    #     set -l current_value (eval echo \$$key)
-    #     test "$current_value" = "$rest"
-    #     return 0 # Already set to the desired value
-    # end
+    # Per-var skip lives here (not in the done-flag). Compare list-as-string.
+    if set -q $key
+        set -l current_value $$key
+        if test "$current_value" = "$rest"
+            return 0
+        end
+    end
+
+    # basically a warning if something _should_ have been set but wasn't, but we don't want to error out and break the shell
+    printf "Setting env var '%s' to '%s' with flags '%s'\n" $key "$rest" "$flag_args"
 
     # @fish-lsp-disable-next-line 3003
     set $flag_args $key $rest
@@ -51,7 +60,7 @@ function __env_cached_set --argument-names flag_args key --description 'Cache en
 end
 
 function __setup_envs
-    set -qg __cached_envs_done; and return 0
+    test "$__cached_envs_done" = 1; and return 0
     # XDG_* come from 00-os.fish (must be set before this file)
 
     __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
@@ -133,24 +142,34 @@ function __setup_envs
 
     __env_cached_set -Ux GROK_BIN "$HOME/.grok/bin"
 
-    set -gx __cached_envs_done 1
+    set -U __cached_envs_done 1
     return 0
 end
 __setup_envs
 
 # mostly just playing around with how fish does job/job groups stuff tbh
 function __setup_gh_token
-    set -l job (jobs -l -p)
-    or begin
+    ## Very buggy attempt at callback-style async job comp.
+
+    # set -l job (jobs -l -p)
+    # or begin
+    #     return 1
+    # end
+    # printf "Setting up GitHub token in background job %s\n" $job
+    #
+    # function _fire --on-job-exit $job --inherit-variable job
+    #     99-ensure_gh_token
+    #     printf "GitHub token setup job %s finished\n" $job
+    #     functions --erase _fire
+    #     set -U __cached_gh_done 1
+    # end
+    # return 0
+
+    99-ensure_gh_token; or begin
+        printf "Failed to ensure GitHub token is set up\n"
         return 1
     end
-    printf "Setting up GitHub token in background job %s\n" $job
-
-    function _fire --on-job-exit $job --inherit-variable job
-        99-ensure_gh_token &
-        functions --erase _fire
-        set -gx __cached_gh_done 1
-    end
+    set -U __cached_gh_done 1
     return 0
 end
 __setup_gh_token &
@@ -161,7 +180,7 @@ __setup_gh_token &
 # end
 
 function __setup_fzf_vars
-    set -qg __cached_fzf_done; and return 0
+    test "$__cached_fzf_done" = 1; and return 0
 
     set -f FZF_DEFAULT_COMMAND ""
     if 00-valid_pacman bfs
@@ -192,7 +211,7 @@ function __setup_fzf_vars
     # Non-official env var, used by personal files!
     __env_cached_set -Ux FZF_RELOAD_COMMAND "reload:rg --column --color=always --smart-case {q} || :"
 
-    set -gx __cached_fzf_done 1
+    set -U __cached_fzf_done 1
     return 0
 end
 __setup_fzf_vars &
