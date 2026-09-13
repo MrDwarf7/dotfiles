@@ -14,25 +14,25 @@ local m = {
     ---@type HL.ConfigOpt.Decoration.Blur
     blur = {
       -- kawase,  -- default
-      acrylic = {}, -- similar to liquid glass
-      aurora = {}, -- aurora-like light streaks
-      drops = {}, -- rain on a window pane
-      fluid_jar = {}, -- 2D fluid simulation
-      frost = {}, -- cracked ice
-      haze = {}, -- a different diffused effect
-      heat_shimmer = {}, -- a small shimmer with aberration
-      prism = {}, -- triangular refraction mask
-      ripple = {}, -- ripple on click
-      water = {}, -- ripple done with a heightmap
+      -- acrylic = {}, -- similar to liquid glass
+      -- aurora = {}, -- aurora-like light streaks
+      -- drops = {}, -- rain on a window pane
+      -- fluid_jar = {}, -- 2D fluid simulation
+      -- frost = {}, -- cracked ice
+      -- haze = {}, -- a different diffused effect
+      -- heat_shimmer = {}, -- a small shimmer with aberration
+      -- prism = {}, -- triangular refraction mask
+      -- ripple = {}, -- ripple on click
+      -- water = {}, -- ripple done with a heightmap
     },
     ---@type HL.ConfigOpt.Decoration.Shadow
     shadow = {},
     ---@type HL.ConfigOpt.Decoration.Glow
     glow = {},
     ---@type HL.ConfigOpt.Decoration.MotionBlur
-    motion_blur = {},
+    -- motion_blur = {},
     ---@type HL.ConfigOpt.Decoration.Wobble
-    wobble = {},
+    -- wobble = {},
   },
 }
 
@@ -93,13 +93,14 @@ m.decoration = {
 m.decoration.blur = {
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
-  size = 10, -- default 8
+  size = 4, -- default 8
   -- Gaussian blur
   passes = 4, -- default 1, previous was 5
-  ignore_opacity = true,
-
   new_optimizations = true,
+
+  ignore_opacity = true,
   xray = false,
+
   -- noise = 0.0117
   -- noise = 0.0000
   -- -- this is what I was using earlier
@@ -174,7 +175,3 @@ m.decoration.wobble = {
 }
 
 hl.config(m)
---   {
---   general = general,
---   decoration = decoration,
--- })

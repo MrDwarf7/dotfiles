@@ -131,7 +131,7 @@ end
 ---@field current str|nil canonical host key
 ---@field get fun(name?: str): HyprConfig.Machine
 ---@field monitor fun(output: str): HL.MonitorSpec|nil
----@field monitor_main fun(): string|integer|nil
+---@field monitor_main fun(): string|nil
 local machine = {
   current = key,
 }
@@ -147,6 +147,9 @@ end
 
 machine.monitor = function(output)
   return lst.find(host.monitors or {}, function(m)
+    if not m.output then
+      return false
+    end
     return m.output == output
   end)
 end

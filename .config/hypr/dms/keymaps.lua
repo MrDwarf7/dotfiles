@@ -17,7 +17,8 @@ hl.bind(mods.with(mods.main_mod, "r"), hl.dsp.exec_cmd(progs.menu))
 hl.bind(mods.with(mods.main_mod_ctrl, "r"), dms.invoke_ipc_call("spotlight toggle"))
 
 hl.bind(mods.with(mods.main_mod_ctrl, "v"), dms.invoke_ipc_call("clipboard toggle"))
-hl.bind(mods.with(mods.main_mod_ctrl, "m"), dms.invoke_ipc_call("settings focusOrToggle"))
+-- hl.bind(mods.with(mods.main_mod_ctrl, "m"), dms.invoke_ipc_call("settings focusOrToggle"))
+hl.bind(mods.with(mods.main_mod_ctrl, "comma"), dms.invoke_ipc_call("settings focusOrToggle"))
 hl.bind(mods.with(mods.main_mod_ctrl, "a"), dms.invoke_ipc_call("notifications toggle"))
 
 hl.bind(mods.with(mods.main_mod_alt, "w"), dms.invoke_ipc_call("hypr toggleOverview"))

@@ -2,6 +2,8 @@
 --## CURSOR ###
 --#############
 
+local machine = require("utils.machine")
+
 hl.config({
   ---@type HL.ConfigOpt.Cursor
   cursor = {
@@ -15,7 +17,7 @@ hl.config({
     persistent_warps = true,
     warp_on_change_workspace = 1,
     warp_on_toggle_special = 0,
-    default_monitor = require("utils.machine").kind == "desktop" and "DP-1" or "eDP-1",
+    default_monitor = machine.monitor_main() or (machine.kind == "desktop" and "DP-1" or "eDP-1"),
     zoom_factor = 1.0,
     zoom_rigid = false,
     enable_hyprcursor = true,

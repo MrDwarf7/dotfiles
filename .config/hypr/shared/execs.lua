@@ -18,11 +18,14 @@ local types = require("types")
 ---@type HyprConfig.ExecCallbacks
 local all_callbacks = {
   on_start = {
-    -- PulseAudio: unmute default sink on startup
+    -- PulseAudio: unmute default sink/source on startup.
+    -- Sink-only unmute leaves the headset capture muted; WirePlumber
+    -- persists HW mute on analog-input-mic (PRO X) across sessions.
     hl.dsp.exec_cmd("pactl set-sink-mute @DEFAULT_SINK@ 0"),
+    hl.dsp.exec_cmd("pactl set-source-mute @DEFAULT_SOURCE@ 0"),
 
     -- OpenRGB: start minimized (case lights)
-    hl.dsp.exec_cmd("openrgb --startminimized 2>&1 >/dev/null & disown"),
+    -- hl.dsp.exec_cmd("openrgb --startminimized 2>&1 >/dev/null & disown"),
 
     -- USB auto-mounting via udiskie (as uwsm service)
     require("utils").uwsm_launcher("udiskie -n -t -m flat", true),
@@ -38,7 +41,7 @@ local all_callbacks = {
   on_shutdown = {
 
     -- OpenRGB: start minimized (case lights)
-    hl.dsp.exec_cmd("openrgb --autostart-enable '--startminimized' 2>&1 >/dev/null & disown"),
+    -- hl.dsp.exec_cmd("openrgb --autostart-enable '--startminimized' 2>&1 >/dev/null & disown"),
   },
 
   -- Add additional event types as HL adds them or they're needed; e.g., on_suspend, on_resume, etc.
