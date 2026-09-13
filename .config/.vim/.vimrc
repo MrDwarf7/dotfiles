@@ -73,7 +73,7 @@ set autocomplete
 
 " set completeopt=menu,menuone,noselect,preview,popup
 set completeopt=menu,menuone,fuzzy,popup,preinsert
-set completepopup=border:single,height:10,width:10,opacity:80,shadow:on
+"set completepopup=border:single,height:10,width:10,opacity:80,shadow:on
 
 " default:
 " set pumwidth=15
