@@ -104,6 +104,34 @@ alias dmslock 'dms ipc call lock lock'
 # alias usudo="env SHELL(which fish) sudo -E $argv" ### not sure if this works, leave as fn for now
 # alias zl (command zellij --session $(tr -dc a-z0-9 </dev/urandom | head -c 3 ; printf "\n"))
 
+### Cargo
+
+alias cb 'cargo build'
+alias cbr 'cargo build --release'
+alias cba 'cargo build && cargo build --release'
+
+alias cr 'cargo run'
+alias crq 'cargo run -q'
+alias crr 'cargo run --release'
+alias cch 'cargo check'
+alias ccl 'cargo clean'
+alias cu 'cargo update'
+alias cdoc 'cargo doc'
+alias cup 'cargo upgrade'
+
+alias ct 'cargo test'
+alias ctq 'cargo test --quiet'
+
+alias cta 'cargo test --all'
+alias ctaq 'cargo test --all --quiet'
+
+alias cw 'cargo watch'
+alias cwq 'cargo watch -q'
+alias cwqc 'cargo watch -q -c'
+alias cwqcr 'cargo watch -q -c -x run'
+
+### Git
+
 alias gst "git status $args"
 alias grv "git remote -v $args"
 alias gb "git branch $args"
@@ -112,3 +140,19 @@ alias gf "git fetch $args"
 alias gfa "git fetch --all --prune $args"
 alias gp "git push $args"
 alias gfp "git fetch --all && git pull --all"
+
+### Tmux
+
+# alias tm tmux
+alias tmls "tmux ls"
+
+### Docker
+
+alias dc "docker compose"
+alias dcu "docker compose up"
+alias dcub "docker compose up --build"
+alias dcd "docker compose down"
+alias dcdf "docker compose down --force"
+
+alias Db. "docker buildx build ."
+alias Db.t "docker buildx build . -t"
