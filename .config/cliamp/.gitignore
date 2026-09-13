@@ -8,3 +8,7 @@ cliamp.sock.pid
 
 resume.json
 ./resume.json
+
+history.toml
+favorites.toml.lock
+*.lock

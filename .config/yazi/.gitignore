@@ -1,3 +1,4 @@
 .schemas/
+package.toml
 
 !/plugins
