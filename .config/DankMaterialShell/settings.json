@@ -1,31 +1,115 @@
 {
   "currentThemeName": "dynamic",
+  "radiusStrength": 38,
+  "clockFormat": "12h",
+  "showSeconds": true,
+  "padHours12Hour": true,
+  "animationDuration": 0,
+  "popoutElevationEnabled": false,
+  "blurBorderColor": "primary",
+  "wallpaperFillMode": "Fit",
+  "lockDateFormat": "ddd, dd MMM | dddd, yyyy_MM_dd",
+  "fontFamily": "Fira Code Medium",
+  "monoFontFamily": "FiraCode Nerd Font Mono",
+  "textRenderType": 1,
+  "powerActionHoldDuration": 0.25,
+  "powerMenuActions": [
+    "reboot",
+    "logout",
+    "poweroff",
+    "lock",
+    "restart",
+    "hibernate"
+  ],
+  "powerMenuGridLayout": true,
+  "dockConfigs": [
+    {
+      "id": "dock",
+      "name": "Dock",
+      "enabled": false,
+      "screenPreferences": [
+        "all"
+      ],
+      "showOnLastDisplay": false,
+      "position": 3,
+      "mode": "compact",
+      "taskbarAlign": "center",
+      "widgetExpansion": "popout",
+      "iconSize": 34,
+      "spacing": 5,
+      "itemSpacing": 4,
+      "margin": 10,
+      "bottomGap": 0,
+      "transparency": 0.6,
+      "followInterfaceStyle": false,
+      "autoHide": false,
+      "smartAutoHide": false,
+      "useOverlayLayer": false,
+      "editOnRightClick": false,
+      "showOnFullscreen": false,
+      "openOnOverview": false,
+      "groupByApp": false,
+      "separatePinnedAndRunningApps": false,
+      "restoreSpecialWorkspaceOnClick": false,
+      "isolateDisplays": false,
+      "indicatorStyle": "circle",
+      "borderEnabled": false,
+      "borderColor": "surfaceText",
+      "borderOpacity": 1,
+      "borderThickness": 1,
+      "launcherEnabled": true,
+      "launcherLogoMode": "apps",
+      "launcherLogoCustomPath": "",
+      "launcherLogoColorOverride": "",
+      "launcherLogoSizeOffset": 0,
+      "launcherLogoBrightness": 0.5,
+      "launcherLogoContrast": 1,
+      "maxVisibleApps": 0,
+      "maxVisibleRunningApps": 0,
+      "showOverflowBadge": true,
+      "showTrash": false,
+      "trashFileManager": "default",
+      "trashCustomCommand": "",
+      "order": [],
+      "widgets": [
+        {
+          "id": "dock_launcher",
+          "widgetId": "dockLauncher",
+          "enabled": true
+        },
+        {
+          "id": "dock_apps",
+          "widgetId": "appsDock",
+          "enabled": true
+        },
+        {
+          "id": "dock_trash",
+          "widgetId": "dockTrash",
+          "enabled": true
+        }
+      ]
+    }
+  ],
   "currentThemeCategory": "dynamic",
   "matugenTargetMonitor": "DP-1",
-  "popupTransparency": 0.1,
+  "popupTransparency": 0.16,
   "floatingWindowTransparency": 0.1,
   "floatingWindowForegroundLayers": false,
   "floatingWindowForegroundTransparency": 0.08,
   "widgetBackgroundColor": "s",
   "hyprlandLayoutGapsOverride": 4,
   "hyprlandLayoutRadiusOverride": 12,
-  "hyprlandLayoutBorderSize": 1,
+  "hyprlandLayoutBorderSize": 2,
   "audioShowStreamDevices": true,
-  "clockFormat": "12h",
-  "showSeconds": true,
-  "padHours12Hour": true,
+  "popoutAnimationDuration": 0,
   "m3ElevationIntensity": 4,
   "m3ElevationColorMode": "surfaceVariant",
   "m3ElevationLightDirection": "autoBar",
   "modalElevationEnabled": false,
-  "popoutElevationEnabled": false,
   "barElevationEnabled": false,
   "blurEnabled": true,
-  "blurForegroundLayers": false,
   "foregroundLayerTransparency": 0.08,
   "blurLayerOutlineOpacity": 0.08,
-  "blurBorderColor": "primary",
-  "wallpaperFillMode": "Fit",
   "blurWallpaperOnOverview": true,
   "controlCenterWidgets": [
     {
@@ -105,7 +189,6 @@
   "audioVisualizerEnabled": false,
   "appIdSubstitutions": [],
   "clockDateFormat": "ddd, dd MMM | dddd, yyyy_MM_dd",
-  "lockDateFormat": "ddd, dd MMM | dddd, yyyy_MM_dd",
   "spotlightSectionViewModes": {
     "apps": "list"
   },
@@ -135,6 +218,15 @@
       "enabled": true
     }
   ],
+  "dashOptions": {
+    "media": {
+      "waveProgress": false
+    },
+    "wallpaper": {
+      "columns": 5,
+      "rows": 5
+    }
+  },
   "networkPreference": "wifi",
   "cursorSettings": {
     "theme": "System Default",
@@ -154,9 +246,6 @@
   },
   "launcherLogoMode": "os",
   "launcherLogoColorOverride": "primary",
-  "fontFamily": "Fira Code Medium",
-  "monoFontFamily": "FiraCode Nerd Font Mono",
-  "textRenderType": 1,
   "notepadShowLineNumbers": true,
   "notepadDefaultMode": "popout",
   "notepadLastCustomTransparency": 0.01,
@@ -166,6 +255,8 @@
   "acSuspendBehavior": 1,
   "batteryCriticalNotificationType": 0,
   "lockBeforeSuspend": true,
+  "fadeToDpmsEnabled": false,
+  "fadeToDpmsGracePeriod": 10,
   "terminalsAlwaysDark": true,
   "matugenTemplateZenBrowser": false,
   "matugenTemplateVesktop": false,
@@ -194,18 +285,10 @@
   "lockScreenNotificationMode": 2,
   "notificationTimeoutNormal": 10000,
   "notificationDedupeEnabled": false,
+  "notificationAnimationDuration": 169,
   "osdAlwaysShowValue": true,
   "osdPosition": 0,
   "osdPowerProfileEnabled": true,
-  "powerMenuActions": [
-    "reboot",
-    "logout",
-    "poweroff",
-    "lock",
-    "restart",
-    "hibernate"
-  ],
-  "powerMenuGridLayout": true,
   "updaterUseCustomCommand": true,
   "updaterIncludeFlatpak": false,
   "screenPreferences": {
@@ -353,7 +436,8 @@
       "hoverPopouts": false,
       "hoverPopoutDelay": 279,
       "useOverlayLayer": false,
-      "followInterfaceStyle": false
+      "followInterfaceStyle": false,
+      "island": false
     },
     {
       "id": "bar1772849107368",
@@ -462,32 +546,6 @@
       "followInterfaceStyle": false
     }
   ],
-  "desktopClockCustomColor": {
-    "r": 1,
-    "g": 1,
-    "b": 1,
-    "a": 1,
-    "hsvHue": -1,
-    "hsvSaturation": 0,
-    "hsvValue": 1,
-    "hslHue": -1,
-    "hslSaturation": 0,
-    "hslLightness": 1,
-    "valid": true
-  },
-  "systemMonitorCustomColor": {
-    "r": 1,
-    "g": 1,
-    "b": 1,
-    "a": 1,
-    "hsvHue": -1,
-    "hsvSaturation": 0,
-    "hsvValue": 1,
-    "hslHue": -1,
-    "hslSaturation": 0,
-    "hslLightness": 1,
-    "valid": true
-  },
   "desktopWidgetGroups": [
     {
       "id": "dwg_1772221872286_jf67oqgr8",
@@ -516,82 +574,5 @@
   },
   "frameMode": "separate",
   "frameBarInsetPadding": 16,
-  "configVersion": 28,
-  "dashOptions": {
-    "media": {
-      "waveProgress": false
-    }
-  },
-  "radiusStrength": 38,
-  "dockConfigs": [
-    {
-      "id": "dock",
-      "name": "Dock",
-      "enabled": false,
-      "screenPreferences": [
-        "all"
-      ],
-      "showOnLastDisplay": false,
-      "position": 3,
-      "mode": "compact",
-      "taskbarAlign": "center",
-      "widgetExpansion": "popout",
-      "iconSize": 34,
-      "spacing": 5,
-      "itemSpacing": 4,
-      "margin": 10,
-      "bottomGap": 0,
-      "transparency": 0.6,
-      "followInterfaceStyle": false,
-      "autoHide": false,
-      "smartAutoHide": false,
-      "useOverlayLayer": false,
-      "editOnRightClick": false,
-      "showOnFullscreen": false,
-      "openOnOverview": false,
-      "groupByApp": false,
-      "separatePinnedAndRunningApps": false,
-      "restoreSpecialWorkspaceOnClick": false,
-      "isolateDisplays": false,
-      "indicatorStyle": "circle",
-      "borderEnabled": false,
-      "borderColor": "surfaceText",
-      "borderOpacity": 1,
-      "borderThickness": 1,
-      "launcherEnabled": true,
-      "launcherLogoMode": "apps",
-      "launcherLogoCustomPath": "",
-      "launcherLogoColorOverride": "",
-      "launcherLogoSizeOffset": 0,
-      "launcherLogoBrightness": 0.5,
-      "launcherLogoContrast": 1,
-      "maxVisibleApps": 0,
-      "maxVisibleRunningApps": 0,
-      "showOverflowBadge": true,
-      "showTrash": false,
-      "trashFileManager": "default",
-      "trashCustomCommand": "",
-      "order": [],
-      "widgets": [
-        {
-          "id": "dock_launcher",
-          "widgetId": "dockLauncher",
-          "enabled": true
-        },
-        {
-          "id": "dock_apps",
-          "widgetId": "appsDock",
-          "enabled": true
-        },
-        {
-          "id": "dock_trash",
-          "widgetId": "dockTrash",
-          "enabled": true
-        }
-      ]
-    }
-  ],
-  "animationDuration": 0,
-  "popoutAnimationDuration": 0,
-  "notificationAnimationDuration": 169
+  "configVersion": 28
 }

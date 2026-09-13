@@ -1,7 +1,9 @@
 modelRoles:
-  default: anthropic/claude-sonnet-5:medium
   advisor: opencode-zen/nemotron-3.5-lightning-free
   smol: opencode-zen/laguna-s-2.1-free
+  default: anthropic/claude-opus-5-5:high
+  task: anthropic/claude-haiku-4-5-20251001
+  tiny: openai/gpt-6-luna
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -18,9 +20,10 @@ tui:
   codexResetFireworks: true
   tight: true
   vimMode: true
+  imeSafeCursor: true
 display:
   shimmer: kitt
-  showTokenUsage: false
+  showTokenUsage: true
   cacheMissMarker: false
   showTurnTime: true
 personality: pragmatic
@@ -34,8 +37,6 @@ loop:
 doubleEscapeAction: tree
 treeFilterMode: default
 autocompleteMaxVisible: 15
-stt:
-  modelName: parakeet
 startup:
   quiet: true
 features:
@@ -54,7 +55,7 @@ eval:
 astGrep:
   enabled: true
 computer:
-  enabled: false
+  enabled: true
 vault:
   enabled: false
 github:
@@ -76,3 +77,5 @@ skills:
 composer:
   shape: box
 defaultThinkingLevel: auto
+extendedContext: false
+hideThinkingBlock: false
