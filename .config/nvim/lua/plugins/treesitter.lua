@@ -33,7 +33,10 @@ return {
   config = function(_, opts)
     local ts = require("nvim-treesitter")
     ts.setup(opts)
-    ts.install(opts.languages)
+    -- ts.install(opts.languages)
+    ts.install(opts.languages).compilers = {
+      "zig",
+    }
     return ts
   end,
 }
