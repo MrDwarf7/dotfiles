@@ -1,4 +1,15 @@
+---@class utils.Buf.new.Opts
+---@field bufnr integer|nil
+---@field buf integer|nil
+
 ---@class utils.Buf
+---@field debugging boolean
+---@field delete fun(opts: utils.Buf.delete.Opts|number|function): utils.Buf
+---@field all fun(opts: utils.Buf.delete.Opts|number|function): utils.Buf
+---@field other fun(opts: utils.Buf.delete.Opts|number|function): utils.Buf
+---@field is_valid fun(opts: utils.Buf.is_valid.Opts|nil): boolean
+---@field new fun(opts: utils.Buf.new.Opts|nil): nil
+---@field setup fun(): utils.Buf
 local Buf = {
   debugging = false,
 }
@@ -103,6 +114,27 @@ function Buf.is_valid(opts)
 
   return bufisvalid and (lc_gt_one or bufname_not_empty)
   -- all conditions must be true for the buffer to be considered 'valid'
+end
+
+function Buf.new(opts)
+  --
+
+  opts = opts or {}
+
+  -- local bufisvalid = require("utils.buf").is_valid({ bufnr = 0 })
+  local bufisvalid = Buf.is_valid({ bufnr = opts.bufnr or opts.buf or 0 })
+  if bufisvalid then -- all conditions must be true for the buffer to be considered 'valid'
+    local uor = (vim.api.nvim_get_option_value("splitright") == true and "right" or "left")
+    vim.api.nvim_open_win(0, true, { split = uor, win = 0 })
+    local id_or_err = vim.api.nvim_create_buf(true, false) -- integer: Buffer id, or 0 on error :: _Create_ the new buffer
+    if id_or_err == 0 then
+      require("utils.output").error("Failed to create new buffer")
+      return
+    end
+    vim.api.nvim_win_set_buf(0, id_or_err) -- actually set the buffer in the current window
+    return
+  end
+  return require("utils.output").error("Current buffer is not valid for splitting")
 end
 
 function Buf.setup()

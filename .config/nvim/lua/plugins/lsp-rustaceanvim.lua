@@ -70,7 +70,7 @@ return {
           -- Subcommand names are the :RustLsp ones (`openCargo`, not `OpenCard`).
           -- A list value is extra args: { "renderDiagnostic", "cycle" }.
           local key_to_action = {
-            ["<Leader>la"] = "codeAction",
+            -- ["<Leader>la"] = "codeAction",
             ["<Leader>ln"] = "renderDiagnostic",
             ["<Leader>lc"] = "openCargo",
             ["]n"] = { "renderDiagnostic", "cycle" },

@@ -241,19 +241,9 @@ end, { expr = true })
 map({ "n", "x" }, "j", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'j' : 'gj'", { expr = true, silent = true })
 map({ "n", "x" }, "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 'gk'", { expr = true, silent = true })
 
--- Searching / searching
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
--- n/N follow the search direction, then center (zz) and open folds (zv).
-map("n", "n", "'Nn'[v:searchforward].'zzzv'", { expr = true, silent = true, desc = "Next Search Result" })
-map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zzzv'", { expr = true, silent = true, desc = "Prev Search Result" })
-map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
-
--- center on next / prev n/N. Folded into the normal-mode maps above.
--- map("n", "n", "nzzzv", silent_opts)
--- map("n", "N", "Nzzzv", silent_opts)
+-- center on next / prev search result (zz) and open folds (zv)
+map("n", "n", "nzzzv", silent_opts("Next Search Result"))
+map("n", "N", "Nzzzv", silent_opts("Prev Search Result"))
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")
@@ -328,19 +318,11 @@ end, { desc = "Quickfix List" })
 
 -- buffer things
 map("n", "<Leader>be", function()
-  local bufisvalid = require("utils.buf").is_valid({ bufnr = 0 })
-  if bufisvalid then -- all conditions must be true for the buffer to be considered 'valid'
-    local uor = (vim.api.nvim_get_option_value("splitright") == true and "right" or "left")
-    vim.api.nvim_open_win(0, true, { split = uor, win = 0 })
-    local id_or_err = vim.api.nvim_create_buf(true, false) -- integer: Buffer id, or 0 on error :: _Create_ the new buffer
-    if id_or_err == 0 then
-      require("utils.output").error("Failed to create new buffer")
-      return
-    end
-    vim.api.nvim_win_set_buf(0, id_or_err) -- actually set the buffer in the current window
-    return
-  end
-  return require("utils.output").error("Current buffer is not valid for splitting")
+  require("utils.buf").new()
+end, silent_opts("[e]new"))
+
+map("n", "<Leader>bc", function()
+  require("utils.buf").new()
 end, silent_opts("[e]new"))
 
 map("n", "<Leader>bn", "<CMD>bnext<CR>", silent_opts("[n]ext"))
@@ -381,6 +363,11 @@ end, silent_opts("[b]uf [d]elete"))
 map("n", "<Leader>bD", function()
   require("utils.buf").other()
 end, silent_opts("[b]uf Wipe"))
+
+-- tabs
+map("n", "<Leader>tn", "<CMD>tabnext<CR>", silent_opts("[n]ext"))
+map("n", "<Leader>tp", "<CMD>tabprevious<CR>", silent_opts("[p]revious"))
+map("n", "<Leader>tx", "<CMD>tabclose<CR>", silent_opts("[c]lose"))
 
 -- buffer resizing
 map("n", "<Left>", "<CMD>vertical resize +2<CR>", silent_opts)

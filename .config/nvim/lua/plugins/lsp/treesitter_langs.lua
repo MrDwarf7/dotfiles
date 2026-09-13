@@ -14,46 +14,48 @@ local M = {}
 M = {
   --
   languages = {
+
     "awk",
     "bash",
     "c",
+    "c_sharp",
     "cmake",
     "cpp",
-    "c_sharp",
     "css", -- not in given list but
     "elixir",
     "fish",
     "fsh",
     "go",
     "javascript",
+    "jjdescription",
     "just",
     "lua",
     "luadoc",
     "luap",
-    -- "luau",
     "make",
     "meson",
     "mlir",
     "nginx",
     "nu",
     "odin",
-    -- "powershell",
     "prisma",
     "python",
     "regex",
-    -- "robot",
     "rust",
     "scss", --- not in given list but
     "sql",
-    -- "surrealdb",
-    -- "teal",
     "terraform",
-    -- "tmux", --- WOULD BE moved to langs, but it's not really
     "tsx",
     "typescript",
     "typst", -- not in given list but
     "vim",
     "zig",
+    -- "luau",
+    -- "powershell",
+    -- "robot",
+    -- "surrealdb",
+    -- "teal",
+    -- "tmux", --- WOULD BE moved to langs, but it's not really
   },
 
   data_formats = {
@@ -71,7 +73,6 @@ M = {
     "jq",
     "json",
     "json5",
-    -- "jsonc",
     "kdl",
     "markdown",
     "markdown_inline",
@@ -83,22 +84,23 @@ M = {
     "tsv",
     "vimdoc",
     "yaml",
+    -- "jsonc",
   },
 
   system = {
 
     "diff",
+    "git_config",
+    "git_rebase",
     "gitattributes",
     "gitcommit",
-    "git_config",
     "gitignore",
-    "git_rebase",
     "gpg",
     "ninja",
     "passwd",
     "printf",
-    -- "robots",
     "ssh_config",
+    -- "robots",
     -- "tmux", --- WOULD BE moved to langs, but it's not really
   },
 }
