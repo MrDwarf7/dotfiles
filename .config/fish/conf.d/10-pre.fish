@@ -62,9 +62,6 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 10-eval_if_pacman batman "batman --export-env"
 10-eval_if_pacman batpipe batpipe
 
-30-export_as_env_var pnpm PNPM_HOME "$XDG_DATA_HOME/pnpm"
-40-var_to_syspath pnpm "$PNPM_HOME" --prepend
-
 # 40-var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
 
 # set -gx PATH $PATH /home/dwarf/.lmstudio/bin
