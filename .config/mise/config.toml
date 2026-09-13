@@ -1,4 +1,11 @@
+# Shared mise config (this file is the symlink target for ~/.config/mise).
+# Machine/work extras: config.local.toml next to this file (gitignored).
+# Do not put work-only tools here if you want one symlink on every box.
+
+wrappers = { cargo = { command = "mbx", env = { MBX_CARGO_SHIM_MODE = "1" } } }
+
 [tools]
+uv = "latest"
 python = "latest"
 
 # JavaScript
@@ -11,12 +18,22 @@ bun = "latest"
 # Framework(?)/Package Runtimes
 # deno = "latest"
 
+go = "latest"
+
 # Tools
 biome = "latest"
+mr-boxington = "latest"
 
 ####################################################################################################
 
 ## NPM / Node.js / JavaScript/TypeScript Tools
+
+golangci-lint = "latest"
+air = "latest"           # Go live reload
+
+prettier = "latest"
+direnv = "latest"
+
 
 # [tools."npm:tailwindcss"]
 # version = "latest"
