@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 50-export_alias_if_pacman --argument-names program_one alias_name alias_value --description "If a provided program is available via pacman, exports an alias"
+function 50-export_alias_if_pacman --argument-names program_one alias_name alias_value --wraps=--wraps=source --description "If a provided program is available via pacman, exports an alias"
     # Exports an alias by checking pacman for the program
     #
     # Parameters:

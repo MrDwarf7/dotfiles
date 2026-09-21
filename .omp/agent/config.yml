@@ -1,5 +1,5 @@
 modelRoles:
-  default: opencode-zen/mimo-v2.5-free:high
+  default: anthropic/claude-sonnet-5:medium
   advisor: opencode-zen/nemotron-3.5-lightning-free
   smol: opencode-zen/laguna-s-2.1-free
 symbolPreset: nerd
@@ -17,10 +17,12 @@ tui:
   textSizing: false
   codexResetFireworks: true
   tight: true
+  vimMode: true
 display:
   shimmer: kitt
   showTokenUsage: false
   cacheMissMarker: false
+  showTurnTime: true
 personality: pragmatic
 advisor:
   enabled: true

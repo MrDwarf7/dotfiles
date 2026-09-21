@@ -150,7 +150,7 @@ cmd-q = 'close'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-slash = 'layout tiles horizontal vertical'
-cmd-z = 'layout accordion horizontal vertical'
+cmd-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 # Worth noting here there is a `--ignore-floating` option
