@@ -5,15 +5,6 @@ local opts = {}
 
 opts.fuzzy = {
   implementation = "prefer_rust",
-  --- previously*
-  -- sorts = {
-  --   "exact",
-  --   "sort_text",
-  --   "score",
-  --   "label",
-  --   "kind",
-  -- },
-
   sorts = {
     "score",
     "sort_text",
@@ -229,6 +220,11 @@ opts.sources = {
         local out = {}
         for _, item in ipairs(items) do
           local raw = item.insertText
+
+          if not raw then -- TEST: maybe terrible ideaa lol...
+            raw = item.label
+          end
+
           if raw:match(correct) then
             local text = case(raw:sub(1, 1)) .. raw:sub(2)
             item.insertText = text
@@ -364,15 +360,6 @@ opts.sources = {
         end,
       },
     },
-
-    -- idk, is broken or smth
-    -- cmdline = {
-    --   min_keyword_length = function(ctx)
-    --     if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
-    --       return CMDLINE_MIN_KW_LEN
-    --     end
-    --   end,
-    -- },
   },
 }
 
@@ -625,13 +612,4 @@ return {
   end,
 
   opts = opts,
-
-  -------------------------------------------------------------------------
-  -------------------------------------------------------------------------
-  --
-  -- opts = {}
-
-  --
-  -------------------------------------------------------------------------
-  -------------------------------------------------------------------------
 }

@@ -7,127 +7,81 @@ end
 local queries = append_rtp("data", "/lazy/nvim-treesitter/runtime/queries")
 append_rtp("data", "/lazy/nvim-treesitter/queries")
 
--- local queries = vim.fn.stdpath("data") .. "/lazy/nvim-treesitter/queries"
--- vim.opt.runtimepath:append(queries)
+local TS_TIMEOUT_MAX = 300000 -- Note this is the default, this is fine but... yeaah
 
--- TODO: eventually deprecate this file in favor of using a new
--- LangHub module that consolidates 'suites'
--- local lang_tables = require("lang_tables")
-
--- ---@type vim.treesitter
--- local ts_native = vim.treesitter
+local ts_langs = require("plugins.lsp.treesitter_langs")
 
 return {
   "nvim-treesitter/nvim-treesitter",
-  lazy = false,
+  lazy = false, -- no longer supports/needs lazy loading!
   build = ":TSUpdate",
   ---@class vim.treesitter.Config
   opts = {
     --- Defaults to the `stdpath('data')/site` dir.
     install_dir = queries,
-    languages = require("lang_tables").ts_ensure_installed(),
+    -- languages = require("plugins.lsp.treesitter_langs").flatten(),
+    ensure_installed = ts_langs.flatten(),
+
+    -- indent = { enable = true },
+    -- highlight = { enable = true },
+    -- folds = { enable = true },
   },
-  ---@param opts? any|nil
-  ---@param _? LazyMeta|nil
-  -- config = function(opts, _)
+
   config = function(_, opts)
-    local ts = require("nvim-treesitter")
-    ts.setup(opts)
-    -- ts.install(opts.languages)
-    ts.install(opts.languages).compilers = {
-      "zig",
-    }
-    return ts
+    local TS = require("nvim-treesitter")
+
+    opts = opts or {}
+    if not opts.ensure_installed and #opts.ensure_installed == 0 then
+      require("utils.output").warn("No treesitter languages specified in ensure_installed, using default list.")
+      opts.ensure_installed = ts_langs.flatten()
+    end
+
+    if not opts.install_dir then
+      opts.install_dir = queries
+    end
+
+    -- check if the dir actually exists or not to indicate first time run or alrady setup
+    local first_run = vim.fn.isdirectory(opts.install_dir) == 0
+    if first_run then
+      TS.install(opts.ensure_installed):wait(TS_TIMEOUT_MAX) -- synchronous, wait for the installation to finish before proceeding
+    else
+      TS.install(opts.ensure_installed) -- This is async
+    end
   end,
 }
 
--- return {
---   "nvim-treesitter/nvim-treesitter",
---   -- lazy = false,
---   -- lazy = true,
---   -- ---@type LazyEventSpec
---   -- event = "BufReadPost",
---   -- event = "WinLeave",
---   -- branch = "master",
---   event = { "BufReadPost", "BufNewFile" },
---   build = ":TSUpdate",
---   opts = {
---     install = require("lang_tables").ts_ensure_installed(),
---     highlight = { enable = true },
---     ensure_installed = require("lang_tables").ts_ensure_installed(),
---     incremental_selection = {
---       enable = false,
---     },
---     indent = {
---       disable = {
---         "html",
---         "javascript",
---         "typescript",
---         "css",
---         "rust",
---       },
---       -- disable = function(lang, buf)
---       --   local indent_disabled = {
---       --     "html",
---       --     "javascript",
---       --     "typescript",
---       --     "css",
---       --     "rust",
---       --   }
---       --   if lang == vim.tbl_keys(indent_disabled) then
---       --     return true
---       --   end
---       -- end,
---       enable = true,
---     },
+---@see TREESITTER "https://github.com/nvim-treesitter/nvim-treesitter#adding-custom-languages"
+
+-- local TSPARSERS = require("nvim-treesitter.parsers")
 --
---     textobjects = {
---       move = {
---         enable = false,
---         goto_next_start = {
---           ["]f"] = "@function.outer",
---           ["]o"] = "@class.outer",
---           ["]a"] = "@parameter.inner",
---         },
---         goto_next_end = {
---           ["]F"] = "@function.outer",
---           ["]O"] = "@class.outer",
---           ["]A"] = "@parameter.inner",
---         },
---         goto_previous_start = {
---           ["[f"] = "@function.outer",
---           ["[o"] = "@class.outer",
---           ["[a"] = "@parameter.inner",
---         },
---         goto_previous_end = {
---           ["[F"] = "@function.outer",
---           ["[O"] = "@class.outer",
---           ["[A"] = "@parameter.inner",
---         },
---       },
---     },
+-- :: prefer to put all custom parsers into a list or something of 'install_info' types and hand them through (potentially with a tag: "remote" | "local" or similar.
+-- local custom_parsers = {}
+
+--   vim.api.nvim_create_autocmd('User', {
+--     pattern = 'TSUpdate',
+--   callback = function()
+--     TSPARSERS.[[LANG]] = {
+--       ------------- REMOTE
+--       -- install_info = {
+--       --   url = 'https://github.com/zimbulang/tree-sitter-zimbu',
+--       --   revision = <sha>, -- commit hash for revision to check out; HEAD if missing
+--       --   -- optional entries:
+--       --   branch = 'develop', -- only needed if different from default branch
+--       --   location = 'parser', -- only needed if the parser is in subdirectory of a "monorepo"
+--       --   generate = true, -- only needed if repo does not contain pre-generated `src/parser.c`
+--       --   generate_from_json = false, -- only needed if repo does not contain `src/grammar.json` either
+--       --   queries = 'queries/neovim', -- also install queries from given directory
+--       -- },
 --
---     autotag = {
---       enable = true,
---     },
---     -- sync_install = true,
---     auto_install = true,
---   },
---
---   -- init = function()
---   --   if package.loaded["nvim-treesitter.configs"] then
---   --     return
---   --   end
---   --
---   --   vim.defer_fn(function()
---   --     if not package.loaded["nvim-treesitter.configs"] then
---   --       require("nvim-treesitter.configs").setup(require("plugins.treesitter").opts)
---   --     end
---   --   end, 80)
---   -- end,
---
---   config = function(_, opts)
---     opts = opts or {}
---     require("nvim-treesitter.configs").setup(opts)
---   end,
--- }
+--       ------------- LOCAL CHECKOUT
+--   -- install_info = {
+--   --   path = '~/parsers/tree-sitter-zimbu',
+--   --   -- optional entries
+--   --   location = 'parser',
+--   --   generate = true,
+--   --   generate_from_json = false,
+--   --   queries = 'queries/neovim', -- symlink queries from given directory
+--   -- },
+--     }
+--   end
+-- })

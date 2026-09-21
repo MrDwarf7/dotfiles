@@ -106,6 +106,7 @@ LangTables = {
       -- "tmux", --- WOULD BE moved to langs, but it's not really
     },
   },
+
   ---@type MasonSubtype
   mason = {
     formatters = {
@@ -132,43 +133,6 @@ LangTables = {
       "yamlfmt",
     },
 
-    formatters_by_ft = {
-
-      ["bash"] = { "shfmt", "beautysh" },
-      ["cpp"] = { "clangformat" },
-      ["cmake"] = { "cmakelang", "neocmake" },
-      ["go"] = { "gofumpt" },
-
-      -- ["fish"] = { "beautysh" },
-      ["gleam"] = { "gleam" },
-      ["javascript"] = { "biome" },
-      ["javascriptreact"] = { "biome" },
-      ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
-      ["lua"] = { "stylua" },
-      -- ["luau"] = { "stylua" },
-      ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      -- markdown = { "prettier" },
-      ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      ["ocaml"] = { "ocamlformat" },
-      ["python"] = function(bufnr)
-        if require("conform").get_formatter_info("ruff_format", bufnr).available then
-          return { "ruff_format" }
-        else
-          return { "isort", "black" }
-        end
-      end,
-      ["odin"] = { "odinfmt" },
-      -- ["rust"] = { "rustfmt" },
-      ["sh"] = { "shfmt" },
-      ["sql"] = { "sql_formatter" },
-      ["surql"] = { "sql_formatter" },
-      ["toml"] = { "taplo" },
-      ["typescript"] = { "biome" },
-      ["typescriptreact"] = { "biome" },
-      ["yaml"] = { "yamlfmt" },
-      ["zsh"] = { "beautysh" },
-    },
-
     linters = {
 
       -- "bacon",
@@ -189,36 +153,6 @@ LangTables = {
       "ts-standard",
       -- "vulture",
       -- "yamllint",
-    },
-
-    linters_by_ft = {
-      ["bash"] = { "shellcheck" },
-      ["cmake"] = { "cmakelint" },
-      ["cpp"] = { "cpplint" },
-      ["hpp"] = { "cpplint" },
-      -- ["c"] = { "clang-tidy" },
-      -- ["h"] = { "clang-tidy" },
-      -- cs = { "omnisharp" },
-      ["css"] = { "stylelint" },
-      ["docker"] = { "hadolint" },
-      ["javascript"] = { "biomejs" },
-      ["javascriptreact"] = { "biomejs" },
-      ["json"] = { "jsonlint" },
-      ["odin"] = { "ols" },
-
-      -- ["lua"] = { "luacheck" },
-      -- markdown = { "markdownlint-cli2" },
-      -- powershell = { "powershell_es" },
-      -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
-      -- python = { "ruff", "mypy", "vulture" },
-      -- ["rust"] = { "rust_analyzer" },
-      ["python"] = { "ruff" },
-      ["sh"] = { "shellcheck" },
-      ["sql"] = { "sqlfluff" },
-      ["typescript"] = { "biomejs" },
-      ["typescriptreact"] = { "biomejs" },
-      ["vim"] = { "vint" },
-      -- ["yaml"] = { "yamllint" },
     },
 
     lsps = {
@@ -270,6 +204,7 @@ LangTables = {
       "yamlls",
       "zls",
     },
+
     daps = {
       "codelldb",
       "debugpy",
@@ -279,6 +214,72 @@ LangTables = {
   disabled = {},
   merged = {},
 }
+
+-- LangTables.mason.formatters_by_ft = {
+--   ["bash"] = { "shfmt", "beautysh" },
+--   ["cpp"] = { "clangformat" },
+--   ["cmake"] = { "cmakelang", "neocmake" },
+--   ["go"] = { "gofumpt" },
+--
+--   -- ["fish"] = { "beautysh" },
+--   ["gleam"] = { "gleam" },
+--   ["javascript"] = { "biome" },
+--   ["javascriptreact"] = { "biome" },
+--   ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
+--   ["lua"] = { "stylua" },
+--   -- ["luau"] = { "stylua" },
+--   ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+--   -- markdown = { "prettier" },
+--   ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+--   ["ocaml"] = { "ocamlformat" },
+--   ["python"] = function(bufnr)
+--     if require("conform").get_formatter_info("ruff_format", bufnr).available then
+--       return { "ruff_format" }
+--     else
+--       return { "isort", "black" }
+--     end
+--   end,
+--   ["odin"] = { "odinfmt" },
+--   -- ["rust"] = { "rustfmt" },
+--   ["sh"] = { "shfmt" },
+--   ["sql"] = { "sql_formatter" },
+--   ["surql"] = { "sql_formatter" },
+--   ["toml"] = { "taplo" },
+--   ["typescript"] = { "biome" },
+--   ["typescriptreact"] = { "biome" },
+--   ["yaml"] = { "yamlfmt" },
+--   ["zsh"] = { "beautysh" },
+-- }
+
+-- LangTables.mason.linters_by_ft = {
+--   ["bash"] = { "shellcheck" },
+--   ["cmake"] = { "cmakelint" },
+--   ["cpp"] = { "cpplint" },
+--   ["hpp"] = { "cpplint" },
+--   -- ["c"] = { "clang-tidy" },
+--   -- ["h"] = { "clang-tidy" },
+--   -- cs = { "omnisharp" },
+--   ["css"] = { "stylelint" },
+--   ["docker"] = { "hadolint" },
+--   ["javascript"] = { "biomejs" },
+--   ["javascriptreact"] = { "biomejs" },
+--   ["json"] = { "jsonlint" },
+--   ["odin"] = { "ols" },
+--
+--   -- ["lua"] = { "luacheck" },
+--   -- markdown = { "markdownlint-cli2" },
+--   -- powershell = { "powershell_es" },
+--   -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },
+--   -- python = { "ruff", "mypy", "vulture" },
+--   -- ["rust"] = { "rust_analyzer" },
+--   ["python"] = { "ruff" },
+--   ["sh"] = { "shellcheck" },
+--   ["sql"] = { "sqlfluff" },
+--   ["typescript"] = { "biomejs" },
+--   ["typescriptreact"] = { "biomejs" },
+--   ["vim"] = { "vint" },
+--   -- ["yaml"] = { "yamllint" },
+-- }
 
 --- Merges items for a category/subtype, caching the result.
 ---@param category Category

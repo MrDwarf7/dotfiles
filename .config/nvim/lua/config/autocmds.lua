@@ -36,6 +36,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "<filetype>" },
+  callback = function()
+    vim.treesitter.start()
+  end,
+})
+
 -- Is bugging this out and breaking (veryyyyy badly)
 -- NVIM v0.12.0-dev-2717+ga940b77cb2
 --
@@ -94,34 +101,37 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-  callback = function(_)
-    -- try_lint without arguments runs the linters defined in `linters_by_ft`
-    -- for the current filetype
-
-    local lint_ok, err = pcall(require, "lint")
-    if not lint_ok then
-      require("utils").output.warn("Linting failed to run: " .. err)
-      return
-    end
-
-    local lint = require("lint")
-    local linters = require("lang_tables").by_ft("force", "linters", {}) -- or { "" }
-
-    if type(linters) == "nil" then
-      require("utils").output.warn("No linters found for filetype " .. vim.bo.filetype)
-      return
-    end
-
-    lint.linters_by_ft = linters
-    pcall(lint.try_lint)
-    -- lint.try_lint()
-
-    -- You can call `try_lint` with a linter name or a list of names to always
-    -- run specific linters, independent of the `linters_by_ft` configuration
-    -- require("lint").try_lint("cspell")
-  end,
-})
+-- TODO: [lsp_fixes] : probs end up moving this to nvim_lint (properly)
+-- ??????????????????
+--
+-- vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+--   callback = function(_)
+--     -- try_lint without arguments runs the linters defined in `linters_by_ft`
+--     -- for the current filetype
+--
+--     local lint_ok, err = pcall(require, "lint")
+--     if not lint_ok then
+--       require("utils").output.warn("Linting failed to run: " .. err)
+--       return
+--     end
+--
+--     local lint = require("lint")
+--     local linters = require("lang_tables").by_ft("force", "linters", {}) -- or { "" }
+--
+--     if type(linters) == "nil" then
+--       require("utils").output.warn("No linters found for filetype " .. vim.bo.filetype)
+--       return
+--     end
+--
+--     lint.linters_by_ft = linters
+--     pcall(lint.try_lint)
+--     -- lint.try_lint()
+--
+--     -- You can call `try_lint` with a linter name or a list of names to always
+--     -- run specific linters, independent of the `linters_by_ft` configuration
+--     -- require("lint").try_lint("cspell")
+--   end,
+-- })
 
 -- Renaming files inside of Oil uses Snacks to propagate the changes to LSP refs
 vim.api.nvim_create_autocmd("User", {

@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+# Is basically an alias to the actual Tailscale binary,
+# but allows for the use of the Tailscale binary in a more convenient way.
+#
+# Calls it and passess everything through unconditionally
+
+# THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+APP_LOC="/Applications/Tailscale.app/Contents/MacOS"
+APP_LOC_BIN="$APP_LOC/Tailscale"
+
+main() {
+  [[ ! -f "$APP_LOC_BIN" ]] && echo "Tailscale binary not found at $APP_LOC_BIN" && exit 1
+  command "$APP_LOC_BIN" "$@" && return $?
+}
+main "$@"

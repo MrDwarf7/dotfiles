@@ -3,20 +3,18 @@ return {
   ---@type LazyEventSpec|string
   event = { "LspAttach", "BufReadPost" },
   lazy = true,
-  -- lazy = false,
-
+  dependencies = { "mason-org/mason.nvim" },
+  cmd = "COnformInfo",
   keys = {
     {
       "<Leader>lf",
       function()
-        print("conform format")
-        local conform = require("conform")
-        conform.format({
-          -- formatters = { "injected" },
+        require("conform").format({
+          formatters = { "injected" },
           timeout_ms = 3000,
         })
       end,
-      mode = { "n", "v" },
+      mode = { "n", "v", "x" },
       desc = "Format Injected Langs",
     },
   },
@@ -32,9 +30,47 @@ return {
     default_format_opts = {
       timeout_ms = 3000,
       -- async = false,
-      async = true,
+      -- async = true,
+      async = false,
       quiet = false,
       lsp_format = "fallback",
+    },
+
+    -- formatters_by_ft = require("lang_tables").by_ft("force", "formatters", {}),
+    formatters_by_ft = {
+      ["bash"] = { "shfmt", "beautysh" },
+      ["cpp"] = { "clangformat" },
+      ["cmake"] = { "cmakelang", "neocmake" },
+      ["go"] = { "gofumpt" },
+
+      -- ["fish"] = { "beautysh" },
+      ["gleam"] = { "gleam" },
+      ["javascript"] = { "biome" },
+      ["javascriptreact"] = { "biome" },
+      ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
+      ["lua"] = { "stylua" },
+      -- ["luau"] = { "stylua" },
+      ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      -- markdown = { "prettier" },
+      ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      ["ocaml"] = { "ocamlformat" },
+      ["python"] = function(bufnr)
+        if require("conform").get_formatter_info("ruff_format", bufnr).available then
+          return { "ruff_format" }
+        else
+          return { "isort", "black" }
+        end
+      end,
+      ["odin"] = { "odinfmt" },
+      -- ["rust"] = { "rustfmt" },
+      ["sh"] = { "shfmt" },
+      ["sql"] = { "sql_formatter" },
+      ["surql"] = { "sql_formatter" },
+      ["toml"] = { "taplo" },
+      ["typescript"] = { "biome" },
+      ["typescriptreact"] = { "biome" },
+      ["yaml"] = { "yamlfmt" },
+      ["zsh"] = { "beautysh" },
     },
 
     ---@type table<string, conform.FormatterConfigOverride|fun(bufnr: integer):conform.FormatterConfigOverride|nil>
@@ -71,7 +107,6 @@ return {
         inherit = true,
       },
     },
-    formatters_by_ft = require("lang_tables").by_ft("force", "formatters", {}),
     notify_on_error = false,
   }),
 }

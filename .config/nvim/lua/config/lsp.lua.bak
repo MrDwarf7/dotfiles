@@ -211,6 +211,8 @@ local function setup_lsp_binds(binds_type)
   -- })
 end
 
+-- local a = setup_lsp_binds()
+
 local clear_defaults = function()
   for _, bind in ipairs({ "grn", "gra", "gri", "grr", "grt" }) do
     pcall(vim.keymap.del, "n", bind)
@@ -249,18 +251,18 @@ local lsp_attach_autocmd = function(opts, lsp)
 
   -- local config_lsp_groud_id = vim.api.nvim_create_augroup("ConfigLSP", { clear = true })
 
-  local setup_binds = function()
-    if opts.setup_lsp and type(opts.setup_lsp) == "function" then
-      opts.setup_lsp(opts.binds_type)
-      return
-    end
-    if not opts.setup_lsp or opts.setup_lsp == nil then
-      setup_lsp_binds(opts.binds_type)
-      return
-    end
-    -- require("utils").output.warn("opts.setup_lsp is not a function")
-    -- return nil
-  end
+  -- local setup_binds = function()
+  --   if opts.setup_lsp and type(opts.setup_lsp) == "function" then
+  --     opts.setup_lsp(opts.binds_type)
+  --     return
+  --   end
+  --   if not opts.setup_lsp or opts.setup_lsp == nil then
+  --     setup_lsp_binds(opts.binds_type)
+  --     return
+  --   end
+  --   -- require("utils").output.warn("opts.setup_lsp is not a function")
+  --   -- return nil
+  -- end
 
   ---@param client vim.lsp.Client
   local conf_fn = function(client)
@@ -299,7 +301,7 @@ local lsp_attach_autocmd = function(opts, lsp)
 
       -- client.server_capabilities.semanticTokensProvider = nil
 
-      pcall(setup_binds)
+      -- pcall(setup_binds)
 
       -- if not opts.setup_lsp or opts.setup_lsp == nil then
       --   setup_lsp_binds(opts.binds_type)

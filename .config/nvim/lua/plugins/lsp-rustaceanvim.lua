@@ -56,48 +56,54 @@ return {
 
       server = {
         on_attach = function(_, bufnr)
-          local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
-          if not LSP then
-            require("utils").output.warn("LSP config not found")
-            return
-          end
+          -- local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+          -- if not LSP then
+          --   require("utils").output.warn("LSP config not found")
+          --   return
+          -- end
 
           local key_to_action = {
-            ["<Leader>lA"] = "codeAction",
-            ["<Leader>ln"] = "renderDiagnostic",
-            ["]n"] = { "renderDiagnostic", "cycle" },
-            ["[n"] = { "renderDiagnostic", "cycle_prev" },
-            ["<leader>lx"] = "relatedDiagnostics",
-            ["<Leader>dd"] = "debuggables",
-            ["<Leader>dr"] = "runnables",
-            ["<Leader>loc"] = "OpenCargo",
+            -- ["<Leader>lA"] = "codeAction",
+            -- ["<Leader>ln"] = "renderDiagnostic",
+            -- ["]n"] = { "renderDiagnostic", "cycle" },
+            -- ["[n"] = { "renderDiagnostic", "cycle_prev" },
+            -- ["<leader>lx"] = "relatedDiagnostics",
+            -- ["<Leader>dd"] = "debuggables",
+            -- ["<Leader>dr"] = "runnables",
+            -- ["<Leader>loc"] = "OpenCargo",
           }
 
-          for lhs, rust_lsp_cmd in pairs(key_to_action) do
-            local desc = type(rust_lsp_cmd) == "table" and rust_lsp_cmd[1] or rust_lsp_cmd
-            desc = fmt_desc(desc)
-            map_rustaceanvim("n", lhs, { desc = "[RUST] - " .. desc, buffer = bufnr }, rust_lsp_cmd)
-          end
+          -- for lhs, rust_lsp_cmd in pairs(key_to_action) do
+          --   dd(lhs, rust_lsp_cmd)
+          --   local desc = type(rust_lsp_cmd) == "table" and rust_lsp_cmd[1] or rust_lsp_cmd
+          --   desc = fmt_desc(desc)
+          --   map_rustaceanvim("n", lhs, { desc = "[RUST] - " .. desc, buffer = bufnr }, rust_lsp_cmd)
+          -- end
 
-          --           vim.keymap.set("n", "<Leader>lA", function()
-          --             vim.cmd.RustLsp("codeAction")
-          --           end, { desc = "Rust - [A]ction", buffer = bufnr })
+          vim.keymap.set("n", "<Leader>lA", function()
+            vim.cmd.RustLsp("codeAction")
+          end, { desc = "Rust - [A]ction", buffer = bufnr })
           --
-          --           vim.keymap.set("n", "<Leader>ln", function()
-          --             vim.cmd.RustLsp("renderDiagnostic")
-          --           end, { desc = "Rust - in-comp. diag", buffer = bufnr })
+          vim.keymap.set("n", "<Leader>ln", function()
+            vim.cmd.RustLsp("renderDiagnostic")
+          end, { desc = "Rust - in-comp. diag", buffer = bufnr })
+
+          vim.keymap.set("n", "<Leader>lc", function()
+            vim.cmd.RustLsp("OpenCard")
+          end, { desc = "Rust - Open Cargo.toml", buffer = bufnr })
+
           --
-          --           vim.keymap.set("n", "]n", function()
-          --             vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
-          --           end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
+          vim.keymap.set("n", "]n", function()
+            vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
+          end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
+
+          vim.keymap.set("n", "[n", function()
+            vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
+          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
           --
-          --           vim.keymap.set("n", "[n", function()
-          --             vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
-          --           end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
-          --
-          --           vim.keymap.set("n", "<leader>lx", function()
-          --             vim.cmd.RustLsp("relatedDiagnostics")
-          --           end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
+          vim.keymap.set("n", "<leader>lx", function()
+            vim.cmd.RustLsp("relatedDiagnostics")
+          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
           --
           --           -- vim.keymap.set("n", "<Leader>lA", function()
           --           --   -- vim.cmd.RustLsp("codeAction")
@@ -108,13 +114,13 @@ return {
           --           --   vim.cmd.RustLsp("flyCheck")
           --           -- end, { desc = "[c]heck" })
           --
-          --           vim.keymap.set("n", "<Leader>dd", function()
-          --             vim.cmd.RustLsp("debuggables")
-          --           end, { desc = "[d]ebuggables", buffer = bufnr })
+          vim.keymap.set("n", "<Leader>dd", function()
+            vim.cmd.RustLsp("debuggables")
+          end, { desc = "[d]ebuggables", buffer = bufnr })
           --
-          --           vim.keymap.set("n", "<Leader>dr", function()
-          --             vim.cmd.RustLsp("runnables")
-          --           end, { desc = "[r]un" })
+          vim.keymap.set("n", "<Leader>dr", function()
+            vim.cmd.RustLsp("runnables")
+          end, { desc = "[r]un" })
 
           local mds = { "n", "x", "o" }
 
@@ -331,10 +337,10 @@ return {
       },
     },
     config = function(_, opts)
-      local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
-      if not LSP then
-        require("utils").output.warn("LSP config not found")
-      end
+      -- local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+      -- if not LSP then
+      --   require("utils").output.warn("LSP config not found")
+      -- end
 
       vim.g.rustaceanvim = opts
     end,

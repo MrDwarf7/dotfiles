@@ -283,38 +283,38 @@ map("n", "<Leader>q", function()
   -- end
 end, { desc = "Quickfix List" })
 
-map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
-map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
+-- map("n", "[q", vim.cmd.cprev, { desc = "Previous Quickfix" })
+-- map("n", "]q", vim.cmd.cnext, { desc = "Next Quickfix" })
 
 -- diagnostic
-local diagnostic_goto = function(next, severity)
-  return function()
-    vim.diagnostic.jump({
-      count = (next and 1 or -1) * vim.v.count1,
-      severity = severity and vim.diagnostic.severity[severity] or nil,
-      float = true,
-    })
-  end
-end
--- map("n", "<Leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
-map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
-map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
-
-local toggle_inlay_hints = function()
-  if type(vim.lsp.inlay_hint) ~= "nil" then
-    if type(vim.lsp.inlay_hint.is_enabled) == "function" then
-      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-    end
-  end
-end
-map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
-
--- TODO: @move -- likely want to move this later
-map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "LSP Hover" })
+-------- local diagnostic_goto = function(next, severity)
+--------   return function()
+--------     vim.diagnostic.jump({
+--------       count = (next and 1 or -1) * vim.v.count1,
+--------       severity = severity and vim.diagnostic.severity[severity] or nil,
+--------       float = true,
+--------     })
+--------   end
+-------- end
+-------- -- map("n", "<Leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+-------- map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+-------- map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+-------- map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+-------- map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+-------- map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+-------- map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+--------
+-------- local toggle_inlay_hints = function()
+--------   if type(vim.lsp.inlay_hint) ~= "nil" then
+--------     if type(vim.lsp.inlay_hint.is_enabled) == "function" then
+--------       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+--------     end
+--------   end
+-------- end
+-------- map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
+--------
+-------- -- TODO: @move -- likely want to move this later
+-------- map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "LSP Hover" })
 
 -- map("n", "<Leader>lf", function()
 --   if package.loaded["conform"] then
@@ -348,30 +348,30 @@ map("n", "<Leader>bp", "<CMD>bprev<CR>", silent_opts("[p]revious"))
 map("n", "]b", "<CMD>bnext<cr>", { desc = "[n]ext" })
 map("n", "[b", "<CMD>bprevious<cr>", { desc = "[p]revious" })
 
-map("n", "[[", function()
-  -- if the qf list or location list is open, navigate that instead of buffers
-  local ql = require("utils").list.find_qf("q")
-  dd(ql)
-  if #ql > 0 then
-    return vim.cmd.cprev()
-  end
-  local ll = require("utils").list.find_qf("l")
-  if #ll > 0 then
-    return vim.cmd.lprev()
-  end
-end, { desc = "Prev item in LIST" })
-
-map("n", "]]", function()
-  -- if the qf list or location list is open, navigate that instead of buffers
-  local ql = require("utils").list.find_qf("q")
-  if #ql > 0 then
-    return vim.cmd.cnext()
-  end
-  local ll = require("utils").list.find_qf("l")
-  if #ll > 0 then
-    return vim.cmd.lnext()
-  end
-end, { desc = "Next item in LIST" })
+-- map("n", "[[", function()
+--   -- if the qf list or location list is open, navigate that instead of buffers
+--   local ql = require("utils").list.find_qf("q")
+--   dd(ql)
+--   if #ql > 0 then
+--     return vim.cmd.cprev()
+--   end
+--   local ll = require("utils").list.find_qf("l")
+--   if #ll > 0 then
+--     return vim.cmd.lprev()
+--   end
+-- end, { desc = "Prev item in LIST" })
+--
+-- map("n", "]]", function()
+--   -- if the qf list or location list is open, navigate that instead of buffers
+--   local ql = require("utils").list.find_qf("q")
+--   if #ql > 0 then
+--     return vim.cmd.cnext()
+--   end
+--   local ll = require("utils").list.find_qf("l")
+--   if #ll > 0 then
+--     return vim.cmd.lnext()
+--   end
+-- end, { desc = "Next item in LIST" })
 
 map("n", "<Leader>bd", function()
   require("utils.buf").delete()

@@ -1,6 +1,6 @@
 return {
   "windwp/nvim-ts-autotag",
-  dependencies = { "nvim-treesitter/nvim-treesitter", lazy = true },
+  dependencies = { "nvim-treesitter/nvim-treesitter" },
   setup = function(opts) -- -- thanks, I hate it. Just use the `opts` table and keep it compatible instead of moving _AWAY_ from the standard??????????????
     opts = vim.tbl_deep_extend("force", opts, {
       -- Defaults

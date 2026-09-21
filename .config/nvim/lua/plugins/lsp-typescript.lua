@@ -34,7 +34,7 @@ return {
   -- lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-lspconfig",
+    "nvim-lspconfig", -- ----------------- lazy = true
   },
   ft = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
   opts = function(_, opts)

@@ -1,7 +1,8 @@
 -- local vimpack_path = vim.fn.stdpath("data") .. "/site/pack/core/opt"
 -- vim.opt.rtp:prepend(vimpack_path)
 
-vim.g.lsp_binds_type = "builtin"
+---@deprecated kinda depr. for time being
+-- vim.g.lsp_binds_type = "builtin"
 
 require("config.options")
 require("config.keymaps")
@@ -26,6 +27,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     os.exit(1)
   end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 ---@type LazyConfig
@@ -99,10 +101,17 @@ local lazy_opts = {
 ---@type Lazy
 require("lazy").setup("plugins", lazy_opts)
 
-local LSP = require("config.lsp")
+-- HOW CONFIGS ARE MERGED                                                                                 lsp-config-merge
+-- (order is least prio -> most prio)
+-- '*'
+-- $rtp/lsp/<config>.lua
+-- $rtp/after/lsp/<config>.lua
+-- other places
 
-if not LSP then
-  require("utils").output.warn("Failed to set up LSP")
-else
-  LSP.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
-end
+-- local LSP = require("config.lsp")
+--
+-- if not LSP then
+--   require("utils").output.warn("Failed to set up LSP")
+-- else
+--   LSP.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
+-- end

@@ -9,6 +9,9 @@ return {
     library = {
       { path = "LazyVim", words = { "LazyVim" } },
       { path = "lazy.nvim", words = { "Lazy*" } },
+      { path = "snacks.nvim", words = { "Snacks" } },
+      { path = "lazy.nvim", words = { "LazyVim" } },
+      { path = "nvim-lspconfig", words = { "lspconfig.settings" } },
       { path = "$VIMRUNTIME", words = { "vim" } },
       { path = "$VIMRUNTIME/lua", words = { "vim" } },
       { path = "lua", words = { "require", "pcall", "type", "vim" } },

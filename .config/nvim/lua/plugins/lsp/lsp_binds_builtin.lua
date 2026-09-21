@@ -3,7 +3,8 @@
 local B = {}
 
 function B.setup()
-  local map = require("config.keymaps")
+  -- local map = require("config.keymaps")
+  local map = vim.keymap.set
   local tsutils = require("utils.tsutils")
   local handle_builtins = tsutils.handle_builtins
 
@@ -29,15 +30,20 @@ function B.setup()
   map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation }) end,
     { desc = "[G]oto [I]mpl" })
 
-  map("n", "]]", function()
-    local cnext_op = function() vim.cmd("cnext") end
-    tsutils.handle_builtins({ operation = cnext_op })
-  end, { silent = true, desc = "qf next" })
+  -- TODO: [URGENT] : Clean this up - we want to go through a SINGULAR
+  -- system for accessing anything to do with `]]` or `[[`
+  -- !!!!!!!!!!
 
-  map("n", "[[", function()
-    local cprev_op = function() vim.cmd("cprev") end
-    tsutils.handle_builtins({ operation = cprev_op })
-  end, { silent = true, desc = "qf prev" })
+  -- map("n", "]]", function()
+  --   local cnext_op = function() vim.cmd("cnext") end
+  --   tsutils.handle_builtins({ operation = cnext_op })
+  -- end, { silent = true, desc = "qf next" })
+  --
+  -- map("n", "[[", function()
+  --   local cprev_op = function() vim.cmd("cprev") end
+  --   tsutils.handle_builtins({ operation = cprev_op })
+  -- end, { silent = true, desc = "qf prev" })
+
   -- stylua: ignore end
 end
 
