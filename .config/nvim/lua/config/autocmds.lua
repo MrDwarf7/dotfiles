@@ -165,9 +165,17 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     local lcount = vim.api.nvim_buf_line_count(0)
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
-      -- run 'zz' after setting the cursor to center the screen
+      -- Center this window only. feedkeys("zz") lands in whatever is focused
+      -- a moment later, including a Snacks prompt.
+      local win = vim.api.nvim_get_current_win()
+      local buf = vim.api.nvim_get_current_buf()
       vim.schedule(function()
-        vim.api.nvim_feedkeys("zz", "n", false)
+        if not vim.api.nvim_win_is_valid(win) or vim.api.nvim_win_get_buf(win) ~= buf then
+          return
+        end
+        vim.api.nvim_win_call(win, function()
+          vim.cmd("normal! zz")
+        end)
       end)
     end
   end,

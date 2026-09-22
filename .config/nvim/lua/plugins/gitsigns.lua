@@ -1,5 +1,3 @@
-local feedkeys = vim.api.nvim_feedkeys
-
 local hunk_nav_settings = {
   count = 1,
   wrap = true,
@@ -16,7 +14,9 @@ local prev_hunk = function()
     "prev",
     hunk_nav_settings,
     vim.schedule(function()
-      feedkeys("zz", "n", false)
+      if vim.api.nvim_get_mode().mode == "n" and vim.bo.buftype == "" then
+        vim.cmd("normal! zz")
+      end
     end)
   )
 end
@@ -27,7 +27,9 @@ local next_hunk = function()
     "next",
     hunk_nav_settings,
     vim.schedule(function()
-      feedkeys("zz", "n", false)
+      if vim.api.nvim_get_mode().mode == "n" and vim.bo.buftype == "" then
+        vim.cmd("normal! zz")
+      end
     end)
   )
 end

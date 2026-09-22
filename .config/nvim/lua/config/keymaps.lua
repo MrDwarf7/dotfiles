@@ -243,16 +243,17 @@ map({ "n", "x" }, "k", "v:count ? (v:count > 5 ? \"m'\" . v:count : '') . 'k' : 
 
 -- Searching / searching
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true, desc = "Next Search Result" })
+-- n/N follow the search direction, then center (zz) and open folds (zv).
+map("n", "n", "'Nn'[v:searchforward].'zzzv'", { expr = true, silent = true, desc = "Next Search Result" })
 map("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
 map("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next Search Result" })
-map("n", "N", "'nN'[v:searchforward].'zv'", { expr = true, desc = "Prev Search Result" })
+map("n", "N", "'nN'[v:searchforward].'zzzv'", { expr = true, silent = true, desc = "Prev Search Result" })
 map("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 map("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev Search Result" })
 
--- center on next / prev n/N
-map("n", "n", "nzzzv", silent_opts)
-map("n", "N", "Nzzzv", silent_opts)
+-- center on next / prev n/N. Folded into the normal-mode maps above.
+-- map("n", "n", "nzzzv", silent_opts)
+-- map("n", "N", "Nzzzv", silent_opts)
 
 -- Add undo break-points
 map("i", ",", ",<c-g>u")

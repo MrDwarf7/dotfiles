@@ -1,3 +1,5 @@
+-- One of three symbol sidebars (this, Trouble `<Leader>ts`, Snacks picker).
+-- The split is written at the top of lua/plugins/trouble.lua.
 return {
   -- {
   "oskarrrrrrr/symbols.nvim",

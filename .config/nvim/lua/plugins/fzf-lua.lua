@@ -125,8 +125,8 @@ return {
     { "<Leader>fd", function() require("fzf-lua").diagnostics_document() end,                                            desc = "Diag - Document" },
     { "<Leader>fD", function() require("fzf-lua").diagnostics_workspace() end,                                           desc = "Diag - Workspace" },
 
-    { "<Leader>ld", function() require("fzf-lua").diagnostics_workspace() end,                                           desc = "Diag - Workspace" },
-    { "<Leader>lD", function() require("fzf-lua").diagnostics_document() end,                                            desc = "Diag - Document" },
+    { "<Leader>ld", function() require("fzf-lua").diagnostics_document() end,                                            desc = "Diag - Document" },
+    { "<Leader>lD", function() require("fzf-lua").diagnostics_workspace() end,                                           desc = "Diag - Workspace" },
 
     { "<Leader>fM", function() require("fzf-lua").man_pages() end,                                                       desc = "Man Pages" },
     { "<Leader>fh", function() require("fzf-lua").help_tags() end,                                                       desc = "Help Pages" },

@@ -1,5 +1,20 @@
--- TODO: properly configure it (binds etc.)
-
+-- Deferred: these overlap and should be one job each.
+--
+-- quicker.nvim owns the real quickfix and location-list window (`ft=qf`).
+-- Trouble is a separate viewer. It is not a keybind layer on top of quicker.
+-- Its `qflist` and `loclist` modes draw the same lists quicker already shows,
+-- and the `]]` / `[[` binds here fight the qf binds.
+--
+-- Keep Trouble for what is not a quickfix: diagnostics, todos, and maybe
+-- document symbols. Drop the qf/loclist modes when that split is done.
+-- lualine still reads Trouble's document-symbol statusline, so do not
+-- remove the plugin until that call moves.
+--
+-- Symbols are the other copy. `<Leader>ls` is symbols.nvim. `<Leader>ts` is
+-- Trouble's symbols mode. Snacks has a third picker, only on the snacks
+-- binds provider. aerial and outline are already commented out in
+-- lua/plugins/symbols.lua. Pick one sidebar.
+--
 return {
   "folke/trouble.nvim",
   enabled = true,

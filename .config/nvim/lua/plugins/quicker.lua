@@ -1,3 +1,5 @@
+-- Owns the real quickfix window. Trouble's qflist mode is a second viewer
+-- of the same list. The split is written at the top of lua/plugins/trouble.lua.
 return {
   "stevearc/quicker.nvim",
   ft = "qf",

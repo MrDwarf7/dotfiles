@@ -38,14 +38,14 @@ return {
       { "<Leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
       { "<Leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
       -- git
-      { "<Leader>fgf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
+      -- { "<Leader>fgf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
+      { "<Leader>fG", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
       { "<Leader>fgb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
       { "<Leader>fgl", function() Snacks.picker.git_log() end, desc = "Git Log" },
       { "<Leader>fgL", function() Snacks.picker.git_log_line() end, desc = "Git Log Line" },
       { "<Leader>fgs", function() Snacks.picker.git_status() end, desc = "Git Status" },
       { "<Leader>fgS", function() Snacks.picker.git_stash() end, desc = "Git Stash" },
       { "<Leader>fgd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
-      { "<Leader>fgf", function() Snacks.picker.git_log_file() end, desc = "Git Log File" },
       -- Grep
       { "<Leader>/", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
       { "<Leader>fs", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
@@ -66,7 +66,7 @@ return {
 
 
       { "<Leader>fl", function() Snacks.picker.resume() end, desc = "Resume" },
-      { "<Leader>fu", function() Snacks.picker.undo() end, desc = "Undo History" },
+      { "<Leader>U", function() Snacks.picker.undo() end, desc = "Undo History" }, -- undotree is <leader>u  ; so we put snacks as the picker on the capital
       { "<Leader>fU", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
 
       -----------

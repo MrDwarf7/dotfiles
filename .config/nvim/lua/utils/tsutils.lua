@@ -144,6 +144,81 @@ function TsUtils.handle_builtins(opts)
   end
 end
 
+--- Same file and range reported by more than one client is one entry.
+--- A different range stays. That includes a real declaration that is not the same spot.
+---@param items vim.quickfix.entry[]
+---@return vim.quickfix.entry[]
+function TsUtils.unique_locations(items)
+  local seen = {}
+  local out = {}
+  for _, item in ipairs(items) do
+    local key = table.concat({
+      item.filename or "",
+      item.bufnr or 0,
+      item.lnum or 0,
+      item.col or 0,
+      item.end_lnum or 0,
+      item.end_col or 0,
+    }, "\0")
+    if not seen[key] then
+      seen[key] = true
+      out[#out + 1] = item
+    end
+  end
+  return out
+end
+
+--- `on_list` for |vim.lsp.buf.definition()| and the other location requests.
+--- Neovim concatenates every client, then calls this. One result jumps.
+--- More than one opens the quickfix, same as the default handler.
+---@param options vim.lsp.LocationOpts.OnList
+---@param jump? { win: integer, tagname: string, from: integer[] }
+function TsUtils.locations_on_list(options, jump)
+  options.items = TsUtils.unique_locations(options.items or {})
+  if #options.items == 0 then
+    return
+  end
+  if #options.items == 1 then
+    local item = options.items[1]
+    local buf = item.bufnr and item.bufnr > 0 and item.bufnr or vim.fn.bufadd(item.filename)
+    vim.cmd("normal! m'")
+    if jump then
+      vim.fn.settagstack(jump.win, { items = { { tagname = jump.tagname, from = jump.from } } }, "t")
+    end
+    vim.bo[buf].buflisted = true
+    local win = jump and jump.win or vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(win, buf)
+    vim.api.nvim_win_set_cursor(win, { item.lnum, math.max((item.col or 1) - 1, 0) })
+    vim._with({ win = win }, function()
+      vim.cmd("normal! zv")
+    end)
+    return
+  end
+  vim.fn.setqflist({}, " ", options)
+  vim.cmd("botright copen")
+end
+
+--- Wrap a location function so the list is deduped. Captures the tagstack
+--- position now, because the result comes back later.
+---@param fn fun(opts: vim.lsp.LocationOpts)
+---@return fun()
+function TsUtils.location_jump(fn)
+  return function()
+    local from = vim.fn.getpos(".")
+    from[1] = vim.api.nvim_get_current_buf()
+    local jump = {
+      win = vim.api.nvim_get_current_win(),
+      tagname = vim.fn.expand("<cword>"),
+      from = from,
+    }
+    fn({
+      on_list = function(options)
+        TsUtils.locations_on_list(options, jump)
+      end,
+    })
+  end
+end
+
 function TsUtils.setup()
   return TsUtils
 end

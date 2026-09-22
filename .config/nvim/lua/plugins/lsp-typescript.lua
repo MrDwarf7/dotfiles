@@ -1,3 +1,15 @@
+--
+--   typescript-tools is unmaintained (last commit ~Nov 2025) and it only speaks
+--   tsserver.js. TypeScript 7 does not ship that file.
+--
+--   Next time this breaks, do not keep patching it:
+--     TS 4 / 5  -> vtsls. It tracks the VS Code extension and can use the
+--                  workspace TypeScript (`vtsls.autoUseWorkspaceTsdk`).
+--     TS 7      -> `tsc --lsp` (lspconfig name `tsc`). Not vtsls.
+--   One of those per buffer. This plugin, vtsls, and tsc all attach to the
+--   same filetypes, so enabling a second one brings the doubled `gd` list back.
+--
+
 --- TSServer capabilities
 ---@param opts? table
 ---@param capabilities? table
