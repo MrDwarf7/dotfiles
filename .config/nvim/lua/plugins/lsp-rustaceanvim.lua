@@ -16,8 +16,7 @@ end
 local map_rustaceanvim = function(modes, lhs, opts, rust_lsp_cmd)
   ---@cast modes string[]
   modes = type(modes) == "string" and { modes } or modes
-  ---@cast lhs string[]
-  lhs = type(lhs) == "string" and { lhs } or lhs
+  -- lhs has to stay a string. vim.keymap.set rejects a table here.
 
   vim.keymap.set(modes, lhs, function()
     vim.cmd.RustLsp(rust_lsp_cmd)
@@ -62,88 +61,50 @@ return {
           --   return
           -- end
 
+          -- <Leader>la overwrites the global code-action map in rust buffers.
+          -- Subcommand names are the :RustLsp ones (`openCargo`, not `OpenCard`).
+          -- A list value is extra args: { "renderDiagnostic", "cycle" }.
           local key_to_action = {
-            -- ["<Leader>lA"] = "codeAction",
-            -- ["<Leader>ln"] = "renderDiagnostic",
-            -- ["]n"] = { "renderDiagnostic", "cycle" },
-            -- ["[n"] = { "renderDiagnostic", "cycle_prev" },
-            -- ["<leader>lx"] = "relatedDiagnostics",
-            -- ["<Leader>dd"] = "debuggables",
-            -- ["<Leader>dr"] = "runnables",
-            -- ["<Leader>loc"] = "OpenCargo",
+            ["<Leader>la"] = "codeAction",
+            ["<Leader>ln"] = "renderDiagnostic",
+            ["<Leader>lc"] = "openCargo",
+            ["]n"] = { "renderDiagnostic", "cycle" },
+            ["[n"] = { "renderDiagnostic", "cycle_prev" },
+            ["<Leader>lx"] = "relatedDiagnostics",
+            ["<Leader>dd"] = "debuggables",
+            ["<Leader>dr"] = "runnables",
           }
 
-          -- for lhs, rust_lsp_cmd in pairs(key_to_action) do
-          --   dd(lhs, rust_lsp_cmd)
-          --   local desc = type(rust_lsp_cmd) == "table" and rust_lsp_cmd[1] or rust_lsp_cmd
-          --   desc = fmt_desc(desc)
-          --   map_rustaceanvim("n", lhs, { desc = "[RUST] - " .. desc, buffer = bufnr }, rust_lsp_cmd)
-          -- end
+          for lhs, rust_lsp_cmd in pairs(key_to_action) do
+            -- LuaJIT reuses the for-loop local. A callback that closed over
+            -- rust_lsp_cmd directly would run the last action for every key.
+            local action = rust_lsp_cmd
+            local name = type(action) == "table" and action[1] or action
+            map_rustaceanvim("n", lhs, { desc = "[RUST] - " .. fmt_desc(name), buffer = bufnr }, action)
+          end
 
-          vim.keymap.set("n", "<Leader>lA", function()
-            vim.cmd.RustLsp("codeAction")
-          end, { desc = "Rust - [A]ction", buffer = bufnr })
+          -- local mds = { "n", "x", "o" }
+
+          -- vim.keymap.set(mds, "[[", function()
+          --   map_list("prev")
+          -- end, { desc = "Prev item in LIST" })
           --
-          vim.keymap.set("n", "<Leader>ln", function()
-            vim.cmd.RustLsp("renderDiagnostic")
-          end, { desc = "Rust - in-comp. diag", buffer = bufnr })
-
-          vim.keymap.set("n", "<Leader>lc", function()
-            vim.cmd.RustLsp("OpenCard")
-          end, { desc = "Rust - Open Cargo.toml", buffer = bufnr })
-
+          -- vim.keymap.set(mds, "]]", function()
+          --   map_list("next")
+          -- end, { desc = "Prev item in LIST" })
           --
-          vim.keymap.set("n", "]n", function()
-            vim.cmd.RustLsp({ "renderDiagnostic", "cycle" })
-          end, { desc = "Rust - Next comp. diag ", buffer = bufnr })
-
-          vim.keymap.set("n", "[n", function()
-            vim.cmd.RustLsp({ "renderDiagnostic", "cycle_prev" })
-          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
-          --
-          vim.keymap.set("n", "<leader>lx", function()
-            vim.cmd.RustLsp("relatedDiagnostics")
-          end, { desc = "Rust - Prev comp. diag ", buffer = bufnr })
-          --
-          --           -- vim.keymap.set("n", "<Leader>lA", function()
-          --           --   -- vim.cmd.RustLsp("codeAction")
-          --           --   -- vim.cmd("FzfLua lsp_code_actions")
-          --           -- end, { desc = "[a]ction", buffer = bufnr })
-          --
-          --           -- vim.keymap.set("n", "<Leader>lc", function()
-          --           --   vim.cmd.RustLsp("flyCheck")
-          --           -- end, { desc = "[c]heck" })
-          --
-          vim.keymap.set("n", "<Leader>dd", function()
-            vim.cmd.RustLsp("debuggables")
-          end, { desc = "[d]ebuggables", buffer = bufnr })
-          --
-          vim.keymap.set("n", "<Leader>dr", function()
-            vim.cmd.RustLsp("runnables")
-          end, { desc = "[r]un" })
-
-          local mds = { "n", "x", "o" }
-
-          vim.keymap.set(mds, "[[", function()
-            map_list("prev")
-          end, { desc = "Prev item in LIST" })
-
-          vim.keymap.set(mds, "]]", function()
-            map_list("next")
-          end, { desc = "Prev item in LIST" })
-
-          vim.keymap.set(mds, "[[", function()
-            -- if the qf list or location list is open, navigate that instead of buffers
-            local ql = require("utils").list.find_qf("q")
-            dd(ql)
-            if #ql > 0 then
-              return vim.cmd.cprev()
-            end
-            local ll = require("utils").list.find_qf("l")
-            if #ll > 0 then
-              return vim.cmd.lprev()
-            end
-          end, { desc = "Prev item in LIST" })
+          -- vim.keymap.set(mds, "[[", function()
+          --   -- if the qf list or location list is open, navigate that instead of buffers
+          --   local ql = require("utils").list.find_qf("q")
+          --   dd(ql)
+          --   if #ql > 0 then
+          --     return vim.cmd.cprev()
+          --   end
+          --   local ll = require("utils").list.find_qf("l")
+          --   if #ll > 0 then
+          --     return vim.cmd.lprev()
+          --   end
+          -- end, { desc = "Prev item in LIST" })
 
           -- vim.keymap.set(mds, "]]", function()
           --   -- if the qf list or location list is open, navigate that instead of buffers

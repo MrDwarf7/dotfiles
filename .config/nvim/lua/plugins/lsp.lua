@@ -3,6 +3,7 @@
 local installables = require("plugins.lsp.installables")
 
 local get_default_capabilities = function()
+  ---@type lsp.ClientCapabilities
   local capabilities = {
     textDocument = {
       completion = {
@@ -13,7 +14,6 @@ local get_default_capabilities = function()
         lineFoldingOnly = true,
       },
     },
-
     workspace = {
       fileOperations = {
         -- TEST: : might turn these off, idk
@@ -78,6 +78,92 @@ local toggle_inlay_hints = function()
   end
 end
 
+--- Maps that are not a `vim.lsp.Config` field. `vim.lsp.config` will not register these.
+--- Goto maps (`gd`/`gr`/…) stay in the binds provider.
+local set_shared_keys = function()
+  local map = vim.keymap.set
+
+  -- gd / gD / gr / gi / gt live in the binds provider (lsp_binds_builtin and friends).
+
+  map("n", "K", function()
+    return vim.lsp.buf.hover()
+  end, { desc = "Hover" })
+  map("n", "<C-k>", function()
+    return vim.lsp.buf.signature_help()
+  end, { desc = "Signature Help" })
+
+  map({ "n", "x" }, "<Leader>la", vim.lsp.buf.code_action, { desc = "Code Action" })
+  map({ "n", "x" }, "<Leader>lc", vim.lsp.codelens.run, { desc = "Run Codelens" })
+  -- { "<Leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+  map("n", "<Leader>lC", function()
+    vim.lsp.codelens.enable(true, { bufnr = vim.api.nvim_get_current_buf() })
+  end, { desc = "Refresh & Display Codelens" })
+  map("n", "<Leader>lr", vim.lsp.buf.rename, { desc = "Rename" })
+  -- { "<Leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
+  map("n", "<Leader>lh", vim.diagnostic.open_float, { desc = "Float" })
+
+  ------------
+
+  -- >ld and >lD handled by Snacks!
+
+  -- { "<Leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
+
+  -- TODO: [URGENT] : move this away from snacks stuff, and use builtin's that enforce qf/loc list jumps! (or via trouble or quicker or w/e)
+  -- { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
+  -- desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
+  -- { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight",
+  -- desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
+
+  -- { "[[", function()
+  --   -- if the qf list or location list is open, navigate that instead of buffers
+  --   local ql = require("utils").list.find_qf("q")
+  --   -- dd(ql)
+  --   if #ql > 0 then
+  --     return vim.cmd.cprev()
+  --   end
+  --   local ll = require("utils").list.find_qf("l")
+  --   if #ll > 0 then
+  --     return vim.cmd.lprev()
+  --   end
+  -- end, { desc = "Prev item in LIST" }},
+  --
+  -- { "]]", function()
+  --   -- if the qf list or location list is open, navigate that instead of buffers
+  --   local ql = require("utils").list.find_qf("q")
+  --   if #ql > 0 then
+  --     return vim.cmd.cnext()
+  --   end
+  --   local ll = require("utils").list.find_qf("l")
+  --   if #ll > 0 then
+  --     return vim.cmd.lnext()
+  --   end
+  -- end, { desc = "Next item in LIST" }},
+
+  -- { "n", "[q", vim.cmd.cprev,  desc = "Previous Quickfix" },
+  -- { "n", "]q", vim.cmd.cnext,  desc = "Next Quickfix" },
+
+  map("n", "[[", vim.cmd.cprev, { desc = "Previous Quickfix" })
+  map("n", "]]", vim.cmd.cnext, { desc = "Next Quickfix" })
+
+  map("n", "<a-n>", function()
+    Snacks.words.jump(vim.v.count1, true)
+  end, { desc = "Next Reference" })
+  -- has = "documentHighlight", enabled = function() return Snacks.words.is_enabled() end
+  map("n", "<a-p>", function()
+    Snacks.words.jump(-vim.v.count1, true)
+  end, { desc = "Prev Reference" })
+  -- has = "documentHighlight", enabled = function() return Snacks.words.is_enabled() end
+
+  map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
+  map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+  map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
+  map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+  map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
+  map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+
+  map("n", "<Leader>ti", toggle_inlay_hints, { desc = "[T]oggle [I]nlay hints" })
+end
+
 return {
   ---@type PluginSpec
   {
@@ -88,7 +174,11 @@ return {
       { "mason-org/mason-lspconfig.nvim", config = function() end }, -- 'nil' to basically clear opts, kinda
     },
 
-    opts_extend = { "servers.*.keys" },
+    -- Maps have to exist before the first buffer. `config` waits on BufReadPre.
+    init = function()
+      apply_keys(vim.g.lsp_binds_type or "builtin")
+      set_shared_keys()
+    end,
 
     ---@return LSPConfigReturn
     opts = function()
@@ -149,84 +239,6 @@ return {
         servers = {
           ["*"] = {
             capabilities = get_default_capabilities(),
-            -------------- KEYS THAT APPLY TO ALLLLLLLLLLLLLLLLLLLLL LSP SERVERS --------------
-            -- stylua: ignore start
-            keys = {
-              { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-              { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-              { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-              { "gi", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-              { "gt", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-              { "K", function() return vim.lsp.buf.hover() end, desc = "Hover" },
-              { "<C-k>", function() return vim.lsp.buf.signature_help() end, desc = "Signature Help", has = "signatureHelp" },
-
-              { "<Leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "x" }, has = "codeAction" },
-              { "<Leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "x" }, has = "codeLens" },
-              -- { "<Leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
-              { "<Leader>lC", function() vim.lsp.codelens.enable(true, { bufnr = vim.api.nvim_get_current_buf() }) end, { desc = "Refresh & Display Codelens" }},
-              { "<Leader>lr", vim.lsp.buf.rename, desc = "Rename" },
-              -- { "<Leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File", mode ={"n"}, has = { "workspace/didRenameFiles", "workspace/willRenameFiles" } },
-              { "<Leader>lh", vim.diagnostic.open_float, desc = "Float" },
-
-              ------------
-
-              -- >ld and >lD handled by Snacks!
-
-              -- { "<Leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
-
-              -- TODO: [URGENT] : move this away from snacks stuff, and use builtin's that enforce qf/loc list jumps! (or via trouble or quicker or w/e)
-              -- { "]]", function() Snacks.words.jump(vim.v.count1) end, has = "documentHighlight",
-              -- desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
-              -- { "[[", function() Snacks.words.jump(-vim.v.count1) end, has = "documentHighlight",
-              -- desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
-
-              -- { "[[", function()
-                --   -- if the qf list or location list is open, navigate that instead of buffers
-                --   local ql = require("utils").list.find_qf("q")
-                --   -- dd(ql)
-                --   if #ql > 0 then
-                --     return vim.cmd.cprev()
-                --   end
-                --   local ll = require("utils").list.find_qf("l")
-                --   if #ll > 0 then
-                --     return vim.cmd.lprev()
-                --   end
-                -- end, { desc = "Prev item in LIST" }},
-                --
-                -- { "]]", function()
-                  --   -- if the qf list or location list is open, navigate that instead of buffers
-                  --   local ql = require("utils").list.find_qf("q")
-                  --   if #ql > 0 then
-                  --     return vim.cmd.cnext()
-                  --   end
-                  --   local ll = require("utils").list.find_qf("l")
-                  --   if #ll > 0 then
-                  --     return vim.cmd.lnext()
-                  --   end
-                  -- end, { desc = "Next item in LIST" }},
-
-                  -- { "n", "[q", vim.cmd.cprev,  desc = "Previous Quickfix" },
-                  -- { "n", "]q", vim.cmd.cnext,  desc = "Next Quickfix" },
-
-                  { "n", "[[", vim.cmd.cprev, desc = "Previous Quickfix" },
-                  { "n", "]]", vim.cmd.cnext, desc = "Next Quickfix" },
-
-                  { "<a-n>", function() Snacks.words.jump(vim.v.count1, true) end, has = "documentHighlight",
-                  desc = "Next Reference", enabled = function() return Snacks.words.is_enabled() end },
-                  { "<a-p>", function() Snacks.words.jump(-vim.v.count1, true) end, has = "documentHighlight",
-                  desc = "Prev Reference", enabled = function() return Snacks.words.is_enabled() end },
-
-                  { "n", "]d", diagnostic_goto(true), desc = "Next Diagnostic" },
-                  { "n", "[d", diagnostic_goto(false), desc = "Prev Diagnostic" },
-                  { "n", "]e", diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-                  { "n", "[e", diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-                  { "n", "]w", diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-                  { "n", "[w", diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-
-                  { "n", "<Leader>ti", toggle_inlay_hints, desc = "[T]oggle [I]nlay hints" } ,
-
-                },
-            -- stylua: ignore end
           },
 
           -- NOTE: Alternative here is inside of config's `opts`
@@ -270,10 +282,7 @@ return {
       -- TEST: [overlap] : I don't think this is needed when using
       -- mason-tool-installer and delegating everything down to it.
       if opts.servers["*"] then
-        vim.lsp.config("*", opts.servers["*"])
-        if opts.servers["*"].keys then
-          apply_keys(vim.g.lsp_binds_type or "builtin")
-        end
+        vim.lsp.config("*", { capabilities = opts.servers["*"].capabilities })
       end
 
       -- NOTE: technically we should be doing a preload/package check here for `mason-lspconfig.nvim`
@@ -305,17 +314,15 @@ return {
       { "neovim/nvim-lspconfig" }, ------------------ -- lazy = true
     },
     opts = {
+      -- these MUST be actual lspconfig names, not mason (or even mason-lspconfig translated names)!
       automatic_enable = {
-        -- Whitelist variant -- If you populate this -- ONLY those will be auto-enabled!
-
-        unpack(installables.flatten()), --
-
-        -- Blacklist variant-- Or leaave auto as-is, and exclude some
+        -- Blacklist, says 'start every installed server, except these ones'
         exclude = {
-          "c3-lsp",
+          "c3_lsp",
           "rust_analyzer", -- handled `mrcjkb/rustaceanvim`
           "ts_ls", -- typescript-language-server, handled by `pmizio/typescript-tools.nvim`
-          "tsserver", -- handled by `pmizio/typescript-tools.nvim`
+          "tsc", -- TS 7 `tsc --lsp`. Not the tsserver typescript-tools drives. Doubles `gd`.
+          "biome", -- installed for format/lint not started as LSP
         },
       },
     },

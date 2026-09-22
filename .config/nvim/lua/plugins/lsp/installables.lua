@@ -89,7 +89,8 @@ M = {
     "qmlls",
     "tailwindcss",
     "tinymist",
-    "ts_ls", -- Want it _installed_ but nvim-lspconfig should IGNORE it.
+    "ts_ls", -- Want it _installed_ only
+    "tsc",
     "ty",
     "vimls",
     "vue-language-server",

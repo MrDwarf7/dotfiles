@@ -36,10 +36,11 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Regex syntax is disabled, and nvim-treesitter does not start highlighting
+-- on its own. A filetype with no parser is normal.
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "<filetype>" },
-  callback = function()
-    vim.treesitter.start()
+  callback = function(ctx)
+    pcall(vim.treesitter.start, ctx.buf)
   end,
 })
 

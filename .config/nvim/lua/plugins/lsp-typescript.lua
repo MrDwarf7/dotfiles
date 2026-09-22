@@ -40,6 +40,9 @@ return {
   opts = function(_, opts)
     return vim.tbl_deep_extend("force", opts or {}, {
       settings = {
+        -- Default true starts a second tsserver and sends hover/definition to the
+        -- other one, which answers quickinfo with nothing ("No information available").
+        separate_diagnostic_server = false,
         capabilities = tsserv_cap(opts),
         -- capabilities,
         root_dir = {

@@ -9,26 +9,28 @@ function B.setup()
   local handle_builtins = tsutils.handle_builtins
 
   -- stylua: ignore start
+  -- on_list is the supported hook. Neovim has already merged every client.
+  -- unique_locations drops the same file+range. It does not drop a different declaration.
+  local jump = tsutils.location_jump
   -- map("n", "gd", function() handle_builtins({ method = "textDocument/definition" }) end,
-  map("n", "gd", function() handle_builtins({ operation = vim.lsp.buf.definition }) end,
-    { desc = "[G]oto [d]efinition" })
+  map("n", "gd", jump(vim.lsp.buf.definition), { desc = "[G]oto [d]efinition" })
 
   -- map("n", "gD", function() handle_builtins({ method = "textDocument/declaration" }) end,
-  map("n", "gD", function() handle_builtins({ operation = vim.lsp.buf.declaration }) end,
-    { desc = "[G]oto [D]eclaration" })
+  map("n", "gD", jump(vim.lsp.buf.declaration), { desc = "[G]oto [D]eclaration" })
 
   -- map("n", "gr", function() handle_builtins({ method = "textDocument/references" }) end,
-  map("n", "gr", function() handle_builtins({ operation = vim.lsp.buf.references }) end,
-    { desc = "[G]oto [r]eferences" })
+  map("n", "gr", function()
+    vim.lsp.buf.references(nil, {
+      on_list = function(options)
+        tsutils.locations_on_list(options)
+      end,
+    })
+  end, { desc = "[G]oto [r]eferences" })
 
   -- map("n", "gt", function() handle_builtins({ method = "textDocument/typeDefinition" }) end,
-  map("n", "gt", function()
-      handle_builtins({ operation = vim.lsp.buf.type_definition })
-    end,
-    { desc = "[G]oto [t]ype Definition" })
+  map("n", "gt", jump(vim.lsp.buf.type_definition), { desc = "[G]oto [t]ype Definition" })
 
-  map("n", "gi", function() handle_builtins({ operation = vim.lsp.buf.implementation }) end,
-    { desc = "[G]oto [I]mpl" })
+  map("n", "gi", jump(vim.lsp.buf.implementation), { desc = "[G]oto [I]mpl" })
 
   -- TODO: [URGENT] : Clean this up - we want to go through a SINGULAR
   -- system for accessing anything to do with `]]` or `[[`
