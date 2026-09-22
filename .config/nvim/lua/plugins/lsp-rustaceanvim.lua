@@ -1,3 +1,8 @@
+-- $VIMRUNTIME/ftplugin/rust.vim maps buffer-local [[ and ]] to rust#Jump.
+-- Buffer maps beat the global qf ones, and that ftplugin runs on FileType,
+-- after a plugin on_attach. This is the switch that file checks.
+vim.g.no_rust_maps = 1
+
 local fmt_desc = function(desc)
   desc = type(desc) == "table" and desc[1] or desc
   ---@cast desc string
