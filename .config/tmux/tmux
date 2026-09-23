@@ -101,6 +101,11 @@ set -g clock-mode-style 12        # whether you want a 12 or 24 hour clock
 set -g extended-keys on
 set -g extended-keys-format csi-u
 
+# Options are: 
+# default | blinking-block | block | blinking-underline | underline | blinking-bar | bar
+# set -g cursor-style default
+set -g cursor-style blinking-block
+
 ###########
 ## Binds ##
 ###########
