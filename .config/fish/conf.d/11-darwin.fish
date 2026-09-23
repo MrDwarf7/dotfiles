@@ -20,3 +20,9 @@ end
 
 set -gx --path DOCKER_BIN $HOME/.docker/bin
 fish_add_path --prepend $DOCKER_BIN
+
+set -gx --path USR_LOCAL_BIN /usr/local/bin
+fish_add_path --prepend $USR_LOCAL_BIN
+
+set -gx --path KIRO_SHELL_INTEGRATION_PATH (kiro --locate-shell-integration-path fish)
+fish_add_path --prepend $KIRO_SHELL_INTEGRATION_PATH
