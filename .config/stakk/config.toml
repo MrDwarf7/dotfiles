@@ -23,14 +23,11 @@ pr_mode = "draft"
 template_path = "/Users/dwarf/.config/stakk/templates/loke.md.jinja"
 
 # Where the stack overview lives: "comment", "body", "none", "ignore",
-# "auto-comment" (default) or "auto-body". "none" writes nothing and
-# removes existing stack comments and body fences; "ignore" writes
-# nothing and touches nothing. The auto modes behave like "none" on
-# runs where a native stack is in effect and like "comment"/"body"
-# otherwise, so the default equals "comment" while native_stacks is
-# "ignore". Details: stakk docs template
-# stack_placement = "body"
-# stack_placement = "auto-body" # NOTE: degrades to "none" (writes nothing) once native_stacks actually registers — don't re-enable while native_stacks="on" without re-reading stakk docs template
+# "auto-comment" (default) or "auto-body".
+# MUST be plain "body" (not auto-body) while native_stacks is on/auto:
+# auto-* resolves to "none" once a native stack registers, which deletes
+# stakk body fences/comments and skips the template entirely.
+# "body" writes STAKK_BODY_* fences only — no PR comments.
 stack_placement = "body"
 
 # Register stacks with GitHub's native stacked pull requests (public
