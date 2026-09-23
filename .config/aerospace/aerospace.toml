@@ -1,4 +1,4 @@
-# Place a copy of this config to ~/.aerospace.toml
+# Place a copy of this config to ~/.aerospace.toml 
 # After that, you can edit ~/.aerospace.toml to your liking
 
 # Config version for compatibility and deprecations
@@ -10,6 +10,33 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
   # 'exec-and-forget borders', ## Will auto source $XDG_CONFIG_HOME/borders/bordersrc
+]
+
+# 1606  | com.apple.finder                 | Finder
+# 22222 | com.vorssaint.utils              | Vorssaint
+# 1080  | com.apple.notificationcenterui   | Notification Centre
+# 95799 | com.apple.coreservices.uiagent   | CoreServicesUIAgent
+# 27282 | com.apple.UserNotificationCenter | UserNotificationCenter
+# 17765 | com.apple.CoreLocationAgent      | CoreLocationAgent
+
+# 40903 | com.google.chrome.for.testing    | Google Chrome for Testing
+# 13756 | com.mitchellh.ghostty            | Ghostty
+
+# 1 | 1599  | com.vivaldi.Vivaldi              | Vivaldi
+
+# 7 | 27110 | com.electron.dockerdesktop       | Docker Desktop
+# 8 | 41219 | com.spotify.client               | Spotify
+# 9 | 7853  | com.tinyspeck.slackmacgap        | Slack
+
+on-window-detected = [
+  # BROWSERS
+  { if = 'test %{app-bundle-id} = com.vivaldi.Vivaldi || test %{app-bundle-id} = com.google.chrome.for.testing', run = 'move-node-to-workspace 1' },
+  # Docker
+  { if = 'test %{app-bundle-id} = com.electron.dockerdesktop', run = 'move-node-to-workspace 7' },
+  # MUSIC
+  { if = 'test %{app-bundle-id} = com.spotify.client', run = 'move-node-to-workspace 8' },
+  # (PRIV_)COMMS
+  { if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap', run = 'move-node-to-workspace 9' },
 ]
 
 # Start AeroSpace at login
@@ -116,6 +143,7 @@ gaps.outer.bottom = 2
 9 = ['secondary', 'main']
 0 = ['secondary', 'main']
 
+
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
@@ -151,6 +179,10 @@ cmd-q = 'close'
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-slash = 'layout tiles horizontal vertical'
 cmd-comma = 'layout accordion horizontal vertical'
+
+# Technically speaaking the `automatically-unhide-macos-hidden-apps` setting turns this off already, but...
+# cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 # Worth noting here there is a `--ignore-floating` option
