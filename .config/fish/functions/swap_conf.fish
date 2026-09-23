@@ -5,23 +5,31 @@
 # mv ~/.config/$target/ ~/.config/$target-bak &&
 # ln -s ~/dotfiles/.config/$target ~/.config/
 
-function swap_conf --description "Swap a config file, using the first argument as the 'target'"
-    set target $argv[1]
+function swap_conf --argument-names target --description "Swap a config file, using the first argument as the 'target'"
     # Sanatize the path's trailing slash, removing it
     set target (echo $target | sed 's/\/$//') || return 1
 
-    set config_path $HOME/.config
-    set backup_path $config_path/$target-bak
+    set xdg_cfg_home (set -q XDG_CONFIG_HOME; and echo $XDG_CONFIG_HOME; or echo $HOME/.config) #
+    set backup_path $xdg_cfg_home/$target-bak
 
-    if test -e "$DOT_CONFIG/"
-        command cp -r "$config_path/$target/" "$DOT_CONFIG/"
-    else
-        echo "One of the two paths don't exist: '$config_path/$target/' or '$DOT_CONFIG/'"
-        exit 1
+    set -q DOT_CONFIG; or set DOT_CONFIG $HOME/dotfiles/.config
+
+    set -l current_path $xdg_cfg_home/$target
+    set -l end_result $DOT_CONFIG/$target
+
+    # Check if it already exists, and the one in $HOME/.config/<FOO> is already a sym
+    if test -e "$end_result" -a -L "$current_path"
+        echo "The target '$target' is already linked to the dotfiles config directory."
+        return 1
     end
-    command mv "$config_path/$target/" "$backup_path"
-    command ln -s "$DOT_CONFIG/$target" "$config_path/"
 
-    echo "Backed up and sym-linked '$config_path/$target' to '$backup_path'"
+    # preserve the original somehow FIRST
+    command cp -r "$current_path" "$backup_path"; and command mv "$current_path" "$end_result"; or begin
+        colorize red "Error: Failed to copy or move the original config directory. Aborting."
+        return 1
+    end
+    command ln -s "$end_result" "$current_path"
+
     return 0
+
 end

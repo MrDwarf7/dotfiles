@@ -1,4 +1,6 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
 #!/usr/bin/env fish
+#
 
 #Changes for xdg dir when using fish
 # must be done via one of the dirs listed in
