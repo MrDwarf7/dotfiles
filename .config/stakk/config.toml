@@ -1,0 +1,74 @@
+# stakk.toml — every field, with its default
+
+# Git remote to push to (default: "origin")
+remote = "origin"
+
+# Which forge the remote is on: "github" or "forgejo" (default: unset —
+# the remote's host decides, see "Which forge" below). Set it to skip
+# that lookup.
+## forge = "forgejo"
+
+# Hosts and their forges, for GitHub Enterprise Server and self-hosted
+# Forgejo (default: none; github.com and codeberg.org are built in).
+# Keep the port of an http(s) remote, so "localhost:3000" works.
+hosts = { "ghe.example.com" = "github", "git.example.com" = "forgejo" }
+
+# "regular" (default) or "draft"
+# pr_mode = "regular"
+pr_mode = "draft"
+
+# Custom minijinja template for stack comments (default: built-in).
+# Reads any path — see the trust note above.
+## template_path = "/path/to/my-template.md.jinja"
+template_path = "/Users/dwarf/.config/stakk/templates/loke.md.jinja"
+
+# Where the stack overview lives: "comment", "body", "none", "ignore",
+# "auto-comment" (default) or "auto-body". "none" writes nothing and
+# removes existing stack comments and body fences; "ignore" writes
+# nothing and touches nothing. The auto modes behave like "none" on
+# runs where a native stack is in effect and like "comment"/"body"
+# otherwise, so the default equals "comment" while native_stacks is
+# "ignore". Details: stakk docs template
+# stack_placement = "body"
+# stack_placement = "auto-body" # NOTE: degrades to "none" (writes nothing) once native_stacks actually registers — don't re-enable while native_stacks="on" without re-reading stakk docs template
+stack_placement = "body"
+
+# Register stacks with GitHub's native stacked pull requests (public
+# preview): "on" (fail where unavailable), "auto" (register where
+# available, skip silently where not), "none" (register nothing and
+# dissolve standing server-side stacks) or "ignore" (default; never
+# touch the stack API). The default is "ignore" while the feature is a
+# public preview and may become "auto" in a minor release once it
+# leaves it — the one default exempt from the stability contract.
+# A single-PR submission is not a stack and skips the registration;
+# "none" retires its stacks anyway.
+# native_stacks = "auto"
+native_stacks = "on"
+
+# Prefix for auto-generated bookmark names (default: none)
+## auto_prefix = "gb-"
+
+# Revset for discovering bookmarks
+# (default: "mine() ~ trunk() ~ immutable()")
+# Stale untracked remote bookmarks can pin commits immutable; clean
+# them up with `jj bookmark forget --include-remotes 'glob:<pattern>'`
+# or drop the `~ immutable()` term for one run.
+bookmarks_revset = "mine() ~ trunk() ~ immutable()"
+
+# Revset for discovering unbookmarked heads
+# (default: "heads((mine() ~ empty() ~ immutable()) & trunk()..)")
+heads_revset = "heads((mine() ~ empty() ~ immutable()) & trunk()..)"
+
+# Update existing PRs from commits: "none" (default), "title", "body" or "all"
+sync_pr_content = "none"
+
+# Commit trailers in PR bodies: "keep" (default) or "strip"
+trailers = "strip"
+
+# Shell command for custom bookmark names — see the trust note above
+## bookmark_command = "my-bookmark-namer"
+
+# Merge with the user config (default: true). Only meaningful in a
+# repo config; false makes the repo file standalone, for team-enforced
+# settings.
+inherit = true

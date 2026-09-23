@@ -1,0 +1,5 @@
+## Related PRs
+{% for entry in stack | reverse -%}
+- {{ entry.pr_url }}{% if entry.is_leaf %} (top of stack){% endif %}{% if entry.is_current %} <-----{% endif %}
+{% endfor -%}
+- `{{ default_branch }}`
