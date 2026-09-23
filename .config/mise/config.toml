@@ -29,6 +29,7 @@ golangci-lint = "latest"
 air = "latest"           # Go live reload
 prettier = "latest"
 direnv = "latest"
+"github:glennib/stakk" = "latest"
 
 [tools."npm:typescript"]
 version = "latest"
