@@ -67,8 +67,6 @@ alias aa jj
 # alias au jjui
 # alias au lza ## no longer needed -> au is now default
 
-alias ghd gh-dash
-
 alias at just
 alias b bat
 alias c cat
