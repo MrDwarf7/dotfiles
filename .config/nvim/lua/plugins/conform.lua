@@ -50,9 +50,11 @@ return {
       ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
       ["lua"] = { "stylua" },
       -- ["luau"] = { "stylua" },
-      ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      -- ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      ["markdown.mdx"] = { "prettier", "markdownlint-cli2" },
       -- markdown = { "prettier" },
-      ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      -- ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
+      ["markdown"] = { "prettier", "markdownlint-cli2" },
       ["ocaml"] = { "ocamlformat" },
       ["python"] = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then

@@ -96,6 +96,8 @@ M = {
     "vue-language-server",
     "yamlls",
     "zls",
+    ---@see DOCS: https://github.com/Urigo/graphql-cli
+    "graphql",
 
     -- "bacon_ls",
     -- "basedpyright",
