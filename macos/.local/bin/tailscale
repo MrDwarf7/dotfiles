@@ -5,6 +5,12 @@
 #
 # Calls it and passess everything through unconditionally
 
+# Official desktop app can generate a `/usr/local/bin/tailscale` file as well which is just:
+# ```
+#  # #!/bin/sh
+#  # exec /Applications/Tailscale.app/Contents/MacOS/Tailscale "$@"
+# ```
+
 # THIS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 APP_LOC="/Applications/Tailscale.app/Contents/MacOS"
