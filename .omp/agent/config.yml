@@ -1,9 +1,11 @@
 modelRoles:
-  advisor: opencode-zen/nemotron-3.5-lightning-free
-  smol: opencode-zen/laguna-s-2.1-free
-  default: anthropic/claude-opus-5-5:high
-  task: anthropic/claude-haiku-4-5-20251001
-  tiny: openai/gpt-6-luna
+  advisor: xai-oauth/grok-4.7
+  smol: opencode-zen/space-bunny-free
+  web: anthropic/claude-sonnet-5
+  task: anthropic/claude-sonnet-5
+  tiny: anthropic/claude-haiku-4-5
+  commit: xai-oauth/grok-4.5
+  default: anthropic/claude-opus-5-5
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -65,6 +67,8 @@ todo:
 task:
   eager: preferred
   enableLsp: true
+  enableEffort: true
+  maxRecursionDepth: 3
 emojiAutocomplete: false
 skills:
   enableAgentsUser: false
@@ -76,6 +80,19 @@ skills:
   enablePiProject: true
 composer:
   shape: box
+  defaultThinkingLevel: auto
+  extendedContext: false
+  hideThinkingBlock: false
 defaultThinkingLevel: auto
-extendedContext: false
-hideThinkingBlock: false
+browser:
+  headless: false
+dev:
+  autoqaConsent: granted
+autolearn:
+  enabled: true
+retry:
+  waitForUsageReset: false
+spelling:
+  autocomplete: smollm
+power:
+  sleepPrevention: system
