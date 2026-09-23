@@ -39,6 +39,13 @@ function ssh-picker --description "fzf SSH host picker (port of Cleboost's ssh-m
         set -gx SSH_PICKER_IGNORE_RE "(aur.archlinux|codeberg|ssh.gitlab|gitlab|github.com)"
     end
 
+    set dependencies "fzf ssh grep sed tac"
+
+    set -l missing (99-check_dependencies_names false "$dependencies") ## should return something like "1 5" if fzf and tac are missing etc.
+    test -n "$missing"; and begin
+        colorize red "Error: Missing dependencies. Please install the following packages:\n$__cfg_TAB- $missing\n"; and return 1
+    end
+
     # Pull host entries out of ~/.ssh/config (skip wildcards / patterns).
     # The list is reversed so the most recently added hosts show first; the
     # manual-entry option below is prepended on top regardless.
