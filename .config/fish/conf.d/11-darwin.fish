@@ -18,6 +18,8 @@ end
 30-export_as_env_var brew PKG_MANAGER_INSTALL_FLAGS install
 30-export_as_env_var brew PKG_MANAGER_INSTALL_CALLABLE "brew install"
 
+30-export_as_env_var stakk STAKK_CONFIG "$HOME/.config/stakk/config.toml"
+
 set -gx --path DOCKER_BIN $HOME/.docker/bin
 fish_add_path --prepend $DOCKER_BIN
 

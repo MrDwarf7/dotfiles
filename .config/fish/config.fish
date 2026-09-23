@@ -1,4 +1,3 @@
-# The following lines were added by Docker Desktop to add commands to your PATH.
 #!/usr/bin/env fish
 #
 
