@@ -574,7 +574,8 @@ ts = ['tag', 'set']
 g = ["git"]
 
 # pull
-gf = ['git', 'fetch', '--all-remotes']
+# gf = ['git', 'fetch', '--all-remotes']
+gf = ['git', 'fetch']
 gfa = ['util', 'exec', '--', 'bash', '-c', 'jj gf && jj rbt']
 gfaa = ['util', 'exec', '--', 'bash', '-c', 'jj gf && jj rbta']
 gfw = ['util', 'exec', '--', 'bash', '-c', 'gh pr checks --watch $0 && jj fl']

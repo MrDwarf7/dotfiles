@@ -176,4 +176,3 @@ batch_size = 50
 #   "bash",
 #   "-c",
 #   "jj ci",
-# ], show = "interactive" }
