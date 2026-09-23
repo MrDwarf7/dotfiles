@@ -26,14 +26,18 @@ mr-boxington = "latest"
 ## NPM / Node.js / JavaScript/TypeScript Tools
 
 golangci-lint = "latest"
-air = "latest"           # Go live reload
+air = "latest"                    # Go live reload
 prettier = "latest"
 direnv = "latest"
 "github:glennib/stakk" = "latest"
+taplo = "latest"
+markdownlint-cli2 = "latest"
 
 [tools."npm:typescript"]
 version = "latest"
 
+[tools."npm:mitata"]
+version = "latest"
 
 ####################################################################################################
 

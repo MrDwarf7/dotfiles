@@ -31,7 +31,8 @@ comment_types = [
 ]
 
 [forge]
-comment_type_prefix = true
+# comment_type_prefix = true
+comment_type_prefix = false
 
 [export]
 intro = "I reviewed this code and have some comments. Please see below for my feedback."
