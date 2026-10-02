@@ -45,7 +45,6 @@ app-notifications = no-clipboard-copy
 # background-blur = 10
 # background-blur = 35
 
-# background-opacity = 0.50
 # window-decoration = none
 
 # bold-is-bright = false
