@@ -221,7 +221,7 @@ duplicate_description = '''
 'until_bookmark(to)' = 'heads(::to & bookmarks())'
 'branch(to)' = 'heads((::to | to::) & ~private())'
 'branch_bookmark(to)' = 'heads((::to | to::) & bookmarks())'
-'stack(to)' = 'ancestors(reachable(to, mutable() & ~blacklist()), 2)'
+'stack(to)' = 'ancestors(reachable(to, mutable() & ~blacklist()), 8)'
 'user(x)' = 'author(x) | committer(x)'
 'default_set(num_back)' = '(present(@) | ancestors(immutable_heads().., num_back) | present(trunk())) & ~blacklist()'
 
@@ -320,9 +320,14 @@ lp = ["log", "-r", "private() & ~stash()"]
 lg = ["log", "-r", "all()"]
 
 
+# Closer to actual defaults / builtin_log
 default = ["util", "exec", "--", "bash", "-c", """
-jj log -n 10 --no-pager -r "stack(@) | present(trunk())"
+jj log --limit 10 --no-pager -r "default_set(4)"
 """, ""]
+
+# default = ["util", "exec", "--", "bash", "-c", """
+# jj log --limit 10 --no-pager -r "stack(@) | present(trunk())"
+# """, ""]
 
 # init
 i = ['git', 'init']

@@ -26,12 +26,19 @@ mr-boxington = "latest"
 ## NPM / Node.js / JavaScript/TypeScript Tools
 
 golangci-lint = "latest"
-air = "latest"                    # Go live reload
+
+air = "latest" # Go live reload
+
 prettier = "latest"
+
 direnv = "latest"
+
 "github:glennib/stakk" = "latest"
+
 taplo = "latest"
+
 markdownlint-cli2 = "latest"
+
 "npm:codebase-context" = "2.2.0"
 
 [tools."npm:typescript"]
@@ -63,6 +70,14 @@ version = "latest"
 version = "latest"
 
 [tools."cargo:cargo-llvm-cov"]
+version = "latest"
+
+
+# [tools."cargo:markdown-oxide"]
+# version = "latest"
+
+# Fast Markdown linter and formatter. (also installed via Mason for nvim)
+[tools."cargo:rumdl"]
 version = "latest"
 
 

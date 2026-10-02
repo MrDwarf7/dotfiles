@@ -51,10 +51,16 @@ return {
       ["lua"] = { "stylua" },
       -- ["luau"] = { "stylua" },
       -- ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      ["markdown.mdx"] = { "prettier", "markdownlint-cli2" },
+      -- ["markdown.mdx"] = { "prettier", "markdownlint-cli2" },
+      ["markdown.mdx"] = { "rumdl", "markdownlint-cli2" },
       -- markdown = { "prettier" },
       -- ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      ["markdown"] = { "prettier", "markdownlint-cli2" },
+      -- ["markdown"] = { "prettier", "markdownlint-cli2" },
+
+      ["markdown"] = { "rumdl", "markdownlint-cli2" },
+      -- ["markdown"] = { "rumdl", "markdownlint-cli2" },
+      -- ["markdown"] = { "rumdl", "markdownlint-cli2", "prettier" },
+
       ["ocaml"] = { "ocamlformat" },
       ["python"] = function(bufnr)
         if require("conform").get_formatter_info("ruff_format", bufnr).available then

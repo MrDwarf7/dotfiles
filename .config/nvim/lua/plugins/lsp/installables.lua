@@ -19,6 +19,7 @@ local M = {}
 M = {
   --
   formatters = {
+
     "beautysh",
     "black",
     "cbfmt",
@@ -32,12 +33,14 @@ M = {
     "mdslw",
     "ols", -- Odin
     "prettier",
+    "rumdl",
     "shfmt",
     "sql-formatter",
     "stylua",
     "taplo",
     "typstyle",
     "yamlfmt",
+
     -- "csharpier",
   },
 
@@ -53,6 +56,7 @@ M = {
     "markdownlint-cli2",
     "mypy",
     "ruff",
+    "rumdl",
     "shellcheck",
     "sqlfluff",
     "ts-standard",
@@ -76,6 +80,7 @@ M = {
     "fish_lsp",
     "gh_actions_ls",
     "gopls",
+    "graphql", ---@see DOCS: https://github.com/Urigo/graphql-cli
     "html",
     "hyprls",
     "jsonls",
@@ -87,6 +92,7 @@ M = {
     "ols",
     "prismals",
     "qmlls",
+    "rumdl",
     "tailwindcss",
     "tinymist",
     "ts_ls", -- Want it _installed_ only
@@ -96,8 +102,6 @@ M = {
     "vue-language-server",
     "yamlls",
     "zls",
-    ---@see DOCS: https://github.com/Urigo/graphql-cli
-    "graphql",
 
     -- "bacon_ls",
     -- "basedpyright",
