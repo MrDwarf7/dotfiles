@@ -16,6 +16,8 @@ alias cf "cd ~/dotfiles/.config/fish || printf 'Failed to cd into ~/dotfiles/.co
 #### <nvim><fish>
 alias vf "nvim ~/dotfiles/.config/fish || printf 'Failed to open ~/dotfiles/.config/fish in nvim\n'"
 
+alias v. "nvim ."
+
 #### <cd><hermes>
 alias ch "cd ~/.hermes/ || printf 'Failed to cd into ~/.hermes/\n'"
 # alias vherm # now handled by function!
