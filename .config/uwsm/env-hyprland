@@ -42,5 +42,16 @@
 ##
 # export AQ_DRM_DEVICES="/dev/dri/card1:/dev/dri/card0"
 
+# nvidia-drm fbdev=0 leaves simpledrm (EFI framebuffer) registered as a DRM
+# card; aquamarine then picks it as primary and renders nothing (pink screen).
+# Resolve the NVIDIA card from its fixed PCI path so card renumbering can't break this.
+export AQ_DRM_DEVICES="$(readlink -f /dev/dri/by-path/pci-0000:01:00.0-card)"
+
+# NVIDIA 615.71.09 DP-wake deadlock (open-gpu-kernel-modules #1371): DDC/CI traffic on the
+# NVIDIA I2C adapter (/dev/i2c-5) during a DisplayPort re-probe is a confirmed trigger.
+# DMS polls DDC and rescans on every udev hotplug. Disables DMS's DDC brightness control.
+export DMS_NO_DDC=1
+
+
 export XDG_CURRENT_DESKTOP=Hyprland
 export XDG_SESSION_DESKTOP=Hyprland

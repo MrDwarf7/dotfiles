@@ -62,8 +62,8 @@ hl.bind( "CTRL + XF86AudioLowerVolume", dms.invoke_ipc_call("mpris decrement 5")
 hl.bind("XF86AudioMute", dms.invoke_ipc_call("audio mute"), { locked = true })
 hl.bind("XF86AudioMicMute", dms.invoke_ipc_call("audio micmute"), { locked = true })
 
-hl.bind( "XF86MonBrightnessUp", dms.invoke_ipc_call('brightness increment 5 ""'), { locked = true, repeating = true })
-hl.bind( "XF86MonBrightnessDown", dms.invoke_ipc_call('brightness decrement 5 ""'), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessUp", dms.invoke_ipc_call('brightness increment 5 ""'), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", dms.invoke_ipc_call('brightness decrement 5 ""'), { locked = true, repeating = true })
 -- stylua: ignore end
 
 hl.bind("XF86AudioNext", dms.invoke_ipc_call("mpris next"), { locked = true })

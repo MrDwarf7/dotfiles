@@ -90,6 +90,7 @@ m.decoration = {
   border_part_of_window = true,
 }
 
+---@type HL.ConfigOpt.Decoration.Blur
 m.decoration.blur = {
   enabled = true,
   -- Size of each surface fragment (high values can cause a sort of 'kaleidoscope' effect)
@@ -98,7 +99,7 @@ m.decoration.blur = {
   passes = 4, -- default 1, previous was 5
   new_optimizations = true,
 
-  ignore_opacity = true,
+  ignore_opacity = false,
   xray = false,
 
   -- noise = 0.0117
@@ -130,9 +131,10 @@ m.decoration.blur = {
   -- vibrancy_darkness = 0.3
 }
 
+---@type HL.ConfigOpt.Decoration.Shadow
 m.decoration.shadow = {
   enabled = true,
-  -- range = 4
+  -- range = 4,
   range = 25,
   render_power = 3,
   offset = { 0, 0 },
@@ -150,19 +152,22 @@ m.decoration.shadow = {
   -- scale = 1.5
 }
 
+---@type HL.ConfigOpt.Decoration.Glow
 m.decoration.glow = {
-  enabled = true,
+  enabled = false,
   range = 2,
   render_power = 3,
   -- color = 0xee1a1a1a
   -- color_inactive = 0
 }
 
+---@type HL.ConfigOpt.Decoration.MotionBlur
 m.decoration.motion_blur = {
   enabled = false,
   samples = 24, -- default: 7
 }
 
+---@type HL.ConfigOpt.Decoration.Wobble
 m.decoration.wobble = {
   enabled = false,
   mesh = 32, -- default: 12 :: [2 - 32]

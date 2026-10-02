@@ -198,6 +198,7 @@ local __base_rules = {
     match = { tag = bkt_types.TERMINALS },
     border_size = 0,
     persistent_size = true,
+    -- opacity = OPACITY_OVERRIDE,
     -- size = "(monitor_w*0.40) (monitor_h*0.65)",
   },
 
@@ -237,13 +238,17 @@ setmetatable(__base_rules, {
   end,
 })
 
-require("utils.tbl").map(__base_rules, hl.window_rule)
+-- IMP: [ordering] 1 : removed in favor of `M.register_effects` function and then called in init
+-- require("utils.tbl").map(__base_rules, hl.window_rule)
 
 --- Put a window into a bucket. Caller supplies the match (class/title/etc).
 ---@param match table
 ---@param bkt_name Bucket The bucket name (case-insensitive). Must match one of the defined buckets above.
----@return void?
+---@return void
 local assign_bucket = function(match, bkt_name)
+  require("utils").validate_type(match, "table")
+  require("utils").validate_type(bkt_name, "string")
+
   hl.window_rule({
     -- IMP: We CANNOT name these! This is because of (hyprlands static vs. dynamic) VS. how orderings are done!
     --Effects marked as Dynamic are reevaluated whenever the matching property of the window changes.
@@ -257,8 +262,22 @@ local assign_bucket = function(match, bkt_name)
   })
 end
 
+-- IMP: [ordering] 2 : if using this, disable [ordering 1 ; see [ordering] 1 for further details.
+--
+-- local assign_bucket = function(match, bkt_name)
+--   require("utils").validate_type(match, "table")
+--   require("utils").validate_type(bkt_name, "string")
+--   hl.window_rule({ match = match, tag = "+" .. bkt_name })   -- keep the tag if you want it for other things
+--   local effects = {}
+--   for k, v in pairs(__base_rules[bkt_name]) do
+--     if k ~= "name" and k ~= "match" then effects[k] = v end
+--   end
+--   effects.match = match
+--   hl.window_rule(effects)
+-- end
+
 ---@class BucketModule
----@field types table<string, string> The bucket types (case-insensitive).
+---@field types table<string, string>|table<Bucket> The bucket types (case-insensitive).
 ---@field bkt_to_ws table<string, string> The mapping of bucket types to workspaces (case-insensitive).
 ---@field assign_bucket fun(match: table, bkt_name: Bucket): void Assigns a window to a bucket based on the provided match and bucket name.
 ---@field get fun(self: BucketModule, bkt_name: Bucket): { bucket: Bucket, workspace: string } Gets the bucket and workspace for the provided bucket name (case-insensitive).
@@ -294,6 +313,11 @@ M.get = function(self, bkt_name)
   local ws_value = self.bkt_to_ws:try_get(bkt_name) or self.bkt_to_ws[bkt_name] or nil
 
   return { bucket = bkt_name, workspace = ws_value }
+end
+
+-- IMP: [ordering] : 1 see other [ordering] tagged items on this; potentially removable if opting for [ordering] 2
+M.register_effects = function()
+  require("utils.tbl").map(__base_rules, hl.window_rule)
 end
 
 setmetatable(M, {

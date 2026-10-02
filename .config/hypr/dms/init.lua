@@ -58,7 +58,7 @@ dms.setup = function(self)
   require("dms.keymaps")
   require("dms.layerrules")
   require("dms.layerrule_animations")
-  -- require("dms.layout")
+  require("dms.layout")
   require("dms.windowrules")
 
   local types = require("types")

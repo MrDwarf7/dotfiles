@@ -5,7 +5,8 @@
 
 ---@class HyprConfig.Shared.Rules
 ---@return HyprConfig.Shared.Rules
-return require("utils.root_shared").load_modules("shared.rules", {
+local ok
+require("utils.root_shared").load_modules("shared.rules", {
   "globals",
   "buckets", -- bucket behavior stanzas + bucket() helper (load BEFORE members)
   "registry", -- standalone apps: exact HL API, looped (no bucket)
@@ -42,3 +43,11 @@ return require("utils.root_shared").load_modules("shared.rules", {
   "zed", -- gui_editors bucket + settings
   "zen", -- browsers bucket
 })
+
+-- IMP: [ordering] : 1 - if using this, do not use [ordering] 2 ; vice-versa applies.
+--
+-- Hyprland: e5053fcd -- changes how dynamic's work
+-- it now _CLEARS_ all dynamics before re-running.
+-- This ensures we always apply them after it's actually available.
+require("shared.rules.buckets").register_effects()
+return ok
