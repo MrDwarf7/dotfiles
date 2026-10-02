@@ -1,11 +1,12 @@
 modelRoles:
   advisor: kiro/claude-opus-5.5:xhigh
+  default: xai-oauth/grok-4.7
+  plan: opencode-zen/grok-4.7
   smol: opencode-zen/space-bunny-free
   web: anthropic/claude-sonnet-5
+  commit: opencode-zen/grok-4.7
   task: opencode-zen/space-bunny-free
   tiny: opencode-zen/space-bunny-free
-  commit: xai-oauth/grok-4.5
-  default: anthropic/claude-opus-5-5
 symbolPreset: nerd
 theme:
   dark: titanium

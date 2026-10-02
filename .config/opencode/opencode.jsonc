@@ -31,6 +31,12 @@
         "CONTEXT7-API-KEY": "${CONTEXT7_API_KEY}"
       },
     },
+    // hotpath profiler MCP; only reachable while an app built with `hotpath-mcp` is running.
+    "hotpath": {
+      "enabled": true,
+      "type": "remote",
+      "url": "http://localhost:6771/mcp",
+    },
     // // All of these are directly from Zed's config file
     // "mcp-server-nextjs": {
     //   "enabled": true,

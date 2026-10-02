@@ -26,6 +26,11 @@
       "headers": {
         "CONTEXT7-API-KEY": "${CONTEXT7_API_KEY}"
       }
+    },
+    "hotpath": {
+      "enabled": true,
+      "type": "remote",
+      "url": "http://localhost:6771/mcp"
     }
   },
   "permission": {
