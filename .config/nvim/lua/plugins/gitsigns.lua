@@ -186,7 +186,7 @@ return {
     signs_staged_enable = true,
     -- worktrees = {},
 
-    signcolumn = true,
+    -- signcolumn = true,
     numhl = false, -- Colored sign colum numbers: default: false,
     linehl = false, -- Colored line-hunks: default: false,
     word_diff = false, -- Colored word-diffs (very distracting): default: false,
