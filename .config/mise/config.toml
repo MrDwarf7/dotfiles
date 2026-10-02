@@ -32,6 +32,7 @@ direnv = "latest"
 "github:glennib/stakk" = "latest"
 taplo = "latest"
 markdownlint-cli2 = "latest"
+"npm:codebase-context" = "2.2.0"
 
 [tools."npm:typescript"]
 version = "latest"

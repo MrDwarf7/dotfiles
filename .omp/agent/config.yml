@@ -71,7 +71,7 @@ task:
   maxRecursionDepth: 3
 emojiAutocomplete: false
 skills:
-  enableAgentsUser: false
+  enableAgentsUser: true
   enableClaudeUser: false
   enableCodexUser: false
   enablePiUser: false
