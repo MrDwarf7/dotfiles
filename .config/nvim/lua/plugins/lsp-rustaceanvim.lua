@@ -59,6 +59,8 @@ return {
       },
 
       server = {
+        cmd_env = { MALLOC_ARENA_MAX = "2" },
+
         on_attach = function(_, bufnr)
           -- local LSP = require("config.lsp") --.setup({ binds_type = vim.g.lsp_binds_type or "builtin" })
           -- if not LSP then
@@ -148,8 +150,11 @@ return {
       },
 
       default_settings = {
+        checkOnSave = true,
         ["rust-analyzer"] = {
+          -- Add clippy lints for Rust.
           check = {
+
             command = "clippy",
             extraArgs = {
               "--no-deps",
@@ -158,14 +163,19 @@ return {
               "clippy::pedantic",
             },
           },
-          -- Add clippy lints for Rust.
-          checkOnSave = true,
           cargo = {
             allFeatures = true,
+            -- -- WARN: LLM SLOP ADJUSTMENT
+            -- targetDir = true,
+            -- allFeatures = false,
+
             loadOutDirsFromCheck = true,
             buildScripts = {
               enable = true,
             },
+          },
+          cachePriming = {
+            enable = false,
           },
           hover = {
             memoryLayout = {

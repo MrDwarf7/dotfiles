@@ -107,6 +107,10 @@ version = "latest"
 [tools."cargo:cargo-watch"]
 version = "latest"
 
+## SEE: https://github.com/watchexec/watchexec
+# [tools."cargo:watchexec-cli"]
+# version = "latest"
+
 [tools."cargo:cargo-workspaces"]
 version = "latest"
 
