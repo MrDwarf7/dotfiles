@@ -70,6 +70,9 @@
       "showTrash": false,
       "trashFileManager": "default",
       "trashCustomCommand": "",
+      "magnification": false,
+      "magnificationScale": 130,
+      "magnificationProfile": "parabolic",
       "order": [],
       "widgets": [
         {
@@ -96,6 +99,10 @@
   "floatingWindowTransparency": 0.1,
   "floatingWindowForegroundLayers": false,
   "floatingWindowForegroundTransparency": 0.08,
+  "dmsWindowsFloatingSeeded": [
+    "hyprland",
+    "hyprland"
+  ],
   "widgetBackgroundColor": "s",
   "hyprlandLayoutGapsOverride": 4,
   "hyprlandLayoutRadiusOverride": 12,
@@ -112,6 +119,33 @@
   "blurLayerOutlineOpacity": 0.08,
   "blurWallpaperOnOverview": true,
   "controlCenterWidgets": [
+    {
+      "id": "user",
+      "enabled": true,
+      "w": 5,
+      "h": 1
+    },
+    {
+      "id": "settings",
+      "enabled": true,
+      "w": 1,
+      "h": 1,
+      "small": true
+    },
+    {
+      "id": "lock",
+      "enabled": true,
+      "w": 1,
+      "h": 1,
+      "small": true
+    },
+    {
+      "id": "power",
+      "enabled": true,
+      "w": 1,
+      "h": 1,
+      "small": true
+    },
     {
       "id": "volumeSlider",
       "enabled": true,
@@ -184,6 +218,13 @@
       "enabled": true,
       "w": 4,
       "h": 1
+    },
+    {
+      "id": "runningApps",
+      "enabled": true,
+      "w": 4,
+      "h": 1,
+      "footer": true
     }
   ],
   "audioVisualizerEnabled": false,
@@ -244,8 +285,6 @@
       "cursorHideTimeout": 0
     }
   },
-  "launcherLogoMode": "os",
-  "launcherLogoColorOverride": "primary",
   "notepadShowLineNumbers": true,
   "notepadDefaultMode": "popout",
   "notepadLastCustomTransparency": 0.01,
@@ -437,7 +476,8 @@
       "hoverPopoutDelay": 279,
       "useOverlayLayer": false,
       "followInterfaceStyle": false,
-      "island": false
+      "island": false,
+      "widgetFollowInterfaceStyle": false
     },
     {
       "id": "bar1772849107368",
@@ -543,7 +583,8 @@
       "shadowColorMode": "text",
       "shadowCustomColor": "#000000",
       "clickThrough": false,
-      "followInterfaceStyle": false
+      "followInterfaceStyle": false,
+      "widgetFollowInterfaceStyle": false
     }
   ],
   "desktopWidgetGroups": [
@@ -574,5 +615,5 @@
   },
   "frameMode": "separate",
   "frameBarInsetPadding": 16,
-  "configVersion": 28
+  "configVersion": 36
 }
