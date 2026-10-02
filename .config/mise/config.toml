@@ -103,9 +103,6 @@ version = "latest"
 [tools."cargo:cargo-update"]
 version = "latest"
 
-[tools."cargo:hotpath"]
-version = "latest"
-
 ### Allows running cargo watch to automatically recompile and rerun your Rust code when changes are detected. Installs as 'cargo-watch'.
 [tools."cargo:cargo-watch"]
 version = "latest"
@@ -113,6 +110,15 @@ version = "latest"
 ## SEE: https://github.com/watchexec/watchexec
 # [tools."cargo:watchexec-cli"]
 # version = "latest"
+### hotpath profiler CLI. tui -> `hotpath console`, cloud -> `hotpath cloud`, utils -> `hotpath-utils`.
+[tools."cargo:hotpath"]
+version = "latest"
+features = ["tui", "cloud", "utils"]
+
+### Sampling CPU profiler; required at runtime by hotpath-samply for the `hotpath-cpu` feature.
+[tools."cargo:samply"]
+version = "latest"
+
 
 [tools."cargo:cargo-workspaces"]
 version = "latest"
