@@ -50,16 +50,10 @@ return {
       ["json"] = { "fixjson" }, -- Cannot use "biome" here as it will break a lot of json due to trailing commas where there shouldn't be any
       ["lua"] = { "stylua" },
       -- ["luau"] = { "stylua" },
-      -- ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      -- ["markdown.mdx"] = { "prettier", "markdownlint-cli2" },
-      ["markdown.mdx"] = { "rumdl", "markdownlint-cli2" },
-      -- markdown = { "prettier" },
-      -- ["markdown"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
-      -- ["markdown"] = { "prettier", "markdownlint-cli2" },
-
-      ["markdown"] = { "rumdl", "markdownlint-cli2" },
-      -- ["markdown"] = { "rumdl", "markdownlint-cli2" },
-      -- ["markdown"] = { "rumdl", "markdownlint-cli2", "prettier" },
+      -- rumdl implements the markdownlint rules and their fixes; chaining markdownlint-cli2
+      -- after it re-applies the same rules under markdownlint's own config.
+      ["markdown"] = { "rumdl" },
+      ["markdown.mdx"] = { "rumdl" },
 
       ["ocaml"] = { "ocamlformat" },
       ["python"] = function(bufnr)
@@ -92,6 +86,13 @@ return {
             end
           end
           return false
+        end,
+      },
+      rumdl = {
+        -- rumdl discovers config by walking up from its cwd and ignores --stdin-filename for
+        -- that, so nvim's cwd would skip the buffer's project config or pick up another repo's.
+        cwd = function(_, ctx)
+          return ctx.dirname
         end,
       },
       yamlfmt = {

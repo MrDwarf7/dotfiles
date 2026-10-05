@@ -41,7 +41,8 @@ return {
       -- ["rust"] = { "rust_analyzer" },
       -- ["yaml"] = { "yamllint" },
       -- cs = { "omnisharp" },
-      -- markdown = { "markdownlint-cli2" },
+      -- markdown: no linter on purpose. The rumdl LSP already publishes these diagnostics, and
+      -- rumdl/markdownlint-cli2 here would report every rule a second time.
       -- powershell = { "powershell_es" },
       -- python = { "ruff", "mypy", "vulture" },
       -- python = { "ruff_lsp", "mypy", "vulture", { "ruff_lsp" } },

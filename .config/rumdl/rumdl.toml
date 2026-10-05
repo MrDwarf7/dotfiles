@@ -1,0 +1,33 @@
+#:schema https://raw.githubusercontent.com/rvben/rumdl/main/rumdl.schema.json
+
+# User-level rumdl defaults, read from ~/.config/rumdl/rumdl.toml.
+#
+# rumdl only uses this file when the walk up from the working directory to the
+# repo root finds no rumdl config (.rumdl.toml, rumdl.toml, .config/rumdl.toml,
+# or pyproject.toml with [tool.rumdl]). A project rumdl config replaces this
+# file outright; nothing here leaks into repos with their own rules. A project
+# markdownlint config (.markdownlint.json etc.) is the exception: it is layered
+# on top of this file, so anything it doesn't set still comes from here.
+#
+# Discovery starts from the working directory, not from --stdin-filename, so
+# editor integrations piping a buffer over stdin must run rumdl from its dir.
+#
+# Every option with its default: `rumdl config --defaults`
+# What is set and where from:  `rumdl config`
+# Config discovery:            https://rumdl.dev/configuration/
+# [global] options:            https://rumdl.dev/global-settings/
+# Rule options:                https://rumdl.dev/rules/ (per rule: https://rumdl.dev/md013/)
+#
+# The schema only covers [global], [code-block-tools] and per-rule `severity`;
+# rule options are untyped there, so check the rule pages for those.
+
+[MD013]
+line-length = 80
+reflow = true    # actually wrap long prose lines
+
+[MD041]
+enabled = false # skill/agent files start with YAML frontmatter, not an H1
+
+[MD060]
+enabled = true
+style = "aligned" # pad table columns, not compact `| --- |`
