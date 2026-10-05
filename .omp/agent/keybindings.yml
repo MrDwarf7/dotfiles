@@ -69,18 +69,18 @@ tui.editor.deleteWordForward:
   - Alt+D
   - Super+Alt+Delete
   - Super+Alt+D
-tui.editor.deleteToLineStart: []
+tui.editor.deleteToLineStart: Ctrl+U
 tui.editor.deleteToLineEnd: Ctrl+K
 tui.editor.yank: Ctrl+Y
 tui.editor.yankPop: Alt+Y
 tui.editor.undo:
-  - Ctrl+U
+  - Ctrl+Z
   - Ctrl+-
   - Ctrl+_
 # --- input ---
 tui.input.newLine:
-  - Shift+Enter
   - Ctrl+J
+  - Shift+Enter
 tui.input.submit: Enter
 tui.input.tab: Tab
 tui.input.copy: Ctrl+C

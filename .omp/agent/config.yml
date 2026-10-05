@@ -2,8 +2,8 @@ modelRoles:
   advisor: xai-oauth/grok-4.7
   smol: opencode-zen/space-bunny-free
   web: anthropic/claude-sonnet-5
-  task: anthropic/claude-sonnet-5
-  tiny: anthropic/claude-haiku-4-5
+  task: opencode-zen/space-bunny-free
+  tiny: opencode-zen/space-bunny-free
   commit: xai-oauth/grok-4.5
   default: anthropic/claude-opus-5-5
 symbolPreset: nerd
