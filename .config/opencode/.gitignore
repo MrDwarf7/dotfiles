@@ -11,3 +11,5 @@
 
 node_modules/
 bun.lock
+# opencode writes a plaintext password here
+service.json
