@@ -37,7 +37,7 @@ direnv = "latest"
 
 taplo = "latest"
 
-markdownlint-cli2 = "latest"
+# markdownlint-cli2 = "latest"
 
 "npm:codebase-context" = "2.2.0"
 
