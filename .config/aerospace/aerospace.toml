@@ -26,6 +26,7 @@ after-startup-command = [
 
 # 7 | 27110 | com.electron.dockerdesktop       | Docker Desktop
 # 8 | 41219 | com.spotify.client               | Spotify
+# 8 | 76804 | rocks.spotifast.Spotifast        | Spotifast
 # 9 | 7853  | com.tinyspeck.slackmacgap        | Slack
 
 on-window-detected = [
@@ -35,6 +36,7 @@ on-window-detected = [
   { if = 'test %{app-bundle-id} = com.electron.dockerdesktop', run = 'move-node-to-workspace 7' },
   # MUSIC
   { if = 'test %{app-bundle-id} = com.spotify.client', run = 'move-node-to-workspace 8' },
+  { if = 'test %{app-bundle-id} = rocks.spotifast.Spotifast', run = 'move-node-to-workspace 8' },
   # (PRIV_)COMMS
   { if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap', run = 'move-node-to-workspace 9' },
 ]
@@ -179,6 +181,7 @@ cmd-q = 'close'
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-o = 'layout accordion horizontal vertical'
 cmd-i = 'layout tiles horizontal vertical'
+cmd-space = 'layout tiles horizontal vertical'
 
 # Technically speaaking the `automatically-unhide-macos-hidden-apps` setting turns this off already, but...
 # cmd-h = [] # Disable "hide application"
@@ -210,8 +213,8 @@ cmd-shift-l = 'focus-monitor right'
 # alt-minus = 'resize smart -50'
 # alt-equal = 'resize smart +50'
 
-cmd-space = 'resize smart +80'
-cmd-shift-space = 'resize smart -80'
+# cmd-space = 'resize smart +80'
+# cmd-shift-space = 'resize smart -80'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
 cmd-1 = 'workspace 1'
