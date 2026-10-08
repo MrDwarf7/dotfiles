@@ -2,11 +2,12 @@ modelRoles:
   advisor: kiro/claude-opus-5.5:xhigh
   default: xai-oauth/grok-4.7
   plan: opencode-zen/grok-4.7
-  smol: opencode-zen/space-bunny-free
+  smol: kiro/claude-opus-5.5
   web: anthropic/claude-sonnet-5
   commit: opencode-zen/grok-4.7
-  task: opencode-zen/space-bunny-free
-  tiny: opencode-zen/space-bunny-free
+  task: kiro/claude-opus-5.5
+  tiny: kiro/qwen3-coder-next
+  judge: openrouter/~typesafe/jev-latest
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -64,7 +65,7 @@ astGrep:
 computer:
   enabled: true
 vault:
-  enabled: false
+  enabled: true
 github:
   enabled: true
 todo:
@@ -117,3 +118,5 @@ secrets:
   enabled: true
 images:
   autoResize: true
+claudeResets:
+  autoRedeem: "no"

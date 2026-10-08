@@ -130,6 +130,8 @@ version = "latest"
 [tools."cargo:create-tauri-app"]
 version = "latest"
 
+[tools."cargo-deny"]
+version = "latest"
 
 ### Performance profiling and flamegraph generation for Rust programs. Installs as 'flamegraph'.
 [tools."cargo:flamegraph"]
