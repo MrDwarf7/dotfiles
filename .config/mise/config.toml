@@ -103,6 +103,9 @@ version = "latest"
 [tools."cargo:cargo-update"]
 version = "latest"
 
+[tools."cargo:hotpath"]
+version = "latest"
+
 ### Allows running cargo watch to automatically recompile and rerun your Rust code when changes are detected. Installs as 'cargo-watch'.
 [tools."cargo:cargo-watch"]
 version = "latest"
@@ -130,6 +133,10 @@ version = "latest"
 ### JJ / Jujutsu workspace (worktree) manageer and helper tool.
 [tools."cargo:jj-navi"]
 version = "latest"
+
+
+# [tools."cargo:pipe-rs"]
+# version = "latest"
 
 #####
 
