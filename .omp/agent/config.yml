@@ -1,5 +1,5 @@
 modelRoles:
-  advisor: xai-oauth/grok-4.7
+  advisor: kiro/claude-opus-5.5:xhigh
   smol: opencode-zen/space-bunny-free
   web: anthropic/claude-sonnet-5
   task: opencode-zen/space-bunny-free
@@ -23,6 +23,7 @@ tui:
   tight: true
   vimMode: true
   imeSafeCursor: true
+  resizeScrollback: rebuild
 display:
   shimmer: kitt
   showTokenUsage: true
@@ -41,6 +42,8 @@ treeFilterMode: default
 autocompleteMaxVisible: 15
 startup:
   quiet: true
+  checkUpdate: true
+  changelogMode: summary
 features:
   unexpectedStopDetection: smart
 memory:
@@ -50,6 +53,7 @@ edit:
 readLineNumbers: true
 bash:
   enabled: true
+  direnv: auto
 bashInterceptor:
   enabled: false
 eval:
@@ -96,3 +100,19 @@ spelling:
   autocomplete: smollm
 power:
   sleepPrevention: system
+extendedContext: true
+paste:
+  largeMenuThreshold: 250
+marketplace:
+  autoUpdate: auto
+mnemopi:
+  polyphonicRecall: true
+  proactiveLinking: true
+shellMinimizer:
+  sourceOutlineLevel: default
+ida:
+  enabled: false
+secrets:
+  enabled: true
+images:
+  autoResize: true
