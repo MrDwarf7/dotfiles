@@ -42,7 +42,7 @@ end
 ---@return void|Error
 local apply_keys = function(binds_provider)
   ----------- Remove some shitty defaults
-  local remove_defaults = { "grn", "gra", "gri", "grr", "grt" }
+  local remove_defaults = { "grn", "gra", "gri", "grr", "grt", "grx" }
   for _, bind in ipairs(remove_defaults) do
     pcall(vim.keymap.del, "n", bind)
   end

@@ -20,6 +20,7 @@ M = {
   --
   formatters = {
 
+    "alejandra",
     "beautysh",
     "black",
     "cbfmt",
@@ -92,6 +93,7 @@ M = {
     "ols",
     "prismals",
     "qmlls",
+    "rnix-lsp",
     "rumdl",
     "tailwindcss",
     "tinymist",
