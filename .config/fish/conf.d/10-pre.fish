@@ -73,6 +73,8 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 ## We want to use the 'fast path', so use the callable command
 40-var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
 
+30-export_as_env_var jj JJ_WORKTREE_DIR "$GITHUB_PROJECTS/worktrees"
+
 # 01eval_if_pacman tirith "tirith init --shell fish | source"
 
 # can't change this as it's hardcoded until I get a PR merged to fix it ( xdg / local / bob )

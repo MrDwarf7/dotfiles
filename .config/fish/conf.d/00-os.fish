@@ -28,11 +28,13 @@ if test "$DOT_OS" = darwin
 
     # XDG Stuff
     set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
-    set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.cache
-    set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.local/share
-    set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.local/state
-    set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.local/bin
-    mkdir -p $XDG_CONFIG_HOME $XDG_CACHE_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_BIN_HOME
+    set -l __xdg_set
+
+    set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.local/bin; and set --append __xdg_set $XDG_BIN_HOME
+    set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.cache; and set --append __xdg_set $XDG_CACHE_HOME
+    set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.local/share; and set --append __xdg_set $XDG_DATA_HOME
+    set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.local/state; and set --append __xdg_set $XDG_STATE_HOME
+    test (count $__xdg_set) -gt 0; and mkdir -p $__xdg_set
 
     # quirk
     set -gx TLRC_CONFIG $XDG_CONFIG_HOME/tlrc/config.toml
@@ -43,6 +45,7 @@ end
 if test "$DOT_OS" = linux
     set -q XDG_CONFIG_HOME; or set -Ux XDG_CONFIG_HOME $HOME/.config
     set -l __xdg_set
+
     set -q XDG_BIN_HOME; or set -Ux XDG_BIN_HOME $HOME/.xdg/bin; and set --append __xdg_set $XDG_BIN_HOME
     set -q XDG_CACHE_HOME; or set -Ux XDG_CACHE_HOME $HOME/.xdg/cache; and set --append __xdg_set $XDG_CACHE_HOME
     set -q XDG_CACHE_LOCAL_HOME; or set -Ux XDG_CACHE_LOCAL_HOME $HOME/.xdg/local; and set --append __xdg_set $XDG_CACHE_LOCAL_HOME

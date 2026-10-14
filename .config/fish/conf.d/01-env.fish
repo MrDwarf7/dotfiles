@@ -87,9 +87,9 @@ function __setup_envs
     __env_cached_set -Ux DISTCC_DIR /tmp/distcc; and test -d $DISTCC_DIR; or mkdir -p $DISTCC_DIR
     set -q DISTCC_HOSTS; or __env_cached_set -Ux DISTCC_HOSTS "--randomize localhost,cpp,lzo"; and test -n "$DISTCC_HOSTS"; or __env_cached_set -Ux DISTCC_HOSTS localhost/8
 
-    __env_cached_set -Ux GITHUB_PROJECTS $HOME/Documents/GitHub_Projects
+    __env_cached_set -Ux GITHUB_PROJECTS $HOME/projects
     # On other systems this is sometimes different -- separate var for work projects
-    __env_cached_set -Ux GITHUB_WORK_PROJECTS $HOME/Documents/GitHub_Projects
+    __env_cached_set -Ux GITHUB_WORK_PROJECTS $HOME/projects
 
     __env_cached_set -Ux GITHUB_PROJECTS_RUST $GITHUB_PROJECTS/Rust
 
