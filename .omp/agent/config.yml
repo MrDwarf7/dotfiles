@@ -1,13 +1,13 @@
 modelRoles:
-  advisor: kiro/claude-opus-5.5:xhigh
-  default: xai-oauth/grok-4.7
-  plan: opencode-zen/grok-4.7
-  smol: kiro/claude-opus-5.5
+  advisor: openai-codex/gpt-6.1-sol:xhigh
+  plan: openai-codex/gpt-6-astra:high
+  smol: openai-codex/gpt-6-luna:high
   web: anthropic/claude-sonnet-5
-  commit: opencode-zen/grok-4.7
-  task: kiro/claude-opus-5.5
-  tiny: kiro/qwen3-coder-next
+  commit: xai-oauth/grok-4.7:low
+  task: openai-codex/gpt-6-luna:auto
+  tiny: openai-codex/gpt-6-luna:medium
   judge: openrouter/~typesafe/jev-latest
+  default: anthropic/claude-opus-5-5
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -98,6 +98,32 @@ autolearn:
   enabled: true
 retry:
   waitForUsageReset: false
+  fallbackChains:
+    default:
+      - kiro/claude-opus-5.5
+      - xai-oauth/grok-4.7
+      - anthropic/claude-opus-5-5
+    smol:
+      - kiro/claude-sonnet-5.5
+      - anthropic/claude-sonnet-5-5
+      - xai-oauth/grok-build
+    tiny:
+      - anthropic/claude-haiku-5-5
+      - kiro/auto
+    task:
+      - kiro/claude-sonnet-5.5
+      - anthropic/claude-sonnet-5-5
+      - xai-oauth/grok-4.7
+      - kiro/claude-opus-5.5
+      - anthropic/claude-opus-5-5
+    plan:
+      - xai-oauth/grok-4.7
+    advisor:
+      - kiro/claude-opus-5.5
+      - xai-oauth/grok-4.7
+      - opencode-go/step-5-preview-free
+      - opencode-zen/big-pickle
+      - openai-codex/gpt-6-astra
 spelling:
   autocomplete: smollm
 power:
@@ -120,3 +146,32 @@ images:
   autoResize: true
 claudeResets:
   autoRedeem: "no"
+modelPresets:
+  openai-codex-preset:
+    modelRoles:
+      advisor: kiro/claude-opus-5.5:xhigh
+      plan: openai-codex/gpt-6-astra
+      smol: openai-codex/gpt-6-luna
+      web: anthropic/claude-sonnet-5
+      commit: xai-oauth/grok-4.7
+      task: openai-codex/gpt-6-luna
+      tiny: openai-codex/gpt-6-luna
+      judge: openrouter/~typesafe/jev-latest
+      default: openai-codex/gpt-6.1-sol
+    defaultThinkingLevel: auto
+  full-power-coding:
+    modelRoles:
+      advisor: openai-codex/gpt-6.1-sol:xhigh
+      plan: openai-codex/gpt-6-astra:high
+      smol: openai-codex/gpt-6-luna:high
+      web: anthropic/claude-sonnet-5
+      commit: xai-oauth/grok-4.7:low
+      task: openai-codex/gpt-6-luna:auto
+      tiny: openai-codex/gpt-6-luna:medium
+      judge: openrouter/~typesafe/jev-latest
+      default: openai-codex/gpt-6.1-sol
+    defaultThinkingLevel: auto
+cycleOrder:
+  - smol
+  - slow
+  - default
