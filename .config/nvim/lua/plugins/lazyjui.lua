@@ -25,7 +25,7 @@ return {
     -- Optionally:
     -- border = {},
 
-    cmd = { "jjui" },
+    cmd = { "jjui", "-r", "default_set(4)" },
     height = 0.8, -- default is 0.8,
     width = 0.7, -- default is 0.9,
     winblend = 0, -- default is 0 (fully opaque). Set to 100 for fully transparent (not recommended though).

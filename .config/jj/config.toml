@@ -686,6 +686,17 @@ wa = [
   '-c',
   'jj workspace add --name $0 $(jj workspace root --name default).$0',
 ]
+
+# wt = [
+#   'util',
+#   'exec',
+#   '--',
+#   'bash',
+#   '-c',
+#   # 'jj workspace add --name $0 ../worktrees/$(jj workspace root --name default)-$0',
+#   'jj workspace add zzzzzzzworktrees/$(jj workspace root --name default)-$0',
+# ]
+
 wf = ['workspace', 'forget']
 wr = ['workspace', 'rename']
 wd = ['workspace', 'remove']
