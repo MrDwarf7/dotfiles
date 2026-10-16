@@ -672,6 +672,7 @@ ft = ['file', 'track']
 fu = ['file', 'untrack']
 
 # workspace
+w = ['workspace']
 wl = ['workspace', 'list']
 wu = ['workspace', 'update-stale']
 
