@@ -20,7 +20,8 @@ pr_mode = "draft"
 # Custom minijinja template for stack comments (default: built-in).
 # Reads any path — see the trust note above.
 ## template_path = "/path/to/my-template.md.jinja"
-template_path = "/Users/dwarf/.config/stakk/templates/loke.md.jinja"
+# Not set here: TOML can't expand $HOME and the home dir differs per OS.
+# STAKK_TEMPLATE_PATH is exported from fish conf.d/10-pre.fish instead.
 
 # Where the stack overview lives: "comment", "body", "none", "ignore",
 # "auto-comment" (default) or "auto-body".

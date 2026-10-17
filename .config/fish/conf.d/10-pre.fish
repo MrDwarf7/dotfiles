@@ -74,6 +74,7 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 40-var_to_syspath lm-studio "$HOME/.lmstudio/bin" --prepend
 
 30-export_as_env_var jj JJ_WORKTREE_DIR "$GITHUB_PROJECTS/worktrees"
+30-export_as_env_var stakk STAKK_TEMPLATE_PATH "$HOME/.config/stakk/templates/default.md.jinja"
 
 # 01eval_if_pacman tirith "tirith init --shell fish | source"
 
