@@ -1,0 +1,74 @@
+# <config directory>/mbx/config.toml
+# cache_dir                    = "/var/cache/mbx"
+# cache_dir                    = "/var/cache/mbx"
+
+incremental                  = false
+eager_incremental            = false   # opt-in state from the first compilation
+learned_incremental_max_size = "8GiB"  # or "none"
+share_out_dir                = true
+share_workspace_root         = false
+build_script_execution       = true
+cc                           = true
+summary                      = "auto"  # or "short", "ci", "full", "off"
+savings                      = "quips" # or "plain", "off"
+
+
+[gc]
+auto                = true
+incremental_max_age = "4d" # default: '30d"
+# incremental_max_size = "20GiB" # default: 5% of the cache disk
+interval = "1h"
+# max_size             = "20GiB" # default: 5% of the cache disk
+# max_total_size = "50GiB" # optional combined budget
+min_free_size = "20GiB" # default: 10% of each disk
+
+[http]
+download_timeout  = "10m" # default: "10m"
+read_stall_budget = "90s" # default; "90s"
+retries           = 3     # default: 3
+timeout           = "30s" # default: '30s"
+
+[linker]
+default = "system"
+
+[linker.profiles.dev]
+# x86_64-unknown-linux-gnu = "mold@2.42.0"
+# aarch64-unknown-linux-gnu = "wild@0.10.0"
+
+x86_64-unknown-linux-gnu     = "mold@3.0.0"
+aarch64-unknown-linux-gnu    = "mold@3.0.0"
+aarch64-unknown-apple-darwin = "mold@3.0.0"
+
+# aarch64-unknown-apple-darwin = "wild@0.10.0"
+
+[linker.profiles.release]
+# default = "rust-lld"
+# default = "system"
+aarch64-unknown-apple-darwin = "wild@0.10.0"
+
+
+[target]
+evict_first = [ ".claude/worktrees" ] # collected first when over budget
+lanes       = true                    # default: true
+max_age     = "7d"                    # default
+seed        = true                    # default: true
+views       = true
+# max_size = "30GiB" # default: 10% of the target disk
+# keep        = [ "~/src/app" ]         # never collected for age or size
+
+[remote]
+# url       = "https://cache.example.com" # or "s3://bucket/prefix"
+# namespace = "acme/backend"
+# mode      = "read-write"
+# s3_endpoint = "https://<account>.r2.cloudflarestorage.com"
+# s3_region = "auto"
+
+
+[scheduler]
+enabled  = true
+cpus     = 16       # default: logical CPUs
+priority = "normal" # or "low"
+pressure = true     # default: true - Delay additional compilations while memory is under pressure.
+
+# memory   = "24GiB"  # default: 85% of physical memory
+# reserve_cpus = 2        # default: 0
