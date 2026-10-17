@@ -3,7 +3,7 @@
 local bkt = require("shared.rules.buckets")
 local v = bkt:get("private_comms")
 
-local rgx = "QQ|Telegram|org.telegram.desktop"
+local rgx = "QQ|Telegram|org.telegram.desktop|[sS]lack"
 
 bkt.assign_bucket({ class = rgx }, v.bucket)
 
