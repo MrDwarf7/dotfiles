@@ -1,0 +1,139 @@
+[display]
+# Image protocol: auto, iterm2, kitty, sixel, or halfblocks.
+image_protocol = "auto"
+
+# Master switch that hides all image previews when true.
+disable_image_preview = false
+
+# Show user avatars next to messages and in profile views.
+show_avatars = true
+
+# Render inline image previews for attachments and embeds.
+show_images = true
+
+# Allow video and audio media to open in an external player.
+media_playback = false
+
+# Preview quality: efficient, balanced, high, or original.
+# image_preview_quality = "balanced"
+image_preview_quality = "original"
+
+# Attachment viewer quality: efficient, balanced, high, or original.
+attachment_viewer_quality = "original"
+
+# Which animated GIF and WebP previews keep playing: always, selected, or never.
+# Each animated frame rebuilds a terminal graphics protocol, so "always" costs
+# roughly 8% of a CPU core per animated preview on screen. Custom emoji animate
+# regardless; theirs are small enough not to matter.
+animate_previews = "always"
+
+# Render custom Discord emoji as images when possible.
+show_custom_emoji = true
+
+# Crop avatars into circles instead of showing square images.
+circular_avatars = false
+
+# Show message times in 24-hour format (14:30) instead of 12-hour (02:30 PM).
+hour_format_24 = false
+
+[composer]
+# Send custom emoji your account cannot use directly as image links.
+emojis_as_links = false
+
+[safety]
+# Enable Concord's extra account-risk safeguards for spam/message-request DMs,
+# new conversations, empty channels, and server screening/onboarding/verification.
+# Set false to skip these safeguards at your own risk, then restart Concord.
+# Slow mode, message-history loading/failure locks, channel permissions, and
+# Discord's own rules and rate limits always apply.
+enabled = true
+
+[reactions]
+# Up to 10 unicode emoji pinned at the top of the reaction picker.
+# When unset or empty, Concord uses the built-in quick reactions.
+favorite_emojis = [ "🔥", "👍", "❤️", "😂", "🎉", "😮", "😢", "🙏", "👀", "💯" ]
+
+[presence]
+# Relay Rich Presence from local apps as your activity (most recent app wins,
+# like the native client).
+share_rich_presence = true
+
+[translation]
+# Translate selected messages and composer drafts when their target is set.
+# Supported providers: deepl or libretranslate.
+# provider = "deepl"
+# message_target_language = "KO"
+# composer_target_language = "EN"
+
+# Optional full API endpoint override. DeepL defaults to its Free API endpoint.
+# LibreTranslate defaults to http://127.0.0.1:5000/translate.
+# endpoint = "https://api.deepl.com/v2/translate"
+
+# Optional API key stored directly in this private config file.
+# api_key = "your-api-key"
+
+# Optional environment variable containing the API key. When set, its value
+# overrides api_key. DeepL checks DEEPL_API_KEY by default.
+# api_key_env = "DEEPL_API_KEY"
+
+[credentials]
+# Credential storage: auto, keychain, or plain.
+# auto tries the system keychain first and falls back to the state file.
+store = "auto"
+
+[notifications]
+# Show desktop notifications for Discord messages that pass notification rules.
+desktop_notifications = true
+
+# Optional notification icon to include in notifications. May not work on all platforms.
+# When unset, no icon is used. It must either be a name of an icon (typically in /usr/share/icons)
+# or a path to an icon.
+# notification_icon = "/path/to/icon.svg"
+
+# Optional WAV files for message, voice join/leave notification sounds.
+# When unset, Concord uses built-in generated tones.
+# notification_sound = "/path/to/message.wav"
+# voice_join_sound = "/path/to/join.wav"
+# voice_leave_sound = "/path/to/leave.wav"
+
+[voice]
+# Join or update Discord voice with Concord self-muted.
+self_mute = false
+
+# Join or update Discord voice with Concord self-deafened.
+self_deaf = false
+
+# Optional CPAL device IDs chosen from Voice Options. When omitted or no longer
+# available, Concord uses the current system default input or output device.
+# input_source = "CoreAudio:input-id"
+# output_source = "CoreAudio:output-id"
+
+# Allow microphone transmit while this session is joined and not self-muted.
+allow_microphone_transmit = false
+
+# Require holding the configured shortcut to transmit.
+push_to_talk = false
+
+# Global push-to-talk shortcut. The key works even when Concord is not focused.
+# Modifiers can be combined before the key, for example "control+shift+F8".
+push_to_talk_shortcut = "F8"
+
+# Reduce steady background microphone noise.
+noise_suppression = true
+
+
+# Optional microphone capture buffer duration in milliseconds, from 10 to 60.
+# When omitted, Concord requests 50ms on Linux and 10ms on other platforms,
+# clamped to the device's supported range. It uses the host default only when
+# the range is unknown or the platform fixed buffer cannot be opened.
+# Setting a value forces that fixed duration.
+# microphone_buffer_ms = 50
+
+# Voice activity threshold in dB. Lower values transmit quieter input.
+microphone_sensitivity = -30
+
+# Microphone input volume percentage, from 0 to 200.
+microphone_volume = 100
+
+# Received voice playback volume percentage, from 0 to 200.
+voice_output_volume = 100

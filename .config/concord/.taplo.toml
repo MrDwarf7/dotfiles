@@ -1,0 +1,15 @@
+include = ["*.toml"]
+exclude = []
+
+#[formatting]
+
+[[rule]]
+include = ["config.toml", "keymap.toml", "theme.toml"]
+
+[rule.formatting]
+align_entries = true
+align_comments = true
+array_trailing_comma = true
+column_width = 150          # May require to be longer
+inline_table_expand = false
+compact_arrays = false      #

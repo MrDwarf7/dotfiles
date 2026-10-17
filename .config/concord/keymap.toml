@@ -1,0 +1,146 @@
+[keymap]
+leader         = "space"
+StartComposer  = "i"
+OpenPaneFilter = "/"
+ClosePopup     = "q"
+OpenDebugPanel = "`"
+
+# FocusGuildPane = "1"
+# FocusChannelPane = "2"
+# FocusMessagePane = "3"
+# FocusMemberPane = "4"
+
+FocusGuildPane   = { keys = [ "1", "<leader>fs" ] }
+FocusChannelPane = { keys = [ "2", "<leader>fc" ] }
+FocusMessagePane = { keys = [ "3", "<leader>fi" ] }
+FocusMemberPane  = { keys = [ "4", "<leader>fm" ] }
+
+SelectNext            = "j"
+SelectPrevious        = "k"
+CycleFocusNext        = { keys = [ "tab", "l", "right" ] }
+CycleFocusPrevious    = { keys = [ "<S-tab>", "h", "left" ] }
+HalfPageDown          = "<C-d>"
+HalfPageUp            = "<C-u>"
+ScrollViewportDown    = { keys = [ "<C-e>", "<C-j>" ] }
+ScrollViewportUp      = { keys = [ "<C-y>", "<C-k>" ] }
+JumpTop               = "gg"
+JumpBottom            = "G"
+ScrollHorizontalLeft  = "H"
+ScrollHorizontalRight = "L"
+ResizePaneLeft        = { keys = [ "<A-h>", "<A-left>" ] }
+ResizePaneRight       = { keys = [ "<A-l>", "<A-right>" ] }
+# Quit = { keys = ["<C-c>", "q"] }
+Quit                  = "q"
+CopyMessage           = "y"
+TranslateMessage      = "T"
+ReactMessage          = "r"
+ReplyMessage          = "R"
+DeleteMessage         = "d"
+EditMessage           = "e"
+OpenMessageUrl        = "o"
+PlayMedia             = "x"
+ViewMessageAttachment = "v"
+# ToggleGuildPane = "<leader>1"
+# ToggleChannelPane = "<leader>2"
+# ToggleMemberPane = "<leader>4"
+
+ToggleGuildPane   = "<leader>ts" # is actually the server list; not 'guilds' lol
+ToggleChannelPane = "<leader>tc"
+ToggleMemberPane  = "<leader>tm"
+
+OpenFocusedPaneAction = "<leader>a"
+# OpenCurrentUserProfile = "<leader>p"
+OpenCurrentUserProfile = "K"
+
+OpenOptions           = { keys = [ "<leader>o", "<leader>S" ] }
+OpenNotificationInbox = "<leader>n"
+RefreshScreen         = "<leader>r"
+ChannelSwitcher       = { keys = [ "<leader><leader>", "<leader>ff", "<C-o>" ] }
+VoiceDeafen           = "<leader>vd"
+VoiceMute             = "<leader>vm"
+ToggleStream          = "<leader>vs"
+VoiceLeave            = "<leader>vl"
+
+[keymap.groups]
+"<leader>f" = "Find"
+"<leader>t" = "Toggles"
+"<leader>v" = "Voice"
+
+[keymap.notification_inbox_actions]
+MarkRead    = "r"
+MarkAllRead = "a"
+
+[keymap.guild_actions]
+MarkAsRead     = "m"
+ToggleMute     = "u"
+LeaveServer    = "l"
+FolderSettings = "r"
+
+[keymap.channel_actions]
+JoinVoice             = "e"
+LeaveVoice            = "l"
+ToggleStream          = "s"
+WatchStream           = "w"
+VoiceParticipantAudio = "a"
+ShowPinnedMessages    = "p"
+ShowThreads           = "t"
+MarkAsRead            = "m"
+ToggleMute            = "u"
+
+[keymap.message_actions]
+CopyMessage           = "y"
+TranslateMessage      = "T"
+ReactMessage          = "r"
+ReplyMessage          = "R"
+DeleteMessage         = "d"
+EditMessage           = "e"
+OpenMessageUrl        = "o"
+RemoveMessageEmbeds   = "D"
+PlayMedia             = "x"
+ViewMessageAttachment = "v"
+GoToReferencedMessage = "g"
+ShowMessageProfile    = "p"
+PinMessage            = "P"
+OpenThread            = "t"
+ShowReactionUsers     = "u"
+OpenPollVotePicker    = "c"
+
+[keymap.member_actions]
+ShowProfile = "p"
+
+[keymap.thread_actions]
+MarkAsRead           = "m"
+ToggleFollow         = "f"
+Close                = "c"
+Lock                 = "l"
+Edit                 = "e"
+CopyLink             = "y"
+ToggleMute           = "u"
+NotificationSettings = "n"
+Pin                  = "P"
+Delete               = "d"
+CopyId               = "i"
+
+[keymap.composer]
+OpenEditor           = "<C-e>"
+PasteClipboard       = "<C-v>"
+InsertNewline        = { keys = [ "<C-j>", "<S-enter>", "<C-enter>", "<A-enter>" ] }
+Submit               = "enter"
+Close                = "esc"
+ClearInput           = "<C-c>"
+RemoveLastAttachment = "delete"
+TranslateComposer    = "<C-t>"
+OpenGifPicker        = "<C-g>"
+DeletePreviousChar   = "backspace"
+DeletePreviousWord   = { keys = [ "<A-backspace>", "<C-backspace>", "<C-w>" ] }
+DeleteToLineStart    = "<C-u>"
+DeleteToLineEnd      = "<C-k>"
+MoveCursorUp         = "up"
+MoveCursorDown       = "down"
+MoveCursorWordLeft   = "<C-left>"
+MoveCursorLeft       = "left"
+MoveCursorWordRight  = "<C-right>"
+MoveCursorRight      = "right"
+MoveCursorHome       = "home"
+MoveCursorEnd        = "end"
+ToggleReplyPing      = "<A-p>"

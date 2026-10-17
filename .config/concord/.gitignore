@@ -1,0 +1,7 @@
+*
+
+!.gitignore
+!.taplo.toml 
+!config.toml 
+!keymap.toml 
+!theme.toml  
