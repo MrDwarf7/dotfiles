@@ -79,15 +79,16 @@ set -g pane-border-lines "heavy" # [ "single" | "double" | "heavy" | "simple" | 
 # set -g tree-mode-preview-format
 # set -g tree-mode-preview-style
 
-set -gq allow-passthrough on
-set -ga update-environment TERM
-set -ga update-environment TERM_PROGRAM
-
 # set -g default-terminal "screen-256color"
 # set -g default-terminal "${TERM}"
 set -g default-terminal "tmux-256color"
 set -g focus-events on            # Allow focus events
 set -a terminal-features "tmux-256color:RGB"
+
+set -gq allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
+
 # set-option -g default-terminal "${TERM}-256olor"
 ## don't do anything when a 'bell' rings
 set -g visual-activity off
