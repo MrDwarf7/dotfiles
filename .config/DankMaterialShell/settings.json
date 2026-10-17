@@ -484,7 +484,8 @@
       "useOverlayLayer": false,
       "followInterfaceStyle": false,
       "island": false,
-      "widgetFollowInterfaceStyle": false
+      "widgetFollowInterfaceStyle": false,
+      "widgetStyle": "pills"
     },
     {
       "id": "bar1772849107368",
