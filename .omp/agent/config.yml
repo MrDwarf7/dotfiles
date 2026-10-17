@@ -7,7 +7,7 @@ modelRoles:
   task: openai-codex/gpt-6-luna:auto
   tiny: openai-codex/gpt-6-luna:medium
   judge: openrouter/~typesafe/jev-latest
-  default: openai-codex/gpt-6.1-sol
+  default: anthropic/claude-opus-5-5
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -159,7 +159,7 @@ modelPresets:
       judge: openrouter/~typesafe/jev-latest
       default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto
-  full-power-coding:
+  fpc:
     modelRoles:
       advisor: openai-codex/gpt-6.1-sol:xhigh
       plan: openai-codex/gpt-6-astra:high

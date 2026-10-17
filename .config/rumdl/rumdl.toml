@@ -22,8 +22,8 @@
 # rule options are untyped there, so check the rule pages for those.
 
 [MD013]
-line-length = 80
-reflow = true    # actually wrap long prose lines
+line-length = 100
+reflow = true     # actually wrap long prose lines
 
 [MD041]
 enabled = false # skill/agent files start with YAML frontmatter, not an H1

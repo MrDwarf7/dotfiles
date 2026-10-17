@@ -39,6 +39,7 @@ if test "$DOT_OS" = darwin
     # quirk
     set -gx TLRC_CONFIG $XDG_CONFIG_HOME/tlrc/config.toml
 
+    set -gx __TAILSCALE_CMD tailscale
 end
 
 # Linux-only:
@@ -52,6 +53,8 @@ if test "$DOT_OS" = linux
     set -q XDG_DATA_HOME; or set -Ux XDG_DATA_HOME $HOME/.xdg/data; and set --append __xdg_set $XDG_DATA_HOME
     set -q XDG_STATE_HOME; or set -Ux XDG_STATE_HOME $HOME/.xdg/state; and set --append __xdg_set $XDG_STATE_HOME
     test (count $__xdg_set) -gt 0; and mkdir -p $__xdg_set
+
+    set -gx __TAILSCALE_CMD "sudo tailscale"
 end
 
 # LATER: ghostty os.conf symlink is not a fish concern. One-shot python/dotlink.

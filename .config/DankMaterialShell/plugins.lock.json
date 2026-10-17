@@ -4,11 +4,11 @@
     "dankDesktopWeather": {
       "repo": "https://github.com/AvengeMedia/dms-plugins",
       "path": "DankDesktopWeather",
-      "commit": "cb66135b0af01eacb25f3a656dc86fb727fa02cf"
+      "commit": "a8a508bc371e7c3f2c7862d8840b88cf5c63978f"
     },
     "githubInbox": {
       "repo": "https://github.com/TMS-Namespace/DMS-GitHub-Inbox-Plugin",
-      "commit": "27b339fe6a1b3192e7b4c0c0e3bc7449fa62e0b8"
+      "commit": "be8d7c14a6c58e92cff2fb494adeb0ed0b546fa5"
     },
     "wallpaperCarousel": {
       "repo": "https://github.com/motor-dev/wallpaperCarousel",

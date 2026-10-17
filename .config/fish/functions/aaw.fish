@@ -26,5 +26,5 @@ function aaw --wraps=source --description 'Jj workspace picker via fzf'
 
     cd (jj workspace root --name $name); and return 0
     or cd $where; and return 0
-    or echo "Failed to change directory to workspace root or location." && return 1
+    or echo "Failed to change directory to workspace root or location."; and return 1
 end

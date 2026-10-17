@@ -13,6 +13,12 @@ set -g TAILSCALE_PROFILE_WORK d192
 set -g TAILSCALE_PROFILES_LIST home work
 set -g TAILSCALE_PROFILES_LIST_OUTPUT "home : $TAILSCALE_PROFILE_HOME" "work : $TAILSCALE_PROFILE_WORK"
 
+# set in the 00-os.fish file -- if needed
+## darwin
+# set -gx __TAILSCALE_CMD tailscale
+## linux
+# set -gx __TAILSCALE_CMD "sudo tailscale"
+
 function __ts_list --description "List available Tailscale profiles"
     tailscale switch --list; or begin
         colorize red "Failed to list Tailscale profiles\n"
