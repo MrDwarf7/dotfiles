@@ -1,34 +1,209 @@
+// Only values that differ from Zed's defaults (`zed: open default settings`).
 {
+  "vim_mode": true,
+  "vim": {
+    "use_smartcase_find": true,
+    "highlight_on_yank_duration": 65,
+    "cursor_shape": {
+      "insert": "bar"
+    }
+  },
+  // Shows Zed's pending-binding popup for the space leader, like which-key.nvim.
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 20
+  },
+  "relative_line_numbers": "enabled",
+  "vertical_scroll_margin": 2,
+  "cursor_blink": false,
+  "use_smartcase_search": true,
+  "search": {
+    // Gives vim's n/N the same recentring as nvim's nzzzv.
+    "center_on_match": true,
+    "regex": true
+  },
+  "seed_search_query_from_cursor": "selection",
+  "scrollbar": {
+    "show": "never"
+  },
+  "preferred_line_length": 120,
+  "wrap_guides": [100, 120],
+
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Tokyo Night Storm"
+  },
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Material Icon Theme",
+    "dark": "Material Icon Theme"
+  },
+  "ui_font_size": 15,
+  "ui_font_family": ".ZedMono",
+  "buffer_font_size": 14,
+  "buffer_line_height": "standard",
+  "buffer_font_features": {
+    "calt": false,
+    "clig": false,
+    "liga": false,
+    "zero": true
+  },
+  "terminal": {
+    "default_height": 400,
+    "font_family": "Mononoki Nerd Font Mono",
+    "font_features": {
+      "calt": false,
+      "clig": false,
+      "liga": false,
+      "zero": true
+    }
+  },
+  "auto_install_extensions": {
+    "assembly": true,
+    "biome": true,
+    "catppuccin": true,
+    "colored-zed-icons-theme": true,
+    "colorizer": true,
+    "csharp": true,
+    "csv": true,
+    "deno": true,
+    "docker-compose": true,
+    "dockerfile": true,
+    "emmet": true,
+    "fish": true,
+    "git-firefly": true,
+    "gleam": true,
+    "graphene": true,
+    "html": true,
+    "ini": true,
+    "just": true,
+    "kdl": true,
+    "log": true,
+    "lua": true,
+    "make": true,
+    "markdown-oxide": true,
+    "marksman": true,
+    "material-icon-theme": true,
+    "meson": true,
+    "neocmake": true,
+    "new-darcula": true,
+    "nix": true,
+    "nu": true,
+    "powershell": true,
+    "prisma": true,
+    "proto": true,
+    "ron": true,
+    "sql": true,
+    "the-dark-side": true,
+    "tmux": true,
+    "tokyo-night": true,
+    "toml": true,
+    "xy-zed": true,
+    "zedokai": true,
+    "zig": true
+  },
+  "auto_update_extensions": {
+    "biome": true
+  },
+
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "title_bar": {
+    "show_onboarding_banner": false,
+    "show_branch_status_icon": true
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "git_status": true,
+    "show_diagnostics": "all"
+  },
+  "toolbar": {
+    "quick_actions": false
+  },
+  "project_panel": {
+    "dock": "left",
+    "button": false
+  },
   "outline_panel": {
     "dock": "left"
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "right"
   },
-  "agent_ui_font_size": 16.0,
-  "session": {
-    "trust_all_worktrees": true,
+  "git_panel": {
+    "dock": "left",
+    "default_width": 320
   },
+  "preview_tabs": {
+    "enable_keep_preview_on_code_navigation": true
+  },
+  "hide_mouse": "on_typing_and_action",
   "use_autoclose": false,
   "use_auto_surround": false,
-  "completions": {
-    "words_min_length": 2,
-  },
   "sticky_scroll": {
-    "enabled": true,
+    "enabled": true
   },
-  "edit_predictions": {
-    "provider": "copilot",
+  "unnecessary_code_fade": null,
+  "show_signature_help_after_edits": true,
+  "lsp_highlight_debounce": 50,
+  "completions": {
+    "words_min_length": 2
   },
+  "diagnostics": {
+    "inline": {
+      "enabled": true
+    }
+  },
+  "git": {
+    "gutter_debounce": null,
+    "hunk_style": "unstaged_hollow"
+  },
+  "indent_guides": {
+    "coloring": "indent_aware"
+  },
+  "file_scan_exclusions": ["**/target/**"],
+  "private_files": [
+    "**/.env*",
+    "**/config/*.toml",
+    "**/config/*.json",
+    "**/config/*.env*",
+    "**/config/*.yml",
+    "**/config/*.yaml",
+    "**/config/*.lock"
+  ],
+  "load_direnv": "shell_hook",
   "calls": {
-    "mute_on_join": true,
+    "mute_on_join": true
   },
+  "ssh_connections": [
+    {
+      "nickname": "nixbook",
+      "host": "nixbook",
+      "port": 22,
+      "username": "dwarf",
+      "upload_binary_over_ssh": true
+    }
+  ],
+
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "agent_ui_font_size": 16.0,
+  "agent_buffer_font_size": 14.0,
   "agent": {
     "dock": "right",
+    "default_width": 700,
     "profiles": {
       "write": {
         "name": "Write",
         "tools": {
+          "search_web": true,
           "copy_path": true,
           "create_directory": true,
           "delete_path": true,
@@ -47,15 +222,14 @@
           "grep": true,
           "spawn_agent": true,
           "terminal": true,
-          "thinking": true,
-          "web_search": true
+          "thinking": true
         },
         "enable_all_context_servers": true,
         "context_servers": {}
       }
     },
     "tool_permissions": {
-      "default": "allow",
+      "default": "allow"
     },
     "favorite_models": [
       {
@@ -70,26 +244,22 @@
       }
     ],
     "inline_assistant_model": {
-      // "provider": "copilot_chat",
-      // "model": "gpt-4o",
       "provider": "openrouter",
-      "model": "nvidia/nemotron-3-nano-30b-a3b",
+      "model": "nvidia/nemotron-3-nano-30b-a3b"
     },
-    "default_profile": "write",
     "default_model": {
       "enable_thinking": true,
       "provider": "openrouter",
-      "model": "openrouter/hunter-alpha",
-    },
-    "default_width": 700,
+      "model": "openrouter/hunter-alpha"
+    }
   },
   "agent_servers": {
     "opencode": {
-      "type": "extension",
+      "type": "registry",
       "favorite_models": ["opencode/grok-code", "openrouter/hunter-alpha"],
       "default_config_options": {},
-      "favorite_config_option_values": {},
-    },
+      "favorite_config_option_values": {}
+    }
   },
   "language_models": {
     "openai_compatible": {
@@ -137,245 +307,71 @@
               "images": false,
               "parallel_tool_calls": true,
               "prompt_cache_key": false,
-              "chat_completions": true,
-            },
-          },
-        ],
-      },
-    },
+              "chat_completions": true
+            }
+          }
+        ]
+      }
+    }
   },
-  "title_bar": {
-    "show_branch_icon": true,
-    "show_onboarding_banner": false,
-  },
-  "project_panel": {
-    "dock": "left",
-    "button": false,
-  },
-  "search": {
-    "center_on_match": true,
-    "regex": true,
-  },
-  "hover_popover_delay": 300,
-  "agent_buffer_font_size": 14.0,
   "context_servers": {
     "prisma-mcp": {
       "enabled": false,
       "remote": false,
-      "settings": {},
+      "settings": {}
     },
     "mcp-server-nextjs": {
       "enabled": true,
-      "settings": {},
+      "settings": {}
     },
     "shadcn-mcp-server": {
       "enabled": true,
-      "settings": {},
+      "settings": {}
     },
     "bun-docs": {
-      "settings": {},
-
       "url": "https://bun.com/docs/mcp",
       "enabled": false,
       "headers": {},
+      "settings": {}
     },
-
     "MCP_DOCKER": {
       "enabled": true,
       "command": "docker",
       "args": ["mcp", "gateway", "run"],
-      "env": {},
-    },
-    "docker-mcp": {
-      "enabled": true,
-      "command": "docker",
-      "args": ["mcp", "gateway", "run"],
-      "env": {},
+      "env": {}
     },
     "container-use-mcp": {
       "enabled": true,
-      "settings": {},
+      "settings": {}
     },
     "mcp-server-context7": {
       "enabled": true,
       "settings": {
-        "context8_api_key": "${CONTEXT7_API_KEY}",
-      },
+        "context7_api_key": "${CONTEXT7_API_KEY}"
+      }
     },
     "Context7": {
       "enabled": false,
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"],
+      "args": ["-y", "@upstash/context7-mcp"]
     },
     "postgres-context-server": {
       "enabled": true,
-      "settings": {},
+      "settings": {}
     },
     "mcp-server-linear": {
       "enabled": false,
       "command": "npx",
       "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
-      "env": {},
-    },
+      "env": {}
+    }
   },
-  "lsp_highlight_debounce": 50,
-  "auto_update_extensions": {
-    "biome": true,
-  },
-  "file_finder": {
-    "file_icons": true,
-  },
-  "auto_signature_help": false,
-  "auto_update": true,
-  "current_line_highlight": "all",
-  "cursor_shape": "bar",
-  "diagnostics": {
-    "include_warnings": true,
-    "inline": {
-      "enabled": true,
-      "update_debounce_ms": 150,
-      "padding": 4,
-      "min_column": 0,
-      "max_severity": null,
-    },
-  },
-  "enable_language_server": true,
-  "file_scan_exclusions": ["**/target/**"],
-  "git": {
-    "git_gutter": "tracked_files",
-    "gutter_debounce": null,
-    "inline_blame": {
-      "enabled": true,
-      "delay_ms": 0,
-    },
-    "hunk_style": "unstaged_hollow",
-  },
-  "git_panel": {
-    "dock": "left",
-    "default_width": 320,
-  },
-  "hide_mouse": "on_typing_and_movement",
-  "icon_theme": "Material Icon Theme",
-  "jsx_tag_auto_close": {
-    "enabled": true,
-  },
-  "message_editor": {
-    "auto_replace_emoji_shortcode": true,
-  },
-  "load_direnv": "shell_hook",
-  "private_files": [
-    "**/.env*",
-    "**/config/*.toml",
-    "**/config/*.json",
-    "**/config/*.env*",
-    "**/config/*.yml",
-    "**/config/*.yaml",
-    "**/config/*.lock",
-  ],
-  "preview_tabs": {
-    "enable_keep_preview_on_code_navigation": true,
-  },
-  "scroll_beyond_last_line": "one_page",
-  "seed_search_query_from_cursor": "selection",
-  "selection_highlight": true,
-  "show_signature_help_after_edits": true,
-  "ssh_connections": [
-    {
-      "nickname": "nixbook",
-      "host": "nixbook",
-      "port": 22,
-      "username": "dwarf",
-      "upload_binary_over_ssh": true,
-    },
-  ],
-  "slash_commands": {
-    "cargo_workspace": {
-      "enabled": true,
-    },
-  },
-  "tab_bar": {
-    "show_nav_history_buttons": false,
-    "show_tab_bar_buttons": false,
-  },
-  "tabs": {
-    "activate_on_close": "history",
-    "file_icons": true,
-    "git_status": true,
-    "show_diagnostics": "all",
-  },
-  "toolbar": {
-    "breadcrumbs": true,
-    "quick_actions": false,
-    "selections_menu": true,
-  },
-  "unnecessary_code_fade": null,
-  "use_smartcase_search": true,
-  "when_closing_with_no_tabs": "platform_default",
-  "vim_mode": true,
-  "preferred_line_length": 120,
-  "show_wrap_guides": true,
-  "wrap_guides": [100, 120],
-  "soft_wrap": null,
-  "ui_font_size": 15,
-  // "ui_font_family": ".Zed Plex Mono",
-  "ui_font_family": ".ZedMono",
-  "ui_font_weight": 400,
-  "ui_font_features": {
-    "calt": false,
-  },
-  "buffer_line_height": "standard",
-  "buffer_font_size": 14,
-  // "buffer_font_family": "Zed Plex Mono",
-  "buffer_font_family": ".ZedMono",
-  "buffer_font_features": {
-    "calt": false,
-    "clig": false,
-    "liga": false,
-    "zero": true,
-  },
-  "cursor_blink": false,
-  "relative_line_numbers": "enabled",
-  "terminal": {
-    "default_height": 400,
-    "line_height": "standard",
-    "font_family": "Mononoki Nerd Font Mono",
-    "font_features": {
-      "calt": false,
-      "clig": false,
-      "liga": false,
-      "zero": true,
-    },
-    "shell": null,
-  },
-  "scrollbar": {
-    "show": "never",
-  },
-  "vertical_scroll_margin": 2,
-  "show_call_status_icon": true,
-  "show_completion_documentation": true,
-  "show_completions_on_input": true,
-  "gutter": {
-    "line_numbers": true,
-    "folds": true,
-    "runnables": true,
-    "breakpoints": true,
-    "min_line_number_digits": 4,
-  },
-  "theme": "Tokyo Night Storm",
-  "indent_guides": {
-    "enabled": true,
-    "line_width": 1,
-    "active_line_width": 1,
-    "coloring": "indent_aware",
-    "background_coloring": "disabled",
-  },
-  "show_edit_predictions": true,
 
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
         "check": {
-          "command": "clippy",
+          "command": "clippy"
         },
         "completion": {
           "snippets": {
@@ -384,50 +380,50 @@
                 "postfix": "arc",
                 "body": ["Arc::new(${receiver})"],
                 "requires": "std::sync::Arc",
-                "scope": "expr",
+                "scope": "expr"
               },
               "Some": {
                 "postfix": "some",
                 "body": ["Some(${receiver})"],
-                "scope": "expr",
+                "scope": "expr"
               },
               "Ok": {
                 "postfix": "ok",
                 "body": ["Ok(${receiver})"],
-                "scope": "expr",
+                "scope": "expr"
               },
               "Rc::new": {
                 "postfix": "rc",
                 "body": ["Rc::new(${receiver})"],
                 "requires": "std::rc::Rc",
-                "scope": "expr",
+                "scope": "expr"
               },
               "Box::pin": {
                 "postfix": "boxpin",
                 "body": ["Box::pin(${receiver})"],
                 "requires": "std::boxed::Box",
-                "scope": "expr",
+                "scope": "expr"
               },
               "vec!": {
                 "postfix": "vec",
                 "body": ["vec![${receiver}]"],
                 "description": "vec![]",
-                "scope": "expr",
-              },
-            },
-          },
-        },
-      },
+                "scope": "expr"
+              }
+            }
+          }
+        }
+      }
     },
     "nixd": {
       "initialization_options": {
         "experimental": {
           "nix": {
             "enableNix": true,
-            "enableNixFlake": true,
-          },
-        },
-      },
+            "enableNixFlake": true
+          }
+        }
+      }
     },
     "tailwindcss-language-server": {
       "settings": {
@@ -441,11 +437,11 @@
             "\\.classList\\.toggle\\(['\"]([^'\"]*)['\"]",
             "\\.classList\\.contains\\(['\"]([^'\"]*)['\"]",
             "\\.classList\\.replace\\(\\s*['\"]([^'\"]*)['\"]",
-            "\\.classList\\.replace\\([^,)]+,\\s*['\"]([^'\"]*)['\"]",
-          ],
-        },
-      },
-    },
+            "\\.classList\\.replace\\([^,)]+,\\s*['\"]([^'\"]*)['\"]"
+          ]
+        }
+      }
+    }
   },
   "languages": {
     "C": {
@@ -455,8 +451,8 @@
       "completions": {
         "lsp": true,
         "lsp_fetch_timeout_ms": 0,
-        "words_min_length": 2,
-      },
+        "words_min_length": 2
+      }
     },
     "Python": {
       "format_on_save": "on",
@@ -464,64 +460,37 @@
       "formatter": "language_server",
       "completions": {
         "lsp": true,
-        "words_min_length": 1,
-      },
+        "words_min_length": 1
+      }
     },
     "TOML": {
       "inlay_hints": {
-        "enabled": true,
-      },
+        "enabled": true
+      }
     },
     "Nix": {
       "inlay_hints": {
         "enabled": true,
         "show_other_hints": true,
         "show_type_hints": true,
-        "show_parameter_hints": true,
+        "show_parameter_hints": true
       },
       "formatter": {
         "external": {
-          "command": "alejandra",
-        },
-      },
+          "command": "alejandra"
+        }
+      }
     },
     "TypeScript": {
       "colorize_brackets": true,
       "completions": {
-        "lsp": false,
+        "lsp": false
       },
       "enable_language_server": true,
       "prettier": {
-        "allowed": false,
+        "allowed": false
       },
-      "formatter": "language_server",
-    },
-  },
-  "inlay_hints": {
-    "enabled": false,
-    "show_type_hints": true,
-    "show_parameter_hints": true,
-    "show_other_hints": true,
-    "edit_debounce_ms": 700,
-    "scroll_debounce_ms": 50,
-    // "maxLength": null
-  },
-  "vim": {
-    "default_mode": "normal",
-    "toggle_relative_line_numbers": true,
-    "use_system_clipboard": "always",
-    "use_smartcase_find": true,
-    "highlight_on_yank_duration": 65,
-    "cursor_shape": {
-      "insert": "bar",
-      "normal": "block",
-      "replace": "underline",
-      "visual": "block",
-    },
-    // "use_multiline_find": true,
-  },
-  "which_key": {
-    "enabled": true, // default: false
-    "delay_ms": 20, // default: 1000
-  },
+      "formatter": "language_server"
+    }
+  }
 }

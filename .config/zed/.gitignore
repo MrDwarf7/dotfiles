@@ -1,8 +1,22 @@
-keys.jsonc
-./keys.jsonc
-/keys.jsonc
+*
+!/.gitignore
+!/keymap.json
+!/settings.json
+!/AGENTS.md
+!/themes/
+!/themes/*.json
+!/prompts/
+!/prompts/**/
+!/prompts/**/*.md
+!/prompts/**/*.txt
 
-keys.*
-./keys.*
-/keys.*
-settings_backup.json
+# Preserve the binary prompt library locally; review exports before tracking.
+# data.mdb and lock.mdb remain ignored by the default rule.
+
+# Never include credential or backup files through the directory exceptions.
+**/keys.*
+**/.env*
+**/*credentials*
+**/*secrets*
+**/*.bak*
+**/*_backup*
