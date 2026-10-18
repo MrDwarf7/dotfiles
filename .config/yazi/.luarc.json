@@ -14,8 +14,7 @@
 		"~/.config/yazi/plugins/relative-motions.yazi/",
 		"~/.config/yazi/plugins/rich-preview.yazi/",
 		"~/.config/yazi/plugins/smart-enter.yazi/",
-		"~/.config/yazi/plugins/toggle-pane.yazi/",
-		"~/.config/yazi/plugins/types.yazi/"
+		"~/.config/yazi/plugins/toggle-pane.yazi/"
 	],
 	"diagnostics.globals": [
 		"Status",

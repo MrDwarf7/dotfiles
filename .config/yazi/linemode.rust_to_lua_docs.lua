@@ -1,0 +1,141 @@
+
+-- This is where Linemode and it's parts can be found
+--
+-- Linemode (lua struct)
+-- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/components/linemode.lua
+--
+-- Which sets it's own metatable { _file = file }
+-- ->  Lua code (not very imp)
+-- https://github.com/sxyazi/yazi/blob/main/yazi-plugin/preset/plugins/file.lua
+--
+-- Rust code def for File (the embedded one!)
+-- https://github.com/sxyazi/yazi/blob/9561890a4fff608a2c435f7ea001af79a32b0ad3/yazi-fs/src/file/file.rs#L10-L15
+--
+-- This is where we Serialize the `File` struct!
+-- https://github.com/sxyazi/yazi/blob/d6632d05c77683110256cd72f50d2fa2c7621f36/yazi-fs/src/file/file.rs#L116-L130
+--
+--
+-- #[derive(Clone, Debug, Default, Deserialize)]
+-- pub struct File {
+-- 	pub url:   UrlBuf,
+-- 	pub stat:  Stat,
+-- 	#[serde(flatten)]
+-- 	pub extra: FileExtra,
+-- }
+--
+-- The `pub stat: Stat` struct is what we care about:
+-- It can be found here:
+-- https://github.com/sxyazi/yazi/blob/9561890a4fff608a2c435f7ea001af79a32b0ad3/yazi-fs/src/stat/stat.rs#L14-L26
+--
+--#[derive(Clone, Copy, Debug, Deserialize, Eq, FromLua, PartialEq, Serialize)]
+-- pub struct Stat {
+-- 	pub kind:  StatKind,
+-- 	pub mode:  StatMode,
+-- 	pub len:   u64,
+-- 	pub atime: Option<Time>,
+-- 	pub btime: Option<Time>,
+-- 	pub ctime: Option<Time>,
+-- 	pub mtime: Option<Time>,
+-- 	pub dev:   u64,
+-- 	pub uid:   u32,
+-- 	pub gid:   u32,
+-- 	pub nlink: u64,
+-- }
+--
+-- Those `Option<Time>` structs are _IN-HOUSE_ time types...
+--https://github.com/sxyazi/yazi/blob/9561890a4fff608a2c435f7ea001af79a32b0ad3/yazi-binding/src/time/time.rs#L11-L13
+-- #[derive(Clone, Copy, Debug, Deserialize, Eq, Hash, Ord, PartialEq, PartialOrd, Serialize)]
+-- #[serde(transparent)]
+-- pub struct Time(DateTime<Utc>);
+--
+--
+-- Locale type on the `fn add_methods<M: UserDataMethods<Self>>(methods: &mut M)`
+-- https://github.com/sxyazi/yazi/blob/9561890a4fff608a2c435f7ea001af79a32b0ad3/yazi-ffi/src/locale/locale.rs#L8-L17
+--
+--#[derive(Clone, Copy, Default)]
+-- pub struct Locale {
+-- 	pub(super) year:       Width,
+-- 	pub(super) month:      Width,
+-- 	pub(super) day:        Width,
+-- 	pub(super) hour12:     Width,
+-- 	pub(super) hour24:     Width,
+-- 	pub(super) hour_am_pm: Width,
+-- 	pub(super) minute:     Width,
+-- 	pub(super) second:     Width,
+-- }
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+--
+------
+--- The rest of the Rust code that makes up the Time struct:
+---
+-- impl FromLua for Time {
+-- 	fn from_lua(value: Value, _: &Lua) -> mlua::Result<Self> {
+-- 		match value {
+-- 			Value::UserData(ud) => Ok(*ud.borrow::<Self>()?),
+-- 			Value::Integer(secs) => Ok(secs.try_into()?),
+-- 			Value::Number(secs) => Ok(secs.try_into()?),
+-- 			Value::String(value) => value.to_str()?.parse().into_lua_err(),
+-- 			value => Err(
+-- 				format!("expected a Time, Unix timestamp, or RFC3339 string, got {}", value.type_name())
+-- 					.into_lua_err(),
+-- 			),
+-- 		}
+-- 	}
+-- }
+--
+-- impl UserData for Time {
+-- 	fn add_fields<F: UserDataFields<Self>>(fields: &mut F) {
+-- 		fields.add_field_method_get("unix", |_, me| Ok(f64::from(*me)));
+-- 		fields.add_field_method_get("year", |_, me| Ok(me.with_timezone(&Local).year()));
+-- 		fields.add_field_method_get("month", |_, me| Ok(me.with_timezone(&Local).month()));
+-- 		fields.add_field_method_get("day", |_, me| Ok(me.with_timezone(&Local).day()));
+-- 		fields.add_field_method_get("hour", |_, me| Ok(me.with_timezone(&Local).hour()));
+-- 		fields.add_field_method_get("minute", |_, me| Ok(me.with_timezone(&Local).minute()));
+-- 		fields.add_field_method_get("second", |_, me| Ok(me.with_timezone(&Local).second()));
+-- 	}
+--
+-- 	fn add_methods<M: UserDataMethods<Self>>(methods: &mut M) {
+-- 		methods.add_method("format", |lua, me, value: Value| {
+-- 			Ok(match value {
+-- 				Value::String(s) => me.format(&s.to_str()?)?,
+-- 				v @ Value::Table(_) => Locale::from_lua(v, lua)?.format(me.0),
+-- 				_ => Err("expected a format string or options table".into_lua_err())?,
+-- 			})
+-- 		});
+--
+-- 		methods.add_meta_method(MetaMethod::Add, |_, me, secs: f64| Ok((*me + secs)?));
+-- 		methods.add_meta_method(MetaMethod::Sub, |lua, me, value: Value| match value {
+-- 			Value::UserData(ud) => (*me - *ud.borrow::<Self>()?).into_lua(lua),
+-- 			Value::Integer(secs) => (*me - secs)?.into_lua(lua),
+-- 			Value::Number(secs) => (*me - secs)?.into_lua(lua),
+-- 			_ => Err("expected a Time or number of seconds".into_lua_err()),
+-- 		});
+--
+-- 		methods.add_meta_method(MetaMethod::Eq, |_, me, other: UserDataRef<Self>| Ok(*me == *other));
+-- 		methods.add_meta_method(MetaMethod::Lt, |_, me, other: UserDataRef<Self>| Ok(*me < *other));
+-- 		methods.add_meta_method(MetaMethod::Le, |_, me, other: UserDataRef<Self>| Ok(*me <= *other));
+-- 		methods.add_meta_method(MetaMethod::ToString, |_, me, ()| Ok(Locale::strftime(me.0)));
+--
+-- 		if !LOG_LEVEL.get().is_none() {
+-- 			methods.add_meta_function(MetaMethod::ToDebugString, |_, ud: AnyUserData| {
+-- 				Ok(format!("Time({:?}): {}", ud.to_pointer(), ud.borrow::<Self>()?.to_rfc3339()))
+-- 			});
+-- 		}
+-- 	}
+-- }

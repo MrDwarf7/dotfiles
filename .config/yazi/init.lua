@@ -11,29 +11,130 @@ th.git.added_sign = "A"
 th.git.untracked_sign = "U"
 th.git.updated_sign = "u"
 
-function Linemode:mtime_better()
-	local time = math.floor(self._file.cha.mtime or 0)
-	if time == 0 then
-		time = ""
+---@enum TimeStampAmPm
+local ts_am_pm = { AM = "AM", PM = "PM" }
+
+---@enum TimeStampFormat
+local time_hours_fmt = { twelve_hour = "12-hour", twenty_four_hour = "24-hour" }
+
+--- Easier to modify in a single spot :)
+local TIME_FMT = time_hours_fmt.twelve_hour
+
+---@type datetime
+local datetime = { sep = "-" }
+
+function datetime.new(t)
+	---@type datetime
+	local dt = {}
+	dt.year = t.year or ""
+	dt.month = t:format({ month = "2-digit" }) or ""
+	dt.day = t:format({ day = "2-digit" }) or ""
+	dt.sep = "-"
+	return setmetatable(dt, { __index = datetime })
+end
+
+function datetime:build()
+	return string.format("%s%s%s%s%s", self.year, self.sep, self.month, self.sep, self.day)
+end
+
+---@type timestamp
+local timestamp = {
+	hours_fmt = TIME_FMT,
+	sep = ":",
+}
+
+function timestamp.new(t, fmt)
+	---@type timestamp
+	local ts = {}
+	ts.hour12 = t:format({ hour12 = "2-digit" }) or os.date("%I", t.unix or os.time()) or ""
+	ts.hour24 = t:format({ hour24 = "2-digit" }) or os.date("%H", t.unix or os.time()) or ""
+	ts.minute = t:format({ minute = "2-digit" }) or os.date("%M", t.unix or os.time()) or ""
+	ts.hours_fmt = fmt or timetamp.hours_fmt or TIME_FMT
+	ts.am_or_pm = t.hour < 12 and ts_am_pm.AM or ts_am_pm.PM
+	ts.sep = ":"
+	return setmetatable(ts, { __index = timestamp })
+end
+
+function timestamp:build_twelve()
+	return string.format("%s%s%s %s", self.hour12, self.sep, self.minute, self.am_or_pm)
+end
+
+function timestamp:build_military()
+	return string.format("%s%s%s", self.hour24, self.sep, self.minute)
+end
+
+function timestamp:build(fmt)
+	fmt = fmt or self.hours_fmt or TIME_FMT
+	if fmt == time_hours_fmt.twelve_hour then
+		return self:build_twelve()
 	else
-		time = os.date("%Y-%m-%d %I:%M %p", time)
+		return self:build_military()
+	end
+end
+
+---@type shape
+local shape = {
+	sep = " | ",
+	-- date_component = nil,
+	-- timestamp_component = nil,
+}
+
+function shape.new(t, fmt)
+	---@type shape
+	local s = {}
+	s.sep = " | "
+	s.date_component = datetime.new(t)
+	s.timestamp_component = timestamp.new(t, fmt or nil)
+	return setmetatable(s, { __index = shape })
+end
+function shape:build()
+	return string.format("%s%s%s", self.date_component:build(), self.sep, self.timestamp_component:build())
+end
+
+function Linemode:mtime_better()
+	---@type Time | nil
+	local time = self._file.stat.mtime
+	if not time or time == 0 then
+		return ""
 	end
 
-	return ui.Line(string.format("%s", time))
-	--- If you want to also have the file size displayed all the time
-	-- local size = self._file:size()
-	-- return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "", time))
+	--- With `<size> <date> | <time>` format
+	-- return ui.Line(string.format("%s %s", self._file:size() or "", shape.new(time, TIME_FMT):build()))
+
+	--- With `<date> | <time>` format
+	return ui.Line(shape.new(time, TIME_FMT):build())
 end
 
 function Linemode:ctime_better()
-	local time = math.floor(self._file.cha.created or 0)
-	if time == 0 then
-		time = ""
-	else
-		time = os.date("%Y-%m-%d | %I:%M %p", time)
+	-- 	time = os.date("%Y-%m-%d | %I:%M %p", time)
+	-- local size = self._file:size()
+	-- return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "", time))
+	local stat = self._file.stat
+
+	local time = stat.ctime
+	if not time or time == 0 then
+		return ""
 	end
 
-	return ui.Line(string.format("%s", time))
+	return ui.Line(
+		--
+		string.format(
+			"%s %s",
+			shape.new(time, TIME_FMT):build(),
+			stat.len or 0
+			--
+		)
+	)
+
+	-- local time = math.floor(self._file.cha.created or 0)
+	-- if time == 0 then
+	-- 	time = ""
+	-- else
+	-- 	time = os.date("%Y-%m-%d | %I:%M %p", time)
+	-- end
+	--
+	-- -- return ui.Line(string.format("%s", time))
+	-- return string.format("%s", time)
 	--- If you want to also have the file size displayed all the time
 	-- local size = self._file:size()
 	-- return ui.Line(string.format("%s %s", size and ya.readable_size(size) or "", time))
