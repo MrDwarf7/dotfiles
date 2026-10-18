@@ -23,3 +23,6 @@ hypr_zbak_*
 
 *_BAK/
 *_bak/
+
+# Keep the frozen Zed snapshot out of automatic tracking.
+/zed_BAK_dots/

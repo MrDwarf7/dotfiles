@@ -12,6 +12,7 @@ prefer_editor_prompt: disabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
+  v: repo view --web
   co: pr checkout
   sm: stack merge
   prm: pr merge -d -m

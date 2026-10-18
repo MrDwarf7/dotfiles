@@ -92,8 +92,9 @@ function shape:build()
 end
 
 function Linemode:mtime_better()
+	local meta = self._file.stat or self._file.cha
 	---@type Time | nil
-	local time = self._file.stat.mtime
+	local time = meta.mtime
 	if not time or time == 0 then
 		return ""
 	end
