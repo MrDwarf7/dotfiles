@@ -198,7 +198,7 @@ local __base_rules = {
     match = { tag = bkt_types.TERMINALS },
     border_size = 0,
     persistent_size = true,
-    -- opacity = OPACITY_OVERRIDE,
+    -- opacity = OPACITY_OVERRIDE, --- let ghostty itself handle its own opacity & blur surface!
     -- size = "(monitor_w*0.40) (monitor_h*0.65)",
   },
 

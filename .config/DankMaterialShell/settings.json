@@ -225,7 +225,9 @@
       "enabled": true,
       "w": 4,
       "h": 1,
-      "footer": true
+      "small": true,
+      "col": 0,
+      "row": 7
     },
     {
       "id": "edit",
@@ -233,8 +235,8 @@
       "w": 1,
       "h": 1,
       "small": true,
-      "footer": true,
-      "footerEnd": true
+      "col": 7,
+      "row": 7
     }
   ],
   "audioVisualizerEnabled": false,
@@ -623,7 +625,7 @@
   },
   "frameMode": "separate",
   "frameBarInsetPadding": 16,
-  "configVersion": 40,
+  "configVersion": 42,
   "hyprlandGroupbarBlur": false,
   "blurBorderEnabled": true,
   "blurBorderSeeded": true,
