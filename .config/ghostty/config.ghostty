@@ -36,14 +36,21 @@ window-padding-x = 4
 window-padding-y = 2
 window-padding-balance = true
 
+## These 2 things are OVERWRITTEN by the os.conf file sourcing below (if it exists)
+background-opacity = 0.95
+background-blur = 95
 
 # Remove annoying popup thing at bottom
 app-notifications = no-clipboard-copy
 # ,no-config-reload
 
+# Allow it
+quit-after-last-window-closed = true
+# But delay the actual closing of the BG daeomon by 5m
+quit-after-last-window-closed-delay = 5m
+
 #### uncomment after fixing up Niri
 # background-blur = 10
-# background-blur = 35
 
 # window-decoration = none
 
@@ -72,8 +79,6 @@ font-family = Mononoki Nerd Font Mono
 # font-size = 10.2
 font-thicken = false
 
-# OS overlay (os.conf -> os-linux.conf or os-darwin.conf). Later keys win.
-config-file = ?os.conf
 
 # ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
 # ss04 - use normal g ( with the gap on the left, like a lowercase Y )
@@ -97,3 +102,5 @@ gtk-tabs-location = bottom
 gtk-wide-tabs = false
 
 config-file = keys.conf
+# OS overlay (os.conf -> os-linux.conf or os-darwin.conf). Later keys win.
+config-file = ?os.conf
