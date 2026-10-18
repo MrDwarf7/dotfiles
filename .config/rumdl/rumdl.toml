@@ -21,6 +21,12 @@
 # The schema only covers [global], [code-block-tools] and per-rule `severity`;
 # rule options are untyped there, so check the rule pages for those.
 
+[global]
+exclude = ["vendor/**", "target/**"]
+
+[per-file-ignores]
+"README.md" = ["MD033"]
+
 [MD013]
 line-length = 100
 reflow = true     # actually wrap long prose lines
