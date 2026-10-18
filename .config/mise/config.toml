@@ -47,6 +47,10 @@ version = "latest"
 [tools."npm:mitata"]
 version = "latest"
 
+[tools."npm:vercel"]
+features = ["optional"]
+version = "latest"
+
 ####################################################################################################
 
 ## Cargo / Cargo install / Cargo binstall / Rust / Rustup Tools
