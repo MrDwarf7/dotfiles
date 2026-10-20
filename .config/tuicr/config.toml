@@ -16,7 +16,7 @@ wrap = false
 relative_line_numbers = true
 cursor_line = true
 transparent_background = true
-scroll_offset = 5
+scroll_offset = 4
 no_update_check = false
 review_watch_interval_ms = 1000
 
