@@ -389,6 +389,16 @@ dv = ['util', 'exec', '--', 'bash', '-c', 'jj diff --git']
 
 d = ['diff']
 dr = ['diff', '-r']
+ds = ['diff', "--stat"]
+dss = [
+  #
+  'util',
+  'exec',
+  '--',
+  'bash',
+  '-c',
+  "jj diff --stat | tail -n 1",
+]
 
 
 ## Hunk
