@@ -1,0 +1,19 @@
+# Port of fish sysup_mirror / rate-mirrors.
+# rate-mirrors refuses euid 0, so this runs as the user into a temp file.
+# 15-stage copies it onto the /etc fs; 17-swap rename(2)s it into place.
+name = "mirror"
+alias = "m"
+description = "Update pacman mirrorlist via rate-mirrors"
+command = [
+  "rate-mirrors",
+  "--save",
+  "/tmp/sysup-mirrorlist",
+  "--max-per-mirror",
+  "90000",
+  "--entry-country",
+  "AUS",
+  "--top-mirrors-number-to-retest",
+  "15",
+  "--disable-comments-in-file",
+  "arch",
+]

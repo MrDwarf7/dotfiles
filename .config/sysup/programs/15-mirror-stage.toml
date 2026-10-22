@@ -1,0 +1,17 @@
+# Copy the complete list onto the dest filesystem. install writes
+# mirrorlist.new, never the live path, so a crash here leaves /etc intact.
+name        = "mirror-stage"
+alias       = "mt"
+description = "Stage mirrorlist onto the /etc filesystem"
+command     = [
+  "sudo",
+  "install",
+  "-o",
+  "root",
+  "-g",
+  "root",
+  "-m",
+  "644",
+  "/tmp/sysup-mirrorlist",
+  "/etc/pacman.d/mirrorlist.new",
+]

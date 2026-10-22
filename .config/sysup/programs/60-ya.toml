@@ -1,0 +1,6 @@
+# Port of fish sysup_ya. Optional: Fish returned 0 if ya was missing.
+name        = "ya"
+alias       = "y"
+description = "Update yazi packages"
+optional    = true
+command     = [ "ya", "pkg", "upgrade", "--discard" ]

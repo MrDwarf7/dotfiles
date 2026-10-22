@@ -1,0 +1,19 @@
+# sysup default config.
+[sudo]
+keepalive = true
+interval  = '50s'
+
+[mise]
+wrap = true
+
+[cache]
+enabled      = true
+include_dirs = [  ]
+exclude_dirs = [  ]
+
+[pkg_manager]
+name = ''
+
+[shutdown]
+force = false
+wait  = '1m'

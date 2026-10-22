@@ -1,0 +1,6 @@
+# Port of fish sysup_hermes.
+name = "hermes"
+enabled = false
+alias = "h"
+description = "Update hermes-agent harness"
+command = ["hermes", "update", "-y"]

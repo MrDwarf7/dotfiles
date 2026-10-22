@@ -1,0 +1,12 @@
+# Same-filesystem rename replaces dest atomically (rename(2)). Pacman
+# never sees a truncated file. /tmp -> /etc mv would be copy (EXDEV).
+name        = "mirror-swap"
+alias       = "mw"
+description = "Atomically replace /etc/pacman.d/mirrorlist"
+command     = [
+  "sudo",
+  "mv",
+  "-f",
+  "/etc/pacman.d/mirrorlist.new",
+  "/etc/pacman.d/mirrorlist",
+]

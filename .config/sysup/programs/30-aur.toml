@@ -1,0 +1,22 @@
+# Port of fish sysup_aur. Fish used $PKG_MANAGER; v1 recipes are literals.
+# Resolve still honours PKG_MANAGER for validate. Swap paru for yay if needed.
+# --noconfirm refuses inner conflicts; on that error we retry with paru
+# --useask (pacman --ask) up to retries.max_attempts, capped by config
+# [retries].max_attempts when that is > 0.
+name = "aur"
+alias = "a"
+description = "Update AUR packages"
+command = [
+  "paru",
+  "-Syu",
+  "--devel",
+  "--needed",
+  "--noconfirm",
+  #
+  # "--ignore",
+  # "FOO",
+]
+
+[retries]
+always       = false
+max_attempts = 3

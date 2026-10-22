@@ -1,0 +1,5 @@
+# Port of fish sysup_pacman. Double -y refreshes the DB after a mirror swap.
+name        = "pacman"
+alias       = "p"
+description = "Update official repository packages"
+command     = [ "sudo", "pacman", "-Syyu", "--needed", "--noconfirm" ]

@@ -1,0 +1,5 @@
+# Port of fish sysup_neovim. Lazy! sync then quit.
+name        = "neovim"
+alias       = "n"
+description = "Update neovim headless via Lazy"
+command     = [ "nvim", "--headless", "-c", "Lazy! sync", "-c", "qa" ]

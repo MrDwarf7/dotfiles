@@ -1,0 +1,12 @@
+# Keep a rollback copy. cp does not remove the live file (unlike Fish
+# `mv dest dest-backup`, which left a window with no mirrorlist).
+name        = "mirror-backup"
+alias       = "mb"
+description = "Copy live mirrorlist to mirrorlist-backup"
+command     = [
+  "sudo",
+  "cp",
+  "-a",
+  "/etc/pacman.d/mirrorlist",
+  "/etc/pacman.d/mirrorlist-backup",
+]

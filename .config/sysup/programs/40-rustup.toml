@@ -1,0 +1,6 @@
+# Port of fish sysup_rustup. Optional: skip if rustup is not on PATH.
+name        = "rustup"
+alias       = "r"
+description = "Update rustup toolchains"
+optional    = true
+command     = [ "rustup", "update" ]
