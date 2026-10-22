@@ -1,14 +1,14 @@
 modelRoles:
-  plan: openai-codex/gpt-6-astra:high
-  web: anthropic/claude-sonnet-5
+  plan: anthropic/claude-opus-5-5:high
+  web: anthropic/claude-sonnet-5-5
   commit: xai-oauth/grok-4.7:low
-  task: openai-codex/gpt-6-luna:high
+  task: kiro/claude-sonnet-5.5:medium
   judge: openrouter/~typesafe/jev-latest
-  default: openai-codex/gpt-6.1-sol
-  smol: openai-codex/gpt-6-luna:low
-  tiny: openai-codex/gpt-6-luna:low
-  advisor: openai-codex/gpt-6-astra:xhigh
-  slow: openai-codex/gpt-6.1-sol:high
+  default: xai-oauth/grok-4.7
+  smol: anthropic/claude-sonnet-5-5:medium
+  tiny: anthropic/claude-haiku-5-5
+  advisor: anthropic/claude-opus-5-5:xhigh
+  slow: anthropic/claude-opus-5-5:high
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -92,7 +92,7 @@ composer:
   hideThinkingBlock: false
 defaultThinkingLevel: auto
 browser:
-  headless: true
+  headless: false
 dev:
   autoqaConsent: granted
 autolearn:
@@ -110,8 +110,8 @@ retry:
     task:
       - kiro/claude-sonnet-5.5:medium
       - anthropic/claude-sonnet-5-5:medium
-      - kiro/claude-opus-5.5:medium
       - xai-oauth/grok-4.7:medium
+      - kiro/claude-opus-5.5:medium
       - anthropic/claude-opus-5-5:low
     slow:
       - anthropic/claude-fable-5-1
@@ -194,6 +194,19 @@ modelPresets:
       task: anthropic/claude-opus-5-5:medium
       judge: openrouter/~typesafe/jev-latest
       default: anthropic/claude-opus-5-5:medium
+      smol: anthropic/claude-sonnet-5-5:medium
+      tiny: anthropic/claude-haiku-5-5
+      advisor: anthropic/claude-opus-5-5:xhigh
+      slow: anthropic/claude-opus-5-5:high
+    defaultThinkingLevel: auto
+  xai:
+    modelRoles:
+      plan: anthropic/claude-opus-5-5:high
+      web: anthropic/claude-sonnet-5-5
+      commit: xai-oauth/grok-4.7:low
+      task: anthropic/claude-opus-5-5:medium
+      judge: openrouter/~typesafe/jev-latest
+      default: xai-oauth/grok-4.7
       smol: anthropic/claude-sonnet-5-5:medium
       tiny: anthropic/claude-haiku-5-5
       advisor: anthropic/claude-opus-5-5:xhigh
