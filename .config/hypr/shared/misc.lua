@@ -20,7 +20,6 @@ hl.config({
     mouse_move_enables_dpms = true, -- wake on mouse move
     key_press_enables_dpms = false,
     always_follow_on_dnd = true,
-    layers_hog_keyboard_focus = true,
     animate_manual_resizes = false,
     animate_mouse_windowdragging = false,
     disable_autoreload = false,
@@ -57,5 +56,8 @@ hl.config({
     -- Default is 2
     on_focus_under_fullscreen = 1,
     disable_watchdog_warning = true,
+  },
+  layers = {
+    layers_hog_keyboard_focus = true,
   },
 })
