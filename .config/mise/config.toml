@@ -51,6 +51,10 @@ version = "latest"
 features = ["optional"]
 version = "latest"
 
+# npx skills add vercel-labs/agent-skills
+[tools."npm:skills"]
+version = "1.7.4"
+
 ####################################################################################################
 
 ## Cargo / Cargo install / Cargo binstall / Rust / Rustup Tools
