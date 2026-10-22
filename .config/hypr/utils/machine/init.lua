@@ -32,6 +32,7 @@ local loaded = root_shrd.get("utils.machine") or {}
 ---@field workspace_rules HL.WorkspaceRuleSpec[]
 ---@field layout? HL.ConfigOpt.Layout
 ---@field scrolling? HL.ConfigOpt.Scrolling
+---@field quirks? { skip_non_kms_dmabuf_formats?: boolean }
 
 ---@type HyprConfig.Machine
 local blank = {

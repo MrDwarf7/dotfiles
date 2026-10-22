@@ -1,3 +1,5 @@
+local machine = require("utils.machine")
+
 hl.config({
   quirks = {
     -- Some clients expect monitor to be in HDR mode prior to the client start.
@@ -6,5 +8,6 @@ hl.config({
     --
     -- Report HDR mode as preferred. 0 - off, 1 - always, 2 - gamescope only
     prefer_hdr = 1,
+    skip_non_kms_dmabuf_formats = (machine.quirks or {}).skip_non_kms_dmabuf_formats,
   },
 })

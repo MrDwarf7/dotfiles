@@ -5,6 +5,10 @@ return {
     "manbook",
     "manbook.daggertooth.morray",
   },
+  quirks = {
+    -- Broadwell KMS lacks alpha formats; filtering them forces GTK/Ghostty onto CPU presentation.
+    skip_non_kms_dmabuf_formats = false,
+  },
   monitors = {
     {
       output = "eDP-1",

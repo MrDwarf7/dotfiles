@@ -27,3 +27,18 @@ otherwise just clone the repo as you normally would.
 ## Misc available options
 
 ### Section is a WIP, the Linux branch is pretty self-explanatory
+
+### Hyprland machine profiles
+
+Keep host differences in `.config/hypr/utils/machine/`. NVIDIA environment
+overrides are enabled only when the driver is present. Manbook disables KMS-only
+DMA-BUF filtering so its Intel GPU exposes alpha formats to GTK and Qt clients.
+After changing that quirk, reload Hyprland and restart existing clients; setting
+the option through `hyprctl eval` alone does not rebuild the format table.
+
+Check environment fallback behavior with:
+
+```sh
+cd .config/hypr
+lua tests/env.lua
+```
