@@ -61,7 +61,7 @@ function __setup_envs
     test "$__cached_envs_done" = 1; and return 0
     # XDG_* come from 00-os.fish (must be set before this file)
 
-    __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
+    # __env_cached_set -Ux INCLUDE_SERVER_PORT 3632
     # Fix wezterm/starship rendering the cursor always as a block
     __env_cached_set -Ux fish_vi_force_cursor 1
 
@@ -84,8 +84,8 @@ function __setup_envs
     __env_cached_set -Ux YAZI_CONFIG_HOME "$XDG_CONFIG_HOME/yazi"
     # $HOME/dotfiles/.config/yazi
 
-    __env_cached_set -Ux DISTCC_DIR /tmp/distcc; and test -d $DISTCC_DIR; or mkdir -p $DISTCC_DIR
-    set -q DISTCC_HOSTS; or __env_cached_set -Ux DISTCC_HOSTS "--randomize localhost,cpp,lzo"; and test -n "$DISTCC_HOSTS"; or __env_cached_set -Ux DISTCC_HOSTS localhost/8
+    # __env_cached_set -Ux DISTCC_DIR /tmp/distcc; and test -d $DISTCC_DIR; or mkdir -p $DISTCC_DIR
+    # set -q DISTCC_HOSTS; or __env_cached_set -Ux DISTCC_HOSTS "--randomize localhost,cpp,lzo"; and test -n "$DISTCC_HOSTS"; or __env_cached_set -Ux DISTCC_HOSTS localhost/8
 
     __env_cached_set -Ux GITHUB_PROJECTS $HOME/projects
     # On other systems this is sometimes different -- separate var for work projects
