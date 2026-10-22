@@ -98,7 +98,7 @@ order              = 1
 sidebar_width      = 30
 use_slack_sections = true
 team_id            = "T02A0FCHA"
-version_ts = "1792705659"
+version_ts = "1792908451"
 # theme = "dracula"          # overrides [appearance].theme
 # use_slack_sections = false # this workspace uses [sections.*] globs;
 

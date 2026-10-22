@@ -1,5 +1,13 @@
 ---@type HL.LayerRuleSpec[]
 local rules = {
+  -- {
+  --   name = "ghostty-quick-term",
+  --   match = {
+  --     namespace = "ghostty-quick-terminal",
+  --   },
+  --   -- no_anim = true,
+  -- },
+
   {
     name = "dms-no-anim",
     match = {
