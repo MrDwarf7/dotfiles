@@ -1,0 +1,945 @@
+# TUIOS Configuration File
+# This file allows you to customize appearance and keybindings
+#
+# Configuration location: /home/dwarf/.config/tuios/config.toml
+# Documentation: https://github.com/Gaurav-Gosain/tuios
+# For keybindings documentation, run: tuios keybinds list
+#
+# tuios watches this file. A save takes effect at once, with no restart.
+# tuios does not apply a file that has an error. It keeps the settings that
+# are in use and shows the error on screen.
+
+# ============================================================================
+# APPEARANCE SETTINGS
+# ============================================================================
+# Many of these can be changed live from the in-app settings page
+# (open it with the leader key followed by ',').
+#
+# border_style: rounded, normal, thick, double, hidden, block, ascii,
+#               outer-half-block, inner-half-block
+# dockbar_position: bottom, top, hidden
+# window_title_position: bottom, top, hidden
+# window_button_style: pill, dots (macOS traffic lights)
+# window_button_position: right, left. Independent of the style; dots and
+#               left is the shipped pair, the macOS arrangement
+# theme: color theme name (e.g. dracula, nord); empty for terminal colors
+# click_to_type: single (a click on a pane starts typing in it), double
+#               (two clicks do), off (a click only focuses)
+# auto_enter_terminal_on_focus: off (Tab keeps cycling windows),
+#               targeted (numbered select and arrows start typing),
+#               all (every covered focus command, including Tab)
+# [appearance.scrollbar]: style = thin, track; thumb/track = a one-cell glyph
+#               (track also takes "none"); tint = border, muted, #RRGGBB
+# background: off (your terminal shows through), theme (the theme's
+#               background), or #RRGGBB, for every surface at once
+# pane_background, desktop_background, window_chrome_background,
+#               dock_background, [appearance.sidebar] background: the same
+#               values for one surface; empty follows background, and a
+#               colour a program or the chrome chose always wins
+# ============================================================================
+
+# ============================================================================
+# KEYBINDINGS
+# ============================================================================
+# Set an action to [] to unbind it and hand the key back to the shell.
+# An empty list and a missing line are not the same thing. A line this file
+# does not have gets its default back the next time tuios starts; an action
+# set to [] stays empty.
+#
+# You do not have to edit this by hand. In tuios, open the keybind manager
+# (leader then k, or the command palette) and press ctrl+d on a binding to
+# remove it, or ctrl+x to take its key off every action. From a shell:
+#
+#   tuios keybinds unbind close_window w   # one key off one action
+#   tuios keybinds free alt+left           # off every action
+#
+# `tuios keybinds doctor` says which binding in each scope is live, what
+# clashes with what, and which keys never reach the program in the pane.
+#
+# [keybindings.global] acts in window mode and terminal mode alike. It binds
+# ctrl+p to the command palette and alt+space to the launcher, which costs
+# you fish's history-back and readline's set-mark. To move or drop either:
+#
+#   [keybindings.global]
+#   command_palette = ["ctrl+shift+p"]
+#   launcher = []
+#
+# [keybindings.terminal_mode] binds alt+arrows to move focus between panes.
+# In readline, fish and zsh, alt+left and alt+right move the cursor a word
+# at a time. If you want those back:
+#
+#   [keybindings.terminal_mode]
+#   terminal_focus_left = []
+#   terminal_focus_right = []
+#
+# alt+up and alt+down are unclaimed by the common shells, so they are the
+# safer pair to keep.
+#
+# shift+pgup and shift+pgdown scroll one page. middle pastes from the host
+# clipboard. Write ctrl+middle to add a modifier.
+#
+# hold_window_mode binds a key that puts tuios in window-management mode for
+# as long as it is physically held, and hands the previous mode back when it
+# is let go:
+#
+#   [keybindings.mode_control]
+#   hold_window_mode = ["leftalt"]
+#
+# It needs a terminal that speaks the Kitty keyboard protocol (Ghostty, kitty,
+# WezTerm, foot, Alacritty; not Terminal.app), because nothing else reports
+# that a key was released. Naming a modifier key (leftalt, rightalt, leftctrl,
+# leftsuper) asks the terminal for one more thing on top: every keystroke in
+# the session then arrives as an escape code. Any ordinary key (f13 to f63,
+# scrolllock, a spare letter) avoids that. Unbound by default.
+# ============================================================================
+
+# ============================================================================
+# DOCK COMPONENTS
+# ============================================================================
+# The dock is three ordered lists of component names. Leave [dock] out
+# entirely and the bar draws what it always drew; write the lists to
+# reorder it, and omit a name to drop that segment.
+#
+#   [dock]
+#   left   = ["mode", "workspaces", "trail", "tape"]
+#   center = ["windows"]
+#   right  = ["notifications", "copy-help", "cpu", "ram", "clock", "session-controls"]
+#
+# A cell of your own is a command whose first line of stdout is the text:
+#
+#   [dock.custom.branch]
+#   command = "git branch --show-current"
+#   refresh = "event:after-focus-change"   # or once, push, or "30s"
+#
+# and then "custom/branch" in one of the lists above. A component that
+# fails is hidden rather than left showing a stale value;
+# `tuios list-dock-components` says which and why.
+# ============================================================================
+
+
+[appearance]
+theme = "tokyonight_storm"
+glyphs = "default"
+border_style = "normal"
+# border_focused_color = ""
+# border_unfocused_color = ""
+shared_borders = false
+gap = 0
+
+dim_unfocused = 0      # 0 :: 90
+dim_foreground = true
+dim_multifocus = false
+
+session_colors = true
+session_border = false
+
+zen_mode = "disabled"
+panel_padding = 2
+motion = "basic"
+animation_speed = 350
+theme_transition = "none"
+theme_transition_duration = 450 # 100 :: 2000 (ms)
+modal_dim = 30                  # 0 :: 90
+max_fps = "auto"
+wrap_lists = true
+
+window_title_position = "top"
+# window_title_format = ""        # default: "{index}: {title} ({cwd})"
+window_button_style = "dots"
+window_button_position = "left"
+hide_window_buttons = true
+window_button_zoom = true
+
+hide_scrollbar = false
+confirm_quit = false
+# preferred_shell = ""
+new_window_inherit_cwd = true
+whichkey_enabled = true
+whichkey_position = "bottom-right"
+prefix_repeat_time = 250           # default: 500, 0 :: 5000 (ms)
+
+click_to_type = "double"             # default: "double", "double", "single", "off"
+auto_enter_terminal_on_focus = "off" # default: "off", "off", "targeted", "all"
+focus_follows_mouse = false
+alt_drag = true
+right_click_opens_menu = false
+copy_on_select = true
+# word_characters = "@-./_~?&=%+#"
+links = "all"       # default: "all", "all", "marked", "off"
+link_click = "both" # default: "both", "both", "ctrl", "shift", "off"
+# link_opener = ""           # takes a cmd, will interpolate a %s in it
+nvim_navigation = false    # neovim pane nav via the plugin ting
+link_hover = "safe"        # default: "safe", "safe", "always"
+kitty_placeholder = "auto" # default: "auto", "auto", "on", "off"
+image_symbols = "auto"
+
+scrollback_lines = 10000      # default: 10000, 0 :: 1000000
+scroll_lines = 3              # default: 3, 1 :: 50
+tiling_scheme = "smart_split" # default: "spiral", "spiral", "longest_side", "alternate", "smart_split"
+master_ratio = 50             # default, 50, 10 : 90
+master_position = "left"      #default: "left", "left", "right", "top", "bottom"
+master_count = 1              # default: 1, 1 :: 9
+master_grid = true
+scroll_column_width = 55      #default: 55, 20 :: 100
+scroll_column_max = 90        # default: 90, 20 :: 100
+niri_scroll_cells = 8         # default: 8, 1 :: 200
+niri_reverse_scroll = false   # default: false, 
+niri_click_reveals = true
+niri_hover_reveals = true
+zoom_size = 95                # default: 95, 50 :: 100
+zoom_max_width = 0            # default: 0, 0 :: 100 (0 means no cap here)
+zoom_animation = true
+zoom_follows_focus = true
+drop_preview = "fill"         # default: "fill", "fill", "outline", "off"
+drop_preview_delay = "120ms"  # default: "120ms". A duration, or 0
+
+dockbar_position = "top"
+dock_workspace_tabs = true
+# dock_workspace_tab_format = ""
+dock_workspace_label_max = 12
+dock_workspace_tooltip = true
+dock_pill_caps = false
+dock_compact = true
+# dock_mode_icon_window
+# dock_mode_icon_terminal
+# dock_mode_icon_tiling
+show_clock = true
+# clock_format = "" ## uses some sort of Go time layout thing
+show_cpu = false
+show_ram = false
+# hide_clock = false ### depr.
+
+window_title_style = "plain"
+window_title_align = "left"
+border_gradient_angle = 45
+dock_prefix_indicator = "pill"
+
+
+[appearance.scrollbar]
+style = "track"
+
+[appearance.sidebar.left]
+enabled = false
+
+[appearance.sidebar.right]
+
+[appearance.sidebar]
+enabled = true
+file_icons = true
+file_icon_colors = true
+folder_click = "navigate"
+file_actions = true
+
+[notifications]
+# duration = 0
+# warning_duration = 0
+# error_duration = 0
+# error_sticky = true
+
+
+[notifications.agent]
+enabled = true
+notify = true
+dock = true
+sound = false
+sound_mode = "audio"       # default: "audio", "audio", "bell", "both"
+sound_cooldown_seconds = 3
+# command = ""
+# settle_secconds = 2
+# suppress_focuses = true
+# quiet_hours = ""
+
+
+[notifications.mail]
+# enabled ## follows [notifications.agent.enabled]
+# notify ## follows [notifications.agent.notify]
+# dock ## follws [notifications.agent.dock]
+# sound ## follows [notifications.agent.sound]
+between_agents = false # also allert on a message from one agent to another agent
+
+
+# [keybindings]
+
+
+[daemon]
+
+
+[startup]
+tiled = true
+daemon = true
+layout = "scrolling"
+open_default_window = true
+start_in_terminal_mode = true
+
+
+[workspaces]
+
+
+[launcher]
+
+
+[tape]
+
+[debug]
+
+
+[screenshot]
+preview = true
+format = "png"
+
+
+[screensaver]
+enabled = true
+idle_minutes = 10
+
+
+[hints]
+open = false
+
+
+[panes]
+
+
+[pip]
+
+
+[spotlight]
+enabled = false
+follow = "mouse"
+
+
+[dock]
+
+
+[tailscale]
+
+
+[agents]
+
+
+[notify]
+
+
+[hooks]
+
+
+##################################################
+
+
+# ┌────────────────────────────────────┬─────────────────────────────────┬─────────────────────────────────┐
+# │ Where it operates                  │ Exact TOML table                │ Action                          │
+# ├────────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+# │ Window mode: create/close panes    │ [keybindings.window_management] │ new_window, close_window        │
+# ├────────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+# │ Window mode: splits, swaps, sizing │ [keybindings.layout]            │ split_vertical, swap_left, etc. │
+# ├────────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+# │ Terminal mode: direct shortcuts    │ [keybindings.terminal_mode]     │ terminal_focus_left, etc.       │
+# ├────────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+# │ Immediately after the leader       │ [keybindings.prefix_mode]       │ prefix_split_vertical, etc.     │
+# ├────────────────────────────────────┼─────────────────────────────────┼─────────────────────────────────┤
+# │ Inside the layout prefix submenu   │ [keybindings.layout_prefix]     │ resize_width_50, etc.           │
+# └────────────────────────────────────┴─────────────────────────────────┴─────────────────────────────────┘
+
+
+[keybindings]
+# preset = "tmux"
+keyboard_layout = "us"
+# option_glyphs = "auto"
+
+leader_key = "ctrl+a"
+leader_twice = "last_workspace"
+
+
+# Explicit keymap, originally expanded from TUIOS 0.10.1's tmux preset.
+# Copy-mode motions and other fixed keys remain built into TUIOS.
+repeat = [
+  "terminal_focus_left",
+  "terminal_focus_right",
+  "terminal_focus_up",
+  "terminal_focus_down",
+  "resize_pane_left_5",
+  "resize_pane_right_5",
+  "resize_pane_up_5",
+  "resize_pane_down_5",
+]
+
+[keybindings.window_management]
+# Bare Home/End are pane jumps only in window-management mode.
+"command:first-pane" = ["home"]
+"command:last-pane" = ["end"]
+# new_window = ["c"]
+# new_session = ["C"]
+# close_window = ["x"] # unbound "w"
+close_window = ["x"]
+copy_selection = ["c"]
+focus_sidebar = ["s"]
+last_pane = [";"]
+minimize_window = ["m"]
+new_session = ["N"]
+new_window = ["n"]
+next_session = ["alt+shift+n"]
+next_window = ["tab"]
+prev_session = ["alt+shift+p"]
+prev_window = ["shift+tab"]
+rename_window = ["r"]
+restore_all = ["M"]
+select_window_1 = ["1"]
+select_window_2 = ["2"]
+select_window_3 = ["3"]
+select_window_4 = ["4"]
+select_window_5 = ["5"]
+select_window_6 = ["6"]
+select_window_7 = ["7"]
+select_window_8 = ["8"]
+select_window_9 = ["9"]
+start_screensaver = ["S"]
+toggle_pip = ["p"]
+toggle_zoom = ["z"]
+
+
+[keybindings.workspaces]
+move_and_follow_1 = ["alt+shift+1"]
+move_and_follow_2 = ["alt+shift+2"]
+move_and_follow_3 = ["alt+shift+3"]
+move_and_follow_4 = ["alt+shift+4"]
+move_and_follow_5 = ["alt+shift+5"]
+move_and_follow_6 = ["alt+shift+6"]
+move_and_follow_7 = ["alt+shift+7"]
+move_and_follow_8 = ["alt+shift+8"]
+move_and_follow_9 = ["alt+shift+9"]
+switch_workspace_1 = ["alt+1"]
+switch_workspace_2 = ["alt+2"]
+switch_workspace_3 = ["alt+3"]
+switch_workspace_4 = ["alt+4"]
+switch_workspace_5 = ["alt+5"]
+switch_workspace_6 = ["alt+6"]
+switch_workspace_7 = ["alt+7"]
+switch_workspace_8 = ["alt+8"]
+switch_workspace_9 = ["alt+9"]
+
+[keybindings.layout]
+equalize_splits = ["="]
+focus_down = ["j"]
+focus_up = ["k"]
+preselect_down = ["alt+j"]
+preselect_left = ["alt+h"]
+preselect_right = ["alt+l"]
+preselect_up = ["alt+k"]
+resize_height_grow = ["}", "shift+]"]
+resize_height_grow_top = ["]"]
+resize_height_shrink = ["{", "shift+["]
+resize_height_shrink_top = ["["]
+resize_master_grow = [">", "shift+."]
+resize_master_grow_left = ["."]
+resize_master_shrink = ["<", "shift+,"]
+rotate_split = ["R"]
+snap_fullscreen = ["f"]
+# Keep h/l as focus commands even when panes are floating.
+snap_left = []
+snap_right = []
+terminal_focus_left = ["h"]
+terminal_focus_right = ["l"]
+split_horizontal = ["-"]
+split_vertical = ["|", "\\"]
+# Like Hyprland: Shift moves panes; Ctrl resizes them.
+swap_down = ["J"]
+swap_left = ["H"]
+swap_right = ["L"]
+swap_up = ["K"]
+resize_pane_down_5 = ["ctrl+j"]
+resize_pane_left_5 = ["ctrl+h"]
+resize_pane_right_5 = ["ctrl+l"]
+resize_pane_up_5 = ["ctrl+k"]
+toggle_tiling = ["t"]
+unsnap = ["u"]
+
+[keybindings.mode_control]
+enter_terminal_mode = ["i", "enter", "esc"]
+enter_window_mode = []
+open_keybind_presets = ["U"]
+open_settings = [","]
+quit = ["q"]
+toggle_help = ["?"]
+
+[keybindings.restore_minimized]
+restore_minimized_1 = ["shift+1", "!"]
+restore_minimized_2 = ["shift+2", "@"]
+restore_minimized_3 = ["shift+3", "#"]
+restore_minimized_4 = ["shift+4", "$"]
+restore_minimized_5 = ["shift+5", "%"]
+restore_minimized_6 = ["shift+6", "^"]
+restore_minimized_7 = ["shift+7", "&"]
+restore_minimized_8 = ["shift+8", "*"]
+restore_minimized_9 = ["shift+9", "("]
+
+[keybindings.system]
+toggle_spotlight = ["B"]
+
+[keybindings.navigation]
+[keybindings.terminal_mode]
+terminal_exit_mode = ["alt+esc"]
+terminal_focus_down = ["alt+down"]
+terminal_focus_left = ["alt+left"]
+terminal_focus_right = ["alt+right"]
+terminal_focus_up = ["alt+up"]
+terminal_next_window = ["alt+n"]
+terminal_paste_host = ["ctrl+shift+v", "super+v", "shift+super+v", "middle"]
+terminal_prev_window = ["alt+p"]
+terminal_scroll_down = ["shift+down"]
+terminal_scroll_page_down = ["shift+pgdown"]
+terminal_scroll_page_up = ["shift+pgup"]
+terminal_scroll_up = ["shift+up"]
+
+[keybindings.global]
+command_palette = []
+launcher = ["alt+space"]
+# Direct resizing in both window-management and terminal modes.
+resize_pane_down_5 = ["ctrl+down"]
+resize_pane_left_5 = ["ctrl+left"]
+resize_pane_right_5 = ["ctrl+right"]
+resize_pane_up_5 = ["ctrl+up"]
+
+[keybindings.prefix_mode]
+# prefix_selection = ["y"]
+choose_buffer = ["=", "#"]
+choose_tree = ["f", "/"]
+display_panes = ["q"]
+hints = ["F"]
+launcher = ["a"]
+next_session = [")"]
+paste_buffer = ["]"]
+paste_image = ["V"]
+prefix_agents_settings = ["A"]
+prefix_close_session = ["X"]
+prefix_close_window = ["x"]
+prefix_command_palette = [":"]
+prefix_debug = ["D"]
+prefix_detach = ["d"]
+prefix_equalize_splits = ["E"]
+prefix_exit_mode = ["w"]
+# Reuse the shared native cancel handler; do not forward Esc to the pane.
+window_prefix_cancel = ["esc"]
+prefix_explore = ["e"]
+prefix_file_search = []
+prefix_fullscreen = ["z"]
+prefix_help = ["?"]
+prefix_inbox = ["i"]
+prefix_jump_notif = ["o"]
+prefix_keybinds = []
+prefix_last_message = ["N"]
+prefix_layout = []
+prefix_mail = ["M"]
+prefix_minimize = []
+# An explicit binding overrides Ctrl+C's default prefix-cancel fallback.
+prefix_new_window = ["ctrl+c"]
+prefix_next_attention = []
+prefix_next_finished = ["O"]
+prefix_next_window = []
+prefix_prev_window = []
+prefix_quit = []
+prefix_rename_window = ["P"]
+prefix_review = ["v"]
+prefix_rotate_split = ["space"]
+prefix_screenshot = ["ctrl+s"]
+prefix_scrollback = []
+prefix_select_0 = []
+prefix_select_1 = []
+prefix_select_2 = []
+prefix_select_3 = []
+prefix_select_4 = []
+prefix_select_5 = []
+prefix_select_6 = []
+prefix_select_7 = []
+prefix_select_8 = []
+prefix_select_9 = []
+prefix_selection = ["[", "y"]
+prefix_session_switcher = ["s"]
+prefix_settings = ["C"]
+prefix_split_horizontal = ["\"", "-"]
+prefix_split_vertical = ["%", "|", "\\"]
+prefix_tape = []
+prefix_toggle_other_rail = []
+# TODO: Revisit prefix+b; prefix+t,l also toggles the right sidebar.
+prefix_toggle_sidebar = ["b"]
+prefix_toggle_spotlight = ["B"]
+prefix_toggle_tiling = []
+prefix_transfers = ["u"]
+prefix_window = ["t"]
+prefix_workspace = []
+prefix_workspace_switcher = ["W"]
+prev_session = ["("]
+terminal_focus_down = ["j", "down"]
+terminal_focus_left = ["h", "left"]
+terminal_focus_right = ["l", "right"]
+terminal_focus_up = ["k", "up"]
+swap_down = ["J"]
+swap_left = ["H"]
+swap_right = ["L"]
+swap_up = ["K"]
+toggle_scratch = ["g"]
+break_pane = ["!"]
+close_workspace = ["&"]
+cycle_layout = ["T"]
+last_pane = [";"]
+# last_session = ["L"]
+last_session = []
+last_workspace = []                                                        # Double-leader still bounces; l now focuses right.
+mark_pane = ["m"]
+new_workspace = ["c"]
+next_workspace = ["n", "ctrl+n"]
+prefix_tuios = ["S"]
+prev_workspace = ["p"]
+reload_config = ["r"]
+rename_session = []                                                        # $ is the last-workspace jump below.
+rename_workspace = ["R"]
+move_workspace_left = [","]
+move_workspace_right = ["."]
+resize_pane_down_5 = ["ctrl+j", "alt+down", "ctrl+down", "shift+down"]
+resize_pane_left_5 = ["ctrl+h", "alt+left", "ctrl+left", "shift+left"]
+resize_pane_right_5 = ["ctrl+l", "alt+right", "ctrl+right", "shift+right"]
+resize_pane_up_5 = ["ctrl+k", "alt+up", "ctrl+up", "shift+up"]
+switch_workspace_1 = ["1"]
+switch_workspace_2 = ["2"]
+switch_workspace_3 = ["3"]
+switch_workspace_4 = ["4"]
+switch_workspace_5 = ["5"]
+switch_workspace_6 = ["6"]
+switch_workspace_7 = ["7"]
+switch_workspace_8 = ["8"]
+switch_workspace_9 = ["9"]
+
+[keybindings.tuios_prefix]
+prefix_keybinds = ["k"]
+prefix_file_search = ["f"]
+prefix_layout = ["L"]
+prefix_minimize = ["m"]
+prefix_new_window = ["c"]
+prefix_next_attention = ["o"]
+prefix_prev_window = ["p"]
+prefix_quit = ["q"]
+prefix_rename_window = ["r"]
+prefix_screenshot = ["C"]
+prefix_scrollback = ["s"]
+prefix_select_0 = ["0"]
+prefix_select_1 = ["1"]
+prefix_select_2 = ["2"]
+prefix_select_3 = ["3"]
+prefix_select_4 = ["4"]
+prefix_select_5 = ["5"]
+prefix_select_6 = ["6"]
+prefix_select_7 = ["7"]
+prefix_select_8 = ["8"]
+prefix_select_9 = ["9"]
+prefix_settings = [","]
+prefix_tape = ["T"]
+prefix_toggle_tiling = ["space"]
+prefix_workspace = ["w"]
+
+[keybindings.window_prefix]
+prefix_toggle_other_rail = ["h"]
+prefix_toggle_sidebar = ["l"]
+window_prefix_cancel = ["esc"]
+window_prefix_close = ["x"]
+window_prefix_new = ["n"]
+window_prefix_next = ["tab"]
+window_prefix_prev = ["shift+tab"]
+window_prefix_rename = ["r"]
+window_prefix_tiling = ["t"]
+
+[keybindings.minimize_prefix]
+minimize_prefix_cancel = ["esc"]
+minimize_prefix_focused = ["m"]
+minimize_prefix_restore_1 = ["1"]
+minimize_prefix_restore_2 = ["2"]
+minimize_prefix_restore_3 = ["3"]
+minimize_prefix_restore_4 = ["4"]
+minimize_prefix_restore_5 = ["5"]
+minimize_prefix_restore_6 = ["6"]
+minimize_prefix_restore_7 = ["7"]
+minimize_prefix_restore_8 = ["8"]
+minimize_prefix_restore_9 = ["9"]
+minimize_prefix_restore_all = ["M"]
+
+[keybindings.workspace_prefix]
+workspace_prefix_cancel = ["esc"]
+workspace_prefix_move_1 = ["!"]
+workspace_prefix_move_2 = ["@"]
+workspace_prefix_move_3 = ["#"]
+workspace_prefix_move_4 = ["$"]
+workspace_prefix_move_5 = ["%"]
+workspace_prefix_move_6 = ["^"]
+workspace_prefix_move_7 = ["&"]
+workspace_prefix_move_8 = ["*"]
+workspace_prefix_move_9 = ["("]
+workspace_prefix_rename = ["r"]
+workspace_prefix_switch_1 = ["1"]
+workspace_prefix_switch_2 = ["2"]
+workspace_prefix_switch_3 = ["3"]
+workspace_prefix_switch_4 = ["4"]
+workspace_prefix_switch_5 = ["5"]
+workspace_prefix_switch_6 = ["6"]
+workspace_prefix_switch_7 = ["7"]
+workspace_prefix_switch_8 = ["8"]
+workspace_prefix_switch_9 = ["9"]
+
+[keybindings.layout_prefix]
+add_master = ["i"]
+cycle_master_position = ["o"]
+focus_master = ["m"]
+layout_prefix_cancel = ["esc"]
+layout_prefix_load = ["l"]
+layout_prefix_save = ["s"]
+remove_master = ["d"]
+resize_height_50 = ["shift+5"]
+resize_height_60 = ["shift+6"]
+resize_height_70 = ["shift+7"]
+resize_height_80 = ["shift+8"]
+resize_height_90 = ["shift+9"]
+resize_width_50 = ["5"]
+resize_width_60 = ["6"]
+resize_width_70 = ["7"]
+resize_width_80 = ["8"]
+resize_width_90 = ["9"]
+snap_corner_1 = ["1"]
+snap_corner_2 = ["2"]
+snap_corner_3 = ["3"]
+snap_corner_4 = ["4"]
+swap_with_master = ["enter"]
+
+[keybindings.tape_prefix]
+tape_prefix_cancel = ["esc"]
+tape_prefix_manager = ["m"]
+tape_prefix_record = ["r"]
+tape_prefix_review = ["t"]
+tape_prefix_stop = ["s"]
+
+[keybindings.debug_prefix]
+debug_prefix_animations = ["a"]
+debug_prefix_cache = ["c"]
+debug_prefix_cancel = ["esc"]
+debug_prefix_logs = ["l"]
+debug_prefix_showkeys = ["k"]
+
+[keybindings.script]
+script_pause = ["ctrl+p"]
+
+[keybindings.sidebar]
+accent = ["c"]
+activate = ["enter"]
+agents_filter = ["f"]
+agents_sort = ["o"]
+collapse = ["h", "left"]
+cursor_down = ["j", "down"]
+cursor_up = ["k", "up"]
+exit = ["esc", "s"]
+expand = ["l", "right"]
+file_search = ["ctrl+f"]
+first = ["g", "home"]
+help = ["?"]
+jump_1 = ["1"]
+jump_2 = ["2"]
+jump_3 = ["3"]
+jump_4 = ["4"]
+jump_5 = ["5"]
+jump_6 = ["6"]
+jump_7 = ["7"]
+jump_8 = ["8"]
+jump_9 = ["9"]
+kill = ["x"]
+last = ["G", "end"]
+mail = ["i"]
+menu = ["m"]
+narrow = ["<"]
+new_session = ["n"]
+new_window = ["t"]
+palette = ["/"]
+rename = ["r"]
+reorder_down = ["J", "shift+down"]
+reorder_up = ["K", "shift+up"]
+section = ["tab", "shift+tab"]
+switch_edge = ["e"]
+widen = [">"]
+
+[keybindings.sidebar_files]
+file_copy = ["y"]
+file_copy_path = ["Y"]
+file_create = ["a"]
+file_cut = ["x"]
+file_delete = ["d"]
+file_delete_forever = ["D"]
+file_edit = ["shift+enter"]
+file_open = ["enter"]
+file_paste = ["p"]
+file_rename = ["r"]
+file_send = ["S"]
+
+[keybindings.sidebar_agents]
+agent_cancel_queued = ["x"]
+agent_reply = ["r"]
+agent_review = ["v"]
+agent_snooze = ["z"]
+agent_subagents = ["space"]
+agent_unread = ["u"]
+
+[keybindings.inbox]
+inbox_agents = ["tab"]
+inbox_close = ["esc", "q"]
+inbox_deny_reason = ["n"]
+inbox_detail_down = ["J", "ctrl+d"]
+inbox_detail_up = ["K", "ctrl+u"]
+inbox_dismiss = ["d", "delete"]
+inbox_down = ["j", "down", "ctrl+n"]
+inbox_filter = ["f"]
+inbox_first = ["g", "home"]
+inbox_go = ["enter"]
+inbox_last = ["G", "end"]
+inbox_mailbox = ["m"]
+inbox_page_down = ["pgdown"]
+inbox_page_up = ["pgup"]
+inbox_pass_on = ["p"]
+inbox_peek = ["space"]
+inbox_reply = ["r"]
+inbox_resume = ["y"]
+inbox_review = ["v"]
+inbox_select = ["/"]
+inbox_show_snoozed = ["S"]
+inbox_snooze = ["z"]
+inbox_sort = ["s"]
+inbox_undo = ["u"]
+inbox_up = ["k", "up", "ctrl+p"]
+inbox_view_pane = ["ctrl+]"]
+
+[keybindings.inbox_peek]
+peek_approve = ["a"]
+peek_approve_always = ["A"]
+peek_back = ["esc", "q", "space"]
+peek_deny = ["d"]
+peek_go = ["enter"]
+peek_read_again = ["r"]
+peek_type = ["tab"]
+
+[keybindings.mail]
+mail_back = ["esc", "q"]
+mail_down = ["j", "down", "ctrl+n"]
+mail_focus_pane = ["o"]
+mail_new = ["n"]
+mail_open = ["enter"]
+mail_page_down = ["pgdown"]
+mail_page_up = ["pgup"]
+mail_reply = ["r"]
+mail_up = ["k", "up", "ctrl+p"]
+
+[keybindings.lists]
+list_down = ["down", "ctrl+n", "j"]
+list_first = ["home", "g"]
+list_last = ["end", "G"]
+list_page_down = ["pgdown"]
+list_page_up = ["pgup"]
+list_up = ["up", "ctrl+p", "k"]
+
+[keybindings.gui]
+close_window = ["ctrl+shift+w"]
+command_palette = []
+equalize_splits = ["ctrl+shift+="]
+gui_copy = ["ctrl+shift+c"]
+gui_copy_mode = ["ctrl+shift+x"]
+gui_find = ["ctrl+shift+f"]
+gui_font_bigger = ["ctrl+="]
+gui_font_reset = ["ctrl+0"]
+gui_font_smaller = ["ctrl+-"]
+gui_inbox = ["ctrl+shift+i"]
+gui_keys = ["ctrl+shift+/"]
+gui_pane_picker = ["ctrl+shift+space"]
+gui_paste = ["ctrl+shift+v"]
+gui_quit = ["ctrl+shift+q"]
+gui_reopen_closed = ["ctrl+shift+u"]
+gui_resize_down = ["alt+shift+down"]
+gui_resize_left = ["alt+shift+left"]
+gui_resize_right = ["alt+shift+right"]
+gui_resize_up = ["alt+shift+up"]
+gui_split_root_down = ["ctrl+shift+alt+e"]
+gui_split_root_right = ["ctrl+shift+alt+d"]
+gui_switcher = ["ctrl+tab"]
+gui_switcher_back = ["ctrl+shift+tab"]
+gui_toggle_float = ["ctrl+shift+alt+f"]
+gui_toggle_sidebar = ["ctrl+shift+b"]
+move_and_follow_1 = ["ctrl+shift+alt+1"]
+move_and_follow_2 = ["ctrl+shift+alt+2"]
+move_and_follow_3 = ["ctrl+shift+alt+3"]
+move_and_follow_4 = ["ctrl+shift+alt+4"]
+move_and_follow_5 = ["ctrl+shift+alt+5"]
+move_and_follow_6 = ["ctrl+shift+alt+6"]
+move_and_follow_7 = ["ctrl+shift+alt+7"]
+move_and_follow_8 = ["ctrl+shift+alt+8"]
+move_and_follow_9 = ["ctrl+shift+alt+9"]
+new_window = ["ctrl+shift+t"]
+next_session = ["ctrl+shift+]"]
+prefix_next_attention = ["ctrl+shift+j"]
+prev_session = ["ctrl+shift+["]
+rotate_split = ["ctrl+shift+r"]
+split_horizontal = ["ctrl+shift+e"]
+split_vertical = ["ctrl+shift+d"]
+swap_down = ["ctrl+shift+alt+down"]
+swap_left = ["ctrl+shift+alt+left"]
+swap_right = ["ctrl+shift+alt+right"]
+swap_up = ["ctrl+shift+alt+up"]
+switch_workspace_1 = ["alt+1"]
+switch_workspace_2 = ["alt+2"]
+switch_workspace_3 = ["alt+3"]
+switch_workspace_4 = ["alt+4"]
+switch_workspace_5 = ["alt+5"]
+switch_workspace_6 = ["alt+6"]
+switch_workspace_7 = ["alt+7"]
+switch_workspace_8 = ["alt+8"]
+switch_workspace_9 = ["alt+9"]
+terminal_focus_down = ["alt+down"]
+terminal_focus_left = ["alt+left"]
+terminal_focus_right = ["alt+right"]
+terminal_focus_up = ["alt+up"]
+toggle_multifocus_active = ["ctrl+shift+alt+i"]
+toggle_zoom = ["ctrl+shift+z"]
+
+[keybindings.transfers]
+transfers_answer = ["enter"]
+transfers_cancel = ["x"]
+transfers_clear = ["c"]
+transfers_close = ["esc", "q"]
+transfers_down = ["j", "down"]
+transfers_pause = ["p"]
+transfers_retry = ["r"]
+transfers_up = ["k", "up"]
+
+[keybindings.copy_mode]
+copy_mode_line_end = ["end"]
+copy_mode_line_start = ["home"]
+
+## TODO: Refactor this later to try and find a better alternative
+# 
+# Workspace ends follow occupied dock order; pane ends follow visual column order.
+# Client-side SwitchWorkspace preserves bounce history; FocusWindow reveals the pane.
+[[keybindings.command]]
+key = "prefix+$"
+type = "shell"
+command = '''target=$(tuios list-workspaces -s "$TUIOS_SESSION" --json | jq -er '(.order // [.workspaces[].workspace]) as $order | [.workspaces[] | select(.window_count > 0)] | sort_by(.workspace as $n | $order | index($n)) | last.workspace') && tuios run-command -s "$TUIOS_SESSION" SwitchWorkspace "$target"'''
+description = "Last occupied workspace"
+
+[[keybindings.command]]
+key = "prefix+^"
+type = "shell"
+command = '''target=$(tuios list-workspaces -s "$TUIOS_SESSION" --json | jq -er '(.order // [.workspaces[].workspace]) as $order | [.workspaces[] | select(.window_count > 0)] | sort_by(.workspace as $n | $order | index($n)) | first.workspace') && tuios run-command -s "$TUIOS_SESSION" SwitchWorkspace "$target"'''
+description = "First occupied workspace"
+
+# Prefix keys register these commands; the bare-key aliases above are window-only.
+[[keybindings.command]]
+name = "first-pane"
+key = "prefix+home"
+type = "shell"
+command = '''target=$(tuios list-windows -s "$TUIOS_SESSION" --json | jq -er '.current_workspace as $ws | [.windows[] | select(.workspace == $ws and .minimized == false)] | sort_by(.x, .y) | first.window_id') && tuios run-command -s "$TUIOS_SESSION" FocusWindow "$target"'''
+description = "First pane in scrolling layout"
+
+[[keybindings.command]]
+name = "last-pane"
+key = "prefix+end"
+type = "shell"
+command = '''target=$(tuios list-windows -s "$TUIOS_SESSION" --json | jq -er '.current_workspace as $ws | [.windows[] | select(.workspace == $ws and .minimized == false)] | sort_by(.x, .y) | last.window_id') && tuios run-command -s "$TUIOS_SESSION" FocusWindow "$target"'''
+description = "Last pane in scrolling layout"
