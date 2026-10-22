@@ -79,6 +79,11 @@ font-family = Mononoki Nerd Font Mono
 # font-size = 10.2
 font-thicken = false
 
+# top | bottom | left | right | center
+quick-terminal-position = top
+# Y,X :: % or px      H,   W
+quick-terminal-size = 70%,50%
+
 
 # ss01 - use normal asterisk, potentially higher in the cell (as opposed to centered etc.)
 # ss04 - use normal g ( with the gap on the left, like a lowercase Y )
