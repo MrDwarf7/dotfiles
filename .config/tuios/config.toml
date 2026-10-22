@@ -958,6 +958,9 @@ transfers_up = ["k", "up"]
 copy_mode_line_end = ["end"]
 copy_mode_line_start = ["home"]
 
+# Proposed upstream action; leave commented until TUIOS exposes it.
+# copy_mode_exit_to_terminal = ["i", "A"]
+
 ## TODO: Refactor this later to try and find a better alternative
 # 
 # Workspace ends follow occupied dock order; pane ends follow visual column order.
