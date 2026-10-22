@@ -1,14 +1,14 @@
 modelRoles:
-  plan: anthropic/claude-opus-5-5:high
-  web: anthropic/claude-sonnet-5-5
-  commit: xai-oauth/grok-4.7:low
-  task: opencode-go/step-5-preview-free:medium
+  plan: openai-codex/gpt-6-astra:high
+  web: anthropic/claude-sonnet-5
+  commit: anthropic/claude-opus-5-5:low
+  task: openai-codex/gpt-6-luna:high
   judge: openrouter/~typesafe/jev-latest
-  smol: kiro/claude-sonnet-5.5:medium
-  tiny: anthropic/claude-haiku-5-5
-  advisor: anthropic/claude-opus-5-5:xhigh
-  slow: anthropic/claude-opus-5-5:high
-  default: xai-oauth/grok-4.7:medium
+  smol: openai-codex/gpt-6-luna:low
+  tiny: openai-codex/gpt-6-luna:low
+  advisor: openai-codex/gpt-6-astra:xhigh
+  slow: openai-codex/gpt-6.1-sol:high
+  default: openai-codex/gpt-6.1-sol
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -216,6 +216,19 @@ modelPresets:
       tiny: anthropic/claude-haiku-5-5
       advisor: anthropic/claude-opus-5-5:xhigh
       slow: anthropic/claude-opus-5-5:high
+    defaultThinkingLevel: auto
+  semi-rand:
+    modelRoles:
+      plan: anthropic/claude-opus-5-5:high
+      web: anthropic/claude-sonnet-5-5
+      commit: xai-oauth/grok-4.7:low
+      task: opencode-go/step-5-preview-free:medium
+      judge: openrouter/~typesafe/jev-latest
+      smol: kiro/claude-sonnet-5.5:medium
+      tiny: anthropic/claude-haiku-5-5
+      advisor: anthropic/claude-opus-5-5:xhigh
+      slow: anthropic/claude-opus-5-5:high
+      default: xai-oauth/grok-4.7:medium
     defaultThinkingLevel: auto
 cycleOrder:
   - smol
