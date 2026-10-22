@@ -38,12 +38,14 @@ export QT_QPA_PLATFORMTHEME_QT6=hyprqt6engine,qt6ct
 # export QT_QPA_PLATFORMTHEME=qt5ct # can't get qt6ct to work
 
 
-# NVIDIA Specific 
-export GBM_BACKEND=nvidia-drm                # it causes issues like Hyprland crashing so care
-export __GLX_VENDOR_LIBRARY_NAME=nvidia
-export LIBVA_DRIVER_NAME=nvidia
-export __GL_GSYNC_ALLOWED=1                  # - Controls if G-Sync capable monitors should use Variable Refresh Rate (VRR)
-export __GL_VRR_ALLOWED=0                    # - Controls if Adaptive Sync should be used. Recommended to set as 0 to avoid having problems with some games
+# Keep desktop NVIDIA overrides off Intel-only machines.
+if [ -d /sys/module/nvidia_drm ]; then
+    export GBM_BACKEND=nvidia-drm
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export LIBVA_DRIVER_NAME=nvidia
+    export __GL_GSYNC_ALLOWED=1
+    export __GL_VRR_ALLOWED=0
+fi
 
 
 # Themeing Related Variables
@@ -59,9 +61,11 @@ export XCURSOR_SIZE=24
 
 # From other sections of docs
 
-export WLR_RENDERER_ALLOW_SOFTWARE=1
-export WLR_NO_HARDWARE_CURSORS=1  # Uncommented; enable if needed for NVIDIA
-export NVD_BACKEND=direct
+if [ -d /sys/module/nvidia_drm ]; then
+    export WLR_RENDERER_ALLOW_SOFTWARE=1
+    export WLR_NO_HARDWARE_CURSORS=1
+    export NVD_BACKEND=direct
+fi
 export ELECTRON_OZONE_PLATFORM_HINT=wayland
 
 export WEBKIT_DISABLE_DMABUF_RENDERER=1

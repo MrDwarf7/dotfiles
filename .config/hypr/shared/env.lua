@@ -27,13 +27,6 @@ local fallbacks = {
   QT_QPA_PLATFORMTHEME = "hyprqt6engine,qt6ct",
   QT_QPA_PLATFORMTHEME_QT6 = "hyprqt6engine,qt6ct",
 
-  -- NVIDIA
-  GBM_BACKEND = "nvidia-drm",
-  __GLX_VENDOR_LIBRARY_NAME = "nvidia",
-  LIBVA_DRIVER_NAME = "nvidia",
-  __GL_GSYNC_ALLOWED = 1,
-  __GL_VRR_ALLOWED = 0,
-
   -- Theme
   GTK_THEME = "Tokyonight-Dark-B",
   HYPRCURSOR_THEME = "Hyprcursor-Bibata-Modern-Classic",
@@ -42,9 +35,6 @@ local fallbacks = {
   XCURSOR_SIZE = 24,
 
   -- Other
-  WLR_RENDERER_ALLOW_SOFTWARE = 1,
-  WLR_NO_HARDWARE_CURSORS = 1,
-  NVD_BACKEND = "direct",
   ELECTRON_OZONE_PLATFORM_HINT = "wayland",
   WEBKIT_DISABLE_DMABUF_RENDERER = 1,
   MOZ_ENABLE_WAYLAND = 1,
@@ -55,6 +45,20 @@ local fallbacks = {
   HYPRLAND_SHELL = "dms",
   WALLPAPER_BACKEND = "wallpaperengine",
 }
+
+-- Direct launches need the same hardware guard as UWSM sessions.
+local nvidia = io.open("/sys/module/nvidia_drm/initstate", "r")
+if nvidia then
+  nvidia:close()
+  fallbacks.GBM_BACKEND = "nvidia-drm"
+  fallbacks.__GLX_VENDOR_LIBRARY_NAME = "nvidia"
+  fallbacks.LIBVA_DRIVER_NAME = "nvidia"
+  fallbacks.__GL_GSYNC_ALLOWED = 1
+  fallbacks.__GL_VRR_ALLOWED = 0
+  fallbacks.WLR_RENDERER_ALLOW_SOFTWARE = 1
+  fallbacks.WLR_NO_HARDWARE_CURSORS = 1
+  fallbacks.NVD_BACKEND = "direct"
+end
 
 ---@class EnvVarTable : EnvVarFallbacks
 local envs = {}
