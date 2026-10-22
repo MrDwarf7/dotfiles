@@ -134,6 +134,12 @@ version = "latest"
 [tools."cargo:create-tauri-app"]
 version = "latest"
 
+# [tools."cargo:leaf-reader"]
+# version = "latest"
+
+[tools."cargo:https://github.com/MrDwarf7/leaf"]
+version = "latest" # should (iirc) support "crate" or "bin" as well?
+
 [tools."cargo-deny"]
 version = "latest"
 
