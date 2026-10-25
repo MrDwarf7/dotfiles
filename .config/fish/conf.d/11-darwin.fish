@@ -31,6 +31,8 @@ fish_add_path --prepend $KIRO_SHELL_INTEGRATION_PATH
 
 set -gx --path INFRA_DIR "$GITHUB_PROJECT/infra"
 
+# set -gx TERM tmux-256color
+
 # Glob over puppeteer's versioned dirs so mmdc keeps working across mermaid-cli upgrades.
 set -l chrome_headless_shell_dirs $HOME/.cache/puppeteer/chrome-headless-shell/mac_arm-*/chrome-headless-shell-mac-arm64
 if set -q chrome_headless_shell_dirs[1]

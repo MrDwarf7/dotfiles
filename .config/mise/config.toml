@@ -37,6 +37,21 @@ direnv = "latest"
 
 taplo = "latest"
 
+## Kubernetes / K8s / Kubectl / Helm / Kustomize / Skaffold / K9s / Kubeconform
+# kind = "latest"
+# minikube = "latest"
+# helm = "latest"                    The Kubernetes Package Manager
+# helm-cr = "latest"                 Hosting Helm Charts via GitHub Pages and Releases
+# helm-ct = "latest"                 CLI tool for linting and testing Helm charts
+# helm-diff = "latest"               A helm plugin that shows a diff explaining what a helm upgrade would change
+# helm-docs = "latest"               A tool for automatically generating markdown documentation for helm charts
+# helm-ls = "latest"                 Helm-ls is a helm language server protocol LSP implementation
+# helmfile = "latest"                Declaratively deploy your Kubernetes manifests, Kustomize configs, and Charts as Helm releases. Generate all-in-one manifests for use with ArgoCD
+# helmsman = "latest"                Helmsman is a Helm Charts (k8s applications) as Code tool which allows you to automate the deployment/management of your Helm charts from version controlled code
+# helmwave = "latest"                New  wave for @helm
+kubeconform = "latest"
+
+
 # markdownlint-cli2 = "latest"
 
 "npm:codebase-context" = "2.2.0"
@@ -48,7 +63,7 @@ version = "latest"
 version = "latest"
 
 [tools."npm:vercel"]
-features = ["optional"]
+# features = ["optional"]
 version = "latest"
 
 # npx skills add vercel-labs/agent-skills

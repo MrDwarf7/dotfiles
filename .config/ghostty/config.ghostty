@@ -28,7 +28,7 @@ scrollback-limit = 100_000_000
 
 confirm-close-surface = false
 shell-integration = fish
-shell-integration-features = cursor,sudo,title,no-cursor
+shell-integration-features = cursor,sudo,title,no-cursor,ssh-terminfo
 clipboard-read = allow
 copy-on-select = false
 window-theme = dark
