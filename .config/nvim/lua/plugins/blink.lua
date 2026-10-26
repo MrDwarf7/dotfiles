@@ -62,15 +62,6 @@ opts.sources = {
       inherit_defaults = true,
       "sshconfig",
     },
-    ghostty = {
-      inherit_defaults = true,
-      "ghostty",
-    },
-    tmux = {
-      inherit_defaults = true,
-      "tmux",
-    },
-
     text = set_text_types_sources(),
     markdown = set_text_types_sources(),
 
@@ -117,11 +108,6 @@ opts.sources = {
       score_offset = 1000,
     },
 
-    ghostty = {
-      name = "Ghostty",
-      module = "blink-cmp-ghostty",
-    },
-
     -- -- conventional_commits = {
     -- --   name = "Conventional Commits",
     -- --   module = "blink-cmp-conventional-commits",
@@ -147,11 +133,6 @@ opts.sources = {
       opts = {
         prefer_pre_generated = true, -- default
       },
-    },
-
-    tmux = {
-      name = "Tmux",
-      module = "blink-cmp-tmux",
     },
 
     -- wezterm = {
@@ -594,8 +575,6 @@ return {
     ----- Specific languages/sources
     { "folke/lazydev.nvim",                           lazy = true,                 ft = "lua" },
     { "bydlw98/blink-cmp-sshconfig",                  lazy = true, enabled = true, ft = { "sshconfig", "sshconfig_hosts" },  build = "make" },
-    { "barrettruth/blink-cmp-ghostty",                lazy = true, enabled = true, ft = "ghostty" },
-    { "barrettruth/blink-cmp-tmux",                   lazy = true, enabled = true, ft = "tmux" },
 
     -- { "junkblocker/blink-cmp-wezterm",                lazy = true, enabled = true, ft = "lua" },
 
