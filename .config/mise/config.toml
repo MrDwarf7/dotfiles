@@ -55,6 +55,7 @@ kubeconform = "latest"
 # markdownlint-cli2 = "latest"
 
 "npm:codebase-context" = "2.2.0"
+viddy = "latest"
 
 [tools."npm:typescript"]
 version = "latest"
