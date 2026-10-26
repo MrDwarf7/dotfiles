@@ -1,0 +1,7 @@
+{
+  "id": "tokyonight_storm_cool",
+  "base": "tokyonight_storm",
+  "chrome": {
+    "surface": "#24283b"
+  }
+}

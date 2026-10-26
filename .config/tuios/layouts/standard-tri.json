@@ -1,0 +1,30 @@
+{
+  "name": "standard-tri",
+  "created_at": "2026-10-26T13:44:12.874177+11:00",
+  "version": 2,
+  "auto_tiling": true,
+  "tiling_scheme": "smart_split",
+  "master_ratio": 0.5,
+  "windows": [
+    {
+      "x": 0,
+      "y": 1,
+      "width": 274,
+      "height": 68
+    },
+    {
+      "x": 274,
+      "y": 1,
+      "width": 125,
+      "height": 86
+    },
+    {
+      "x": 0,
+      "y": 69,
+      "width": 274,
+      "height": 18
+    }
+  ],
+  "screen_width": 399,
+  "screen_height": 87
+}

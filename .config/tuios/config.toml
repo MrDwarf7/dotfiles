@@ -118,12 +118,12 @@
 
 
 [appearance]
-theme = "tokyonight_storm"
+theme = "tokyonight_storm_cool"
 glyphs = "default"
-border_style = "normal"
-# border_focused_color = ""
-# border_unfocused_color = ""
-shared_borders = false
+border_style = "thick"
+border_focused_color = "magenta"
+border_unfocused_color = "bright_black"
+shared_borders = true
 gap = 0
 
 dim_unfocused = 0      # 0 :: 90
@@ -144,7 +144,7 @@ max_fps = "auto"
 wrap_lists = true
 
 window_title_position = "top"
-# window_title_format = ""        # default: "{index}: {title} ({cwd})"
+window_title_format = "{index}//{title}"
 window_button_style = "dots"
 window_button_position = "left"
 hide_window_buttons = true
@@ -173,7 +173,7 @@ link_hover = "safe"        # default: "safe", "safe", "always"
 kitty_placeholder = "auto" # default: "auto", "auto", "on", "off"
 image_symbols = "auto"
 
-scrollback_lines = 10000      # default: 10000, 0 :: 1000000
+scrollback_lines = 100000     # Applies to new panes after the next daemon start.
 scroll_lines = 3              # default: 3, 1 :: 50
 tiling_scheme = "smart_split" # default: "spiral", "spiral", "longest_side", "alternate", "smart_split"
 master_ratio = 50             # default, 50, 10 : 90
@@ -195,8 +195,8 @@ drop_preview_delay = "120ms"  # default: "120ms". A duration, or 0
 
 dockbar_position = "top"
 dock_workspace_tabs = true
-# dock_workspace_tab_format = ""
-dock_workspace_label_max = 12
+dock_workspace_tab_format = "{index}//{name}{zoom}"
+dock_workspace_label_max = 32
 dock_workspace_tooltip = true
 dock_pill_caps = false
 dock_compact = true
@@ -224,7 +224,7 @@ enabled = false
 [appearance.sidebar.right]
 
 [appearance.sidebar]
-enabled = true
+enabled = false
 file_icons = true
 file_icon_colors = true
 folder_click = "navigate"
@@ -262,12 +262,16 @@ between_agents = false # also allert on a message from one agent to another agen
 
 
 [daemon]
+persist_scrollback = true
+persist_scrollback_lines = 10000
+persist_scrollback_kb = 16384
 
 
 [startup]
 tiled = true
 daemon = true
-layout = "scrolling"
+# layout = "scrolling"
+layout = "bsp"
 open_default_window = true
 start_in_terminal_mode = true
 
@@ -284,8 +288,12 @@ start_in_terminal_mode = true
 
 
 [screenshot]
-preview = true
+preview = false
 format = "png"
+title_format = "{title} {cwd}"
+frame = "window"
+controls = "auto"
+shadow = true
 
 
 [screensaver]
@@ -309,6 +317,43 @@ follow = "mouse"
 
 
 [dock]
+left = ["mode", "workspaces", "custom/workspace-end", "trail", "tape"]
+right = [
+  "transfers",
+  "notifications",
+  "copy-help",
+  "cpu",
+  "ram",
+  "session",
+  "custom/host",
+  "clock",
+  "session-controls",
+]
+
+[dock.session]
+format = "{session}"
+fg = "magenta"
+
+[dock.custom.host]
+command = "hostname -s"
+refresh = "once"
+fg = "magenta"
+
+[dock.custom.workspace-end]
+command = 'sh "${XDG_CONFIG_HOME:-$HOME/.config}/tuios/workspace-names.sh"'
+refresh = "push"
+fg = "blue"
+
+[dock.tabs]
+style = "flat"
+separator = " │ "
+separator_fg = "blue"
+active_bg = "magenta"
+active_fg = "black"
+active_bold = true
+inactive_bg = "black"
+inactive_fg = "white"
+zoom_marker = " Z"
 
 
 [tailscale]
