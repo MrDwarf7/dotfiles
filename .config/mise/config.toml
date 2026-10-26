@@ -70,6 +70,9 @@ version = "latest"
 [tools."npm:skills"]
 version = "1.7.4"
 
+[tools."npm:nx"]
+version = "latest"
+
 ####################################################################################################
 
 ## Cargo / Cargo install / Cargo binstall / Rust / Rustup Tools
@@ -136,7 +139,7 @@ version = "latest"
 ### hotpath profiler CLI. tui -> `hotpath console`, cloud -> `hotpath cloud`, utils -> `hotpath-utils`.
 [tools."cargo:hotpath"]
 version = "latest"
-features = ["tui", "cloud", "utils"]
+# features = ["tui", "cloud", "utils"]
 
 ### Sampling CPU profiler; required at runtime by hotpath-samply for the `hotpath-cpu` feature.
 [tools."cargo:samply"]
@@ -198,5 +201,8 @@ pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
 # Experimental 'dotfiles' manager stuff
 dotfiles.root = "~/dotfiles"
 dotfiles.default_mode = "symlink" # "symlink" | "symlink-each" | "copy" | "template"
+
+[settings.self_update]
+auto = true
 
 [dotfiles]
