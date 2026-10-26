@@ -1,14 +1,14 @@
 modelRoles:
   plan: openai-codex/gpt-6-astra:high
   web: anthropic/claude-sonnet-5
-  commit: xai-oauth/grok-4.7:low
+  commit: anthropic/claude-opus-5-5:low
   task: openai-codex/gpt-6-luna:high
   judge: openrouter/~typesafe/jev-latest
   smol: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
-  advisor: xai-oauth/grok-4.7:xhigh
+  advisor: openai-codex/gpt-6-astra:xhigh
   slow: openai-codex/gpt-6.1-sol:high
-  default: openai-codex/gpt-6.1-sol
+  default: openai-codex/gpt-6.1-sol:high
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -85,6 +85,8 @@ skills:
   enableAgentsProject: true
   enableClaudeProject: true
   enablePiProject: true
+  ignoredSkills:
+    - local-cli-tools
 composer:
   shape: box
   defaultThinkingLevel: auto
@@ -114,7 +116,8 @@ retry:
       - kiro/claude-opus-5.5:medium
       - anthropic/claude-opus-5-5:low
     slow:
-      - anthropic/claude-fable-5-1
+      - kiro/claude-opus-5.5
+      - anthropic/claude-opus-5-5
     web:
       - kiro/claude-sonnet-5.5
       - anthropic/claude-opus-5-5
@@ -151,14 +154,14 @@ modelPresets:
     modelRoles:
       plan: openai-codex/gpt-6-astra:high
       web: anthropic/claude-sonnet-5
-      commit: xai-oauth/grok-4.7:low
+      commit: anthropic/claude-opus-5-5:low
       task: openai-codex/gpt-6-luna:high
       judge: openrouter/~typesafe/jev-latest
-      default: openai-codex/gpt-6.1-sol
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
       advisor: openai-codex/gpt-6-astra:xhigh
       slow: openai-codex/gpt-6.1-sol:high
+      default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto
   fpc:
     modelRoles:
