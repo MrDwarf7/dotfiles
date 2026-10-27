@@ -180,6 +180,7 @@ cmd-q = 'close'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 cmd-o = 'layout accordion horizontal vertical'
+cmd-shift-space = 'layout accordion horizontal vertical'
 cmd-i = 'layout tiles horizontal vertical'
 cmd-space = 'layout tiles horizontal vertical'
 
