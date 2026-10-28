@@ -83,6 +83,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "checkhealth",
     "jumplist",
     "lspinfo",
+    "gitsigns-blame",
   },
   callback = function()
     -- keymaps.map("n", "q", "<CMD>close<CR>")
