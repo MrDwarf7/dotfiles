@@ -25,8 +25,8 @@
       "] h": "editor::GoToHunk",
       "[ h": "editor::GoToPreviousHunk",
       "] t": "pane::ActivateNextItem",
-      "[ t": "pane::ActivatePreviousItem"
-    }
+      "[ t": "pane::ActivatePreviousItem",
+    },
   },
   {
     // Bound after y is pushed, not as "y g f" in normal mode: a multi-key "y …" binding turns
@@ -34,8 +34,8 @@
     "context": "vim_operator == y",
     "bindings": {
       "g f": ["workspace::SendKeystrokes", "escape g g shift-v shift-g y"],
-      "g shift-f": ["workspace::SendKeystrokes", "escape g g shift-v shift-g y shift-g"]
-    }
+      "g shift-f": ["workspace::SendKeystrokes", "escape g g shift-v shift-g y shift-g"],
+    },
   },
   {
     "context": "vim_mode == normal && !menu",
@@ -73,6 +73,8 @@
 
       // Harpoon stand-in: pinned tabs sort first, so slot N is the Nth pinned file.
       "space i": "pane::TogglePinTab",
+      "space t p": "pane::TogglePinTab",
+      "g p": "pane::TogglePinTab",
       "space shift-i": "tab_switcher::Toggle",
       "space 1": ["pane::ActivateItem", 0],
       "space 2": ["pane::ActivateItem", 1],
@@ -165,8 +167,8 @@
       "space d u": "debug_panel::ToggleFocus",
 
       "space o r": "editor::SpawnNearestTask",
-      "space o l": "task::Rerun"
-    }
+      "space o l": "task::Rerun",
+    },
   },
   {
     "context": "vim_mode == visual && !menu",
@@ -180,8 +182,8 @@
       "space l a": "editor::ToggleCodeActions",
       "space l f": "editor::FormatSelections",
       "space f shift-w": "pane::DeploySearch",
-      "space f shift-r": ["pane::DeploySearch", { "replace_enabled": true }]
-    }
+      "space f shift-r": ["pane::DeploySearch", { "replace_enabled": true }],
+    },
   },
   {
     "context": "vim_mode == insert",
@@ -192,23 +194,23 @@
       // nvim's blink binds these to select_next/prev with no fallback, so outside a menu they do
       // nothing; here they'd fall through to macOS JoinLines and vim's digraph prefix.
       "ctrl-j": null,
-      "ctrl-k": null
-    }
+      "ctrl-k": null,
+    },
   },
   {
     // Must come after the insert block's ctrl-j/ctrl-k nulls (same Editor node, later wins).
     "context": "Editor && (showing_code_actions || showing_completions)",
     "bindings": {
       "ctrl-j": "editor::ContextMenuNext",
-      "ctrl-k": "editor::ContextMenuPrevious"
-    }
+      "ctrl-k": "editor::ContextMenuPrevious",
+    },
   },
   {
     "context": "Picker > Editor",
     "bindings": {
       "ctrl-j": "menu::SelectNext",
-      "ctrl-k": "menu::SelectPrevious"
-    }
+      "ctrl-k": "menu::SelectPrevious",
+    },
   },
   {
     // Without these, `space f` (built-in, fires instantly) opens the finder and the next `f` lands in its query.
@@ -216,8 +218,8 @@
     "bindings": {
       "space e": "project_panel::ToggleFocus",
       "space f f": "file_finder::Toggle",
-      "space f w": "pane::DeploySearch"
-    }
+      "space f w": "pane::DeploySearch",
+    },
   },
   {
     "context": "ProjectPanel && not_editing",
@@ -238,22 +240,22 @@
       "ctrl-v": "project_panel::OpenSplitVertical",
       "ctrl-s": "project_panel::OpenSplitHorizontal",
       "g x": "workspace::OpenWithSystem",
-      "g .": "project_panel::ToggleHideHidden"
-    }
+      "g .": "project_panel::ToggleHideHidden",
+    },
   },
   {
     "context": "Workspace",
     "bindings": {
       "ctrl-tab": "pane::ActivateNextItem",
       "ctrl-shift-tab": "pane::ActivatePreviousItem",
-      "ctrl-:": "terminal_panel::ToggleFocus"
-    }
+      "ctrl-:": "terminal_panel::ToggleFocus",
+    },
   },
   {
     "context": "Pane",
     "bindings": {
-      "ctrl-shift-t": "pane::ReopenClosedItem"
-    }
+      "ctrl-shift-t": "pane::ReopenClosedItem",
+    },
   },
   {
     // ctrl-w only works where vim is active or nothing editable is focused; tabs like Extensions
@@ -261,8 +263,8 @@
     // "not in an editor or terminal" scope, so alt-d still reaches the shell in the terminal.
     "context": "Editor || (!Editor && !Terminal)",
     "bindings": {
-      "alt-d": "pane::CloseActiveItem"
-    }
+      "alt-d": "pane::CloseActiveItem",
+    },
   },
   {
     // One null at the Editor node shadows every Editor-level default for these keys:
@@ -271,27 +273,27 @@
     "bindings": {
       "alt-tab": null,
       "alt-up": null,
-      "alt-down": null
-    }
+      "alt-down": null,
+    },
   },
   {
+    // Keep partial acceptance on the defaults (ctrl-cmd-right/down): Ctrl-only bindings
+    // make holding Ctrl preview predictions and hide the completion menu.
     "context": "Editor && edit_prediction",
     "bindings": {
       "tab": "editor::AcceptEditPrediction",
-      "ctrl-right": "editor::AcceptNextWordEditPrediction",
-      "ctrl-down": "editor::AcceptNextLineEditPrediction"
-    }
+    },
   },
   {
     "context": "!SettingsWindow",
     "bindings": {
-      "ctrl-,": "zed::OpenSettings"
-    }
+      "ctrl-,": "zed::OpenSettings",
+    },
   },
   {
     "context": "!SettingsWindow",
     "unbind": {
-      "cmd-,": "zed::OpenSettings"
-    }
-  }
+      "cmd-,": "zed::OpenSettings",
+    },
+  },
 ]
