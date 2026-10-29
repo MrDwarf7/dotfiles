@@ -1,14 +1,14 @@
 modelRoles:
-  plan: openai-codex/gpt-6-astra:high
-  web: anthropic/claude-sonnet-5
-  commit: anthropic/claude-opus-5-5:low
-  task: openai-codex/gpt-6-luna:high
+  plan: anthropic/claude-opus-5-5:high
+  web: anthropic/claude-sonnet-5-5
+  commit: xai-oauth/grok-4.7:low
+  task: opencode-go/step-5-preview-free:medium
   judge: openrouter/~typesafe/jev-latest
-  smol: openai-codex/gpt-6-luna:low
-  tiny: openai-codex/gpt-6-luna:low
-  advisor: openai-codex/gpt-6-astra:xhigh
-  slow: openai-codex/gpt-6.1-sol:high
-  default: openai-codex/gpt-6.1-sol:high
+  smol: kiro/claude-sonnet-5.5:medium
+  tiny: anthropic/claude-haiku-5-5
+  advisor: anthropic/claude-opus-5-5:xhigh
+  slow: anthropic/claude-opus-5-5:high
+  default: xai-oauth/grok-4.7
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -110,6 +110,7 @@ retry:
     tiny:
       - anthropic/claude-haiku-5-5:medium
     task:
+      - opencode-go/space-bunny-free
       - kiro/claude-sonnet-5.5:medium
       - anthropic/claude-sonnet-5-5:medium
       - xai-oauth/grok-4.7:medium
@@ -125,8 +126,9 @@ retry:
       - openai-codex/gpt-image-2
       - opencode-zen/step-5-preview-free
     advisor:
-      - openai-codex/gpt-6-astra
       - anthropic/claude-opus-5-5:high
+      - openai-codex/gpt-6-astra
+      - xai-oauth/grok-4.7
 spelling:
   autocomplete: smollm
 power:
