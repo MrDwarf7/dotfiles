@@ -34,10 +34,15 @@ function sudo_last_command
 end
 abbr -a !! --position anywhere --function sudo_last_command
 
-function file_resolver_for_cmd
+function file_resolver_for_cmd_short
     echo "file (command -v !)"
 end
-abbr -a fe --position anywhere --set-cursor=! --function file_resolver_for_cmd
+abbr -a fe --position anywhere --set-cursor=! --function file_resolver_for_cmd_short
+
+function file_resolver_for_cmd_trim
+    echo "file (command -v !) | rg '^.*(?::)' --only-matching | tr -d ':'"
+end
+abbr -a fet --position anywhere --set-cursor=! --function file_resolver_for_cmd_trim
 
 function nvim_resolver_for_cmd --description "Resolve a command to its path and open it in nvim"
     echo "nvim (command -v !)"
