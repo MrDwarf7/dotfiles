@@ -1,5 +1,11 @@
-// Only values that differ from Zed's defaults (`zed: open default settings`).
 {
+  "proxy": "",
+  "document_folding_ranges": "on",
+  "lsp_results_location": "picker",
+  "colorize_brackets": true,
+  "line_ending": "enforce_lf",
+  "format_on_save": "modifications_if_available",
+  "redact_private_values": true,
   "vim_mode": true,
   "vim": {
     "use_smartcase_find": true,
@@ -8,7 +14,6 @@
       "insert": "bar"
     }
   },
-  // Shows Zed's pending-binding popup for the space leader, like which-key.nvim.
   "which_key": {
     "enabled": true,
     "delay_ms": 20
@@ -18,7 +23,6 @@
   "cursor_blink": false,
   "use_smartcase_search": true,
   "search": {
-    // Gives vim's n/N the same recentring as nvim's nzzzv.
     "center_on_match": true,
     "regex": true
   },
@@ -27,11 +31,13 @@
     "show": "never"
   },
   "preferred_line_length": 120,
-  "wrap_guides": [100, 120],
-
+  "wrap_guides": [
+    100,
+    120
+  ],
   "theme": {
     "mode": "dark",
-    "light": "One Light",
+    "light": "Gruvbox Dark",
     "dark": "Tokyo Night Storm"
   },
   "icon_theme": {
@@ -82,7 +88,7 @@
     "log": true,
     "lua": true,
     "make": true,
-    "markdown-oxide": true,
+    "markdown-oxide": false,
     "marksman": true,
     "material-icon-theme": true,
     "meson": true,
@@ -94,6 +100,7 @@
     "prisma": true,
     "proto": true,
     "ron": true,
+    "rumdl": true,
     "sql": true,
     "the-dark-side": true,
     "tmux": true,
@@ -106,7 +113,6 @@
   "auto_update_extensions": {
     "biome": true
   },
-
   "session": {
     "trust_all_worktrees": true
   },
@@ -127,6 +133,8 @@
     "quick_actions": false
   },
   "project_panel": {
+    "git_status_indicator": true,
+    "diagnostic_badges": true,
     "dock": "left",
     "button": false
   },
@@ -145,7 +153,7 @@
   },
   "hide_mouse": "on_typing_and_action",
   "use_autoclose": false,
-  "use_auto_surround": false,
+  "use_auto_surround": true,
   "sticky_scroll": {
     "enabled": true
   },
@@ -167,7 +175,9 @@
   "indent_guides": {
     "coloring": "indent_aware"
   },
-  "file_scan_exclusions": ["**/target/**"],
+  "file_scan_exclusions": [
+    "**/target/**"
+  ],
   "private_files": [
     "**/.env*",
     "**/config/*.toml",
@@ -190,13 +200,19 @@
       "upload_binary_over_ssh": true
     }
   ],
-
   "edit_predictions": {
+    "allow_data_collection": "no",
     "provider": "copilot"
   },
-  "agent_ui_font_size": 16.0,
-  "agent_buffer_font_size": 14.0,
+  "agent_ui_font_size": 16,
+  "agent_buffer_font_size": 14,
   "agent": {
+    "sandbox_permissions": {
+      "allow_unsandboxed": false
+    },
+    "threads_sidebar": {
+      "position": "right"
+    },
     "dock": "right",
     "default_width": 700,
     "profiles": {
@@ -241,6 +257,30 @@
         "provider": "openrouter",
         "model": "openrouter/hunter-alpha",
         "enable_thinking": false
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6.1-sol",
+        "enable_thinking": true,
+        "effort": "medium"
+      },
+      {
+        "provider": "openai-subscribed",
+        "model": "gpt-6.1-sol",
+        "enable_thinking": true,
+        "effort": "medium"
+      },
+      {
+        "provider": "openai-subscribed",
+        "model": "gpt-6-luna",
+        "enable_thinking": true,
+        "effort": "medium"
+      },
+      {
+        "provider": "openai",
+        "model": "gpt-6-luna",
+        "enable_thinking": true,
+        "effort": "medium"
       }
     ],
     "inline_assistant_model": {
@@ -248,15 +288,19 @@
       "model": "nvidia/nemotron-3-nano-30b-a3b"
     },
     "default_model": {
+      "effort": "medium",
       "enable_thinking": true,
-      "provider": "openrouter",
-      "model": "openrouter/hunter-alpha"
+      "provider": "openai-subscribed",
+      "model": "gpt-6.1-sol"
     }
   },
   "agent_servers": {
     "opencode": {
       "type": "registry",
-      "favorite_models": ["opencode/grok-code", "openrouter/hunter-alpha"],
+      "favorite_models": [
+        "opencode/grok-code",
+        "openrouter/hunter-alpha"
+      ],
       "default_config_options": {},
       "favorite_config_option_values": {}
     }
@@ -337,7 +381,11 @@
     "MCP_DOCKER": {
       "enabled": true,
       "command": "docker",
-      "args": ["mcp", "gateway", "run"],
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ],
       "env": {}
     },
     "container-use-mcp": {
@@ -353,7 +401,10 @@
     "Context7": {
       "enabled": false,
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "postgres-context-server": {
       "enabled": true,
@@ -362,11 +413,14 @@
     "mcp-server-linear": {
       "enabled": false,
       "command": "npx",
-      "args": ["-y", "mcp-remote", "https://mcp.linear.app/sse"],
+      "args": [
+        "-y",
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ],
       "env": {}
     }
   },
-
   "lsp": {
     "rust-analyzer": {
       "initialization_options": {
@@ -378,35 +432,47 @@
             "custom": {
               "Arc::new": {
                 "postfix": "arc",
-                "body": ["Arc::new(${receiver})"],
+                "body": [
+                  "Arc::new(${receiver})"
+                ],
                 "requires": "std::sync::Arc",
                 "scope": "expr"
               },
               "Some": {
                 "postfix": "some",
-                "body": ["Some(${receiver})"],
+                "body": [
+                  "Some(${receiver})"
+                ],
                 "scope": "expr"
               },
               "Ok": {
                 "postfix": "ok",
-                "body": ["Ok(${receiver})"],
+                "body": [
+                  "Ok(${receiver})"
+                ],
                 "scope": "expr"
               },
               "Rc::new": {
                 "postfix": "rc",
-                "body": ["Rc::new(${receiver})"],
+                "body": [
+                  "Rc::new(${receiver})"
+                ],
                 "requires": "std::rc::Rc",
                 "scope": "expr"
               },
               "Box::pin": {
                 "postfix": "boxpin",
-                "body": ["Box::pin(${receiver})"],
+                "body": [
+                  "Box::pin(${receiver})"
+                ],
                 "requires": "std::boxed::Box",
                 "scope": "expr"
               },
               "vec!": {
                 "postfix": "vec",
-                "body": ["vec![${receiver}]"],
+                "body": [
+                  "vec![${receiver}]"
+                ],
                 "description": "vec![]",
                 "scope": "expr"
               }
