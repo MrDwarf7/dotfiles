@@ -1,12 +1,13 @@
 # yaml-language-server: $schema=https://gh-dash.dev/schema.json
 prSections:
+  - title: "My PR's"
+    filters: is:open author:@me
+    type: null
+    #
   - title: "Repo PR's"
     filters: is:open
     type: null
     #
-  - title: "My PR's"
-    filters: is:open author:@me
-    type: null
   - title: "Needs My Review"
     filters: is:open review-requested:@me
     type: null
@@ -34,9 +35,9 @@ defaults:
     width: 80
     position: "bottom" # "auto" | "right" | "bottom"
   prsLimit: 20
-  prApproveComment: LGTM
+  prApproveComment: lgtm
   issuesLimit: 20
-  view: issues
+  view: prs
   layout:
     prs:
       updatedAt:
