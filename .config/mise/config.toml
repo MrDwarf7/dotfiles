@@ -20,6 +20,7 @@ go = "latest"
 # Tools
 biome = "latest"
 mr-boxington = "latest"
+"github:indexable-inc/blaze" = { version = "latest", prerelease = true, minimum_release_age = "4h", version_prefix = "v" }
 
 ####################################################################################################
 
