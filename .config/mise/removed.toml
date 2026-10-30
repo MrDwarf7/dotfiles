@@ -100,6 +100,18 @@
 # [tools."cargo:gh-stars"]
 # version = "latest"
 
+# github releases are x86_64-only; arm64 Mac got Bad CPU type. Use cargo:cross-rs/cross instead.
+# [tools."github:cross-rs/cross"]
+# version = "latest"
+# minimum_release_age = "2h"
+# Available assets:
+#   cross-x86_64-apple-darwin.tar.gz
+#   cross-x86_64-pc-windows-msvc.tar.gz
+#   cross-x86_64-unknown-linux-gnu.tar.gz
+#   cross-x86_64-unknown-linux-musl.tar.gz
+# [tools."github:cross-rs/cross".platforms]
+# macos-arm64 = { asset_pattern = "cross-*-apple-darwin.tar.gz" }
+# linux-x64 = { asset_pattern = "cross-*-unknown-linux-gnu.tar.gz" }
 
 # [settings]
 # npm.package_manager = "bun"
