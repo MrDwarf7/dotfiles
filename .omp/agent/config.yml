@@ -8,7 +8,7 @@ modelRoles:
   tiny: anthropic/claude-haiku-5-5
   advisor: anthropic/claude-opus-5-5:xhigh
   slow: anthropic/claude-opus-5-5:high
-  default: xai-oauth/grok-4.7
+  default: xai-oauth/grok-4.7:medium
 symbolPreset: nerd
 theme:
   dark: titanium
