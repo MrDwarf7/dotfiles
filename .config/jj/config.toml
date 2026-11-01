@@ -668,6 +668,8 @@ prls = ['util', 'exec', '--', 'bash', '-c', 'gh pr list']
 prco = ['util', 'exec', '--', 'bash', '-c', 'gh pr checkout $0']
 
 
+u = ["undo"]
+
 # op
 ol = ['op', 'log']
 or = ['op', 'restore']
