@@ -1,4 +1,7 @@
+## #:-- schema https://starship.rs/config-schema.json
+"$schema" = "https://starship.rs/config-schema.json"
 # p10k_esq_starshi### Prompt
+
 
 # The format layout for the prompt is as follows:
 
@@ -6,17 +9,17 @@
 
 # Commands may be slower in restricted environments, e.g. containers
 command_timeout = 10000
-scan_timeout = 1000
+scan_timeout    = 1000
+
 
 format = """$username\
 $hostname\
 $os\
 $directory\
-$git_branch\
-$git_commit\
-$git_state\
-$git_status\
+$jobs\
+$vcs\
 $fill\
+$jj_status\
 [ ](#767676)\
 $cmd_duration\
 $package\
@@ -31,130 +34,196 @@ $mojo\
 $nim\
 $nodejs\
 $rust\
+$terraform\
+$typst\
 $zig\
-$jobs\
 \n\
 ($sudo)$character"""
 
 
-# format = """$username\
-# $hostname\
-# $os\
-# $directory\
-# $git_branch\
-# $git_commit\
-# $git_state\
-# $git_status\
-# $fill\
-# [ ](#767676)\
-# $cmd_duration\
-# $package\
-# $c\
-# $cmake\
-# $docker_context\
-# $dotnet\
-# $golang\
-# $haskell\
-# $lua\
-# $meson\
-# $mojo\
-# $nim\
-# $nodejs\
-# $rust\
-# $zig\
-# $jobs\
-# \n\
-# ($sudo)$character"""
+# $direnv\
+
 
 #
 #
 # Setup-ish things
 [fill]
-symbol = " "
+disabled = false
+symbol   = " "
 
 [character]
-format = "$symbol "
-success_symbol = " [❯](purple)"
-error_symbol = " [❯](red)"
-vimcmd_symbol = " [❮](green)"
+disabled              = false
+format                = "$symbol "
+error_symbol          = " [❯](red)"
+success_symbol        = " [❯](purple)"
 vimcmd_replace_symbol = " [❯](orange)"
-vimcmd_visual_symbol = " [❯](yellow)"
+vimcmd_symbol         = " [❮](green)"
+vimcmd_visual_symbol  = " [❯](yellow)"
 
 [env_var.VIMSHELL]
-format = "[$env_value]($style)"
-style = 'green italic'
+disabled = false
+format   = "[$env_value]($style)"
+style    = 'green italic'
 
 [sudo]
-format = " [$symbol]($style)"
-style = "bold italic bright-yellow"
-symbol = "⋈┈"
 disabled = false
+format   = " [$symbol]($style)"
+style    = "bold italic bright-yellow"
+symbol   = "⋈"
+# symbol   = "⋈┈"
 
 #
 #
 ### Left prompt
 [username]
-# Don't display for normal logged in user
-disabled = false
+disabled   = true
+format     = "[ $user]($style)"
 style_user = "#d3b987"
-format = "[ $user]($style)"
 
 [hostname]
-disabled = false
+disabled = true
+format   = "[@$hostname]($style)[](#767676)"
 ssh_only = true
-style = "#d3b987"
-format = "[@$hostname]($style)[](#767676)"
+style    = "#d3b987"
 
 [os]
 disabled = false
-format = "[ $symbol]($style)"
-style = "#00afff"
+format   = "[ $symbol]($style)"
+style    = "#00afff"
 
 [os.symbols]
-"Alpine" = ""
-"Arch" = ""
-"CachyOS" = ""
-"CentOS" = ""
-#"CoreOS" = ""
-"Debian" = ""
-"Fedora" = ""
-"Gentoo" = ""
-"Linux" = ""
-"Macos" = ""
-"NixOS" = ""
-"Windows" = ""
-# "Manjaro" = ""
-# "Mint" =  ""
-# "Raspbian" =  ""
-# "Ubuntu" = ""
+## ASCII symbols
+# "Alpine"  = ""
+"ALTLinux" = "Ⓐ "
+"Arch"     = ""
+"CachyOS"  = ""
+"CentOS"   = ""
+"Debian"   = ""
+"Fedora"   = ""
+"Gentoo"   = ""
+"Linux"    = ""
+"Macos"    = ""
+"Manjaro"  = ""
+"Mint"     = ""
+"NixOS"    = ""
+"Raspbian" = ""
+"Ubuntu"   = ""
+"Void"     = " "
+"Windows"  = ""
 
+
+## Unicode symbols
+
+"AIX"              = "➿ "
+"AOSC"             = "🐱 "
+"AlmaLinux"        = "💠 "
+"Alpaquita"        = "🔔 "
+"Alpine"           = "🏔️ "
+"Amazon"           = "🙂 "
+"Android"          = "🤖 "
+"Artix"            = "🎗️ "
+"Bazzite"          = "🎮 "
+"Bluefin"          = "🐟 "
+"DragonFly"        = "🐉 "
+"Elementary"       = "🍏 "
+"Emscripten"       = "🔗 "
+"EndeavourOS"      = "🚀 "
+"FreeBSD"          = "😈 "
+"Garuda"           = "🦅 "
+"HardenedBSD"      = "🛡️ "
+"Hurd"             = "🐂 "
+"Illumos"          = "🐦 "
+"InstantOS"        = "⏲️ "
+"Ios"              = "📱 "
+"KDENeon"          = "⚛️ "
+"Kali"             = "🐉 "
+"Mabox"            = "📦 "
+"Mariner"          = "🌊 "
+"MidnightBSD"      = "🌘 "
+"NetBSD"           = "🚩 "
+"Nobara"           = "🎩 "
+"OpenBSD"          = "🐡 "
+"OpenCloudOS"      = "☁️ "
+"OracleLinux"      = "🦴 "
+"PikaOS"           = "🐤 "
+"Pop"              = "🍭 "
+"RedHatEnterprise" = "🎩 "
+"Redhat"           = "🎩 "
+"Redox"            = "🧪 "
+"RockyLinux"       = "💠 "
+"SUSE"             = "🦎 "
+"Solus"            = "⛵ "
+"Ultramarine"      = "🔷 "
+"Unknown"          = "❓ "
+"Uos"              = "🐲 "
+"Zorin"            = "🔹 "
+"openEuler"        = "🦉 "
+"openSUSE"         = "🦎 "
+# "CachyOS"          = "🎗️ "
+# "CentOS"           = "💠 "
+# "CoreOS"           = ""
+# "Debian"           = "🌀 "
+# "Fedora"           = "🎩 "
+# "Gentoo"           = "🗜️ "
+# "Macos"            = "🍎 "
+# "Mint"             = "🌿 "
+# "NixOS"            = "❄️ "
+# "Raspbian"         = "🍓 "
+# "Ubuntu"           = "🎯 "
 
 [directory]
-# read_only = " "
-truncation_length = 0
-use_os_path_sep = true
-# truncate_to_repo = false
-repo_root_style = "#0087af"
+before_repo_root_style    = ""
+disabled                  = false
 fish_style_pwd_dir_length = 3
-style = "#00afff"
-# Repo format
-repo_root_format = "[ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+format                    = "[ $path]($style)[$read_only]($read_only_style) "
+home_symbol               = "~"
+read_only                 = "🔒"
+read_only_style           = "red"
+repo_root_format          = "[ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+repo_root_style           = "#0087af"
+style                     = "#00afff"
+truncate_to_repo          = true
+truncation_length         = 0
+truncation_symbol         = ""
+use_os_path_sep           = true
+
 # Non repo format
-format = "[ $path]($style)[$read_only]($read_only_style) "
+# Repo format
+# read_only = " "
+# truncate_to_repo = false
+
+[direnv]
+allowed_msg       = "allowed"
+denied_msg        = "denied"
+detect_env_vars   = [ "DIRENV_FILE" ]
+detect_extensions = [  ]
+detect_files      = [ ".envrc" ]
+detect_folders    = [  ]
+disabled          = false
+format            = "[$symbol$loaded/$allowed]($style) "
+loaded_msg        = "loaded"
+not_allowed_msg   = "not allowed"
+style             = "bold bright-yellow"
+symbol            = "direnv "
+unloaded_msg      = "unloaded"
+
+
 
 [git_branch]
-symbol = "  "
-style = "green"
-format = "[ ](#767676)[$symbol$branch]($style)"
+disabled = false
+format   = "[ ](#767676)[$symbol$branch]($style)"
+style    = "green"
+symbol   = "  "
+
 
 [git_status]
-stashed = "[*${count}](blue) "
-modified = "[!${count}](yellow) "
-staged = "[+${count}](green) "
+deleted   = "[-${count}](red) "
+format    = " ([$stashed$modified$staged$untracked $ahead_behind]($style))"
+modified  = "[!${count}](yellow) "
+staged    = "[+${count}](green) "
+stashed   = "[*${count}](blue) "
 untracked = "[?${count}](blue)"
-deleted = "[-${count}](red) "
-format = " ([$stashed$modified$staged$untracked $ahead_behind]($style))"
-#format = " ([$all_status $ahead_behind]($style))"
+# format = " ([$all_status $ahead_behind]($style))"
 
 #
 #
@@ -164,18 +233,24 @@ format = " ([$stashed$modified$staged$untracked $ahead_behind]($style))"
 #
 ## Generic/cmd stuff
 [jobs]
-disabled = false
-format = "[$number]($style)"
+disabled         = false
+format           = "[$number]($style) "
+number_threshold = 1
+style            = "bold blue"
+symbol           = "✦"
+symbol_threshold = 1
+
 
 [status]
-disabled = false
+disabled   = false
+format     = "[$symbol$status]($style)"
 map_symbol = false
-format = "[$symbol$status]($style)"
+
 
 [cmd_duration]
 disabled = false
-style = "#a8a8a8"
-format = "((#767676)[$duration  ]($style))"
+format   = "((#767676)[$duration  ]($style))"
+style    = "#a8a8a8"
 
 
 #
@@ -183,17 +258,17 @@ format = "((#767676)[$duration  ]($style))"
 ## Right prompt tools and versions
 
 [c]
-symbol = " "
-format = "([$symbol($version(-$name)) ]($style))"
+disabled = false
+format   = "([$symbol($version(-$name)) ]($style))"
+symbol   = " "
 
 [cmake]
-symbol = '△ '
-format = "([$symbol($version )]($style))"
-detect_files = ["CMakeLists.txt", "CMakeCache.txt"]
+detect_files = [ "CMakeLists.txt", "CMakeCache.txt" ]
+disabled     = false
+format       = "([$symbol($version )]($style))"
+symbol       = '△ '
 
 [docker_context]
-symbol = " "
-format = "([$symbol$context]($style))"
 detect_files = [
   'docker-compose.yml',
   'docker-compose.yaml',
@@ -202,46 +277,130 @@ detect_files = [
   'compose.yml',
   'compose.yaml',
 ]
+disabled = false
+format = "([$symbol$context]($style))"
+symbol = " "
 
 [dotnet]
-symbol = '.NET '
-detect_extensions = ["csproj", "sln", 'fsproj', 'xproj', 'nuspec']
-format = "([.NET $version ]($style))"
+detect_extensions = [ "csproj", "sln", 'fsproj', 'xproj', 'nuspec' ]
+disabled          = false
+format            = "([.NET $version ]($style))"
+symbol            = '.NET '
 
 [golang]
-symbol = " "
-format = "([$symbol($version )]($style))"
+disabled = false
+format   = "([$symbol($version )]($style))"
+symbol   = " "
 
 [haskell]
-symbol = 'λ '
-format = "([$symbol($version )]($style))"
+disabled = false
+format   = "([$symbol($version )]($style))"
+symbol   = 'λ '
+
+
+[jj_bookmark]
+disabled        = false
+diverged_symbol = "⇕"
+format          = "[ ](#767676)[$symbol$bookmark(@$remote)$diverged( \\(+$overflow_count others\\))]($style) "
+# ignore_names      = [ "linux", "main", "master", "default" ]
+ignore_names      = [  ]
+ignore_remotes    = [ "origin" ]
+style             = "green"
+symbol            = " "
+truncation_length = 65535
+truncation_symbol = "…"
+# style             = "green"
+# diverged_symbol   = "*"
+
+
+[jj_change]
+change_hash_length = 7
+commit_hash_length = 7
+disabled           = false
+# `$change` == [$change_prefix]($prefix_style)[$change_suffix]($suffix_style)([/$change_offset]($change_offset_style)) 
+# `$commit` == [$commit_prefix]($prefix_style)[$commit_suffix]($suffix_style)
+# format              = "([$change_prefix]($prefix_style)[$change_suffix]($suffix_style)([/$change_offset]($change_offset_style)) [$commit_prefix]($prefix_style)[$commit_suffix]($suffix_style)) "
+format = "([$change_prefix]($prefix_style)[$change_suffix]($suffix_style)([/$change_offset]($change_offset_style)):[$commit_prefix](blue bold)[$commit_suffix]($suffix_style)) "
+# format = "([$change_prefix]($prefix_style)[$change_suffix]($suffix_style)([/$change_offset]($change_offset_style)) [$commit_prefix](blue)) "
+# format              = "([$change_prefix]($prefix_style)([/$change_offset]($change_offset_style)):[$commit_prefix](blue)) "
+prefix_style        = "purple bold"
+suffix_style        = "dimmed"
+change_offset_style = "bold"
+# format              = "$change "
+
+
+[jj_metrics]
+disabled      = false
+added_style   = "dimmed green"
+deleted_style = "dimmed red"
+# format             = "([+$added]($added_style) )([-$deleted]($deleted_style) )"
+format             = " ([$added]($added_style) )([$deleted]($deleted_style)) "
+only_nonzero_diffs = true
+
+
+[jj_status]
+# `$all` == $conflicted$description$hidden$immutable$added$copied$deleted$modified$renamed
+disabled = false
+# format              = "([\\[$conflicted$description$hidden$immutable$added$copied$deleted$modified$renamed\\]]($style) )"
+# format              = "([$conflicted$description$hidden$immutable$added$copied$deleted$modified$renamed]($style) )"
+format              = "([$conflicted$description $hidden$immutable$added$copied$deleted$modified$renamed]($style) )"
+conflicted          = "!"
+description_empty   = "◌"
+description_present = ""
+hidden              = ""
+immutable           = "◆"
+added               = "+"
+copied              = "="
+deleted             = "x"
+modified            = "~"
+renamed             = "»$count"
+style               = "dimmed"
+# deleted             = "✘"
+
+
 
 [lua]
-symbol = "⨀ "
-format = "([$symbol($version )]($style))"
+disabled       = false
+format         = "([$symbol($version )]($style))"
+symbol         = "⨀ "
+style          = "bold blue"
+version_format = "${major}.${minor}.${patch}"
+# version_format = "${raw}"
+
 
 [meson]
-symbol = '⬢ '
-format = "([$symbol$project]($style))"
-detect_files = ['meson.build', 'meson_options.txt']
+disabled          = false
+format            = "([$symbol$project]($style))"
+style             = "blue bold"
+symbol            = '⬢ '
+truncation_length = 4294967295
+truncation_symbol = "…"
+# detect_files = [ 'meson.build', 'meson_options.txt' ]
+
 
 [nim]
-symbol = "▴▲▴ "
-format = "([$symbol($version )]($style))"
+disabled = false
+format   = "([$symbol($version )]($style))"
+symbol   = "▴▲▴ "
+
 
 [nix_shell]
-symbol = " "
-format = "[${symbol}nix ${state} ]($style)"
+disabled = false
+format   = "[${symbol}nix ${state} ]($style)"
+symbol   = " "
+
 
 [nodejs]
-symbol = " "
-format = "([$symbol($version)]($style))"
+disabled = false
+format   = "([$symbol($version)]($style))"
+symbol   = " "
 
 
 [package]
-symbol = "◨ "
-format = "([$symbol($version )]($style))"
-style = "dimmed yellow italic"
+disabled       = false
+format         = "([$symbol($version )]($style))"
+style          = "dimmed yellow italic"
+symbol         = "◨ "
 version_format = "${raw}"
 # detect_folders = ["node_modules", "target"]
 # detect_files = [ 
@@ -261,23 +420,63 @@ version_format = "${raw}"
 # ]
 
 [rust]
-# format = '[ $symbol ($version )]($style)'
-format = "([$symbol($version)]($style))"
-# symbol = "⊃ "
+disabled       = false
+format         = "([$symbol($version)]($style))"
+symbol         = "🦀 "
 version_format = "${major}.${minor}"
-symbol = "🦀 "
+# format = '[ $symbol ($version )]($style)'
+# symbol = "⊃ "
 
 
-[zig]
-symbol = '↯ '
-format = "([$symbol($version )]($style))"
-version_format = "${major}.${minor}.${patch}"
-detect_folders = [".zig-cache", "zig-out"]
+[vcs]
+disabled    = false
+git_modules = "$git_branch$git_commit$git_state$git_status"
+# jj_modules  = "$jj_bookmark$jj_change$jj_metrics$jj_status"
+jj_modules = "$jj_bookmark$jj_change$jj_metrics"
+order      = [ "jj", "git" ]
+# git_modules ="$git_branch$git_commit$git_state$git_metrics$git_status"
+# order = [ "jj", "git", "hg", "pijul", "fossil" ]
+
+
 
 # [python]
 # disabled = true
 # symbol = " "
 # format = '([ ](#767676)[${symbol}${pyenv_prefix}(${version} )([\($virtualenv\)](#306998))]($style))'
+
+[terraform]
+disabled          = false
+commands          = [ [ "terraform", "version" ], [ "tofu", "version" ] ]
+detect_extensions = [ "tf", "tofu", "tfplan", "tfstate" ]
+detect_files      = [ "terragrunt.hcl", "terraform.tf", "terraform.tfvars", "terraform.tfstate" ]
+detect_folders    = [ ".terraform" ]
+format            = "[$symbol$workspace]($style) "
+style             = "bold 105"
+symbol            = "💠 "
+version_format    = "${major}.${minor}.${patch}"
+# version_format    = "${raw}"
+
+
+[typst]
+detect_extensions = [ "typ", "typst" ]
+detect_files      = [  ]
+detect_folders    = [  ]
+disabled          = false
+format            = "[$symbol($version )]($style)"
+style             = "bold #0093A7"
+symbol            = "t "
+version_format    = "${major}.${minor}.${patch}"
+# version_format    = "${raw}"
+
+
+[zig]
+style          = "bold yellow"
+detect_folders = [ ".zig-cache", "zig-out" ]
+disabled       = false
+format         = "([$symbol($version )]($style))"
+symbol         = '↯ '
+version_format = "${major}.${minor}.${patch}"
+
 
 # [terraform]
 # # We disable the native tf plugin because it is much slower than tfenv
