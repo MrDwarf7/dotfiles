@@ -73,6 +73,7 @@ set -g automatic-rename on     # automatic window renaming
 # set -g automatic-rename-format '#{b:pane_current_command}'
 #{b:pane_current_path}" # show current command and path in window name
 
+set -g pane-border-status top
 set -g pane-border-indicators "both" # [ "off" | "colour" | "arrows" | "both" ]
 set -g pane-border-lines "heavy" # [ "single" | "double" | "heavy" | "simple" | "number" | "spaces" ]
 
