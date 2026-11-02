@@ -6,7 +6,7 @@ modelRoles:
   judge: openrouter/~typesafe/jev-latest
   smol: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
-  advisor: openai-codex/gpt-6-astra:xhigh
+  advisor: kiro/claude-opus-5.5:xhigh
   slow: openai-codex/gpt-6.1-sol:high
   default: openai-codex/gpt-6.1-sol
 symbolPreset: nerd
@@ -126,8 +126,8 @@ retry:
       - openai-codex/gpt-image-2
       - opencode-zen/step-5-preview-free
     advisor:
-      - anthropic/claude-opus-5-5:high
       - openai-codex/gpt-6-astra
+      - anthropic/claude-opus-5-5
       - xai-oauth/grok-4.7
 spelling:
   autocomplete: smollm
@@ -161,7 +161,7 @@ modelPresets:
       judge: openrouter/~typesafe/jev-latest
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
-      advisor: openai-codex/gpt-6-astra:xhigh
+      advisor: kiro/claude-opus-5.5:xhigh
       slow: openai-codex/gpt-6.1-sol:high
       default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto

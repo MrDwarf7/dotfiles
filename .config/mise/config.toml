@@ -105,7 +105,7 @@ version = "latest"
 
 [tools."cargo:cross-rs/cross"]
 version = "branch:main"
-crate = "cross" # workspace also ships xtask
+crate = "cross"         # workspace also ships xtask
 
 # [tools."cargo:markdown-oxide"]
 # version = "latest"
