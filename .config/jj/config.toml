@@ -761,6 +761,10 @@ uis = ['util', 'exec', '--', 'bash', '-c', 'jjui']
 # jj git "$@"
 # """, ""]
 
+conflicts = ["util", "exec", "--", "bash", "-c", """
+jj log -r 'conflicts() & ~@'
+"""]
+
 detail = ["util", "exec", "--", "bash", "-c", """
 jj log -T 'builtin_log_compact_full_description' "$@"
 """, ""]
