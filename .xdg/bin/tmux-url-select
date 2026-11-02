@@ -1,32 +1,12 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2016,SC2218
+OPEN_CMD="${OPEN_CMD:-$(command -v xdg-open || command -v open)}"
+COPY_CMD="${CLIP_COPY:-${COPY_CMD:-$(command -v wl-copy || command -v pbcopy)}}"
+RG_BASE=(--no-config --color never -N --no-heading -I --pcre2)
 
-DEBUG=${DEBUG:-0}
-DEBUG_LOG=${DEBUG_LOG:-/tmp/tmux-url-select.log}
-DEBUG_TIMEOUT=${DEBUG_TIMEOUT:-60000}
-
-# dbg() {
-#   if [[ $DEBUG -eq 0 ]]; then
-#     return
-#   fi
-#   local msg="$1"
-#   tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=yellow,bold]|DEBUG:| $msg"
-# }
-
-OPEN_CMD="${OPEN_CMD:-xdg-open}"
-COPY_CMD="${CLIP_COPY:-${COPY_CMD:-wl-copy}}"
-_rg_base=(--no-config --color never -N --no-heading -I --pcre2)
-RG_BASE=("${_rg_base[@]}" -o)
-RG_STRIP=("${_rg_base[@]}" --passthrough --replace '' --)
-
-LEN_ROW_PADDING=5
+LEN_ROW_PADDING=7
+MESSAGE_TIME_PERIOD=850
 
 FUZZ_CMD=$(command -v fzf || command -v sk)
-# On error, use this timeout period
-MESSAGE_TIME_PERIOD=850
-# menu_max_items=5 # if adding native, we need a max to switch on
-
-# tmux display-popup -xP -yP -w25% -h20% -T 'Selection' -E -k
 
 export_fish_fzf_env_opts() {
   # early return if this bash instance already has FZF_DEFAULT_OPTS set
@@ -42,38 +22,40 @@ export_fish_fzf_env_opts() {
 
 declare -g LEN_COLS
 declare -g LEN_ROWS
-declare -g FZF_TMUX_OPTS
 
 # Standard URLs
 #   https://example.com/path?q=1
 #   ftp://files.example.com/file.tar.gz
 read -r PAT_URL <<'PATTERN'
-(?:https?|ftp|file):/?//[-\w+&@#/%?=~|!:,.;]*[-\w+&@#/%=~|]
+(?i:https?|ftp|file)://(?:[^\s'"`<>()]|\([^\s'"`<>()]*\))+(?<![.,;:!?])
 PATTERN
 
 # Git SSH URLs
 #   git@github.com:user/repo.git -> https://github.com/user/repo.git
 #   ssh://git@github.com/user/repo.git -> https://github.com/user/repo.git
 read -r PAT_GIT <<'PATTERN'
-(?:ssh://)?git@([^\s'"`:]+)[:/]([^\s'"`]+)
+(?:ssh://)?git@([^\s'"`:/<>]+)[:/]([^\s'"`<>()]+)(?<![.,;:!?])
 PATTERN
-SUB_GIT='https://$1/$2'
 
 # Bare www domains
 #   www.example.com -> http://www.example.com
 #   www.example.com/path -> http://www.example.com/path
 read -r PAT_WWW <<'PATTERN'
-(?<!://)www\.[a-zA-Z](?:-?[a-zA-Z0-9])+\.[a-zA-Z]{2,}(?:/[^\s'"`]+)*
+www\.[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,}(?::\d{1,5})?(?:[/?#][^\s'"`<>()]*)?(?<![.,;:!?])
 PATTERN
-SUB_WWW='http://$0'
+
+# ponytail: common bare-domain suffixes avoid treating source filenames as URLs;
+# extend the suffix list when another TLD is needed.
+read -r PAT_DOMAIN <<'PATTERN'
+(?<![\w@./-])(?:[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?\.)+(?i:com|org|net|edu|gov|io|dev|app|co|uk|me|tv|ai|au|nz|de|fr|ca|us|be|info|biz|xyz|tech|cloud|online|site)(?![\w-]|\.[a-zA-Z0-9])(?::\d{1,5})?(?:[/?#][^\s'"`<>()]*)?(?<![.,;:!?])
+PATTERN
 
 # IP addresses
 #   192.168.1.1 -> http://192.168.1.1
 #   10.0.0.1:8080/api -> http://10.0.0.1:8080/api
 read -r PAT_IP <<'PATTERN'
-\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d{1,5})?(?:/[^\s'"`]+)*
+(?<![\w.])\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}(?::\d{1,5})?(?:[/?#][^\s'"`<>()]*)?(?<![.,;:!?])
 PATTERN
-SUB_IP='http://$0'
 
 # GitHub shorthand
 #   'user/repo' -> https://github.com/user/repo
@@ -81,7 +63,6 @@ SUB_IP='http://$0'
 read -r PAT_GH <<'PATTERN'
 ['"]([\w-]+/[\w.-]+)['"]
 PATTERN
-SUB_GH='https://github.com/$1'
 
 # Helper, but we use it here to wrap the call via
 # `nohup` and also the handoff via `... &`
@@ -90,94 +71,95 @@ open_url() {
 }
 
 fzf_filter() {
-  local copy_bind="ctrl-y:execute-silent(printf '%s\n' {+} | awk '{print \$2}' | $COPY_CMD)"
+  local copy_bind="ctrl-y:execute-silent(printf '%s\n' {+2} | $COPY_CMD)"
+  local opts=(--multi --exit-0 --prompt='URL> '
+    --header='Enter: open | Tab: select | Ctrl-Y: copy' --bind "$copy_bind")
   if [[ "$FUZZ_CMD" == *fzf* ]]; then
-    # shellcheck disable=SC2086
-    "$FUZZ_CMD" $FZF_TMUX_OPTS --multi --exit-0 --no-preview --bind "$copy_bind"
+    "$FUZZ_CMD" --tmux "bottom,${LEN_COLS},${LEN_ROWS}" --no-preview "${opts[@]}"
   else
-    "$FUZZ_CMD" --multi --exit-0 --bind "$copy_bind"
+    "$FUZZ_CMD" "${opts[@]}"
   fi
 }
 
 rg_extract() {
-  declare data
-  data=$(rg "${RG_STRIP[@]}" $'\x1B\[[0-9;]*[a-zA-Z]' 2>/dev/null)
-  {
-    printf '%s\n' "$data" | rg "${RG_BASE[@]}" -- "$PAT_URL" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_GIT" -- "$PAT_GIT" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_WWW" -- "$PAT_WWW" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_IP" -- "$PAT_IP" 2>/dev/null || true
-    printf '%s\n' "$data" | rg "${RG_BASE[@]}" --replace "$SUB_GH" -- "$PAT_GH" 2>/dev/null || true
-  }
+  local data url
+  data=$(rg "${RG_BASE[@]}" --passthrough --replace '' -- $'\x1B\\[[0-9;]*[a-zA-Z]')
+  printf '%s\n' "$data" |
+    rg "${RG_BASE[@]}" -o -- "(?:$PAT_URL)|(?:$PAT_GIT)|(?:$PAT_WWW)|(?:$PAT_DOMAIN)|(?:$PAT_IP)|(?:$PAT_GH)" |
+    while IFS= read -r url; do
+      case "$url" in
+      ssh://git@*) url="https://${url#ssh://git@}" ;;
+      git@*)
+        url=${url#*git@}
+        url="https://${url/:/\/}"
+        ;;
+      \'* | \"*) url="https://github.com/${url:1:${#url}-2}" ;;
+      *://*) ;;
+      *) url="http://$url" ;;
+      esac
+      printf '%s\n' "$url"
+    done
 }
 
-# If we want to simply 'inherit' limit just -I otherwise be explicit
-# declare -I limit
 pane_content() {
   case "$1" in
   full) tmux capture-pane -J -p -e -S - ;;
   screen) tmux capture-pane -J -p -e ;;
-  *) tmux capture-pane -J -p -e -S -"$limit" ;;
+  *) tmux capture-pane -J -p -e -S "-$1" ;;
   esac
 }
 
-# If we want to simply 'inherit' limit just -I otherwise be explicit
-# declare -I limit
 parse_limit() {
   declare limit="$1"
   [[ $limit =~ ^[0-9]+$ ]] && echo "$limit" && return
   case "$limit" in
   full | screen) echo "$limit" ;;
-  *) echo "screen" ;;
+  *)
+    printf 'Usage: %s [screen|full|LINES]\n' "${0##*/}" >&2
+    return 1
+    ;;
   esac
 }
 
+if [[ -z "${TMUX:-}" ]]; then
+  printf '%s\n' 'This script must be run inside tmux.' >&2
+  exit 1
+fi
+if (($# > 1)); then
+  printf 'Usage: %s [screen|full|LINES]\n' "${0##*/}" >&2
+  exit 1
+fi
+limit=$(parse_limit "${1:-screen}") || exit 1
 export_fish_fzf_env_opts
 
-declare limit=${1:-}
-# dbg "[1st] :: Limit before parse: $limit"
-limit=$(parse_limit "$limit")
-# dbg "[2nd] :: Limit after parse: $limit"
-
-# We want unique values, but want to AVOID sorting them, so we use `nl` to number them and then extract the second column after filtering.
-items=$(pane_content "$limit" | rg_extract | awk '!seen[tolower($0)]++' | nl -w1 -s '  ')
-# dbg "[3rd] :: Extracted items: $items"
+# Match in pane order and keep case-sensitive paths distinct.
+content=$(pane_content "$limit") || exit 1
+items=$(rg_extract <<<"$content" | awk '!seen[$0]++' | nl -w1 -s '  ')
 
 [ -z "$items" ] && tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=red,bold]No URL found" && exit 0
 
-LEN_COLS=$(awk 'NR==1{max=length($2)} length($2)>max{max=length($2)} END{print max+10}' <<<"$items")
+LEN_COLS=$(awk 'length($0)>max{max=length($0)} END{print max+8}' <<<"$items")
 LEN_ROWS=$(wc -l <<<"$items")
-count=$LEN_ROWS                 # must be assigned before padding or we have to to extra work
-((LEN_ROWS += LEN_ROW_PADDING)) # bot border | input | no. items | 1-line-pad | top border
+count=$LEN_ROWS
+((LEN_ROWS += LEN_ROW_PADDING)) # Borders, input, count, and key hints.
 
-FZF_TMUX_OPTS="--tmux bottom,${LEN_COLS},${LEN_ROWS}"
+# Keep the controls readable; tmux limits larger popups to the client size.
+((LEN_COLS < 44)) && LEN_COLS=44
 
 if ((count == 1)); then
   item=$(awk '{print $2}' <<<"$items")
-  open_url "$item" &
+  open_url "$item"
   tmux display -d "$MESSAGE_TIME_PERIOD" "#[fg=green,bold]Opening URL :: $item"
   exit
 fi
 
-# We have more than a single item
-fzf_filter <<<"$items" | awk '{print $2}' |
-  while read -r chosen; do
-    # nohup "$OPEN_CMD" "$chosen" >/dev/null 2>&1 &
-    open_url "$chosen"
-  done
-exit
+selected=$(fzf_filter <<<"$items") || {
+  status=$?
+  ((status == 1 || status == 130)) && exit 0
+  exit "$status"
+}
+[[ -n "$selected" ]] || exit 0
+while IFS= read -r chosen; do
+  open_url "${chosen#*  }"
+done <<<"$selected"
 
-# url_count=$(mapfile -t urls_array <<<"$items"; echo "${#urls_array[@]}")
-# url_count="${#items[@]}"
-
-# if ((url_count == 1)); then
-#   open_url "$(awk '{print $2}' <<<"$items")"
-# elif ((url_count > menu_max_items)); then
-
-# Early/Quick return (also stops fzf from blipping)
-
-## Later if we want to
-#   native_menu <<<"$items" | awk '{print $2}' |
-#     while read -r chosen; do
-#       open_url "$chosen"
-#     done
