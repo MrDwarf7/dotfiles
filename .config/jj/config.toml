@@ -680,6 +680,7 @@ fa = ['file', 'annotate']
 far = ['file', 'annotate', '-r']
 ft = ['file', 'track']
 fu = ['file', 'untrack']
+fd = ['file', 'delete']
 
 # workspace
 w = ['workspace']
