@@ -58,7 +58,7 @@ return {
     },
     keys = {
       {
-        "<leader>du",
+        "<leader>Du",
         function()
           require("dapui").toggle({ reset = true })
         end,
@@ -81,13 +81,13 @@ return {
     dependencies = { "mfussenegger/nvim-dap" },
     keys = {
       -- stylua: ignore start
-      { "<leader>dc", function() require("dap").continue() end, desc = "DAP [c]ontinue" },
-      { "<leader>di", function() require("dap").step_into() end, desc = "DAP Step [i]nto" },
-      { "<leader>do", function() require("dap").step_over() end, desc = "DAP Step [o]ver" },
-      { "<leader>dO", function() require("dap").step_out() end, desc = "DAP Step [O]ut" },
-      { "<leader>dz", function() require("dap").step_back() end, desc = "DAP Step Back" },
-      { "<leader>dB", function() require("dap").clear_breakpoints() end, desc = "DAP Clear [B]reakpoints" },
-      { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle [b]reakpoint" },
+      { "<leader>Dc", function() require("dap").continue() end, desc = "DAP [c]ontinue" },
+      { "<leader>Di", function() require("dap").step_into() end, desc = "DAP Step [i]nto" },
+      { "<leader>Do", function() require("dap").step_over() end, desc = "DAP Step [o]ver" },
+      { "<leader>DO", function() require("dap").step_out() end, desc = "DAP Step [O]ut" },
+      { "<leader>Dz", function() require("dap").step_back() end, desc = "DAP Step Back" },
+      { "<leader>DB", function() require("dap").clear_breakpoints() end, desc = "DAP Clear [B]reakpoints" },
+      { "<leader>Db", function() require("dap").toggle_breakpoint() end, desc = "DAP Toggle [b]reakpoint" },
       -- stylua: ignore end
     },
     opts = {
@@ -181,8 +181,8 @@ return {
     lazy = true,
     keys = {
       -- stylua: ignore start
-      { "<leader>dv", function() require("dap-view").toggle() end, desc = "DAP View Toggle" },
-      { "<leader>dw", "<CMD>DapViewWatch<CR>", desc = "DAP View Toggle"  },
+      { "<leader>Dv", function() require("dap-view").toggle() end, desc = "DAP View Toggle" },
+      { "<leader>Dw", "<CMD>DapViewWatch<CR>", desc = "DAP View Toggle"  },
       -- stylua: ignore end
     },
     ---@module 'dap-view'

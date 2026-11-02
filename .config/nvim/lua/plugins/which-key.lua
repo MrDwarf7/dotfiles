@@ -7,7 +7,8 @@ return {
     spec = {
       { "<Leader>a", group = "jj/jujutsu" },
       { "<Leader>b", group = "+[B]uffers" },
-      { "<Leader>d", group = "+[D]ebug" },
+      { "<Leader>d", group = "+[D]ataBase" },
+      { "<Leader>D", group = "+[D]ebug" },
       { "<Leader>f", group = "+[F]ind" },
       { "<Leader>g", group = "+[G]it & GO" },
       { "<Leader>h", group = "+[H]unk(s)" },
