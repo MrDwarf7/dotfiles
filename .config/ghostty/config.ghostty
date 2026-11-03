@@ -32,6 +32,8 @@ shell-integration-features = cursor,sudo,title,no-cursor,ssh-terminfo
 clipboard-read = allow
 copy-on-select = false
 window-theme = dark
+
+## Sensible default fix; OS specific overrides.
 window-padding-x = 4
 window-padding-y = 2
 window-padding-balance = true
