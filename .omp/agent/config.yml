@@ -1,14 +1,14 @@
 modelRoles:
-  plan: anthropic/claude-opus-5-5:high
-  web: anthropic/claude-sonnet-5-5
-  commit: xai-oauth/grok-4.7:low
-  task: anthropic/claude-opus-5-5:medium
+  plan: openai-codex/gpt-6-astra:high
+  web: anthropic/claude-sonnet-5
+  commit: anthropic/claude-sonnet-5:low
+  task: openai-codex/gpt-6-luna:high
   judge: openrouter/~typesafe/jev-latest
-  smol: anthropic/claude-sonnet-5-5:medium
-  tiny: anthropic/claude-haiku-5-5
+  smol: openai-codex/gpt-6-luna:low
+  tiny: openai-codex/gpt-6-luna:low
   advisor: anthropic/claude-opus-5-5:xhigh
-  slow: anthropic/claude-opus-5-5:high
-  default: anthropic/claude-opus-5-5:medium
+  slow: openai-codex/gpt-6.1-sol:high
+  default: openai-codex/gpt-6.1-sol
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -110,9 +110,11 @@ retry:
   fallbackChains:
     smol:
       - kiro/claude-sonnet-5.5:medium
-      - kiro/claude-opus-5.5:low
       - anthropic/claude-sonnet-5-5:medium
       - anthropic/claude-opus-5-5:low
+      - kiro/claude-opus-5.5:low
+      - xai-oauth/grok-4.7
+      - openai-codex/gpt-6.1-sol
     tiny:
       - anthropic/claude-haiku-5-5:medium
     task:
@@ -133,9 +135,10 @@ retry:
       - openai-codex/gpt-image-2
       - opencode-zen/step-5-preview-free
     advisor:
-      - openai-codex/gpt-6-astra
       - anthropic/claude-opus-5-5
+      - kiro/claude-opus-5.5
       - xai-oauth/grok-4.7
+      - openai-codex/gpt-6-astra
 spelling:
   autocomplete: smollm
 power:
@@ -163,12 +166,12 @@ modelPresets:
     modelRoles:
       plan: openai-codex/gpt-6-astra:high
       web: anthropic/claude-sonnet-5
-      commit: anthropic/claude-opus-5-5:low
+      commit: anthropic/claude-sonnet-5:low
       task: openai-codex/gpt-6-luna:high
       judge: openrouter/~typesafe/jev-latest
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
-      advisor: kiro/claude-opus-5.5:xhigh
+      advisor: anthropic/claude-opus-5-5:xhigh
       slow: openai-codex/gpt-6.1-sol:high
       default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto
