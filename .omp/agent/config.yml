@@ -76,6 +76,12 @@ task:
   enableLsp: true
   enableEffort: true
   maxRecursionDepth: 3
+  structured: true
+  maxRuntimeMs: 1800000
+  softRequestBudgetNotice: true
+  softRequestBudget: 150
+  maxEffort: xhigh
+  prewalk: true
 emojiAutocomplete: false
 skills:
   enableAgentsUser: true
@@ -94,7 +100,7 @@ composer:
   hideThinkingBlock: false
 defaultThinkingLevel: auto
 browser:
-  headless: false
+  headless: true
 dev:
   autoqaConsent: granted
 autolearn:
@@ -235,3 +241,7 @@ cycleOrder:
   - smol
   - slow
   - default
+tools:
+  xdevNotices: true
+prewalk:
+  enabled: false
