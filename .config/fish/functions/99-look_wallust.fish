@@ -8,7 +8,7 @@ function 99-look_wallust
     # if not test -f $path
     #     return 1
     # end
-    not 00-valid_pacman wallust; and return 1
+    not 00-valid_program wallust; and return 1
 
     # if not 00-valid_pacman wallust
     #     return 1

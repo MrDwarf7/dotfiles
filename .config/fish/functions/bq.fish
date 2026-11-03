@@ -21,9 +21,9 @@ function __bq_help
 end
 
 function __bq_fallback_chain --argument-names try fallback
-    not 00-valid_pacman $try; and not 00-valid_pacman $fallback; and colorize red "Error: Neither '$try' nor '$fallback' commands are available. Please install one of them.\n"; and return 1
-    00-valid_pacman $try; and echo $try; and return 0
-    00-valid_pacman $fallback; and echo $fallback; and return 0
+    not 00-valid_program $try; and not 00-valid_program $fallback; and colorize red "Error: Neither '$try' nor '$fallback' commands are available. Please install one of them.\n"; and return 1
+    00-valid_program $try; and echo $try; and return 0
+    00-valid_program $fallback; and echo $fallback; and return 0
     return 1
 end
 

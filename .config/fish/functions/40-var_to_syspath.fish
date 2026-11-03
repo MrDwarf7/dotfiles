@@ -17,8 +17,8 @@ function 40-var_to_syspath --wraps=fish_add_path --argument-names program_to_che
     contains $argv[2] $PATH; and return 0
 
     # If valid prog and flag was given, pass the flag through to the fish_add_path function
-    00-valid_pacman "$program_to_check"; and test -n "$flag"; and fish_add_path $flag $env_var; and return 0
-    00-valid_pacman "$program_to_check"; and fish_add_path $env_var; and return 0
+    00-valid_program "$program_to_check"; and test -n "$flag"; and fish_add_path $flag $env_var; and return 0
+    00-valid_program "$program_to_check"; and fish_add_path $env_var; and return 0
     or return 1
 
     ## old code

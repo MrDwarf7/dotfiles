@@ -7,7 +7,7 @@ set -g max_recurses (math "5")
 
 # Yes, I know - it's an abomination, it's slightly faster on average though
 # (normal one is at the bottom~~)
-set -g checks_total (math "$(not set -q "WEZTERM_PANE"; and printf "0"; or printf "1") + $(not set -q "TMUX"; and printf "0"; or printf "1") + $(00-valid_pacman tmux; and printf "0"; or printf "1") ")
+set -g checks_total (math "$(not set -q "WEZTERM_PANE"; and printf "0"; or printf "1") + $(not set -q "TMUX"; and printf "0"; or printf "1") + $(00-valid_program tmux; and printf "0"; or printf "1") ")
 
 function __autostart_tmux_cleanup
     set -e -g session_name

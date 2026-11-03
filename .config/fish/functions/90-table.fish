@@ -2,7 +2,7 @@
 #
 
 function 90-table --argument-names data padding delimiter use_stdin --description "Prints a table from a string or stdin using qsv"
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         colorize red "qsv is not installed. Please install qsv to use this function."
         return 1
     end

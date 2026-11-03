@@ -8,7 +8,7 @@ function __pkg_review_cmp
 end
 
 function __pkg_review_help
-    if not 00-valid_pacman fzf
+    if not 00-valid_program fzf
         return 0
     end
 

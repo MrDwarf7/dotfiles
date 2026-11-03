@@ -27,7 +27,7 @@ function 30-export_as_env_var --argument-names program_one env_var path_value --
     set -q $env_var; and return 1
     test -z "$env_var"; and return 2
 
-    00-valid_pacman "$program_one"; and set -gx $env_var $path_value; and return 0
+    00-valid_program "$program_one"; and set -gx $env_var $path_value; and return 0
     or printf "[ERROR] :: 30-export_as_env_var: %s not found via pacman, cannot set %s to %s\n" "$program_one" "$env_var" "$path_value"
     and return 1
 

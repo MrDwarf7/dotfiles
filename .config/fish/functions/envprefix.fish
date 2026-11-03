@@ -14,7 +14,7 @@ function __envprefix_cmp
 end
 
 function __envprefix_help
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end

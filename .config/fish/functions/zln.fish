@@ -2,7 +2,7 @@
 #
 
 function zln --wraps=source --description 'zellij new/start'
-    if not 00-valid_pacman zellij
+    if not 00-valid_program zellij
         printf "Error: zellij is not installed.\n" >&2
         return 1
     end

@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 #
 
-function 10-eval_if_pacman --argument-names program_one expr --description "If a provided program is available via pacman, evaluates a provided expression"
+function 10-eval_if_program --argument-names program_one expr --description "If a provided program is available via pacman, evaluates a provided expression"
     # Checks to make sure a program is installed before evaluating an expression
     # Used for instances where the item must be called as:
     #
@@ -20,7 +20,7 @@ function 10-eval_if_pacman --argument-names program_one expr --description "If a
     # 1 if the program is not installed
     # set -l program_one $argv[1]
     # set -l expr $argv[2]
-    00-valid_pacman "$program_one"; and eval $expr | source; and return 0
+    00-valid_program "$program_one"; and eval $expr | source; and return 0
     or return 1
 
     # printf "1.0: Checking for %s\n" "$program_one"

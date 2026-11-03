@@ -20,7 +20,7 @@ function 50-export_alias_if_pacman --argument-names program_one alias_name alias
     # printf "5.0: Setting %s\n" "$alias_name"
     # printf "5.0: Falling back to %s\n" "$alias_value"
 
-    00-valid_pacman "$program_one"; and alias $alias_name $alias_value; and return 0
+    00-valid_program "$program_one"; and alias $alias_name $alias_value; and return 0
     or return 1
 
     # if 00-valid_pacman "$program_one"

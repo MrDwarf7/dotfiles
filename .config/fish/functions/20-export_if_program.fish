@@ -2,7 +2,7 @@
 # @fish-lsp-disable 3003
 #
 
-function 20-export_if_pacman --argument-names program_one env_var fallback --description "If a provided program is available via pacman, exports an environment variable, otherwise uses a provided fallback"
+function 20-export_if_program --argument-names program_one env_var fallback --description "If a provided program is available via pacman, exports an environment variable, otherwise uses a provided fallback"
     # Exports a program if it is found in pacman, otherwise it exports a fallback
     #
     # Parameters:
@@ -26,8 +26,8 @@ function 20-export_if_pacman --argument-names program_one env_var fallback --des
     set -q $env_var; and return 0
     test -z "$env_var"; and return 1
 
-    00-valid_pacman "$program_one"; and set -gx $env_var $program_one; and return 0
-    or 00-valid_pacman "$fallback"; and set -gx $env_var $fallback; and return 0
+    00-valid_program "$program_one"; and set -gx $env_var $program_one; and return 0
+    or 00-valid_program "$fallback"; and set -gx $env_var $fallback; and return 0
 
     or printf "[ERROR] :: 02export_if_pacman: %s not found via pacman, and no fallback provided, cannot set %s\n" "$program_one" "$env_var"
     and return 1

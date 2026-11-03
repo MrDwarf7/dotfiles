@@ -14,7 +14,7 @@ function 00-pkg-db-query --argument-names name --description 'pacman -Qi fallbac
     command pacman -Qi "$name" &>/dev/null
 end
 
-20-export_if_pacman paru PKG_MANAGER yay
+20-export_if_program paru PKG_MANAGER yay
 30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_FLAGS "-S --noconfirm"
 30-export_as_env_var $PKG_MANAGER PKG_MANAGER_INSTALL_CALLABLE "$PKG_MANAGER $PKG_MANAGER_INSTALL_FLAGS"
 
@@ -22,6 +22,6 @@ end
 40-var_to_syspath pnpm "$PNPM_HOME" --prepend
 
 if status is-interactive
-    10-eval_if_pacman keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"
+    10-eval_if_program keychain "keychain add --eval id_ed25519 --quick --immediate --quiet --systemd 2>&1 >/dev/null; or true"
     or colorize red "keychain failed to load, please check your keychain setup"
 end

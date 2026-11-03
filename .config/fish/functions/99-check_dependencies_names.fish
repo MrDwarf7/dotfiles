@@ -20,7 +20,7 @@ function 99-check_dependencies_names --argument-names should_early_exit programs
     for i in (seq (count $programs)) #                                  ### will give actual index's from 1..
         # for i in $programs                                            ### will give names
         set -l prog (string trim -- $programs[$i])
-        if not 00-valid_pacman $prog
+        if not 00-valid_program $prog
             if test "$should_early_exit" = true
                 printf "Exiting early due to missing dependency: %s\n" "$prog"
                 return 99

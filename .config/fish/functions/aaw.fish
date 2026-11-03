@@ -14,7 +14,7 @@ function __base_fzf --argument-names popup
 end
 
 function aaw --wraps=source --description 'Jj workspace picker via fzf'
-    00-valid_pacman jj; and command jj git root >/dev/null; or return 1
+    00-valid_program jj; and command jj git root >/dev/null; or return 1
 
     set -l popup (string match -qr -- '(\-p|p|\-\-popup)' $argv[1]; and echo '--popup' || echo '')
 

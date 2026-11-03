@@ -5,7 +5,7 @@
 # Optional dependency: only runs if rustup is on PATH.
 
 function sysup_rustup --description 'Step: update rustup'
-    if not 00-valid_pacman rustup
+    if not 00-valid_program rustup
         colorize yellow "rustup not found; skipping.\n"
         return 1
     end

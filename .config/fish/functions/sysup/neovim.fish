@@ -1,5 +1,5 @@
 function sysup_neovim --description 'Step: update neovim headless via Lazy'
-    if not 00-valid_pacman nvim
+    if not 00-valid_program nvim
         colorize red "neovim not found; cannot update neovim.\n"
         return 1
     end

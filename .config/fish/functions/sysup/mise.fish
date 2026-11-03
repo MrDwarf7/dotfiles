@@ -13,7 +13,7 @@
 # once around the step loop rather than as a step in the middle.
 
 function __sysup_mise_begin --description 'Deactivate mise before updating'
-    not 00-valid_pacman mise; and return 0
+    not 00-valid_program mise; and return 0
     # if not 00-valid_pacman mise
     #     return 0
     # end
@@ -31,7 +31,7 @@ function __sysup_mise_end --argument-names from_crash --description 'Whether the
         set from_crash $_flag_from_crash
     end
 
-    not 00-valid_pacman mise; and return 0
+    not 00-valid_program mise; and return 0
     # if not 00-valid_pacman mise
     #     return 0
     # end

@@ -13,7 +13,7 @@ set k_marker m
 # end
 
 function __mypath_help
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         return
     end
 

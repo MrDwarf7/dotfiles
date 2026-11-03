@@ -5,7 +5,7 @@
 # Single responsibility, guard up front.
 
 function sysup_pacman --description 'Step: update official packages'
-    if not 00-valid_pacman pacman
+    if not 00-valid_program pacman
         colorize red "pacman not found; cannot update official packages.\n"
         return 1
     end

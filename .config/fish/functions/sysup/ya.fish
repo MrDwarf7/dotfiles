@@ -8,7 +8,7 @@
 # No other file in the system needed touching.
 
 function sysup_ya --description 'Step: update yazi packages'
-    not 00-valid_pacman ya; and colorize yellow "ya (yazi pkg mgr) not found; skipping.\n"; and return 0
+    not 00-valid_program ya; and colorize yellow "ya (yazi pkg mgr) not found; skipping.\n"; and return 0
     # if not 00-valid_pacman ya
     #     colorize yellow "ya (yazi pkg mgr) not found; skipping.\n"
     #     return 0

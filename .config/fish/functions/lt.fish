@@ -10,7 +10,7 @@ set k_num n
 set k_color c
 
 function __lt_help
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
@@ -69,7 +69,7 @@ function lt --description 'List files in a directory with tree view'
 
     if string match -q ls $LIST_CLIENT; or string match -q /usr/bin/ls $LIST_CLIENT
         colorize yellow "Warning: Tree view not available with '$LIST_CLIENT', using tree instead"
-        if 00-valid_pacman tree
+        if 00-valid_program tree
             set -l args "-L $depth -a -C --dirsfirst -l"
             command tree $args $argv
             return $status

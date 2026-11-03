@@ -10,7 +10,7 @@ function __pc_cmp
 end
 
 function __pc_help
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         return 0
     end
 

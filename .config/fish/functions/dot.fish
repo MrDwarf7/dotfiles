@@ -6,7 +6,7 @@ set k_files f
 set k_pop p
 
 function dot_help
-    if not 00-valid_pacman qsv
+    if not 00-valid_program qsv
         colorize red "qsv is not installed. Please install qsv to use the help function.\n"
         return
     end
@@ -92,9 +92,9 @@ function dot --argument-names cmd --description 'Show latest changes in the dotf
         return 1
     end
 
-    if 00-valid_pacman jj || jj git root 2>&1
+    if 00-valid_program jj || jj git root 2>&1
         set vcs jj
-    else if 00-valid_pacman git
+    else if 00-valid_program git
         set vcs git
     else
         colorize red "Error: Neither 'jj' nor 'git' is installed. Please install one of them to use this function.\n"

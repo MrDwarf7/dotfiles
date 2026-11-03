@@ -2,10 +2,10 @@
 #
 
 function hd --wraps=source --description 'Wrapper around `hunk diff` for jj'
-    if not 00-valid_pacman jj
+    if not 00-valid_program jj
         colorize red "Error: jj is not installed or not in PATH."
     end
-    if not 00-valid_pacman hunk
+    if not 00-valid_program hunk
         colorize red "Error: hunk is not installed or not in PATH."
     end
 

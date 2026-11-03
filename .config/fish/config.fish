@@ -21,16 +21,16 @@ if status is-interactive
     # #
 
     # Immediately call starship on term start (interactive)
-    10-eval_if_pacman starship "starship init fish --print-full-init"
+    10-eval_if_program starship "starship init fish --print-full-init"
     commandline -f repaint
-    10-eval_if_pacman direnv "direnv hook fish | source"
+    10-eval_if_program direnv "direnv hook fish | source"
 
     # source our secrets file if it exists
     if test -e "$HOME/.secret/secrets.fish"
         source "$HOME/.secret/secrets.fish" &
     end
 
-    is_linux; and 00-valid_pacman shellup; and shellup &
+    is_linux; and 00-valid_program shellup; and shellup &
 
     # 099autostart_tmux new
 end

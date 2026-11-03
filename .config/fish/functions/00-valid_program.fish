@@ -5,7 +5,7 @@
 # fill from the various places like command and pacman etc.
 # (Ironically, the completion function itself will probably need to call this functin lol...)
 
-function 00-valid_pacman --argument-names to_test_prog --description "Validates if a package is installed. (command -q first; then 00-pkg-db-query if the OS file registered one)"
+function 00-valid_program --argument-names to_test_prog --description "Validates if a package is installed. (command -q first; then 00-pkg-db-query if the OS file registered one)"
     # Validates if a package is installed
     #
     # Parameters:

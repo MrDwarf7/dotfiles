@@ -180,9 +180,9 @@ function __setup_fzf_vars
     test "$__cached_fzf_done" = 1; and return 0
 
     set -f FZF_DEFAULT_COMMAND ""
-    if 00-valid_pacman bfs
+    if 00-valid_program bfs
         set FZF_DEFAULT_COMMAND "bfs -type f,d,l,p -s -print -maxdepth 8 -d -ignore_readdir_race -O4 --"
-    else if 00-valid_pacman fd
+    else if 00-valid_program fd
         # __env_cached_set -Ux FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix --"
         set FZF_DEFAULT_COMMAND "fd --type f --type d --strip-cwd-prefix --"
     else

@@ -39,7 +39,7 @@ function set_awww
         return 1
     end
 
-    00-valid_pacman awww; or return 1
+    00-valid_program awww; or return 1
     # if not 00-valid_pacman awww
     #     return 1
     # end

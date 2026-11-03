@@ -38,7 +38,7 @@ function set_waypaper --argument-names path monitor
     #     return 1
     # end
 
-    not 00-valid_pacman waypaper; and return 1
+    not 00-valid_program waypaper; and return 1
 
     command waypaper --backend awww --fill $waypaper_fill_method --monitor $monitor --wallpaper $path >$output_buffer 2>&1 || begin
         printf "Failed to set wallpaper for %s: %s\n" $monitor (cat $output_buffer)
@@ -137,10 +137,10 @@ function 99-look_waypaper --argument-names path_one path_two --description 'Call
     # pprint "MAIN :: FIRST %s\n" $first_mon
     # pprint "MAIN :: SECOND %s\n" $second_mon
 
-    00-valid_pacman jq || begin
+    00-valid_program jq || begin
         printf "Error: jq is not installed. Please install jq to use this function.\n"
         return 1
-    end; and 00-valid_pacman waypaper || begin
+    end; and 00-valid_program waypaper || begin
         printf "Error: waypaper is not installed. Please install waypaper to use this function.\n"
         return 1
     end

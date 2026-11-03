@@ -14,7 +14,7 @@ function 00-pkg-db-query --argument-names name --description 'Homebrew cellar fa
     test -n "$HOMEBREW_PREFIX"; and test -d "$HOMEBREW_PREFIX/opt/$name"
 end
 
-20-export_if_pacman brew PKG_MANAGER brew
+20-export_if_program brew PKG_MANAGER brew
 30-export_as_env_var brew PKG_MANAGER_INSTALL_FLAGS install
 30-export_as_env_var brew PKG_MANAGER_INSTALL_CALLABLE "brew install"
 

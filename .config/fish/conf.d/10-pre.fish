@@ -8,7 +8,7 @@
 #  tmux-resurrect and tmux-continuum loading...                      #
 ######################################################################
 
-20-export_if_pacman eza LIST_CLIENT exa
+20-export_if_program eza LIST_CLIENT exa
 # Because the actual thing requires path; fallback to just te name for invoke
 # 20-export_if_pacman sccache RUSTC_WRAPPER sccache
 # 30-export_as_env_var sccache RUSTC_WRAPPER (command -v sccache)
@@ -31,10 +31,10 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # must come AFTER cargo's bin due to shim ordering (if `--prepend` for mbx side)
 40-var_to_syspath mbx "$XDG_DATA_HOME/mbx/bin" --prepend
 
-10-eval_if_pacman zoxide "zoxide init fish"
-10-eval_if_pacman fzf "fzf --fish"
+10-eval_if_program zoxide "zoxide init fish"
+10-eval_if_program fzf "fzf --fish"
 ##### # 04var_to_syspath mise "$HOME/.xdg/data/mise/shims" --prepend ## no!
-10-eval_if_pacman mise "mise activate fish"
+10-eval_if_program mise "mise activate fish"
 
 # PERF: The performance on this is _horrible_ man...
 #
@@ -58,11 +58,11 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 # 01eval_if_pacman carapace "carapace _carapace | source && carapace fish | source"
 
 # tested: works fine with one of the two below commented out
-10-eval_if_pacman carapace "carapace _carapace"
+10-eval_if_program carapace "carapace _carapace"
 # 01eval_if_pacman carapace "carapace fish"
 
-10-eval_if_pacman batman "batman --export-env"
-10-eval_if_pacman batpipe batpipe
+10-eval_if_program batman "batman --export-env"
+10-eval_if_program batpipe batpipe
 
 # 40-var_to_syspath jetbrains-toolbox "$XDG_DATA_HOME/JetBrains/Toolbox/scripts" --prepend
 

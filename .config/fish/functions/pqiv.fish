@@ -7,7 +7,14 @@ function __output_to_buf_pqiv --description "Outputs the result of `paru -Siv <p
 end
 
 function pqiv --description "Queries paru for a pkg, then pipes it into `paru -Siv <pkg>`" --argument-names pkg
+    is_linux; or begin
+        colorize red "Error: pqiv is only supported on Linux systems.\n"; and return 1
+    end
     # set pkg $argv[1]
+
+    00-valid_program paru; or 00-valid_program yay; or 00-valid_program yay; or 00-valid_program trizen; or 00-valid_program pacman; or begin
+        colorize red "Error: paru, yay, trizen, or pacman is required for pqi to work.\n"; and return 1
+    end
 
     # alias pqi "command paru -Q | rg -i"
     set query_output (paru -Q | rg --ignore-case $pkg | awk '{print $1}')
