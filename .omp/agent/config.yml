@@ -1,14 +1,14 @@
 modelRoles:
-  plan: openai-codex/gpt-6-astra:high
-  web: anthropic/claude-sonnet-5
-  commit: anthropic/claude-opus-5-5:low
-  task: openai-codex/gpt-6-luna:high
+  plan: anthropic/claude-opus-5-5:high
+  web: anthropic/claude-sonnet-5-5
+  commit: xai-oauth/grok-4.7:low
+  task: anthropic/claude-opus-5-5:medium
   judge: openrouter/~typesafe/jev-latest
-  smol: openai-codex/gpt-6-luna:low
-  tiny: openai-codex/gpt-6-luna:low
-  advisor: kiro/claude-opus-5.5:xhigh
-  slow: openai-codex/gpt-6.1-sol:high
-  default: openai-codex/gpt-6.1-sol
+  smol: anthropic/claude-sonnet-5-5:medium
+  tiny: anthropic/claude-haiku-5-5
+  advisor: anthropic/claude-opus-5-5:xhigh
+  slow: anthropic/claude-opus-5-5:high
+  default: anthropic/claude-opus-5-5:medium
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -110,6 +110,7 @@ retry:
     tiny:
       - anthropic/claude-haiku-5-5:medium
     task:
+      - openai-codex/gpt-6-luna
       - opencode-go/space-bunny-free
       - kiro/claude-sonnet-5.5:medium
       - anthropic/claude-sonnet-5-5:medium
