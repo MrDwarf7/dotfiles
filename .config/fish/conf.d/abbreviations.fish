@@ -68,4 +68,4 @@ function nvim_ripgrep
     printf "nvim %s" "(rgif '"!")"
 end
 
-abbr -a rv --position anywhere --set-cursor=! --function nvim_ripgrep
+abbr -a vr --position anywhere --set-cursor=! --function nvim_ripgrep

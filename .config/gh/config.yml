@@ -12,11 +12,18 @@ prefer_editor_prompt: disabled
 pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
-  v: repo view --web
-  co: pr checkout
+  # Repo views
+  rv: repo view
+  rvb: repo view --branch
+  rvw: repo view --web
+  # Stack
   sm: stack merge
-  prm: pr merge -d -m
-  prma: pr merge --auto -d -m
+  # PR's
+  prco: pr checkout
+  prsm: pr list --search "author:@me" # pr-search-me
+  # Merging
+  prmd: pr merge -d -m # pr-merge-delete
+  prmda: pr merge --auto -d -m # pr-merge-delete-auto
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
