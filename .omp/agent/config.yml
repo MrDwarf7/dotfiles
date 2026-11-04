@@ -2,11 +2,11 @@ modelRoles:
   plan: openai-codex/gpt-6-astra:high
   web: anthropic/claude-sonnet-5
   commit: anthropic/claude-sonnet-5:low
-  task: openai-codex/gpt-6-luna:high
-  judge: openrouter/~typesafe/jev-latest
+  task: openai-codex/gpt-6-luna:auto
+  judge: typesafe/jev-latest
   smol: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
-  advisor: xai-oauth/grok-4.7:minimal
+  advisor: kiro/claude-opus-5.5
   slow: openai-codex/gpt-6.1-sol:high
   default: openai-codex/gpt-6.1-sol
 symbolPreset: nerd
@@ -35,6 +35,7 @@ display:
 personality: pragmatic
 advisor:
   enabled: true
+  reviewMode: agent-end
 steeringMode: one-at-a-time
 followUpMode: one-at-a-time
 interruptMode: immediate
@@ -72,7 +73,7 @@ github:
 todo:
   eager: default
 task:
-  eager: preferred
+  eager: default
   enableLsp: true
   enableEffort: true
   maxRecursionDepth: 3
@@ -93,6 +94,7 @@ skills:
   enablePiProject: true
   ignoredSkills:
     - local-cli-tools
+    - ripwire-*
 composer:
   shape: box
   defaultThinkingLevel: auto
@@ -151,6 +153,7 @@ marketplace:
 mnemopi:
   polyphonicRecall: true
   proactiveLinking: true
+  autoRecall: false
 shellMinimizer:
   sourceOutlineLevel: default
 ida:
@@ -167,11 +170,11 @@ modelPresets:
       plan: openai-codex/gpt-6-astra:high
       web: anthropic/claude-sonnet-5
       commit: anthropic/claude-sonnet-5:low
-      task: openai-codex/gpt-6-luna:high
-      judge: openrouter/~typesafe/jev-latest
+      task: openai-codex/gpt-6-luna:auto
+      judge: typesafe/jev-latest
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
-      advisor: xai-oauth/grok-4.7:minimal
+      advisor: kiro/claude-opus-5.5
       slow: openai-codex/gpt-6.1-sol:high
       default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto
@@ -184,7 +187,7 @@ modelPresets:
       commit: xai-oauth/grok-4.7:low
       task: openai-codex/gpt-6-luna:auto
       tiny: openai-codex/gpt-6-luna:medium
-      judge: openrouter/~typesafe/jev-latest
+      judge: typesafe/jev-latest
       default: anthropic/claude-opus-5-5
       slow: openai-codex/gpt-6.1-sol:xhigh
     defaultThinkingLevel: auto
@@ -197,7 +200,7 @@ modelPresets:
       commit: xai-oauth/grok-4.7:low
       task: xai-oauth/grok-4.7:auto
       tiny: openai-codex/gpt-6-luna:medium
-      judge: openrouter/~typesafe/jev-latest
+      judge: typesafe/jev-latest
       default: anthropic/claude-opus-5-5
       slow: openai-codex/gpt-6.1-sol:xhigh
     defaultThinkingLevel: auto
@@ -207,7 +210,7 @@ modelPresets:
       web: anthropic/claude-sonnet-5-5
       commit: xai-oauth/grok-4.7:low
       task: anthropic/claude-opus-5-5:medium
-      judge: openrouter/~typesafe/jev-latest
+      judge: typesafe/jev-latest
       default: anthropic/claude-opus-5-5:medium
       smol: anthropic/claude-sonnet-5-5:medium
       tiny: anthropic/claude-haiku-5-5
@@ -220,7 +223,7 @@ modelPresets:
       web: anthropic/claude-sonnet-5-5
       commit: xai-oauth/grok-4.7:low
       task: anthropic/claude-opus-5-5:medium
-      judge: openrouter/~typesafe/jev-latest
+      judge: typesafe/jev-latest
       default: xai-oauth/grok-4.7
       smol: anthropic/claude-sonnet-5-5:medium
       tiny: anthropic/claude-haiku-5-5
@@ -233,7 +236,7 @@ modelPresets:
       web: anthropic/claude-sonnet-5-5
       commit: xai-oauth/grok-4.7:low
       task: opencode-go/step-5-preview-free:medium
-      judge: openrouter/~typesafe/jev-latest
+      judge: typesafe/jev-latest
       smol: kiro/claude-sonnet-5.5:medium
       tiny: anthropic/claude-haiku-5-5
       advisor: anthropic/claude-opus-5-5:xhigh
@@ -245,6 +248,7 @@ cycleOrder:
   - slow
   - default
 tools:
-  xdevNotices: true
+  xdevNotices: false
+  xdevDocs: builtins
 prewalk:
   enabled: false
