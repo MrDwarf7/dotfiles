@@ -7,7 +7,7 @@ modelRoles:
   smol: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
   advisor: kiro/claude-opus-5.5
-  slow: openai-codex/gpt-6.1-sol:high
+  slow: anthropic/claude-opus-5-5:high
   default: openai-codex/gpt-6.1-sol
 symbolPreset: nerd
 theme:
@@ -128,6 +128,7 @@ retry:
       - kiro/claude-opus-5.5:medium
       - anthropic/claude-opus-5-5:low
     slow:
+      - openai-codex/gpt-6.1-sol
       - kiro/claude-opus-5.5
       - anthropic/claude-opus-5-5
     web:

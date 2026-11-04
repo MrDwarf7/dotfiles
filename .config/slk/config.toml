@@ -95,7 +95,7 @@ text       = "#E0E0E0"
 
 [workspaces.work]
 order              = 1
-sidebar_width      = 30
+sidebar_width = 30
 use_slack_sections = true
 team_id            = "T02A0FCHA"
 version_ts = "1793678253"
