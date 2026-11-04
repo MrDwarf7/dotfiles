@@ -1,3 +1,4 @@
+#:schema https://raw.githubusercontent.com/jdx/mise/refs/heads/main/schema/mise.json
 # Shared mise config (this file is the symlink target for ~/.config/mise).
 # Machine/work extras: config.local.toml next to this file (gitignored).
 # Do not put work-only tools here if you want one symlink on every box.
@@ -5,7 +6,7 @@
 wrappers = { cargo = { command = "mbx", env = { MBX_CARGO_SHIM_MODE = "1" } } }
 
 [tools]
-uv = "latest"
+uv     = "latest"
 python = "latest"
 
 # JavaScript
@@ -40,13 +41,13 @@ direnv = "latest"
 taplo = "latest"
 
 ## Kubernetes / K8s / Kubectl / Helm / Kustomize / Skaffold / K9s / Kubeconform
-kind = "latest"
-minikube = "latest"
-helm = "latest"        # The Kubernetes Package Manager
-helm-ct = "latest"     # CLI tool for linting and testing Helm charts
-helm-diff = "latest"   # A helm plugin that shows a diff explaining what a helm upgrade would change
-helm-docs = "latest"   # A tool for automatically generating markdown documentation for helm charts
-helmfile = "latest"    # Declaratively deploy your Kubernetes manifests, Kustomize configs, and Charts as Helm releases. Generate all-in-one manifests for use with ArgoCD
+kind        = "latest"
+minikube    = "latest"
+helm        = "latest" # The Kubernetes Package Manager
+helm-ct     = "latest" # CLI tool for linting and testing Helm charts
+helm-diff   = "latest" # A helm plugin that shows a diff explaining what a helm upgrade would change
+helm-docs   = "latest" # A tool for automatically generating markdown documentation for helm charts
+helmfile    = "latest" # Declaratively deploy your Kubernetes manifests, Kustomize configs, and Charts as Helm releases. Generate all-in-one manifests for use with ArgoCD
 kubeconform = "latest" # FAST Kubernetes manifests validator, with support for Custom Resources!
 
 # helmsman = "latest"               # Helmsman is a Helm Charts (k8s applications) as Code tool which allows you to automate the deployment/management of your Helm charts from version controlled code
@@ -59,7 +60,7 @@ kubeconform = "latest" # FAST Kubernetes manifests validator, with support for C
 # markdownlint-cli2 = "latest"
 
 "npm:codebase-context" = "2.2.0"
-viddy = "latest"
+viddy                  = "latest"
 
 [tools."npm:typescript"]
 version = "latest"
@@ -105,7 +106,7 @@ version = "latest"
 
 [tools."cargo:cross-rs/cross"]
 version = "branch:main"
-crate = "cross"         # workspace also ships xtask
+crate   = "cross"       # workspace also ships xtask
 
 # [tools."cargo:markdown-oxide"]
 # version = "latest"
@@ -190,7 +191,7 @@ version = "latest"
 
 [tools."mr-boxington"]
 minimum_release_age = "2h"
-version = "latest"
+version             = "latest"
 
 ### A simple, fast, and flexible command-line tool for managing and running tasks (written in Rust). Installs as 'just'.
 [tools.just]
@@ -200,17 +201,10 @@ version = "latest"
 ####################################################################################################
 
 [settings]
-experimental = true
-idiomatic_version_file_enable_tools = [
-  "node",
-  "deno",
-  "npm",
-  "pnpm",
-  "python",
-  "yarn",
-]
+experimental                        = true
+idiomatic_version_file_enable_tools = [ "node", "deno", "npm", "pnpm", "python", "yarn" ]
 
-cargo.binstall = true              # Prefer using binstall over cargo --install
+cargo.binstall              = true # Prefer using binstall over cargo --install
 cargo.binstall_quickinstall = true # Allows cargo binstall to fallback to cargo-quickinstall before trying normal `cargo install` cmds ( docs: https://mise.jdx.dev/dev-tools/backends/cargo.html#cargo.binstall_quickinstall | repo: https://github.com/cargo-bins/cargo-quickinstall )
 
 npm.bun = true # Prefer using bun over npm
@@ -218,8 +212,8 @@ npm.bun = true # Prefer using bun over npm
 pipx.uvx = true # Prefer to use ux(x) mode instead of pipx
 
 # Experimental 'dotfiles' manager stuff
-dotfiles.root = "~/dotfiles"
-dotfiles.default_mode = "symlink" # "symlink" | "symlink-each" | "copy" | "template"
+dotfiles.root         = "~/dotfiles"
+dotfiles.default_mode = "symlink"    # "symlink" | "symlink-each" | "copy" | "template"
 
 [settings.self_update]
 auto = true

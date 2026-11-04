@@ -1,0 +1,128 @@
+# Everything/blanket rules
+include = [ "**/*.toml" ]
+
+[formatting]
+crlf                  = false
+align_entries         = true
+align_comments        = true
+array_trailing_comma  = true
+column_width          = 100   # Try and keep this in sync with rustfmt's max_width, or roughly so
+inline_table_expand   = false
+compact_arrays        = false #
+trailing_newline      = true
+compact_entries       = false
+align_single_comments = true
+array_auto_collapse   = false
+allowed_blank_lines   = 3
+
+
+# ## Mise
+# [[rule]]
+# name = "mise"
+# include = [ #
+#   "**/mise.toml",
+#   "mise.toml",
+# ]
+# [rule.schema]
+# path = "https://raw.githubusercontent.com/jdx/mise/refs/heads/main/schema/mise.json"
+#
+# [rule.formatting]
+# crlf                  = false
+# align_entries         = true
+# align_comments        = true
+# array_trailing_comma  = true
+# column_width          = 100   # Try and keep this in sync with rustfmt's max_width, or roughly so
+# inline_table_expand   = false
+# compact_arrays        = false #
+# trailing_newline      = true
+# compact_entries       = false
+# align_single_comments = true
+# array_auto_collapse   = false
+# allowed_blank_lines   = 3
+#
+#
+# ## Rust
+# ### Cargo.toml
+# [[rule]]
+# name = "cargo-toml"
+# include = [ #
+#   "**/Cargo.toml",
+# ]
+# [rule.schema]
+# path = "https://raw.githubusercontent.com/rust-lang/cargo/refs/heads/master/crates/cargo-util-schemas/manifest.schema.json"
+#
+#
+# [rule.formatting]
+# crlf                  = false
+# align_entries         = true
+# align_comments        = true
+# array_trailing_comma  = true
+# column_width          = 100   # Try and keep this in sync with rustfmt's max_width, or roughly so
+# inline_table_expand   = false
+# compact_arrays        = false #
+# trailing_newline      = true
+# compact_entries       = false
+# align_single_comments = true
+# ## specifically to allow alignment for dependencies
+# array_auto_collapse   = true
+# allowed_blank_lines   = 3
+#
+# ### Cargo.lock
+# [[rule]]
+# name = "cargo-lock"
+# include = [
+#   "**/Cargo.lock",
+#   # "Cargo.lock",
+# ]
+# [rule.schema]
+# path = "https://raw.githubusercontent.com/rust-lang/cargo/refs/heads/master/crates/cargo-util-schemas/lockfile.schema.json"
+# # path = "https://raw.githubusercontent.com/rust-lang/cargo/refs/heads/master/crates/cargo-util-schemas/index.schema.json"
+#
+# [rule.formatting]
+# crlf                  = false
+# align_entries         = true
+# align_comments        = true
+# array_trailing_comma  = true
+# column_width          = 100   # Try and keep this in sync with rustfmt's max_width, or roughly so
+# inline_table_expand   = false
+# compact_arrays        = false #
+# trailing_newline      = true
+# compact_entries       = false
+# align_single_comments = true
+# array_auto_collapse   = false
+# allowed_blank_lines   = 3
+
+
+# [[rule]]
+# name = "rumdl"
+# include = [
+#   "rumdl.toml",
+#   ".rumdl.toml",
+#   "**/rumdl.toml",
+#   "**/.rumdl.toml",
+#   # "Cargo.lock",
+# ]
+# [rule.schema]
+# path = "https://raw.githubusercontent.com/rvben/rumdl/main/rumdl.schema.json"
+# # path = "https://raw.githubusercontent.com/rust-lang/cargo/refs/heads/master/crates/cargo-util-schemas/index.schema.json"
+#
+# [rule.formatting]
+# crlf                  = false
+# align_entries         = true
+# align_comments        = true
+# array_trailing_comma  = true
+# column_width          = 100   # Try and keep this in sync with rustfmt's max_width, or roughly so
+# inline_table_expand   = false
+# compact_arrays        = false #
+# trailing_newline      = true
+# compact_entries       = false
+# align_single_comments = true
+# array_auto_collapse   = false
+# allowed_blank_lines   = 3
+#
+#
+#
+# # # "**/.rust-toolchain.toml",
+# # # "**/.rustfmt.toml",
+# # # ".rustfmt.toml",
+# # # ".taplo.toml",

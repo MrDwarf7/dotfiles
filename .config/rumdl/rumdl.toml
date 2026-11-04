@@ -37,3 +37,18 @@ enabled = false # skill/agent files start with YAML frontmatter, not an H1
 [MD060]
 enabled = true
 style = "aligned" # pad table columns, not compact `| --- |`
+
+# TOC/Table of contents
+# requires:
+# <!-- toc -->
+#
+# <!-- tocstop -->
+#
+# to be placed into the file.
+# can be run manually via: 
+# `rumdl check --extend-enable MD073 --fix <FILE>`
+#
+[MD073]
+enabled = true
+min-level = 2
+max-level = 4
