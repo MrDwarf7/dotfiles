@@ -32,6 +32,7 @@ display:
   showTokenUsage: true
   cacheMissMarker: false
   showTurnTime: true
+  hideToolActivity: false
 personality: pragmatic
 advisor:
   enabled: true
