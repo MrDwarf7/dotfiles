@@ -15,7 +15,8 @@ custom_callout: null # Override or create callout styles (e.g. tip:icon=*,color=
 # Keys must use snake_case (e.g. no_colors, tab_length).
 cols: 120 # Fallback width when terminal size cannot be detected
 tab_length: 4 # Replace tab characters with this many spaces
-no_colors: false # Strip all ANSI colors from output
+# no_colors: false # Strip all ANSI colors from output
+colors: "always" # Strip all ANSI colors from output
 wrap: "char" # Options: "char" | "word" | "none"
 table_wrap: "fit" # Options: "fit" | "wrap" | "none"
 heading_layout: "level" # Options: "level" | "center" | "flat" | "none"
