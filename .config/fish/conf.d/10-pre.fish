@@ -27,7 +27,9 @@ set -gx LIST_CLIENT_BASE_CMD (99-listing_cmd_base) >/dev/null 2>&1; or true
 
 # 05export_alias_if_pacman neovim vi rvim
 # 05export_alias_if_pacman neovim vim nvim
-40-var_to_syspath rustup "$HOME/.cargo/bin" --prepend
+# 40-var_to_syspath rustup "$HOME/.cargo/bin" --prepend
+fish_add_path --path --move --prepend "$HOME/.cargo/bin"
+
 # must come AFTER cargo's bin due to shim ordering (if `--prepend` for mbx side)
 40-var_to_syspath mbx "$XDG_DATA_HOME/mbx/bin" --prepend
 
