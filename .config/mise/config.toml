@@ -74,7 +74,7 @@ version = "latest"
 
 # npx skills add vercel-labs/agent-skills
 [tools."npm:skills"]
-version = "1.7.4"
+version = "1.7.6"
 
 [tools."npm:nx"]
 version = "latest"
