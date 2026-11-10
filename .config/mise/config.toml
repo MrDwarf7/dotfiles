@@ -203,6 +203,7 @@ version = "latest"
 [settings]
 experimental                        = true
 idiomatic_version_file_enable_tools = [ "node", "deno", "npm", "pnpm", "python", "yarn" ]
+lockfile_platforms                  = [ "macos-arm64", "linux-x64" ]
 
 cargo.binstall              = true # Prefer using binstall over cargo --install
 cargo.binstall_quickinstall = true # Allows cargo binstall to fallback to cargo-quickinstall before trying normal `cargo install` cmds ( docs: https://mise.jdx.dev/dev-tools/backends/cargo.html#cargo.binstall_quickinstall | repo: https://github.com/cargo-bins/cargo-quickinstall )
