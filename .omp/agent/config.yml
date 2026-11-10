@@ -8,7 +8,7 @@ modelRoles:
   tiny: openai-codex/gpt-6-luna:low
   advisor: kiro/claude-opus-5.5
   slow: anthropic/claude-opus-5-5:high
-  default: openai-codex/gpt-6.1-sol
+  default: anthropic/claude-fable-5-2
 symbolPreset: nerd
 theme:
   dark: titanium
@@ -143,6 +143,7 @@ retry:
       - kiro/claude-opus-5.5
       - xai-oauth/grok-4.7
       - openai-codex/gpt-6-astra
+      - anthropic/claude-fable-5-2
 spelling:
   autocomplete: smollm
 power:
@@ -182,16 +183,16 @@ modelPresets:
     defaultThinkingLevel: auto
   fpc:
     modelRoles:
-      advisor: openai-codex/gpt-6-astra:xhigh
       plan: openai-codex/gpt-6-astra:high
-      smol: openai-codex/gpt-6-luna:high
-      web: openai-codex/gpt-6-luna
-      commit: xai-oauth/grok-4.7:low
+      web: anthropic/claude-sonnet-5
+      commit: anthropic/claude-sonnet-5:low
       task: openai-codex/gpt-6-luna:auto
-      tiny: openai-codex/gpt-6-luna:medium
       judge: typesafe/jev-latest
-      default: anthropic/claude-opus-5-5
-      slow: openai-codex/gpt-6.1-sol:xhigh
+      smol: openai-codex/gpt-6-luna:low
+      tiny: openai-codex/gpt-6-luna:low
+      advisor: kiro/claude-opus-5.5
+      slow: anthropic/claude-opus-5-5:high
+      default: openai-codex/gpt-6.1-sol
     defaultThinkingLevel: auto
   fpc-cpx-task:
     modelRoles:
