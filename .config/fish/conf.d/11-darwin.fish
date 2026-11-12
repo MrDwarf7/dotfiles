@@ -29,7 +29,7 @@ fish_add_path --prepend $USR_LOCAL_BIN
 set -gx --path KIRO_SHELL_INTEGRATION_PATH (kiro --locate-shell-integration-path fish)
 fish_add_path --prepend $KIRO_SHELL_INTEGRATION_PATH
 
-set -gx --path INFRA_DIR "$GITHUB_PROJECT/infra"
+set -gx --path INFRA_DIR "$GITHUB_PROJECTS/infra"
 
 # set -gx TERM tmux-256color
 
