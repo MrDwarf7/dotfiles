@@ -4,15 +4,15 @@ modelRoles:
   commit: anthropic/claude-sonnet-5:low
   task: openai-codex/gpt-6-luna:auto
   judge: typesafe/jev-latest
-  smol: openai-codex/gpt-6-luna:low
   tiny: openai-codex/gpt-6-luna:low
   advisor: kiro/claude-opus-5.5
-  slow: anthropic/claude-opus-5-5:high
-  default: anthropic/claude-fable-5-2
+  slow: anthropic/claude-fable-5-2:high
+  smol: openai-codex/gpt-6-luna:low
+  default: openai-codex/gpt-6.2-sol
 symbolPreset: nerd
 theme:
   dark: titanium
-setupVersion: 2
+setupVersion: 3
 statusLine:
   preset: default
   separator: powerline-thin
@@ -113,25 +113,26 @@ retry:
   fallbackChains:
     smol:
       - kiro/claude-sonnet-5.5:medium
+      - openai-codex/gpt-6-luna
       - anthropic/claude-sonnet-5-5:medium
       - anthropic/claude-opus-5-5:low
       - kiro/claude-opus-5.5:low
       - xai-oauth/grok-4.7
-      - openai-codex/gpt-6.1-sol
     tiny:
       - anthropic/claude-haiku-5-5:medium
     task:
-      - openai-codex/gpt-6-luna
       - opencode-go/space-bunny-free
       - kiro/claude-sonnet-5.5:medium
       - anthropic/claude-sonnet-5-5:medium
       - xai-oauth/grok-4.7:medium
       - kiro/claude-opus-5.5:medium
       - anthropic/claude-opus-5-5:low
+      - openai-codex/gpt-6-luna
     slow:
-      - openai-codex/gpt-6.1-sol
-      - kiro/claude-opus-5.5
       - anthropic/claude-opus-5-5
+      - openai-codex/gpt-6.2-sol
+      - kiro/claude-opus-5.5
+      - anthropic/claude-fable-5-2
     web:
       - kiro/claude-sonnet-5.5
       - anthropic/claude-opus-5-5
@@ -166,7 +167,8 @@ secrets:
 images:
   autoResize: true
 claudeResets:
-  autoRedeem: "no"
+  autoRedeem5h: "no"
+  autoRedeemWeekly: "no"
 modelPresets:
   openai-codex-preset:
     modelRoles:
@@ -178,8 +180,8 @@ modelPresets:
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
       advisor: kiro/claude-opus-5.5
-      slow: openai-codex/gpt-6.1-sol:high
-      default: openai-codex/gpt-6.1-sol
+      slow: openai-codex/gpt-6.2-sol:high
+      default: openai-codex/gpt-6.2-sol
     defaultThinkingLevel: auto
   fpc:
     modelRoles:
@@ -191,8 +193,8 @@ modelPresets:
       smol: openai-codex/gpt-6-luna:low
       tiny: openai-codex/gpt-6-luna:low
       advisor: kiro/claude-opus-5.5
-      slow: anthropic/claude-opus-5-5:high
-      default: openai-codex/gpt-6.1-sol
+      slow: anthropic/claude-fable-5-2:high
+      default: openai-codex/gpt-6.2-sol
     defaultThinkingLevel: auto
   fpc-cpx-task:
     modelRoles:
@@ -205,7 +207,7 @@ modelPresets:
       tiny: openai-codex/gpt-6-luna:medium
       judge: typesafe/jev-latest
       default: anthropic/claude-opus-5-5
-      slow: openai-codex/gpt-6.1-sol:xhigh
+      slow: openai-codex/gpt-6.2-sol:xhigh
     defaultThinkingLevel: auto
   anth-reset:
     modelRoles:
@@ -255,3 +257,5 @@ tools:
   xdevDocs: builtins
 prewalk:
   enabled: false
+update:
+  auto: true
