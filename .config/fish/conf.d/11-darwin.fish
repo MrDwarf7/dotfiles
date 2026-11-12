@@ -18,6 +18,9 @@ end
 30-export_as_env_var brew PKG_MANAGER_INSTALL_FLAGS install
 30-export_as_env_var brew PKG_MANAGER_INSTALL_CALLABLE "brew install"
 
+set -gx HOMEBREW_UPGRADE_GREEDY 1
+set -gx HOMEBREW_UPGRADE_GREEDY_CASKS 1
+
 30-export_as_env_var stakk STAKK_CONFIG "$HOME/.config/stakk/config.toml"
 
 set -gx --path DOCKER_BIN $HOME/.docker/bin
