@@ -135,3 +135,5 @@
   helper = !/usr/bin/gh auth git-credential
 [credential "https://dev.azure.com"]
   useHttpPath = true
+[credential "https://git.heroku.com"]
+	helper = !heroku git:credentials
