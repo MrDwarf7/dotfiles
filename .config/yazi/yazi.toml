@@ -91,6 +91,7 @@ play = [
   # { run = "vlc '%s'", orphan = true, for = "unix" },
   # { run = "vlc %s", orphan = true, for = "linux" },
   { run = 'xdg-open "$(basename %s)"', orphan = true, for = "linux" },
+  { run = 'open "$(basename %s)"', orphan = true, for = "macos" },
 
   { run = 'vlc %*', orphan = true, for = "windows" },
   { run = '''mediainfo "$(dirname %s)"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },

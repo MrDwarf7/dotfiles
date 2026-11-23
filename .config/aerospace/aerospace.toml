@@ -30,6 +30,10 @@ after-startup-command = [
 # 8 | 76804 | rocks.spotifast.Spotifast        | Spotifast
 # 9 | 7853  | com.tinyspeck.slackmacgap        | Slack
 
+
+## General rules
+# float center | 84612 | com.apple.QuickTimePlayerX                      | QuickTime Player
+
 on-window-detected = [
   # BROWSERS
   { if = 'test %{app-bundle-id} = com.vivaldi.Vivaldi || test %{app-bundle-id} = com.google.chrome.for.testing', run = 'move-node-to-workspace 1' },
@@ -41,6 +45,8 @@ on-window-detected = [
   { if = 'test %{app-bundle-id} = rocks.spotifast.Spotifast', run = 'move-node-to-workspace 8' },
   # (PRIV_)COMMS
   { if = 'test %{app-bundle-id} = com.tinyspeck.slackmacgap', run = 'move-node-to-workspace 9' },
+
+  { if = 'test %{app-bundle-id} = com.apple.QuickTimePlayerX', run = 'layout floating tiling' },
 ]
 
 # Start AeroSpace at login
