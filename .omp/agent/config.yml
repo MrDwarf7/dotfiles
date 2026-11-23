@@ -103,7 +103,8 @@ composer:
   hideThinkingBlock: false
 defaultThinkingLevel: auto
 browser:
-  headless: true
+  headless: false
+  relay: true
 dev:
   autoqaConsent: granted
 autolearn:

@@ -99,6 +99,7 @@ return {
       -- stylua: ignore end
     },
 
+    ---@type KulalaDefaultConfig
     opts = {
       global_keymaps = false,
       -- global_keymaps_prefix = "<Leader>r",

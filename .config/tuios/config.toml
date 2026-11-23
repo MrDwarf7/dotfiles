@@ -269,7 +269,7 @@ persist_scrollback_kb = 16384
 
 [startup]
 tiled = true
-daemon = true
+daemon = false
 # layout = "scrolling"
 layout = "bsp"
 open_default_window = true
