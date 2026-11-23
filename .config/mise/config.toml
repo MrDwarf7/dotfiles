@@ -74,7 +74,7 @@ version = "latest"
 
 # npx skills add vercel-labs/agent-skills
 [tools."npm:skills"]
-version = "1.7.6"
+version = "1.9.0"
 
 [tools."npm:nx"]
 version = "latest"
@@ -107,6 +107,13 @@ version = "latest"
 [tools."cargo:cross-rs/cross"]
 version = "branch:main"
 crate   = "cross"       # workspace also ships xtask
+
+
+[tools."cargo:https://github.com/dmtrKovalenko/fframes"]
+version = "tag:v1.4.1"
+crate   = "cargo-fframes"
+bin     = "cargo-fframes"
+rename_exe = "fframes"
 
 # [tools."cargo:markdown-oxide"]
 # version = "latest"
@@ -220,3 +227,6 @@ dotfiles.default_mode = "symlink"    # "symlink" | "symlink-each" | "copy" | "te
 auto = true
 
 [dotfiles]
+
+[tool_alias]
+cargo-fframes = "fframes"
