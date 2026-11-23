@@ -23,8 +23,8 @@ set -gx HOMEBREW_UPGRADE_GREEDY_CASKS 1
 
 30-export_as_env_var stakk STAKK_CONFIG "$HOME/.config/stakk/config.toml"
 
-set -gx --path DOCKER_BIN $HOME/.docker/bin
-fish_add_path --prepend $DOCKER_BIN
+# set -gx --path DOCKER_BIN $HOME/.docker/bin
+# fish_add_path --append $DOCKER_BIN
 
 set -gx --path USR_LOCAL_BIN /usr/local/bin
 fish_add_path --prepend $USR_LOCAL_BIN

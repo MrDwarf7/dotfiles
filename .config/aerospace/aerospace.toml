@@ -25,6 +25,7 @@ after-startup-command = [
 # 1 | 1599  | com.vivaldi.Vivaldi              | Vivaldi
 
 # 7 | 27110 | com.electron.dockerdesktop       | Docker Desktop
+# 7 | 49757 | dev.kiri.app                     | Kiri
 # 8 | 41219 | com.spotify.client               | Spotify
 # 8 | 76804 | rocks.spotifast.Spotifast        | Spotifast
 # 9 | 7853  | com.tinyspeck.slackmacgap        | Slack
@@ -34,6 +35,7 @@ on-window-detected = [
   { if = 'test %{app-bundle-id} = com.vivaldi.Vivaldi || test %{app-bundle-id} = com.google.chrome.for.testing', run = 'move-node-to-workspace 1' },
   # Docker
   { if = 'test %{app-bundle-id} = com.electron.dockerdesktop', run = 'move-node-to-workspace 7' },
+  { if = 'test %{app-bundle-id} = dev.kiri.app', run = 'move-node-to-workspace 7' },
   # MUSIC
   { if = 'test %{app-bundle-id} = com.spotify.client', run = 'move-node-to-workspace 8' },
   { if = 'test %{app-bundle-id} = rocks.spotifast.Spotifast', run = 'move-node-to-workspace 8' },

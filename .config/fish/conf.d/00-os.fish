@@ -13,6 +13,9 @@ set -gx DOT_OS (string lower -- (uname -s))
 
 # Darwin-only: brew PATH before the rest of conf.d. Linux has no equivalent.
 if test "$DOT_OS" = darwin
+    set -gx --path KIRI_BIN $HOME/.kiri/bin
+    fish_add_path --prepend --move $KIRI_BIN
+
     # Homebrew / brew stuff
     if test -x /opt/homebrew/bin/brew
         /opt/homebrew/bin/brew shellenv fish | source
