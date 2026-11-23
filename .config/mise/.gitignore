@@ -1,5 +1,6 @@
 config.local.toml
 mise.local.lock
+mise.lock
 
 conf.d/*.toml
 !conf.d/.gitkeep
