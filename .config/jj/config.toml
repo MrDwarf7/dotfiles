@@ -581,7 +581,12 @@ bsh = ['bookmark', 'set', '-r', '@']
 
 # tags
 t = ['tag']
-tls = ['tag', 'list']
+tls = [
+  'tag',
+  'list',
+  '--sort',
+  'author-date,name',
+] # required _in this order_ to actually use the timestamps and stuff (otherwise v0.0.1 and v0.0.10 are adjacent)
 td = ['tag', 'delete']
 ts = ['tag', 'set']
 
